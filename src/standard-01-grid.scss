@@ -1,0 +1,142 @@
+/* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
+   Use this as your single grid across the site (replaces old .h-grid API).
+   Relies on your Harmony tokens: --space, --space-gap, --space-l, borders, etc.
+*/
+
+/* Grid container */
+.grid {
+    --grid-cols: 12;
+    --grid-gap: var(--space);
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    gap: var(--grid-gap);
+}
+
+/* Gap variants aligned to rhythm */
+.grid.tight {
+    --grid-gap: var(--space-gap);
+}
+.grid.wide {
+    --grid-gap: var(--space-l);
+}
+
+/* Spans 1..12 */
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        grid-column: span #{$i};
+    }
+}
+
+/* Optional starts 1..12 */
+@for $i from 1 through 12 {
+    .start-#{$i} {
+        grid-column-start: #{$i};
+    }
+}
+
+/* Responsive spans/starts: md ≥ 768px, lg ≥ 1024px */
+@media (min-width: 768px) {
+    @for $i from 1 through 12 {
+        .col-md-#{$i} {
+            grid-column: span #{$i};
+        }
+        .start-md-#{$i} {
+            grid-column-start: #{$i};
+        }
+    }
+}
+@media (min-width: 1024px) {
+    @for $i from 1 through 12 {
+        .col-lg-#{$i} {
+            grid-column: span #{$i};
+        }
+        .start-lg-#{$i} {
+            grid-column-start: #{$i};
+        }
+    }
+}
+
+/* Full-span helper (replaces old .h-col-full) */
+.col-full {
+    grid-column: 1 / -1;
+}
+
+/* Ergonomic presets (optional sugar) */
+.col-half {
+    grid-column: span 6;
+} /* 1/2 */
+.col-third {
+    grid-column: span 4;
+} /* 1/3 */
+.col-two3 {
+    grid-column: span 8;
+} /* 2/3 */
+.col-quarter {
+    grid-column: span 3;
+} /* 1/4 */
+
+/* Rhythm inside grid items: apply .flow to a cell containing prose */
+.grid .flow > * + * {
+    margin-block-start: var(--space);
+}
+
+/* Free columns: place anywhere with CSS vars or utility shorthands */
+.free-col {
+    /* Defaults; authors override via CSS vars or utilities */
+    --start: auto; /* 1..12 or auto */
+    --span: 3; /* 1..12 */
+
+    grid-column: var(--start) / span var(--span);
+
+    /* If the free column contains prose, opt-in to flow rhythm */
+    &.flow > * + * {
+        margin-block-start: var(--space);
+    }
+}
+
+/* Utility-class interface to set the CSS vars (ergonomic authoring) */
+@for $i from 1 through 12 {
+    .span-#{$i} {
+        --span: #{$i};
+    }
+    .startv-#{$i} {
+        --start: #{$i};
+    } /* 'startv' to avoid clash with .start- utilities */
+}
+
+/* Responsive overrides for the var-based API */
+@media (min-width: 768px) {
+    @for $i from 1 through 12 {
+        .span-md-#{$i} {
+            --span: #{$i};
+        }
+        .startv-md-#{$i} {
+            --start: #{$i};
+        }
+    }
+}
+@media (min-width: 1024px) {
+    @for $i from 1 through 12 {
+        .span-lg-#{$i} {
+            --span: #{$i};
+        }
+        .startv-lg-#{$i} {
+            --start: #{$i};
+        }
+    }
+}
+
+/* Mobile fallback: stack free columns full-width */
+@media (max-width: 767.98px) {
+    .free-col {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Optional: sticky marginalia variant for editorial layouts */
+.free-col.sticky {
+    position: sticky;
+    top: var(--space);
+    align-self: start;
+    z-index: 1;
+}

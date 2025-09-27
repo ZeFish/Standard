@@ -1,0 +1,103 @@
+/* -= Image Galery =- */
+
+img {
+    max-width: 100%;
+}
+
+article:not(.no-grid) {
+    p:has(img) {
+        display: flex;
+        gap: var(--space-gap);
+        border-radius: var(--border-radius);
+    }
+
+    /* img[width] { border:0;margin:auto !important; } */
+
+    * + img,
+    img,
+    img:first-child,
+    img:last-child {
+        margin: 0;
+        border: var(--border);
+    }
+
+    p:has(img) > * {
+        flex: 1 1 auto;
+        min-width: 1%;
+        min-height: 1%;
+        object-fit: cover;
+    }
+    p:has(video) > * {
+        flex: 1 1 auto;
+        min-width: 1%;
+        min-height: 1%;
+        object-fit: cover;
+    }
+    p:has(img) img,
+    p:has(img) img:first-child,
+    p:has(img) img:last-child {
+        margin-inline: auto;
+    }
+    p:has(img) br {
+        display: none;
+    }
+
+    .callout p:has(img),
+    .callout p:has(img) br {
+        display: block;
+    }
+
+    img {
+        max-width: 100%;
+        cursor: zoom-in;
+        border-radius: var(--border-radius);
+        transition:
+            mix-blend-mode 0.2s,
+            opacity 0.2s,
+            filter 0.2s;
+    }
+    img:hover,
+    img.zoomed {
+        mix-blend-mode: normal;
+        filter: none;
+    }
+
+    img:active,
+    img.zoomed {
+        cursor: zoom-out;
+        display: block;
+        z-index: 9999999;
+        position: fixed;
+        max-height: 88vh;
+        max-width: 88vw;
+        max-height: calc(100vh - (var(--space) * 2));
+        max-width: calc(100vw - (var(--space) * 2));
+        object-fit: contain;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        user-select: none;
+    }
+}
+
+article :has(img:active)::before,
+article :has(img.zoomed)::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-background);
+    z-index: 9999991;
+}
+
+html:has(p img.zoomed) .logo {
+    position: fixed;
+    bottom: var(--space);
+    right: var(--space);
+    z-index: 9999992;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "standard",
+  "version": "0.1.0",
+  "description": "A standard framework for web development.",
+  "main": "dist/standard.css",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "sass src/standard.scss dist/standard.css --style=compressed"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "sass"
+  ],
+  "author": "",
+  "license": "MIT"
+}

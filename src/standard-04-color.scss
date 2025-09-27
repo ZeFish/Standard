@@ -1,0 +1,199 @@
+:root {
+    color-scheme: light dark;
+
+    --color-background: var(--color-light-background);
+    --color-foreground: var(--color-light-foreground);
+
+    /* 🌞 Light Mode Colors (natural, paper-like, analog-inspired) */
+    --color-red: var(--color-light-red, #b14c42); /* dusty red clay */
+    --color-orange: var(--color-light-orange, #d78a5a); /* trail-worn orange */
+    --color-yellow: var(--color-light-yellow, #c8a840); /* parchment mustard */
+    --color-green: var(--color-light-green, #5e9d80); /* sage green */
+    --color-cyan: var(--color-light-cyan, #6ba4b6); /* glacier teal */
+    --color-blue: var(--color-light-blue, #4f81a4); /* faded blueprint */
+    --color-purple: var(--color-light-purple, #7a6c91); /* dusk lavender */
+    --color-pink: var(--color-light-pink, #b97aa0); /* vintage mauve rose */
+
+    --color-accent: var(--color-light-accent, var(--color-yellow));
+    --color-header: var(--color-light-header, inherit);
+    --color-bold: var(--color-light-bold, inherit);
+    --color-italic: var(--color-light-italic, inherit);
+
+    --color-muted: var(
+        --color-light-muted,
+        color-mix(in srgb, var(--color-foreground) 50%, var(--color-background))
+    );
+
+    --color-border: var(
+        --light-border-color,
+        color-mix(in srgb, var(--color-foreground) 10%, var(--color-background))
+    );
+    --color-background-secondary: var(
+        --color-light-background-secondary,
+        color-mix(
+            in srgb,
+            var(--color-foreground) 2.5%,
+            var(--color-background)
+        )
+    );
+
+    --shadow: 0 0 var(--space-xxs) 0px
+        color-mix(in srgb, var(--color-border) 40%, transparent);
+}
+
+.dark {
+    --color-background: var(--color-dark-background);
+    --color-foreground: var(--color-dark-foreground);
+
+    /* 🌙 Dark Mode Colors (soft-glow, night-usable, retro tech) */
+    --color-red: var(--color-dark-red, #db6057); /* ember red */
+    --color-orange: var(--color-dark-orange, #e58f5c); /* lantern orange */
+    --color-yellow: var(--color-dark-yellow, #dcb757); /* candlelight gold */
+    --color-green: var(--color-dark-green, #74ba98); /* forest mint glow */
+    --color-cyan: var(--color-dark-cyan, #7db9c8); /* creek frost */
+    --color-blue: var(--color-dark-blue, #6d96b8); /* twilight blueprint */
+    --color-purple: var(--color-dark-purple, #a18db6); /* smoky violet dusk */
+    --color-pink: var(--color-dark-pink, #d49ab8); /* faded polaroid blush */
+
+    --pointer-move-line-color: #f3a;
+    --base-grid-color1: rgba(240, 155, 255, 0.1);
+    --base-grid-color2: rgba(240, 155, 255, 0.05);
+
+    --color-accent: var(--color-dark-accent, var(--color-yellow));
+    --color-header: var(--color-dark-header, var(--color-foreground));
+    --color-bold: var(--color-dark-bold, var(--color-foreground));
+    --color-italic: var(--color-dark-italic, var(--color-blue));
+
+    --color-background-secondary: var(
+        --color-dark-background-secondary,
+        color-mix(in srgb, var(--color-foreground) 7%, var(--color-background))
+    );
+
+    --border: 1px solid var(--color-border);
+    --color-border: var(
+        --dark-border-color,
+        color-mix(in srgb, var(--color-background) 90%, black)
+    );
+
+    --shadow: 0 0 var(--space-xxs) 0px var(--color-border);
+
+    --color-muted: var(
+        --color-dark-muted,
+        color-mix(in srgb, var(--color-foreground) 40%, var(--color-background))
+    );
+}
+.dark ::selection,
+::selection {
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+/* -= Antialised Default =- */
+html {
+    color: var(--color-foreground);
+    background: var(--color-background);
+}
+
+.muted {
+    color: var(--color-muted);
+}
+
+blockquote,
+.callout-content,
+.callout-title {
+    color: color-mix(in srgb, currentColor 80%, var(--color-background));
+}
+
+.callout-content a,
+.callout-title a {
+    color: color-mix(in srgb, var(--color-accent) 80%, var(--color-background));
+}
+
+.callout-content em {
+    color: color-mix(in srgb, var(--color-italic) 80%, var(--color-background));
+}
+
+.callout-content strong {
+    color: color-mix(in srgb, var(--color-bold) 80%, var(--color-background));
+}
+
+// ==========================
+// Links Management
+// ==========================
+a,
+a:active,
+a:visited {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--color-foreground) 50%,
+        var(--color-background)
+    );
+    white-space: normal;
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.25s ease;
+}
+a:hover {
+    color: var(--color-accent);
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--color-accent) 90%,
+        var(--color-background)
+    );
+}
+
+article a,
+article a:active,
+article a:visited {
+    color: color-mix(
+        in srgb,
+        var(--color-accent) 100%,
+        var(--color-foreground)
+    );
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--color-accent) 0%,
+        var(--color-background)
+    );
+}
+article a:visited {
+    /*color: color-mix(in srgb, var(--color-accent) 50%, var(--color-foreground));*/
+}
+article a:hover {
+    color: var(--color-accent) !important;
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--color-accent) 90%,
+        var(--color-background)
+    );
+}
+
+strong {
+    color: var(--color-bold);
+}
+em {
+    color: var(--color-italic);
+}
+
+hr,
+hr:only-child {
+    background: var(--color-border);
+}
+
+article .callout-content {
+    background: var(--color-background);
+}
+
+table {
+    --border-width: 1px;
+    --border-opacity: 1;
+    --color-border: unset;
+}
+
+mark {
+    color: var(--color-foreground);
+    background-color: color-mix(in srgb, var(--color-background));
+}

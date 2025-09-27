@@ -1,0 +1,11 @@
+{
+    "tasks": {
+        "compile-sass": {
+            "command": "sass --watch src:dist",
+            "description": "Compiles the main Sass file to CSS and watches for changes.",
+            "watch": {
+                "include": ["src/**/*.scss"]
+            }
+        }
+    }
+}

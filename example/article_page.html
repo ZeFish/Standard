@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Swiss Grid Starter</title>
+        <link rel="stylesheet" href="../dist/standard.css" />
+        <style>
+            body {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    sans-serif;
+                line-height: 1.3;
+            }
+            .demo-box {
+                background: color-mix(
+                    in srgb,
+                    var(--color-foreground) 5%,
+                    var(--color-background)
+                );
+                border: var(--border);
+                border-radius: var(--border-radius);
+                padding: var(--space);
+            }
+        </style>
+    </head>
+    <body class="container show-base-grid">
+        <h1 class="flow">Swiss Grid Demo</h1>
+
+        <!-- Simple grid -->
+        <section class="grid flow">
+            <div class="col-6 demo-box">col-6</div>
+            <div class="col-6 demo-box">col-6</div>
+            <div class="col-4 demo-box">col-4</div>
+            <div class="col-8 demo-box">col-8</div>
+            <div class="col-3 demo-box">col-3</div>
+            <div class="col-9 demo-box">col-9</div>
+        </section>
+
+        <!-- Free column placed anywhere -->
+        <section class="grid flow" style="margin-block-start: var(--space-xxl)">
+            <div class="col-8 demo-box flow">
+                <h2>Main content</h2>
+                <p>This is the main text column. Notice rhythm via .flow.</p>
+                <p>On small screens, free columns collapse below.</p>
+            </div>
+
+            <!-- Place a floating small column at start=10 span=3 -->
+            <aside
+                class="free-col demo-box flow"
+                style="--start: 10; --span: 3"
+            >
+                <strong>Free column</strong>
+                <p>Positioned with CSS vars.</p>
+                <p>Try changing --start/--span.</p>
+            </aside>
+
+            <!-- Another free column via utility classes -->
+            <aside class="free-col demo-box span-2 startv-2 flow">
+                <strong>Free column 2</strong>
+                <p>Using .span-2 .startv-2 utilities.</p>
+            </aside>
+        </section>
+
+        <!-- Tight gaps -->
+        <section
+            class="grid tight flow"
+            style="margin-block-start: var(--space-xxl)"
+        >
+            <div class="col-4 demo-box">tight gap col-4</div>
+            <div class="col-4 demo-box">tight gap col-4</div>
+            <div class="col-4 demo-box">tight gap col-4</div>
+        </section>
+
+        <!-- Wide gaps -->
+        <section
+            class="grid wide flow"
+            style="margin-block-start: var(--space-xxl)"
+        >
+            <div class="col-3 demo-box">wide gap col-3</div>
+            <div class="col-3 demo-box">wide gap col-3</div>
+            <div class="col-3 demo-box">wide gap col-3</div>
+            <div class="col-3 demo-box">wide gap col-3</div>
+        </section>
+    </body>
+</html>

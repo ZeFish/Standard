@@ -1,0 +1,291 @@
+:root {
+    --font-size: 1rem;
+    --font-ratio: 1.425;
+    --font-letter-spacing: normal;
+
+    --font-density: 1.3;
+    --font-density-s: 1.3;
+
+    --font-text: "Diatype";
+    --font-feature: "liga", "dlig", "kern", "calt", "ss01", "ss12";
+    --font-variation: "";
+
+    --font-header: "InterVariable";
+    --font-header-feature:
+        "dlig", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06",
+        "cv09", "cv10", "cv11", "cv12", "cv13";
+    --font-header-variation: "";
+    --font-header-letter-spacing: -0.065em;
+    --font-header-line-height: 0.75em;
+    --font-header-weight: 900;
+
+    --font-monospace: "Diatype";
+    --font-monospace-feature:
+        "liga", "dlig", "kern", "calt", "ss01", "ss12", "ss15";
+    --font-monospace-variation: "MONO" 1;
+
+    --font-interface: var(--font-text);
+    --font-interface-feature: var(--font-feature);
+    --font-interface-variation: var(--font-variation);
+
+    --font-weight: 400;
+    --bold-weight: 600;
+
+    --line-height: calc(var(--font-size) * var(--font-density));
+
+    --line-width-normal: 42rem;
+    --line-width-wide: 50rem;
+    --line-width-full: 88vw;
+    --line-width: var(--line-width-normal);
+
+    --font-weight-h1: var(--font-header-weight);
+    --font-weight-h2: max(
+        calc(var(--font-header-weight) * 0.95),
+        var(--font-weight)
+    );
+    --font-weight-h3: max(
+        calc(var(--font-header-weight) * 0.9),
+        var(--font-weight)
+    );
+    --font-weight-h4: max(
+        calc(var(--font-header-weight) * 0.85),
+        var(--font-weight)
+    );
+    --font-weight-h5: max(
+        calc(var(--font-header-weight) * 0.5),
+        var(--font-weight)
+    );
+    --font-weight-h6: max(
+        calc(var(--font-header-weight) * 0.5),
+        var(--font-weight)
+    );
+
+    /* Modular Scale */
+    --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
+    --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
+    --scale: var(--font-size);
+    --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 1));
+    --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
+    --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+}
+
+html.dark {
+    /*--font-density: 1.5;*/
+    --font-weight: 400;
+    --font-letter-spacing: 0.001em;
+}
+
+// ========== Typography ==========
+
+html {
+    font-family: var(--font-text), system-ui, sans-serif;
+    font-size: var(--scale);
+    font-weight: var(--font-weight);
+    letter-spacing: var(--font-letter-spacing);
+
+    line-height: var(--line-height);
+
+    text-rendering: optimizeLegibility; /* kerning & ligatures */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
+
+    font-feature-settings: var(--font-feature);
+    font-variant-ligatures: normal;
+    font-variation-settings: var(--font-variation);
+
+    text-wrap: pretty;
+    widows: 2;
+    orphans: 2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-header), system-ui, sans-serif;
+    color: var(--color-header);
+    text-wrap: balance;
+    font-variant-ligatures: normal;
+    font-feature-settings: var(--font-header-feature);
+    font-variation-settings: var(--font-header-variation);
+    font-style: var(--font-header-style, normal);
+    line-height: var(--font-header-line-height);
+    letter-spacing: var(--font-header-letter-spacing);
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    overflow: visible;
+}
+/*
+svg {
+    fill: var(--color-header);
+    stroke: var(--color-header);
+}
+*/
+
+h1 {
+    font-weight: var(--font-weight-h1);
+    font-size: var(--scale-xxxl);
+}
+
+// First heading in article
+article > h1:first-child {
+    position: relative;
+    z-index: 2;
+}
+
+h2 {
+    font-weight: var(--font-weight-h2);
+    font-size: var(--scale-xxl);
+}
+
+h3 {
+    font-weight: var(--font-weight-h3);
+    font-size: var(--scale-xl);
+}
+
+h4 {
+    font-weight: var(--font-weight-h4);
+    font-size: var(--scale-l);
+    line-height: var(--line-height);
+}
+
+h5,
+h6 {
+    font-weight: var(--font-weight-h5);
+    font-size: var(--scale-l);
+    line-height: var(--line-height);
+    letter-spacing: 0em;
+}
+
+h6 {
+    font-weight: var(--font-weight-h6);
+}
+
+.txt-center p {
+    text-align: center;
+}
+
+// Utility text sizes
+.small {
+    font-size: var(--scale-s);
+}
+.smaller {
+    font-size: var(--scale-xs);
+}
+.compact {
+    line-height: var(--font-density-s);
+}
+
+.font-ui {
+    font-family: var(--font-interface), system-ui, sans-serif;
+    font-variation-settings: var(--font-interface-variation);
+    font-feature-settings: var(--font-interface-feature);
+}
+
+// Monospaced text
+pre,
+code,
+tt,
+.code,
+.monospace,
+.font-mono {
+    font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+    font-feature-settings: var(--font-monospace-feature);
+    font-variation-settings: var(--font-monospace-variation);
+}
+
+// Strong/bold normalization
+b,
+strong,
+.bold {
+    font-weight: var(--bold-weight);
+}
+:is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
+    font-weight: inherit;
+}
+
+// Heading spacing logic
+article :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+    margin-top: 0rlh;
+}
+// Heading spacing logic
+article h1 + :is(h1, h2, h3, h4, h5, h6) {
+    margin-top: var(--space-l);
+}
+
+// ==========================
+// p5-sketch Block
+// ==========================
+article .p5-sketch-container {
+    text-align: center;
+}
+
+// Footer-specific tweaks
+.footer .footer-links {
+    overflow: hidden;
+}
+.footer {
+    h2 {
+        letter-spacing: var(--font-header-letter-spacing);
+        line-height: 1em;
+    }
+
+    ul li {
+        font-size: var(--scale-s);
+        letter-spacing: -0.05em;
+
+        a {
+            color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+            overflow: hidden;
+            max-width: 95%;
+            hyphens: auto;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+            color: color-mix(in srgb, var(--color-accent) 80%, transparent);
+        }
+    }
+}
+
+/* ===== Harmony Base (containers and resets) ===== */
+:where(*, *::before, *::after) {
+    box-sizing: border-box;
+}
+
+/* Containers usable across pages */
+.container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-gutter);
+}
+.container-full {
+    margin-inline: auto;
+    padding-inline: var(--container-gutter);
+}
+
+/* Zero default margins on common blocks; use .flow for rhythm */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table, figure) {
+    margin: 0;
+}
+/* Logical unsets for first/last child when containers apply margins */
+:where(:first-child) {
+    margin-block-start: unset;
+}
+:where(:last-child) {
+    margin-block-end: unset;
+}
+
+/* Links inherit color by default; article overrides already exist */
+a,
+a:visited {
+    color: inherit;
+}

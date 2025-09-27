@@ -1,0 +1,57 @@
+/* Harmony Utilities: rhythm, layout stacks, exceptions, baseline debugging */
+
+/* Content rhythm: apply to prose containers (e.g., article, .prose) */
+.flow > * + * {
+    margin-block-start: var(--flow-space, var(--space-block));
+}
+.flow-tight > * + * {
+    margin-block-start: var(--space);
+}
+.flow-wide > * + * {
+    margin-block-start: var(--space-xxl);
+}
+
+/* Layout stacks: gap avoids margin-collapsing */
+.stack {
+    display: grid;
+    gap: var(--stack-gap, var(--space));
+}
+.stack.tight {
+    --stack-gap: var(--space-gap);
+}
+.stack.wide {
+    --stack-gap: var(--space-l);
+}
+
+/* Small exception helpers */
+.no-top {
+    margin-block-start: 0 !important;
+}
+.no-bottom {
+    margin-block-end: 0 !important;
+}
+.stick-next {
+    margin-block-end: var(--space-gap) !important;
+}
+
+/* Text utility */
+.muted {
+    color: var(--color-muted);
+}
+
+/* Baseline debug overlay */
+.grid-debug {
+    background-image: repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--color-muted) 10%, transparent),
+        color-mix(in srgb, var(--color-muted) 10%, transparent) 1px,
+        transparent 1px,
+        transparent var(--space)
+    );
+    background-repeat: repeat-y;
+    background-size: 100% var(--space);
+    background-position: 0 0.5px;
+}
+.grid-debug * {
+    outline: 1px solid var(--color-muted);
+}
