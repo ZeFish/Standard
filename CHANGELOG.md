@@ -54,11 +54,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `--ratio-halfstep: 1.272` (√φ - Half-step harmony)
   - `--ratio-quarterstep: 1.128` (⁴√φ - Quarter-step precision)
   - `--ratio-eighthstep: 1.062` (⁸√φ - Fine adjustments)
-- **Book layout system** with print design terminology
-  - `.book` - Main layout container (alternative to traditional `.prose`)
-  - `.standard` - Sidebar space (traditional print term)
-  - `.margin` - Main content area with reading margins
-  - `.bleed` - Full-width content extending to edges (print term)
+- **Reading layout system** with flexible content areas
+  - `.reading` - Main layout container for sophisticated content layout
+  - `.content` - Default content area with optimal reading width
+  - `.small` - Narrow area, --space smaller on each side than content
+  - `.accent` - Wider area for pullquotes and highlights
+  - `.feature` - Even wider for images and featured content
+  - `.full` - Full container width for backgrounds and bleeds
 - **Vertical rhythm system** based on 1rlh (root line height)
   - Mathematical spacing scale from `--space-xxxs` to `--space-xxxl`
   - All spacing aligned to baseline grid for visual harmony

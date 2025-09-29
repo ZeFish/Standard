@@ -32,7 +32,7 @@ Standard bridges the centuries-old wisdom of print typography with the dynamic n
 
 Standard is built around classical typography and print design principles:
 
-### `.book` - Fine-Art Layout System
+### `.reading` - Fine-Art Layout System
 Handles article content positioning using print design terminology and principles:
 
 - **.content:** Main content area with reading margins

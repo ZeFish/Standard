@@ -1,37 +1,230 @@
-/* Harmony Utilities: rhythm, layout stacks, exceptions, baseline debugging */
+/* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
 
-/* Content rhythm: apply to prose containers (e.g., article, .prose) */
-.flow > * + * {
-    margin-block-start: var(--flow-space, var(--space-block));
-}
-.flow-tight > * + * {
-    margin-block-start: var(--space);
-}
-.flow-wide > * + * {
-    margin-block-start: var(--space-xxl);
+/* ===== RHYTHM DEBUG UTILITIES ===== */
+
+/* Advanced debugging - shows rhythm grid and element outlines */
+.rhythm-debug-advanced {
+    * {
+        outline: 1px solid
+            color-mix(in srgb, var(--color-accent) 30%, transparent) !important;
+        position: relative;
+    }
+
+    /* Show element spacing measurements */
+    *::after {
+        content: attr(class) " (" attr(data-spacing, "auto") ")";
+        position: absolute;
+        inset-block-start: -1.5rem;
+        inset-inline-start: 0;
+        font-size: 0.75rem;
+        background: var(--color-accent);
+        color: var(--color-background);
+        padding-block: 0.1rem;
+        padding-inline: 0.3rem;
+        border-radius: 2px;
+        opacity: 0.8;
+        z-index: 9999;
+        pointer-events: none;
+        white-space: nowrap;
+    }
 }
 
-/* Layout stacks: gap avoids margin-collapsing */
-.stack {
-    display: grid;
-    gap: var(--stack-gap, var(--space));
-}
-.stack.tight {
-    --stack-gap: var(--space-gap);
-}
-.stack.wide {
-    --stack-gap: var(--space-l);
+/* Simple rhythm grid overlay */
+.rhythm-debug-grid {
+    position: relative;
+
+    &::before {
+        content: "RHYTHM DEBUG MODE";
+        position: fixed;
+        inset-block-start: 1rem;
+        inset-inline-end: 1rem;
+        background: var(--color-accent);
+        color: var(--color-background);
+        padding-block: 0.5rem;
+        padding-inline: 1rem;
+        border-radius: var(--border-radius);
+        font-size: var(--scale-xs);
+        z-index: 10000;
+        box-shadow: var(--shadow);
+    }
 }
 
-/* Small exception helpers */
-.no-top {
+/* Debug rhythm measurements */
+.rhythm-debug-measure {
+    > * {
+        border-inline-start: 2px solid var(--color-accent);
+        padding-inline-start: 0.5rem;
+        position: relative;
+
+        &::before {
+            content: "↕ " counter(rhythm-item);
+            counter-increment: rhythm-item;
+            position: absolute;
+            inset-inline-start: -2rem;
+            inset-block-start: 0;
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            background: var(--color-background);
+            padding-block: 0.2rem;
+            padding-inline: 0.2rem;
+            border-radius: 2px;
+        }
+    }
+}
+
+.rhythm-debug-measure {
+    counter-reset: rhythm-item;
+}
+
+/* ===== LOGICAL SPACING UTILITIES ===== */
+
+/* Block direction spacing utilities */
+.margin-block-start-0 {
     margin-block-start: 0 !important;
 }
-.no-bottom {
+.margin-block-end-0 {
+    margin-block-end: 0 !important;
+}
+.margin-block-0 {
+    margin-block: 0 !important;
+}
+
+.padding-block-start-0 {
+    padding-block-start: 0 !important;
+}
+.padding-block-end-0 {
+    padding-block-end: 0 !important;
+}
+.padding-block-0 {
+    padding-block: 0 !important;
+}
+
+/* Inline direction spacing utilities */
+.margin-inline-start-0 {
+    margin-inline-start: 0 !important;
+}
+.margin-inline-end-0 {
+    margin-inline-end: 0 !important;
+}
+.margin-inline-0 {
+    margin-inline: 0 !important;
+}
+.margin-inline-auto {
+    margin-inline: auto !important;
+}
+.margin-inline-start-auto {
+    margin-inline-start: auto !important;
+}
+.margin-inline-end-auto {
+    margin-inline-end: auto !important;
+}
+
+.padding-inline-start-0 {
+    padding-inline-start: 0 !important;
+}
+.padding-inline-end-0 {
+    padding-inline-end: 0 !important;
+}
+.padding-inline-0 {
+    padding-inline: 0 !important;
+}
+
+/* ===== CENTERING UTILITIES ===== */
+/* General-purpose centered containers with max-width constraints */
+
+.centered {
+    max-width: var(--line-width-normal);
+    margin-inline: auto;
+}
+
+.centered-narrow {
+    max-width: var(--line-width-s);
+    margin-inline: auto;
+}
+
+.centered-wide {
+    max-width: var(--line-width-wide);
+    margin-inline: auto;
+}
+
+.centered-xl {
+    max-width: var(--line-width-xl);
+    margin-inline: auto;
+}
+
+.centered-xs {
+    max-width: var(--line-width-xs);
+    margin-inline: auto;
+}
+
+/* Responsive centered container */
+.centered-responsive {
+    max-width: var(--content);
+    margin-inline: auto;
+    padding-inline: var(--gap);
+}
+
+/* ===== RHYTHM SCALING UTILITIES ===== */
+
+/* Spacing exceptions using logical properties */
+.no-block-start {
+    margin-block-start: 0 !important;
+}
+.no-block-end {
     margin-block-end: 0 !important;
 }
 .stick-next {
     margin-block-end: var(--space-gap) !important;
+}
+
+/* Rhythm scaling utilities using logical properties */
+.rhythm-micro {
+    margin-block-end: calc(
+        var(--space-xxxs) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-tiny {
+    margin-block-end: calc(
+        var(--space-xxs) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-small {
+    margin-block-end: calc(
+        var(--space-xs) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-base {
+    margin-block-end: calc(
+        var(--space) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-large {
+    margin-block-end: calc(
+        var(--space-l) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-xl {
+    margin-block-end: calc(
+        var(--space-xl) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-xxl {
+    margin-block-end: calc(
+        var(--space-xxl) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+/* Rhythm reset - completely removes from rhythm system */
+.rhythm-reset {
+    margin: 0 !important;
 }
 
 /* Text utility */
@@ -39,33 +232,33 @@
     color: var(--color-muted);
 }
 
-/* Line-width utilities for readability */
+/* Line-width utilities for readability - using logical properties */
 .line-width-xs {
-    max-width: var(--line-width-xs);
+    max-inline-size: var(--line-width-xs);
     margin-inline: auto;
 }
 .line-width-s {
-    max-width: var(--line-width-s);
+    max-inline-size: var(--line-width-s);
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-inline-size: var(--line-width-normal);
     margin-inline: auto;
 }
 .line-width-wide {
-    max-width: var(--line-width-wide);
+    max-inline-size: var(--line-width-wide);
     margin-inline: auto;
 }
 .line-width-xl {
-    max-width: var(--line-width-xl);
+    max-inline-size: var(--line-width-xl);
     margin-inline: auto;
 }
 .line-width-full {
-    max-width: var(--line-width-full);
+    max-inline-size: var(--line-width-full);
     margin-inline: auto;
 }
 
-/* Baseline debug overlay */
+/* ===== LEGACY DEBUG (deprecated - use .rhythm-debug instead) ===== */
 .grid-debug {
     background-image: repeating-linear-gradient(
         0deg,
@@ -82,6 +275,111 @@
     outline: 1px solid var(--color-muted);
 }
 
+/* ===== RHYTHM CONTENT UTILITIES ===== */
+
+/* Force elements to participate in rhythm system */
+.rhythm-include {
+    margin-block-end: calc(
+        var(--space-block) * var(--rhythm-multiplier, 1)
+    ) !important;
+}
+
+/* Exclude elements from rhythm system */
+.rhythm-exclude {
+    margin: 0 !important;
+
+    &.rhythm {
+        --marge-active: 0;
+        background-image: none;
+
+        > * {
+            margin-block-end: 0 !important;
+        }
+    }
+}
+
+/* Special rhythm behaviors */
+.rhythm-tight-group > * {
+    margin-block-end: calc(
+        var(--space-xs) * var(--marge-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-loose-group > * {
+    margin-block-end: calc(
+        var(--space-l) * var(--marge-multiplier, 1)
+    ) !important;
+}
+
+/* Form-specific rhythm helpers using logical properties */
+.rhythm-form-row {
+    display: flex;
+    gap: calc(var(--space-s) * var(--marge-multiplier, 1));
+    align-items: center;
+    margin-block-end: calc(
+        var(--space) * var(--marge-multiplier, 1)
+    ) !important;
+}
+
+.rhythm-form-group {
+    margin-block-end: calc(
+        var(--space) * var(--marge-multiplier, 1)
+    ) !important;
+
+    label {
+        margin-block-end: calc(
+            var(--space-xs) * var(--marge-multiplier, 1)
+        ) !important;
+    }
+
+    input,
+    textarea,
+    select {
+        margin-block-end: calc(
+            var(--space-xs) * var(--marge-multiplier, 1)
+        ) !important;
+    }
+}
+
+/* Rhythm mode switching */
+/* Alternative rhythm modes removed - margin mode is the only mode */
+
+/* Spacing override utilities */
+.rhythm-tight {
+    gap: calc(var(--space-s) * var(--marge-multiplier)) !important;
+}
+
+.rhythm-loose {
+    gap: calc(var(--space-l) * var(--marge-multiplier)) !important;
+}
+
+.rhythm-none {
+    gap: 0 !important;
+}
+
+/* Individual element overrides */
+.no-rhythm {
+    margin: 0 !important;
+}
+
+.rhythm-after-tight {
+    /* Add small spacing after this element */
+}
+
+.rhythm-after-loose {
+    /* Add large spacing after this element */
+}
+
+/* =========================== */
+/* DEBUG AND DEVELOPMENT      */
+/* =========================== */
+
+/* Debug utilities moved to rhythm and color files for proper separation of concerns */
+
+/* =========================== */
+/* RESPONSIVE TYPOGRAPHY      */
+/* =========================== */
+
 .heading-responsive {
     font-size: clamp(var(--scale-xl), 4vw, var(--scale-xxl)) !important;
 }
@@ -93,7 +391,7 @@
 
 .heading-contain {
     container-type: inline-size;
-    max-width: 100%;
+    max-inline-size: 100%;
     overflow: hidden;
 }
 
@@ -107,4 +405,101 @@
 
 .heading-contain h3 {
     font-size: clamp(var(--scale-s), 3cqi, var(--scale-l));
+}
+
+/* =========================== */
+/* PERFORMANCE OPTIMIZATIONS  */
+/* =========================== */
+
+/* Reduce repaints and reflows */
+.rhythm {
+    /* Use GPU acceleration for transforms if needed */
+    transform: translateZ(0);
+
+    /* Optimize for animations */
+    will-change: auto;
+}
+
+/* =========================== */
+/* ACCESSIBILITY               */
+/* =========================== */
+
+/* Ensure rhythm doesn't interfere with screen readers */
+.rhythm:focus-within {
+    /* Maintain focus visibility */
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .rhythm {
+        transition: none;
+    }
+}
+
+/* =========================== */
+/* LEGACY SUPPORT             */
+/* =========================== */
+
+/* Fallback for browsers without CSS Grid support */
+@supports not (display: grid) {
+    .rhythm {
+        display: block;
+
+        > * {
+            margin-block-end: calc(
+                var(--space-block) * var(--marge-multiplier)
+            );
+        }
+
+        > :last-child {
+            margin-block-end: 0;
+        }
+    }
+}
+
+/* Fallback for logical properties */
+@supports not (margin-block-end: 1rem) {
+    .rhythm > * {
+        margin-bottom: calc(var(--space-block) * var(--marge-multiplier));
+    }
+
+    .rhythm > :last-child {
+        margin-bottom: 0;
+    }
+
+    .line-width-xs {
+        max-width: var(--line-width-xs);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .line-width-s {
+        max-width: var(--line-width-s);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .line-width-normal {
+        max-width: var(--line-width-normal);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .line-width-wide {
+        max-width: var(--line-width-wide);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .line-width-xl {
+        max-width: var(--line-width-xl);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .line-width-full {
+        max-width: var(--line-width-full);
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

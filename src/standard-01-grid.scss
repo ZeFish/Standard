@@ -1,8 +1,9 @@
-/* Grid Design Tokens */
+/* Grid Design Tokens - Using logical properties */
 :root {
     /* Grid system tokens */
     --grid-cols: 12;
     --grid-gap: var(--space);
+    --grid-row-gap: var(--space-block); /* Separate control for row spacing */
 
     /* Container tokens */
     --container-max: 1200px;
@@ -11,29 +12,31 @@
 
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
    Use this as your single grid across the site (replaces old .h-grid API).
-   Relies on your Harmony tokens: --space, --space-gap, --space-l, borders, etc.
+   Relies on logical properties and Harmony tokens: --space, --space-gap, --space-l, borders, etc.
 */
 
 /* Grid container */
 .grid {
     display: grid;
     grid-template-columns: repeat(var(--grid-cols), 1fr);
-    gap: var(--grid-gap);
+    column-gap: var(--grid-gap);
+    row-gap: var(--grid-row-gap);
 }
 
 /* Gap variants aligned to rhythm */
 .grid.tight {
     --grid-gap: var(--space-gap);
+    --grid-row-gap: var(--space-s);
 }
 .grid.wide {
     --grid-gap: var(--space-l);
+    --grid-row-gap: var(--space-xl);
 }
 
 /* Spans 1..12 */
 @for $i from 1 through 12 {
     .col-#{$i} {
         grid-column: span #{$i};
-        overflow: hidden;
     }
 }
 
@@ -85,9 +88,9 @@
     grid-column: span 3;
 } /* 1/4 */
 
-/* Rhythm inside grid items: apply .flow to a cell containing prose */
-.grid .flow > * + * {
-    margin-block-start: var(--space);
+/* Rhythm inside grid items: apply to a cell containing prose */
+.grid .rhythm > * {
+    margin-block-end: var(--space);
 }
 
 /* Free columns: place anywhere with CSS vars or utility shorthands */
@@ -98,9 +101,9 @@
 
     grid-column: var(--start) / span var(--span);
 
-    /* If the free column contains prose, opt-in to flow rhythm */
-    &.flow > * + * {
-        margin-block-start: var(--space);
+    /* If the free column contains prose, opt-in to rhythm */
+    &.rhythm > * {
+        margin-block-end: var(--space);
     }
 }
 
@@ -146,7 +149,49 @@
 /* Optional: sticky marginalia variant for editorial layouts */
 .free-col.sticky {
     position: sticky;
-    top: var(--space);
+    inset-block-start: var(--space);
     align-self: start;
     z-index: 1;
+}
+
+/* Row gap utilities for grid system */
+.grid.no-row-gap {
+    row-gap: 0;
+}
+
+.grid.row-gap-xs {
+    --grid-row-gap: var(--space-xs);
+}
+
+.grid.row-gap-s {
+    --grid-row-gap: var(--space-s);
+}
+
+.grid.row-gap-l {
+    --grid-row-gap: var(--space-l);
+}
+
+.grid.row-gap-xl {
+    --grid-row-gap: var(--space-xl);
+}
+
+/* Column gap utilities for grid system */
+.grid.no-col-gap {
+    column-gap: 0;
+}
+
+.grid.col-gap-xs {
+    --grid-gap: var(--space-xs);
+}
+
+.grid.col-gap-s {
+    --grid-gap: var(--space-s);
+}
+
+.grid.col-gap-l {
+    --grid-gap: var(--space-l);
+}
+
+.grid.col-gap-xl {
+    --grid-gap: var(--space-xl);
 }

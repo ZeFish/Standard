@@ -1,4 +1,4 @@
-/* Primitive Design Tokens - Foundation layer only */
+/* Primitive Design Tokens - Foundation layer with logical properties */
 
 :root {
     /* Base measurements & ratios - the foundation of everything else */
@@ -24,30 +24,42 @@
     --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
     --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
 
-    /* Base rhythm unit */
-    --marge: 1rlh;
-    --marge-block: 1;
-    --marge-gap: 0.25;
+    /* Rhythm system control tokens */
+    --rhythm-multiplier: 1; /* Global rhythm scaling */
+    --rhythm-block-space: 2; /* Multiplier for special block elements (blockquote, pre, figure) */
 
-    /* Spacing Scale - based on rhythm unit */
-    --space-xxxs: calc(var(--marge) / 5);
-    --space-xxs: calc(var(--marge) / 4);
-    --space-xs: calc(var(--marge) / 3);
-    --space-s: calc(var(--marge) / 2);
-    --space: var(--marge);
-    --space-l: calc(2 * var(--marge));
-    --space-xl: calc(3 * var(--marge));
-    --space-xxl: calc(4 * var(--marge));
-    --space-xxxl: calc(5 * var(--marge));
+    /* Logical Spacing Scale - based on rhythm unit */
+    --space-xxxs: calc(1rlh / 5);
+    --space-xxs: calc(1rlh / 4);
+    --space-xs: calc(1rlh / 3);
+    --space-s: calc(1rlh / 2);
+    --space: 1rlh; /* Base rhythm unit */
+    --space-l: calc(2 * 1rlh);
+    --space-xl: calc(3 * 1rlh);
+    --space-xxl: calc(4 * 1rlh);
+    --space-xxxl: calc(5 * 1rlh);
+
+    /* Logical spacing tokens - block and inline directions */
+    --space-block-start: var(--space);
+    --space-block-end: var(--space);
+    --space-inline-start: var(--space);
+    --space-inline-end: var(--space);
 
     /* Derived spacing tokens */
-    --space-gap: calc(var(--marge) * var(--marge-gap));
-    --space-block: calc(var(--marge) * var(--marge-block));
-    --space-negative: calc(var(--marge) * -1);
+    --space-gap: calc(var(--space) / 4); /* Small gap for flex grids */
+    --space-block: var(--space); /* Default block spacing */
+    --space-block-special: calc(
+        var(--space) * var(--rhythm-block-space)
+    ); /* Special block elements spacing */
+    --space-negative: calc(var(--space) * -1);
 
-    /* Base border properties */
+    /* Logical border properties */
     --hr-thickness: 1px;
     --border-radius: var(--space-xxs);
+    --border-block-start-width: var(--hr-thickness);
+    --border-block-end-width: var(--hr-thickness);
+    --border-inline-start-width: var(--hr-thickness);
+    --border-inline-end-width: var(--hr-thickness);
 
     /* Z-index scale */
     --z-base: 1;

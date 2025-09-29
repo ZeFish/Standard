@@ -9083,8 +9083,8 @@ button {
     }
 
     &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
     }
 }
 
@@ -9468,8 +9468,8 @@ button {
     }
 
     &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
     }
 }
 
@@ -9490,8 +9490,8 @@ textarea {
     color: var(--color-foreground);
 
     &:focus {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 1px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
         border-color: var(--color-accent);
     }
 
@@ -29376,8 +29376,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             .nav a:hover {
@@ -30873,8 +30873,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             .nav a:hover {
@@ -30891,7 +30891,7 @@ Diff: example/index.html
             }
 
             .nav li:nth-child(n + 4) a {
-                outline: 2px solid blue !important;
+                outline: 1px solid blue !important;
                 background: rgba(255, 0, 0, 0.1) !important;
             }
 
@@ -32427,8 +32427,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -34430,8 +34430,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -36234,8 +36234,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -37902,8 +37902,8 @@ button {
     }
 
     &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
     }
 }
 
@@ -37924,8 +37924,8 @@ textarea {
     color: var(--color-foreground);
 
     &:focus {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 1px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
         border-color: var(--color-accent);
     }
 
@@ -38225,8 +38225,8 @@ button {
     }
 
     &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
     }
 }
 
@@ -38247,8 +38247,8 @@ textarea {
     color: var(--color-foreground);
 
     &:focus {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 1px;
+        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline-offset: 0px;
         border-color: var(--color-accent);
     }
 
@@ -38594,8 +38594,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -40821,8 +40821,8 @@ Showing matches 1-20 (there were more matches found; use offset: 20 to see next 
 ### head › .nav a:focus › L130-133
 ```
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 ```
 
@@ -41132,8 +41132,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -43755,8 +43755,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -45992,8 +45992,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -47595,8 +47595,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -49567,8 +49567,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -52027,8 +52027,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -53710,8 +53710,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -55573,8 +55573,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */
@@ -58082,8 +58082,8 @@ Diff: example/index.html
             }
 
             .nav a:focus {
-                outline: 2px solid var(--color-accent);
-                outline-offset: 2px;
+                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+                outline-offset: 0px;
             }
 
             /* Rhythm visualization styles */

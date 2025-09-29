@@ -1,14 +1,14 @@
-/* Color Design Tokens */
+/* Modern Color System - Automatic Light/Dark Theme with System Preference Detection */
 :root {
+    /* Tell browser we support both color schemes */
     color-scheme: light dark;
 
-    /* Base colors */
+    /* ===== LIGHT MODE PALETTE ===== */
+    /* Natural, paper-like, analog-inspired colors */
     --color-light-background: white;
-    --color-light-foreground: rgba(0, 0, 0, 0.85);
-    --color-dark-background: black;
-    --color-dark-foreground: rgba(255, 255, 255, 0.85);
+    --color-light-foreground: rgba(0, 0, 0, 0.87);
+    --color-light-surface: rgba(0, 0, 0, 0.02);
 
-    /* 🌞 Light Mode Colors (natural, paper-like, analog-inspired) */
     --color-light-red: #b14c42; /* dusty red clay */
     --color-light-orange: #d78a5a; /* trail-worn orange */
     --color-light-yellow: #c8a840; /* parchment mustard */
@@ -19,11 +19,17 @@
     --color-light-pink: #b97aa0; /* vintage mauve rose */
 
     --color-light-accent: var(--color-light-yellow);
-    --color-light-header: inherit;
-    --color-light-bold: inherit;
-    --color-light-italic: inherit;
+    --color-light-success: var(--color-light-green);
+    --color-light-warning: var(--color-light-orange);
+    --color-light-error: var(--color-light-red);
+    --color-light-info: var(--color-light-blue);
 
-    /* 🌙 Dark Mode Colors (soft-glow, night-usable, retro tech) */
+    /* ===== DARK MODE PALETTE ===== */
+    /* Soft-glow, night-usable, retro tech inspired */
+    --color-dark-background: #0f0f0f;
+    --color-dark-foreground: rgba(255, 255, 255, 0.87);
+    --color-dark-surface: rgba(255, 255, 255, 0.05);
+
     --color-dark-red: #db6057; /* ember red */
     --color-dark-orange: #e58f5c; /* lantern orange */
     --color-dark-yellow: #dcb757; /* candlelight gold */
@@ -34,13 +40,15 @@
     --color-dark-pink: #d49ab8; /* faded polaroid blush */
 
     --color-dark-accent: var(--color-dark-yellow);
-    --color-dark-header: inherit;
-    --color-dark-bold: inherit;
-    --color-dark-italic: inherit;
+    --color-dark-success: var(--color-dark-green);
+    --color-dark-warning: var(--color-dark-orange);
+    --color-dark-error: var(--color-dark-red);
+    --color-dark-info: var(--color-dark-blue);
 
-    /* Current theme colors - default to light mode */
+    /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
     --color-background: var(--color-light-background);
     --color-foreground: var(--color-light-foreground);
+    --color-surface: var(--color-light-surface);
 
     --color-red: var(--color-light-red);
     --color-orange: var(--color-light-orange);
@@ -52,43 +60,213 @@
     --color-pink: var(--color-light-pink);
 
     --color-accent: var(--color-light-accent);
-    --color-header: var(--color-light-header);
-    --color-bold: var(--color-light-bold);
-    --color-italic: var(--color-light-italic);
+    --color-success: var(--color-light-success);
+    --color-warning: var(--color-light-warning);
+    --color-error: var(--color-light-error);
+    --color-info: var(--color-light-info);
 
-    /* Computed colors based on theme */
-    --color-muted: var(
-        --color-light-muted,
-        color-mix(in srgb, var(--color-foreground) 50%, var(--color-background))
+    /* ===== COMPUTED SEMANTIC COLORS ===== */
+    --color-muted: color-mix(
+        in srgb,
+        var(--color-foreground) 60%,
+        var(--color-background)
+    );
+    --color-subtle: color-mix(
+        in srgb,
+        var(--color-foreground) 40%,
+        var(--color-background)
+    );
+    --color-border: color-mix(
+        in srgb,
+        var(--color-foreground) 12%,
+        var(--color-background)
+    );
+    --color-divider: color-mix(
+        in srgb,
+        var(--color-foreground) 8%,
+        var(--color-background)
     );
 
-    --color-border: var(
-        --light-border-color,
-        color-mix(in srgb, var(--color-foreground) 10%, var(--color-background))
+    --color-background-secondary: color-mix(
+        in srgb,
+        var(--color-foreground) 3%,
+        var(--color-background)
+    );
+    --color-background-tertiary: color-mix(
+        in srgb,
+        var(--color-foreground) 6%,
+        var(--color-background)
     );
 
-    --color-background-secondary: var(
-        --color-light-background-secondary,
-        color-mix(
-            in srgb,
-            var(--color-foreground) 2.5%,
-            var(--color-background)
-        )
+    /* Interactive states */
+    --color-hover: color-mix(
+        in srgb,
+        var(--color-accent) 10%,
+        var(--color-background)
+    );
+    --color-active: color-mix(
+        in srgb,
+        var(--color-accent) 20%,
+        var(--color-background)
     );
 
-    /* Border tokens */
-    --border: var(--hr-thickness) solid var(--color-border);
+    /* ===== SHADOWS AND EFFECTS ===== */
+    --shadow-color: color-mix(
+        in srgb,
+        var(--color-foreground) 15%,
+        transparent
+    );
+    --shadow: 0 1px 3px var(--shadow-color);
+    --shadow-lg: 0 4px 12px var(--shadow-color);
+    --shadow-xl: 0 8px 25px var(--shadow-color);
 
-    /* Shadow tokens */
-    --shadow: 0 0 var(--space-xxs) 0px var(--color-border);
+    /* ===== DESIGN TOKENS ===== */
+    --border: 1px solid var(--color-border);
+    --border-accent: 2px solid var(--color-accent);
+
+    /* Theme transition for smooth switching */
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-/* Dark mode overrides */
+/* ===== AUTOMATIC DARK MODE (System Preference) ===== */
+@media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+        /* Override semantic tokens to use dark palette */
+        --color-background: var(--color-dark-background);
+        --color-foreground: var(--color-dark-foreground);
+        --color-surface: var(--color-dark-surface);
+
+        --color-red: var(--color-dark-red);
+        --color-orange: var(--color-dark-orange);
+        --color-yellow: var(--color-dark-yellow);
+        --color-green: var(--color-dark-green);
+        --color-cyan: var(--color-dark-cyan);
+        --color-blue: var(--color-dark-blue);
+        --color-purple: var(--color-dark-purple);
+        --color-pink: var(--color-dark-pink);
+
+        --color-accent: var(--color-dark-accent);
+        --color-success: var(--color-dark-success);
+        --color-warning: var(--color-dark-warning);
+        --color-error: var(--color-dark-error);
+        --color-info: var(--color-dark-info);
+
+        /* Adjusted computed colors for dark mode */
+        --color-muted: color-mix(
+            in srgb,
+            var(--color-foreground) 65%,
+            var(--color-background)
+        );
+        --color-subtle: color-mix(
+            in srgb,
+            var(--color-foreground) 45%,
+            var(--color-background)
+        );
+        --color-border: color-mix(
+            in srgb,
+            var(--color-foreground) 18%,
+            var(--color-background)
+        );
+        --color-divider: color-mix(
+            in srgb,
+            var(--color-foreground) 12%,
+            var(--color-background)
+        );
+
+        --color-background-secondary: color-mix(
+            in srgb,
+            var(--color-foreground) 5%,
+            var(--color-background)
+        );
+        --color-background-tertiary: color-mix(
+            in srgb,
+            var(--color-foreground) 8%,
+            var(--color-background)
+        );
+
+        /* Dark mode shadows */
+        --shadow-color: color-mix(in srgb, #000 40%, transparent);
+        --shadow: 0 2px 4px var(--shadow-color);
+        --shadow-lg: 0 8px 16px var(--shadow-color);
+        --shadow-xl: 0 12px 32px var(--shadow-color);
+    }
+}
+
+/* ===== MANUAL THEME OVERRIDES ===== */
+/* Force light mode regardless of system preference */
+.light {
+    --color-background: var(--color-light-background);
+    --color-foreground: var(--color-light-foreground);
+    --color-surface: var(--color-light-surface);
+
+    --color-red: var(--color-light-red);
+    --color-orange: var(--color-light-orange);
+    --color-yellow: var(--color-light-yellow);
+    --color-green: var(--color-light-green);
+    --color-cyan: var(--color-light-cyan);
+    --color-blue: var(--color-light-blue);
+    --color-purple: var(--color-light-purple);
+    --color-pink: var(--color-light-pink);
+
+    --color-accent: var(--color-light-accent);
+    --color-success: var(--color-light-success);
+    --color-warning: var(--color-light-warning);
+    --color-error: var(--color-light-error);
+    --color-info: var(--color-light-info);
+
+    /* Light mode computed colors */
+    --color-muted: color-mix(
+        in srgb,
+        var(--color-foreground) 60%,
+        var(--color-background)
+    );
+    --color-subtle: color-mix(
+        in srgb,
+        var(--color-foreground) 40%,
+        var(--color-background)
+    );
+    --color-border: color-mix(
+        in srgb,
+        var(--color-foreground) 12%,
+        var(--color-background)
+    );
+    --color-divider: color-mix(
+        in srgb,
+        var(--color-foreground) 8%,
+        var(--color-background)
+    );
+
+    --color-background-secondary: color-mix(
+        in srgb,
+        var(--color-foreground) 3%,
+        var(--color-background)
+    );
+    --color-background-tertiary: color-mix(
+        in srgb,
+        var(--color-foreground) 6%,
+        var(--color-background)
+    );
+
+    /* Light mode shadows */
+    --shadow-color: color-mix(
+        in srgb,
+        var(--color-foreground) 15%,
+        transparent
+    );
+    --shadow: 0 1px 3px var(--shadow-color);
+    --shadow-lg: 0 4px 12px var(--shadow-color);
+    --shadow-xl: 0 8px 25px var(--shadow-color);
+}
+
+/* Force dark mode regardless of system preference */
 .dark {
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
+    --color-surface: var(--color-dark-surface);
 
-    /* Switch to dark mode colors */
     --color-red: var(--color-dark-red);
     --color-orange: var(--color-dark-orange);
     --color-yellow: var(--color-dark-yellow);
@@ -99,113 +277,408 @@
     --color-pink: var(--color-dark-pink);
 
     --color-accent: var(--color-dark-accent);
-    --color-header: var(--color-dark-header);
-    --color-bold: var(--color-dark-bold);
-    --color-italic: var(--color-dark-italic);
+    --color-success: var(--color-dark-success);
+    --color-warning: var(--color-dark-warning);
+    --color-error: var(--color-dark-error);
+    --color-info: var(--color-dark-info);
 
-    /* Dark mode specific computed colors */
-    --color-background-secondary: var(
-        --color-dark-background-secondary,
-        color-mix(in srgb, var(--color-foreground) 7%, var(--color-background))
+    /* Dark mode computed colors */
+    --color-muted: color-mix(
+        in srgb,
+        var(--color-foreground) 65%,
+        var(--color-background)
+    );
+    --color-subtle: color-mix(
+        in srgb,
+        var(--color-foreground) 45%,
+        var(--color-background)
+    );
+    --color-border: color-mix(
+        in srgb,
+        var(--color-foreground) 18%,
+        var(--color-background)
+    );
+    --color-divider: color-mix(
+        in srgb,
+        var(--color-foreground) 12%,
+        var(--color-background)
     );
 
-    --color-border: var(
-        --dark-border-color,
-        color-mix(in srgb, var(--color-background) 90%, var(--color-accent))
+    --color-background-secondary: color-mix(
+        in srgb,
+        var(--color-foreground) 5%,
+        var(--color-background)
+    );
+    --color-background-tertiary: color-mix(
+        in srgb,
+        var(--color-foreground) 8%,
+        var(--color-background)
     );
 
-    --color-muted: var(
-        --color-dark-muted,
-        color-mix(in srgb, var(--color-foreground) 40%, var(--color-background))
-    );
-
-    --shadow: 0 0 var(--space-xxs) 0px
-        color-mix(in srgb, var(--color-background) 50%, transparent);
+    /* Dark mode shadows */
+    --shadow-color: color-mix(in srgb, #000 40%, transparent);
+    --shadow: 0 2px 4px var(--shadow-color);
+    --shadow-lg: 0 8px 16px var(--shadow-color);
+    --shadow-xl: 0 12px 32px var(--shadow-color);
 }
 
-/* Selection highlighting for both modes */
-.dark ::selection,
-::selection {
-    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+/* ===== ACCESSIBILITY SUPPORT ===== */
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --color-border: var(--color-foreground);
+        --color-muted: var(--color-foreground);
+        --color-subtle: var(--color-foreground);
+    }
 }
 
-/* -= Base HTML Color Application =- */
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        transition: none;
+    }
+
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Windows High Contrast mode */
+@media (forced-colors: active) {
+    :root {
+        --color-background: Canvas;
+        --color-foreground: CanvasText;
+        --color-accent: Highlight;
+        --color-border: CanvasText;
+        --color-muted: GrayText;
+    }
+}
+
+/* ===== BASE HTML STYLING ===== */
 html {
     color: var(--color-foreground);
     background: var(--color-background);
+
+    /* Smooth theme transitions */
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
-.muted {
+body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+}
+
+/* ===== SEMANTIC UTILITY CLASSES ===== */
+.text-muted {
     color: var(--color-muted);
 }
-/*
-blockquote,
-.callout-content,
-.callout-title {
-    color: color-mix(in srgb, currentColor 80%, var(--color-background));
+.text-subtle {
+    color: var(--color-subtle);
+}
+.text-accent {
+    color: var(--color-accent);
+}
+.text-success {
+    color: var(--color-success);
+}
+.text-warning {
+    color: var(--color-warning);
+}
+.text-error {
+    color: var(--color-error);
+}
+.text-info {
+    color: var(--color-info);
 }
 
-.callout-content a,
-.callout-title a {
-    color: color-mix(in srgb, var(--color-accent) 80%, var(--color-background));
+.bg-surface {
+    background: var(--color-surface);
+}
+.bg-secondary {
+    background: var(--color-background-secondary);
+}
+.bg-tertiary {
+    background: var(--color-background-tertiary);
 }
 
-.callout-content em {
-    color: color-mix(in srgb, var(--color-italic) 80%, var(--color-background));
+.border-default {
+    border: var(--border);
+}
+.border-accent {
+    border: var(--border-accent);
 }
 
-.callout-content strong {
-    color: color-mix(in srgb, var(--color-bold) 80%, var(--color-background));
-}
-*/
-// ==========================
-// Links Management
-// ==========================
+/* ===== INTERACTIVE ELEMENTS ===== */
+/* Links */
 a,
-a:active,
 a:visited {
-    cursor: pointer;
     color: inherit;
     text-decoration: underline;
     text-decoration-thickness: 0.1em;
-    text-decoration-color: color-mix(
-        in srgb,
-        var(--color-foreground) 50%,
-        var(--color-background)
-    );
-    white-space: normal;
+    text-underline-offset: 0.15em;
+    text-decoration-color: var(--color-border);
     transition:
         color 0.2s ease,
-        text-decoration-color 0.25s ease;
+        text-decoration-color 0.2s ease;
 }
-a:hover {
+
+a:hover,
+a:focus {
     color: var(--color-accent);
-    text-decoration-color: color-mix(
+    text-decoration-color: var(--color-accent);
+}
+
+a:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    border-radius: 2px;
+}
+
+/* Form elements inherit theme */
+input,
+textarea,
+select,
+button {
+    color: inherit;
+    background: var(--color-background-secondary);
+    border: var(--border);
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    outline-offset: 0px;
+    border-color: var(--color-accent);
+}
+
+button:hover {
+    background: var(--color-hover);
+}
+
+button:active {
+    background: var(--color-active);
+}
+
+/* Selection highlighting */
+::selection {
+    background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    color: var(--color-foreground);
+}
+
+/* =========================== */
+/* RHYTHM ELEMENT COLORS       */
+/* =========================== */
+
+/* Color, border and visual properties for elements within rhythm containers */
+.rhythm {
+    /* Debug mode visualization */
+    background-image: repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent),
+        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent) 1px,
+        transparent 1px,
+        transparent calc(var(--space) * var(--rhythm-multiplier))
+    );
+    background-repeat: repeat-y;
+    background-size: 100% calc(var(--space) * var(--rhythm-multiplier));
+    background-position: 0 0.5px;
+
+    /* Nested rhythm debug reset */
+    .rhythm {
+        background-image: none;
+    }
+}
+/* Blockquote borders */
+blockquote {
+    border-inline-start: calc(var(--space-xxs) * var(--rhythm-multiplier)) solid
+        var(--color-border);
+}
+
+/* Code block colors */
+pre {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius);
+    border: var(--border);
+}
+
+/* Horizontal rule colors */
+hr {
+    height: var(--hr-thickness);
+    background: var(--color-border);
+    border: none;
+}
+
+/* Form field group borders */
+fieldset {
+    border: var(--border);
+    border-radius: var(--border-radius);
+}
+
+/* Media element borders */
+img,
+video,
+audio,
+iframe {
+    border-radius: var(--border-radius);
+    border: var(--border);
+}
+
+/* Table colors and borders */
+th,
+td {
+    border: var(--border);
+}
+
+th {
+    background: var(--color-background-secondary);
+}
+
+/* Callout colors */
+.callout {
+    background: var(--color-background-secondary);
+    border: var(--border);
+    border-radius: var(--border-radius);
+}
+
+/* Semantic elements debug visualization */
+section,
+article,
+main {
+    /* Debug mode visualization */
+    background-image: repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent),
+        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent) 1px,
+        transparent 1px,
+        transparent calc(var(--space) * var(--rhythm-multiplier))
+    );
+    background-repeat: repeat-y;
+    background-size: 100% calc(var(--space) * var(--rhythm-multiplier));
+    background-position: 0 0.5px;
+
+    /* Nested rhythm debug reset */
+    .rhythm {
+        background-image: none;
+    }
+}
+
+/* Debug mode border styling */
+.rhythm.rhythm-debug > * {
+    border: 1px dashed color-mix(in srgb, var(--color-accent) 50%, transparent);
+}
+
+/* Debug utilities visual styling */
+.rhythm-debug-advanced > * {
+    outline: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+
+    &::before {
+        font-size: 0.65rem;
+        background: var(--color-accent);
+        color: var(--color-background);
+        padding: 0.1rem 0.3rem;
+        border-radius: 2px;
+        opacity: 0.9;
+    }
+}
+
+/* Debug outline for semantic elements */
+section.rhythm-debug-advanced,
+article.rhythm-debug-advanced,
+main.rhythm-debug-advanced {
+    > * {
+        outline: 1px solid
+            color-mix(in srgb, var(--color-accent) 40%, transparent);
+    }
+}
+
+.rhythm-debug-grid::before {
+    background: var(--color-accent);
+    color: var(--color-background);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: var(--scale-xs);
+    box-shadow: var(--shadow);
+}
+
+.rhythm-debug-measure > * {
+    border-inline-start: 2px solid var(--color-accent);
+    padding-inline-start: 0.5rem;
+
+    &::before {
+        font-size: 0.75rem;
+        color: var(--color-accent);
+        background: var(--color-background);
+        padding: 0.2rem;
+        border-radius: 2px;
+    }
+}
+
+/* Strong and emphasis */
+strong {
+    color: var(--color-foreground);
+    font-weight: 600;
+}
+
+em {
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+/* Horizontal rules */
+hr {
+    background: var(--color-divider);
+    border: none;
+    block-size: 1px;
+}
+
+/* Code elements */
+code:not(pre code),
+pre {
+    background: var(--color-background-secondary);
+    color: var(--color-foreground);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: inset var(--shadow);
+}
+code:not(pre code) {
+    padding: var(--space-xxs);
+    box-shadow: unset;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: var(--border);
+}
+
+th {
+    background: var(--color-background-secondary);
+    font-weight: 600;
+}
+
+/* Quotes */
+blockquote {
+    border-inline-start: 4px solid var(--color-accent);
+    background: var(--color-background-secondary);
+    color: var(--color-muted);
+}
+
+/* Mark highlighting */
+mark {
+    background: color-mix(
         in srgb,
-        var(--color-accent) 90%,
+        var(--color-yellow) 30%,
         var(--color-background)
     );
-}
-
-strong {
-    color: var(--color-bold);
-}
-em {
-    color: var(--color-italic);
-}
-
-hr,
-hr:only-child {
-    background: var(--color-border);
-}
-
-table {
-    --border-width: 1px;
-    --border-opacity: 1;
-    --color-border: unset;
-}
-
-mark {
     color: var(--color-foreground);
-    background-color: color-mix(in srgb, var(--color-background));
 }

@@ -1,4 +1,4 @@
-/* Prose Layout Design Tokens */
+/* Prose Layout Design Tokens - Using logical properties */
 :root {
     /* Content area tokens */
     --line-width-xs: 24rem; /* ~384px - narrow sidebar content */
@@ -12,16 +12,16 @@
     /* Layout grid tokens */
     --gap: clamp(var(--space), 6vw, var(--space-xl));
     --content: min(var(--line-width), 100% - var(--gap) * 2);
+    --content-small: var(--space-l);
     --content-accent: minmax(0, var(--space-l));
     --content-feature: minmax(0, var(--space-xxl));
     --content-full: minmax(var(--gap), 1fr);
 }
 
-/* Book Layout System - Article content grid and positioning */
+/* Reading Layout System - Article content grid and positioning */
 /* Inspired by fine-art typography and book design principles */
 
-.book,
-.prose {
+.reading {
     display: grid;
     grid-template-columns:
         [full-start] var(--content-full)
@@ -32,8 +32,7 @@
         var(--content-feature) [feature-end]
         var(--content-full) [full-end];
 
-    padding-left: calc(var(--space) * -2);
-    padding-right: calc(var(--space) * -2);
+    padding-inline: calc(var(--space) * -2);
 
     position: relative;
     z-index: var(--z-base);
@@ -43,31 +42,24 @@
         grid-column: content;
     }
 
-    /* Content area positioning classes */
-    .content,
-    .margin {
+    .small {
         grid-column: content;
-        margin-left: 0;
-        margin-right: 0;
+        margin-inline: var(--content-small);
     }
 
     .accent {
         grid-column: accent;
-        margin-left: 0;
-        margin-right: 0;
+        margin-inline: 0;
     }
 
-    .feature,
-    .table-wrapper {
+    .feature {
         grid-column: feature;
-        margin-left: 0;
-        margin-right: 0;
+        margin-inline: 0;
     }
 
     .full {
         grid-column: full;
-        margin-left: 0;
-        margin-right: 0;
+        margin-inline: 0;
     }
 
     /* Image gallery layout */
@@ -111,18 +103,20 @@
     /* Table wrapper layout */
     .table-wrapper {
         width: 100%;
-        overflow-y: hidden;
-        overflow-x: auto;
+        overflow-block: hidden;
+        overflow-inline: auto;
+
         -webkit-overflow-scrolling: touch;
         position: relative;
-        margin: var(--space-l) auto var(--space-xl) auto;
+        margin-block: var(--space-l) var(--space-xl);
+        margin-inline: auto;
 
         .table-gradient-overlay {
             position: absolute;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: var(--space-xl);
+            inset-block-start: 0;
+            inset-inline-end: 0;
+            block-size: 100%;
+            inline-size: var(--space-xl);
             background: linear-gradient(
                 to left,
                 var(--color-background),
@@ -140,7 +134,7 @@
 
         @media (min-width: 769px) {
             .table-gradient-overlay {
-                width: var(--space-xl);
+                inline-size: var(--space-xl);
                 opacity: 0;
             }
 
@@ -168,8 +162,8 @@
         &.has-overflow:focus::before {
             content: "Use ← → arrow keys to scroll";
             position: absolute;
-            top: -1.5rem;
-            left: 0;
+            inset-block-start: -1.5rem;
+            inset-inline-start: 0;
             font-size: var(--scale-xs);
             color: var(--color-muted);
             background: var(--color-background);
@@ -199,10 +193,9 @@
         &.has-overflow::after {
             content: "";
             position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 1px;
+            inset-block: 0;
+            inset-inline-end: 0;
+            inline-size: 1px;
             background: var(--color-border);
             opacity: 0.3;
             pointer-events: none;
@@ -229,54 +222,23 @@
     img,
     audio,
     video {
-        margin-inline: auto;
         margin: 0;
-        max-width: 100%;
+        margin-inline: auto;
+        max-inline-size: 100%;
         border-radius: var(--border-radius);
         border: var(--border);
     }
 
     /* Mermaid diagrams */
     .mermaid {
-        margin: 0 auto var(--space) auto;
+        margin-block-end: var(--space);
+        margin-inline: auto;
         padding: var(--space);
     }
 
     p img {
-        max-width: 100%;
+        max-inline-size: 100%;
     }
-}
-
-/* Content positioning utility classes */
-.book .content-area,
-.prose .content-area {
-    grid-column: content;
-}
-
-.book .accent-area,
-.prose .accent-area {
-    grid-column: accent;
-}
-
-.book .feature-area,
-.prose .feature-area {
-    grid-column: feature;
-}
-
-.book .full-area,
-.prose .full-area {
-    grid-column: full;
-}
-
-/* Fine-art inspired semantic classes */
-.standard {
-    grid-column: accent; /* Reference to typography's standard concept */
-}
-
-
-
-.bleed {
-    grid-column: full; /* Full bleed like print design */
 }
 
 /* Animation keyframes */

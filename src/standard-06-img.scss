@@ -1,10 +1,10 @@
-/* Image Styles - Works with both .prose (layout) and .rhythm (spacing) */
+/* Image Styles - Works with both .reading (layout) and .rhythm (spacing) - Using logical properties */
 
 img {
-    max-width: 100%;
+    max-inline-size: 100%;
 }
 
-.prose,
+.reading,
 .rhythm {
     /* Basic image styling */
     * + img,
@@ -13,6 +13,8 @@ img {
     img:last-child {
         margin: 0;
         border: var(--border);
+        max-inline-size: 100%;
+        block-size: auto;
     }
 
     img {
@@ -53,16 +55,14 @@ img {
 }
 
 /* Zoom overlay backgrounds */
-.prose :has(img:active)::before,
-.prose :has(img.zoomed)::before,
+.reading :has(img:active)::before,
+.reading :has(img.zoomed)::before,
 .rhythm :has(img:active)::before,
 .rhythm :has(img.zoomed)::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: var(--color-background);
-    z-index: calc(var(--z-image-zoom) - 100);
+    opacity: 0.95;
+    z-index: calc(var(--z-image-zoom) - 1);
 }
