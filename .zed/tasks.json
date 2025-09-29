@@ -1,0 +1,12 @@
+[
+  {
+    "label": "build-css",
+    "command": "npm run build",
+    "description": "Compiles Sass to CSS."
+  },
+  {
+    "label": "watch-css",
+    "command": "npm run build",
+    "description": "Watches Sass files for changes and recompiles."
+  }
+]

@@ -1,3 +1,14 @@
+/* Grid Design Tokens */
+:root {
+    /* Grid system tokens */
+    --grid-cols: 12;
+    --grid-gap: var(--space);
+
+    /* Container tokens */
+    --container-max: 1200px;
+    --container-standard: var(--space);
+}
+
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
    Use this as your single grid across the site (replaces old .h-grid API).
    Relies on your Harmony tokens: --space, --space-gap, --space-l, borders, etc.
@@ -5,8 +16,6 @@
 
 /* Grid container */
 .grid {
-    --grid-cols: 12;
-    --grid-gap: var(--space);
     display: grid;
     grid-template-columns: repeat(var(--grid-cols), 1fr);
     gap: var(--grid-gap);

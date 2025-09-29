@@ -1,17 +1,65 @@
 {
-  "name": "standard",
-  "version": "0.1.0",
-  "description": "A standard framework for web development.",
+  "name": "@zefish/standard",
+  "version": "0.1.2",
+  "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "main": "dist/standard.css",
+  "exports": {
+    ".": "./dist/standard.css",
+    "./min": "./dist/standard.min.css",
+    "./js": "./dist/standard.js"
+  },
+  "files": [
+    "dist",
+    "src/standard.js"
+  ],
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "sass src/standard.scss dist/standard.css --style=compressed"
+    "build:css": "sass --load-path=node_modules src/standard.scss dist/standard.css",
+    "build:css-min": "sass --load-path=node_modules src/standard.scss dist/standard.min.css --style=compressed",
+    "build:js": "cp src/standard.js dist/standard.js",
+    "build": "npm run build:css && npm run build:css-min && npm run build:js",
+    "release": "npm run clean && npm run build",
+    "dev": "sass --watch --load-path=node_modules src/standard.scss dist/standard.css"
   },
   "keywords": [
     "css",
     "framework",
-    "sass"
+    "sass",
+    "typography",
+    "fine-art",
+    "golden-ratio",
+    "vertical-rhythm",
+    "print-design",
+    "micro-typography",
+    "swiss-style",
+    "baseline-grid",
+    "classical-typography",
+    "standard",
+    "book-layout"
   ],
-  "author": "",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeFish/Standard.git"
+  },
+  "homepage": "https://github.com/ZeFish/Standard#readme",
+  "bugs": {
+    "url": "https://github.com/ZeFish/Standard/issues"
+  },
+  "author": "Francis Fontaine",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "sanitize.css": "^13.0.0",
+    "sass": "^1.93.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

@@ -1,61 +1,400 @@
 @charset "UTF-8";
-/* Entry bundle for article pages (uses your lanes and markdown polish) */
-/* Harmony Utilities: rhythm, layout stacks, exceptions, baseline debugging */
-/* Content rhythm: apply to prose containers (e.g., article, .prose) */
-.flow > * + * {
-  margin-block-start: var(--flow-space, var(--space-block));
+/* Document
+ * ========================================================================== */
+/**
+ * 1. Add border box sizing in all browsers (opinionated).
+ * 2. Backgrounds do not repeat by default (opinionated).
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  background-repeat: no-repeat; /* 2 */
 }
 
-.flow-tight > * + * {
-  margin-block-start: var(--space);
+/**
+ * 1. Add text decoration inheritance in all browsers (opinionated).
+ * 2. Add vertical alignment inheritance in all browsers (opinionated).
+ */
+::before,
+::after {
+  text-decoration: inherit; /* 1 */
+  vertical-align: inherit; /* 2 */
 }
 
-.flow-wide > * + * {
-  margin-block-start: var(--space-xxl);
+/**
+ * 1. Use the default cursor in all browsers (opinionated).
+ * 2. Change the line height in all browsers (opinionated).
+ * 3. Breaks words to prevent overflow in all browsers (opinionated).
+ * 4. Use a 4-space tab width in all browsers (opinionated).
+ * 5. Remove the grey highlight on links in iOS (opinionated).
+ * 6. Prevent adjustments of font size after orientation changes in iOS.
+ */
+:where(:root) {
+  cursor: default; /* 1 */
+  line-height: 1.5; /* 2 */
+  overflow-wrap: break-word; /* 3 */
+  -moz-tab-size: 4; /* 4 */
+  tab-size: 4; /* 4 */
+  -webkit-tap-highlight-color: transparent; /* 5 */
+  -webkit-text-size-adjust: 100%; /* 6 */
 }
 
-/* Layout stacks: gap avoids margin-collapsing */
-.stack {
-  display: grid;
-  gap: var(--stack-gap, var(--space));
+/* Sections
+ * ========================================================================== */
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+:where(body) {
+  margin: 0;
 }
 
-.stack.tight {
-  --stack-gap: var(--space-gap);
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Edge, Firefox, and Safari.
+ */
+:where(h1) {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
 
-.stack.wide {
-  --stack-gap: var(--space-l);
+/* Grouping content
+ * ========================================================================== */
+/**
+ * Remove the margin on nested lists in Chrome, Edge, and Safari.
+ */
+:where(dl, ol, ul) :where(dl, ol, ul) {
+  margin: 0;
 }
 
-/* Small exception helpers */
-.no-top {
-  margin-block-start: 0 !important;
+/**
+ * 1. Correct the inheritance of border color in Firefox.
+ * 2. Add the correct box sizing in Firefox.
+ */
+:where(hr) {
+  color: inherit; /* 1 */
+  height: 0; /* 2 */
 }
 
-.no-bottom {
-  margin-block-end: 0 !important;
+/**
+ * Remove the list style on navigation lists in all browsers (opinionated).
+ */
+:where(nav) :where(ol, ul) {
+  list-style-type: none;
+  padding: 0;
 }
 
-.stick-next {
-  margin-block-end: var(--space-gap) !important;
+/**
+ * Prevent VoiceOver from ignoring list semantics in Safari (opinionated).
+ */
+:where(nav li)::before {
+  content: "​";
+  float: left;
 }
 
-/* Text utility */
-.muted {
-  color: var(--color-muted);
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ * 3. Prevent overflow of the container in all browsers (opinionated).
+ */
+:where(pre) {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+  overflow: auto; /* 3 */
 }
 
-/* Baseline debug overlay */
-.grid-debug {
-  background-image: repeating-linear-gradient(0deg, color-mix(in srgb, var(--color-muted) 10%, transparent), color-mix(in srgb, var(--color-muted) 10%, transparent) 1px, transparent 1px, transparent var(--space));
-  background-repeat: repeat-y;
-  background-size: 100% var(--space);
-  background-position: 0 0.5px;
+/* Text-level semantics
+ * ========================================================================== */
+/**
+ * Add the correct text decoration in Safari.
+ */
+:where(abbr[title]) {
+  text-decoration: underline;
+  text-decoration: underline dotted;
 }
 
-.grid-debug * {
-  outline: 1px solid var(--color-muted);
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+:where(b, strong) {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+:where(code, kbd, samp) {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+:where(small) {
+  font-size: 80%;
+}
+
+/* Embedded content
+ * ========================================================================== */
+/*
+ * Change the alignment on media elements in all browsers (opinionated).
+ */
+:where(audio, canvas, iframe, img, svg, video) {
+  vertical-align: middle;
+}
+
+/**
+ * Remove the border on iframes in all browsers (opinionated).
+ */
+:where(iframe) {
+  border-style: none;
+}
+
+/**
+ * Change the fill color to match the text color in all browsers (opinionated).
+ */
+:where(svg:not([fill])) {
+  fill: currentColor;
+}
+
+/* Tabular data
+ * ========================================================================== */
+/**
+ * 1. Collapse border spacing in all browsers (opinionated).
+ * 2. Correct table border color inheritance in all Chrome, Edge, and Safari.
+ * 3. Remove text indentation from table contents in Chrome, Edge, and Safari.
+ */
+:where(table) {
+  border-collapse: collapse; /* 1 */
+  border-color: inherit; /* 2 */
+  text-indent: 0; /* 3 */
+}
+
+/* Forms
+ * ========================================================================== */
+/**
+ * Remove the margin on controls in Safari.
+ */
+:where(button, input, select) {
+  margin: 0;
+}
+
+/**
+ * Correct the inability to style buttons in iOS and Safari.
+ */
+:where(button, [type=button i], [type=reset i], [type=submit i]) {
+  -webkit-appearance: button;
+}
+
+/**
+ * Change the inconsistent appearance in all browsers (opinionated).
+ */
+:where(fieldset) {
+  border: 1px solid #a0a0a0;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Edge, and Firefox.
+ */
+:where(progress) {
+  vertical-align: baseline;
+}
+
+/**
+ * 1. Remove the margin in Firefox and Safari.
+ * 3. Change the resize direction in all browsers (opinionated).
+ */
+:where(textarea) {
+  margin: 0; /* 1 */
+  resize: vertical; /* 3 */
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome, Edge, and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+:where([type=search i]) {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Safari.
+ */
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+/**
+ * Remove the inner padding in Chrome, Edge, and Safari on macOS.
+ */
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style upload buttons in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+ * ========================================================================== */
+/*
+ * Add the correct styles in Safari.
+ */
+:where(dialog) {
+  background-color: white;
+  border: solid;
+  color: black;
+  height: -moz-fit-content;
+  height: fit-content;
+  left: 0;
+  margin: auto;
+  padding: 1em;
+  position: absolute;
+  right: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+:where(dialog:not([open])) {
+  display: none;
+}
+
+/*
+ * Add the correct display in Safari.
+ */
+:where(details > summary:first-of-type) {
+  display: list-item;
+}
+
+/* Accessibility
+ * ========================================================================== */
+/**
+ * Change the cursor on busy elements in all browsers (opinionated).
+ */
+:where([aria-busy=true i]) {
+  cursor: progress;
+}
+
+/*
+ * Change the cursor on control elements in all browsers (opinionated).
+ */
+:where([aria-controls]) {
+  cursor: pointer;
+}
+
+/*
+ * Change the cursor on disabled, not-editable, or otherwise
+ * inoperable elements in all browsers (opinionated).
+ */
+:where([aria-disabled=true i], [disabled]) {
+  cursor: not-allowed;
+}
+
+/*
+ * Change the display on visually hidden accessible elements
+ * in all browsers (opinionated).
+ */
+:where([aria-hidden=false i][hidden]) {
+  display: initial;
+}
+
+:where([aria-hidden=false i][hidden]:not(:focus)) {
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+/* Standard - Fine-Art Typography Framework */
+/* A framework implementing classical design principles, mathematical precision with the golden ratio, */
+/* and micro-typography rules inspired by the masters of print design. */
+/* Primitive Design Tokens - Foundation layer only */
+:root {
+  /* Base measurements & ratios - the foundation of everything else */
+  --font-size: 1rem;
+  /* Golden Ratio & Mathematical Precision */
+  --ratio-golden: 1.618;
+  --ratio-wholestep: 1.618;
+  --ratio-halfstep: 1.272; /* sqrt of golden ratio */
+  --ratio-quarterstep: 1.128;
+  --ratio-eighthstep: 1.062;
+  /* Current ratio (configurable) */
+  --font-ratio: var(--ratio-golden);
+  --font-density: 1.4;
+  --font-density-s: 1.2;
+  /* Modular Scale - calculated from font-ratio */
+  --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
+  --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
+  --scale: var(--font-size);
+  --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 1));
+  --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
+  --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+  --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+  /* Base rhythm unit */
+  --marge: 1rlh;
+  --marge-block: 1;
+  --marge-gap: 0.25;
+  /* Spacing Scale - based on rhythm unit */
+  --space-xxxs: calc(var(--marge) / 5);
+  --space-xxs: calc(var(--marge) / 4);
+  --space-xs: calc(var(--marge) / 3);
+  --space-s: calc(var(--marge) / 2);
+  --space: var(--marge);
+  --space-l: calc(2 * var(--marge));
+  --space-xl: calc(3 * var(--marge));
+  --space-xxl: calc(4 * var(--marge));
+  --space-xxxl: calc(5 * var(--marge));
+  /* Derived spacing tokens */
+  --space-gap: calc(var(--marge) * var(--marge-gap));
+  --space-block: calc(var(--marge) * var(--marge-block));
+  --space-negative: calc(var(--marge) * -1);
+  /* Base border properties */
+  --hr-thickness: 1px;
+  --border-radius: var(--space-xxs);
+  /* Z-index scale */
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-offcanvas: 1050;
+  --z-modal: 1060;
+  --z-popover: 1070;
+  --z-tooltip: 1080;
+  --z-toast: 1090;
+  --z-image-zoom: 9999;
+  /* Animation scale */
+  --duration-superfast: 0.15s;
+  --duration-fast: 0.25s;
+  --duration-normal: 0.35s;
+  --duration-slow: 0.5s;
+  --motion-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Grid Design Tokens */
+:root {
+  /* Grid system tokens */
+  --grid-cols: 12;
+  --grid-gap: var(--space);
+  /* Container tokens */
+  --container-max: 1200px;
+  --container-standard: var(--space);
 }
 
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
@@ -64,8 +403,6 @@
 */
 /* Grid container */
 .grid {
-  --grid-cols: 12;
-  --grid-gap: var(--space);
   display: grid;
   grid-template-columns: repeat(var(--grid-cols), 1fr);
   gap: var(--grid-gap);
@@ -610,37 +947,329 @@
   z-index: 1;
 }
 
+/* Prose Layout Design Tokens */
 :root {
-  --font-size: 1rem;
-  --font-ratio: 1.425;
-  --font-letter-spacing: normal;
-  --font-density: 1.3;
-  --font-density-s: 1.3;
-  --font-text: "Diatype";
+  /* Content area tokens */
+  --line-width-xs: 24rem; /* ~384px - narrow sidebar content */
+  --line-width-s: 32rem; /* ~512px - short form content */
+  --line-width-normal: 42rem; /* ~672px - optimal reading (60-75 chars) */
+  --line-width-wide: 50rem; /* ~800px - wider articles */
+  --line-width-xl: 60rem; /* ~960px - documentation/wide content */
+  --line-width-full: 88vw; /* responsive full width with margins */
+  --line-width: var(--line-width-normal);
+  /* Layout grid tokens */
+  --gap: clamp(var(--space), 6vw, var(--space-xl));
+  --content: min(var(--line-width), 100% - var(--gap) * 2);
+  --content-accent: minmax(0, var(--space-l));
+  --content-feature: minmax(0, var(--space-xxl));
+  --content-full: minmax(var(--gap), 1fr);
+}
+
+/* Book Layout System - Article content grid and positioning */
+/* Inspired by fine-art typography and book design principles */
+.book,
+.prose {
+  display: grid;
+  grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
+  padding-left: calc(var(--space) * -2);
+  padding-right: calc(var(--space) * -2);
+  position: relative;
+  z-index: var(--z-base);
+  /* Default content positioning */
+}
+.book > *,
+.prose > * {
+  grid-column: content;
+}
+.book,
+.prose {
+  /* Content area positioning classes */
+}
+.book .content,
+.book .margin,
+.prose .content,
+.prose .margin {
+  grid-column: content;
+  margin-left: 0;
+  margin-right: 0;
+}
+.book .accent,
+.prose .accent {
+  grid-column: accent;
+  margin-left: 0;
+  margin-right: 0;
+}
+.book .feature,
+.book .table-wrapper,
+.prose .feature,
+.prose .table-wrapper {
+  grid-column: feature;
+  margin-left: 0;
+  margin-right: 0;
+}
+.book .full,
+.prose .full {
+  grid-column: full;
+  margin-left: 0;
+  margin-right: 0;
+}
+.book,
+.prose {
+  /* Image gallery layout */
+}
+.book:not(.no-grid) p:has(img),
+.prose:not(.no-grid) p:has(img) {
+  display: flex;
+  gap: var(--space-gap);
+  border-radius: var(--border-radius);
+}
+.book:not(.no-grid) p:has(img) > *,
+.prose:not(.no-grid) p:has(img) > * {
+  flex: 1 1 auto;
+  min-width: 1%;
+  min-height: 1%;
+  object-fit: cover;
+}
+.book:not(.no-grid) p:has(video) > *,
+.prose:not(.no-grid) p:has(video) > * {
+  flex: 1 1 auto;
+  min-width: 1%;
+  min-height: 1%;
+  object-fit: cover;
+}
+.book:not(.no-grid) p:has(img) img,
+.book:not(.no-grid) p:has(img) img:first-child,
+.book:not(.no-grid) p:has(img) img:last-child,
+.prose:not(.no-grid) p:has(img) img,
+.prose:not(.no-grid) p:has(img) img:first-child,
+.prose:not(.no-grid) p:has(img) img:last-child {
+  margin-inline: auto;
+}
+.book:not(.no-grid) p:has(img) br,
+.prose:not(.no-grid) p:has(img) br {
+  display: none;
+}
+.book:not(.no-grid) .callout p:has(img),
+.book:not(.no-grid) .callout p:has(img) br,
+.prose:not(.no-grid) .callout p:has(img),
+.prose:not(.no-grid) .callout p:has(img) br {
+  display: block;
+}
+.book,
+.prose {
+  /* Table wrapper layout */
+}
+.book .table-wrapper,
+.prose .table-wrapper {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  margin: var(--space-l) auto var(--space-xl) auto;
+}
+.book .table-wrapper .table-gradient-overlay,
+.prose .table-wrapper .table-gradient-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: var(--space-xl);
+  background: linear-gradient(to left, var(--color-background), transparent);
+  pointer-events: none;
+  z-index: var(--z-dropdown);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.book .table-wrapper.has-overflow .table-gradient-overlay,
+.prose .table-wrapper.has-overflow .table-gradient-overlay {
+  opacity: 0.8;
+}
+@media (min-width: 769px) {
+  .book .table-wrapper .table-gradient-overlay,
+  .prose .table-wrapper .table-gradient-overlay {
+    width: var(--space-xl);
+    opacity: 0;
+  }
+  .book .table-wrapper.has-overflow .table-gradient-overlay,
+  .prose .table-wrapper.has-overflow .table-gradient-overlay {
+    opacity: 1;
+  }
+  .book .table-wrapper:hover .table-gradient-overlay,
+  .prose .table-wrapper:hover .table-gradient-overlay {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+@media (max-width: 768px) {
+  .book .table-wrapper.has-overflow .table-gradient-overlay,
+  .prose .table-wrapper.has-overflow .table-gradient-overlay {
+    background: linear-gradient(to right, transparent, var(--color-background));
+    opacity: 0.8;
+  }
+}
+.book .table-wrapper.has-overflow:focus::before,
+.prose .table-wrapper.has-overflow:focus::before {
+  content: "Use ← → arrow keys to scroll";
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  font-size: var(--scale-xs);
+  color: var(--color-muted);
+  background: var(--color-background);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-border);
+  white-space: nowrap;
+  z-index: var(--z-tooltip);
+  opacity: 0;
+  animation: fadeInUp 0.3s ease forwards;
+}
+@media (max-width: 768px) {
+  .book .table-wrapper.has-overflow:focus::before,
+  .prose .table-wrapper.has-overflow:focus::before {
+    display: none;
+  }
+}
+.book .table-wrapper.has-overflow,
+.prose .table-wrapper.has-overflow {
+  cursor: grab;
+}
+.book .table-wrapper.has-overflow:active,
+.prose .table-wrapper.has-overflow:active {
+  cursor: grabbing;
+}
+.book .table-wrapper.has-overflow::after,
+.prose .table-wrapper.has-overflow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: var(--z-base);
+}
+.book .table-wrapper:hover .table-copy-button,
+.prose .table-wrapper:hover .table-copy-button {
+  opacity: 1;
+}
+.book .table-wrapper .table-copy-button:hover,
+.prose .table-wrapper .table-copy-button:hover {
+  background: var(--color-background-secondary);
+  color: var(--color-foreground);
+  transform: scale(1.05);
+}
+.book .table-wrapper table,
+.prose .table-wrapper table {
+  width: fit-content(var(--content-feature));
+  border-collapse: collapse;
+}
+.book,
+.prose {
+  /* Basic media styling */
+}
+.book img,
+.book audio,
+.book video,
+.prose img,
+.prose audio,
+.prose video {
+  margin-inline: auto;
+  margin: 0;
+  max-width: 100%;
+  border-radius: var(--border-radius);
+  border: var(--border);
+}
+.book,
+.prose {
+  /* Mermaid diagrams */
+}
+.book .mermaid,
+.prose .mermaid {
+  margin: 0 auto var(--space) auto;
+  padding: var(--space);
+}
+.book p img,
+.prose p img {
+  max-width: 100%;
+}
+
+/* Content positioning utility classes */
+.book .content-area,
+.prose .content-area {
+  grid-column: content;
+}
+
+.book .accent-area,
+.prose .accent-area {
+  grid-column: accent;
+}
+
+.book .feature-area,
+.prose .feature-area {
+  grid-column: feature;
+}
+
+.book .full-area,
+.prose .full-area {
+  grid-column: full;
+}
+
+/* Fine-art inspired semantic classes */
+.standard {
+  grid-column: accent; /* Reference to typography's standard concept */
+}
+
+.bleed {
+  grid-column: full; /* Full bleed like print design */
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Typography Design Tokens */
+:root {
+  /* Font stacks */
+  --font-text: system-ui, -apple-system, sans-serif;
+  --font-header: system-ui, -apple-system, sans-serif;
+  --font-monospace:
+      ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+      Consolas, "Courier New", monospace;
+  /* Font features & variations */
   --font-feature: "liga", "dlig", "kern", "calt", "ss01", "ss12";
   --font-variation: "";
-  --font-header: "InterVariable";
   --font-header-feature:
       "dlig", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06",
       "cv09", "cv10", "cv11", "cv12", "cv13";
   --font-header-variation: "";
+  --font-monospace-feature:
+      "liga", "dlig", "kern", "calt", "ss01", "ss12", "ss15";
+  --font-monospace-variation: "";
+  /* Font properties */
+  --font-weight: 400;
+  --bold-weight: 600;
+  --font-letter-spacing: normal;
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 0.75em;
   --font-header-weight: 900;
-  --font-monospace: "Diatype";
-  --font-monospace-feature:
-      "liga", "dlig", "kern", "calt", "ss01", "ss12", "ss15";
-  --font-monospace-variation: "MONO" 1;
+  /* Interface font tokens */
   --font-interface: var(--font-text);
   --font-interface-feature: var(--font-feature);
   --font-interface-variation: var(--font-variation);
-  --font-weight: 400;
-  --bold-weight: 600;
+  /* Calculated typography tokens */
   --line-height: calc(var(--font-size) * var(--font-density));
-  --line-width-normal: 42rem;
-  --line-width-wide: 50rem;
-  --line-width-full: 88vw;
-  --line-width: var(--line-width-normal);
+  /* Heading weight scale */
   --font-weight-h1: var(--font-header-weight);
   --font-weight-h2: max(
       calc(var(--font-header-weight) * 0.95),
@@ -662,14 +1291,8 @@
       calc(var(--font-header-weight) * 0.5),
       var(--font-weight)
   );
-  /* Modular Scale */
-  --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
-  --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
-  --scale: var(--font-size);
-  --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 1));
-  --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
-  --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
-  --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+  /* List styling */
+  --list-indentation: var(--space);
 }
 
 html.dark {
@@ -679,6 +1302,7 @@ html.dark {
 }
 
 html {
+  scroll-behavior: smooth;
   font-family: var(--font-text), system-ui, sans-serif;
   font-size: var(--scale);
   font-weight: var(--font-weight);
@@ -694,6 +1318,11 @@ html {
   text-wrap: pretty;
   widows: 2;
   orphans: 2;
+}
+
+body {
+  margin: 0;
+  padding: var(--space);
 }
 
 h1,
@@ -712,9 +1341,11 @@ h6 {
   line-height: var(--font-header-line-height);
   letter-spacing: var(--font-header-letter-spacing);
   white-space: normal;
-  overflow-wrap: normal;
+  overflow-wrap: break-word;
   word-break: keep-all;
-  overflow: visible;
+  hyphens: none;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /*
@@ -725,12 +1356,7 @@ svg {
 */
 h1 {
   font-weight: var(--font-weight-h1);
-  font-size: var(--scale-xxxl);
-}
-
-article > h1:first-child {
-  position: relative;
-  z-index: 2;
+  font-size: clamp(var(--scale-xl), 5vw, var(--scale-xxxl));
 }
 
 h2 {
@@ -749,8 +1375,7 @@ h4 {
   line-height: var(--line-height);
 }
 
-h5,
-h6 {
+h5 {
   font-weight: var(--font-weight-h5);
   font-size: var(--scale-l);
   line-height: var(--line-height);
@@ -759,10 +1384,9 @@ h6 {
 
 h6 {
   font-weight: var(--font-weight-h6);
-}
-
-.txt-center p {
-  text-align: center;
+  font-size: var(--scale-l);
+  line-height: var(--line-height);
+  letter-spacing: 0em;
 }
 
 .small {
@@ -787,6 +1411,7 @@ pre,
 code,
 tt,
 .code,
+.mono,
 .monospace,
 .font-mono {
   font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
@@ -804,43 +1429,73 @@ strong,
   font-weight: inherit;
 }
 
-article :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
-  margin-top: 0rlh;
+/* Links inherit color by default; article overrides already exist */
+a,
+a:visited {
+  color: inherit;
 }
 
-article h1 + :is(h1, h2, h3, h4, h5, h6) {
-  margin-top: var(--space-l);
-}
-
-article .p5-sketch-container {
-  text-align: center;
-}
-
-.footer .footer-links {
-  overflow: hidden;
-}
-
-.footer h2 {
-  letter-spacing: var(--font-header-letter-spacing);
-  line-height: 1em;
-}
-.footer ul li {
+/* Button styles for consistent appearance */
+button {
+  font-family: var(--font-interface), system-ui, sans-serif;
   font-size: var(--scale-s);
-  letter-spacing: -0.05em;
+  font-weight: var(--font-weight);
+  line-height: 1.2;
+  padding: var(--space-xs) var(--space-s);
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--color-accent);
+  color: var(--color-background);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
-.footer ul li a {
-  color: color-mix(in srgb, var(--color-foreground) 80%, transparent);
-  overflow: hidden;
-  max-width: 95%;
-  hyphens: auto;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  text-decoration: none;
+button:hover {
+  opacity: 0.9;
 }
-.footer ul li a:hover {
-  text-decoration: none;
-  color: color-mix(in srgb, var(--color-accent) 80%, transparent);
+button:active {
+  opacity: 0.8;
+}
+button:focus-visible {
+  outline: 1px solid var(--color-accent);
+}
+
+/* Form element styles for consistency */
+input,
+select,
+textarea {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--scale-s);
+  font-weight: var(--font-weight);
+  line-height: 1.2;
+  padding: var(--space-xs) var(--space-s);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background: var(--color-background-secondary);
+  color: var(--color-foreground);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+  background-color: color-mix(in srgb, var(--color-accent) 2.5%, var(--color-background-secondary));
+}
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+textarea {
+  resize: vertical;
+  min-height: calc(var(--space-l) * 3);
+}
+
+/* Rhythm Design Tokens */
+:root {
+  /* Rhythm-specific tokens */
+  --max-width: 100%;
 }
 
 /* ===== Harmony Base (containers and resets) ===== */
@@ -850,17 +1505,14 @@ article .p5-sketch-container {
 
 /* Containers usable across pages */
 .container {
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: var(--container-gutter);
+  padding-inline: var(--container-standard);
 }
 
 .container-full {
   margin-inline: auto;
-  padding-inline: var(--container-gutter);
+  padding-inline: var(--container-standard);
 }
 
-/* Zero default margins on common blocks; use .flow for rhythm */
 :where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table, figure) {
   margin: 0;
 }
@@ -874,29 +1526,334 @@ article .p5-sketch-container {
   margin-block-end: unset;
 }
 
-/* Links inherit color by default; article overrides already exist */
-a,
-a:visited {
-  color: inherit;
+/* Vertical Rhythm System - Typography spacing and flow */
+.rhythm {
+  /* Default block spacing */
+}
+.rhythm > * {
+  margin-block-end: var(--space-block);
+}
+.rhythm > :last-child {
+  margin-block-end: var(--space);
+}
+.rhythm {
+  /* Typography element spacing */
+}
+.rhythm h1 {
+  margin: var(--space-xl) 0 var(--space-l) 0;
+}
+.rhythm > h1:first-child {
+  margin: var(--space) 0 var(--space-xxxl) 0;
+}
+.rhythm h2 {
+  margin: var(--space-l) 0 var(--space) 0;
+}
+.rhythm h3,
+.rhythm h4 {
+  margin: var(--space) 0 var(--space) 0;
+}
+.rhythm h5 {
+  margin: var(--space) 0 var(--space-s) 0;
+}
+.rhythm h6 {
+  margin: var(--space) 0 var(--space-s) 0;
+}
+.rhythm {
+  /* Heading sequence spacing */
+}
+.rhythm :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0rlh;
+}
+.rhythm h1 + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: var(--space-l);
+}
+.rhythm {
+  /* First heading in article */
+}
+.rhythm > h1:first-child {
+  position: relative;
+  z-index: 2;
+}
+.rhythm {
+  /* Horizontal rules */
+}
+.rhythm hr,
+.rhythm hr:not(:first-child) {
+  margin: var(--space) var(--space-xxl) var(--space-xl) var(--space-xxl);
+}
+.rhythm hr + h1,
+.rhythm hr + h2,
+.rhythm hr + h3,
+.rhythm hr + h4,
+.rhythm hr + h5,
+.rhythm hr + h6 {
+  margin-top: var(--space);
+}
+.rhythm {
+  /* Image rhythm */
+}
+.rhythm p:has(img) {
+  margin-top: 0;
+  margin-bottom: var(--space-gap);
+}
+.rhythm p:has(img) + hr,
+.rhythm p:has(img) + hr:not(:first-child) {
+  margin-top: 0rlh;
+}
+.rhythm {
+  /* Adjacent element spacing adjustments */
+}
+.rhythm p:has(img) + p:has(img),
+.rhythm h1 + p:has(img),
+.rhythm h2 + p:has(img),
+.rhythm h3 + p:has(img),
+.rhythm h4 + p:has(img),
+.rhythm h5 + p:has(img),
+.rhythm h6 + p:has(img),
+.rhythm .metadata + p:has(img),
+.rhythm blockquote + p:has(img),
+.rhythm hr + p:has(img),
+.rhythm pre + p:has(img),
+.rhythm .callout + p:has(img),
+.rhythm h1 + .callout,
+.rhythm h2 + .callout,
+.rhythm h3 + .callout,
+.rhythm h4 + .callout,
+.rhythm h5 + .callout,
+.rhythm h6 + .callout,
+.rhythm hr + .callout {
+  margin-top: 0 !important;
+}
+.rhythm pre + pre,
+.rhythm .callout + .callout {
+  margin-top: calc(var(--space) * -1) !important;
+}
+.rhythm {
+  /* Metadata never gets bottom margin */
+}
+.rhythm .metadata {
+  margin-bottom: 0 !important;
+}
+.rhythm {
+  /* Following image spacing */
+}
+.rhythm p:has(img) + p:not(:has(img)),
+.rhythm p:has(img) + div,
+.rhythm p:has(img) + blockquote,
+.rhythm p:has(img) + hr,
+.rhythm p:has(img) + pre {
+  margin-top: calc(var(--space) + var(--space-s)) !important;
+}
+.rhythm {
+  /* Blockquote spacing */
+}
+.rhythm blockquote {
+  font-size: var(--scale-s);
+  line-height: var(--font-density-s);
+  padding: var(--space);
+  font-style: italic;
+  margin: 0 var(--space-block) var(--space-block) var(--space-block);
+}
+.rhythm {
+  /* Callout spacing */
+}
+.rhythm .callout {
+  padding: var(--space-xxs);
+  margin: 0 var(--space-block) var(--space-block) var(--space-block);
+}
+.rhythm .callout .callout-title {
+  padding: var(--space-xxxs) calc(var(--space) - var(--space-xs)) var(--space-xxxs) calc(var(--space) - var(--space-xs));
+}
+.rhythm .callout .callout-content {
+  padding: var(--space-s) calc(var(--space) - var(--space-xs));
+  margin-top: var(--space-xxs);
+  margin-left: 0;
+}
+.rhythm .callout .callout-content p:first-child {
+  margin-top: 0;
+}
+.rhythm .callout .callout-content ul,
+.rhythm .callout .callout-content ol {
+  padding: 0 calc(var(--space) * 0.75);
+}
+.rhythm .callout .callout-content pre {
+  margin: var(--space) 0;
+}
+.rhythm .callout .callout-content > .callout {
+  margin: calc(var(--space-xs) * -1);
+}
+.rhythm .callout .callout-content > .callout .callout-content {
+  padding: var(--space-s);
+}
+.rhythm .callout .callout-content > .callout .callout-title {
+  padding-left: var(--space-s);
+  padding-right: var(--space-s);
+}
+.rhythm pre,
+.rhythm pre:first-child,
+.rhythm pre:last-child {
+  font-size: var(--scale-s);
+  line-height: var(--font-density-s);
+  overflow-x: auto;
+  white-space: pre;
+  word-wrap: normal;
+  word-break: keep-all;
+  padding: var(--space);
+  margin: 0 var(--space-block) var(--space-block) var(--space-block);
+}
+.rhythm {
+  /* Adjacent element spacing for code */
+}
+.rhythm pre + .callout,
+.rhythm pre + p:has(img),
+.rhythm pre + blockquote {
+  margin-top: 0;
+}
+.rhythm {
+  /* List spacing */
+}
+.rhythm ul:not([start]),
+.rhythm ul,
+.rhythm ol:not([start]),
+.rhythm ol {
+  list-style: none;
+  list-style-position: outside;
+  padding: 0 var(--space-l);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  counter-reset: ol-counter;
+}
+.rhythm ul ul,
+.rhythm ol ol,
+.rhythm ul ol,
+.rhythm ol ul {
+  padding-left: calc(var(--space) * 1) !important;
+}
+.rhythm ul ul li,
+.rhythm ol ol li,
+.rhythm ul ol li,
+.rhythm ol ul li {
+  margin-bottom: 0;
+}
+.rhythm li > p {
+  display: inline;
+}
+.rhythm li {
+  line-height: 1.3;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+.rhythm ul > li::before {
+  content: "•";
+  display: inline-block;
+  text-align: center;
+  width: var(--space);
+  opacity: 0.25;
+  margin-left: calc(var(--space) * -1);
+}
+.rhythm ol > li::before,
+.rhythm ol:not([start]) > li::before {
+  display: inline-block;
+  width: var(--space);
+  opacity: 0.25;
+  content: counter(ol-counter) ". ";
+  font-variant-numeric: tabular-nums;
+  position: absolute;
+  left: calc(var(--space) * -1.5);
+  text-align: right;
+  --space: unset;
+}
+.rhythm ol > li:not(:last-child),
+.rhythm ul > li:not(:last-child) {
+  margin-bottom: var(--space-xs);
+}
+.rhythm li > p + ul,
+.rhythm li > p + ol {
+  margin-top: calc(var(--space-s) * -1);
+}
+.rhythm p:has(img),
+.rhythm p:has(video) {
+  margin: 0 var(--space-block);
 }
 
+/* Utility classes for rhythm overrides */
+li > p + ul,
+li > p + ol {
+  margin-top: calc(var(--space-s) * -1);
+}
+
+:not(pre) > code {
+  background-color: var(--color-background-secondary);
+  border: 0;
+  border-radius: var(--border-radius);
+  line-height: var(--font-density-s);
+  margin: 0;
+  padding: 0.1em 0.3em;
+  font-size: var(--scale-s);
+  white-space: normal;
+  text-wrap: wrap;
+}
+
+.nobullet {
+  list-style: none;
+  padding-left: 0;
+}
+.nobullet li::before {
+  content: "";
+  margin-left: 0;
+}
+
+/* Color Design Tokens */
 :root {
   color-scheme: light dark;
+  /* Base colors */
+  --color-light-background: white;
+  --color-light-foreground: rgba(0, 0, 0, 0.85);
+  --color-dark-background: black;
+  --color-dark-foreground: rgba(255, 255, 255, 0.85);
+  /* 🌞 Light Mode Colors (natural, paper-like, analog-inspired) */
+  --color-light-red: #b14c42; /* dusty red clay */
+  --color-light-orange: #d78a5a; /* trail-worn orange */
+  --color-light-yellow: #c8a840; /* parchment mustard */
+  --color-light-green: #5e9d80; /* sage green */
+  --color-light-cyan: #6ba4b6; /* glacier teal */
+  --color-light-blue: #4f81a4; /* faded blueprint */
+  --color-light-purple: #7a6c91; /* dusk lavender */
+  --color-light-pink: #b97aa0; /* vintage mauve rose */
+  --color-light-accent: var(--color-light-yellow);
+  --color-light-header: inherit;
+  --color-light-bold: inherit;
+  --color-light-italic: inherit;
+  /* 🌙 Dark Mode Colors (soft-glow, night-usable, retro tech) */
+  --color-dark-red: #db6057; /* ember red */
+  --color-dark-orange: #e58f5c; /* lantern orange */
+  --color-dark-yellow: #dcb757; /* candlelight gold */
+  --color-dark-green: #74ba98; /* forest mint glow */
+  --color-dark-cyan: #7db9c8; /* creek frost */
+  --color-dark-blue: #6d96b8; /* twilight blueprint */
+  --color-dark-purple: #a18db6; /* smoky violet dusk */
+  --color-dark-pink: #d49ab8; /* faded polaroid blush */
+  --color-dark-accent: var(--color-dark-yellow);
+  --color-dark-header: inherit;
+  --color-dark-bold: inherit;
+  --color-dark-italic: inherit;
+  /* Current theme colors - default to light mode */
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
-  /* 🌞 Light Mode Colors (natural, paper-like, analog-inspired) */
-  --color-red: var(--color-light-red, #b14c42); /* dusty red clay */
-  --color-orange: var(--color-light-orange, #d78a5a); /* trail-worn orange */
-  --color-yellow: var(--color-light-yellow, #c8a840); /* parchment mustard */
-  --color-green: var(--color-light-green, #5e9d80); /* sage green */
-  --color-cyan: var(--color-light-cyan, #6ba4b6); /* glacier teal */
-  --color-blue: var(--color-light-blue, #4f81a4); /* faded blueprint */
-  --color-purple: var(--color-light-purple, #7a6c91); /* dusk lavender */
-  --color-pink: var(--color-light-pink, #b97aa0); /* vintage mauve rose */
-  --color-accent: var(--color-light-accent, var(--color-yellow));
-  --color-header: var(--color-light-header, inherit);
-  --color-bold: var(--color-light-bold, inherit);
-  --color-italic: var(--color-light-italic, inherit);
+  --color-red: var(--color-light-red);
+  --color-orange: var(--color-light-orange);
+  --color-yellow: var(--color-light-yellow);
+  --color-green: var(--color-light-green);
+  --color-cyan: var(--color-light-cyan);
+  --color-blue: var(--color-light-blue);
+  --color-purple: var(--color-light-purple);
+  --color-pink: var(--color-light-pink);
+  --color-accent: var(--color-light-accent);
+  --color-header: var(--color-light-header);
+  --color-bold: var(--color-light-bold);
+  --color-italic: var(--color-light-italic);
+  /* Computed colors based on theme */
   --color-muted: var(
       --color-light-muted,
       color-mix(in srgb, var(--color-foreground) 50%, var(--color-background))
@@ -913,51 +1870,53 @@ a:visited {
           var(--color-background)
       )
   );
-  --shadow: 0 0 var(--space-xxs) 0px
-      color-mix(in srgb, var(--color-border) 40%, transparent);
+  /* Border tokens */
+  --border: var(--hr-thickness) solid var(--color-border);
+  /* Shadow tokens */
+  --shadow: 0 0 var(--space-xxs) 0px var(--color-border);
 }
 
+/* Dark mode overrides */
 .dark {
   --color-background: var(--color-dark-background);
   --color-foreground: var(--color-dark-foreground);
-  /* 🌙 Dark Mode Colors (soft-glow, night-usable, retro tech) */
-  --color-red: var(--color-dark-red, #db6057); /* ember red */
-  --color-orange: var(--color-dark-orange, #e58f5c); /* lantern orange */
-  --color-yellow: var(--color-dark-yellow, #dcb757); /* candlelight gold */
-  --color-green: var(--color-dark-green, #74ba98); /* forest mint glow */
-  --color-cyan: var(--color-dark-cyan, #7db9c8); /* creek frost */
-  --color-blue: var(--color-dark-blue, #6d96b8); /* twilight blueprint */
-  --color-purple: var(--color-dark-purple, #a18db6); /* smoky violet dusk */
-  --color-pink: var(--color-dark-pink, #d49ab8); /* faded polaroid blush */
-  --pointer-move-line-color: #f3a;
-  --base-grid-color1: rgba(240, 155, 255, 0.1);
-  --base-grid-color2: rgba(240, 155, 255, 0.05);
-  --color-accent: var(--color-dark-accent, var(--color-yellow));
-  --color-header: var(--color-dark-header, var(--color-foreground));
-  --color-bold: var(--color-dark-bold, var(--color-foreground));
-  --color-italic: var(--color-dark-italic, var(--color-blue));
+  /* Switch to dark mode colors */
+  --color-red: var(--color-dark-red);
+  --color-orange: var(--color-dark-orange);
+  --color-yellow: var(--color-dark-yellow);
+  --color-green: var(--color-dark-green);
+  --color-cyan: var(--color-dark-cyan);
+  --color-blue: var(--color-dark-blue);
+  --color-purple: var(--color-dark-purple);
+  --color-pink: var(--color-dark-pink);
+  --color-accent: var(--color-dark-accent);
+  --color-header: var(--color-dark-header);
+  --color-bold: var(--color-dark-bold);
+  --color-italic: var(--color-dark-italic);
+  /* Dark mode specific computed colors */
   --color-background-secondary: var(
       --color-dark-background-secondary,
       color-mix(in srgb, var(--color-foreground) 7%, var(--color-background))
   );
-  --border: 1px solid var(--color-border);
   --color-border: var(
       --dark-border-color,
-      color-mix(in srgb, var(--color-background) 90%, black)
+      color-mix(in srgb, var(--color-background) 90%, var(--color-accent))
   );
-  --shadow: 0 0 var(--space-xxs) 0px var(--color-border);
   --color-muted: var(
       --color-dark-muted,
       color-mix(in srgb, var(--color-foreground) 40%, var(--color-background))
   );
+  --shadow: 0 0 var(--space-xxs) 0px
+      color-mix(in srgb, var(--color-background) 50%, transparent);
 }
 
+/* Selection highlighting for both modes */
 .dark ::selection,
 ::selection {
   background: color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
-/* -= Antialised Default =- */
+/* -= Base HTML Color Application =- */
 html {
   color: var(--color-foreground);
   background: var(--color-background);
@@ -967,25 +1926,26 @@ html {
   color: var(--color-muted);
 }
 
+/*
 blockquote,
 .callout-content,
 .callout-title {
-  color: color-mix(in srgb, currentColor 80%, var(--color-background));
+    color: color-mix(in srgb, currentColor 80%, var(--color-background));
 }
 
 .callout-content a,
 .callout-title a {
-  color: color-mix(in srgb, var(--color-accent) 80%, var(--color-background));
+    color: color-mix(in srgb, var(--color-accent) 80%, var(--color-background));
 }
 
 .callout-content em {
-  color: color-mix(in srgb, var(--color-italic) 80%, var(--color-background));
+    color: color-mix(in srgb, var(--color-italic) 80%, var(--color-background));
 }
 
 .callout-content strong {
-  color: color-mix(in srgb, var(--color-bold) 80%, var(--color-background));
+    color: color-mix(in srgb, var(--color-bold) 80%, var(--color-background));
 }
-
+*/
 a,
 a:active,
 a:visited {
@@ -1003,22 +1963,6 @@ a:hover {
   text-decoration-color: color-mix(in srgb, var(--color-accent) 90%, var(--color-background));
 }
 
-article a,
-article a:active,
-article a:visited {
-  color: color-mix(in srgb, var(--color-accent) 100%, var(--color-foreground));
-  text-decoration-color: color-mix(in srgb, var(--color-accent) 0%, var(--color-background));
-}
-
-article a:visited {
-  /*color: color-mix(in srgb, var(--color-accent) 50%, var(--color-foreground));*/
-}
-
-article a:hover {
-  color: var(--color-accent) !important;
-  text-decoration-color: color-mix(in srgb, var(--color-accent) 90%, var(--color-background));
-}
-
 strong {
   color: var(--color-bold);
 }
@@ -1032,10 +1976,6 @@ hr:only-child {
   background: var(--color-border);
 }
 
-article .callout-content {
-  background: var(--color-background);
-}
-
 table {
   --border-width: 1px;
   --border-opacity: 1;
@@ -1047,672 +1987,47 @@ mark {
   background-color: color-mix(in srgb, var(--color-background));
 }
 
-:root {
-  --marge: 1rlh;
-  --marge-block: 2;
-  --marge-gap: 0.25;
-  --max-width: 100%;
-  /* Spacing Tokens (Vertical Rhythm) */
-  --space-xxxs: calc(var(--marge) / 5);
-  --space-xxs: calc(var(--marge) / 4);
-  --space-xs: calc(var(--marge) / 3);
-  --space-s: calc(var(--marge) / 2);
-  --space: var(--marge);
-  --space-l: calc(2 * var(--marge));
-  --space-xl: calc(3 * var(--marge));
-  --space-xxl: calc(4 * var(--marge));
-  --space-xxxl: calc(5 * var(--marge));
-  --space-gap: calc(var(--marge) * var(--marge-gap));
-  --space-block: calc(var(--marge) * var(--marge-block));
-  --space-negative: calc(var(--marge) * -1);
-  --hr-thickness: 1px;
-  --border: var(--hr-thickness) solid var(--color-border);
-  --border-radius: var(--space-xxs);
-  --list-indentation: var(--space);
-}
-
-:first-child {
-  margin-top: unset;
-}
-
-:last-child {
-  margin-bottom: unset;
-}
-
-html {
-  padding: 0;
-  scroll-behavior: smooth;
-}
-
-body {
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  padding: var(--space-l);
-  max-width: var(--max-width);
-  margin: auto;
-}
-
-article {
-  --gap: clamp(var(--space), 6vw, var(--space-xl));
-  --content: min(var(--line-width), 100% - var(--gap) * 2);
-  --content-accent: minmax(0, var(--space-l));
-  --content-feature: minmax(0, var(--space-xxl));
-  --content-full: minmax(var(--gap), 1fr);
-  display: grid;
-  grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
-  /* If you prefer gutters instead of negative padding, replace with:
-     padding-inline: var(--gap); */
-  padding-left: calc(var(--space) * -2);
-  padding-right: calc(var(--space) * -2);
-  position: relative;
-  z-index: 10;
-}
-
-article > * {
-  grid-column: content;
-  margin-bottom: var(--space-block);
-}
-
-article section {
-  margin: 0 var(--space-xxl) var(--space) var(--space-xxl);
-}
-
-article .xsmall,
-.img-xsmall article.note p:has(img),
-article p:has(img),
-article p:has(video) {
-  margin: 0 var(--space-block);
-}
-
-.img-small article.note p:has(img),
-article .callout,
-article .code-wrapper,
-article blockquote {
-  margin: 0 var(--space-block) var(--space-block) var(--space-block);
-}
-
-article .content,
-.img-content article p:has(img) {
-  grid-column: content;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-article .accent,
-.img-accent article p:has(img) {
-  grid-column: accent;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.feature article > *,
-article .feature,
-.img-feature article p:has(img),
-article .table-wrapper {
-  grid-column: feature;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.full article > *,
-article .full,
-.img-max article p:has(img),
-.img-full article p:has(img) {
-  grid-column: full;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-article.note:not(.portfolio) p:has(img) {
-  margin-bottom: var(--space-gap);
-}
-
-article .table-wrapper {
-  width: 100%;
-  overflow-y: hidden;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-}
-
-/* Table gradient overflow indicator */
-article .table-wrapper .table-gradient-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: var(--space-xl);
-  background: linear-gradient(to left, var(--color-background), transparent);
-  pointer-events: none;
-  z-index: 3;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-article .table-wrapper.has-overflow .table-gradient-overlay {
-  opacity: 0.8;
-}
-
-/* Enhanced gradient for desktop */
-@media (min-width: 769px) {
-  article .table-wrapper .table-gradient-overlay {
-    width: var(--space-xl);
-    opacity: 0;
-  }
-  article .table-wrapper.has-overflow .table-gradient-overlay {
-    opacity: 1;
-  }
-  article .table-wrapper:hover .table-gradient-overlay {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-}
-/* Mobile table gradient overlay */
-@media (max-width: 768px) {
-  article .table-wrapper.has-overflow .table-gradient-overlay {
-    background: linear-gradient(to right, transparent, var(--color-background));
-    opacity: 0.8;
-  }
-}
-/* Scroll indicator hint for keyboard users */
-article .table-wrapper.has-overflow:focus::before {
-  content: "Use ← → arrow keys to scroll";
-  position: absolute;
-  top: -1.5rem;
-  left: 0;
-  font-size: var(--scale-xs);
-  color: var(--color-muted);
-  background: var(--color-background); /* fixed */
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid var(--color-border);
-  white-space: nowrap;
-  z-index: 5;
-  opacity: 0;
-  animation: fadeInUp 0.3s ease forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(0.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* Hide hint on mobile since touch scrolling is natural */
-@media (max-width: 768px) {
-  article .table-wrapper.has-overflow:focus::before {
-    display: none;
-  }
-}
-/* Scrollable table visual cues */
-article .table-wrapper.has-overflow {
-  cursor: grab;
-}
-
-article .table-wrapper.has-overflow:active {
-  cursor: grabbing;
-}
-
-/* Add subtle fade to table edges when scrollable */
-article .table-wrapper.has-overflow::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-border);
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Table copy button hover styles */
-article .table-wrapper:hover .table-copy-button {
-  opacity: 1;
-}
-
-article .table-wrapper .table-copy-button:hover {
-  background: var(--color-background-secondary);
-  color: var(--color-foreground);
-  transform: scale(1.05);
-}
-
-article .table-wrapper table {
-  width: fit-content(var(--content-feature));
-  border-collapse: collapse;
-}
-
-article img,
-article audio,
-article video {
-  margin-inline: auto;
-  margin: 0;
-  max-width: 100%;
-  border-radius: var(--border-radius);
-  border: var(--border);
-} /* asd */
-article h1 {
-  margin: var(--space-xl) 0 var(--space-l) 0;
-}
-
-article > h1:first-child {
-  margin: var(--space) 0 var(--space-xxxl) 0;
-}
-
-article h2 {
-  margin: var(--space-l) 0 var(--space) 0;
-}
-
-article h3,
-article h4 {
-  margin: var(--space) 0 var(--space) 0;
-}
-
-article h5 {
-  margin: var(--space) 0 var(--space-s) 0;
-}
-
-article h6 {
-  margin: var(--space) 0 var(--space-xs) 0;
-}
-
-article hr,
-article hr:not(:first-child) {
-  margin: var(--space) var(--space-xxl) var(--space-xl) var(--space-xxl);
-}
-
-article hr + h1,
-article hr + h2,
-article hr + h3,
-article hr + h4,
-article hr + h5,
-article hr + h6 {
-  margin-top: var(--space);
-}
-
-article p:has(img) + hr,
-article p:has(img) + hr:not(:first-child) {
-  margin-top: 0rlh;
-}
-
-article p:has(img),
-.img-tiny article p:has(img) {
-  margin-top: 0;
-  margin-bottom: var(--space-gap);
-}
-
-article p:has(img) + p:has(img),
-article h1 + p:has(img),
-article h2 + p:has(img),
-article h3 + p:has(img),
-article h4 + p:has(img),
-article h5 + p:has(img),
-article h6 + p:has(img),
-article .metadata + p:has(img),
-article blockquote + p:has(img),
-article hr + p:has(img),
-article .code-wrapper + p:has(img),
-article .callout + p:has(img),
-article h1 + .callout,
-article h2 + .callout,
-article h3 + .callout,
-article h4 + .callout,
-article h5 + .callout,
-article h6 + .callout,
-article hr + .callout,
-article .table-wrapper + .callout {
-  margin-top: 0 !important;
-}
-
-article .code-wrapper + .code-wrapper,
-article .callout + .callout {
-  margin-top: calc(var(--space) * -1) !important;
-}
-
-article .metadata {
-  margin-bottom: 0 !important;
-}
-
-article p:has(img) + p:not(:has(img)),
-article p:has(img) + div,
-article p:has(img) + blockquote,
-article p:has(img) + hr,
-article p:has(img) + .code-wrapper {
-  margin-top: calc(var(--space) + var(--space-s)) !important;
-}
-
-/* zzz
-article blockquote + p:has(img),
-article .code-wrapper + p:has(img),
-article .callout + p:has(img),
-article blockquote + p,
-article .callout + p,
-article .code-wrapper + p,
-article .mermaid + p {
-    margin-top: calc(var(--space) * 1);
-}
-*/
-article .mermaid {
-  margin: 0 auto var(--space) auto;
-  padding: var(--space);
-}
-
-article p img {
-  max-width: 100%;
-}
-
-article blockquote {
-  font-size: var(--scale-s);
-  line-height: var(--font-density-s);
-  padding: var(--space);
-  font-style: italic;
-}
-
-article .callout {
-  line-height: var(--font-density-s);
-  transition: var(--duration-superfast) var(--motion-smooth);
-  padding: var(--space-xxs);
-}
-
-article .callout-title-icon {
-  display: none;
-}
-
-article .callout-title {
-  font-size: var(--scale-s);
-  user-select: none;
-  font-weight: bold;
-  padding: var(--space-xxxs) calc(var(--space) - var(--space-xs)) var(--space-xxxs) calc(var(--space) - var(--space-xs));
-}
-
-article .callout img {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-article .callout-content {
-  font-size: var(--scale-s);
-  overflow: hidden;
-  border-radius: var(--border-radius);
-  padding: var(--space-s) calc(var(--space) - var(--space-xs));
-  margin-top: var(--space-xxs);
-  margin-left: 0;
-  border: var(--border);
-  text-align: left;
-}
-
-article .callout .callout-content p:first-child {
-  margin-top: 0;
-}
-
-article .callout .callout-content ul,
-article .callout .callout-content ol {
-  padding: 0 calc(var(--space) * 0.75);
-}
-
-article .callout .callout-content .code-wrapper {
-  margin: var(--space) 0;
-}
-
-article .callout .callout-content > .callout {
-  margin: calc(var(--space-xs) * -1);
-}
-
-article .callout .callout-content > .callout .callout-content {
-  padding: var(--space-s);
-}
-
-article .callout .callout-content > .callout .callout-title {
-  padding-left: var(--space-s);
-  padding-right: var(--space-s);
-}
-
-/*
-.callout-content:has(> p:empty):not(:has(.callout)) {
-    display: none;
-}
-}*/
-article details > summary {
-  list-style: none; /* removes marker in Firefox */
-}
-
-article details .callout-title::before {
-  content: "▸";
-  display: inline-block;
-  transform: rotate(0deg);
-  transition: transform 0.2s ease;
-}
-
-article details[open] .callout-title::before {
-  transform: rotate(90deg);
-}
-
-article details .callout-title-inner {
-  display: inline;
-}
-
-article p:has(img) + .callout[data-callout=caption i] {
-  padding: 0;
-  background: none;
-  border: none;
-  margin: 0 var(--space-l);
-  position: relative;
-  top: calc(var(--space) * -1.75);
-  box-shadow: none;
-}
-
-article p:has(img) + .callout[data-callout=caption i] .callout-title {
-  display: none;
-}
-
-article p:has(img) + .callout[data-callout=caption i] .callout-content {
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
-  line-height: 1;
-  text-align: center !important;
-  text-wrap: balance !important;
-}
-
-article .table-wrapper {
-  margin: var(--space-l) auto var(--space-xl) auto;
-}
-
-article .table-wrapper + .callout,
-article .table-wrapper + p:has(img),
-article .table-wrapper + blockquote,
-article .table-wrapper + .code-wrapper {
-  margin-top: 0;
-}
-
-article pre {
-  margin: 0;
-  padding: var(--space);
-}
-
-article .code-wrapper,
-article .code-wrapper:first-child,
-article .code-wrapper:last-child {
-  margin: var(--space) var(--space-l) var(--space-l) var(--space-l);
-  font-size: var(--scale-s);
-  line-height: var(--font-density-s);
-  overflow-x: auto;
-  white-space: pre;
-  word-wrap: normal;
-  word-break: keep-all;
-}
-
-article .code-wrapper + .callout,
-article .code-wrapper + p:has(img),
-article .code-wrapper + blockquote,
-article .code-wrapper + .table-wrapper {
-  margin-top: 0;
-}
-
-:not(pre) > code {
-  background-color: var(--color-background-secondary);
-  border: 0;
-  border-radius: var(--border-radius);
-  line-height: var(--font-density-s);
-  margin: 0;
-  padding: 0.1em 0.3em;
-  font-size: var(--scale-s);
-  white-space: normal;
-  text-wrap: wrap;
-}
-
-/* -= List =- */
-.nobullet {
-  list-style: none;
-  padding-left: 0;
-}
-
-.nobullet li::before {
-  content: "";
-  margin-left: 0;
-}
-
-article ul:not([start]),
-article ul,
-article ol:not([start]),
-article ol {
-  list-style: none;
-  list-style-position: outside;
-  padding: 0 var(--space-l);
-  break-inside: avoid;
-  page-break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  counter-reset: ol-counter;
-}
-
-article ul ul,
-article ol ol,
-article ul ol,
-article ol ul {
-  padding-left: calc(var(--space) * 1) !important; /* or whatever deeper value you want */
-}
-article ul ul li,
-article ol ol li,
-article ul ol li,
-article ol ul li {
-  margin-bottom: 0;
-}
-
-article li > p {
-  display: inline;
-}
-
-article li {
-  line-height: 1.3;
-  margin-bottom: 0;
-  margin-left: 0;
-}
-
-article ul > li::before {
-  content: "•";
-  display: inline-block;
-  text-align: center;
-  width: var(--space);
-  opacity: 0.25;
-  margin-left: calc(var(--space) * -1);
-}
-
-article ol > li::before,
-article ol:not([start]) > li::before {
-  display: inline-block;
-  width: var(--space);
-  opacity: 0.25;
-  content: counter(ol-counter) ". ";
-  font-variant-numeric: tabular-nums;
-  position: absolute;
-  left: calc(var(--space) * -1.5);
-  text-align: right;
-  --space: unset;
-}
-
-article ol > li:not(:last-child),
-article ul > li:not(:last-child) {
-  margin-bottom: var(--space-xs);
-}
-
-article li > p + ul,
-article li > p + ol {
-  margin-top: calc(var(--space-s) * -1);
-}
-
-li > p + ul,
-li > p + ol {
-  /* like above but for lists inside compact lists */
-  margin-top: calc(var(--blockSpacingBottom) * -1);
-}
-
-/* -= Image Galery =- */
+/* Image Styles - Works with both .prose (layout) and .rhythm (spacing) */
 img {
   max-width: 100%;
 }
 
-article:not(.no-grid) {
-  /* img[width] { border:0;margin:auto !important; } */
+.prose,
+.rhythm {
+  /* Basic image styling */
 }
-article:not(.no-grid) p:has(img) {
-  display: flex;
-  gap: var(--space-gap);
-  border-radius: var(--border-radius);
-}
-article:not(.no-grid) * + img,
-article:not(.no-grid) img,
-article:not(.no-grid) img:first-child,
-article:not(.no-grid) img:last-child {
+.prose * + img,
+.prose img,
+.prose img:first-child,
+.prose img:last-child,
+.rhythm * + img,
+.rhythm img,
+.rhythm img:first-child,
+.rhythm img:last-child {
   margin: 0;
   border: var(--border);
 }
-article:not(.no-grid) p:has(img) > * {
-  flex: 1 1 auto;
-  min-width: 1%;
-  min-height: 1%;
-  object-fit: cover;
-}
-article:not(.no-grid) p:has(video) > * {
-  flex: 1 1 auto;
-  min-width: 1%;
-  min-height: 1%;
-  object-fit: cover;
-}
-article:not(.no-grid) p:has(img) img,
-article:not(.no-grid) p:has(img) img:first-child,
-article:not(.no-grid) p:has(img) img:last-child {
-  margin-inline: auto;
-}
-article:not(.no-grid) p:has(img) br {
-  display: none;
-}
-article:not(.no-grid) .callout p:has(img),
-article:not(.no-grid) .callout p:has(img) br {
-  display: block;
-}
-article:not(.no-grid) img {
+.prose img,
+.rhythm img {
   max-width: 100%;
   cursor: zoom-in;
   border-radius: var(--border-radius);
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
-article:not(.no-grid) img:hover,
-article:not(.no-grid) img.zoomed {
+.prose img:hover,
+.prose img.zoomed,
+.rhythm img:hover,
+.rhythm img.zoomed {
   mix-blend-mode: normal;
   filter: none;
 }
-article:not(.no-grid) img:active,
-article:not(.no-grid) img.zoomed {
+.prose img:active,
+.prose img.zoomed,
+.rhythm img:active,
+.rhythm img.zoomed {
   cursor: zoom-out;
   display: block;
-  z-index: 9999999;
+  z-index: var(--z-image-zoom);
   position: fixed;
   max-height: 88vh;
   max-width: 88vw;
@@ -1728,8 +2043,11 @@ article:not(.no-grid) img.zoomed {
   user-select: none;
 }
 
-article :has(img:active)::before,
-article :has(img.zoomed)::before {
+/* Zoom overlay backgrounds */
+.prose :has(img:active)::before,
+.prose :has(img.zoomed)::before,
+.rhythm :has(img:active)::before,
+.rhythm :has(img.zoomed)::before {
   content: "";
   position: fixed;
   top: 0;
@@ -1737,53 +2055,54 @@ article :has(img.zoomed)::before {
   right: 0;
   bottom: 0;
   background: var(--color-background);
-  z-index: 9999991;
+  z-index: calc(var(--z-image-zoom) - 100);
 }
 
-html:has(p img.zoomed) .logo {
-  position: fixed;
-  bottom: var(--space);
-  right: var(--space);
-  z-index: 9999992;
-}
-
-article .callout,
-article .code-wrapper,
-article blockquote,
-article img,
-article iframe {
+.md .callout,
+.md pre,
+.md blockquote,
+.md img,
+.md iframe,
+.md .outset,
+.md .inset {
   background: var(--color-background-secondary);
   border-radius: var(--border-radius);
   border: var(--border);
   box-shadow: var(--shadow);
 }
-
-article blockquote {
+.md pre,
+.md blockquote .inset {
+  box-shadow: inset var(--shadow);
+}
+.md blockquote {
   font-size: var(--scale-s);
   line-height: var(--font-density-s);
   padding: var(--space);
   font-style: italic;
 }
-
-article .callout {
+.md .callout {
   line-height: var(--font-density-s);
   transition: var(--duration-superfast) var(--motion-smooth);
   padding: var(--space-xxs);
-  --callout-color: var(--color-background-secondary);
-  background: color-mix(in srgb, var(--callout-color) 5%, var(--color-background-secondary));
-  border-color: color-mix(in srgb, var(--callout-color) 10%, var(--color-border));
+  --color-callout: var(--color-background-secondary);
+  --color-border: color-mix(
+      in srgb,
+      var(--color-callout) 15%,
+      transparent
+  );
+  background: color-mix(in srgb, var(--color-callout) 5%, var(--color-background-secondary));
+  border-color: var(--color-border);
 }
-article .callout .callout-title {
-  color: color-mix(in srgb, var(--callout-color) 50%, var(--color-foreground));
+.md .callout .callout-title {
+  color: color-mix(in srgb, var(--color-callout) 50%, var(--color-foreground));
   font-weight: bold;
   font-size: var(--scale-s);
   user-select: none;
   padding: var(--space-xxxs) calc(var(--space) - var(--space-xs)) var(--space-xxxs) calc(var(--space) - var(--space-xs));
 }
-article .callout .callout-content {
+.md .callout .callout-content {
   color: var(--color-foreground);
-  background: color-mix(in srgb, var(--callout-color) 2.5%, var(--color-background));
-  border-color: color-mix(in srgb, var(--callout-color) 10%, var(--color-border));
+  background: color-mix(in srgb, var(--color-callout) 2.5%, var(--color-background));
   box-shadow: inset var(--shadow);
   font-size: var(--scale-s);
   overflow: hidden;
@@ -1792,64 +2111,58 @@ article .callout .callout-content {
   margin-top: var(--space-xxs);
   margin-left: 0;
   border: var(--border);
+  border-color: var(--color-border);
   text-align: left;
 }
-article .callout .callout-content p:first-child {
+.md .callout .callout-content p:first-child {
   margin-top: 0;
 }
-article .callout .callout-content ul,
-article .callout .callout-content ol {
+.md .callout .callout-content ul,
+.md .callout .callout-content ol {
   padding: 0 calc(var(--space) * 0.75);
 }
-article .callout .callout-content .code-wrapper {
+.md .callout .callout-content pre {
   margin: var(--space) 0;
 }
-article .callout .callout-content > .callout {
+.md .callout .callout-content > .callout {
   margin: calc(var(--space-xs) * -1);
 }
-article .callout .callout-content > .callout .callout-content {
+.md .callout .callout-content > .callout .callout-content {
   padding: var(--space-s);
 }
-article .callout .callout-content > .callout .callout-title {
+.md .callout .callout-content > .callout .callout-title {
   padding-left: var(--space-s);
   padding-right: var(--space-s);
 }
-article .callout .callout-title-icon {
+.md .callout .callout-title-icon {
   display: none;
 }
-article .callout img {
+.md .callout img {
   margin-left: 0;
   margin-right: 0;
 }
-
-article .callout[data-callout=warning i] {
-  --callout-color: var(--color-red);
+.md .callout[data-callout=warning i] {
+  --color-callout: var(--color-red);
 }
-
-article .callout[data-callout=important i] {
-  --callout-color: var(--color-orange);
+.md .callout[data-callout=important i] {
+  --color-callout: var(--color-orange);
 }
-
-article details > summary {
+.md details > summary {
   list-style: none; /* removes marker in Firefox */
 }
-
-article details .callout-title::before {
+.md details .callout-title::before {
   content: "▸";
   display: inline-block;
   transform: rotate(0deg);
   transition: transform 0.2s ease;
 }
-
-article details[open] .callout-title::before {
+.md details[open] .callout-title::before {
   transform: rotate(90deg);
 }
-
-article details .callout-title-inner {
+.md details .callout-title-inner {
   display: inline;
 }
-
-article p:has(img) + .callout[data-callout=caption i] {
+.md p:has(img) + .callout[data-callout=caption i] {
   padding: 0;
   background: none;
   border: none;
@@ -1858,10 +2171,10 @@ article p:has(img) + .callout[data-callout=caption i] {
   top: calc(var(--space) * -1.75);
   box-shadow: none;
 }
-article p:has(img) + .callout[data-callout=caption i] .callout-title {
+.md p:has(img) + .callout[data-callout=caption i] .callout-title {
   display: none;
 }
-article p:has(img) + .callout[data-callout=caption i] .callout-content {
+.md p:has(img) + .callout[data-callout=caption i] .callout-content {
   padding: 0;
   background: none;
   border: none;
@@ -1870,25 +2183,133 @@ article p:has(img) + .callout[data-callout=caption i] .callout-content {
   text-align: center !important;
   text-wrap: balance !important;
 }
-
-article .table-wrapper + .callout,
-article .table-wrapper + p:has(img),
-article .table-wrapper + blockquote,
-article .table-wrapper + .code-wrapper {
-  margin-top: 0;
-}
-
 @media only screen and (max-width: 600px) {
-  article .callout,
-  article blockquote,
-  article .code-wrapper {
+  .md .callout,
+  .md blockquote,
+  .md pre {
     margin: var(--space) 0 var(--space-l) 0;
   }
-  article ul:not([start]),
-  article ol:not([start]) {
+  .md ul:not([start]),
+  .md ol:not([start]) {
     padding: 0;
     padding-left: var(--space);
   }
+}
+
+/* Harmony Utilities: rhythm, layout stacks, exceptions, baseline debugging */
+/* Content rhythm: apply to prose containers (e.g., article, .prose) */
+.flow > * + * {
+  margin-block-start: var(--flow-space, var(--space-block));
+}
+
+.flow-tight > * + * {
+  margin-block-start: var(--space);
+}
+
+.flow-wide > * + * {
+  margin-block-start: var(--space-xxl);
+}
+
+/* Layout stacks: gap avoids margin-collapsing */
+.stack {
+  display: grid;
+  gap: var(--stack-gap, var(--space));
+}
+
+.stack.tight {
+  --stack-gap: var(--space-gap);
+}
+
+.stack.wide {
+  --stack-gap: var(--space-l);
+}
+
+/* Small exception helpers */
+.no-top {
+  margin-block-start: 0 !important;
+}
+
+.no-bottom {
+  margin-block-end: 0 !important;
+}
+
+.stick-next {
+  margin-block-end: var(--space-gap) !important;
+}
+
+/* Text utility */
+.muted {
+  color: var(--color-muted);
+}
+
+/* Line-width utilities for readability */
+.line-width-xs {
+  max-width: var(--line-width-xs);
+  margin-inline: auto;
+}
+
+.line-width-s {
+  max-width: var(--line-width-s);
+  margin-inline: auto;
+}
+
+.line-width-normal {
+  max-width: var(--line-width-normal);
+  margin-inline: auto;
+}
+
+.line-width-wide {
+  max-width: var(--line-width-wide);
+  margin-inline: auto;
+}
+
+.line-width-xl {
+  max-width: var(--line-width-xl);
+  margin-inline: auto;
+}
+
+.line-width-full {
+  max-width: var(--line-width-full);
+  margin-inline: auto;
+}
+
+/* Baseline debug overlay */
+.grid-debug {
+  background-image: repeating-linear-gradient(0deg, color-mix(in srgb, var(--color-muted) 10%, transparent), color-mix(in srgb, var(--color-muted) 10%, transparent) 1px, transparent 1px, transparent var(--space));
+  background-repeat: repeat-y;
+  background-size: 100% var(--space);
+  background-position: 0 0.5px;
+}
+
+.grid-debug * {
+  outline: 1px solid var(--color-muted);
+}
+
+.heading-responsive {
+  font-size: clamp(var(--scale-xl), 4vw, var(--scale-xxl)) !important;
+}
+
+.heading-compact {
+  font-size: clamp(var(--scale-l), 3vw, var(--scale-xl)) !important;
+  line-height: 1.1 !important;
+}
+
+.heading-contain {
+  container-type: inline-size;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.heading-contain h1 {
+  font-size: clamp(var(--scale-l), 5cqi, var(--scale-xxl));
+}
+
+.heading-contain h2 {
+  font-size: clamp(var(--scale), 4cqi, var(--scale-xl));
+}
+
+.heading-contain h3 {
+  font-size: clamp(var(--scale-s), 3cqi, var(--scale-l));
 }
 
 /*# sourceMappingURL=standard.css.map */

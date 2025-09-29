@@ -1,10 +1,15 @@
-@import url('https://unpkg.com/sanitize.css');
+@use "sanitize.css/sanitize.css";
 
-/* Entry bundle for article pages (uses your lanes and markdown polish) */
-@use "standard-00-utilities";
+/* Standard - Fine-Art Typography Framework */
+/* A framework implementing classical design principles, mathematical precision with the golden ratio, */
+/* and micro-typography rules inspired by the masters of print design. */
+
+@use "standard-00-token";
 @use "standard-01-grid";
-@use "standard-02-typography";
-@use "standard-04-color";
-@use "standard-03-rhythm";
-@use "standard-05-img";
-@use "standard-06-md";
+@use "standard-02-prose";
+@use "standard-03-typography";
+@use "standard-04-rhythm";
+@use "standard-05-color";
+@use "standard-06-img";
+@use "standard-07-md";
+@use "standard-08-utilities";

@@ -1,0 +1,321 @@
+/* Rhythm Design Tokens */
+:root {
+    /* Rhythm-specific tokens */
+    --max-width: 100%;
+}
+
+/* ===== Harmony Base (containers and resets) ===== */
+:where(*, *::before, *::after) {
+    box-sizing: border-box;
+}
+
+/* Containers usable across pages */
+.container {
+    padding-inline: var(--container-standard);
+}
+.container-full {
+    margin-inline: auto;
+    padding-inline: var(--container-standard);
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table, figure) {
+    margin: 0;
+}
+/* Logical unsets for first/last child when containers apply margins */
+:where(:first-child) {
+    margin-block-start: unset;
+}
+:where(:last-child) {
+    margin-block-end: unset;
+}
+
+/* Vertical Rhythm System - Typography spacing and flow */
+
+.rhythm {
+    /* Default block spacing */
+    > * {
+        margin-block-end: var(--space-block);
+    }
+    > :last-child {
+        margin-block-end: var(--space);
+    }
+    /* Typography element spacing */
+    h1 {
+        margin: var(--space-xl) 0 var(--space-l) 0;
+    }
+
+    > h1:first-child {
+        margin: var(--space) 0 var(--space-xxxl) 0;
+    }
+
+    h2 {
+        margin: var(--space-l) 0 var(--space) 0;
+    }
+
+    h3,
+    h4 {
+        margin: var(--space) 0 var(--space) 0;
+    }
+
+    h5 {
+        margin: var(--space) 0 var(--space-s) 0;
+    }
+
+    h6 {
+        margin: var(--space) 0 var(--space-s) 0;
+    }
+
+    /* Heading sequence spacing */
+    :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+        margin-top: 0rlh;
+    }
+
+    h1 + :is(h1, h2, h3, h4, h5, h6) {
+        margin-top: var(--space-l);
+    }
+
+    /* First heading in article */
+    > h1:first-child {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Horizontal rules */
+    hr,
+    hr:not(:first-child) {
+        margin: var(--space) var(--space-xxl) var(--space-xl) var(--space-xxl);
+    }
+
+    hr + h1,
+    hr + h2,
+    hr + h3,
+    hr + h4,
+    hr + h5,
+    hr + h6 {
+        margin-top: var(--space);
+    }
+
+    /* Image rhythm */
+    p:has(img) {
+        margin-top: 0;
+        margin-bottom: var(--space-gap);
+    }
+
+    p:has(img) + hr,
+    p:has(img) + hr:not(:first-child) {
+        margin-top: 0rlh;
+    }
+
+    /* Adjacent element spacing adjustments */
+    p:has(img) + p:has(img),
+    h1 + p:has(img),
+    h2 + p:has(img),
+    h3 + p:has(img),
+    h4 + p:has(img),
+    h5 + p:has(img),
+    h6 + p:has(img),
+    .metadata + p:has(img),
+    blockquote + p:has(img),
+    hr + p:has(img),
+    pre + p:has(img),
+    .callout + p:has(img),
+    h1 + .callout,
+    h2 + .callout,
+    h3 + .callout,
+    h4 + .callout,
+    h5 + .callout,
+    h6 + .callout,
+    hr + .callout {
+        margin-top: 0 !important;
+    }
+
+    pre + pre,
+    .callout + .callout {
+        margin-top: calc(var(--space) * -1) !important;
+    }
+
+    /* Metadata never gets bottom margin */
+    .metadata {
+        margin-bottom: 0 !important;
+    }
+
+    /* Following image spacing */
+    p:has(img) + p:not(:has(img)),
+    p:has(img) + div,
+    p:has(img) + blockquote,
+    p:has(img) + hr,
+    p:has(img) + pre {
+        margin-top: calc(var(--space) + var(--space-s)) !important;
+    }
+
+    /* Blockquote spacing */
+    blockquote {
+        font-size: var(--scale-s);
+        line-height: var(--font-density-s);
+        padding: var(--space);
+        font-style: italic;
+        margin: 0 var(--space-block) var(--space-block) var(--space-block);
+    }
+
+    /* Callout spacing */
+    .callout {
+        padding: var(--space-xxs);
+        margin: 0 var(--space-block) var(--space-block) var(--space-block);
+
+        .callout-title {
+            padding: var(--space-xxxs) calc(var(--space) - var(--space-xs))
+                var(--space-xxxs) calc(var(--space) - var(--space-xs));
+        }
+
+        .callout-content {
+            padding: var(--space-s) calc(var(--space) - var(--space-xs));
+            margin-top: var(--space-xxs);
+            margin-left: 0;
+
+            p:first-child {
+                margin-top: 0;
+            }
+
+            ul,
+            ol {
+                padding: 0 calc(var(--space) * 0.75);
+            }
+
+            pre {
+                margin: var(--space) 0;
+            }
+
+            > .callout {
+                margin: calc(var(--space-xs) * -1);
+
+                .callout-content {
+                    padding: var(--space-s);
+                }
+                .callout-title {
+                    padding-left: var(--space-s);
+                    padding-right: var(--space-s);
+                }
+            }
+        }
+    }
+
+    pre,
+    pre:first-child,
+    pre:last-child {
+        font-size: var(--scale-s);
+        line-height: var(--font-density-s);
+        overflow-x: auto;
+        white-space: pre;
+        word-wrap: normal;
+        word-break: keep-all;
+        padding: var(--space);
+        margin: 0 var(--space-block) var(--space-block) var(--space-block);
+    }
+
+    /* Adjacent element spacing for code */
+    pre + .callout,
+    pre + p:has(img),
+    pre + blockquote {
+        margin-top: 0;
+    }
+
+    /* List spacing */
+    ul:not([start]),
+    ul,
+    ol:not([start]),
+    ol {
+        list-style: none;
+        list-style-position: outside;
+        padding: 0 var(--space-l);
+        break-inside: avoid;
+        page-break-inside: avoid;
+        -webkit-column-break-inside: avoid;
+        counter-reset: ol-counter;
+    }
+
+    ul ul,
+    ol ol,
+    ul ol,
+    ol ul {
+        padding-left: calc(var(--space) * 1) !important;
+
+        li {
+            margin-bottom: 0;
+        }
+    }
+
+    li > p {
+        display: inline;
+    }
+
+    li {
+        line-height: 1.3;
+        margin-bottom: 0;
+        margin-left: 0;
+    }
+
+    ul > li::before {
+        content: "\2022";
+        display: inline-block;
+        text-align: center;
+        width: var(--space);
+        opacity: 0.25;
+        margin-left: calc(var(--space) * -1);
+    }
+
+    ol > li::before,
+    ol:not([start]) > li::before {
+        display: inline-block;
+        width: var(--space);
+        opacity: 0.25;
+        content: counter(ol-counter) ". ";
+        font-variant-numeric: tabular-nums;
+        position: absolute;
+        left: calc(var(--space) * -1.5);
+        text-align: right;
+        --space: unset;
+    }
+
+    ol > li:not(:last-child),
+    ul > li:not(:last-child) {
+        margin-bottom: var(--space-xs);
+    }
+
+    li > p + ul,
+    li > p + ol {
+        margin-top: calc(var(--space-s) * -1);
+    }
+
+    p:has(img),
+    p:has(video) {
+        margin: 0 var(--space-block);
+    }
+}
+
+/* Utility classes for rhythm overrides */
+li > p + ul,
+li > p + ol {
+    margin-top: calc(var(--space-s) * -1);
+}
+
+:not(pre) > code {
+    background-color: var(--color-background-secondary);
+    border: 0;
+    border-radius: var(--border-radius);
+    line-height: var(--font-density-s);
+    margin: 0;
+    padding: 0.1em 0.3em;
+    font-size: var(--scale-s);
+    white-space: normal;
+    text-wrap: wrap;
+}
+
+.nobullet {
+    list-style: none;
+    padding-left: 0;
+
+    li::before {
+        content: "";
+        margin-left: 0;
+    }
+}

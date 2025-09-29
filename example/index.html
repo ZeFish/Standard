@@ -1,0 +1,2206 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Standard Framework - Fine-Art Typography Demo</title>
+        <link rel="stylesheet" href="../dist/standard.css" />
+        <style>
+            .demo-section {
+                margin-bottom: var(--space-xxxl);
+                padding: var(--space);
+                border: var(--border);
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                scroll-margin-top: calc(var(--space) * 8);
+                background: var(--color-background-secondary);
+            }
+
+            .demo-title {
+                font-size: var(--scale-l);
+                font-weight: var(--bold-weight);
+                margin-bottom: var(--space);
+                color: var(--color-accent);
+            }
+
+            .code-example {
+                background: var(--color-background);
+                padding: var(--space);
+                margin: var(--space) 0;
+                border-radius: var(--border-radius);
+                font-family: var(--font-monospace);
+                font-size: var(--scale-s);
+                overflow-x: auto;
+                border: var(--border);
+                box-shadow: inset var(--shadow);
+            }
+
+            .demo-box {
+                background: color-mix(
+                    in srgb,
+                    var(--color-foreground) 10%,
+                    var(--color-background)
+                );
+                border: var(--border);
+                border-radius: var(--border-radius);
+                padding: var(--space);
+                text-align: center;
+                font-size: var(--scale-s);
+            }
+
+            .visual-example {
+                border: var(--border);
+                border-radius: var(--border-radius);
+                padding: var(--space);
+                margin-block-start: var(--space);
+                background: var(--color-background);
+                box-shadow: inset var(--shadow);
+            }
+
+            .token-showcase {
+                display: grid;
+                gap: var(--space);
+                margin: var(--space) 0;
+            }
+
+            .token-item {
+                padding: var(--space-s);
+                background: var(--color-background);
+                border: var(--border);
+                border-radius: var(--border-radius);
+                font-family: var(--font-monospace);
+                font-size: var(--scale-xs);
+                box-shadow: inset var(--shadow);
+            }
+
+            .nav {
+                position: sticky;
+                top: var(--space);
+                z-index: var(--z-sticky);
+                background: color-mix(
+                    in srgb,
+                    var(--color-background) 15%,
+                    transparent
+                );
+                backdrop-filter: blur(2px);
+                border: var(--border);
+                border-radius: var(--border-radius);
+                padding: var(--space-xs);
+                margin-block-start: var(--space);
+                margin-bottom: var(--space-xl);
+            }
+
+            .nav ul {
+                list-style: none;
+                padding: 0 !important;
+                margin: 0;
+                display: block;
+            }
+
+            .nav li {
+                display: inline-block;
+            }
+
+            .nav a {
+                display: inline-block;
+                text-decoration: none;
+                padding: var(--space-xs) var(--space-s);
+                border-radius: var(--border-radius);
+                background: var(--color-background-secondary);
+                font-size: var(--scale-s);
+                color: var(--color-foreground);
+                cursor: pointer;
+                border: var(--border);
+            }
+
+            .nav a:hover {
+                background: var(--color-accent);
+                color: var(--color-background);
+                border-color: var(--color-accent);
+            }
+
+            .nav a:focus {
+                outline: 2px solid var(--color-accent);
+                outline-offset: 2px;
+            }
+
+            /* Rhythm visualization styles */
+            .rhythm-demo {
+                position: relative;
+                background-image: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent calc(var(--space) - 1px),
+                    rgba(255, 0, 255, 0.2) calc(var(--space) - 1px),
+                    rgba(255, 0, 255, 0.2) var(--space)
+                );
+                background-size: 100% var(--space);
+            }
+
+            .rhythm-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent calc(var(--space) - 1px),
+                    rgba(0, 255, 0, 0.3) calc(var(--space) - 1px),
+                    rgba(0, 255, 0, 0.3) var(--space)
+                );
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .rhythm-legend {
+                position: relative;
+                z-index: 2;
+                background: var(--color-background);
+                padding: var(--space-s);
+                border: var(--border);
+                border-radius: var(--border-radius);
+                margin-bottom: var(--space);
+                font-size: var(--scale-s);
+            }
+
+            .spacing-visualization {
+                display: grid;
+                gap: var(--space-xs);
+                margin: 0;
+            }
+
+            .spacing-item {
+                display: flex;
+                align-items: center;
+                gap: var(--space-s);
+            }
+
+            .spacing-bar {
+                flex-shrink: 0;
+                background: var(--color-accent);
+                border-radius: 2px;
+            }
+
+            .toggle-rhythm {
+                background: var(--color-accent);
+                color: var(--color-background);
+                border: none;
+                padding: var(--space-xs) var(--space-s);
+                border-radius: var(--border-radius);
+                font-size: var(--scale-s);
+                cursor: pointer;
+                margin-bottom: var(--space);
+            }
+            li::before {
+                display: none !important;
+            }
+        </style>
+        <script>
+            function toggleRhythm() {
+                const demo = document.getElementById("rhythm-demo");
+                demo.classList.toggle("rhythm-demo");
+            }
+        </script>
+    </head>
+    <body class="rhythm">
+        <!-- Header -->
+        <header class="line-width-wide" style="margin-bottom: var(--space-xl)">
+            <h1>Standard<br />Framework</h1>
+
+            <p class="muted">
+                A fine-art typography framework implementing classical design
+                principles, mathematical precision with the golden ratio, and
+                micro-typography rules inspired by the masters of print design.
+            </p>
+
+            <nav class="nav smaller mono">
+                <ul>
+                    <li><a href="#design-tokens">Design Tokens</a></li>
+                    <li><a href="#grid-system">Grid System</a></li>
+                    <li><a href="#prose-layout">Prose Layout</a></li>
+                    <li><a href="#typography">Typography</a></li>
+                    <li><a href="#rhythm">Rhythm System</a></li>
+                    <li><a href="#colors">Colors</a></li>
+                    <li>
+                        <a href="#typography-engine">Typography Engine</a>
+                    </li>
+                    <li><a href="#book-layout">Book Layout</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#utilities">Utilities</a></li>
+                    <li><a href="#markdown">Markdown</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Design Tokens Section -->
+        <section id="design-tokens" class="demo-section line-width-xl">
+            <div class="demo-title">Mathematical Design Tokens</div>
+            <p>
+                Standard uses mathematically precise ratios inspired by fine-art
+                typography, including the golden ratio and its derivatives:
+            </p>
+
+            <div class="token-showcase">
+                <div class="token-item">
+                    <strong>Mathematical Ratios</strong>
+                    (standard-00-token.scss)<br />
+                    --ratio-golden: 1.618 | --ratio-halfstep: 1.272 |
+                    --ratio-quarterstep: 1.128
+                </div>
+                <div class="token-item">
+                    <strong>Grid Tokens</strong> (standard-01-grid.scss)<br />
+                    --grid-cols: 12 | --container-max: 1200px
+                </div>
+                <div class="token-item">
+                    <strong>Content Tokens</strong>
+                    (standard-02-prose.scss)<br />
+                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                </div>
+                <div class="token-item">
+                    <strong>Typography Tokens</strong>
+                    (standard-03-typography.scss)<br />
+                    --font-text: system-ui | --font-header-weight: 900
+                </div>
+                <div class="token-item">
+                    <strong>Color Tokens</strong> (standard-05-color.scss)<br />
+                    --color-accent: #c8a840 | --color-muted: mix(fg 50% bg)
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid System Section -->
+        <section id="grid-system" class="demo-section">
+            <div class="demo-title">12-Column Grid System</div>
+            <div class="code-example">
+                &lt;div class="grid"&gt;&lt;div
+                class="col-6"&gt;...&lt;/div&gt;&lt;/div&gt;
+            </div>
+
+            <div class="visual-example">
+                <div class="grid" style="margin-bottom: var(--space)">
+                    <div class="col-6 demo-box">col-6</div>
+                    <div class="col-6 demo-box">col-6</div>
+                </div>
+                <div class="grid" style="margin-bottom: var(--space)">
+                    <div class="col-4 demo-box">col-4</div>
+                    <div class="col-8 demo-box">col-8</div>
+                </div>
+                <div class="grid" style="margin-bottom: var(--space)">
+                    <div class="col-3 demo-box">col-3</div>
+                    <div class="col-3 demo-box">col-3</div>
+                    <div class="col-3 demo-box">col-3</div>
+                    <div class="col-3 demo-box">col-3</div>
+                </div>
+            </div>
+
+            <h4>Free Columns with CSS Variables</h4>
+            <div class="code-example">
+                &lt;div class="free-col" style="--start: 3; --span:
+                4"&gt;...&lt;/div&gt;
+            </div>
+
+            <div class="visual-example">
+                <div class="grid">
+                    <div class="col-6 demo-box">Main Content</div>
+                    <div
+                        class="free-col demo-box"
+                        style="--start: 8; --span: 3"
+                    >
+                        Sidebar<br />--start: 8<br />--span: 3
+                    </div>
+                    <div class="free-col demo-box span-2 startv-10">
+                        Utility<br />.span-2<br />.startv-10
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prose Layout Section -->
+        <section id="prose-layout" class="demo-section">
+            <div class="demo-title">Prose Layout System</div>
+            <p>
+                The <code>.prose</code> class provides content area positioning
+                with different widths for visual hierarchy. The
+                <code>.full</code> area uses negative margins to break out to
+                true edge-to-edge:
+            </p>
+            <div class="code-example">&lt;article class="prose"&gt;</div>
+
+            <div class="visual-example">
+                <article class="prose">
+                    <div
+                        style="
+                            background: color-mix(
+                                in srgb,
+                                var(--color-red) 10%,
+                                var(--color-background)
+                            );
+                            padding: var(--space-s);
+                            border: var(--border);
+                            border-color: color-mix(
+                                in srgb,
+                                var(--color-red) 50%,
+                                var(--color-background)
+                            );
+                        "
+                    >
+                        <strong>Content Area (default)</strong><br />
+                        Main reading column with optimal width for reading
+                    </div>
+                    <div
+                        class="accent"
+                        style="
+                            background: color-mix(
+                                in srgb,
+                                var(--color-green) 10%,
+                                var(--color-background)
+                            );
+                            padding: var(--space-s);
+                            border: var(--border);
+                            border-color: color-mix(
+                                in srgb,
+                                var(--color-green) 50%,
+                                var(--color-background)
+                            );
+                        "
+                    >
+                        <strong>Accent Area</strong><br />
+                        Sidebar content positioned alongside main content
+                    </div>
+                    <div
+                        class="feature"
+                        style="
+                            background: color-mix(
+                                in srgb,
+                                var(--color-blue) 10%,
+                                var(--color-background)
+                            );
+                            padding: var(--space-s);
+                            border: var(--border);
+                            border-color: color-mix(
+                                in srgb,
+                                var(--color-blue) 50%,
+                                var(--color-background)
+                            );
+                        "
+                    >
+                        <strong>Feature Area</strong><br />
+                        Wider content area for emphasized content like images
+                    </div>
+                    <div
+                        class="full"
+                        style="
+                            background: color-mix(
+                                in srgb,
+                                var(--color-orange) 10%,
+                                var(--color-background)
+                            );
+                            padding: var(--space-s);
+                            border: var(--border);
+                            border-color: color-mix(
+                                in srgb,
+                                var(--color-orange) 50%,
+                                var(--color-background)
+                            );
+                        "
+                    >
+                        <strong>Full Width Area</strong><br />
+                        Breaks out to true edge-to-edge using negative margins
+                    </div>
+                </article>
+            </div>
+
+            <div
+                style="
+                    margin-top: var(--space-l);
+                    padding: var(--space);
+                    background: var(--color-background-secondary);
+                    border-radius: var(--border-radius);
+                "
+            >
+                <h4>Fine-Art Layout Philosophy</h4>
+                <p class="small">
+                    <strong>Margin & Standard:</strong> Inspired by traditional
+                    book design margins<br />
+                    <strong>Feature:</strong> For emphasized content that needs
+                    more space<br />
+                    <strong>Bleed:</strong> Full-width areas that extend to the
+                    edges like print bleeds<br />
+                    This terminology comes from centuries of print design
+                    wisdom.
+                </p>
+                <p class="small muted">
+                    Each class name reflects actual typography and print design
+                    terminology, creating a framework that speaks the language
+                    of fine-art professionals.
+                </p>
+            </div>
+        </section>
+
+        <!-- Typography Section -->
+        <section id="typography" class="demo-section line-width-wide">
+            <div class="demo-title">Typography System</div>
+            <p>Modular scale typography with proper font feature settings:</p>
+
+            <div class="visual-example">
+                <h1>Typography Demonstration Article</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. This substantial paragraph demonstrates how body
+                    text at base scale (1rem) flows naturally with proper line
+                    height, letter spacing, and OpenType features enabled. Ut
+                    enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum. The typography system
+                    handles longer paragraphs gracefully, maintaining
+                    <strong>bold formatting</strong> and
+                    <em>italic emphasis</em> with proper color relationships.
+                </p>
+
+                <h2>Major Section Header - Scale XXL</h2>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                    aut fugit, sed quia consequuntur magni dolores eos qui
+                    ratione voluptatem sequi nesciunt.
+                </p>
+
+                <h3>Subsection Header - Scale XL</h3>
+                <p>
+                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+                    amet, consectetur, adipisci velit, sed quia non numquam eius
+                    modi tempora incidunt ut labore et dolore magnam aliquam
+                    quaerat voluptatem. But I must explain to you how all this
+                    mistaken idea of denouncing pleasure and praising pain was
+                    born and I will give you a complete account of the system.
+                </p>
+
+                <h4>Detailed Topic - Scale L</h4>
+                <p>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus
+                    qui blanditiis praesentium voluptatum deleniti atque
+                    corrupti quos dolores et quas molestias excepturi sint
+                    occaecati cupiditate non provident, similique sunt in culpa
+                    qui officia deserunt mollitia animi, id est laborum et
+                    dolorum fuga.
+                </p>
+
+                <h5>Supporting Point</h5>
+                <p>
+                    Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere
+                    possimus, omnis voluptas assumenda est, omnis dolor
+                    repellendus.
+                </p>
+
+                <h6>Minor Detail</h6>
+                <p>
+                    Temporibus autem quibusdam et aut officiis debitis aut rerum
+                    necessitatibus saepe eveniet ut et voluptates repudiandae
+                    sint et molestiae non recusandae. Itaque earum rerum hic
+                    tenetur a sapiente delectus.
+                </p>
+            </div>
+        </section>
+
+        <!-- Rhythm Section -->
+        <section id="rhythm" class="demo-section line-width-normal">
+            <div class="demo-title">Vertical Rhythm System</div>
+            <p>
+                The <code>.rhythm</code> class provides consistent vertical
+                spacing:
+            </p>
+            <div class="code-example">&lt;article class="rhythm"&gt;</div>
+
+            <div class="rhythm-legend">
+                <strong>Rhythm Visualization</strong>
+                <p class="small">
+                    Green lines show the baseline grid (1rlh = var(--space)).
+                    All vertical spacing aligns to these rhythm units for
+                    consistent visual harmony.
+                </p>
+                <button class="toggle-rhythm" onclick="toggleRhythm()">
+                    Toggle Rhythm Grid
+                </button>
+            </div>
+
+            <div class="visual-example rhythm rhythm-demo" id="rhythm-demo">
+                <div class="rhythm-overlay"></div>
+                <div style="position: relative; z-index: 2">
+                    <h2>Rhythm Demonstration</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Notice how this longer paragraph
+                        demonstrates proper vertical rhythm spacing based on the
+                        modular scale, and how all spacing aligns to the green
+                        baseline grid lines for visual consistency.
+                    </p>
+                    <p>
+                        Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                        Multiple paragraphs like this maintain consistent
+                        spacing that aligns to the baseline grid, creating
+                        visual harmony throughout the entire reading experience.
+                    </p>
+                    <p>
+                        Sed ut perspiciatis unde omnis iste natus error sit
+                        voluptatem accusantium doloremque laudantium, totam rem
+                        aperiam, eaque ipsa quae ab illo inventore veritatis et
+                        quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                        enim ipsam voluptatem quia voluptas sit aspernatur aut
+                        odit aut fugit, sed quia consequuntur magni dolores eos
+                        qui ratione voluptatem sequi nesciunt.
+                    </p>
+                    <blockquote>
+                        "At vero eos et accusamus et iusto odio dignissimos
+                        ducimus qui blanditiis praesentium voluptatum deleniti
+                        atque corrupti quos dolores et quas molestias excepturi
+                        sint occaecati cupiditate non provident, similique sunt
+                        in culpa qui officia deserunt mollitia animi, id est
+                        laborum et dolorum fuga."
+                    </blockquote>
+                    <h3>Subheading with Rhythm</h3>
+                    <p>
+                        Et harum quidem rerum facilis est et expedita
+                        distinctio. Nam libero tempore, cum soluta nobis est
+                        eligendi optio cumque nihil impedit quo minus id quod
+                        maxime placeat facere possimus, omnis voluptas assumenda
+                        est, omnis dolor repellendus. Temporibus autem quibusdam
+                        et aut officiis debitis aut rerum necessitatibus saepe
+                        eveniet ut et voluptates repudiandae sint et molestiae
+                        non recusandae.
+                    </p>
+                    <p>
+                        Itaque earum rerum hic tenetur a sapiente delectus, ut
+                        aut reiciendis voluptatibus maiores alias consequatur
+                        aut perferendis doloribus asperiores repellat. Headings
+                        and paragraphs flow together with mathematical
+                        precision, each element's spacing calculated from the
+                        base rhythm unit to maintain optimal readability.
+                    </p>
+                    <ul>
+                        <li>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt
+                        </li>
+                        <li>
+                            Ut labore et dolore magna aliqua. Ut enim ad minim
+                            veniam, quis nostrud exercitation ullamco laboris
+                        </li>
+                        <li>
+                            Nisi ut aliquip ex ea commodo consequat. Duis aute
+                            irure dolor in reprehenderit in voluptate velit esse
+                            cillum
+                        </li>
+                        <li>
+                            All list items following the baseline grid system
+                            for consistent vertical rhythm
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="spacing-visualization">
+                <h4>Vertical Spacing Scale</h4>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 12px; height: 8px"
+                    ></div>
+                    <code>--space-xxxs</code>
+                    <span class="small muted">(marge ÷ 5)</span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 16px; height: 8px"
+                    ></div>
+                    <code>--space-xxs</code>
+                    <span class="small muted">(marge ÷ 4)</span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 20px; height: 8px"
+                    ></div>
+                    <code>--space-xs</code>
+                    <span class="small muted">(marge ÷ 3)</span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 30px; height: 8px"
+                    ></div>
+                    <code>--space-s</code>
+                    <span class="small muted">(marge ÷ 2)</span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 60px; height: 8px; opacity: 0.8"
+                    ></div>
+                    <code>--space</code>
+                    <span class="small muted">
+                        <strong>BASE UNIT (1rlh)</strong>
+                    </span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 120px; height: 8px"
+                    ></div>
+                    <code>--space-l</code>
+                    <span class="small muted">(2 × marge)</span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 180px; height: 8px"
+                    ></div>
+                    <code>--space-xl</code>
+                    <span class="small muted">(3 × marge)</span>
+                </div>
+                <div class="spacing-item">
+                    <div
+                        class="spacing-bar"
+                        style="width: 240px; height: 8px"
+                    ></div>
+                    <code>--space-xxl</code>
+                    <span class="small muted">(4 × marge)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Combined Example -->
+        <section class="demo-section">
+            <div class="demo-title">Combined: Prose + Rhythm</div>
+            <p>
+                Using both <code>.prose.rhythm</code> provides the complete
+                article system:
+            </p>
+            <div class="code-example">&lt;article class="prose rhythm"&gt;</div>
+
+            <div class="visual-example">
+                <article class="book rhythm">
+                    <h1>Complete Article System</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. This content demonstrates both layout
+                        positioning and vertical rhythm working together
+                        seamlessly. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </p>
+                    <p>
+                        Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                        The main content column maintains optimal line length
+                        for comfortable reading while preserving the
+                        mathematical rhythm system.
+                    </p>
+
+                    <div class="standard">
+                        <h3>Standard Content</h3>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit
+                            voluptatem accusantium doloremque laudantium, totam
+                            rem aperiam, eaque ipsa quae ab illo inventore
+                            veritatis et quasi architecto beatae vitae dicta
+                            sunt explicabo. This content is positioned in the
+                            standard—the typographic term for sidebar space.
+                        </p>
+                        <p>
+                            Nemo enim ipsam voluptatem quia voluptas sit
+                            aspernatur aut odit aut fugit, sed quia consequuntur
+                            magni dolores eos qui ratione voluptatem sequi
+                            nesciunt.
+                        </p>
+                    </div>
+
+                    <p>
+                        Neque porro quisquam est, qui dolorem ipsum quia dolor
+                        sit amet, consectetur, adipisci velit, sed quia non
+                        numquam eius modi tempora incidunt ut labore et dolore
+                        magnam aliquam quaerat voluptatem. Regular content
+                        continues in the main column with full paragraph lengths
+                        that demonstrate proper line wrapping and rhythm
+                        spacing.
+                    </p>
+
+                    <blockquote>
+                        "At vero eos et accusamus et iusto odio dignissimos
+                        ducimus qui blanditiis praesentium voluptatum deleniti
+                        atque corrupti quos dolores et quas molestias excepturi
+                        sint occaecati cupiditate non provident, similique sunt
+                        in culpa qui officia deserunt mollitia animi, id est
+                        laborum et dolorum fuga."
+                    </blockquote>
+
+                    <p>
+                        Et harum quidem rerum facilis est et expedita
+                        distinctio. Nam libero tempore, cum soluta nobis est
+                        eligendi optio cumque nihil impedit quo minus id quod
+                        maxime placeat facere possimus, omnis voluptas assumenda
+                        est, omnis dolor repellendus.
+                    </p>
+
+                    <div class="feature">
+                        <h3>Featured Content</h3>
+                        <p>
+                            Temporibus autem quibusdam et aut officiis debitis
+                            aut rerum necessitatibus saepe eveniet ut et
+                            voluptates repudiandae sint et molestiae non
+                            recusandae. This spans the feature width while
+                            maintaining typography rhythm, perfect for
+                            emphasized content that needs more horizontal space.
+                        </p>
+                        <p>
+                            Itaque earum rerum hic tenetur a sapiente delectus,
+                            ut aut reiciendis voluptatibus maiores alias
+                            consequatur aut perferendis doloribus asperiores
+                            repellat. The wider column accommodates longer lines
+                            while still maintaining readability through proper
+                            typography and spacing.
+                        </p>
+                    </div>
+
+                    <p>
+                        On the other hand, we denounce with righteous
+                        indignation and dislike men who are so beguiled and
+                        demoralized by the charms of pleasure of the moment, so
+                        blinded by desire, that they cannot foresee the pain and
+                        trouble that are bound to ensue; and equal blame belongs
+                        to those who fail in their duty through weakness of
+                        will, which is the same as saying through shrinking from
+                        toil and pain.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Line Width Section -->
+        <section id="line-width" class="demo-section">
+            <div class="demo-title">Line-Width for Readability</div>
+            <p>Optimized reading widths based on typography research:</p>
+
+            <div style="display: grid; gap: var(--gap)">
+                <div class="line-width-xs visual-example">
+                    <h4>Extra Small (24rem)</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Perfect for sidebars and narrow content
+                        areas where space is limited.
+                    </p>
+                </div>
+                <div class="line-width-s visual-example">
+                    <h4>Small (32rem)</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris. Ideal for forms and
+                        mobile-first content that needs to be concise while
+                        maintaining readability.
+                    </p>
+                </div>
+                <div class="line-width-normal visual-example">
+                    <h4>Normal (42rem) - Default</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. The optimal reading width
+                        accommodating 60-75 characters per line for maximum
+                        readability and comprehension.
+                    </p>
+                </div>
+                <div class="line-width-wide visual-example">
+                    <h4>Wide (50rem)</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum. For articles with images, code
+                        examples, or tables that benefit from extra horizontal
+                        space while maintaining readability.
+                    </p>
+                </div>
+                <div class="line-width-xl visual-example">
+                    <h4>Extra Large (60rem)</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum. Sed ut perspiciatis unde omnis iste
+                        natus error sit voluptatem accusantium doloremque
+                        laudantium, totam rem aperiam. Designed for
+                        documentation and technical content that requires more
+                        width for complex layouts but still maintains reasonable
+                        line lengths.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Colors Section -->
+        <section id="colors" class="demo-section line-width-wide">
+            <div class="demo-title">Color System</div>
+            <p>Automatic light/dark mode with semantic color tokens:</p>
+            <div class="visual-example">
+                <div
+                    style="
+                        display: grid;
+                        grid-template-columns: repeat(
+                            auto-fit,
+                            minmax(200px, 1fr)
+                        );
+                        gap: var(--space);
+                    "
+                >
+                    <div
+                        style="
+                            background: var(--color-red);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Red</strong><br />
+                        var(--color-red)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-orange);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Orange</strong><br />
+                        var(--color-orange)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-yellow);
+                            color: black;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Yellow</strong><br />
+                        var(--color-yellow)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-green);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Green</strong><br />
+                        var(--color-green)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-blue);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Blue</strong><br />
+                        var(--color-blue)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-purple);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Purple</strong><br />
+                        var(--color-purple)
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        margin-top: var(--space);
+                        display: grid;
+                        grid-template-columns: repeat(
+                            auto-fit,
+                            minmax(200px, 1fr)
+                        );
+                        gap: var(--space);
+                    "
+                >
+                    <div
+                        style="
+                            background: var(--color-background-secondary);
+                            padding: var(--space);
+                            border: var(--border);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Background Secondary</strong><br />
+                        var(--color-background-secondary)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-muted);
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Muted</strong><br />
+                        var(--color-muted)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-accent);
+                            color: var(--color-background);
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Accent</strong><br />
+                        var(--color-accent)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fine-Art Typography Engine Section -->
+        <section id="typography-engine" class="demo-section line-width-normal">
+            <div class="demo-title">Fine-Art Typography Engine</div>
+            <p>
+                JavaScript library implementing classical typography rules that
+                CSS cannot handle, inspired by centuries of print design wisdom:
+            </p>
+
+            <div class="visual-example">
+                <h4>Typography Engine Demo</h4>
+                <div
+                    id="typography-demo"
+                    style="
+                        padding: var(--space);
+                        background: var(--color-background-secondary);
+                        border-radius: var(--border-radius);
+                        border: var(--border);
+                        box-shadow: var(--shadow);
+                        margin: var(--space) 0;
+                    "
+                >
+                    <p>
+                        This paragraph demonstrates "smart quotes", proper
+                        em--dashes, ellipsis..., and widow prevention. Notice
+                        how two letter words like "of the framework" get
+                        non-breaking spaces to prevent awkward line breaks.
+                    </p>
+                    <p>
+                        French typography: Before punctuation marks like colons
+                        : semicolons ; exclamation marks ! and question marks ?
+                        we add thin spaces following European conventions.
+                    </p>
+                </div>
+
+                <button
+                    onclick="toggleTypographyDemo()"
+                    style="
+                        padding: var(--space-xs) var(--space-s);
+                        background: var(--color-accent);
+                        color: var(--color-background);
+                        border: var(--border);
+                        border-radius: var(--border-radius);
+                        cursor: pointer;
+                        font-size: var(--scale-s);
+                    "
+                >
+                    Toggle Typography Processing
+                </button>
+
+                <script>
+                    let typographyProcessed = false;
+
+                    function toggleTypographyDemo() {
+                        const demo = document.getElementById("typography-demo");
+                        const button = event.target;
+
+                        if (
+                            !typographyProcessed &&
+                            typeof StandardTypography !== "undefined"
+                        ) {
+                            const typography = new StandardTypography({
+                                enableSmartQuotes: true,
+                                enablePunctuation: true,
+                                enableWidowPrevention: true,
+                                enableSpacing: true,
+                                locale: "en",
+                            });
+                            typography.processNewContent(demo);
+                            button.textContent = "Reset Typography";
+                            typographyProcessed = true;
+                        } else {
+                            // Reset to original text
+                            const paragraphs = demo.querySelectorAll("p");
+                            paragraphs[0].innerHTML =
+                                'This paragraph demonstrates "smart quotes", proper em--dashes, ellipsis..., and widow prevention. Notice how two letter words like "of the framework" get non-breaking spaces to prevent awkward line breaks.';
+                            paragraphs[1].innerHTML =
+                                "French typography: Before punctuation marks like colons : semicolons ; exclamation marks ! and question marks ? we add thin spaces following European conventions.";
+                            button.textContent = "Toggle Typography Processing";
+                            typographyProcessed = false;
+                        }
+                    }
+                </script>
+            </div>
+
+            <div class="spacing-visualization">
+                <h4>Typography Rules Applied</h4>
+                <div class="token-item">
+                    <strong>Smart Quotes:</strong> "straight quotes" → "curly
+                    quotes"
+                </div>
+                <div class="token-item">
+                    <strong>Punctuation:</strong> -- → em—dash, ... → ellipsis…
+                </div>
+                <div class="token-item">
+                    <strong>Widow Prevention:</strong> Non-breaking space before
+                    last word
+                </div>
+                <div class="token-item">
+                    <strong>Two-letter Words:</strong> "of the" → "of&nbsp;the"
+                </div>
+                <div class="token-item">
+                    <strong>French Spacing:</strong> "word :" → "word&thinsp;:"
+                </div>
+            </div>
+        </section>
+
+        <!-- Forms Section -->
+        <section id="forms" class="demo-section line-width-normal">
+            <div class="demo-title">Form Elements</div>
+            <p>
+                Consistent form styling that integrates with the framework's
+                design system:
+            </p>
+
+            <div class="visual-example">
+                <form style="display: grid; gap: var(--space)">
+                    <div>
+                        <label
+                            for="demo-text"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                        >
+                            Text Input
+                        </label>
+                        <input
+                            type="text"
+                            id="demo-text"
+                            placeholder="Enter your name"
+                            style="width: 100%"
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            for="demo-email"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                        >
+                            Email Input
+                        </label>
+                        <input
+                            type="email"
+                            id="demo-email"
+                            placeholder="your.email@example.com"
+                            style="width: 100%"
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            for="demo-select"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                        >
+                            Select Dropdown
+                        </label>
+                        <select id="demo-select" style="width: 100%">
+                            <option>Choose an option...</option>
+                            <option>Fine-Art Typography</option>
+                            <option>Swiss Grid System</option>
+                            <option>Golden Ratio Precision</option>
+                            <option>Vertical Rhythm</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label
+                            for="demo-textarea"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                        >
+                            Textarea
+                        </label>
+                        <textarea
+                            id="demo-textarea"
+                            placeholder="Share your thoughts on typography and design..."
+                            style="
+                                width: 100%;
+                                height: calc(var(--space-l) * 4);
+                            "
+                        ></textarea>
+                    </div>
+
+                    <div
+                        style="
+                            display: flex;
+                            gap: var(--space);
+                            align-items: center;
+                        "
+                    >
+                        <input type="checkbox" id="demo-checkbox" />
+                        <label for="demo-checkbox"
+                            >I agree to the terms and conditions</label
+                        >
+                    </div>
+
+                    <div
+                        style="
+                            display: flex;
+                            gap: var(--space);
+                            align-items: center;
+                        "
+                    >
+                        <input
+                            type="radio"
+                            id="demo-radio1"
+                            name="demo-radio"
+                        />
+                        <label for="demo-radio1">Light theme</label>
+                        <input
+                            type="radio"
+                            id="demo-radio2"
+                            name="demo-radio"
+                        />
+                        <label for="demo-radio2">Dark theme</label>
+                    </div>
+
+                    <div
+                        style="
+                            display: flex;
+                            gap: var(--space);
+                            flex-wrap: wrap;
+                        "
+                    >
+                        <button type="submit">Submit Form</button>
+                        <button
+                            type="button"
+                            style="
+                                background: var(--color-background-secondary);
+                                color: var(--color-foreground);
+                                border: 1px solid var(--color-border);
+                            "
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="button"
+                            style="
+                                background: var(--color-red);
+                                color: white;
+                                border: none;
+                            "
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="code-example">
+                &lt;form&gt; &lt;label for="email"&gt;Email&lt;/label&gt;
+                &lt;input type="email" id="email"
+                placeholder="your@email.com"&gt; &lt;label
+                for="message"&gt;Message&lt;/label&gt; &lt;textarea id="message"
+                placeholder="Your message..."&gt;&lt;/textarea&gt; &lt;button
+                type="submit"&gt;Send Message&lt;/button&gt; &lt;/form&gt;
+            </div>
+
+            <p>
+                <strong>Features:</strong> All form elements inherit the
+                framework's typography, spacing, and color system. Focus states
+                use the accent color for consistency. Buttons follow the same
+                styling as other interactive elements.
+            </p>
+
+            <div
+                class="demo-title"
+                style="margin-top: var(--space-xl); font-size: var(--scale)"
+            >
+                Advanced Form Layout Examples
+            </div>
+
+            <div class="visual-example">
+                <!-- Login Form Example -->
+                <form style="max-width: 24rem; margin-bottom: var(--space-xl)">
+                    <h3 style="margin-bottom: var(--space)">Login Form</h3>
+                    <div style="margin-bottom: var(--space)">
+                        <label
+                            for="login-email"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                            >Email</label
+                        >
+                        <input
+                            type="email"
+                            id="login-email"
+                            placeholder="Enter your email"
+                            style="width: 100%"
+                        />
+                    </div>
+                    <div style="margin-bottom: var(--space)">
+                        <label
+                            for="login-password"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                            >Password</label
+                        >
+                        <input
+                            type="password"
+                            id="login-password"
+                            placeholder="Enter your password"
+                            style="width: 100%"
+                        />
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            gap: var(--space);
+                            margin-bottom: var(--space);
+                        "
+                    >
+                        <input type="checkbox" id="remember-me" />
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            gap: var(--space);
+                            flex-wrap: wrap;
+                        "
+                    >
+                        <button type="submit">Sign In</button>
+                        <button
+                            type="button"
+                            style="
+                                background: transparent;
+                                color: var(--color-accent);
+                                border: 1px solid var(--color-accent);
+                            "
+                        >
+                            Forgot Password?
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Contact Form Example -->
+                <form style="max-width: 32rem">
+                    <h3 style="margin-bottom: var(--space)">Contact Form</h3>
+                    <div
+                        style="
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: var(--space);
+                            margin-bottom: var(--space);
+                        "
+                    >
+                        <div>
+                            <label
+                                for="first-name"
+                                style="
+                                    display: block;
+                                    margin-bottom: var(--space-xs);
+                                    font-weight: var(--bold-weight);
+                                "
+                                >First Name</label
+                            >
+                            <input
+                                type="text"
+                                id="first-name"
+                                placeholder="John"
+                                style="width: 100%"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                for="last-name"
+                                style="
+                                    display: block;
+                                    margin-bottom: var(--space-xs);
+                                    font-weight: var(--bold-weight);
+                                "
+                                >Last Name</label
+                            >
+                            <input
+                                type="text"
+                                id="last-name"
+                                placeholder="Doe"
+                                style="width: 100%"
+                            />
+                        </div>
+                    </div>
+                    <div style="margin-bottom: var(--space)">
+                        <label
+                            for="contact-email"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                            >Email</label
+                        >
+                        <input
+                            type="email"
+                            id="contact-email"
+                            placeholder="john.doe@example.com"
+                            style="width: 100%"
+                        />
+                    </div>
+                    <div style="margin-bottom: var(--space)">
+                        <label
+                            for="subject"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                            >Subject</label
+                        >
+                        <select id="subject" style="width: 100%">
+                            <option>General Inquiry</option>
+                            <option>Typography Question</option>
+                            <option>Design Consultation</option>
+                            <option>Technical Support</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: var(--space)">
+                        <label
+                            for="message"
+                            style="
+                                display: block;
+                                margin-bottom: var(--space-xs);
+                                font-weight: var(--bold-weight);
+                            "
+                            >Message</label
+                        >
+                        <textarea
+                            id="message"
+                            placeholder="Tell us about your project or question..."
+                            style="
+                                width: 100%;
+                                height: calc(var(--space-l) * 3);
+                            "
+                        ></textarea>
+                    </div>
+                    <div style="margin-bottom: var(--space)">
+                        <fieldset
+                            style="
+                                border: 1px solid var(--color-border);
+                                border-radius: var(--border-radius);
+                                padding: var(--space-s);
+                            "
+                        >
+                            <legend
+                                style="
+                                    padding: 0 var(--space-xs);
+                                    font-weight: var(--bold-weight);
+                                "
+                            >
+                                Preferred Contact Method
+                            </legend>
+                            <div
+                                style="
+                                    display: flex;
+                                    gap: var(--space);
+                                    flex-wrap: wrap;
+                                "
+                            >
+                                <label
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        gap: var(--space-xs);
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        name="contact-method"
+                                        value="email"
+                                        checked
+                                    />
+                                    Email
+                                </label>
+                                <label
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        gap: var(--space-xs);
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        name="contact-method"
+                                        value="phone"
+                                    />
+                                    Phone
+                                </label>
+                                <label
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        gap: var(--space-xs);
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        name="contact-method"
+                                        value="either"
+                                    />
+                                    Either
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            gap: var(--space);
+                            flex-wrap: wrap;
+                        "
+                    >
+                        <button type="submit">Send Message</button>
+                        <button
+                            type="reset"
+                            style="
+                                background: var(--color-background-secondary);
+                                color: var(--color-foreground);
+                                border: 1px solid var(--color-border);
+                            "
+                        >
+                            Clear Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div
+                class="demo-title"
+                style="margin-top: var(--space-xl); font-size: var(--scale)"
+            >
+                Button Variants
+            </div>
+
+            <div class="visual-example">
+                <div
+                    style="
+                        display: flex;
+                        gap: var(--space);
+                        flex-wrap: wrap;
+                        align-items: center;
+                        margin-bottom: var(--space);
+                    "
+                >
+                    <button>Primary Button</button>
+                    <button
+                        style="
+                            background: var(--color-background-secondary);
+                            color: var(--color-foreground);
+                            border: 1px solid var(--color-border);
+                        "
+                    >
+                        Secondary
+                    </button>
+                    <button
+                        style="
+                            background: transparent;
+                            color: var(--color-accent);
+                            border: 1px solid var(--color-accent);
+                        "
+                    >
+                        Outline
+                    </button>
+                    <button
+                        style="
+                            background: transparent;
+                            color: var(--color-foreground);
+                            border: none;
+                            text-decoration: underline;
+                        "
+                    >
+                        Link Style
+                    </button>
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        gap: var(--space);
+                        flex-wrap: wrap;
+                        align-items: center;
+                        margin-bottom: var(--space);
+                    "
+                >
+                    <button
+                        style="
+                            background: var(--color-green);
+                            color: white;
+                            border: none;
+                        "
+                    >
+                        Success
+                    </button>
+                    <button
+                        style="
+                            background: var(--color-red);
+                            color: white;
+                            border: none;
+                        "
+                    >
+                        Danger
+                    </button>
+                    <button
+                        style="
+                            background: var(--color-orange);
+                            color: white;
+                            border: none;
+                        "
+                    >
+                        Warning
+                    </button>
+                    <button
+                        style="
+                            background: var(--color-blue);
+                            color: white;
+                            border: none;
+                        "
+                    >
+                        Info
+                    </button>
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        gap: var(--space);
+                        flex-wrap: wrap;
+                        align-items: center;
+                    "
+                >
+                    <button
+                        style="
+                            padding: var(--space-xs) var(--space-s);
+                            font-size: var(--scale-xs);
+                        "
+                    >
+                        Small
+                    </button>
+                    <button>Regular</button>
+                    <button
+                        style="
+                            padding: var(--space-s) var(--space);
+                            font-size: var(--scale-l);
+                        "
+                    >
+                        Large
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Utilities Section -->
+        <section id="utilities" class="demo-section line-width-normal">
+            <div class="demo-title">Utility Classes</div>
+
+            <h4>Flow and Stack Utilities</h4>
+            <div class="visual-example flow">
+                <div class="demo-box">Flow item 1</div>
+                <div class="demo-box">Flow item 2 - automatic spacing</div>
+                <div class="demo-box">Flow item 3</div>
+            </div>
+
+            <h4>Text Utilities</h4>
+            <div class="visual-example">
+                <p class="small">Small text (.small)</p>
+                <p class="smaller">Smaller text (.smaller)</p>
+                <p class="muted">Muted text (.muted)</p>
+                <p class="compact">Compact line height (.compact)</p>
+            </div>
+
+            <h4>Rhythm Debugging</h4>
+            <div class="code-example">
+                &lt;div class="grid-debug"&gt; &lt;!-- Shows baseline grid
+                overlay --&gt;
+            </div>
+            <p class="small">
+                Use <code>.grid-debug</code> to visualize the baseline grid and
+                see how elements align to the rhythm system. This utility shows
+                repeating horizontal lines at <code>--space</code> intervals and
+                outlines all elements to help debug spacing issues.
+            </p>
+
+            <div
+                class="visual-example grid-debug"
+                style="min-height: 200px; padding: var(--space)"
+            >
+                <h3>Debug Mode Active</h3>
+                <p>
+                    This container has <code>.grid-debug</code> applied. Notice
+                    the horizontal baseline grid lines and element outlines that
+                    help visualize spacing alignment.
+                </p>
+                <p>
+                    All vertical spacing should align to these grid lines for
+                    proper rhythm consistency.
+                </p>
+            </div>
+        </section>
+
+        <!-- Book Layout vs Prose Section -->
+        <section id="book-layout" class="demo-section">
+            <div class="demo-title">Book Layout System</div>
+            <p>
+                The framework now includes <code>.book</code> as an elegant
+                alternative to <code>.prose</code>, using print design
+                terminology:
+            </p>
+
+            <div class="code-example">
+                &lt;article class="book rhythm"&gt; &lt;div
+                class="standard"&gt;...&lt;/div&gt; &lt;div
+                class="bleed"&gt;...&lt;/div&gt; &lt;/article&gt;
+            </div>
+
+            <div class="visual-example">
+                <article class="book rhythm" style="padding: var(--space)">
+                    <h2>Book Layout Demonstration</h2>
+                    <p>
+                        The main text sits in the default content area,
+                        following optimal reading width principles established
+                        by centuries of book design.
+                    </p>
+
+                    <div class="standard">
+                        <h4>Standard Notes</h4>
+                        <p>
+                            This content sits in the "standard" - traditional
+                            print terminology for the margin space, now
+                            repurposed for sidebar content.
+                        </p>
+                    </div>
+
+                    <div class="bleed">
+                        <div>
+                            <h4>Full Bleed Content</h4>
+                            <p>
+                                This content "bleeds" to the edges, using print
+                                terminology for content that extends beyond the
+                                normal page margins.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div
+                style="
+                    margin-top: var(--space-l);
+                    padding: var(--space);
+                    background: var(--color-background-secondary);
+                    border-radius: var(--border-radius);
+                "
+            >
+                <h4>Print Design Terminology</h4>
+                <p class="small">
+                    <strong>.book:</strong> Main layout container (alternative
+                    to .prose)<br />
+                    <strong>.standard:</strong> Sidebar space (print term for
+                    space between columns)<br />
+                    <strong>.content:</strong> Main content area with reading
+                    margins<br />
+                    <strong>.bleed:</strong> Full-width content extending to
+                    edges (print term)
+                </p>
+            </div>
+        </section>
+
+        <!-- Markdown Section -->
+        <section id="markdown" class="demo-section line-width-normal">
+            <div class="demo-title">Markdown Enhancements</div>
+            <p>Enhanced styling for markdown content:</p>
+            <div class="code-example">
+                &lt;article class="book rhythm md"&gt;
+            </div>
+
+            <div class="visual-example">
+                <article class="book rhythm md">
+                    <h2>Enhanced Markdown Article</h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. This demonstrates how the framework
+                        handles substantial markdown content with proper
+                        typography, rhythm, and enhanced components. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris
+                        nisi ut aliquip ex ea commodo consequat.
+                    </p>
+
+                    <div class="callout" data-callout="note">
+                        <div class="callout-title">Important Note</div>
+                        <div class="callout-content">
+                            <p>
+                                Callouts provide enhanced visual hierarchy for
+                                important information. Sed ut perspiciatis unde
+                                omnis iste natus error sit voluptatem
+                                accusantium doloremque laudantium, totam rem
+                                aperiam, eaque ipsa quae ab illo inventore
+                                veritatis et quasi architecto beatae vitae dicta
+                                sunt explicabo.
+                            </p>
+                            <p>
+                                Nemo enim ipsam voluptatem quia voluptas sit
+                                aspernatur aut odit aut fugit, sed quia
+                                consequuntur magni dolores eos qui ratione
+                                voluptatem sequi nesciunt.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p>
+                        Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                        Regular markdown content flows naturally with
+                        <strong>bold formatting</strong> and
+                        <em>italic emphasis</em> that maintain proper color
+                        relationships within the design system.
+                    </p>
+
+                    <h3>Subsection with Enhanced Content</h3>
+
+                    <p>
+                        But I must explain to you how all this mistaken idea of
+                        denouncing pleasure and praising pain was born and I
+                        will give you a complete account of the system, and
+                        expound the actual teachings of the great explorer of
+                        the truth, the master-builder of human happiness. No one
+                        rejects, dislikes, or avoids pleasure itself, because it
+                        is pleasure, but because those who do not know how to
+                        pursue pleasure rationally encounter consequences that
+                        are extremely painful.
+                    </p>
+
+                    <div class="callout" data-callout="warning">
+                        <div class="callout-title">Important Warning</div>
+                        <div class="callout-content">
+                            <p>
+                                Warning callouts use different colors to convey
+                                urgency and draw attention to critical
+                                information. Nor again is there anyone who loves
+                                or pursues or desires to obtain pain of itself,
+                                because it is pain, but because occasionally
+                                circumstances occur in which toil and pain can
+                                procure him some great pleasure.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p>
+                        To take a trivial example, which of us ever undertakes
+                        laborious physical exercise, except to obtain some
+                        advantage from it? But who has any right to find fault
+                        with a man who chooses to enjoy a pleasure that has no
+                        annoying consequences, or one who avoids a pain that
+                        produces no resultant pleasure?
+                    </p>
+
+                    <blockquote>
+                        "On the other hand, we denounce with righteous
+                        indignation and dislike men who are so beguiled and
+                        demoralized by the charms of pleasure of the moment, so
+                        blinded by desire, that they cannot foresee the pain and
+                        trouble that are bound to ensue; and equal blame belongs
+                        to those who fail in their duty through weakness of
+                        will, which is the same as saying through shrinking from
+                        toil and pain."
+                    </blockquote>
+
+                    <p>
+                        These cases are perfectly simple and easy to
+                        distinguish. In a free hour, when our power of choice is
+                        untrammelled and when nothing prevents our being able to
+                        do what we like best, every pleasure is to be welcomed
+                        and every pain avoided.
+                    </p>
+
+                    <pre><code>// Code blocks maintain proper spacing and typography
+function demonstrateCodeBlock() {
+    const example = "This shows how code integrates within the content flow";
+    const spacing = "maintaining proper rhythm and readability";
+    return `${example} while ${spacing}`;
+}</code></pre>
+
+                    <p>
+                        But in certain circumstances and owing to the claims of
+                        duty or the obligations of business it will frequently
+                        occur that pleasures have to be repudiated and
+                        annoyances accepted. The wise man therefore always holds
+                        in these matters to this principle of selection: he
+                        rejects pleasures to secure other greater pleasures, or
+                        else he endures pains to avoid worse pains.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer
+            class="line-width-normal"
+            style="
+                text-align: center;
+                margin-top: var(--space-xxxl);
+                padding: var(--space-xl);
+            "
+        >
+            <h3>Standard Framework</h3>
+            <p class="muted">
+                A fine-art typography framework implementing classical design
+                principles, mathematical precision, and micro-typography rules
+                inspired by print mastery.
+            </p>
+            <div style="margin-top: var(--space-l); font-size: var(--scale-s)">
+                <p><strong>Fine-Art Features:</strong></p>
+                <ul
+                    class="nobullet"
+                    style="text-align: left; max-width: 500px; margin: 0 auto"
+                >
+                    <li>Golden ratio & mathematical precision</li>
+                    <li>Book layout system with print terminology</li>
+                    <li>Vertical rhythm based on 1rlh</li>
+                    <li>Micro-typography JavaScript engine</li>
+                    <li>Smart quotes & widow prevention</li>
+                    <li>French typography conventions</li>
+                    <li>Classical typographic hierarchy</li>
+                    <li>Swiss-style grid system</li>
+                </ul>
+            </div>
+
+            <div
+                style="
+                    margin-top: var(--space-l);
+                    padding: var(--space);
+                    background: var(--color-background-secondary);
+                    border-radius: var(--border-radius);
+                "
+            >
+                <h4>Typography Engine Demo</h4>
+                <p style="font-size: var(--scale-s)">
+                    This text demonstrates the JavaScript typography engine.
+                    Notice the "smart quotes", proper em—dashes, and ellipsis...
+                    The engine also prevents widows and adds non-breaking spaces
+                    before two letter words like "of the framework".
+                </p>
+                <script>
+                    // Load and demonstrate the typography engine
+                    if (typeof StandardTypography !== "undefined") {
+                        const demo = document.querySelector(
+                            'footer p[style*="scale-s"]',
+                        );
+                        if (demo) {
+                            const typography = new StandardTypography({
+                                enableSmartQuotes: true,
+                                enablePunctuation: true,
+                                enableWidowPrevention: true,
+                            });
+                            typography.processElement(demo);
+                        }
+                    }
+                </script>
+            </div>
+        </footer>
+
+        <!-- Load Standard JavaScript -->
+        <script src="../dist/standard.js"></script>
+
+        <!-- System Theme Detection and Management -->
+        <script>
+            // Theme state management
+            let currentThemeMode = "auto"; // "auto", "light", "dark"
+
+            // Theme management system
+            function initializeThemeSystem() {
+                // Check for saved preference or default to auto (system)
+                const savedTheme = localStorage.getItem("theme") || "auto";
+                currentThemeMode = savedTheme;
+
+                // Apply theme based on current mode
+                applyTheme(currentThemeMode);
+
+                // Listen for system theme changes
+                window
+                    .matchMedia("(prefers-color-scheme: dark)")
+                    .addEventListener("change", (e) => {
+                        // Only auto-switch if in auto mode
+                        if (currentThemeMode === "auto") {
+                            console.log(
+                                `🔄 System theme changed: ${e.matches ? "dark" : "light"} (mode: ${currentThemeMode})`,
+                            );
+                            applySystemTheme(e.matches);
+                        } else {
+                            console.log(
+                                `⏸️ System theme changed but ignoring (mode: ${currentThemeMode})`,
+                            );
+                        }
+                    });
+
+                console.log(
+                    `🎨 Theme system initialized. Mode: ${currentThemeMode}, Applied: ${document.documentElement.classList.contains("dark") ? "dark" : "light"}`,
+                );
+            }
+
+            // Apply theme based on mode
+            function applyTheme(mode) {
+                switch (mode) {
+                    case "dark":
+                        document.documentElement.classList.add("dark");
+                        break;
+                    case "light":
+                        document.documentElement.classList.remove("dark");
+                        break;
+                    case "auto":
+                        applySystemTheme(
+                            window.matchMedia("(prefers-color-scheme: dark)")
+                                .matches,
+                        );
+                        break;
+                }
+            }
+
+            // Apply system theme preference
+            function applySystemTheme(prefersDark) {
+                const wasAlreadyDark =
+                    document.documentElement.classList.contains("dark");
+                if (prefersDark) {
+                    document.documentElement.classList.add("dark");
+                    console.log(
+                        `🌙 System preference: dark mode - applied .dark class (was already dark: ${wasAlreadyDark})`,
+                    );
+                } else {
+                    document.documentElement.classList.remove("dark");
+                    console.log(
+                        `☀️ System preference: light mode - removed .dark class (was already dark: ${wasAlreadyDark})`,
+                    );
+                }
+            }
+
+            // Enhanced toggle function with 3-way cycling: light → dark → auto
+            function toggleTheme() {
+                const beforeToggle = {
+                    mode: currentThemeMode,
+                    hasClass:
+                        document.documentElement.classList.contains("dark"),
+                    systemPrefers: window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches,
+                };
+
+                switch (currentThemeMode) {
+                    case "light":
+                        currentThemeMode = "dark";
+                        localStorage.setItem("theme", "dark");
+                        console.log("🌙 Manually switched to dark mode");
+                        break;
+                    case "dark":
+                        currentThemeMode = "auto";
+                        localStorage.setItem("theme", "auto");
+                        console.log(
+                            "🔄 Switched to auto mode (follows system)",
+                        );
+                        break;
+                    case "auto":
+                    default:
+                        currentThemeMode = "light";
+                        localStorage.setItem("theme", "light");
+                        console.log("☀️ Manually switched to light mode");
+                        break;
+                }
+
+                console.log(
+                    `🔍 Toggle debug - Before: mode=${beforeToggle.mode}, hasClass=${beforeToggle.hasClass}, system=${beforeToggle.systemPrefers}`,
+                );
+                applyTheme(currentThemeMode);
+
+                const afterToggle = {
+                    mode: currentThemeMode,
+                    hasClass:
+                        document.documentElement.classList.contains("dark"),
+                    systemPrefers: window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches,
+                };
+                console.log(
+                    `🔍 Toggle debug - After: mode=${afterToggle.mode}, hasClass=${afterToggle.hasClass}, system=${afterToggle.systemPrefers}`,
+                );
+
+                updateButtonText();
+            }
+
+            // Update button text to show current mode
+            function updateButtonText() {
+                const button = document.querySelector(
+                    'button[onclick="toggleTheme()"]',
+                );
+                if (button) {
+                    const isDark =
+                        document.documentElement.classList.contains("dark");
+                    const modeText =
+                        currentThemeMode === "auto" ? " (Auto)" : "";
+                    button.textContent = `Switch to ${isDark ? "Light" : "Dark"} Mode${modeText}`;
+                }
+            }
+
+            // Get current theme info
+            function getThemeInfo() {
+                return {
+                    mode: currentThemeMode,
+                    applied: document.documentElement.classList.contains("dark")
+                        ? "dark"
+                        : "light",
+                    systemPrefers: window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches
+                        ? "dark"
+                        : "light",
+                };
+            }
+
+            // Initialize theme system immediately
+            initializeThemeSystem();
+
+            // Update button text on load
+            document.addEventListener("DOMContentLoaded", updateButtonText);
+        </script>
+
+        <!-- Standard JavaScript Load Test -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (typeof StandardTypography !== "undefined") {
+                    console.log("✅ StandardTypography loaded successfully");
+
+                    // Initialize with safe settings that exclude navigation
+                    const typography = new StandardTypography({
+                        enableSmartQuotes: true,
+                        enablePunctuation: true,
+                        excludeSelectors: "nav, .nav, [role='navigation']",
+                        watchThemeChanges: true,
+                        reprocessOnThemeChange: false,
+                        debug: true,
+                    });
+
+                    // Listen for theme changes
+                    document.addEventListener(
+                        "standard:themechange",
+                        function (e) {
+                            console.log(
+                                `🎨 Standard.js detected theme change to ${e.detail.isDark ? "dark" : "light"} mode`,
+                            );
+                        },
+                    );
+
+                    // Log initial theme
+                    console.log(
+                        `🎨 Standard.js theme: ${typography.getCurrentTheme()} mode`,
+                    );
+
+                    // Test basic functionality
+                    const testElement = document.createElement("div");
+                    testElement.innerHTML = 'Test "quotes" and -- dashes...';
+                    typography.processElement(testElement);
+
+                    if (
+                        testElement.innerHTML.includes('"') &&
+                        testElement.innerHTML.includes("—")
+                    ) {
+                        console.log(
+                            "✅ Typography processing working correctly",
+                        );
+                    } else {
+                        console.warn(
+                            "⚠️ Typography processing may not be working",
+                        );
+                    }
+                } else {
+                    console.error("❌ StandardTypography failed to load");
+                }
+            });
+        </script>
+    </body>
+</html>

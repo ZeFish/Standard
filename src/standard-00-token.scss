@@ -1,0 +1,73 @@
+/* Primitive Design Tokens - Foundation layer only */
+
+:root {
+    /* Base measurements & ratios - the foundation of everything else */
+    --font-size: 1rem;
+    /* Golden Ratio & Mathematical Precision */
+    --ratio-golden: 1.618;
+    --ratio-wholestep: 1.618;
+    --ratio-halfstep: 1.272; /* sqrt of golden ratio */
+    --ratio-quarterstep: 1.128;
+    --ratio-eighthstep: 1.062;
+
+    /* Current ratio (configurable) */
+    --font-ratio: var(--ratio-golden);
+    --font-density: 1.4;
+    --font-density-s: 1.2;
+
+    /* Modular Scale - calculated from font-ratio */
+    --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
+    --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
+    --scale: var(--font-size);
+    --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 1));
+    --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
+    --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+
+    /* Base rhythm unit */
+    --marge: 1rlh;
+    --marge-block: 1;
+    --marge-gap: 0.25;
+
+    /* Spacing Scale - based on rhythm unit */
+    --space-xxxs: calc(var(--marge) / 5);
+    --space-xxs: calc(var(--marge) / 4);
+    --space-xs: calc(var(--marge) / 3);
+    --space-s: calc(var(--marge) / 2);
+    --space: var(--marge);
+    --space-l: calc(2 * var(--marge));
+    --space-xl: calc(3 * var(--marge));
+    --space-xxl: calc(4 * var(--marge));
+    --space-xxxl: calc(5 * var(--marge));
+
+    /* Derived spacing tokens */
+    --space-gap: calc(var(--marge) * var(--marge-gap));
+    --space-block: calc(var(--marge) * var(--marge-block));
+    --space-negative: calc(var(--marge) * -1);
+
+    /* Base border properties */
+    --hr-thickness: 1px;
+    --border-radius: var(--space-xxs);
+
+    /* Z-index scale */
+    --z-base: 1;
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-offcanvas: 1050;
+    --z-modal: 1060;
+    --z-popover: 1070;
+    --z-tooltip: 1080;
+    --z-toast: 1090;
+    --z-image-zoom: 9999;
+
+    /* Animation scale */
+    --duration-superfast: 0.15s;
+    --duration-fast: 0.25s;
+    --duration-normal: 0.35s;
+    --duration-slow: 0.5s;
+
+    --motion-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --motion-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

@@ -1,50 +1,18 @@
-/* -= Image Galery =- */
+/* Image Styles - Works with both .prose (layout) and .rhythm (spacing) */
 
 img {
     max-width: 100%;
 }
 
-article:not(.no-grid) {
-    p:has(img) {
-        display: flex;
-        gap: var(--space-gap);
-        border-radius: var(--border-radius);
-    }
-
-    /* img[width] { border:0;margin:auto !important; } */
-
+.prose,
+.rhythm {
+    /* Basic image styling */
     * + img,
     img,
     img:first-child,
     img:last-child {
         margin: 0;
         border: var(--border);
-    }
-
-    p:has(img) > * {
-        flex: 1 1 auto;
-        min-width: 1%;
-        min-height: 1%;
-        object-fit: cover;
-    }
-    p:has(video) > * {
-        flex: 1 1 auto;
-        min-width: 1%;
-        min-height: 1%;
-        object-fit: cover;
-    }
-    p:has(img) img,
-    p:has(img) img:first-child,
-    p:has(img) img:last-child {
-        margin-inline: auto;
-    }
-    p:has(img) br {
-        display: none;
-    }
-
-    .callout p:has(img),
-    .callout p:has(img) br {
-        display: block;
     }
 
     img {
@@ -56,6 +24,7 @@ article:not(.no-grid) {
             opacity 0.2s,
             filter 0.2s;
     }
+
     img:hover,
     img.zoomed {
         mix-blend-mode: normal;
@@ -66,7 +35,7 @@ article:not(.no-grid) {
     img.zoomed {
         cursor: zoom-out;
         display: block;
-        z-index: 9999999;
+        z-index: var(--z-image-zoom);
         position: fixed;
         max-height: 88vh;
         max-width: 88vw;
@@ -83,8 +52,11 @@ article:not(.no-grid) {
     }
 }
 
-article :has(img:active)::before,
-article :has(img.zoomed)::before {
+/* Zoom overlay backgrounds */
+.prose :has(img:active)::before,
+.prose :has(img.zoomed)::before,
+.rhythm :has(img:active)::before,
+.rhythm :has(img.zoomed)::before {
     content: "";
     position: fixed;
     top: 0;
@@ -92,12 +64,5 @@ article :has(img.zoomed)::before {
     right: 0;
     bottom: 0;
     background: var(--color-background);
-    z-index: 9999991;
-}
-
-html:has(p img.zoomed) .logo {
-    position: fixed;
-    bottom: var(--space);
-    right: var(--space);
-    z-index: 9999992;
+    z-index: calc(var(--z-image-zoom) - 100);
 }

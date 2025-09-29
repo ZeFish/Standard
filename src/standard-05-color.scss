@@ -1,0 +1,211 @@
+/* Color Design Tokens */
+:root {
+    color-scheme: light dark;
+
+    /* Base colors */
+    --color-light-background: white;
+    --color-light-foreground: rgba(0, 0, 0, 0.85);
+    --color-dark-background: black;
+    --color-dark-foreground: rgba(255, 255, 255, 0.85);
+
+    /* 🌞 Light Mode Colors (natural, paper-like, analog-inspired) */
+    --color-light-red: #b14c42; /* dusty red clay */
+    --color-light-orange: #d78a5a; /* trail-worn orange */
+    --color-light-yellow: #c8a840; /* parchment mustard */
+    --color-light-green: #5e9d80; /* sage green */
+    --color-light-cyan: #6ba4b6; /* glacier teal */
+    --color-light-blue: #4f81a4; /* faded blueprint */
+    --color-light-purple: #7a6c91; /* dusk lavender */
+    --color-light-pink: #b97aa0; /* vintage mauve rose */
+
+    --color-light-accent: var(--color-light-yellow);
+    --color-light-header: inherit;
+    --color-light-bold: inherit;
+    --color-light-italic: inherit;
+
+    /* 🌙 Dark Mode Colors (soft-glow, night-usable, retro tech) */
+    --color-dark-red: #db6057; /* ember red */
+    --color-dark-orange: #e58f5c; /* lantern orange */
+    --color-dark-yellow: #dcb757; /* candlelight gold */
+    --color-dark-green: #74ba98; /* forest mint glow */
+    --color-dark-cyan: #7db9c8; /* creek frost */
+    --color-dark-blue: #6d96b8; /* twilight blueprint */
+    --color-dark-purple: #a18db6; /* smoky violet dusk */
+    --color-dark-pink: #d49ab8; /* faded polaroid blush */
+
+    --color-dark-accent: var(--color-dark-yellow);
+    --color-dark-header: inherit;
+    --color-dark-bold: inherit;
+    --color-dark-italic: inherit;
+
+    /* Current theme colors - default to light mode */
+    --color-background: var(--color-light-background);
+    --color-foreground: var(--color-light-foreground);
+
+    --color-red: var(--color-light-red);
+    --color-orange: var(--color-light-orange);
+    --color-yellow: var(--color-light-yellow);
+    --color-green: var(--color-light-green);
+    --color-cyan: var(--color-light-cyan);
+    --color-blue: var(--color-light-blue);
+    --color-purple: var(--color-light-purple);
+    --color-pink: var(--color-light-pink);
+
+    --color-accent: var(--color-light-accent);
+    --color-header: var(--color-light-header);
+    --color-bold: var(--color-light-bold);
+    --color-italic: var(--color-light-italic);
+
+    /* Computed colors based on theme */
+    --color-muted: var(
+        --color-light-muted,
+        color-mix(in srgb, var(--color-foreground) 50%, var(--color-background))
+    );
+
+    --color-border: var(
+        --light-border-color,
+        color-mix(in srgb, var(--color-foreground) 10%, var(--color-background))
+    );
+
+    --color-background-secondary: var(
+        --color-light-background-secondary,
+        color-mix(
+            in srgb,
+            var(--color-foreground) 2.5%,
+            var(--color-background)
+        )
+    );
+
+    /* Border tokens */
+    --border: var(--hr-thickness) solid var(--color-border);
+
+    /* Shadow tokens */
+    --shadow: 0 0 var(--space-xxs) 0px var(--color-border);
+}
+
+/* Dark mode overrides */
+.dark {
+    --color-background: var(--color-dark-background);
+    --color-foreground: var(--color-dark-foreground);
+
+    /* Switch to dark mode colors */
+    --color-red: var(--color-dark-red);
+    --color-orange: var(--color-dark-orange);
+    --color-yellow: var(--color-dark-yellow);
+    --color-green: var(--color-dark-green);
+    --color-cyan: var(--color-dark-cyan);
+    --color-blue: var(--color-dark-blue);
+    --color-purple: var(--color-dark-purple);
+    --color-pink: var(--color-dark-pink);
+
+    --color-accent: var(--color-dark-accent);
+    --color-header: var(--color-dark-header);
+    --color-bold: var(--color-dark-bold);
+    --color-italic: var(--color-dark-italic);
+
+    /* Dark mode specific computed colors */
+    --color-background-secondary: var(
+        --color-dark-background-secondary,
+        color-mix(in srgb, var(--color-foreground) 7%, var(--color-background))
+    );
+
+    --color-border: var(
+        --dark-border-color,
+        color-mix(in srgb, var(--color-background) 90%, var(--color-accent))
+    );
+
+    --color-muted: var(
+        --color-dark-muted,
+        color-mix(in srgb, var(--color-foreground) 40%, var(--color-background))
+    );
+
+    --shadow: 0 0 var(--space-xxs) 0px
+        color-mix(in srgb, var(--color-background) 50%, transparent);
+}
+
+/* Selection highlighting for both modes */
+.dark ::selection,
+::selection {
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+/* -= Base HTML Color Application =- */
+html {
+    color: var(--color-foreground);
+    background: var(--color-background);
+}
+
+.muted {
+    color: var(--color-muted);
+}
+/*
+blockquote,
+.callout-content,
+.callout-title {
+    color: color-mix(in srgb, currentColor 80%, var(--color-background));
+}
+
+.callout-content a,
+.callout-title a {
+    color: color-mix(in srgb, var(--color-accent) 80%, var(--color-background));
+}
+
+.callout-content em {
+    color: color-mix(in srgb, var(--color-italic) 80%, var(--color-background));
+}
+
+.callout-content strong {
+    color: color-mix(in srgb, var(--color-bold) 80%, var(--color-background));
+}
+*/
+// ==========================
+// Links Management
+// ==========================
+a,
+a:active,
+a:visited {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--color-foreground) 50%,
+        var(--color-background)
+    );
+    white-space: normal;
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.25s ease;
+}
+a:hover {
+    color: var(--color-accent);
+    text-decoration-color: color-mix(
+        in srgb,
+        var(--color-accent) 90%,
+        var(--color-background)
+    );
+}
+
+strong {
+    color: var(--color-bold);
+}
+em {
+    color: var(--color-italic);
+}
+
+hr,
+hr:only-child {
+    background: var(--color-border);
+}
+
+table {
+    --border-width: 1px;
+    --border-opacity: 1;
+    --color-border: unset;
+}
+
+mark {
+    color: var(--color-foreground);
+    background-color: color-mix(in srgb, var(--color-background));
+}

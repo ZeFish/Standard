@@ -1,3 +1,7 @@
+/node_modules
+RELEASE-READY.md
+PUBLISHING.md
+.DS_Store
 .sass-cache/
 *.css.map
 *.sass.map
