@@ -18,10 +18,10 @@ npm install @zefish/standard
 
 ```html
 <!-- Include the Standard CSS -->
-<link rel="stylesheet" href="https://unpkg.com/@zefish/standard@0.1.3/dist/standard.css">
+<link rel="stylesheet" href="https://unpkg.com/@zefish/standard/min">
 
 <!-- Include the Standard JavaScript -->
-<script src="https://unpkg.com/@zefish/standard@0.1.3/dist/standard.js"></script>
+<script src="https://unpkg.com/@zefish/standard/js"></script>
 ```
 
 ## Philosophy
@@ -58,7 +58,7 @@ Golden Ratio System:
 
 Vertical Rhythm: 1rlh (root line height)
 ├── --space-xxxs: marge ÷ 5    (Fine details)
-├── --space-xxs:  marge ÷ 4    (Micro spacing)  
+├── --space-xxs:  marge ÷ 4    (Micro spacing)
 ├── --space-xs:   marge ÷ 3    (Small spacing)
 ├── --space-s:    marge ÷ 2    (Half rhythm)
 ├── --space:      marge        (1 rhythm unit) ← FOUNDATION
@@ -140,14 +140,14 @@ Combining book layout, rhythm, and typography engine:
 <article class="book rhythm">
   <h1>Fine-Art Article</h1>
   <p>Content with mathematical spacing and micro-typography.</p>
-  
+
   <div class="standard">
     <h3>Marginal Notes</h3>
     <p>Traditional print design sidebar placement.</p>
   </div>
-  
+
   <blockquote>"Enhanced quotes with smart typography"</blockquote>
-  
+
   <div class="bleed">
     <h2>Full-Width Feature</h2>
     <p>Content extending to edges like print bleeds.</p>
@@ -265,7 +265,7 @@ Standard uses **distributed design tokens** organized by domain for better maint
 
 ### Token Organization
 - **`standard-00-token.scss`** - Mathematical ratios, golden ratio system
-- **`standard-01-grid.scss`** - Swiss-style grid system 
+- **`standard-01-grid.scss`** - Swiss-style grid system
 - **`standard-02-prose.scss`** - Book layout system + print terminology
 - **`standard-03-typography.scss`** - Fine-art typography + OpenType features
 - **`standard-04-rhythm.scss`** - Baseline grid + vertical rhythm
@@ -276,7 +276,7 @@ Standard uses **distributed design tokens** organized by domain for better maint
 ```
 src/
 ├── standard-00-token.scss     # Mathematical ratios, golden ratio system
-├── standard-01-grid.scss      # Swiss-style grid system 
+├── standard-01-grid.scss      # Swiss-style grid system
 ├── standard-02-prose.scss     # Book layout system + print terminology
 ├── standard-03-typography.scss # Fine-art typography + OpenType features
 ├── standard-04-rhythm.scss    # Baseline grid + vertical rhythm

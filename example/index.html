@@ -18,7 +18,7 @@
                 border: var(--border);
                 border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
-                scroll-margin-top: calc(var(--space) * 8);
+                scroll-margin-top: calc(var(--space) * 9);
                 background: var(--color-background-secondary);
             }
 
@@ -191,12 +191,12 @@
             style="
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
+                align-items: flex-start;
             "
         >
             <div>
                 <h1 style="margin: 0">Standard<br />Framework</h1>
-                <p class="small muted compact">
+                <p class="small compact" style="margin-top: var(--space)">
                     A fine-art typography framework implementing classical
                     design principles, mathematical precision with the golden
                     ratio, and micro-typography rules inspired by the masters of
@@ -890,6 +890,17 @@
                     </div>
                     <div
                         style="
+                            background: var(--color-cyan);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Cyan</strong><br />
+                        var(--color-cyan)
+                    </div>
+                    <div
+                        style="
                             background: var(--color-blue);
                             color: white;
                             padding: var(--space);
@@ -909,6 +920,17 @@
                     >
                         <strong>Purple</strong><br />
                         var(--color-purple)
+                    </div>
+                    <div
+                        style="
+                            background: var(--color-pink);
+                            color: white;
+                            padding: var(--space);
+                            border-radius: var(--border-radius);
+                        "
+                    >
+                        <strong>Pink</strong><br />
+                        var(--color-pink)
                     </div>
                 </div>
 
@@ -1911,6 +1933,8 @@ function demonstrateCodeBlock() {
                     padding: var(--space);
                     background: var(--color-background-secondary);
                     border-radius: var(--border-radius);
+                    border: var(--border);
+                    box-shadow: var(--shadow);
                 "
             >
                 <h4>Typography Engine Demo</h4>
@@ -1941,218 +1965,5 @@ function demonstrateCodeBlock() {
 
         <!-- Load Standard JavaScript -->
         <script src="../dist/standard.js"></script>
-
-        <!-- System Theme Detection and Management -->
-        <script>
-            // Theme state management
-            let currentThemeMode = "auto"; // "auto", "light", "dark"
-
-            // Theme management system
-            function initializeThemeSystem() {
-                // Check for saved preference or default to auto (system)
-                const savedTheme = localStorage.getItem("theme") || "auto";
-                currentThemeMode = savedTheme;
-
-                // Apply theme based on current mode
-                applyTheme(currentThemeMode);
-
-                // Listen for system theme changes
-                window
-                    .matchMedia("(prefers-color-scheme: dark)")
-                    .addEventListener("change", (e) => {
-                        // Only auto-switch if in auto mode
-                        if (currentThemeMode === "auto") {
-                            console.log(
-                                `🔄 System theme changed: ${e.matches ? "dark" : "light"} (mode: ${currentThemeMode})`,
-                            );
-                            applySystemTheme(e.matches);
-                        } else {
-                            console.log(
-                                `⏸️ System theme changed but ignoring (mode: ${currentThemeMode})`,
-                            );
-                        }
-                    });
-
-                console.log(
-                    `🎨 Theme system initialized. Mode: ${currentThemeMode}, Applied: ${document.documentElement.classList.contains("dark") ? "dark" : "light"}`,
-                );
-            }
-
-            // Apply theme based on mode
-            function applyTheme(mode) {
-                switch (mode) {
-                    case "dark":
-                        document.documentElement.classList.add("dark");
-                        break;
-                    case "light":
-                        document.documentElement.classList.remove("dark");
-                        break;
-                    case "auto":
-                        applySystemTheme(
-                            window.matchMedia("(prefers-color-scheme: dark)")
-                                .matches,
-                        );
-                        break;
-                }
-            }
-
-            // Apply system theme preference
-            function applySystemTheme(prefersDark) {
-                const wasAlreadyDark =
-                    document.documentElement.classList.contains("dark");
-                if (prefersDark) {
-                    document.documentElement.classList.add("dark");
-                    console.log(
-                        `🌙 System preference: dark mode - applied .dark class (was already dark: ${wasAlreadyDark})`,
-                    );
-                } else {
-                    document.documentElement.classList.remove("dark");
-                    console.log(
-                        `☀️ System preference: light mode - removed .dark class (was already dark: ${wasAlreadyDark})`,
-                    );
-                }
-            }
-
-            // Enhanced toggle function with 3-way cycling: light → dark → auto
-            function toggleTheme() {
-                const beforeToggle = {
-                    mode: currentThemeMode,
-                    hasClass:
-                        document.documentElement.classList.contains("dark"),
-                    systemPrefers: window.matchMedia(
-                        "(prefers-color-scheme: dark)",
-                    ).matches,
-                };
-
-                switch (currentThemeMode) {
-                    case "light":
-                        currentThemeMode = "dark";
-                        localStorage.setItem("theme", "dark");
-                        console.log("🌙 Manually switched to dark mode");
-                        break;
-                    case "dark":
-                        currentThemeMode = "auto";
-                        localStorage.setItem("theme", "auto");
-                        console.log(
-                            "🔄 Switched to auto mode (follows system)",
-                        );
-                        break;
-                    case "auto":
-                    default:
-                        currentThemeMode = "light";
-                        localStorage.setItem("theme", "light");
-                        console.log("☀️ Manually switched to light mode");
-                        break;
-                }
-
-                console.log(
-                    `🔍 Toggle debug - Before: mode=${beforeToggle.mode}, hasClass=${beforeToggle.hasClass}, system=${beforeToggle.systemPrefers}`,
-                );
-                applyTheme(currentThemeMode);
-
-                const afterToggle = {
-                    mode: currentThemeMode,
-                    hasClass:
-                        document.documentElement.classList.contains("dark"),
-                    systemPrefers: window.matchMedia(
-                        "(prefers-color-scheme: dark)",
-                    ).matches,
-                };
-                console.log(
-                    `🔍 Toggle debug - After: mode=${afterToggle.mode}, hasClass=${afterToggle.hasClass}, system=${afterToggle.systemPrefers}`,
-                );
-
-                updateButtonText();
-            }
-
-            // Update button text to show current mode
-            function updateButtonText() {
-                const button = document.querySelector(
-                    'button[onclick="toggleTheme()"]',
-                );
-                if (button) {
-                    const isDark =
-                        document.documentElement.classList.contains("dark");
-                    const modeText =
-                        currentThemeMode === "auto" ? " (Auto)" : "";
-                    button.textContent = `Switch to ${isDark ? "Light" : "Dark"} Mode${modeText}`;
-                }
-            }
-
-            // Get current theme info
-            function getThemeInfo() {
-                return {
-                    mode: currentThemeMode,
-                    applied: document.documentElement.classList.contains("dark")
-                        ? "dark"
-                        : "light",
-                    systemPrefers: window.matchMedia(
-                        "(prefers-color-scheme: dark)",
-                    ).matches
-                        ? "dark"
-                        : "light",
-                };
-            }
-
-            // Initialize theme system immediately
-            initializeThemeSystem();
-
-            // Update button text on load
-            document.addEventListener("DOMContentLoaded", updateButtonText);
-        </script>
-
-        <!-- Standard JavaScript Load Test -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                if (typeof StandardTypography !== "undefined") {
-                    console.log("✅ StandardTypography loaded successfully");
-
-                    // Initialize with safe settings that exclude navigation
-                    const typography = new StandardTypography({
-                        enableSmartQuotes: true,
-                        enablePunctuation: true,
-                        excludeSelectors: "nav, .nav, [role='navigation']",
-                        watchThemeChanges: true,
-                        reprocessOnThemeChange: false,
-                        debug: true,
-                    });
-
-                    // Listen for theme changes
-                    document.addEventListener(
-                        "standard:themechange",
-                        function (e) {
-                            console.log(
-                                `🎨 Standard.js detected theme change to ${e.detail.isDark ? "dark" : "light"} mode`,
-                            );
-                        },
-                    );
-
-                    // Log initial theme
-                    console.log(
-                        `🎨 Standard.js theme: ${typography.getCurrentTheme()} mode`,
-                    );
-
-                    // Test basic functionality
-                    const testElement = document.createElement("div");
-                    testElement.innerHTML = 'Test "quotes" and -- dashes...';
-                    typography.processElement(testElement);
-
-                    if (
-                        testElement.innerHTML.includes('"') &&
-                        testElement.innerHTML.includes("—")
-                    ) {
-                        console.log(
-                            "✅ Typography processing working correctly",
-                        );
-                    } else {
-                        console.warn(
-                            "⚠️ Typography processing may not be working",
-                        );
-                    }
-                } else {
-                    console.error("❌ StandardTypography failed to load");
-                }
-            });
-        </script>
     </body>
 </html>
