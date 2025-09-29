@@ -129,7 +129,7 @@ svg {
 
 h1 {
     font-weight: var(--font-weight-h1);
-    font-size: clamp(var(--scale-xl), 5vw, var(--scale-xxxl));
+    font-size: clamp(var(--scale-xxl), 5vw, var(--scale-xxxl));
 }
 
 h2 {
@@ -211,7 +211,7 @@ button {
     font-family: var(--font-interface), system-ui, sans-serif;
     font-size: var(--scale-s);
     font-weight: var(--font-weight);
-    line-height: 1.2;
+    line-height: var(--font-density);
 
     padding: var(--space-xs) var(--space-s);
     border: none;
@@ -232,7 +232,8 @@ button {
     }
 
     &:focus-visible {
-        outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+        outline: 1px solid
+            color-mix(in srgb, var(--color-accent) 50%, transparent);
     }
 }
 
@@ -243,7 +244,7 @@ textarea {
     font-family: var(--font-interface), system-ui, sans-serif;
     font-size: var(--scale-s);
     font-weight: var(--font-weight);
-    line-height: 1.2;
+    line-height: var(--font-density);
 
     padding: var(--space-xs) var(--space-s);
     border: 1px solid var(--color-border);

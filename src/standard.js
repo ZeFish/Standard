@@ -424,16 +424,16 @@ class StandardTypography {
   constructor(options = {}) {
     this.options = {
       locale: "en",
-      enableWidowPrevention: true,
-      enableSmartQuotes: true,
-      enablePunctuation: true,
-      enableSpacing: true,
-      enableLigatures: true,
-      debug: false,
-      autoProcess: true,
+      enableWidowPrevention: false,
+      enableSmartQuotes: false,
+      enablePunctuation: false,
+      enableSpacing: false,
+      enableLigatures: false,
+      debug: true,
+      autoProcess: false,
       excludeSelectors: "nav, .nav, [role='navigation']",
       excludeFromWidows: "h1, h2, h3, h4, h5, h6",
-      watchThemeChanges: true,
+      watchThemeChanges: false,
       reprocessOnThemeChange: false,
       ...options,
     };
@@ -587,10 +587,30 @@ class StandardTypography {
   processElement(element) {
     // Skip if already processed to prevent cumulative changes
     if (element.hasAttribute("data-typography-processed")) {
+      if (this.options.debug) {
+        console.log(
+          "StandardTypography: Skipping already processed element",
+          element,
+        );
+      }
       return;
     }
 
-    let text = element.innerHTML;
+    // Store original content before first processing
+    this.storeOriginalContent(element);
+
+    // Store original text for comparison
+    const originalText = element.innerHTML;
+    let text = originalText;
+
+    if (this.options.debug) {
+      console.log(
+        "StandardTypography: Processing element",
+        element,
+        "Original:",
+        originalText.substring(0, 50) + "...",
+      );
+    }
 
     if (this.options.enablePunctuation) {
       text = this.fixPunctuation(text);
@@ -614,7 +634,17 @@ class StandardTypography {
       text = this.preventWidows(text);
     }
 
-    element.innerHTML = text;
+    // Only update if text actually changed
+    if (text !== originalText) {
+      if (this.options.debug) {
+        console.log("StandardTypography: Text changed, updating element");
+      }
+      element.innerHTML = text;
+    } else {
+      if (this.options.debug) {
+        console.log("StandardTypography: No changes made to text");
+      }
+    }
 
     // Mark as processed to prevent reprocessing
     element.setAttribute("data-typography-processed", "true");
@@ -871,45 +901,33 @@ class StandardTypography {
    * Insert non-breaking space before two-letter words at line endings
    */
   preventWidows(text) {
-    // Prevent widow: non-breaking space before last word (only if not already present)
-    const nbspRegex = new RegExp(
-      `(?!${this.rules.nonBreakingSpace})\\s+(\\S+)\\s*$`,
-      "g",
-    );
+    // Check if text already contains non-breaking spaces to prevent double processing
+    if (text.includes(this.rules.nonBreakingSpace)) {
+      return text; // Already processed
+    }
+
+    // Prevent widow: non-breaking space before last word
+    const nbspRegex = /\s+(\S+)\s*$/;
     text = text.replace(nbspRegex, `${this.rules.nonBreakingSpace}$1`);
 
-    // Prevent orphan prepositions and articles (2-letter words) - only if not already processed
-    const twoLetterWords = new RegExp(
-      `\\s+(a|an|at|be|by|do|go|he|if|in|is|it|me|my|no|of|on|or|so|to|up|us|we|un|le|la|et|ou|où|à|de|en|ce|ça|il|on|je|tu|me|te|se|ne|y|ci|là)(?!${this.rules.nonBreakingSpace})\\s+`,
-      "gi",
-    );
+    // Prevent orphan prepositions and articles (2-letter words)
+    const twoLetterWords =
+      /\s+(a|an|at|be|by|do|go|he|if|in|is|it|me|my|no|of|on|or|so|to|up|us|we|un|le|la|et|ou|où|à|de|en|ce|ça|il|on|je|tu|me|te|se|ne|y|ci|là)\s+/gi;
     text = text.replace(twoLetterWords, ` $1${this.rules.nonBreakingSpace}`);
 
-    // Prevent breaking on common short words and phrases - only if not already processed
-    const commonPhrases = [
-      new RegExp(
-        `\\s+(Mr|Mrs|Ms|Dr|Prof|St)\\.(?!${this.rules.nonBreakingSpace})\\s+`,
-        "gi",
-      ),
-      new RegExp(
-        `\\s+(\\d+)(?!${this.rules.nonBreakingSpace})\\s+(am|pm|AM|PM)\\s+`,
-        "gi",
-      ),
-      new RegExp(
-        `\\s+(\\d+)(?!${this.rules.nonBreakingSpace})\\s+(st|nd|rd|th)\\s+`,
-        "gi",
-      ),
-    ];
-
-    commonPhrases.forEach((pattern, index) => {
-      text = text.replace(pattern, (match, p1, p2) => {
-        if (index === 0) {
-          return ` ${p1}.${this.rules.nonBreakingSpace}`;
-        } else {
-          return ` ${p1}${this.rules.nonBreakingSpace}${p2} `;
-        }
-      });
-    });
+    // Prevent breaking on common short words and phrases
+    text = text.replace(
+      /\s+(Mr|Mrs|Ms|Dr|Prof|St)\.\s+/gi,
+      ` $1.${this.rules.nonBreakingSpace}`,
+    );
+    text = text.replace(
+      /\s+(\d+)\s+(am|pm|AM|PM)\s+/gi,
+      ` $1${this.rules.nonBreakingSpace}$2 `,
+    );
+    text = text.replace(
+      /\s+(\d+)\s+(st|nd|rd|th)\s+/gi,
+      ` $1${this.rules.nonBreakingSpace}$2 `,
+    );
 
     return text;
   }
@@ -941,6 +959,8 @@ class StandardTypography {
         `StandardTypography: Refreshing (theme: ${this.getCurrentTheme()})`,
       );
     }
+    // Restore original content and reprocess to prevent cumulative changes
+    this.restoreAllOriginalContent();
     this.process();
   }
 
@@ -953,6 +973,39 @@ class StandardTypography {
     );
     processedElements.forEach((element) => {
       element.removeAttribute("data-typography-processed");
+    });
+  }
+
+  /**
+   * Store original text content before processing
+   */
+  storeOriginalContent(element) {
+    if (!element.hasAttribute("data-original-content")) {
+      element.setAttribute("data-original-content", element.innerHTML);
+    }
+  }
+
+  /**
+   * Restore original text content
+   */
+  restoreOriginalContent(element) {
+    const original = element.getAttribute("data-original-content");
+    if (original) {
+      element.innerHTML = original;
+      element.removeAttribute("data-original-content");
+      element.removeAttribute("data-typography-processed");
+    }
+  }
+
+  /**
+   * Restore original content for all processed elements
+   */
+  restoreAllOriginalContent() {
+    const processedElements = document.querySelectorAll(
+      "[data-typography-processed]",
+    );
+    processedElements.forEach((element) => {
+      this.restoreOriginalContent(element);
     });
   }
 
@@ -1021,6 +1074,350 @@ class StandardTypography {
 }
 
 // ========================================
+// READING LAYOUT DEBUG SYSTEM
+// ========================================
+
+class StandardReadingDebug {
+  constructor(options = {}) {
+    this.options = {
+      debug: false,
+      keyboardShortcuts: true,
+      infoPanel: true,
+      defaultMode: "off", // 'off', 'rhythm', 'columns', 'both'
+      ...options,
+    };
+
+    this.currentMode = this.options.defaultMode;
+    this.isInitialized = false;
+    this.shortcuts = {
+      rhythm: "KeyR",
+      columns: "KeyC",
+      both: "KeyB",
+      off: "Escape",
+    };
+
+    this.init();
+  }
+
+  /**
+   * Initialize the debug system
+   */
+  init() {
+    if (this.isInitialized) return;
+
+    if (this.options.keyboardShortcuts) {
+      this.setupKeyboardShortcuts();
+    }
+
+    this.isInitialized = true;
+
+    if (this.options.debug) {
+      console.log("StandardReadingDebug: Initialized");
+    }
+  }
+
+  /**
+   * Setup keyboard shortcuts for debug modes
+   */
+  setupKeyboardShortcuts() {
+    document.addEventListener("keydown", (e) => {
+      // Only activate when Ctrl/Cmd + Shift + [key]
+      if (!(e.ctrlKey || e.metaKey) || !e.shiftKey) return;
+
+      let newMode = null;
+
+      switch (e.code) {
+        case this.shortcuts.rhythm:
+          newMode = this.currentMode === "rhythm" ? "off" : "rhythm";
+          break;
+        case this.shortcuts.columns:
+          newMode = this.currentMode === "columns" ? "off" : "columns";
+          break;
+        case this.shortcuts.both:
+          newMode = this.currentMode === "both" ? "off" : "both";
+          break;
+        case this.shortcuts.off:
+          newMode = "off";
+          break;
+      }
+
+      if (newMode !== null) {
+        e.preventDefault();
+        this.setDebugMode(newMode);
+      }
+    });
+  }
+
+  /**
+   * Set debug mode for all .reading elements
+   */
+  setDebugMode(mode) {
+    const readingElements = document.querySelectorAll(".reading");
+
+    readingElements.forEach((element) => {
+      // Remove all debug classes
+      element.classList.remove("reading-debug", "reading-debug-columns");
+
+      // Add appropriate debug classes
+      switch (mode) {
+        case "rhythm":
+          element.classList.add("reading-debug");
+          break;
+        case "columns":
+          element.classList.add("reading-debug-columns");
+          break;
+        case "both":
+          element.classList.add("reading-debug", "reading-debug-columns");
+          break;
+        case "off":
+        default:
+          // Classes already removed
+          break;
+      }
+    });
+
+    const oldMode = this.currentMode;
+    this.currentMode = mode;
+
+    if (this.options.debug) {
+      console.log(
+        `StandardReadingDebug: Mode changed from "${oldMode}" to "${mode}"`,
+      );
+    }
+
+    // Dispatch debug mode change event
+    this.dispatchDebugEvent(mode, oldMode);
+
+    // Show temporary notification
+    this.showModeNotification(mode);
+  }
+
+  /**
+   * Dispatch debug mode change event
+   */
+  dispatchDebugEvent(newMode, oldMode) {
+    if (typeof CustomEvent === "undefined") return;
+
+    document.dispatchEvent(
+      new CustomEvent("standard:readingdebug", {
+        detail: {
+          mode: newMode,
+          oldMode: oldMode,
+          isActive: newMode !== "off",
+          showsRhythm: newMode === "rhythm" || newMode === "both",
+          showsColumns: newMode === "columns" || newMode === "both",
+        },
+      }),
+    );
+  }
+
+  /**
+   * Show temporary notification of mode change
+   */
+  showModeNotification(mode) {
+    // Remove existing notification if present
+    const existing = document.getElementById("standard-debug-notification");
+    if (existing) {
+      existing.remove();
+    }
+
+    const notifications = {
+      off: "📖 Reading Debug: Off",
+      rhythm: "📏 Reading Debug: Vertical Rhythm",
+      columns: "📐 Reading Debug: Column Layout",
+      both: "🔍 Reading Debug: Full Layout",
+    };
+
+    const notification = document.createElement("div");
+    notification.id = "standard-debug-notification";
+    notification.textContent = notifications[mode];
+
+    // Style the notification
+    Object.assign(notification.style, {
+      position: "fixed",
+      top: "20px",
+      right: "20px",
+      background: "var(--color-accent, #007acc)",
+      color: "var(--color-background, white)",
+      padding: "12px 16px",
+      borderRadius: "var(--border-radius, 4px)",
+      fontSize: "14px",
+      fontFamily: "var(--font-interface, system-ui)",
+      fontWeight: "500",
+      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+      zIndex: "var(--z-toast, 1090)",
+      transform: "translateX(100%)",
+      transition: "transform 0.3s ease",
+    });
+
+    document.body.appendChild(notification);
+
+    // Animate in
+    requestAnimationFrame(() => {
+      notification.style.transform = "translateX(0)";
+    });
+
+    // Auto-remove after 2 seconds
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.style.transform = "translateX(100%)";
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 300);
+      }
+    }, 2000);
+  }
+
+  /**
+   * Toggle debug mode (cycle through modes)
+   */
+  toggleDebugMode() {
+    const modes = ["off", "rhythm", "columns", "both"];
+    const currentIndex = modes.indexOf(this.currentMode);
+    const nextIndex = (currentIndex + 1) % modes.length;
+    this.setDebugMode(modes[nextIndex]);
+  }
+
+  /**
+   * Get current debug info
+   */
+  getDebugInfo() {
+    return {
+      mode: this.currentMode,
+      isActive: this.currentMode !== "off",
+      showsRhythm: this.currentMode === "rhythm" || this.currentMode === "both",
+      showsColumns:
+        this.currentMode === "columns" || this.currentMode === "both",
+      shortcuts: {
+        rhythm: `Ctrl/Cmd + Shift + R`,
+        columns: `Ctrl/Cmd + Shift + C`,
+        both: `Ctrl/Cmd + Shift + B`,
+        off: `Escape`,
+      },
+    };
+  }
+
+  /**
+   * Create debug control buttons
+   */
+  createDebugControls(options = {}) {
+    const config = {
+      container: null,
+      className: "reading-debug-controls",
+      ...options,
+    };
+
+    const container = document.createElement("div");
+    container.className = config.className;
+
+    // Style the container
+    Object.assign(container.style, {
+      display: "flex",
+      gap: "8px",
+      padding: "8px",
+      background: "var(--color-background-secondary, #f5f5f5)",
+      borderRadius: "var(--border-radius, 4px)",
+      border: "1px solid var(--color-border, #ddd)",
+      fontSize: "14px",
+      fontFamily: "var(--font-interface, system-ui)",
+    });
+
+    const buttons = [
+      { mode: "off", text: "📖 Off", title: "Turn off debug mode" },
+      {
+        mode: "rhythm",
+        text: "📏 Rhythm",
+        title: "Show vertical rhythm lines",
+      },
+      { mode: "columns", text: "📐 Columns", title: "Show column boundaries" },
+      { mode: "both", text: "🔍 Both", title: "Show rhythm and columns" },
+    ];
+
+    buttons.forEach(({ mode, text, title }) => {
+      const button = document.createElement("button");
+      button.textContent = text;
+      button.title = title;
+      button.className = "debug-mode-button";
+
+      Object.assign(button.style, {
+        padding: "6px 12px",
+        border: "1px solid var(--color-border, #ccc)",
+        borderRadius: "var(--border-radius, 4px)",
+        background: "var(--color-background, white)",
+        color: "var(--color-foreground, black)",
+        cursor: "pointer",
+        fontSize: "inherit",
+        fontFamily: "inherit",
+      });
+
+      button.addEventListener("click", () => {
+        this.setDebugMode(mode);
+        this.updateButtonStates(container);
+      });
+
+      container.appendChild(button);
+    });
+
+    // Update initial button states
+    this.updateButtonStates(container);
+
+    // Append to specified container if provided
+    if (config.container) {
+      const targetContainer =
+        typeof config.container === "string"
+          ? document.querySelector(config.container)
+          : config.container;
+
+      if (targetContainer) {
+        targetContainer.appendChild(container);
+      }
+    }
+
+    return container;
+  }
+
+  /**
+   * Update button states to show current mode
+   */
+  updateButtonStates(container) {
+    const buttons = container.querySelectorAll(".debug-mode-button");
+    const modes = ["off", "rhythm", "columns", "both"];
+
+    buttons.forEach((button, index) => {
+      const isActive = modes[index] === this.currentMode;
+      button.style.background = isActive
+        ? "var(--color-accent, #007acc)"
+        : "var(--color-background, white)";
+      button.style.color = isActive
+        ? "var(--color-background, white)"
+        : "var(--color-foreground, black)";
+    });
+  }
+
+  /**
+   * Cleanup debug system
+   */
+  destroy() {
+    // Turn off all debug modes
+    this.setDebugMode("off");
+
+    // Remove notification if present
+    const notification = document.getElementById("standard-debug-notification");
+    if (notification) {
+      notification.remove();
+    }
+
+    this.isInitialized = false;
+
+    if (this.options.debug) {
+      console.log("StandardReadingDebug: Destroyed");
+    }
+  }
+}
+
+// ========================================
 // AUTO-INITIALIZATION
 // ========================================
 
@@ -1031,17 +1428,34 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
   // Make classes available globally
   window.StandardTypography = StandardTypography;
   window.StandardTheme = StandardTheme;
+  window.StandardReadingDebug = StandardReadingDebug;
 
   // Auto-initialize theme system (no configuration needed)
   window.standardTheme = new StandardTheme();
 
-  // Auto-initialize typography system
-  window.standardTypography = new StandardTypography();
+  // Auto-initialize typography system with conservative settings
+  window.standardTypography = new StandardTypography({
+    autoProcess: false,
+    debug: false,
+    enableWidowPrevention: false,
+    enableSmartQuotes: false,
+    enablePunctuation: false,
+  });
+
+  // Auto-initialize reading debug system
+  window.standardReadingDebug = new StandardReadingDebug();
 
   // Create convenient global functions
   window.setTheme = (theme) => window.standardTheme.setTheme(theme);
   window.toggleTheme = () => window.standardTheme.toggleTheme();
   window.getTheme = () => window.standardTheme.getThemeInfo();
+
+  // Reading debug functions
+  window.setReadingDebug = (mode) =>
+    window.standardReadingDebug.setDebugMode(mode);
+  window.toggleReadingDebug = () =>
+    window.standardReadingDebug.toggleDebugMode();
+  window.getReadingDebug = () => window.standardReadingDebug.getDebugInfo();
 
   // Auto-create theme toggle if container exists
   document.addEventListener("DOMContentLoaded", () => {
@@ -1071,17 +1485,27 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
       "toggleTheme()": "Toggle between light and dark",
       "getTheme()": "Get current theme info",
     });
-    console.log("Keyboard shortcut: Ctrl/Cmd + Shift + D to toggle theme");
+    console.log("Reading Debug API:", {
+      "setReadingDebug(mode)": "Set debug mode: off, rhythm, columns, both",
+      "toggleReadingDebug()": "Cycle through debug modes",
+      "getReadingDebug()": "Get current debug info",
+    });
+    console.log("Keyboard shortcuts:");
+    console.log("• Ctrl/Cmd + Shift + D: Toggle theme");
+    console.log("• Ctrl/Cmd + Shift + R: Toggle vertical rhythm");
+    console.log("• Ctrl/Cmd + Shift + C: Toggle column layout");
+    console.log("• Ctrl/Cmd + Shift + B: Toggle both debug modes");
   }
 }
 
 // Export for module systems
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { StandardTypography, StandardTheme };
+  module.exports = { StandardTypography, StandardTheme, StandardReadingDebug };
 }
 
 // Export for ES6 modules
 if (typeof exports !== "undefined") {
   exports.StandardTypography = StandardTypography;
   exports.StandardTheme = StandardTheme;
+  exports.StandardReadingDebug = StandardReadingDebug;
 }

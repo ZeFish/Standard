@@ -152,7 +152,8 @@
     /* Blockquotes get more generous spacing */
     blockquote {
         margin-block-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
+            (var(--space-block-special) - var(--space)) *
+                var(--rhythm-multiplier)
         );
         margin-block-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
@@ -162,7 +163,8 @@
     /* Pre/code blocks need breathing room */
     pre {
         margin-block-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
+            (var(--space-block-special) - var(--space)) *
+                var(--rhythm-multiplier)
         );
         margin-block-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
@@ -172,7 +174,8 @@
     /* Figure spacing for visual hierarchy */
     figure {
         margin-block-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
+            (var(--space-block-special) - var(--space)) *
+                var(--rhythm-multiplier)
         );
         margin-block-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
@@ -182,7 +185,8 @@
     /* Paragraphs with images get special block spacing */
     p:has(img) {
         margin-block-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
+            (var(--space-block-special) - var(--space)) *
+                var(--rhythm-multiplier)
         );
         margin-block-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
@@ -192,7 +196,8 @@
     /* Callouts get special block spacing */
     .callout {
         margin-block-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
+            (var(--space-block-special) - var(--space)) *
+                var(--rhythm-multiplier)
         );
         margin-block-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
@@ -215,9 +220,11 @@
     }
 
     /* Form elements get consistent but nuanced spacing */
+    /* Form field groups - spacing only */
     fieldset {
         margin-block-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
+            (var(--space-block-special) - var(--space)) *
+                var(--rhythm-multiplier)
         );
         margin-block-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
@@ -290,9 +297,16 @@
     /* FORMS AND INTERACTIVE       */
     /* =========================== */
 
-    /* Form containers */
-    form {
+    /* Form containers - avoid nested grids */
+    form:not(.grid *) {
         display: grid;
+        gap: calc(var(--space-s) * var(--rhythm-multiplier));
+    }
+
+    /* Forms inside grids use flex layout to avoid nesting issues */
+    .grid form {
+        display: flex;
+        flex-direction: column;
         gap: calc(var(--space-s) * var(--rhythm-multiplier));
     }
 

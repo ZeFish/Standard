@@ -167,7 +167,7 @@
         );
         --color-border: color-mix(
             in srgb,
-            var(--color-foreground) 18%,
+            var(--color-foreground) 10%,
             var(--color-background)
         );
         --color-divider: color-mix(
@@ -465,6 +465,32 @@ button:active {
     background: var(--color-active);
 }
 
+/* Checkbox and radio button styling */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--color-accent);
+    outline: none;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    accent-color: var(--color-accent);
+}
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Remove outlines from specific toggle elements only */
+.toggle-btn:focus,
+.toggle-btn:focus-visible,
+[data-theme-toggle] button:focus,
+[data-theme-toggle] button:focus-visible {
+    outline: none;
+}
+
 /* Selection highlighting */
 ::selection {
     background: color-mix(in srgb, var(--color-accent) 25%, transparent);
@@ -475,25 +501,6 @@ button:active {
 /* RHYTHM ELEMENT COLORS       */
 /* =========================== */
 
-/* Color, border and visual properties for elements within rhythm containers */
-.rhythm {
-    /* Debug mode visualization */
-    background-image: repeating-linear-gradient(
-        0deg,
-        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent),
-        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent) 1px,
-        transparent 1px,
-        transparent calc(var(--space) * var(--rhythm-multiplier))
-    );
-    background-repeat: repeat-y;
-    background-size: 100% calc(var(--space) * var(--rhythm-multiplier));
-    background-position: 0 0.5px;
-
-    /* Nested rhythm debug reset */
-    .rhythm {
-        background-image: none;
-    }
-}
 /* Blockquote borders */
 blockquote {
     border-inline-start: calc(var(--space-xxs) * var(--rhythm-multiplier)) solid

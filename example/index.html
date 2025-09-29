@@ -16,7 +16,7 @@
 
             /* Minimal custom styles - using framework tokens */
             section {
-                max-width: var(--line-width-normal);
+                max-width: var(--line-width-xl);
                 margin-inline: auto;
                 background: var(--color-background-secondary);
                 border: var(--border);
@@ -177,12 +177,30 @@
                         rules inspired by the masters of print design.
                     </p>
                 </div>
-                <div style="display: flex; align-items: flex-start; gap: var(--space-l);">
+                <div style="display: none; align-items: flex-start; gap: var(--space-l);">
                     <!-- Theme Toggle Button Container -->
                     <div data-theme-toggle style="margin-block-start: var(--space-xs);"></div>
 
                     <nav class="smaller">
                         <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="#book-layout" class="nav-link"
+                                    >Reading Layout</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="#grid-system" class="nav-link"
+                                    >Grid System</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="#typography" class="nav-link"
+                                    >Typography</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="#colors" class="nav-link">Colors</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="#theme-system" class="nav-link">Theme System</a>
                             </li>
@@ -192,25 +210,7 @@
                                 >
                             </li>
                             <li class="nav-item">
-                                <a href="#grid-system" class="nav-link"
-                                    >Grid System</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#prose-layout" class="nav-link"
-                                    >Prose Layout</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#typography" class="nav-link"
-                                    >Typography</a
-                                >
-                            </li>
-                            <li class="nav-item">
                                 <a href="#rhythm" class="nav-link">Rhythm System</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#colors" class="nav-link">Colors</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#typography-engine" class="nav-link"
@@ -218,18 +218,7 @@
                                 >
                             </li>
                             <li class="nav-item">
-                                <a href="#book-layout" class="nav-link"
-                                    >Book Layout</a
-                                >
-                            </li>
-                            <li class="nav-item">
                                 <a href="#forms" class="nav-link">Forms</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#utilities" class="nav-link">Utilities</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#markdown" class="nav-link">Markdown</a>
                             </li>
                         </ul>
                     </nav>
@@ -237,125 +226,210 @@
             </div>
         </header>
 
-        <!-- Theme System Section -->
-        <section id="theme-system">
-            <h3>🌓 Automatic Theme System</h3>
-            <p>
-                The Standard Framework includes a zero-configuration theme system that automatically
-                detects your system preference and provides smooth light/dark mode switching.
+        <!-- Book Layout & Reading System Section -->
+        <section id="book-layout" class="reading md" style="max-width: var(--line-width-full);">
+            <h1>Reading Layout & Markdown System</h1>
+            <p class="lead">
+                The Standard framework includes sophisticated content layout with print design
+                principles, optimal reading widths, and comprehensive markdown support.
             </p>
 
-            <div class="visual-example">
-                <h4>Features</h4>
-                <ul>
-                    <li>🎯 <strong>Zero Configuration</strong> - Works automatically without setup</li>
-                    <li>🔄 <strong>System Preference Detection</strong> - Follows your OS dark/light mode</li>
-                    <li>💾 <strong>Preference Memory</strong> - Remembers your manual choice</li>
-                    <li>🖱️ <strong>Manual Override</strong> - Toggle manually when needed</li>
-                    <li>⚡ <strong>Smooth Transitions</strong> - Respects prefers-reduced-motion</li>
-                    <li>♿ <strong>Accessibility</strong> - Supports high-contrast and forced-colors</li>
-                    <li>🌐 <strong>Cross-tab Sync</strong> - Theme choice syncs across browser tabs</li>
-                </ul>
+            <h2>Typography & Reading Flow</h2>
+            <p>
+                This demonstration shows how the <code>.reading</code> class creates
+                <strong>optimal reading experiences</strong> with flexible layout areas.
+                The system is designed around <em>classical typography principles</em>
+                and book design traditions.
+            </p>
+
+            <blockquote>
+                "The good reader, the major reader, the active and creative reader is a rereader."
+                — Vladimir Nabokov
+            </blockquote>
+
+            <h3>Layout Areas</h3>
+            <p>
+                The reading system provides multiple content areas for flexible layout:
+            </p>
+
+            <ul>
+                <li><strong>Content:</strong> Default optimal reading width (42rem)</li>
+                <li><strong>Small:</strong> Narrower for side notes and asides</li>
+                <li><strong>Accent:</strong> Wider for pullquotes and highlights</li>
+                <li><strong>Feature:</strong> Even wider for images and media</li>
+                <li><strong>Full:</strong> Full container width for backgrounds</li>
+            </ul>
+
+            <div class="small">
+                <h4>Small Area Example</h4>
+                <p>
+                    This content appears in the <code>.small</code> area,
+                    perfect for supplementary information, footnotes,
+                    or sidebar content that doesn't need full width.
+                </p>
             </div>
 
+            <p>
+                The main content continues here in the default content area,
+                maintaining optimal line length for comfortable reading.
+            </p>
+
+            <div class="accent">
+                <h4>Accent Area for Emphasis</h4>
+                <p>
+                    The <code>.accent</code> area is perfect for pullquotes,
+                    highlighted content, or important information that
+                    deserves extra attention and breathing room.
+                </p>
+            </div>
+
+            <h3>Code and Technical Content</h3>
+            <p>Here's how code blocks integrate with the reading layout:</p>
+
+            <pre><code>&lt;article class="reading md"&gt;
+  &lt;h1&gt;Article Title&lt;/h1&gt;
+  &lt;p&gt;Main content in default area&lt;/p&gt;
+
+  &lt;div class="accent"&gt;
+    &lt;p&gt;Highlighted content&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="feature"&gt;
+    &lt;img src="wide-image.jpg" alt="Feature image" /&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+            <div class="feature">
+                <h4>Feature Area for Media</h4>
+                <div style="background: linear-gradient(135deg, var(--color-accent), var(--color-background-secondary)); height: 200px; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                    Wide Feature Content Area
+                </div>
+                <p style="text-align: center; margin-top: var(--space-s); font-size: var(--scale-xs); color: var(--color-muted);">
+                    This <code>.feature</code> area is ideal for images, videos, tables, or other wide content
+                </p>
+            </div>
+
+            <h3>Markdown Elements</h3>
+            <p>The <code>.md</code> class enhances markdown rendering with:</p>
+
+            <ol>
+                <li><strong>Smart typography</strong> with proper punctuation</li>
+                <li><strong>Callout boxes</strong> for special content</li>
+                <li><strong>Enhanced lists</strong> with better spacing</li>
+                <li><strong>Code syntax</strong> highlighting support</li>
+            </ol>
+
+            <div class="callout callout-info">
+                <div class="callout-title">💡 Pro Tip</div>
+                <p>
+                    Combine <code>.reading</code> and <code>.md</code> classes
+                    for the ultimate content presentation experience.
+                </p>
+            </div>
+
+            <div class="full">
+                <div style="background: var(--color-background-secondary); padding: var(--space); text-align: center; border-radius: var(--border-radius);">
+                    <h4>Full Width Section</h4>
+                    <p>
+                        The <code>.full</code> area extends to the complete container width,
+                        perfect for full-bleed backgrounds, wide tables, or spanning content.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Visual Debug System</h2>
+            <p>
+                Use the debug controls to visualize the vertical rhythm and column boundaries:
+            </p>
+
+            <div id="reading-debug-controls" style="margin-bottom: var(--space);"></div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space); margin: var(--space) 0;">
+                <div style="background: var(--color-background-secondary); padding: var(--space-s); border-radius: var(--border-radius); font-size: var(--scale-xs);">
+                    <strong>Keyboard Shortcuts:</strong><br>
+                    <kbd>Ctrl/Cmd + Shift + R</kbd> - Rhythm lines<br>
+                    <kbd>Ctrl/Cmd + Shift + C</kbd> - Column boundaries<br>
+                    <kbd>Ctrl/Cmd + Shift + B</kbd> - Both modes<br>
+                    <kbd>Escape</kbd> - Turn off debug
+                </div>
+                <div style="background: var(--color-background-secondary); padding: var(--space-s); border-radius: var(--border-radius); font-size: var(--scale-xs);">
+                    <strong>Debug Lines:</strong><br>
+                    <span style="color: var(--color-accent); font-weight: bold;">━━</span> Major rhythm (4×)<br>
+                    <span style="color: var(--color-accent); opacity: 0.6;">━━</span> Secondary rhythm (2×)<br>
+                    <span style="color: var(--color-accent); opacity: 0.3;">━━</span> Base rhythm (1×)<br>
+                    <span style="color: var(--color-accent); font-weight: bold;">│</span> Columns
+                </div>
+            </div>
+
+            <script>
+                // Create debug controls when page loads
+                document.addEventListener('DOMContentLoaded', function() {
+                    const controlsContainer = document.getElementById('reading-debug-controls');
+                    if (controlsContainer && window.standardReadingDebug) {
+                        window.standardReadingDebug.createDebugControls({
+                            container: controlsContainer
+                        });
+                    }
+                });
+            </script>
+
+            <h2>Typography Processing Demo</h2>
+            <p>Test the typography engine to see how it processes text:</p>
+
             <div class="visual-example">
-                <h4>Theme Controls & API</h4>
-                <p>The theme system provides multiple ways to control themes:</p>
-
-                <div class="grid">
-                    <div class="col-4">
-                        <h5>🖱️ Interactive</h5>
-                        <div id="theme-buttons" style="display: flex; gap: var(--space-s); flex-wrap: wrap;">
-                            <button onclick="if(typeof setTheme !== 'undefined') setTheme('light'); else console.warn('setTheme not available yet');" style="background: var(--color-background-secondary); border: var(--border); padding: var(--space-xs) var(--space-s); border-radius: var(--border-radius); cursor: pointer;">
-                                ☀️ Light
-                            </button>
-                            <button onclick="if(typeof setTheme !== 'undefined') setTheme('dark'); else console.warn('setTheme not available yet');" style="background: var(--color-background-secondary); border: var(--border); padding: var(--space-xs) var(--space-s); border-radius: var(--border-radius); cursor: pointer;">
-                                🌙 Dark
-                            </button>
-                            <button onclick="if(typeof setTheme !== 'undefined') setTheme('auto'); else console.warn('setTheme not available yet');" style="background: var(--color-background-secondary); border: var(--border); padding: var(--space-xs) var(--space-s); border-radius: var(--border-radius); cursor: pointer;">
-                                🔄 Auto
-                            </button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space); margin: var(--space) 0;">
+                    <div>
+                        <h4>Typography Test Text</h4>
+                        <div id="typography-test" style="background: var(--color-background-secondary); padding: var(--space); border-radius: var(--border-radius);">
+                            <p>This is a test of the typography system. It should prevent "widow words" and handle quotes like "smart quotes" and apostrophes like don't.</p>
+                            <p>It also handles common abbreviations like Dr. Smith and time like 3 PM.</p>
+                            <p>Special characters like em dashes -- and ellipses... should be converted.</p>
                         </div>
+                        <button onclick="toggleTypographyDemo()" style="margin-top: var(--space-xs);">Toggle Typography Processing</button>
                     </div>
-
-                    <div class="col-4">
-                        <h5>⌨️ Keyboard</h5>
-                        <div class="demo-box">
-                            <strong>Ctrl/Cmd + Shift + D</strong><br>
-                            <small>Toggle between light and dark</small>
+                    <div>
+                        <h4>Processing Info</h4>
+                        <div id="typography-info" style="background: var(--color-background-secondary); padding: var(--space); border-radius: var(--border-radius); font-family: monospace; font-size: var(--scale-xs);">
+                            Click button to see processing effects
                         </div>
-                    </div>
-
-                    <div class="col-4">
-                        <h5>🔧 JavaScript API</h5>
-                        <pre><code>setTheme('light')
-setTheme('dark')
-setTheme('auto')
-toggleTheme()
-getTheme()</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="visual-example">
-                <h4>Current Theme Info</h4>
-                <div id="theme-info" style="background: var(--color-background-secondary); padding: var(--space); border-radius: var(--border-radius); font-family: var(--font-monospace, monospace); font-size: var(--scale-s);">
-                    Loading theme information...
-                </div>
+            <script>
+                let typographyDemoProcessed = false;
 
-                <script>
-                    // Update theme info display
-                    function updateThemeInfo() {
-                        try {
-                            // Check if getTheme function is available
-                            if (typeof getTheme === 'undefined') {
-                                console.log('getTheme not yet available, retrying...');
-                                setTimeout(updateThemeInfo, 500);
-                                return;
-                            }
+                function toggleTypographyDemo() {
+                    const testElement = document.getElementById('typography-test');
+                    const infoElement = document.getElementById('typography-info');
 
-                            const info = getTheme();
-                            const display = document.getElementById('theme-info');
-                            if (display && info) {
-                                display.innerHTML = `
-Current: <strong>${info.current}</strong><br>
-Effective: <strong>${info.effective}</strong><br>
-User Preference: <strong>${info.user || 'auto'}</strong><br>
-System Preference: <strong>${info.system}</strong><br>
-Is Dark: <strong>${info.isDark}</strong><br>
-Is Light: <strong>${info.isLight}</strong><br>
-Is Auto: <strong>${info.isAuto}</strong>
-                                `;
-                            }
-                        } catch (error) {
-                            console.warn('Error updating theme info:', error);
-                            const display = document.getElementById('theme-info');
-                            if (display) {
-                                display.innerHTML = 'Theme system loading...';
-                            }
-                            // Retry after delay
-                            setTimeout(updateThemeInfo, 1000);
+                    if (!typographyDemoProcessed) {
+                        // Force processing
+                        if (window.standardTypography) {
+                            window.standardTypography.clearProcessedMarkers();
+                            window.standardTypography.processNewContent(testElement);
+                            infoElement.innerHTML = 'Typography processed:<br>• Smart quotes applied<br>• Non-breaking spaces added<br>• Em dashes converted<br>• Widow prevention active';
+                            typographyDemoProcessed = true;
                         }
+                    } else {
+                        // Reset to original
+                        const paragraphs = testElement.querySelectorAll('p');
+                        paragraphs.forEach(p => {
+                            if (p.hasAttribute('data-original-content')) {
+                                p.innerHTML = p.getAttribute('data-original-content');
+                                p.removeAttribute('data-original-content');
+                                p.removeAttribute('data-typography-processed');
+                            }
+                        });
+                        infoElement.innerHTML = 'Typography reset to original:<br>• Regular quotes restored<br>• Normal spaces restored<br>• Hyphens restored<br>• Original text layout';
+                        typographyDemoProcessed = false;
                     }
-
-                    // Update on theme changes
-                    document.addEventListener('standard:themechange', updateThemeInfo);
-
-                    // Wait for DOM and scripts to load before initial update
-                    document.addEventListener('DOMContentLoaded', function() {
-                        setTimeout(updateThemeInfo, 100);
-                    });
-
-                    // Fallback if already loaded
-                    if (document.readyState === 'complete') {
-                        setTimeout(updateThemeInfo, 100);
-                    }
-                </script>
-            </div>
+                }
+            </script>
         </section>
 
         <!-- Grid System Section -->
-        <section id="grid-system" class="centered">
+        <section id="grid-system">
             <h3>12-Column Grid System</h3>
             <pre><code>&lt;div class="grid"&gt;
   &lt;div class="col-6"&gt;...&lt;/div&gt;
@@ -400,7 +474,7 @@ Is Auto: <strong>${info.isAuto}</strong>
         </section>
 
         <!-- Design Tokens Section -->
-        <section id="design-tokens" class="centered">
+        <section id="design-tokens">
             <h3>Design Tokens</h3>
             <p>
                 The framework is built on a systematic approach to design tokens
@@ -446,7 +520,7 @@ Is Auto: <strong>${info.isAuto}</strong>
         </section>
 
         <!-- Typography Section -->
-        <section id="typography" class="centered">
+        <section id="typography">
             <h3>Typography System</h3>
             <p>Fine-art inspired typography with mathematical precision.</p>
 
@@ -507,7 +581,7 @@ Is Auto: <strong>${info.isAuto}</strong>
         </section>
 
         <!-- Bulletproof Rhythm Section -->
-        <section id="rhythm" class="centered">
+        <section id="rhythm">
             <h3>Bulletproof Rhythm System</h3>
             <p>
                 The enhanced rhythm system now handles ALL content types: typography, forms, media,
@@ -666,7 +740,7 @@ Is Auto: <strong>${info.isAuto}</strong>
         </section>
 
         <!-- Colors Section -->
-        <section id="colors" class="centered">
+        <section id="colors">
             <h3>Color System</h3>
             <p>Analog-inspired colors with automatic dark mode support.</p>
 
@@ -754,7 +828,7 @@ Is Auto: <strong>${info.isAuto}</strong>
         </section>
 
         <!-- Typography Engine Section -->
-        <section id="typography-engine" class="centered">
+        <section id="typography-engine">
             <h3>Typography Processing Engine</h3>
             <p>
                 Advanced typography features including smart quotes, ligatures,
@@ -827,7 +901,7 @@ Is Auto: <strong>${info.isAuto}</strong>
         </section>
 
         <!-- Forms Section -->
-        <section id="forms" class="centered">
+        <section id="forms">
             <h3>Form Elements</h3>
             <p>
                 Consistent form styling that integrates with the framework's
@@ -967,7 +1041,7 @@ Is Auto: <strong>${info.isAuto}</strong>
 
             <p>Form layout examples and variations...</p>
 
-            <p><strong>Two-column form example:</strong></p>
+            <p><strong>Form layout examples:</strong></p>
 
             <div class="visual-example">
                 <div class="grid">
@@ -1008,6 +1082,23 @@ Is Auto: <strong>${info.isAuto}</strong>
                             />
                         </div>
                         <div>
+                            <label
+                                for="contact-message"
+                                style="
+                                    display: block;
+                                    font-weight: var(--bold-weight);
+                                "
+                            >
+                                Message
+                            </label>
+                            <textarea
+                                id="contact-message"
+                                rows="4"
+                                placeholder="Your message here..."
+                                style="width: 100%"
+                            ></textarea>
+                        </div>
+                        <div>
                             <input type="checkbox" id="newsletter" />
                             <label for="newsletter"
                                 >Subscribe to newsletter</label
@@ -1031,39 +1122,22 @@ Is Auto: <strong>${info.isAuto}</strong>
 
                     <form class="col-6">
                         <h3>Registration Form</h3>
-                        <div class="grid">
-                            <div class="col-6">
-                                <label
-                                    for="first-name"
-                                    style="
-                                        display: block;
-                                        font-weight: var(--bold-weight);
-                                    "
-                                >
-                                    First Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="first-name"
-                                    style="width: 100%"
-                                />
-                            </div>
-                            <div class="col-6">
-                                <label
-                                    for="last-name"
-                                    style="
-                                        display: block;
-                                        font-weight: var(--bold-weight);
-                                    "
-                                >
-                                    Last Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="last-name"
-                                    style="width: 100%"
-                                />
-                            </div>
+                        <div>
+                            <label
+                                for="reg-name"
+                                style="
+                                    display: block;
+                                    font-weight: var(--bold-weight);
+                                "
+                            >
+                                Full Name
+                            </label>
+                            <input
+                                type="text"
+                                id="reg-name"
+                                placeholder="Enter your full name"
+                                style="width: 100%"
+                            />
                         </div>
                         <div>
                             <label
@@ -1078,6 +1152,7 @@ Is Auto: <strong>${info.isAuto}</strong>
                             <input
                                 type="email"
                                 id="reg-email"
+                                placeholder="your.email@example.com"
                                 style="width: 100%"
                             />
                         </div>
@@ -1092,28 +1167,12 @@ Is Auto: <strong>${info.isAuto}</strong>
                                 Country
                             </label>
                             <select id="country" style="width: 100%">
-                                <option>Select country...</option>
+                                <option>Select your country...</option>
                                 <option>United States</option>
                                 <option>Canada</option>
                                 <option>United Kingdom</option>
+                                <option>Australia</option>
                             </select>
-                        </div>
-                        <div>
-                            <label
-                                for="bio"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Biography
-                            </label>
-                            <textarea
-                                id="bio"
-                                rows="3"
-                                placeholder="Tell us about yourself..."
-                                style="width: 100%"
-                            ></textarea>
                         </div>
                         <div>
                             <fieldset>
@@ -1140,84 +1199,47 @@ Is Auto: <strong>${info.isAuto}</strong>
                                 </div>
                             </fieldset>
                         </div>
+                        <div>
+                            <button type="submit">Create Account</button>
+                        </div>
                     </form>
                 </div>
             </div>
-        </section>
-
-        <!-- Book Layout Section -->
-        <section id="book-layout" class="centered">
-            <h3>Book Layout System</h3>
-            <p>
-                The framework includes the <code>.reading</code>
-                class for sophisticated content layout with print design
-                terminology and flexible layout areas:
-            </p>
-
-            <pre><code>&lt;article class="reading"&gt;
-  &lt;div class="content"&gt;...&lt;/div&gt;
-  &lt;div class="small"&gt;...&lt;/div&gt;
-  &lt;div class="accent"&gt;...&lt;/div&gt;
-  &lt;div class="feature"&gt;...&lt;/div&gt;
-  &lt;div class="full"&gt;...&lt;/div&gt;
-&lt;/article&gt;</code></pre>
-
-            <div class="visual-example">
-                <article class="reading">
-                    <h2>Reading Layout Demonstration</h2>
-                    <p>
-                        The main text sits in the default content area,
-                        following optimal reading width principles.
-                    </p>
-
-                    <div class="small">
-                        <h4>Small Area</h4>
-                        <p>
-                            Narrower than content, perfect for side notes
-                            or supplementary information.
-                        </p>
-                    </div>
-
-                    <div class="accent">
-                        <h4>Accent Area</h4>
-                        <p>
-                            Wider than content, good for pullquotes
-                            or highlighted content.
-                        </p>
-                    </div>
-
-                    <div class="feature">
-                        <h4>Feature Area</h4>
-                        <p>
-                            Even wider, perfect for images, tables,
-                            or featured content blocks.
-                        </p>
-                    </div>
-
-                    <div class="full">
-                        <div style="background: var(--color-background-secondary); padding: var(--space); text-align: center; border-radius: var(--border-radius);">
-                            <h4>Full Width</h4>
-                            <p>
-                                Extends to the full container width, like full-bleed
-                                images or background sections.
-                            </p>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <div class="visual-example">
-                <h4>Layout Area Reference</h4>
-                <p>
-                    <strong>.reading:</strong> Main layout container with flexible content areas<br />
-                    <strong>.content:</strong> Default content area with optimal reading width<br />
-                    <strong>.small:</strong> Narrower area, --space smaller on each side<br />
-                    <strong>.accent:</strong> Wider area for pullquotes and highlights<br />
-                    <strong>.feature:</strong> Even wider for images and featured content<br />
-                    <strong>.full:</strong> Full container width for backgrounds and bleeds
-                </p>
-            </div>
-        </section>
+                            <li class="nav-item">
+                                <a href="#book-layout" class="nav-link"
+                                    >Reading Layout</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="#grid-system" class="nav-link">Grid System</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#typography" class="nav-link">Typography</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#colors" class="nav-link">Colors</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#theme-system" class="nav-link">Theme System</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#design-tokens" class="nav-link"
+                                    >Design Tokens</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="#rhythm" class="nav-link"
+                                    >Rhythm System</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a href="#forms" class="nav-link">Forms</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#typography-engine" class="nav-link"
+                                    >Typography Engine</a
+                                >
+                            </li>
 
         <!-- Load Standard Framework JavaScript -->
         <script src="../dist/standard.js"></script>
