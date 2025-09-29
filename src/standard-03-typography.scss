@@ -49,11 +49,11 @@
         var(--font-weight)
     );
     --font-weight-h5: max(
-        calc(var(--font-header-weight) * 0.5),
+        calc(var(--font-header-weight) * 0.8),
         var(--font-weight)
     );
     --font-weight-h6: max(
-        calc(var(--font-header-weight) * 0.5),
+        calc(var(--font-header-weight) * 0.75),
         var(--font-weight)
     );
 
@@ -152,14 +152,12 @@ h5 {
     font-weight: var(--font-weight-h5);
     font-size: var(--scale-l);
     line-height: var(--line-height);
-    letter-spacing: 0em;
 }
 
 h6 {
     font-weight: var(--font-weight-h6);
     font-size: var(--scale-l);
     line-height: var(--line-height);
-    letter-spacing: 0em;
 }
 
 // Utility text sizes

@@ -6,6 +6,12 @@
         <title>Standard Framework - Fine-Art Typography Demo</title>
         <link rel="stylesheet" href="../dist/standard.css" />
         <style>
+            @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+            body {
+                --font-text: Inter;
+                --font-header: Fraunces;
+                --font-monospace: "Source Code Pro";
+            }
             .demo-section {
                 margin-bottom: var(--space-xxxl);
                 padding: var(--space);
@@ -14,13 +20,6 @@
                 box-shadow: var(--shadow);
                 scroll-margin-top: calc(var(--space) * 8);
                 background: var(--color-background-secondary);
-            }
-
-            .demo-title {
-                font-size: var(--scale-l);
-                font-weight: var(--bold-weight);
-                margin-bottom: var(--space);
-                color: var(--color-accent);
             }
 
             .code-example {
@@ -57,37 +56,18 @@
                 box-shadow: inset var(--shadow);
             }
 
-            .token-showcase {
-                display: grid;
-                gap: var(--space);
-                margin: var(--space) 0;
-            }
-
-            .token-item {
-                padding: var(--space-s);
-                background: var(--color-background);
-                border: var(--border);
-                border-radius: var(--border-radius);
-                font-family: var(--font-monospace);
-                font-size: var(--scale-xs);
-                box-shadow: inset var(--shadow);
-            }
-
-            .nav {
+            header {
                 position: sticky;
-                top: var(--space);
                 z-index: var(--z-sticky);
-                background: color-mix(
+                top: 0;
+                background-color: color-mix(
                     in srgb,
-                    var(--color-background) 15%,
+                    var(--color-background) 40%,
                     transparent
                 );
-                backdrop-filter: blur(2px);
-                border: var(--border);
-                border-radius: var(--border-radius);
-                padding: var(--space-xs);
-                margin-block-start: var(--space);
-                margin-bottom: var(--space-xl);
+                backdrop-filter: blur(8px);
+                padding: var(--space) 0;
+                margin-top: var(--space-negative);
             }
 
             .nav ul {
@@ -107,10 +87,11 @@
                 padding: var(--space-xs) var(--space-s);
                 border-radius: var(--border-radius);
                 background: var(--color-background-secondary);
-                font-size: var(--scale-s);
+                font-size: var(--scale-xs);
                 color: var(--color-foreground);
                 cursor: pointer;
                 border: var(--border);
+                font-family: var(--font-interface);
             }
 
             .nav a:hover {
@@ -206,16 +187,23 @@
     </head>
     <body class="rhythm">
         <!-- Header -->
-        <header class="line-width-wide" style="margin-bottom: var(--space-xl)">
-            <h1>Standard<br />Framework</h1>
-
-            <p class="muted">
-                A fine-art typography framework implementing classical design
-                principles, mathematical precision with the golden ratio, and
-                micro-typography rules inspired by the masters of print design.
-            </p>
-
-            <nav class="nav smaller mono">
+        <header
+            style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            "
+        >
+            <div>
+                <h1 style="margin: 0">Standard<br />Framework</h1>
+                <p class="small muted compact">
+                    A fine-art typography framework implementing classical
+                    design principles, mathematical precision with the golden
+                    ratio, and micro-typography rules inspired by the masters of
+                    print design.
+                </p>
+            </div>
+            <nav class="nav smaller" style="text-align: right">
                 <ul>
                     <li><a href="#design-tokens">Design Tokens</a></li>
                     <li><a href="#grid-system">Grid System</a></li>
@@ -234,45 +222,9 @@
             </nav>
         </header>
 
-        <!-- Design Tokens Section -->
-        <section id="design-tokens" class="demo-section line-width-xl">
-            <div class="demo-title">Mathematical Design Tokens</div>
-            <p>
-                Standard uses mathematically precise ratios inspired by fine-art
-                typography, including the golden ratio and its derivatives:
-            </p>
-
-            <div class="token-showcase">
-                <div class="token-item">
-                    <strong>Mathematical Ratios</strong>
-                    (standard-00-token.scss)<br />
-                    --ratio-golden: 1.618 | --ratio-halfstep: 1.272 |
-                    --ratio-quarterstep: 1.128
-                </div>
-                <div class="token-item">
-                    <strong>Grid Tokens</strong> (standard-01-grid.scss)<br />
-                    --grid-cols: 12 | --container-max: 1200px
-                </div>
-                <div class="token-item">
-                    <strong>Content Tokens</strong>
-                    (standard-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
-                </div>
-                <div class="token-item">
-                    <strong>Typography Tokens</strong>
-                    (standard-03-typography.scss)<br />
-                    --font-text: system-ui | --font-header-weight: 900
-                </div>
-                <div class="token-item">
-                    <strong>Color Tokens</strong> (standard-05-color.scss)<br />
-                    --color-accent: #c8a840 | --color-muted: mix(fg 50% bg)
-                </div>
-            </div>
-        </section>
-
         <!-- Grid System Section -->
         <section id="grid-system" class="demo-section">
-            <div class="demo-title">12-Column Grid System</div>
+            <h3>12-Column Grid System</h3>
             <div class="code-example">
                 &lt;div class="grid"&gt;&lt;div
                 class="col-6"&gt;...&lt;/div&gt;&lt;/div&gt;
@@ -319,7 +271,7 @@
 
         <!-- Prose Layout Section -->
         <section id="prose-layout" class="demo-section">
-            <div class="demo-title">Prose Layout System</div>
+            <h3>Prose Layout System</h3>
             <p>
                 The <code>.prose</code> class provides content area positioning
                 with different widths for visual hierarchy. The
@@ -441,7 +393,7 @@
 
         <!-- Typography Section -->
         <section id="typography" class="demo-section line-width-wide">
-            <div class="demo-title">Typography System</div>
+            <h3>Typography System</h3>
             <p>Modular scale typography with proper font feature settings:</p>
 
             <div class="visual-example">
@@ -518,7 +470,7 @@
 
         <!-- Rhythm Section -->
         <section id="rhythm" class="demo-section line-width-normal">
-            <div class="demo-title">Vertical Rhythm System</div>
+            <h3>Vertical Rhythm System</h3>
             <p>
                 The <code>.rhythm</code> class provides consistent vertical
                 spacing:
@@ -691,7 +643,7 @@
 
         <!-- Combined Example -->
         <section class="demo-section">
-            <div class="demo-title">Combined: Prose + Rhythm</div>
+            <h3>Combined: Prose + Rhythm</h3>
             <p>
                 Using both <code>.prose.rhythm</code> provides the complete
                 article system:
@@ -801,7 +753,7 @@
 
         <!-- Line Width Section -->
         <section id="line-width" class="demo-section">
-            <div class="demo-title">Line-Width for Readability</div>
+            <h3>Line-Width for Readability</h3>
             <p>Optimized reading widths based on typography research:</p>
 
             <div style="display: grid; gap: var(--gap)">
@@ -879,7 +831,7 @@
 
         <!-- Colors Section -->
         <section id="colors" class="demo-section line-width-wide">
-            <div class="demo-title">Color System</div>
+            <h3>Color System</h3>
             <p>Automatic light/dark mode with semantic color tokens:</p>
             <div class="visual-example">
                 <div
@@ -1009,7 +961,7 @@
 
         <!-- Fine-Art Typography Engine Section -->
         <section id="typography-engine" class="demo-section line-width-normal">
-            <div class="demo-title">Fine-Art Typography Engine</div>
+            <h3>Fine-Art Typography Engine</h3>
             <p>
                 JavaScript library implementing classical typography rules that
                 CSS cannot handle, inspired by centuries of print design wisdom:
@@ -1115,7 +1067,7 @@
 
         <!-- Forms Section -->
         <section id="forms" class="demo-section line-width-normal">
-            <div class="demo-title">Form Elements</div>
+            <h3>Form Elements</h3>
             <p>
                 Consistent form styling that integrates with the framework's
                 design system:
@@ -1676,7 +1628,7 @@
 
         <!-- Utilities Section -->
         <section id="utilities" class="demo-section line-width-normal">
-            <div class="demo-title">Utility Classes</div>
+            <h3>Utility Classes</h3>
 
             <h4>Flow and Stack Utilities</h4>
             <div class="visual-example flow">
@@ -1724,7 +1676,7 @@
 
         <!-- Book Layout vs Prose Section -->
         <section id="book-layout" class="demo-section">
-            <div class="demo-title">Book Layout System</div>
+            <h3>Book Layout System</h3>
             <p>
                 The framework now includes <code>.book</code> as an elegant
                 alternative to <code>.prose</code>, using print design
@@ -1792,7 +1744,7 @@
 
         <!-- Markdown Section -->
         <section id="markdown" class="demo-section line-width-normal">
-            <div class="demo-title">Markdown Enhancements</div>
+            <h3>Markdown Enhancements</h3>
             <p>Enhanced styling for markdown content:</p>
             <div class="code-example">
                 &lt;article class="book rhythm md"&gt;

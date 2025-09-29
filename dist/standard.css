@@ -336,7 +336,7 @@
   /* Current ratio (configurable) */
   --font-ratio: var(--ratio-golden);
   --font-density: 1.4;
-  --font-density-s: 1.2;
+  --font-density-s: 1;
   /* Modular Scale - calculated from font-ratio */
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
   --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
@@ -420,50 +420,62 @@
 /* Spans 1..12 */
 .col-1 {
   grid-column: span 1;
+  overflow: hidden;
 }
 
 .col-2 {
   grid-column: span 2;
+  overflow: hidden;
 }
 
 .col-3 {
   grid-column: span 3;
+  overflow: hidden;
 }
 
 .col-4 {
   grid-column: span 4;
+  overflow: hidden;
 }
 
 .col-5 {
   grid-column: span 5;
+  overflow: hidden;
 }
 
 .col-6 {
   grid-column: span 6;
+  overflow: hidden;
 }
 
 .col-7 {
   grid-column: span 7;
+  overflow: hidden;
 }
 
 .col-8 {
   grid-column: span 8;
+  overflow: hidden;
 }
 
 .col-9 {
   grid-column: span 9;
+  overflow: hidden;
 }
 
 .col-10 {
   grid-column: span 10;
+  overflow: hidden;
 }
 
 .col-11 {
   grid-column: span 11;
+  overflow: hidden;
 }
 
 .col-12 {
   grid-column: span 12;
+  overflow: hidden;
 }
 
 /* Optional starts 1..12 */
@@ -1284,11 +1296,11 @@
       var(--font-weight)
   );
   --font-weight-h5: max(
-      calc(var(--font-header-weight) * 0.5),
+      calc(var(--font-header-weight) * 0.8),
       var(--font-weight)
   );
   --font-weight-h6: max(
-      calc(var(--font-header-weight) * 0.5),
+      calc(var(--font-header-weight) * 0.75),
       var(--font-weight)
   );
   /* List styling */
@@ -1379,14 +1391,12 @@ h5 {
   font-weight: var(--font-weight-h5);
   font-size: var(--scale-l);
   line-height: var(--line-height);
-  letter-spacing: 0em;
 }
 
 h6 {
   font-weight: var(--font-weight-h6);
   font-size: var(--scale-l);
   line-height: var(--line-height);
-  letter-spacing: 0em;
 }
 
 .small {
@@ -1541,9 +1551,6 @@ textarea {
 }
 .rhythm h1 {
   margin: var(--space-xl) 0 var(--space-l) 0;
-}
-.rhythm > h1:first-child {
-  margin: var(--space) 0 var(--space-xxxl) 0;
 }
 .rhythm h2 {
   margin: var(--space-l) 0 var(--space) 0;

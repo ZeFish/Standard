@@ -13,7 +13,7 @@
     /* Current ratio (configurable) */
     --font-ratio: var(--ratio-golden);
     --font-density: 1.4;
-    --font-density-s: 1.2;
+    --font-density-s: 1;
 
     /* Modular Scale - calculated from font-ratio */
     --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
