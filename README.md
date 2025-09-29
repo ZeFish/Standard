@@ -14,9 +14,14 @@ npm install @zefish/standard
 @import '@zefish/standard';
 ```
 
+### CDN Usage
+
 ```html
+<!-- Include the Standard CSS -->
+<link rel="stylesheet" href="https://unpkg.com/@zefish/standard@0.1.3/dist/standard.css">
+
 <!-- Include the Standard JavaScript -->
-<script src="node_modules/@zefish/standard/dist/standard.js"></script>
+<script src="https://unpkg.com/@zefish/standard@0.1.3/dist/standard.js"></script>
 ```
 
 ## Philosophy
@@ -149,7 +154,7 @@ Combining book layout, rhythm, and typography engine:
   </div>
 </article>
 
-<script src="standard.js"></script>
+<script src="https://unpkg.com/@zefish/standard@0.1.3/dist/standard.js"></script>
 ```
 
 ### Enhanced Markdown with Typography
@@ -165,6 +170,7 @@ Add `.md` for enhanced markdown with fine-art typography:
   </div>
 </article>
 
+<!-- Ensure standard.js is loaded, e.g., via CDN: <script src="https://unpkg.com/@zefish/standard@0.1.3/dist/standard.js"></script> -->
 <script>
 // Auto-applies widow prevention, smart quotes, proper punctuation
 const typography = new StandardTypography();
