@@ -15,7 +15,7 @@
     padding-inline: var(--container-standard);
 }
 
-/* Universal reset for rhythm-managed elements */
+/* Universal reset for rhythm-managed elements
 :where(
     h1,
     h2,
@@ -49,7 +49,7 @@
 ) {
     margin: 0;
 }
-
+*/
 /* Logical unsets for first/last child when containers apply margins */
 :where(:first-child) {
     margin-block-start: unset;
@@ -119,6 +119,38 @@
 
 .rhythm {
     /* Enhanced spacing relationships for typography */
+    p {
+        margin-block-start: 0;
+    }
+
+    h1 {
+        margin: var(--space-xxxl) 0 var(--space-l) 0;
+    }
+
+    h2 {
+        margin: var(--space-xxl) 0 var(--space-l) 0;
+    }
+
+    h3 {
+        margin: var(--space-xl) 0 var(--space-l) 0;
+    }
+
+    h4 {
+        margin: var(--space-l) 0 var(--space) 0;
+    }
+
+    h5 {
+        margin: var(--space) 0 var(--space-s) 0;
+    }
+
+    h6 {
+        margin: var(--space) 0 var(--space-xs) 0;
+    }
+
+    hr {
+        margin-block-start: var(--space-xxl);
+        margin-block-end: var(--space-l);
+    }
 
     /* Heading after heading gets reduced spacing */
     h1 + h2,
@@ -127,16 +159,6 @@
     h4 + h5,
     h5 + h6 {
         margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
-    }
-
-    /* Content after headings gets normal spacing */
-    h1 + p,
-    h2 + p,
-    h3 + p,
-    h4 + p,
-    h5 + p,
-    h6 + p {
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
 
     /* Lists after headings get normal spacing */
@@ -156,6 +178,12 @@
                 var(--rhythm-multiplier)
         );
         margin-block-end: calc(
+            var(--space-block-special) * var(--rhythm-multiplier)
+        );
+        margin-inline-start: calc(
+            var(--space-block-special) * var(--rhythm-multiplier)
+        );
+        margin-inline-end: calc(
             var(--space-block-special) * var(--rhythm-multiplier)
         );
     }
@@ -192,6 +220,16 @@
             var(--space-block-special) * var(--rhythm-multiplier)
         );
     }
+    p:has(img) + p:has(img) {
+        --margin-to-remove: calc(
+            (var(--space-block-special) * var(--rhythm-multiplier)) * -1
+        );
+
+        margin-block-start: calc(var(--margin-to-remove) + var(--space-gap));
+        margin-block-end: calc(
+            var(--space-block-special) * var(--rhythm-multiplier)
+        );
+    }
 
     /* Callouts get special block spacing */
     .callout {
@@ -214,29 +252,17 @@
         margin-block-start: 0;
     }
 
-    /* Tight spacing for related content */
-    p + p {
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-    }
-
     /* Form elements get consistent but nuanced spacing */
     /* Form field groups - spacing only */
     fieldset {
-        margin-block-start: calc(
-            (var(--space-block-special) - var(--space)) *
-                var(--rhythm-multiplier)
-        );
-        margin-block-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
+        margin-block-start: calc((var(--space-block-special) - var(--space)));
+        margin-block-end: var(--space-block-special);
     }
-}
 
-/* =========================== */
-/* TYPOGRAPHY ELEMENTS         */
-/* =========================== */
+    /* =========================== */
+    /* TYPOGRAPHY ELEMENTS         */
+    /* =========================== */
 
-.rhythm {
     /* Typography-specific spacing adjustments */
 
     /* =========================== */
@@ -246,14 +272,14 @@
     /* Lists */
     ul,
     ol {
-        padding-inline-start: calc(var(--space-l) * var(--rhythm-multiplier));
+        padding-inline-start: var(--space-l);
         list-style-position: outside;
     }
 
     /* Nested lists */
     li > ul,
     li > ol {
-        padding-inline-start: calc(var(--space) * var(--rhythm-multiplier));
+        padding-inline-start: var(--space);
     }
 
     /* List items spacing only */
@@ -262,30 +288,30 @@
     }
 
     /* List marker spacing only */
-    ul > li::before {
+    ul > li::marker {
         display: inline-block;
-        width: calc(var(--space) * var(--rhythm-multiplier));
-        margin-inline-start: calc(var(--space) * -1 * var(--rhythm-multiplier));
+        width: var(--space);
+        margin-inline-start: var(--space);
     }
 
     ol {
         counter-reset: ol-counter;
     }
 
-    ol > li::before {
+    ol > li::marker {
         display: inline-block;
-        width: calc(var(--space) * var(--rhythm-multiplier));
-        margin-inline-start: calc(var(--space) * -1 * var(--rhythm-multiplier));
+        width: var(--space);
+        margin-inline-start: var(--space);
     }
 
     /* Blockquotes - spacing only */
     blockquote {
-        padding-inline-start: calc(var(--space-l) * var(--rhythm-multiplier));
+        padding-inline-start: var(--space-l);
     }
 
     /* Code blocks - spacing only */
     pre {
-        padding: calc(var(--space) * var(--rhythm-multiplier));
+        padding: calc(var(--space));
     }
 
     /* Horizontal rules - spacing only */
@@ -418,45 +444,8 @@
     }
 }
 
-/* =========================== */
-/* SEMANTIC ELEMENTS           */
-/* =========================== */
-
-/* Automatically apply rhythm to semantic sections */
-section,
-article,
-main {
-    /* Apply rhythm properties directly without @extend to avoid complex nesting rules */
-
-    /* Use margin-based spacing (preferred mode) */
-    display: block;
-
-    /* Create new block formatting context to prevent margin collapse */
-    contain: layout style;
-
-    /* Alternative: Use padding on container to prevent collapse */
-    padding-block-start: 1px;
-    padding-block-end: 1px;
-    margin-block-start: -1px;
-    margin-block-end: -1px;
-
-    > * {
-        margin-block: 0;
-        margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
-    }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-
-    > :first-child {
-        margin-block-start: 0;
-    }
-}
-
 /* Common layout containers inherit rhythm to cascade deeper */
-.visual-example,
-.demo-box,
+.box,
 .grid > .col-1,
 .grid > .col-2,
 .grid > .col-3,
@@ -522,69 +511,6 @@ main {
     margin-block-end: calc(
         var(--space-xs) * var(--rhythm-multiplier)
     ) !important;
-}
-
-/* =========================== */
-/* DEBUG AND DEVELOPMENT      */
-/* =========================== */
-
-/* =========================== */
-/* DEBUG AND DEVELOPMENT       */
-/* =========================== */
-
-/* Debug mode utilities - layout debugging only */
-.rhythm-debug {
-    /* Debug mode handled by color system */
-}
-
-.rhythm-debug-advanced {
-    /* Debug mode handled by color system */
-
-    > * {
-        /* Visual styling handled in color file */
-        position: relative;
-
-        &::before {
-            content: attr(class);
-            position: absolute;
-            top: -1.2rem;
-            left: 0;
-            z-index: 1000;
-            white-space: nowrap;
-        }
-    }
-}
-
-.rhythm-debug-grid {
-    /* Debug mode handled by color system */
-    position: relative;
-
-    &::before {
-        content: "RHYTHM DEBUG MODE";
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 10000;
-    }
-}
-
-.rhythm-debug-measure {
-    /* Debug mode handled by color system */
-    counter-reset: rhythm-item;
-
-    > * {
-        position: relative;
-
-        &::before {
-            content: "↕ " counter(rhythm-item);
-            counter-increment: rhythm-item;
-            position: absolute;
-            left: -2rem;
-            top: 0;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-        }
-    }
 }
 
 /* =========================== */

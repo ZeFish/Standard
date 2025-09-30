@@ -335,7 +335,7 @@
   --ratio-eighthstep: 1.062;
   /* Current ratio (configurable) */
   --font-ratio: var(--ratio-golden);
-  --font-density: 1.4;
+  --font-density: 1.3;
   --font-density-s: 1;
   /* Modular Scale - calculated from font-ratio */
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
@@ -1085,102 +1085,6 @@
   display: block;
 }
 .reading {
-  /* Table wrapper layout */
-}
-.reading .table-wrapper {
-  width: 100%;
-  overflow-block: hidden;
-  overflow-inline: auto;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  margin-block: var(--space-l) var(--space-xl);
-  margin-inline: auto;
-}
-.reading .table-wrapper .table-gradient-overlay {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-end: 0;
-  block-size: 100%;
-  inline-size: var(--space-xl);
-  background: linear-gradient(to left, var(--color-background), transparent);
-  pointer-events: none;
-  z-index: var(--z-dropdown);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.reading .table-wrapper.has-overflow .table-gradient-overlay {
-  opacity: 0.8;
-}
-@media (min-width: 769px) {
-  .reading .table-wrapper .table-gradient-overlay {
-    inline-size: var(--space-xl);
-    opacity: 0;
-  }
-  .reading .table-wrapper.has-overflow .table-gradient-overlay {
-    opacity: 1;
-  }
-  .reading .table-wrapper:hover .table-gradient-overlay {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-}
-@media (max-width: 768px) {
-  .reading .table-wrapper.has-overflow .table-gradient-overlay {
-    background: linear-gradient(to right, transparent, var(--color-background));
-    opacity: 0.8;
-  }
-}
-.reading .table-wrapper.has-overflow:focus::before {
-  content: "Use ← → arrow keys to scroll";
-  position: absolute;
-  inset-block-start: -1.5rem;
-  inset-inline-start: 0;
-  font-size: var(--scale-xs);
-  color: var(--color-muted);
-  background: var(--color-background);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid var(--color-border);
-  white-space: nowrap;
-  z-index: var(--z-tooltip);
-  opacity: 0;
-  animation: fadeInUp 0.3s ease forwards;
-}
-@media (max-width: 768px) {
-  .reading .table-wrapper.has-overflow:focus::before {
-    display: none;
-  }
-}
-.reading .table-wrapper.has-overflow {
-  cursor: grab;
-}
-.reading .table-wrapper.has-overflow:active {
-  cursor: grabbing;
-}
-.reading .table-wrapper.has-overflow::after {
-  content: "";
-  position: absolute;
-  inset-block: 0;
-  inset-inline-end: 0;
-  inline-size: 1px;
-  background: var(--color-border);
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: var(--z-base);
-}
-.reading .table-wrapper:hover .table-copy-button {
-  opacity: 1;
-}
-.reading .table-wrapper .table-copy-button:hover {
-  background: var(--color-background-secondary);
-  color: var(--color-foreground);
-  transform: scale(1.05);
-}
-.reading .table-wrapper table {
-  width: fit-content(var(--content-feature));
-  border-collapse: collapse;
-}
-.reading {
   /* Basic media styling */
 }
 .reading img,
@@ -1215,98 +1119,6 @@
     transform: translateY(0);
   }
 }
-/* =========================== */
-/* READING LAYOUT DEBUG SYSTEM */
-/* =========================== */
-/* Vertical rhythm debug overlay for .reading */
-.reading.reading-debug {
-  position: relative;
-}
-
-.reading.reading-debug::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: var(--z-modal);
-  opacity: 0.3;
-  /* Create vertical rhythm lines using CSS gradients */
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(4 * var(--space) - 2px), color-mix(in srgb, var(--color-accent) 60%, transparent) calc(4 * var(--space) - 2px), color-mix(in srgb, var(--color-accent) 60%, transparent) calc(4 * var(--space))), repeating-linear-gradient(to bottom, transparent 0, transparent calc(2 * var(--space) - 1px), color-mix(in srgb, var(--color-accent) 30%, transparent) calc(2 * var(--space) - 1px), color-mix(in srgb, var(--color-accent) 30%, transparent) calc(2 * var(--space))), repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--space) - 0.5px), color-mix(in srgb, var(--color-accent) 15%, transparent) calc(var(--space) - 0.5px), color-mix(in srgb, var(--color-accent) 15%, transparent) var(--space)), repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--space) / 2 - 0.25px), color-mix(in srgb, var(--color-accent) 8%, transparent) calc(var(--space) / 2 - 0.25px), color-mix(in srgb, var(--color-accent) 8%, transparent) calc(var(--space) / 2));
-}
-
-/* Debug info overlay */
-.reading.reading-debug::after {
-  content: "Reading Layout Debug\aMajor: 4×rhythm | Secondary: 2×rhythm | Base: 1×rhythm | Fine: 0.5×rhythm";
-  position: fixed;
-  top: var(--space);
-  right: var(--space);
-  background: color-mix(in srgb, var(--color-accent) 90%, var(--color-background));
-  color: var(--color-background);
-  padding: var(--space-xs) var(--space-s);
-  border-radius: var(--border-radius);
-  font-size: var(--scale-xs);
-  font-family: var(--font-monospace, monospace);
-  line-height: 1.3;
-  white-space: pre;
-  z-index: var(--z-modal);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-accent) 20%, transparent);
-}
-
-/* Column boundary indicators using visual overlays */
-.reading.reading-debug-columns {
-  position: relative;
-}
-
-.reading.reading-debug-columns::before {
-  content: "full" "feature" "accent" "content" "accent" "feature" "full";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  pointer-events: none;
-  z-index: var(--z-dropdown);
-  opacity: 0.3;
-  /* Use the same grid as the parent */
-  display: grid;
-  grid-template-columns: inherit;
-  gap: 0;
-  /* Style the grid line labels */
-  font-family: var(--font-monospace, monospace);
-  font-size: var(--scale-xs);
-  color: var(--color-accent);
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding-top: var(--space-xs);
-}
-
-.reading.reading-debug-columns::after {
-  content: "Reading Layout Grid\a[full] [feature] [accent] [content] [accent] [feature] [full]";
-  position: fixed;
-  top: calc(var(--space) * 3);
-  right: var(--space);
-  background: color-mix(in srgb, var(--color-accent) 90%, var(--color-background));
-  color: var(--color-background);
-  padding: var(--space-xs) var(--space-s);
-  border-radius: var(--border-radius);
-  font-size: var(--scale-xs);
-  font-family: var(--font-monospace, monospace);
-  line-height: 1.3;
-  white-space: pre;
-  z-index: var(--z-modal);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-accent) 20%, transparent);
-}
-
-/* Combination debug mode - rhythm + columns */
-.reading.reading-debug.reading-debug-columns::before {
-  /* Combine grid labels with rhythm background */
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(4 * var(--space) - 2px), color-mix(in srgb, var(--color-accent) 30%, transparent) calc(4 * var(--space) - 2px), color-mix(in srgb, var(--color-accent) 30%, transparent) calc(4 * var(--space))), repeating-linear-gradient(to bottom, transparent 0, transparent calc(2 * var(--space) - 1px), color-mix(in srgb, var(--color-accent) 15%, transparent) calc(2 * var(--space) - 1px), color-mix(in srgb, var(--color-accent) 15%, transparent) calc(2 * var(--space))), repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--space) - 0.5px), color-mix(in srgb, var(--color-accent) 8%, transparent) calc(var(--space) - 0.5px), color-mix(in srgb, var(--color-accent) 8%, transparent) var(--space));
-}
-
 /* Typography Design Tokens - Using logical properties */
 :root {
   /* Font stacks */
@@ -1389,7 +1201,8 @@ html {
   orphans: 2;
 }
 
-body {
+body,
+body.rhythm {
   margin: 0;
   padding: var(--space);
 }
@@ -1425,12 +1238,12 @@ svg {
 */
 h1 {
   font-weight: var(--font-weight-h1);
-  font-size: clamp(var(--scale-xxl), 5vw, var(--scale-xxxl));
+  font-size: clamp(var(--scale-xxl), 10vw, var(--scale-xxxl));
 }
 
 h2 {
   font-weight: var(--font-weight-h2);
-  font-size: var(--scale-xxl);
+  font-size: clamp(var(--scale-xl), 7vw, var(--scale-xxl));
 }
 
 h3 {
@@ -1569,12 +1382,12 @@ textarea {
 .rhythm li {
   line-height: 1.4;
 }
-.rhythm ul > li::before {
+.rhythm ul > li::marker {
   content: "•";
   text-align: center;
   opacity: 0.6;
 }
-.rhythm ol > li::before {
+.rhythm ol > li::marker {
   content: counter(ol-counter) ". ";
   counter-increment: ol-counter;
   text-align: right;
@@ -1591,7 +1404,8 @@ textarea {
 .rhythm {
   /* Code block typography */
 }
-.rhythm pre {
+.rhythm pre,
+.rhythm code {
   font-family: var(--font-monospace, monospace);
   font-size: var(--scale-s);
   line-height: var(--font-density-s);
@@ -1656,39 +1470,41 @@ textarea {
   padding-inline: var(--container-standard);
 }
 
-/* Universal reset for rhythm-managed elements */
-:where(h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-dl,
-blockquote,
-pre,
-table,
-figure,
-form,
-fieldset,
-div,
-section,
-article,
-aside,
-header,
-footer,
-nav,
-input,
-textarea,
-select,
-button,
-label,
-legend) {
-  margin: 0;
+/* Universal reset for rhythm-managed elements
+:where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    dl,
+    blockquote,
+    pre,
+    table,
+    figure,
+    form,
+    fieldset,
+    div,
+    section,
+    article,
+    aside,
+    header,
+    footer,
+    nav,
+    input,
+    textarea,
+    select,
+    button,
+    label,
+    legend
+) {
+    margin: 0;
 }
-
+*/
 /* Logical unsets for first/last child when containers apply margins */
 :where(:first-child) {
   margin-block-start: unset;
@@ -1747,6 +1563,33 @@ legend) {
 /* =========================== */
 .rhythm {
   /* Enhanced spacing relationships for typography */
+}
+.rhythm p {
+  margin-block-start: 0;
+}
+.rhythm h1 {
+  margin: var(--space-xxxl) 0 var(--space-l) 0;
+}
+.rhythm h2 {
+  margin: var(--space-xxl) 0 var(--space-l) 0;
+}
+.rhythm h3 {
+  margin: var(--space-xl) 0 var(--space-l) 0;
+}
+.rhythm h4 {
+  margin: var(--space-l) 0 var(--space) 0;
+}
+.rhythm h5 {
+  margin: var(--space) 0 var(--space-s) 0;
+}
+.rhythm h6 {
+  margin: var(--space) 0 var(--space-xs) 0;
+}
+.rhythm hr {
+  margin-block-start: var(--space-xxl);
+  margin-block-end: var(--space-l);
+}
+.rhythm {
   /* Heading after heading gets reduced spacing */
 }
 .rhythm h1 + h2,
@@ -1755,17 +1598,6 @@ legend) {
 .rhythm h4 + h5,
 .rhythm h5 + h6 {
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
-}
-.rhythm {
-  /* Content after headings gets normal spacing */
-}
-.rhythm h1 + p,
-.rhythm h2 + p,
-.rhythm h3 + p,
-.rhythm h4 + p,
-.rhythm h5 + p,
-.rhythm h6 + p {
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 .rhythm {
   /* Lists after headings get normal spacing */
@@ -1784,6 +1616,8 @@ legend) {
 .rhythm blockquote {
   margin-block-start: calc((var(--space-block-special) - var(--space)) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
+  margin-inline-start: calc(var(--space-block-special) * var(--rhythm-multiplier));
+  margin-inline-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
 }
 .rhythm {
   /* Pre/code blocks need breathing room */
@@ -1806,6 +1640,13 @@ legend) {
   margin-block-start: calc((var(--space-block-special) - var(--space)) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
 }
+.rhythm p:has(img) + p:has(img) {
+  --margin-to-remove: calc(
+      (var(--space-block-special) * var(--rhythm-multiplier)) * -1
+  );
+  margin-block-start: calc(var(--margin-to-remove) + var(--space-gap));
+  margin-block-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
+}
 .rhythm {
   /* Callouts get special block spacing */
 }
@@ -1825,24 +1666,17 @@ legend) {
   margin-block-start: 0;
 }
 .rhythm {
-  /* Tight spacing for related content */
-}
-.rhythm p + p {
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-}
-.rhythm {
   /* Form elements get consistent but nuanced spacing */
   /* Form field groups - spacing only */
 }
 .rhythm fieldset {
-  margin-block-start: calc((var(--space-block-special) - var(--space)) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space-block-special) - var(--space));
+  margin-block-end: var(--space-block-special);
 }
-
-/* =========================== */
-/* TYPOGRAPHY ELEMENTS         */
-/* =========================== */
 .rhythm {
+  /* =========================== */
+  /* TYPOGRAPHY ELEMENTS         */
+  /* =========================== */
   /* Typography-specific spacing adjustments */
   /* =========================== */
   /* CONTENT ELEMENTS            */
@@ -1851,7 +1685,7 @@ legend) {
 }
 .rhythm ul,
 .rhythm ol {
-  padding-inline-start: calc(var(--space-l) * var(--rhythm-multiplier));
+  padding-inline-start: var(--space-l);
   list-style-position: outside;
 }
 .rhythm {
@@ -1859,7 +1693,7 @@ legend) {
 }
 .rhythm li > ul,
 .rhythm li > ol {
-  padding-inline-start: calc(var(--space) * var(--rhythm-multiplier));
+  padding-inline-start: var(--space);
 }
 .rhythm {
   /* List items spacing only */
@@ -1870,30 +1704,30 @@ legend) {
 .rhythm {
   /* List marker spacing only */
 }
-.rhythm ul > li::before {
+.rhythm ul > li::marker {
   display: inline-block;
-  width: calc(var(--space) * var(--rhythm-multiplier));
-  margin-inline-start: calc(var(--space) * -1 * var(--rhythm-multiplier));
+  width: var(--space);
+  margin-inline-start: var(--space);
 }
 .rhythm ol {
   counter-reset: ol-counter;
 }
-.rhythm ol > li::before {
+.rhythm ol > li::marker {
   display: inline-block;
-  width: calc(var(--space) * var(--rhythm-multiplier));
-  margin-inline-start: calc(var(--space) * -1 * var(--rhythm-multiplier));
+  width: var(--space);
+  margin-inline-start: var(--space);
 }
 .rhythm {
   /* Blockquotes - spacing only */
 }
 .rhythm blockquote {
-  padding-inline-start: calc(var(--space-l) * var(--rhythm-multiplier));
+  padding-inline-start: var(--space-l);
 }
 .rhythm {
   /* Code blocks - spacing only */
 }
 .rhythm pre {
-  padding: calc(var(--space) * var(--rhythm-multiplier));
+  padding: calc(var(--space));
 }
 .rhythm {
   /* Horizontal rules - spacing only */
@@ -2026,44 +1860,8 @@ legend) {
   margin: 0;
 }
 
-/* =========================== */
-/* SEMANTIC ELEMENTS           */
-/* =========================== */
-/* Automatically apply rhythm to semantic sections */
-section,
-article,
-main {
-  /* Apply rhythm properties directly without @extend to avoid complex nesting rules */
-  /* Use margin-based spacing (preferred mode) */
-  display: block;
-  /* Create new block formatting context to prevent margin collapse */
-  contain: layout style;
-  /* Alternative: Use padding on container to prevent collapse */
-  padding-block-start: 1px;
-  padding-block-end: 1px;
-  margin-block-start: -1px;
-  margin-block-end: -1px;
-}
-section > *,
-article > *,
-main > * {
-  margin-block: 0;
-  margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
-}
-section > :last-child,
-article > :last-child,
-main > :last-child {
-  margin-block-end: 0;
-}
-section > :first-child,
-article > :first-child,
-main > :first-child {
-  margin-block-start: 0;
-}
-
 /* Common layout containers inherit rhythm to cascade deeper */
-.visual-example > *,
-.demo-box > *,
+.box > *,
 .grid > .col-1 > *,
 .grid > .col-2 > *,
 .grid > .col-3 > *,
@@ -2084,8 +1882,7 @@ main > :first-child {
   margin-block: 0;
   margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
 }
-.visual-example > :last-child,
-.demo-box > :last-child,
+.box > :last-child,
 .grid > .col-1 > :last-child,
 .grid > .col-2 > :last-child,
 .grid > .col-3 > :last-child,
@@ -2105,8 +1902,7 @@ main > :first-child {
 .grid > .col-full > :last-child {
   margin-block-end: 0;
 }
-.visual-example > :first-child,
-.demo-box > :first-child,
+.box > :first-child,
 .grid > .col-1 > :first-child,
 .grid > .col-2 > :first-child,
 .grid > .col-3 > :first-child,
@@ -2158,62 +1954,6 @@ main > :first-child {
 
 .stick-next {
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier)) !important;
-}
-
-/* =========================== */
-/* DEBUG AND DEVELOPMENT      */
-/* =========================== */
-/* =========================== */
-/* DEBUG AND DEVELOPMENT       */
-/* =========================== */
-/* Debug mode utilities - layout debugging only */
-.rhythm-debug {
-  /* Debug mode handled by color system */
-}
-
-.rhythm-debug-advanced {
-  /* Debug mode handled by color system */
-}
-.rhythm-debug-advanced > * {
-  /* Visual styling handled in color file */
-  position: relative;
-}
-.rhythm-debug-advanced > *::before {
-  content: attr(class);
-  position: absolute;
-  top: -1.2rem;
-  left: 0;
-  z-index: 1000;
-  white-space: nowrap;
-}
-
-.rhythm-debug-grid {
-  /* Debug mode handled by color system */
-  position: relative;
-}
-.rhythm-debug-grid::before {
-  content: "RHYTHM DEBUG MODE";
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10000;
-}
-
-.rhythm-debug-measure {
-  /* Debug mode handled by color system */
-  counter-reset: rhythm-item;
-}
-.rhythm-debug-measure > * {
-  position: relative;
-}
-.rhythm-debug-measure > *::before {
-  content: "↕ " counter(rhythm-item);
-  counter-increment: rhythm-item;
-  position: absolute;
-  left: -2rem;
-  top: 0;
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
 }
 
 /* =========================== */
@@ -2727,13 +2467,6 @@ blockquote {
   border-inline-start: calc(var(--space-xxs) * var(--rhythm-multiplier)) solid var(--color-border);
 }
 
-/* Code block colors */
-pre {
-  background: var(--color-background-secondary);
-  border-radius: var(--border-radius);
-  border: var(--border);
-}
-
 /* Horizontal rule colors */
 hr {
   height: var(--hr-thickness);
@@ -2773,60 +2506,14 @@ th {
   border-radius: var(--border-radius);
 }
 
-/* Debug mode border styling */
-.rhythm.rhythm-debug > * {
-  border: 1px dashed color-mix(in srgb, var(--color-accent) 50%, transparent);
-}
-
-/* Debug utilities visual styling */
-.rhythm-debug-advanced > * {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-}
-.rhythm-debug-advanced > *::before {
-  font-size: 0.65rem;
-  background: var(--color-accent);
-  color: var(--color-background);
-  padding: 0.1rem 0.3rem;
-  border-radius: 2px;
-  opacity: 0.9;
-}
-
-/* Debug outline for semantic elements */
-section.rhythm-debug-advanced > *,
-article.rhythm-debug-advanced > *,
-main.rhythm-debug-advanced > * {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-}
-
-.rhythm-debug-grid::before {
-  background: var(--color-accent);
-  color: var(--color-background);
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  font-size: var(--scale-xs);
-  box-shadow: var(--shadow);
-}
-
-.rhythm-debug-measure > * {
-  border-inline-start: 2px solid var(--color-accent);
-  padding-inline-start: 0.5rem;
-}
-.rhythm-debug-measure > *::before {
-  font-size: 0.75rem;
-  color: var(--color-accent);
-  background: var(--color-background);
-  padding: 0.2rem;
-  border-radius: 2px;
-}
-
 /* Strong and emphasis */
 strong {
-  color: var(--color-foreground);
+  color: var(--color-bold);
   font-weight: 600;
 }
 
 em {
-  color: var(--color-muted);
+  color: var(--color-italic);
   font-style: italic;
 }
 
@@ -2848,8 +2535,8 @@ pre {
 }
 
 code:not(pre code) {
-  padding: var(--space-xxs);
   box-shadow: unset;
+  padding: 0 var(--space-xxxs);
 }
 
 /* Tables */

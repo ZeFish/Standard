@@ -8,42 +8,25 @@
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
-            body {
+            :root {
                 --font-text: Inter;
                 --font-header: Fraunces;
                 --font-monospace: "Source Code Pro";
+
+                --font-ratio: 1.4;
+                --font-letter-spacing: normal;
+
+                --font-density: 1.2;
             }
 
             /* Minimal custom styles - using framework tokens */
             section {
                 max-width: var(--line-width-xl);
                 margin-inline: auto;
-                background: var(--color-background-secondary);
-                border: var(--border);
-                border-radius: var(--border-radius);
-                box-shadow: var(--shadow);
-                scroll-margin-top: calc(var(--space) * 9);
-                padding: var(--space);
                 margin-bottom: var(--space-xxxl);
             }
 
-
-            /* Framework handles pre/code styling automatically */
-
-            .demo-box {
-                background: color-mix(
-                    in srgb,
-                    var(--color-foreground) 10%,
-                    var(--color-background)
-                );
-                border: var(--border);
-                text-align: center;
-                font-size: var(--scale-s);
-                padding: var(--space);
-                border-radius: var(--border-radius);
-            }
-
-            .visual-example {
+            .section-inset {
                 border: var(--border);
                 background: var(--color-background);
                 box-shadow: inset var(--shadow);
@@ -51,187 +34,29 @@
                 border-radius: var(--border-radius);
             }
 
-            /* Sticky header using framework tokens */
-            .sticky-header {
-                position: sticky;
-                z-index: var(--z-sticky);
-                top: 0;
-                background-color: color-mix(
-                    in srgb,
-                    var(--color-background) 40%,
-                    transparent
-                );
-                backdrop-filter: blur(8px);
-                margin-top: var(--space-negative);
-                padding-top: var(--space);
-            }
+            /* Framework handles pre/code styling automatically */
 
-            /* Navigation using framework patterns */
-            .nav-list {
-                list-style: none;
-                padding: 0 !important;
-                margin: 0;
-                display: block;
-            }
-
-            .nav-item {
-                display: inline-block;
-            }
-
-            .nav-link {
-                display: inline-block;
-                text-decoration: none;
+            .demo-box {
                 background: var(--color-background-secondary);
-                font-size: var(--scale-xs);
-                color: var(--color-foreground);
-                cursor: pointer;
+                border-radius: var(--border-radius);
                 border: var(--border);
-                font-family: var(--font-interface);
-                padding: var(--space-xs) var(--space-s);
-                border-radius: var(--border-radius);
-            }
+                box-shadow: var(--shadow);
+                padding: var(--space);
 
-            .nav-link:hover {
-                background: var(--color-accent);
-                color: var(--color-background);
-                border-color: var(--color-accent);
-            }
 
-            .nav-link:focus {
-                outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
-            }
-
-            /* Rhythm visualization - simplified */
-            .rhythm-overlay {
-                background-image: repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent calc(var(--space) - 1px),
-                    rgba(0, 255, 0, 0.3) calc(var(--space) - 1px),
-                    rgba(0, 255, 0, 0.3) var(--space)
-                );
-                pointer-events: none;
-                z-index: 1;
-            }
-
-            .rhythm-demo {
-                position: relative;
-                background-image: repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent calc(var(--space) - 1px),
-                    rgba(255, 0, 255, 0.2) calc(var(--space) - 1px),
-                    rgba(255, 0, 255, 0.2) var(--space)
-                );
-                background-size: 100% var(--space);
-            }
-
-            .toggle-btn {
-                background: var(--color-accent);
-                color: var(--color-background);
-                border: none;
-                cursor: pointer;
-                padding: var(--space-xs) var(--space-s);
-                border-radius: var(--border-radius);
+                text-align: center;
                 font-size: var(--scale-s);
             }
-
-            /* Hide list bullets in nav */
-            .nav-list li::before {
-                display: none !important;
-            }
-
-            /* Header layout */
-            .header-layout {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-            }
         </style>
-        <script>
-            function toggleRhythm() {
-                const demo = document.getElementById("rhythm-demo");
-                demo.classList.toggle("rhythm-debug-grid");
-            }
-
-            function toggleAdvancedDebug() {
-                const demo = document.getElementById("rhythm-demo");
-                demo.classList.toggle("rhythm-debug-advanced");
-            }
-
-            function toggleMeasureMode() {
-                const demo = document.getElementById("rhythm-demo");
-                demo.classList.toggle("rhythm-debug-measure");
-            }
-        </script>
     </head>
-    <body class="rhythm">
-        <!-- Header with automatic rhythm spacing -->
-        <header class="sticky-header">
-            <div class="header-layout">
-                <div>
-                    <h1>Standard<br />Framework</h1>
-                    <p class="small compact">
-                        A fine-art typography framework with automatic light/dark theme,
-                        mathematical precision using the golden ratio, and micro-typography
-                        rules inspired by the masters of print design.
-                    </p>
-                </div>
-                <div style="display: none; align-items: flex-start; gap: var(--space-l);">
-                    <!-- Theme Toggle Button Container -->
-                    <div data-theme-toggle style="margin-block-start: var(--space-xs);"></div>
-
-                    <nav class="smaller">
-                        <ul class="nav-list">
-                            <li class="nav-item">
-                                <a href="#book-layout" class="nav-link"
-                                    >Reading Layout</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#grid-system" class="nav-link"
-                                    >Grid System</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#typography" class="nav-link"
-                                    >Typography</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#colors" class="nav-link">Colors</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#theme-system" class="nav-link">Theme System</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#design-tokens" class="nav-link"
-                                    >Design Tokens</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#rhythm" class="nav-link">Rhythm System</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#typography-engine" class="nav-link"
-                                    >Typography Engine</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#forms" class="nav-link">Forms</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-
+    <body class="rhythm md">
         <!-- Book Layout & Reading System Section -->
-        <section id="book-layout" class="reading md" style="max-width: var(--line-width-full);">
-            <h1>Reading Layout & Markdown System</h1>
-            <p class="lead">
-                The Standard framework includes sophisticated content layout with print design
-                principles, optimal reading widths, and comprehensive markdown support.
+        <section id="book-layout" class="reading" style="max-width: var(--line-width-full);">
+            <h1>Standard<br />Framework</h1>
+            <p>
+                A fine-art typography framework with automatic light/dark theme,
+                mathematical precision using the golden ratio, and micro-typography
+                rules inspired by the masters of print design.
             </p>
 
             <h2>Typography & Reading Flow</h2>
@@ -260,18 +85,32 @@
                 <li><strong>Full:</strong> Full container width for backgrounds</li>
             </ul>
 
+            <p class="small">
+                <img src="https://wsrv.nl/?url=https://ffp.co/img/220126%20-%20Yeux%20-%20Anne-Marie0777_2048%20long%20edge_2048x2048_U_150_G10.jpg&w=960&h=960&sharp=0.5" />
+                <img src="https://wsrv.nl/?url=https://ffp.co/img/220126%20-%20Yeux%20-%20Anne-Marie0777_2048%20long%20edge_2048x2048_U_150_G10.jpg&w=960&h=960&sharp=0.5" />
+            </p>
+            <p class="small">
+                <img src="https://wsrv.nl/?url=https://ffp.co/img/220126%20-%20Yeux%20-%20Anne-Marie0777_2048%20long%20edge_2048x2048_U_150_G10.jpg&w=960&h=960&sharp=0.5" />
+            </p>
+
+            <p>
+                The main content continues here in the default content area,
+                maintaining optimal line length for comfortable reading. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
             <div class="small">
                 <h4>Small Area Example</h4>
                 <p>
                     This content appears in the <code>.small</code> area,
                     perfect for supplementary information, footnotes,
                     or sidebar content that doesn't need full width.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
 
             <p>
                 The main content continues here in the default content area,
-                maintaining optimal line length for comfortable reading.
+                maintaining optimal line length for comfortable reading. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
             <div class="accent">
@@ -281,10 +120,15 @@
                     highlighted content, or important information that
                     deserves extra attention and breathing room.
                 </p>
+                <p>
+                    The <code>.accent</code> area is perfect for pullquotes,
+                    highlighted content, or important information that
+                    deserves extra attention and breathing room.
+                </p>
             </div>
 
             <h3>Code and Technical Content</h3>
-            <p>Here's how code blocks integrate with the reading layout:</p>
+            <p>Here's how code blocks integrate with the reading layout Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.:</p>
 
             <pre><code>&lt;article class="reading md"&gt;
   &lt;h1&gt;Article Title&lt;/h1&gt;
@@ -321,10 +165,10 @@
 
             <div class="callout callout-info">
                 <div class="callout-title">💡 Pro Tip</div>
-                <p>
+                <div class="callout-content">
                     Combine <code>.reading</code> and <code>.md</code> classes
                     for the ultimate content presentation experience.
-                </p>
+                </div>
             </div>
 
             <div class="full">
@@ -376,7 +220,7 @@
             <h2>Typography Processing Demo</h2>
             <p>Test the typography engine to see how it processes text:</p>
 
-            <div class="visual-example">
+            <div class="section-inset">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space); margin: var(--space) 0;">
                     <div>
                         <h4>Typography Test Text</h4>
@@ -430,34 +274,27 @@
 
         <!-- Grid System Section -->
         <section id="grid-system">
-            <h3>12-Column Grid System</h3>
+            <h2>12-Column Grid System</h2>
             <pre><code>&lt;div class="grid"&gt;
   &lt;div class="col-6"&gt;...&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-            <div class="visual-example">
                 <div class="grid">
                     <div class="col-6 demo-box">col-6</div>
                     <div class="col-6 demo-box">col-6</div>
-                </div>
-                <div class="grid">
                     <div class="col-4 demo-box">col-4</div>
                     <div class="col-8 demo-box">col-8</div>
-                </div>
-                <div class="grid">
                     <div class="col-3 demo-box">col-3</div>
                     <div class="col-3 demo-box">col-3</div>
                     <div class="col-3 demo-box">col-3</div>
                     <div class="col-3 demo-box">col-3</div>
                 </div>
-            </div>
 
-            <h4>Free Columns with CSS Variables</h4>
+            <h3>Free Columns with CSS Variables</h3>
             <pre><code>&lt;div class="free-col" style="--start: 3; --span: 4"&gt;
   ...
 &lt;/div&gt;</code></pre>
 
-            <div class="visual-example">
                 <div class="grid">
                     <div class="col-6 demo-box">Main Content</div>
                     <div
@@ -470,63 +307,17 @@
                         Utility<br />.span-2<br />.startv-10
                     </div>
                 </div>
-            </div>
         </section>
 
-        <!-- Design Tokens Section -->
-        <section id="design-tokens">
-            <h3>Design Tokens</h3>
-            <p>
-                The framework is built on a systematic approach to design tokens
-                using the <code>golden ratio (1.618)</code> and
-                <code>rhythm-based spacing (1rlh)</code>.
-            </p>
 
-            <div class="visual-example">
-                <article>
-                    <div>
-                        <strong>Font Scale (Golden Ratio)</strong>
-                        <p>Typography sizes follow mathematical proportions</p>
-                    </div>
-                    <div>
-                        <strong>Spacing Scale (Rhythm Units)</strong>
-                        <p>All spacing based on 1rlh for vertical rhythm</p>
-                    </div>
-                    <div>
-                        <strong>Color Tokens</strong>
-                        <p>Analog-inspired palette with automatic dark mode</p>
-                    </div>
-                    <div>
-                        <strong>Animation & Z-index</strong>
-                        <p>Systematic approach to motion and layering</p>
-                    </div>
-                </article>
-            </div>
-
-            <div class="visual-example">
-                <h4>Interactive Token Inspector</h4>
-                <p>
-                    <strong>Golden Ratio:</strong> Creates harmonious
-                    proportions<br />
-                    <strong>Rhythm Unit (1rlh):</strong> Maintains vertical
-                    rhythm<br />
-                    <strong>Modular Scale:</strong> Consistent sizing
-                    relationships
-                </p>
-                <p class="muted">
-                    Click values to copy CSS custom properties to clipboard
-                </p>
-            </div>
-        </section>
 
         <!-- Typography Section -->
         <section id="typography">
-            <h3>Typography System</h3>
-            <p>Fine-art inspired typography with mathematical precision.</p>
 
-            <div class="visual-example">
-                <article>
-                    <h1>Heading Level 1</h1>
+
+                <article class="reading">
+                    <h1>Typography System</h1>
+                    <p>Fine-art inspired typography with mathematical precision.</p>
                     <p>
                         This demonstrates the typography system in action. The
                         golden ratio governs the relationships between font
@@ -576,35 +367,8 @@
                         framework's commitment to mathematical precision and
                         readability.
                     </p>
-                </article>
-            </div>
-        </section>
 
-        <!-- Bulletproof Rhythm Section -->
-        <section id="rhythm">
-            <h3>Bulletproof Rhythm System</h3>
-            <p>
-                The enhanced rhythm system now handles ALL content types: typography, forms, media,
-                tables, and custom components with automatic spacing, nesting protection, and debug modes.
-            </p>
 
-            <div class="visual-example">
-                <h4>Debug Controls</h4>
-                <p>
-                    Test different debug modes to see how rhythm works:
-                </p>
-                <button onclick="toggleRhythm()" class="toggle-btn">
-                    Toggle Basic Grid
-                </button>
-                <button onclick="toggleAdvancedDebug()" class="toggle-btn">
-                    Advanced Debug
-                </button>
-                <button onclick="toggleMeasureMode()" class="toggle-btn">
-                    Measure Mode
-                </button>
-            </div>
-
-            <div id="rhythm-demo" class="visual-example">
                 <h2>Complete Content Coverage</h2>
                 <p>
                     The bulletproof rhythm system now handles every type of content seamlessly:
@@ -653,98 +417,13 @@
                     </tbody>
                 </table>
 
-                <!-- Nested Rhythm Protection -->
-                <h3>Nesting Protection</h3>
-                <div>
-                    <p>This rhythm container is nested inside another rhythm container.</p>
-                    <div>
-                        <p>But nested rhythm containers don't double-space!</p>
-                        <p>The system automatically prevents spacing conflicts.</p>
-                    </div>
-                    <p>Content continues with proper spacing after nested containers.</p>
-                </div>
 
-                <!-- Custom Components -->
-                <h3>Custom Components</h3>
-                <div class="demo-box">Custom components integrate seamlessly</div>
-                <div class="demo-box">Each maintains proper rhythm spacing</div>
-            </div>
 
-            <div class="visual-example">
-                <h4>Rhythm Control Utilities</h4>
-                <p>Fine-tune spacing with utility classes:</p>
 
-                <div class="rhythm-tight">This has tight spacing</div>
-                <div class="rhythm-loose">This has loose spacing</div>
-                <div class="rhythm-xl">This has extra large spacing</div>
-                <div class="no-block-start">This removes block-start margin</div>
-                <div class="no-block-end">This removes block-end margin</div>
-            </div>
 
-            <div class="visual-example">
-                <h4>Margin Collapse Prevention</h4>
-                <p>The rhythm system uses margin-based spacing with collapse prevention for typographic nuances:</p>
-
-                <div class="demo-box" style="padding: var(--space-s);">
-                    <strong>Margin-Based Rhythm (Default)</strong>
-                    <div style="background: color-mix(in srgb, var(--color-green) 5%, var(--color-background)); padding: var(--space-xs);">
-                        <p style="background: var(--color-background); padding: var(--space-xxs);">Paragraph with natural spacing</p>
-                        <p style="background: var(--color-background); padding: var(--space-xxs);">Allows typographic nuances</p>
-                        <p style="background: var(--color-background); padding: var(--space-xxs);">Margin collapse prevented!</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="visual-example">
-                <h4>Logical vs Physical Properties</h4>
-                <p>The Standard Framework uses <strong>logical properties</strong> for international typography support:</p>
-
-                <div class="grid">
-                    <div class="col-6">
-                        <h5>✅ Logical Properties (Framework Default)</h5>
-                        <pre><code>/* Adapts to writing modes automatically */
-.rhythm > * {
-  margin-block-end: var(--space);
-}
-
-.reading {
-  padding-inline: var(--space-l);
-}</code></pre>
-                        <p class="small">Works in LTR, RTL, and vertical writing modes</p>
-                    </div>
-
-                    <div class="col-6">
-                        <h5>❌ Physical Properties (Avoid)</h5>
-                        <pre><code>/* Fixed to viewport directions */
-.old-way > * {
-  margin-bottom: var(--space);
-}
-
-.old-prose {
-  padding-left: var(--space-l);
-}</code></pre>
-                        <p class="small">Breaks in RTL languages and vertical text</p>
-                    </div>
-                </div>
-
-                <div class="demo-box" style="margin-block-start: var(--space);">
-                    <p><strong>Key Benefits of Logical Properties:</strong></p>
-                    <ul style="padding-inline-start: var(--space-l);">
-                        <li>🌍 International typography support</li>
-                        <li>🔮 Future-proof for writing modes</li>
-                        <li>🎯 Semantic clarity (start/end vs left/right)</li>
-                        <li>📏 Consistent with modern CSS (Grid, Flexbox)</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Colors Section -->
-        <section id="colors">
             <h3>Color System</h3>
             <p>Analog-inspired colors with automatic dark mode support.</p>
 
-            <div class="visual-example">
                 <div class="grid">
                     <div class="col-6">
                         <div
@@ -824,228 +503,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Typography Engine Section -->
-        <section id="typography-engine">
-            <h3>Typography Processing Engine</h3>
-            <p>
-                Advanced typography features including smart quotes, ligatures,
-                and enhanced readability.
-            </p>
-
-            <div class="visual-example">
-                <h4>Typographic Enhancements</h4>
-                <div id="typography-demo-content">
-                    <p>
-                        The typography engine automatically processes text to improve
-                        readability and aesthetic appeal. It transforms "straight quotes"
-                        into proper curly quotes and handles em-dashes gracefully.
-                    </p>
-                    <p>
-                        Advanced features include ligature support for common letter
-                        combinations like 'fi' and 'fl', widow prevention, and optimal
-                        text rendering for enhanced typography.
-                    </p>
-                </div>
-
-                <button
-                    onclick="toggleTypography()"
-                    style="
-                        background: var(--color-accent);
-                        color: var(--color-background);
-                        border: none;
-                        padding: var(--space-xs) var(--space-s);
-        border-radius: var(--border-radius);
-                        cursor: pointer;
-                    "
-                >
-                    Toggle Typography
-                </button>
-
-                <script>
-                    let typographyEnabled = true;
-
-                    function toggleTypography() {
-                        if (typeof standardTypography !== 'undefined') {
-                            typographyEnabled = !typographyEnabled;
-
-                            if (typographyEnabled) {
-                                standardTypography.init();
-                                console.log('Typography enabled');
-                            } else {
-                                standardTypography.destroy();
-                                console.log('Typography disabled');
-                            }
-                        } else {
-                            console.log('StandardTypography not available');
-                        }
-                    }
-
-                    // Make function globally accessible
-                    window.toggleTypography = toggleTypography;
-                </script>
-            </div>
-
-            <div class="visual-example">
-                <h4>Typography Metrics</h4>
-                <div>
-                    <div><strong>Reading Level:</strong> College</div>
-                    <div><strong>Average Words per Line:</strong> 12</div>
-                    <div><strong>Line Height Ratio:</strong> 1.5</div>
-                    <div><strong>Character Spacing:</strong> Optimized</div>
-                    <div><strong>Ligature Support:</strong> Enabled</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Forms Section -->
-        <section id="forms">
-            <h3>Form Elements</h3>
+<hr />
+            <h2>Form Elements</h3>
             <p>
                 Consistent form styling that integrates with the framework's
                 design system:
             </p>
-
-            <div class="visual-example">
-                <form>
-                    <div>
-                        <label
-                            for="demo-text"
-                            style="
-                                display: block;
-                                font-weight: var(--bold-weight);
-                            "
-                        >
-                            Text Input
-                        </label>
-                        <input
-                            type="text"
-                            id="demo-text"
-                            placeholder="Enter your name"
-                            style="width: 100%"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            for="demo-email"
-                            style="
-                                display: block;
-                                font-weight: var(--bold-weight);
-                            "
-                        >
-                            Email Input
-                        </label>
-                        <input
-                            type="email"
-                            id="demo-email"
-                            placeholder="your.email@example.com"
-                            style="width: 100%"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            for="demo-select"
-                            style="
-                                display: block;
-                                font-weight: var(--bold-weight);
-                            "
-                        >
-                            Select Dropdown
-                        </label>
-                        <select id="demo-select" style="width: 100%">
-                            <option>Choose an option...</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label
-                            for="demo-textarea"
-                            style="
-                                display: block;
-                                font-weight: var(--bold-weight);
-                            "
-                        >
-                            Textarea
-                        </label>
-                        <textarea
-                            id="demo-textarea"
-                            rows="4"
-                            placeholder="Enter your message here..."
-                            style="width: 100%"
-                        ></textarea>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" id="demo-checkbox" />
-                        <label for="demo-checkbox">
-                            I agree to the terms and conditions
-                        </label>
-                    </div>
-
-                    <div>
-                        <fieldset>
-                            <legend style="font-weight: var(--bold-weight)">
-                                Choose your preference:
-                            </legend>
-                            <div>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="preference"
-                                        value="option1"
-                                    />
-                                    Option 1
-                                </label>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="preference"
-                                        value="option2"
-                                    />
-                                    Option 2
-                                </label>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="preference"
-                                        value="option3"
-                                    />
-                                    Option 3
-                                </label>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div style="display: flex; gap: var(--space-s)">
-                        <button type="submit">Submit Form</button>
-                        <button
-                            type="button"
-                            style="
-                                background: var(--color-background-secondary);
-                                color: var(--color-foreground);
-                            "
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <p>Form layout examples and variations...</p>
-
-            <p><strong>Form layout examples:</strong></p>
-
-            <div class="visual-example">
-                <div class="grid">
-                    <form class="col-6">
+                    <form class="small">
                         <h3>Contact Form</h3>
                         <div>
                             <label
@@ -1119,127 +583,8 @@
                             </button>
                         </div>
                     </form>
-
-                    <form class="col-6">
-                        <h3>Registration Form</h3>
-                        <div>
-                            <label
-                                for="reg-name"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Full Name
-                            </label>
-                            <input
-                                type="text"
-                                id="reg-name"
-                                placeholder="Enter your full name"
-                                style="width: 100%"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="reg-email"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Email Address
-                            </label>
-                            <input
-                                type="email"
-                                id="reg-email"
-                                placeholder="your.email@example.com"
-                                style="width: 100%"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="country"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Country
-                            </label>
-                            <select id="country" style="width: 100%">
-                                <option>Select your country...</option>
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>United Kingdom</option>
-                                <option>Australia</option>
-                            </select>
-                        </div>
-                        <div>
-                            <fieldset>
-                                <legend style="font-weight: var(--bold-weight)">
-                                    Account Type
-                                </legend>
-                                <div>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="account-type"
-                                            value="personal"
-                                        />
-                                        Personal Account
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="account-type"
-                                            value="business"
-                                        />
-                                        Business Account
-                                    </label>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <button type="submit">Create Account</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-                            <li class="nav-item">
-                                <a href="#book-layout" class="nav-link"
-                                    >Reading Layout</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#grid-system" class="nav-link">Grid System</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#typography" class="nav-link">Typography</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#colors" class="nav-link">Colors</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#theme-system" class="nav-link">Theme System</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#design-tokens" class="nav-link"
-                                    >Design Tokens</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#rhythm" class="nav-link"
-                                    >Rhythm System</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a href="#forms" class="nav-link">Forms</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#typography-engine" class="nav-link"
-                                    >Typography Engine</a
-                                >
-                            </li>
+                </article>
+            </section>
 
         <!-- Load Standard Framework JavaScript -->
         <script src="../dist/standard.js"></script>

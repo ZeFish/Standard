@@ -507,13 +507,6 @@ blockquote {
         var(--color-border);
 }
 
-/* Code block colors */
-pre {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius);
-    border: var(--border);
-}
-
 /* Horizontal rule colors */
 hr {
     height: var(--hr-thickness);
@@ -553,65 +546,14 @@ th {
     border-radius: var(--border-radius);
 }
 
-/* Debug mode border styling */
-.rhythm.rhythm-debug > * {
-    border: 1px dashed color-mix(in srgb, var(--color-accent) 50%, transparent);
-}
-
-/* Debug utilities visual styling */
-.rhythm-debug-advanced > * {
-    outline: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-
-    &::before {
-        font-size: 0.65rem;
-        background: var(--color-accent);
-        color: var(--color-background);
-        padding: 0.1rem 0.3rem;
-        border-radius: 2px;
-        opacity: 0.9;
-    }
-}
-
-/* Debug outline for semantic elements */
-section.rhythm-debug-advanced,
-article.rhythm-debug-advanced,
-main.rhythm-debug-advanced {
-    > * {
-        outline: 1px solid
-            color-mix(in srgb, var(--color-accent) 40%, transparent);
-    }
-}
-
-.rhythm-debug-grid::before {
-    background: var(--color-accent);
-    color: var(--color-background);
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
-    font-size: var(--scale-xs);
-    box-shadow: var(--shadow);
-}
-
-.rhythm-debug-measure > * {
-    border-inline-start: 2px solid var(--color-accent);
-    padding-inline-start: 0.5rem;
-
-    &::before {
-        font-size: 0.75rem;
-        color: var(--color-accent);
-        background: var(--color-background);
-        padding: 0.2rem;
-        border-radius: 2px;
-    }
-}
-
 /* Strong and emphasis */
 strong {
-    color: var(--color-foreground);
+    color: var(--color-bold);
     font-weight: 600;
 }
 
 em {
-    color: var(--color-muted);
+    color: var(--color-italic);
     font-style: italic;
 }
 
@@ -632,8 +574,8 @@ pre {
     box-shadow: inset var(--shadow);
 }
 code:not(pre code) {
-    padding: var(--space-xxs);
     box-shadow: unset;
+    padding: 0 var(--space-xxxs);
 }
 
 /* Tables */
