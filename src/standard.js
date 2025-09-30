@@ -1081,7 +1081,6 @@ class StandardReadingDebug {
   constructor(options = {}) {
     this.options = {
       debug: false,
-      keyboardShortcuts: true,
       infoPanel: true,
       defaultMode: "off", // 'off', 'rhythm', 'columns', 'both'
       ...options,
@@ -1089,12 +1088,6 @@ class StandardReadingDebug {
 
     this.currentMode = this.options.defaultMode;
     this.isInitialized = false;
-    this.shortcuts = {
-      rhythm: "KeyR",
-      columns: "KeyC",
-      both: "KeyB",
-      off: "Escape",
-    };
 
     this.init();
   }
@@ -1105,47 +1098,11 @@ class StandardReadingDebug {
   init() {
     if (this.isInitialized) return;
 
-    if (this.options.keyboardShortcuts) {
-      this.setupKeyboardShortcuts();
-    }
-
     this.isInitialized = true;
 
     if (this.options.debug) {
       console.log("StandardReadingDebug: Initialized");
     }
-  }
-
-  /**
-   * Setup keyboard shortcuts for debug modes
-   */
-  setupKeyboardShortcuts() {
-    document.addEventListener("keydown", (e) => {
-      // Only activate when Ctrl/Cmd + Shift + [key]
-      if (!(e.ctrlKey || e.metaKey) || !e.shiftKey) return;
-
-      let newMode = null;
-
-      switch (e.code) {
-        case this.shortcuts.rhythm:
-          newMode = this.currentMode === "rhythm" ? "off" : "rhythm";
-          break;
-        case this.shortcuts.columns:
-          newMode = this.currentMode === "columns" ? "off" : "columns";
-          break;
-        case this.shortcuts.both:
-          newMode = this.currentMode === "both" ? "off" : "both";
-          break;
-        case this.shortcuts.off:
-          newMode = "off";
-          break;
-      }
-
-      if (newMode !== null) {
-        e.preventDefault();
-        this.setDebugMode(newMode);
-      }
-    });
   }
 
   /**
@@ -1278,25 +1235,6 @@ class StandardReadingDebug {
     const currentIndex = modes.indexOf(this.currentMode);
     const nextIndex = (currentIndex + 1) % modes.length;
     this.setDebugMode(modes[nextIndex]);
-  }
-
-  /**
-   * Get current debug info
-   */
-  getDebugInfo() {
-    return {
-      mode: this.currentMode,
-      isActive: this.currentMode !== "off",
-      showsRhythm: this.currentMode === "rhythm" || this.currentMode === "both",
-      showsColumns:
-        this.currentMode === "columns" || this.currentMode === "both",
-      shortcuts: {
-        rhythm: `Ctrl/Cmd + Shift + R`,
-        columns: `Ctrl/Cmd + Shift + C`,
-        both: `Ctrl/Cmd + Shift + B`,
-        off: `Escape`,
-      },
-    };
   }
 
   /**
@@ -1455,7 +1393,6 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
     window.standardReadingDebug.setDebugMode(mode);
   window.toggleReadingDebug = () =>
     window.standardReadingDebug.toggleDebugMode();
-  window.getReadingDebug = () => window.standardReadingDebug.getDebugInfo();
 
   // Auto-create theme toggle if container exists
   document.addEventListener("DOMContentLoaded", () => {
@@ -1463,14 +1400,6 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
     const toggleContainers = document.querySelectorAll("[data-theme-toggle]");
     toggleContainers.forEach((container) => {
       window.standardTheme.createToggleButton({ container });
-    });
-
-    // Create keyboard shortcut (Ctrl/Cmd + Shift + D)
-    document.addEventListener("keydown", (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "D") {
-        e.preventDefault();
-        window.toggleTheme();
-      }
     });
   });
 
@@ -1488,13 +1417,7 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
     console.log("Reading Debug API:", {
       "setReadingDebug(mode)": "Set debug mode: off, rhythm, columns, both",
       "toggleReadingDebug()": "Cycle through debug modes",
-      "getReadingDebug()": "Get current debug info",
     });
-    console.log("Keyboard shortcuts:");
-    console.log("• Ctrl/Cmd + Shift + D: Toggle theme");
-    console.log("• Ctrl/Cmd + Shift + R: Toggle vertical rhythm");
-    console.log("• Ctrl/Cmd + Shift + C: Toggle column layout");
-    console.log("• Ctrl/Cmd + Shift + B: Toggle both debug modes");
   }
 }
 
