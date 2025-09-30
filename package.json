@@ -5,7 +5,7 @@
   "main": "dist/standard.css",
   "exports": {
     ".": "./dist/standard.min.css",
-    "./js": "./dist/standard.js"
+    "./js": "./dist/standard.min.js"
   },
   "files": [
     "dist",
@@ -16,7 +16,8 @@
     "build:css": "sass --load-path=node_modules src/standard.scss dist/standard.css",
     "build:css-min": "sass --load-path=node_modules src/standard.scss dist/standard.min.css --style=compressed",
     "build:js": "cp src/standard.js dist/standard.js",
-    "build": "npm run build:css && npm run build:css-min && npm run build:js",
+    "build:js-min": "terser src/standard.js -o dist/standard.min.js",
+    "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min",
     "release": "release-it",
     "dev": "sass --watch --load-path=node_modules src/standard.scss dist/standard.css"
   },
@@ -64,7 +65,8 @@
   "devDependencies": {
     "release-it": "^19.0.5",
     "sanitize.css": "^13.0.0",
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "terser": "^5.44.0"
   },
   "engines": {
     "node": ">=14.0.0"

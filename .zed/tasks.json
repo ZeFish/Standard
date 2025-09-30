@@ -1,12 +1,25 @@
 [
   {
-    "label": "build-css",
+    "label": "build-all",
     "command": "npm run build",
+    "description": "Compiles Sass to CSS and minifies JS."
+  },
+  {
+    "label": "build-css",
+    "command": "npm run build:css && npm run build:css-min",
     "description": "Compiles Sass to CSS."
   },
   {
+    "label": "build-js",
+    "command": "npm run build:js && npm run build:js-min",
+    "description": "Copies and minifies JS."
+  },
+  {
     "label": "watch-css",
-    "command": "npm run build",
-    "description": "Watches Sass files for changes and recompiles."
+    "description": "Watches Sass files for changes and recompiles.",
+    "watch": {
+      "paths": ["src/**/*.scss"],
+      "task": "build-css"
+    }
   }
 ]
