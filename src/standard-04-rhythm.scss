@@ -520,10 +520,10 @@
 /* Reduce repaints and reflows */
 .rhythm {
     /* Use GPU acceleration for transforms if needed */
-    transform: translateZ(0);
+    /*transform: translateZ(0); */
 
     /* Optimize for animations */
-    will-change: auto;
+    /*will-change: auto; */
 }
 
 /* =========================== */
