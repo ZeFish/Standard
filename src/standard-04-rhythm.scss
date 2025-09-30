@@ -212,34 +212,50 @@
     /* =========================== */
 
     /* Lists */
+
     ul,
     ol {
         padding-inline-start: var(--space);
-        list-style: none;
+        list-style-position: initial;
+        list-style-image: initial;
+        list-style-type: initial;
+        margin-block-start: 0;
+        margin-block-end: var(--space);
     }
 
     /* Nested lists */
     li > ul,
     li > ol {
-        padding-inline-start: var(--space);
+        padding-inline-start: var(--space-s);
     }
 
     /* List items spacing only */
     li {
         margin: 0;
-    }
-    li::before {
-        margin-inline-end: var(--space-s);
+        padding-inline-start: var(--space-s);
+        line-height: var(--font-density-s);
     }
 
     ol {
         counter-reset: ol-counter;
+        list-style-type: decimal;
     }
 
-    ol > li::before {
-        display: inline-block;
-        width: var(--space);
-        margin-inline-start: var(--space);
+    ul > li::marker {
+        content: "\2022";
+        text-align: center;
+        color: color-mix(in srgb, currentColor 60%, transparent);
+        margin-inline-end: var(--space-s);
+    }
+
+    ol > li::marker {
+        /*content: counter(ol-counter) ".\00A0";
+        counter-increment: ol-counter;*/
+        text-align: right;
+        color: color-mix(in srgb, currentColor 60%, transparent);
+        font-variant-numeric: tabular-nums;
+        text-align: end !important;
+        padding-inline-start: var(--space-s);
     }
 
     /* Blockquotes - spacing only */

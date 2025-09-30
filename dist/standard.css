@@ -336,7 +336,7 @@
   /* Current ratio (configurable) */
   --font-ratio: var(--ratio-golden);
   --font-density: 1.3;
-  --font-density-s: 1;
+  --font-density-s: 1.2;
   /* Modular Scale - calculated from font-ratio */
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
   --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
@@ -1420,80 +1420,64 @@ textarea {
 /* RHYTHM ELEMENT TYPOGRAPHY   */
 /* =========================== */
 /* Typography properties for elements within rhythm containers */
-:where(.rhythm) {
-  /* List styling */
+/* List styling */
+li {
+  line-height: var(--font-density-s);
 }
-:where(.rhythm) li {
-  line-height: 1.4;
-}
-:where(.rhythm) ul > li::before {
-  content: "•";
-  text-align: center;
-  color: color-mix(in srgb, currentColor 60%, transparent);
-}
-:where(.rhythm) ol > li::before {
-  content: counter(ol-counter) ". ";
-  counter-increment: ol-counter;
-  text-align: right;
-  color: color-mix(in srgb, currentColor 60%, transparent);
-  font-variant-numeric: tabular-nums;
-}
-:where(.rhythm) {
-  /* Blockquote typography */
-}
-:where(.rhythm) blockquote {
+
+/* Blockquote typography */
+blockquote {
   font-style: italic;
   font-size: var(--scale-s);
 }
-:where(.rhythm) {
-  /* Code block typography */
-}
-:where(.rhythm) pre,
-:where(.rhythm) code {
+
+/* Code block typography */
+pre,
+code {
   font-family: var(--font-monospace, monospace);
   font-size: var(--scale-s);
   line-height: var(--font-density-s);
   overflow-x: auto;
 }
-:where(.rhythm) {
-  /* Form typography */
-}
-:where(.rhythm) legend {
+
+/* Form typography */
+legend {
   font-weight: var(--bold-weight, bold);
 }
-:where(.rhythm) label {
+
+label {
   font-weight: var(--bold-weight, bold);
 }
-:where(.rhythm) {
-  /* Figure caption typography */
-}
-:where(.rhythm) figcaption {
+
+/* Figure caption typography */
+figcaption {
   font-size: var(--scale-s);
   font-style: italic;
   text-align: center;
 }
-:where(.rhythm) {
-  /* Table typography */
-}
-:where(.rhythm) table {
+
+/* Table typography */
+table {
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
-:where(.rhythm) th,
-:where(.rhythm) td {
+
+th,
+td {
   text-align: left;
 }
-:where(.rhythm) th {
+
+th {
   font-weight: var(--bold-weight, bold);
 }
-:where(.rhythm) caption {
+
+caption {
   font-weight: var(--bold-weight, bold);
   text-align: left;
 }
-:where(.rhythm) {
-  /* Callout typography */
-}
-:where(.rhythm) .callout-title {
+
+/* Callout typography */
+.callout-title {
   font-weight: var(--bold-weight, bold);
 }
 
@@ -1693,31 +1677,45 @@ textarea {
 :where(.rhythm) ul,
 :where(.rhythm) ol {
   padding-inline-start: var(--space);
-  list-style: none;
+  list-style-position: initial;
+  list-style-image: initial;
+  list-style-type: initial;
+  margin-block-start: 0;
+  margin-block-end: var(--space);
 }
 :where(.rhythm) {
   /* Nested lists */
 }
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
-  padding-inline-start: var(--space);
+  padding-inline-start: var(--space-s);
 }
 :where(.rhythm) {
   /* List items spacing only */
 }
 :where(.rhythm) li {
   margin: 0;
-}
-:where(.rhythm) li::before {
-  margin-inline-end: var(--space-s);
+  padding-inline-start: var(--space-s);
+  line-height: var(--font-density-s);
 }
 :where(.rhythm) ol {
   counter-reset: ol-counter;
+  list-style-type: decimal;
 }
-:where(.rhythm) ol > li::before {
-  display: inline-block;
-  width: var(--space);
-  margin-inline-start: var(--space);
+:where(.rhythm) ul > li::marker {
+  content: "•";
+  text-align: center;
+  color: color-mix(in srgb, currentColor 60%, transparent);
+  margin-inline-end: var(--space-s);
+}
+:where(.rhythm) ol > li::marker {
+  /*content: counter(ol-counter) ".\00A0";
+  counter-increment: ol-counter;*/
+  text-align: right;
+  color: color-mix(in srgb, currentColor 60%, transparent);
+  font-variant-numeric: tabular-nums;
+  text-align: end !important;
+  padding-inline-start: var(--space-s);
 }
 :where(.rhythm) {
   /* Blockquotes - spacing only */
