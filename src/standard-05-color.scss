@@ -553,28 +553,6 @@ th {
     border-radius: var(--border-radius);
 }
 
-/* Semantic elements debug visualization */
-section,
-article,
-main {
-    /* Debug mode visualization */
-    background-image: repeating-linear-gradient(
-        0deg,
-        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent),
-        color-mix(in srgb, var(--color-accent, magenta) 10%, transparent) 1px,
-        transparent 1px,
-        transparent calc(var(--space) * var(--rhythm-multiplier))
-    );
-    background-repeat: repeat-y;
-    background-size: 100% calc(var(--space) * var(--rhythm-multiplier));
-    background-position: 0 0.5px;
-
-    /* Nested rhythm debug reset */
-    .rhythm {
-        background-image: none;
-    }
-}
-
 /* Debug mode border styling */
 .rhythm.rhythm-debug > * {
     border: 1px dashed color-mix(in srgb, var(--color-accent) 50%, transparent);
