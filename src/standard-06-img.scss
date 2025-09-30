@@ -30,6 +30,11 @@ img {
         border-radius: var(--border-radius);
         border: var(--border);
     }
+    img.nofx {
+        border-radius: unset;
+        border: unset;
+        box-shadow: unset;
+    }
 
     img:hover,
     img.zoomed {

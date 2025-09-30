@@ -2912,6 +2912,12 @@ img {
   border-radius: var(--border-radius);
   border: var(--border);
 }
+.reading img.nofx,
+.rhythm img.nofx {
+  border-radius: unset;
+  border: unset;
+  box-shadow: unset;
+}
 .reading img:hover,
 .reading img.zoomed,
 .rhythm img:hover,
