@@ -189,6 +189,7 @@ tt,
     font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
     font-feature-settings: var(--font-monospace-feature);
     font-variation-settings: var(--font-monospace-variation);
+    font-size: var(--scale-s);
 }
 
 // Strong/bold normalization
@@ -282,23 +283,23 @@ textarea {
 
 /* Typography properties for elements within rhythm containers */
 
-.rhythm {
+:where(.rhythm) {
     /* List styling */
     li {
         line-height: 1.4;
     }
 
-    ul > li::marker {
+    ul > li::before {
         content: "\2022";
         text-align: center;
-        opacity: 0.6;
+        color: color-mix(in srgb, currentColor 60%, transparent);
     }
 
-    ol > li::marker {
-        content: counter(ol-counter) ". ";
+    ol > li::before {
+        content: counter(ol-counter) ".\00A0";
         counter-increment: ol-counter;
         text-align: right;
-        opacity: 0.6;
+        color: color-mix(in srgb, currentColor 60%, transparent);
         font-variant-numeric: tabular-nums;
     }
 

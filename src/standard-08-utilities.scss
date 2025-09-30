@@ -53,11 +53,26 @@
     padding-inline: 0 !important;
 }
 
+.box {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: var(--space);
+}
+.box-inset {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius);
+    border: var(--border);
+    box-shadow: inset var(--shadow);
+    padding: var(--space);
+}
+
 /* ===== CENTERING UTILITIES ===== */
 /* General-purpose centered containers with max-width constraints */
 
 .centered {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 
@@ -164,7 +179,7 @@
     margin-inline: auto;
 }
 .line-width-normal {
-    max-inline-size: var(--line-width-normal);
+    max-inline-size: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -206,34 +221,34 @@
 /* Special rhythm behaviors */
 .rhythm-tight-group > * {
     margin-block-end: calc(
-        var(--space-xs) * var(--marge-multiplier, 1)
+        var(--space-xs) * var(--rhythm-multiplier, 1)
     ) !important;
 }
 
 .rhythm-loose-group > * {
     margin-block-end: calc(
-        var(--space-l) * var(--marge-multiplier, 1)
+        var(--space-l) * var(--rhythm-multiplier, 1)
     ) !important;
 }
 
 /* Form-specific rhythm helpers using logical properties */
 .rhythm-form-row {
     display: flex;
-    gap: calc(var(--space-s) * var(--marge-multiplier, 1));
+    gap: calc(var(--space-s) * var(--rhythm-multiplier, 1));
     align-items: center;
     margin-block-end: calc(
-        var(--space) * var(--marge-multiplier, 1)
+        var(--space) * var(--rhythm-multiplier, 1)
     ) !important;
 }
 
 .rhythm-form-group {
     margin-block-end: calc(
-        var(--space) * var(--marge-multiplier, 1)
+        var(--space) * var(--rhythm-multiplier, 1)
     ) !important;
 
     label {
         margin-block-end: calc(
-            var(--space-xs) * var(--marge-multiplier, 1)
+            var(--space-xs) * var(--rhythm-multiplier, 1)
         ) !important;
     }
 
@@ -241,7 +256,7 @@
     textarea,
     select {
         margin-block-end: calc(
-            var(--space-xs) * var(--marge-multiplier, 1)
+            var(--space-xs) * var(--rhythm-multiplier, 1)
         ) !important;
     }
 }
@@ -251,11 +266,11 @@
 
 /* Spacing override utilities */
 .rhythm-tight {
-    gap: calc(var(--space-s) * var(--marge-multiplier)) !important;
+    gap: calc(var(--space-s) * var(--rhythm-multiplier)) !important;
 }
 
 .rhythm-loose {
-    gap: calc(var(--space-l) * var(--marge-multiplier)) !important;
+    gap: calc(var(--space-l) * var(--rhythm-multiplier)) !important;
 }
 
 .rhythm-none {
@@ -339,7 +354,7 @@
 
         > * {
             margin-block-end: calc(
-                var(--space-block) * var(--marge-multiplier)
+                var(--space-block) * var(--rhythm-multiplier)
             );
         }
 
@@ -352,7 +367,7 @@
 /* Fallback for logical properties */
 @supports not (margin-block-end: 1rem) {
     .rhythm > * {
-        margin-bottom: calc(var(--space-block) * var(--marge-multiplier));
+        margin-bottom: calc(var(--space-block) * var(--rhythm-multiplier));
     }
 
     .rhythm > :last-child {
@@ -372,7 +387,7 @@
     }
 
     .line-width-normal {
-        max-width: var(--line-width-normal);
+        max-width: var(--line-width);
         margin-left: auto;
         margin-right: auto;
     }

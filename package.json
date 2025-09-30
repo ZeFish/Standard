@@ -4,8 +4,7 @@
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "main": "dist/standard.css",
   "exports": {
-    ".": "./dist/standard.css",
-    "./min": "./dist/standard.min.css",
+    ".": "./dist/standard.min.css",
     "./js": "./dist/standard.js"
   },
   "files": [
@@ -18,7 +17,7 @@
     "build:css-min": "sass --load-path=node_modules src/standard.scss dist/standard.min.css --style=compressed",
     "build:js": "cp src/standard.js dist/standard.js",
     "build": "npm run build:css && npm run build:css-min && npm run build:js",
-    "release": "npm run clean && npm run build",
+    "release": "release-it",
     "dev": "sass --watch --load-path=node_modules src/standard.scss dist/standard.css"
   },
   "keywords": [
@@ -50,7 +49,20 @@
   "publishConfig": {
     "access": "public"
   },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true
+    }
+  },
   "devDependencies": {
+    "release-it": "^19.0.5",
     "sanitize.css": "^13.0.0",
     "sass": "^1.93.2"
   },

@@ -199,7 +199,7 @@ Optimized reading widths based on typography research:
 
 - `--line-width-xs` (24rem) - Sidebar content, narrow columns
 - `--line-width-s` (32rem) - Forms, short articles, mobile-first
-- `--line-width-normal` (42rem) - Optimal reading width (60-75 chars/line)
+- `--line-width` (42rem) - Optimal reading width (60-75 chars/line)
 - `--line-width-wide` (50rem) - Articles with images/code
 - `--line-width-xl` (60rem) - Documentation, technical content
 - `--line-width-full` (88vw) - Responsive full width with margins

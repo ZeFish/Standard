@@ -60,7 +60,7 @@
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 
-.rhythm {
+:where(.rhythm) {
     /* Prevent nested rhythm from double-spacing - token defined in tokens file */
 
     /* Debug mode visualization - moved to debug section */
@@ -70,7 +70,7 @@
     /* =========================== */
 
     /* Default: Use margins with collapse prevention (allows typographic nuances) */
-    /*display: block;*/
+    display: flow-root; /* Modern margin collapse prevention */
 
     /* Create new block formatting context to prevent margin collapse */
     /* contain: layout style; I messed the position fixed so commented it */
@@ -82,42 +82,32 @@
     margin-block-end: -1px;
 
     > * {
-        margin-block: 0;
-        margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
-    }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-
-    > :first-child {
         margin-block-start: 0;
+        margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
+
+        &:last-child {
+            margin-block-end: 0;
+        }
     }
-}
 
-/* =========================== */
-/* NESTING PROTECTION          */
-/* =========================== */
+    .rhythm {
+        --rhythm-multiplier: 1; /* Reset for nested contexts */
+    }
 
-/* Nested rhythm containers don't double-space */
-/* Apply to both explicit rhythm classes and semantic elements */
-/*
-.rhythm .rhythm,
-.rhythm section,
-.rhythm article,
-.rhythm main {
-    --marge-active: 0;
-    contain: unset;
-    padding-block: 0;
-    margin-block: 0;
-}
-*/
+    .small,
+    .accent,
+    .feature,
+    .full {
+        /* These are layout containers, give them rhythm spacing */
+        margin-block-end: calc(
+            var(--space-block-special) * var(--rhythm-multiplier)
+        );
+    }
 
-/* =========================== */
-/* TYPOGRAPHIC NUANCES         */
-/* =========================== */
+    /* =========================== */
+    /* TYPOGRAPHIC NUANCES         */
+    /* =========================== */
 
-.rhythm {
     /* Enhanced spacing relationships for typography */
     p {
         margin-block-start: 0;
@@ -172,45 +162,10 @@
     }
 
     /* Blockquotes get more generous spacing */
-    blockquote {
-        margin-block-start: calc(
-            (var(--space-block-special) - var(--space)) *
-                var(--rhythm-multiplier)
-        );
-        margin-block-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
-        margin-inline-start: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
-        margin-inline-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
-    }
-
-    /* Pre/code blocks need breathing room */
-    pre {
-        margin-block-start: calc(
-            (var(--space-block-special) - var(--space)) *
-                var(--rhythm-multiplier)
-        );
-        margin-block-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
-    }
-
-    /* Figure spacing for visual hierarchy */
-    figure {
-        margin-block-start: calc(
-            (var(--space-block-special) - var(--space)) *
-                var(--rhythm-multiplier)
-        );
-        margin-block-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
-    }
-
-    /* Paragraphs with images get special block spacing */
+    .callout,
+    blockquote,
+    pre,
+    figure,
     p:has(img) {
         margin-block-start: calc(
             (var(--space-block-special) - var(--space)) *
@@ -220,26 +175,13 @@
             var(--space-block-special) * var(--rhythm-multiplier)
         );
     }
+
     p:has(img) + p:has(img) {
         --margin-to-remove: calc(
             (var(--space-block-special) * var(--rhythm-multiplier)) * -1
         );
 
         margin-block-start: calc(var(--margin-to-remove) + var(--space-gap));
-        margin-block-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
-    }
-
-    /* Callouts get special block spacing */
-    .callout {
-        margin-block-start: calc(
-            (var(--space-block-special) - var(--space)) *
-                var(--rhythm-multiplier)
-        );
-        margin-block-end: calc(
-            var(--space-block-special) * var(--rhythm-multiplier)
-        );
     }
 
     /* Reset first-child spacing for special blocks */
@@ -272,8 +214,8 @@
     /* Lists */
     ul,
     ol {
-        padding-inline-start: var(--space-l);
-        list-style-position: outside;
+        padding-inline-start: var(--space);
+        list-style: none;
     }
 
     /* Nested lists */
@@ -286,19 +228,15 @@
     li {
         margin: 0;
     }
-
-    /* List marker spacing only */
-    ul > li::marker {
-        display: inline-block;
-        width: var(--space);
-        margin-inline-start: var(--space);
+    li::before {
+        margin-inline-end: var(--space-s);
     }
 
     ol {
         counter-reset: ol-counter;
     }
 
-    ol > li::marker {
+    ol > li::before {
         display: inline-block;
         width: var(--space);
         margin-inline-start: var(--space);
@@ -423,25 +361,6 @@
     caption {
         margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
-
-    /* =========================== */
-    /* COMPONENTS & CUSTOM         */
-    /* =========================== */
-
-    /* Callouts and special components - spacing only */
-    .callout {
-        padding: calc(var(--space) * var(--rhythm-multiplier));
-        display: grid;
-        gap: calc(var(--space-s) * var(--rhythm-multiplier));
-    }
-
-    .callout-title {
-        margin: 0;
-    }
-
-    .callout-content {
-        margin: 0;
-    }
 }
 
 /* Common layout containers inherit rhythm to cascade deeper */
@@ -560,5 +479,11 @@
         > :last-child {
             margin-block-end: 0;
         }
+    }
+}
+
+/* Mobile fallback: stack free columns full-width */
+@media (max-width: 767.98px) {
+    :root {
     }
 }

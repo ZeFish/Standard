@@ -18,40 +18,17 @@
 
                 --font-density: 1.2;
             }
-
-            /* Minimal custom styles - using framework tokens */
-            section {
-                max-width: var(--line-width-xl);
-                margin-inline: auto;
-                margin-bottom: var(--space-xxxl);
-            }
-
-            .section-inset {
-                border: var(--border);
-                background: var(--color-background);
-                box-shadow: inset var(--shadow);
-                padding: var(--space);
-                border-radius: var(--border-radius);
-            }
-
             /* Framework handles pre/code styling automatically */
 
-            .demo-box {
-                background: var(--color-background-secondary);
-                border-radius: var(--border-radius);
-                border: var(--border);
-                box-shadow: var(--shadow);
-                padding: var(--space);
-
-
+            .box {
                 text-align: center;
                 font-size: var(--scale-s);
             }
         </style>
     </head>
     <body class="rhythm md">
+        <div class="reading">
         <!-- Book Layout & Reading System Section -->
-        <section id="book-layout" class="reading" style="max-width: var(--line-width-full);">
             <h1>Standard<br />Framework</h1>
             <p>
                 A fine-art typography framework with automatic light/dark theme,
@@ -181,113 +158,23 @@
                 </div>
             </div>
 
-            <h2>Visual Debug System</h2>
-            <p>
-                Use the debug controls to visualize the vertical rhythm and column boundaries:
-            </p>
-
-            <div id="reading-debug-controls" style="margin-bottom: var(--space);"></div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space); margin: var(--space) 0;">
-                <div style="background: var(--color-background-secondary); padding: var(--space-s); border-radius: var(--border-radius); font-size: var(--scale-xs);">
-                    <strong>Keyboard Shortcuts:</strong><br>
-                    <kbd>Ctrl/Cmd + Shift + R</kbd> - Rhythm lines<br>
-                    <kbd>Ctrl/Cmd + Shift + C</kbd> - Column boundaries<br>
-                    <kbd>Ctrl/Cmd + Shift + B</kbd> - Both modes<br>
-                    <kbd>Escape</kbd> - Turn off debug
-                </div>
-                <div style="background: var(--color-background-secondary); padding: var(--space-s); border-radius: var(--border-radius); font-size: var(--scale-xs);">
-                    <strong>Debug Lines:</strong><br>
-                    <span style="color: var(--color-accent); font-weight: bold;">━━</span> Major rhythm (4×)<br>
-                    <span style="color: var(--color-accent); opacity: 0.6;">━━</span> Secondary rhythm (2×)<br>
-                    <span style="color: var(--color-accent); opacity: 0.3;">━━</span> Base rhythm (1×)<br>
-                    <span style="color: var(--color-accent); font-weight: bold;">│</span> Columns
-                </div>
-            </div>
-
-            <script>
-                // Create debug controls when page loads
-                document.addEventListener('DOMContentLoaded', function() {
-                    const controlsContainer = document.getElementById('reading-debug-controls');
-                    if (controlsContainer && window.standardReadingDebug) {
-                        window.standardReadingDebug.createDebugControls({
-                            container: controlsContainer
-                        });
-                    }
-                });
-            </script>
-
-            <h2>Typography Processing Demo</h2>
-            <p>Test the typography engine to see how it processes text:</p>
-
-            <div class="section-inset">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space); margin: var(--space) 0;">
-                    <div>
-                        <h4>Typography Test Text</h4>
-                        <div id="typography-test" style="background: var(--color-background-secondary); padding: var(--space); border-radius: var(--border-radius);">
-                            <p>This is a test of the typography system. It should prevent "widow words" and handle quotes like "smart quotes" and apostrophes like don't.</p>
-                            <p>It also handles common abbreviations like Dr. Smith and time like 3 PM.</p>
-                            <p>Special characters like em dashes -- and ellipses... should be converted.</p>
-                        </div>
-                        <button onclick="toggleTypographyDemo()" style="margin-top: var(--space-xs);">Toggle Typography Processing</button>
-                    </div>
-                    <div>
-                        <h4>Processing Info</h4>
-                        <div id="typography-info" style="background: var(--color-background-secondary); padding: var(--space); border-radius: var(--border-radius); font-family: monospace; font-size: var(--scale-xs);">
-                            Click button to see processing effects
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                let typographyDemoProcessed = false;
-
-                function toggleTypographyDemo() {
-                    const testElement = document.getElementById('typography-test');
-                    const infoElement = document.getElementById('typography-info');
-
-                    if (!typographyDemoProcessed) {
-                        // Force processing
-                        if (window.standardTypography) {
-                            window.standardTypography.clearProcessedMarkers();
-                            window.standardTypography.processNewContent(testElement);
-                            infoElement.innerHTML = 'Typography processed:<br>• Smart quotes applied<br>• Non-breaking spaces added<br>• Em dashes converted<br>• Widow prevention active';
-                            typographyDemoProcessed = true;
-                        }
-                    } else {
-                        // Reset to original
-                        const paragraphs = testElement.querySelectorAll('p');
-                        paragraphs.forEach(p => {
-                            if (p.hasAttribute('data-original-content')) {
-                                p.innerHTML = p.getAttribute('data-original-content');
-                                p.removeAttribute('data-original-content');
-                                p.removeAttribute('data-typography-processed');
-                            }
-                        });
-                        infoElement.innerHTML = 'Typography reset to original:<br>• Regular quotes restored<br>• Normal spaces restored<br>• Hyphens restored<br>• Original text layout';
-                        typographyDemoProcessed = false;
-                    }
-                }
-            </script>
-        </section>
 
         <!-- Grid System Section -->
-        <section id="grid-system">
+        <section id="grid-system" class="feature">
             <h2>12-Column Grid System</h2>
             <pre><code>&lt;div class="grid"&gt;
   &lt;div class="col-6"&gt;...&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
                 <div class="grid">
-                    <div class="col-6 demo-box">col-6</div>
-                    <div class="col-6 demo-box">col-6</div>
-                    <div class="col-4 demo-box">col-4</div>
-                    <div class="col-8 demo-box">col-8</div>
-                    <div class="col-3 demo-box">col-3</div>
-                    <div class="col-3 demo-box">col-3</div>
-                    <div class="col-3 demo-box">col-3</div>
-                    <div class="col-3 demo-box">col-3</div>
+                    <div class="col-6 box">col-6</div>
+                    <div class="col-6 box">col-6</div>
+                    <div class="col-4 box">col-4</div>
+                    <div class="col-8 box">col-8</div>
+                    <div class="col-3 box">col-3</div>
+                    <div class="col-3 box">col-3</div>
+                    <div class="col-3 box">col-3</div>
+                    <div class="col-3 box">col-3</div>
                 </div>
 
             <h3>Free Columns with CSS Variables</h3>
@@ -296,14 +183,14 @@
 &lt;/div&gt;</code></pre>
 
                 <div class="grid">
-                    <div class="col-6 demo-box">Main Content</div>
+                    <div class="col-6 box">Main Content</div>
                     <div
-                        class="free-col demo-box"
+                        class="free-col box"
                         style="--start: 8; --span: 3"
                     >
                         Sidebar<br />--start: 8<br />--span: 3
                     </div>
-                    <div class="free-col demo-box span-2 startv-10">
+                    <div class="free-col box span-2 startv-10">
                         Utility<br />.span-2<br />.startv-10
                     </div>
                 </div>
@@ -427,7 +314,7 @@
                 <div class="grid">
                     <div class="col-6">
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-red);
                                 color: var(--color-background);
@@ -436,7 +323,7 @@
                             <strong>Red</strong>
                         </div>
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-orange);
                                 color: var(--color-background);
@@ -445,7 +332,7 @@
                             <strong>Orange</strong>
                         </div>
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-yellow);
                                 color: var(--color-background);
@@ -454,7 +341,7 @@
                             <strong>Yellow</strong>
                         </div>
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-green);
                                 color: var(--color-background);
@@ -466,7 +353,7 @@
 
                     <div class="col-6">
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-cyan);
                                 color: var(--color-background);
@@ -475,7 +362,7 @@
                             <strong>Cyan</strong>
                         </div>
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-blue);
                                 color: var(--color-background);
@@ -484,7 +371,7 @@
                             <strong>Blue</strong>
                         </div>
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-purple);
                                 color: var(--color-background);
@@ -493,7 +380,7 @@
                             <strong>Purple</strong>
                         </div>
                         <div
-                            class="demo-box"
+                            class="box"
                             style="
                                 background: var(--color-pink);
                                 color: var(--color-background);
@@ -570,17 +457,7 @@
                         </div>
                         <div>
                             <button type="submit">Send Message</button>
-                            <button
-                                type="reset"
-                                style="
-                                    background: var(
-                                        --color-background-secondary
-                                    );
-                                    color: var(--color-foreground);
-                                "
-                            >
-                                Reset Form
-                            </button>
+                            <button type="reset">Reset Form</button>
                         </div>
                     </form>
                 </article>
@@ -588,5 +465,6 @@
 
         <!-- Load Standard Framework JavaScript -->
         <script src="../dist/standard.js"></script>
+        </div>
     </body>
 </html>

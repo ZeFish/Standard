@@ -3415,11 +3415,11 @@ Found 15 matches:
     /* Content area tokens */
     --line-width-xs: 24rem; /* ~384px - narrow sidebar content */
     --line-width-s: 32rem; /* ~512px - short form content */
-    --line-width-normal: 42rem; /* ~672px - optimal reading (60-75 chars) */
+    --line-width: 42rem; /* ~672px - optimal reading (60-75 chars) */
     --line-width-wide: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
     --line-width-full: 88vw; /* responsive full width with margins */
-    --line-width: var(--line-width-normal);
+    --line-width: var(--line-width);
 
     /* Layout grid tokens */
     --gap: clamp(var(--space), 6vw, var(--space-xl));
@@ -4999,7 +4999,7 @@ Status: Completed
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -5095,7 +5095,7 @@ Diff: src/gutter-08-utilities.scss
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -5465,7 +5465,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -7693,7 +7693,7 @@ Diff: src/gutter-08-utilities.scss
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -8153,7 +8153,7 @@ Diff: src/gutter-08-utilities.scss
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -10572,7 +10572,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -12058,7 +12058,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -13568,7 +13568,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -15326,7 +15326,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -16813,7 +16813,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -18335,7 +18335,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -19859,7 +19859,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -21354,7 +21354,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -22879,7 +22879,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -24906,7 +24906,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -26414,7 +26414,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -28029,7 +28029,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -29528,7 +29528,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -31038,7 +31038,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -32574,7 +32574,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -34577,7 +34577,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -36010,7 +36010,7 @@ Diff: src/gutter-08-utilities.scss
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -36381,7 +36381,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -38360,7 +38360,7 @@ Diff: src/gutter-08-utilities.scss
     margin-inline: auto;
 }
 .line-width-normal {
-    max-width: var(--line-width-normal);
+    max-width: var(--line-width);
     margin-inline: auto;
 }
 .line-width-wide {
@@ -38741,7 +38741,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -41279,7 +41279,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -43902,7 +43902,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -46139,7 +46139,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -47742,7 +47742,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -49714,7 +49714,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -51339,7 +51339,7 @@ Optimized reading widths based on typography research:
 
 - `--line-width-xs` (24rem) - Sidebar content, narrow columns
 - `--line-width-s` (32rem) - Forms, short articles, mobile-first
-- `--line-width-normal` (42rem) - Optimal reading width (60-75 chars/line)
+- `--line-width` (42rem) - Optimal reading width (60-75 chars/line)
 - `--line-width-wide` (50rem) - Articles with images/code
 - `--line-width-xl` (60rem) - Documentation, technical content
 - `--line-width-full` (88vw) - Responsive full width with margins
@@ -52175,7 +52175,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -53858,7 +53858,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -55721,7 +55721,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>
@@ -58230,7 +58230,7 @@ Diff: example/index.html
                 <div class="token-item">
                     <strong>Content Tokens</strong>
                     (gutter-02-prose.scss)<br />
-                    --line-width-normal: 42rem | --line-width-wide: 50rem
+                    --line-width: 42rem | --line-width-wide: 50rem
                 </div>
                 <div class="token-item">
                     <strong>Typography Tokens</strong>

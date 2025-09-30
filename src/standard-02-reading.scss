@@ -3,19 +3,32 @@
     /* Content area tokens */
     --line-width-xs: 24rem; /* ~384px - narrow sidebar content */
     --line-width-s: 32rem; /* ~512px - short form content */
-    --line-width-normal: 42rem; /* ~672px - optimal reading (60-75 chars) */
-    --line-width-wide: 50rem; /* ~800px - wider articles */
+    --line-width-m: 42rem; /* ~672px - optimal reading (60-75 chars) - DEFAULT */
+    --line-width-l: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
-    --line-width-full: 88vw; /* responsive full width with margins */
-    --line-width: var(--line-width-normal);
+    --line-width-full: calc(
+        100vw - (var(--space) * 2)
+    ); /* responsive full width with margins */
+    --line-width: var(--line-width-m);
 
     /* Layout grid tokens */
     --gap: clamp(var(--space), 6vw, var(--space-xl));
-    --content: min(var(--line-width), 100% - var(--gap) * 2);
+    --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
     --content-small: var(--space-l);
     --content-accent: minmax(0, var(--space-l));
     --content-feature: minmax(0, var(--space-xxl));
-    --content-full: minmax(var(--gap), 1fr);
+    --content-full: minmax(0, 1fr);
+}
+
+/* Responsive adjustments - collapse gutters on small screens */
+@media only screen and (max-width: 668px) {
+    :root {
+        --content-small: 0;
+        --content: min(var(--line-width), 100%); /* ← FIXED */
+        --content-accent: 0;
+        --content-feature: 0;
+        --content-full: 0; /* Just the minimum gap */
+    }
 }
 
 /* Reading Layout System - Article content grid and positioning */
@@ -32,11 +45,10 @@
         var(--content-feature) [feature-end]
         var(--content-full) [full-end];
 
-    padding-inline: calc(var(--space) * -2);
+    transition: grid-template-columns 0.3s ease-out;
 
     position: relative;
     z-index: var(--z-base);
-
     /* Default content positioning */
     > * {
         grid-column: content;
@@ -111,6 +123,14 @@
         border: var(--border);
     }
 
+    .callout,
+    blockquote,
+    pre,
+    figure,
+    p:has(img) {
+        margin-inline: var(--content-small);
+    }
+
     /* Mermaid diagrams */
     .mermaid {
         margin-block-end: var(--space);
@@ -121,6 +141,25 @@
     p img {
         max-inline-size: 100%;
     }
+}
+
+.width-xs {
+    max-width: var(--line-width-xs);
+}
+.width-s {
+    max-width: var(--line-width-s);
+}
+.width-m {
+    max-width: var(--line-width-m);
+}
+.width-l {
+    max-width: var(--line-width-l);
+}
+.width-xl {
+    max-width: var(--line-width-xl);
+}
+.width-full {
+    max-width: var(--line-width-full);
 }
 
 /* Animation keyframes */

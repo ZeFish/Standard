@@ -50,7 +50,7 @@
             var(--color-callout) 5%,
             var(--color-background-secondary)
         );
-        border-color: var(--color-border);
+        border: var(--border);
 
         .callout-title {
             color: color-mix(
@@ -81,7 +81,6 @@
             margin-top: var(--space-xxs);
             margin-left: 0;
             border: var(--border);
-            border-color: var(--color-border);
             text-align: left;
 
             p:first-child {
@@ -177,13 +176,7 @@
     // ==========================
     // Mobile Specific Styles
     // ==========================
-    @media only screen and (max-width: 600px) {
-        .callout,
-        blockquote,
-        pre {
-            margin: var(--space) 0 var(--space-l) 0;
-        }
-
+    @media only screen and (max-width: 768px) {
         ul:not([start]),
         ol:not([start]) {
             padding: 0;
