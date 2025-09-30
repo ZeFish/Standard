@@ -15,11 +15,11 @@
     "description": "Copies and minifies JS."
   },
   {
-    "label": "watch-css",
-    "description": "Watches Sass files for changes and recompiles.",
+    "label": "watch",
+    "description": "Watches all files for changes and recompiles.",
     "watch": {
-      "paths": ["src/**/*.scss"],
-      "task": "build-css"
+      "paths": ["src/**/*.scss", "src/standard.js"],
+      "task": "build-all"
     }
   }
 ]
