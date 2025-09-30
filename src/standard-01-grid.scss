@@ -40,6 +40,16 @@
     }
 }
 
+/* Spans 1..12 */
+@for $i from 1 through 12 {
+    .grid-#{$i} {
+        display: grid;
+        grid-template-columns: repeat(#{$i}, 1fr);
+        column-gap: var(--grid-gap);
+        row-gap: var(--grid-row-gap);
+    }
+}
+
 /* Optional starts 1..12 */
 @for $i from 1 through 12 {
     .start-#{$i} {

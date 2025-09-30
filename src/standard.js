@@ -1093,6 +1093,7 @@ class Standard {
     this.restoreAllOriginalContent();
     this.process();
     this.dispatchEvent("afterRefresh", {});
+    return this;
   }
 
   /**
@@ -1165,6 +1166,41 @@ class Standard {
   }
 
   /**
+   * Enable specific features and allow chaining
+   */
+  enable(features) {
+    if (!Array.isArray(features)) {
+      console.error("Standard.enable() expects an array of feature names.");
+      return this;
+    }
+
+    const featureMap = {
+      WidowPrevention: "enableWidowPrevention",
+      SmartQuotes: "enableSmartQuotes",
+      Punctuation: "enablePunctuation",
+      Spacing: "enableSpacing",
+      Fractions: "enableFractions",
+      NumberFormatting: "enableNumberFormatting",
+    };
+
+    const newOptions = {};
+    features.forEach((feature) => {
+      const optionName = featureMap[feature];
+      if (optionName) {
+        newOptions[optionName] = true;
+      } else {
+        console.warn(
+          `Standard: Unknown feature \"${feature}\" passed to enable().`,
+        );
+      }
+    });
+
+    this.updateOptions(newOptions);
+
+    return this; // Enable chaining
+  }
+
+  /**
    * Update options and reprocess
    */
   updateOptions(newOptions) {
@@ -1207,6 +1243,8 @@ class Standard {
     if (shouldRefresh) {
       this.refresh();
     }
+
+    return this;
   }
 
   /**
