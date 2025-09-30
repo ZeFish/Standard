@@ -73,7 +73,7 @@
     /*display: block;*/
 
     /* Create new block formatting context to prevent margin collapse */
-    contain: layout style;
+    /* contain: layout style; I messed the position fixed so commented it */
 
     /* Alternative: Use padding on container to prevent collapse */
     padding-block-start: 1px;
