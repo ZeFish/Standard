@@ -1706,7 +1706,7 @@ legend) {
   /* MARGIN-COLLAPSE-SAFE CORE   */
   /* =========================== */
   /* Default: Use margins with collapse prevention (allows typographic nuances) */
-  display: block;
+  /*display: block;*/
   /* Create new block formatting context to prevent margin collapse */
   contain: layout style;
   /* Alternative: Use padding on container to prevent collapse */
@@ -2898,7 +2898,6 @@ img {
 .rhythm img:first-child,
 .rhythm img:last-child {
   margin: 0;
-  border: var(--border);
   max-inline-size: 100%;
   block-size: auto;
 }
@@ -2906,8 +2905,12 @@ img {
 .rhythm img {
   max-width: 100%;
   cursor: zoom-in;
-  border-radius: var(--border-radius);
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
+}
+.reading img.fx,
+.rhythm img.fx {
+  border-radius: var(--border-radius);
+  border: var(--border);
 }
 .reading img:hover,
 .reading img.zoomed,
