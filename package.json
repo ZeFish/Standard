@@ -80,7 +80,10 @@
       "publish": true
     },
     "github": {
-      "release": true
-    }
+      "release": true,
+      "web": false
+    },
+    "hooks": {},
+    "ci": true
   }
 }
