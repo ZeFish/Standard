@@ -2531,11 +2531,6 @@ aside) {
       var(--color-foreground) 3%,
       var(--color-background)
   );
-  --color-background-tertiary: color-mix(
-      in srgb,
-      var(--color-foreground) 6%,
-      var(--color-background)
-  );
   /* Interactive states */
   --color-hover: color-mix(
       in srgb,
@@ -2595,11 +2590,6 @@ aside) {
     --color-background-secondary: color-mix(
         in srgb,
         var(--color-foreground) 5%,
-        var(--color-background)
-    );
-    --color-background-tertiary: color-mix(
-        in srgb,
-        var(--color-foreground) 8%,
         var(--color-background)
     );
     /* Dark mode shadows */
@@ -2684,10 +2674,6 @@ body {
   background: var(--color-background-secondary);
 }
 
-.bg-tertiary {
-  background: var(--color-background-tertiary);
-}
-
 .border-default {
   border: var(--border);
 }
@@ -2704,7 +2690,7 @@ a:visited {
   text-decoration: underline;
   text-decoration-thickness: 0.1em;
   text-underline-offset: 0.15em;
-  text-decoration-color: var(--color-border);
+  text-decoration-color: var(--color-subtle);
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
