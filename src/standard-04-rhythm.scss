@@ -258,6 +258,11 @@
         display: none;
     }
 
+    ul.compact li,
+    ol.compact li {
+        margin-block-end: 0;
+    }
+
     /* Blockquotes - spacing only */
     blockquote {
         padding-inline-start: var(--space);
