@@ -1476,11 +1476,6 @@ html {
   orphans: 2;
 }
 
-body {
-  margin: 0;
-  padding: var(--space);
-}
-
 h1,
 h2,
 h3,
@@ -1764,6 +1759,12 @@ caption {
 }
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
+:where(body:not(.no-rhythm)) {
+  margin: 0;
+  padding: var(--space-l);
+  padding-bottom: var(--space-xl);
+}
+
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
