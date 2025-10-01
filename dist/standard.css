@@ -1940,7 +1940,7 @@ aside) {
 :where(.rhythm) pre,
 :where(.rhythm) figure,
 :where(.rhythm) p:has(img) {
-  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 :where(body:not(.no-rhythm)),
