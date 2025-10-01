@@ -882,7 +882,7 @@ class Standard {
     ];
 
     // Build one big regex pattern for all words
-    const pattern = `\\b(${shortWords.join("|")})\\s`;
+    const pattern = `\\b(${shortWords.join("|")})\\b\\s`;
     const regex = new RegExp(pattern, "gi");
 
     // Replace all at once
@@ -970,7 +970,7 @@ class Standard {
       "sera",
     ];
 
-    const pattern = `\\b(${shortWords.join("|")})\\s`;
+    const pattern = `\\b(${shortWords.join("|")})\\b\\s`;
     const regex = new RegExp(pattern, "gi");
     text = text.replace(regex, `$1${rules.nonBreakingSpace}`);
 
@@ -1035,7 +1035,7 @@ class Standard {
       "wird",
     ];
 
-    const pattern = `\\b(${shortWords.join("|")})\\s`;
+    const pattern = `\\b(${shortWords.join("|")})\\b\\s`;
     const regex = new RegExp(pattern, "gi");
     text = text.replace(regex, `$1${rules.nonBreakingSpace}`);
 
@@ -1091,7 +1091,7 @@ class Standard {
       "ser",
     ];
 
-    const pattern = `\\b(${shortWords.join("|")})\\s`;
+    const pattern = `\\b(${shortWords.join("|")})\\b\\s`;
     const regex = new RegExp(pattern, "gi");
     text = text.replace(regex, `$1${rules.nonBreakingSpace}`);
 
@@ -1147,7 +1147,7 @@ class Standard {
       "fare",
     ];
 
-    const pattern = `\\b(${shortWords.join("|")})\\s`;
+    const pattern = `\\b(${shortWords.join("|")})\\b\\s`;
     const regex = new RegExp(pattern, "gi");
     text = text.replace(regex, `$1${rules.nonBreakingSpace}`);
 

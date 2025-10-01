@@ -49,6 +49,10 @@
     text-transform: none;
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 /* ===== LOGICAL SPACING UTILITIES ===== */
 
 /* Block direction spacing utilities */
@@ -507,5 +511,68 @@
         max-width: var(--line-width-full);
         margin-left: auto;
         margin-right: auto;
+    }
+}
+
+/* Multi-column text flow utilities */
+.flow-2 {
+    columns: 2;
+    column-gap: var(--grid-gap);
+}
+
+.flow-3 {
+    columns: 3;
+    column-gap: var(--grid-gap);
+}
+
+.flow-4 {
+    columns: 4;
+    column-gap: var(--grid-gap);
+}
+
+/* Responsive column count based on container width */
+.flow-auto {
+    columns: auto;
+    column-width: var(--line-width-s); /* ~32rem optimal column width */
+    column-gap: var(--grid-gap);
+}
+
+/* Column gap variants */
+.flow-gap-tight {
+    column-gap: var(--space-s);
+}
+
+.flow-gap-wide {
+    column-gap: var(--space-l);
+}
+
+/* Prevent breaks inside elements */
+.flow-keep {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+/* Column rules (vertical lines between columns) */
+.flow-rule {
+    column-rule: var(--border);
+}
+
+.flow-rule-accent {
+    column-rule: 1px solid var(--color-accent);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .flow-2,
+    .flow-3,
+    .flow-4 {
+        columns: 1; /* Stack on mobile */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .flow-3,
+    .flow-4 {
+        columns: 2; /* Reduce columns on tablets */
     }
 }
