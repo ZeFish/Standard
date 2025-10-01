@@ -56,6 +56,12 @@
 /* Responsive spans/starts: md ≥ 768px, lg ≥ 1024px */
 @media (max-width: 768px) {
     @for $i from 1 through 12 {
+        .grid-sm-#{$i} {
+            display: grid;
+            grid-template-columns: repeat(#{$i}, 1fr);
+            column-gap: var(--grid-gap);
+            row-gap: var(--grid-row-gap);
+        }
         .col-sm-#{$i} {
             grid-column: span #{$i};
         }
@@ -69,6 +75,12 @@
 }
 @media (min-width: 1024px) {
     @for $i from 1 through 12 {
+        .grid-lg-#{$i} {
+            display: grid;
+            grid-template-columns: repeat(#{$i}, 1fr);
+            column-gap: var(--grid-gap);
+            row-gap: var(--grid-row-gap);
+        }
         .col-lg-#{$i} {
             grid-column: span #{$i};
         }
