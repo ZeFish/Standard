@@ -1919,6 +1919,19 @@ aside) {
   color: color-mix(in srgb, currentColor 60%, transparent);
   font-variant-numeric: tabular-nums;
 }
+:where(body:not(.no-rhythm)) ul.no-bullet,
+:where(body:not(.no-rhythm)) ol.no-bullet,
+:where(.rhythm) ul.no-bullet,
+:where(.rhythm) ol.no-bullet {
+  list-style: none;
+  padding-inline-start: 0;
+}
+:where(body:not(.no-rhythm)) ul.no-bullet li::before,
+:where(body:not(.no-rhythm)) ol.no-bullet li::before,
+:where(.rhythm) ul.no-bullet li::before,
+:where(.rhythm) ol.no-bullet li::before {
+  display: none;
+}
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Blockquotes - spacing only */
