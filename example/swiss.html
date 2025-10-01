@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ausstellung: Schweizer Grafik 1950–1970</title>
+        <link rel="stylesheet" href="../dist/standard.css" />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+            :root {
+                --font-text: Inter, system-ui, sans-serif;
+                /* Pure Swiss Color Palette */
+                --color-background: #ffffff;
+                --color-foreground: #000000;
+                --color-accent: #ff0000;
+
+                /* Collapse all decorative colors */
+                --color-red: var(--color-accent);
+                --color-orange: var(--color-accent);
+                --color-yellow: var(--color-accent);
+                --color-green: var(--color-accent);
+                --color-cyan: var(--color-accent);
+                --color-blue: var(--color-accent);
+                --color-purple: var(--color-accent);
+                --color-pink: var(--color-accent);
+
+                --color-muted: #666666;
+                --color-subtle: #999999;
+                --color-border: #000000;
+                --color-background-secondary: #f5f5f5;
+
+                /* No shadows - flat design */
+                --shadow: none;
+                --shadow-l: none;
+
+                /* Swiss typography settings */
+                --font-header-weight: 900;
+                --font-header-letter-spacing: -0.02em;
+                --font-ratio: 1.5;
+            }
+
+            body {
+                background: var(--color-background);
+                color: var(--color-foreground);
+                padding: 0;
+            }
+
+            /* Main container - Swiss poster proportions */
+            .exhibition-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: var(--space-xxl);
+            }
+
+            /* Extreme display typography */
+            .exhibition-title {
+                font-size: clamp(3rem, 12vw, 10rem);
+                font-weight: 900;
+                line-height: 0.85;
+                letter-spacing: -0.02em;
+                text-transform: uppercase;
+                margin: 0;
+                margin-bottom: var(--space-s);
+            }
+
+            .exhibition-subtitle {
+                font-size: clamp(1.5rem, 6vw, 4rem);
+                font-weight: 900;
+                line-height: 0.9;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            /* Technical labels */
+            .label {
+                font-size: 0.625rem;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                font-weight: 700;
+                line-height: 1.4;
+            }
+
+            /* Thick dividers */
+            .divider-thick {
+                height: 6px;
+                background: var(--color-foreground);
+                margin: var(--space-xl) 0;
+                border: none;
+            }
+
+            .divider-accent {
+                height: 4px;
+                background: var(--color-accent);
+                margin: var(--space-l) 0;
+                border: none;
+            }
+
+            /* Swiss table */
+            .swiss-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-variant-numeric: tabular-nums;
+                margin: var(--space-l) 0;
+            }
+
+            .swiss-table th {
+                text-align: left;
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                font-size: var(--scale-s);
+                border-bottom: 3px solid var(--color-foreground);
+                padding-block-end: var(--space-xs);
+                padding-inline-end: var(--space);
+            }
+
+            .swiss-table td {
+                border-bottom: 1px solid var(--color-border);
+                padding-block: var(--space-xs);
+                padding-inline-end: var(--space);
+                font-size: var(--scale-s);
+            }
+
+            .swiss-table tbody tr:nth-child(even) {
+                background: var(--color-background-secondary);
+            }
+
+            /* Info boxes */
+            .info-box {
+                border: 3px solid var(--color-foreground);
+                padding: var(--space);
+                margin: var(--space-l) 0;
+            }
+
+            .info-box-accent {
+                background: var(--color-foreground);
+                color: var(--color-background);
+                border: none;
+                padding: var(--space);
+            }
+
+            .info-box-red {
+                background: var(--color-accent);
+                color: var(--color-background);
+                border: none;
+                padding: var(--space);
+            }
+
+            /* Artist grid */
+            .artist-card {
+                border: 2px solid var(--color-foreground);
+                padding: var(--space);
+                text-align: center;
+            }
+
+            .artist-name {
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: var(--space-xs);
+            }
+
+            .artist-years {
+                font-size: var(--scale-s);
+                color: var(--color-muted);
+            }
+
+            /* Image placeholder */
+            .image-placeholder {
+                background: var(--color-background-secondary);
+                border: 2px solid var(--color-foreground);
+                aspect-ratio: 3/4;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 4rem;
+                margin-bottom: var(--space);
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .exhibition-container {
+                    padding: var(--space);
+                }
+            }
+        </style>
+    </head>
+    <body class="rhythm">
+        <div class="exhibition-container">
+            <!-- Header -->
+            <header>
+                <p class="label" style="margin-bottom: var(--space-xs)">
+                    Kunsthaus Zürich Präsentiert
+                </p>
+                <h1 class="exhibition-title">Schweizer</h1>
+                <h1 class="exhibition-title" style="color: var(--color-accent)">
+                    Grafik
+                </h1>
+                <h2 class="exhibition-subtitle">1950–1970</h2>
+                <hr class="divider-accent" />
+            </header>
+
+            <!-- Introduction -->
+            <div class="grid">
+                <div class="col-8">
+                    <p
+                        style="
+                            font-size: var(--scale-l);
+                            line-height: 1.5;
+                            margin-bottom: var(--space-l);
+                        "
+                    >
+                        Eine umfassende Retrospektive der Schweizer
+                        Grafik-Design-Bewegung, die die visuelle Kommunikation
+                        weltweit revolutionierte. Von den Pionieren des
+                        Internationalen Stils bis zu den ikonischen Plakaten,
+                        die eine Ära definierten.
+                    </p>
+
+                    <hr class="divider-thick" />
+
+                    <h3
+                        class="uppercase"
+                        style="
+                            font-size: var(--scale-xl);
+                            margin-bottom: var(--space);
+                        "
+                    >
+                        Ausstellungsübersicht
+                    </h3>
+
+                    <p style="margin-bottom: var(--space)">
+                        Die Ausstellung zeigt über 200 Originalwerke der
+                        bedeutendsten Schweizer Grafikdesigner. Jedes Werk
+                        verkörpert die Prinzipien des Internationalen
+                        Typografischen Stils: mathematische Präzision,
+                        asymmetrische Layouts, Sans-Serif-Typografie und
+                        funktionale Klarheit.
+                    </p>
+
+                    <h4 class="uppercase" style="margin-bottom: var(--space-s)">
+                        Thematische Bereiche
+                    </h4>
+                    <ul style="margin-bottom: var(--space-l)">
+                        <li>Konzertplakate und Kulturwerbung</li>
+                        <li>Rastersysteme und typografische Ordnung</li>
+                        <li>Objektive Fotografie</li>
+                        <li>Signalétique und Orientierungssysteme</li>
+                        <li>Buchgestaltung und Editorial Design</li>
+                    </ul>
+                </div>
+
+                <div class="col-4">
+                    <div class="info-box-red">
+                        <p
+                            class="label"
+                            style="
+                                color: var(--color-background);
+                                margin-bottom: var(--space-xs);
+                            "
+                        >
+                            Vernissage
+                        </p>
+                        <p
+                            style="
+                                font-size: var(--scale-xl);
+                                font-weight: 900;
+                                line-height: 1;
+                                margin-bottom: var(--space-s);
+                            "
+                        >
+                            15<br />
+                            März<br />
+                            2024
+                        </p>
+                        <p style="font-weight: 700">18:00 Uhr</p>
+                    </div>
+
+                    <div class="info-box" style="margin-top: var(--space)">
+                        <p class="label" style="margin-bottom: var(--space-xs)">
+                            Ausstellungsdauer
+                        </p>
+                        <p
+                            style="
+                                font-weight: 700;
+                                margin-bottom: var(--space-xs);
+                            "
+                        >
+                            16. März – 15. Juni 2024
+                        </p>
+                        <p style="font-size: var(--scale-s)">
+                            Dienstag – Sonntag<br />
+                            10:00 – 18:00 Uhr<br />
+                            Donnerstag bis 20:00 Uhr
+                        </p>
+                    </div>
+
+                    <div
+                        class="info-box-accent"
+                        style="margin-top: var(--space)"
+                    >
+                        <p
+                            class="label"
+                            style="
+                                color: var(--color-background);
+                                margin-bottom: var(--space-xs);
+                            "
+                        >
+                            Eintritt
+                        </p>
+                        <p
+                            style="
+                                font-size: var(--scale-l);
+                                font-weight: 900;
+                                margin-bottom: var(--space-xs);
+                            "
+                        >
+                            CHF 18
+                        </p>
+                        <p style="font-size: var(--scale-s)">
+                            Ermässigt CHF 12<br />
+                            Kinder unter 16 frei
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Artists -->
+            <div style="margin-top: var(--space-xxl)">
+                <h3
+                    class="uppercase"
+                    style="
+                        font-size: var(--scale-xxl);
+                        margin-bottom: var(--space-xl);
+                        text-align: center;
+                    "
+                >
+                    Künstler
+                </h3>
+
+                <div class="grid">
+                    <div class="col-3">
+                        <div class="artist-card">
+                            <div class="image-placeholder">JMB</div>
+                            <div class="artist-name">
+                                Josef Müller-Brockmann
+                            </div>
+                            <div class="artist-years">1914–1996</div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="artist-card">
+                            <div class="image-placeholder">AH</div>
+                            <div class="artist-name">Armin Hofmann</div>
+                            <div class="artist-years">1920–2020</div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="artist-card">
+                            <div class="image-placeholder">ER</div>
+                            <div class="artist-name">Emil Ruder</div>
+                            <div class="artist-years">1914–1970</div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="artist-card">
+                            <div class="image-placeholder">MB</div>
+                            <div class="artist-name">Max Bill</div>
+                            <div class="artist-years">1908–1994</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exhibition Schedule -->
+            <div style="margin-top: var(--space-xxl)">
+                <h3
+                    class="uppercase"
+                    style="
+                        font-size: var(--scale-xl);
+                        margin-bottom: var(--space-l);
+                    "
+                >
+                    Veranstaltungsprogramm
+                </h3>
+
+                <table class="swiss-table">
+                    <thead>
+                        <tr>
+                            <th>Datum</th>
+                            <th>Zeit</th>
+                            <th>Veranstaltung</th>
+                            <th>Referent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15. März</td>
+                            <td>18:00</td>
+                            <td>Vernissage & Eröffnungsrede</td>
+                            <td>Dr. Anna Weber</td>
+                        </tr>
+                        <tr>
+                            <td>22. März</td>
+                            <td>19:00</td>
+                            <td>Vortrag: Rastersysteme im Design</td>
+                            <td>Prof. Hans Neuburg</td>
+                        </tr>
+                        <tr>
+                            <td>5. April</td>
+                            <td>14:00</td>
+                            <td>Workshop: Typografie-Grundlagen</td>
+                            <td>Studio Müller</td>
+                        </tr>
+                        <tr>
+                            <td>19. April</td>
+                            <td>19:00</td>
+                            <td>Filmvorführung: Helvetica</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>3. Mai</td>
+                            <td>14:00</td>
+                            <td>Führung: Objektive Fotografie</td>
+                            <td>Claudia Meier</td>
+                        </tr>
+                        <tr>
+                            <td>17. Mai</td>
+                            <td>19:00</td>
+                            <td>Podiumsdiskussion: Erbe des Swiss Style</td>
+                            <td>Diverse Sprecher</td>
+                        </tr>
+                        <tr>
+                            <td>31. Mai</td>
+                            <td>14:00</td>
+                            <td>Workshop: Plakat-Design</td>
+                            <td>Atelier Hofmann</td>
+                        </tr>
+                        <tr>
+                            <td>14. Juni</td>
+                            <td>19:00</td>
+                            <td>Finissage & Abschlussveranstaltung</td>
+                            <td>Kuratorenteam</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Key Principles -->
+            <div style="margin-top: var(--space-xxl)">
+                <hr class="divider-thick" />
+
+                <div class="grid">
+                    <div class="col-6">
+                        <h3
+                            class="uppercase"
+                            style="
+                                font-size: var(--scale-xl);
+                                margin-bottom: var(--space);
+                            "
+                        >
+                            Gestaltungsprinzipien
+                        </h3>
+
+                        <h4
+                            class="uppercase"
+                            style="margin-bottom: var(--space-s)"
+                        >
+                            Mathematische Präzision
+                        </h4>
+                        <p style="margin-bottom: var(--space)">
+                            Jedes Element folgt einem strengen Rastersystem.
+                            Proportionen basieren auf mathematischen
+                            Verhältnissen, nicht auf subjektiven Entscheidungen.
+                        </p>
+
+                        <h4
+                            class="uppercase"
+                            style="margin-bottom: var(--space-s)"
+                        >
+                            Asymmetrische Balance
+                        </h4>
+                        <p style="margin-bottom: var(--space)">
+                            Dynamische Spannung durch asymmetrische Anordnung.
+                            Vermeidung von zentrierten, symmetrischen
+                            Kompositionen.
+                        </p>
+
+                        <h4
+                            class="uppercase"
+                            style="margin-bottom: var(--space-s)"
+                        >
+                            Sans-Serif-Typografie
+                        </h4>
+                        <p style="margin-bottom: var(--space)">
+                            Helvetica, Univers, Akzidenz-Grotesk. Neutrale,
+                            objektive Schriften ohne dekorative Elemente.
+                        </p>
+                    </div>
+
+                    <div class="col-6">
+                        <h3
+                            class="uppercase"
+                            style="
+                                font-size: var(--scale-xl);
+                                margin-bottom: var(--space);
+                            "
+                        >
+                            Philosophie
+                        </h3>
+
+                        <blockquote
+                            style="
+                                border: none;
+                                padding: 0;
+                                font-style: italic;
+                                font-size: var(--scale-l);
+                                line-height: 1.4;
+                                margin-bottom: var(--space-l);
+                            "
+                        >
+                            "Die Form folgt der Funktion. Gestaltung ist nicht
+                            Dekoration, sondern Ordnung der Information."
+                        </blockquote>
+
+                        <p style="margin-bottom: var(--space)">
+                            Der Internationale Typografische Stil entstand aus
+                            dem Bedürfnis nach klarer, objektiver Kommunikation
+                            in einer zunehmend komplexen Welt. Schweizer
+                            Designer entwickelten ein System, das Klarheit über
+                            Ausdruck, Funktion über Form stellte.
+                        </p>
+
+                        <p>
+                            Diese Prinzipien beeinflussten nicht nur das
+                            Grafikdesign, sondern auch Architektur,
+                            Produktdesign und visuelle Identitätssysteme
+                            weltweit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Section -->
+            <div
+                style="
+                    margin-top: var(--space-xxl);
+                    margin-bottom: var(--space-xxl);
+                "
+            >
+                <hr class="divider-accent" />
+                <div class="grid">
+                    <div class="col-8 col-start-3">
+                        <blockquote
+                            style="
+                                border: none;
+                                padding: var(--space-xl) 0;
+                                text-align: center;
+                            "
+                        >
+                            <p
+                                style="
+                                    font-size: var(--scale-xxl);
+                                    line-height: 1.1;
+                                    font-weight: 900;
+                                    text-transform: uppercase;
+                                    margin-bottom: var(--space);
+                                "
+                            >
+                                "Weniger ist mehr"
+                            </p>
+                            <p class="label">— Ludwig Mies van der Rohe</p>
+                        </blockquote>
+                    </div>
+                </div>
+                <hr class="divider-accent" />
+            </div>
+
+            <!-- Practical Information -->
+            <div class="grid">
+                <div class="col-6">
+                    <div class="info-box">
+                        <h4
+                            class="uppercase"
+                            style="margin-bottom: var(--space-s)"
+                        >
+                            Anfahrt
+                        </h4>
+                        <p
+                            style="
+                                font-weight: 700;
+                                margin-bottom: var(--space-xs);
+                            "
+                        >
+                            Kunsthaus Zürich
+                        </p>
+                        <p style="font-size: var(--scale-s); line-height: 1.5">
+                            Heimplatz 1<br />
+                            8001 Zürich<br /><br />
+                            Tram 3, 5, 9 → Kunsthaus<br />
+                            S-Bahn → Stadelhofen (5 Min. Fussweg)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="info-box">
+                        <h4
+                            class="uppercase"
+                            style="margin-bottom: var(--space-s)"
+                        >
+                            Kontakt
+                        </h4>
+                        <p style="font-size: var(--scale-s); line-height: 1.5">
+                            <strong>Telefon:</strong> +41 44 253 84 84<br />
+                            <strong>E-Mail:</strong> info@kunsthaus.ch<br />
+                            <strong>Web:</strong> www.kunsthaus.ch<br /><br />
+                            <strong>Führungen:</strong> Jeden Samstag 15:00
+                            Uhr<br />
+                            <strong>Gruppenführungen:</strong> Nach Vereinbarung
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer
+                style="
+                    margin-top: var(--space-xxl);
+                    padding-top: var(--space-l);
+                    border-top: 2px solid var(--color-foreground);
+                "
+            >
+                <div class="grid">
+                    <div class="col-6">
+                        <p class="label">
+                            Kunsthaus Zürich<br />
+                            Gegründet 1787
+                        </p>
+                    </div>
+                    <div class="col-6" style="text-align: right">
+                        <p class="label">
+                            Ausstellungsgestaltung: Studio Müller-Brockmann<br />
+                            Katalog: Lars Müller Publishers
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Load Standard Framework JavaScript -->
+        <script src="../dist/standard.js"></script>
+        <script>
+            // Initialize Standard with Swiss settings
+            if (window.standard) {
+                window.standard.updateOptions({
+                    locale: "de",
+                    enableSmartQuotes: true,
+                    enablePunctuation: true,
+                    enableWidowPrevention: true,
+                    enableSpacing: true,
+                });
+            }
+        </script>
+    </body>
+</html>

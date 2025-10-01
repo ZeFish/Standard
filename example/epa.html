@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en" data-swiss-mode="epa">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Environmental Data Report - EPA Design System</title>
+        <link rel="stylesheet" href="../dist/standard.css" />
+        <link rel="stylesheet" href="../dist/standard-10-swiss.css" />
+        <style>
+            /* EPA-specific overrides inline for demo */
+            :root {
+                /* EPA Color System */
+                --color-primary: #0071bc;
+                --color-secondary: #2e8540;
+                --color-accent: #0071bc;
+                --color-background: #ffffff;
+                --color-foreground: #212121;
+
+                /* EPA Grays */
+                --color-gray-darkest: #323a45;
+                --color-gray-dark: #5b616b;
+                --color-gray: #aeb0b5;
+                --color-gray-light: #d6d7d9;
+                --color-gray-lighter: #f1f1f1;
+
+                /* Semantic colors */
+                --color-success: #2e8540;
+                --color-info: #02bfe7;
+                --color-warning: #fdb81e;
+                --color-error: #e31c3d;
+
+                --color-muted: var(--color-gray-dark);
+                --color-border: var(--color-gray-light);
+                --color-background-secondary: var(--color-gray-lighter);
+
+                /* EPA uses subtle shadows */
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                --shadow-l: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            /* EPA Navigation */
+            .epa-header {
+                background: var(--color-primary);
+                color: white;
+                padding: var(--space) var(--space-l);
+                box-shadow: var(--shadow-l);
+            }
+
+            .epa-header-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .epa-logo {
+                font-size: var(--scale-l);
+                font-weight: 700;
+                color: white;
+                text-decoration: none;
+            }
+
+            .epa-nav {
+                display: flex;
+                gap: var(--space);
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .epa-nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: var(--scale-s);
+                padding: var(--space-xs) var(--space-s);
+                border-radius: 4px;
+                transition: background 0.2s ease;
+            }
+
+            .epa-nav a:hover {
+                background: rgba(255, 255, 255, 0.15);
+            }
+
+            .epa-nav a.active {
+                background: rgba(255, 255, 255, 0.25);
+            }
+
+            /* EPA Hero */
+            .epa-hero {
+                background: linear-gradient(135deg, #0071bc 0%, #205493 100%);
+                color: white;
+                padding: var(--space-xxl) var(--space-l);
+                text-align: center;
+            }
+
+            .epa-hero-title {
+                font-size: clamp(2.5rem, 6vw, 4rem);
+                font-weight: 700;
+                margin-bottom: var(--space);
+                line-height: 1.1;
+            }
+
+            .epa-hero-subtitle {
+                font-size: clamp(1.125rem, 3vw, 1.5rem);
+                opacity: 0.95;
+                max-width: 42rem;
+                margin: 0 auto;
+                line-height: 1.5;
+            }
+
+            /* EPA Alert */
+            .epa-alert {
+                padding: var(--space);
+                border-left: 4px solid var(--color-info);
+                background: var(--color-background-secondary);
+                margin-bottom: var(--space);
+                border-radius: 4px;
+            }
+
+            .epa-alert-success {
+                border-color: var(--color-success);
+                background: color-mix(
+                    in srgb,
+                    var(--color-success) 10%,
+                    var(--color-background)
+                );
+            }
+
+            .epa-alert-warning {
+                border-color: var(--color-warning);
+                background: color-mix(
+                    in srgb,
+                    var(--color-warning) 10%,
+                    var(--color-background)
+                );
+            }
+
+            .epa-alert-error {
+                border-color: var(--color-error);
+                background: color-mix(
+                    in srgb,
+                    var(--color-error) 10%,
+                    var(--color-background)
+                );
+            }
+
+            .epa-alert-title {
+                font-weight: 700;
+                margin-bottom: var(--space-xs);
+            }
+
+            /* EPA Card */
+            .epa-card {
+                background: white;
+                border: 1px solid var(--color-border);
+                padding: var(--space);
+                box-shadow: var(--shadow);
+                border-radius: 4px;
+            }
+
+            .epa-card-header {
+                font-size: var(--scale-l);
+                font-weight: 700;
+                color: var(--color-primary);
+                margin-bottom: var(--space-s);
+            }
+
+            .epa-card-meta {
+                font-size: var(--scale-xs);
+                color: var(--color-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: var(--space-xs);
+            }
+
+            /* EPA Button */
+            .epa-button {
+                display: inline-block;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                font-weight: 700;
+                text-decoration: none;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                background: var(--color-primary);
+                color: white;
+            }
+
+            .epa-button:hover {
+                background: #205493;
+                color: white;
+            }
+
+            .epa-button-secondary {
+                background: var(--color-secondary);
+            }
+
+            .epa-button-secondary:hover {
+                background: #246837;
+            }
+
+            .epa-button-outline {
+                background: transparent;
+                color: var(--color-primary);
+                border: 2px solid var(--color-primary);
+            }
+
+            .epa-button-outline:hover {
+                background: var(--color-primary);
+                color: white;
+            }
+
+            /* EPA Tag */
+            .epa-tag {
+                display: inline-block;
+                padding: 0.25rem 0.75rem;
+                font-size: var(--scale-xs);
+                font-weight: 600;
+                border-radius: 3px;
+                background: var(--color-gray-lighter);
+                color: var(--color-gray-darkest);
+            }
+
+            .epa-tag-primary {
+                background: var(--color-primary);
+                color: white;
+            }
+
+            .epa-tag-success {
+                background: var(--color-success);
+                color: white;
+            }
+
+            /* EPA Table */
+            .epa-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: var(--space-l);
+            }
+
+            .epa-table th {
+                background: var(--color-gray-lighter);
+                color: var(--color-gray-darkest);
+                font-weight: 700;
+                text-align: left;
+                padding: var(--space-s);
+                border-bottom: 2px solid var(--color-border);
+                font-size: var(--scale-s);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .epa-table td {
+                padding: var(--space-s);
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .epa-table tbody tr:hover {
+                background: var(--color-gray-lighter);
+            }
+
+            .epa-table-numeric {
+                text-align: right;
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* EPA Stats */
+            .epa-stat {
+                text-align: center;
+            }
+
+            .epa-stat-value {
+                font-size: clamp(2rem, 5vw, 3rem);
+                font-weight: 700;
+                color: var(--color-primary);
+                line-height: 1;
+                margin-bottom: var(--space-xs);
+            }
+
+            .epa-stat-label {
+                font-size: var(--scale-s);
+                color: var(--color-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            /* EPA Section */
+            .epa-section {
+                padding: var(--space-xl) var(--space-l);
+            }
+
+            .epa-section-alt {
+                background: var(--color-gray-lighter);
+            }
+
+            .epa-section-header {
+                max-width: 42rem;
+                margin-bottom: var(--space-l);
+            }
+
+            .epa-section-title {
+                font-size: clamp(1.75rem, 4vw, 2.5rem);
+                font-weight: 700;
+                color: var(--color-primary);
+                margin-bottom: var(--space-s);
+                line-height: 1.2;
+            }
+
+            .epa-section-description {
+                font-size: var(--scale-l);
+                line-height: 1.6;
+                color: var(--color-gray-darkest);
+            }
+
+            /* EPA Footer */
+            .epa-footer {
+                background: var(--color-gray-darkest);
+                color: white;
+                padding: var(--space-xl) var(--space-l);
+                margin-top: var(--space-xxl);
+            }
+
+            .epa-footer a {
+                color: #4a90e2;
+                text-decoration: none;
+            }
+
+            .epa-footer a:hover {
+                text-decoration: underline;
+            }
+
+            /* Utility */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .container-narrow {
+                max-width: 42rem;
+                margin: 0 auto;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .epa-nav {
+                    display: none;
+                }
+
+                .epa-hero {
+                    padding: var(--space-xl) var(--space);
+                }
+
+                .epa-section {
+                    padding: var(--space-l) var(--space);
+                }
+            }
+        </style>
+    </head>
+    <body class="rhythm">
+        <!-- EPA Header -->
+        <header class="epa-header">
+            <div class="epa-header-content">
+                <a href="#" class="epa-logo">EPA</a>
+                <nav>
+                    <ul class="epa-nav">
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#data">Data</a></li>
+                        <li><a href="#reports">Reports</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="epa-hero">
+            <div class="container">
+                <h1 class="epa-hero-title">2024 Air Quality Report</h1>
+                <p class="epa-hero-subtitle">
+                    Comprehensive analysis of air quality trends across the
+                    United States
+                </p>
+            </div>
+        </section>
+
+        <!-- Alert Section -->
+        <section class="epa-section">
+            <div class="container">
+                <div class="epa-alert epa-alert-success">
+                    <div class="epa-alert-title">✓ Air Quality Improving</div>
+                    <p>
+                        National air quality has improved by 12% compared to
+                        last year, with significant reductions in particulate
+                        matter across major metropolitan areas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="epa-section epa-section-alt">
+            <div class="container">
+                <div class="grid grid-3">
+                    <div class="epa-stat">
+                        <div class="epa-stat-value">12%</div>
+                        <div class="epa-stat-label">Improvement</div>
+                    </div>
+                    <div class="epa-stat">
+                        <div class="epa-stat-value">328</div>
+                        <div class="epa-stat-label">Monitoring Sites</div>
+                    </div>
+                    <div class="epa-stat">
+                        <div class="epa-stat-value">98.5%</div>
+                        <div class="epa-stat-label">Compliance Rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+        <section class="epa-section">
+            <div class="container">
+                <div class="epa-section-header">
+                    <h2 class="epa-section-title">Executive Summary</h2>
+                    <p class="epa-section-description">
+                        Our comprehensive monitoring network tracked air quality
+                        across all 50 states, measuring key pollutants and their
+                        impact on public health.
+                    </p>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="rhythm">
+                        <h3>Key Findings</h3>
+                        <ul>
+                            <li>
+                                Particulate matter (PM2.5) decreased by 15%
+                                nationally
+                            </li>
+                            <li>
+                                Ozone levels remained stable in most regions
+                            </li>
+                            <li>
+                                Industrial emissions showed significant
+                                reduction
+                            </li>
+                            <li>
+                                Urban air quality improved in 87% of monitored
+                                cities
+                            </li>
+                        </ul>
+
+                        <h3>Methodology</h3>
+                        <p>
+                            Data was collected from 328 monitoring stations
+                            using EPA-certified equipment. All measurements
+                            follow standardized protocols established under the
+                            Clean Air Act.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="epa-card">
+                            <div class="epa-card-meta">Featured Report</div>
+                            <h3 class="epa-card-header">Regional Analysis</h3>
+                            <p>
+                                Detailed breakdown of air quality trends by
+                                region, including state-by-state comparisons and
+                                metropolitan area rankings.
+                            </p>
+                            <div style="margin-top: var(--space)">
+                                <a href="#" class="epa-button"
+                                    >Download Report</a
+                                >
+                            </div>
+                        </div>
+
+                        <div class="epa-card" style="margin-top: var(--space)">
+                            <div class="epa-card-meta">Data Access</div>
+                            <h3 class="epa-card-header">Open Data Portal</h3>
+                            <p>
+                                Access raw data, visualizations, and API
+                                endpoints for researchers and developers.
+                            </p>
+                            <div style="margin-top: var(--space)">
+                                <a
+                                    href="#"
+                                    class="epa-button epa-button-outline"
+                                    >Explore Data</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table Section -->
+        <section class="epa-section epa-section-alt" id="data">
+            <div class="container">
+                <h2 class="epa-section-title">Pollutant Levels by Region</h2>
+
+                <table class="epa-table">
+                    <thead>
+                        <tr>
+                            <th>Region</th>
+                            <th>PM2.5 (µg/m³)</th>
+                            <th>Ozone (ppb)</th>
+                            <th>NO₂ (ppb)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Northeast</td>
+                            <td class="epa-table-numeric">8.2</td>
+                            <td class="epa-table-numeric">42</td>
+                            <td class="epa-table-numeric">18</td>
+                            <td>
+                                <span class="epa-tag epa-tag-success"
+                                    >Good</span
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Southeast</td>
+                            <td class="epa-table-numeric">9.1</td>
+                            <td class="epa-table-numeric">48</td>
+                            <td class="epa-table-numeric">22</td>
+                            <td>
+                                <span class="epa-tag epa-tag-success"
+                                    >Good</span
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Midwest</td>
+                            <td class="epa-table-numeric">10.5</td>
+                            <td class="epa-table-numeric">51</td>
+                            <td class="epa-table-numeric">25</td>
+                            <td><span class="epa-tag">Moderate</span></td>
+                        </tr>
+                        <tr>
+                            <td>Southwest</td>
+                            <td class="epa-table-numeric">11.8</td>
+                            <td class="epa-table-numeric">58</td>
+                            <td class="epa-table-numeric">28</td>
+                            <td><span class="epa-tag">Moderate</span></td>
+                        </tr>
+                        <tr>
+                            <td>West</td>
+                            <td class="epa-table-numeric">7.9</td>
+                            <td class="epa-table-numeric">45</td>
+                            <td class="epa-table-numeric">16</td>
+                            <td>
+                                <span class="epa-tag epa-tag-success"
+                                    >Good</span
+                                >
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size: var(--scale-s); color: var(--color-muted)">
+                    <strong>Note:</strong> All measurements represent annual
+                    averages. PM2.5 = Particulate Matter 2.5 micrometers or
+                    smaller. Values below 12 µg/m³ meet EPA standards.
+                </p>
+            </div>
+        </section>
+
+        <!-- Cards Grid Section -->
+        <section class="epa-section" id="reports">
+            <div class="container">
+                <h2 class="epa-section-title">Related Reports</h2>
+
+                <div class="grid grid-3">
+                    <div class="epa-card">
+                        <div class="epa-card-meta">March 2024</div>
+                        <h3 class="epa-card-header">
+                            Water Quality Assessment
+                        </h3>
+                        <p>
+                            Annual evaluation of drinking water quality across
+                            public water systems.
+                        </p>
+                        <div style="margin-top: var(--space)">
+                            <a href="#" class="epa-button epa-button-secondary"
+                                >Read More</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="epa-card">
+                        <div class="epa-card-meta">February 2024</div>
+                        <h3 class="epa-card-header">Climate Impact Study</h3>
+                        <p>
+                            Analysis of climate change effects on air quality
+                            and public health.
+                        </p>
+                        <div style="margin-top: var(--space)">
+                            <a href="#" class="epa-button epa-button-secondary"
+                                >Read More</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="epa-card">
+                        <div class="epa-card-meta">January 2024</div>
+                        <h3 class="epa-card-header">Industrial Emissions</h3>
+                        <p>
+                            Comprehensive tracking of emissions from industrial
+                            facilities nationwide.
+                        </p>
+                        <div style="margin-top: var(--space)">
+                            <a href="#" class="epa-button epa-button-secondary"
+                                >Read More</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Callout Section -->
+        <section class="epa-section epa-section-alt">
+            <div class="container-narrow">
+                <div class="epa-alert epa-alert-warning">
+                    <div class="epa-alert-title">⚠ Wildfire Season Alert</div>
+                    <p>
+                        Western states should prepare for elevated air quality
+                        concerns during the upcoming wildfire season. Monitor
+                        local air quality indices and follow health advisories.
+                    </p>
+                    <div style="margin-top: var(--space)">
+                        <a href="#" class="epa-button"
+                            >View Safety Guidelines</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="epa-section" id="resources">
+            <div class="container">
+                <h2 class="epa-section-title">Additional Resources</h2>
+
+                <div class="grid grid-2">
+                    <div class="rhythm">
+                        <h3>For Researchers</h3>
+                        <ul>
+                            <li><a href="#">API Documentation</a></li>
+                            <li><a href="#">Historical Data Archive</a></li>
+                            <li><a href="#">Methodology Papers</a></li>
+                            <li><a href="#">Research Grants</a></li>
+                        </ul>
+
+                        <h3>For Policymakers</h3>
+                        <ul>
+                            <li><a href="#">Regulatory Framework</a></li>
+                            <li><a href="#">Compliance Guidelines</a></li>
+                            <li><a href="#">State Implementation Plans</a></li>
+                            <li><a href="#">Technical Assistance</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="rhythm">
+                        <h3>For the Public</h3>
+                        <ul>
+                            <li><a href="#">Air Quality Index Explained</a></li>
+                            <li><a href="#">Health Effects Guide</a></li>
+                            <li><a href="#">Local Monitoring Stations</a></li>
+                            <li><a href="#">Mobile Apps</a></li>
+                        </ul>
+
+                        <h3>For Industry</h3>
+                        <ul>
+                            <li><a href="#">Emissions Reporting</a></li>
+                            <li><a href="#">Best Practices</a></li>
+                            <li><a href="#">Certification Programs</a></li>
+                            <li><a href="#">Technical Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="epa-footer">
+            <div class="container">
+                <div class="grid grid-3">
+                    <div>
+                        <h4 style="color: white; margin-bottom: var(--space-s)">
+                            About EPA
+                        </h4>
+                        <ul style="list-style: none; padding: 0; margin: 0">
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Our Mission</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Leadership</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Organization</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Careers</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 style="color: white; margin-bottom: var(--space-s)">
+                            Connect
+                        </h4>
+                        <ul style="list-style: none; padding: 0; margin: 0">
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Contact Us</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">News Room</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Social Media</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Subscribe</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 style="color: white; margin-bottom: var(--space-s)">
+                            Legal
+                        </h4>
+                        <ul style="list-style: none; padding: 0; margin: 0">
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">Accessibility</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">FOIA</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-xs)">
+                                <a href="#">No FEAR Act</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        margin-top: var(--space-xl);
+                        padding-top: var(--space);
+                        border-top: 1px solid rgba(255, 255, 255, 0.2);
+                        text-align: center;
+                        font-size: var(--scale-s);
+                        opacity: 0.8;
+                    "
+                >
+                    <p>
+                        United States Environmental Protection Agency<br />
+                        1200 Pennsylvania Avenue, N.W. Washington, DC 20460
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Load Standard Framework JavaScript -->
+        <script src="../dist/standard.js"></script>
+
+        <script>
+            // Initialize Standard with EPA-friendly settings
+            if (window.standard) {
+                window.standard.updateOptions({
+                    enableSmartQuotes: true,
+                    enablePunctuation: true,
+                    enableWidowPrevention: true,
+                    enableSpacing: true,
+                    enableNumberFormatting: true, // Good for data-heavy EPA content
+                });
+            }
+        </script>
+    </body>
+</html>
