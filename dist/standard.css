@@ -1884,8 +1884,8 @@ aside) {
 }
 :where(body:not(.no-rhythm)) hr,
 :where(.rhythm) hr {
-  margin-block-start: var(--space-xxl);
-  margin-block-end: var(--space-l);
+  margin-block-start: var(--space-l);
+  margin-block-end: var(--space-xl);
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
@@ -2876,7 +2876,7 @@ th {
 
 /* Quotes */
 blockquote {
-  border-inline-start: 4px solid var(--color-accent);
+  border-inline-start: var(--space-xxxs) solid var(--color-muted);
   background: var(--color-background-secondary);
   color: var(--color-muted);
 }
