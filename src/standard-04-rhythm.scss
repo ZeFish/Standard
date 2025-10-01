@@ -194,6 +194,10 @@
         margin-block-start: 0;
         margin-block-end: var(--space);
     }
+    p + ul,
+    p + ol {
+        margin-block-start: calc(var(--space) * 0.5);
+    }
     ul:last-child,
     ol:last-child {
         margin-block-end: 0;
@@ -212,7 +216,7 @@
         margin: 0;
         padding-inline-start: 0;
         line-height: var(--font-density-s);
-        margin-block-end: var(--space-s);
+        margin-block-end: var(--space-xs);
     }
 
     /* Unordered list bullets */

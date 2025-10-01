@@ -1841,6 +1841,12 @@ aside) {
   margin-block-start: 0;
   margin-block-end: var(--space);
 }
+:where(body:not(.no-rhythm)) p + ul,
+:where(body:not(.no-rhythm)) p + ol,
+:where(.rhythm) p + ul,
+:where(.rhythm) p + ol {
+  margin-block-start: calc(var(--space) * 0.5);
+}
 :where(body:not(.no-rhythm)) ul:last-child,
 :where(body:not(.no-rhythm)) ol:last-child,
 :where(.rhythm) ul:last-child,
@@ -1868,7 +1874,7 @@ aside) {
   margin: 0;
   padding-inline-start: 0;
   line-height: var(--font-density-s);
-  margin-block-end: var(--space-s);
+  margin-block-end: var(--space-xs);
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
