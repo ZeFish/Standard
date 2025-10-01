@@ -914,6 +914,10 @@
   grid-column: 1/-1;
 }
 
+hr.col-row {
+  margin-block: var(--space);
+}
+
 /* Ergonomic presets (optional sugar) */
 .col-half {
   grid-column: span 6;
