@@ -381,9 +381,6 @@ class Standard {
 
     this.dispatchEvent("beforeProcess", { element });
 
-    // Store original content before first processing
-    this.storeOriginalContent(element);
-
     // Get element-specific language
     const elementLocale = this.getElementLocale(element);
     const rules = this.getRulesForLocale(elementLocale);
@@ -1246,8 +1243,8 @@ class Standard {
    */
   refresh() {
     this.dispatchEvent("beforeRefresh", {});
-    // Restore original content and reprocess to prevent cumulative changes
-    this.restoreAllOriginalContent();
+    // Clear processed markers and reprocess to prevent cumulative changes
+    this.clearProcessedMarkers();
     this.process();
     this.dispatchEvent("afterRefresh", {});
   }
@@ -1261,39 +1258,6 @@ class Standard {
     );
     processedElements.forEach((element) => {
       element.removeAttribute("data-typography-processed");
-    });
-  }
-
-  /**
-   * Store original text content before processing
-   */
-  storeOriginalContent(element) {
-    if (!element.hasAttribute("data-original-content")) {
-      element.setAttribute("data-original-content", element.innerHTML);
-    }
-  }
-
-  /**
-   * Restore original text content
-   */
-  restoreOriginalContent(element) {
-    const original = element.getAttribute("data-original-content");
-    if (original) {
-      element.innerHTML = original;
-      element.removeAttribute("data-original-content");
-      element.removeAttribute("data-typography-processed");
-    }
-  }
-
-  /**
-   * Restore original content for all processed elements
-   */
-  restoreAllOriginalContent() {
-    const processedElements = document.querySelectorAll(
-      "[data-typography-processed]",
-    );
-    processedElements.forEach((element) => {
-      this.restoreOriginalContent(element);
     });
   }
 
