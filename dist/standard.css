@@ -1845,7 +1845,7 @@ aside) {
 :where(body:not(.no-rhythm)) p + ol,
 :where(.rhythm) p + ul,
 :where(.rhythm) p + ol {
-  margin-block-start: calc(var(--space) * 0.5);
+  margin-block-start: calc(var(--space) * -0.5);
 }
 :where(body:not(.no-rhythm)) ul:last-child,
 :where(body:not(.no-rhythm)) ol:last-child,
