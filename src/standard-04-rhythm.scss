@@ -248,6 +248,16 @@
         font-variant-numeric: tabular-nums;
     }
 
+    ul.no-bullet,
+    ol.no-bullet {
+        list-style: none;
+        padding-inline-start: 0;
+    }
+    ul.no-bullet li::before,
+    ol.no-bullet li::before {
+        display: none;
+    }
+
     /* Blockquotes - spacing only */
     blockquote {
         padding-inline-start: var(--space);
