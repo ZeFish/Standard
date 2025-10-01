@@ -35,13 +35,6 @@
 
 /* Spans 1..12 */
 @for $i from 1 through 12 {
-    .col-#{$i} {
-        grid-column: span #{$i};
-    }
-}
-
-/* Spans 1..12 */
-@for $i from 1 through 12 {
     .grid-#{$i} {
         display: grid;
         grid-template-columns: repeat(#{$i}, 1fr);
@@ -50,22 +43,28 @@
     }
 }
 
-/* Optional starts 1..12 */
+/* Spans 1..12 */
 @for $i from 1 through 12 {
+    .col-#{$i} {
+        grid-column: span #{$i};
+    }
     .start-#{$i} {
         grid-column-start: #{$i};
     }
 }
 
 /* Responsive spans/starts: md ≥ 768px, lg ≥ 1024px */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     @for $i from 1 through 12 {
-        .col-md-#{$i} {
+        .col-sm-#{$i} {
             grid-column: span #{$i};
         }
-        .start-md-#{$i} {
+        .start-sm-#{$i} {
             grid-column-start: #{$i};
         }
+    }
+    .sm-row {
+        grid-column: 1 / -1;
     }
 }
 @media (min-width: 1024px) {
@@ -76,6 +75,9 @@
         .start-lg-#{$i} {
             grid-column-start: #{$i};
         }
+    }
+    .lg-row {
+        grid-column: 1 / -1;
     }
 }
 
@@ -130,17 +132,14 @@
 }
 
 /* Responsive overrides for the var-based API */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     @for $i from 1 through 12 {
-        .span-md-#{$i} {
+        .span-sm-#{$i} {
             --span: #{$i};
         }
-        .startv-md-#{$i} {
+        .startv-sm-#{$i} {
             --start: #{$i};
         }
-    }
-    .md-row {
-        grid-column: 1 / -1;
     }
 }
 @media (min-width: 1024px) {
@@ -151,9 +150,6 @@
         .startv-lg-#{$i} {
             --start: #{$i};
         }
-    }
-    .lg-row {
-        grid-column: 1 / -1;
     }
 }
 
