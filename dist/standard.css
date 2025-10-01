@@ -1706,6 +1706,7 @@ aside) {
 :where(body:not(.no-rhythm)) p,
 :where(.rhythm) p {
   margin-block-start: 0;
+  margin-block-end: var(--space);
 }
 :where(body:not(.no-rhythm)) h1,
 :where(.rhythm) h1 {

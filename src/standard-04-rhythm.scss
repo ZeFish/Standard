@@ -90,6 +90,7 @@
     /* Enhanced spacing relationships for typography */
     p {
         margin-block-start: 0;
+        margin-block-end: var(--space);
     }
 
     h1 {
