@@ -90,12 +90,12 @@ html {
     font-optical-sizing: auto;
 
     text-wrap: pretty;
+    hyphens: none;
     widows: 2;
     orphans: 2;
 }
 
-body,
-body.rhythm {
+body {
     margin: 0;
     padding: var(--space);
 }
@@ -343,4 +343,30 @@ caption {
 /* Callout typography */
 .callout-title {
     font-weight: var(--bold-weight, bold);
+}
+
+/* ADD: Helper classes for extreme scales */
+.display {
+    font-size: clamp(var(--scale-xxxl), 12vw, var(--scale-display));
+    line-height: 0.85;
+    font-weight: var(--font-header-weight);
+    letter-spacing: var(--font-header-letter-spacing);
+}
+
+.poster {
+    font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
+    line-height: 0.8;
+    font-weight: var(--font-header-weight);
+    letter-spacing: -0.04em;
+}
+
+.label {
+    font-size: var(--scale-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+}
+
+.micro {
+    font-size: var(--scale-micro);
 }

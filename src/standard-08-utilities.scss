@@ -1,5 +1,43 @@
 /* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
 
+.leading-tight {
+    line-height: 0.85;
+}
+
+.leading-none {
+    line-height: 1;
+}
+
+.leading-snug {
+    line-height: var(--font-density-s);
+}
+
+.leading-normal {
+    line-height: var(--font-density);
+}
+
+.leading-relaxed {
+    line-height: 1.6;
+}
+
+/* Text transformation utilities */
+.uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* Uppercase needs looser tracking */
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.normal-case {
+    text-transform: none;
+}
+
 /* ===== LOGICAL SPACING UTILITIES ===== */
 
 /* Block direction spacing utilities */
@@ -294,11 +332,58 @@
 }
 
 /* =========================== */
-/* DEBUG AND DEVELOPMENT      */
+/* Asymmetric width utilities      */
 /* =========================== */
 
-/* Debug utilities moved to rhythm and color files for proper separation of concerns */
+/* Asymmetric width utilities (work with your existing rhythm/reading) */
+.width-third {
+    max-width: 33.333%;
+}
+.width-half {
+    max-width: 50%;
+}
+.width-two-thirds {
+    max-width: 66.666%;
+}
+.width-three-quarters {
+    max-width: 75%;
+}
 
+/* Asymmetric alignment utilities */
+.align-start {
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+}
+
+.align-end {
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+}
+
+/* Combined: asymmetric positioned blocks */
+.aside-left {
+    max-width: 33.333%;
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+}
+
+.aside-right {
+    max-width: 33.333%;
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+}
+
+.content-left {
+    max-width: 66.666%;
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+}
+
+.content-right {
+    max-width: 66.666%;
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+}
 /* =========================== */
 /* RESPONSIVE TYPOGRAPHY      */
 /* =========================== */

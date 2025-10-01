@@ -23,7 +23,7 @@
 }
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
-
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
     /* Rhythm control - can be overridden per instance */
     --rhythm-multiplier: 1;
@@ -366,6 +366,46 @@
 
     caption {
         margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+    }
+
+    /* Swiss-style data tables */
+    table {
+        /* You already have: border-collapse: collapse; */
+        width: 100%;
+        font-variant-numeric: tabular-nums; /* ADD: Monospace numbers */
+    }
+
+    th {
+        /* You already have: text-align: left; font-weight: bold; */
+        text-transform: uppercase; /* ADD */
+        letter-spacing: 0.05em; /* ADD */
+        font-size: var(--scale-s); /* ADD: Smaller, tighter */
+        border-bottom: 2px solid var(--color-foreground); /* ADD: Thick border */
+        padding-block-end: var(--space-xs); /* ADD */
+    }
+
+    td {
+        border-bottom: 1px solid var(--color-border); /* ADD: Hairline */
+        padding-block: var(--space-xs);
+        padding-inline-end: var(--space-s);
+    }
+
+    /* ADD: Numeric column alignment */
+    .numeric {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* ADD: Zebra striping (functional, not decorative) */
+    .striped tbody tr:nth-child(even) {
+        background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+    }
+
+    /* ADD: Compact table variant */
+    .compact th,
+    .compact td {
+        padding-block: var(--space-xxs);
+        padding-inline-end: var(--space-xs);
     }
 }
 

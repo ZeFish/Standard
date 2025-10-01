@@ -371,6 +371,20 @@ hr {
     background: var(--color-border);
     border: none;
 }
+hr.thick {
+    height: calc(var(--hr-thickness) * 4);
+    background: var(--color-foreground);
+}
+
+hr.accent {
+    height: calc(var(--hr-thickness) * 3);
+    background: var(--color-accent);
+}
+
+hr.hairline {
+    height: 1px;
+    opacity: 0.3;
+}
 
 /* Form field group borders */
 fieldset {

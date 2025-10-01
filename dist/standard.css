@@ -345,6 +345,20 @@
   --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
   --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
   --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+  /* ADD: Extreme scales for display/poster typography */
+  --scale-display: calc(
+      var(--font-size) * pow(var(--font-ratio), 6)
+  ); /* ~10rem */
+  --scale-poster: calc(
+      var(--font-size) * pow(var(--font-ratio), 8)
+  ); /* ~16rem */
+  /* ADD: Micro scales for technical labels */
+  --scale-micro: calc(
+      var(--font-size) * pow(var(--font-ratio), -2)
+  ); /* ~0.6rem */
+  --scale-nano: calc(
+      var(--font-size) * pow(var(--font-ratio), -3)
+  ); /* ~0.4rem */
   /* Logical Spacing Scale - based on rhythm unit */
   --space-xxxs: calc(1rlh / 5);
   --space-xxs: calc(1rlh / 4);
@@ -1307,12 +1321,12 @@ html {
   font-variation-settings: var(--font-variation);
   font-optical-sizing: auto;
   text-wrap: pretty;
+  hyphens: none;
   widows: 2;
   orphans: 2;
 }
 
-body,
-body.rhythm {
+body {
   margin: 0;
   padding: var(--space);
 }
@@ -1548,6 +1562,32 @@ caption {
   font-weight: var(--bold-weight, bold);
 }
 
+/* ADD: Helper classes for extreme scales */
+.display {
+  font-size: clamp(var(--scale-xxxl), 12vw, var(--scale-display));
+  line-height: 0.85;
+  font-weight: var(--font-header-weight);
+  letter-spacing: var(--font-header-letter-spacing);
+}
+
+.poster {
+  font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
+  line-height: 0.8;
+  font-weight: var(--font-header-weight);
+  letter-spacing: -0.04em;
+}
+
+.label {
+  font-size: var(--scale-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+.micro {
+  font-size: var(--scale-micro);
+}
+
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
 /* ===== Harmony Base (containers and resets) ===== */
 :where(*, *::before, *::after) {
@@ -1574,11 +1614,32 @@ caption {
 }
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
   --rhythm-multiplier: 1;
   /* Reset margins for all rhythm-managed elements (scoped to .rhythm) */
 }
+:where(body:not(.no-rhythm)) :where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+table,
+figure,
+form,
+fieldset,
+div,
+section,
+article,
+aside),
 :where(.rhythm) :where(h1,
 h2,
 h3,
@@ -1601,24 +1662,33 @@ article,
 aside) {
   margin: 0;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Modern margin collapse prevention */
   display: flow-root;
   /* Apply rhythm spacing to all direct children */
 }
+:where(body:not(.no-rhythm)) > *,
 :where(.rhythm) > * {
   margin-block-start: 0;
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)) > *:last-child,
 :where(.rhythm) > *:last-child {
   margin-block-end: 0;
 }
+:where(body:not(.no-rhythm)) .grid,
 :where(.rhythm) .grid {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)) .rhythm,
 :where(.rhythm) .rhythm {
   --rhythm-multiplier: 1; /* Reset for nested contexts */
 }
+:where(body:not(.no-rhythm)) .small,
+:where(body:not(.no-rhythm)) .accent,
+:where(body:not(.no-rhythm)) .feature,
+:where(body:not(.no-rhythm)) .full,
 :where(.rhythm) .small,
 :where(.rhythm) .accent,
 :where(.rhythm) .feature,
@@ -1626,40 +1696,55 @@ aside) {
   /* Layout containers get double spacing for emphasis */
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* =========================== */
   /* TYPOGRAPHIC NUANCES         */
   /* =========================== */
   /* Enhanced spacing relationships for typography */
 }
+:where(body:not(.no-rhythm)) p,
 :where(.rhythm) p {
   margin-block-start: 0;
 }
+:where(body:not(.no-rhythm)) h1,
 :where(.rhythm) h1 {
   margin: var(--space-xxxl) 0 var(--space-l) 0;
 }
+:where(body:not(.no-rhythm)) h2,
 :where(.rhythm) h2 {
   margin: var(--space-xxl) 0 var(--space-l) 0;
 }
+:where(body:not(.no-rhythm)) h3,
 :where(.rhythm) h3 {
   margin: var(--space-xl) 0 var(--space-l) 0;
 }
+:where(body:not(.no-rhythm)) h4,
 :where(.rhythm) h4 {
   margin: var(--space-l) 0 var(--space) 0;
 }
+:where(body:not(.no-rhythm)) h5,
 :where(.rhythm) h5 {
   margin: var(--space) 0 var(--space-s) 0;
 }
+:where(body:not(.no-rhythm)) h6,
 :where(.rhythm) h6 {
   margin: var(--space) 0 var(--space-xs) 0;
 }
+:where(body:not(.no-rhythm)) hr,
 :where(.rhythm) hr {
   margin-block-start: var(--space-xxl);
   margin-block-end: var(--space-l);
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Heading after heading gets reduced spacing */
 }
+:where(body:not(.no-rhythm)) h1 + h2,
+:where(body:not(.no-rhythm)) h2 + h3,
+:where(body:not(.no-rhythm)) h3 + h4,
+:where(body:not(.no-rhythm)) h4 + h5,
+:where(body:not(.no-rhythm)) h5 + h6,
 :where(.rhythm) h1 + h2,
 :where(.rhythm) h2 + h3,
 :where(.rhythm) h3 + h4,
@@ -1667,9 +1752,16 @@ aside) {
 :where(.rhythm) h5 + h6 {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier) * -1);
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Lists after headings get normal spacing */
 }
+:where(body:not(.no-rhythm)) h1 + ul,
+:where(body:not(.no-rhythm)) h1 + ol,
+:where(body:not(.no-rhythm)) h2 + ul,
+:where(body:not(.no-rhythm)) h2 + ol,
+:where(body:not(.no-rhythm)) h3 + ul,
+:where(body:not(.no-rhythm)) h3 + ol,
 :where(.rhythm) h1 + ul,
 :where(.rhythm) h1 + ol,
 :where(.rhythm) h2 + ul,
@@ -1678,9 +1770,15 @@ aside) {
 :where(.rhythm) h3 + ol {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Special blocks get generous spacing (2× rhythm) */
 }
+:where(body:not(.no-rhythm)) .callout,
+:where(body:not(.no-rhythm)) blockquote,
+:where(body:not(.no-rhythm)) pre,
+:where(body:not(.no-rhythm)) figure,
+:where(body:not(.no-rhythm)) p:has(img),
 :where(.rhythm) .callout,
 :where(.rhythm) blockquote,
 :where(.rhythm) pre,
@@ -1689,15 +1787,23 @@ aside) {
   margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Adjacent images get reduced spacing */
 }
+:where(body:not(.no-rhythm)) p:has(img) + p:has(img),
 :where(.rhythm) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier) * -1 + var(--space) / 4);
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Reset first-child spacing for special blocks */
 }
+:where(body:not(.no-rhythm)) blockquote:first-child,
+:where(body:not(.no-rhythm)) pre:first-child,
+:where(body:not(.no-rhythm)) figure:first-child,
+:where(body:not(.no-rhythm)) p:has(img):first-child,
+:where(body:not(.no-rhythm)) .callout:first-child,
 :where(.rhythm) blockquote:first-child,
 :where(.rhythm) pre:first-child,
 :where(.rhythm) figure:first-child,
@@ -1705,13 +1811,16 @@ aside) {
 :where(.rhythm) .callout:first-child {
   margin-block-start: 0;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Form field groups */
 }
+:where(body:not(.no-rhythm)) fieldset,
 :where(.rhythm) fieldset {
   margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* =========================== */
   /* TYPOGRAPHY ELEMENTS         */
@@ -1722,6 +1831,8 @@ aside) {
   /* =========================== */
   /* Lists */
 }
+:where(body:not(.no-rhythm)) ul,
+:where(body:not(.no-rhythm)) ol,
 :where(.rhythm) ul,
 :where(.rhythm) ol {
   list-style: none;
@@ -1729,30 +1840,39 @@ aside) {
   margin-block-start: 0;
   margin-block-end: var(--space);
 }
+:where(body:not(.no-rhythm)) ul:last-child,
+:where(body:not(.no-rhythm)) ol:last-child,
 :where(.rhythm) ul:last-child,
 :where(.rhythm) ol:last-child {
   margin-block-end: 0;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Nested lists */
 }
+:where(body:not(.no-rhythm)) li > ul,
+:where(body:not(.no-rhythm)) li > ol,
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
   padding-inline-start: var(--space);
   margin-block-end: 0;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* List items */
 }
+:where(body:not(.no-rhythm)) li,
 :where(.rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
   line-height: var(--font-density-s);
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Unordered list bullets */
 }
+:where(body:not(.no-rhythm)) ul > li::before,
 :where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
@@ -1761,15 +1881,19 @@ aside) {
   text-align: center;
   color: color-mix(in srgb, currentColor 60%, transparent);
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Ordered list numbers */
 }
+:where(body:not(.no-rhythm)) ol,
 :where(.rhythm) ol {
   counter-reset: ol-counter;
 }
+:where(body:not(.no-rhythm)) ol > li,
 :where(.rhythm) ol > li {
   counter-increment: ol-counter;
 }
+:where(body:not(.no-rhythm)) ol > li::before,
 :where(.rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
@@ -1779,73 +1903,98 @@ aside) {
   color: color-mix(in srgb, currentColor 60%, transparent);
   font-variant-numeric: tabular-nums;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Blockquotes - spacing only */
 }
+:where(body:not(.no-rhythm)) blockquote,
 :where(.rhythm) blockquote {
   padding-inline-start: var(--space);
   padding-inline-end: var(--space);
   padding-block-start: var(--space);
   padding-block-end: var(--space);
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Code blocks - spacing only */
 }
+:where(body:not(.no-rhythm)) pre,
 :where(.rhythm) pre {
   padding: calc(var(--space));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Horizontal rules - spacing only */
 }
+:where(body:not(.no-rhythm)) hr,
 :where(.rhythm) hr {
   margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* =========================== */
   /* FORMS AND INTERACTIVE       */
   /* =========================== */
   /* Form containers - avoid nested grids */
 }
+:where(body:not(.no-rhythm)) form:not(.grid *),
 :where(.rhythm) form:not(.grid *) {
   display: grid;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Forms inside grids use flex layout to avoid nesting issues */
 }
+:where(body:not(.no-rhythm)) .grid form,
 :where(.rhythm) .grid form {
   display: flex;
   flex-direction: column;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Form field groups - spacing only */
 }
+:where(body:not(.no-rhythm)) fieldset,
 :where(.rhythm) fieldset {
   padding: calc(var(--space-s) * var(--rhythm-multiplier));
   display: grid;
   gap: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)) legend,
 :where(.rhythm) legend {
   padding-inline: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Form inputs */
 }
+:where(body:not(.no-rhythm)) input,
+:where(body:not(.no-rhythm)) textarea,
+:where(body:not(.no-rhythm)) select,
 :where(.rhythm) input,
 :where(.rhythm) textarea,
 :where(.rhythm) select {
   margin: 0;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Labels - spacing only */
 }
+:where(body:not(.no-rhythm)) label,
 :where(.rhythm) label {
   margin: 0;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Label + input pairs */
 }
+:where(body:not(.no-rhythm)) label:has(+ input[type=text]),
+:where(body:not(.no-rhythm)) label:has(+ input[type=email]),
+:where(body:not(.no-rhythm)) label:has(+ input[type=password]),
+:where(body:not(.no-rhythm)) label:has(+ textarea),
+:where(body:not(.no-rhythm)) label:has(+ select),
 :where(.rhythm) label:has(+ input[type=text]),
 :where(.rhythm) label:has(+ input[type=email]),
 :where(.rhythm) label:has(+ input[type=password]),
@@ -1854,27 +2003,37 @@ aside) {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
   margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Checkbox/radio with labels */
 }
+:where(body:not(.no-rhythm)) label + input[type=checkbox],
+:where(body:not(.no-rhythm)) label + input[type=radio],
 :where(.rhythm) label + input[type=checkbox],
 :where(.rhythm) label + input[type=radio] {
   margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Button groups */
 }
+:where(body:not(.no-rhythm)) .button-group,
 :where(.rhythm) .button-group {
   display: flex;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
   flex-wrap: wrap;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* =========================== */
   /* MEDIA ELEMENTS              */
   /* =========================== */
   /* Images, videos, etc. */
 }
+:where(body:not(.no-rhythm)) img,
+:where(body:not(.no-rhythm)) video,
+:where(body:not(.no-rhythm)) audio,
+:where(body:not(.no-rhythm)) iframe,
 :where(.rhythm) img,
 :where(.rhythm) video,
 :where(.rhythm) audio,
@@ -1882,33 +2041,95 @@ aside) {
   max-width: 100%;
   height: auto;
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Figures */
 }
+:where(body:not(.no-rhythm)) figure,
 :where(.rhythm) figure {
   display: grid;
   gap: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)) figcaption,
 :where(.rhythm) figcaption {
   /* Spacing handled by rhythm system */
 }
+:where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* =========================== */
   /* TABLES                      */
   /* =========================== */
 }
+:where(body:not(.no-rhythm)) table,
 :where(.rhythm) table {
   width: 100%;
 }
+:where(body:not(.no-rhythm)) th,
+:where(body:not(.no-rhythm)) td,
 :where(.rhythm) th,
 :where(.rhythm) td {
   padding: calc(var(--space-xs) * var(--rhythm-multiplier)) calc(var(--space-s) * var(--rhythm-multiplier));
 }
+:where(body:not(.no-rhythm)) th,
 :where(.rhythm) th {
   /* Typography and colors handled elsewhere */
 }
+:where(body:not(.no-rhythm)) caption,
 :where(.rhythm) caption {
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+}
+:where(body:not(.no-rhythm)),
+:where(.rhythm) {
+  /* Swiss-style data tables */
+}
+:where(body:not(.no-rhythm)) table,
+:where(.rhythm) table {
+  /* You already have: border-collapse: collapse; */
+  width: 100%;
+  font-variant-numeric: tabular-nums; /* ADD: Monospace numbers */
+}
+:where(body:not(.no-rhythm)) th,
+:where(.rhythm) th {
+  /* You already have: text-align: left; font-weight: bold; */
+  text-transform: uppercase; /* ADD */
+  letter-spacing: 0.05em; /* ADD */
+  font-size: var(--scale-s); /* ADD: Smaller, tighter */
+  border-bottom: 2px solid var(--color-foreground); /* ADD: Thick border */
+  padding-block-end: var(--space-xs); /* ADD */
+}
+:where(body:not(.no-rhythm)) td,
+:where(.rhythm) td {
+  border-bottom: 1px solid var(--color-border); /* ADD: Hairline */
+  padding-block: var(--space-xs);
+  padding-inline-end: var(--space-s);
+}
+:where(body:not(.no-rhythm)),
+:where(.rhythm) {
+  /* ADD: Numeric column alignment */
+}
+:where(body:not(.no-rhythm)) .numeric,
+:where(.rhythm) .numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+:where(body:not(.no-rhythm)),
+:where(.rhythm) {
+  /* ADD: Zebra striping (functional, not decorative) */
+}
+:where(body:not(.no-rhythm)) .striped tbody tr:nth-child(even),
+:where(.rhythm) .striped tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+}
+:where(body:not(.no-rhythm)),
+:where(.rhythm) {
+  /* ADD: Compact table variant */
+}
+:where(body:not(.no-rhythm)) .compact th,
+:where(body:not(.no-rhythm)) .compact td,
+:where(.rhythm) .compact th,
+:where(.rhythm) .compact td {
+  padding-block: var(--space-xxs);
+  padding-inline-end: var(--space-xs);
 }
 
 /* Common layout containers inherit rhythm to cascade deeper */
@@ -2381,6 +2602,21 @@ hr {
   border: none;
 }
 
+hr.thick {
+  height: calc(var(--hr-thickness) * 4);
+  background: var(--color-foreground);
+}
+
+hr.accent {
+  height: calc(var(--hr-thickness) * 3);
+  background: var(--color-accent);
+}
+
+hr.hairline {
+  height: 1px;
+  opacity: 0.3;
+}
+
 /* Form field group borders */
 fieldset {
   border: var(--border);
@@ -2687,6 +2923,44 @@ img {
 }
 
 /* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
+.leading-tight {
+  line-height: 0.85;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+.leading-snug {
+  line-height: var(--font-density-s);
+}
+
+.leading-normal {
+  line-height: var(--font-density);
+}
+
+.leading-relaxed {
+  line-height: 1.6;
+}
+
+/* Text transformation utilities */
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* Uppercase needs looser tracking */
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.normal-case {
+  text-transform: none;
+}
+
 /* ===== LOGICAL SPACING UTILITIES ===== */
 /* Block direction spacing utilities */
 .no-margin-block-start {
@@ -2964,9 +3238,61 @@ img {
 }
 
 /* =========================== */
-/* DEBUG AND DEVELOPMENT      */
+/* Asymmetric width utilities      */
 /* =========================== */
-/* Debug utilities moved to rhythm and color files for proper separation of concerns */
+/* Asymmetric width utilities (work with your existing rhythm/reading) */
+.width-third {
+  max-width: 33.333%;
+}
+
+.width-half {
+  max-width: 50%;
+}
+
+.width-two-thirds {
+  max-width: 66.666%;
+}
+
+.width-three-quarters {
+  max-width: 75%;
+}
+
+/* Asymmetric alignment utilities */
+.align-start {
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.align-end {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+/* Combined: asymmetric positioned blocks */
+.aside-left {
+  max-width: 33.333%;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.aside-right {
+  max-width: 33.333%;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.content-left {
+  max-width: 66.666%;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+
+.content-right {
+  max-width: 66.666%;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
 /* =========================== */
 /* RESPONSIVE TYPOGRAPHY      */
 /* =========================== */

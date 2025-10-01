@@ -23,6 +23,21 @@
     --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
     --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
     --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+    /* ADD: Extreme scales for display/poster typography */
+    --scale-display: calc(
+        var(--font-size) * pow(var(--font-ratio), 6)
+    ); /* ~10rem */
+    --scale-poster: calc(
+        var(--font-size) * pow(var(--font-ratio), 8)
+    ); /* ~16rem */
+
+    /* ADD: Micro scales for technical labels */
+    --scale-micro: calc(
+        var(--font-size) * pow(var(--font-ratio), -2)
+    ); /* ~0.6rem */
+    --scale-nano: calc(
+        var(--font-size) * pow(var(--font-ratio), -3)
+    ); /* ~0.4rem */
 
     /* Logical Spacing Scale - based on rhythm unit */
     --space-xxxs: calc(1rlh / 5);
