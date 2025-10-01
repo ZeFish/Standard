@@ -47,9 +47,12 @@
     "build:js": "cp src/standard.js dist/standard.js",
     "build:js-min": "terser src/standard.js -o dist/standard.min.js --compress --mangle",
     "clean": "rm -rf dist",
-    "release": "npm run clean && npm run build && release-it"
+    "release": "npm run clean && npm run build && npm run changelog && release-it",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
   },
   "devDependencies": {
+    "auto-changelog": "^2.5.0",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.10",
     "release-it": "^19.0.5",

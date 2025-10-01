@@ -1,5 +1,16 @@
 /* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
 
+@for $i from 1 through 12 {
+    .h-#{$i} {
+        height: calc(var(--space) * #{$i});
+    }
+}
+@for $i from 1 through 12 {
+    .w-#{$i} {
+        width: calc(var(--space) * #{$i});
+    }
+}
+
 .leading-tight {
     line-height: 0.85;
 }

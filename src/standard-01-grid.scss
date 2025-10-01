@@ -80,6 +80,8 @@
 }
 
 /* Full-span helper (replaces old .h-col-full) */
+.row,
+.col-row,
 .col-full {
     grid-column: 1 / -1;
 }
@@ -137,6 +139,9 @@
             --start: #{$i};
         }
     }
+    .md-row {
+        grid-column: 1 / -1;
+    }
 }
 @media (min-width: 1024px) {
     @for $i from 1 through 12 {
@@ -146,6 +151,9 @@
         .startv-lg-#{$i} {
             --start: #{$i};
         }
+    }
+    .lg-row {
+        grid-column: 1 / -1;
     }
 }
 
