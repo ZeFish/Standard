@@ -3,7 +3,7 @@
     /* Grid system tokens */
     --grid-cols: 12;
     --grid-gap: var(--space);
-    --grid-row-gap: var(--space-block); /* Separate control for row spacing */
+    --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
 
     /* Container tokens */
     --container-max: 1200px;
@@ -12,7 +12,7 @@
 
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
    Use this as your single grid across the site (replaces old .h-grid API).
-   Relies on logical properties and Harmony tokens: --space, --space-gap, --space-l, borders, etc.
+   Relies on logical properties and Harmony tokens: --space, calc(var(--space) / 4), --space-l, borders, etc.
 */
 
 /* Grid container */
@@ -25,7 +25,7 @@
 
 /* Gap variants aligned to rhythm */
 .grid.tight {
-    --grid-gap: var(--space-gap);
+    --grid-gap: calc(var(--space) / 4);
     --grid-row-gap: var(--space-s);
 }
 .grid.wide {

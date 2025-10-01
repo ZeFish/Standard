@@ -17,7 +17,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version 2.0.0
+ * @version 2.1.0
  * @license MIT
  */
 
@@ -31,6 +31,7 @@ class Standard {
       enableSpacing: false,
       enableFractions: false,
       enableNumberFormatting: false,
+      enableArrowsAndSymbols: false,
       autoProcess: false,
       observeDOM: false, // Watch for dynamic content
       debounceDelay: 100,
@@ -114,6 +115,27 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ",",
         decimalSeparator: ".",
+        // Arrows and symbols
+        rightArrow: "\u2192",
+        leftArrow: "\u2190",
+        upArrow: "\u2191",
+        downArrow: "\u2193",
+        doubleRightArrow: "\u21D2",
+        doubleLeftArrow: "\u21D0",
+        leftRightArrow: "\u2194",
+        multiplication: "\u00D7",
+        division: "\u00F7",
+        plusMinus: "\u00B1",
+        notEqual: "\u2260",
+        lessThanEqual: "\u2264",
+        greaterThanEqual: "\u2265",
+        approximately: "\u2248",
+        copyright: "\u00A9",
+        registered: "\u00AE",
+        trademark: "\u2122",
+        degree: "\u00B0",
+        bullet: "\u2022",
+        middleDot: "\u00B7",
       },
       fr: {
         // French typography rules (with thin spaces before punctuation)
@@ -129,6 +151,27 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: "\u2009", // thin space
         decimalSeparator: ",",
+        // Arrows and symbols
+        rightArrow: "\u2192",
+        leftArrow: "\u2190",
+        upArrow: "\u2191",
+        downArrow: "\u2193",
+        doubleRightArrow: "\u21D2",
+        doubleLeftArrow: "\u21D0",
+        leftRightArrow: "\u2194",
+        multiplication: "\u00D7",
+        division: "\u00F7",
+        plusMinus: "\u00B1",
+        notEqual: "\u2260",
+        lessThanEqual: "\u2264",
+        greaterThanEqual: "\u2265",
+        approximately: "\u2248",
+        copyright: "\u00A9",
+        registered: "\u00AE",
+        trademark: "\u2122",
+        degree: "\u00B0",
+        bullet: "\u2022",
+        middleDot: "\u00B7",
       },
       de: {
         // German typography rules
@@ -144,6 +187,27 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ".",
         decimalSeparator: ",",
+        // Arrows and symbols
+        rightArrow: "\u2192",
+        leftArrow: "\u2190",
+        upArrow: "\u2191",
+        downArrow: "\u2193",
+        doubleRightArrow: "\u21D2",
+        doubleLeftArrow: "\u21D0",
+        leftRightArrow: "\u2194",
+        multiplication: "\u00D7",
+        division: "\u00F7",
+        plusMinus: "\u00B1",
+        notEqual: "\u2260",
+        lessThanEqual: "\u2264",
+        greaterThanEqual: "\u2265",
+        approximately: "\u2248",
+        copyright: "\u00A9",
+        registered: "\u00AE",
+        trademark: "\u2122",
+        degree: "\u00B0",
+        bullet: "\u2022",
+        middleDot: "\u00B7",
       },
       es: {
         // Spanish typography rules
@@ -159,6 +223,27 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ".",
         decimalSeparator: ",",
+        // Arrows and symbols
+        rightArrow: "\u2192",
+        leftArrow: "\u2190",
+        upArrow: "\u2191",
+        downArrow: "\u2193",
+        doubleRightArrow: "\u21D2",
+        doubleLeftArrow: "\u21D0",
+        leftRightArrow: "\u2194",
+        multiplication: "\u00D7",
+        division: "\u00F7",
+        plusMinus: "\u00B1",
+        notEqual: "\u2260",
+        lessThanEqual: "\u2264",
+        greaterThanEqual: "\u2265",
+        approximately: "\u2248",
+        copyright: "\u00A9",
+        registered: "\u00AE",
+        trademark: "\u2122",
+        degree: "\u00B0",
+        bullet: "\u2022",
+        middleDot: "\u00B7",
       },
       it: {
         // Italian typography rules
@@ -174,6 +259,27 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ".",
         decimalSeparator: ",",
+        // Arrows and symbols
+        rightArrow: "\u2192",
+        leftArrow: "\u2190",
+        upArrow: "\u2191",
+        downArrow: "\u2193",
+        doubleRightArrow: "\u21D2",
+        doubleLeftArrow: "\u21D0",
+        leftRightArrow: "\u2194",
+        multiplication: "\u00D7",
+        division: "\u00F7",
+        plusMinus: "\u00B1",
+        notEqual: "\u2260",
+        lessThanEqual: "\u2264",
+        greaterThanEqual: "\u2265",
+        approximately: "\u2248",
+        copyright: "\u00A9",
+        registered: "\u00AE",
+        trademark: "\u2122",
+        degree: "\u00B0",
+        bullet: "\u2022",
+        middleDot: "\u00B7",
       },
     };
 
@@ -314,6 +420,9 @@ class Standard {
       enableNumberFormatting:
         element.dataset.standardNumbers !== "false" &&
         this.options.enableNumberFormatting,
+      enableArrowsAndSymbols:
+        element.dataset.standardArrows !== "false" &&
+        this.options.enableArrowsAndSymbols,
     };
   }
 
@@ -360,6 +469,10 @@ class Standard {
 
       if (elementOptions.enableFractions) {
         text = this.fixFractions(text);
+      }
+
+      if (elementOptions.enableArrowsAndSymbols) {
+        text = this.fixArrowsAndSymbols(text, rules);
       }
 
       if (elementOptions.enableNumberFormatting) {
@@ -484,7 +597,7 @@ class Standard {
     text = text.replace(/\b'(twas|til|cause)\b/gi, `${rules.apostrophe}$1`);
 
     // Possessive after s: James' or James's
-    text = text.replace(/(\w)s'(\s|$)/g, `$1s${rules.apostrophe}$2`);
+    text = text.replace(/(\\w)s'(\s|$)/g, `$1s${rules.apostrophe}$2`);
 
     return text;
   }
@@ -516,6 +629,50 @@ class Standard {
       const regex = new RegExp(`\\b${ascii.replace("/", "\\/")}\\b`, "g");
       text = text.replace(regex, unicode);
     });
+
+    return text;
+  }
+
+  /**
+   * Transform ASCII arrows and symbols into proper Unicode characters
+   */
+  fixArrowsAndSymbols(text, rules = this.rules) {
+    // Skip if already has proper symbols
+    if (text.includes(rules.rightArrow)) {
+      return text;
+    }
+
+    // Arrow transformations (order matters - longest patterns first)
+
+    // Double arrows
+    text = text.replace(/==>/g, rules.doubleRightArrow); // ==> becomes ⇒
+    text = text.replace(/<==/g, rules.doubleLeftArrow); // <== becomes ⇐
+    text = text.replace(/<==>/g, rules.leftRightArrow); // <==> becomes ↔
+
+    // Single arrows (with word boundaries to avoid breaking HTML/code)
+    text = text.replace(/\s+->\s+/g, ` ${rules.rightArrow} `); // -> becomes →
+    text = text.replace(/\s+<-\s+/g, ` ${rules.leftArrow} `); // <- becomes ←
+    text = text.replace(/\s+<->\s+/g, ` ${rules.leftRightArrow} `); // <-> becomes ↔
+
+    // Math operators (with spaces to avoid breaking code)
+    text = text.replace(/\s+x\s+/gi, ` ${rules.multiplication} `); // x becomes ×
+    text = text.replace(/\s+\*\s+/g, ` ${rules.multiplication} `); // * becomes ×
+    text = text.replace(/\s+\/\s+/g, ` ${rules.division} `); // / becomes ÷
+    text = text.replace(/\+\/-/g, rules.plusMinus); // +/- becomes ±
+    text = text.replace(/!=/g, rules.notEqual); // != becomes ≠
+    text = text.replace(/<=/g, rules.lessThanEqual); // <= becomes ≤
+    text = text.replace(/>=/g, rules.greaterThanEqual); // >= becomes ≥
+    text = text.replace(/~=/g, rules.approximately); // ~= becomes ≈
+    text = text.replace(/≈=/g, rules.approximately); // ≈= becomes ≈
+
+    // Special symbols
+    text = text.replace(/\(c\)/gi, rules.copyright); // (c) becomes ©
+    text = text.replace(/\(r\)/gi, rules.registered); // (r) becomes ®
+    text = text.replace(/\(tm\)/gi, rules.trademark); // (tm) becomes ™
+
+    // Temperature (careful with degrees)
+    text = text.replace(/(\d+)\s*degrees?/gi, `$1${rules.degree}`); // 100 degrees becomes 100°
+    text = text.replace(/(\d+)\s*deg\b/gi, `$1${rules.degree}`); // 100 deg becomes 100°
 
     return text;
   }
@@ -1093,7 +1250,6 @@ class Standard {
     this.restoreAllOriginalContent();
     this.process();
     this.dispatchEvent("afterRefresh", {});
-    return this;
   }
 
   /**
@@ -1166,41 +1322,6 @@ class Standard {
   }
 
   /**
-   * Enable specific features and allow chaining
-   */
-  enable(features) {
-    if (!Array.isArray(features)) {
-      console.error("Standard.enable() expects an array of feature names.");
-      return this;
-    }
-
-    const featureMap = {
-      WidowPrevention: "enableWidowPrevention",
-      SmartQuotes: "enableSmartQuotes",
-      Punctuation: "enablePunctuation",
-      Spacing: "enableSpacing",
-      Fractions: "enableFractions",
-      NumberFormatting: "enableNumberFormatting",
-    };
-
-    const newOptions = {};
-    features.forEach((feature) => {
-      const optionName = featureMap[feature];
-      if (optionName) {
-        newOptions[optionName] = true;
-      } else {
-        console.warn(
-          `Standard: Unknown feature \"${feature}\" passed to enable().`,
-        );
-      }
-    });
-
-    this.updateOptions(newOptions);
-
-    return this; // Enable chaining
-  }
-
-  /**
    * Update options and reprocess
    */
   updateOptions(newOptions) {
@@ -1232,6 +1353,7 @@ class Standard {
       "enableSpacing",
       "enableFractions",
       "enableNumberFormatting",
+      "enableArrowsAndSymbols",
       "locale",
     ];
 
@@ -1243,8 +1365,6 @@ class Standard {
     if (shouldRefresh) {
       this.refresh();
     }
-
-    return this;
   }
 
   /**
@@ -1257,6 +1377,46 @@ class Standard {
       rules: { ...this.rules },
       isObserving: !!this.observer,
     };
+  }
+
+  /**
+   * Toggle baseline grid debug mode
+   */
+  toggleBaselineGrid(show = true) {
+    document.body.setAttribute("data-baseline-debug", show);
+    document.documentElement.style.setProperty(
+      "--baseline-debug",
+      show ? "1" : "0",
+    );
+  }
+
+  /**
+   * Measure font baseline offset (run once per font)
+   */
+  measureBaselineOffset(fontFamily = "system-ui", fontSize = 16) {
+    const testEl = document.createElement("div");
+    testEl.style.cssText = `
+      position: absolute;
+      font-family: ${fontFamily};
+      font-size: ${fontSize}px;
+      line-height: 1;
+      visibility: hidden;
+    `;
+    testEl.textContent = "Hxg";
+    document.body.appendChild(testEl);
+
+    const bounds = testEl.getBoundingClientRect();
+    const lineHeight = parseFloat(getComputedStyle(testEl).lineHeight);
+
+    // Calculate offset from top of line-box to baseline
+    const offset = (lineHeight - fontSize) / 2;
+
+    document.body.removeChild(testEl);
+
+    console.log(
+      `Baseline offset for ${fontFamily}: ${offset}px (${offset / fontSize}em)`,
+    );
+    return offset / fontSize; // Return as em value
   }
 }
 
@@ -1280,6 +1440,7 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
     enablePunctuation: true,
     enableSpacing: true,
     enableFractions: true,
+    enableArrowsAndSymbols: true,
     enableNumberFormatting: false, // Conservative default
   });
 

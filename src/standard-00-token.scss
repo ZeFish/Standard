@@ -24,10 +24,6 @@
     --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
     --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
 
-    /* Rhythm system control tokens */
-    --rhythm-multiplier: 1; /* Global rhythm scaling */
-    --rhythm-block-space: 2; /* Multiplier for special block elements (blockquote, pre, figure) */
-
     /* Logical Spacing Scale - based on rhythm unit */
     --space-xxxs: calc(1rlh / 5);
     --space-xxs: calc(1rlh / 4);
@@ -39,27 +35,9 @@
     --space-xxl: calc(4 * 1rlh);
     --space-xxxl: calc(5 * 1rlh);
 
-    /* Logical spacing tokens - block and inline directions */
-    --space-block-start: var(--space);
-    --space-block-end: var(--space);
-    --space-inline-start: var(--space);
-    --space-inline-end: var(--space);
-
-    /* Derived spacing tokens */
-    --space-gap: calc(var(--space) / 4); /* Small gap for flex grids */
-    --space-block: var(--space); /* Default block spacing */
-    --space-block-special: calc(
-        var(--space) * var(--rhythm-block-space)
-    ); /* Special block elements spacing */
-    --space-negative: calc(var(--space) * -1);
-
     /* Logical border properties */
     --hr-thickness: 1px;
     --border-radius: var(--space-xxs);
-    --border-block-start-width: var(--hr-thickness);
-    --border-block-end-width: var(--hr-thickness);
-    --border-inline-start-width: var(--hr-thickness);
-    --border-inline-end-width: var(--hr-thickness);
 
     /* Z-index scale */
     --z-base: 1;

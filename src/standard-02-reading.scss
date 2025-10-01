@@ -78,7 +78,7 @@
     &:not(.no-grid) {
         p:has(img) {
             display: flex;
-            gap: var(--space-gap);
+            gap: calc(var(--space) / 4);
             border-radius: var(--border-radius);
         }
 

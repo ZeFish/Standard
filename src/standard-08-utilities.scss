@@ -6,6 +6,9 @@
 .no-margin-block-start {
     margin-block-start: 0 !important;
 }
+.margin-block-end-space {
+    margin-block-end: var(--space);
+}
 .no-margin-block-end {
     margin-block-end: 0 !important;
 }
@@ -113,7 +116,7 @@
     margin-block-end: 0 !important;
 }
 .stick-next {
-    margin-block-end: var(--space-gap) !important;
+    margin-block-end: var(calc(var(--space) / 4)) !important;
 }
 
 /* Rhythm scaling utilities using logical properties */

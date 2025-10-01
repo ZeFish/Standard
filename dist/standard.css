@@ -345,9 +345,6 @@
   --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
   --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
   --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
-  /* Rhythm system control tokens */
-  --rhythm-multiplier: 1; /* Global rhythm scaling */
-  --rhythm-block-space: 2; /* Multiplier for special block elements (blockquote, pre, figure) */
   /* Logical Spacing Scale - based on rhythm unit */
   --space-xxxs: calc(1rlh / 5);
   --space-xxs: calc(1rlh / 4);
@@ -358,25 +355,9 @@
   --space-xl: calc(3 * 1rlh);
   --space-xxl: calc(4 * 1rlh);
   --space-xxxl: calc(5 * 1rlh);
-  /* Logical spacing tokens - block and inline directions */
-  --space-block-start: var(--space);
-  --space-block-end: var(--space);
-  --space-inline-start: var(--space);
-  --space-inline-end: var(--space);
-  /* Derived spacing tokens */
-  --space-gap: calc(var(--space) / 4); /* Small gap for flex grids */
-  --space-block: var(--space); /* Default block spacing */
-  --space-block-special: calc(
-      var(--space) * var(--rhythm-block-space)
-  ); /* Special block elements spacing */
-  --space-negative: calc(var(--space) * -1);
   /* Logical border properties */
   --hr-thickness: 1px;
   --border-radius: var(--space-xxs);
-  --border-block-start-width: var(--hr-thickness);
-  --border-block-end-width: var(--hr-thickness);
-  --border-inline-start-width: var(--hr-thickness);
-  --border-inline-end-width: var(--hr-thickness);
   /* Z-index scale */
   --z-base: 1;
   --z-dropdown: 1000;
@@ -403,7 +384,7 @@
   /* Grid system tokens */
   --grid-cols: 12;
   --grid-gap: var(--space);
-  --grid-row-gap: var(--space-block); /* Separate control for row spacing */
+  --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
   /* Container tokens */
   --container-max: 1200px;
   --container-standard: var(--space);
@@ -411,7 +392,7 @@
 
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
    Use this as your single grid across the site (replaces old .h-grid API).
-   Relies on logical properties and Harmony tokens: --space, --space-gap, --space-l, borders, etc.
+   Relies on logical properties and Harmony tokens: --space, calc(var(--space) / 4), --space-l, borders, etc.
 */
 /* Grid container */
 .grid {
@@ -423,7 +404,7 @@
 
 /* Gap variants aligned to rhythm */
 .grid.tight {
-  --grid-gap: var(--space-gap);
+  --grid-gap: calc(var(--space) / 4);
   --grid-row-gap: var(--space-s);
 }
 
@@ -1154,7 +1135,7 @@
 }
 .reading:not(.no-grid) p:has(img) {
   display: flex;
-  gap: var(--space-gap);
+  gap: calc(var(--space) / 4);
   border-radius: var(--border-radius);
 }
 .reading:not(.no-grid) p:has(img) > * {
@@ -1324,6 +1305,7 @@ html {
   font-feature-settings: var(--font-feature);
   font-variant-ligatures: normal;
   font-variation-settings: var(--font-variation);
+  font-optical-sizing: auto;
   text-wrap: pretty;
   widows: 2;
   orphans: 2;
@@ -1567,7 +1549,6 @@ caption {
 }
 
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
-/* Rhythm tokens are now consolidated in standard-00-token.scss */
 /* ===== Harmony Base (containers and resets) ===== */
 :where(*, *::before, *::after) {
   box-sizing: border-box;
@@ -1583,41 +1564,6 @@ caption {
   padding-inline: var(--container-standard);
 }
 
-/* Universal reset for rhythm-managed elements
-:where(
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    ul,
-    ol,
-    dl,
-    blockquote,
-    pre,
-    table,
-    figure,
-    form,
-    fieldset,
-    div,
-    section,
-    article,
-    aside,
-    header,
-    footer,
-    nav,
-    input,
-    textarea,
-    select,
-    button,
-    label,
-    legend
-) {
-    margin: 0;
-}
-*/
 /* Logical unsets for first/last child when containers apply margins */
 :where(:first-child) {
   margin-block-start: unset;
@@ -1629,27 +1575,46 @@ caption {
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 :where(.rhythm) {
-  /* Prevent nested rhythm from double-spacing - token defined in tokens file */
-  /* Debug mode visualization - moved to debug section */
-  /* =========================== */
-  /* MARGIN-COLLAPSE-SAFE CORE   */
-  /* =========================== */
-  /* Default: Use margins with collapse prevention (allows typographic nuances) */
-  display: flow-root; /* Modern margin collapse prevention */
-  /* Create new block formatting context to prevent margin collapse */
-  /* contain: layout style; I messed the position fixed so commented it */
-  /* Alternative: Use padding on container to prevent collapse */
-  padding-block-start: 1px;
-  padding-block-end: 1px;
-  margin-block-start: -1px;
-  margin-block-end: -1px;
+  /* Rhythm control - can be overridden per instance */
+  --rhythm-multiplier: 1;
+  /* Reset margins for all rhythm-managed elements (scoped to .rhythm) */
+}
+:where(.rhythm) :where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+table,
+figure,
+form,
+fieldset,
+div,
+section,
+article,
+aside) {
+  margin: 0;
+}
+:where(.rhythm) {
+  /* Modern margin collapse prevention */
+  display: flow-root;
+  /* Apply rhythm spacing to all direct children */
 }
 :where(.rhythm) > * {
   margin-block-start: 0;
-  margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 :where(.rhythm) > *:last-child {
   margin-block-end: 0;
+}
+:where(.rhythm) .grid {
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 :where(.rhythm) .rhythm {
   --rhythm-multiplier: 1; /* Reset for nested contexts */
@@ -1658,8 +1623,8 @@ caption {
 :where(.rhythm) .accent,
 :where(.rhythm) .feature,
 :where(.rhythm) .full {
-  /* These are layout containers, give them rhythm spacing */
-  margin-block-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
+  /* Layout containers get double spacing for emphasis */
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 :where(.rhythm) {
   /* =========================== */
@@ -1700,7 +1665,7 @@ caption {
 :where(.rhythm) h3 + h4,
 :where(.rhythm) h4 + h5,
 :where(.rhythm) h5 + h6 {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier) * -1);
 }
 :where(.rhythm) {
   /* Lists after headings get normal spacing */
@@ -1714,21 +1679,21 @@ caption {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 :where(.rhythm) {
-  /* Blockquotes get more generous spacing */
+  /* Special blocks get generous spacing (2× rhythm) */
 }
 :where(.rhythm) .callout,
 :where(.rhythm) blockquote,
 :where(.rhythm) pre,
 :where(.rhythm) figure,
 :where(.rhythm) p:has(img) {
-  margin-block-start: calc((var(--space-block-special) - var(--space)) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-block-special) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+}
+:where(.rhythm) {
+  /* Adjacent images get reduced spacing */
 }
 :where(.rhythm) p:has(img) + p:has(img) {
-  --margin-to-remove: calc(
-      (var(--space-block-special) * var(--rhythm-multiplier)) * -1
-  );
-  margin-block-start: calc(var(--margin-to-remove) + var(--space-gap));
+  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier) * -1 + var(--space) / 4);
 }
 :where(.rhythm) {
   /* Reset first-child spacing for special blocks */
@@ -1736,18 +1701,16 @@ caption {
 :where(.rhythm) blockquote:first-child,
 :where(.rhythm) pre:first-child,
 :where(.rhythm) figure:first-child,
-:where(.rhythm) fieldset:first-child,
 :where(.rhythm) p:has(img):first-child,
 :where(.rhythm) .callout:first-child {
   margin-block-start: 0;
 }
 :where(.rhythm) {
-  /* Form elements get consistent but nuanced spacing */
-  /* Form field groups - spacing only */
+  /* Form field groups */
 }
 :where(.rhythm) fieldset {
-  margin-block-start: calc(var(--space-block-special) - var(--space));
-  margin-block-end: var(--space-block-special);
+  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 :where(.rhythm) {
   /* =========================== */
@@ -1761,52 +1724,69 @@ caption {
 }
 :where(.rhythm) ul,
 :where(.rhythm) ol {
+  list-style: none;
   padding-inline-start: var(--space);
-  list-style-position: initial;
-  list-style-image: initial;
-  list-style-type: initial;
   margin-block-start: 0;
   margin-block-end: var(--space);
+}
+:where(.rhythm) ul:last-child,
+:where(.rhythm) ol:last-child {
+  margin-block-end: 0;
 }
 :where(.rhythm) {
   /* Nested lists */
 }
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
-  padding-inline-start: var(--space-s);
+  padding-inline-start: var(--space);
+  margin-block-end: 0;
 }
 :where(.rhythm) {
-  /* List items spacing only */
+  /* List items */
 }
 :where(.rhythm) li {
+  position: relative;
   margin: 0;
-  padding-inline-start: var(--space-s);
+  padding-inline-start: 0;
   line-height: var(--font-density-s);
+}
+:where(.rhythm) {
+  /* Unordered list bullets */
+}
+:where(.rhythm) ul > li::before {
+  content: "•";
+  position: absolute;
+  left: calc(var(--space) / -1);
+  width: var(--space);
+  text-align: center;
+  color: color-mix(in srgb, currentColor 60%, transparent);
+}
+:where(.rhythm) {
+  /* Ordered list numbers */
 }
 :where(.rhythm) ol {
   counter-reset: ol-counter;
-  list-style-type: decimal;
 }
-:where(.rhythm) ul > li::marker {
-  content: "•";
-  text-align: center;
-  color: color-mix(in srgb, currentColor 60%, transparent);
-  margin-inline-end: var(--space-s);
+:where(.rhythm) ol > li {
+  counter-increment: ol-counter;
 }
-:where(.rhythm) ol > li::marker {
-  /*content: counter(ol-counter) ".\00A0";
-  counter-increment: ol-counter;*/
+:where(.rhythm) ol > li::before {
+  content: counter(ol-counter) ".";
+  position: absolute;
+  left: calc(var(--space) / -1);
+  width: calc(var(--space) - 0.25em);
   text-align: right;
   color: color-mix(in srgb, currentColor 60%, transparent);
   font-variant-numeric: tabular-nums;
-  text-align: end !important;
-  padding-inline-start: var(--space-s);
 }
 :where(.rhythm) {
   /* Blockquotes - spacing only */
 }
 :where(.rhythm) blockquote {
-  padding-inline-start: var(--space-l);
+  padding-inline-start: var(--space);
+  padding-inline-end: var(--space);
+  padding-block-start: var(--space);
+  padding-block-end: var(--space);
 }
 :where(.rhythm) {
   /* Code blocks - spacing only */
@@ -1866,17 +1846,20 @@ caption {
 :where(.rhythm) {
   /* Label + input pairs */
 }
-:where(.rhythm) label:has(+ input),
+:where(.rhythm) label:has(+ input[type=text]),
+:where(.rhythm) label:has(+ input[type=email]),
+:where(.rhythm) label:has(+ input[type=password]),
 :where(.rhythm) label:has(+ textarea),
 :where(.rhythm) label:has(+ select) {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
 :where(.rhythm) {
   /* Checkbox/radio with labels */
 }
-:where(.rhythm) input[type=checkbox],
-:where(.rhythm) input[type=radio] {
-  margin-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+:where(.rhythm) label + input[type=checkbox],
+:where(.rhythm) label + input[type=radio] {
+  margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
 :where(.rhythm) {
   /* Button groups */
@@ -1948,7 +1931,7 @@ caption {
 .grid > .col-quarter > *,
 .grid > .col-full > * {
   margin-block: 0;
-  margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 .box > :last-child,
 .grid > .col-1 > :last-child,
@@ -2058,13 +2041,12 @@ caption {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
+    margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
   }
   .rhythm > :last-child {
     margin-block-end: 0;
   }
 }
-/* Mobile fallback: stack free columns full-width */
 /* Modern Color System - Automatic Light/Dark Theme with System Preference Detection */
 :root {
   /* Tell browser we support both color schemes */
@@ -2711,6 +2693,10 @@ img {
   margin-block-start: 0 !important;
 }
 
+.margin-block-end-space {
+  margin-block-end: var(--space);
+}
+
 .no-margin-block-end {
   margin-block-end: 0 !important;
 }
@@ -2829,7 +2815,7 @@ img {
 }
 
 .stick-next {
-  margin-block-end: var(--space-gap) !important;
+  margin-block-end: var(calc(var(--space) / 4)) !important;
 }
 
 /* Rhythm scaling utilities using logical properties */
@@ -3077,6 +3063,382 @@ img {
     max-width: var(--line-width-full);
     margin-left: auto;
     margin-right: auto;
+  }
+}
+/* =========================== */
+/* STANDARD DEBUG SYSTEM       */
+/* =========================== */
+/* Single class to enable all debug features */
+.standard-debug {
+  position: relative;
+}
+
+/* Baseline Grid Overlay */
+.standard-debug::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent calc(var(--space) - 1px), color-mix(in srgb, var(--color-accent) 15%, transparent) calc(var(--space) - 1px), color-mix(in srgb, var(--color-accent) 15%, transparent) var(--space));
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+  opacity: 0.5;
+}
+
+/* Grid Column Overlay (only for .grid inside debug) */
+.standard-debug .grid {
+  position: relative;
+}
+
+.standard-debug .grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  column-gap: var(--grid-gap);
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+}
+
+.standard-debug .grid::after {
+  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-cyan) 10%, transparent) 0, color-mix(in srgb, var(--color-cyan) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
+}
+
+/* Reading Layout Debug - show zones */
+.standard-debug.reading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
+  pointer-events: none;
+  z-index: var(--z-base);
+  opacity: 0.1;
+  background: linear-gradient(to right, transparent 0, transparent var(--content-full), var(--color-purple) var(--content-full), var(--color-purple) calc(var(--content-full) + var(--content-feature)), var(--color-blue) calc(var(--content-full) + var(--content-feature)), var(--color-blue) calc(var(--content-full) + var(--content-feature) + var(--content-accent)), var(--color-accent) calc(var(--content-full) + var(--content-feature) + var(--content-accent)), var(--color-accent) calc(100% - var(--content-full) - var(--content-feature) - var(--content-accent)), var(--color-blue) calc(100% - var(--content-full) - var(--content-feature) - var(--content-accent)), var(--color-blue) calc(100% - var(--content-full) - var(--content-feature)), var(--color-purple) calc(100% - var(--content-full) - var(--content-feature)), var(--color-purple) calc(100% - var(--content-full)), transparent calc(100% - var(--content-full)));
+}
+
+/* Rhythm Spacing Debug - outline all elements */
+.standard-debug.rhythm > * {
+  outline: 1px dashed color-mix(in srgb, var(--color-orange) 50%, transparent);
+  outline-offset: -1px;
+  position: relative;
+}
+
+/* Show margin-block-end values */
+.standard-debug.rhythm > *::after {
+  content: "↓ " attr(data-margin-block-end);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--color-orange);
+  color: var(--color-background);
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+  display: none;
+}
+
+/* Typography Debug - show processed elements */
+.standard-debug [data-typography-processed] {
+  position: relative;
+}
+
+.standard-debug [data-typography-processed]::before {
+  content: "✓ Typo";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-success);
+  color: var(--color-background);
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+  opacity: 0.63;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+  display: none;
+}
+
+/* Debug Info Panel */
+.standard-debug::after {
+  content: "🔍 Standard Debug" "\a" "Baseline: " var(--space) "\a" "Ratio: " var(--font-ratio) "\a" "Density: " var(--font-density) "\a" "Grid: " var(--grid-cols) " cols";
+  position: fixed;
+  top: var(--space);
+  right: var(--space);
+  background: var(--color-background);
+  color: var(--color-foreground);
+  border: var(--border-accent);
+  border-radius: var(--border-radius);
+  padding: var(--space-s);
+  font-family: var(--font-monospace);
+  font-size: var(--scale-xs);
+  line-height: 1.5;
+  white-space: pre;
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-toast);
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+/* Grid item debugging */
+.standard-debug .grid > * {
+  outline: 1px solid color-mix(in srgb, var(--color-cyan) 50%, transparent);
+  outline-offset: -1px;
+  position: relative;
+}
+
+.standard-debug .grid > *::before {
+  content: attr(class);
+  position: absolute;
+  top: var(--space-xxxs);
+  left: var(--space-xxxs);
+  background: var(--color-cyan);
+  color: var(--color-background);
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Free column debug */
+.standard-debug .free-col::after {
+  content: "start: " var(--start) " / span: " var(--span);
+  position: absolute;
+  bottom: var(--space-xxxs);
+  left: var(--space-xxxs);
+  background: var(--color-purple);
+  color: var(--color-background);
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+}
+
+/* Color token visualization */
+.standard-debug .text-accent,
+.standard-debug .text-success,
+.standard-debug .text-warning,
+.standard-debug .text-error {
+  position: relative;
+}
+
+.standard-debug .text-accent::before {
+  content: "accent";
+  background: var(--color-accent);
+}
+
+.standard-debug .text-success::before {
+  content: "success";
+  background: var(--color-success);
+}
+
+.standard-debug .text-warning::before {
+  content: "warning";
+  background: var(--color-warning);
+}
+
+.standard-debug .text-error::before {
+  content: "error";
+  background: var(--color-error);
+}
+
+.standard-debug .text-accent::before,
+.standard-debug .text-success::before,
+.standard-debug .text-warning::before,
+.standard-debug .text-error::before {
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+  color: var(--color-background);
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+}
+
+/* Responsive breakpoint indicator */
+body.standard-debug::before {
+  content: "md";
+  position: fixed;
+  bottom: var(--space);
+  left: var(--space);
+  color: var(--color-foreground);
+  font-family: var(--font-monospace);
+  font-size: var(--scale-xs);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  z-index: var(--z-toast);
+  pointer-events: none;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  body.standard-debug::before {
+    content: "sm (<768px)";
+    color: var(--color-foreground);
+  }
+}
+@media (max-width: 600px) {
+  body.standard-debug::before {
+    content: "xs (<600px)";
+    color: var(--color-foreground);
+  }
+}
+@media (min-width: 1024px) {
+  body.standard-debug::before {
+    content: "lg (≥1024px)";
+    color: var(--color-foreground);
+  }
+}
+/* Layout zone labels for .reading - CRITICAL FIX */
+.standard-debug.reading .small,
+.standard-debug.reading .accent,
+.standard-debug.reading .feature,
+.standard-debug.reading .full {
+  position: relative; /* CRITICAL: Make these positioned containers */
+  outline: 2px dashed; /* Add outline to make zones visible */
+  outline-offset: -2px;
+}
+
+.standard-debug.reading .small {
+  outline-color: color-mix(in srgb, var(--color-blue) 50%, transparent);
+}
+
+.standard-debug.reading .accent {
+  outline-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+}
+
+.standard-debug.reading .feature {
+  outline-color: color-mix(in srgb, var(--color-purple) 50%, transparent);
+}
+
+.standard-debug.reading .full {
+  outline-color: color-mix(in srgb, var(--color-pink) 50%, transparent);
+}
+
+.standard-debug.reading .small::before,
+.standard-debug.reading .accent::before,
+.standard-debug.reading .feature::before,
+.standard-debug.reading .full::before {
+  position: absolute;
+  top: var(--space-xxxs);
+  right: var(--space-xxxs);
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space-xxxs) var(--space-xxs);
+  border-radius: var(--border-radius);
+  pointer-events: none;
+  opacity: 0.95;
+  z-index: var(--z-tooltip);
+  color: var(--color-background);
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.standard-debug.reading .small::before {
+  content: "Small";
+  background: var(--color-blue);
+}
+
+.standard-debug.reading .accent::before {
+  content: "Accent";
+  background: var(--color-accent);
+}
+
+.standard-debug.reading .feature::before {
+  content: "Feature";
+  background: var(--color-purple);
+}
+
+.standard-debug.reading .full::before {
+  content: "Full";
+  background: var(--color-pink);
+}
+
+/* Default content zone indicator (elements without zone class) */
+.standard-debug.reading > :not(.small):not(.accent):not(.feature):not(.full) {
+  outline: 1px dotted color-mix(in srgb, var(--color-green) 30%, transparent);
+  outline-offset: -1px;
+}
+
+/* Print debug styles */
+@media print {
+  .standard-debug::before,
+  .standard-debug::after,
+  .standard-debug .grid::after,
+  .standard-debug.reading::after,
+  body.standard-debug::before {
+    display: none !important;
+  }
+}
+/* Dark mode adjustments for debug */
+@media (prefers-color-scheme: dark) {
+  .standard-debug::before {
+    opacity: 0.3;
+  }
+  .standard-debug.reading::after {
+    opacity: 0.15;
+  }
+}
+/* Add to standard.css */
+:root {
+  --baseline-trim-support: 0; /* Will be 1 when supported */
+}
+
+/* Detect support */
+@supports (text-box-trim: both) {
+  :root {
+    --baseline-trim-support: 1;
+  }
+}
+@supports (leading-trim: both) {
+  :root {
+    --baseline-trim-support: 1;
+  }
+}
+/* Apply when supported */
+.rhythm {
+  /* Current fallback behavior */
+}
+
+@supports (text-box-trim: both) or (leading-trim: both) {
+  .rhythm > * {
+    text-box-trim: both;
+    text-box-edge: cap alphabetic;
+    /* Safari fallback */
+    leading-trim: both;
+    text-edge: cap alphabetic;
+    /* Adjust margins since leading is now trimmed */
+    margin-block-end: var(--space);
+  }
+  .rhythm > :is(h1, h2, h3, h4, h5, h6) {
+    text-box-trim: both;
+    text-box-edge: cap alphabetic;
+    leading-trim: both;
+    text-edge: cap alphabetic;
   }
 }
 

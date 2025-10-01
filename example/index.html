@@ -3,468 +3,587 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Standard Framework - Fine-Art Typography Demo</title>
+        <title>Standard Framework - Typography, Grid, Rhythm, Color</title>
         <link rel="stylesheet" href="../dist/standard.css" />
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
             :root {
-                --font-text: Inter;
-                --font-header: Fraunces;
-                --font-monospace: "Source Code Pro";
-
+                --font-text: Inter, system-ui, sans-serif;
+                --font-header: Fraunces, Georgia, serif;
+                --font-monospace: "Source Code Pro", monospace;
                 --font-ratio: 1.4;
-                --font-letter-spacing: normal;
-
-                --font-density: 1.2;
+                --font-density: 1.3;
             }
-            /* Framework handles pre/code styling automatically */
 
-            .box {
+            .color-swatch {
+                padding: var(--space);
+                border-radius: var(--border-radius);
                 text-align: center;
+                font-weight: var(--bold-weight);
                 font-size: var(--scale-s);
+            }
+
+            .demo-placeholder {
+                height: 12rem;
+                background: var(--color-background-secondary);
+                border: var(--border);
+                border-radius: var(--border-radius);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--color-muted);
+                font-style: italic;
             }
         </style>
     </head>
-    <body class="rhythm md">
-        <div class="reading">
-        <!-- Book Layout & Reading System Section -->
-            <h1>Standard<br />Framework</h1>
-            <p>
-                A fine-art typography framework with automatic light/dark theme,
-                mathematical precision using the golden ratio, and micro-typography
-                rules inspired by the masters of print design.
+    <body class="reading rhythm">
+        <!-- Hero Section -->
+        <header>
+            <h1>Standard Framework</h1>
+            <p class="text-muted">
+                Typography is the voice · Grid is the structure · Rhythm is the
+                flow · Color is the emotion
             </p>
+        </header>
 
-            <h2>Typography & Reading Flow</h2>
-            <p>
-                This demonstration shows how the <code>.reading</code> class creates
-                <strong>optimal reading experiences</strong> with flexible layout areas.
-                The system is designed around <em>classical typography principles</em>
-                and book design traditions.
-            </p>
+        <p>
+            A fine-art design framework implementing classical typography, Swiss
+            grid systems, and vertical rhythm with mathematical precision
+            inspired by centuries of print mastery.
+        </p>
 
-            <blockquote>
-                "The good reader, the major reader, the active and creative reader is a rereader."
-                — Vladimir Nabokov
-            </blockquote>
-
-            <h3>Layout Areas</h3>
-            <p>
-                The reading system provides multiple content areas for flexible layout:
-            </p>
-
-            <ul>
-                <li><strong>Content:</strong> Default optimal reading width (42rem)</li>
-                <li><strong>Small:</strong> Narrower for side notes and asides</li>
-                <li><strong>Accent:</strong> Wider for pullquotes and highlights</li>
-                <li><strong>Feature:</strong> Even wider for images and media</li>
-                <li><strong>Full:</strong> Full container width for backgrounds Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-            </ul>
-
-            <p class="small">
-                <img src="https://wsrv.nl/?url=https://ffp.co/img/220126%20-%20Yeux%20-%20Anne-Marie0777_2048%20long%20edge_2048x2048_U_150_G10.jpg&w=960&h=960&sharp=0.5" />
-                <img src="https://wsrv.nl/?url=https://ffp.co/img/220126%20-%20Yeux%20-%20Anne-Marie0777_2048%20long%20edge_2048x2048_U_150_G10.jpg&w=960&h=960&sharp=0.5" />
-            </p>
-            <p class="small">
-                <img src="https://wsrv.nl/?url=https://ffp.co/img/220126%20-%20Yeux%20-%20Anne-Marie0777_2048%20long%20edge_2048x2048_U_150_G10.jpg&w=960&h=960&sharp=0.5" />
-            </p>
-
-            <p>
-                The main content continues here in the default content area,
-                maintaining optimal line length for comfortable reading. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <div class="small">
-                <h4>Small Area Example</h4>
-                <p>
-                    This content appears in the <code>.small</code> area,
-                    perfect for supplementary information, footnotes,
-                    or sidebar content that doesn't need full width.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </div>
-
-            <p>
-                The main content continues here in the default content area,
-                maintaining optimal line length for comfortable reading. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <div class="accent">
-                <h4>Accent Area for Emphasis</h4>
-                <p>
-                    The <code>.accent</code> area is perfect for pullquotes,
-                    highlighted content, or important information that
-                    deserves extra attention and breathing room.
-                </p>
-                <p>
-                    The <code>.accent</code> area is perfect for pullquotes,
-                    highlighted content, or important information that
-                    deserves extra attention and breathing room.
-                </p>
-            </div>
-
-            <h3>Code and Technical Content</h3>
-            <p>Here's how code blocks integrate with the reading layout Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.:</p>
-
-            <pre><code>&lt;article class="reading md"&gt;
-  &lt;h1&gt;Article Title&lt;/h1&gt;
-  &lt;p&gt;Main content in default area&lt;/p&gt;
-
-  &lt;div class="accent"&gt;
-    &lt;p&gt;Highlighted content&lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;div class="feature"&gt;
-    &lt;img src="wide-image.jpg" alt="Feature image" /&gt;
-  &lt;/div&gt;
-&lt;/article&gt;</code></pre>
-
-            <div class="feature">
-                <h4>Feature Area for Media</h4>
-                <div style="background: linear-gradient(135deg, var(--color-accent), var(--color-background-secondary)); height: 200px; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                    Wide Feature Content Area
-                </div>
-                <p style="text-align: center; margin-top: var(--space-s); font-size: var(--scale-xs); color: var(--color-muted);">
-                    This <code>.feature</code> area is ideal for images, videos, tables, or other wide content
-                </p>
-            </div>
-
-            <h3>Markdown Elements</h3>
-            <p>The <code>.md</code> class enhances markdown rendering with:</p>
-
+        <!-- Table of Contents -->
+        <nav class="">
+            <h3 class="margin-block-end-space">Contents</h3>
             <ol>
-                <li><strong>Smart typography</strong> with proper punctuation</li>
-                <li><strong>Callout boxes</strong> for special content</li>
-                <li><strong>Enhanced lists</strong> with better spacing</li>
-                <li><strong>Code syntax</strong> highlighting support</li>
+                <li><a href="#typography">Typography System</a></li>
+                <li><a href="#grid">Grid System</a></li>
+                <li><a href="#rhythm">Vertical Rhythm</a></li>
+                <li><a href="#color">Color Management</a></li>
+                <li><a href="#reading">Reading Layout</a></li>
+                <li><a href="#forms">Form Elements</a></li>
             </ol>
-
-            <div class="callout callout-info">
-                <div class="callout-title">💡 Pro Tip</div>
-                <div class="callout-content">
-                    Combine <code>.reading</code> and <code>.md</code> classes
-                    for the ultimate content presentation experience.
-                </div>
-            </div>
-
-            <div class="full">
-                <div style="background: var(--color-background-secondary); padding: var(--space); text-align: center; border-radius: var(--border-radius);">
-                    <h4>Full Width Section</h4>
-                    <p>
-                        The <code>.full</code> area extends to the complete container width,
-                        perfect for full-bleed backgrounds, wide tables, or spanning content.
-                    </p>
-                </div>
-            </div>
-
-
-        <!-- Grid System Section -->
-        <section id="grid-system" class="feature">
-            <h2>12-Column Grid System</h2>
-            <pre><code>&lt;div class="grid"&gt;
-  &lt;div class="col-6"&gt;...&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-                <div class="grid">
-                    <div class="col-6 box">col-6</div>
-                    <div class="col-6 box">col-6</div>
-                    <div class="col-4 box">col-4</div>
-                    <div class="col-8 box">col-8</div>
-                    <div class="col-3 box">col-3</div>
-                    <div class="col-3 box">col-3</div>
-                    <div class="col-3 box">col-3</div>
-                    <div class="col-3 box">col-3</div>
-                </div>
-
-            <h3>Free Columns with CSS Variables</h3>
-            <pre><code>&lt;div class="free-col" style="--start: 3; --span: 4"&gt;
-  ...
-&lt;/div&gt;</code></pre>
-
-                <div class="grid">
-                    <div class="col-6 box">Main Content</div>
-                    <div
-                        class="free-col box"
-                        style="--start: 8; --span: 3"
-                    >
-                        Sidebar<br />--start: 8<br />--span: 3
-                    </div>
-                    <div class="free-col box span-2 startv-10">
-                        Utility<br />.span-2<br />.startv-10
-                    </div>
-                </div>
-        </section>
-
-
+        </nav>
 
         <!-- Typography Section -->
-        <section id="typography">
+        <h2 id="typography">Typography is the Voice</h2>
+        <p>
+            Standard implements fine-art typography with smart quotes, proper
+            punctuation, widow prevention, and multi-locale support. The golden
+            ratio governs all typographic relationships.
+        </p>
 
+        <h3>Heading Hierarchy</h3>
+        <p>
+            Each heading level maintains precise mathematical relationships
+            based on the golden ratio (φ = 1.618).
+        </p>
 
-                <article class="reading">
-                    <h1>Typography System</h1>
-                    <p>Fine-art inspired typography with mathematical precision.</p>
-                    <p>
-                        This demonstrates the typography system in action. The
-                        golden ratio governs the relationships between font
-                        sizes, creating a harmonious visual hierarchy that
-                        guides the reader's eye naturally through the content.
-                    </p>
+        <div class="box-inset">
+            <h1>Heading Level 1</h1>
+            <h2>Heading Level 2</h2>
+            <h3>Heading Level 3</h3>
+            <h4>Heading Level 4</h4>
+            <h5>Heading Level 5</h5>
+            <h6>Heading Level 6</h6>
+            <p>
+                Body text with <strong>bold emphasis</strong> and
+                <em>italic stress</em>.
+            </p>
+        </div>
 
-                    <p>
-                        Each heading level maintains precise mathematical
-                        relationships.
-                        <strong>Bold text stands out</strong> while
-                        <em>italic text adds emphasis</em> without disrupting
-                        the overall rhythm.
-                    </p>
+        <h3>Smart Typography</h3>
+        <p>
+            The JavaScript engine automatically enhances your text with proper
+            typographic conventions:
+        </p>
 
-                    <h2>Secondary Heading</h2>
-                    <p>
-                        Secondary headings provide clear content structure while
-                        maintaining the golden ratio proportions established in
-                        the modular scale.
-                    </p>
+        <ul>
+            <li>"Straight quotes" become "curly quotes"</li>
+            <li>Double hyphens -- become em-dashes—like this</li>
+            <li>Three periods... become proper ellipsis…</li>
+            <li>Fractions like 1/2 become ½</li>
+            <li>No orphaned words on last lines</li>
+        </ul>
 
-                    <h3>Tertiary Heading</h3>
-                    <p>
-                        Third-level headings continue the systematic approach to
-                        typography, ensuring consistent spacing and proportions
-                        throughout the document.
-                    </p>
+        <blockquote>
+            "Typography is the craft of endowing human language with a durable
+            visual form."
+            <cite>— Robert Bringhurst</cite>
+        </blockquote>
 
-                    <h4>Fourth Level</h4>
-                    <p>
-                        Even at smaller heading levels, the mathematical
-                        relationships remain intact, providing a cohesive
-                        reading experience.
-                    </p>
+        <h3>Code & Monospace</h3>
+        <p>
+            Inline code like <code>const standard = new Standard()</code> and
+            code blocks maintain rhythm:
+        </p>
 
-                    <h5>Fifth Level</h5>
-                    <p>
-                        Fine-grain control over typography allows for nuanced
-                        information architecture while preserving visual
-                        harmony.
-                    </p>
+        <pre><code>// Initialize Standard
+const standard = new Standard({
+  locale: 'en',
+  enableSmartQuotes: true,
+  enableWidowPrevention: true,
+  observeDOM: true
+});</code></pre>
 
-                    <h6>Sixth Level</h6>
-                    <p>
-                        The smallest heading level still maintains the
-                        framework's commitment to mathematical precision and
-                        readability.
-                    </p>
+        <!-- Grid Section (use .feature to make it wider) -->
+        <div class="feature">
+            <h2 id="grid">Grid is the Structure</h2>
+            <p>
+                A Swiss-style 12-column responsive grid with logical properties.
+                Inspired by Josef Müller-Brockmann and the International
+                Typographic Style.
+            </p>
 
+            <h3>Basic Columns</h3>
+            <div class="grid">
+                <div class="col-12 box">col-12 (Full width)</div>
+                <div class="col-6 box">col-6 (Half)</div>
+                <div class="col-6 box">col-6 (Half)</div>
+                <div class="col-4 box">col-4 (Third)</div>
+                <div class="col-4 box">col-4 (Third)</div>
+                <div class="col-4 box">col-4 (Third)</div>
+                <div class="col-3 box">col-3</div>
+                <div class="col-3 box">col-3</div>
+                <div class="col-3 box">col-3</div>
+                <div class="col-3 box">col-3</div>
+            </div>
 
-                <h2>Complete Content Coverage</h2>
-                <p>
-                    The bulletproof rhythm system now handles every type of content seamlessly:
-                </p>
+            <h3>Responsive Grid</h3>
+            <p>Columns adapt at breakpoints (md: 768px, lg: 1024px):</p>
+            <div class="grid">
+                <div class="col-12 col-md-6 col-lg-4 box">12 → 6 → 4</div>
+                <div class="col-12 col-md-6 col-lg-4 box">12 → 6 → 4</div>
+                <div class="col-12 col-md-12 col-lg-4 box">12 → 12 → 4</div>
+            </div>
 
-                <!-- Typography -->
-                <h3>Typography Elements</h3>
-                <p>Headings, paragraphs, lists, and blockquotes all follow the rhythm.</p>
-                <blockquote>Even blockquotes maintain perfect spacing relationships.</blockquote>
+            <h3>Free Column Positioning</h3>
+            <p>Precise control with CSS variables:</p>
+            <div class="grid">
+                <div class="free-col box" style="--start: 1; --span: 7">
+                    Main content<br />
+                    <code>--start: 1; --span: 7</code>
+                </div>
+                <div class="free-col box" style="--start: 9; --span: 4">
+                    Sidebar<br />
+                    <code>--start: 9; --span: 4</code>
+                </div>
+            </div>
+
+            <h3>Gap Variants</h3>
+            <div class="grid tight">
+                <div class="col-4 box">Tight gaps</div>
+                <div class="col-4 box">Tight gaps</div>
+                <div class="col-4 box">Tight gaps</div>
+            </div>
+            <div class="grid wide">
+                <div class="col-4 box">Wide gaps</div>
+                <div class="col-4 box">Wide gaps</div>
+                <div class="col-4 box">Wide gaps</div>
+            </div>
+        </div>
+
+        <!-- Rhythm Section (back to normal content width) -->
+        <h2 id="rhythm">Rhythm is the Flow</h2>
+        <p>
+            Mathematical vertical spacing based on <code>1rlh</code> (root
+            line-height) creates visual harmony and guides the eye naturally
+            through content.
+        </p>
+
+        <h3>Consistent Spacing</h3>
+        <p>
+            All elements automatically align to the baseline grid. Headings,
+            paragraphs, lists, blockquotes, forms, and media all follow the same
+            rhythmic system.
+        </p>
+
+        <div class="box-inset rhythm-tight">
+            <h4 class="no-margin-block-start">Tight Rhythm</h4>
+            <p>Spacing multiplier: 0.75×</p>
+            <ul>
+                <li>Closer spacing</li>
+                <li>More compact</li>
+            </ul>
+        </div>
+
+        <div class="box-inset rhythm-loose">
+            <h4 class="no-margin-block-start">Loose Rhythm</h4>
+            <p>Spacing multiplier: 1.5×</p>
+            <ul>
+                <li>More breathing room</li>
+                <li>Generous spacing</li>
+            </ul>
+        </div>
+
+        <h3>Lists & Hierarchy</h3>
+        <p>Lists maintain rhythm with proper indentation:</p>
+
+        <ul>
+            <li>Unordered lists use centered bullets</li>
+            <li>Proper indentation with <code>--space</code></li>
+            <li>
+                Nested lists maintain rhythm
                 <ul>
-                    <li>Lists are properly spaced</li>
-                    <li>Including nested lists
+                    <li>Second level nesting</li>
+                    <li>
+                        Consistent spacing
                         <ul>
-                            <li>Which maintain rhythm</li>
-                            <li>Without double-spacing</li>
+                            <li>Third level nesting</li>
                         </ul>
                     </li>
                 </ul>
+            </li>
+        </ul>
 
-                <!-- Forms -->
-                <h3>Form Integration</h3>
-                <form>
-                    <label for="test-input">Form elements follow rhythm:</label>
-                    <input type="text" id="test-input" placeholder="Input field">
-                    <button type="button">Button spacing</button>
-                </form>
+        <ol>
+            <li>Ordered lists use right-aligned numbers</li>
+            <li>Tabular number formatting</li>
+            <li>
+                Mathematical precision
+                <ol>
+                    <li>Nested ordered lists</li>
+                    <li>Maintain alignment</li>
+                </ol>
+            </li>
+        </ol>
 
-                <!-- Media -->
-                <h3>Media Elements</h3>
-                <figure></figure>
-                    <div style="height: 3rem; background: var(--color-background-secondary); border: var(--border); display: flex; align-items: center; justify-content: center;">
-                        [Image Placeholder]
-                    </div>
-                    <figcaption>Figures and captions are rhythm-aware</figcaption>
-                </figure>
+        <h3>Special Elements</h3>
+        <p>Blockquotes, code blocks, and figures get generous spacing:</p>
 
-                <!-- Tables -->
-                <h3>Tables</h3>
-                <table>
-                    <caption>Tables maintain rhythm spacing</caption>
-                    <thead>
-                        <tr><th>Column 1</th><th>Column 2</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Data 1</td><td>Data 2</td></tr>
-                    </tbody>
-                </table>
+        <blockquote>
+            Special elements receive <code>--space-block-special</code> (2×
+            rhythm) to create visual breathing room and emphasize their
+            importance.
+        </blockquote>
 
+        <figure>
+            <div class="demo-placeholder">[Figure Placeholder]</div>
+            <figcaption>
+                Figures and captions maintain rhythm spacing
+            </figcaption>
+        </figure>
 
+        <!-- Color Section (use .feature for wider display) -->
+        <div class="feature">
+            <h2 id="color">Color is the Emotion</h2>
+            <p>
+                Automatic light/dark theming with analog-inspired colors. Zero
+                configuration— respects
+                <code>prefers-color-scheme</code> automatically.
+            </p>
 
-
-
-            <h3>Color System</h3>
-            <p>Analog-inspired colors with automatic dark mode support.</p>
-
-                <div class="grid">
-                    <div class="col-6">
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-red);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Red</strong>
-                        </div>
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-orange);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Orange</strong>
-                        </div>
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-yellow);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Yellow</strong>
-                        </div>
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-green);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Green</strong>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-cyan);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Cyan</strong>
-                        </div>
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-blue);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Blue</strong>
-                        </div>
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-purple);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Purple</strong>
-                        </div>
-                        <div
-                            class="box"
-                            style="
-                                background: var(--color-pink);
-                                color: var(--color-background);
-                            "
-                        >
-                            <strong>Pink</strong>
-                        </div>
+            <h3>Color Palette</h3>
+            <div class="grid">
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-red);
+                            color: var(--color-background);
+                        "
+                    >
+                        Red
                     </div>
                 </div>
-<hr />
-            <h2>Form Elements</h3>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-orange);
+                            color: var(--color-background);
+                        "
+                    >
+                        Orange
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-yellow);
+                            color: var(--color-background);
+                        "
+                    >
+                        Yellow
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-green);
+                            color: var(--color-background);
+                        "
+                    >
+                        Green
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-cyan);
+                            color: var(--color-background);
+                        "
+                    >
+                        Cyan
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-blue);
+                            color: var(--color-background);
+                        "
+                    >
+                        Blue
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-purple);
+                            color: var(--color-background);
+                        "
+                    >
+                        Purple
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div
+                        class="color-swatch"
+                        style="
+                            background: var(--color-pink);
+                            color: var(--color-background);
+                        "
+                    >
+                        Pink
+                    </div>
+                </div>
+            </div>
+
+            <h3>Semantic Colors</h3>
+            <div class="grid">
+                <div class="col-6">
+                    <div
+                        class="box"
+                        style="
+                            background: var(--color-background);
+                            color: var(--color-foreground);
+                        "
+                    >
+                        Background
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div
+                        class="box"
+                        style="
+                            background: var(--color-foreground);
+                            color: var(--color-background);
+                        "
+                    >
+                        Foreground
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div
+                        class="box"
+                        style="background: var(--color-background-secondary)"
+                    >
+                        Secondary
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div
+                        class="box"
+                        style="background: var(--color-background-tertiary)"
+                    >
+                        Tertiary
+                    </div>
+                </div>
+            </div>
+
+            <h3>Text Colors</h3>
+            <p>Normal text color</p>
+            <p class="text-muted">Muted text (60% opacity)</p>
+            <p class="text-subtle">Subtle text (40% opacity)</p>
+            <p class="text-accent">Accent color text</p>
+            <p class="text-success">Success message</p>
+            <p class="text-warning">Warning message</p>
+            <p class="text-error">Error message</p>
+        </div>
+
+        <!-- Reading Layout Section -->
+        <h2 id="reading">Reading Layout System</h2>
+        <p>
+            Editorial-quality layouts for long-form content. Inspired by
+            centuries of book design with flexible content areas.
+        </p>
+
+        <h3>Layout Areas</h3>
+        <ul>
+            <li>
+                <strong>content</strong> (default) — 42rem, optimal reading
+                width
+            </li>
+            <li><strong>small</strong> — Narrower for side notes</li>
+            <li><strong>accent</strong> — Extends into margins</li>
+            <li><strong>feature</strong> — Wider for images and media</li>
+            <li><strong>full</strong> — Edge-to-edge, full width</li>
+        </ul>
+
+        <div class="small box">
+            <h4>Small Area</h4>
             <p>
-                Consistent form styling that integrates with the framework's
-                design system:
+                Perfect for supplementary information, footnotes, or sidebar
+                content that doesn't need full width.
             </p>
-                    <form class="small">
-                        <h3>Contact Form</h3>
-                        <div>
-                            <label
-                                for="contact-name"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Full Name
-                            </label>
-                            <input
-                                type="text"
-                                id="contact-name"
-                                placeholder="John Doe"
-                                style="width: 100%"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="contact-email"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Email Address
-                            </label>
-                            <input
-                                type="email"
-                                id="contact-email"
-                                placeholder="john@example.com"
-                                style="width: 100%"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                for="contact-message"
-                                style="
-                                    display: block;
-                                    font-weight: var(--bold-weight);
-                                "
-                            >
-                                Message
-                            </label>
-                            <textarea
-                                id="contact-message"
-                                rows="4"
-                                placeholder="Your message here..."
-                                style="width: 100%"
-                            ></textarea>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="newsletter" />
-                            <label for="newsletter"
-                                >Subscribe to newsletter</label
-                            >
-                        </div>
-                        <div>
-                            <button type="submit">Send Message</button>
-                            <button type="reset">Reset Form</button>
-                        </div>
-                    </form>
-                </article>
-            </section>
+        </div>
+
+        <p>Main content continues here in the default area.</p>
+
+        <div class="accent box">
+            <h4>Accent Area</h4>
+            <p>
+                Ideal for pullquotes, highlighted content, or important
+                information that deserves extra attention.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h4>Feature Area</h4>
+            <div class="demo-placeholder">Wide Feature Content</div>
+            <p class="text-muted small" style="text-align: center">
+                Perfect for images, videos, tables, or wide content
+            </p>
+        </div>
+
+        <div class="full box">
+            <h4>Full Width Area</h4>
+            <p>
+                Extends to complete container width for full-bleed backgrounds
+                or spanning content.
+            </p>
+        </div>
+
+        <h3>Image Galleries</h3>
+        <p>Multiple images in a paragraph create automatic galleries:</p>
+
+        <p class="small">
+            <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
+            <img src="https://picsum.photos/400/300?random=2" alt="Demo 2" />
+            <img src="https://picsum.photos/400/300?random=3" alt="Demo 3" />
+        </p>
+
+        <p>
+            <img src="https://picsum.photos/800/400?random=4" alt="Wide demo" />
+        </p>
+
+        <!-- Forms Section (use .accent for emphasis) -->
+        <div class="accent">
+            <h2 id="forms">Form Elements</h2>
+            <p>
+                Consistent form styling that integrates with the rhythm system
+                and color management.
+            </p>
+
+            <form class="small">
+                <fieldset>
+                    <legend>Contact Information</legend>
+
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe" />
+
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="john@example.com"
+                    />
+
+                    <label for="message">Message</label>
+                    <textarea
+                        id="message"
+                        rows="4"
+                        placeholder="Your message here..."
+                    ></textarea>
+
+                    <div>
+                        <input type="checkbox" id="newsletter" />
+                        <label for="newsletter">Subscribe to newsletter</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="option1" name="option" />
+                        <label for="option1">Option 1</label>
+
+                        <input type="radio" id="option2" name="option" />
+                        <label for="option2">Option 2</label>
+                    </div>
+                </fieldset>
+
+                <div class="button-group">
+                    <button type="submit">Send Message</button>
+                    <button type="reset">Reset Form</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Markdown Enhancements (use .feature) -->
+        <div class="feature md">
+            <h2 id="markdown">Markdown Enhancements</h2>
+            <p>
+                Add the <code>.md</code> class for enhanced callouts and
+                formatting:
+            </p>
+
+            <div class="callout" data-callout="note">
+                <div class="callout-title">Note</div>
+                <div class="callout-content">
+                    <p>Standard callout for general information and notes.</p>
+                </div>
+            </div>
+
+            <div class="callout" data-callout="warning">
+                <div class="callout-title">Warning</div>
+                <div class="callout-content">
+                    <p>Warning callout for cautionary information.</p>
+                </div>
+            </div>
+
+            <div class="callout" data-callout="important">
+                <div class="callout-title">Important</div>
+                <div class="callout-content">
+                    <p>Important callout for critical information.</p>
+                </div>
+            </div>
+
+            <details class="callout" data-callout="note">
+                <summary>
+                    <div class="callout-title">Collapsible Callout</div>
+                </summary>
+                <div class="callout-content">
+                    <p>Click the title to expand and collapse this content.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <hr />
+            <p class="text-muted small">
+                Standard Framework — Typography · Grid · Rhythm · Color<br />
+                Built with mathematical precision and classical design
+                principles
+            </p>
+        </footer>
 
         <!-- Load Standard Framework JavaScript -->
         <script src="../dist/standard.js"></script>
-        </div>
     </body>
 </html>

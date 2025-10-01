@@ -2,24 +2,15 @@
   "name": "@zefish/standard",
   "version": "0.4.1",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
-  "main": "dist/standard.css",
-  "exports": {
-    ".": "./dist/standard.min.css",
-    "./js": "./dist/standard.min.js"
+  "author": "Francis Fontaine",
+  "license": "MIT",
+  "homepage": "https://github.com/ZeFish/Standard#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeFish/Standard.git"
   },
-  "files": [
-    "dist",
-    "src/standard.js"
-  ],
-  "scripts": {
-    "clean": "rm -rf dist",
-    "build:css": "sass --load-path=node_modules src/standard.scss dist/standard.css",
-    "build:css-min": "sass --load-path=node_modules src/standard.scss dist/standard.min.css --style=compressed",
-    "build:js": "cp src/standard.js dist/standard.js",
-    "build:js-min": "terser src/standard.js -o dist/standard.min.js",
-    "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min",
-    "release": "release-it",
-    "dev": "sass --watch --load-path=node_modules src/standard.scss dist/standard.css"
+  "bugs": {
+    "url": "https://github.com/ZeFish/Standard/issues"
   },
   "keywords": [
     "css",
@@ -37,43 +28,56 @@
     "standard",
     "book-layout"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ZeFish/Standard.git"
+  "main": "dist/standard.css",
+  "exports": {
+    ".": "./dist/standard.min.css",
+    "./js": "./dist/standard.min.js"
   },
-  "homepage": "https://github.com/ZeFish/Standard#readme",
-  "bugs": {
-    "url": "https://github.com/ZeFish/Standard/issues"
-  },
-  "author": "Francis Fontaine",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release v${version}",
-      "tagName": "v${version}"
-    },
-    "github": {
-      "release": true
-    },
-    "npm": {
-      "publish": true
-    }
+  "files": [
+    "dist",
+    "src/standard.js"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm:watch:*\"",
+    "watch:css": "sass --watch --load-path=node_modules src/standard.scss dist/standard.css",
+    "watch:js": "nodemon --watch src/standard.js --exec \"npm run build:js\"",
+    "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min",
+    "build:css": "sass --load-path=node_modules src/standard.scss dist/standard.css",
+    "build:css-min": "sass --load-path=node_modules src/standard.scss dist/standard.min.css --style=compressed",
+    "build:js": "cp src/standard.js dist/standard.js",
+    "build:js-min": "terser src/standard.js -o dist/standard.min.js --compress --mangle",
+    "clean": "rm -rf dist",
+    "release": "npm run clean && npm run build && release-it"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.10",
     "release-it": "^19.0.5",
     "sanitize.css": "^13.0.0",
     "sass": "^1.93.2",
     "terser": "^5.44.0"
   },
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release-it": {
+    "git": {
+      "tagName": "v${version}",
+      "commitMessage": "chore: release v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    }
+  }
 }

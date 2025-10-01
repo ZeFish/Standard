@@ -13,3 +13,49 @@
 @use "standard-06-img";
 @use "standard-07-md";
 @use "standard-08-utilities";
+@use "standard-09-debug";
+
+/* Add to standard.css */
+
+:root {
+    --baseline-trim-support: 0; /* Will be 1 when supported */
+}
+
+/* Detect support */
+@supports (text-box-trim: both) {
+    :root {
+        --baseline-trim-support: 1;
+    }
+}
+
+@supports (leading-trim: both) {
+    :root {
+        --baseline-trim-support: 1;
+    }
+}
+
+/* Apply when supported */
+.rhythm {
+    /* Current fallback behavior */
+}
+
+@supports (text-box-trim: both) or (leading-trim: both) {
+    .rhythm > * {
+        text-box-trim: both;
+        text-box-edge: cap alphabetic;
+
+        /* Safari fallback */
+        leading-trim: both;
+        text-edge: cap alphabetic;
+
+        /* Adjust margins since leading is now trimmed */
+        margin-block-end: var(--space);
+    }
+
+    .rhythm > :is(h1, h2, h3, h4, h5, h6) {
+        text-box-trim: both;
+        text-box-edge: cap alphabetic;
+        leading-trim: both;
+        text-edge: cap alphabetic;
+    }
+}

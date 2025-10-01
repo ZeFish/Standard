@@ -1,25 +1,26 @@
 [
   {
-    "label": "build-all",
-    "command": "npm run build",
-    "description": "Compiles Sass to CSS and minifies JS."
+    "label": "🚀 Dev (Watch All)",
+    "command": "npm run dev"
   },
   {
-    "label": "build-css",
-    "command": "npm run build:css && npm run build:css-min",
-    "description": "Compiles Sass to CSS."
+    "label": "🎨 Watch CSS Only",
+    "command": "npm run watch:css"
   },
   {
-    "label": "build-js",
-    "command": "npm run build:js && npm run build:js-min",
-    "description": "Copies and minifies JS."
+    "label": "⚡ Watch JS Only",
+    "command": "npm run watch:js"
   },
   {
-    "label": "watch",
-    "description": "Watches all files for changes and recompiles.",
-    "watch": {
-      "paths": ["src/**/*.scss", "src/standard.js"],
-      "task": "build-all"
-    }
+    "label": "📦 Build All",
+    "command": "npm run build"
+  },
+  {
+    "label": "🧹 Clean",
+    "command": "npm run clean"
+  },
+  {
+    "label": "🚢 Release",
+    "command": "npm run release"
   }
 ]
