@@ -86,6 +86,9 @@
             p:first-child {
                 margin-top: 0;
             }
+            p:last-child {
+                margin-bottom: 0;
+            }
 
             ul,
             ol {
