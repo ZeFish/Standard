@@ -63,7 +63,7 @@
             grid-column-start: #{$i};
         }
     }
-    .sm-row {
+    .col-sm-row {
         grid-column: 1 / -1;
     }
 }
@@ -76,13 +76,12 @@
             grid-column-start: #{$i};
         }
     }
-    .lg-row {
+    .col-lg-row {
         grid-column: 1 / -1;
     }
 }
 
 /* Full-span helper (replaces old .h-col-full) */
-.row,
 .col-row,
 .col-full {
     grid-column: 1 / -1;
