@@ -3034,6 +3034,9 @@ img {
 .md .callout .callout-content p:first-child {
   margin-top: 0;
 }
+.md .callout .callout-content p:last-child {
+  margin-bottom: 0;
+}
 .md .callout .callout-content ul,
 .md .callout .callout-content ol {
   padding: 0 calc(var(--space) * 0.75);
