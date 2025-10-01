@@ -196,7 +196,7 @@
     }
     p + ul,
     p + ol {
-        margin-block-start: calc(var(--space) * 0.5);
+        margin-block-start: calc(var(--space) * -0.5);
     }
     ul:last-child,
     ol:last-child {
