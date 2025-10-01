@@ -170,13 +170,13 @@
     blockquote > :first-child,
     pre > :first-child,
     figure > :first-child,
-    .callout > :first-child {
+    .callout .callout-content > :first-child {
         margin-block-start: 0;
     }
     blockquote > :last-child,
     pre > :last-child,
     figure > :last-child,
-    .callout > :last-child {
+    .callout .callout-content > :last-child {
         margin-block-end: 0;
     }
 
