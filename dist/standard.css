@@ -3767,6 +3767,22 @@ img {
     columns: 2; /* Reduce columns on tablets */
   }
 }
+.md-hidden {
+  display: none;
+}
+
+.sm-only {
+  display: none;
+}
+
+.md-only {
+  display: inherit;
+}
+
+.lg-only {
+  display: none;
+}
+
 /* Responsive breakpoints */
 @media (max-width: 768px) {
   .sm-hidden {
@@ -3782,21 +3798,7 @@ img {
     display: none;
   }
 }
-@media (min-width: 769px) and (max-width: 1024px) {
-  .md-hidden {
-    display: none;
-  }
-  .sm-only {
-    display: none;
-  }
-  .md-only {
-    display: inherit;
-  }
-  .lg-only {
-    display: none;
-  }
-}
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
   .lg-hidden {
     display: none;
   }
