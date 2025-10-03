@@ -93,8 +93,8 @@ npm install @standard/framework
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@zefish/standard">
-<script src="https://unpkg.com/@zefish/standard/js"></script>
+<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
+<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>
 ```
 
 ### Download
