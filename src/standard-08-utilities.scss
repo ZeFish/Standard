@@ -65,8 +65,12 @@
 .no-margin-block-start {
     margin-block-start: 0 !important;
 }
+.margin-bottom,
 .margin-block-end-space {
     margin-block-end: var(--space);
+}
+.margin-bottom-2 {
+    margin-block-end: var(--space-l);
 }
 .no-margin-block-end {
     margin-block-end: 0 !important;
