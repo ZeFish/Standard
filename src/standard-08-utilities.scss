@@ -1,5 +1,11 @@
 /* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
 
+.elipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 @for $i from 1 through 12 {
     .h-#{$i} {
         height: calc(var(--space) * #{$i});

@@ -25,9 +25,10 @@
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 :where(body:not(.no-rhythm)) {
     margin: 0;
-    padding: var(--space-l);
-    padding-bottom: var(--space-xl);
+    padding: var(--space);
+    padding-bottom: var(--space-l);
 }
+
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
     /* Rhythm control - can be overridden per instance */
@@ -93,59 +94,28 @@
     /* =========================== */
 
     /* Enhanced spacing relationships for typography */
-    p {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    dl,
+    blockquote,
+    pre,
+    table,
+    figure,
+    form,
+    fieldset,
+    div,
+    section,
+    article,
+    aside {
         margin-block-start: 0;
         margin-block-end: var(--space);
-    }
-
-    h1 {
-        margin: var(--space-xxxl) 0 var(--space-l) 0;
-    }
-
-    h2 {
-        margin: var(--space-xxl) 0 var(--space-l) 0;
-    }
-
-    h3 {
-        margin: var(--space-xl) 0 var(--space-l) 0;
-    }
-
-    h4 {
-        margin: var(--space-l) 0 var(--space) 0;
-    }
-
-    h5 {
-        margin: var(--space) 0 var(--space-s) 0;
-    }
-
-    h6 {
-        margin: var(--space) 0 var(--space-xs) 0;
-    }
-
-    hr {
-        margin-block-start: var(--space-l);
-        margin-block-end: var(--space-xl);
-    }
-
-    /* Heading after heading gets reduced spacing */
-    h1 + h2,
-    h2 + h3,
-    h3 + h4,
-    h4 + h5,
-    h5 + h6 {
-        margin-block-start: calc(
-            var(--space-xs) * var(--rhythm-multiplier) * -1
-        );
-    }
-
-    /* Lists after headings get normal spacing */
-    h1 + ul,
-    h1 + ol,
-    h2 + ul,
-    h2 + ol,
-    h3 + ul,
-    h3 + ol {
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
 
     /* Special blocks get generous spacing (2× rhythm) */

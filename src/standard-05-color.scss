@@ -6,8 +6,7 @@
     /* ===== LIGHT MODE PALETTE ===== */
     /* Natural, paper-like, analog-inspired colors */
     --color-light-background: white;
-    --color-light-foreground: rgba(0, 0, 0, 0.87);
-    --color-light-surface: rgba(0, 0, 0, 0.02);
+    --color-light-foreground: #262626;
 
     --color-light-red: #b14c42; /* dusty red clay */
     --color-light-orange: #d78a5a; /* trail-worn orange */
@@ -27,9 +26,7 @@
     /* ===== DARK MODE PALETTE ===== */
     /* Soft-glow, night-usable, retro tech inspired */
     --color-dark-background: #0f0f0f;
-    --color-dark-foreground: rgba(255, 255, 255, 0.87);
-    --color-dark-surface: rgba(255, 255, 255, 0.05);
-
+    --color-dark-foreground: #dbdbdb;
     --color-dark-red: #db6057; /* ember red */
     --color-dark-orange: #e58f5c; /* lantern orange */
     --color-dark-yellow: #dcb757; /* candlelight gold */
@@ -48,6 +45,8 @@
     /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
     --color-background: var(--color-light-background);
     --color-foreground: var(--color-light-foreground);
+
+    --color-header: var(--color-light-header), var(--color-foreground);
 
     --color-red: var(--color-light-red);
     --color-orange: var(--color-light-orange);
@@ -119,6 +118,8 @@
         /* Override semantic tokens to use dark palette */
         --color-background: var(--color-dark-background);
         --color-foreground: var(--color-dark-foreground);
+
+        --color-header: var(--color-dark-header), var(--color-foreground);
 
         --color-red: var(--color-dark-red);
         --color-orange: var(--color-dark-orange);

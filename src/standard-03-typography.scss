@@ -95,6 +95,13 @@ html {
     orphans: 2;
 }
 
+/* Responsive adjustments - collapse gutters on small screens */
+@media only screen and (max-width: 768px) {
+    :root {
+        --font-size: var(--font-mobile-size);
+    }
+}
+
 h1,
 h2,
 h3,
@@ -111,8 +118,8 @@ h6 {
     line-height: var(--font-header-line-height);
     letter-spacing: var(--font-header-letter-spacing);
     white-space: normal;
-    overflow-wrap: break-word;
-    word-break: keep-all;
+    overflow-wrap: normal;
+    word-break: normal;
     hyphens: none;
     max-width: 100%;
     box-sizing: border-box;
