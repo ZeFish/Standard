@@ -65,6 +65,14 @@
 .no-margin-block-start {
     margin-block-start: 0 !important;
 }
+.margin-top,
+.margin-block-start-space {
+    margin-block-start: var(--space);
+}
+.margin-top-2 {
+    margin-block-start: var(--space-l);
+}
+
 .margin-bottom,
 .margin-block-end-space {
     margin-block-end: var(--space);
