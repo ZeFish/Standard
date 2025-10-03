@@ -1819,14 +1819,6 @@ caption {
   padding-bottom: var(--space-l);
 }
 
-/* Responsive adjustments - collapse gutters on small screens */
-@media only screen and (max-width: 768px) {
-  :where(body:not(.no-rhythm)) {
-    margin: 0;
-    padding: var(--space);
-    padding-bottom: var(--space-l);
-  }
-}
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
