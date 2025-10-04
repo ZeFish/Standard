@@ -1,417 +1,367 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Konzert - Tonhalle Zürich</title>
-        <link rel="stylesheet" href="../dist/standard.css" />
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
-            /* Swiss Poster Color Palette */
-            :root {
-                --font-text: Inter, system-ui, sans-serif;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konzert - Tonhalle Zürich</title>
+    <link rel="stylesheet" href="../dist/standard.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+      /* Swiss Poster Color Palette */
+      :root {
+        --font-text: Inter, system-ui, sans-serif;
 
-                --color-background: #ffffff;
-                --color-foreground: #000000;
-                --color-accent: #ff0000;
+        --color-background: #ffffff;
+        --color-foreground: #000000;
+        --color-accent: #ff0000;
 
-                /* Collapse all colors to B&W + Red */
-                --color-red: var(--color-accent);
-                --color-orange: var(--color-accent);
-                --color-yellow: var(--color-accent);
-                --color-green: var(--color-accent);
-                --color-cyan: var(--color-accent);
-                --color-blue: var(--color-accent);
-                --color-purple: var(--color-accent);
-                --color-pink: var(--color-accent);
+        /* Collapse all colors to B&W + Red */
+        --color-red: var(--color-accent);
+        --color-orange: var(--color-accent);
+        --color-yellow: var(--color-accent);
+        --color-green: var(--color-accent);
+        --color-cyan: var(--color-accent);
+        --color-blue: var(--color-accent);
+        --color-purple: var(--color-accent);
+        --color-pink: var(--color-accent);
 
-                --color-muted: #666666;
-                --color-border: #000000;
+        --color-muted: #666666;
+        --color-border: #000000;
 
-                /* No shadows - flat Swiss design */
-                --shadow: none;
-                --shadow-l: none;
-            }
+        /* No shadows - flat Swiss design */
+        --shadow: none;
+        --shadow-l: none;
+      }
 
-            body {
-                background: var(--color-background);
-                color: var(--color-foreground);
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                padding: 0;
-            }
+      body {
+        background: var(--color-background);
+        color: var(--color-foreground);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
 
-            /* Swiss poster layout */
-            .poster-container {
-                flex: 1;
-                display: grid;
-                grid-template-rows: auto 1fr auto;
-                padding: var(--space-xl);
-                max-width: 1200px;
-                margin: 0 auto;
-                width: 100%;
-            }
+      /* Swiss poster layout */
+      .poster-container {
+        flex: 1;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        padding: var(--space-xl);
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
 
-            /* Poster headline - massive, tight, bold */
-            .poster-title {
-                font-size: clamp(4rem, 15vw, 12rem);
-                font-weight: 900;
-                line-height: 0.85;
-                letter-spacing: -0.02em;
-                text-transform: uppercase;
-                margin: 0;
-                margin-bottom: var(--space);
-            }
+      /* Poster headline - massive, tight, bold */
+      .poster-title {
+        font-size: clamp(4rem, 15vw, 12rem);
+        font-weight: 900;
+        line-height: 0.85;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin: 0;
+        margin-bottom: var(--space);
+      }
 
-            .poster-subtitle {
-                font-size: clamp(2rem, 8vw, 5rem);
-                font-weight: 900;
-                line-height: 0.9;
-                letter-spacing: -0.01em;
-                text-transform: uppercase;
-                margin: 0;
-                color: var(--color-accent);
-            }
+      .poster-subtitle {
+        font-size: clamp(2rem, 8vw, 5rem);
+        font-weight: 900;
+        line-height: 0.9;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        margin: 0;
+        color: var(--color-accent);
+      }
 
-            /* Small technical labels */
-            .poster-label {
-                font-size: var(--scale-micro);
-                text-transform: uppercase;
-                letter-spacing: 0.2em;
-                font-weight: 700;
-                line-height: 1.4;
-            }
+      /* Small technical labels */
+      .poster-label {
+        font-size: var(--scale-micro);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-weight: 700;
+        line-height: 1.4;
+      }
 
-            /* Thick graphic divider */
-            .poster-divider {
-                height: 4px;
+      /* Thick graphic divider */
+      .poster-divider {
+        height: 4px;
+        background: var(--color-foreground);
+        margin: var(--space-xl) 0;
+        border: none;
+      }
+
+      .poster-divider-accent {
+        height: 6px;
+        background: var(--color-accent);
+        margin: var(--space-l) 0;
+        border: none;
+      }
+
+      /* Asymmetric content blocks */
+      .content-block {
+        margin-bottom: var(--space-xl);
+      }
+
+      /* Swiss table styling */
+      .swiss-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-variant-numeric: tabular-nums;
+        margin: var(--space-l) 0;
+      }
+
+      .swiss-table th {
+        text-align: left;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--scale-s);
+        border-bottom: 3px solid var(--color-foreground);
+        padding-block-end: var(--space-xs);
+        padding-inline-end: var(--space);
+      }
+
+      .swiss-table td {
+        border-bottom: 1px solid var(--color-border);
+        padding-block: var(--space-xs);
+        padding-inline-end: var(--space);
+      }
+
+      .swiss-table tbody tr:nth-child(even) {
+        background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      }
+
+      /* Footer info */
+      .poster-footer {
+        border-top: 2px solid var(--color-foreground);
+        padding-top: var(--space);
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .poster-container {
+          padding: var(--space);
+        }
+
+        .poster-footer {
+          flex-direction: column;
+          align-items: start;
+          gap: var(--space);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster-container">
+      <!-- Header Section -->
+      <header>
+        <p class="poster-label" style="margin-bottom: var(--space-xs)">
+          Tonhalle-Gesellschaft Zürich Präsentiert
+        </p>
+        <h1 class="poster-title">Konzert</h1>
+        <h2 class="poster-subtitle">Beethoven</h2>
+        <hr class="poster-divider-accent" />
+      </header>
+
+      <!-- Main Content Section -->
+      <main>
+        <!-- Asymmetric two-column layout using grid -->
+        <div class="grid">
+          <div class="col-7">
+            <div class="content-block">
+              <h3
+                class="uppercase"
+                style="font-size: var(--scale-xl); margin-bottom: var(--space-s)"
+              >
+                Programm
+              </h3>
+              <p style="font-size: var(--scale-l); line-height: 1.4; margin-bottom: var(--space)">
+                Symphonie Nr. 9 in d-Moll, Op. 125<br />
+                "An die Freude"
+              </p>
+
+              <hr class="poster-divider" />
+
+              <h3
+                class="uppercase"
+                style="font-size: var(--scale-l); margin-bottom: var(--space-s)"
+              >
+                Interpreten
+              </h3>
+              <table class="swiss-table">
+                <tbody>
+                  <tr>
+                    <td><strong>Dirigent</strong></td>
+                    <td>Herbert von Karajan</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Orchester</strong></td>
+                    <td>Tonhalle-Orchester Zürich</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Chor</strong></td>
+                    <td>Zürcher Sing-Akademie</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sopran</strong></td>
+                    <td>Elisabeth Schwarzkopf</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Alt</strong></td>
+                    <td>Christa Ludwig</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tenor</strong></td>
+                    <td>Fritz Wunderlich</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bass</strong></td>
+                    <td>Walter Berry</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right column - asymmetric info block -->
+          <div class="col-4 start-9">
+            <div
+              style="
                 background: var(--color-foreground);
-                margin: var(--space-xl) 0;
-                border: none;
-            }
+                color: var(--color-background);
+                padding: var(--space);
+                margin-bottom: var(--space-l);
+              "
+            >
+              <p
+                class="poster-label"
+                style="color: var(--color-accent); margin-bottom: var(--space-xs)"
+              >
+                Datum & Zeit
+              </p>
+              <p
+                style="
+                  font-size: var(--scale-xl);
+                  font-weight: 900;
+                  line-height: 1;
+                  margin-bottom: var(--space-s);
+                "
+              >
+                20<br />
+                März<br />
+                1960
+              </p>
+              <p style="font-size: var(--scale-l); font-weight: 900">20:00 Uhr</p>
+            </div>
 
-            .poster-divider-accent {
-                height: 6px;
+            <div
+              style="
+                border: 3px solid var(--color-foreground);
+                padding: var(--space);
+                margin-bottom: var(--space-l);
+              "
+            >
+              <p class="poster-label" style="margin-bottom: var(--space-xs)">Veranstaltungsort</p>
+              <p style="font-weight: 700; margin-bottom: var(--space-xs)">
+                Tonhalle Zürich<br />
+                Grosser Saal
+              </p>
+              <p style="font-size: var(--scale-s); line-height: 1.4">
+                Claridenstrasse 7<br />
+                8002 Zürich
+              </p>
+            </div>
+
+            <div
+              style="
+                border: 3px solid var(--color-accent);
                 background: var(--color-accent);
-                margin: var(--space-l) 0;
-                border: none;
-            }
-
-            /* Asymmetric content blocks */
-            .content-block {
-                margin-bottom: var(--space-xl);
-            }
-
-            /* Swiss table styling */
-            .swiss-table {
-                width: 100%;
-                border-collapse: collapse;
-                font-variant-numeric: tabular-nums;
-                margin: var(--space-l) 0;
-            }
-
-            .swiss-table th {
-                text-align: left;
-                font-weight: 900;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                font-size: var(--scale-s);
-                border-bottom: 3px solid var(--color-foreground);
-                padding-block-end: var(--space-xs);
-                padding-inline-end: var(--space);
-            }
-
-            .swiss-table td {
-                border-bottom: 1px solid var(--color-border);
-                padding-block: var(--space-xs);
-                padding-inline-end: var(--space);
-            }
-
-            .swiss-table tbody tr:nth-child(even) {
-                background: color-mix(
-                    in srgb,
-                    var(--color-foreground) 5%,
-                    transparent
-                );
-            }
-
-            /* Footer info */
-            .poster-footer {
-                border-top: 2px solid var(--color-foreground);
-                padding-top: var(--space);
-                display: flex;
-                justify-content: space-between;
-                align-items: end;
-            }
-
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
-                .poster-container {
-                    padding: var(--space);
-                }
-
-                .poster-footer {
-                    flex-direction: column;
-                    align-items: start;
-                    gap: var(--space);
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="poster-container">
-            <!-- Header Section -->
-            <header>
-                <p class="poster-label" style="margin-bottom: var(--space-xs)">
-                    Tonhalle-Gesellschaft Zürich Präsentiert
-                </p>
-                <h1 class="poster-title">Konzert</h1>
-                <h2 class="poster-subtitle">Beethoven</h2>
-                <hr class="poster-divider-accent" />
-            </header>
-
-            <!-- Main Content Section -->
-            <main>
-                <!-- Asymmetric two-column layout using grid -->
-                <div class="grid">
-                    <div class="col-7">
-                        <div class="content-block">
-                            <h3
-                                class="uppercase"
-                                style="
-                                    font-size: var(--scale-xl);
-                                    margin-bottom: var(--space-s);
-                                "
-                            >
-                                Programm
-                            </h3>
-                            <p
-                                style="
-                                    font-size: var(--scale-l);
-                                    line-height: 1.4;
-                                    margin-bottom: var(--space);
-                                "
-                            >
-                                Symphonie Nr. 9 in d-Moll, Op. 125<br />
-                                "An die Freude"
-                            </p>
-
-                            <hr class="poster-divider" />
-
-                            <h3
-                                class="uppercase"
-                                style="
-                                    font-size: var(--scale-l);
-                                    margin-bottom: var(--space-s);
-                                "
-                            >
-                                Interpreten
-                            </h3>
-                            <table class="swiss-table">
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Dirigent</strong></td>
-                                        <td>Herbert von Karajan</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Orchester</strong></td>
-                                        <td>Tonhalle-Orchester Zürich</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Chor</strong></td>
-                                        <td>Zürcher Sing-Akademie</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Sopran</strong></td>
-                                        <td>Elisabeth Schwarzkopf</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Alt</strong></td>
-                                        <td>Christa Ludwig</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Tenor</strong></td>
-                                        <td>Fritz Wunderlich</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Bass</strong></td>
-                                        <td>Walter Berry</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Right column - asymmetric info block -->
-                    <div class="col-4 start-9">
-                        <div
-                            style="
-                                background: var(--color-foreground);
-                                color: var(--color-background);
-                                padding: var(--space);
-                                margin-bottom: var(--space-l);
-                            "
-                        >
-                            <p
-                                class="poster-label"
-                                style="
-                                    color: var(--color-accent);
-                                    margin-bottom: var(--space-xs);
-                                "
-                            >
-                                Datum & Zeit
-                            </p>
-                            <p
-                                style="
-                                    font-size: var(--scale-xl);
-                                    font-weight: 900;
-                                    line-height: 1;
-                                    margin-bottom: var(--space-s);
-                                "
-                            >
-                                20<br />
-                                März<br />
-                                1960
-                            </p>
-                            <p
-                                style="
-                                    font-size: var(--scale-l);
-                                    font-weight: 900;
-                                "
-                            >
-                                20:00 Uhr
-                            </p>
-                        </div>
-
-                        <div
-                            style="
-                                border: 3px solid var(--color-foreground);
-                                padding: var(--space);
-                                margin-bottom: var(--space-l);
-                            "
-                        >
-                            <p
-                                class="poster-label"
-                                style="margin-bottom: var(--space-xs)"
-                            >
-                                Veranstaltungsort
-                            </p>
-                            <p
-                                style="
-                                    font-weight: 700;
-                                    margin-bottom: var(--space-xs);
-                                "
-                            >
-                                Tonhalle Zürich<br />
-                                Grosser Saal
-                            </p>
-                            <p
-                                style="
-                                    font-size: var(--scale-s);
-                                    line-height: 1.4;
-                                "
-                            >
-                                Claridenstrasse 7<br />
-                                8002 Zürich
-                            </p>
-                        </div>
-
-                        <div
-                            style="
-                                border: 3px solid var(--color-accent);
-                                background: var(--color-accent);
-                                color: var(--color-background);
-                                padding: var(--space);
-                            "
-                        >
-                            <p
-                                class="poster-label"
-                                style="
-                                    color: var(--color-background);
-                                    margin-bottom: var(--space-xs);
-                                "
-                            >
-                                Billette
-                            </p>
-                            <p
-                                style="
-                                    font-size: var(--scale-xl);
-                                    font-weight: 900;
-                                    line-height: 1;
-                                    margin-bottom: var(--space-xs);
-                                "
-                            >
-                                CHF 15–45
-                            </p>
-                            <p style="font-size: var(--scale-s)">
-                                Vorverkauf ab 1. März<br />
-                                Tonhalle-Kasse
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Full-width quote section -->
-                <div class="grid" style="margin-top: var(--space-xxl)">
-                    <div class="col-8 start-3">
-                        <hr class="poster-divider" />
-                        <blockquote
-                            style="
-                                border: none;
-                                padding: var(--space-l) 0;
-                                text-align: center;
-                            "
-                        >
-                            <p
-                                style="
-                                    font-size: var(--scale-xl);
-                                    line-height: 1.3;
-                                    font-style: italic;
-                                    margin-bottom: var(--space);
-                                "
-                            >
-                                "Freude, schöner Götterfunken,<br />
-                                Tochter aus Elysium"
-                            </p>
-                            <p class="poster-label">— Friedrich Schiller</p>
-                        </blockquote>
-                        <hr class="poster-divider" />
-                    </div>
-                </div>
-            </main>
-
-            <!-- Footer Section -->
-            <footer class="poster-footer">
-                <div>
-                    <p class="poster-label">
-                        Tonhalle-Gesellschaft Zürich<br />
-                        Gegründet 1868
-                    </p>
-                </div>
-                <div style="text-align: right">
-                    <p class="poster-label">
-                        Grafische Gestaltung: Josef Müller-Brockmann<br />
-                        Druck: Wolfsberg AG, Zürich
-                    </p>
-                </div>
-            </footer>
+                color: var(--color-background);
+                padding: var(--space);
+              "
+            >
+              <p
+                class="poster-label"
+                style="color: var(--color-background); margin-bottom: var(--space-xs)"
+              >
+                Billette
+              </p>
+              <p
+                style="
+                  font-size: var(--scale-xl);
+                  font-weight: 900;
+                  line-height: 1;
+                  margin-bottom: var(--space-xs);
+                "
+              >
+                CHF 15–45
+              </p>
+              <p style="font-size: var(--scale-s)">
+                Vorverkauf ab 1. März<br />
+                Tonhalle-Kasse
+              </p>
+            </div>
+          </div>
         </div>
 
-        <!-- Load Standard Framework JavaScript -->
-        <script src="../dist/standard.js"></script>
-        <script>
-            // Initialize Standard with Swiss-appropriate settings
-            if (window.standard) {
-                window.standard.updateOptions({
-                    enableSmartQuotes: false, // Keep straight quotes for technical feel
-                    enablePunctuation: true,
-                    enableWidowPrevention: true,
-                    enableSpacing: true,
-                    enableFractions: false,
-                    enableNumberFormatting: false, // Keep numbers raw
-                });
-            }
-        </script>
-    </body>
+        <!-- Full-width quote section -->
+        <div class="grid" style="margin-top: var(--space-2xl)">
+          <div class="col-8 start-3">
+            <hr class="poster-divider" />
+            <blockquote style="border: none; padding: var(--space-l) 0; text-align: center">
+              <p
+                style="
+                  font-size: var(--scale-xl);
+                  line-height: 1.3;
+                  font-style: italic;
+                  margin-bottom: var(--space);
+                "
+              >
+                "Freude, schöner Götterfunken,<br />
+                Tochter aus Elysium"
+              </p>
+              <p class="poster-label">— Friedrich Schiller</p>
+            </blockquote>
+            <hr class="poster-divider" />
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer Section -->
+      <footer class="poster-footer">
+        <div>
+          <p class="poster-label">
+            Tonhalle-Gesellschaft Zürich<br />
+            Gegründet 1868
+          </p>
+        </div>
+        <div style="text-align: right">
+          <p class="poster-label">
+            Grafische Gestaltung: Josef Müller-Brockmann<br />
+            Druck: Wolfsberg AG, Zürich
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Load Standard Framework JavaScript -->
+    <script src="../dist/standard.js"></script>
+    <script>
+      // Initialize Standard with Swiss-appropriate settings
+      if (window.standard) {
+        window.standard.updateOptions({
+          enableSmartQuotes: false, // Keep straight quotes for technical feel
+          enablePunctuation: true,
+          enableWidowPrevention: true,
+          enableSpacing: true,
+          enableFractions: false,
+          enableNumberFormatting: false, // Keep numbers raw
+        });
+      }
+    </script>
+  </body>
 </html>

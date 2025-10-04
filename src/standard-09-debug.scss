@@ -136,7 +136,7 @@
     color: var(--color-background);
     font-size: var(--scale-xs);
     font-family: var(--font-monospace);
-    padding: var(--space-xxxs) var(--space-xxs);
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -159,7 +159,7 @@
     color: var(--color-background);
     font-size: var(--scale-xs);
     font-family: var(--font-monospace);
-    padding: var(--space-xxxs) var(--space-xxs);
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.63;
@@ -201,13 +201,13 @@
 .standard-debug .grid > *::before {
     content: attr(class);
     position: absolute;
-    top: var(--space-xxxs);
-    left: var(--space-xxxs);
+    top: var(--space-3xs);
+    left: var(--space-3xs);
     background: var(--color-cyan);
     color: var(--color-background);
     font-size: var(--scale-xs);
     font-family: var(--font-monospace);
-    padding: var(--space-xxxs) var(--space-xxs);
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -222,13 +222,13 @@
 .standard-debug .free-col::after {
     content: "start: " var(--start) " / span: " var(--span);
     position: absolute;
-    bottom: var(--space-xxxs);
-    left: var(--space-xxxs);
+    bottom: var(--space-3xs);
+    left: var(--space-3xs);
     background: var(--color-purple);
     color: var(--color-background);
     font-size: var(--scale-xs);
     font-family: var(--font-monospace);
-    padding: var(--space-xxxs) var(--space-xxs);
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -274,7 +274,7 @@
     color: var(--color-background);
     font-size: var(--scale-xs);
     font-family: var(--font-monospace);
-    padding: var(--space-xxxs) var(--space-xxs);
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -351,11 +351,11 @@ body.standard-debug::before {
 .standard-debug.reading .feature::before,
 .standard-debug.reading .full::before {
     position: absolute;
-    top: var(--space-xxxs);
-    right: var(--space-xxxs);
+    top: var(--space-3xs);
+    right: var(--space-3xs);
     font-size: var(--scale-xs);
     font-family: var(--font-monospace);
-    padding: var(--space-xxxs) var(--space-xxs);
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.95;

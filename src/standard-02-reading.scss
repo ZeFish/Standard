@@ -16,7 +16,7 @@
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
     --content-small: var(--space-l);
     --content-accent: minmax(0, var(--space-l));
-    --content-feature: minmax(0, var(--space-xxl));
+    --content-feature: minmax(0, var(--space-2xl));
     --content-full: minmax(0, 1fr);
 }
 
@@ -113,11 +113,11 @@
     }
 
     h1 {
-        margin: var(--space-xxxl) 0 var(--space-l) 0;
+        margin: var(--space-3xl) 0 var(--space-l) 0;
     }
 
     h2 {
-        margin: var(--space-xxl) 0 var(--space-l) 0;
+        margin: var(--space-2xl) 0 var(--space-l) 0;
     }
 
     h3 {

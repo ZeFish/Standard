@@ -38,7 +38,7 @@
     .callout {
         line-height: var(--font-density-s);
         transition: var(--duration-superfast) var(--motion-smooth);
-        padding: var(--space-xxs);
+        padding: var(--space-2xs);
         --color-callout: var(--color-background-secondary);
         --color-border: color-mix(
             in srgb,
@@ -61,8 +61,8 @@
             font-weight: bold;
             font-size: var(--scale-s);
             user-select: none;
-            padding: var(--space-xxxs) calc(var(--space) - var(--space-xs))
-                var(--space-xxxs) calc(var(--space) - var(--space-xs));
+            padding: var(--space-3xs) calc(var(--space) - var(--space-xs))
+                var(--space-3xs) calc(var(--space) - var(--space-xs));
         }
 
         .callout-content {
@@ -78,7 +78,7 @@
             overflow: hidden;
             border-radius: var(--border-radius);
             padding: var(--space-s) calc(var(--space) - var(--space-xs));
-            margin-top: var(--space-xxs);
+            margin-top: var(--space-2xs);
             margin-left: 0;
             border: var(--border);
             text-align: left;

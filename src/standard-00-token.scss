@@ -22,8 +22,8 @@
     --scale: var(--font-size);
     --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 1));
     --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
-    --scale-xxl: calc(var(--font-size) * pow(var(--font-ratio), 3));
-    --scale-xxxl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+    --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 4));
     /* ADD: Extreme scales for display/poster typography */
     --scale-display: calc(
         var(--font-size) * pow(var(--font-ratio), 6)
@@ -41,19 +41,19 @@
     ); /* ~0.4rem */
 
     /* Logical Spacing Scale - based on rhythm unit */
-    --space-xxxs: calc(1rlh / 5);
-    --space-xxs: calc(1rlh / 4);
+    --space-3xs: calc(1rlh / 5);
+    --space-2xs: calc(1rlh / 4);
     --space-xs: calc(1rlh / 3);
     --space-s: calc(1rlh / 2);
     --space: 1rlh; /* Base rhythm unit */
     --space-l: calc(2 * 1rlh);
     --space-xl: calc(3 * 1rlh);
-    --space-xxl: calc(4 * 1rlh);
-    --space-xxxl: calc(5 * 1rlh);
+    --space-2xl: calc(4 * 1rlh);
+    --space-3xl: calc(5 * 1rlh);
 
     /* Logical border properties */
     --hr-thickness: 1px;
-    --border-radius: var(--space-xxs);
+    --border-radius: var(--space-2xs);
 
     /* Z-index scale */
     --z-base: 1;

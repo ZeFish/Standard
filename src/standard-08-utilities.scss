@@ -193,13 +193,13 @@
 /* Rhythm scaling utilities using logical properties */
 .rhythm-micro {
     margin-block-end: calc(
-        var(--space-xxxs) * var(--rhythm-multiplier, 1)
+        var(--space-3xs) * var(--rhythm-multiplier, 1)
     ) !important;
 }
 
 .rhythm-tiny {
     margin-block-end: calc(
-        var(--space-xxs) * var(--rhythm-multiplier, 1)
+        var(--space-2xs) * var(--rhythm-multiplier, 1)
     ) !important;
 }
 
@@ -229,7 +229,7 @@
 
 .rhythm-xxl {
     margin-block-end: calc(
-        var(--space-xxl) * var(--rhythm-multiplier, 1)
+        var(--space-2xl) * var(--rhythm-multiplier, 1)
     ) !important;
 }
 
@@ -422,7 +422,7 @@
 /* =========================== */
 
 .heading-responsive {
-    font-size: clamp(var(--scale-xl), 4vw, var(--scale-xxl)) !important;
+    font-size: clamp(var(--scale-xl), 4vw, var(--scale-2xl)) !important;
 }
 
 .heading-compact {
@@ -437,7 +437,7 @@
 }
 
 .heading-contain h1 {
-    font-size: clamp(var(--scale-l), 5cqi, var(--scale-xxl));
+    font-size: clamp(var(--scale-l), 5cqi, var(--scale-2xl));
 }
 
 .heading-contain h2 {

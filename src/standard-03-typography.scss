@@ -133,12 +133,12 @@ svg {
 
 h1 {
     font-weight: var(--font-weight-h1);
-    font-size: clamp(var(--scale-xxl), 10vw, var(--scale-xxxl));
+    font-size: clamp(var(--scale-2xl), 10vw, var(--scale-3xl));
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
-    font-size: clamp(var(--scale-xl), 7vw, var(--scale-xxl));
+    font-size: clamp(var(--scale-xl), 7vw, var(--scale-2xl));
 }
 
 h3 {
@@ -349,7 +349,7 @@ caption {
 
 /* ADD: Helper classes for extreme scales */
 .display {
-    font-size: clamp(var(--scale-xxxl), 12vw, var(--scale-display));
+    font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
     line-height: 0.85;
     font-weight: var(--font-header-weight);
     letter-spacing: var(--font-header-letter-spacing);
