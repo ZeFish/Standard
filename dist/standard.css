@@ -925,6 +925,7 @@
 .col-row,
 .col-full {
   grid-column: 1/-1;
+  margin-block-end: 0;
 }
 
 hr.col-row {
@@ -1960,6 +1961,10 @@ aside) {
   margin-block-start: 0;
   margin-block-end: var(--space);
 }
+:where(body:not(.no-rhythm)) * > :last-child,
+:where(.rhythm) * > :last-child {
+  margin-block-end: 0;
+}
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Special blocks get generous spacing (2× rhythm) */
@@ -2123,8 +2128,10 @@ aside) {
 }
 :where(body:not(.no-rhythm)) ul.compact li,
 :where(body:not(.no-rhythm)) ol.compact li,
+:where(body:not(.no-rhythm)) li:last-of-type,
 :where(.rhythm) ul.compact li,
-:where(.rhythm) ol.compact li {
+:where(.rhythm) ol.compact li,
+:where(.rhythm) li:last-of-type {
   margin-block-end: 0;
 }
 :where(body:not(.no-rhythm)),
