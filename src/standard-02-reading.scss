@@ -139,6 +139,7 @@
     hr {
         margin-block-start: var(--space-l);
         margin-block-end: var(--space-xl);
+        margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     /* Heading after heading gets reduced spacing */

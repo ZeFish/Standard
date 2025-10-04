@@ -5,23 +5,6 @@
     box-sizing: border-box;
 }
 
-/* Containers usable across pages */
-.container {
-    padding-inline: var(--container-standard);
-}
-.container-full {
-    margin-inline: auto;
-    padding-inline: var(--container-standard);
-}
-
-/* Logical unsets for first/last child when containers apply margins */
-:where(:first-child) {
-    margin-block-start: unset;
-}
-:where(:last-child) {
-    margin-block-end: unset;
-}
-
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 :where(body:not(.no-rhythm)) {
     margin: 0;
@@ -33,32 +16,6 @@
 :where(.rhythm) {
     /* Rhythm control - can be overridden per instance */
     --rhythm-multiplier: 1;
-
-    /* Reset margins for all rhythm-managed elements (scoped to .rhythm) */
-    :where(
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        ul,
-        ol,
-        dl,
-        blockquote,
-        pre,
-        table,
-        figure,
-        form,
-        fieldset,
-        div,
-        section,
-        article,
-        aside
-    ) {
-        margin: 0;
-    }
 
     /* Modern margin collapse prevention */
     display: flow-root;
@@ -73,27 +30,7 @@
         }
     }
 
-    .grid {
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-    }
-
-    .rhythm {
-        --rhythm-multiplier: 1; /* Reset for nested contexts */
-    }
-
-    .small,
-    .accent,
-    .feature,
-    .full {
-        /* Layout containers get double spacing for emphasis */
-        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
-    }
-
-    /* =========================== */
-    /* TYPOGRAPHIC NUANCES         */
-    /* =========================== */
-
-    /* Enhanced spacing relationships for typography */
+    /* Enhanced spacing relationships for typography
     h1,
     h2,
     h3,
@@ -113,24 +50,36 @@
     div,
     section,
     article,
-    aside {
+    aside,
+    .grid {
         margin-block-start: 0;
-        margin-block-end: var(--space);
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
+    */
 
-    * > :last-child {
-        margin-block-end: 0;
+    .rhythm {
+        --rhythm-multiplier: 1; /* Reset for nested contexts */
     }
 
     /* Special blocks get generous spacing (2× rhythm) */
+    /* Layout containers get double spacing for emphasis */
     .callout,
     blockquote,
     pre,
     figure,
-    p:has(img) {
+    p:has(img),
+    fieldset,
+    .small,
+    .accent,
+    .feature,
+    .full {
         margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
         margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
     }
+
+    /* =========================== */
+    /* TYPOGRAPHIC NUANCES         */
+    /* =========================== */
 
     /* Adjacent images get reduced spacing */
     p:has(img) + p:has(img) {
@@ -154,12 +103,6 @@
         margin-block-end: 0;
     }
 
-    /* Form field groups */
-    fieldset {
-        margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
-        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
-    }
-
     /* =========================== */
     /* TYPOGRAPHY ELEMENTS         */
     /* =========================== */
@@ -175,16 +118,10 @@
     ol {
         list-style: none;
         padding-inline-start: var(--space);
-        margin-block-start: 0;
-        margin-block-end: var(--space);
     }
     p + ul,
     p + ol {
         margin-block-start: calc(var(--space) * -0.5);
-    }
-    ul:last-child,
-    ol:last-child {
-        margin-block-end: 0;
     }
 
     /* Nested lists */
@@ -249,21 +186,10 @@
     }
 
     /* Blockquotes - spacing only */
-    blockquote {
-        padding-inline-start: var(--space);
-        padding-inline-end: var(--space);
-        padding-block-start: var(--space);
-        padding-block-end: var(--space);
-    }
-
     /* Code blocks - spacing only */
+    blockquote,
     pre {
-        padding: calc(var(--space));
-    }
-
-    /* Horizontal rules - spacing only */
-    hr {
-        margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
+        padding: var(--space);
     }
 
     /* =========================== */
@@ -412,39 +338,6 @@
     .compact td {
         padding-block: var(--space-2xs);
         padding-inline-end: var(--space-xs);
-    }
-}
-
-/* Common layout containers inherit rhythm to cascade deeper */
-.box,
-.grid > .col-1,
-.grid > .col-2,
-.grid > .col-3,
-.grid > .col-4,
-.grid > .col-5,
-.grid > .col-6,
-.grid > .col-7,
-.grid > .col-8,
-.grid > .col-9,
-.grid > .col-10,
-.grid > .col-11,
-.grid > .col-12,
-.grid > .col-half,
-.grid > .col-third,
-.grid > .col-two3,
-.grid > .col-quarter,
-.grid > .col-full {
-    > * {
-        margin-block: 0;
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-    }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-
-    > :first-child {
-        margin-block-start: 0;
     }
 }
 
