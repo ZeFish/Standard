@@ -162,10 +162,10 @@ h6 {
 }
 
 // Utility text sizes
-.font-small {
+.small {
     font-size: var(--scale-s);
 }
-.font-smaller {
+.smaller {
     font-size: var(--scale-xs);
 }
 .compact {
@@ -345,27 +345,27 @@ caption {
 }
 
 /* ADD: Helper classes for extreme scales */
-.font-display {
+.display {
     font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
     line-height: 0.85;
     font-weight: var(--font-header-weight);
     letter-spacing: var(--font-header-letter-spacing);
 }
 
-.font-poster {
+.poster {
     font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
     line-height: 0.8;
     font-weight: var(--font-header-weight);
     letter-spacing: -0.04em;
 }
 
-.font-label {
+.label {
     font-size: var(--scale-micro);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-weight: 700;
 }
 
-.font-micro {
+.micro {
     font-size: var(--scale-micro);
 }

@@ -37,10 +37,10 @@
     p:has(img),
     fieldset,
     hr,
-    .small,
-    .accent,
-    .feature,
-    .full {
+    .container-small,
+    .container-accent,
+    .container-feature,
+    .container-full {
         @content;
     }
 }

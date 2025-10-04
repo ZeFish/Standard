@@ -1298,19 +1298,19 @@ hr.col-row {
 .reading > * {
   grid-column: content;
 }
-.reading .small {
+.reading .container-small {
   grid-column: content;
   margin-inline: var(--content-small);
 }
-.reading .accent {
+.reading .container-accent {
   grid-column: accent;
   margin-inline: 0;
 }
-.reading .feature {
+.reading .container-feature {
   grid-column: feature;
   margin-inline: 0;
 }
-.reading .full {
+.reading .container-full {
   grid-column: full;
   margin-inline: calc(var(--space) * -1);
 }
@@ -1405,10 +1405,10 @@ hr.col-row {
 .reading figure > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .small > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .accent > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .feature > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .full > :is(h1, h2, h3, h4, h5, h6):first-child {
+.reading .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .container-accent > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .container-feature > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .container-full > :is(h1, h2, h3, h4, h5, h6):first-child {
   margin-block-start: 0; /* No top margin */
   /* Keep the heading's natural bottom margin */
 }
@@ -1627,11 +1627,11 @@ h6 {
   line-height: var(--line-height);
 }
 
-.font-small {
+.small {
   font-size: var(--scale-s);
 }
 
-.font-smaller {
+.smaller {
   font-size: var(--scale-xs);
 }
 
@@ -1797,28 +1797,28 @@ caption {
 }
 
 /* ADD: Helper classes for extreme scales */
-.font-display {
+.display {
   font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
   line-height: 0.85;
   font-weight: var(--font-header-weight);
   letter-spacing: var(--font-header-letter-spacing);
 }
 
-.font-poster {
+.poster {
   font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
   line-height: 0.8;
   font-weight: var(--font-header-weight);
   letter-spacing: -0.04em;
 }
 
-.font-label {
+.label {
   font-size: var(--scale-micro);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-weight: 700;
 }
 
-.font-micro {
+.micro {
   font-size: var(--scale-micro);
 }
 
@@ -1921,10 +1921,10 @@ caption {
 :where(body:not(.no-rhythm)) p:has(img),
 :where(body:not(.no-rhythm)) fieldset,
 :where(body:not(.no-rhythm)) hr,
-:where(body:not(.no-rhythm)) .small,
-:where(body:not(.no-rhythm)) .accent,
-:where(body:not(.no-rhythm)) .feature,
-:where(body:not(.no-rhythm)) .full,
+:where(body:not(.no-rhythm)) .container-small,
+:where(body:not(.no-rhythm)) .container-accent,
+:where(body:not(.no-rhythm)) .container-feature,
+:where(body:not(.no-rhythm)) .container-full,
 :where(.rhythm) .callout,
 :where(.rhythm) blockquote,
 :where(.rhythm) pre,
@@ -1932,10 +1932,10 @@ caption {
 :where(.rhythm) p:has(img),
 :where(.rhythm) fieldset,
 :where(.rhythm) hr,
-:where(.rhythm) .small,
-:where(.rhythm) .accent,
-:where(.rhythm) .feature,
-:where(.rhythm) .full {
+:where(.rhythm) .container-small,
+:where(.rhythm) .container-accent,
+:where(.rhythm) .container-feature,
+:where(.rhythm) .container-full {
   /* Subtract regular margin to avoid double-spacing */
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier-block) - var(--space) * var(--rhythm-multiplier));
   /* Bottom margin uses the block multiplier */
