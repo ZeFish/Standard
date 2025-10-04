@@ -1928,6 +1928,13 @@ caption {
   /* =========================== */
   /* TYPOGRAPHIC NUANCES         */
   /* =========================== */
+}
+:where(body:not(.no-rhythm)) hr,
+:where(.rhythm) hr {
+  --rhythm-multiplier-block: 3;
+}
+:where(body:not(.no-rhythm)),
+:where(.rhythm) {
   /* Adjacent images get reduced spacing */
 }
 :where(body:not(.no-rhythm)) p:has(img) + p:has(img),
