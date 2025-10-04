@@ -1627,11 +1627,11 @@ h6 {
   line-height: var(--line-height);
 }
 
-.small {
+.font-small {
   font-size: var(--scale-s);
 }
 
-.smaller {
+.font-smaller {
   font-size: var(--scale-xs);
 }
 
@@ -1797,28 +1797,28 @@ caption {
 }
 
 /* ADD: Helper classes for extreme scales */
-.display {
+.font-display {
   font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
   line-height: 0.85;
   font-weight: var(--font-header-weight);
   letter-spacing: var(--font-header-letter-spacing);
 }
 
-.poster {
+.font-poster {
   font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
   line-height: 0.8;
   font-weight: var(--font-header-weight);
   letter-spacing: -0.04em;
 }
 
-.label {
+.font-label {
   font-size: var(--scale-micro);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-weight: 700;
 }
 
-.micro {
+.font-micro {
   font-size: var(--scale-micro);
 }
 
