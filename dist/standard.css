@@ -1449,14 +1449,11 @@ hr.col-row {
       ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
       Consolas, "Courier New", monospace;
   /* Font features & variations */
-  --font-feature: "liga", "dlig", "kern", "calt", "ss01", "ss12";
+  --font-feature: "liga", "dlig", "kern", "calt";
   --font-variation: "";
-  --font-header-feature:
-      "dlig", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06",
-      "cv09", "cv10", "cv11", "cv12", "cv13";
+  --font-header-feature: "liga", "dlig", "kern", "calt";
   --font-header-variation: "";
-  --font-monospace-feature:
-      "liga", "dlig", "kern", "calt", "ss01", "ss12", "ss15";
+  --font-monospace-feature: "liga", "dlig", "kern", "calt";
   --font-monospace-variation: "";
   /* Font properties */
   --font-weight: 400;
