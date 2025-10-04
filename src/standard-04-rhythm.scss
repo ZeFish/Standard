@@ -36,6 +36,7 @@
     figure,
     p:has(img),
     fieldset,
+    hr,
     .small,
     .accent,
     .feature,
@@ -100,6 +101,10 @@
     /* =========================== */
     /* TYPOGRAPHIC NUANCES         */
     /* =========================== */
+    
+    hr {
+        --rhythm-multiplier-block: 3;
+    }
 
     /* Adjacent images get reduced spacing */
     p:has(img) + p:has(img) {
