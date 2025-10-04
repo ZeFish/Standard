@@ -71,7 +71,7 @@
 
     .full {
         grid-column: full;
-        margin-inline: 0;
+        margin-inline: calc(var(--space) * -1);
     }
 
     /* Image gallery layout */
@@ -113,32 +113,36 @@
     }
 
     h1 {
-        margin: var(--space-3xl) 0 var(--space-l) 0;
+        margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     h2 {
-        margin: var(--space-2xl) 0 var(--space-l) 0;
+        margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     h3 {
-        margin: var(--space-xl) 0 var(--space-l) 0;
+        margin-block-start: calc(var(--space-xl) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     h4 {
-        margin: var(--space-l) 0 var(--space) 0;
+        margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
 
     h5 {
-        margin: var(--space) 0 var(--space-s) 0;
+        margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-s) * var(--rhythm-multiplier));
     }
 
     h6 {
-        margin: var(--space) 0 var(--space-xs) 0;
+        margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
 
     hr {
-        margin-block-start: var(--space-l);
-        margin-block-end: var(--space-xl);
         margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
@@ -161,6 +165,27 @@
     h3 + ul,
     h3 + ol {
         margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+    }
+
+    section,
+    aside,
+    header,
+    footer,
+    main,
+    nav,
+    blockquote,
+    pre,
+    figure,
+    .callout,
+    .grid,
+    .small,
+    .accent,
+    .feature,
+    .full {
+        > :is(h1, h2, h3, h4, h5, h6):first-child {
+            margin-block-start: 0; /* No top margin */
+            /* Keep the heading's natural bottom margin */
+        }
     }
 
     /* Basic media styling */

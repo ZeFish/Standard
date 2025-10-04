@@ -64,20 +64,16 @@
     --color-info: var(--color-light-info);
 
     /* ===== COMPUTED SEMANTIC COLORS ===== */
-    --color-muted: color-mix(
-        in srgb,
-        var(--color-foreground) 60%,
-        var(--color-background)
-    );
+    --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
     --color-subtle: color-mix(
         in srgb,
         var(--color-foreground) 40%,
-        var(--color-background)
+        transparent
     );
     --color-border: color-mix(
         in srgb,
         var(--color-foreground) 10%,
-        var(--color-background)
+        transparent
     );
     --color-background-secondary: color-mix(
         in srgb,
@@ -86,16 +82,8 @@
     );
 
     /* Interactive states */
-    --color-hover: color-mix(
-        in srgb,
-        var(--color-accent) 35%,
-        var(--color-background)
-    );
-    --color-active: color-mix(
-        in srgb,
-        var(--color-accent) 20%,
-        var(--color-background)
-    );
+    --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
 
     /* ===== SHADOWS AND EFFECTS ===== */
     --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
@@ -140,17 +128,17 @@
         --color-muted: color-mix(
             in srgb,
             var(--color-foreground) 65%,
-            var(--color-background)
+            transparent
         );
         --color-subtle: color-mix(
             in srgb,
             var(--color-foreground) 45%,
-            var(--color-background)
+            transparent
         );
         --color-border: color-mix(
             in srgb,
             var(--color-foreground) 10%,
-            var(--color-background)
+            transparent
         );
 
         --color-background-secondary: color-mix(

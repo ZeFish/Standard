@@ -101,7 +101,7 @@
     /* =========================== */
     /* TYPOGRAPHIC NUANCES         */
     /* =========================== */
-    
+
     hr {
         --rhythm-multiplier-block: 3;
     }
@@ -146,7 +146,16 @@
     }
     p + ul,
     p + ol {
-        margin-block-start: calc(var(--space) * -0.5);
+        margin-block-start: calc(
+            var(--space) * -0.5 * var(--rhythm-multiplier)
+        );
+    }
+
+    ol ul,
+    ol ol,
+    ul ul,
+    ul ol {
+        margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
 
     /* Nested lists */
@@ -162,7 +171,7 @@
         margin: 0;
         padding-inline-start: 0;
         line-height: var(--font-density-s);
-        margin-block-end: var(--space-xs);
+        margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
 
     /* Unordered list bullets */
@@ -172,7 +181,7 @@
         left: calc(var(--space) / -1);
         width: var(--space);
         text-align: center;
-        color: color-mix(in srgb, currentColor 60%, transparent);
+        color: var(--color-subtle);
     }
 
     /* Ordered list numbers */
@@ -190,8 +199,10 @@
         left: calc(var(--space) / -1);
         width: calc(var(--space) - 0.25em);
         text-align: right;
-        color: color-mix(in srgb, currentColor 60%, transparent);
+        line-height: inherit;
+        color: var(--color-subtle);
         font-variant-numeric: tabular-nums;
+        overflow: hidden;
     }
 
     ul.no-bullet,
@@ -372,7 +383,7 @@
 
 /* Spacing override utilities */
 .rhythm-tight {
-    --rhythm-multiplier: 0.75;
+    --rhythm-multiplier: 0.5;
 }
 
 .rhythm-loose {

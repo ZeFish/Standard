@@ -1312,7 +1312,7 @@ hr.col-row {
 }
 .reading .full {
   grid-column: full;
-  margin-inline: 0;
+  margin-inline: calc(var(--space) * -1);
 }
 .reading {
   /* Image gallery layout */
@@ -1347,26 +1347,30 @@ hr.col-row {
   display: block;
 }
 .reading h1 {
-  margin: var(--space-3xl) 0 var(--space-l) 0;
+  margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 .reading h2 {
-  margin: var(--space-2xl) 0 var(--space-l) 0;
+  margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 .reading h3 {
-  margin: var(--space-xl) 0 var(--space-l) 0;
+  margin-block-start: calc(var(--space-xl) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 .reading h4 {
-  margin: var(--space-l) 0 var(--space) 0;
+  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 .reading h5 {
-  margin: var(--space) 0 var(--space-s) 0;
+  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-s) * var(--rhythm-multiplier));
 }
 .reading h6 {
-  margin: var(--space) 0 var(--space-xs) 0;
+  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
 .reading hr {
-  margin-block-start: var(--space-l);
-  margin-block-end: var(--space-xl);
   margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 .reading {
@@ -1389,6 +1393,24 @@ hr.col-row {
 .reading h3 + ul,
 .reading h3 + ol {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+}
+.reading section > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading aside > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading header > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading footer > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading main > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading nav > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading pre > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading figure > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .small > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .accent > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .feature > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .full > :is(h1, h2, h3, h4, h5, h6):first-child {
+  margin-block-start: 0; /* No top margin */
+  /* Keep the heading's natural bottom margin */
 }
 .reading {
   /* Basic media styling */
@@ -1987,7 +2009,17 @@ caption {
 :where(body:not(.no-rhythm)) p + ol,
 :where(.rhythm) p + ul,
 :where(.rhythm) p + ol {
-  margin-block-start: calc(var(--space) * -0.5);
+  margin-block-start: calc(var(--space) * -0.5 * var(--rhythm-multiplier));
+}
+:where(body:not(.no-rhythm)) ol ul,
+:where(body:not(.no-rhythm)) ol ol,
+:where(body:not(.no-rhythm)) ul ul,
+:where(body:not(.no-rhythm)) ul ol,
+:where(.rhythm) ol ul,
+:where(.rhythm) ol ol,
+:where(.rhythm) ul ul,
+:where(.rhythm) ul ol {
+  margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
@@ -2010,7 +2042,7 @@ caption {
   margin: 0;
   padding-inline-start: 0;
   line-height: var(--font-density-s);
-  margin-block-end: var(--space-xs);
+  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
@@ -2023,7 +2055,7 @@ caption {
   left: calc(var(--space) / -1);
   width: var(--space);
   text-align: center;
-  color: color-mix(in srgb, currentColor 60%, transparent);
+  color: var(--color-subtle);
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
@@ -2044,8 +2076,10 @@ caption {
   left: calc(var(--space) / -1);
   width: calc(var(--space) - 0.25em);
   text-align: right;
-  color: color-mix(in srgb, currentColor 60%, transparent);
+  line-height: inherit;
+  color: var(--color-subtle);
   font-variant-numeric: tabular-nums;
+  overflow: hidden;
 }
 :where(body:not(.no-rhythm)) ul.no-bullet,
 :where(body:not(.no-rhythm)) ol.no-bullet,
@@ -2286,7 +2320,7 @@ caption {
 /* =========================== */
 /* Spacing override utilities */
 .rhythm-tight {
-  --rhythm-multiplier: 0.75;
+  --rhythm-multiplier: 0.5;
 }
 
 .rhythm-loose {
@@ -2410,20 +2444,16 @@ caption {
   --color-error: var(--color-light-error);
   --color-info: var(--color-light-info);
   /* ===== COMPUTED SEMANTIC COLORS ===== */
-  --color-muted: color-mix(
-      in srgb,
-      var(--color-foreground) 60%,
-      var(--color-background)
-  );
+  --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(
       in srgb,
       var(--color-foreground) 40%,
-      var(--color-background)
+      transparent
   );
   --color-border: color-mix(
       in srgb,
       var(--color-foreground) 10%,
-      var(--color-background)
+      transparent
   );
   --color-background-secondary: color-mix(
       in srgb,
@@ -2431,16 +2461,8 @@ caption {
       var(--color-background)
   );
   /* Interactive states */
-  --color-hover: color-mix(
-      in srgb,
-      var(--color-accent) 35%,
-      var(--color-background)
-  );
-  --color-active: color-mix(
-      in srgb,
-      var(--color-accent) 20%,
-      var(--color-background)
-  );
+  --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
   /* ===== SHADOWS AND EFFECTS ===== */
   --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
   --shadow: 0 0 var(--space-2xs) var(--shadow-color);
@@ -2475,17 +2497,17 @@ caption {
     --color-muted: color-mix(
         in srgb,
         var(--color-foreground) 65%,
-        var(--color-background)
+        transparent
     );
     --color-subtle: color-mix(
         in srgb,
         var(--color-foreground) 45%,
-        var(--color-background)
+        transparent
     );
     --color-border: color-mix(
         in srgb,
         var(--color-foreground) 10%,
-        var(--color-background)
+        transparent
     );
     --color-background-secondary: color-mix(
         in srgb,
