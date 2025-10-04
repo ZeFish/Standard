@@ -38,6 +38,7 @@ class Standard {
       batchSize: 50,
       excludeSelectors: "nav, .nav, [role='navigation']",
       excludeFromWidows: "h1, h2, h3, h4, h5, h6",
+      includeClass: "standard-typography", // Class to explicitly mark elements for processing
       ...options,
     };
 
@@ -45,6 +46,33 @@ class Standard {
     if (!this.options.locale) {
       this.options.locale = this.detectLocale();
     }
+
+    // Global symbols (universal across all languages)
+    this.globalSymbols = {
+      // Arrows
+      rightArrow: "\u2192",
+      leftArrow: "\u2190",
+      upArrow: "\u2191",
+      downArrow: "\u2193",
+      doubleRightArrow: "\u21D2",
+      doubleLeftArrow: "\u21D0",
+      leftRightArrow: "\u2194",
+      // Math operators
+      multiplication: "\u00D7",
+      plusMinus: "\u00B1",
+      notEqual: "\u2260",
+      lessThanEqual: "\u2264",
+      greaterThanEqual: "\u2265",
+      approximately: "\u2248",
+      // Legal and branding
+      copyright: "\u00A9",
+      registered: "\u00AE",
+      trademark: "\u2122",
+      // Other symbols
+      degree: "\u00B0",
+      bullet: "\u2022",
+      middleDot: "\u00B7",
+    };
 
     this.rules = this.getRulesForLocale(this.options.locale);
     this.observer = null;
@@ -115,27 +143,6 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ",",
         decimalSeparator: ".",
-        // Arrows and symbols
-        rightArrow: "\u2192",
-        leftArrow: "\u2190",
-        upArrow: "\u2191",
-        downArrow: "\u2193",
-        doubleRightArrow: "\u21D2",
-        doubleLeftArrow: "\u21D0",
-        leftRightArrow: "\u2194",
-        multiplication: "\u00D7",
-        division: "\u00F7",
-        plusMinus: "\u00B1",
-        notEqual: "\u2260",
-        lessThanEqual: "\u2264",
-        greaterThanEqual: "\u2265",
-        approximately: "\u2248",
-        copyright: "\u00A9",
-        registered: "\u00AE",
-        trademark: "\u2122",
-        degree: "\u00B0",
-        bullet: "\u2022",
-        middleDot: "\u00B7",
       },
       fr: {
         // French typography rules (with thin spaces before punctuation)
@@ -151,27 +158,6 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: "\u2009", // thin space
         decimalSeparator: ",",
-        // Arrows and symbols
-        rightArrow: "\u2192",
-        leftArrow: "\u2190",
-        upArrow: "\u2191",
-        downArrow: "\u2193",
-        doubleRightArrow: "\u21D2",
-        doubleLeftArrow: "\u21D0",
-        leftRightArrow: "\u2194",
-        multiplication: "\u00D7",
-        division: "\u00F7",
-        plusMinus: "\u00B1",
-        notEqual: "\u2260",
-        lessThanEqual: "\u2264",
-        greaterThanEqual: "\u2265",
-        approximately: "\u2248",
-        copyright: "\u00A9",
-        registered: "\u00AE",
-        trademark: "\u2122",
-        degree: "\u00B0",
-        bullet: "\u2022",
-        middleDot: "\u00B7",
       },
       de: {
         // German typography rules
@@ -187,27 +173,6 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ".",
         decimalSeparator: ",",
-        // Arrows and symbols
-        rightArrow: "\u2192",
-        leftArrow: "\u2190",
-        upArrow: "\u2191",
-        downArrow: "\u2193",
-        doubleRightArrow: "\u21D2",
-        doubleLeftArrow: "\u21D0",
-        leftRightArrow: "\u2194",
-        multiplication: "\u00D7",
-        division: "\u00F7",
-        plusMinus: "\u00B1",
-        notEqual: "\u2260",
-        lessThanEqual: "\u2264",
-        greaterThanEqual: "\u2265",
-        approximately: "\u2248",
-        copyright: "\u00A9",
-        registered: "\u00AE",
-        trademark: "\u2122",
-        degree: "\u00B0",
-        bullet: "\u2022",
-        middleDot: "\u00B7",
       },
       es: {
         // Spanish typography rules
@@ -223,27 +188,6 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ".",
         decimalSeparator: ",",
-        // Arrows and symbols
-        rightArrow: "\u2192",
-        leftArrow: "\u2190",
-        upArrow: "\u2191",
-        downArrow: "\u2193",
-        doubleRightArrow: "\u21D2",
-        doubleLeftArrow: "\u21D0",
-        leftRightArrow: "\u2194",
-        multiplication: "\u00D7",
-        division: "\u00F7",
-        plusMinus: "\u00B1",
-        notEqual: "\u2260",
-        lessThanEqual: "\u2264",
-        greaterThanEqual: "\u2265",
-        approximately: "\u2248",
-        copyright: "\u00A9",
-        registered: "\u00AE",
-        trademark: "\u2122",
-        degree: "\u00B0",
-        bullet: "\u2022",
-        middleDot: "\u00B7",
       },
       it: {
         // Italian typography rules
@@ -259,27 +203,6 @@ class Standard {
         apostrophe: "\u2019",
         numberSeparator: ".",
         decimalSeparator: ",",
-        // Arrows and symbols
-        rightArrow: "\u2192",
-        leftArrow: "\u2190",
-        upArrow: "\u2191",
-        downArrow: "\u2193",
-        doubleRightArrow: "\u21D2",
-        doubleLeftArrow: "\u21D0",
-        leftRightArrow: "\u2194",
-        multiplication: "\u00D7",
-        division: "\u00F7",
-        plusMinus: "\u00B1",
-        notEqual: "\u2260",
-        lessThanEqual: "\u2264",
-        greaterThanEqual: "\u2265",
-        approximately: "\u2248",
-        copyright: "\u00A9",
-        registered: "\u00AE",
-        trademark: "\u2122",
-        degree: "\u00B0",
-        bullet: "\u2022",
-        middleDot: "\u00B7",
       },
     };
 
@@ -292,7 +215,13 @@ class Standard {
   async process(selector = "p, li, blockquote, h1, h2, h3, h4, h5, h6") {
     this.dispatchEvent("beforeProcessAll", { selector });
 
-    const elements = document.querySelectorAll(selector);
+    // Include elements with the includeClass (like links with class="standard-typography")
+    const includeClassSelector = this.options.includeClass
+      ? `, .${this.options.includeClass}`
+      : "";
+    const fullSelector = selector + includeClassSelector;
+
+    const elements = document.querySelectorAll(fullSelector);
 
     // Filter out elements that should be excluded
     const filteredElements = Array.from(elements).filter((element) => {
@@ -634,42 +563,44 @@ class Standard {
    * Transform ASCII arrows and symbols into proper Unicode characters
    */
   fixArrowsAndSymbols(text, rules = this.rules) {
+    const symbols = this.globalSymbols;
+
     // Skip if already has proper symbols
-    if (text.includes(rules.rightArrow)) {
+    if (text.includes(symbols.rightArrow)) {
       return text;
     }
 
     // Arrow transformations (order matters - longest patterns first)
 
     // Double arrows
-    text = text.replace(/==>/g, rules.doubleRightArrow); // ==> becomes ⇒
-    text = text.replace(/<==/g, rules.doubleLeftArrow); // <== becomes ⇐
-    text = text.replace(/<==>/g, rules.leftRightArrow); // <==> becomes ↔
+    text = text.replace(/==>/g, symbols.doubleRightArrow); // ==> becomes ⇒
+    text = text.replace(/<==/g, symbols.doubleLeftArrow); // <== becomes ⇐
+    text = text.replace(/<==>/g, symbols.leftRightArrow); // <==> becomes ↔
 
-    // Single arrows (with word boundaries to avoid breaking HTML/code)
-    text = text.replace(/\s+->\s+/g, ` ${rules.rightArrow} `); // -> becomes →
-    text = text.replace(/\s+<-\s+/g, ` ${rules.leftArrow} `); // <- becomes ←
-    text = text.replace(/\s+<->\s+/g, ` ${rules.leftRightArrow} `); // <-> becomes ↔
+    // Single arrows
+    text = text.replace(/->/g, symbols.rightArrow); // -> becomes →
+    text = text.replace(/<->/g, symbols.leftRightArrow); // <-> becomes ↔ (must come before <-)
+    text = text.replace(/<-/g, symbols.leftArrow); // <- becomes ←
 
     // Math operators (with spaces to avoid breaking code)
-    text = text.replace(/\s+x\s+/gi, ` ${rules.multiplication} `); // x becomes ×
-    text = text.replace(/\s+\*\s+/g, ` ${rules.multiplication} `); // * becomes ×
-    text = text.replace(/\s+\/\s+/g, ` ${rules.division} `); // / becomes ÷
-    text = text.replace(/\+\/-/g, rules.plusMinus); // +/- becomes ±
-    text = text.replace(/!=/g, rules.notEqual); // != becomes ≠
-    text = text.replace(/<=/g, rules.lessThanEqual); // <= becomes ≤
-    text = text.replace(/>=/g, rules.greaterThanEqual); // >= becomes ≥
-    text = text.replace(/~=/g, rules.approximately); // ~= becomes ≈
-    text = text.replace(/≈=/g, rules.approximately); // ≈= becomes ≈
+    text = text.replace(/\s+x\s+/gi, ` ${symbols.multiplication} `); // x becomes × (keep spaces to avoid breaking words)
+    text = text.replace(/\s+\*\s+/g, ` ${symbols.multiplication} `); // * becomes ×
+    // Division operator removed - "/" is too common in regular text (dates, and/or, etc.)
+    text = text.replace(/\+\/-/g, symbols.plusMinus); // +/- becomes ±
+    text = text.replace(/!=/g, symbols.notEqual); // != becomes ≠
+    text = text.replace(/<=/g, symbols.lessThanEqual); // <= becomes ≤
+    text = text.replace(/>=/g, symbols.greaterThanEqual); // >= becomes ≥
+    text = text.replace(/~=/g, symbols.approximately); // ~= becomes ≈
+    text = text.replace(/≈=/g, symbols.approximately); // ≈= becomes ≈
 
     // Special symbols
-    text = text.replace(/\(c\)/gi, rules.copyright); // (c) becomes ©
-    text = text.replace(/\(r\)/gi, rules.registered); // (r) becomes ®
-    text = text.replace(/\(tm\)/gi, rules.trademark); // (tm) becomes ™
+    text = text.replace(/\(c\)/gi, symbols.copyright); // (c) becomes ©
+    text = text.replace(/\(r\)/gi, symbols.registered); // (r) becomes ®
+    text = text.replace(/\(tm\)/gi, symbols.trademark); // (tm) becomes ™
 
     // Temperature (careful with degrees)
-    text = text.replace(/(\d+)\s*degrees?/gi, `$1${rules.degree}`); // 100 degrees becomes 100°
-    text = text.replace(/(\d+)\s*deg\b/gi, `$1${rules.degree}`); // 100 deg becomes 100°
+    text = text.replace(/(\d+)\s*degrees?/gi, `$1${symbols.degree}`); // 100 degrees becomes 100°
+    text = text.replace(/(\d+)\s*deg\b/gi, `$1${symbols.degree}`); // 100 deg becomes 100°
 
     return text;
   }
@@ -1196,7 +1127,12 @@ class Standard {
       // Check if element itself should be processed
       if (this.shouldProcess(element)) {
         const selector = element.tagName.toLowerCase();
+        const hasIncludeClass =
+          this.options.includeClass &&
+          element.classList.contains(this.options.includeClass);
+
         if (
+          hasIncludeClass ||
           [
             "p",
             "li",
@@ -1213,9 +1149,12 @@ class Standard {
         }
       }
 
-      // Process child elements
+      // Process child elements (including those with includeClass)
+      const includeClassSelector = this.options.includeClass
+        ? `, .${this.options.includeClass}`
+        : "";
       const children = element.querySelectorAll(
-        "p, li, blockquote, h1, h2, h3, h4, h5, h6",
+        `p, li, blockquote, h1, h2, h3, h4, h5, h6${includeClassSelector}`,
       );
       children.forEach((child) => {
         if (this.shouldProcess(child)) {
