@@ -338,6 +338,8 @@
   --font-ratio: var(--ratio-golden);
   --font-density: 1.3;
   --font-density-s: 1.2;
+  --rhythm-multiplier: 1;
+  --rhythm-multiplier-block: 2;
   /* Modular Scale - calculated from font-ratio */
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
   --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
@@ -1798,6 +1800,7 @@ caption {
   font-size: var(--scale-micro);
 }
 
+/* Special blocks with extra spacing */
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
 /* ===== Harmony Base (containers and resets) ===== */
 :where(*, *::before, *::after) {
@@ -1814,7 +1817,6 @@ caption {
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
-  --rhythm-multiplier: 1;
   /* Modern margin collapse prevention */
   display: flow-root;
   /* Apply rhythm spacing to all direct children */
@@ -1824,38 +1826,62 @@ caption {
   margin-block-start: 0;
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)) > *:last-child,
-:where(.rhythm) > *:last-child {
-  margin-block-end: 0;
-}
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
-  /* Enhanced spacing relationships for typography
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  ul,
-  ol,
-  dl,
-  blockquote,
-  pre,
-  table,
-  figure,
-  form,
-  fieldset,
-  div,
-  section,
-  article,
-  aside,
-  .grid {
-      margin-block-start: 0;
-      margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-  }
-  */
+  /* Enhanced spacing relationships for typography */
+}
+:where(body:not(.no-rhythm)) h1,
+:where(body:not(.no-rhythm)) h2,
+:where(body:not(.no-rhythm)) h3,
+:where(body:not(.no-rhythm)) h4,
+:where(body:not(.no-rhythm)) h5,
+:where(body:not(.no-rhythm)) h6,
+:where(body:not(.no-rhythm)) p,
+:where(body:not(.no-rhythm)) ul,
+:where(body:not(.no-rhythm)) ol,
+:where(body:not(.no-rhythm)) dl,
+:where(body:not(.no-rhythm)) blockquote,
+:where(body:not(.no-rhythm)) pre,
+:where(body:not(.no-rhythm)) table,
+:where(body:not(.no-rhythm)) figure,
+:where(body:not(.no-rhythm)) form,
+:where(body:not(.no-rhythm)) fieldset,
+:where(body:not(.no-rhythm)) section,
+:where(body:not(.no-rhythm)) article,
+:where(body:not(.no-rhythm)) aside,
+:where(body:not(.no-rhythm)) header,
+:where(body:not(.no-rhythm)) footer,
+:where(body:not(.no-rhythm)) main,
+:where(body:not(.no-rhythm)) nav,
+:where(body:not(.no-rhythm)) .grid,
+:where(body:not(.no-rhythm)) .box,
+:where(.rhythm) h1,
+:where(.rhythm) h2,
+:where(.rhythm) h3,
+:where(.rhythm) h4,
+:where(.rhythm) h5,
+:where(.rhythm) h6,
+:where(.rhythm) p,
+:where(.rhythm) ul,
+:where(.rhythm) ol,
+:where(.rhythm) dl,
+:where(.rhythm) blockquote,
+:where(.rhythm) pre,
+:where(.rhythm) table,
+:where(.rhythm) figure,
+:where(.rhythm) form,
+:where(.rhythm) fieldset,
+:where(.rhythm) section,
+:where(.rhythm) article,
+:where(.rhythm) aside,
+:where(.rhythm) header,
+:where(.rhythm) footer,
+:where(.rhythm) main,
+:where(.rhythm) nav,
+:where(.rhythm) .grid,
+:where(.rhythm) .box {
+  margin-block-start: 0;
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 :where(body:not(.no-rhythm)) .rhythm,
 :where(.rhythm) .rhythm {
@@ -1886,8 +1912,14 @@ caption {
 :where(.rhythm) .accent,
 :where(.rhythm) .feature,
 :where(.rhythm) .full {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+  /* Subtract regular margin to avoid double-spacing */
+  margin-block-start: calc(var(--space) * var(--rhythm-multiplier-block) - var(--space) * var(--rhythm-multiplier));
+  /* Bottom margin uses the block multiplier */
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
+}
+:where(body:not(.no-rhythm)) * > :last-child,
+:where(.rhythm) * > :last-child {
+  margin-block-end: 0;
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {

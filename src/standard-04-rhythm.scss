@@ -1,3 +1,49 @@
+@mixin apply-rhythm {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    dl,
+    blockquote,
+    pre,
+    table,
+    figure,
+    form,
+    fieldset,
+    section,
+    article,
+    aside,
+    header,
+    footer,
+    main,
+    nav,
+    .grid,
+    .box {
+        @content;
+    }
+}
+
+/* Special blocks with extra spacing */
+@mixin apply-rhythm-block {
+    .callout,
+    blockquote,
+    pre,
+    figure,
+    p:has(img),
+    fieldset,
+    .small,
+    .accent,
+    .feature,
+    .full {
+        @content;
+    }
+}
+
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
 
 /* ===== Harmony Base (containers and resets) ===== */
@@ -15,7 +61,6 @@
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
     /* Rhythm control - can be overridden per instance */
-    --rhythm-multiplier: 1;
 
     /* Modern margin collapse prevention */
     display: flow-root;
@@ -24,38 +69,13 @@
     > * {
         margin-block-start: 0;
         margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-
-        &:last-child {
-            margin-block-end: 0;
-        }
     }
 
-    /* Enhanced spacing relationships for typography
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    ul,
-    ol,
-    dl,
-    blockquote,
-    pre,
-    table,
-    figure,
-    form,
-    fieldset,
-    div,
-    section,
-    article,
-    aside,
-    .grid {
+    /* Enhanced spacing relationships for typography */
+    @include apply-rhythm {
         margin-block-start: 0;
         margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
-    */
 
     .rhythm {
         --rhythm-multiplier: 1; /* Reset for nested contexts */
@@ -63,18 +83,18 @@
 
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
-    .callout,
-    blockquote,
-    pre,
-    figure,
-    p:has(img),
-    fieldset,
-    .small,
-    .accent,
-    .feature,
-    .full {
-        margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
-        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+    @include apply-rhythm-block {
+        /* Subtract regular margin to avoid double-spacing */
+        margin-block-start: calc(
+            (var(--space) * var(--rhythm-multiplier-block)) -
+                (var(--space) * var(--rhythm-multiplier))
+        );
+        /* Bottom margin uses the block multiplier */
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
+    }
+
+    * > :last-child {
+        margin-block-end: 0;
     }
 
     /* =========================== */

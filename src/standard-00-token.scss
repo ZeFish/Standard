@@ -16,6 +16,9 @@
     --font-density: 1.3;
     --font-density-s: 1.2;
 
+    --rhythm-multiplier: 1;
+    --rhythm-multiplier-block: 2;
+
     /* Modular Scale - calculated from font-ratio */
     --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
     --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
