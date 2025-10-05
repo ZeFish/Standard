@@ -1352,7 +1352,7 @@ caption {
 :where(.rhythm) ul,
 :where(.rhythm) ol {
   list-style: none;
-  padding-inline-start: var(--space);
+  padding-inline: var(--space-l);
 }
 :where(body:not(.no-rhythm)) p + ul,
 :where(body:not(.no-rhythm)) p + ol,
@@ -1401,7 +1401,7 @@ caption {
 :where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
-  left: calc(var(--space) / -1);
+  left: calc(var(--space) * -1.25);
   width: var(--space);
   text-align: center;
   color: var(--color-subtle);
@@ -1422,8 +1422,7 @@ caption {
 :where(.rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
-  left: calc(var(--space) / -1);
-  width: calc(var(--space) - 0.25em);
+  left: calc(var(--space) * -1.25);
   text-align: right;
   line-height: inherit;
   color: var(--color-subtle);
@@ -2723,6 +2722,7 @@ hr.col-row {
 .reading .container-full {
   grid-column: full;
   margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+  padding-inline: calc(var(--space) * var(--body-padding-multiplier));
 }
 .reading {
   /* Image gallery layout */
@@ -2813,6 +2813,8 @@ hr.col-row {
 .reading blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading pre > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading figure > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .box > :is(h1, h2, h3, h4, h5, h6):first-child,
+.reading .box-inset > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
 .reading .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
@@ -4282,6 +4284,13 @@ hr.col-row {
   border: var(--border);
   box-shadow: inset var(--shadow);
   padding: var(--space);
+}
+
+.box.container-full,
+.box-inset.container-full {
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
 }
 
 /* =========================== */

@@ -362,6 +362,12 @@
     box-shadow: inset var(--shadow);
     padding: var(--space);
 }
+.box.container-full,
+.box-inset.container-full {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+}
 
 /* =========================== */
 /* CENTERING UTILITIES         */

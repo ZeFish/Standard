@@ -75,6 +75,7 @@
         margin-inline: calc(
             (var(--space) * var(--body-padding-multiplier)) * -1
         );
+        padding-inline: calc(var(--space) * var(--body-padding-multiplier));
     }
 
     /* Image gallery layout */
@@ -179,6 +180,8 @@
     blockquote,
     pre,
     figure,
+    .box,
+    .box-inset,
     .callout,
     .grid,
     .container-small,
