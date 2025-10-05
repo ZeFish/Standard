@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -30,9 +30,9 @@
   ],
   "main": "src/eleventy.js",
   "exports": {
-    ".": "./dist/standard.min.css",
+    "./css": "./dist/standard.min.css",
     "./js": "./dist/standard.min.js",
-    "./eleventy": "./src/eleventy.js"
+    ".": "./src/eleventy.js"
   },
   "files": [
     "dist",
@@ -77,7 +77,9 @@
   "release-it": {
     "git": {
       "tagName": "v${version}",
-      "commitMessage": "chore: release v${version}"
+      "commitMessage": "chore: release v${version}",
+      "requireCleanWorkingDir": false,
+      "requireUpstream": false
     },
     "npm": {
       "publish": true
@@ -86,7 +88,13 @@
       "release": true,
       "web": false
     },
-    "hooks": {},
-    "ci": true
+    "hooks": {
+      "after:bump": "npm run changelog"
+    },
+    "prompt": {
+      "ghRelease": false,
+      "glRelease": false,
+      "publish": false
+    }
   }
 }
