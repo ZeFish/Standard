@@ -1,3 +1,4 @@
+@use "standard-00-variables" as *;
 /* =========================== */
 /* STANDARD DEBUG SYSTEM       */
 /* =========================== */
@@ -299,9 +300,9 @@ body.standard-debug::before {
     font-weight: bold;
 }
 
-@media (max-width: 768px) {
+@media (max-width: #{$small}) {
     body.standard-debug::before {
-        content: "sm (<768px)";
+        content: "sm (<#{$small})";
         color: var(--color-foreground);
     }
 }
@@ -313,9 +314,9 @@ body.standard-debug::before {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: #{$large}) {
     body.standard-debug::before {
-        content: "lg (≥1024px)";
+        content: "lg (≥#{$large})";
         color: var(--color-foreground);
     }
 }

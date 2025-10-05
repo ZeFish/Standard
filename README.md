@@ -45,7 +45,7 @@ Automatic enhancement of text with proper typographic conventions:
 
 - **Asymmetric Layouts** — Swiss-style dynamic compositions
 - **Free Column Positioning** — Precise control with CSS variables
-- **Responsive Breakpoints** — Mobile-first, adapts at 768px and 1024px
+- **Responsive Breakpoints** — Mobile-first, adapts at #{$small} and #{$large}
 - **Gap Control** — Tight, normal, and wide variants
 - **Logical Properties** — International-ready, RTL support
 
@@ -87,8 +87,78 @@ Editorial-quality layouts for long-form content:
 ### npm
 
 ```bash
-npm install @standard/framework
+npm install @zefish/standard
 ```
+
+### Eleventy Plugin
+
+After installing via npm, add the plugin to your `.eleventy.js` configuration:
+
+```js
+module.exports = function (eleventyConfig) {
+  // Add the Standard plugin
+  eleventyConfig.addPlugin(require("@zefish/standard"));
+  
+  return {
+    dir: {
+      input: "src",
+      output: "_site"
+    }
+  };
+};
+```
+
+Then use the shortcode in your templates:
+
+```njk
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    {% standardAssets %}
+</head>
+<body class="reading rhythm">
+    <!-- Your content here -->
+</body>
+</html>
+```
+
+The plugin will automatically copy the CSS and JS files to your output directory at `assets/standard/`.
+
+#### Plugin Options
+
+```js
+eleventyConfig.addPlugin(require("@zefish/standard"), {
+  // Output directory for copied files (relative to output folder)
+  outputDir: "assets/standard",  // default
+  
+  // Whether to copy files from node_modules
+  copyFiles: true,  // default
+  
+  // Whether to use CDN instead of local files
+  useCDN: false  // default
+});
+```
+
+#### Available Shortcodes
+
+- `{% standardAssets %}` — Includes both CSS and JS
+- `{% standardCSS %}` — Includes only CSS
+- `{% standardJS %}` — Includes only JS
+
+#### Using CDN with Plugin
+
+To use the CDN version instead of copying local files:
+
+```js
+eleventyConfig.addPlugin(require("@zefish/standard"), {
+  useCDN: true
+});
+```
+
+Then use the same shortcodes in your templates.
 
 ### CDN
 

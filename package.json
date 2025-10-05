@@ -28,14 +28,15 @@
     "standard",
     "book-layout"
   ],
-  "main": "dist/standard.css",
+  "main": "src/eleventy.js",
   "exports": {
     ".": "./dist/standard.min.css",
-    "./js": "./dist/standard.min.js"
+    "./js": "./dist/standard.min.js",
+    "./eleventy": "./src/eleventy.js"
   },
   "files": [
     "dist",
-    "src/standard.js"
+    "src/eleventy.js"
   ],
   "scripts": {
     "dev": "concurrently \"npm:watch:*\"",
@@ -49,9 +50,11 @@
     "clean": "rm -rf dist",
     "release": "npm run clean && npm run build && release-it",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
+    "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
+    "eleventy": "eleventy"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
     "auto-changelog": "^2.5.0",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.10",

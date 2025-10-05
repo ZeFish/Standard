@@ -1,3 +1,4 @@
+@use "standard-00-variables" as *;
 /* Typography Design Tokens - Using logical properties */
 :root {
     /* Font stacks */
@@ -93,7 +94,7 @@ html {
 }
 
 /* Responsive adjustments - collapse gutters on small screens */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: #{$small}) {
     :root {
         --font-size: var(--font-mobile-size);
     }

@@ -1,3 +1,4 @@
+@use "standard-00-variables" as *;
 // Harmonized Markdown Styles - Using logical properties
 // Works with both .prose (layout) and .rhythm (spacing) classes
 
@@ -179,7 +180,7 @@
     // ==========================
     // Mobile Specific Styles
     // ==========================
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: #{$small}) {
         ul:not([start]),
         ol:not([start]) {
             padding: 0;
