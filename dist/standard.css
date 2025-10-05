@@ -909,8 +909,8 @@ html {
 /* Responsive adjustments - collapse gutters on small screens */
 @media only screen and (max-width: 768px) {
   :root {
-    --font-size: var(--font-mobile-size);
-    --font-ratio: 1.2;
+    --font-size: var(--font-mobile-size) !important;
+    --font-ratio: 1.2 !important;
   }
 }
 h1,
