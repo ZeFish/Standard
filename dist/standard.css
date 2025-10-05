@@ -825,11 +825,13 @@ mark {
 /* Typography Design Tokens - Using logical properties */
 :root {
   /* Font stacks */
-  --font-text: system-ui, -apple-system, sans-serif;
-  --font-header: system-ui, -apple-system, sans-serif;
+  --font-sans: Archivo, system-ui, -apple-system, sans-serif;
+  --font-serif: Fraunces, serif;
+  --font-text: var(--font-sans);
+  --font-header: Inter, system-ui, -apple-system, sans-serif;
   --font-monospace:
-      ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
-      Consolas, "Courier New", monospace;
+      "IBM Plex Mono", ui-monospace, "SF Mono", Monaco, "Cascadia Code",
+      "Roboto Mono", Consolas, "Courier New", monospace;
   /* Font features & variations */
   --font-feature: "liga", "dlig", "kern", "calt";
   --font-variation: "";
