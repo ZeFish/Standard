@@ -4583,7 +4583,7 @@ hr.col-row {
     columns: 1;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .flow-3,
   .flow-4 {
     columns: 2;
