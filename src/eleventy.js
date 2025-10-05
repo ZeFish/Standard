@@ -17,14 +17,14 @@ module.exports = function (eleventyConfig, options = {}) {
     });
   }
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standard-fonts", function () {
+  eleventyConfig.addShortcode("standardFonts", function () {
     return `<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">`;
   });
 
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("meta-mobile", function () {
+  eleventyConfig.addShortcode("metaMobile", function () {
     return `<!-- Mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standard-assets", function () {
+  eleventyConfig.addShortcode("standardAssets", function () {
     if (useCDN) {
       return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
@@ -44,7 +44,7 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Shortcode to include only CSS
-  eleventyConfig.addShortcode("standard-cSS", function () {
+  eleventyConfig.addShortcode("standardCSS", function () {
     if (useCDN) {
       return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
     }
@@ -52,7 +52,7 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Shortcode to include only JS
-  eleventyConfig.addShortcode("standard-jS", function () {
+  eleventyConfig.addShortcode("standardJS", function () {
     if (useCDN) {
       return `<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
     }
@@ -60,7 +60,7 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Legacy shortcode for CDN (deprecated but kept for backward compatibility)
-  eleventyConfig.addShortcode("standard-unpkg", function () {
+  eleventyConfig.addShortcode("standardUnpkg", function () {
     return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
   });
