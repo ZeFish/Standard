@@ -4706,6 +4706,18 @@ hr.col-row {
     margin-right: auto;
   }
 }
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
