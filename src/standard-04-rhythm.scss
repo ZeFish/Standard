@@ -9,8 +9,8 @@
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 :where(body:not(.no-rhythm)) {
     margin: 0;
-    padding: var(--space);
-    padding-bottom: var(--space-l);
+    padding: calc(var(--space) * var(--body-padding-multiplier));
+    padding-bottom: calc((var(--space) * var(--body-padding-multiplier) * 1.5));
 }
 
 :where(body:not(.no-rhythm)),

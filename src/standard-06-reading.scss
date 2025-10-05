@@ -72,7 +72,9 @@
 
     .container-full {
         grid-column: full;
-        margin-inline: calc(var(--space) * -1);
+        margin-inline: calc(
+            (var(--space) * var(--body-padding-multiplier)) * -1
+        );
     }
 
     /* Image gallery layout */
