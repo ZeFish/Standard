@@ -96,7 +96,7 @@
     ul,
     ol {
         list-style: none;
-        padding-inline: var(--space-l);
+        padding-inline-start: var(--space);
     }
     p + ul,
     p + ol {
@@ -132,7 +132,7 @@
     ul > li::before {
         content: "•";
         position: absolute;
-        left: calc(var(--space) * -1.25);
+        left: calc(var(--space) * -1);
         width: var(--space);
         text-align: center;
         color: var(--color-subtle);
@@ -150,12 +150,13 @@
     ol > li::before {
         content: counter(ol-counter) ".";
         position: absolute;
-        left: calc(var(--space) * -1.25);
+        left: calc(var(--space) * -1.75);
         text-align: right;
         line-height: inherit;
         color: var(--color-subtle);
         font-variant-numeric: tabular-nums;
         overflow: hidden;
+        width: calc(var(--space) * 1.5);
     }
 
     ul.no-bullet,
