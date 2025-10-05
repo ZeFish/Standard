@@ -99,7 +99,7 @@ html {
 @media only screen and (max-width: #{$small}) {
     :root {
         --font-size: var(--font-mobile-size) !important;
-        --font-ratio: 1.2 !important;
+        --font-ratio: var(--font-mobile-ratio) !important;
     }
 }
 
