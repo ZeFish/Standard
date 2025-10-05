@@ -1307,7 +1307,7 @@ caption {
 }
 :where(body:not(.no-rhythm)) p:has(img) + p:has(img),
 :where(.rhythm) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier) * -1 + var(--space) / 4);
+  margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier) * -1 + var(--space) / 4) !important;
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
