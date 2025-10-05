@@ -713,6 +713,10 @@ hr {
   border: none;
 }
 
+hr.plain {
+  background: var(--color-foreground);
+}
+
 hr.thick {
   height: calc(var(--hr-thickness) * 4);
   background: var(--color-foreground);
