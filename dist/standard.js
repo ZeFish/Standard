@@ -716,6 +716,11 @@ class Standard {
       return;
     }
 
+    // Skip elements containing <br> tags (explicit line breaks)
+    if (element.querySelector("br")) {
+      return;
+    }
+
     // Find the last text node that contains actual words
     const walker = document.createTreeWalker(
       element,

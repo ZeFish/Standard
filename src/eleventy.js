@@ -18,7 +18,17 @@ module.exports = function (eleventyConfig, options = {}) {
   }
 
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardAssets", function () {
+  eleventyConfig.addShortcode("meta-mobile", function () {
+    return `<!-- Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">`;
+  });
+
+  // Shortcode to include Standard CSS and JS from local files
+  eleventyConfig.addShortcode("standard-assets", function () {
     if (useCDN) {
       return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
@@ -28,7 +38,7 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Shortcode to include only CSS
-  eleventyConfig.addShortcode("standardCSS", function () {
+  eleventyConfig.addShortcode("standard-cSS", function () {
     if (useCDN) {
       return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
     }
@@ -36,7 +46,7 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Shortcode to include only JS
-  eleventyConfig.addShortcode("standardJS", function () {
+  eleventyConfig.addShortcode("standard-jS", function () {
     if (useCDN) {
       return `<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
     }

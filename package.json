@@ -48,7 +48,7 @@
     "build:js": "cp src/standard.js dist/standard.js",
     "build:js-min": "terser src/standard.js -o dist/standard.min.js --compress --mangle",
     "clean": "rm -rf dist",
-    "release": "npm run clean && npm run build && release-it",
+    "release": "npm run clean && npm run build && release-it --no-git.requireCleanWorkingDir --no-npm.requireCleanWorkingDir",
     "test": "echo \"Error: no test specified\" && exit 1",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "eleventy": "eleventy"
@@ -92,8 +92,12 @@
       "after:bump": "npm run changelog"
     },
     "prompt": {
-      "ghRelease": false,
-      "glRelease": false,
+      "src": false,
+      "changelog": false,
+      "commit": false,
+      "tag": false,
+      "push": false,
+      "release": false,
       "publish": false
     }
   }
