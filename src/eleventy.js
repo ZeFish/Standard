@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = function (eleventyConfig, options = {}) {
   // Options with defaults
   const {
@@ -11,16 +9,11 @@ module.exports = function (eleventyConfig, options = {}) {
     useCDN = false,
   } = options;
 
-  // Get the path to this package's dist folder
-  const packageDistPath = path.join(__dirname, "..", "dist");
-
-  // Add passthrough copy from the package's dist folder to the user's output
+  // Add passthrough copy from node_modules using relative path
   if (copyFiles && !useCDN) {
     eleventyConfig.addPassthroughCopy({
-      [path.join(packageDistPath, "standard.min.css")]:
-        `${outputDir}/standard.min.css`,
-      [path.join(packageDistPath, "standard.min.js")]:
-        `${outputDir}/standard.min.js`,
+      "node_modules/@zefish/standard/dist/standard.min.css": `${outputDir}/standard.min.css`,
+      "node_modules/@zefish/standard/dist/standard.min.js": `${outputDir}/standard.min.js`,
     });
   }
 
@@ -56,6 +49,7 @@ module.exports = function (eleventyConfig, options = {}) {
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
   });
 
+  // Extract first image from content
   eleventyConfig.addFilter("extract_first_image", (content) => {
     const match = content.match(/<img[^>]*src=["']([^"']+)["']/);
     return match ? match[1] : null;
@@ -268,6 +262,7 @@ module.exports = function (eleventyConfig, options = {}) {
     return words.slice(0, maxWords).join(" ") + "...";
   });
 
+  // Remove specific HTML tags
   eleventyConfig.addFilter("remove_tags", (content, tags = "p") => {
     if (!content) return "";
 
@@ -295,6 +290,7 @@ module.exports = function (eleventyConfig, options = {}) {
     return result;
   });
 
+  // Keep only specific HTML tags
   eleventyConfig.addFilter("keep_only_tags", (content, tags = "p") => {
     if (!content) return "";
 
@@ -324,12 +320,14 @@ module.exports = function (eleventyConfig, options = {}) {
     return matches.join("");
   });
 
+  // Remove empty HTML tags
   eleventyConfig.addFilter("remove_empty_tags", (content) => {
     if (!content) return "";
     // This regex finds tags that are empty or contain only whitespace.
     return content.replace(/<(\w+)[^>]*>\s*<\/(\1)>/g, "");
   });
 
+  // Convert newlines to <br> tags
   eleventyConfig.addFilter("newline_to_br", (str) => {
     if (!str) return "";
     return str.replace(/\n/g, "<br>");

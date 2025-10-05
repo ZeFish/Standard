@@ -92,7 +92,7 @@ npm install @zefish/standard
 
 ### Eleventy Plugin
 
-After installing via npm, add the plugin to your `.eleventy.js` configuration:
+After installing via npm, add the plugin to your `.eleventy.js` or `eleventy.config.js` configuration:
 
 ```js
 module.exports = function (eleventyConfig) {
@@ -125,7 +125,9 @@ Then use the shortcode in your templates:
 </html>
 ```
 
-The plugin will automatically copy the CSS and JS files to your output directory at `assets/standard/`.
+The plugin will automatically copy the CSS and JS files from `node_modules/@zefish/standard/dist/` to your output directory at `assets/standard/`.
+
+> **Note:** The plugin works with both CommonJS (`.eleventy.js`) and ESM (`eleventy.config.js`) configurations.
 
 #### Plugin Options
 
