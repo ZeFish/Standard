@@ -671,7 +671,7 @@
     }
 }
 
-@media (max-width: #{$small}) {
+@media (min-width: #{$small}) {
     .flow-3,
     .flow-4 {
         columns: 2;
