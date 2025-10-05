@@ -65,7 +65,7 @@
         margin-block-start: calc(
             (var(--space-l) * var(--rhythm-multiplier) * -1) +
                 (var(--space) / 4)
-        );
+        ) !important;
     }
 
     /* Reset first-child spacing for special blocks */
