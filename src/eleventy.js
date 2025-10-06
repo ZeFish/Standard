@@ -357,6 +357,12 @@ module.exports = function (eleventyConfig, options = {}) {
   // Convert newlines to <br> tags
   eleventyConfig.addFilter("newline_to_br", (str) => {
     if (!str) return "";
-    return str.replace(/\n/g, "<br>");
+
+    // Only replace newlines that are inside <p> tags
+    return str.replace(/<p>(.*?)<\/p>/gs, (match, pContent) => {
+      const withBr = pContent.replace(/\n/g, "<br>\n");
+      return `<p>${withBr}</p>`;
+    });
   });
+
 };
