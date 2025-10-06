@@ -334,14 +334,15 @@
   /* Golden Ratio & Mathematical Precision */
   --ratio-golden: 1.618;
   --ratio-wholestep: 1.618;
+  --ratio-silver: 1.414;
   --ratio-halfstep: 1.272; /* sqrt of golden ratio */
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   /* Current ratio (configurable) */
-  --font-ratio: var(--ratio-golden);
-  --font-density: 1.3;
-  --font-density-s: 1.2;
-  --font-mobile-size: 1.1rem;
+  --font-ratio: var(--ratio-silver);
+  --font-density: 1.2;
+  --font-density-s: 1;
+  --font-mobile-size: 1rem;
   --font-mobile-ratio: var(--ratio-halfstep);
   --rhythm-multiplier: 1;
   --rhythm-multiplier-block: 2;
