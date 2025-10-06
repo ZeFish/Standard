@@ -1213,7 +1213,7 @@ caption {
   padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
 }
 :where(body:not(.no-rhythm)) [id] {
-  scroll-margin-top: var(--body-padding-multiplier); /* Adjust value as needed */
+  scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier)); /* Adjust value as needed */
 }
 
 @media (max-width: 768px) {
@@ -1223,7 +1223,7 @@ caption {
     padding-bottom: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5);
   }
   :where(body:not(.no-rhythm)) [id] {
-    scroll-margin-top: var(--body-mobile-padding-multiplier); /* Adjust value as needed */
+    scroll-margin-top: calc(var(--space) * var(--body-mobile-padding-multiplier)); /* Adjust value as needed */
   }
 }
 :where(body:not(.no-rhythm)),

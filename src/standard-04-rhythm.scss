@@ -12,7 +12,7 @@
     padding: calc(var(--space) * var(--body-padding-multiplier));
     padding-bottom: calc((var(--space) * var(--body-padding-multiplier) * 1.5));
     [id] {
-        scroll-margin-top: var(--body-padding-multiplier); /* Adjust value as needed */
+        scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier));/* Adjust value as needed */
     }
 }
 @media (max-width: #{$small}) {
@@ -23,7 +23,7 @@
             (var(--space) * var(--body-mobile-padding-multiplier) * 1.5)
         );
         [id] {
-            scroll-margin-top: var(--body-mobile-padding-multiplier); /* Adjust value as needed */
+            scroll-margin-top: calc(var(--space) * var(--body-mobile-padding-multiplier));/* Adjust value as needed */
         }
     }
 }
