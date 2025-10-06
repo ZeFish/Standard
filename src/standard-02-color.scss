@@ -206,9 +206,11 @@ body {
 }
 
 /* ===== SEMANTIC UTILITY CLASSES ===== */
+.muted,
 .text-muted {
     color: var(--color-muted);
 }
+.sublte,
 .text-subtle {
     color: var(--color-subtle);
 }

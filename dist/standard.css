@@ -583,10 +583,12 @@ body {
 }
 
 /* ===== SEMANTIC UTILITY CLASSES ===== */
+.muted,
 .text-muted {
   color: var(--color-muted);
 }
 
+.sublte,
 .text-subtle {
   color: var(--color-subtle);
 }
@@ -4461,38 +4463,28 @@ hr.col-row {
 /* =========================== */
 /* TEXT UTILITIES              */
 /* =========================== */
-.muted {
-  color: var(--color-muted);
-}
-
 .line-width-xs {
   max-inline-size: var(--line-width-xs);
-  margin-inline: auto;
 }
 
 .line-width-s {
   max-inline-size: var(--line-width-s);
-  margin-inline: auto;
 }
 
-.line-width-normal {
+.line-width {
   max-inline-size: var(--line-width);
-  margin-inline: auto;
 }
 
 .line-width-wide {
   max-inline-size: var(--line-width-wide);
-  margin-inline: auto;
 }
 
 .line-width-xl {
   max-inline-size: var(--line-width-xl);
-  margin-inline: auto;
 }
 
 .line-width-full {
   max-inline-size: var(--line-width-full);
-  margin-inline: auto;
 }
 
 /* =========================== */
