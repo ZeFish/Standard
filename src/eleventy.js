@@ -45,6 +45,14 @@ module.exports = function (eleventyConfig, options = {}) {
   });
 
   // Shortcode to include only CSS
+  eleventyConfig.addShortcode("standardSystem", function () {
+    if (useCDN) {
+      return `<link href="https://unpkg.com/@zefish/standard/system" rel="stylesheet">`;
+    }
+    return `<link href="/${outputDir}/standard.system.js" rel="stylesheet">`;
+  });
+
+  // Shortcode to include only CSS
   eleventyConfig.addShortcode("standardCSS", function () {
     if (useCDN) {
       return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
