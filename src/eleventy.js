@@ -14,6 +14,7 @@ module.exports = function (eleventyConfig, options = {}) {
     eleventyConfig.addPassthroughCopy({
       "node_modules/@zefish/standard/dist/standard.min.css": `${outputDir}/standard.min.css`,
       "node_modules/@zefish/standard/dist/standard.min.js": `${outputDir}/standard.min.js`,
+      "node_modules/@zefish/standard/dist/standard.system.js": `${outputDir}/standard.system.js`,
     });
   }
   // Shortcode to include Standard CSS and JS from local files
