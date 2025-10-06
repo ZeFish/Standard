@@ -1212,12 +1212,18 @@ caption {
   padding: calc(var(--space) * var(--body-padding-multiplier));
   padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
 }
+:where(body:not(.no-rhythm)) [id] {
+  scroll-margin-top: var(--body-padding-multiplier); /* Adjust value as needed */
+}
 
 @media (max-width: 768px) {
   :where(body:not(.no-rhythm)) {
     margin: 0;
     padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
     padding-bottom: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5);
+  }
+  :where(body:not(.no-rhythm)) [id] {
+    scroll-margin-top: var(--body-mobile-padding-multiplier); /* Adjust value as needed */
   }
 }
 :where(body:not(.no-rhythm)),

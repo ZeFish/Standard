@@ -11,6 +11,9 @@
     margin: 0;
     padding: calc(var(--space) * var(--body-padding-multiplier));
     padding-bottom: calc((var(--space) * var(--body-padding-multiplier) * 1.5));
+    [id] {
+        scroll-margin-top: var(--body-padding-multiplier); /* Adjust value as needed */
+    }
 }
 @media (max-width: #{$small}) {
     :where(body:not(.no-rhythm)) {
@@ -19,6 +22,9 @@
         padding-bottom: calc(
             (var(--space) * var(--body-mobile-padding-multiplier) * 1.5)
         );
+        [id] {
+            scroll-margin-top: var(--body-mobile-padding-multiplier); /* Adjust value as needed */
+        }
     }
 }
 
