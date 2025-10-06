@@ -1,4 +1,27 @@
 @charset "UTF-8";
+/*!
+ * Standard Framework - Fine-Art Typography Management
+ *
+ * A comprehensive framework implementing:
+ * - Classical typography rules that CSS cannot handle
+ * - Progressive enhancement with zero-configuration setup
+ * - Multi-locale support with automatic detection
+ * - Dynamic content observation
+ * - Performance-optimized batch processing
+ * - Image zoom with keyboard navigation
+ *
+ * Based on research from:
+ * - The Elements of Typographic Style (Robert Bringhurst)
+ * - Ellen Lupton's typography works
+ * - Classical European typography conventions
+ * - Swiss typography principles
+ * - Modern web accessibility standards
+ *
+ * Philosophy: Respect classic typography rules, but readability always wins.
+ *
+ * @version 2.2.0
+ * @license MIT
+ */
 /* Document
  * ========================================================================== */
 /**
@@ -4768,50 +4791,38 @@ img {
   max-inline-size: 100%;
 }
 
-.reading,
-.rhythm {
+:where(body:not(.no-rhythm)) {
   /* Basic image styling */
 }
-.reading * + img,
-.reading img,
-.reading img:first-child,
-.reading img:last-child,
-.rhythm * + img,
-.rhythm img,
-.rhythm img:first-child,
-.rhythm img:last-child {
+:where(body:not(.no-rhythm)) * + img,
+:where(body:not(.no-rhythm)) img,
+:where(body:not(.no-rhythm)) img:first-child,
+:where(body:not(.no-rhythm)) img:last-child {
   margin: 0;
   max-inline-size: 100%;
   block-size: auto;
 }
-.reading img,
-.rhythm img {
+:where(body:not(.no-rhythm)) img {
   max-width: 100%;
   cursor: zoom-in;
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
-.reading img.fx,
-.rhythm img.fx {
+:where(body:not(.no-rhythm)) img.fx {
   border-radius: var(--border-radius);
   border: var(--border);
 }
-.reading img.nofx,
-.rhythm img.nofx {
+:where(body:not(.no-rhythm)) img.nofx {
   border-radius: unset;
   border: unset;
   box-shadow: unset;
 }
-.reading img:hover,
-.reading img.zoomed,
-.rhythm img:hover,
-.rhythm img.zoomed {
+:where(body:not(.no-rhythm)) img:hover,
+:where(body:not(.no-rhythm)) img.zoomed {
   mix-blend-mode: normal;
   filter: none;
 }
-.reading img:active,
-.reading img.zoomed,
-.rhythm img:active,
-.rhythm img.zoomed {
+:where(body:not(.no-rhythm)) img:active,
+:where(body:not(.no-rhythm)) img.zoomed {
   cursor: zoom-out;
   display: block;
   z-index: var(--z-image-zoom);
@@ -4839,7 +4850,6 @@ img {
   position: fixed;
   inset: 0;
   background: var(--color-background);
-  opacity: 0.95;
   z-index: calc(var(--z-image-zoom) - 1);
 }
 
@@ -5360,5 +5370,3 @@ body.standard-debug::before {
     text-edge: cap alphabetic;
   }
 }
-
-/*# sourceMappingURL=standard.css.map */

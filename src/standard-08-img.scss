@@ -5,8 +5,7 @@ img {
     max-inline-size: 100%;
 }
 
-.reading,
-.rhythm {
+:where(body:not(.no-rhythm)) {
     /* Basic image styling */
     * + img,
     img,
@@ -73,6 +72,5 @@ img {
     position: fixed;
     inset: 0;
     background: var(--color-background);
-    opacity: 0.95;
     z-index: calc(var(--z-image-zoom) - 1);
 }

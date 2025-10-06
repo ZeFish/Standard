@@ -1,4 +1,27 @@
 @charset "UTF-8";
+/*!
+ * Standard Framework - Fine-Art Typography Management
+ *
+ * A comprehensive framework implementing:
+ * - Classical typography rules that CSS cannot handle
+ * - Progressive enhancement with zero-configuration setup
+ * - Multi-locale support with automatic detection
+ * - Dynamic content observation
+ * - Performance-optimized batch processing
+ * - Image zoom with keyboard navigation
+ *
+ * Based on research from:
+ * - The Elements of Typographic Style (Robert Bringhurst)
+ * - Ellen Lupton's typography works
+ * - Classical European typography conventions
+ * - Swiss typography principles
+ * - Modern web accessibility standards
+ *
+ * Philosophy: Respect classic typography rules, but readability always wins.
+ *
+ * @version 2.2.0
+ * @license MIT
+ */
 /* Document
  * ========================================================================== */
 /**
@@ -334,18 +357,20 @@
   /* Golden Ratio & Mathematical Precision */
   --ratio-golden: 1.618;
   --ratio-wholestep: 1.618;
+  --ratio-silver: 1.414;
   --ratio-halfstep: 1.272; /* sqrt of golden ratio */
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   /* Current ratio (configurable) */
-  --font-ratio: var(--ratio-golden);
-  --font-density: 1.3;
-  --font-density-s: 1.2;
-  --font-mobile-size: 1.1rem;
+  --font-ratio: var(--ratio-silver);
+  --font-density: 1.2;
+  --font-density-s: 1;
+  --font-mobile-size: 1rem;
   --font-mobile-ratio: var(--ratio-halfstep);
   --rhythm-multiplier: 1;
   --rhythm-multiplier-block: 2;
   --body-padding-multiplier: 1;
+  --body-mobile-padding-multiplier: 1;
   /* Modular Scale - calculated from font-ratio */
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
   --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
@@ -428,8 +453,8 @@
   --color-light-info: var(--color-light-blue);
   /* ===== DARK MODE PALETTE ===== */
   /* Soft-glow, night-usable, retro tech inspired */
-  --color-dark-background: #0f0f0f;
-  --color-dark-foreground: #dbdbdb;
+  --color-dark-background: #0f0f0f; /* #111 */
+  --color-dark-foreground: #dbdbdb; /* #aaa */
   --color-dark-red: #db6057; /* ember red */
   --color-dark-orange: #e58f5c; /* lantern orange */
   --color-dark-yellow: #dcb757; /* candlelight gold */
@@ -581,10 +606,12 @@ body {
 }
 
 /* ===== SEMANTIC UTILITY CLASSES ===== */
+.muted,
 .text-muted {
   color: var(--color-muted);
 }
 
+.sublte,
 .text-subtle {
   color: var(--color-subtle);
 }
@@ -836,19 +863,16 @@ mark {
   --font-text: var(--font-sans);
   --font-header: InterVariable, system-ui, -apple-system, sans-serif;
   --font-monospace:
-      "IBM Plex Mono", ui-monospace, "SF Mono", Monaco, "Cascadia Code",
-      "Roboto Mono", Consolas, "Courier New", monospace;
+      "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
   /* Font features & variations */
   --font-feature: "liga", "dlig", "kern", "calt", "zero";
-  --font-variation: "opsz" 32;
+  --font-variation: "";
   --font-header-feature:
       "liga", "dlig", "kern", "calt", "case", "cv06", "cv10", "cv11", "cv12",
       "cv13", "ss01";
   --font-header-variation: "";
   --font-monospace-feature: "liga", "dlig", "kern", "calt";
   --font-monospace-variation: "";
-  --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
-  --font-list-variation: "opsz" 32;
   /* Font properties */
   --font-weight: 400;
   --bold-weight: 600;
@@ -857,9 +881,11 @@ mark {
   --font-header-line-height: 0.75em;
   --font-header-weight: 900;
   /* Interface font tokens */
-  --font-interface: var(--font-text);
-  --font-interface-feature: var(--font-feature);
+  --font-interface: InterVariable, system-ui, -apple-system, sans-serif;
+  --font-interface-feature: "liga", "dlig", "kern", "calt", "zero";
   --font-interface-variation: "opsz" 32;
+  --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
+  --font-list-variation: "opsz" 32;
   /* Calculated typography tokens */
   --line-height: calc(var(--font-size) * var(--font-density));
   /* Heading weight scale */
@@ -1209,7 +1235,20 @@ caption {
   padding: calc(var(--space) * var(--body-padding-multiplier));
   padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
 }
+:where(body:not(.no-rhythm)) [id] {
+  scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier)); /* Adjust value as needed */
+}
 
+@media (max-width: 768px) {
+  :where(body:not(.no-rhythm)) {
+    margin: 0;
+    padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
+    padding-bottom: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5);
+  }
+  :where(body:not(.no-rhythm)) [id] {
+    scroll-margin-top: calc(var(--space) * var(--body-mobile-padding-multiplier)); /* Adjust value as needed */
+  }
+}
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
@@ -4453,38 +4492,28 @@ hr.col-row {
 /* =========================== */
 /* TEXT UTILITIES              */
 /* =========================== */
-.muted {
-  color: var(--color-muted);
-}
-
 .line-width-xs {
   max-inline-size: var(--line-width-xs);
-  margin-inline: auto;
 }
 
 .line-width-s {
   max-inline-size: var(--line-width-s);
-  margin-inline: auto;
 }
 
-.line-width-normal {
+.line-width {
   max-inline-size: var(--line-width);
-  margin-inline: auto;
 }
 
 .line-width-wide {
   max-inline-size: var(--line-width-wide);
-  margin-inline: auto;
 }
 
 .line-width-xl {
   max-inline-size: var(--line-width-xl);
-  margin-inline: auto;
 }
 
 .line-width-full {
   max-inline-size: var(--line-width-full);
-  margin-inline: auto;
 }
 
 /* =========================== */
@@ -4762,50 +4791,38 @@ img {
   max-inline-size: 100%;
 }
 
-.reading,
-.rhythm {
+:where(body:not(.no-rhythm)) {
   /* Basic image styling */
 }
-.reading * + img,
-.reading img,
-.reading img:first-child,
-.reading img:last-child,
-.rhythm * + img,
-.rhythm img,
-.rhythm img:first-child,
-.rhythm img:last-child {
+:where(body:not(.no-rhythm)) * + img,
+:where(body:not(.no-rhythm)) img,
+:where(body:not(.no-rhythm)) img:first-child,
+:where(body:not(.no-rhythm)) img:last-child {
   margin: 0;
   max-inline-size: 100%;
   block-size: auto;
 }
-.reading img,
-.rhythm img {
+:where(body:not(.no-rhythm)) img {
   max-width: 100%;
   cursor: zoom-in;
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
-.reading img.fx,
-.rhythm img.fx {
+:where(body:not(.no-rhythm)) img.fx {
   border-radius: var(--border-radius);
   border: var(--border);
 }
-.reading img.nofx,
-.rhythm img.nofx {
+:where(body:not(.no-rhythm)) img.nofx {
   border-radius: unset;
   border: unset;
   box-shadow: unset;
 }
-.reading img:hover,
-.reading img.zoomed,
-.rhythm img:hover,
-.rhythm img.zoomed {
+:where(body:not(.no-rhythm)) img:hover,
+:where(body:not(.no-rhythm)) img.zoomed {
   mix-blend-mode: normal;
   filter: none;
 }
-.reading img:active,
-.reading img.zoomed,
-.rhythm img:active,
-.rhythm img.zoomed {
+:where(body:not(.no-rhythm)) img:active,
+:where(body:not(.no-rhythm)) img.zoomed {
   cursor: zoom-out;
   display: block;
   z-index: var(--z-image-zoom);
@@ -4833,7 +4850,6 @@ img {
   position: fixed;
   inset: 0;
   background: var(--color-background);
-  opacity: 0.95;
   z-index: calc(var(--z-image-zoom) - 1);
 }
 
@@ -5354,5 +5370,3 @@ body.standard-debug::before {
     text-edge: cap alphabetic;
   }
 }
-
-/*# sourceMappingURL=standard.css.map */

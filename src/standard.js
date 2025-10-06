@@ -7,6 +7,7 @@
  * - Multi-locale support with automatic detection
  * - Dynamic content observation
  * - Performance-optimized batch processing
+ * - Image zoom with keyboard navigation
  *
  * Based on research from:
  * - The Elements of Typographic Style (Robert Bringhurst)
@@ -17,7 +18,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @license MIT
  */
 
@@ -523,7 +524,7 @@ class Standard {
     text = text.replace(/\b'(twas|til|cause)\b/gi, `${rules.apostrophe}$1`);
 
     // Possessive after s: James' or James's
-    text = text.replace(/(\\w)s'(\s|$)/g, `$1s${rules.apostrophe}$2`);
+    text = text.replace(/(\w)s'(\s|$)/g, `$1s${rules.apostrophe}$2`);
 
     return text;
   }
@@ -575,7 +576,7 @@ class Standard {
     // Double arrows
     text = text.replace(/==>/g, symbols.doubleRightArrow); // ==> becomes ⇒
     text = text.replace(/<==/g, symbols.doubleLeftArrow); // <== becomes ⇐
-    text = text.replace(/<==>/g, symbols.leftRightArrow); // <==> becomes ↔
+    text = text.replace(/<==/g, symbols.leftRightArrow); // <==> becomes ↔
 
     // Single arrows
     text = text.replace(/->/g, symbols.rightArrow); // -> becomes →
@@ -1326,6 +1327,213 @@ class Standard {
     );
     return offset / fontSize; // Return as em value
   }
+
+  // ========================================
+  // IMAGE ZOOM ENHANCEMENT
+  // ========================================
+
+  /**
+   * Initialize image zoom functionality
+   * - Click to zoom in/out
+   * - Arrow keys to navigate
+   * - ESC or click anywhere to close
+   */
+  initImageZoom() {
+    this.imageZoom = {
+      currentZoomedImage: null,
+      images: [],
+      zoomedClass: "zoomed",
+      selector: ".reading img, .rhythm img",
+    };
+
+    // Disable CSS :active conflicts by injecting override styles
+    this.disableImageActiveStyles();
+
+    // Bind click events
+    this.bindImageZoomClicks();
+
+    // Bind keyboard events
+    this.bindImageZoomKeyboard();
+
+    this.dispatchEvent("imageZoomInitialized", {});
+  }
+
+  /**
+   * Disable CSS :active pseudo-class for images to prevent conflicts
+   * Injects a style override with higher specificity
+   */
+  disableImageActiveStyles() {
+    const styleId = "standard-image-zoom-override";
+
+    // Check if already injected
+    if (document.getElementById(styleId)) {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+        /* Standard.js - Disable :active pseudo-class conflicts */
+        .reading img:active,
+        .rhythm img:active,
+        :where(body:not(.no-rhythm)) img:active {
+          /* Reset :active styles - JS handles zoom now */
+          cursor: zoom-in !important;
+          display: inline !important;
+          z-index: auto !important;
+          position: static !important;
+          max-height: none !important;
+          max-width: 100% !important;
+          object-fit: initial !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          top: auto !important;
+          left: auto !important;
+          transform: none !important;
+          user-select: auto !important;
+        }
+
+        /* Remove :active backdrop overlay */
+        .reading :has(img:active)::before,
+        .rhythm :has(img:active)::before {
+          display: none !important;
+        }
+      `;
+
+    document.head.appendChild(style);
+
+    this.dispatchEvent("imageZoomStylesInjected", { styleId });
+  }
+
+  /**
+   * Refresh list of zoomable images
+   */
+  refreshZoomableImages() {
+    this.imageZoom.images = Array.from(
+      document.querySelectorAll(this.imageZoom.selector),
+    );
+  }
+
+  /**
+   * Bind click events for image zoom
+   */
+  bindImageZoomClicks() {
+    document.addEventListener("click", (e) => {
+      const img = e.target.closest(this.imageZoom.selector);
+
+      if (img) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.toggleImageZoom(img);
+      } else if (this.imageZoom.currentZoomedImage) {
+        // Click anywhere else closes zoom
+        this.closeImageZoom();
+      }
+    });
+  }
+
+  /**
+   * Bind keyboard events for image zoom
+   */
+  bindImageZoomKeyboard() {
+    document.addEventListener("keydown", (e) => {
+      if (!this.imageZoom.currentZoomedImage) return;
+
+      switch (e.key) {
+        case "Escape":
+          e.preventDefault();
+          this.closeImageZoom();
+          break;
+
+        case "ArrowLeft":
+          e.preventDefault();
+          this.navigateZoomedImage(-1);
+          break;
+
+        case "ArrowRight":
+          e.preventDefault();
+          this.navigateZoomedImage(1);
+          break;
+      }
+    });
+  }
+
+  /**
+   * Toggle zoom on an image
+   */
+  toggleImageZoom(img) {
+    if (this.imageZoom.currentZoomedImage === img) {
+      this.closeImageZoom();
+    } else {
+      this.openImageZoom(img);
+    }
+  }
+
+  /**
+   * Open image zoom
+   */
+  openImageZoom(img) {
+    // Close any currently zoomed image
+    if (this.imageZoom.currentZoomedImage) {
+      this.closeImageZoom();
+    }
+
+    img.classList.add(this.imageZoom.zoomedClass);
+    this.imageZoom.currentZoomedImage = img;
+
+    // Prevent body scroll
+    document.body.style.overflow = "hidden";
+
+    // Dispatch custom event
+    this.dispatchEvent("imageZoomOpen", { image: img });
+  }
+
+  /**
+   * Close image zoom
+   */
+  closeImageZoom() {
+    if (!this.imageZoom.currentZoomedImage) return;
+
+    this.imageZoom.currentZoomedImage.classList.remove(
+      this.imageZoom.zoomedClass,
+    );
+
+    // Dispatch custom event before clearing reference
+    this.dispatchEvent("imageZoomClose", {
+      image: this.imageZoom.currentZoomedImage,
+    });
+
+    this.imageZoom.currentZoomedImage = null;
+
+    // Restore body scroll
+    document.body.style.overflow = "";
+  }
+
+  /**
+   * Navigate between images while zoomed
+   */
+  navigateZoomedImage(direction) {
+    if (!this.imageZoom.currentZoomedImage) return;
+
+    // Refresh images list in case DOM changed
+    this.refreshZoomableImages();
+
+    const currentIndex = this.imageZoom.images.indexOf(
+      this.imageZoom.currentZoomedImage,
+    );
+    if (currentIndex === -1) return;
+
+    const newIndex = currentIndex + direction;
+
+    // Wrap around
+    const nextIndex =
+      (newIndex + this.imageZoom.images.length) % this.imageZoom.images.length;
+    const nextImage = this.imageZoom.images[nextIndex];
+
+    if (nextImage) {
+      this.openImageZoom(nextImage);
+    }
+  }
 }
 
 // ========================================
@@ -1352,10 +1560,22 @@ if (typeof window !== "undefined" && !window.StandardLoaded) {
     enableNumberFormatting: false, // Conservative default
   });
 
+  // Initialize image zoom
+  window.standard.initImageZoom();
+
   // Listen for custom events (example)
   document.addEventListener("standard:afterProcessAll", (e) => {
     // You can hook into this event for custom behavior
     // console.log('Standard processed', e.detail.processedCount, 'elements');
+  });
+
+  // Image zoom event listeners (optional)
+  document.addEventListener("standard:imageZoomOpen", (e) => {
+    // console.log('Image zoomed:', e.detail.image);
+  });
+
+  document.addEventListener("standard:imageZoomClose", (e) => {
+    // console.log('Zoom closed');
   });
 }
 

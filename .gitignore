@@ -7,3 +7,5 @@ PUBLISHING.md
 *.sass.map
 *.scss.map
 .DS_Store
+/_site
+/_site

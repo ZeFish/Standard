@@ -10,7 +10,7 @@
  * @version 1.0.0
  */
 
-class StandardSystem {
+class StandardLab {
   constructor() {
     this.isOpen = false;
     this.panel = null;
@@ -1036,14 +1036,14 @@ class StandardSystem {
 if (typeof window !== "undefined") {
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
-      window.standardSystem = new StandardSystem();
+      window.StandardLab = new StandardLab();
     });
   } else {
-    window.standardSystem = new StandardSystem();
+    window.StandardLab = new StandardLab();
   }
 }
 
 // Export for module systems
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { StandardSystem };
+  module.exports = { StandardLab };
 }
