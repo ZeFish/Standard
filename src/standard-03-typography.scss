@@ -18,8 +18,6 @@
     --font-header-variation: "";
     --font-monospace-feature: "liga", "dlig", "kern", "calt";
     --font-monospace-variation: "";
-    --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
-    --font-list-variation: "opsz" 32;
 
     /* Font properties */
     --font-weight: 400;
@@ -30,9 +28,11 @@
     --font-header-weight: 900;
 
     /* Interface font tokens */
-    --font-interface: var(--font-text);
-    --font-interface-feature: var(--font-feature);
+    --font-interface: InterVariable, system-ui, -apple-system, sans-serif;
+    --font-interface-feature: "liga", "dlig", "kern", "calt", "zero";
     --font-interface-variation: "opsz" 32;
+    --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
+    --font-list-variation: "opsz" 32;
 
     /* Calculated typography tokens */
     --line-height: calc(var(--font-size) * var(--font-density));
