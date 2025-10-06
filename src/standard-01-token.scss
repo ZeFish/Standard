@@ -24,6 +24,7 @@
     --rhythm-multiplier-block: 2;
 
     --body-padding-multiplier: 1;
+    --body-mobile-padding-multiplier: 1;
 
     /* Modular Scale - calculated from font-ratio */
     --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));

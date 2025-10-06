@@ -12,6 +12,15 @@
     padding: calc(var(--space) * var(--body-padding-multiplier));
     padding-bottom: calc((var(--space) * var(--body-padding-multiplier) * 1.5));
 }
+@media (max-width: #{$small}) {
+    :where(body:not(.no-rhythm)) {
+        margin: 0;
+        padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
+        padding-bottom: calc(
+            (var(--space) * var(--body-mobile-padding-multiplier) * 1.5)
+        );
+    }
+}
 
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
