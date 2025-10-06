@@ -2,21 +2,24 @@
 /* Typography Design Tokens - Using logical properties */
 :root {
     /* Font stacks */
-    --font-sans: Archivo, system-ui, -apple-system, sans-serif;
+    --font-sans: InterVariable, system-ui, -apple-system, sans-serif;
     --font-serif: "Source Serif 4", serif;
     --font-text: var(--font-sans);
-    --font-header: Inter, system-ui, -apple-system, sans-serif;
+    --font-header: InterVariable, system-ui, -apple-system, sans-serif;
     --font-monospace:
-        "IBM Plex Mono", ui-monospace, "SF Mono", Monaco, "Cascadia Code",
-        "Roboto Mono", Consolas, "Courier New", monospace;
+        "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
 
     /* Font features & variations */
-    --font-feature: "liga", "dlig", "kern", "calt";
-    --font-variation: "";
-    --font-header-feature: "liga", "dlig", "kern", "calt";
+    --font-feature: "liga", "dlig", "kern", "calt", "zero";
+    --font-variation: "opsz" 32;
+    --font-header-feature:
+        "liga", "dlig", "kern", "calt", "case", "cv06", "cv10", "cv11", "cv12",
+        "cv13", "ss01";
     --font-header-variation: "";
     --font-monospace-feature: "liga", "dlig", "kern", "calt";
     --font-monospace-variation: "";
+    --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
+    --font-list-variation: "opsz" 32;
 
     /* Font properties */
     --font-weight: 400;
@@ -29,7 +32,7 @@
     /* Interface font tokens */
     --font-interface: var(--font-text);
     --font-interface-feature: var(--font-feature);
-    --font-interface-variation: var(--font-variation);
+    --font-interface-variation: "opsz" 32;
 
     /* Calculated typography tokens */
     --line-height: calc(var(--font-size) * var(--font-density));
@@ -82,17 +85,25 @@ html {
     text-rendering: optimizeLegibility; /* kerning & ligatures */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-optical-sizing: auto;
 
-    font-feature-settings: var(--font-feature);
-    font-variant-ligatures: normal;
-    font-variation-settings: var(--font-variation);
     font-optical-sizing: auto;
+    font-feature-settings: var(--font-feature);
+    font-variation-settings: var(--font-variation);
 
     text-wrap: pretty;
     hyphens: none;
     widows: 2;
     orphans: 2;
+}
+
+.circular {
+    font-feature-settings: "ss05" on;
+}
+.squared {
+    font-feature-settings: "ss06" on;
+}
+.inter-display {
+    font-variation-settings: "opsz" 32;
 }
 
 /* Responsive adjustments - collapse gutters on small screens */
@@ -291,6 +302,11 @@ textarea {
 li {
     line-height: var(--font-density-s);
 }
+li::before {
+    font-feature-settings: var(--font-list-feature);
+    font-variation-settings: var(--font-list-variation);
+    line-height: var(--font-density-s);
+}
 
 /* Blockquote typography */
 blockquote {
@@ -301,7 +317,6 @@ blockquote {
 /* Code block typography */
 pre,
 code {
-    font-family: var(--font-monospace, monospace);
     font-size: var(--scale-s);
     line-height: var(--font-density-s);
     overflow-x: auto;
