@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.10.32",
+  "version": "0.10.33",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -29,26 +29,27 @@
     "book-layout"
   ],
   "main": "src/eleventy.js",
+  "type": "module",
   "exports": {
     "./css": "./dist/standard.min.css",
     "./js": "./dist/standard.min.js",
-    "./system": "./dist/standard.system.js",
-    ".": "./src/eleventy.js"
+    "./lab": "./dist/standard.lab.js",
+    ".": "./src/eleventy/eleventy.js"
   },
   "files": [
     "dist",
-    "src/eleventy.js"
+    "src/eleventy/eleventy.js"
   ],
   "scripts": {
     "start": "rm -rf _site && npx @11ty/eleventy --serve --quiet",
     "dev": "concurrently \"npm:watch:*\"",
-    "watch:css": "sass --watch --load-path=node_modules src/standard.scss dist/standard.css --no-source-map",
-    "watch:js": "nodemon --watch src/standard.js --exec \"npm run build:js\"",
+    "watch:css": "sass --watch --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
+    "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",
     "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min",
-    "build:css": "sass --load-path=node_modules src/standard.scss dist/standard.css --no-source-map",
-    "build:css-min": "sass --load-path=node_modules src/standard.scss dist/standard.min.css --style=compressed --no-source-map",
-    "build:js": "cp src/standard.js dist/standard.js && cp src/standard.lab.js dist/standard.lab.js",
-    "build:js-min": "terser src/standard.js -o dist/standard.min.js --compress --mangle && terser src/standard.lab.js -o dist/standard.lab.js",
+    "build:css": "sass --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
+    "build:css-min": "sass --load-path=node_modules src/styles/standard.scss dist/standard.min.css --style=compressed --no-source-map",
+    "build:js": "cp src/js/standard.js dist/standard.js && cp src/js/standard.lab.js dist/standard.lab.js",
+    "build:js-min": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js",
     "clean": "rimraf dist",
     "release": "npm run clean && npm run build && release-it --only-version --no-git.requireCleanWorkingDir --no-npm.requireCleanWorkingDir",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -98,6 +99,5 @@
   },
   "directories": {
     "example": "example"
-  },
-  "type": "commonjs"
+  }
 }

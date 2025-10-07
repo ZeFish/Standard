@@ -2782,6 +2782,7 @@ hr.col-row {
   grid-column: accent;
   margin-inline: 0;
 }
+.reading table,
 .reading .container-feature {
   grid-column: feature;
   margin-inline: 0;

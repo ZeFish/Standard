@@ -1,10 +1,10 @@
-module.exports = function(eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("dist");
 
   return {
     dir: {
       input: "example",
-      output: "_site"
-    }
+      output: "_site",
+    },
   };
-};
+}
