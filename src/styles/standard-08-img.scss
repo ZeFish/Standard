@@ -1,0 +1,76 @@
+@use "standard-00-variables" as *;
+/* Image Styles - Works with both .reading (layout) and .rhythm (spacing) - Using logical properties */
+
+img {
+    max-inline-size: 100%;
+}
+
+:where(body:not(.no-rhythm)) {
+    /* Basic image styling */
+    * + img,
+    img,
+    img:first-child,
+    img:last-child {
+        margin: 0;
+
+        max-inline-size: 100%;
+        block-size: auto;
+    }
+
+    img {
+        max-width: 100%;
+        cursor: zoom-in;
+
+        transition:
+            mix-blend-mode 0.2s,
+            opacity 0.2s,
+            filter 0.2s;
+    }
+    img.fx {
+        border-radius: var(--border-radius);
+        border: var(--border);
+    }
+    img.nofx {
+        border-radius: unset;
+        border: unset;
+        box-shadow: unset;
+    }
+
+    img:hover,
+    img.zoomed {
+        mix-blend-mode: normal;
+        filter: none;
+    }
+
+    img:active,
+    img.zoomed {
+        cursor: zoom-out;
+        display: block;
+        z-index: var(--z-image-zoom);
+        position: fixed;
+        max-height: 88vh;
+        max-width: 88vw;
+        max-height: calc(100vh - (var(--space) * 2));
+        max-width: calc(100vw - (var(--space) * 2));
+        object-fit: contain;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        user-select: none;
+    }
+}
+
+/* Zoom overlay backgrounds */
+.reading :has(img:active)::before,
+.reading :has(img.zoomed)::before,
+.rhythm :has(img:active)::before,
+.rhythm :has(img.zoomed)::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--color-background);
+    z-index: calc(var(--z-image-zoom) - 1);
+}
