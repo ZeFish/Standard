@@ -524,8 +524,6 @@
 /* TEXT UTILITIES              */
 /* =========================== */
 
-
-
 .line-width-xs {
     max-inline-size: var(--line-width-xs);
 }
@@ -623,11 +621,18 @@
 /* =========================== */
 /* MULTI-COLUMN FLOW           */
 /* =========================== */
-
+[class*="flow-"] {
+    orphans: 3;
+    widows: 3;
+}
+.flow-row {
+    column-span: all;
+}
 .flow-2 {
     columns: 2;
     column-gap: var(--grid-gap);
 }
+
 .flow-3 {
     columns: 3;
     column-gap: var(--grid-gap);
@@ -670,9 +675,11 @@
 }
 
 @media (min-width: #{$small}) {
-    .flow-3,
-    .flow-4 {
+    .flow-3 {
         columns: 2;
+    }
+    .flow-4 {
+        columns: 3;
     }
 }
 

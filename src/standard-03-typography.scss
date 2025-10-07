@@ -187,7 +187,8 @@ h6 {
     line-height: var(--font-density-s);
 }
 
-.font-ui {
+.font-ui,
+.font-interface {
     font-family: var(--font-interface), system-ui, sans-serif;
     font-variation-settings: var(--font-interface-variation);
     font-feature-settings: var(--font-interface-feature);
