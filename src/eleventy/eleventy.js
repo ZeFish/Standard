@@ -451,4 +451,89 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPreprocessor("highlight", "md", (data, content) => {
     return content.replace(/==(.+?)==/g, "<mark>$1</mark>");
   });
+
+  eleventyConfig.addShortcode("readingTime", function (text) {
+    // Return an empty string if the text is empty
+    if (!text) {
+      return "";
+    }
+
+    const wordsPerMinute = 225;
+    // Count words by splitting on any whitespace
+    const wordCount = text.split(/\s+/g).length;
+    const minutes = Math.floor(wordCount / wordsPerMinute);
+
+    // This follows your original logic of only showing for > 1 minute
+    if (minutes > 1) {
+      return `&nbsp;- ${minutes} minutes`;
+    }
+
+    // You could also uncomment this block to handle the 1 minute case
+    /*
+      if (minutes === 1) {
+        return `&nbsp;- 1 minute`;
+      }
+      */
+
+    return "";
+  });
+
+  eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
+    // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+    return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
+      format || "dd LLLL yyyy",
+    );
+  });
+
+  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+    // dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+  });
+  eleventyConfig.addFilter("dateToXmlschema", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISO();
+  });
+
+  eleventyConfig.addFilter("numberOfWords", (text) => {
+    return text.split(/\s+/).length;
+  });
+
+  eleventyConfig.addFilter("excerptWords", (text, count) => {
+    if (typeof text !== "string") {
+      return ""; // Return empty string or handle as appropriate for non-string input
+    }
+    return text.split(/\s+/).slice(0, count).join(" ");
+  });
+
+  // Add the generic date filter
+  eleventyConfig.addFilter("date", (dateObj, format = "yyyy-LL-dd") => {
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
+  });
+
+  // Add split filter
+  eleventyConfig.addFilter("split", (text, separator) => {
+    if (typeof text !== "string") {
+      return text;
+    }
+    return text.split(separator || ",");
+  });
+
+  // Add filterData filter
+  // {% set public_backlinks = backlinks | filterData("data.visibility", "private") %}
+  // {% if public_backlinks.length > 0 %}
+  eleventyConfig.addFilter("filterData", (arr, propertyPath, value) => {
+    if (!Array.isArray(arr)) {
+      return arr;
+    }
+    return arr.filter((item) => {
+      let current = item;
+      const path = propertyPath.split(".");
+      for (let i = 0; i < path.length; i++) {
+        if (current === undefined || current === null) {
+          return false;
+        }
+        current = current[path[i]];
+      }
+      return current !== value;
+    });
+  });
 }
