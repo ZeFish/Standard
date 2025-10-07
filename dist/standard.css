@@ -1032,7 +1032,8 @@ h6 {
   line-height: var(--font-density-s);
 }
 
-.font-ui {
+.font-ui,
+.font-interface {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-variation-settings: var(--font-interface-variation);
   font-feature-settings: var(--font-interface-feature);
@@ -4599,6 +4600,15 @@ hr.col-row {
 /* =========================== */
 /* MULTI-COLUMN FLOW           */
 /* =========================== */
+[class*=flow-] {
+  orphans: 3;
+  widows: 3;
+}
+
+.flow-row {
+  column-span: all;
+}
+
 .flow-2 {
   columns: 2;
   column-gap: var(--grid-gap);
@@ -4649,9 +4659,11 @@ hr.col-row {
   }
 }
 @media (min-width: 768px) {
-  .flow-3,
-  .flow-4 {
+  .flow-3 {
     columns: 2;
+  }
+  .flow-4 {
+    columns: 3;
   }
 }
 @media (min-width: 1024px) {
