@@ -82,7 +82,7 @@ export default function (eleventyConfig, options = {}) {
   });
 
   // Extract first image from content
-  eleventyConfig.addFilter("extract_first_image", (content) => {
+  eleventyConfig.addFilter("extractFirstImage", (content) => {
     const match = content.match(/<img[^>]*src=["']([^"']+)["']/);
     return match ? match[1] : null;
   });
@@ -295,7 +295,7 @@ export default function (eleventyConfig, options = {}) {
   });
 
   // Remove specific HTML tags
-  eleventyConfig.addFilter("remove_tags", (content, tags = "p") => {
+  eleventyConfig.addFilter("removeTags", (content, tags = "p") => {
     if (!content) return "";
 
     // Handle array, comma-separated string, or single tag
@@ -323,7 +323,7 @@ export default function (eleventyConfig, options = {}) {
   });
 
   // Keep only specific HTML tags
-  eleventyConfig.addFilter("keep_only_tags", (content, tags = "p") => {
+  eleventyConfig.addFilter("filterTags", (content, tags = "p") => {
     if (!content) return "";
 
     let tagArray;
@@ -353,7 +353,7 @@ export default function (eleventyConfig, options = {}) {
   });
 
   // Remove empty HTML tags
-  eleventyConfig.addFilter("remove_empty_tags", (content) => {
+  eleventyConfig.addFilter("removeEmptyTags", (content) => {
     if (!content) return "";
     // This regex finds tags that are empty or contain only whitespace.
     return content.replace(/<(\w+)[^>]*>\s*<\/(\1)>/g, "");
@@ -429,27 +429,33 @@ export default function (eleventyConfig, options = {}) {
     return endIndex !== -1 ? content.slice(0, endIndex) : content;
   });
 
-  // Convert newlines to <br> tags
-  eleventyConfig.addFilter("newline_to_br", (str) => {
-    if (!str) return "";
-
-    // Only replace newlines that are inside <p> tags
-    return str.replace(/<p>(.*?)<\/p>/gs, (match, pContent) => {
-      const withBr = pContent.replace(/\n/g, "<br>\n");
-      return `<p>${withBr}</p>`;
-    });
-  });
-
   eleventyConfig.addPreprocessor("comment", "md", (data, content) => {
     return content.replaceAll(/%%(.|\n|\s)*?%%/g, "");
   });
-
   eleventyConfig.addPreprocessor("commentCallouts", "md", (data, content) => {
     return content.replace(/(^> \[!comments?\][^\n]*\n(?:^>.*\n?)*)/gm, "");
   });
-
   eleventyConfig.addPreprocessor("highlight", "md", (data, content) => {
     return content.replace(/==(.+?)==/g, "<mark>$1</mark>");
+  });
+  eleventyConfig.addPreprocessor("fixDates", "md", (data, content) => {
+    const fixDateString = (value) => {
+      if (
+        typeof value === "string" &&
+        /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(value)
+      ) {
+        const date = new Date(value.replace(" ", "T"));
+        // If the date is invalid, return the original value to prevent errors
+        return isNaN(date.getTime()) ? value : date;
+      }
+      return value;
+    };
+
+    // Fix only known fields
+    if (data.created) data.created = fixDateString(data.created);
+    if (data.modified) data.modified = fixDateString(data.modified);
+
+    return content;
   });
 
   eleventyConfig.addShortcode("readingTime", function (text) {
@@ -478,19 +484,14 @@ export default function (eleventyConfig, options = {}) {
     return "";
   });
 
-  eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
-    // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-    return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
-      format || "dd LLLL yyyy",
-    );
+  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+    // Returns YYYY-MM-DD format for HTML datetime attributes
+    return dateObj.toISOString().split("T")[0];
   });
 
-  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
-    // dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
-  });
   eleventyConfig.addFilter("dateToXmlschema", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISO();
+    // Returns ISO 8601 format for XML/RSS feeds
+    return dateObj.toISOString();
   });
 
   eleventyConfig.addFilter("numberOfWords", (text) => {
@@ -504,9 +505,12 @@ export default function (eleventyConfig, options = {}) {
     return text.split(/\s+/).slice(0, count).join(" ");
   });
 
-  // Add the generic date filter
-  eleventyConfig.addFilter("date", (dateObj, format = "yyyy-LL-dd") => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
+  eleventyConfig.addFilter("dotDate", (dateObj) => {
+    const year = String(dateObj.getFullYear()).slice(-2);
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    return `${year}.${month}.${day}`;
   });
 
   // Add split filter
