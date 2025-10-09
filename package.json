@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.10.37",
+  "version": "0.10.38",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -50,7 +50,7 @@
     "build:css-min": "sass --load-path=node_modules src/styles/standard.scss dist/standard.min.css --style=compressed --no-source-map",
     "build:js": "cp src/js/standard.js dist/standard.js",
     "build:js-min": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js",
-    "release": "npm run clean && npm run build && release-it --only-version --no-git.requireCleanWorkingDir --no-npm.requireCleanWorkingDir",
+    "release": "npm run build && release-it --only-version --no-git.requireCleanWorkingDir --no-npm.requireCleanWorkingDir",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
   },
   "devDependencies": {
