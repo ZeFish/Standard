@@ -241,6 +241,36 @@ body {
     border: var(--border-accent);
 }
 
+/* PrismJS core styles for CSS highlighting */
+.token.selector {
+    color: var(--color-blue);
+}
+.token.property {
+    color: var(--color-orange);
+}
+.token.function {
+    color: var(--color-yellow);
+}
+.token.punctuation {
+    color: var(--color-muted);
+}
+.token.keyword {
+    color: var(--color-red);
+}
+.token.boolean {
+    color: var(--color-purple);
+}
+.token.number {
+    color: var(--color-cyan);
+}
+.token.comment {
+    color: var(--color-subtle);
+    font-style: italic;
+}
+.token.string {
+    color: var(--color-green);
+}
+
 /* ===== INTERACTIVE ELEMENTS ===== */
 /* Links */
 a,

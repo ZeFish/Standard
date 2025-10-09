@@ -48,13 +48,10 @@
     "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min",
     "build:css": "sass --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
     "build:css-min": "sass --load-path=node_modules src/styles/standard.scss dist/standard.min.css --style=compressed --no-source-map",
-    "build:js": "cp src/js/standard.js dist/standard.js && cp src/js/standard.lab.js dist/standard.lab.js",
+    "build:js": "cp src/js/standard.js dist/standard.js",
     "build:js-min": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js",
-    "clean": "rimraf dist",
     "release": "npm run clean && npm run build && release-it --only-version --no-git.requireCleanWorkingDir --no-npm.requireCleanWorkingDir",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
-    "eleventy": "eleventy"
+    "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
@@ -99,5 +96,11 @@
   },
   "directories": {
     "example": "example"
+  },
+  "dependencies": {
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-obsidian-callouts": "^0.3.2",
+    "nunjucks": "^3.2.4"
   }
 }

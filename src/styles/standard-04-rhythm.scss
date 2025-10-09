@@ -322,7 +322,7 @@
         text-transform: uppercase; /* ADD */
         letter-spacing: 0.05em; /* ADD */
         font-size: var(--scale-s); /* ADD: Smaller, tighter */
-        border-bottom: 2px solid var(--color-foreground); /* ADD: Thick border */
+        border-bottom: 2px solid var(--color-subtle); /* ADD: Thick border */
         padding-block-end: var(--space-xs); /* ADD */
     }
 

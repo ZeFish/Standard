@@ -1,9 +1,15 @@
-import backlinks from "./backlinks.js";
-import slugify from "./slugify.js";
+import nunjucks from "nunjucks";
+import * as sass from "sass";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import Backlinks from "./backlinks.js";
+import Markdown from "./markdown.js";
+import { addEncryptionTransform } from "./encryption.js";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default function (eleventyConfig, options = {}) {
-  // Backlinks
-  backlinks(eleventyConfig, options);
   // Options with defaults
   const {
     // Output directory for copied files (relative to output folder)
@@ -13,6 +19,12 @@ export default function (eleventyConfig, options = {}) {
     // Whether to use CDN instead of local files
     useCDN = false,
   } = options;
+
+  //eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
+
+  eleventyConfig.addPlugin(Backlinks);
+  eleventyConfig.addPlugin(Markdown);
+  eleventyConfig.addPlugin(addEncryptionTransform);
 
   // Add passthrough copy from node_modules using relative path
   if (copyFiles && !useCDN) {
@@ -54,31 +66,9 @@ export default function (eleventyConfig, options = {}) {
   // Shortcode to include only CSS
   eleventyConfig.addShortcode("standardLab", function () {
     if (useCDN) {
-      return `<link href="https://unpkg.com/@zefish/standard/lab" rel="stylesheet">`;
+      return `<script type="module" src="https://unpkg.com/@zefish/standard/lab"></script>`;
     }
-    return `<link href="/${outputDir}/standard.lab.js" rel="stylesheet">`;
-  });
-
-  // Shortcode to include only CSS
-  eleventyConfig.addShortcode("standardCSS", function () {
-    if (useCDN) {
-      return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
-    }
-    return `<link href="/${outputDir}/standard.min.css" rel="stylesheet">`;
-  });
-
-  // Shortcode to include only JS
-  eleventyConfig.addShortcode("standardJS", function () {
-    if (useCDN) {
-      return `<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
-    }
-    return `<script src="/${outputDir}/standard.min.js" type="module"></script>`;
-  });
-
-  // Legacy shortcode for CDN (deprecated but kept for backward compatibility)
-  eleventyConfig.addShortcode("standardUnpkg", function () {
-    return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
-<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
+    return `<script type="module" src="/${outputDir}/standard.lab.js"></script>`;
   });
 
   // Extract first image from content

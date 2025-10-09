@@ -648,6 +648,44 @@ body {
   border: var(--border-accent);
 }
 
+/* PrismJS core styles for CSS highlighting */
+.token.selector {
+  color: var(--color-blue);
+}
+
+.token.property {
+  color: var(--color-orange);
+}
+
+.token.function {
+  color: var(--color-yellow);
+}
+
+.token.punctuation {
+  color: var(--color-muted);
+}
+
+.token.keyword {
+  color: var(--color-red);
+}
+
+.token.boolean {
+  color: var(--color-purple);
+}
+
+.token.number {
+  color: var(--color-cyan);
+}
+
+.token.comment {
+  color: var(--color-subtle);
+  font-style: italic;
+}
+
+.token.string {
+  color: var(--color-green);
+}
+
 /* ===== INTERACTIVE ELEMENTS ===== */
 /* Links */
 a,
@@ -1692,7 +1730,7 @@ caption {
   text-transform: uppercase; /* ADD */
   letter-spacing: 0.05em; /* ADD */
   font-size: var(--scale-s); /* ADD: Smaller, tighter */
-  border-bottom: 2px solid var(--color-foreground); /* ADD: Thick border */
+  border-bottom: 2px solid var(--color-subtle); /* ADD: Thick border */
   padding-block-end: var(--space-xs); /* ADD */
 }
 :where(body:not(.no-rhythm)) td,

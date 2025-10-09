@@ -1,5 +1,13 @@
 import fs from "fs";
-import slugify from "./slugify.js";
+
+function slugify(str) {
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
 
 export default function (eleventyConfig, options = {}) {
   let backlinksMap = null;
@@ -56,7 +64,8 @@ export default function (eleventyConfig, options = {}) {
             !target.startsWith("http://") &&
             !target.startsWith("https://") &&
             !target.includes("/public/img/") &&
-            !target.includes("/attachments/")
+            !target.includes("/attachments/") &&
+            !target.includes("/assets/")
           );
         });
 
