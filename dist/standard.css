@@ -2790,7 +2790,7 @@ hr.col-row {
 }
 
 /* Responsive adjustments - collapse gutters on small screens */
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 768px) {
   :root {
     --content-small: 0;
     --content: min(var(--line-width), 100%); /* ← FIXED */

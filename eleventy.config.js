@@ -3,7 +3,7 @@ import { execSync } from "child_process";
 
 const site = {
   title: "Francis Fontaine",
-  url: "https://francisfontaine.com",
+  url: "https://francisfontaine.com/",
   language: "fr",
   description: "",
   keywords: "",
