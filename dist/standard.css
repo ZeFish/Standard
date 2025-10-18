@@ -1724,12 +1724,12 @@ caption {
   text-transform: uppercase; /* ADD */
   letter-spacing: 0.05em; /* ADD */
   font-size: var(--scale-s); /* ADD: Smaller, tighter */
-  border-bottom: 2px solid var(--color-subtle); /* ADD: Thick border */
+  border-bottom: var(--border);
   padding-block-end: var(--space-xs); /* ADD */
 }
 :where(body:not(.no-rhythm)) td,
 :where(.rhythm) td {
-  border-bottom: 1px solid var(--color-border); /* ADD: Hairline */
+  border-bottom: var(--border);
   padding-block: var(--space-xs);
   padding-inline-end: var(--space-s);
 }
