@@ -1695,12 +1695,6 @@ caption {
   width: 100%;
 }
 :where(body:not(.no-rhythm)) th,
-:where(body:not(.no-rhythm)) td,
-:where(.rhythm) th,
-:where(.rhythm) td {
-  padding: calc(var(--space-xs) * var(--rhythm-multiplier)) calc(var(--space-s) * var(--rhythm-multiplier));
-}
-:where(body:not(.no-rhythm)) th,
 :where(.rhythm) th {
   /* Typography and colors handled elsewhere */
 }
@@ -1732,6 +1726,12 @@ caption {
   border-bottom: var(--border);
   padding-block: var(--space-xs);
   padding-inline-end: var(--space-s);
+}
+:where(body:not(.no-rhythm)) th,
+:where(body:not(.no-rhythm)) td,
+:where(.rhythm) th,
+:where(.rhythm) td {
+  padding: calc(var(--space-xs) * var(--rhythm-multiplier)) calc(var(--space-s) * var(--rhythm-multiplier));
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {

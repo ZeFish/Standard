@@ -295,12 +295,6 @@
         width: 100%;
     }
 
-    th,
-    td {
-        padding: calc(var(--space-xs) * var(--rhythm-multiplier))
-            calc(var(--space-s) * var(--rhythm-multiplier));
-    }
-
     th {
         /* Typography and colors handled elsewhere */
     }
@@ -329,6 +323,12 @@
         border-bottom: var(--border);
         padding-block: var(--space-xs);
         padding-inline-end: var(--space-s);
+    }
+
+    th,
+    td {
+        padding: calc(var(--space-xs) * var(--rhythm-multiplier))
+            calc(var(--space-s) * var(--rhythm-multiplier));
     }
 
     /* ADD: Numeric column alignment */
