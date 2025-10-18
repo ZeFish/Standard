@@ -300,13 +300,9 @@ textarea {
 /* Typography properties for elements within rhythm containers */
 
 /* List styling */
-li {
-    line-height: var(--font-density-s);
-}
 li::before {
     font-feature-settings: var(--font-list-feature);
     font-variation-settings: var(--font-list-variation);
-    line-height: var(--font-density-s);
 }
 
 /* Blockquote typography */
