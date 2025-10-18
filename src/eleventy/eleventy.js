@@ -47,6 +47,7 @@ export default function (eleventyConfig, options = {}) {
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
     }
     return `<link rel="preload" href="/${outputDir}/standard.min.css" as="style">
+<link rel="stylesheet" href="/${outputDir}/standard.min.css">
 <script src="/${outputDir}/standard.min.js" type="module"></script>`;
   });
 
