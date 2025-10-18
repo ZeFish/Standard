@@ -1690,14 +1690,6 @@ caption {
   /* TABLES                      */
   /* =========================== */
 }
-:where(body:not(.no-rhythm)) table,
-:where(.rhythm) table {
-  width: 100%;
-}
-:where(body:not(.no-rhythm)) th,
-:where(.rhythm) th {
-  /* Typography and colors handled elsewhere */
-}
 :where(body:not(.no-rhythm)) caption,
 :where(.rhythm) caption {
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
@@ -1712,26 +1704,20 @@ caption {
   width: 100%;
   font-variant-numeric: tabular-nums; /* ADD: Monospace numbers */
 }
+:where(body:not(.no-rhythm)) td,
+:where(body:not(.no-rhythm)) th,
+:where(.rhythm) td,
+:where(.rhythm) th {
+  border-bottom: var(--border);
+  font-size: var(--scale-s);
+  padding-block: calc(var(--space-xs) * var(--rhythm-multiplier));
+  padding-inline: calc(var(--space-s) * var(--rhythm-multiplier));
+}
 :where(body:not(.no-rhythm)) th,
 :where(.rhythm) th {
   /* You already have: text-align: left; font-weight: bold; */
   text-transform: uppercase; /* ADD */
   letter-spacing: 0.05em; /* ADD */
-  font-size: var(--scale-s); /* ADD: Smaller, tighter */
-  border-bottom: var(--border);
-  padding-block-end: var(--space-xs); /* ADD */
-}
-:where(body:not(.no-rhythm)) td,
-:where(.rhythm) td {
-  border-bottom: var(--border);
-  padding-block: var(--space-xs);
-  padding-inline-end: var(--space-s);
-}
-:where(body:not(.no-rhythm)) th,
-:where(body:not(.no-rhythm)) td,
-:where(.rhythm) th,
-:where(.rhythm) td {
-  padding: calc(var(--space-xs) * var(--rhythm-multiplier)) calc(var(--space-s) * var(--rhythm-multiplier));
 }
 :where(body:not(.no-rhythm)),
 :where(.rhythm) {
@@ -1758,8 +1744,8 @@ caption {
 :where(body:not(.no-rhythm)) .compact td,
 :where(.rhythm) .compact th,
 :where(.rhythm) .compact td {
-  padding-block: var(--space-2xs);
-  padding-inline-end: var(--space-xs);
+  padding-block: calc(var(--space-2xs) * var(--rhythm-multiplier));
+  padding-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
 
 /* =========================== */

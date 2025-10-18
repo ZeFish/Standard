@@ -291,14 +291,6 @@
     /* TABLES                      */
     /* =========================== */
 
-    table {
-        width: 100%;
-    }
-
-    th {
-        /* Typography and colors handled elsewhere */
-    }
-
     caption {
         margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
@@ -310,25 +302,18 @@
         font-variant-numeric: tabular-nums; /* ADD: Monospace numbers */
     }
 
+    td,
+    th {
+        border-bottom: var(--border);
+        font-size: var(--scale-s);
+        padding-block: calc(var(--space-xs) * var(--rhythm-multiplier));
+        padding-inline: calc(var(--space-s) * var(--rhythm-multiplier));
+    }
+
     th {
         /* You already have: text-align: left; font-weight: bold; */
         text-transform: uppercase; /* ADD */
         letter-spacing: 0.05em; /* ADD */
-        font-size: var(--scale-s); /* ADD: Smaller, tighter */
-        border-bottom: var(--border);
-        padding-block-end: var(--space-xs); /* ADD */
-    }
-
-    td {
-        border-bottom: var(--border);
-        padding-block: var(--space-xs);
-        padding-inline-end: var(--space-s);
-    }
-
-    th,
-    td {
-        padding: calc(var(--space-xs) * var(--rhythm-multiplier))
-            calc(var(--space-s) * var(--rhythm-multiplier));
     }
 
     /* ADD: Numeric column alignment */
@@ -345,8 +330,8 @@
     /* ADD: Compact table variant */
     .compact th,
     .compact td {
-        padding-block: var(--space-2xs);
-        padding-inline-end: var(--space-xs);
+        padding-block: calc(var(--space-2xs) * var(--rhythm-multiplier));
+        padding-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
 }
 
