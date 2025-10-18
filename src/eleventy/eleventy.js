@@ -30,6 +30,8 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(addEncryptionTransform);
 
+  eleventyConfig.setUseGitIgnore(false);
+
   //eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   //
   eleventyConfig.addGlobalData("standard", {
@@ -44,7 +46,7 @@ export default function (eleventyConfig, options = {}) {
       return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
     }
-    return `<link href="/${outputDir}/standard.min.css" rel="stylesheet">
+    return `<link rel="preload" href="/${outputDir}/standard.min.css" as="style">
 <script src="/${outputDir}/standard.min.js" type="module"></script>`;
   });
 
