@@ -6,7 +6,7 @@
 /* =========================== */
 
 // Mixin to generate spacing utilities
-@mixin spacing-scale($property, $class-prefix, $important: false) {
+@mixin spacing-scale($property, $class-prefix, $important: true) {
     $imp: if($important, " !important", "");
 
     .#{$class-prefix}-0 {
