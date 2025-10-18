@@ -2,7 +2,7 @@ import Standard from "./src/eleventy/eleventy.js";
 import { execSync } from "child_process";
 
 const site = {
-  title: "Francis Fontaine",
+  title: "Standard Framework",
   url: "https://francisfontaine.com/",
   language: "fr",
   description: "",
