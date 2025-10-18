@@ -78,6 +78,7 @@
     "access": "public"
   },
   "release-it": {
+    "ci": true,
     "git": {
       "tagName": "v${version}",
       "commitMessage": "chore: release v${version}",
