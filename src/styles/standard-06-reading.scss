@@ -35,7 +35,7 @@
 /* Reading Layout System - Article content grid and positioning */
 /* Inspired by fine-art typography and book design principles */
 
-.reading {
+:where(.reading) {
     display: grid;
     grid-template-columns:
         [full-start] var(--content-full)

@@ -2781,7 +2781,7 @@ hr.col-row {
 }
 /* Reading Layout System - Article content grid and positioning */
 /* Inspired by fine-art typography and book design principles */
-.reading {
+:where(.reading) {
   display: grid;
   grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
   transition: grid-template-columns 0.3s ease-out;
@@ -2789,155 +2789,155 @@ hr.col-row {
   z-index: var(--z-base);
   /* Default content positioning */
 }
-.reading > * {
+:where(.reading) > * {
   grid-column: content;
 }
-.reading .container-small {
+:where(.reading) .container-small {
   grid-column: content;
   margin-inline: var(--content-small);
 }
-.reading .container-accent {
+:where(.reading) .container-accent {
   grid-column: accent;
   margin-inline: 0;
 }
-.reading table,
-.reading .container-feature {
+:where(.reading) table,
+:where(.reading) .container-feature {
   grid-column: feature;
   margin-inline: 0;
 }
-.reading .container-full {
+:where(.reading) .container-full {
   grid-column: full;
   margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
   padding-inline: calc(var(--space) * var(--body-padding-multiplier));
 }
-.reading {
+:where(.reading) {
   /* Image gallery layout */
 }
-.reading:not(.no-grid) p:has(img) {
+:where(.reading):not(.no-grid) p:has(img) {
   display: flex;
   gap: calc(var(--space) / 4);
   border-radius: var(--border-radius);
 }
-.reading:not(.no-grid) p:has(img) > * {
+:where(.reading):not(.no-grid) p:has(img) > * {
   flex: 1 1 auto;
   min-width: 1%;
   min-height: 1%;
   object-fit: cover;
 }
-.reading:not(.no-grid) p:has(video) > * {
+:where(.reading):not(.no-grid) p:has(video) > * {
   flex: 1 1 auto;
   min-width: 1%;
   min-height: 1%;
   object-fit: cover;
 }
-.reading:not(.no-grid) p:has(img) img,
-.reading:not(.no-grid) p:has(img) img:first-child,
-.reading:not(.no-grid) p:has(img) img:last-child {
+:where(.reading):not(.no-grid) p:has(img) img,
+:where(.reading):not(.no-grid) p:has(img) img:first-child,
+:where(.reading):not(.no-grid) p:has(img) img:last-child {
   margin-inline: auto;
 }
-.reading:not(.no-grid) p:has(img) br {
+:where(.reading):not(.no-grid) p:has(img) br {
   display: none;
 }
-.reading:not(.no-grid) .callout p:has(img),
-.reading:not(.no-grid) .callout p:has(img) br {
+:where(.reading):not(.no-grid) .callout p:has(img),
+:where(.reading):not(.no-grid) .callout p:has(img) br {
   display: block;
 }
-.reading h1 {
+:where(.reading) h1 {
   margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
-.reading h2 {
+:where(.reading) h2 {
   margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
-.reading h3 {
+:where(.reading) h3 {
   margin-block-start: calc(var(--space-xl) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
-.reading h4 {
+:where(.reading) h4 {
   margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-.reading h5 {
+:where(.reading) h5 {
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-.reading h6 {
+:where(.reading) h6 {
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-.reading hr {
+:where(.reading) hr {
   margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
 }
-.reading {
+:where(.reading) {
   /* Heading after heading gets reduced spacing */
 }
-.reading h1 + h2,
-.reading h2 + h3,
-.reading h3 + h4,
-.reading h4 + h5,
-.reading h5 + h6 {
+:where(.reading) h1 + h2,
+:where(.reading) h2 + h3,
+:where(.reading) h3 + h4,
+:where(.reading) h4 + h5,
+:where(.reading) h5 + h6 {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier) * -1);
 }
-.reading {
+:where(.reading) {
   /* Lists after headings get normal spacing */
 }
-.reading h1 + ul,
-.reading h1 + ol,
-.reading h2 + ul,
-.reading h2 + ol,
-.reading h3 + ul,
-.reading h3 + ol {
+:where(.reading) h1 + ul,
+:where(.reading) h1 + ol,
+:where(.reading) h2 + ul,
+:where(.reading) h2 + ol,
+:where(.reading) h3 + ul,
+:where(.reading) h3 + ol {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-.reading section > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading aside > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading header > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading footer > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading main > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading nav > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading pre > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading figure > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .box > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .box-inset > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .container-accent > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .container-feature > :is(h1, h2, h3, h4, h5, h6):first-child,
-.reading .container-full > :is(h1, h2, h3, h4, h5, h6):first-child {
+:where(.reading) section > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) aside > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) header > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) footer > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) main > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) nav > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) pre > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) figure > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .box > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .box-inset > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .container-accent > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .container-feature > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.reading) .container-full > :is(h1, h2, h3, h4, h5, h6):first-child {
   margin-block-start: 0; /* No top margin */
   /* Keep the heading's natural bottom margin */
 }
-.reading {
+:where(.reading) {
   /* Basic media styling */
 }
-.reading img,
-.reading audio,
-.reading video {
+:where(.reading) img,
+:where(.reading) audio,
+:where(.reading) video {
   margin: 0;
   margin-inline: auto;
   max-inline-size: 100%;
   border-radius: var(--border-radius);
   border: var(--border);
 }
-.reading .callout,
-.reading blockquote,
-.reading pre,
-.reading figure,
-.reading p:has(img) {
+:where(.reading) .callout,
+:where(.reading) blockquote,
+:where(.reading) pre,
+:where(.reading) figure,
+:where(.reading) p:has(img) {
   margin-inline: var(--content-small);
 }
-.reading {
+:where(.reading) {
   /* Mermaid diagrams */
 }
-.reading .mermaid {
+:where(.reading) .mermaid {
   margin-block-end: var(--space);
   margin-inline: auto;
   padding: var(--space);
 }
-.reading p img {
+:where(.reading) p img {
   max-inline-size: 100%;
 }
 
