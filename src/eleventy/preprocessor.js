@@ -22,7 +22,8 @@ export default function (eleventyConfig, options = {}) {
     // Create a regex pattern for each language to match code blocks
     escapeLanguages.forEach((lang) => {
       // Match ```language\n content \n``` and remove backticks
-      const pattern = new RegExp(`^\`\`\`${lang}\n(.*?)\n\`\`\`$`, "gm");
+      // The 's' flag makes '.' match newlines, allowing multiline content
+      const pattern = new RegExp(`^\`\`\`${lang}\n(.*?)\n\`\`\`$`, "gms");
       content = content.replace(pattern, "$1");
     });
 

@@ -1264,12 +1264,14 @@ caption {
 }
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
-:where(body:not(.no-rhythm)) {
+:where(body:not(.no-rhythm)),
+:where(.rhythm) {
   margin: 0;
   padding: calc(var(--space) * var(--body-padding-multiplier));
   padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
 }
-:where(body:not(.no-rhythm)) [id] {
+:where(body:not(.no-rhythm)) [id],
+:where(.rhythm) [id] {
   scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier)); /* Adjust value as needed */
 }
 
@@ -1369,6 +1371,18 @@ caption {
 :where(body:not(.no-rhythm)) fieldset,
 :where(body:not(.no-rhythm)) hr,
 :where(body:not(.no-rhythm)) table,
+:where(body:not(.no-rhythm)) .grid,
+:where(body:not(.no-rhythm)) .grid-2,
+:where(body:not(.no-rhythm)) .grid-3,
+:where(body:not(.no-rhythm)) .grid-4,
+:where(body:not(.no-rhythm)) .grid-5,
+:where(body:not(.no-rhythm)) .grid-6,
+:where(body:not(.no-rhythm)) .grid-7,
+:where(body:not(.no-rhythm)) .grid-8,
+:where(body:not(.no-rhythm)) .grid-9,
+:where(body:not(.no-rhythm)) .grid-10,
+:where(body:not(.no-rhythm)) .grid-11,
+:where(body:not(.no-rhythm)) .grid-12,
 :where(body:not(.no-rhythm)) .container-small,
 :where(body:not(.no-rhythm)) .container-accent,
 :where(body:not(.no-rhythm)) .container-feature,
@@ -1381,6 +1395,18 @@ caption {
 :where(.rhythm) fieldset,
 :where(.rhythm) hr,
 :where(.rhythm) table,
+:where(.rhythm) .grid,
+:where(.rhythm) .grid-2,
+:where(.rhythm) .grid-3,
+:where(.rhythm) .grid-4,
+:where(.rhythm) .grid-5,
+:where(.rhythm) .grid-6,
+:where(.rhythm) .grid-7,
+:where(.rhythm) .grid-8,
+:where(.rhythm) .grid-9,
+:where(.rhythm) .grid-10,
+:where(.rhythm) .grid-11,
+:where(.rhythm) .grid-12,
 :where(.rhythm) .container-small,
 :where(.rhythm) .container-accent,
 :where(.rhythm) .container-feature,
@@ -2846,11 +2872,11 @@ hr.col-row {
 }
 :where(.reading) h1 {
   margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
 }
 :where(.reading) h2 {
   margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
 }
 :where(.reading) h3 {
   margin-block-start: calc(var(--space-xl) * var(--rhythm-multiplier));
@@ -5023,6 +5049,41 @@ img {
     padding: 0;
     padding-left: var(--space);
   }
+}
+
+/* Standard - Fine-Art Typography Framework */
+/* A framework implementing classical design principles, mathematical precision with the golden ratio, */
+/* and micro-typography rules inspired by the masters of print design. */
+/* Minimalist button class for styling links as buttons */
+a.button,
+a.button:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--scale-s);
+  font-weight: var(--font-weight);
+  line-height: var(--font-density);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--border-radius);
+  background: var(--color-accent);
+  color: var(--color-background);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+a.button:hover,
+a.button:visited:hover {
+  opacity: 0.9;
+}
+a.button:active,
+a.button:visited:active {
+  opacity: 0.8;
+}
+a.button:focus-visible,
+a.button:visited:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
 }
 
 /* Standard - Fine-Art Typography Framework */
