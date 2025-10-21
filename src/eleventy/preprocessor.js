@@ -1,4 +1,6 @@
 export default function (eleventyConfig, options = {}) {
+  const { escapeCodeBlocks: globalEscapeCodeBlocks = [] } = options;
+
   eleventyConfig.addPreprocessor("comment", "md", (data, content) => {
     return content.replaceAll(/%%(.|\n|\s)*?%%/g, "");
   });
@@ -7,6 +9,24 @@ export default function (eleventyConfig, options = {}) {
   });
   eleventyConfig.addPreprocessor("highlight", "md", (data, content) => {
     return content.replace(/==(.+?)==/g, "<mark>$1</mark>");
+  });
+  eleventyConfig.addPreprocessor("escapeCodeBlock", "md", (data, content) => {
+    // Get escape languages from front matter or use global setting
+    // Front matter takes precedence: escapeCodeBlocks: ["html", "xml"]
+    const escapeLanguages = data.escapeCodeBlocks || globalEscapeCodeBlocks;
+
+    if (!escapeLanguages || escapeLanguages.length === 0) {
+      return content;
+    }
+
+    // Create a regex pattern for each language to match code blocks
+    escapeLanguages.forEach((lang) => {
+      // Match ```language\n content \n``` and remove backticks
+      const pattern = new RegExp(`^\`\`\`${lang}\n(.*?)\n\`\`\`$`, "gm");
+      content = content.replace(pattern, "$1");
+    });
+
+    return content;
   });
   eleventyConfig.addPreprocessor("fixDates", "md", (data, content) => {
     const fixDateString = (value) => {

@@ -21,9 +21,11 @@ export default function (eleventyConfig, options = {}) {
     copyFiles = true,
     // Whether to use CDN instead of local files
     useCDN = false,
+    // Languages to escape code blocks for globally
+    escapeCodeBlocks = [],
   } = options;
 
-  eleventyConfig.addPlugin(PreProcessor);
+  eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
   eleventyConfig.addPlugin(ShortCode);
   eleventyConfig.addPlugin(Filter);
   eleventyConfig.addPlugin(Backlinks);
