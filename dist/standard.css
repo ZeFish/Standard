@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version @VERSION_PLACEHOLDER@
+ * @version Standard Framework v0.11.8 | 2025-10-22T19:21:10.529Z
  * @license MIT
  */
 /* Document
@@ -5148,6 +5148,15 @@ img {
 @media (max-width: 768px) {
   .negate-body-padding-bottom {
     margin-block-end: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
+  }
+}
+
+.negate-body-padding-top {
+  margin-block-start: calc(var(--space) * var(--body-padding-multiplier) * 1 * -1);
+}
+@media (max-width: 768px) {
+  .negate-body-padding-top {
+    margin-block-start: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1 * -1);
   }
 }
 
