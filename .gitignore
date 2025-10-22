@@ -8,4 +8,8 @@ PUBLISHING.md
 *.scss.map
 .DS_Store
 /_site
-/_site
+
+# Auto-synced files (generated during build)
+content/README.md
+content/claude.md
+.doc-generator-hash

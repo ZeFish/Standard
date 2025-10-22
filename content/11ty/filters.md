@@ -1,6 +1,6 @@
 ---
 title: Filters & Template Helpers
-layout: article
+
 eleventyNavigation:
   key: Filters
   parent: 11ty Plugin

@@ -1,6 +1,6 @@
 ---
 title: Wiki-Style Backlinks
-layout: article
+
 eleventyNavigation:
   key: Backlinks
   parent: 11ty Plugin

@@ -1,6 +1,6 @@
 ---
 title: Quick Start - Build Your First Website
-layout: article
+
 eleventyNavigation:
   key: Quick Start
   parent: 11ty Plugin
@@ -63,7 +63,7 @@ import Standard from "@zefish/standard";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(Standard);
-  
+
   return {
     dir: { input: "content", output: "_site" }
   };
@@ -158,13 +158,13 @@ Visit `http://localhost:8080`
 
 Seriously. You now have:
 
-✅ **Beautiful typography** - Perfect fonts and spacing  
-✅ **Responsive grid** - Works on phone, tablet, desktop  
-✅ **Dark mode** - Automatic theme switching  
-✅ **Semantic HTML** - Clean, accessible code  
-✅ **Professional styling** - Golden ratio proportions  
-✅ **Fast build** - Completes in seconds  
-✅ **Zero configuration** - It just works  
+✅ **Beautiful typography** - Perfect fonts and spacing
+✅ **Responsive grid** - Works on phone, tablet, desktop
+✅ **Dark mode** - Automatic theme switching
+✅ **Semantic HTML** - Clean, accessible code
+✅ **Professional styling** - Golden ratio proportions
+✅ **Fast build** - Completes in seconds
+✅ **Zero configuration** - It just works
 
 ---
 
@@ -351,9 +351,9 @@ layout: layouts/base.njk
 <article class="rhythm-block">
   <h1>{{ title }}</h1>
   <time class="text-sm text-foreground/60">{{ date | dateFilter('long') }}</time>
-  
+
   {{ content | safe }}
-  
+
   <!-- Backlinks appear here -->
   {% if backlinks %}
     <aside class="mt-8 p-4 bg-accent/10 border-l-4 border-accent">

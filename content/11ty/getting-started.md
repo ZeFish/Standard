@@ -1,6 +1,6 @@
 ---
 title: Getting Started with 11ty Plugin
-layout: article
+
 eleventyNavigation:
   key: Getting Started
   parent: 11ty Plugin
@@ -201,7 +201,7 @@ layout: layouts/base.njk
 
 <article class="rhythm-block">
   <h1>{{ title }}</h1>
-  
+
   <div class="text-sm text-foreground/60">
     Published: <time datetime="{{ date | dateFilter }}">
       {{ date | dateFilter('long') }}
@@ -222,7 +222,7 @@ layout: layouts/base.njk
         ← {{ previousPost.data.title }}
       </a>
     {% endif %}
-    
+
     {% if nextPost %}
       <a href="{{ nextPost.url }}" class="btn btn-secondary">
         {{ nextPost.data.title }} →
@@ -360,7 +360,7 @@ npx @11ty/eleventy --serve
 # Or configure in eleventy.config.js
 export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./content/**/*");
-  
+
   return {
     dir: { input: "content" }
   };

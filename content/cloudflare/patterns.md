@@ -1,6 +1,6 @@
 ---
 title: Common Usage Patterns
-layout: article
+
 eleventyNavigation:
   key: Patterns
   parent: Cloudflare Functions
@@ -22,7 +22,7 @@ import { createResponse, parseRequest } from "./utils.js";
 export default {
   async fetch(request) {
     const { method } = await parseRequest(request);
-    
+
     if (method !== "GET") {
       return createResponse({ error: "Method not allowed" }, { status: 405 });
     }

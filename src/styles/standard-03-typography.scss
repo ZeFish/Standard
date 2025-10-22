@@ -125,6 +125,7 @@ html {
     orphans: 2;
 }
 
+/* Note: Typography-only feature toggles (kept in typography layer) */
 .circular {
     font-feature-settings: "ss05" on;
 }
@@ -143,104 +144,20 @@ html {
     }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-header), system-ui, sans-serif;
-    color: var(--color-header);
-    text-wrap: balance;
-    font-variant-ligatures: normal;
-    font-feature-settings: var(--font-header-feature);
-    font-variation-settings: var(--font-header-variation);
-    font-style: var(--font-header-style, normal);
-    line-height: var(--font-header-line-height);
-    letter-spacing: var(--font-header-letter-spacing);
-    white-space: normal;
-    overflow-wrap: normal;
-    word-break: normal;
-    hyphens: none;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-/*
-svg {
-    fill: var(--color-header);
-    stroke: var(--color-header);
-}
-*/
+/* Heading element styling moved to standard-04-elements.scss
+   This file now contains only typography design tokens and rules.
+   See standard-04-elements.scss for h1-h6 element styling. */
 
-h1 {
-    font-weight: var(--font-weight-h1);
-    font-size: clamp(var(--scale-2xl), 10vw, var(--scale-3xl));
-}
+/* Note: Text size utilities moved to standard-98-utilities.scss */
+/* .small, .smaller, .compact now defined in utilities layer */
 
-h2 {
-    font-weight: var(--font-weight-h2);
-    font-size: clamp(var(--scale-xl), 7vw, var(--scale-2xl));
-}
-
-h3 {
-    font-weight: var(--font-weight-h3);
-    font-size: var(--scale-xl);
-}
-
-h4 {
-    font-weight: var(--font-weight-h4);
-    font-size: var(--scale-l);
-    line-height: var(--line-height);
-}
-
-h5 {
-    font-weight: var(--font-weight-h5);
-    font-size: var(--scale-l);
-    line-height: var(--line-height);
-}
-
-h6 {
-    font-weight: var(--font-weight-h6);
-    font-size: var(--scale-l);
-    line-height: var(--line-height);
-}
-
-// Utility text sizes
-.small {
-    font-size: var(--scale-s);
-}
-.smaller {
-    font-size: var(--scale-xs);
-}
-.compact {
-    line-height: var(--font-density-s);
-}
-
-.font-ui,
-.font-interface {
-    font-family: var(--font-interface), system-ui, sans-serif;
-    font-variation-settings: var(--font-interface-variation);
-    font-feature-settings: var(--font-interface-feature);
-}
-
-// Monospaced text
-pre,
-code,
-tt,
-.code,
-.mono,
-.monospace,
-.font-mono {
-    font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
-    font-feature-settings: var(--font-monospace-feature);
-    font-variation-settings: var(--font-monospace-variation);
-    font-size: var(--scale-s);
-}
+/* Note: Font family utilities (.font-ui, .font-interface, .mono, .code, .bold) */
+/* moved to standard-98-utilities.scss */
+/* Element font families for pre, code, tt kept below as element selectors */
 
 // Strong/bold normalization
 b,
-strong,
-.bold {
+strong {
     font-weight: var(--bold-weight);
 }
 :is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
@@ -253,69 +170,9 @@ a:visited {
     color: inherit;
 }
 
-/* Button styles for consistent appearance */
-button {
-    font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--scale-s);
-    font-weight: var(--font-weight);
-    line-height: var(--font-density);
-
-    padding: var(--space-xs) var(--space-s);
-    border: none;
-    border-radius: var(--border-radius);
-
-    background: var(--color-accent);
-    color: var(--color-background);
-
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-        opacity: 0.9;
-    }
-
-    &:active {
-        opacity: 0.8;
-    }
-
-    &:focus-visible {
-        outline: 1px solid
-            color-mix(in srgb, var(--color-accent) 50%, transparent);
-    }
-}
-
-/* Form element styles for consistency */
-input,
-select,
-textarea {
-    font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--scale-s);
-    font-weight: var(--font-weight);
-    line-height: var(--font-density);
-
-    padding: var(--space-xs) var(--space-s);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-
-    background: var(--color-background-secondary);
-    color: var(--color-foreground);
-
-    &:focus {
-        outline: 1px solid
-            color-mix(in srgb, var(--color-accent) 50%, transparent);
-        border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
-        background-color: color-mix(
-            in srgb,
-            var(--color-accent) 2.5%,
-            var(--color-background-secondary)
-        );
-    }
-
-    &::placeholder {
-        color: var(--color-muted);
-        opacity: 0.7;
-    }
-}
+/* Button and form element styling moved to standard-04-elements.scss
+   This file now contains only typography design tokens and rules.
+   See standard-04-elements.scss for button, input, textarea, select styling. */
 
 textarea {
     resize: vertical;
@@ -389,28 +246,5 @@ caption {
     font-weight: var(--bold-weight, bold);
 }
 
-/* ADD: Helper classes for extreme scales */
-.display {
-    font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
-    line-height: 0.85;
-    font-weight: var(--font-header-weight);
-    letter-spacing: var(--font-header-letter-spacing);
-}
-
-.poster {
-    font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
-    line-height: 0.8;
-    font-weight: var(--font-header-weight);
-    letter-spacing: -0.04em;
-}
-
-.label {
-    font-size: var(--scale-micro);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 700;
-}
-
-.micro {
-    font-size: var(--scale-micro);
-}
+/* Note: Display scale utilities (.display, .poster, .label, .micro) */
+/* moved to standard-98-utilities.scss */

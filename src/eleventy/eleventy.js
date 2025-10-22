@@ -2,7 +2,9 @@ import nunjucks from "nunjucks";
 import * as sass from "sass";
 import path from "path";
 import { fileURLToPath } from "url";
+import { readFileSync, existsSync } from "fs";
 import EleventyNavigationPlugin from "@11ty/eleventy-navigation";
+import fs from "fs";
 
 import Backlinks from "./backlinks.js";
 import Markdown from "./markdown.js";
@@ -13,20 +15,31 @@ import { addEncryptionTransform } from "./encryption.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Read package.json for version
+const pkg = JSON.parse(
+  readFileSync(path.join(__dirname, "../../package.json"), "utf-8"),
+);
+
 /**
  * @component Standard Framework 11ty Plugin
  * @category 11ty Plugins
- * @description Main plugin orchestrator for Standard Framework. Registers all
- * sub-plugins (markdown, filters, shortcodes, backlinks, encryption, documentation).
- * Configures asset copying, global data, and template functions. Can serve assets
- * from local files or CDN. Automatically includes all framework CSS and JS.
+ * @description Complete plugin orchestrator for Standard Framework. Includes:
+ * - Typography system (smart quotes, fractions, dashes, widow prevention)
+ * - CSS framework (grid, spacing, colors, responsive design)
+ * - 11ty plugins (markdown, filters, shortcodes, backlinks, encryption)
+ * - Cloudflare Functions integration (serverless endpoints)
+ * - GitHub Comments System (serverless comments stored in GitHub)
+ *
+ * One plugin adds everything you need. Configure what you want to use.
  *
  * @param {object} eleventyConfig 11ty configuration object
  * @param {object} options Plugin options
- * @param {string} options.outputDir Output directory for copied files (default: assets/standard)
+ * @param {string} options.outputDir Output directory for Standard assets (default: assets/standard)
  * @param {boolean} options.copyFiles Copy files from node_modules (default: true)
  * @param {boolean} options.useCDN Use CDN instead of local files (default: false)
  * @param {array} options.escapeCodeBlocks Languages to escape code blocks for (default: [])
+ * @param {object} options.cloudflare Cloudflare Functions config (default: { enabled: false })
+ * @param {object} options.comments GitHub Comments config (default: { enabled: false })
  *
  * @prop {shortcode} standardAssets Include CSS and JS in template
  * @prop {shortcode} standardLab Include lab/experimental features
@@ -37,22 +50,34 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * @prop {plugin} Backlinks Wiki-style backlinks
  * @prop {plugin} Encryption Content encryption
  * @prop {plugin} Navigation Hierarchical navigation menus
+ * @prop {passthrough} Cloudflare Functions Serverless functions
+ * @prop {passthrough} Comments GitHub comments system
  *
  * @example
- * // In eleventy.config.js
+ * // Minimal setup (typography + CSS only)
  * import Standard from "./src/eleventy/eleventy.js";
  *
  * export default function (eleventyConfig) {
- *   eleventyConfig.addPlugin(Standard, {
- *     outputDir: "assets/standard",
- *     copyFiles: true,
- *     useCDN: false
- *   });
+ *   eleventyConfig.addPlugin(Standard);
  * }
  *
- * // In templates
- * {% standardAssets %}
- * {% standardLab %}
+ * // With Cloudflare Functions
+ * eleventyConfig.addPlugin(Standard, {
+ *   cloudflare: { enabled: true, outputDir: "functions" }
+ * });
+ *
+ * // With Comments System
+ * eleventyConfig.addPlugin(Standard, {
+ *   comments: { enabled: true, outputDir: "functions/api" }
+ * });
+ *
+ * // Everything included
+ * eleventyConfig.addPlugin(Standard, {
+ *   outputDir: "assets/standard",
+ *   copyFiles: true,
+ *   cloudflare: { enabled: true },
+ *   comments: { enabled: true }
+ * });
  *
  * @since 0.1.0
  */
@@ -68,6 +93,18 @@ export default function (eleventyConfig, options = {}) {
     useCDN = false,
     // Languages to escape code blocks for globally
     escapeCodeBlocks = [],
+    // Cloudflare Functions configuration
+    cloudflare = {
+      enabled: false,
+      outputDir: "functions",
+      environment: "production",
+    },
+    // GitHub Comments System configuration
+    comments = {
+      enabled: false,
+      outputDir: "functions/api",
+      copyClientLibrary: true,
+    },
   } = options;
 
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
@@ -85,17 +122,28 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addGlobalData("standard", {
     layout: {
       meta: "node_modules/@zefish/standard/src/layouts/meta.njk",
+      encrypted: "node_modules/@zefish/standard/src/layouts/encrypted.njk",
     },
   });
 
   // Shortcode to include Standard CSS and JS from local files
   eleventyConfig.addShortcode("standardAssets", function () {
+    let html = "";
+
     if (useCDN) {
-      return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
+      html = `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
-    }
-    return `<link rel="stylesheet" href="/${outputDir}/standard.min.css">
+    } else {
+      html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">
 <script src="/${outputDir}/standard.min.js" type="module"></script>`;
+    }
+
+    // Add comments client library if comments are enabled
+    if (comments.enabled) {
+      html += `\n<script src="/assets/js/comments-client.js"></script>`;
+    }
+
+    return html;
   });
 
   // Shortcode to include only CSS
@@ -114,4 +162,97 @@ export default function (eleventyConfig, options = {}) {
       "node_modules/@zefish/standard/dist/standard.lab.js": `${outputDir}/standard.lab.js`,
     });
   }
+
+  // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
+  if (cloudflare.enabled) {
+    const cloudflareDir = path.join(__dirname, "../cloudflare");
+    if (fs.existsSync(cloudflareDir)) {
+      eleventyConfig.addPassthroughCopy({
+        [cloudflareDir]: cloudflare.outputDir,
+      });
+    }
+
+    eleventyConfig.addGlobalData("cloudflare", {
+      environment: cloudflare.environment || "production",
+      outputDir: cloudflare.outputDir,
+      version: pkg.version,
+    });
+
+    console.log(
+      `[Standard] Cloudflare Functions enabled → ${cloudflare.outputDir}/`,
+    );
+  }
+
+  // ===== GITHUB COMMENTS SYSTEM INTEGRATION =====
+  if (comments.enabled) {
+    const commentsHandler = path.join(
+      __dirname,
+      "../cloudflare/comments-example.js",
+    );
+    const commentsUtils = path.join(__dirname, "../cloudflare/utils.js");
+    const commentsConfig = path.join(
+      __dirname,
+      "../cloudflare/wrangler-comments.toml.template",
+    );
+
+    // Copy comments handler
+    if (fs.existsSync(commentsHandler)) {
+      eleventyConfig.addPassthroughCopy({
+        [commentsHandler]: `${comments.outputDir}/comments.js`,
+      });
+    }
+
+    // Copy utilities (required by handler)
+    if (fs.existsSync(commentsUtils)) {
+      eleventyConfig.addPassthroughCopy({
+        [commentsUtils]: `${comments.outputDir}/utils.js`,
+      });
+    }
+
+    // Copy config template
+    if (fs.existsSync(commentsConfig)) {
+      eleventyConfig.addPassthroughCopy({
+        [commentsConfig]: "wrangler-comments.toml.template",
+      });
+    }
+
+    // Optionally copy client library to assets
+    if (comments.copyClientLibrary) {
+      const commentsClient = path.join(
+        __dirname,
+        "../cloudflare/comments-client.js",
+      );
+      if (fs.existsSync(commentsClient)) {
+        eleventyConfig.addPassthroughCopy({
+          [commentsClient]: "assets/js/comments-client.js",
+        });
+      }
+    }
+
+    eleventyConfig.addGlobalData("comments", {
+      enabled: true,
+      apiEndpoint: "/api/comments",
+      clientLibrary: comments.copyClientLibrary
+        ? "/assets/js/comments-client.js"
+        : null,
+      version: pkg.version,
+    });
+
+    console.log(
+      `[Standard] GitHub Comments System enabled → ${comments.outputDir}/comments.js`,
+    );
+    if (comments.copyClientLibrary)
+      console.log(
+        `[Standard] Comments client library → assets/js/comments-client.js`,
+      );
+  }
+
+  // Log plugin initialization after build completes
+  eleventyConfig.on("eleventy.after", () => {
+    console.log(
+      "📦 Standard Framework | " +
+        pkg.version +
+        " | https://standard.ffp.co/cheet-sheat",
+    );
+  });
 }

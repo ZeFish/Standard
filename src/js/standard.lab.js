@@ -7,7 +7,7 @@
  * Philosophy: Form follows function. Every control serves a purpose.
  * Inspired by the clarity of Swiss design and Dieter Rams' interface principles.
  *
- * @version 1.0.0
+ * @version @VERSION_PLACEHOLDER@
  */
 
 class StandardLab {

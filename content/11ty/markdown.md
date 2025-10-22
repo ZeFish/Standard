@@ -1,6 +1,6 @@
 ---
 title: Markdown Enhancements
-layout: article
+
 eleventyNavigation:
   key: Markdown
   parent: 11ty Plugin
@@ -182,7 +182,7 @@ import Standard from "@zefish/standard";
 eleventyConfig.addPlugin(Standard, {
   // Escape code blocks for these languages
   escapeCodeBlocks: ["liquid", "nunjucks"],
-  
+
   // Standard Framework automatically enables:
   // - Footnotes (via markdown-it-footnote)
   // - Obsidian callouts (via markdown-it-obsidian-callouts)

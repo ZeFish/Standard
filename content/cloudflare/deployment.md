@@ -1,6 +1,6 @@
 ---
 title: Deployment Guide
-layout: article
+
 eleventyNavigation:
   key: Deployment
   parent: Cloudflare Functions
@@ -171,7 +171,7 @@ Or in `wrangler.toml`:
 
 ```toml
 [env.production]
-vars = { 
+vars = {
   ENVIRONMENT = "production"
 }
 
@@ -329,7 +329,7 @@ async function fastOperation() {
   // Keep under 30 seconds
   const timeout = Promise.race([
     doWork(),
-    new Promise((_, reject) => 
+    new Promise((_, reject) =>
       setTimeout(() => reject(new Error('Timeout')), 25000)
     )
   ]);

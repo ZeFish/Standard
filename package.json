@@ -43,7 +43,7 @@
     "src/layouts"
   ],
   "scripts": {
-    "start": "rm -rf _site && npx @11ty/eleventy --serve --port=8090 --quiet",
+    "start": "rm -rf _site && npm run build:css && npx @11ty/eleventy --serve --port=8090 --quiet",
     "dev": "concurrently \"npm:watch:*\"",
     "watch:css": "sass --watch --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",

@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Cloudflare Functions
-layout: article
+
 eleventyNavigation:
   key: Setup
   parent: Cloudflare Functions

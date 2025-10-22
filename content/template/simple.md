@@ -13,7 +13,7 @@ Base Layout
       {% include "meta.njk" %}
     </head>
 	{% standardAssets  %}
-	<body class="reading md">
+	<body class="prose md">
 			{{ content | safe  }}
 	</body>
 </html>

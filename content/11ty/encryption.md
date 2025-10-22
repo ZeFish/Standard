@@ -1,6 +1,6 @@
 ---
 title: Content Encryption & Protection
-layout: article
+
 eleventyNavigation:
   key: Encryption
   parent: 11ty Plugin
@@ -90,7 +90,7 @@ Create a markdown file with encryption enabled:
 title: Private Notes
 encrypted: true
 password: mypassword123
-layout: article
+
 ---
 
 # Private Notes
@@ -281,7 +281,7 @@ Control encryption per-page:
 ```markdown
 ---
 title: Protected Article
-layout: article
+
 
 # Encryption settings
 encrypted: true              # Enable encryption
@@ -465,7 +465,7 @@ Create a landing page with encrypted content:
 ```markdown
 ---
 title: Premium Content Hub
-layout: article
+
 ---
 
 # Premium Articles

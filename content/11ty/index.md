@@ -1,6 +1,6 @@
 ---
 title: 11ty Plugin
-layout: article
+
 eleventyNavigation:
   key: 11ty Plugin
   title: 11ty Plugin
@@ -9,20 +9,7 @@ permalink: /11ty/
 
 # Standard Framework 11ty Plugin
 
-Complete integration of the Standard Framework CSS system with Eleventy (11ty) static site generator.
-
-## What is This?
-
-The Standard Framework 11ty Plugin is a comprehensive package that brings:
-
-- **Perfect CSS integration** - Automatic asset copying and inclusion
-- **Enhanced markdown** - Extended markdown with custom syntax
-- **Smart filters** - Template filters for content transformation
-- **Wiki-style features** - Automatic backlinks between pages
-- **Content encryption** - Encrypt sensitive content inline
-- **Global data** - Ready-to-use framework variables
-- **Layouts** - Pre-built page templates
-- **Zero configuration** - Works out of the box
+Complete integration of the Standard Framework CSS system with Eleventy. Includes automatic asset management, enhanced markdown, template filters, backlinks, content encryption, and zero-configuration setup.
 
 ## Quick Start
 
@@ -207,7 +194,7 @@ Access framework data in templates:
 
 ```nunjucks
 ---
-layout: article
+
 title: My Blog Post
 ---
 
@@ -220,7 +207,7 @@ Your blog post content with beautiful Standard Framework styling.
 
 ```nunjucks
 ---
-layout: article
+
 eleventyNavigation:
   key: Documentation
   title: Documentation
@@ -235,7 +222,7 @@ Automatically get wiki-style backlinks and beautiful typography.
 
 ```nunjucks
 ---
-layout: article
+
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -247,7 +234,7 @@ layout: article
 
 ```nunjucks
 ---
-layout: article
+
 ---
 
 # Topic

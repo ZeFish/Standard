@@ -1,6 +1,6 @@
 ---
 title: Color System
-layout: article
+
 eleventyNavigation:
   key: Colors
   parent: CSS Framework
@@ -10,18 +10,15 @@ permalink: /css/colors/
 
 # Color System
 
-A semantic color system with automatic light/dark theme support that respects user preferences.
+A semantic color system with automatic light/dark theme support that respects user preferences and guarantees WCAG AA accessibility.
 
-## Philosophy
+## Quick Navigation
 
-Standard Framework uses **semantic colors** instead of arbitrary color names. Colors represent their purpose (success, warning, error) rather than their appearance, making your site automatically adapt to user preferences.
-
-### Key Features
-
-- **Semantic naming** - Colors describe their purpose, not appearance
-- **Light & Dark themes** - Automatic switching based on system preference
-- **Accessibility** - WCAG AA contrast ratios guaranteed
-- **Automatic adaptation** - No media query boilerplate needed
+- **[Typography System](/css/typography/)** - Font scales, sizes, and weights
+- **[Grid System](/css/grid/)** - Flexible layouts and responsive columns
+- **[Spacing & Rhythm](/css/spacing/)** - Vertical rhythm and spacing utilities
+- **[Prose System](/css/prose/)** - Readable article layouts
+- **[Utilities](/css/utilities/)** - Helper classes for common patterns
 
 ## Color Variables
 

@@ -14,7 +14,7 @@ const site = {
   title: "Standard Framework",
   url: "https://standard.ffp.co",
   version: pkg.version,
-  docs: "https://standard.ffp.co",
+  docs: "https://standard.ffp.co/docs",
   language: "fr",
   description: "",
   keywords: "",
@@ -36,7 +36,7 @@ export default function (eleventyConfig) {
   eleventyConfig.setOutputDirectory("_site");
 
   eleventyConfig.addGlobalData("site", site); // 👈 Add metadata globally
-  eleventyConfig.addGlobalData("layout", "article");
+  eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
   eleventyConfig.addPlugin(Standard);
@@ -44,16 +44,17 @@ export default function (eleventyConfig) {
     sourceDir: "src",
     patterns: ["styles/**/*.scss", "js/**/*.js", "eleventy/**/*.js"],
     outputDir: "content/docs",
-    layout: "component",
   });
 
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
 
-  // Watch README.md for changes and copy into content directory
+  // Watch README.md and claude.md for changes and copy into content directory
   eleventyConfig.addWatchTarget("README.md");
+  eleventyConfig.addWatchTarget("claude.md");
   eleventyConfig.on("eleventy.before", () => {
+    // Sync README.md
     const readmeSrc = join(__dirname, "README.md");
     const readmeDest = join(__dirname, "content", "README.md");
 
@@ -69,6 +70,23 @@ export default function (eleventyConfig) {
         fs.writeFileSync(readmeDest, srcContent, "utf-8");
       }
     }
+
+    // Sync claude.md
+    const claudeSrc = join(__dirname, "claude.md");
+    const claudeDest = join(__dirname, "content", "claude.md");
+
+    if (fs.existsSync(claudeSrc)) {
+      const srcContent = fs.readFileSync(claudeSrc, "utf-8");
+      const destExists = fs.existsSync(claudeDest);
+      const destContent = destExists
+        ? fs.readFileSync(claudeDest, "utf-8")
+        : null;
+
+      // Only write if content has changed to prevent infinite watch loop
+      if (!destExists || srcContent !== destContent) {
+        fs.writeFileSync(claudeDest, srcContent, "utf-8");
+      }
+    }
   });
 
   eleventyConfig.addGlobalData("eleventyComputed", {
@@ -76,27 +94,12 @@ export default function (eleventyConfig) {
       if (data.page.fileSlug.toLowerCase() === "readme") {
         return "/index.html";
       }
-      if (data.page.fileSlug.toLowerCase() === "index") {
-        return "/index.html";
-      }
     },
     title: (data) => {
-      if (
-        data.page.fileSlug.toLowerCase() === "readme" ||
-        data.page.fileSlug.toLowerCase() === "index"
-      ) {
+      if (data.page.fileSlug.toLowerCase() === "readme") {
         return "Standard Framework";
       }
     },
-  });
-
-  // Log startup message
-  eleventyConfig.on("eleventy.after", () => {
-    console.log("");
-    console.log("🎨 " + site.title);
-    console.log("📦 v" + site.version);
-    console.log("📖 " + site.docs);
-    console.log("");
   });
 
   return {

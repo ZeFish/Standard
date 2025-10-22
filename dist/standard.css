@@ -1,4 +1,3 @@
-/*! Standard Framework v0.10.52 | 2025-10-22T02:03:02.604Z */
 @charset "UTF-8";
 /*!
  * Standard Framework - Fine-Art Typography Management
@@ -20,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version 2.2.0
+ * @version @VERSION_PLACEHOLDER@
  * @license MIT
  */
 /* Document
@@ -710,21 +709,8 @@ body {
   color: var(--color-foreground);
 }
 
-/* ===== SEMANTIC UTILITY CLASSES ===== */
-.muted,
-.text-muted {
-  color: var(--color-muted);
-}
-
-.sublte,
-.text-subtle {
-  color: var(--color-subtle);
-}
-
-.text-accent {
-  color: var(--color-accent);
-}
-
+/* ===== SEMANTIC STATE CLASSES ===== */
+/* Kept in color layer for system coherence (semantic messaging) */
 .text-success {
   color: var(--color-success);
 }
@@ -741,127 +727,210 @@ body {
   color: var(--color-info);
 }
 
-.bg-secondary {
-  background: var(--color-background-secondary);
-}
-
-.border-default {
-  border: var(--border);
-}
-
-.border-accent {
-  border: var(--border-accent);
-}
-
-/* PrismJS core styles for CSS highlighting */
-.token.selector {
-  color: var(--color-blue);
-}
-
-.token.property {
-  color: var(--color-orange);
-}
-
-.token.function {
-  color: var(--color-yellow);
-}
-
-.token.punctuation {
-  color: var(--color-muted);
-}
-
-.token.keyword {
+/* Note: General color utilities (.text-muted, .text-subtle, .text-accent, .bg-secondary, .border-*) */
+/* moved to standard-98-utilities.scss for better layer organization */
+/* PrismJS syntax highlighting - Language agnostic tokens */
+/* Keywords, control flow */
+.token.keyword,
+.token.module,
+.token.class-name {
   color: var(--color-red);
 }
 
-.token.boolean {
-  color: var(--color-purple);
+/* Strings and attributes */
+.token.string,
+.token.attr-value {
+  color: var(--color-green);
 }
 
-.token.number {
+/* Numbers and booleans */
+.token.number,
+.token.boolean {
   color: var(--color-cyan);
 }
 
+/* Functions, methods, tags */
+.token.function,
+.token.tag,
+.token.builtin {
+  color: var(--color-yellow);
+}
+
+/* Properties, attributes, selectors */
+.token.property,
+.token.attr-name,
+.token.selector {
+  color: var(--color-orange);
+}
+
+/* Punctuation, operators, delimiters */
+.token.punctuation,
+.token.operator {
+  color: var(--color-muted);
+}
+
+/* Comments */
 .token.comment {
   color: var(--color-subtle);
   font-style: italic;
 }
 
-.token.string {
+/* HTML-specific */
+.token.tag > .token.punctuation {
+  color: var(--color-muted);
+}
+
+.token.attr-name {
+  color: var(--color-orange);
+}
+
+/* Namespace and doctype */
+.token.doctype,
+.token.namespace {
+  color: var(--color-purple);
+}
+
+/* Generics */
+.token.generics {
+  color: var(--color-blue);
+}
+
+/* YAML-specific */
+.language-yaml .token.key {
+  color: var(--color-orange);
+}
+
+.language-yaml .token.literal {
+  color: var(--color-cyan);
+}
+
+/* Markdown-specific */
+.language-markdown .token.italic,
+.language-md .token.italic,
+.language-markdown .token.emphasis,
+.language-md .token.emphasis {
+  color: var(--color-italic);
+  font-style: italic;
+}
+
+.language-markdown .token.bold,
+.language-md .token.bold,
+.language-markdown .token.strong,
+.language-md .token.strong {
+  color: var(--color-bold);
+  font-weight: bold;
+}
+
+.language-markdown .token.link,
+.language-md .token.link {
+  color: var(--color-blue);
+}
+
+.language-markdown .token.url,
+.language-md .token.url {
+  color: var(--color-cyan);
+}
+
+.language-markdown .token.heading,
+.language-md .token.heading {
+  color: var(--color-header);
+  font-weight: bold;
+}
+
+.language-markdown .token.code,
+.language-md .token.code,
+.language-markdown .token.codespan,
+.language-md .token.codespan {
   color: var(--color-green);
 }
 
+.language-markdown .token.list,
+.language-md .token.list {
+  color: var(--color-orange);
+}
+
+.language-markdown .token.table,
+.language-md .token.table {
+  color: var(--color-blue);
+}
+
+/* Bash/Shell-specific */
+.language-bash .token.function {
+  color: var(--color-yellow);
+}
+
+.language-bash .token.variable {
+  color: var(--color-cyan);
+}
+
+.language-bash .token.builtin {
+  color: var(--color-red);
+}
+
+.language-bash .token.string {
+  color: var(--color-green);
+}
+
+.language-bash .token.parameter {
+  color: var(--color-orange);
+}
+
+.language-sh .token.function,
+.language-shell .token.function {
+  color: var(--color-yellow);
+}
+
+.language-sh .token.variable,
+.language-shell .token.variable {
+  color: var(--color-cyan);
+}
+
+.language-sh .token.builtin,
+.language-shell .token.builtin {
+  color: var(--color-red);
+}
+
+/* Nunjucks/Jinja-specific - inherits HTML color syntax */
+.language-nunjucks .token.tag,
+.language-njk .token.tag {
+  color: var(--color-yellow);
+}
+
+.language-nunjucks .token.tag > .token.punctuation,
+.language-njk .token.tag > .token.punctuation {
+  color: var(--color-muted);
+}
+
+.language-nunjucks .token.attr-name,
+.language-njk .token.attr-name {
+  color: var(--color-orange);
+}
+
+.language-nunjucks .token.attr-value,
+.language-njk .token.attr-value {
+  color: var(--color-green);
+}
+
+/* Nunjucks template variables and expressions */
+.language-nunjucks .token.variable,
+.language-njk .token.variable {
+  color: var(--color-cyan);
+}
+
+.language-nunjucks .token.expression,
+.language-njk .token.expression {
+  color: var(--color-cyan);
+}
+
+.language-nunjucks .token.filter,
+.language-njk .token.filter {
+  color: var(--color-orange);
+}
+
 /* ===== INTERACTIVE ELEMENTS ===== */
-/* Links */
-a,
-a:visited {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 0.1em;
-  text-underline-offset: 0.15em;
-  text-decoration-color: var(--color-subtle);
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
-}
-
-a:hover,
-a:focus {
-  color: var(--color-accent);
-  text-decoration-color: var(--color-accent);
-}
-
-a:focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
-  border-radius: 2px;
-}
-
-/* Form elements inherit theme */
-input,
-textarea,
-select,
-button {
-  color: inherit;
-  background: var(--color-background-secondary);
-  border: var(--border);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-  outline-offset: 0px;
-  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  background-color: color-mix(in srgb, var(--color-accent) 5%, var(--color-background));
-}
-
-button:hover {
-  background: var(--color-hover);
-  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-}
-
-button:active {
-  background: var(--color-active);
-  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-}
-
-/* Checkbox and radio button styling */
-input[type=checkbox],
-input[type=radio] {
-  accent-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-background));
-  outline: 0;
-}
-
-input[type=checkbox]:checked,
-input[type=radio]:checked {
-  accent-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-background));
-}
-
-input[type=checkbox]:focus,
-input[type=radio]:focus {
-  outline: none;
-  box-shadow: none;
-}
-
+/* Element-specific styling moved to standard-04-elements.scss
+   This file now contains only color system design tokens.
+   See standard-04-elements.scss for link, button, and form element styling. */
 /* Selection highlighting */
 ::selection {
   background: color-mix(in srgb, var(--color-accent) 25%, transparent);
@@ -1109,6 +1178,7 @@ html {
   orphans: 2;
 }
 
+/* Note: Typography-only feature toggles (kept in typography layer) */
 .circular {
   font-feature-settings: "ss05" on;
 }
@@ -1128,103 +1198,16 @@ html {
     --font-ratio: var(--font-mobile-ratio) !important;
   }
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-header), system-ui, sans-serif;
-  color: var(--color-header);
-  text-wrap: balance;
-  font-variant-ligatures: normal;
-  font-feature-settings: var(--font-header-feature);
-  font-variation-settings: var(--font-header-variation);
-  font-style: var(--font-header-style, normal);
-  line-height: var(--font-header-line-height);
-  letter-spacing: var(--font-header-letter-spacing);
-  white-space: normal;
-  overflow-wrap: normal;
-  word-break: normal;
-  hyphens: none;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/*
-svg {
-    fill: var(--color-header);
-    stroke: var(--color-header);
-}
-*/
-h1 {
-  font-weight: var(--font-weight-h1);
-  font-size: clamp(var(--scale-2xl), 10vw, var(--scale-3xl));
-}
-
-h2 {
-  font-weight: var(--font-weight-h2);
-  font-size: clamp(var(--scale-xl), 7vw, var(--scale-2xl));
-}
-
-h3 {
-  font-weight: var(--font-weight-h3);
-  font-size: var(--scale-xl);
-}
-
-h4 {
-  font-weight: var(--font-weight-h4);
-  font-size: var(--scale-l);
-  line-height: var(--line-height);
-}
-
-h5 {
-  font-weight: var(--font-weight-h5);
-  font-size: var(--scale-l);
-  line-height: var(--line-height);
-}
-
-h6 {
-  font-weight: var(--font-weight-h6);
-  font-size: var(--scale-l);
-  line-height: var(--line-height);
-}
-
-.small {
-  font-size: var(--scale-s);
-}
-
-.smaller {
-  font-size: var(--scale-xs);
-}
-
-.compact {
-  line-height: var(--font-density-s);
-}
-
-.font-ui,
-.font-interface {
-  font-family: var(--font-interface), system-ui, sans-serif;
-  font-variation-settings: var(--font-interface-variation);
-  font-feature-settings: var(--font-interface-feature);
-}
-
-pre,
-code,
-tt,
-.code,
-.mono,
-.monospace,
-.font-mono {
-  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
-  font-feature-settings: var(--font-monospace-feature);
-  font-variation-settings: var(--font-monospace-variation);
-  font-size: var(--scale-s);
-}
-
+/* Heading element styling moved to standard-04-elements.scss
+   This file now contains only typography design tokens and rules.
+   See standard-04-elements.scss for h1-h6 element styling. */
+/* Note: Text size utilities moved to standard-98-utilities.scss */
+/* .small, .smaller, .compact now defined in utilities layer */
+/* Note: Font family utilities (.font-ui, .font-interface, .mono, .code, .bold) */
+/* moved to standard-98-utilities.scss */
+/* Element font families for pre, code, tt kept below as element selectors */
 b,
-strong,
-.bold {
+strong {
   font-weight: var(--bold-weight);
 }
 
@@ -1238,58 +1221,9 @@ a:visited {
   color: inherit;
 }
 
-/* Button styles for consistent appearance */
-button {
-  font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--scale-s);
-  font-weight: var(--font-weight);
-  line-height: var(--font-density);
-  padding: var(--space-xs) var(--space-s);
-  border: none;
-  border-radius: var(--border-radius);
-  background: var(--color-accent);
-  color: var(--color-background);
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-button:hover {
-  opacity: 0.9;
-}
-button:active {
-  opacity: 0.8;
-}
-button:focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
-}
-
-/* Form element styles for consistency */
-input,
-select,
-textarea {
-  font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--scale-s);
-  font-weight: var(--font-weight);
-  line-height: var(--font-density);
-  padding: var(--space-xs) var(--space-s);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  background: var(--color-background-secondary);
-  color: var(--color-foreground);
-}
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
-  border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
-  background-color: color-mix(in srgb, var(--color-accent) 2.5%, var(--color-background-secondary));
-}
-input::placeholder,
-select::placeholder,
-textarea::placeholder {
-  color: var(--color-muted);
-  opacity: 0.7;
-}
-
+/* Button and form element styling moved to standard-04-elements.scss
+   This file now contains only typography design tokens and rules.
+   See standard-04-elements.scss for button, input, textarea, select styling. */
 textarea {
   resize: vertical;
   min-height: calc(var(--space-l) * 3);
@@ -1360,30 +1294,363 @@ caption {
   font-weight: var(--bold-weight, bold);
 }
 
-/* ADD: Helper classes for extreme scales */
-.display {
-  font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
-  line-height: 0.85;
-  font-weight: var(--font-header-weight);
+/* Note: Display scale utilities (.display, .poster, .label, .micro) */
+/* moved to standard-98-utilities.scss */
+/* Standard - Fine-Art Typography Framework */
+/* A framework implementing classical design principles, mathematical precision with the golden ratio, */
+/* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component HTML Elements
+ * @category Foundation
+ * @description Styling for bare HTML elements (h1-h6, p, a, form, button, etc).
+ * Applies typography rules and colors to semantic HTML elements.
+ * Combines typography scales with color system for complete element styling.
+ * All elements respect rhythm and typography system constraints.
+ * This layer bridges the typography system and color system with concrete element styling.
+ *
+ * @prop {element} h1-h6 Heading hierarchy with proper sizing and weights
+ * @prop {element} p Paragraph text styling
+ * @prop {element} a Link styling with underline and hover states
+ * @prop {element} button Native button element styling
+ * @prop {class} .button Apply button styling to any element
+ * @prop {element} input Text input styling
+ * @prop {element} textarea Textarea styling
+ * @prop {element} select Select dropdown styling
+ * @prop {element} label Label styling
+ * @prop {element} strong Bold text styling
+ * @prop {element} code Inline code styling
+ * @prop {element} pre Code block styling
+ *
+ * @example
+ * // Headings automatically styled with typography + colors
+ * <h1>Page Title</h1>
+ * <h2>Section Heading</h2>
+ *
+ * // Links with hover states
+ * <a href="/page">Link text</a>
+ *
+ * // Buttons - native and custom
+ * <button>Click me</button>
+ * <a href="/page" class="button">Link button</a>
+ *
+ * // Form elements with focus states
+ * <input type="text" placeholder="Name">
+ * <textarea>Message</textarea>
+ * <select><option>Choose...</option></select>
+ *
+ * @since 0.1.0
+ * @see standard-02-color.scss
+ * @see standard-03-typography.scss
+ */
+/* ===== HEADINGS ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header), system-ui, sans-serif;
+  color: var(--color-header);
+  text-wrap: balance;
+  font-variant-ligatures: normal;
+  font-feature-settings: var(--font-header-feature);
+  font-variation-settings: var(--font-header-variation);
+  font-style: var(--font-header-style, normal);
+  line-height: var(--font-header-line-height);
   letter-spacing: var(--font-header-letter-spacing);
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.poster {
-  font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
-  line-height: 0.8;
-  font-weight: var(--font-header-weight);
-  letter-spacing: -0.04em;
+h1 {
+  font-weight: var(--font-weight-h1);
+  font-size: clamp(var(--scale-2xl), 10vw, var(--scale-3xl));
 }
 
-.label {
-  font-size: var(--scale-micro);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-weight: 700;
+h2 {
+  font-weight: var(--font-weight-h2);
+  font-size: clamp(var(--scale-xl), 7vw, var(--scale-2xl));
 }
 
-.micro {
-  font-size: var(--scale-micro);
+h3 {
+  font-weight: var(--font-weight-h3);
+  font-size: var(--scale-xl);
+}
+
+h4 {
+  font-weight: var(--font-weight-h4);
+  font-size: var(--scale-l);
+  line-height: var(--line-height);
+}
+
+h5 {
+  font-weight: var(--font-weight-h5);
+  font-size: var(--scale-l);
+  line-height: var(--line-height);
+}
+
+h6 {
+  font-weight: var(--font-weight-h6);
+  font-size: var(--scale-l);
+  line-height: var(--line-height);
+}
+
+/* ===== PARAGRAPH AND TEXT ===== */
+p {
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: inherit;
+}
+
+/* ===== LINKS ===== */
+a,
+a:visited {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.15em;
+  text-decoration-color: var(--color-subtle);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+
+a:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  border-radius: 2px;
+}
+
+/* ===== BUTTONS ===== */
+/* Native button element */
+button {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--scale-s);
+  font-weight: var(--font-weight);
+  line-height: var(--font-density);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--border-radius);
+  background: var(--color-accent);
+  color: var(--color-background);
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+button:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button class for styling links as buttons */
+a.button,
+a.button:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--scale-s);
+  font-weight: var(--font-weight);
+  line-height: var(--font-density);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--border-radius);
+  background: var(--color-accent);
+  color: var(--color-background);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+a.button:hover {
+  opacity: 0.9;
+}
+
+a.button:active {
+  opacity: 0.8;
+}
+
+a.button:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  outline-offset: 2px;
+}
+
+/* ===== FORM ELEMENTS ===== */
+input,
+textarea,
+select {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  padding: var(--space-xs);
+  border-radius: var(--border-radius);
+  color: var(--color-foreground);
+  background: var(--color-background-secondary);
+  border: var(--border);
+  transition: background-color 0.2s ease, border-color 0.2s ease, outline-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  outline-offset: 0px;
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background-color: color-mix(in srgb, var(--color-accent) 5%, var(--color-background));
+}
+
+textarea {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  resize: vertical;
+  min-height: 6em;
+}
+
+/* ===== CHECKBOXES AND RADIO BUTTONS ===== */
+input[type=checkbox],
+input[type=radio] {
+  width: 1.25em;
+  height: 1.25em;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+input[type=checkbox]:checked,
+input[type=radio]:checked {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+input[type=checkbox]:focus,
+input[type=radio]:focus {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  outline-offset: 2px;
+}
+
+/* ===== LABELS ===== */
+label {
+  display: inline-block;
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--font-size);
+  color: var(--color-foreground);
+  cursor: pointer;
+}
+
+/* ===== STRONG AND BOLD ===== */
+b,
+strong,
+.bold {
+  font-weight: var(--bold-weight);
+}
+
+:is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
+  font-weight: inherit;
+}
+
+/* ===== CODE ===== */
+code,
+pre,
+tt,
+.code,
+.mono,
+.monospace,
+.font-mono {
+  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+  font-feature-settings: var(--font-monospace-feature);
+  font-variation-settings: var(--font-monospace-variation);
+  font-size: var(--scale-s);
+}
+
+code {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 0.125em 0.25em;
+  word-break: break-word;
+}
+
+pre {
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-s);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* ===== SMALL AND EMPHASIS ===== */
+small {
+  font-size: var(--scale-s);
+}
+
+sub,
+sup {
+  font-size: var(--scale-xs);
+  line-height: 0;
+}
+
+sub {
+  vertical-align: sub;
+}
+
+sup {
+  vertical-align: super;
+}
+
+/* ===== UTILITY TEXT SIZES ===== */
+.small {
+  font-size: var(--scale-s);
+}
+
+/* Make all children of .small inherit the font size */
+.small * {
+  font-size: inherit;
+}
+
+.smaller {
+  font-size: var(--scale-xs);
+}
+
+/* Make all children of .smaller inherit the font size */
+.smaller * {
+  font-size: inherit;
+}
+
+.compact {
+  line-height: var(--font-density-s);
+}
+
+.font-ui,
+.font-interface {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
 }
 
 /* Standard - Fine-Art Typography Framework */
@@ -1395,26 +1662,40 @@ caption {
  * @description Enhanced bulletproof rhythm system that prevents margin collapse
  * and ensures consistent vertical spacing throughout the document. Based on the
  * 1rlh (relative line height) rhythm unit for mathematical precision.
+ * Applied globally to <html> root for cascade throughout the page.
  * Supports responsive rhythm adjustments and granular control per element.
  *
- * @prop {class} .rhythm Apply rhythm spacing to container
+ * @prop {class} .rhythm Apply rhythm spacing to <html> root or any container
  * @prop {class} .no-rhythm Disable rhythm for specific elements
  * @prop {variable} --space Base rhythm unit (1rlh)
- * @prop {variable} --rhythm-multiplier Normal element spacing multiplier
+ * @prop {variable} --rhythm-multiplier Normal element spacing multiplier (default: 1)
  * @prop {variable} --rhythm-multiplier-block Block element spacing multiplier
+ * @prop {variable} --body-padding-multiplier Padding multiplier for <body> (desktop)
+ * @prop {variable} --body-mobile-padding-multiplier Padding multiplier for <body> (mobile)
  *
  * @example
- * // Enable rhythm on container
+ * // Global: <html> has .rhythm class (applied automatically)
+ * <html class="rhythm">
+ *   <body>
+ *     <!-- All content gets rhythm spacing -->
+ *     <h1>Title</h1>
+ *     <p>Paragraphs get automatic spacing</p>
+ *   </body>
+ * </html>
+ *
+ * // Local: Apply .rhythm to specific container
  * <div class="rhythm">
- *   <h1>Title</h1>
- *   <p>Paragraphs get automatic spacing</p>
+ *   <h1>Section Title</h1>
+ *   <p>Container children get rhythm spacing</p>
  * </div>
  *
- * // Disable rhythm for specific element
- * <div class="rhythm no-rhythm">No spacing applied</div>
+ * // Disable: Use .no-rhythm to opt-out
+ * <section class="no-rhythm">No spacing applied here</section>
+ * <div class="rhythm no-rhythm">Explicitly disabled rhythm</div>
  *
  * @since 0.1.0
  * @see standard-01-token.scss
+ * @see standard-06-reading.scss
  */
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
 /* ===== Harmony Base (containers and resets) ===== */
@@ -1423,206 +1704,145 @@ caption {
 }
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
-  margin: 0;
-  padding: calc(var(--space) * var(--body-padding-multiplier));
-  padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
-}
-:where(body:not(.no-rhythm)) [id],
-:where(.rhythm) [id] {
-  scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier)); /* Adjust value as needed */
-}
-
-@media (max-width: 768px) {
-  :where(body:not(.no-rhythm)) {
-    margin: 0;
-    padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
-    padding-bottom: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5);
-  }
-  :where(body:not(.no-rhythm)) [id] {
-    scroll-margin-top: calc(var(--space) * var(--body-mobile-padding-multiplier)); /* Adjust value as needed */
-  }
-}
-:where(body:not(.no-rhythm)),
+/* Applied to <html> root for global cascade (best practice for frameworks) */
+:where(html:not(.no-rhythm)),
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
   /* Modern margin collapse prevention */
   display: flow-root;
   /* Apply rhythm spacing to all direct children */
 }
-:where(body:not(.no-rhythm)) > *,
+:where(html:not(.no-rhythm)) > *,
 :where(.rhythm) > * {
   margin-block-start: 0;
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
+
+/* Padding only applied to <body> when rhythm is active */
 :where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm)) > body {
+  margin: 0;
+  padding: calc(var(--space) * var(--body-padding-multiplier));
+  padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
+}
+:where(body:not(.no-rhythm)) [id],
+:where(html:not(.no-rhythm)) > body [id] {
+  scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier)); /* Adjust value as needed */
+}
+
+@media (max-width: 768px) {
+  :where(body:not(.no-rhythm)),
+  :where(html:not(.no-rhythm)) > body {
+    margin: 0;
+    padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
+    padding-bottom: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5);
+  }
+  :where(body:not(.no-rhythm)) [id],
+  :where(html:not(.no-rhythm)) > body [id] {
+    scroll-margin-top: calc(var(--space) * var(--body-mobile-padding-multiplier)); /* Adjust value as needed */
+  }
+}
+/* Elements within rhythm containers */
+:where(html:not(.no-rhythm), .rhythm) {
   /* Enhanced spacing relationships for typography */
 }
-:where(body:not(.no-rhythm)) h1,
-:where(body:not(.no-rhythm)) h2,
-:where(body:not(.no-rhythm)) h3,
-:where(body:not(.no-rhythm)) h4,
-:where(body:not(.no-rhythm)) h5,
-:where(body:not(.no-rhythm)) h6,
-:where(body:not(.no-rhythm)) p,
-:where(body:not(.no-rhythm)) ul,
-:where(body:not(.no-rhythm)) ol,
-:where(body:not(.no-rhythm)) dl,
-:where(body:not(.no-rhythm)) blockquote,
-:where(body:not(.no-rhythm)) pre,
-:where(body:not(.no-rhythm)) table,
-:where(body:not(.no-rhythm)) figure,
-:where(body:not(.no-rhythm)) form,
-:where(body:not(.no-rhythm)) fieldset,
-:where(body:not(.no-rhythm)) section,
-:where(body:not(.no-rhythm)) article,
-:where(body:not(.no-rhythm)) aside,
-:where(body:not(.no-rhythm)) header,
-:where(body:not(.no-rhythm)) footer,
-:where(body:not(.no-rhythm)) main,
-:where(body:not(.no-rhythm)) nav,
-:where(body:not(.no-rhythm)) .grid,
-:where(body:not(.no-rhythm)) .box,
-:where(.rhythm) h1,
-:where(.rhythm) h2,
-:where(.rhythm) h3,
-:where(.rhythm) h4,
-:where(.rhythm) h5,
-:where(.rhythm) h6,
-:where(.rhythm) p,
-:where(.rhythm) ul,
-:where(.rhythm) ol,
-:where(.rhythm) dl,
-:where(.rhythm) blockquote,
-:where(.rhythm) pre,
-:where(.rhythm) table,
-:where(.rhythm) figure,
-:where(.rhythm) form,
-:where(.rhythm) fieldset,
-:where(.rhythm) section,
-:where(.rhythm) article,
-:where(.rhythm) aside,
-:where(.rhythm) header,
-:where(.rhythm) footer,
-:where(.rhythm) main,
-:where(.rhythm) nav,
-:where(.rhythm) .grid,
-:where(.rhythm) .box {
+:where(html:not(.no-rhythm), .rhythm) h1,
+:where(html:not(.no-rhythm), .rhythm) h2,
+:where(html:not(.no-rhythm), .rhythm) h3,
+:where(html:not(.no-rhythm), .rhythm) h4,
+:where(html:not(.no-rhythm), .rhythm) h5,
+:where(html:not(.no-rhythm), .rhythm) h6,
+:where(html:not(.no-rhythm), .rhythm) p,
+:where(html:not(.no-rhythm), .rhythm) ul,
+:where(html:not(.no-rhythm), .rhythm) ol,
+:where(html:not(.no-rhythm), .rhythm) dl,
+:where(html:not(.no-rhythm), .rhythm) blockquote,
+:where(html:not(.no-rhythm), .rhythm) pre,
+:where(html:not(.no-rhythm), .rhythm) table,
+:where(html:not(.no-rhythm), .rhythm) figure,
+:where(html:not(.no-rhythm), .rhythm) form,
+:where(html:not(.no-rhythm), .rhythm) fieldset,
+:where(html:not(.no-rhythm), .rhythm) section,
+:where(html:not(.no-rhythm), .rhythm) article,
+:where(html:not(.no-rhythm), .rhythm) aside,
+:where(html:not(.no-rhythm), .rhythm) header,
+:where(html:not(.no-rhythm), .rhythm) footer,
+:where(html:not(.no-rhythm), .rhythm) main,
+:where(html:not(.no-rhythm), .rhythm) nav,
+:where(html:not(.no-rhythm), .rhythm) .grid,
+:where(html:not(.no-rhythm), .rhythm) .box {
   margin-block-start: 0;
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)) .rhythm,
-:where(.rhythm) .rhythm {
+:where(html:not(.no-rhythm), .rhythm) .rhythm {
   --rhythm-multiplier: 1; /* Reset for nested contexts */
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Special blocks get generous spacing (2× rhythm) */
   /* Layout containers get double spacing for emphasis */
 }
-:where(body:not(.no-rhythm)) .callout,
-:where(body:not(.no-rhythm)) blockquote,
-:where(body:not(.no-rhythm)) pre,
-:where(body:not(.no-rhythm)) figure,
-:where(body:not(.no-rhythm)) p:has(img),
-:where(body:not(.no-rhythm)) fieldset,
-:where(body:not(.no-rhythm)) hr,
-:where(body:not(.no-rhythm)) table,
-:where(body:not(.no-rhythm)) .grid,
-:where(body:not(.no-rhythm)) .grid-2,
-:where(body:not(.no-rhythm)) .grid-3,
-:where(body:not(.no-rhythm)) .grid-4,
-:where(body:not(.no-rhythm)) .grid-5,
-:where(body:not(.no-rhythm)) .grid-6,
-:where(body:not(.no-rhythm)) .grid-7,
-:where(body:not(.no-rhythm)) .grid-8,
-:where(body:not(.no-rhythm)) .grid-9,
-:where(body:not(.no-rhythm)) .grid-10,
-:where(body:not(.no-rhythm)) .grid-11,
-:where(body:not(.no-rhythm)) .grid-12,
-:where(body:not(.no-rhythm)) .container-small,
-:where(body:not(.no-rhythm)) .container-accent,
-:where(body:not(.no-rhythm)) .container-feature,
-:where(body:not(.no-rhythm)) .container-full,
-:where(.rhythm) .callout,
-:where(.rhythm) blockquote,
-:where(.rhythm) pre,
-:where(.rhythm) figure,
-:where(.rhythm) p:has(img),
-:where(.rhythm) fieldset,
-:where(.rhythm) hr,
-:where(.rhythm) table,
-:where(.rhythm) .grid,
-:where(.rhythm) .grid-2,
-:where(.rhythm) .grid-3,
-:where(.rhythm) .grid-4,
-:where(.rhythm) .grid-5,
-:where(.rhythm) .grid-6,
-:where(.rhythm) .grid-7,
-:where(.rhythm) .grid-8,
-:where(.rhythm) .grid-9,
-:where(.rhythm) .grid-10,
-:where(.rhythm) .grid-11,
-:where(.rhythm) .grid-12,
-:where(.rhythm) .container-small,
-:where(.rhythm) .container-accent,
-:where(.rhythm) .container-feature,
-:where(.rhythm) .container-full {
+:where(html:not(.no-rhythm), .rhythm) .callout,
+:where(html:not(.no-rhythm), .rhythm) blockquote,
+:where(html:not(.no-rhythm), .rhythm) pre,
+:where(html:not(.no-rhythm), .rhythm) figure,
+:where(html:not(.no-rhythm), .rhythm) p:has(img),
+:where(html:not(.no-rhythm), .rhythm) fieldset,
+:where(html:not(.no-rhythm), .rhythm) hr,
+:where(html:not(.no-rhythm), .rhythm) table,
+:where(html:not(.no-rhythm), .rhythm) .grid,
+:where(html:not(.no-rhythm), .rhythm) .grid-2,
+:where(html:not(.no-rhythm), .rhythm) .grid-3,
+:where(html:not(.no-rhythm), .rhythm) .grid-4,
+:where(html:not(.no-rhythm), .rhythm) .grid-5,
+:where(html:not(.no-rhythm), .rhythm) .grid-6,
+:where(html:not(.no-rhythm), .rhythm) .grid-7,
+:where(html:not(.no-rhythm), .rhythm) .grid-8,
+:where(html:not(.no-rhythm), .rhythm) .grid-9,
+:where(html:not(.no-rhythm), .rhythm) .grid-10,
+:where(html:not(.no-rhythm), .rhythm) .grid-11,
+:where(html:not(.no-rhythm), .rhythm) .grid-12,
+:where(html:not(.no-rhythm), .rhythm) .container-small,
+:where(html:not(.no-rhythm), .rhythm) .container-accent,
+:where(html:not(.no-rhythm), .rhythm) .container-feature,
+:where(html:not(.no-rhythm), .rhythm) .container-full {
   /* Subtract regular margin to avoid double-spacing */
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier-block) - var(--space) * var(--rhythm-multiplier));
   /* Bottom margin uses the block multiplier */
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
 }
-:where(body:not(.no-rhythm)) * > :last-child,
-:where(.rhythm) * > :last-child {
+:where(html:not(.no-rhythm), .rhythm) * > :last-child {
   margin-block-end: 0;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* =========================== */
   /* TYPOGRAPHIC NUANCES         */
   /* =========================== */
 }
-:where(body:not(.no-rhythm)) hr,
-:where(.rhythm) hr {
+:where(html:not(.no-rhythm), .rhythm) hr {
   --rhythm-multiplier-block: 3;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Adjacent images get reduced spacing */
 }
-:where(body:not(.no-rhythm)) p:has(img) + p:has(img),
-:where(.rhythm) p:has(img) + p:has(img) {
+:where(html:not(.no-rhythm), .rhythm) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier) * -1 + var(--space) / 4) !important;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Reset first-child spacing for special blocks */
 }
-:where(body:not(.no-rhythm)) blockquote > :first-child,
-:where(body:not(.no-rhythm)) pre > :first-child,
-:where(body:not(.no-rhythm)) figure > :first-child,
-:where(body:not(.no-rhythm)) .callout .callout-content > :first-child,
-:where(.rhythm) blockquote > :first-child,
-:where(.rhythm) pre > :first-child,
-:where(.rhythm) figure > :first-child,
-:where(.rhythm) .callout .callout-content > :first-child {
+:where(html:not(.no-rhythm), .rhythm) blockquote > :first-child,
+:where(html:not(.no-rhythm), .rhythm) pre > :first-child,
+:where(html:not(.no-rhythm), .rhythm) figure > :first-child,
+:where(html:not(.no-rhythm), .rhythm) .callout .callout-content > :first-child {
   margin-block-start: 0;
 }
-:where(body:not(.no-rhythm)) blockquote > :last-child,
-:where(body:not(.no-rhythm)) pre > :last-child,
-:where(body:not(.no-rhythm)) figure > :last-child,
-:where(body:not(.no-rhythm)) .callout .callout-content > :last-child,
-:where(.rhythm) blockquote > :last-child,
-:where(.rhythm) pre > :last-child,
-:where(.rhythm) figure > :last-child,
-:where(.rhythm) .callout .callout-content > :last-child {
+:where(html:not(.no-rhythm), .rhythm) blockquote > :last-child,
+:where(html:not(.no-rhythm), .rhythm) pre > :last-child,
+:where(html:not(.no-rhythm), .rhythm) figure > :last-child,
+:where(html:not(.no-rhythm), .rhythm) .callout .callout-content > :last-child {
   margin-block-end: 0;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* =========================== */
   /* TYPOGRAPHY ELEMENTS         */
   /* =========================== */
@@ -1632,57 +1852,42 @@ caption {
   /* =========================== */
   /* Lists */
 }
-:where(body:not(.no-rhythm)) ul,
-:where(body:not(.no-rhythm)) ol,
-:where(.rhythm) ul,
-:where(.rhythm) ol {
+:where(html:not(.no-rhythm), .rhythm) ul,
+:where(html:not(.no-rhythm), .rhythm) ol {
   list-style: none;
   padding-inline-start: var(--space);
 }
-:where(body:not(.no-rhythm)) p + ul,
-:where(body:not(.no-rhythm)) p + ol,
-:where(.rhythm) p + ul,
-:where(.rhythm) p + ol {
+:where(html:not(.no-rhythm), .rhythm) p + ul,
+:where(html:not(.no-rhythm), .rhythm) p + ol {
   margin-block-start: calc(var(--space) * -0.5 * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)) ol ul,
-:where(body:not(.no-rhythm)) ol ol,
-:where(body:not(.no-rhythm)) ul ul,
-:where(body:not(.no-rhythm)) ul ol,
-:where(.rhythm) ol ul,
-:where(.rhythm) ol ol,
-:where(.rhythm) ul ul,
-:where(.rhythm) ul ol {
+:where(html:not(.no-rhythm), .rhythm) ol ul,
+:where(html:not(.no-rhythm), .rhythm) ol ol,
+:where(html:not(.no-rhythm), .rhythm) ul ul,
+:where(html:not(.no-rhythm), .rhythm) ul ol {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Nested lists */
 }
-:where(body:not(.no-rhythm)) li > ul,
-:where(body:not(.no-rhythm)) li > ol,
-:where(.rhythm) li > ul,
-:where(.rhythm) li > ol {
+:where(html:not(.no-rhythm), .rhythm) li > ul,
+:where(html:not(.no-rhythm), .rhythm) li > ol {
   padding-inline-start: var(--space);
   margin-block-end: 0;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* List items */
 }
-:where(body:not(.no-rhythm)) li,
-:where(.rhythm) li {
+:where(html:not(.no-rhythm), .rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Unordered list bullets */
 }
-:where(body:not(.no-rhythm)) ul > li::before,
-:where(.rhythm) ul > li::before {
+:where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";
   position: absolute;
   left: calc(var(--space) * -1);
@@ -1690,20 +1895,16 @@ caption {
   text-align: center;
   color: var(--color-subtle);
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Ordered list numbers */
 }
-:where(body:not(.no-rhythm)) ol,
-:where(.rhythm) ol {
+:where(html:not(.no-rhythm), .rhythm) ol {
   counter-reset: ol-counter;
 }
-:where(body:not(.no-rhythm)) ol > li,
-:where(.rhythm) ol > li {
+:where(html:not(.no-rhythm), .rhythm) ol > li {
   counter-increment: ol-counter;
 }
-:where(body:not(.no-rhythm)) ol > li::before,
-:where(.rhythm) ol > li::before {
+:where(html:not(.no-rhythm), .rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
   left: calc(var(--space) * -1.75);
@@ -1714,223 +1915,174 @@ caption {
   overflow: hidden;
   width: calc(var(--space) * 1.5);
 }
-:where(body:not(.no-rhythm)) ul.no-bullet,
-:where(body:not(.no-rhythm)) ol.no-bullet,
-:where(.rhythm) ul.no-bullet,
-:where(.rhythm) ol.no-bullet {
+:where(html:not(.no-rhythm), .rhythm) ul.no-bullet,
+:where(html:not(.no-rhythm), .rhythm) ol.no-bullet {
   list-style: none;
   padding-inline-start: 0;
 }
-:where(body:not(.no-rhythm)) ul.no-bullet li::before,
-:where(body:not(.no-rhythm)) ol.no-bullet li::before,
-:where(.rhythm) ul.no-bullet li::before,
-:where(.rhythm) ol.no-bullet li::before {
+:where(html:not(.no-rhythm), .rhythm) ul.no-bullet li::before,
+:where(html:not(.no-rhythm), .rhythm) ol.no-bullet li::before {
   display: none;
 }
-:where(body:not(.no-rhythm)) ul.compact li,
-:where(body:not(.no-rhythm)) ol.compact li,
-:where(body:not(.no-rhythm)) li:last-of-type,
-:where(.rhythm) ul.compact li,
-:where(.rhythm) ol.compact li,
-:where(.rhythm) li:last-of-type {
+:where(html:not(.no-rhythm), .rhythm) {
+  /* Inline lists - remove margin-bottom from list items */
+}
+:where(html:not(.no-rhythm), .rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
+:where(html:not(.no-rhythm), .rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
+  margin-block-end: 0;
+}
+:where(html:not(.no-rhythm), .rhythm) ul.compact li,
+:where(html:not(.no-rhythm), .rhythm) ol.compact li,
+:where(html:not(.no-rhythm), .rhythm) li:last-of-type {
   line-height: var(--font-density);
   margin-block-end: 0;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Blockquotes - spacing only */
   /* Code blocks - spacing only */
 }
-:where(body:not(.no-rhythm)) blockquote,
-:where(body:not(.no-rhythm)) pre,
-:where(.rhythm) blockquote,
-:where(.rhythm) pre {
+:where(html:not(.no-rhythm), .rhythm) blockquote,
+:where(html:not(.no-rhythm), .rhythm) pre {
   padding: var(--space);
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* =========================== */
   /* FORMS AND INTERACTIVE       */
   /* =========================== */
   /* Form containers - avoid nested grids */
 }
-:where(body:not(.no-rhythm)) form:not(.grid *),
-:where(.rhythm) form:not(.grid *) {
+:where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
   display: grid;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Forms inside grids use flex layout to avoid nesting issues */
 }
-:where(body:not(.no-rhythm)) .grid form,
-:where(.rhythm) .grid form {
+:where(html:not(.no-rhythm), .rhythm) .grid form {
   display: flex;
   flex-direction: column;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Form field groups - spacing only */
 }
-:where(body:not(.no-rhythm)) fieldset,
-:where(.rhythm) fieldset {
+:where(html:not(.no-rhythm), .rhythm) fieldset {
   padding: calc(var(--space-s) * var(--rhythm-multiplier));
   display: grid;
   gap: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)) legend,
-:where(.rhythm) legend {
+:where(html:not(.no-rhythm), .rhythm) legend {
   padding-inline: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Form inputs */
 }
-:where(body:not(.no-rhythm)) input,
-:where(body:not(.no-rhythm)) textarea,
-:where(body:not(.no-rhythm)) select,
-:where(.rhythm) input,
-:where(.rhythm) textarea,
-:where(.rhythm) select {
+:where(html:not(.no-rhythm), .rhythm) input,
+:where(html:not(.no-rhythm), .rhythm) textarea,
+:where(html:not(.no-rhythm), .rhythm) select {
   margin: 0;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Labels - spacing only */
 }
-:where(body:not(.no-rhythm)) label,
-:where(.rhythm) label {
+:where(html:not(.no-rhythm), .rhythm) label {
   margin: 0;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Label + input pairs */
 }
-:where(body:not(.no-rhythm)) label:has(+ input[type=text]),
-:where(body:not(.no-rhythm)) label:has(+ input[type=email]),
-:where(body:not(.no-rhythm)) label:has(+ input[type=password]),
-:where(body:not(.no-rhythm)) label:has(+ textarea),
-:where(body:not(.no-rhythm)) label:has(+ select),
-:where(.rhythm) label:has(+ input[type=text]),
-:where(.rhythm) label:has(+ input[type=email]),
-:where(.rhythm) label:has(+ input[type=password]),
-:where(.rhythm) label:has(+ textarea),
-:where(.rhythm) label:has(+ select) {
+:where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=text]),
+:where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=email]),
+:where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=password]),
+:where(html:not(.no-rhythm), .rhythm) label:has(+ textarea),
+:where(html:not(.no-rhythm), .rhythm) label:has(+ select) {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
   margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Checkbox/radio with labels */
 }
-:where(body:not(.no-rhythm)) label + input[type=checkbox],
-:where(body:not(.no-rhythm)) label + input[type=radio],
-:where(.rhythm) label + input[type=checkbox],
-:where(.rhythm) label + input[type=radio] {
+:where(html:not(.no-rhythm), .rhythm) label + input[type=checkbox],
+:where(html:not(.no-rhythm), .rhythm) label + input[type=radio] {
   margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Button groups */
 }
-:where(body:not(.no-rhythm)) .button-group,
-:where(.rhythm) .button-group {
+:where(html:not(.no-rhythm), .rhythm) .button-group {
   display: flex;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
   flex-wrap: wrap;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* =========================== */
   /* MEDIA ELEMENTS              */
   /* =========================== */
   /* Images, videos, etc. */
 }
-:where(body:not(.no-rhythm)) img,
-:where(body:not(.no-rhythm)) video,
-:where(body:not(.no-rhythm)) audio,
-:where(body:not(.no-rhythm)) iframe,
-:where(.rhythm) img,
-:where(.rhythm) video,
-:where(.rhythm) audio,
-:where(.rhythm) iframe {
+:where(html:not(.no-rhythm), .rhythm) img,
+:where(html:not(.no-rhythm), .rhythm) video,
+:where(html:not(.no-rhythm), .rhythm) audio,
+:where(html:not(.no-rhythm), .rhythm) iframe {
   max-width: 100%;
   height: auto;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Figures */
 }
-:where(body:not(.no-rhythm)) figure,
-:where(.rhythm) figure {
+:where(html:not(.no-rhythm), .rhythm) figure {
   display: grid;
   gap: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)) figcaption,
-:where(.rhythm) figcaption {
+:where(html:not(.no-rhythm), .rhythm) figcaption {
   /* Spacing handled by rhythm system */
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* =========================== */
   /* TABLES                      */
   /* =========================== */
 }
-:where(body:not(.no-rhythm)) caption,
-:where(.rhythm) caption {
+:where(html:not(.no-rhythm), .rhythm) caption {
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Swiss-style data tables */
 }
-:where(body:not(.no-rhythm)) table,
-:where(.rhythm) table {
+:where(html:not(.no-rhythm), .rhythm) table {
   /* You already have: border-collapse: collapse; */
   width: 100%;
   font-variant-numeric: tabular-nums; /* ADD: Monospace numbers */
 }
-:where(body:not(.no-rhythm)) td,
-:where(body:not(.no-rhythm)) th,
-:where(.rhythm) td,
-:where(.rhythm) th {
+:where(html:not(.no-rhythm), .rhythm) td,
+:where(html:not(.no-rhythm), .rhythm) th {
   border-bottom: var(--border);
   font-size: var(--scale-s);
   padding-block: calc(var(--space-xs) * var(--rhythm-multiplier));
   padding-inline: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-:where(body:not(.no-rhythm)) th,
-:where(.rhythm) th {
+:where(html:not(.no-rhythm), .rhythm) th {
   /* You already have: text-align: left; font-weight: bold; */
   text-transform: uppercase; /* ADD */
   letter-spacing: 0.05em; /* ADD */
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* ADD: Numeric column alignment */
 }
-:where(body:not(.no-rhythm)) .numeric,
-:where(.rhythm) .numeric {
+:where(html:not(.no-rhythm), .rhythm) .numeric {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* ADD: Zebra striping (functional, not decorative) */
 }
-:where(body:not(.no-rhythm)) .striped tbody tr:nth-child(even),
-:where(.rhythm) .striped tbody tr:nth-child(even) {
+:where(html:not(.no-rhythm), .rhythm) .striped tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
 }
-:where(body:not(.no-rhythm)),
-:where(.rhythm) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* ADD: Compact table variant */
 }
-:where(body:not(.no-rhythm)) .compact th,
-:where(body:not(.no-rhythm)) .compact td,
-:where(.rhythm) .compact th,
-:where(.rhythm) .compact td {
+:where(html:not(.no-rhythm), .rhythm) .compact th,
+:where(html:not(.no-rhythm), .rhythm) .compact td {
   padding-block: calc(var(--space-2xs) * var(--rhythm-multiplier));
   padding-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
@@ -2977,14 +3129,14 @@ hr.col-row {
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
 /**
- * @component Reading Layout System
+ * @component Prose Layout System
  * @category Layout
  * @description Prose-focused layout system for optimal reading experience with proper
  * line lengths based on typography research (60-75 characters). Uses CSS Grid with
  * responsive content columns for sidebars, accents, and featured content.
  * Inspired by fine-art typography and classical book design principles.
  *
- * @prop {class} .reading Main article/content container
+ * @prop {class} .prose Main article/content container for readable prose
  * @prop {class} .small Narrow sidebar width container
  * @prop {class} .accent Accent container with background color
  * @prop {class} .feature Featured content with larger spacing
@@ -2997,18 +3149,18 @@ hr.col-row {
  *
  * @example
  * // Standard article with proper reading width
- * <article class="reading">
+ * <article class="prose">
  *   <h1>Article Title</h1>
  *   <p>Content here stays within optimal reading width...</p>
  * </article>
  *
  * // Narrow sidebar content
- * <div class="reading small">
+ * <div class="prose small">
  *   <p>Short form content</p>
  * </div>
  *
  * // Featured content with emphasis
- * <section class="reading feature">
+ * <section class="prose feature">
  *   <blockquote>Important quote with extra space</blockquote>
  * </section>
  *
@@ -3046,9 +3198,9 @@ hr.col-row {
     --content-full: 0; /* Just the minimum gap */
   }
 }
-/* Reading Layout System - Article content grid and positioning */
+/* Prose Layout System - Article content grid and positioning */
 /* Inspired by fine-art typography and book design principles */
-:where(.reading) {
+:where(.prose) {
   display: grid;
   grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
   transition: grid-template-columns 0.3s ease-out;
@@ -3056,155 +3208,156 @@ hr.col-row {
   z-index: var(--z-base);
   /* Default content positioning */
 }
-:where(.reading) > * {
+:where(.prose) > * {
   grid-column: content;
 }
-:where(.reading) .container-small {
+:where(.prose) .container-small {
   grid-column: content;
   margin-inline: var(--content-small);
 }
-:where(.reading) .container-accent {
+:where(.prose) .container-accent {
   grid-column: accent;
   margin-inline: 0;
 }
-:where(.reading) table,
-:where(.reading) .container-feature {
+:where(.prose) table,
+:where(.prose) .container-feature {
   grid-column: feature;
   margin-inline: 0;
 }
-:where(.reading) .container-full {
+:where(.prose) .container-full {
   grid-column: full;
   margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
   padding-inline: calc(var(--space) * var(--body-padding-multiplier));
 }
-:where(.reading) {
+:where(.prose) {
   /* Image gallery layout */
 }
-:where(.reading):not(.no-grid) p:has(img) {
+:where(.prose):not(.no-grid) p:has(img) {
   display: flex;
   gap: calc(var(--space) / 4);
   border-radius: var(--border-radius);
 }
-:where(.reading):not(.no-grid) p:has(img) > * {
+:where(.prose):not(.no-grid) p:has(img) > * {
   flex: 1 1 auto;
   min-width: 1%;
   min-height: 1%;
   object-fit: cover;
 }
-:where(.reading):not(.no-grid) p:has(video) > * {
+:where(.prose):not(.no-grid) p:has(video) > * {
   flex: 1 1 auto;
   min-width: 1%;
   min-height: 1%;
   object-fit: cover;
 }
-:where(.reading):not(.no-grid) p:has(img) img,
-:where(.reading):not(.no-grid) p:has(img) img:first-child,
-:where(.reading):not(.no-grid) p:has(img) img:last-child {
+:where(.prose):not(.no-grid) p:has(img) img,
+:where(.prose):not(.no-grid) p:has(img) img:first-child,
+:where(.prose):not(.no-grid) p:has(img) img:last-child {
   margin-inline: auto;
 }
-:where(.reading):not(.no-grid) p:has(img) br {
+:where(.prose):not(.no-grid) p:has(img) br {
   display: none;
 }
-:where(.reading):not(.no-grid) .callout p:has(img),
-:where(.reading):not(.no-grid) .callout p:has(img) br {
+:where(.prose):not(.no-grid) .callout p:has(img),
+:where(.prose):not(.no-grid) .callout p:has(img) br {
   display: block;
 }
-:where(.reading) h1 {
+:where(.prose) h1,
+:where(.prose) > h1:first-child {
   margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
 }
-:where(.reading) h2 {
+:where(.prose) h2 {
   margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
 }
-:where(.reading) h3 {
+:where(.prose) h3 {
   margin-block-start: calc(var(--space-xl) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
-:where(.reading) h4 {
+:where(.prose) h4 {
   margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-:where(.reading) h5 {
+:where(.prose) h5 {
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-s) * var(--rhythm-multiplier));
 }
-:where(.reading) h6 {
+:where(.prose) h6 {
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
 }
-:where(.reading) hr {
+:where(.prose) hr {
   margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
 }
-:where(.reading) {
+:where(.prose) {
   /* Heading after heading gets reduced spacing */
 }
-:where(.reading) h1 + h2,
-:where(.reading) h2 + h3,
-:where(.reading) h3 + h4,
-:where(.reading) h4 + h5,
-:where(.reading) h5 + h6 {
+:where(.prose) h1 + h2,
+:where(.prose) h2 + h3,
+:where(.prose) h3 + h4,
+:where(.prose) h4 + h5,
+:where(.prose) h5 + h6 {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier) * -1);
 }
-:where(.reading) {
+:where(.prose) {
   /* Lists after headings get normal spacing */
 }
-:where(.reading) h1 + ul,
-:where(.reading) h1 + ol,
-:where(.reading) h2 + ul,
-:where(.reading) h2 + ol,
-:where(.reading) h3 + ul,
-:where(.reading) h3 + ol {
+:where(.prose) h1 + ul,
+:where(.prose) h1 + ol,
+:where(.prose) h2 + ul,
+:where(.prose) h2 + ol,
+:where(.prose) h3 + ul,
+:where(.prose) h3 + ol {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-:where(.reading) section > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) aside > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) header > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) footer > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) main > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) nav > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) pre > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) figure > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .box > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .box-inset > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .container-accent > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .container-feature > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.reading) .container-full > :is(h1, h2, h3, h4, h5, h6):first-child {
+:where(.prose) section > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) aside > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) header > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) footer > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) main > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) nav > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) pre > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) figure > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .box > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .box-inset > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .container-accent > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .container-feature > :is(h1, h2, h3, h4, h5, h6):first-child,
+:where(.prose) .container-full > :is(h1, h2, h3, h4, h5, h6):first-child {
   margin-block-start: 0; /* No top margin */
   /* Keep the heading's natural bottom margin */
 }
-:where(.reading) {
+:where(.prose) {
+  /* Note: Page's main title h1:first-child retains spacing via direct child selector */
+  /* The > h1:first-child selector in h1 rule ensures it overrides rhythm's > * margin-reset */
   /* Basic media styling */
 }
-:where(.reading) img,
-:where(.reading) audio,
-:where(.reading) video {
+:where(.prose) img,
+:where(.prose) audio,
+:where(.prose) video {
   margin: 0;
   margin-inline: auto;
   max-inline-size: 100%;
   border-radius: var(--border-radius);
   border: var(--border);
 }
-:where(.reading) .callout,
-:where(.reading) blockquote,
-:where(.reading) pre,
-:where(.reading) figure,
-:where(.reading) p:has(img) {
+:where(.prose) .callout,
+:where(.prose) blockquote,
+:where(.prose) pre,
+:where(.prose) figure,
+:where(.prose) p:has(img) {
   margin-inline: var(--content-small);
 }
-:where(.reading) {
+:where(.prose) {
   /* Mermaid diagrams */
 }
-:where(.reading) .mermaid {
+:where(.prose) .mermaid {
   margin-block-end: var(--space);
   margin-inline: auto;
   padding: var(--space);
 }
-:where(.reading) p img {
+:where(.prose) p img {
   max-inline-size: 100%;
 }
 
@@ -3243,1884 +3396,6 @@ hr.col-row {
     transform: translateY(0);
   }
 }
-/* Standard - Fine-Art Typography Framework */
-/* A framework implementing classical design principles, mathematical precision with the golden ratio, */
-/* and micro-typography rules inspired by the masters of print design. */
-/**
- * @component Utility Classes & Mixins
- * @category Utilities
- * @description Helper utilities for spacing, text styling, visibility, and common
- * patterns. Includes mixin for generating spacing utilities and responsive helpers.
- * All utilities respect the rhythm system and use logical properties for RTL support.
- *
- * @prop {class} .m-0 through .m-3xl Margin utilities
- * @prop {class} .p-0 through .p-3xl Padding utilities
- * @prop {class} .mt-* through .mb-* Directional margins
- * @prop {class} .pt-* through .pb-* Directional padding
- * @prop {class} .text-left, .text-center, .text-right Text alignment
- * @prop {class} .text-bold, .text-italic, .text-uppercase Text styling
- * @prop {class} .hidden, .visually-hidden Visibility utilities
- * @prop {class} .no-margin, .no-padding Reset utilities
- *
- * @example
- * // Spacing utilities
- * <div class="m-l">Large margin bottom</div>
- * <div class="p-s">Small padding</div>
- *
- * // Text utilities
- * <p class="text-center text-bold">Centered bold text</p>
- *
- * // Visibility utilities
- * <div class="hidden">Hidden from view</div>
- *
- * @since 0.1.0
- */
-/* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
-/* =========================== */
-/* SPACING UTILITY GENERATOR   */
-/* =========================== */
-/**
- * Mixin to generate spacing utility classes for any CSS property
- * @param {string} $property CSS property name (margin, padding, etc.)
- * @param {string} $class-prefix Class name prefix (m, p, mt, etc.)
- * @param {boolean} $important Add !important flag
- *
- * @example
- * @include spacing-scale(margin, m);
- * // Generates: .m-0, .m-xs, .m, .m-l, etc.
- */
-/* =========================== */
-/* BASIC UTILITIES             */
-/* =========================== */
-.elipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.height-1 {
-  height: calc(var(--space) * 1);
-}
-
-.width-1 {
-  width: calc(var(--space) * 1);
-}
-
-.height-2 {
-  height: calc(var(--space) * 2);
-}
-
-.width-2 {
-  width: calc(var(--space) * 2);
-}
-
-.height-3 {
-  height: calc(var(--space) * 3);
-}
-
-.width-3 {
-  width: calc(var(--space) * 3);
-}
-
-.height-4 {
-  height: calc(var(--space) * 4);
-}
-
-.width-4 {
-  width: calc(var(--space) * 4);
-}
-
-.height-5 {
-  height: calc(var(--space) * 5);
-}
-
-.width-5 {
-  width: calc(var(--space) * 5);
-}
-
-.height-6 {
-  height: calc(var(--space) * 6);
-}
-
-.width-6 {
-  width: calc(var(--space) * 6);
-}
-
-.height-7 {
-  height: calc(var(--space) * 7);
-}
-
-.width-7 {
-  width: calc(var(--space) * 7);
-}
-
-.height-8 {
-  height: calc(var(--space) * 8);
-}
-
-.width-8 {
-  width: calc(var(--space) * 8);
-}
-
-.height-9 {
-  height: calc(var(--space) * 9);
-}
-
-.width-9 {
-  width: calc(var(--space) * 9);
-}
-
-.height-10 {
-  height: calc(var(--space) * 10);
-}
-
-.width-10 {
-  width: calc(var(--space) * 10);
-}
-
-.height-11 {
-  height: calc(var(--space) * 11);
-}
-
-.width-11 {
-  width: calc(var(--space) * 11);
-}
-
-.height-12 {
-  height: calc(var(--space) * 12);
-}
-
-.width-12 {
-  width: calc(var(--space) * 12);
-}
-
-/* =========================== */
-/* LINE HEIGHT UTILITIES       */
-/* =========================== */
-.leading-tight {
-  line-height: 0.85;
-}
-
-.leading-none {
-  line-height: 1;
-}
-
-.leading-snug {
-  line-height: var(--font-density-s);
-}
-
-.leading-normal {
-  line-height: var(--font-density);
-}
-
-.leading-relaxed {
-  line-height: 1.6;
-}
-
-/* =========================== */
-/* TEXT TRANSFORMATION         */
-/* =========================== */
-.uppercase {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.lowercase {
-  text-transform: lowercase;
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
-.normal-case {
-  text-transform: none;
-}
-
-.no-wrap {
-  white-space: nowrap;
-}
-
-/* =========================== */
-/* MARGIN UTILITIES            */
-/* =========================== */
-.margin-top-0 {
-  margin-block-start: 0  !important;
-}
-
-.margin-top-3xs {
-  margin-block-start: var(--space-3xs)  !important;
-}
-
-.margin-top-2xs {
-  margin-block-start: var(--space-2xs)  !important;
-}
-
-.margin-top-xs {
-  margin-block-start: var(--space-xs)  !important;
-}
-
-.margin-top-s {
-  margin-block-start: var(--space-s)  !important;
-}
-
-.margin-top {
-  margin-block-start: var(--space)  !important;
-}
-
-.margin-top-l {
-  margin-block-start: var(--space-l)  !important;
-}
-
-.margin-top-xl {
-  margin-block-start: var(--space-xl)  !important;
-}
-
-.margin-top-2xl {
-  margin-block-start: var(--space-2xl)  !important;
-}
-
-.margin-top-3xl {
-  margin-block-start: var(--space-3xl)  !important;
-}
-
-.margin-top-0 {
-  margin-block-start: 0 !important;
-}
-
-.margin-bottom-0 {
-  margin-block-end: 0  !important;
-}
-
-.margin-bottom-3xs {
-  margin-block-end: var(--space-3xs)  !important;
-}
-
-.margin-bottom-2xs {
-  margin-block-end: var(--space-2xs)  !important;
-}
-
-.margin-bottom-xs {
-  margin-block-end: var(--space-xs)  !important;
-}
-
-.margin-bottom-s {
-  margin-block-end: var(--space-s)  !important;
-}
-
-.margin-bottom {
-  margin-block-end: var(--space)  !important;
-}
-
-.margin-bottom-l {
-  margin-block-end: var(--space-l)  !important;
-}
-
-.margin-bottom-xl {
-  margin-block-end: var(--space-xl)  !important;
-}
-
-.margin-bottom-2xl {
-  margin-block-end: var(--space-2xl)  !important;
-}
-
-.margin-bottom-3xl {
-  margin-block-end: var(--space-3xl)  !important;
-}
-
-.margin-bottom-0 {
-  margin-block-end: 0 !important;
-}
-
-.margin-block-0 {
-  margin-block: 0  !important;
-}
-
-.margin-block-3xs {
-  margin-block: var(--space-3xs)  !important;
-}
-
-.margin-block-2xs {
-  margin-block: var(--space-2xs)  !important;
-}
-
-.margin-block-xs {
-  margin-block: var(--space-xs)  !important;
-}
-
-.margin-block-s {
-  margin-block: var(--space-s)  !important;
-}
-
-.margin-block {
-  margin-block: var(--space)  !important;
-}
-
-.margin-block-l {
-  margin-block: var(--space-l)  !important;
-}
-
-.margin-block-xl {
-  margin-block: var(--space-xl)  !important;
-}
-
-.margin-block-2xl {
-  margin-block: var(--space-2xl)  !important;
-}
-
-.margin-block-3xl {
-  margin-block: var(--space-3xl)  !important;
-}
-
-.margin-block-0 {
-  margin-block: 0 !important;
-}
-
-.margin-left-0 {
-  margin-inline-start: 0  !important;
-}
-
-.margin-left-3xs {
-  margin-inline-start: var(--space-3xs)  !important;
-}
-
-.margin-left-2xs {
-  margin-inline-start: var(--space-2xs)  !important;
-}
-
-.margin-left-xs {
-  margin-inline-start: var(--space-xs)  !important;
-}
-
-.margin-left-s {
-  margin-inline-start: var(--space-s)  !important;
-}
-
-.margin-left {
-  margin-inline-start: var(--space)  !important;
-}
-
-.margin-left-l {
-  margin-inline-start: var(--space-l)  !important;
-}
-
-.margin-left-xl {
-  margin-inline-start: var(--space-xl)  !important;
-}
-
-.margin-left-2xl {
-  margin-inline-start: var(--space-2xl)  !important;
-}
-
-.margin-left-3xl {
-  margin-inline-start: var(--space-3xl)  !important;
-}
-
-.margin-left-0 {
-  margin-inline-start: 0 !important;
-}
-
-.margin-right-0 {
-  margin-inline-end: 0  !important;
-}
-
-.margin-right-3xs {
-  margin-inline-end: var(--space-3xs)  !important;
-}
-
-.margin-right-2xs {
-  margin-inline-end: var(--space-2xs)  !important;
-}
-
-.margin-right-xs {
-  margin-inline-end: var(--space-xs)  !important;
-}
-
-.margin-right-s {
-  margin-inline-end: var(--space-s)  !important;
-}
-
-.margin-right {
-  margin-inline-end: var(--space)  !important;
-}
-
-.margin-right-l {
-  margin-inline-end: var(--space-l)  !important;
-}
-
-.margin-right-xl {
-  margin-inline-end: var(--space-xl)  !important;
-}
-
-.margin-right-2xl {
-  margin-inline-end: var(--space-2xl)  !important;
-}
-
-.margin-right-3xl {
-  margin-inline-end: var(--space-3xl)  !important;
-}
-
-.margin-right-0 {
-  margin-inline-end: 0 !important;
-}
-
-.margin-inline-0 {
-  margin-inline: 0  !important;
-}
-
-.margin-inline-3xs {
-  margin-inline: var(--space-3xs)  !important;
-}
-
-.margin-inline-2xs {
-  margin-inline: var(--space-2xs)  !important;
-}
-
-.margin-inline-xs {
-  margin-inline: var(--space-xs)  !important;
-}
-
-.margin-inline-s {
-  margin-inline: var(--space-s)  !important;
-}
-
-.margin-inline {
-  margin-inline: var(--space)  !important;
-}
-
-.margin-inline-l {
-  margin-inline: var(--space-l)  !important;
-}
-
-.margin-inline-xl {
-  margin-inline: var(--space-xl)  !important;
-}
-
-.margin-inline-2xl {
-  margin-inline: var(--space-2xl)  !important;
-}
-
-.margin-inline-3xl {
-  margin-inline: var(--space-3xl)  !important;
-}
-
-.margin-inline-0 {
-  margin-inline: 0 !important;
-}
-
-.margin-inline-auto {
-  margin-inline: auto !important;
-}
-
-.margin-left-auto {
-  margin-inline-start: auto !important;
-}
-
-.margin-right-auto {
-  margin-inline-end: auto !important;
-}
-
-.margin-0 {
-  margin: 0  !important;
-}
-
-.margin-3xs {
-  margin: var(--space-3xs)  !important;
-}
-
-.margin-2xs {
-  margin: var(--space-2xs)  !important;
-}
-
-.margin-xs {
-  margin: var(--space-xs)  !important;
-}
-
-.margin-s {
-  margin: var(--space-s)  !important;
-}
-
-.margin {
-  margin: var(--space)  !important;
-}
-
-.margin-l {
-  margin: var(--space-l)  !important;
-}
-
-.margin-xl {
-  margin: var(--space-xl)  !important;
-}
-
-.margin-2xl {
-  margin: var(--space-2xl)  !important;
-}
-
-.margin-3xl {
-  margin: var(--space-3xl)  !important;
-}
-
-.margin-0 {
-  margin: 0 !important;
-}
-
-/* =========================== */
-/* PADDING UTILITIES           */
-/* =========================== */
-.padding-top-0 {
-  padding-block-start: 0  !important;
-}
-
-.padding-top-3xs {
-  padding-block-start: var(--space-3xs)  !important;
-}
-
-.padding-top-2xs {
-  padding-block-start: var(--space-2xs)  !important;
-}
-
-.padding-top-xs {
-  padding-block-start: var(--space-xs)  !important;
-}
-
-.padding-top-s {
-  padding-block-start: var(--space-s)  !important;
-}
-
-.padding-top {
-  padding-block-start: var(--space)  !important;
-}
-
-.padding-top-l {
-  padding-block-start: var(--space-l)  !important;
-}
-
-.padding-top-xl {
-  padding-block-start: var(--space-xl)  !important;
-}
-
-.padding-top-2xl {
-  padding-block-start: var(--space-2xl)  !important;
-}
-
-.padding-top-3xl {
-  padding-block-start: var(--space-3xl)  !important;
-}
-
-.padding-top-0 {
-  padding-block-start: 0 !important;
-}
-
-.padding-bottom-0 {
-  padding-block-end: 0  !important;
-}
-
-.padding-bottom-3xs {
-  padding-block-end: var(--space-3xs)  !important;
-}
-
-.padding-bottom-2xs {
-  padding-block-end: var(--space-2xs)  !important;
-}
-
-.padding-bottom-xs {
-  padding-block-end: var(--space-xs)  !important;
-}
-
-.padding-bottom-s {
-  padding-block-end: var(--space-s)  !important;
-}
-
-.padding-bottom {
-  padding-block-end: var(--space)  !important;
-}
-
-.padding-bottom-l {
-  padding-block-end: var(--space-l)  !important;
-}
-
-.padding-bottom-xl {
-  padding-block-end: var(--space-xl)  !important;
-}
-
-.padding-bottom-2xl {
-  padding-block-end: var(--space-2xl)  !important;
-}
-
-.padding-bottom-3xl {
-  padding-block-end: var(--space-3xl)  !important;
-}
-
-.padding-bottom-0 {
-  padding-block-end: 0 !important;
-}
-
-.padding-block-0 {
-  padding-block: 0  !important;
-}
-
-.padding-block-3xs {
-  padding-block: var(--space-3xs)  !important;
-}
-
-.padding-block-2xs {
-  padding-block: var(--space-2xs)  !important;
-}
-
-.padding-block-xs {
-  padding-block: var(--space-xs)  !important;
-}
-
-.padding-block-s {
-  padding-block: var(--space-s)  !important;
-}
-
-.padding-block {
-  padding-block: var(--space)  !important;
-}
-
-.padding-block-l {
-  padding-block: var(--space-l)  !important;
-}
-
-.padding-block-xl {
-  padding-block: var(--space-xl)  !important;
-}
-
-.padding-block-2xl {
-  padding-block: var(--space-2xl)  !important;
-}
-
-.padding-block-3xl {
-  padding-block: var(--space-3xl)  !important;
-}
-
-.padding-block-0 {
-  padding-block: 0 !important;
-}
-
-.padding-left-0 {
-  padding-inline-start: 0  !important;
-}
-
-.padding-left-3xs {
-  padding-inline-start: var(--space-3xs)  !important;
-}
-
-.padding-left-2xs {
-  padding-inline-start: var(--space-2xs)  !important;
-}
-
-.padding-left-xs {
-  padding-inline-start: var(--space-xs)  !important;
-}
-
-.padding-left-s {
-  padding-inline-start: var(--space-s)  !important;
-}
-
-.padding-left {
-  padding-inline-start: var(--space)  !important;
-}
-
-.padding-left-l {
-  padding-inline-start: var(--space-l)  !important;
-}
-
-.padding-left-xl {
-  padding-inline-start: var(--space-xl)  !important;
-}
-
-.padding-left-2xl {
-  padding-inline-start: var(--space-2xl)  !important;
-}
-
-.padding-left-3xl {
-  padding-inline-start: var(--space-3xl)  !important;
-}
-
-.padding-left-0 {
-  padding-inline-start: 0 !important;
-}
-
-.padding-right-0 {
-  padding-inline-end: 0  !important;
-}
-
-.padding-right-3xs {
-  padding-inline-end: var(--space-3xs)  !important;
-}
-
-.padding-right-2xs {
-  padding-inline-end: var(--space-2xs)  !important;
-}
-
-.padding-right-xs {
-  padding-inline-end: var(--space-xs)  !important;
-}
-
-.padding-right-s {
-  padding-inline-end: var(--space-s)  !important;
-}
-
-.padding-right {
-  padding-inline-end: var(--space)  !important;
-}
-
-.padding-right-l {
-  padding-inline-end: var(--space-l)  !important;
-}
-
-.padding-right-xl {
-  padding-inline-end: var(--space-xl)  !important;
-}
-
-.padding-right-2xl {
-  padding-inline-end: var(--space-2xl)  !important;
-}
-
-.padding-right-3xl {
-  padding-inline-end: var(--space-3xl)  !important;
-}
-
-.padding-right-0 {
-  padding-inline-end: 0 !important;
-}
-
-.padding-inline-0 {
-  padding-inline: 0  !important;
-}
-
-.padding-inline-3xs {
-  padding-inline: var(--space-3xs)  !important;
-}
-
-.padding-inline-2xs {
-  padding-inline: var(--space-2xs)  !important;
-}
-
-.padding-inline-xs {
-  padding-inline: var(--space-xs)  !important;
-}
-
-.padding-inline-s {
-  padding-inline: var(--space-s)  !important;
-}
-
-.padding-inline {
-  padding-inline: var(--space)  !important;
-}
-
-.padding-inline-l {
-  padding-inline: var(--space-l)  !important;
-}
-
-.padding-inline-xl {
-  padding-inline: var(--space-xl)  !important;
-}
-
-.padding-inline-2xl {
-  padding-inline: var(--space-2xl)  !important;
-}
-
-.padding-inline-3xl {
-  padding-inline: var(--space-3xl)  !important;
-}
-
-.padding-inline-0 {
-  padding-inline: 0 !important;
-}
-
-.padding-0 {
-  padding: 0  !important;
-}
-
-.padding-3xs {
-  padding: var(--space-3xs)  !important;
-}
-
-.padding-2xs {
-  padding: var(--space-2xs)  !important;
-}
-
-.padding-xs {
-  padding: var(--space-xs)  !important;
-}
-
-.padding-s {
-  padding: var(--space-s)  !important;
-}
-
-.padding {
-  padding: var(--space)  !important;
-}
-
-.padding-l {
-  padding: var(--space-l)  !important;
-}
-
-.padding-xl {
-  padding: var(--space-xl)  !important;
-}
-
-.padding-2xl {
-  padding: var(--space-2xl)  !important;
-}
-
-.padding-3xl {
-  padding: var(--space-3xl)  !important;
-}
-
-.padding-0 {
-  padding: 0 !important;
-}
-
-/* =========================== */
-/* GAP UTILITIES               */
-/* =========================== */
-.gap-0 {
-  gap: 0  !important;
-}
-
-.gap-3xs {
-  gap: var(--space-3xs)  !important;
-}
-
-.gap-2xs {
-  gap: var(--space-2xs)  !important;
-}
-
-.gap-xs {
-  gap: var(--space-xs)  !important;
-}
-
-.gap-s {
-  gap: var(--space-s)  !important;
-}
-
-.gap {
-  gap: var(--space)  !important;
-}
-
-.gap-l {
-  gap: var(--space-l)  !important;
-}
-
-.gap-xl {
-  gap: var(--space-xl)  !important;
-}
-
-.gap-2xl {
-  gap: var(--space-2xl)  !important;
-}
-
-.gap-3xl {
-  gap: var(--space-3xl)  !important;
-}
-
-.gap-0 {
-  gap: 0 !important;
-}
-
-.row-gap-0 {
-  row-gap: 0  !important;
-}
-
-.row-gap-3xs {
-  row-gap: var(--space-3xs)  !important;
-}
-
-.row-gap-2xs {
-  row-gap: var(--space-2xs)  !important;
-}
-
-.row-gap-xs {
-  row-gap: var(--space-xs)  !important;
-}
-
-.row-gap-s {
-  row-gap: var(--space-s)  !important;
-}
-
-.row-gap {
-  row-gap: var(--space)  !important;
-}
-
-.row-gap-l {
-  row-gap: var(--space-l)  !important;
-}
-
-.row-gap-xl {
-  row-gap: var(--space-xl)  !important;
-}
-
-.row-gap-2xl {
-  row-gap: var(--space-2xl)  !important;
-}
-
-.row-gap-3xl {
-  row-gap: var(--space-3xl)  !important;
-}
-
-.row-gap-0 {
-  row-gap: 0 !important;
-}
-
-.column-gap-0 {
-  column-gap: 0  !important;
-}
-
-.column-gap-3xs {
-  column-gap: var(--space-3xs)  !important;
-}
-
-.column-gap-2xs {
-  column-gap: var(--space-2xs)  !important;
-}
-
-.column-gap-xs {
-  column-gap: var(--space-xs)  !important;
-}
-
-.column-gap-s {
-  column-gap: var(--space-s)  !important;
-}
-
-.column-gap {
-  column-gap: var(--space)  !important;
-}
-
-.column-gap-l {
-  column-gap: var(--space-l)  !important;
-}
-
-.column-gap-xl {
-  column-gap: var(--space-xl)  !important;
-}
-
-.column-gap-2xl {
-  column-gap: var(--space-2xl)  !important;
-}
-
-.column-gap-3xl {
-  column-gap: var(--space-3xl)  !important;
-}
-
-.column-gap-0 {
-  column-gap: 0 !important;
-}
-
-/* =========================== */
-/* HEIGHT UTILITIES            */
-/* =========================== */
-.height-0 {
-  height: 0  !important;
-}
-
-.height-3xs {
-  height: var(--space-3xs)  !important;
-}
-
-.height-2xs {
-  height: var(--space-2xs)  !important;
-}
-
-.height-xs {
-  height: var(--space-xs)  !important;
-}
-
-.height-s {
-  height: var(--space-s)  !important;
-}
-
-.height {
-  height: var(--space)  !important;
-}
-
-.height-l {
-  height: var(--space-l)  !important;
-}
-
-.height-xl {
-  height: var(--space-xl)  !important;
-}
-
-.height-2xl {
-  height: var(--space-2xl)  !important;
-}
-
-.height-3xl {
-  height: var(--space-3xl)  !important;
-}
-
-.height-0 {
-  height: 0 !important;
-}
-
-.height-auto {
-  height: auto !important;
-}
-
-.height-full {
-  height: 100%;
-}
-
-.height-screen {
-  height: 100vh;
-}
-
-.height-min {
-  height: min-content;
-}
-
-.height-max {
-  height: max-content;
-}
-
-.height-fit {
-  height: fit-content;
-}
-
-.min-height-0 {
-  min-height: 0  !important;
-}
-
-.min-height-3xs {
-  min-height: var(--space-3xs)  !important;
-}
-
-.min-height-2xs {
-  min-height: var(--space-2xs)  !important;
-}
-
-.min-height-xs {
-  min-height: var(--space-xs)  !important;
-}
-
-.min-height-s {
-  min-height: var(--space-s)  !important;
-}
-
-.min-height {
-  min-height: var(--space)  !important;
-}
-
-.min-height-l {
-  min-height: var(--space-l)  !important;
-}
-
-.min-height-xl {
-  min-height: var(--space-xl)  !important;
-}
-
-.min-height-2xl {
-  min-height: var(--space-2xl)  !important;
-}
-
-.min-height-3xl {
-  min-height: var(--space-3xl)  !important;
-}
-
-.min-height-0 {
-  min-height: 0 !important;
-}
-
-.min-height-full {
-  min-height: 100%;
-}
-
-.min-height-screen {
-  min-height: 100vh;
-}
-
-.max-height-0 {
-  max-height: 0  !important;
-}
-
-.max-height-3xs {
-  max-height: var(--space-3xs)  !important;
-}
-
-.max-height-2xs {
-  max-height: var(--space-2xs)  !important;
-}
-
-.max-height-xs {
-  max-height: var(--space-xs)  !important;
-}
-
-.max-height-s {
-  max-height: var(--space-s)  !important;
-}
-
-.max-height {
-  max-height: var(--space)  !important;
-}
-
-.max-height-l {
-  max-height: var(--space-l)  !important;
-}
-
-.max-height-xl {
-  max-height: var(--space-xl)  !important;
-}
-
-.max-height-2xl {
-  max-height: var(--space-2xl)  !important;
-}
-
-.max-height-3xl {
-  max-height: var(--space-3xl)  !important;
-}
-
-.max-height-none {
-  max-height: none !important;
-}
-
-.max-height-full {
-  max-height: 100%;
-}
-
-.max-height-screen {
-  max-height: 100vh;
-}
-
-/* =========================== */
-/* WIDTH UTILITIES             */
-/* =========================== */
-.width-0 {
-  width: 0  !important;
-}
-
-.width-3xs {
-  width: var(--space-3xs)  !important;
-}
-
-.width-2xs {
-  width: var(--space-2xs)  !important;
-}
-
-.width-xs {
-  width: var(--space-xs)  !important;
-}
-
-.width-s {
-  width: var(--space-s)  !important;
-}
-
-.width {
-  width: var(--space)  !important;
-}
-
-.width-l {
-  width: var(--space-l)  !important;
-}
-
-.width-xl {
-  width: var(--space-xl)  !important;
-}
-
-.width-2xl {
-  width: var(--space-2xl)  !important;
-}
-
-.width-3xl {
-  width: var(--space-3xl)  !important;
-}
-
-.width-0 {
-  width: 0 !important;
-}
-
-.width-auto {
-  width: auto !important;
-}
-
-.width-full {
-  width: 100%;
-}
-
-.width-screen {
-  width: 100vw;
-}
-
-.width-min {
-  width: min-content;
-}
-
-.width-max {
-  width: max-content;
-}
-
-.width-fit {
-  width: fit-content;
-}
-
-.min-width-0 {
-  min-width: 0  !important;
-}
-
-.min-width-3xs {
-  min-width: var(--space-3xs)  !important;
-}
-
-.min-width-2xs {
-  min-width: var(--space-2xs)  !important;
-}
-
-.min-width-xs {
-  min-width: var(--space-xs)  !important;
-}
-
-.min-width-s {
-  min-width: var(--space-s)  !important;
-}
-
-.min-width {
-  min-width: var(--space)  !important;
-}
-
-.min-width-l {
-  min-width: var(--space-l)  !important;
-}
-
-.min-width-xl {
-  min-width: var(--space-xl)  !important;
-}
-
-.min-width-2xl {
-  min-width: var(--space-2xl)  !important;
-}
-
-.min-width-3xl {
-  min-width: var(--space-3xl)  !important;
-}
-
-.min-width-0 {
-  min-width: 0 !important;
-}
-
-.min-width-full {
-  min-width: 100%;
-}
-
-.min-width-screen {
-  min-width: 100vw;
-}
-
-.max-width-0 {
-  max-width: 0  !important;
-}
-
-.max-width-3xs {
-  max-width: var(--space-3xs)  !important;
-}
-
-.max-width-2xs {
-  max-width: var(--space-2xs)  !important;
-}
-
-.max-width-xs {
-  max-width: var(--space-xs)  !important;
-}
-
-.max-width-s {
-  max-width: var(--space-s)  !important;
-}
-
-.max-width {
-  max-width: var(--space)  !important;
-}
-
-.max-width-l {
-  max-width: var(--space-l)  !important;
-}
-
-.max-width-xl {
-  max-width: var(--space-xl)  !important;
-}
-
-.max-width-2xl {
-  max-width: var(--space-2xl)  !important;
-}
-
-.max-width-3xl {
-  max-width: var(--space-3xl)  !important;
-}
-
-.max-width-none {
-  max-width: none !important;
-}
-
-.max-width-full {
-  max-width: 100%;
-}
-
-.max-width-screen {
-  max-width: 100vw;
-}
-
-/* =========================== */
-/* LOGICAL SIZE UTILITIES      */
-/* =========================== */
-.block-size-0 {
-  block-size: 0  !important;
-}
-
-.block-size-3xs {
-  block-size: var(--space-3xs)  !important;
-}
-
-.block-size-2xs {
-  block-size: var(--space-2xs)  !important;
-}
-
-.block-size-xs {
-  block-size: var(--space-xs)  !important;
-}
-
-.block-size-s {
-  block-size: var(--space-s)  !important;
-}
-
-.block-size {
-  block-size: var(--space)  !important;
-}
-
-.block-size-l {
-  block-size: var(--space-l)  !important;
-}
-
-.block-size-xl {
-  block-size: var(--space-xl)  !important;
-}
-
-.block-size-2xl {
-  block-size: var(--space-2xl)  !important;
-}
-
-.block-size-3xl {
-  block-size: var(--space-3xl)  !important;
-}
-
-.block-size-auto {
-  block-size: auto;
-}
-
-.block-size-full {
-  block-size: 100%;
-}
-
-.inline-size-0 {
-  inline-size: 0  !important;
-}
-
-.inline-size-3xs {
-  inline-size: var(--space-3xs)  !important;
-}
-
-.inline-size-2xs {
-  inline-size: var(--space-2xs)  !important;
-}
-
-.inline-size-xs {
-  inline-size: var(--space-xs)  !important;
-}
-
-.inline-size-s {
-  inline-size: var(--space-s)  !important;
-}
-
-.inline-size {
-  inline-size: var(--space)  !important;
-}
-
-.inline-size-l {
-  inline-size: var(--space-l)  !important;
-}
-
-.inline-size-xl {
-  inline-size: var(--space-xl)  !important;
-}
-
-.inline-size-2xl {
-  inline-size: var(--space-2xl)  !important;
-}
-
-.inline-size-3xl {
-  inline-size: var(--space-3xl)  !important;
-}
-
-.inline-size-auto {
-  inline-size: auto;
-}
-
-.inline-size-full {
-  inline-size: 100%;
-}
-
-/* =========================== */
-/* BOX UTILITIES               */
-/* =========================== */
-.box {
-  background: var(--color-background-secondary);
-  border-radius: var(--border-radius);
-  border: var(--border);
-  box-shadow: var(--shadow);
-  padding: var(--space);
-}
-
-.box-inset {
-  background: var(--color-background-secondary);
-  border-radius: var(--border-radius);
-  border: var(--border);
-  box-shadow: inset var(--shadow);
-  padding: var(--space);
-}
-
-.box.container-full,
-.box-inset.container-full {
-  border-radius: 0;
-  border-left: 0;
-  border-right: 0;
-}
-
-/* =========================== */
-/* CENTERING UTILITIES         */
-/* =========================== */
-.centered {
-  max-width: var(--line-width);
-  margin-inline: auto;
-}
-
-.centered-narrow {
-  max-width: var(--line-width-s);
-  margin-inline: auto;
-}
-
-.centered-wide {
-  max-width: var(--line-width-wide);
-  margin-inline: auto;
-}
-
-.centered-xl {
-  max-width: var(--line-width-xl);
-  margin-inline: auto;
-}
-
-.centered-xs {
-  max-width: var(--line-width-xs);
-  margin-inline: auto;
-}
-
-.centered-responsive {
-  max-width: var(--content);
-  margin-inline: auto;
-  padding-inline: var(--gap);
-}
-
-/* =========================== */
-/* RHYTHM UTILITIES            */
-/* =========================== */
-.stick-next {
-  margin-block-end: calc(var(--space) / 4) !important;
-}
-
-.rhythm-micro {
-  margin-block-end: calc(var(--space-3xs) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-tiny {
-  margin-block-end: calc(var(--space-2xs) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-small {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-base {
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-large {
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-xl {
-  margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-xxl {
-  margin-block-end: calc(var(--space-2xl) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-reset {
-  margin: 0 !important;
-}
-
-.rhythm-include {
-  margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-exclude {
-  margin: 0 !important;
-}
-.rhythm-exclude.rhythm {
-  --marge-active: 0;
-  background-image: none;
-}
-.rhythm-exclude.rhythm > * {
-  margin-block-end: 0 !important;
-}
-
-.rhythm-tight-group > * {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-loose-group > * {
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-form-row {
-  display: flex;
-  gap: calc(var(--space-s) * var(--rhythm-multiplier, 1));
-  align-items: center;
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-form-group {
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier, 1)) !important;
-}
-.rhythm-form-group label {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier, 1)) !important;
-}
-.rhythm-form-group input,
-.rhythm-form-group textarea,
-.rhythm-form-group select {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier, 1)) !important;
-}
-
-.rhythm-tight {
-  gap: calc(var(--space-s) * var(--rhythm-multiplier)) !important;
-}
-
-.rhythm-loose {
-  gap: calc(var(--space-l) * var(--rhythm-multiplier)) !important;
-}
-
-.rhythm-none {
-  gap: 0 !important;
-}
-
-.no-rhythm {
-  margin: 0 !important;
-}
-
-/* =========================== */
-/* TEXT UTILITIES              */
-/* =========================== */
-.line-width-xs {
-  max-inline-size: var(--line-width-xs);
-}
-
-.line-width-s {
-  max-inline-size: var(--line-width-s);
-}
-
-.line-width {
-  max-inline-size: var(--line-width);
-}
-
-.line-width-wide {
-  max-inline-size: var(--line-width-wide);
-}
-
-.line-width-xl {
-  max-inline-size: var(--line-width-xl);
-}
-
-.line-width-full {
-  max-inline-size: var(--line-width-full);
-}
-
-/* =========================== */
-/* ASYMMETRIC WIDTH UTILITIES  */
-/* =========================== */
-.width-third {
-  max-width: 33.333%;
-}
-
-.width-half {
-  max-width: 50%;
-}
-
-.width-two-thirds {
-  max-width: 66.666%;
-}
-
-.width-three-quarters {
-  max-width: 75%;
-}
-
-.align-start {
-  margin-inline-start: 0;
-  margin-inline-end: auto;
-}
-
-.align-end {
-  margin-inline-start: auto;
-  margin-inline-end: 0;
-}
-
-.aside-left {
-  max-width: 33.333%;
-  margin-inline-start: 0;
-  margin-inline-end: auto;
-}
-
-.aside-right {
-  max-width: 33.333%;
-  margin-inline-start: auto;
-  margin-inline-end: 0;
-}
-
-.content-left {
-  max-width: 66.666%;
-  margin-inline-start: 0;
-  margin-inline-end: auto;
-}
-
-.content-right {
-  max-width: 66.666%;
-  margin-inline-start: auto;
-  margin-inline-end: 0;
-}
-
-/* =========================== */
-/* RESPONSIVE TYPOGRAPHY       */
-/* =========================== */
-.heading-responsive {
-  font-size: clamp(var(--scale-xl), 4vw, var(--scale-2xl)) !important;
-}
-
-.heading-compact {
-  font-size: clamp(var(--scale-l), 3vw, var(--scale-xl)) !important;
-  line-height: 1.1 !important;
-}
-
-.heading-contain {
-  container-type: inline-size;
-  max-inline-size: 100%;
-  overflow: hidden;
-}
-.heading-contain h1 {
-  font-size: clamp(var(--scale-l), 5cqi, var(--scale-2xl));
-}
-.heading-contain h2 {
-  font-size: clamp(var(--scale), 4cqi, var(--scale-xl));
-}
-.heading-contain h3 {
-  font-size: clamp(var(--scale-s), 3cqi, var(--scale-l));
-}
-
-/* =========================== */
-/* MULTI-COLUMN FLOW           */
-/* =========================== */
-[class*=flow-] {
-  orphans: 3;
-  widows: 3;
-}
-
-.flow-row {
-  column-span: all;
-}
-
-.flow-2 {
-  columns: 2;
-  column-gap: var(--grid-gap);
-}
-
-.flow-3 {
-  columns: 3;
-  column-gap: var(--grid-gap);
-}
-
-.flow-4 {
-  columns: 4;
-  column-gap: var(--grid-gap);
-}
-
-.flow-auto {
-  columns: auto;
-  column-width: var(--line-width-s);
-  column-gap: var(--grid-gap);
-}
-
-.flow-gap-tight {
-  column-gap: var(--space-s);
-}
-
-.flow-gap-wide {
-  column-gap: var(--space-l);
-}
-
-.flow-keep {
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
-
-.flow-rule {
-  column-rule: var(--border);
-}
-
-.flow-rule-accent {
-  column-rule: 1px solid var(--color-accent);
-}
-
-@media (max-width: 480px) {
-  .flow-2,
-  .flow-3,
-  .flow-4 {
-    columns: 1;
-  }
-}
-@media (min-width: 768px) {
-  .flow-3 {
-    columns: 2;
-  }
-  .flow-4 {
-    columns: 3;
-  }
-}
-@media (min-width: 1024px) {
-  .flow-4 {
-    columns: 4;
-  }
-}
-/* =========================== */
-/* RESPONSIVE VISIBILITY       */
-/* =========================== */
-.md-hidden {
-  display: none;
-}
-
-.sm-only {
-  display: none;
-}
-
-.md-only {
-  display: inherit;
-}
-
-.lg-only {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .sm-hidden {
-    display: none;
-  }
-  .sm-only {
-    display: inherit;
-  }
-  .md-only {
-    display: none;
-  }
-  .lg-only {
-    display: none;
-  }
-  .flow-2,
-  .flow-3,
-  .flow-4 {
-    columns: 1;
-  }
-}
-@media (min-width: 1024px) {
-  .lg-hidden {
-    display: none;
-  }
-  .sm-only {
-    display: none;
-  }
-  .md-only {
-    display: none;
-  }
-  .lg-only {
-    display: inherit;
-  }
-}
-/* =========================== */
-/* ACCESSIBILITY               */
-/* =========================== */
-@media (prefers-reduced-motion: reduce) {
-  .rhythm {
-    transition: none;
-  }
-}
-/* =========================== */
-/* LEGACY SUPPORT              */
-/* =========================== */
-@supports not (display: grid) {
-  .rhythm {
-    display: block;
-  }
-  .rhythm > * {
-    margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
-  }
-  .rhythm > :last-child {
-    margin-block-end: 0;
-  }
-}
-@supports not (margin-block-end: 1rem) {
-  .rhythm > * {
-    margin-bottom: calc(var(--space-block) * var(--rhythm-multiplier));
-  }
-  .rhythm > :last-child {
-    margin-bottom: 0;
-  }
-  .line-width-xs {
-    max-width: var(--line-width-xs);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .line-width-s {
-    max-width: var(--line-width-s);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .line-width-normal {
-    max-width: var(--line-width);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .line-width-wide {
-    max-width: var(--line-width-wide);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .line-width-xl {
-    max-width: var(--line-width-xl);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .line-width-full {
-    max-width: var(--line-width-full);
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-.center {
-  text-align: center;
-}
-
-.left {
-  text-align: left;
-}
-
-.right {
-  text-align: right;
-}
-
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
@@ -5396,67 +3671,1507 @@ img {
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
 /**
- * @component Button Component
- * @category Components
- * @description Minimalist button styling that works on both native button elements
- * and anchor/link elements. Uses the framework's accent color with smooth opacity
- * transitions. Supports keyboard focus states for accessibility.
+ * @component Utility Classes
+ * @category Utilities
+ * @description Self-documenting utility classes following a consistent naming pattern.
+ * All utilities use the format: [property]-[side/variant]-[size].
+ * Size tokens: xs, s, base (default), l, xl, 2xl, 3xl
+ * All utilities use logical properties for RTL support and !important for override capability.
  *
- * @prop {element} button Default button element styling
- * @prop {class} .button Apply button styling to elements
- * @prop {state} button:hover Reduced opacity on hover
- * @prop {state} button:active Reduced opacity on active/click
- * @prop {state} button:focus-visible Keyboard focus outline
- * @prop {state} button:disabled Disabled button styling
+ * @pattern [property]-[side]-[size]
+ * Examples:
+ *   - .margin-top-xs (margin-top: var(--space-xs))
+ *   - .padding-right-base (padding-right: var(--space))
+ *   - .gap-l (gap: var(--space-l))
+ *
+ * @prop {class} .margin-* Margin utilities (top, right, bottom, left, block, inline)
+ * @prop {class} .padding-* Padding utilities (top, right, bottom, left, block, inline)
+ * @prop {class} .gap-* Gap utilities for flexbox/grid
+ * @prop {class} .width-* Width utilities
+ * @prop {class} .height-* Height utilities
+ * @prop {class} .text-size-* Typography size utilities
+ * @prop {class} .text-weight-* Font weight utilities
+ * @prop {class} .text-align-* Text alignment utilities
+ * @prop {class} .text-transform-* Text transformation utilities
+ * @prop {class} .line-height-* Line height utilities
+ * @prop {class} .text-color-* Text color utilities
+ * @prop {class} .background-color-* Background color utilities
+ * @prop {class} .border-color-* Border color utilities
+ * @prop {class} .display-* Visibility utilities
  *
  * @example
- * // Native button element
- * <button>Click me</button>
+ * // Spacing
+ * <div class="margin-top-base padding-right-l">Spaced content</div>
+ * <div class="margin-bottom-xs gap-s">Flex container</div>
  *
- * // Link styled as button
- * <a href="/page" class="button">Go to page</a>
+ * // Typography
+ * <p class="text-size-small text-color-muted">Small muted text</p>
+ * <h2 class="text-size-display text-align-center">Display heading</h2>
  *
- * // With icon or content
- * <button>
- *   <svg>...</svg>
- *   Button text
- * </button>
+ * // Layout
+ * <div class="width-full height-auto display-hidden">Hidden element</div>
  *
  * @since 0.1.0
  */
-/* Minimalist button class for styling links as buttons */
-a.button,
-a.button:visited {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xs);
-  font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--scale-s);
-  font-weight: var(--font-weight);
-  line-height: var(--font-density);
-  padding: var(--space-xs) var(--space-s);
-  border-radius: var(--border-radius);
-  background: var(--color-accent);
-  color: var(--color-background);
-  text-decoration: none;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-a.button:hover,
-a.button:visited:hover {
-  opacity: 0.9;
-}
-a.button:active,
-a.button:visited:active {
-  opacity: 0.8;
-}
-a.button:focus-visible,
-a.button:visited:focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+/* =========================== */
+/* MIXIN: Generate Scale      */
+/* =========================== */
+/**
+ * Generate spacing utility classes for any CSS property
+ * @param {string} $property CSS property name
+ * @param {string} $prefix Class name prefix
+ *
+ * @example
+ * @include generate-scale(margin-top, margin-top);
+ * Creates: .margin-top-3xs, .margin-top-2xs, .margin-top-xs, .margin-top-s, .margin-top-base, etc.
+ */
+/**
+ * Generate special value utilities (auto, none, etc.)
+ * @param {string} $property CSS property name
+ * @param {string} $class-suffix Class name suffix
+ * @param {string} $value CSS value to apply
+ */
+/* =========================== */
+/* MARGIN UTILITIES            */
+/* =========================== */
+/* Margin - Top */
+.margin-top-3xs {
+  margin-top: var(--space-3xs) !important;
 }
 
-/* test */
+.margin-top-2xs {
+  margin-top: var(--space-2xs) !important;
+}
+
+.margin-top-xs {
+  margin-top: var(--space-xs) !important;
+}
+
+.margin-top-s {
+  margin-top: var(--space-s) !important;
+}
+
+.margin-top-base {
+  margin-top: var(--space) !important;
+}
+
+.margin-top-l {
+  margin-top: var(--space-l) !important;
+}
+
+.margin-top-xl {
+  margin-top: var(--space-xl) !important;
+}
+
+.margin-top-2xl {
+  margin-top: var(--space-2xl) !important;
+}
+
+.margin-top-3xl {
+  margin-top: var(--space-3xl) !important;
+}
+
+.margin-top-0 {
+  margin-top: 0 !important;
+}
+
+/* Margin - Right (inline-end) */
+.margin-right-3xs {
+  margin-right: var(--space-3xs) !important;
+}
+
+.margin-right-2xs {
+  margin-right: var(--space-2xs) !important;
+}
+
+.margin-right-xs {
+  margin-right: var(--space-xs) !important;
+}
+
+.margin-right-s {
+  margin-right: var(--space-s) !important;
+}
+
+.margin-right-base {
+  margin-right: var(--space) !important;
+}
+
+.margin-right-l {
+  margin-right: var(--space-l) !important;
+}
+
+.margin-right-xl {
+  margin-right: var(--space-xl) !important;
+}
+
+.margin-right-2xl {
+  margin-right: var(--space-2xl) !important;
+}
+
+.margin-right-3xl {
+  margin-right: var(--space-3xl) !important;
+}
+
+.margin-right-0 {
+  margin-right: 0 !important;
+}
+
+/* Margin - Bottom */
+.margin-bottom-3xs {
+  margin-bottom: var(--space-3xs) !important;
+}
+
+.margin-bottom-2xs {
+  margin-bottom: var(--space-2xs) !important;
+}
+
+.margin-bottom-xs {
+  margin-bottom: var(--space-xs) !important;
+}
+
+.margin-bottom-s {
+  margin-bottom: var(--space-s) !important;
+}
+
+.margin-bottom-base {
+  margin-bottom: var(--space) !important;
+}
+
+.margin-bottom-l {
+  margin-bottom: var(--space-l) !important;
+}
+
+.margin-bottom-xl {
+  margin-bottom: var(--space-xl) !important;
+}
+
+.margin-bottom-2xl {
+  margin-bottom: var(--space-2xl) !important;
+}
+
+.margin-bottom-3xl {
+  margin-bottom: var(--space-3xl) !important;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0 !important;
+}
+
+/* Margin - Left (inline-start) */
+.margin-left-3xs {
+  margin-left: var(--space-3xs) !important;
+}
+
+.margin-left-2xs {
+  margin-left: var(--space-2xs) !important;
+}
+
+.margin-left-xs {
+  margin-left: var(--space-xs) !important;
+}
+
+.margin-left-s {
+  margin-left: var(--space-s) !important;
+}
+
+.margin-left-base {
+  margin-left: var(--space) !important;
+}
+
+.margin-left-l {
+  margin-left: var(--space-l) !important;
+}
+
+.margin-left-xl {
+  margin-left: var(--space-xl) !important;
+}
+
+.margin-left-2xl {
+  margin-left: var(--space-2xl) !important;
+}
+
+.margin-left-3xl {
+  margin-left: var(--space-3xl) !important;
+}
+
+.margin-left-0 {
+  margin-left: 0 !important;
+}
+
+/* Margin - Block (top & bottom) */
+.margin-block-3xs {
+  margin-block: var(--space-3xs) !important;
+}
+
+.margin-block-2xs {
+  margin-block: var(--space-2xs) !important;
+}
+
+.margin-block-xs {
+  margin-block: var(--space-xs) !important;
+}
+
+.margin-block-s {
+  margin-block: var(--space-s) !important;
+}
+
+.margin-block-base {
+  margin-block: var(--space) !important;
+}
+
+.margin-block-l {
+  margin-block: var(--space-l) !important;
+}
+
+.margin-block-xl {
+  margin-block: var(--space-xl) !important;
+}
+
+.margin-block-2xl {
+  margin-block: var(--space-2xl) !important;
+}
+
+.margin-block-3xl {
+  margin-block: var(--space-3xl) !important;
+}
+
+.margin-block-0 {
+  margin-block: 0 !important;
+}
+
+/* Margin - Inline (left & right) */
+.margin-inline-3xs {
+  margin-inline: var(--space-3xs) !important;
+}
+
+.margin-inline-2xs {
+  margin-inline: var(--space-2xs) !important;
+}
+
+.margin-inline-xs {
+  margin-inline: var(--space-xs) !important;
+}
+
+.margin-inline-s {
+  margin-inline: var(--space-s) !important;
+}
+
+.margin-inline-base {
+  margin-inline: var(--space) !important;
+}
+
+.margin-inline-l {
+  margin-inline: var(--space-l) !important;
+}
+
+.margin-inline-xl {
+  margin-inline: var(--space-xl) !important;
+}
+
+.margin-inline-2xl {
+  margin-inline: var(--space-2xl) !important;
+}
+
+.margin-inline-3xl {
+  margin-inline: var(--space-3xl) !important;
+}
+
+.margin-inline-0 {
+  margin-inline: 0 !important;
+}
+
+/* Margin - Auto (centering) */
+.margin-inline-auto {
+  margin-inline: auto !important;
+}
+
+.margin-left-auto {
+  margin-left: auto !important;
+}
+
+.margin-right-auto {
+  margin-right: auto !important;
+}
+
+.margin-top-auto {
+  margin-top: auto !important;
+}
+
+.margin-bottom-auto {
+  margin-bottom: auto !important;
+}
+
+/* Margin - All sides */
+.margin-3xs {
+  margin: var(--space-3xs) !important;
+}
+
+.margin-2xs {
+  margin: var(--space-2xs) !important;
+}
+
+.margin-xs {
+  margin: var(--space-xs) !important;
+}
+
+.margin-s {
+  margin: var(--space-s) !important;
+}
+
+.margin-base {
+  margin: var(--space) !important;
+}
+
+.margin-l {
+  margin: var(--space-l) !important;
+}
+
+.margin-xl {
+  margin: var(--space-xl) !important;
+}
+
+.margin-2xl {
+  margin: var(--space-2xl) !important;
+}
+
+.margin-3xl {
+  margin: var(--space-3xl) !important;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+/* =========================== */
+/* PADDING UTILITIES           */
+/* =========================== */
+/* Padding - Top */
+.padding-top-3xs {
+  padding-top: var(--space-3xs) !important;
+}
+
+.padding-top-2xs {
+  padding-top: var(--space-2xs) !important;
+}
+
+.padding-top-xs {
+  padding-top: var(--space-xs) !important;
+}
+
+.padding-top-s {
+  padding-top: var(--space-s) !important;
+}
+
+.padding-top-base {
+  padding-top: var(--space) !important;
+}
+
+.padding-top-l {
+  padding-top: var(--space-l) !important;
+}
+
+.padding-top-xl {
+  padding-top: var(--space-xl) !important;
+}
+
+.padding-top-2xl {
+  padding-top: var(--space-2xl) !important;
+}
+
+.padding-top-3xl {
+  padding-top: var(--space-3xl) !important;
+}
+
+.padding-top-0 {
+  padding-top: 0 !important;
+}
+
+/* Padding - Right */
+.padding-right-3xs {
+  padding-right: var(--space-3xs) !important;
+}
+
+.padding-right-2xs {
+  padding-right: var(--space-2xs) !important;
+}
+
+.padding-right-xs {
+  padding-right: var(--space-xs) !important;
+}
+
+.padding-right-s {
+  padding-right: var(--space-s) !important;
+}
+
+.padding-right-base {
+  padding-right: var(--space) !important;
+}
+
+.padding-right-l {
+  padding-right: var(--space-l) !important;
+}
+
+.padding-right-xl {
+  padding-right: var(--space-xl) !important;
+}
+
+.padding-right-2xl {
+  padding-right: var(--space-2xl) !important;
+}
+
+.padding-right-3xl {
+  padding-right: var(--space-3xl) !important;
+}
+
+.padding-right-0 {
+  padding-right: 0 !important;
+}
+
+/* Padding - Bottom */
+.padding-bottom-3xs {
+  padding-bottom: var(--space-3xs) !important;
+}
+
+.padding-bottom-2xs {
+  padding-bottom: var(--space-2xs) !important;
+}
+
+.padding-bottom-xs {
+  padding-bottom: var(--space-xs) !important;
+}
+
+.padding-bottom-s {
+  padding-bottom: var(--space-s) !important;
+}
+
+.padding-bottom-base {
+  padding-bottom: var(--space) !important;
+}
+
+.padding-bottom-l {
+  padding-bottom: var(--space-l) !important;
+}
+
+.padding-bottom-xl {
+  padding-bottom: var(--space-xl) !important;
+}
+
+.padding-bottom-2xl {
+  padding-bottom: var(--space-2xl) !important;
+}
+
+.padding-bottom-3xl {
+  padding-bottom: var(--space-3xl) !important;
+}
+
+.padding-bottom-0 {
+  padding-bottom: 0 !important;
+}
+
+/* Padding - Left */
+.padding-left-3xs {
+  padding-left: var(--space-3xs) !important;
+}
+
+.padding-left-2xs {
+  padding-left: var(--space-2xs) !important;
+}
+
+.padding-left-xs {
+  padding-left: var(--space-xs) !important;
+}
+
+.padding-left-s {
+  padding-left: var(--space-s) !important;
+}
+
+.padding-left-base {
+  padding-left: var(--space) !important;
+}
+
+.padding-left-l {
+  padding-left: var(--space-l) !important;
+}
+
+.padding-left-xl {
+  padding-left: var(--space-xl) !important;
+}
+
+.padding-left-2xl {
+  padding-left: var(--space-2xl) !important;
+}
+
+.padding-left-3xl {
+  padding-left: var(--space-3xl) !important;
+}
+
+.padding-left-0 {
+  padding-left: 0 !important;
+}
+
+/* Padding - Block (top & bottom) */
+.padding-block-3xs {
+  padding-block: var(--space-3xs) !important;
+}
+
+.padding-block-2xs {
+  padding-block: var(--space-2xs) !important;
+}
+
+.padding-block-xs {
+  padding-block: var(--space-xs) !important;
+}
+
+.padding-block-s {
+  padding-block: var(--space-s) !important;
+}
+
+.padding-block-base {
+  padding-block: var(--space) !important;
+}
+
+.padding-block-l {
+  padding-block: var(--space-l) !important;
+}
+
+.padding-block-xl {
+  padding-block: var(--space-xl) !important;
+}
+
+.padding-block-2xl {
+  padding-block: var(--space-2xl) !important;
+}
+
+.padding-block-3xl {
+  padding-block: var(--space-3xl) !important;
+}
+
+.padding-block-0 {
+  padding-block: 0 !important;
+}
+
+/* Padding - Inline (left & right) */
+.padding-inline-3xs {
+  padding-inline: var(--space-3xs) !important;
+}
+
+.padding-inline-2xs {
+  padding-inline: var(--space-2xs) !important;
+}
+
+.padding-inline-xs {
+  padding-inline: var(--space-xs) !important;
+}
+
+.padding-inline-s {
+  padding-inline: var(--space-s) !important;
+}
+
+.padding-inline-base {
+  padding-inline: var(--space) !important;
+}
+
+.padding-inline-l {
+  padding-inline: var(--space-l) !important;
+}
+
+.padding-inline-xl {
+  padding-inline: var(--space-xl) !important;
+}
+
+.padding-inline-2xl {
+  padding-inline: var(--space-2xl) !important;
+}
+
+.padding-inline-3xl {
+  padding-inline: var(--space-3xl) !important;
+}
+
+.padding-inline-0 {
+  padding-inline: 0 !important;
+}
+
+/* Padding - All sides */
+.padding-3xs {
+  padding: var(--space-3xs) !important;
+}
+
+.padding-2xs {
+  padding: var(--space-2xs) !important;
+}
+
+.padding-xs {
+  padding: var(--space-xs) !important;
+}
+
+.padding-s {
+  padding: var(--space-s) !important;
+}
+
+.padding-base {
+  padding: var(--space) !important;
+}
+
+.padding-l {
+  padding: var(--space-l) !important;
+}
+
+.padding-xl {
+  padding: var(--space-xl) !important;
+}
+
+.padding-2xl {
+  padding: var(--space-2xl) !important;
+}
+
+.padding-3xl {
+  padding: var(--space-3xl) !important;
+}
+
+.padding-0 {
+  padding: 0 !important;
+}
+
+/* =========================== */
+/* GAP UTILITIES               */
+/* =========================== */
+/* Gap (flexbox/grid) */
+.gap-3xs {
+  gap: var(--space-3xs) !important;
+}
+
+.gap-2xs {
+  gap: var(--space-2xs) !important;
+}
+
+.gap-xs {
+  gap: var(--space-xs) !important;
+}
+
+.gap-s {
+  gap: var(--space-s) !important;
+}
+
+.gap-base {
+  gap: var(--space) !important;
+}
+
+.gap-l {
+  gap: var(--space-l) !important;
+}
+
+.gap-xl {
+  gap: var(--space-xl) !important;
+}
+
+.gap-2xl {
+  gap: var(--space-2xl) !important;
+}
+
+.gap-3xl {
+  gap: var(--space-3xl) !important;
+}
+
+.gap-0 {
+  gap: 0 !important;
+}
+
+/* Row Gap */
+.row-gap-3xs {
+  row-gap: var(--space-3xs) !important;
+}
+
+.row-gap-2xs {
+  row-gap: var(--space-2xs) !important;
+}
+
+.row-gap-xs {
+  row-gap: var(--space-xs) !important;
+}
+
+.row-gap-s {
+  row-gap: var(--space-s) !important;
+}
+
+.row-gap-base {
+  row-gap: var(--space) !important;
+}
+
+.row-gap-l {
+  row-gap: var(--space-l) !important;
+}
+
+.row-gap-xl {
+  row-gap: var(--space-xl) !important;
+}
+
+.row-gap-2xl {
+  row-gap: var(--space-2xl) !important;
+}
+
+.row-gap-3xl {
+  row-gap: var(--space-3xl) !important;
+}
+
+.row-gap-0 {
+  row-gap: 0 !important;
+}
+
+/* Column Gap */
+.column-gap-3xs {
+  column-gap: var(--space-3xs) !important;
+}
+
+.column-gap-2xs {
+  column-gap: var(--space-2xs) !important;
+}
+
+.column-gap-xs {
+  column-gap: var(--space-xs) !important;
+}
+
+.column-gap-s {
+  column-gap: var(--space-s) !important;
+}
+
+.column-gap-base {
+  column-gap: var(--space) !important;
+}
+
+.column-gap-l {
+  column-gap: var(--space-l) !important;
+}
+
+.column-gap-xl {
+  column-gap: var(--space-xl) !important;
+}
+
+.column-gap-2xl {
+  column-gap: var(--space-2xl) !important;
+}
+
+.column-gap-3xl {
+  column-gap: var(--space-3xl) !important;
+}
+
+.column-gap-0 {
+  column-gap: 0 !important;
+}
+
+/* =========================== */
+/* WIDTH UTILITIES             */
+/* =========================== */
+.width-3xs {
+  width: var(--space-3xs) !important;
+}
+
+.width-2xs {
+  width: var(--space-2xs) !important;
+}
+
+.width-xs {
+  width: var(--space-xs) !important;
+}
+
+.width-s {
+  width: var(--space-s) !important;
+}
+
+.width-base {
+  width: var(--space) !important;
+}
+
+.width-l {
+  width: var(--space-l) !important;
+}
+
+.width-xl {
+  width: var(--space-xl) !important;
+}
+
+.width-2xl {
+  width: var(--space-2xl) !important;
+}
+
+.width-3xl {
+  width: var(--space-3xl) !important;
+}
+
+.width-0 {
+  width: 0 !important;
+}
+
+.width-auto {
+  width: auto !important;
+}
+
+.width-full {
+  width: 100% !important;
+}
+
+.width-screen {
+  width: 100vw !important;
+}
+
+.width-min {
+  width: min-content !important;
+}
+
+.width-max {
+  width: max-content !important;
+}
+
+.width-fit {
+  width: fit-content !important;
+}
+
+/* Min Width */
+.min-width-3xs {
+  min-width: var(--space-3xs) !important;
+}
+
+.min-width-2xs {
+  min-width: var(--space-2xs) !important;
+}
+
+.min-width-xs {
+  min-width: var(--space-xs) !important;
+}
+
+.min-width-s {
+  min-width: var(--space-s) !important;
+}
+
+.min-width-base {
+  min-width: var(--space) !important;
+}
+
+.min-width-l {
+  min-width: var(--space-l) !important;
+}
+
+.min-width-xl {
+  min-width: var(--space-xl) !important;
+}
+
+.min-width-2xl {
+  min-width: var(--space-2xl) !important;
+}
+
+.min-width-3xl {
+  min-width: var(--space-3xl) !important;
+}
+
+.min-width-0 {
+  min-width: 0 !important;
+}
+
+.min-width-full {
+  min-width: 100% !important;
+}
+
+.min-width-screen {
+  min-width: 100vw !important;
+}
+
+/* Max Width */
+.max-width-3xs {
+  max-width: var(--space-3xs) !important;
+}
+
+.max-width-2xs {
+  max-width: var(--space-2xs) !important;
+}
+
+.max-width-xs {
+  max-width: var(--space-xs) !important;
+}
+
+.max-width-s {
+  max-width: var(--space-s) !important;
+}
+
+.max-width-base {
+  max-width: var(--space) !important;
+}
+
+.max-width-l {
+  max-width: var(--space-l) !important;
+}
+
+.max-width-xl {
+  max-width: var(--space-xl) !important;
+}
+
+.max-width-2xl {
+  max-width: var(--space-2xl) !important;
+}
+
+.max-width-3xl {
+  max-width: var(--space-3xl) !important;
+}
+
+.max-width-none {
+  max-width: none !important;
+}
+
+.max-width-full {
+  max-width: 100% !important;
+}
+
+.max-width-screen {
+  max-width: 100vw !important;
+}
+
+/* =========================== */
+/* HEIGHT UTILITIES            */
+/* =========================== */
+.height-3xs {
+  height: var(--space-3xs) !important;
+}
+
+.height-2xs {
+  height: var(--space-2xs) !important;
+}
+
+.height-xs {
+  height: var(--space-xs) !important;
+}
+
+.height-s {
+  height: var(--space-s) !important;
+}
+
+.height-base {
+  height: var(--space) !important;
+}
+
+.height-l {
+  height: var(--space-l) !important;
+}
+
+.height-xl {
+  height: var(--space-xl) !important;
+}
+
+.height-2xl {
+  height: var(--space-2xl) !important;
+}
+
+.height-3xl {
+  height: var(--space-3xl) !important;
+}
+
+.height-0 {
+  height: 0 !important;
+}
+
+.height-auto {
+  height: auto !important;
+}
+
+.height-full {
+  height: 100% !important;
+}
+
+.height-screen {
+  height: 100vh !important;
+}
+
+.height-min {
+  height: min-content !important;
+}
+
+.height-max {
+  height: max-content !important;
+}
+
+.height-fit {
+  height: fit-content !important;
+}
+
+/* Min Height */
+.min-height-3xs {
+  min-height: var(--space-3xs) !important;
+}
+
+.min-height-2xs {
+  min-height: var(--space-2xs) !important;
+}
+
+.min-height-xs {
+  min-height: var(--space-xs) !important;
+}
+
+.min-height-s {
+  min-height: var(--space-s) !important;
+}
+
+.min-height-base {
+  min-height: var(--space) !important;
+}
+
+.min-height-l {
+  min-height: var(--space-l) !important;
+}
+
+.min-height-xl {
+  min-height: var(--space-xl) !important;
+}
+
+.min-height-2xl {
+  min-height: var(--space-2xl) !important;
+}
+
+.min-height-3xl {
+  min-height: var(--space-3xl) !important;
+}
+
+.min-height-0 {
+  min-height: 0 !important;
+}
+
+.min-height-full {
+  min-height: 100% !important;
+}
+
+.min-height-screen {
+  min-height: 100vh !important;
+}
+
+/* Max Height */
+.max-height-3xs {
+  max-height: var(--space-3xs) !important;
+}
+
+.max-height-2xs {
+  max-height: var(--space-2xs) !important;
+}
+
+.max-height-xs {
+  max-height: var(--space-xs) !important;
+}
+
+.max-height-s {
+  max-height: var(--space-s) !important;
+}
+
+.max-height-base {
+  max-height: var(--space) !important;
+}
+
+.max-height-l {
+  max-height: var(--space-l) !important;
+}
+
+.max-height-xl {
+  max-height: var(--space-xl) !important;
+}
+
+.max-height-2xl {
+  max-height: var(--space-2xl) !important;
+}
+
+.max-height-3xl {
+  max-height: var(--space-3xl) !important;
+}
+
+.max-height-none {
+  max-height: none !important;
+}
+
+.max-height-full {
+  max-height: 100% !important;
+}
+
+.max-height-screen {
+  max-height: 100vh !important;
+}
+
+/* =========================== */
+/* TEXT SIZE UTILITIES         */
+/* =========================== */
+/**
+ * Typography size utilities
+ * Moved from standard-03-typography.scss for better layer organization
+ */
+.text-size-small {
+  font-size: var(--scale-s);
+}
+
+.text-size-smaller {
+  font-size: var(--scale-xs);
+}
+
+.text-size-micro {
+  font-size: var(--scale-micro);
+}
+
+.text-size-compact {
+  line-height: var(--font-density-s);
+}
+
+.text-size-display {
+  font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
+  line-height: 0.85;
+  font-weight: var(--font-header-weight);
+  letter-spacing: var(--font-header-letter-spacing);
+}
+
+.text-size-poster {
+  font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
+  line-height: 0.8;
+  font-weight: var(--font-header-weight);
+  letter-spacing: -0.04em;
+}
+
+.text-size-label {
+  font-size: var(--scale-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+/* =========================== */
+/* FONT FAMILY UTILITIES       */
+/* =========================== */
+/**
+ * Font family utility classes
+ * Moved from standard-03-typography.scss
+ */
+.font-family-mono,
+.font-family-monospace,
+.font-family-code {
+  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+  font-feature-settings: var(--font-monospace-feature);
+  font-variation-settings: var(--font-monospace-variation);
+  font-size: var(--scale-s);
+}
+
+.font-family-ui,
+.font-family-interface {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
+}
+
+/* =========================== */
+/* FONT WEIGHT UTILITIES       */
+/* =========================== */
+.text-weight-bold {
+  font-weight: var(--bold-weight);
+}
+
+.text-weight-normal {
+  font-weight: var(--font-weight);
+}
+
+/* =========================== */
+/* LINE HEIGHT UTILITIES       */
+/* =========================== */
+/**
+ * Line height utilities for controlling text spacing
+ */
+.line-height-tight {
+  line-height: 0.85;
+}
+
+.line-height-none {
+  line-height: 1;
+}
+
+.line-height-snug {
+  line-height: var(--font-density-s);
+}
+
+.line-height-normal {
+  line-height: var(--font-density);
+}
+
+.line-height-relaxed {
+  line-height: 1.6;
+}
+
+/* =========================== */
+/* TEXT ALIGNMENT UTILITIES    */
+/* =========================== */
+.text-align-left {
+  text-align: left !important;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
+.text-align-right {
+  text-align: right !important;
+}
+
+.text-align-justify {
+  text-align: justify !important;
+}
+
+/* =========================== */
+/* TEXT TRANSFORMATION         */
+/* =========================== */
+.text-transform-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.text-transform-lowercase {
+  text-transform: lowercase;
+}
+
+.text-transform-capitalize {
+  text-transform: capitalize;
+}
+
+.text-transform-normal {
+  text-transform: none;
+}
+
+.text-no-wrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* =========================== */
+/* TEXT COLOR UTILITIES        */
+/* =========================== */
+/**
+ * Text color utilities
+ * Moved from standard-02-color.scss
+ */
+.text-color-muted {
+  color: var(--color-muted) !important;
+}
+
+.text-color-subtle {
+  color: var(--color-subtle) !important;
+}
+
+.text-color-accent {
+  color: var(--color-accent) !important;
+}
+
+/* =========================== */
+/* BACKGROUND COLOR UTILITIES  */
+/* =========================== */
+.background-color-secondary {
+  background: var(--color-background-secondary) !important;
+}
+
+/* =========================== */
+/* BORDER COLOR UTILITIES      */
+/* =========================== */
+.border-color-default {
+  border: var(--border) !important;
+}
+
+.border-color-accent {
+  border: var(--border-accent) !important;
+}
+
+/* =========================== */
+/* DISPLAY & VISIBILITY       */
+/* =========================== */
+/**
+ * Display utilities for showing/hiding content
+ */
+.display-hidden,
+.hidden {
+  display: none !important;
+}
+
+.display-visible {
+  display: block !important;
+}
+
+.display-inline {
+  display: inline !important;
+}
+
+.display-inline-block {
+  display: inline-block !important;
+}
+
+.display-flex {
+  display: flex !important;
+}
+
+.display-grid {
+  display: grid !important;
+}
+
+/**
+ * Visually hidden (accessible hiding for screen readers)
+ */
+.visibility-screen-reader-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* =========================== */
+/* LAYOUT UTILITIES            */
+/* =========================== */
+/**
+ * Centering and layout helpers
+ */
+.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-horizontally {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-vertically {
+  display: flex;
+  align-items: center;
+}
+
+/* =========================== */
+/* RHYTHM UTILITIES            */
+/* =========================== */
+/**
+ * Rhythm-aware utilities for consistent spacing
+ */
+.rhythm-tight {
+  --rhythm-multiplier: 0.5;
+}
+
+.rhythm-loose {
+  --rhythm-multiplier: 1.5;
+}
+
+/* =========================== */
+/* FALLBACK SUPPORT            */
+/* =========================== */
+/**
+ * Fallback for browsers without CSS Grid or modern layout support
+ */
+@supports not (display: grid) {
+  .rhythm {
+    display: block;
+  }
+  .rhythm > * {
+    margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
+  }
+  .rhythm > :last-child {
+    margin-block-end: 0;
+  }
+}
+/* =========================== */
+/* READING WIDTH UTILITIES     */
+/* =========================== */
+/**
+ * Width constraints for optimal reading experience
+ */
+.width-line-extra-small {
+  max-width: var(--line-width-xs);
+}
+
+.width-line-small {
+  max-width: var(--line-width-s);
+}
+
+.width-line-base {
+  max-width: var(--line-width);
+}
+
+.width-line-large {
+  max-width: var(--line-width-l);
+}
+
+.width-line-extra-large {
+  max-width: var(--line-width-xl);
+}
+
+.width-line-full {
+  max-width: var(--line-width-full);
+}
+
+/* =========================== */
+/* BODY PADDING NEGATION       */
+/* =========================== */
+/**
+ * Utilities to negate body padding for full-width elements
+ * Useful for footers, headers, or other elements that should extend to viewport edges
+ *
+ * .negate-body-padding — Negates horizontal body padding only
+ * .negate-body-padding-full — Negates all body padding (horizontal + bottom)
+ * .negate-body-padding-bottom — Negates extra bottom body padding (1.5× multiplier)
+ *
+ * Usage:
+ * <footer class="negate-body-padding-full">
+ *   Full-width footer content
+ * </footer>
+ */
+/**
+ * Negate horizontal body padding (left/right)
+ * Allows full-width backgrounds while keeping vertical padding
+ */
+.negate-body-padding {
+  margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+  padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+}
+@media (max-width: 768px) {
+  .negate-body-padding {
+    margin-inline: calc(var(--space) * var(--body-mobile-padding-multiplier) * -1);
+    padding-inline: calc(var(--space) * var(--body-mobile-padding-multiplier));
+  }
+}
+
+/**
+ * Negate bottom body padding (extra 1.5× multiplier)
+ * Removes the generous bottom padding applied to body elements
+ * Useful when you want footer to sit flush at bottom
+ */
+.negate-body-padding-bottom {
+  margin-block-end: calc(var(--space) * var(--body-padding-multiplier) * 1.5 * -1);
+}
+@media (max-width: 768px) {
+  .negate-body-padding-bottom {
+    margin-block-end: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
+  }
+}
+
+/**
+ * Negate all body padding (horizontal + bottom)
+ * Full-width element that extends to viewport edges on all sides except top
+ * Combines .negate-body-padding + .negate-body-padding-bottom
+ */
+.negate-body-padding-full {
+  margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+  margin-block-end: calc(var(--space) * var(--body-padding-multiplier) * 1.5 * -1);
+  padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+}
+@media (max-width: 768px) {
+  .negate-body-padding-full {
+    margin-inline: calc(var(--space) * var(--body-mobile-padding-multiplier) * -1);
+    margin-block-end: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
+    padding-inline: calc(var(--space) * var(--body-mobile-padding-multiplier));
+  }
+}
+
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */

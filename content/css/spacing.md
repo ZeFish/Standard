@@ -1,6 +1,6 @@
 ---
 title: Spacing & Vertical Rhythm
-layout: article
+
 eleventyNavigation:
   key: Spacing
   parent: CSS Framework
@@ -10,19 +10,72 @@ permalink: /css/spacing/
 
 # Spacing & Vertical Rhythm
 
-Master the vertical rhythm system for perfectly aligned, harmonious layouts.
+Master consistent spacing and vertical rhythm throughout your layouts using the golden ratio.
 
-## The Golden Ratio
+## Quick Navigation
 
-Standard Framework's spacing system is built on the **golden ratio (1.618)**. Every space is calculated to work perfectly with every other space, creating visual harmony that feels naturally right.
+- **[Typography System](/css/typography/)** - Font scales, sizes, and weights
+- **[Grid System](/css/grid/)** - Flexible layouts and responsive columns
+- **[Prose System](/css/prose/)** - Readable article layouts
+- **[Colors](/css/colors/)** - Text and background colors
+- **[Utilities](/css/utilities/)** - Helper classes for common patterns
 
-### Why This Matters
+## The Rhythm Class
 
-In print design, masters like Jan Tschichold established that:
-- **Margins should follow ratios** - Not be arbitrary
-- **Line height affects spacing** - Everything connects
-- **Baseline alignment** - All content sits on invisible grid
-- **Proportional relationships** - Create natural rhythm
+The `.rhythm` class is the foundation of the spacing system. It's applied globally to the `<html>` root element by default, ensuring vertical rhythm cascades throughout your entire page:
+
+```html
+<html class="rhythm">
+  <body>
+    <!-- All content automatically gets rhythm spacing -->
+  </body>
+</html>
+```
+
+### How Rhythm Works
+
+When `.rhythm` is active:
+- **Global cascade** — Applied to `<html>` for true root-level styling
+- **Margin collapse prevention** — Uses `display: flow-root`
+- **Consistent spacing** — All direct children get rhythm-based margins
+- **Body padding** — `<body>` gets rhythm-based padding (desktop & mobile responsive)
+- **Opt-out capability** — Use `.no-rhythm` on specific sections to disable
+
+### Rhythm on Custom Containers
+
+You can apply `.rhythm` to any container for local rhythm control:
+
+```html
+<!-- Global rhythm on <html> -->
+<html class="rhythm">
+  <body>
+    <main>
+      <!-- Main content gets rhythm -->
+    </main>
+
+    <!-- But you can disable it -->
+    <aside class="no-rhythm">
+      <!-- No rhythm spacing here -->
+    </aside>
+
+    <!-- Or create a new rhythm context -->
+    <section class="rhythm">
+      <!-- New rhythm context with fresh spacing -->
+    </section>
+  </body>
+</html>
+```
+
+### Body Padding
+
+When rhythm is active on `<html>`, the `<body>` element automatically gets rhythm-based padding:
+
+| Breakpoint | Padding | Variable |
+|------------|---------|----------|
+| Desktop | `calc(--space × --body-padding-multiplier)` | `--body-padding-multiplier` |
+| Mobile | `calc(--space × --body-mobile-padding-multiplier)` | `--body-mobile-padding-multiplier` |
+
+**Note**: Direct `.rhythm` containers (like `<div class="rhythm">`) do NOT receive body padding — only `<body>` does.
 
 ## Rhythm Unit
 
@@ -304,7 +357,7 @@ space-x-{value}  - horizontal spacing between children
 ```html
 <article>
   <h1>Article Title</h1>
-  
+
   <section class="my-6">
     <h2>Section 1</h2>
     <p>Content maintains rhythm throughout</p>
@@ -349,13 +402,13 @@ space-x-{value}  - horizontal spacing between children
 <article class="rhythm-block">
   <!-- This H1 is sized so it takes 2 rhythm units -->
   <h1>Heading</h1>
-  
+
   <!-- This paragraph is sized so it takes 1 rhythm unit per line -->
   <p>Paragraph text</p>
-  
+
   <!-- Spacing between elements also uses rhythm units -->
   <p>Another paragraph</p>
-  
+
   <!-- Result: everything aligns perfectly -->
 </article>
 ```
@@ -413,7 +466,7 @@ See [Debug System](/css/debug/) for more tools.
 ## Learn More
 
 - **[API Reference](/docs/vertical-rhythm-system/)** - Complete rhythm documentation
-- **[Reading Layout](/docs/reading-layout-system/)** - Optimal content width
+- **[Prose Layout](/docs/prose-layout-system/)** - Optimal content width
 - **[Rhythm Application](/docs/rhythm-application-mixin/)** - Advanced rhythm techniques
 - **[Grid System](/css/grid/)** - Grid spacing (gap)
 

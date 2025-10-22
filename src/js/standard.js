@@ -18,7 +18,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version 2.2.0
+ * @version @VERSION_PLACEHOLDER@
  * @license MIT
  */
 

@@ -1,6 +1,6 @@
 ---
 title: Advanced Features & Optimization
-layout: article
+
 eleventyNavigation:
   key: Advanced
   parent: 11ty Plugin
@@ -81,8 +81,8 @@ export default function (eleventyConfig) {
 
 ```nunjucks
 <!-- In templates -->
-<img 
-  src="{{ image }}" 
+<img
+  src="{{ image }}"
   alt="{{ alt }}"
   loading="lazy"
   decoding="async"

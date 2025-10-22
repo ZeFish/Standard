@@ -1,6 +1,6 @@
 ---
 title: CSS Framework
-layout: article
+
 eleventyNavigation:
   key: CSS Framework
   title: CSS Framework
@@ -9,21 +9,7 @@ permalink: /css/
 
 # Standard Framework CSS
 
-A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.
-
-## Philosophy
-
-Standard Framework is built on the belief that **typography should follow mathematical principles**, not arbitrary rules. Every spacing, font size, and line height is calculated based on the golden ratio (1.618) to create visual harmony that feels right to the human eye.
-
-### Core Principles
-
-- **Mathematical Precision** - All measurements derive from the golden ratio
-- **Vertical Rhythm** - Content flows with consistent baseline grid
-- **Fine-Art Typography** - Inspired by classical print design masters
-- **Responsive** - Breakpoints at mobile, small, large, and wide screens
-- **Accessibility** - WCAG AA compliant color contrasts
-- **Dark Mode** - Seamless light/dark theme with system preference detection
-- **Modern CSS** - Pure CSS variables, no JavaScript required
+Professional typography framework with responsive layouts, semantic colors, dark mode support, and mathematical precision based on the golden ratio. Build beautiful, accessible interfaces with pre-calculated font scales, spacing systems, and components.
 
 ## Quick Start
 
@@ -71,7 +57,7 @@ Then in your templates:
 - **[Color System](/css/colors/)** - Semantic colors, light/dark themes, accessibility
 - **[Grid System](/css/grid/)** - Flexible layout system with breakpoints
 - **[Spacing & Rhythm](/css/spacing/)** - Vertical rhythm, margins, padding
-- **[Reading Layout](/css/reading/)** - Optimal line lengths and content width
+- **[Prose Layout](/css/prose/)** - Optimal line lengths and content width
 
 ### Components
 

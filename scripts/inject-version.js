@@ -8,41 +8,44 @@ const projectRoot = path.resolve(__dirname, "..");
 
 // Read package.json
 const pkg = JSON.parse(
-  fs.readFileSync(path.join(projectRoot, "package.json"), "utf-8")
+  fs.readFileSync(path.join(projectRoot, "package.json"), "utf-8"),
 );
 
 const version = pkg.version;
 const timestamp = new Date().toISOString();
 
-// CSS Header
-const cssHeader = `/*! Standard Framework v${version} | ${timestamp} */\n`;
+// Version string to inject
+const versionString = `Standard Framework v${version} | ${timestamp}`;
 
-// JS Header
-const jsHeader = `/*! Standard Framework v${version} | ${timestamp} */\n`;
+// Placeholder to replace
+const placeholder = "@VERSION_PLACEHOLDER@";
 
 // Files to update
 const files = [
-  { path: "dist/standard.css", header: cssHeader },
-  { path: "dist/standard.min.css", header: cssHeader },
-  { path: "dist/standard.js", header: jsHeader },
-  { path: "dist/standard.min.js", header: jsHeader },
-  { path: "dist/standard.lab.js", header: jsHeader },
+  "dist/standard.css",
+  "dist/standard.min.css",
+  "dist/standard.js",
+  "dist/standard.min.js",
+  "dist/standard.lab.js",
 ];
 
 for (const file of files) {
-  const filePath = path.join(projectRoot, file.path);
+  const filePath = path.join(projectRoot, file);
 
   if (fs.existsSync(filePath)) {
     let content = fs.readFileSync(filePath, "utf-8");
 
-    // Remove existing version header if present
-    content = content.replace(/\/\*! Standard Framework v[\d.]+.*?\*\/\n/, "");
-
-    // Add new header
-    content = file.header + content;
-
-    fs.writeFileSync(filePath, content, "utf-8");
-    console.log(`✓ ${file.path}`);
+    // Check if placeholder exists
+    if (content.includes(placeholder)) {
+      // Replace placeholder with version info
+      content = content.replace(placeholder, versionString);
+      fs.writeFileSync(filePath, content, "utf-8");
+      console.log(`✓ ${file} (placeholder replaced)`);
+    } else {
+      console.log(`⚠ ${file} (placeholder not found, skipped)`);
+    }
+  } else {
+    console.log(`✗ ${file} (file not found)`);
   }
 }
 

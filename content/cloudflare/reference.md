@@ -1,6 +1,6 @@
 ---
 title: API Reference
-layout: article
+
 eleventyNavigation:
   key: Reference
   parent: Cloudflare Functions

@@ -1,215 +1,33 @@
 <!DOCTYPE html>
-<html lang="{{ site.language }}">
+<html lang="{{ site.language }}" class="rhythm">
     <head>
       {% include "meta.njk" %}
     </head>
     {% standardFonts %}
     {% standardAssets %}
     {% standardLab %}
-    <style>
-    @font-face {
-        font-family: 'Courier Prime';
-        src: url('/assets/fonts/CourierPrime-BoldItalic.woff2') format('woff2');
-        font-weight: bold;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime';
-        src: url('/assets/fonts/CourierPrime-Bold.woff2') format('woff2');
-        font-weight: bold;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime Code';
-        src: url('/assets/fonts/CourierPrimeCode-Italic.woff2') format('woff2');
-        font-weight: normal;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime Sans';
-        src: url('/assets/fonts/CourierPrimeSans-BoldItalic.woff2') format('woff2');
-        font-weight: bold;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime Code';
-        src: url('/assets/fonts/CourierPrimeCode-Regular.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime';
-        src: url('/assets/fonts/CourierPrime-Italic.woff2') format('woff2');
-        font-weight: normal;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime';
-        src: url('/assets/fonts/CourierPrime-SemiBold.woff2') format('woff2');
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime Sans';
-        src: url('/assets/fonts/CourierPrimeSans-Regular.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime';
-        src: url('/assets/fonts/CourierPrime.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime Sans';
-        src: url('/assets/fonts/CourierPrimeSans-Italic.woff2') format('woff2');
-        font-weight: normal;
-        font-style: italic;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime Sans';
-        src: url('/assets/fonts/CourierPrimeSans-Bold.woff2') format('woff2');
-        font-weight: bold;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Courier Prime';
-        src: url('/assets/fonts/CourierPrime-Medium.woff2') format('woff2');
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'Monosten Pro Var';
-        src: url('/assets/fonts/MonostenProVar.woff2') format('woff2');
-        font-weight: 300 900;
-        font-style: normal;
-        font-display: swap;
-    }
-    :root {
-        --color-light-foreground: #262320;
-        --color-light-foreground: #241b10;
-        --color-light-background: #fffbe9;
-        --color-light-red: #b44e41;
-        --color-light-orange: #e28400;
-        --color-light-yellow: #dbb539;
-        --color-light-green: #5f9c53;
-        --color-light-cyan: #1faba6;
-        --color-light-blue: #308bb8;
-        --color-light-purple: #bb90c1;
-        --color-light-pink: #df9cbf;
-
-        --color-dark-foreground: #9e7f5b;
-        --color-dark-background: #1d2027;
-        --color-dark-red: #9c392e;
-        --color-dark-orange: #934b22;
-        --color-dark-yellow: #8c7528;
-        --color-dark-green: #446b32;
-        --color-dark-cyan: #1c7571;
-        --color-dark-blue: #1b6599;
-        --color-dark-purple: #63409a;
-        --color-dark-pink: #8b376a;
-
-        --color-light-accent: var(--color-light-yellow) !important;
-        --color-dark-accent: var(--color-light-yellow) !important;
-
-
-        --line-height-normal: 1.7em;
-        --font-size: 1.1rem;
-        --font-ratio: 1.2;
-
-        --font-text: "Courier Prime";
-        --font-feature: "";
-        --font-variation: "wght" 400;
-
-        --font-interface: var(--font-text);
-        --font-monospace: "Courier Prime Code";
-
-        --font-header: "MonoStein Pro Var", "Gorton Perfected", "Futura Now Var";
-        --font-header-feature: "onum", "salt", "calt";
-        --font-header-variation: "wght" 400, "wdth" 100;
-        --font-header-line-height: 0.9em;
-        --font-header-letter-spacing: 0em;
-
-        &.theme-dark {
-            --font-text: "JetBrains Mono";
-            --font-monospace: "Voyager Mono";
-            --font-interface: "Futura Now Var";
-        }
-
-        &.theme-light .markdown-reading-view a {
-            text-decoration: underline !important;
-            --shadow-color: color-mix(in oklab, currentcolor 20%, transparent);
-            --shadow-distance: 0px;
-            --shadow-depth: 0.5px;
-            text-shadow:
-                var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
-                calc(var(--shadow-depth) * -1) 0px var(--shadow-depth)
-                    var(--shadow-color),
-                0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
-        }
-
-        .markdown-preview-view,
-        .markdown-source-view {
-            color: color-mix(in oklab, var(--text-normal) 90%, transparent);
-            text-shadow: 0 0 0.5px var(--text-normal);
-
-            --shadow-color: color-mix(in oklab, currentcolor 10%, transparent);
-            --shadow-distance: 0px;
-            --shadow-depth: 0.5px;
-            text-shadow:
-                var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
-                calc(var(--shadow-depth) * -1) 0px var(--shadow-depth)
-                    var(--shadow-color),
-                0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
-        }
-
-        .inline-title,
-        .markdown-reading-view :is(h1, h2, h3, h4, h5, h6) {
-            text-align: center;
-            color: color-mix(in oklab, currentcolor 90%, var(--background-primary));
-
-            --shadow-color: color-mix(
-                in oklab,
-                currentcolor 30%,
-                var(--background-primary)
-            );
-            --shadow-distance: 0px;
-            --shadow-depth: 0.5px;
-            text-shadow:
-                var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
-                calc(var(--shadow-depth) * -1) 0px var(--shadow-depth)
-                    var(--shadow-color),
-                0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
-        }
-    }
-    </style>
+    <link rel="stylesheet" href="/assets/css/style.css">
 	<body>
-			{{ content | safe  }}
-			<footer class="reading">
+		<header>
+			<nav class="display-flex" style="justify-content: space-between; align-items: center; max-width: 100%;">
+				<div class="display-flex" style="align-items: left;">
+					<a href="/" style="text-decoration: none;">{{ site.title }}</a>
+				</div>
+				<ul class="display-flex gap-base no-bullet smaller" style="margin: 0; padding: 0;">
+					<li><a href="/">Home</a></li>
+					<li><a href="/css/">CSS</a></li>
+					<li><a href="/11ty/">11ty</a></li>
+					<li><a href="/cloudflare/">Cloudflare</a></li>
+					<li><a href="/docs/">Docs</a></li>
+					<li><a href="/getting-started/">Getting Started</a></li>
+					<li><a href="/cheat-sheet/">Cheat Sheet</a></li>
+				</ul>
+			</nav>
+		</header>
+     	<article class="prose md">
+          {{ content | safe }}
+      </article>
+			<footer class="prose smaller">
 			  <hr >
 				<p>© {{ now.getFullYear() }} {{ site.author.name }}. <a href="{{ site.url }}">{{ site.title }}</a> | <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE">MIT License</a> | {{ pkg.version }}</p>
 			</footer>

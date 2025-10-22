@@ -1,4 +1,3 @@
-/*! Standard Framework v0.10.52 | 2025-10-22T02:03:02.604Z */
 /**
  * Standard Framework - Fine-Art Typography Management
  *
@@ -19,7 +18,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version 2.2.0
+ * @version Standard Framework v0.10.52 | 2025-10-22T16:11:13.054Z
  * @license MIT
  */
 

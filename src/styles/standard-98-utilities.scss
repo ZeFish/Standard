@@ -1,0 +1,762 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Utility Classes
+ * @category Utilities
+ * @description Self-documenting utility classes following a consistent naming pattern.
+ * All utilities use the format: [property]-[side/variant]-[size].
+ * Size tokens: xs, s, base (default), l, xl, 2xl, 3xl
+ * All utilities use logical properties for RTL support and !important for override capability.
+ *
+ * @pattern [property]-[side]-[size]
+ * Examples:
+ *   - .margin-top-xs (margin-top: var(--space-xs))
+ *   - .padding-right-base (padding-right: var(--space))
+ *   - .gap-l (gap: var(--space-l))
+ *
+ * @prop {class} .margin-* Margin utilities (top, right, bottom, left, block, inline)
+ * @prop {class} .padding-* Padding utilities (top, right, bottom, left, block, inline)
+ * @prop {class} .gap-* Gap utilities for flexbox/grid
+ * @prop {class} .width-* Width utilities
+ * @prop {class} .height-* Height utilities
+ * @prop {class} .text-size-* Typography size utilities
+ * @prop {class} .text-weight-* Font weight utilities
+ * @prop {class} .text-align-* Text alignment utilities
+ * @prop {class} .text-transform-* Text transformation utilities
+ * @prop {class} .line-height-* Line height utilities
+ * @prop {class} .text-color-* Text color utilities
+ * @prop {class} .background-color-* Background color utilities
+ * @prop {class} .border-color-* Border color utilities
+ * @prop {class} .display-* Visibility utilities
+ *
+ * @example
+ * // Spacing
+ * <div class="margin-top-base padding-right-l">Spaced content</div>
+ * <div class="margin-bottom-xs gap-s">Flex container</div>
+ *
+ * // Typography
+ * <p class="text-size-small text-color-muted">Small muted text</p>
+ * <h2 class="text-size-display text-align-center">Display heading</h2>
+ *
+ * // Layout
+ * <div class="width-full height-auto display-hidden">Hidden element</div>
+ *
+ * @since 0.1.0
+ */
+
+/* =========================== */
+/* MIXIN: Generate Scale      */
+/* =========================== */
+
+/**
+ * Generate spacing utility classes for any CSS property
+ * @param {string} $property CSS property name
+ * @param {string} $prefix Class name prefix
+ *
+ * @example
+ * @include generate-scale(margin-top, margin-top);
+ * Creates: .margin-top-3xs, .margin-top-2xs, .margin-top-xs, .margin-top-s, .margin-top-base, etc.
+ */
+@mixin generate-scale($property, $prefix) {
+    .#{$prefix}-3xs {
+        #{$property}: var(--space-3xs) !important;
+    }
+    .#{$prefix}-2xs {
+        #{$property}: var(--space-2xs) !important;
+    }
+    .#{$prefix}-xs {
+        #{$property}: var(--space-xs) !important;
+    }
+    .#{$prefix}-s {
+        #{$property}: var(--space-s) !important;
+    }
+    .#{$prefix}-base {
+        #{$property}: var(--space) !important;
+    }
+    .#{$prefix}-l {
+        #{$property}: var(--space-l) !important;
+    }
+    .#{$prefix}-xl {
+        #{$property}: var(--space-xl) !important;
+    }
+    .#{$prefix}-2xl {
+        #{$property}: var(--space-2xl) !important;
+    }
+    .#{$prefix}-3xl {
+        #{$property}: var(--space-3xl) !important;
+    }
+}
+
+/**
+ * Generate special value utilities (auto, none, etc.)
+ * @param {string} $property CSS property name
+ * @param {string} $class-suffix Class name suffix
+ * @param {string} $value CSS value to apply
+ */
+@mixin generate-special($property, $class-suffix, $value) {
+    .#{$class-suffix} {
+        #{$property}: #{$value} !important;
+    }
+}
+
+/* =========================== */
+/* MARGIN UTILITIES            */
+/* =========================== */
+
+/* Margin - Top */
+@include generate-scale(margin-top, margin-top);
+.margin-top-0 {
+    margin-top: 0 !important;
+}
+
+/* Margin - Right (inline-end) */
+@include generate-scale(margin-right, margin-right);
+.margin-right-0 {
+    margin-right: 0 !important;
+}
+
+/* Margin - Bottom */
+@include generate-scale(margin-bottom, margin-bottom);
+.margin-bottom-0 {
+    margin-bottom: 0 !important;
+}
+
+/* Margin - Left (inline-start) */
+@include generate-scale(margin-left, margin-left);
+.margin-left-0 {
+    margin-left: 0 !important;
+}
+
+/* Margin - Block (top & bottom) */
+@include generate-scale(margin-block, margin-block);
+.margin-block-0 {
+    margin-block: 0 !important;
+}
+
+/* Margin - Inline (left & right) */
+@include generate-scale(margin-inline, margin-inline);
+.margin-inline-0 {
+    margin-inline: 0 !important;
+}
+
+/* Margin - Auto (centering) */
+.margin-inline-auto {
+    margin-inline: auto !important;
+}
+.margin-left-auto {
+    margin-left: auto !important;
+}
+.margin-right-auto {
+    margin-right: auto !important;
+}
+.margin-top-auto {
+    margin-top: auto !important;
+}
+.margin-bottom-auto {
+    margin-bottom: auto !important;
+}
+
+/* Margin - All sides */
+@include generate-scale(margin, margin);
+.margin-0 {
+    margin: 0 !important;
+}
+
+/* =========================== */
+/* PADDING UTILITIES           */
+/* =========================== */
+
+/* Padding - Top */
+@include generate-scale(padding-top, padding-top);
+.padding-top-0 {
+    padding-top: 0 !important;
+}
+
+/* Padding - Right */
+@include generate-scale(padding-right, padding-right);
+.padding-right-0 {
+    padding-right: 0 !important;
+}
+
+/* Padding - Bottom */
+@include generate-scale(padding-bottom, padding-bottom);
+.padding-bottom-0 {
+    padding-bottom: 0 !important;
+}
+
+/* Padding - Left */
+@include generate-scale(padding-left, padding-left);
+.padding-left-0 {
+    padding-left: 0 !important;
+}
+
+/* Padding - Block (top & bottom) */
+@include generate-scale(padding-block, padding-block);
+.padding-block-0 {
+    padding-block: 0 !important;
+}
+
+/* Padding - Inline (left & right) */
+@include generate-scale(padding-inline, padding-inline);
+.padding-inline-0 {
+    padding-inline: 0 !important;
+}
+
+/* Padding - All sides */
+@include generate-scale(padding, padding);
+.padding-0 {
+    padding: 0 !important;
+}
+
+/* =========================== */
+/* GAP UTILITIES               */
+/* =========================== */
+
+/* Gap (flexbox/grid) */
+@include generate-scale(gap, gap);
+.gap-0 {
+    gap: 0 !important;
+}
+
+/* Row Gap */
+@include generate-scale(row-gap, row-gap);
+.row-gap-0 {
+    row-gap: 0 !important;
+}
+
+/* Column Gap */
+@include generate-scale(column-gap, column-gap);
+.column-gap-0 {
+    column-gap: 0 !important;
+}
+
+/* =========================== */
+/* WIDTH UTILITIES             */
+/* =========================== */
+
+@include generate-scale(width, width);
+
+.width-0 {
+    width: 0 !important;
+}
+.width-auto {
+    width: auto !important;
+}
+.width-full {
+    width: 100% !important;
+}
+.width-screen {
+    width: 100vw !important;
+}
+.width-min {
+    width: min-content !important;
+}
+.width-max {
+    width: max-content !important;
+}
+.width-fit {
+    width: fit-content !important;
+}
+
+/* Min Width */
+@include generate-scale(min-width, min-width);
+.min-width-0 {
+    min-width: 0 !important;
+}
+.min-width-full {
+    min-width: 100% !important;
+}
+.min-width-screen {
+    min-width: 100vw !important;
+}
+
+/* Max Width */
+@include generate-scale(max-width, max-width);
+.max-width-none {
+    max-width: none !important;
+}
+.max-width-full {
+    max-width: 100% !important;
+}
+.max-width-screen {
+    max-width: 100vw !important;
+}
+
+/* =========================== */
+/* HEIGHT UTILITIES            */
+/* =========================== */
+
+@include generate-scale(height, height);
+
+.height-0 {
+    height: 0 !important;
+}
+.height-auto {
+    height: auto !important;
+}
+.height-full {
+    height: 100% !important;
+}
+.height-screen {
+    height: 100vh !important;
+}
+.height-min {
+    height: min-content !important;
+}
+.height-max {
+    height: max-content !important;
+}
+.height-fit {
+    height: fit-content !important;
+}
+
+/* Min Height */
+@include generate-scale(min-height, min-height);
+.min-height-0 {
+    min-height: 0 !important;
+}
+.min-height-full {
+    min-height: 100% !important;
+}
+.min-height-screen {
+    min-height: 100vh !important;
+}
+
+/* Max Height */
+@include generate-scale(max-height, max-height);
+.max-height-none {
+    max-height: none !important;
+}
+.max-height-full {
+    max-height: 100% !important;
+}
+.max-height-screen {
+    max-height: 100vh !important;
+}
+
+/* =========================== */
+/* TEXT SIZE UTILITIES         */
+/* =========================== */
+
+/**
+ * Typography size utilities
+ * Moved from standard-03-typography.scss for better layer organization
+ */
+
+.text-size-small {
+    font-size: var(--scale-s);
+}
+
+.text-size-smaller {
+    font-size: var(--scale-xs);
+}
+
+.text-size-micro {
+    font-size: var(--scale-micro);
+}
+
+.text-size-compact {
+    line-height: var(--font-density-s);
+}
+
+.text-size-display {
+    font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
+    line-height: 0.85;
+    font-weight: var(--font-header-weight);
+    letter-spacing: var(--font-header-letter-spacing);
+}
+
+.text-size-poster {
+    font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
+    line-height: 0.8;
+    font-weight: var(--font-header-weight);
+    letter-spacing: -0.04em;
+}
+
+.text-size-label {
+    font-size: var(--scale-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+}
+
+/* =========================== */
+/* FONT FAMILY UTILITIES       */
+/* =========================== */
+
+/**
+ * Font family utility classes
+ * Moved from standard-03-typography.scss
+ */
+
+.font-family-mono,
+.font-family-monospace,
+.font-family-code {
+    font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+    font-feature-settings: var(--font-monospace-feature);
+    font-variation-settings: var(--font-monospace-variation);
+    font-size: var(--scale-s);
+}
+
+.font-family-ui,
+.font-family-interface {
+    font-family: var(--font-interface), system-ui, sans-serif;
+    font-variation-settings: var(--font-interface-variation);
+    font-feature-settings: var(--font-interface-feature);
+}
+
+/* =========================== */
+/* FONT WEIGHT UTILITIES       */
+/* =========================== */
+
+.text-weight-bold {
+    font-weight: var(--bold-weight);
+}
+
+.text-weight-normal {
+    font-weight: var(--font-weight);
+}
+
+/* =========================== */
+/* LINE HEIGHT UTILITIES       */
+/* =========================== */
+
+/**
+ * Line height utilities for controlling text spacing
+ */
+
+.line-height-tight {
+    line-height: 0.85;
+}
+
+.line-height-none {
+    line-height: 1;
+}
+
+.line-height-snug {
+    line-height: var(--font-density-s);
+}
+
+.line-height-normal {
+    line-height: var(--font-density);
+}
+
+.line-height-relaxed {
+    line-height: 1.6;
+}
+
+/* =========================== */
+/* TEXT ALIGNMENT UTILITIES    */
+/* =========================== */
+
+.text-align-left {
+    text-align: left !important;
+}
+
+.text-align-center {
+    text-align: center !important;
+}
+
+.text-align-right {
+    text-align: right !important;
+}
+
+.text-align-justify {
+    text-align: justify !important;
+}
+
+/* =========================== */
+/* TEXT TRANSFORMATION         */
+/* =========================== */
+
+.text-transform-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.text-transform-lowercase {
+    text-transform: lowercase;
+}
+
+.text-transform-capitalize {
+    text-transform: capitalize;
+}
+
+.text-transform-normal {
+    text-transform: none;
+}
+
+.text-no-wrap {
+    white-space: nowrap !important;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* =========================== */
+/* TEXT COLOR UTILITIES        */
+/* =========================== */
+
+/**
+ * Text color utilities
+ * Moved from standard-02-color.scss
+ */
+
+.text-color-muted {
+    color: var(--color-muted) !important;
+}
+
+.text-color-subtle {
+    color: var(--color-subtle) !important;
+}
+
+.text-color-accent {
+    color: var(--color-accent) !important;
+}
+
+/* =========================== */
+/* BACKGROUND COLOR UTILITIES  */
+/* =========================== */
+
+.background-color-secondary {
+    background: var(--color-background-secondary) !important;
+}
+
+/* =========================== */
+/* BORDER COLOR UTILITIES      */
+/* =========================== */
+
+.border-color-default {
+    border: var(--border) !important;
+}
+
+.border-color-accent {
+    border: var(--border-accent) !important;
+}
+
+/* =========================== */
+/* DISPLAY & VISIBILITY       */
+/* =========================== */
+
+/**
+ * Display utilities for showing/hiding content
+ */
+
+.display-hidden,
+.hidden {
+    display: none !important;
+}
+
+.display-visible {
+    display: block !important;
+}
+
+.display-inline {
+    display: inline !important;
+}
+
+.display-inline-block {
+    display: inline-block !important;
+}
+
+.display-flex {
+    display: flex !important;
+}
+
+.display-grid {
+    display: grid !important;
+}
+
+/**
+ * Visually hidden (accessible hiding for screen readers)
+ */
+.visibility-screen-reader-only,
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* =========================== */
+/* LAYOUT UTILITIES            */
+/* =========================== */
+
+/**
+ * Centering and layout helpers
+ */
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-horizontally {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center-vertically {
+    display: flex;
+    align-items: center;
+}
+
+/* =========================== */
+/* RHYTHM UTILITIES            */
+/* =========================== */
+
+/**
+ * Rhythm-aware utilities for consistent spacing
+ */
+
+.rhythm-tight {
+    --rhythm-multiplier: 0.5;
+}
+
+.rhythm-loose {
+    --rhythm-multiplier: 1.5;
+}
+
+/* =========================== */
+/* FALLBACK SUPPORT            */
+/* =========================== */
+
+/**
+ * Fallback for browsers without CSS Grid or modern layout support
+ */
+
+@supports not (display: grid) {
+    .rhythm {
+        display: block;
+
+        > * {
+            margin-block-end: calc(
+                var(--space-block) * var(--rhythm-multiplier)
+            );
+        }
+
+        > :last-child {
+            margin-block-end: 0;
+        }
+    }
+}
+
+/* =========================== */
+/* READING WIDTH UTILITIES     */
+/* =========================== */
+
+/**
+ * Width constraints for optimal reading experience
+ */
+
+.width-line-extra-small {
+    max-width: var(--line-width-xs);
+}
+
+.width-line-small {
+    max-width: var(--line-width-s);
+}
+
+.width-line-base {
+    max-width: var(--line-width);
+}
+
+.width-line-large {
+    max-width: var(--line-width-l);
+}
+
+.width-line-extra-large {
+    max-width: var(--line-width-xl);
+}
+
+.width-line-full {
+    max-width: var(--line-width-full);
+}
+
+/* =========================== */
+/* BODY PADDING NEGATION       */
+/* =========================== */
+
+/**
+ * Utilities to negate body padding for full-width elements
+ * Useful for footers, headers, or other elements that should extend to viewport edges
+ *
+ * .negate-body-padding — Negates horizontal body padding only
+ * .negate-body-padding-full — Negates all body padding (horizontal + bottom)
+ * .negate-body-padding-bottom — Negates extra bottom body padding (1.5× multiplier)
+ *
+ * Usage:
+ * <footer class="negate-body-padding-full">
+ *   Full-width footer content
+ * </footer>
+ */
+
+/**
+ * Negate horizontal body padding (left/right)
+ * Allows full-width backgrounds while keeping vertical padding
+ */
+.negate-body-padding {
+    margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+    padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+
+    @media (max-width: #{$small}) {
+        margin-inline: calc(
+            var(--space) * var(--body-mobile-padding-multiplier) * -1
+        );
+        padding-inline: calc(
+            var(--space) * var(--body-mobile-padding-multiplier)
+        );
+    }
+}
+
+/**
+ * Negate bottom body padding (extra 1.5× multiplier)
+ * Removes the generous bottom padding applied to body elements
+ * Useful when you want footer to sit flush at bottom
+ */
+.negate-body-padding-bottom {
+    margin-block-end: calc(
+        (var(--space) * var(--body-padding-multiplier) * 1.5) * -1
+    );
+
+    @media (max-width: #{$small}) {
+        margin-block-end: calc(
+            (var(--space) * var(--body-mobile-padding-multiplier) * 1.5) * -1
+        );
+    }
+}
+
+/**
+ * Negate all body padding (horizontal + bottom)
+ * Full-width element that extends to viewport edges on all sides except top
+ * Combines .negate-body-padding + .negate-body-padding-bottom
+ */
+.negate-body-padding-full {
+    margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+    margin-block-end: calc(
+        (var(--space) * var(--body-padding-multiplier) * 1.5) * -1
+    );
+    padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+
+    @media (max-width: #{$small}) {
+        margin-inline: calc(
+            var(--space) * var(--body-mobile-padding-multiplier) * -1
+        );
+        margin-block-end: calc(
+            (var(--space) * var(--body-mobile-padding-multiplier) * 1.5) * -1
+        );
+        padding-inline: calc(
+            var(--space) * var(--body-mobile-padding-multiplier)
+        );
+    }
+}

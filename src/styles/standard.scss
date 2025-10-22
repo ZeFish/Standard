@@ -18,7 +18,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version 2.2.0
+ * @version @VERSION_PLACEHOLDER@
  * @license MIT
  */
 
@@ -32,13 +32,13 @@
 @use "standard-01-token";
 @use "standard-02-color";
 @use "standard-03-typography";
-@use "standard-04-rhythm";
-@use "standard-05-grid";
-@use "standard-06-reading";
-@use "standard-07-utilities";
+@use "standard-04-elements";
+@use "standard-05-rhythm";
+@use "standard-06-grid";
+@use "standard-07-prose";
 @use "standard-08-img";
 @use "standard-09-md";
-@use "standard-10-button";
+@use "standard-98-utilities";
 @use "standard-99-debug";
 
 /* Add to standard.css */

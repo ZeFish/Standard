@@ -1,6 +1,6 @@
 ---
 title: Typography System
-layout: article
+
 eleventyNavigation:
   key: Typography
   parent: CSS Framework
@@ -10,18 +10,15 @@ permalink: /css/typography/
 
 # Typography System
 
-Master the mathematical typography system based on the golden ratio for perfect readability and visual harmony.
+Master font scales, sizes, weights, and line heights based on the golden ratio for perfect readability and visual harmony.
 
-## Philosophy
+## Quick Navigation
 
-Standard Framework's typography system is built on the **golden ratio (1.618)**, a mathematical principle found throughout nature. Every font size, line height, and letter spacing is calculated to create visual harmony that feels naturally right.
-
-### Why the Golden Ratio?
-
-- **Mathematical elegance** - Proportions that please the eye
-- **Professional appearance** - Used by designers for centuries
-- **Readability** - Optimal line heights and sizes for comfortable reading
-- **Consistency** - All typography scales work together harmoniously
+- **[Grid System](/css/grid/)** - Flexible layouts and responsive columns
+- **[Spacing & Rhythm](/css/spacing/)** - Vertical rhythm and spacing utilities
+- **[Prose System](/css/prose/)** - Readable article layouts
+- **[Colors](/css/colors/)** - Text and background colors
+- **[Utilities](/css/utilities/)** - Helper classes for common patterns
 
 ## Font Families
 

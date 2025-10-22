@@ -1,6 +1,6 @@
 ---
 title: Cloudflare Functions
-layout: article
+
 eleventyNavigation:
   key: Cloudflare Functions
   title: Cloudflare Functions
@@ -76,6 +76,18 @@ The plugin includes a complete utility library with these helper functions:
 | `handleCORS()` | Handle CORS preflight requests |
 | `corsHeaders` | Pre-configured CORS headers |
 
+## Systems & Plugins
+
+### Core Plugin
+- **[Cloudflare Functions Plugin](/cloudflare/)** - Main serverless integration
+
+### Pre-Built Systems
+- **[GitHub Comments System](/cloudflare/comments/)** - Serverless comments stored in GitHub
+  - Spam detection
+  - Moderation workflow
+  - Nested threaded replies
+  - [Quick Start Guide](/cloudflare/comments/COMMENTS-QUICK-START.md)
+
 ## Documentation
 
 - **[Getting Started](/cloudflare/setup/)** - Installation and setup
@@ -86,14 +98,14 @@ The plugin includes a complete utility library with these helper functions:
 
 ## Features
 
-✅ Automatic function copying to build output  
-✅ Environment variables support  
-✅ Global data available in templates  
-✅ Cloudflare configuration template  
-✅ CORS handling built-in  
-✅ Caching with TTL support  
-✅ Request parsing utilities  
-✅ Error handling with timestamps  
+✅ Automatic function copying to build output
+✅ Environment variables support
+✅ Global data available in templates
+✅ Cloudflare configuration template
+✅ CORS handling built-in
+✅ Caching with TTL support
+✅ Request parsing utilities
+✅ Error handling with timestamps
 
 ## Integration with Standard Framework
 
@@ -121,7 +133,7 @@ export default function (eleventyConfig) {
 
 ## Version
 
-Cloudflare Functions Plugin **v0.10.52**  
+Cloudflare Functions Plugin **v0.10.52**
 Part of Standard Framework
 
 ---

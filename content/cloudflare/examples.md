@@ -1,6 +1,6 @@
 ---
 title: Real-World Examples
-layout: article
+
 eleventyNavigation:
   key: Examples
   parent: Cloudflare Functions
