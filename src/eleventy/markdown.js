@@ -65,8 +65,17 @@ export default function (eleventyConfig, options = {}) {
     const href = token.attrGet("href");
 
     if (href && href.startsWith("content/")) {
-      // Rewrite content/path/ to /path/
-      const rewrittenHref = "/" + href.replace(/^content\//, "");
+      // Rewrite content/path/index.md to /path/
+      let rewrittenHref =
+        "/" +
+        href
+          .replace(/^content\//, "")
+          .replace(/\/index\.md$/, "/")
+          .replace(/\.md$/, "/");
+      // Ensure trailing slash
+      if (!rewrittenHref.endsWith("/")) {
+        rewrittenHref += "/";
+      }
       token.attrSet("href", rewrittenHref);
     }
 

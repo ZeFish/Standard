@@ -143,26 +143,26 @@ npx @11ty/eleventy --serve
 Comprehensive guides and API reference:
 
 ### User Guides
-- **[CSS Framework](content/css/)** - Typography, grid, spacing, colors
-- **[11ty Plugin](content/11ty/)** - Setup, markdown, filters, backlinks
-- **[Quick Start](content/11ty/quick-start/)** - Build your first site in 5 minutes
-- **[Getting Started](content/11ty/getting-started/)** - Complete setup guide
+- **[CSS Framework](content/css/index.md)** - Typography, grid, spacing, colors
+- **[11ty Plugin](content/11ty/index.md)** - Setup, markdown, filters, backlinks
+- **[Quick Start](content/11ty/quick-start/index.md)** - Build your first site in 5 minutes
+- **[Getting Started](content/11ty/getting-started/index.md)** - Complete setup guide
 
 ### 11ty Features
-- **[Markdown Enhancements](content/11ty/markdown/)** - Extended markdown syntax
-- **[Filters & Helpers](content/11ty/filters/)** - Data transformation
-- **[Backlinks](content/11ty/backlinks/)** - Wiki-style linking
-- **[Encryption](content/11ty/encryption/)** - Password protection
-- **[Advanced Features](content/11ty/advanced/)** - Power user techniques
+- **[Markdown Enhancements](content/11ty/markdown/index.md)** - Extended markdown syntax
+- **[Filters & Helpers](content/11ty/filters/index.md)** - Data transformation
+- **[Backlinks](content/11ty/backlinks/index.md)** - Wiki-style linking
+- **[Encryption](content/11ty/encryption/index.md)** - Password protection
+- **[Advanced Features](content/11ty/advanced/index.md)** - Power user techniques
 
 ### CSS Features
-- **[Typography System](content/css/typography/)** - Font scales and sizing
-- **[Grid System](content/css/grid/)** - Responsive layouts
-- **[Color System](content/css/colors/)** - Light/dark theming
-- **[Spacing & Rhythm](content/css/spacing/)** - Vertical rhythm
+- **[Typography System](content/css/typography/index.md)** - Font scales and sizing
+- **[Grid System](content/css/grid/index.md)** - Responsive layouts
+- **[Color System](content/css/colors/index.md)** - Light/dark theming
+- **[Spacing & Rhythm](content/css/spacing/index.md)** - Vertical rhythm
 
 ### API Reference
-- **[Full API Docs](content/docs/)** - Auto-generated from source code
+- **[Full API Docs](content/docs/index.md)** - Auto-generated from source code
 
 ---
 
