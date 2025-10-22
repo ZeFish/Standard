@@ -2,6 +2,7 @@ import nunjucks from "nunjucks";
 import * as sass from "sass";
 import path from "path";
 import { fileURLToPath } from "url";
+import EleventyNavigationPlugin from "@11ty/eleventy-navigation";
 
 import Backlinks from "./backlinks.js";
 import Markdown from "./markdown.js";
@@ -35,6 +36,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * @prop {plugin} PreProcessor Markdown preprocessing
  * @prop {plugin} Backlinks Wiki-style backlinks
  * @prop {plugin} Encryption Content encryption
+ * @prop {plugin} Navigation Hierarchical navigation menus
  *
  * @example
  * // In eleventy.config.js
@@ -74,6 +76,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Backlinks);
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(addEncryptionTransform);
+  eleventyConfig.addPlugin(EleventyNavigationPlugin);
 
   eleventyConfig.setUseGitIgnore(false);
 

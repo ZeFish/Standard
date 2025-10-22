@@ -283,7 +283,3 @@ standard.min.js      ~2 KB gzipped
 - 🐛 [Report Issues](https://github.com/ZeFish/Standard/issues)
 - 💬 [Discussions](https://github.com/ZeFish/Standard/discussions)
 - ⭐ [Star on GitHub](https://github.com/ZeFish/Standard)
-
----
-
-**Version 0.10.52** | [Standard Framework](https://standard.ffp.com/) | [MIT License](https://github.com/ZeFish/Standard/blob/main/LICENSE)

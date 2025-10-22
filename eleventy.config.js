@@ -12,9 +12,9 @@ const pkg = JSON.parse(
 
 const site = {
   title: "Standard Framework",
-  url: "https://standard.ffp.com/",
+  url: "https://standard.ffp.co",
   version: pkg.version,
-  docs: "https://standard.ffp.com/",
+  docs: "https://standard.ffp.co",
   language: "fr",
   description: "",
   keywords: "",
@@ -37,6 +37,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addGlobalData("site", site); // 👈 Add metadata globally
   eleventyConfig.addGlobalData("layout", "article");
+  eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
   eleventyConfig.addPlugin(Standard);
   eleventyConfig.addPlugin(DocGenerator, {
@@ -48,6 +49,7 @@ export default function (eleventyConfig) {
 
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
+  eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
 
   // Watch README.md for changes and copy into content directory
   eleventyConfig.addWatchTarget("README.md");
@@ -56,8 +58,16 @@ export default function (eleventyConfig) {
     const readmeDest = join(__dirname, "content", "README.md");
 
     if (fs.existsSync(readmeSrc)) {
-      const content = fs.readFileSync(readmeSrc, "utf-8");
-      fs.writeFileSync(readmeDest, content, "utf-8");
+      const srcContent = fs.readFileSync(readmeSrc, "utf-8");
+      const destExists = fs.existsSync(readmeDest);
+      const destContent = destExists
+        ? fs.readFileSync(readmeDest, "utf-8")
+        : null;
+
+      // Only write if content has changed to prevent infinite watch loop
+      if (!destExists || srcContent !== destContent) {
+        fs.writeFileSync(readmeDest, srcContent, "utf-8");
+      }
     }
   });
 
