@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.6 | 2025-10-22T19:02:23.998Z
+ * @version Standard Framework v0.11.7 | 2025-10-22T19:04:32.416Z
  * @license MIT
  */
 /* Document
@@ -3305,23 +3305,23 @@ hr.col-row {
 :where(.prose) h3 + ol {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-:where(.prose) section > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) aside > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) header > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) footer > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) main > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) nav > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) blockquote > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) pre > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) figure > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .box > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .box-inset > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .callout > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .grid > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .container-small > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .container-accent > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .container-feature > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
-:where(.prose) .container-full > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(section,
+aside,
+header,
+footer,
+main,
+nav,
+blockquote,
+pre,
+figure,
+.box,
+.box-inset,
+.callout,
+.grid,
+.container-small,
+.container-accent,
+.container-feature,
+.container-full) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; /* No top margin */
   /* Keep the heading's natural bottom margin */
 }
