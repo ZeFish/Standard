@@ -49,13 +49,23 @@ export default function (eleventyConfig) {
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
   eleventyConfig.addPassthroughCopy({
-    [resolve(__dirname, "README.md")]: "index.html",
+    [resolve(__dirname, "README.md")]: "README.md",
   });
 
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: (data) => {
-      if (data.page.fileSlug.toLowerCase() === "readme") {
-        return "/";
+      if (data.page.fileSlug.toLowerCase() === "index") {
+        return "/index.html";
+      }
+    },
+    title: (data) => {
+      if (data.page.fileSlug.toLowerCase() === "index") {
+        return "Standard Framework";
+      }
+    },
+    layout: (data) => {
+      if (data.page.fileSlug.toLowerCase() === "index") {
+        return "article";
       }
     },
   });
