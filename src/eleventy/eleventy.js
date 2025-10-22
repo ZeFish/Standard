@@ -15,6 +15,13 @@ import { addEncryptionTransform } from "./encryption.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// ANSI color codes for console output
+const colors = {
+  reset: "\x1b[0m",
+  cyan: "\x1b[36m",
+  green: "\x1b[32m",
+};
+
 // Read package.json for version
 const pkg = JSON.parse(
   readFileSync(path.join(__dirname, "../../package.json"), "utf-8"),
@@ -250,9 +257,7 @@ export default function (eleventyConfig, options = {}) {
   // Log plugin initialization after build completes
   eleventyConfig.on("eleventy.after", () => {
     console.log(
-      "📦 Standard Framework | " +
-        pkg.version +
-        " | https://standard.ffp.co/cheet-sheat",
+      `${colors.cyan}📦 Standard Framework${colors.reset} | ${colors.green}${pkg.version}${colors.reset} | https://standard.ffp.co/cheet-sheat`,
     );
   });
 }
