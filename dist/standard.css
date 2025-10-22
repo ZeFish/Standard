@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.8 | 2025-10-22T19:21:10.529Z
+ * @version Standard Framework v0.11.9 | 2025-10-22T19:28:35.213Z
  * @license MIT
  */
 /* Document
@@ -575,7 +575,7 @@
   /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
-  --color-header: var(--color-light-header), var(--color-foreground);
+  --color-header: var(--color-light-header, var(--color-foreground));
   --color-red: var(--color-light-red);
   --color-orange: var(--color-light-orange);
   --color-yellow: var(--color-light-yellow);

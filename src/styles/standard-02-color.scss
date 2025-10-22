@@ -84,7 +84,7 @@
     --color-background: var(--color-light-background);
     --color-foreground: var(--color-light-foreground);
 
-    --color-header: var(--color-light-header), var(--color-foreground);
+    --color-header: var(--color-light-header, var(--color-foreground));
 
     --color-red: var(--color-light-red);
     --color-orange: var(--color-light-orange);
