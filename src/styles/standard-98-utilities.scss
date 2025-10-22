@@ -736,6 +736,18 @@
     }
 }
 
+.negate-body-padding-top {
+    margin-block-start: calc(
+        (var(--space) * var(--body-padding-multiplier) * 1) * -1
+    );
+
+    @media (max-width: #{$small}) {
+        margin-block-start: calc(
+            (var(--space) * var(--body-mobile-padding-multiplier) * 1) * -1
+        );
+    }
+}
+
 /**
  * Negate all body padding (horizontal + bottom)
  * Full-width element that extends to viewport edges on all sides except top
