@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.5 | 2025-10-22T18:02:36.458Z
+ * @version Standard Framework v0.11.6 | 2025-10-22T19:02:23.998Z
  * @license MIT
  */
 /* Document
@@ -1807,7 +1807,7 @@ sup {
   /* Bottom margin uses the block multiplier */
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
 }
-:where(html:not(.no-rhythm), .rhythm) * > :last-child {
+:where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) {
@@ -3305,23 +3305,23 @@ hr.col-row {
 :where(.prose) h3 + ol {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
-:where(.prose) section > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) aside > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) header > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) footer > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) main > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) nav > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) blockquote > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) pre > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) figure > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .box > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .box-inset > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .callout > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .grid > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .container-small > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .container-accent > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .container-feature > :is(h1, h2, h3, h4, h5, h6):first-child,
-:where(.prose) .container-full > :is(h1, h2, h3, h4, h5, h6):first-child {
+:where(.prose) section > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) aside > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) header > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) footer > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) main > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) nav > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) blockquote > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) pre > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) figure > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .box > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .box-inset > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .callout > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .grid > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .container-small > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .container-accent > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .container-feature > :is(h1, h2, h3, h4, h5, h6):where(:first-child),
+:where(.prose) .container-full > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; /* No top margin */
   /* Keep the heading's natural bottom margin */
 }
