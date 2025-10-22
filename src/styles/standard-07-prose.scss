@@ -159,7 +159,7 @@
     }
 
     h1,
-    > h1:first-child {
+    > h1:where(:first-child) {
         margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
         margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
     }
