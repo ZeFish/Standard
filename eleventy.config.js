@@ -49,7 +49,7 @@ export default function (eleventyConfig) {
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
   eleventyConfig.addPassthroughCopy({
-    [resolve(__dirname, "README.md")]: "README.md",
+    [resolve(__dirname, "README.md")]: "index.html",
   });
 
   eleventyConfig.addGlobalData("eleventyComputed", {
