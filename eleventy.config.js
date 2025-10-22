@@ -39,7 +39,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
-  eleventyConfig.addPlugin(Standard);
+  eleventyConfig.addPlugin(Standard, {
+    copyFiles: false, // Use local dist/ folder, not node_modules
+  });
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: ["styles/**/*.scss", "js/**/*.js", "eleventy/**/*.js"],
