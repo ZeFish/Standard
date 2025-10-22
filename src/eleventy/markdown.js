@@ -65,17 +65,19 @@ export default function (eleventyConfig, options = {}) {
     const href = token.attrGet("href");
 
     if (href && href.startsWith("content/")) {
-      // Rewrite content/path/index.md to /path/
-      let rewrittenHref =
-        "/" +
-        href
-          .replace(/^content\//, "")
-          .replace(/\/index\.md$/, "/")
-          .replace(/\.md$/, "/");
+      // Rewrite content paths to site URLs
+      // content/path/index.md → /path/
+      // content/path/file.md → /path/file/
+      let rewrittenHref = "/" + href.replace(/^content\//, "");
+
+      // Remove .md extension
+      rewrittenHref = rewrittenHref.replace(/\.md$/, "/");
+
       // Ensure trailing slash
       if (!rewrittenHref.endsWith("/")) {
         rewrittenHref += "/";
       }
+
       token.attrSet("href", rewrittenHref);
     }
 
