@@ -1,3 +1,4 @@
+/*! Standard Framework v0.10.52 | 2025-10-22T00:52:37.227Z */
 @charset "UTF-8";
 /*!
  * Standard Framework - Fine-Art Typography Management
@@ -346,10 +347,79 @@
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component SCSS Variables & Mixins
+ * @category Foundation
+ * @description Responsive breakpoints and rhythm application mixins for consistent
+ * vertical rhythm and spacing across all elements. These mixins ensure proper
+ * spacing application for rhythm-aware components.
+ *
+ * @prop {variable} $mobile Mobile breakpoint (480px)
+ * @prop {variable} $small Small screen breakpoint (768px)
+ * @prop {variable} $large Large screen breakpoint (1024px)
+ * @prop {variable} $wide Wide screen breakpoint (1440px)
+ *
+ * @example
+ * // Using breakpoint variables
+ * @media (min-width: $small) {
+ *   font-size: 1.2rem;
+ * }
+ *
+ * // Using rhythm mixin
+ * @include apply-rhythm {
+ *   margin-bottom: var(--space);
+ * }
+ *
+ * @since 0.1.0
+ * @see standard-01-token.scss
+ */
+/**
+ * @component Rhythm Application Mixin
+ * @category Foundation
+ * @description Applies rhythm spacing rules to semantic HTML elements
+ * and common layout components. Ensures consistent vertical rhythm.
+ *
+ * @example
+ * @include apply-rhythm {
+ *   margin-bottom: var(--space);
+ * }
+ *
+ * @since 0.1.0
+ */
+/**
+ * @component Rhythm Block Mixin
+ * @category Foundation
+ * @description Applies enhanced spacing to block-level elements that require
+ * extra visual separation such as callouts, blockquotes, code blocks, and tables.
+ *
+ * @example
+ * @include apply-rhythm-block {
+ *   margin-bottom: calc(var(--space) * var(--rhythm-multiplier-block));
+ * }
+ *
+ * @since 0.1.0
+ */
 /* Special blocks with extra spacing */
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Design Tokens
+ * @category Foundation
+ * @description Primitive design tokens forming the foundation of the design system.
+ * Includes mathematical ratios, modular scales, spacing system, and animation curves.
+ * All tokens use CSS custom properties for runtime customization.
+ *
+ * @example
+ * :root {
+ *   --font-ratio: var(--ratio-silver);
+ *   --space: 1rlh;
+ *   --scale-l: calc(1rem * 1.414);
+ * }
+ *
+ * @since 0.1.0
+ * @see standard-00-variables.scss
+ */
 /* Primitive Design Tokens - Foundation layer with logical properties */
 :root {
   /* Base measurements & ratios - the foundation of everything else */
@@ -430,6 +500,41 @@
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Color System
+ * @category Colors
+ * @description Complete light/dark color system with semantic color tokens.
+ * Automatically respects user's system color scheme preference using CSS media queries.
+ * Includes analog-inspired light theme and retro tech-inspired dark theme.
+ * All colors designed for WCAG AA accessibility contrast ratios.
+ *
+ * @prop {color} --color-background Page background color
+ * @prop {color} --color-foreground Text foreground color
+ * @prop {color} --color-accent Primary accent color
+ * @prop {color} --color-success Success/positive state color
+ * @prop {color} --color-warning Warning/caution state color
+ * @prop {color} --color-error Error/negative state color
+ * @prop {color} --color-info Info/neutral state color
+ *
+ * @example
+ * // Light theme colors
+ * :root {
+ *   --color-background: white;
+ *   --color-foreground: #262626;
+ *   --color-accent: #c8a840;
+ * }
+ *
+ * // Dark theme (auto-applied)
+ * @media (prefers-color-scheme: dark) {
+ *   :root {
+ *     --color-background: #0f0f0f;
+ *     --color-foreground: #dbdbdb;
+ *   }
+ * }
+ *
+ * @since 0.1.0
+ * @see https://webaim.org/articles/contrast/
+ */
 /* Modern Color System - Automatic Light/Dark Theme with System Preference Detection */
 :root {
   /* Tell browser we support both color schemes */
@@ -893,6 +998,33 @@ mark {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Typography System
+ * @category Typography
+ * @description Fine-art typography system using variable fonts, OpenType features,
+ * and mathematical scaling. Implements classical typography rules with modern web capabilities.
+ * Supports multiple font families, optical sizing, and locale-specific rules.
+ *
+ * @prop {string} --font-text Font family for body text (default: InterVariable)
+ * @prop {string} --font-header Font family for headings (default: InterVariable)
+ * @prop {string} --font-monospace Monospace font for code (default: IBM Plex Mono)
+ * @prop {number} --font-weight Body text weight (default: 400)
+ * @prop {number} --bold-weight Bold text weight (default: 600)
+ * @prop {string} --font-feature OpenType features to enable
+ * @prop {string} --font-variation Variable font axis settings
+ *
+ * @example
+ * html {
+ *   font-family: var(--font-text);
+ *   font-size: var(--scale);
+ *   font-feature-settings: var(--font-feature);
+ *   line-height: var(--line-height);
+ *   text-wrap: pretty;
+ * }
+ *
+ * @since 0.1.0
+ * @see standard-01-token.scss
+ */
 /* Typography Design Tokens - Using logical properties */
 :root {
   /* Font stacks */
@@ -1257,6 +1389,33 @@ caption {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Vertical Rhythm System
+ * @category Layout
+ * @description Enhanced bulletproof rhythm system that prevents margin collapse
+ * and ensures consistent vertical spacing throughout the document. Based on the
+ * 1rlh (relative line height) rhythm unit for mathematical precision.
+ * Supports responsive rhythm adjustments and granular control per element.
+ *
+ * @prop {class} .rhythm Apply rhythm spacing to container
+ * @prop {class} .no-rhythm Disable rhythm for specific elements
+ * @prop {variable} --space Base rhythm unit (1rlh)
+ * @prop {variable} --rhythm-multiplier Normal element spacing multiplier
+ * @prop {variable} --rhythm-multiplier-block Block element spacing multiplier
+ *
+ * @example
+ * // Enable rhythm on container
+ * <div class="rhythm">
+ *   <h1>Title</h1>
+ *   <p>Paragraphs get automatic spacing</p>
+ * </div>
+ *
+ * // Disable rhythm for specific element
+ * <div class="rhythm no-rhythm">No spacing applied</div>
+ *
+ * @since 0.1.0
+ * @see standard-01-token.scss
+ */
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
 /* ===== Harmony Base (containers and resets) ===== */
 :where(*, *::before, *::after) {
@@ -1852,6 +2011,47 @@ caption {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Grid System
+ * @category Layout
+ * @description 12-column Swiss-style responsive grid with flexible gaps and alignment.
+ * Uses CSS Grid with logical properties for RTL support. Supports nested grids,
+ * asymmetric layouts, gap variants (tight/normal/wide), and responsive column changes.
+ * All gaps align to the vertical rhythm system.
+ *
+ * @prop {class} .grid 12-column grid container
+ * @prop {class} .grid-2 through .grid-12 Predefined grid layouts (2-12 columns)
+ * @prop {class} .col-1 through .col-12 Column span modifiers
+ * @prop {class} .col-sm-* Responsive columns at 768px+
+ * @prop {class} .col-lg-* Responsive columns at 1024px+
+ * @prop {class} .start-{n} Start column position (1-12)
+ * @prop {class} .gap-tight Tight gap (1/4 space)
+ * @prop {class} .gap-wide Wide gap (1.5 space)
+ *
+ * @example
+ * // Basic 12-column grid with equal width columns
+ * <div class="grid">
+ *   <div class="col-3">Item 1</div>
+ *   <div class="col-3">Item 2</div>
+ *   <div class="col-3">Item 3</div>
+ *   <div class="col-3">Item 4</div>
+ * </div>
+ *
+ * // Responsive grid layout
+ * <div class="grid">
+ *   <div class="col-12 col-sm-6 col-lg-3">Card</div>
+ *   <div class="col-12 col-sm-6 col-lg-3">Card</div>
+ * </div>
+ *
+ * // Main content + sidebar layout
+ * <div class="grid">
+ *   <div class="col-8">Main content</div>
+ *   <div class="col-4">Sidebar</div>
+ * </div>
+ *
+ * @since 0.1.0
+ * @see standard-04-rhythm.scss
+ */
 /* Grid Design Tokens - Using logical properties */
 :root {
   /* Grid system tokens */
@@ -2776,6 +2976,45 @@ hr.col-row {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Reading Layout System
+ * @category Layout
+ * @description Prose-focused layout system for optimal reading experience with proper
+ * line lengths based on typography research (60-75 characters). Uses CSS Grid with
+ * responsive content columns for sidebars, accents, and featured content.
+ * Inspired by fine-art typography and classical book design principles.
+ *
+ * @prop {class} .reading Main article/content container
+ * @prop {class} .small Narrow sidebar width container
+ * @prop {class} .accent Accent container with background color
+ * @prop {class} .feature Featured content with larger spacing
+ * @prop {class} .full Full-width container
+ * @prop {variable} --line-width-xs Extra small (24rem / 384px)
+ * @prop {variable} --line-width-s Small (32rem / 512px)
+ * @prop {variable} --line-width-m Medium (42rem / 672px) - default
+ * @prop {variable} --line-width-l Large (50rem / 800px)
+ * @prop {variable} --line-width-xl Extra large (60rem / 960px)
+ *
+ * @example
+ * // Standard article with proper reading width
+ * <article class="reading">
+ *   <h1>Article Title</h1>
+ *   <p>Content here stays within optimal reading width...</p>
+ * </article>
+ *
+ * // Narrow sidebar content
+ * <div class="reading small">
+ *   <p>Short form content</p>
+ * </div>
+ *
+ * // Featured content with emphasis
+ * <section class="reading feature">
+ *   <blockquote>Important quote with extra space</blockquote>
+ * </section>
+ *
+ * @since 0.1.0
+ * @see https://www.rsub.com/blog/how-long-should-a-line-of-text-be/
+ */
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
   /* Content area tokens */
@@ -3007,10 +3246,49 @@ hr.col-row {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Utility Classes & Mixins
+ * @category Utilities
+ * @description Helper utilities for spacing, text styling, visibility, and common
+ * patterns. Includes mixin for generating spacing utilities and responsive helpers.
+ * All utilities respect the rhythm system and use logical properties for RTL support.
+ *
+ * @prop {class} .m-0 through .m-3xl Margin utilities
+ * @prop {class} .p-0 through .p-3xl Padding utilities
+ * @prop {class} .mt-* through .mb-* Directional margins
+ * @prop {class} .pt-* through .pb-* Directional padding
+ * @prop {class} .text-left, .text-center, .text-right Text alignment
+ * @prop {class} .text-bold, .text-italic, .text-uppercase Text styling
+ * @prop {class} .hidden, .visually-hidden Visibility utilities
+ * @prop {class} .no-margin, .no-padding Reset utilities
+ *
+ * @example
+ * // Spacing utilities
+ * <div class="m-l">Large margin bottom</div>
+ * <div class="p-s">Small padding</div>
+ *
+ * // Text utilities
+ * <p class="text-center text-bold">Centered bold text</p>
+ *
+ * // Visibility utilities
+ * <div class="hidden">Hidden from view</div>
+ *
+ * @since 0.1.0
+ */
 /* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
 /* =========================== */
 /* SPACING UTILITY GENERATOR   */
 /* =========================== */
+/**
+ * Mixin to generate spacing utility classes for any CSS property
+ * @param {string} $property CSS property name (margin, padding, etc.)
+ * @param {string} $class-prefix Class name prefix (m, p, mt, etc.)
+ * @param {boolean} $important Add !important flag
+ *
+ * @example
+ * @include spacing-scale(margin, m);
+ * // Generates: .m-0, .m-xs, .m, .m-l, etc.
+ */
 /* =========================== */
 /* BASIC UTILITIES             */
 /* =========================== */
@@ -4846,6 +5124,33 @@ hr.col-row {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Image System
+ * @category Components
+ * @description Responsive image handling with interactive zoom functionality.
+ * Images automatically scale to 100% width, support smooth zoom on click,
+ * and include keyboard navigation for dismissing zoomed images.
+ * Works seamlessly with rhythm and reading layouts.
+ *
+ * @prop {element} img Default responsive image
+ * @prop {class} .fx Images with border and effects
+ * @prop {class} .nofx Images without border/effects
+ * @prop {state} img:hover Prepare for zoom interaction
+ * @prop {state} img:active Active zoom state
+ * @prop {class} .zoomed Zoomed image state
+ *
+ * @example
+ * // Basic responsive image
+ * <img src="image.jpg" alt="Description">
+ *
+ * // Image with border and effects
+ * <img src="image.jpg" class="fx" alt="Description">
+ *
+ * // Click to zoom, click again to close
+ * // ESC key also closes zoomed image
+ *
+ * @since 0.1.0
+ */
 /* Image Styles - Works with both .reading (layout) and .rhythm (spacing) - Using logical properties */
 img {
   max-inline-size: 100%;
@@ -4916,6 +5221,42 @@ img {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Markdown Styling
+ * @category Components
+ * @description Beautiful styling for markdown-generated HTML. Includes support for
+ * blockquotes, callouts, code blocks, tables, lists, and other common markdown elements.
+ * Designed to work seamlessly with the rhythm and reading layout systems.
+ * Automatically styles headings, paragraphs, links with proper typography.
+ *
+ * @prop {class} .md Apply markdown styling to container
+ * @prop {element} blockquote Styled blockquote with italic text
+ * @prop {class} .callout Highlighted callout/admonition blocks
+ * @prop {class} .callout-title Title for callout blocks
+ * @prop {element} pre Code block with syntax highlighting
+ * @prop {element} code Inline code styling
+ * @prop {element} table Responsive table styling
+ * @prop {element} a Link styling with underline
+ * @prop {element} h1-h6 Heading hierarchy with proper sizing
+ *
+ * @example
+ * // Apply markdown styling to content
+ * <article class="reading md">
+ *   <h1>Title</h1>
+ *   <p>Paragraph text...</p>
+ *   <blockquote>Quote</blockquote>
+ *   <pre><code>Code block</code></pre>
+ * </article>
+ *
+ * // Callout admonition block
+ * <div class="callout">
+ *   <div class="callout-title">Note</div>
+ *   <div class="callout-content">Important information</div>
+ * </div>
+ *
+ * @since 0.1.0
+ * @see standard-09-md.scss
+ */
 .md .callout,
 .md pre,
 .md blockquote,
@@ -5054,6 +5395,35 @@ img {
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Button Component
+ * @category Components
+ * @description Minimalist button styling that works on both native button elements
+ * and anchor/link elements. Uses the framework's accent color with smooth opacity
+ * transitions. Supports keyboard focus states for accessibility.
+ *
+ * @prop {element} button Default button element styling
+ * @prop {class} .button Apply button styling to elements
+ * @prop {state} button:hover Reduced opacity on hover
+ * @prop {state} button:active Reduced opacity on active/click
+ * @prop {state} button:focus-visible Keyboard focus outline
+ * @prop {state} button:disabled Disabled button styling
+ *
+ * @example
+ * // Native button element
+ * <button>Click me</button>
+ *
+ * // Link styled as button
+ * <a href="/page" class="button">Go to page</a>
+ *
+ * // With icon or content
+ * <button>
+ *   <svg>...</svg>
+ *   Button text
+ * </button>
+ *
+ * @since 0.1.0
+ */
 /* Minimalist button class for styling links as buttons */
 a.button,
 a.button:visited {
@@ -5086,9 +5456,45 @@ a.button:visited:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
 }
 
+/* test */
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
+/**
+ * @component Debug System
+ * @category Development
+ * @description Development debugging utilities for visualizing grid layouts,
+ * baseline rhythm, reading zones, and typography processing. Activated by adding
+ * .standard-debug class to body or parent element. Shows overlays for grid columns,
+ * baseline rhythm, reading layout zones, and other layout metrics. Essential for
+ * design system development and layout debugging. Automatically hidden in print.
+ *
+ * @prop {class} .standard-debug Enable debug visualization
+ * @prop {overlay} baseline-grid Horizontal baseline grid overlay
+ * @prop {overlay} grid-columns Vertical grid column overlay
+ * @prop {overlay} reading-zones Reading layout zone visualization
+ * @prop {overlay} rhythm-spacing Margin/spacing outline visualization
+ * @prop {indicator} breakpoint-indicator Current responsive breakpoint
+ * @prop {indicator} debug-panel Fixed info panel with metrics
+ *
+ * @example
+ * // Enable debug mode on page
+ * <body class="standard-debug">
+ *   <!-- All debug overlays visible -->
+ * </body>
+ *
+ * // Debug specific grid
+ * <div class="grid standard-debug">
+ *   <div class="col-4">Shows grid overlay</div>
+ * </div>
+ *
+ * // Debug reading layout zones
+ * <article class="reading standard-debug">
+ *   <div class="accent">Zone highlighted</div>
+ * </article>
+ *
+ * @since 0.1.0
+ */
 /* =========================== */
 /* STANDARD DEBUG SYSTEM       */
 /* =========================== */

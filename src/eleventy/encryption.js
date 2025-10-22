@@ -3,12 +3,31 @@ import * as path from "path";
 import nunjucks from "nunjucks";
 
 /**
- * Simple encryption function to avoid pagecrypt stack overflow issue
- * @param {string} html - The HTML content to encrypt
- * @param {string} password - The password to use for encryption
- * @param {Object} customOptions - Customization options for the encrypted page
- * @returns {Promise<string>} The encrypted HTML page
+ * @component Content Encryption Plugin
+ * @category 11ty Plugins
+ * @description Encrypts sensitive page content with password protection.
+ * Uses SHA256-based XOR encryption for client-side decryption. Supports
+ * password-protected pages via front matter configuration. Encrypted content
+ * is embedded in HTML with decryption UI.
+ *
+ * @prop {frontmatter} encrypted: true Enable encryption for page
+ * @prop {frontmatter} password Required password for decryption
+ * @prop {transform} protect-notes Automatic encryption transform
+ * @prop {layout} encrypted.njk Template for encrypted content display
+ *
+ * @example
+ * // In markdown front matter
+ * ---
+ * title: Private Page
+ * encrypted: true
+ * password: mypassword123
+ * ---
+ *
+ * This content will be encrypted and require password to view.
+ *
+ * @since 0.1.0
  */
+
 export async function customEncryptHTML(html, password) {
   const crypto = await import("crypto");
 
@@ -36,10 +55,6 @@ export async function customEncryptHTML(html, password) {
   return template;
 }
 
-/**
- * Create the Eleventy transform for protecting notes with encryption
- * @param {Function} eleventyConfig - The Eleventy configuration object
- */
 export function addEncryptionTransform(eleventyConfig) {
   eleventyConfig.addTransform("protect-notes", async function (content) {
     if (!this.page.inputPath.endsWith(".md")) return content;

@@ -1,4 +1,33 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Vertical Rhythm System
+ * @category Layout
+ * @description Enhanced bulletproof rhythm system that prevents margin collapse
+ * and ensures consistent vertical spacing throughout the document. Based on the
+ * 1rlh (relative line height) rhythm unit for mathematical precision.
+ * Supports responsive rhythm adjustments and granular control per element.
+ *
+ * @prop {class} .rhythm Apply rhythm spacing to container
+ * @prop {class} .no-rhythm Disable rhythm for specific elements
+ * @prop {variable} --space Base rhythm unit (1rlh)
+ * @prop {variable} --rhythm-multiplier Normal element spacing multiplier
+ * @prop {variable} --rhythm-multiplier-block Block element spacing multiplier
+ *
+ * @example
+ * // Enable rhythm on container
+ * <div class="rhythm">
+ *   <h1>Title</h1>
+ *   <p>Paragraphs get automatic spacing</p>
+ * </div>
+ *
+ * // Disable rhythm for specific element
+ * <div class="rhythm no-rhythm">No spacing applied</div>
+ *
+ * @since 0.1.0
+ * @see standard-01-token.scss
+ */
+
 /* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
 
 /* ===== Harmony Base (containers and resets) ===== */

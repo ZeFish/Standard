@@ -1,5 +1,30 @@
 import fs from "fs";
 
+/**
+ * @component Backlinks Plugin
+ * @category 11ty Plugins
+ * @description Implements wiki-style bidirectional backlinks for knowledge graph
+ * and content interconnection. Automatically discovers internal links and creates
+ * a backlinks map showing which pages link to each page. Supports wiki-style link
+ * syntax [[Page Name]] in addition to standard markdown links.
+ *
+ * @prop {collection} _backlinksMap Map of all backlinks in the site
+ * @prop {function} getBacklinks(url) Get backlinks for a specific URL
+ * @prop {syntax} [[Page Name]] Wiki-style internal link syntax
+ * @prop {syntax} [Link Text](url) Standard markdown link syntax
+ *
+ * @example
+ * // In template, show backlinks to current page
+ * {% for backlink in backlinks %}
+ *   <a href="{{ backlink.url }}">{{ backlink.title }}</a>
+ * {% endfor %}
+ *
+ * // Wiki-style link (auto-discovered)
+ * [[Related Article]]
+ *
+ * @since 0.1.0
+ */
+
 function slugify(str) {
   return str
     .toLowerCase()

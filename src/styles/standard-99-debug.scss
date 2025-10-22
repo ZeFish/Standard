@@ -1,4 +1,41 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Debug System
+ * @category Development
+ * @description Development debugging utilities for visualizing grid layouts,
+ * baseline rhythm, reading zones, and typography processing. Activated by adding
+ * .standard-debug class to body or parent element. Shows overlays for grid columns,
+ * baseline rhythm, reading layout zones, and other layout metrics. Essential for
+ * design system development and layout debugging. Automatically hidden in print.
+ *
+ * @prop {class} .standard-debug Enable debug visualization
+ * @prop {overlay} baseline-grid Horizontal baseline grid overlay
+ * @prop {overlay} grid-columns Vertical grid column overlay
+ * @prop {overlay} reading-zones Reading layout zone visualization
+ * @prop {overlay} rhythm-spacing Margin/spacing outline visualization
+ * @prop {indicator} breakpoint-indicator Current responsive breakpoint
+ * @prop {indicator} debug-panel Fixed info panel with metrics
+ *
+ * @example
+ * // Enable debug mode on page
+ * <body class="standard-debug">
+ *   <!-- All debug overlays visible -->
+ * </body>
+ *
+ * // Debug specific grid
+ * <div class="grid standard-debug">
+ *   <div class="col-4">Shows grid overlay</div>
+ * </div>
+ *
+ * // Debug reading layout zones
+ * <article class="reading standard-debug">
+ *   <div class="accent">Zone highlighted</div>
+ * </article>
+ *
+ * @since 0.1.0
+ */
+
 /* =========================== */
 /* STANDARD DEBUG SYSTEM       */
 /* =========================== */

@@ -1,9 +1,20 @@
 import Standard from "./src/eleventy/eleventy.js";
+import DocGenerator from "./src/eleventy/doc-generator.js";
 import { execSync } from "child_process";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+import fs from "fs";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(
+  fs.readFileSync(resolve(__dirname, "package.json"), "utf-8"),
+);
 
 const site = {
   title: "Standard Framework",
-  url: "https://francisfontaine.com/",
+  url: "https://standard.ffp.com/",
+  version: pkg.version,
+  docs: "https://standard.ffp.com/",
   language: "fr",
   description: "",
   keywords: "",
@@ -25,10 +36,21 @@ export default function (eleventyConfig) {
   eleventyConfig.setOutputDirectory("_site");
 
   eleventyConfig.addGlobalData("site", site); // 👈 Add metadata globally
-  eleventyConfig.addGlobalData("layout", "base");
+  eleventyConfig.addGlobalData("layout", "article");
 
   eleventyConfig.addPlugin(Standard);
+  eleventyConfig.addPlugin(DocGenerator, {
+    sourceDir: "src",
+    patterns: ["styles/**/*.scss", "js/**/*.js", "eleventy/**/*.js"],
+    outputDir: "content/docs",
+    layout: "component",
+  });
+
+  // Copy files to output
   eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
+  eleventyConfig.addPassthroughCopy({
+    [resolve(__dirname, "README.md")]: "README.md",
+  });
 
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: (data) => {
@@ -36,6 +58,15 @@ export default function (eleventyConfig) {
         return "/";
       }
     },
+  });
+
+  // Log startup message
+  eleventyConfig.on("eleventy.after", () => {
+    console.log("");
+    console.log("🎨 " + site.title);
+    console.log("📦 v" + site.version);
+    console.log("📖 " + site.docs);
+    console.log("");
   });
 
   return {

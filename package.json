@@ -34,7 +34,8 @@
     "./css": "./dist/standard.min.css",
     "./js": "./dist/standard.min.js",
     "./lab": "./dist/standard.lab.js",
-    ".": "./src/eleventy/eleventy.js"
+    ".": "./src/eleventy/eleventy.js",
+    "./cloudflare": "./src/eleventy/cloudflare.js"
   },
   "files": [
     "dist",
@@ -46,7 +47,7 @@
     "dev": "concurrently \"npm:watch:*\"",
     "watch:css": "sass --watch --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",
-    "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min",
+    "build": "npm run build:css && npm run build:css-min && npm run build:js && npm run build:js-min && node scripts/inject-version.js",
     "build:css": "sass --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
     "build:css-min": "sass --load-path=node_modules src/styles/standard.scss dist/standard.min.css --style=compressed --no-source-map",
     "build:js": "cp src/js/standard.js dist/standard.js",

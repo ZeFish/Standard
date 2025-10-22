@@ -1,4 +1,33 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Image System
+ * @category Components
+ * @description Responsive image handling with interactive zoom functionality.
+ * Images automatically scale to 100% width, support smooth zoom on click,
+ * and include keyboard navigation for dismissing zoomed images.
+ * Works seamlessly with rhythm and reading layouts.
+ *
+ * @prop {element} img Default responsive image
+ * @prop {class} .fx Images with border and effects
+ * @prop {class} .nofx Images without border/effects
+ * @prop {state} img:hover Prepare for zoom interaction
+ * @prop {state} img:active Active zoom state
+ * @prop {class} .zoomed Zoomed image state
+ *
+ * @example
+ * // Basic responsive image
+ * <img src="image.jpg" alt="Description">
+ *
+ * // Image with border and effects
+ * <img src="image.jpg" class="fx" alt="Description">
+ *
+ * // Click to zoom, click again to close
+ * // ESC key also closes zoomed image
+ *
+ * @since 0.1.0
+ */
+
 /* Image Styles - Works with both .reading (layout) and .rhythm (spacing) - Using logical properties */
 
 img {

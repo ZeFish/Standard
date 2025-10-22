@@ -1,11 +1,51 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Utility Classes & Mixins
+ * @category Utilities
+ * @description Helper utilities for spacing, text styling, visibility, and common
+ * patterns. Includes mixin for generating spacing utilities and responsive helpers.
+ * All utilities respect the rhythm system and use logical properties for RTL support.
+ *
+ * @prop {class} .m-0 through .m-3xl Margin utilities
+ * @prop {class} .p-0 through .p-3xl Padding utilities
+ * @prop {class} .mt-* through .mb-* Directional margins
+ * @prop {class} .pt-* through .pb-* Directional padding
+ * @prop {class} .text-left, .text-center, .text-right Text alignment
+ * @prop {class} .text-bold, .text-italic, .text-uppercase Text styling
+ * @prop {class} .hidden, .visually-hidden Visibility utilities
+ * @prop {class} .no-margin, .no-padding Reset utilities
+ *
+ * @example
+ * // Spacing utilities
+ * <div class="m-l">Large margin bottom</div>
+ * <div class="p-s">Small padding</div>
+ *
+ * // Text utilities
+ * <p class="text-center text-bold">Centered bold text</p>
+ *
+ * // Visibility utilities
+ * <div class="hidden">Hidden from view</div>
+ *
+ * @since 0.1.0
+ */
+
 /* Enhanced Rhythm Utilities: debugging, overrides, and advanced control - Using logical properties */
 
 /* =========================== */
 /* SPACING UTILITY GENERATOR   */
 /* =========================== */
 
-// Mixin to generate spacing utilities
+/**
+ * Mixin to generate spacing utility classes for any CSS property
+ * @param {string} $property CSS property name (margin, padding, etc.)
+ * @param {string} $class-prefix Class name prefix (m, p, mt, etc.)
+ * @param {boolean} $important Add !important flag
+ *
+ * @example
+ * @include spacing-scale(margin, m);
+ * // Generates: .m-0, .m-xs, .m, .m-l, etc.
+ */
 @mixin spacing-scale($property, $class-prefix, $important: true) {
     $imp: if($important, " !important", "");
 

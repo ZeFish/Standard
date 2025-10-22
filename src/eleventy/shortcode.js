@@ -1,3 +1,27 @@
+/**
+ * @component Eleventy Shortcode Plugin
+ * @category 11ty Plugins
+ * @description Provides template shortcodes for including Standard Framework assets,
+ * fonts, mobile meta tags, and calculating reading time estimates. Integrates with
+ * Nunjucks templates for easy asset inclusion and content utilities.
+ *
+ * @prop {shortcode} standardFonts Include Inter and Source Serif 4 fonts
+ * @prop {shortcode} standardAssets Include CSS and JS (in main plugin)
+ * @prop {shortcode} metaMobile Include mobile viewport meta tags
+ * @prop {shortcode} readingTime Calculate and display reading time estimate
+ *
+ * @example
+ * // In Nunjucks template
+ * {% standardFonts %}
+ * {% standardAssets %}
+ * {% metaMobile %}
+ *
+ * // Reading time shortcode
+ * {% readingTime page.content %}
+ *
+ * @since 0.1.0
+ */
+
 export default function (eleventyConfig, options = {}) {
   // Shortcode to include Standard CSS and JS from local files
   eleventyConfig.addShortcode("standardFonts", function () {

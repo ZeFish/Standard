@@ -4,7 +4,8 @@
 
 Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
 
-[[doc/simple_template.md]]
+[Simple Tempalte](template/simple.md)
+[Documentation](docs/)
 
 ---
 

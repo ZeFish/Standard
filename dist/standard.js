@@ -1,3 +1,4 @@
+/*! Standard Framework v0.10.52 | 2025-10-22T00:52:37.227Z */
 /**
  * Standard Framework - Fine-Art Typography Management
  *

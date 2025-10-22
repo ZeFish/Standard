@@ -1,4 +1,23 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Design Tokens
+ * @category Foundation
+ * @description Primitive design tokens forming the foundation of the design system.
+ * Includes mathematical ratios, modular scales, spacing system, and animation curves.
+ * All tokens use CSS custom properties for runtime customization.
+ *
+ * @example
+ * :root {
+ *   --font-ratio: var(--ratio-silver);
+ *   --space: 1rlh;
+ *   --scale-l: calc(1rem * 1.414);
+ * }
+ *
+ * @since 0.1.0
+ * @see standard-00-variables.scss
+ */
+
 /* Primitive Design Tokens - Foundation layer with logical properties */
 
 :root {

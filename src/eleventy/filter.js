@@ -1,3 +1,30 @@
+/**
+ * @component Eleventy Filter Plugin
+ * @category 11ty Plugins
+ * @description Provides template filters for content processing including excerpt
+ * generation, image extraction, HTML manipulation, date formatting, and data filtering.
+ * All filters handle both Markdown and HTML input gracefully.
+ *
+ * @prop {filter} excerpt Extract content summary with customizable options
+ * @prop {filter} extractFirstImage Get first image URL from content
+ * @prop {filter} firstParagraph Extract first paragraph
+ * @prop {filter} excerptWords Limit excerpt to N words
+ * @prop {filter} htmlDateString Format date for HTML
+ * @prop {filter} dateToXmlschema ISO 8601 date format
+ * @prop {filter} removeTags Remove specific HTML tags
+ * @prop {filter} filterTags Keep only specific tags
+ * @prop {filter} removeEmptyTags Clean empty elements
+ * @prop {filter} dotDate Format date as YY.MM.DD
+ *
+ * @example
+ * // In template
+ * {{ post.content | excerpt(maxWords: 50) }}
+ * {{ post.content | extractFirstImage }}
+ * {{ post.date | dateToXmlschema }}
+ *
+ * @since 0.1.0
+ */
+
 export default function (eleventyConfig, options = {}) {
   // Extract first image from content
   eleventyConfig.addFilter("extractFirstImage", (content) => {
@@ -366,13 +393,6 @@ export default function (eleventyConfig, options = {}) {
 
   eleventyConfig.addFilter("numberOfWords", (text) => {
     return text.split(/\s+/).length;
-  });
-
-  eleventyConfig.addFilter("excerptWords", (text, count) => {
-    if (typeof text !== "string") {
-      return ""; // Return empty string or handle as appropriate for non-string input
-    }
-    return text.split(/\s+/).slice(0, count).join(" ");
   });
 
   eleventyConfig.addFilter("dotDate", (dateObj) => {

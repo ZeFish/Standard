@@ -1,4 +1,41 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Color System
+ * @category Colors
+ * @description Complete light/dark color system with semantic color tokens.
+ * Automatically respects user's system color scheme preference using CSS media queries.
+ * Includes analog-inspired light theme and retro tech-inspired dark theme.
+ * All colors designed for WCAG AA accessibility contrast ratios.
+ *
+ * @prop {color} --color-background Page background color
+ * @prop {color} --color-foreground Text foreground color
+ * @prop {color} --color-accent Primary accent color
+ * @prop {color} --color-success Success/positive state color
+ * @prop {color} --color-warning Warning/caution state color
+ * @prop {color} --color-error Error/negative state color
+ * @prop {color} --color-info Info/neutral state color
+ *
+ * @example
+ * // Light theme colors
+ * :root {
+ *   --color-background: white;
+ *   --color-foreground: #262626;
+ *   --color-accent: #c8a840;
+ * }
+ *
+ * // Dark theme (auto-applied)
+ * @media (prefers-color-scheme: dark) {
+ *   :root {
+ *     --color-background: #0f0f0f;
+ *     --color-foreground: #dbdbdb;
+ *   }
+ * }
+ *
+ * @since 0.1.0
+ * @see https://webaim.org/articles/contrast/
+ */
+
 /* Modern Color System - Automatic Light/Dark Theme with System Preference Detection */
 :root {
     /* Tell browser we support both color schemes */
