@@ -53,7 +53,7 @@
     "build:css-min": "sass --load-path=node_modules src/styles/standard.scss dist/standard.min.css --style=compressed --no-source-map",
     "build:js": "cp src/js/standard.js dist/standard.js",
     "build:js-min": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js",
-    "release": "npm run build && release-it --only-version --no-git.requireCleanWorkingDir --no-npm.requireCleanWorkingDir",
+    "release": "npm run build && release-it --only-version",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
   },
   "devDependencies": {
@@ -88,11 +88,12 @@
       "requireUpstream": false
     },
     "npm": {
-      "publish": true
+      "skipChecks": true
     },
     "github": {
       "release": true,
-      "web": false
+      "web": false,
+      "autoGenerate": true
     },
     "hooks": {
       "after:bump": "npm run changelog"
