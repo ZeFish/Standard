@@ -124,6 +124,9 @@ a:focus-visible {
     outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
     border-radius: 2px;
 }
+:is(h1, h2, h3, h4, h5, h6) a {
+    text-decoration: none;
+}
 
 /* ===== BUTTONS ===== */
 /* Native button element */
