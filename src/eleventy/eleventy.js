@@ -170,6 +170,13 @@ export default function (eleventyConfig, options = {}) {
     });
   }
 
+  eleventyConfig.addTransform("remove-empty-p", function (content, outputPath) {
+    if (outputPath && outputPath.endsWith(".html")) {
+      return content.replace(/<p><\/p>/g, "");
+    }
+    return content;
+  });
+
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
     const cloudflareDir = path.join(__dirname, "../cloudflare");
