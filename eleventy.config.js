@@ -2,7 +2,7 @@ import Standard from "./src/eleventy/eleventy.js";
 import DocGenerator from "./src/eleventy/doc-generator.js";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
-import { dirname, resolve } from "path";
+import { dirname, resolve, join } from "path";
 import fs from "fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -48,24 +48,34 @@ export default function (eleventyConfig) {
 
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
-  eleventyConfig.addPassthroughCopy({
-    [resolve(__dirname, "README.md")]: "README.md",
+
+  // Watch README.md for changes and copy into content directory
+  eleventyConfig.addWatchTarget("README.md");
+  eleventyConfig.on("eleventy.before", () => {
+    const readmeSrc = join(__dirname, "README.md");
+    const readmeDest = join(__dirname, "content", "README.md");
+
+    if (fs.existsSync(readmeSrc)) {
+      const content = fs.readFileSync(readmeSrc, "utf-8");
+      fs.writeFileSync(readmeDest, content, "utf-8");
+    }
   });
 
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: (data) => {
+      if (data.page.fileSlug.toLowerCase() === "readme") {
+        return "/index.html";
+      }
       if (data.page.fileSlug.toLowerCase() === "index") {
         return "/index.html";
       }
     },
     title: (data) => {
-      if (data.page.fileSlug.toLowerCase() === "index") {
+      if (
+        data.page.fileSlug.toLowerCase() === "readme" ||
+        data.page.fileSlug.toLowerCase() === "index"
+      ) {
         return "Standard Framework";
-      }
-    },
-    layout: (data) => {
-      if (data.page.fileSlug.toLowerCase() === "index") {
-        return "article";
       }
     },
   });
