@@ -52,6 +52,27 @@ export default function (eleventyConfig, options = {}) {
   })
     .use(markdown_it_obsidian_callouts)
     .use(markdownItFootnote);
+
+  // Add custom rule to rewrite content/ links to site paths
+  const defaultLinkRender =
+    md.renderer.rules.link_open ||
+    function (tokens, idx, options, env, renderer) {
+      return renderer.renderToken(tokens, idx, options);
+    };
+
+  md.renderer.rules.link_open = function (tokens, idx, options, env, renderer) {
+    const token = tokens[idx];
+    const href = token.attrGet("href");
+
+    if (href && href.startsWith("content/")) {
+      // Rewrite content/path/ to /path/
+      const rewrittenHref = "/" + href.replace(/^content\//, "");
+      token.attrSet("href", rewrittenHref);
+    }
+
+    return defaultLinkRender(tokens, idx, options, env, renderer);
+  };
+
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.setLibrary("md", md);
