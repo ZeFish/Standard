@@ -229,7 +229,7 @@
     .container-accent,
     .container-feature,
     .container-full {
-        > :is(h1, h2, h3, h4, h5, h6):first-child {
+        > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
             margin-block-start: 0; /* No top margin */
             /* Keep the heading's natural bottom margin */
         }

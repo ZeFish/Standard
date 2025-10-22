@@ -118,7 +118,7 @@
         margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
     }
 
-    * > :last-child {
+    * > :where(:last-child) {
         margin-block-end: 0;
     }
 
