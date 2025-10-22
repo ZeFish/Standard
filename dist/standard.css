@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.0 | 2025-10-22T17:13:52.028Z
+ * @version Standard Framework v0.11.1 | 2025-10-22T17:33:49.584Z
  * @license MIT
  */
 /* Document
@@ -3254,7 +3254,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose) h1,
-:where(.prose) > h1:first-child {
+:where(.prose) > h1:where(:first-child) {
   margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
 }
