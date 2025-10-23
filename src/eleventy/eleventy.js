@@ -251,7 +251,7 @@ export default function (eleventyConfig, options = {}) {
   // Log plugin initialization after build completes
   eleventyConfig.on("eleventy.after", () => {
     console.log(
-      `${colors.cyan}📦 Standard Framework${colors.reset} | ${colors.green}${pkg.version}${colors.reset} | https://standard.ffp.co/cheet-sheat`,
+      `${colors.cyan}⚡ Standard Framework${colors.reset} | ${colors.green}${pkg.version}${colors.reset} | https://standard.ffp.co/cheet-sheat`,
     );
   });
 
