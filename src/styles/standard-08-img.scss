@@ -34,7 +34,7 @@ img {
     max-inline-size: 100%;
 }
 
-:where(body:not(.no-rhythm)) {
+:where(html:not(.no-rhythm)) {
     /* Basic image styling */
     * + img,
     img,
@@ -93,8 +93,10 @@ img {
 }
 
 /* Zoom overlay backgrounds */
-.reading :has(img:active)::before,
-.reading :has(img.zoomed)::before,
+:where(html:not(.no-rhythm)) :has(img:active)::before,
+:where(html:not(.no-rhythm)) :has(img:zoomed)::before,
+.prose :has(img:active)::before,
+.prose :has(img.zoomed)::before,
 .rhythm :has(img:active)::before,
 .rhythm :has(img.zoomed)::before {
     content: "";
