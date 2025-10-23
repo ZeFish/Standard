@@ -59,8 +59,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("README.md");
   eleventyConfig.addWatchTarget("claude.md");
   eleventyConfig.on("eleventy.before", () => {
-    // Copy Cloudflare Functions to _site/functions for Cloudflare Pages
-    eleventyConfig.addPassthroughCopy({ "src/cloudflare": "functions" });
+    // Copy Cloudflare Functions to the root functions directory for Cloudflare Pages
+    execSync("mkdir -p functions && cp -r src/cloudflare/* functions");
 
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");

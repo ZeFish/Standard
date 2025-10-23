@@ -1,0 +1,126 @@
+# Cloudflare Workers Configuration for GitHub Comments System
+# This is a template for the comments system. Copy and customize for your project.
+
+name = "comments"
+type = "service"
+account_id = "your-account-id"
+workers_dev = true
+routes = [
+  { pattern = "example.com/api/comments", zone_name = "example.com" }
+]
+
+# Local development
+[env.development]
+workers_dev = true
+route = "localhost:8787/*"
+
+vars = { SPAM_CHECK_ENABLED = "true" }
+
+# Staging environment
+[env.staging]
+route = "staging.example.com/api/comments"
+zone_name = "example.com"
+
+vars = { SPAM_CHECK_ENABLED = "true" }
+
+[env.staging.secrets]
+# Set these with: wrangler secret put GITHUB_TOKEN --env staging
+GITHUB_TOKEN = ""
+GITHUB_OWNER = "your-username"
+GITHUB_REPO = "your-repo"
+GITHUB_COMMENTS_PATH = "data/comments"
+MODERATION_EMAIL = "moderation@example.com"
+
+# Production environment
+[env.production]
+route = "example.com/api/comments"
+zone_name = "example.com"
+
+vars = { SPAM_CHECK_ENABLED = "true" }
+
+[env.production.secrets]
+# Set these with: wrangler secret put GITHUB_TOKEN --env production
+GITHUB_TOKEN = ""
+GITHUB_OWNER = "your-username"
+GITHUB_REPO = "your-repo"
+GITHUB_COMMENTS_PATH = "data/comments"
+MODERATION_EMAIL = "moderation@example.com"
+GITHUB_WEBHOOK_SECRET = ""
+
+# Optional: Cloudflare KV for rate limiting
+# [[kv_namespaces]]
+# binding = "COMMENTS_KV"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-namespace-id"
+
+# Optional: D1 Database for comments storage
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "comments_db"
+# database_id = "your-database-id"
+
+# Build configuration
+build = { command = "npm install" }
+
+# Limits
+limits = { cpu_seconds = 50 }
+
+# Browser rendering (optional, for advanced features)
+# compatibility_date = "2024-01-01"
+# compatibility_flags = ["nodejs_compat"]
+
+# Build configuration
+[build.upload]
+format = "service-worker"
+
+# Environment variable documentation
+# ===================================
+#
+# GITHUB_TOKEN (secret, required)
+#   Personal access token with 'repo' scope for GitHub API access.
+#   Generate at: https://github.com/settings/tokens
+#
+# GITHUB_OWNER (required)
+#   GitHub username or organization name where comments will be stored.
+#   Example: "your-username" or "my-org"
+#
+# GITHUB_REPO (required)
+#   Repository name where comments will be stored.
+#   Example: "blog" or "my-website"
+#
+# GITHUB_COMMENTS_PATH (required)
+#   Path within repo where comment files will be stored.
+#   Example: "data/comments" or "comments"
+#
+# MODERATION_EMAIL (optional)
+#   Email address for moderation notifications when spam is detected.
+#   Example: "admin@example.com"
+#
+# GITHUB_WEBHOOK_SECRET (optional)
+#   Secret for validating GitHub webhook signatures.
+#   Generate a random string for security.
+#
+# SPAM_CHECK_ENABLED (default: "true")
+#   Enable/disable automatic spam detection.
+#   Values: "true" or "false"
+#
+# ===================================
+#
+# Setup Instructions:
+#
+# 1. Create environment-specific variables file:
+#    cp wrangler-comments.toml.template wrangler.toml
+#
+# 2. Update account_id:
+#    wrangler whoami
+#
+# 3. Set secrets for your environment:
+#    wrangler secret put GITHUB_TOKEN --env production
+#    wrangler secret put GITHUB_OWNER --env production
+#    wrangler secret put GITHUB_REPO --env production
+#
+# 4. Deploy:
+#    wrangler publish --env production
+#
+# 5. Test the endpoint:
+#    curl https://your-domain/api/comments?pageId=test
