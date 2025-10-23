@@ -34,14 +34,13 @@ img {
     max-inline-size: 100%;
 }
 
-:where(html:not(.no-rhythm)) {
+:where(html:not(.no-rhythm), .rhythm) {
     /* Basic image styling */
     * + img,
     img,
     img:first-child,
     img:last-child {
         margin: 0;
-
         max-inline-size: 100%;
         block-size: auto;
     }
@@ -93,8 +92,8 @@ img {
 }
 
 /* Zoom overlay backgrounds */
-:where(html:not(.no-rhythm)) :has(img:active)::before,
-:where(html:not(.no-rhythm)) :has(img:zoomed)::before,
+html:not(.no-rhythm) :has(img:active)::before,
+html:not(.no-rhythm) :has(img.zoomed)::before,
 .prose :has(img:active)::before,
 .prose :has(img.zoomed)::before,
 .rhythm :has(img:active)::before,
@@ -104,4 +103,6 @@ img {
     inset: 0;
     background: var(--color-background);
     z-index: calc(var(--z-image-zoom) - 1);
+
+    z-index: unset;
 }

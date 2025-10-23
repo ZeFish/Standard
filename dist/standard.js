@@ -18,7 +18,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.15 | 2025-10-23T14:11:40.373Z
+ * @version Standard Framework v0.11.16 | 2025-10-23T15:13:37.723Z
  * @license MIT
  */
 
@@ -1343,7 +1343,7 @@ class Standard {
       currentZoomedImage: null,
       images: [],
       zoomedClass: "zoomed",
-      selector: ".reading img, .rhythm img",
+      selector: "html:not(.no-rhythm) img, .prose img, .rhythm img",
     };
 
     // Disable CSS :active conflicts by injecting override styles
@@ -1374,9 +1374,9 @@ class Standard {
     style.id = styleId;
     style.textContent = `
         /* Standard.js - Disable :active pseudo-class conflicts */
-        .reading img:active,
+        .prose img:active,
         .rhythm img:active,
-        :where(body:not(.no-rhythm)) img:active {
+        html:not(.no-rhythm) img:active {
           /* Reset :active styles - JS handles zoom now */
           cursor: zoom-in !important;
           display: inline !important;
@@ -1394,7 +1394,8 @@ class Standard {
         }
 
         /* Remove :active backdrop overlay */
-        .reading :has(img:active)::before,
+        html:not(.no-rhythm) :has(img:active)::before,
+        .prose :has(img:active)::before,
         .rhythm :has(img:active)::before {
           display: none !important;
         }

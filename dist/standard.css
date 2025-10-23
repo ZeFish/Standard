@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.15 | 2025-10-23T14:11:40.373Z
+ * @version Standard Framework v0.11.16 | 2025-10-23T15:13:37.723Z
  * @license MIT
  */
 /* Document
@@ -3432,38 +3432,38 @@ img {
   max-inline-size: 100%;
 }
 
-:where(html:not(.no-rhythm)) {
+:where(html:not(.no-rhythm), .rhythm) {
   /* Basic image styling */
 }
-:where(html:not(.no-rhythm)) * + img,
-:where(html:not(.no-rhythm)) img,
-:where(html:not(.no-rhythm)) img:first-child,
-:where(html:not(.no-rhythm)) img:last-child {
+:where(html:not(.no-rhythm), .rhythm) * + img,
+:where(html:not(.no-rhythm), .rhythm) img,
+:where(html:not(.no-rhythm), .rhythm) img:first-child,
+:where(html:not(.no-rhythm), .rhythm) img:last-child {
   margin: 0;
   max-inline-size: 100%;
   block-size: auto;
 }
-:where(html:not(.no-rhythm)) img {
+:where(html:not(.no-rhythm), .rhythm) img {
   max-width: 100%;
   cursor: zoom-in;
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
-:where(html:not(.no-rhythm)) img.fx {
+:where(html:not(.no-rhythm), .rhythm) img.fx {
   border-radius: var(--border-radius);
   border: var(--border);
 }
-:where(html:not(.no-rhythm)) img.nofx {
+:where(html:not(.no-rhythm), .rhythm) img.nofx {
   border-radius: unset;
   border: unset;
   box-shadow: unset;
 }
-:where(html:not(.no-rhythm)) img:hover,
-:where(html:not(.no-rhythm)) img.zoomed {
+:where(html:not(.no-rhythm), .rhythm) img:hover,
+:where(html:not(.no-rhythm), .rhythm) img.zoomed {
   mix-blend-mode: normal;
   filter: none;
 }
-:where(html:not(.no-rhythm)) img:active,
-:where(html:not(.no-rhythm)) img.zoomed {
+:where(html:not(.no-rhythm), .rhythm) img:active,
+:where(html:not(.no-rhythm), .rhythm) img.zoomed {
   cursor: zoom-out;
   display: block;
   z-index: var(--z-image-zoom);
@@ -3483,8 +3483,8 @@ img {
 }
 
 /* Zoom overlay backgrounds */
-:where(html:not(.no-rhythm)) :has(img:active)::before,
-:where(html:not(.no-rhythm)) :has(img:zoomed)::before,
+html:not(.no-rhythm) :has(img:active)::before,
+html:not(.no-rhythm) :has(img.zoomed)::before,
 .prose :has(img:active)::before,
 .prose :has(img.zoomed)::before,
 .rhythm :has(img:active)::before,
@@ -3494,6 +3494,7 @@ img {
   inset: 0;
   background: var(--color-background);
   z-index: calc(var(--z-image-zoom) - 1);
+  z-index: unset;
 }
 
 /* Standard - Fine-Art Typography Framework */

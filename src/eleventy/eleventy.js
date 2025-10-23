@@ -158,6 +158,24 @@ export default function (eleventyConfig, options = {}) {
     return html;
   });
 
+  // Shortcode to include Standard CSS local files
+  eleventyConfig.addShortcode("standardCss", function () {
+    if (useCDN) {
+      return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
+    } else {
+      return `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
+    }
+  });
+
+  // Shortcode to include Standard JS from local files
+  eleventyConfig.addShortcode("standardJs", function () {
+    if (useCDN) {
+      return `<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
+    } else {
+      return `<script src="/${outputDir}/standard.min.js" type="module"></script>`;
+    }
+  });
+
   // Shortcode to include only CSS
   eleventyConfig.addShortcode("standardLab", function () {
     if (useCDN) {
