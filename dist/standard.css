@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.17 | 2025-10-23T15:46:46.159Z
+ * @version Standard Framework v0.11.18 | 2025-10-23T15:49:20.124Z
  * @license MIT
  */
 /* Document
@@ -5691,35 +5691,35 @@ body.standard-debug::before {
   }
 }
 /* Layout zone labels for .prose - CRITICAL FIX */
-.standard-debug.prose .container-small,
-.standard-debug.prose .container-accent,
-.standard-debug.prose .container-feature,
-.standard-debug.prose .container-full {
+.standard-debug .prose .container-small,
+.standard-debug .prose .container-accent,
+.standard-debug .prose .container-feature,
+.standard-debug .prose .container-full {
   position: relative; /* CRITICAL: Make these positioned containers */
   outline: 2px dashed; /* Add outline to make zones visible */
   outline-offset: -2px;
 }
 
-.standard-debug.prose .container-small {
+.standard-debug .prose .container-small {
   outline-color: color-mix(in srgb, var(--color-blue) 50%, transparent);
 }
 
-.standard-debug.prose .container-accent {
+.standard-debug .prose .container-accent {
   outline-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 }
 
-.standard-debug.prose .container-feature {
+.standard-debug .prose .container-feature {
   outline-color: color-mix(in srgb, var(--color-purple) 50%, transparent);
 }
 
-.standard-debug.prose .container-full {
+.standard-debug .prose .container-full {
   outline-color: color-mix(in srgb, var(--color-pink) 50%, transparent);
 }
 
-.standard-debug.prose .container-small::before,
-.standard-debug.prose .container-accent::before,
-.standard-debug.prose .container-feature::before,
-.standard-debug.prose .container-full::before {
+.standard-debug .prose .container-small::before,
+.standard-debug .prose .container-accent::before,
+.standard-debug .prose .container-feature::before,
+.standard-debug .prose .container-full::before {
   position: absolute;
   top: var(--space-3xs);
   right: var(--space-3xs);
@@ -5735,28 +5735,28 @@ body.standard-debug::before {
   font-weight: bold;
 }
 
-.standard-debug.prose .container-small::before {
+.standard-debug .prose .container-small::before {
   content: "Small";
   background: var(--color-blue);
 }
 
-.standard-debug.prose .container-accent::before {
+.standard-debug .prose .container-accent::before {
   content: "Accent";
   background: var(--color-accent);
 }
 
-.standard-debug.prose .container-feature::before {
+.standard-debug .prose .container-feature::before {
   content: "Feature";
   background: var(--color-purple);
 }
 
-.standard-debug.prose .container-full::before {
+.standard-debug .prose .container-full::before {
   content: "Full";
   background: var(--color-pink);
 }
 
 /* Default content zone indicator (elements without zone class) */
-.standard-debug.prose > :not(.container-small):not(.container-accent):not(.container-feature):not(.container-full) {
+.standard-debug .prose > :not(.container-small):not(.container-accent):not(.container-feature):not(.container-full) {
   outline: 1px dotted color-mix(in srgb, var(--color-green) 30%, transparent);
   outline-offset: -1px;
 }
@@ -5766,7 +5766,7 @@ body.standard-debug::before {
   .standard-debug::before,
   .standard-debug::after,
   .standard-debug .grid::after,
-  .standard-debug.prose::after,
+  .standard-debug .prose::after,
   body.standard-debug::before {
     display: none !important;
   }
@@ -5776,7 +5776,7 @@ body.standard-debug::before {
   .standard-debug::before {
     opacity: 0.3;
   }
-  .standard-debug.prose::after {
+  .standard-debug .prose::after {
     opacity: 0.15;
   }
 }
