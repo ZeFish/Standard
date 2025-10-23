@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.21 | 2025-10-23T19:12:52.919Z
+ * @version Standard Framework v0.11.22 | 2025-10-23T19:45:06.924Z
  * @license MIT
  */
 /* Document
@@ -1097,20 +1097,18 @@ mark {
 /* Typography Design Tokens - Using logical properties */
 :root {
   /* Font stacks */
-  --font-sans: InterVariable, system-ui, -apple-system, sans-serif;
+  --font-sans: Diatype, InterVariable, system-ui, -apple-system, sans-serif;
   --font-serif: "Source Serif 4", serif;
   --font-text: var(--font-sans);
   --font-header: InterVariable, system-ui, -apple-system, sans-serif;
   --font-monospace:
       "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
   /* Font features & variations */
-  --font-feature: "liga", "dlig", "kern", "calt", "zero";
+  --font-feature: "dlig", "zero";
   --font-variation: "";
-  --font-header-feature:
-      "liga", "dlig", "kern", "calt", "case", "cv06", "cv10", "cv11", "cv12",
-      "cv13", "ss01";
+  --font-header-feature: "dlig", "cv11", "cv12", "cv13";
   --font-header-variation: "";
-  --font-monospace-feature: "liga", "dlig", "kern", "calt";
+  --font-monospace-feature: "dlig";
   --font-monospace-variation: "";
   /* Font properties */
   --font-weight: 400;
@@ -1121,9 +1119,9 @@ mark {
   --font-header-weight: 900;
   /* Interface font tokens */
   --font-interface: InterVariable, system-ui, -apple-system, sans-serif;
-  --font-interface-feature: "liga", "dlig", "kern", "calt", "zero";
+  --font-interface-feature: "dlig", "zero";
   --font-interface-variation: "opsz" 32;
-  --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
+  --font-list-feature: "dlig", "tnum", "zero";
   --font-list-variation: "opsz" 32;
   /* Calculated typography tokens */
   --line-height: calc(var(--font-size) * var(--font-density));
@@ -1420,6 +1418,13 @@ a:focus {
 a:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
   border-radius: 2px;
+}
+
+a.external-link::after {
+  content: "↗";
+  font-size: var(--scale-xs);
+  opacity: var(--color-subtle);
+  color: var(--color-foreground);
 }
 
 :is(h1, h2, h3, h4, h5, h6) a {
