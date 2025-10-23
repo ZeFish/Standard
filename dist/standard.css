@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.23 | 2025-10-23T19:57:42.353Z
+ * @version Standard Framework v0.11.24 | 2025-10-23T20:22:49.440Z
  * @license MIT
  */
 /* Document
@@ -1270,7 +1270,7 @@ figcaption {
 /* Table typography */
 table {
   border-collapse: collapse;
-  font-variant-numeric: tabular-nums;
+  /*font-variant-numeric: tabular-nums;*/
 }
 
 th,
@@ -2062,7 +2062,7 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) table {
   /* You already have: border-collapse: collapse; */
   width: 100%;
-  font-variant-numeric: tabular-nums; /* ADD: Monospace numbers */
+  /* font-variant-numeric: tabular-nums;*/ /* ADD: Monospace numbers */
 }
 :where(html:not(.no-rhythm), .rhythm) td,
 :where(html:not(.no-rhythm), .rhythm) th {

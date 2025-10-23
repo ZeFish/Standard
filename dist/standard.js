@@ -18,7 +18,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.23 | 2025-10-23T19:57:42.353Z
+ * @version Standard Framework v0.11.24 | 2025-10-23T20:22:49.440Z
  * @license MIT
  */
 
