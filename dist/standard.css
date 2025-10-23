@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.13 | 2025-10-23T14:03:52.835Z
+ * @version Standard Framework v0.11.14 | 2025-10-23T14:08:09.392Z
  * @license MIT
  */
 /* Document
@@ -3428,38 +3428,38 @@ img {
   max-inline-size: 100%;
 }
 
-:where(body:not(.no-rhythm)) {
+:where(html:not(.no-rhythm)) {
   /* Basic image styling */
 }
-:where(body:not(.no-rhythm)) * + img,
-:where(body:not(.no-rhythm)) img,
-:where(body:not(.no-rhythm)) img:first-child,
-:where(body:not(.no-rhythm)) img:last-child {
+:where(html:not(.no-rhythm)) * + img,
+:where(html:not(.no-rhythm)) img,
+:where(html:not(.no-rhythm)) img:first-child,
+:where(html:not(.no-rhythm)) img:last-child {
   margin: 0;
   max-inline-size: 100%;
   block-size: auto;
 }
-:where(body:not(.no-rhythm)) img {
+:where(html:not(.no-rhythm)) img {
   max-width: 100%;
   cursor: zoom-in;
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
-:where(body:not(.no-rhythm)) img.fx {
+:where(html:not(.no-rhythm)) img.fx {
   border-radius: var(--border-radius);
   border: var(--border);
 }
-:where(body:not(.no-rhythm)) img.nofx {
+:where(html:not(.no-rhythm)) img.nofx {
   border-radius: unset;
   border: unset;
   box-shadow: unset;
 }
-:where(body:not(.no-rhythm)) img:hover,
-:where(body:not(.no-rhythm)) img.zoomed {
+:where(html:not(.no-rhythm)) img:hover,
+:where(html:not(.no-rhythm)) img.zoomed {
   mix-blend-mode: normal;
   filter: none;
 }
-:where(body:not(.no-rhythm)) img:active,
-:where(body:not(.no-rhythm)) img.zoomed {
+:where(html:not(.no-rhythm)) img:active,
+:where(html:not(.no-rhythm)) img.zoomed {
   cursor: zoom-out;
   display: block;
   z-index: var(--z-image-zoom);
@@ -3479,8 +3479,10 @@ img {
 }
 
 /* Zoom overlay backgrounds */
-.reading :has(img:active)::before,
-.reading :has(img.zoomed)::before,
+:where(html:not(.no-rhythm)) :has(img:active)::before,
+:where(html:not(.no-rhythm)) :has(img:zoomed)::before,
+.prose :has(img:active)::before,
+.prose :has(img.zoomed)::before,
 .rhythm :has(img:active)::before,
 .rhythm :has(img.zoomed)::before {
   content: "";
