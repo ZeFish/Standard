@@ -50,14 +50,17 @@
     img,
     iframe,
     .outset,
-    .inset {
+    .inset,
+    .box,
+    .box-inset {
         background: var(--color-background-secondary);
         border-radius: var(--border-radius);
         border: var(--border);
         box-shadow: var(--shadow);
     }
     pre,
-    blockquote .inset {
+    blockquote .inset,
+    .box-inset {
         box-shadow: inset var(--shadow);
     }
 

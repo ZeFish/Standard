@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.11 | 2025-10-23T01:45:58.237Z
+ * @version Standard Framework v0.11.12 | 2025-10-23T12:50:08.511Z
  * @license MIT
  */
 /* Document
@@ -3535,14 +3535,17 @@ img {
 .md img,
 .md iframe,
 .md .outset,
-.md .inset {
+.md .inset,
+.md .box,
+.md .box-inset {
   background: var(--color-background-secondary);
   border-radius: var(--border-radius);
   border: var(--border);
   box-shadow: var(--shadow);
 }
 .md pre,
-.md blockquote .inset {
+.md blockquote .inset,
+.md .box-inset {
   box-shadow: inset var(--shadow);
 }
 .md blockquote {
