@@ -10,7 +10,7 @@
  * @returns {Response} The response to the request.
  */
 
-import { createErrorResponse } from "./utils.js";
+import { createErrorResponse } from "../utils.js";
 
 export async function onRequestPost(request, env, ctx) {
   if (request.method !== "POST") {
