@@ -67,8 +67,12 @@ $wide: 1440px;
     footer,
     main,
     nav,
-    .grid,
-    .box {
+    .flow,
+    .flow-2,
+    .flow-3,
+    .flow-4,
+    .box,
+    .box-inset {
         @content;
     }
 }

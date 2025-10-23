@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.14 | 2025-10-23T14:08:09.392Z
+ * @version Standard Framework v0.11.15 | 2025-10-23T14:11:15.995Z
  * @license MIT
  */
 /* Document
@@ -1766,8 +1766,12 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) footer,
 :where(html:not(.no-rhythm), .rhythm) main,
 :where(html:not(.no-rhythm), .rhythm) nav,
-:where(html:not(.no-rhythm), .rhythm) .grid,
-:where(html:not(.no-rhythm), .rhythm) .box {
+:where(html:not(.no-rhythm), .rhythm) .flow,
+:where(html:not(.no-rhythm), .rhythm) .flow-2,
+:where(html:not(.no-rhythm), .rhythm) .flow-3,
+:where(html:not(.no-rhythm), .rhythm) .flow-4,
+:where(html:not(.no-rhythm), .rhythm) .box,
+:where(html:not(.no-rhythm), .rhythm) .box-inset {
   margin-block-start: 0;
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
