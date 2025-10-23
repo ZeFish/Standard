@@ -157,6 +157,7 @@ type = "service"
 main = "functions/index.js"
 account_id = "${accountId}"
 compatibility_date = "2024-10-22"
+pages_build_output_dir = "_site"
 
 # Local development
 [env.development]

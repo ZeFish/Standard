@@ -6,6 +6,7 @@ type = "service"
 main = "functions/index.js"
 account_id = "ed75b6e6d045cf3c5c66f55f784c1769"
 compatibility_date = "2024-10-22"
+pages_build_output_dir = "_site"
 
 # Local development
 [env.development]
