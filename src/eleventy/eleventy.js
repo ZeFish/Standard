@@ -124,6 +124,11 @@ export default function (eleventyConfig, options = {}) {
 
   eleventyConfig.setUseGitIgnore(false);
 
+  eleventyConfig.setNunjucksEnvironmentOptions({
+    trimBlocks: true,
+    lstripBlocks: true,
+  });
+
   //eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   //
   eleventyConfig.addGlobalData("standard", {
@@ -169,13 +174,6 @@ export default function (eleventyConfig, options = {}) {
       "node_modules/@zefish/standard/dist/standard.lab.js": `${outputDir}/standard.lab.js`,
     });
   }
-
-  eleventyConfig.addTransform("remove-empty-p", function (content, outputPath) {
-    if (outputPath && outputPath.endsWith(".html")) {
-      return content.replace(/<p><\/p>/g, "");
-    }
-    return content;
-  });
 
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
@@ -267,4 +265,9 @@ export default function (eleventyConfig, options = {}) {
       `${colors.cyan}📦 Standard Framework${colors.reset} | ${colors.green}${pkg.version}${colors.reset} | https://standard.ffp.co/cheet-sheat`,
     );
   });
+
+  return {
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
+  };
 }
