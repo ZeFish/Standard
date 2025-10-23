@@ -9,7 +9,7 @@
  * @since 0.10.53
  */
 
-import { handleComments } from "./comments.js";
+import { handleComments } from "./comments-core.js";
 import { handleCORS, createErrorResponse } from "./utils.js";
 
 /**
