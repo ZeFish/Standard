@@ -215,7 +215,6 @@ export default function (eleventyConfig, options = {}) {
 
   // ===== GITHUB COMMENTS SYSTEM INTEGRATION =====
   if (comments.enabled) {
-    generateWranglerConfig({ environment: cloudflare.environment });
 
 
     // Optionally copy client library to assets

@@ -45,10 +45,7 @@ export default function (eleventyConfig, options = {}) {
     includeFunctions = ["example"],
   } = options;
 
-  // Generate wrangler.toml from .env on build start
-  eleventyConfig.on("eleventy.before", () => {
-    generateWranglerConfig({ environment });
-  });
+
 
   // Copy Cloudflare functions to output directory
   // Functions are now in src/cloudflare/ instead of src/eleventy/cloudflare/
@@ -103,37 +100,7 @@ export function generateWranglerConfig(options = {}) {
   const wranglerConfig = buildWranglerToml(environment);
   const devVarsContent = buildDevVars(environment);
 
-  if (!dryRun) {
-    try {
-      // Write wrangler.toml
-      fs.writeFileSync("wrangler.toml", wranglerConfig);
-
-      // Write .dev.vars
-      fs.writeFileSync(".dev.vars", devVarsContent);
-
-      console.log(`
-[Standard] ✅ Generated wrangler.toml and .dev.vars
-
-📝 Configuration loaded from .env:
-   - Project: ${process.env.PROJECT_NAME || "comments"}
-   - GitHub: ${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}
-   - Comments path: ${process.env.GITHUB_COMMENTS_PATH || "data/comments"}
-
-⚠️  IMPORTANT: Set production secrets manually:
-
-   wrangler secret put GITHUB_TOKEN --env ${environment}
-   wrangler secret put MODERATION_EMAIL --env ${environment}
-   wrangler secret put GITHUB_WEBHOOK_SECRET --env ${environment}
-
-🚀 Then deploy:
-
-   wrangler publish --env ${environment}
-`);
-    } catch (error) {
-      console.error("[Wrangler] Error writing configuration files:", error);
-      return false;
-    }
-  }
+// Removed code for generating wrangler.toml and .dev.vars. Cloudflare Pages handles function discovery automatically.
 
   return true;
 }
