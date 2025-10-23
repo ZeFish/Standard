@@ -12,6 +12,7 @@ import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
 import { addEncryptionTransform } from "./encryption.js";
+import { generateWranglerConfig } from "./cloudflare.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -107,12 +108,15 @@ export default function (eleventyConfig, options = {}) {
       environment: "production",
     },
     // GitHub Comments System configuration
-    comments = {
-      enabled: false,
-      outputDir: "functions/api",
-      copyClientLibrary: true,
-    },
+    comments: userComments = {},
   } = options;
+
+  const comments = {
+    enabled: false,
+    outputDir: "functions/api",
+    copyClientLibrary: true,
+    ...userComments,
+  };
 
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
   eleventyConfig.addPlugin(ShortCode);
@@ -196,11 +200,7 @@ export default function (eleventyConfig, options = {}) {
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
     const cloudflareDir = path.join(__dirname, "../cloudflare");
-    if (fs.existsSync(cloudflareDir)) {
-      eleventyConfig.addPassthroughCopy({
-        [cloudflareDir]: cloudflare.outputDir,
-      });
-    }
+
 
     eleventyConfig.addGlobalData("cloudflare", {
       environment: cloudflare.environment || "production",
@@ -215,36 +215,8 @@ export default function (eleventyConfig, options = {}) {
 
   // ===== GITHUB COMMENTS SYSTEM INTEGRATION =====
   if (comments.enabled) {
-    const commentsHandler = path.join(
-      __dirname,
-      "../cloudflare/comments-example.js",
-    );
-    const commentsUtils = path.join(__dirname, "../cloudflare/utils.js");
-    const commentsConfig = path.join(
-      __dirname,
-      "../cloudflare/wrangler-comments.toml.template",
-    );
+    generateWranglerConfig({ environment: cloudflare.environment });
 
-    // Copy comments handler
-    if (fs.existsSync(commentsHandler)) {
-      eleventyConfig.addPassthroughCopy({
-        [commentsHandler]: `${comments.outputDir}/comments.js`,
-      });
-    }
-
-    // Copy utilities (required by handler)
-    if (fs.existsSync(commentsUtils)) {
-      eleventyConfig.addPassthroughCopy({
-        [commentsUtils]: `${comments.outputDir}/utils.js`,
-      });
-    }
-
-    // Copy config template
-    if (fs.existsSync(commentsConfig)) {
-      eleventyConfig.addPassthroughCopy({
-        [commentsConfig]: "wrangler-comments.toml.template",
-      });
-    }
 
     // Optionally copy client library to assets
     if (comments.copyClientLibrary) {

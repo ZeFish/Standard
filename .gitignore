@@ -13,3 +13,7 @@ PUBLISHING.md
 content/README.md
 content/claude.md
 .doc-generator-hash
+.dev.vars
+.env
+/functions
+wrangler.toml

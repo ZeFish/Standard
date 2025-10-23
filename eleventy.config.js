@@ -41,6 +41,9 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(Standard, {
     copyFiles: false, // Use local dist/ folder, not node_modules
+    comments: {
+      enabled: true,
+    },
   });
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
@@ -56,6 +59,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("README.md");
   eleventyConfig.addWatchTarget("claude.md");
   eleventyConfig.on("eleventy.before", () => {
+    // Create functions directory and copy files
+    execSync("mkdir -p functions/handlers && cp src/cloudflare/api.js functions/index.js && cp -r src/cloudflare/handlers/* functions/handlers/ && cp src/cloudflare/utils.js functions/utils.js && cp src/cloudflare/comments.js functions/comments.js");
+
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");
     const readmeDest = join(__dirname, "content", "README.md");

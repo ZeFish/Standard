@@ -77,7 +77,7 @@ export default function (eleventyConfig, options = {}) {
  * @param {object} options Configuration options
  * @returns {boolean} Success status
  */
-function generateWranglerConfig(options = {}) {
+export function generateWranglerConfig(options = {}) {
   const { environment = "production", dryRun = false } = options;
 
   // Load environment variables from .env
@@ -154,7 +154,7 @@ function buildWranglerToml(environment) {
 
 name = "${projectName}"
 type = "service"
-main = "functions/api/comments.js"
+main = "functions/index.js"
 account_id = "${accountId}"
 compatibility_date = "2024-10-22"
 
