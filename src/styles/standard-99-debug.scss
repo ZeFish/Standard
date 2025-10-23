@@ -54,9 +54,9 @@
         to bottom,
         transparent,
         transparent calc(var(--space) - 1px),
-        color-mix(in srgb, var(--color-accent) 15%, transparent)
+        color-mix(in srgb, var(--color-accent) 5%, transparent)
             calc(var(--space) - 1px),
-        color-mix(in srgb, var(--color-accent) 15%, transparent) var(--space)
+        color-mix(in srgb, var(--color-accent) 5%, transparent) var(--space)
     );
     pointer-events: none;
     z-index: var(--z-tooltip);
@@ -410,19 +410,19 @@ body.standard-debug::before {
 }
 
 .standard-debug .prose .container-small {
-    outline-color: color-mix(in srgb, var(--color-blue) 50%, transparent);
+    outline-color: color-mix(in srgb, var(--color-blue) 75%, transparent);
 }
 
 .standard-debug .prose .container-accent {
-    outline-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+    outline-color: color-mix(in srgb, var(--color-accent) 75%, transparent);
 }
 
 .standard-debug .prose .container-feature {
-    outline-color: color-mix(in srgb, var(--color-purple) 50%, transparent);
+    outline-color: color-mix(in srgb, var(--color-purple) 75%, transparent);
 }
 
 .standard-debug .prose .container-full {
-    outline-color: color-mix(in srgb, var(--color-pink) 50%, transparent);
+    outline-color: color-mix(in srgb, var(--color-pink) 75%, transparent);
 }
 
 .standard-debug .prose .container-small::before,
@@ -470,7 +470,7 @@ body.standard-debug::before {
     > :not(.container-small):not(.container-accent):not(.container-feature):not(
         .container-full
     ) {
-    outline: 1px dotted color-mix(in srgb, var(--color-green) 30%, transparent);
+    outline: 1px dotted color-mix(in srgb, var(--color-green) 40%, transparent);
     outline-offset: -1px;
 }
 
