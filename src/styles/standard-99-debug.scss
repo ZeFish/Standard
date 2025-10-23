@@ -405,24 +405,24 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature,
 .standard-debug .prose .container-full {
     position: relative; /* CRITICAL: Make these positioned containers */
-    outline: 2px dashed; /* Add outline to make zones visible */
-    outline-offset: -2px;
+    outline: 1px dashed; /* Add outline to make zones visible */
+    outline-offset: -1px;
 }
 
 .standard-debug .prose .container-small {
-    outline-color: color-mix(in srgb, var(--color-blue) 75%, transparent);
+    outline-color: color-mix(in srgb, var(--color-blue) 85%, transparent);
 }
 
 .standard-debug .prose .container-accent {
-    outline-color: color-mix(in srgb, var(--color-accent) 75%, transparent);
+    outline-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
 }
 
 .standard-debug .prose .container-feature {
-    outline-color: color-mix(in srgb, var(--color-purple) 75%, transparent);
+    outline-color: color-mix(in srgb, var(--color-purple) 85%, transparent);
 }
 
 .standard-debug .prose .container-full {
-    outline-color: color-mix(in srgb, var(--color-pink) 75%, transparent);
+    outline-color: color-mix(in srgb, var(--color-pink) 85%, transparent);
 }
 
 .standard-debug .prose .container-small::before,
@@ -470,7 +470,7 @@ body.standard-debug::before {
     > :not(.container-small):not(.container-accent):not(.container-feature):not(
         .container-full
     ) {
-    outline: 1px dotted color-mix(in srgb, var(--color-green) 40%, transparent);
+    outline: 1px dotted color-mix(in srgb, var(--color-green) 60%, transparent);
     outline-offset: -1px;
 }
 
