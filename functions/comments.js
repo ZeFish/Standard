@@ -10,7 +10,7 @@
  */
 
 import { handleComments } from "./comments.js";
-import { handleCORS, createErrorResponse } from "../utils.js";
+import { handleCORS, createErrorResponse } from "./utils.js";
 
 /**
  * Middleware: Validate environment variables
