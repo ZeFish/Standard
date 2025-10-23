@@ -15,9 +15,8 @@ vars = { SPAM_CHECK_ENABLED = "true" }
 
 # Production environment
 [env.production]
-vars = { SPAM_CHECK_ENABLED = "true" }
-
 [env.production.vars]
+SPAM_CHECK_ENABLED = "true"
 GITHUB_OWNER = "zefish"
 GITHUB_REPO = "standard"
 GITHUB_COMMENTS_PATH = "data/comments"

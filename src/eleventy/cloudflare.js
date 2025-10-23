@@ -176,9 +176,8 @@ zone_id = "${zoneId}"
 `;
   }
 
-  toml += `vars = { SPAM_CHECK_ENABLED = "${process.env.SPAM_CHECK_ENABLED || "true"}" }
-
-[env.${environment}.vars]
+  toml += `[env.${environment}.vars]
+SPAM_CHECK_ENABLED = "${process.env.SPAM_CHECK_ENABLED || "true"}"
 GITHUB_OWNER = "${process.env.GITHUB_OWNER}"
 GITHUB_REPO = "${process.env.GITHUB_REPO}"
 GITHUB_COMMENTS_PATH = "${process.env.GITHUB_COMMENTS_PATH || "data/comments"}"
