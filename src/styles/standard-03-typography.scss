@@ -31,7 +31,7 @@
 /* Typography Design Tokens - Using logical properties */
 :root {
     /* Font stacks */
-    --font-sans: InterVariable, system-ui, -apple-system, sans-serif;
+    --font-sans: Diatype, InterVariable, system-ui, -apple-system, sans-serif;
     --font-serif: "Source Serif 4", serif;
     --font-text: var(--font-sans);
     --font-header: InterVariable, system-ui, -apple-system, sans-serif;
@@ -39,13 +39,11 @@
         "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
 
     /* Font features & variations */
-    --font-feature: "liga", "dlig", "kern", "calt", "zero";
+    --font-feature: "dlig", "zero";
     --font-variation: "";
-    --font-header-feature:
-        "liga", "dlig", "kern", "calt", "case", "cv06", "cv10", "cv11", "cv12",
-        "cv13", "ss01";
+    --font-header-feature: "dlig", "cv11", "cv12", "cv13";
     --font-header-variation: "";
-    --font-monospace-feature: "liga", "dlig", "kern", "calt";
+    --font-monospace-feature: "dlig";
     --font-monospace-variation: "";
 
     /* Font properties */
@@ -58,9 +56,9 @@
 
     /* Interface font tokens */
     --font-interface: InterVariable, system-ui, -apple-system, sans-serif;
-    --font-interface-feature: "liga", "dlig", "kern", "calt", "zero";
+    --font-interface-feature: "dlig", "zero";
     --font-interface-variation: "opsz" 32;
-    --font-list-feature: "liga", "dlig", "kern", "calt", "tnum", "zero", "ss01";
+    --font-list-feature: "dlig", "tnum", "zero";
     --font-list-variation: "opsz" 32;
 
     /* Calculated typography tokens */
