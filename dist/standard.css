@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.12 | 2025-10-23T12:50:08.511Z
+ * @version Standard Framework v0.11.13 | 2025-10-23T14:03:52.835Z
  * @license MIT
  */
 /* Document
@@ -3548,6 +3548,11 @@ img {
 .md .box-inset {
   box-shadow: inset var(--shadow);
 }
+.md .box,
+.md .box-inset {
+  padding: var(--space);
+  font-size: var(--scale-s);
+}
 .md blockquote {
   font-size: var(--scale-s);
   line-height: var(--font-density-s);
@@ -5255,6 +5260,102 @@ img {
     display: inherit !important;
   }
 }
+/* =========================== */
+/* MULTI-COLUMN FLOW UTILITIES */
+/* =========================== */
+/**
+ * @component Multi-Column Flow Utilities
+ * @category Utilities
+ * @description CSS multi-column layout utilities for flowing text across columns.
+ * Useful for magazine-style layouts, masonry grids, and dense text content.
+ * Automatically stacks to single column on mobile for readability.
+ *
+ * Classes:
+ * - .flow-2, .flow-3, .flow-4: Fixed column count
+ * - .flow-auto: Automatic columns based on optimal width
+ * - .flow-gap-tight, .flow-gap-wide: Column gap variants
+ * - .flow-keep: Prevent breaks inside elements
+ * - .flow-rule, .flow-rule-accent: Vertical lines between columns
+ *
+ * @example
+ * <!-- Two-column layout -->
+ * <div class="flow-2">
+ *   <p>Content flows across two columns...</p>
+ * </div>
+ *
+ * <!-- Auto-responsive columns with rules -->
+ * <div class="flow-auto flow-rule">
+ *   <p>Automatically creates optimal columns...</p>
+ * </div>
+ *
+ * <!-- Prevent element from breaking across columns -->
+ * <div class="flow-3">
+ *   <blockquote class="flow-keep">Stays together</blockquote>
+ * </div>
+ *
+ * @since 0.1.0
+ */
+/* Fixed column counts */
+.flow-2 {
+  columns: 2;
+  column-gap: var(--grid-gap);
+}
+
+.flow-3 {
+  columns: 3;
+  column-gap: var(--grid-gap);
+}
+
+.flow-4 {
+  columns: 4;
+  column-gap: var(--grid-gap);
+}
+
+/* Responsive column count based on container width */
+.flow-auto {
+  columns: auto;
+  column-width: var(--line-width-s); /* ~32rem optimal column width */
+  column-gap: var(--grid-gap);
+}
+
+/* Column gap variants */
+.flow-gap-tight {
+  column-gap: var(--space-s);
+}
+
+.flow-gap-wide {
+  column-gap: var(--space-l);
+}
+
+/* Prevent breaks inside elements */
+.flow-keep {
+  break-inside: avoid;
+  page-break-inside: avoid; /* Legacy support */
+}
+
+/* Column rules (vertical lines between columns) */
+.flow-rule {
+  column-rule: var(--border);
+}
+
+.flow-rule-accent {
+  column-rule: 1px solid var(--color-accent);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .flow-2,
+  .flow-3,
+  .flow-4 {
+    columns: 1; /* Stack on mobile */
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .flow-3,
+  .flow-4 {
+    columns: 2; /* Reduce columns on tablets */
+  }
+}
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
@@ -5313,11 +5414,33 @@ img {
 }
 
 /* Grid Column Overlay (only for .grid inside debug) */
-.standard-debug .grid {
+.standard-debug .grid,
+.standard-debug .grid-2,
+.standard-debug .grid-3,
+.standard-debug .grid-4,
+.standard-debug .grid-5,
+.standard-debug .grid-6,
+.standard-debug .grid-7,
+.standard-debug .grid-8,
+.standard-debug .grid-9,
+.standard-debug .grid-10,
+.standard-debug .grid-11,
+.standard-debug .grid-12 {
   position: relative;
 }
 
-.standard-debug .grid::after {
+.standard-debug .grid::after,
+.standard-debug .grid-2::after,
+.standard-debug .grid-3::after,
+.standard-debug .grid-4::after,
+.standard-debug .grid-5::after,
+.standard-debug .grid-6::after,
+.standard-debug .grid-7::after,
+.standard-debug .grid-8::after,
+.standard-debug .grid-9::after,
+.standard-debug .grid-10::after,
+.standard-debug .grid-11::after,
+.standard-debug .grid-12::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -5326,14 +5449,11 @@ img {
   column-gap: var(--grid-gap);
   pointer-events: none;
   z-index: var(--z-tooltip);
-}
-
-.standard-debug .grid::after {
   background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-cyan) 10%, transparent) 0, color-mix(in srgb, var(--color-cyan) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
 }
 
 /* Reading Layout Debug - show zones */
-.standard-debug.reading::after {
+.standard-debug.prose::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -5416,13 +5536,35 @@ img {
 }
 
 /* Grid item debugging */
-.standard-debug .grid > * {
+.standard-debug .grid > *,
+.standard-debug .grid-2 > *,
+.standard-debug .grid-3 > *,
+.standard-debug .grid-4 > *,
+.standard-debug .grid-5 > *,
+.standard-debug .grid-6 > *,
+.standard-debug .grid-7 > *,
+.standard-debug .grid-8 > *,
+.standard-debug .grid-9 > *,
+.standard-debug .grid-10 > *,
+.standard-debug .grid-11 > *,
+.standard-debug .grid-12 > * {
   outline: 1px solid color-mix(in srgb, var(--color-cyan) 50%, transparent);
   outline-offset: -1px;
   position: relative;
 }
 
-.standard-debug .grid > *::before {
+.standard-debug .grid > *::before,
+.standard-debug .grid-2 > *::before,
+.standard-debug .grid-3 > *::before,
+.standard-debug .grid-4 > *::before,
+.standard-debug .grid-5 > *::before,
+.standard-debug .grid-6 > *::before,
+.standard-debug .grid-7 > *::before,
+.standard-debug .grid-8 > *::before,
+.standard-debug .grid-9 > *::before,
+.standard-debug .grid-10 > *::before,
+.standard-debug .grid-11 > *::before,
+.standard-debug .grid-12 > *::before {
   content: attr(class);
   position: absolute;
   top: var(--space-3xs);
@@ -5541,36 +5683,36 @@ body.standard-debug::before {
     color: var(--color-foreground);
   }
 }
-/* Layout zone labels for .reading - CRITICAL FIX */
-.standard-debug.reading .small,
-.standard-debug.reading .accent,
-.standard-debug.reading .feature,
-.standard-debug.reading .full {
+/* Layout zone labels for .prose - CRITICAL FIX */
+.standard-debug.prose .small,
+.standard-debug.prose .accent,
+.standard-debug.prose .feature,
+.standard-debug.prose .full {
   position: relative; /* CRITICAL: Make these positioned containers */
   outline: 2px dashed; /* Add outline to make zones visible */
   outline-offset: -2px;
 }
 
-.standard-debug.reading .small {
+.standard-debug.prose .small {
   outline-color: color-mix(in srgb, var(--color-blue) 50%, transparent);
 }
 
-.standard-debug.reading .accent {
+.standard-debug.prose .accent {
   outline-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 }
 
-.standard-debug.reading .feature {
+.standard-debug.prose .feature {
   outline-color: color-mix(in srgb, var(--color-purple) 50%, transparent);
 }
 
-.standard-debug.reading .full {
+.standard-debug.prose .full {
   outline-color: color-mix(in srgb, var(--color-pink) 50%, transparent);
 }
 
-.standard-debug.reading .small::before,
-.standard-debug.reading .accent::before,
-.standard-debug.reading .feature::before,
-.standard-debug.reading .full::before {
+.standard-debug.prose .small::before,
+.standard-debug.prose .accent::before,
+.standard-debug.prose .feature::before,
+.standard-debug.prose .full::before {
   position: absolute;
   top: var(--space-3xs);
   right: var(--space-3xs);
@@ -5586,28 +5728,28 @@ body.standard-debug::before {
   font-weight: bold;
 }
 
-.standard-debug.reading .small::before {
+.standard-debug.prose .small::before {
   content: "Small";
   background: var(--color-blue);
 }
 
-.standard-debug.reading .accent::before {
+.standard-debug.prose .accent::before {
   content: "Accent";
   background: var(--color-accent);
 }
 
-.standard-debug.reading .feature::before {
+.standard-debug.prose .feature::before {
   content: "Feature";
   background: var(--color-purple);
 }
 
-.standard-debug.reading .full::before {
+.standard-debug.prose .full::before {
   content: "Full";
   background: var(--color-pink);
 }
 
 /* Default content zone indicator (elements without zone class) */
-.standard-debug.reading > :not(.small):not(.accent):not(.feature):not(.full) {
+.standard-debug.prose > :not(.small):not(.accent):not(.feature):not(.full) {
   outline: 1px dotted color-mix(in srgb, var(--color-green) 30%, transparent);
   outline-offset: -1px;
 }
@@ -5617,7 +5759,7 @@ body.standard-debug::before {
   .standard-debug::before,
   .standard-debug::after,
   .standard-debug .grid::after,
-  .standard-debug.reading::after,
+  .standard-debug.prose::after,
   body.standard-debug::before {
     display: none !important;
   }
@@ -5627,7 +5769,7 @@ body.standard-debug::before {
   .standard-debug::before {
     opacity: 0.3;
   }
-  .standard-debug.reading::after {
+  .standard-debug.prose::after {
     opacity: 0.15;
   }
 }

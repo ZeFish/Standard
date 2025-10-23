@@ -64,11 +64,33 @@
 }
 
 /* Grid Column Overlay (only for .grid inside debug) */
-.standard-debug .grid {
+.standard-debug .grid,
+.standard-debug .grid-2,
+.standard-debug .grid-3,
+.standard-debug .grid-4,
+.standard-debug .grid-5,
+.standard-debug .grid-6,
+.standard-debug .grid-7,
+.standard-debug .grid-8,
+.standard-debug .grid-9,
+.standard-debug .grid-10,
+.standard-debug .grid-11,
+.standard-debug .grid-12 {
     position: relative;
 }
 
-.standard-debug .grid::after {
+.standard-debug .grid::after,
+.standard-debug .grid-2::after,
+.standard-debug .grid-3::after,
+.standard-debug .grid-4::after,
+.standard-debug .grid-5::after,
+.standard-debug .grid-6::after,
+.standard-debug .grid-7::after,
+.standard-debug .grid-8::after,
+.standard-debug .grid-9::after,
+.standard-debug .grid-10::after,
+.standard-debug .grid-11::after,
+.standard-debug .grid-12::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -77,9 +99,6 @@
     column-gap: var(--grid-gap);
     pointer-events: none;
     z-index: var(--z-tooltip);
-}
-
-.standard-debug .grid::after {
     background-image: repeating-linear-gradient(
         to right,
         color-mix(in srgb, var(--color-cyan) 10%, transparent) 0,
@@ -102,7 +121,7 @@
 }
 
 /* Reading Layout Debug - show zones */
-.standard-debug.reading::after {
+.standard-debug.prose::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -230,13 +249,35 @@
 }
 
 /* Grid item debugging */
-.standard-debug .grid > * {
+.standard-debug .grid > *,
+.standard-debug .grid-2 > *,
+.standard-debug .grid-3 > *,
+.standard-debug .grid-4 > *,
+.standard-debug .grid-5 > *,
+.standard-debug .grid-6 > *,
+.standard-debug .grid-7 > *,
+.standard-debug .grid-8 > *,
+.standard-debug .grid-9 > *,
+.standard-debug .grid-10 > *,
+.standard-debug .grid-11 > *,
+.standard-debug .grid-12 > * {
     outline: 1px solid color-mix(in srgb, var(--color-cyan) 50%, transparent);
     outline-offset: -1px;
     position: relative;
 }
 
-.standard-debug .grid > *::before {
+.standard-debug .grid > *::before,
+.standard-debug .grid-2 > *::before,
+.standard-debug .grid-3 > *::before,
+.standard-debug .grid-4 > *::before,
+.standard-debug .grid-5 > *::before,
+.standard-debug .grid-6 > *::before,
+.standard-debug .grid-7 > *::before,
+.standard-debug .grid-8 > *::before,
+.standard-debug .grid-9 > *::before,
+.standard-debug .grid-10 > *::before,
+.standard-debug .grid-11 > *::before,
+.standard-debug .grid-12 > *::before {
     content: attr(class);
     position: absolute;
     top: var(--space-3xs);
@@ -358,36 +399,36 @@ body.standard-debug::before {
     }
 }
 
-/* Layout zone labels for .reading - CRITICAL FIX */
-.standard-debug.reading .small,
-.standard-debug.reading .accent,
-.standard-debug.reading .feature,
-.standard-debug.reading .full {
+/* Layout zone labels for .prose - CRITICAL FIX */
+.standard-debug.prose .small,
+.standard-debug.prose .accent,
+.standard-debug.prose .feature,
+.standard-debug.prose .full {
     position: relative; /* CRITICAL: Make these positioned containers */
     outline: 2px dashed; /* Add outline to make zones visible */
     outline-offset: -2px;
 }
 
-.standard-debug.reading .small {
+.standard-debug.prose .small {
     outline-color: color-mix(in srgb, var(--color-blue) 50%, transparent);
 }
 
-.standard-debug.reading .accent {
+.standard-debug.prose .accent {
     outline-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 }
 
-.standard-debug.reading .feature {
+.standard-debug.prose .feature {
     outline-color: color-mix(in srgb, var(--color-purple) 50%, transparent);
 }
 
-.standard-debug.reading .full {
+.standard-debug.prose .full {
     outline-color: color-mix(in srgb, var(--color-pink) 50%, transparent);
 }
 
-.standard-debug.reading .small::before,
-.standard-debug.reading .accent::before,
-.standard-debug.reading .feature::before,
-.standard-debug.reading .full::before {
+.standard-debug.prose .small::before,
+.standard-debug.prose .accent::before,
+.standard-debug.prose .feature::before,
+.standard-debug.prose .full::before {
     position: absolute;
     top: var(--space-3xs);
     right: var(--space-3xs);
@@ -403,28 +444,28 @@ body.standard-debug::before {
     font-weight: bold;
 }
 
-.standard-debug.reading .small::before {
+.standard-debug.prose .small::before {
     content: "Small";
     background: var(--color-blue);
 }
 
-.standard-debug.reading .accent::before {
+.standard-debug.prose .accent::before {
     content: "Accent";
     background: var(--color-accent);
 }
 
-.standard-debug.reading .feature::before {
+.standard-debug.prose .feature::before {
     content: "Feature";
     background: var(--color-purple);
 }
 
-.standard-debug.reading .full::before {
+.standard-debug.prose .full::before {
     content: "Full";
     background: var(--color-pink);
 }
 
 /* Default content zone indicator (elements without zone class) */
-.standard-debug.reading > :not(.small):not(.accent):not(.feature):not(.full) {
+.standard-debug.prose > :not(.small):not(.accent):not(.feature):not(.full) {
     outline: 1px dotted color-mix(in srgb, var(--color-green) 30%, transparent);
     outline-offset: -1px;
 }
@@ -434,7 +475,7 @@ body.standard-debug::before {
     .standard-debug::before,
     .standard-debug::after,
     .standard-debug .grid::after,
-    .standard-debug.reading::after,
+    .standard-debug.prose::after,
     body.standard-debug::before {
         display: none !important;
     }
@@ -446,7 +487,7 @@ body.standard-debug::before {
         opacity: 0.3;
     }
 
-    .standard-debug.reading::after {
+    .standard-debug.prose::after {
         opacity: 0.15;
     }
 }

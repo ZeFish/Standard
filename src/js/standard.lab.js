@@ -95,6 +95,29 @@ class StandardLab {
       }
     });
 
+    // ADD THIS NEW SECTION - Toggle debug mode with Cmd+Shift+S / Ctrl+Shift+S
+    document.addEventListener("keydown", (e) => {
+      const isMac = navigator.platform.indexOf("Mac") > -1;
+      const matchesMac =
+        isMac && e.shiftKey && e.metaKey && e.key.toLowerCase() === "s";
+      const matchesWin =
+        !isMac && e.shiftKey && e.ctrlKey && e.key.toLowerCase() === "s";
+
+      if (matchesMac || matchesWin) {
+        e.preventDefault();
+        document.body.classList.toggle("standard-debug");
+
+        // Show visual feedback
+        const isActive = document.body.classList.contains("standard-debug");
+        this.showDebugToggleNotification(isActive);
+
+        // Update indicator if panel is open
+        if (this.isOpen) {
+          this.updateDebugIndicator();
+        }
+      }
+    });
+
     // ESC to close
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && this.isOpen) {
@@ -577,6 +600,7 @@ class StandardLab {
         } else if (action === "toggle-debug") {
           document.body.classList.toggle("standard-debug");
           this.updateDebugIndicator();
+          this.close();
         } else if (action === "reset") {
           this.resetAllTokens();
         } else if (action === "copy-all") {

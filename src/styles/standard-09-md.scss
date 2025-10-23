@@ -64,6 +64,12 @@
         box-shadow: inset var(--shadow);
     }
 
+    .box,
+    .box-inset {
+        padding: var(--space);
+        font-size: var(--scale-s);
+    }
+
     // ==========================
     // BLOCKQUOTE
     // ==========================
