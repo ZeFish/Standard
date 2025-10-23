@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.11.20 | 2025-10-23T15:58:15.583Z
+ * @version Standard Framework v0.11.21 | 2025-10-23T19:12:52.919Z
  * @license MIT
  */
 /* Document
@@ -1790,18 +1790,6 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) fieldset,
 :where(html:not(.no-rhythm), .rhythm) hr,
 :where(html:not(.no-rhythm), .rhythm) table,
-:where(html:not(.no-rhythm), .rhythm) .grid,
-:where(html:not(.no-rhythm), .rhythm) .grid-2,
-:where(html:not(.no-rhythm), .rhythm) .grid-3,
-:where(html:not(.no-rhythm), .rhythm) .grid-4,
-:where(html:not(.no-rhythm), .rhythm) .grid-5,
-:where(html:not(.no-rhythm), .rhythm) .grid-6,
-:where(html:not(.no-rhythm), .rhythm) .grid-7,
-:where(html:not(.no-rhythm), .rhythm) .grid-8,
-:where(html:not(.no-rhythm), .rhythm) .grid-9,
-:where(html:not(.no-rhythm), .rhythm) .grid-10,
-:where(html:not(.no-rhythm), .rhythm) .grid-11,
-:where(html:not(.no-rhythm), .rhythm) .grid-12,
 :where(html:not(.no-rhythm), .rhythm) .container-small,
 :where(html:not(.no-rhythm), .rhythm) .container-accent,
 :where(html:not(.no-rhythm), .rhythm) .container-feature,
@@ -1818,6 +1806,23 @@ sup {
   /* =========================== */
   /* TYPOGRAPHIC NUANCES         */
   /* =========================== */
+  /* Exception for grid in a prose div */
+}
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-2,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-3,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-4,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-5,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-6,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-7,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-8,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-9,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-10,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-11,
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid-12 {
+  margin-block-start: calc(var(--space) * var(--rhythm-multiplier-block) - var(--space) * var(--rhythm-multiplier));
+  /* Bottom margin uses the block multiplier */
+  margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
   --rhythm-multiplier-block: 3;
@@ -5696,24 +5701,24 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature,
 .standard-debug .prose .container-full {
   position: relative; /* CRITICAL: Make these positioned containers */
-  outline: 2px dashed; /* Add outline to make zones visible */
-  outline-offset: -2px;
+  outline: 1px dashed; /* Add outline to make zones visible */
+  outline-offset: -1px;
 }
 
 .standard-debug .prose .container-small {
-  outline-color: color-mix(in srgb, var(--color-blue) 75%, transparent);
+  outline-color: color-mix(in srgb, var(--color-blue) 85%, transparent);
 }
 
 .standard-debug .prose .container-accent {
-  outline-color: color-mix(in srgb, var(--color-accent) 75%, transparent);
+  outline-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
 }
 
 .standard-debug .prose .container-feature {
-  outline-color: color-mix(in srgb, var(--color-purple) 75%, transparent);
+  outline-color: color-mix(in srgb, var(--color-purple) 85%, transparent);
 }
 
 .standard-debug .prose .container-full {
-  outline-color: color-mix(in srgb, var(--color-pink) 75%, transparent);
+  outline-color: color-mix(in srgb, var(--color-pink) 85%, transparent);
 }
 
 .standard-debug .prose .container-small::before,
@@ -5757,7 +5762,7 @@ body.standard-debug::before {
 
 /* Default content zone indicator (elements without zone class) */
 .standard-debug .prose > :not(.container-small):not(.container-accent):not(.container-feature):not(.container-full) {
-  outline: 1px dotted color-mix(in srgb, var(--color-green) 40%, transparent);
+  outline: 1px dotted color-mix(in srgb, var(--color-green) 60%, transparent);
   outline-offset: -1px;
 }
 

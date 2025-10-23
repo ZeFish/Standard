@@ -126,6 +126,27 @@
     /* TYPOGRAPHIC NUANCES         */
     /* =========================== */
 
+    /* Exception for grid in a prose div */
+    .prose > .grid,
+    .prose > .grid-2,
+    .prose > .grid-3,
+    .prose > .grid-4,
+    .prose > .grid-5,
+    .prose > .grid-6,
+    .prose > .grid-7,
+    .prose > .grid-8,
+    .prose > .grid-9,
+    .prose > .grid-10,
+    .prose > .grid-11,
+    .prose > .grid-12 {
+        margin-block-start: calc(
+            (var(--space) * var(--rhythm-multiplier-block)) -
+                (var(--space) * var(--rhythm-multiplier))
+        );
+        /* Bottom margin uses the block multiplier */
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
+    }
+
     hr {
         --rhythm-multiplier-block: 3;
     }
