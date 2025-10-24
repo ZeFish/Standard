@@ -290,20 +290,29 @@ async function handlePost(request, env) {
  * Main Cloudflare Function handler
  */
 export async function onRequest(request, env, ctx) {
+  const method = request.method?.toUpperCase();
+  console.log(`[DEBUG] Method: "${method}", Type: ${typeof method}`);
+
   // Handle CORS preflight
-  if (request.method === "OPTIONS") {
+  if (method === "OPTIONS") {
     return handleOptions();
   }
 
   // Route to appropriate handler
-  if (request.method === "GET") {
+  if (method === "GET") {
     return await handleGet(request, env);
-  } else if (request.method === "POST") {
+  } else if (method === "POST") {
     return await handlePost(request, env);
   } else {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      headers: corsHeaders,
-      status: 405,
-    });
+    return new Response(
+      JSON.stringify({
+        error: "Method not allowed",
+        received: method,
+      }),
+      {
+        headers: corsHeaders,
+        status: 405,
+      },
+    );
   }
 }
