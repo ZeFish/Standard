@@ -5,17 +5,26 @@
  *
  * Features:
  * - GET: Fetch all comments for a page from GitHub
- * - POST: Store new comment as a file in GitHub
+ * - POST: Store new comment as Markdown file in GitHub
  * - CORS enabled for cross-domain requests
  * - Automatic moderation flag for review
+ * - Comments stored as .md files with frontmatter for 11ty integration
  *
  * GitHub Storage Structure:
- * data/comments/{pageId}/{timestamp}-{hash}.json
+ * data/comments/{pageId}/{timestamp}-{hash}.md
+ *
+ * Page ID Format:
+ * - Uses normalized page.url from 11ty
+ * - Examples: "/blog/my-post/" → "blog--my-post"
+ * - Homepage "/" → "index"
+ * - Nested URLs: "/blog/2024/article/" → "blog--2024--article"
+ * - Normalization done in shortcode.js before reaching API
  *
  * Environment Variables Required:
  * - GITHUB_TOKEN: Personal access token with repo write access
  * - GITHUB_OWNER: Repository owner (e.g., "zefish")
  * - GITHUB_REPO: Repository name (e.g., "standard")
+ * - GITHUB_COMMENTS_PATH: Path for storing comments (default: "data/comments")
  * - MODERATION_EMAIL: Email for notifications
  *
  * @since 0.10.53
@@ -37,24 +46,74 @@ function generateCommentId() {
 }
 
 /**
+ * Parse Markdown comment with frontmatter
+ */
+function parseMarkdownComment(markdownContent) {
+  try {
+    // Split frontmatter and content
+    const parts = markdownContent.split("---\n");
+    if (parts.length < 3) {
+      console.error("Invalid markdown format: missing frontmatter");
+      return null;
+    }
+
+    // Parse YAML frontmatter (simple key-value parsing)
+    const frontmatterText = parts[1];
+    const content = parts.slice(2).join("---\n").trim();
+
+    const frontmatter = {};
+    frontmatterText.split("\n").forEach((line) => {
+      const match = line.match(/^(\w+):\s*(.+)$/);
+      if (match) {
+        const key = match[1];
+        let value = match[2].trim();
+
+        // Handle boolean values
+        if (value === "true") value = true;
+        else if (value === "false") value = false;
+        // Handle null
+        else if (value === "null" || value === "") value = null;
+        // Remove quotes from strings
+        else if (value.startsWith('"') && value.endsWith('"')) {
+          value = value.slice(1, -1);
+        }
+
+        frontmatter[key] = value;
+      }
+    });
+
+    return {
+      id: frontmatter.id,
+      pageId: frontmatter.pageId,
+      author: frontmatter.author,
+      email: frontmatter.email,
+      parentId: frontmatter.parentId,
+      createdAt: frontmatter.createdAt,
+      approved: frontmatter.approved,
+      spam: frontmatter.spam,
+      content: content,
+    };
+  } catch (error) {
+    console.error("Error parsing markdown comment:", error);
+    return null;
+  }
+}
+
+/**
  * Fetch comments from GitHub for a specific page
  */
 async function fetchCommentsFromGitHub(pageId, env) {
-  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO } = env;
+  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_COMMENTS_PATH } = env;
 
   if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
-    console.error("Missing env vars:", {
-      hasToken: !!GITHUB_TOKEN,
-      hasOwner: !!GITHUB_OWNER,
-      hasRepo: !!GITHUB_REPO,
-      envKeys: Object.keys(env),
-    });
     throw new Error("Missing GitHub configuration");
   }
 
+  const commentsPath = GITHUB_COMMENTS_PATH || "data/comments";
+
   try {
     // Use GitHub API to list files in comments directory for this page
-    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/data/comments/${encodeURIComponent(
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${commentsPath}/${encodeURIComponent(
       pageId,
     )}`;
 
@@ -86,7 +145,7 @@ async function fetchCommentsFromGitHub(pageId, env) {
     // Fetch content of each comment file
     const comments = [];
     for (const file of files) {
-      if (file.name.endsWith(".json")) {
+      if (file.name.endsWith(".md")) {
         try {
           const contentResponse = await fetch(file.url, {
             headers: {
@@ -97,8 +156,11 @@ async function fetchCommentsFromGitHub(pageId, env) {
           });
 
           if (contentResponse.ok) {
-            const comment = await contentResponse.json();
-            comments.push(comment);
+            const markdownContent = await contentResponse.text();
+            const comment = parseMarkdownComment(markdownContent);
+            if (comment) {
+              comments.push(comment);
+            }
           }
         } catch (error) {
           console.error(`Error fetching comment file ${file.name}:`, error);
@@ -117,20 +179,21 @@ async function fetchCommentsFromGitHub(pageId, env) {
 }
 
 /**
- * Save new comment to GitHub
+ * Save new comment to GitHub as Markdown file
  */
 async function saveCommentToGitHub(pageId, commentData, env) {
-  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO } = env;
+  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_COMMENTS_PATH } = env;
 
   if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
     throw new Error("Missing GitHub configuration");
   }
 
+  const commentsPath = GITHUB_COMMENTS_PATH || "data/comments";
   const commentId = generateCommentId();
-  const fileName = `${commentId}.json`;
-  const filePath = `data/comments/${pageId}/${fileName}`;
+  const fileName = `${commentId}.md`;
+  const filePath = `${commentsPath}/${pageId}/${fileName}`;
 
-  // Prepare comment object
+  // Prepare comment data
   const comment = {
     id: commentId,
     pageId,
@@ -145,10 +208,25 @@ async function saveCommentToGitHub(pageId, commentData, env) {
     ip: commentData.ip || "",
   };
 
+  // Generate Markdown with frontmatter
+  const markdownContent = `---
+id: ${comment.id}
+pageId: ${comment.pageId}
+author: "${comment.author}"
+email: "${comment.email}"
+parentId: ${comment.parentId || "null"}
+createdAt: ${comment.createdAt}
+approved: ${comment.approved}
+spam: ${comment.spam}
+layout: layouts/comment.njk
+---
+
+${comment.content}
+`;
+
   try {
     // Convert to base64 for GitHub API
-    const fileContent = JSON.stringify(comment, null, 2);
-    const base64Content = btoa(fileContent);
+    const base64Content = btoa(markdownContent);
 
     // Create or update file via GitHub API
     const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
