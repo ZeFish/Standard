@@ -26,10 +26,10 @@
 				</ul>
 			</nav>
 		</header>
-		{% if comment or page.data.comment %}<div class="comments-section" style="background: var(--color-background-secondary); padding: var(--space-l); margin-bottom: var(--space-xl); border-radius: 8px;">{% standardComment %}
-</div>{% endif %}
+
      	<main class="prose md">
           {{ content | safe }}
+          {% standardComment %}
       </main>
 			<footer class="prose smaller">
 			  <hr >

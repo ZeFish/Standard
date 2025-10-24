@@ -54,7 +54,7 @@
     "build:js": "cp src/js/standard.js dist/standard.js",
     "build:js-min": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js",
     "clean:comments": "rm -rf data/comments && mkdir -p data/comments && echo '# Comments Storage' > data/comments/README.md",
-    "clean:ports": "lsof -ti:8090,8091,3000,8080,8081 | xargs kill -9 2>/dev/null || true",
+    "clean:ports": "lsof -ti:8080,8081,8082,8083,8084,8085,8086,8087,8088,8089 | xargs kill -9 2>/dev/null || true",
     "release": "npm run build && release-it --only-version",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
   },

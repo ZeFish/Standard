@@ -86,24 +86,30 @@ export default function (eleventyConfig, options = {}) {
         showSubmit === false || showSubmit === "false" ? false : true;
       showReset = showReset === false || showReset === "false" ? false : true;
 
-      // Get frontmatter variables from this context
+      // Get frontmatter variables from this context (ctx property)
       // Use comment: true in frontmatter, page ID auto-generated from file slug
-      const isCommentsEnabled = this.comment === true;
+      const context = this.ctx || this;
+      const isCommentsEnabled = context.comment === true;
       const pageId = isCommentsEnabled
-        ? (this.page && this.page.fileSlug) || null
+        ? (context.page && context.page.fileSlug) || null
         : null;
-      const apiUrl = this.commentApiUrl || "/api/comments";
-      const pollInterval = this.pollInterval || null;
+      const apiUrl = context.commentApiUrl || "/api/comments";
+      const pollInterval = context.pollInterval || null;
 
-      // Build comments container and form HTML with semantic structure using Standard design tokens
-      const commentsContainer = `<div id="comments" class="comments-list" style="margin-bottom: var(--space-l); margin-top: var(--space-l);"></div>`;
+      // If comments not enabled, silently return empty string
+      if (!isCommentsEnabled || !pageId) {
+        return "";
+      }
 
-      const form = `<form id="comment-form" class="comment-form" novalidate hx-boost="false" style="border: 1px solid var(--color-border); padding: var(--space-l); border-radius: 6px; background: var(--color-background);">
-  <fieldset style="border: none; padding: 0; margin: 0;">
-    <legend style="font-size: var(--scale-l); font-weight: 600; margin-bottom: var(--space-m);">Leave a Comment</legend>
+      // Build comments container and form HTML with semantic structure
+      const commentsContainer = `<div id="comments" class="comments-list"></div>`;
 
-    <div class="form-group" style="margin-bottom: var(--space-m);">
-      <label for="author" style="display: block; font-weight: 500; margin-bottom: var(--space-s);">Your Name <span aria-label="required" style="color: var(--color-red);">*</span></label>
+      const form = `<form id="comment-form" class="comment-form" method="post" action="${apiUrl}" novalidate>
+  <fieldset>
+    <legend>Leave a Comment</legend>
+
+    <div class="form-group">
+      <label for="author">Your Name <span aria-label="required">*</span></label>
       <input
         type="text"
         id="author"
@@ -111,26 +117,24 @@ export default function (eleventyConfig, options = {}) {
         placeholder="John Doe"
         required
         maxlength="100"
-        style="width: 100%; padding: var(--space-s); border: 1px solid var(--color-border); border-radius: 4px; font-family: inherit; font-size: inherit;"
       />
-      <small class="text-color-subtle" style="display: block; margin-top: 4px;">Your name will be displayed with your comment.</small>
+      <small>Your name will be displayed with your comment.</small>
     </div>
 
-    <div class="form-group" style="margin-bottom: var(--space-m);">
-      <label for="email" style="display: block; font-weight: 500; margin-bottom: var(--space-s);">Email Address <span aria-label="required" style="color: var(--color-red);">*</span></label>
+    <div class="form-group">
+      <label for="email">Email Address <span aria-label="required">*</span></label>
       <input
         type="email"
         id="email"
         name="email"
         placeholder="john@example.com"
         required
-        style="width: 100%; padding: var(--space-s); border: 1px solid var(--color-border); border-radius: 4px; font-family: inherit; font-size: inherit;"
       />
-      <small class="text-color-subtle" style="display: block; margin-top: 4px;">Your email will not be displayed publicly.</small>
+      <small>Your email will not be displayed publicly.</small>
     </div>
 
-    <div class="form-group" style="margin-bottom: var(--space-m);">
-      <label for="content" style="display: block; font-weight: 500; margin-bottom: var(--space-s);">Comment <span aria-label="required" style="color: var(--color-red);">*</span></label>
+    <div class="form-group">
+      <label for="content">Comment <span aria-label="required">*</span></label>
       <textarea
         id="content"
         name="content"
@@ -138,28 +142,29 @@ export default function (eleventyConfig, options = {}) {
         required
         minlength="3"
         maxlength="10000"
-        style="width: 100%; padding: var(--space-s); border: 1px solid var(--color-border); border-radius: 4px; font-family: inherit; font-size: inherit; min-height: 120px; resize: vertical;"
+        rows="6"
       ></textarea>
-      <small class="text-color-subtle" style="display: block; margin-top: 4px;">Markdown formatting supported. Max 10,000 characters.</small>
+      <small>Markdown formatting supported. Max 10,000 characters.</small>
     </div>
 
-    <!-- Hidden field for threaded replies (REQUIRED - do not remove) -->
+    <!-- Hidden fields (REQUIRED - do not remove) -->
+    <input type="hidden" id="pageId" name="pageId" value="${pageId}" />
     <input type="hidden" id="parentId" name="parentId" value="" />
 
     <!-- Status indicator -->
-    <div id="form-status" style="display: none; padding: var(--space-m); margin-bottom: var(--space-m); border-radius: 4px; font-weight: 500;" role="status" aria-live="polite"></div>
+    <div id="form-status" role="status" aria-live="polite"></div>
 
     <!-- Success/error message -->
-    <div class="form-message" role="alert" style="display: none; padding: var(--space-m); margin-bottom: var(--space-m); border-radius: 4px; font-weight: 500;"></div>
+    <div class="form-message" role="alert"></div>
 
     <!-- Submit buttons -->
-    <div class="form-actions" style="display: flex; gap: var(--space-s); margin-top: var(--space-l);">
-      ${showSubmit ? '<button type="submit" class="button" style="flex: 1; padding: var(--space-m); font-weight: 600; border: none; border-radius: 4px; cursor: pointer; background: var(--color-accent); color: white; transition: opacity 0.2s;">Post Comment</button>' : ""}
-      ${showReset ? '<button type="reset" class="button" style="padding: var(--space-m); font-weight: 600; border: 1px solid var(--color-border); border-radius: 4px; cursor: pointer; background: transparent; color: var(--color-foreground); transition: background 0.2s;">Clear</button>' : ""}
+    <div class="form-actions">
+      ${showSubmit ? '<button type="submit" class="button">Post Comment</button>' : ""}
+      ${showReset ? '<button type="reset" class="button">Clear</button>' : ""}
     </div>
 
     <!-- Privacy notice -->
-    <p class="text-color-subtle" style="font-size: var(--scale-s); margin-top: var(--space-l); margin-bottom: 0;">
+    <p class="form-privacy">
       <small>
         By submitting a comment, you agree to our
         <a href="/privacy/">privacy policy</a> and
@@ -169,20 +174,18 @@ export default function (eleventyConfig, options = {}) {
   </fieldset>
 </form>`;
 
-      // Auto-initialize if pageId is available
-      let html = commentsContainer + "\n" + form;
-      if (pageId) {
-        const initOptions = {
-          apiUrl,
-          pageId,
-          container: "#comments",
-          form: "#comment-form",
-        };
-        if (pollInterval) {
-          initOptions.pollInterval = pollInterval;
-        }
+      // Build initialization script
+      const initOptions = {
+        apiUrl,
+        pageId,
+        container: "#comments",
+        form: "#comment-form",
+      };
+      if (pollInterval) {
+        initOptions.pollInterval = pollInterval;
+      }
 
-        html += `\n\n<script defer>
+      const initScript = `<script defer>
   document.addEventListener("DOMContentLoaded", async () => {
     const comments = new GitHubComments(${JSON.stringify(initOptions)});
 
@@ -197,9 +200,8 @@ export default function (eleventyConfig, options = {}) {
     comments.attachFormHandler();
   });
 </script>`;
-      }
 
-      return html;
+      return commentsContainer + "\n" + form + "\n" + initScript;
     },
   );
 
