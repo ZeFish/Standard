@@ -295,6 +295,11 @@ export async function onRequest(context) {
   const env = context.env;
   const method = request.method;
 
+  // Debug: log environment variables
+  console.log("DEBUG env keys:", Object.keys(env || {}));
+  console.log("DEBUG has GITHUB_TOKEN:", !!env?.GITHUB_TOKEN);
+  console.log("DEBUG has GITHUB_OWNER:", !!env?.GITHUB_OWNER);
+
   // Handle CORS preflight
   if (method === "OPTIONS") {
     return handleOptions();

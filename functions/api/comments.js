@@ -43,6 +43,12 @@ async function fetchCommentsFromGitHub(pageId, env) {
   const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO } = env;
 
   if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
+    console.error("Missing env vars:", {
+      hasToken: !!GITHUB_TOKEN,
+      hasOwner: !!GITHUB_OWNER,
+      hasRepo: !!GITHUB_REPO,
+      envKeys: Object.keys(env),
+    });
     throw new Error("Missing GitHub configuration");
   }
 
@@ -294,6 +300,11 @@ export async function onRequest(context) {
   const request = context.request;
   const env = context.env;
   const method = request.method;
+
+  // Debug: log environment variables
+  console.log("DEBUG env keys:", Object.keys(env || {}));
+  console.log("DEBUG has GITHUB_TOKEN:", !!env?.GITHUB_TOKEN);
+  console.log("DEBUG has GITHUB_OWNER:", !!env?.GITHUB_OWNER);
 
   // Handle CORS preflight
   if (method === "OPTIONS") {
