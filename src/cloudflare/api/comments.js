@@ -290,19 +290,34 @@ async function handlePost(request, env) {
  * Main Cloudflare Function handler
  */
 export async function onRequest(request, env, ctx) {
-  // Debug: check all possible method locations
-  let method = request.method;
+  // For Cloudflare Pages, the request object IS the full context
+  // Try to extract method from different possible locations
+  let method;
 
-  if (!method) {
-    // Try alternate locations
-    method =
-      request.headers?.get?.("x-http-method-override") ||
-      ctx?.request?.method ||
-      ctx?.method ||
-      "UNKNOWN";
+  // First check if request has method property
+  if (request?.method) {
+    method = request.method;
+  }
+  // If request IS the full request object with a method property
+  else if (typeof request === "object" && Object.keys(request).length > 0) {
+    // Try common property names
+    for (const key of [
+      "method",
+      "METHOD",
+      "verb",
+      "VERB",
+      "httpMethod",
+      "HTTP_METHOD",
+    ]) {
+      if (request[key]) {
+        method = request[key];
+        break;
+      }
+    }
   }
 
-  method = (method || "").toUpperCase();
+  // Fallback
+  method = (method || "UNKNOWN").toUpperCase();
 
   // Handle CORS preflight
   if (method === "OPTIONS") {
