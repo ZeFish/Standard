@@ -17,20 +17,16 @@ Real-world patterns for building APIs, handlers, and utilities with Cloudflare F
 Return JSON data from a GET request.
 
 ```javascript
-import { createResponse, parseRequest } from "./utils.js";
-
 export default {
   async fetch(request) {
-    const { method } = await parseRequest(request);
-
-    if (method !== "GET") {
-      return createResponse({ error: "Method not allowed" }, { status: 405 });
+    if (request.method !== "GET") {
+      return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { "Content-Type": "application/json" } });
     }
 
-    return createResponse({
+    return new Response(JSON.stringify({
       message: "Hello World",
       timestamp: new Date().toISOString(),
-    });
+    }), { headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -40,17 +36,15 @@ export default {
 Extract and use query parameters.
 
 ```javascript
-import { createResponse, parseRequest } from "./utils.js";
-
 export default {
   async fetch(request) {
-    const { query } = await parseRequest(request);
-    const name = query.name || "Guest";
-    const greeting = query.greeting || "Hello";
+    const url = new URL(request.url);
+    const name = url.searchParams.get("name") || "Guest";
+    const greeting = url.searchParams.get("greeting") || "Hello";
 
-    return createResponse({
+    return new Response(JSON.stringify({
       message: `${greeting}, ${name}!`,
-    });
+    }), { headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -62,13 +56,12 @@ Usage: `https://your-domain.com/api/greet?name=Francis&greeting=Welcome`
 Accept and process POST data.
 
 ```javascript
-import { createResponse, createErrorResponse, parseRequest, validateMethod } from "./utils.js";
-
 export default {
   async fetch(request) {
-    // Validate method
-    const error = validateMethod(request, ["POST", "OPTIONS"]);
-    if (error) return error;
+    // Only allow POST
+    if (request.method !== "POST" && request.method !== "OPTIONS") {
+      return new Response("Method not allowed", { status: 405 });
+    }
 
     // Handle preflight
     if (request.method === "OPTIONS") {
@@ -76,15 +69,15 @@ export default {
     }
 
     // Parse request
-    const { body } = await parseRequest(request);
+    const body = await request.json();
 
     // Process data
     const result = await processForm(body);
 
-    return createResponse({
+    return new Response(JSON.stringify({
       success: true,
       data: result,
-    });
+    }), { headers: { "Content-Type": "application/json" } });
   },
 };
 
@@ -99,8 +92,6 @@ async function processForm(data) {
 Cache responses to reduce load and improve performance.
 
 ```javascript
-import { createResponse, withCache } from "./utils.js";
-
 export default {
   async fetch(request) {
     const data = {
@@ -108,10 +99,10 @@ export default {
       timestamp: new Date().toISOString(),
     };
 
-    const response = createResponse(data);
+    const response = new Response(JSON.stringify(data), { headers: { "Content-Type": "application/json" } });
 
     // Cache for 1 hour (3600 seconds)
-    return withCache(response, 3600);
+    return response;
   },
 };
 ```
@@ -119,10 +110,8 @@ export default {
 Cache TTL examples:
 
 ```javascript
-withCache(response, 300)       // 5 minutes
-withCache(response, 3600)      // 1 hour
-withCache(response, 86400)     // 1 day
-withCache(response, 604800)    // 1 week
+// Caching is now handled by Cloudflare Workers/Pages configuration, not directly in the function code.
+// You can set caching rules in your `wrangler.toml` or Cloudflare dashboard.
 ```
 
 ## Error Handling
@@ -130,26 +119,25 @@ withCache(response, 604800)    // 1 week
 Proper error responses with status codes.
 
 ```javascript
-import { createResponse, createErrorResponse, parseRequest } from "./utils.js";
-
 export default {
   async fetch(request) {
     try {
-      const { pathname } = await parseRequest(request);
+      const url = new URL(request.url);
+      const pathname = url.pathname;
 
       // Validate endpoint
       if (!pathname.startsWith("/api/")) {
-        return createErrorResponse("Not an API endpoint", 404);
+        return new Response(JSON.stringify({ error: "Not an API endpoint" }), { status: 404, headers: { "Content-Type": "application/json" } });
       }
 
       // Simulate processing
       const data = await fetchData();
 
-      return createResponse(data);
+      return new Response(JSON.stringify(data), { headers: { "Content-Type": "application/json" } });
 
     } catch (error) {
       console.error("Error:", error);
-      return createErrorResponse(error.message, 500);
+      return new Response(JSON.stringify({ error: error.message }), { status: 500, headers: { "Content-Type": "application/json" } });
     }
   },
 };
@@ -165,22 +153,29 @@ async function fetchData() {
 Handle CORS requests for cross-origin access.
 
 ```javascript
-import { createResponse, handleCORS, validateMethod } from "./utils.js";
-
 export default {
   async fetch(request) {
     // Handle CORS preflight
     if (request.method === "OPTIONS") {
-      return handleCORS(request);
+      return new Response(null, {
+        status: 204,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Max-Age": "86400",
+        },
+      });
     }
 
-    // Validate method
-    const error = validateMethod(request, ["GET", "POST"]);
-    if (error) return error;
-
     // Your API logic
-    return createResponse({
+    return new Response(JSON.stringify({
       message: "CORS enabled response",
+    }), {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
   },
 };
@@ -191,11 +186,10 @@ export default {
 Route different paths to different handlers.
 
 ```javascript
-import { createResponse, createErrorResponse, parseRequest } from "./utils.js";
-
 export default {
   async fetch(request) {
-    const { pathname } = await parseRequest(request);
+    const url = new URL(request.url);
+    const pathname = url.pathname;
 
     // Route requests
     if (pathname === "/api/users") {
@@ -203,29 +197,29 @@ export default {
     } else if (pathname === "/api/posts") {
       return handlePosts(request);
     } else if (pathname === "/api/health") {
-      return createResponse({ status: "ok" });
+      return new Response(JSON.stringify({ status: "ok" }), { headers: { "Content-Type": "application/json" } });
     } else {
-      return createErrorResponse("Not found", 404);
+      return new Response(JSON.stringify({ error: "Not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
     }
   },
 };
 
 async function handleUsers(request) {
-  return createResponse({
+  return new Response(JSON.stringify({
     users: [
       { id: 1, name: "Alice" },
       { id: 2, name: "Bob" },
     ],
-  });
+  }), { headers: { "Content-Type": "application/json" } });
 }
 
 async function handlePosts(request) {
-  return createResponse({
+  return new Response(JSON.stringify({
     posts: [
       { id: 1, title: "Hello World" },
       { id: 2, title: "Second Post" },
     ],
-  });
+  }), { headers: { "Content-Type": "application/json" } });
 }
 ```
 
@@ -234,8 +228,6 @@ async function handlePosts(request) {
 Simple redirect service.
 
 ```javascript
-import { createResponse } from "./utils.js";
-
 export default {
   async fetch(request) {
     const url = new URL(request.url);
@@ -256,10 +248,9 @@ export default {
       });
     }
 
-    return createResponse(
-      { error: "Short URL not found", code },
-      { status: 404 }
-    );
+    return new Response(JSON.stringify(
+      { error: "Short URL not found", code }
+    ), { status: 404, headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -296,35 +287,35 @@ export default {
 Validate incoming requests before processing.
 
 ```javascript
-import { createResponse, createErrorResponse, parseRequest, validateMethod } from "./utils.js";
-
 export default {
   async fetch(request) {
     // Check method
-    const methodError = validateMethod(request, ["POST"]);
-    if (methodError) return methodError;
+    if (request.method !== "POST") {
+      return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { "Content-Type": "application/json" } });
+    }
 
-    const { headers, body } = await parseRequest(request);
+    const headers = Object.fromEntries(request.headers);
+    const body = await request.json().catch(() => null);
 
     // Check content type
     const contentType = headers["content-type"] || "";
     if (!contentType.includes("application/json")) {
-      return createErrorResponse("Content-Type must be application/json", 400);
+      return new Response(JSON.stringify({ error: "Content-Type must be application/json" }), { status: 400, headers: { "Content-Type": "application/json" } });
     }
 
     // Validate body
     if (!body) {
-      return createErrorResponse("Request body is required", 400);
+      return new Response(JSON.stringify({ error: "Request body is required" }), { status: 400, headers: { "Content-Type": "application/json" } });
     }
 
     const data = typeof body === "string" ? JSON.parse(body) : body;
 
     // Validate required fields
     if (!data.email || !data.name) {
-      return createErrorResponse("Missing required fields: email, name", 400);
+      return new Response(JSON.stringify({ error: "Missing required fields: email, name" }), { status: 400, headers: { "Content-Type": "application/json" } });
     }
 
-    return createResponse({ success: true, data });
+    return new Response(JSON.stringify({ success: true, data }), { headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -334,8 +325,6 @@ export default {
 Use middleware for common operations.
 
 ```javascript
-import { createResponse, validateMethod } from "./utils.js";
-
 // Middleware functions
 async function authenticateRequest(request, env) {
   const token = request.headers.get("Authorization")?.replace("Bearer ", "");
@@ -357,12 +346,12 @@ export default {
       await authenticateRequest(request, env);
 
       // Your API logic
-      return createResponse({ message: "Authenticated" });
+      return new Response(JSON.stringify({ message: "Authenticated" }), { headers: { "Content-Type": "application/json" } });
 
     } catch (error) {
-      return createResponse(
-        { error: error.message },
-        { status: 401 }
+      return new Response(
+        JSON.stringify({ error: error.message }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
       );
     }
   },
@@ -374,24 +363,23 @@ export default {
 Compose multiple operations.
 
 ```javascript
-import { createResponse, createErrorResponse, parseRequest, withCache } from "./utils.js";
-
 export default {
   async fetch(request) {
     try {
-      const { query } = await parseRequest(request);
+      const url = new URL(request.url);
+      const query = Object.fromEntries(url.searchParams);
 
       // Chain operations
       const data = await fetchData(query);
       const validated = await validateData(data);
       const enriched = await enrichData(validated);
-      const response = createResponse(enriched);
+      const response = new Response(JSON.stringify(enriched), { headers: { "Content-Type": "application/json" } });
 
       // Cache the result
-      return withCache(response, 3600);
+      return response;
 
     } catch (error) {
-      return createErrorResponse(error.message, 500);
+      return new Response(JSON.stringify({ error: error.message }), { status: 500, headers: { "Content-Type": "application/json" } });
     }
   },
 };
@@ -415,7 +403,6 @@ async function enrichData(data) {
 ## Next Steps
 
 - [See Real Examples](/cloudflare/examples/) - Complete working code
-- [API Reference](/cloudflare/reference/) - All utilities
 - [Deploy to Production](/cloudflare/deployment/) - Go live
 
 ---

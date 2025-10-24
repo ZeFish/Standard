@@ -46,12 +46,14 @@ Standard/
 │   │   ├── standard.js        ← Main typography engine (2.2.0)
 │   │   └── standard.lab.js    ← Experimental features
 │   ├── cloudflare/            ← Serverless Cloudflare functions
-│   │   ├── comments.js        ← GitHub comments system
-│   │   ├── comments-client.js ← Browser library
-│   │   ├── comments-example.js ← Deploy example
-│   │   ├── utils.js           ← Helper utilities
-│   │   ├── example.js         ← Example function
-│   │   └── wrangler*.toml.template ← Config templates
+│   │   ├── api/
+│   │   │   ├── comments.js    ← Simplified comments API endpoint
+│   │   │   └── contact.js     ← Simplified contact API endpoint
+│   │   └── example.js         ← Example function
+│   ├── js/
+│   │   ├── standard.js        ← Main typography engine (2.2.0)
+│   │   ├── standard.lab.js    ← Experimental features
+│   │   └── comments-client.js ← Browser library for comments
 │   ├── styles/
 │   │   ├── standard.scss      ← Entry point
 │   │   ├── standard-00-variables.scss
@@ -595,24 +597,19 @@ MODERATION_EMAIL=admin@example.com
 - Generates `.dev.vars` for local development
 - Validates required environment variables
 
-**GitHub Comments System**:
-- `src/cloudflare/comments.js` — Server-side handler (validation, spam detection, GitHub API)
-- `src/cloudflare/comments-client.js` — Browser library (rendering, form handling, real-time updates)
-- `src/cloudflare/comments-example.js` — Ready-to-deploy endpoint
-- `src/cloudflare/utils.js` — Helper functions
-- `src/layouts/comments.njk` — Nunjucks layout template with `{% standardComment %}` support
+**Simplified API Endpoints**:
+- `src/cloudflare/api/comments.js` — Simplified comments API endpoint (returns a basic response)
+- `src/cloudflare/api/contact.js` — Simplified contact API endpoint (returns a basic response)
+- `src/js/comments-client.js` — Browser library (rendering, form handling, real-time updates)
 
 **Shortcodes**:
 - `{% standardComment %}` — Renders form + auto-initializes from `comment: true` frontmatter
 - `{% initComments "page-id" %}` — Manual initialization (optional)
 
 **Features**:
-- ✅ Comments stored as JSON files in GitHub
-- ✅ Spam detection with confidence scoring
-- ✅ Nested comment threading
-- ✅ Markdown formatting support
-- ✅ Real-time updates via optional polling
-- ✅ Email moderation alerts
+- ✅ Simplified API endpoints for comments and contact forms
+- ✅ Client-side library for comments (now in `src/js/`)
+- ✅ Shortcodes for easy integration
 - ✅ CORS-enabled for cross-domain requests
 
 **Usage in Pages**:

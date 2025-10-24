@@ -37,21 +37,12 @@ This starts a local server at `http://localhost:8787`.
 
 ```bash
 # Test a function
-curl http://localhost:8787/api/hello?name=Francis
+curl http://localhost:8787/api/comments
 
 # Test with POST
 curl -X POST http://localhost:8787/api/contact \
   -H "Content-Type: application/json" \
   -d '{"name":"John","email":"john@example.com"}'
-```
-
-### Test Environment Variables
-
-Environment variables defined in `wrangler.toml` are available:
-
-```bash
-# Verify they're accessible
-curl http://localhost:8787/api/debug
 ```
 
 ## Building
@@ -179,18 +170,6 @@ vars = {
 API_KEY = "your-secret-value"
 ```
 
-### Custom Domains
-
-Configure in `wrangler.toml`:
-
-```toml
-[env.production]
-routes = [
-  { pattern = "api.example.com/*", zone_id = "your-zone-id" },
-  { pattern = "example.com/api/*", zone_id = "your-zone-id" }
-]
-```
-
 ## Deployment Process
 
 ### Step 1: Verify Build
@@ -273,26 +252,12 @@ wrangler tail --format json
 
 **Problem:** `wrangler publish` fails with "No functions found"
 
-**Solution:** Ensure functions are in `_site/functions/`:
+**Solution:** Ensure functions are in `_site/functions/`: 
 
 ```bash
 npm run build
 ls _site/functions/
 wrangler publish
-```
-
-### Import Errors
-
-**Problem:** `Error: Cannot find module './utils.js'`
-
-**Solution:** Ensure `utils.js` is in the functions directory:
-
-```bash
-# Check file exists
-ls _site/functions/utils.js
-
-# Verify import path
-cat _site/functions/hello.js | grep import
 ```
 
 ### Environment Variables Not Available
@@ -336,25 +301,6 @@ async function fastOperation() {
 }
 ```
 
-### CORS Issues
-
-**Problem:** Browser blocks requests with CORS error
-
-**Solution:** Use `handleCORS`:
-
-```javascript
-import { handleCORS } from "./utils.js";
-
-export default {
-  async fetch(request) {
-    if (request.method === "OPTIONS") {
-      return handleCORS(request);
-    }
-    // ...
-  },
-};
-```
-
 ## Updating Deployed Functions
 
 ### Quick Update
@@ -380,16 +326,14 @@ wrangler rollback --version <version-id>
 
 ## Performance Tips
 
-1. **Cache aggressively** - Use `withCache()` for static data
-2. **Keep functions small** - Faster cold starts
-3. **Avoid N+1 queries** - Batch database requests
-4. **Use KV for data** - Store frequently accessed data
-5. **Monitor logs** - Check `wrangler tail` for issues
+1. **Keep functions small** - Faster cold starts
+2. **Avoid N+1 queries** - Batch database requests
+3. **Use KV for data** - Store frequently accessed data
+4. **Monitor logs** - Check `wrangler tail` for issues
 
 ## Cost Optimization
 
 - **Requests:** First 100,000/day free
-- **Caching:** Reduce requests with `withCache()`
 - **Cold starts:** Optimize function size
 - **KV storage:** Consider costs for large datasets
 
@@ -397,9 +341,8 @@ wrangler rollback --version <version-id>
 
 1. **Use secrets** - Never hardcode API keys
 2. **Validate input** - Check request data
-3. **Rate limit** - Prevent abuse
-4. **Log carefully** - Don't log sensitive data
-5. **Use HTTPS** - Always use secure connections
+3. **Log carefully** - Don't log sensitive data
+4. **Use HTTPS** - Always use secure connections
 
 ## Next Steps
 

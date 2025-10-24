@@ -1,8 +1,8 @@
 /**
- * @component Contact Form Handler
+ * @component Simplified Contact API Endpoint
  * @category Cloudflare Functions
- * @description Handles submissions from a contact form.
- * This example sends an email using a placeholder service.
+ * @description A simplified example of a Cloudflare Function for handling contact form submissions.
+ * This file now returns a basic response and does not include complex logic.
  *
  * @param {Request} request The incoming request.
  * @param {object} env The environment variables.

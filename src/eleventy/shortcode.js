@@ -134,8 +134,8 @@ export default function (eleventyConfig, options = {}) {
       <small class="text-color-subtle">Markdown formatting supported. Max 10,000 characters.</small>
     </div>
 
-    <!-- Hidden field for threaded replies -->
-    <input type="hidden" name="parentId" value="" />
+    <!-- Hidden field for threaded replies (REQUIRED - do not remove) -->
+    <input type="hidden" id="parentId" name="parentId" value="" />
 
     <!-- Success/error message -->
     <div class="form-message" role="alert"></div>

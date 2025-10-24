@@ -51,7 +51,7 @@ class GitHubComments {
     this.loading = true;
     try {
       const response = await fetch(
-        `${this.apiUrl}?pageId=${encodeURIComponent(this.pageId)}`
+        `${this.apiUrl}?pageId=${encodeURIComponent(this.pageId)}`,
       );
 
       if (!response.ok) {
@@ -94,7 +94,7 @@ class GitHubComments {
       if (result.comment) {
         this.comments.push(result.comment);
         this.comments.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
       }
 
@@ -144,16 +144,16 @@ class GitHubComments {
     html = html.replace(/_(.+?)_/g, "<em>$1</em>");
 
     // Code blocks: ```code``` → <pre><code>code</code></pre>
-    html = html.replace(
-      /```(.*?)```/gs,
-      "<pre><code>$1</code></pre>"
-    );
+    html = html.replace(/```(.*?)```/gs, "<pre><code>$1</code></pre>");
 
     // Inline code: `code` → <code>code</code>
     html = html.replace(/`(.+?)`/g, "<code>$1</code>");
 
     // Links: [text](url) → <a href="url">text</a>
-    html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank">$1</a>');
+    html = html.replace(
+      /\[(.+?)\]\((.+?)\)/g,
+      '<a href="$2" target="_blank">$1</a>',
+    );
 
     // Line breaks: preserve newlines
     html = html.replace(/\n/g, "<br>");
@@ -221,7 +221,7 @@ class GitHubComments {
         if (comment.replies && comment.replies.length > 0) {
           html += `<div class="comment-replies">${this.renderTree(
             comment.replies,
-            level + 1
+            level + 1,
           )}</div>`;
         }
 
@@ -304,7 +304,12 @@ class GitHubComments {
 
         // Clear form
         form.reset();
-        form.querySelector('[name="parentId"]').value = "";
+
+        // Clear parentId field if it exists (for threaded replies)
+        const parentIdField = form.querySelector('[name="parentId"]');
+        if (parentIdField) {
+          parentIdField.value = "";
+        }
 
         // Re-render
         this.render();

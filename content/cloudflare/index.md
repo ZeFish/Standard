@@ -13,13 +13,11 @@ Integrate serverless Cloudflare Workers/Functions with your 11ty website powered
 
 ## What's Included
 
-The Cloudflare Functions plugin provides everything you need to add serverless functions to your 11ty project:
+The Cloudflare Functions plugin provides basic integration for serverless functions with your 11ty project:
 
 - **Plugin** - Seamless 11ty integration
-- **Utility Library** - 7 helper functions for common patterns
-- **Configuration Template** - Pre-configured wrangler.toml
-- **Example Functions** - Working code templates
-- **Complete Documentation** - Everything you need to get started
+- **Configuration Template** - Basic `wrangler.toml` generation
+- **Simplified API Endpoints** - Basic `comments.js` and `contact.js` examples
 
 ## Quick Start
 
@@ -46,11 +44,10 @@ export default function (eleventyConfig) {
 
 ```javascript
 // functions/hello.js
-import { createResponse } from "./utils.js";
 
 export default {
   async fetch(request) {
-    return createResponse({ hello: "world" });
+    return new Response("Hello from Cloudflare Function!");
   },
 };
 ```
@@ -62,37 +59,19 @@ npm run build
 wrangler publish
 ```
 
-## Available Utilities
-
-The plugin includes a complete utility library with these helper functions:
-
-| Function | Purpose |
-|----------|---------|
-| `createResponse()` | Create standardized JSON responses |
-| `createErrorResponse()` | Handle errors with timestamps |
-| `parseRequest()` | Extract body, query, headers |
-| `validateMethod()` | Validate HTTP methods |
-| `withCache()` | Add cache headers (TTL) |
-| `handleCORS()` | Handle CORS preflight requests |
-| `corsHeaders` | Pre-configured CORS headers |
-
 ## Systems & Plugins
 
 ### Core Plugin
 - **[Cloudflare Functions Plugin](/cloudflare/)** - Main serverless integration
 
-### Pre-Built Systems
-- **[GitHub Comments System](/cloudflare/comments/)** - Serverless comments stored in GitHub
-  - Spam detection
-  - Moderation workflow
-  - Nested threaded replies
-  - [Quick Start Guide](/cloudflare/comments/COMMENTS-QUICK-START.md)
+### Simplified API Endpoints
+- **[Comments API](/cloudflare/comments/)** - A simplified example of a comments API endpoint.
+- **[Contact API](/cloudflare/contact/)** - A simplified example of a contact form API endpoint.
 
 ## Documentation
 
 - **[Getting Started](/cloudflare/setup/)** - Installation and setup
 - **[Usage Patterns](/cloudflare/patterns/)** - Common use cases
-- **[API Reference](/cloudflare/reference/)** - Complete utility API
 - **[Examples](/cloudflare/examples/)** - Real-world examples
 - **[Deployment](/cloudflare/deployment/)** - How to deploy
 
@@ -102,10 +81,6 @@ The plugin includes a complete utility library with these helper functions:
 ✅ Environment variables support
 ✅ Global data available in templates
 ✅ Cloudflare configuration template
-✅ CORS handling built-in
-✅ Caching with TTL support
-✅ Request parsing utilities
-✅ Error handling with timestamps
 
 ## Integration with Standard Framework
 

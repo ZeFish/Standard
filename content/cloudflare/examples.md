@@ -18,20 +18,16 @@ Return structured data from a simple API endpoint.
 
 ```javascript
 // functions/data.js
-import { createResponse } from "./utils.js";
 
 export default {
   async fetch(request) {
-    return createResponse({
+    return new Response(JSON.stringify({
       framework: "Standard Framework",
-      version: "0.10.52",
-      features: [
-        "Typography system",
-        "Grid system",
-        "Color system",
-        "Cloudflare Functions",
-      ],
-      documentation: "https://standard.ffp.com/",
+      version: "Simplified",
+      message: "This is a simplified example.",
+    }), {
+      headers: { "Content-Type": "application/json" },
+      status: 200,
     });
   },
 };
@@ -45,7 +41,6 @@ Fetch and filter user data.
 
 ```javascript
 // functions/users.js
-import { createResponse, parseRequest } from "./utils.js";
 
 const users = [
   { id: 1, name: "Alice", role: "admin", email: "alice@example.com" },
@@ -55,22 +50,25 @@ const users = [
 
 export default {
   async fetch(request) {
-    const { query } = await parseRequest(request);
+    const url = new URL(request.url);
+    const role = url.searchParams.get("role");
+    const limit = url.searchParams.get("limit");
 
-    // Filter by role if provided
     let result = users;
-    if (query.role) {
-      result = users.filter(u => u.role === query.role);
+    if (role) {
+      result = users.filter(u => u.role === role);
     }
 
-    // Paginate if requested
-    if (query.limit) {
-      result = result.slice(0, parseInt(query.limit));
+    if (limit) {
+      result = result.slice(0, parseInt(limit));
     }
 
-    return createResponse({
+    return new Response(JSON.stringify({
       count: result.length,
       users: result,
+    }), {
+      headers: { "Content-Type": "application/json" },
+      status: 200,
     });
   },
 };
@@ -89,13 +87,12 @@ Process form submissions.
 
 ```javascript
 // functions/contact.js
-import { createResponse, createErrorResponse, parseRequest, validateMethod } from "./utils.js";
 
 export default {
   async fetch(request) {
     // Only allow POST
     if (request.method !== "POST" && request.method !== "OPTIONS") {
-      return createErrorResponse("Method not allowed", 405);
+      return new Response("Method not allowed", { status: 405 });
     }
 
     // Handle preflight
@@ -104,30 +101,30 @@ export default {
     }
 
     try {
-      const { body } = await parseRequest(request);
+      const body = await request.json();
 
       // Validate required fields
       if (!body.name || !body.email || !body.message) {
-        return createErrorResponse("Missing required fields", 400);
+        return new Response("Missing required fields", { status: 400 });
       }
 
       // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(body.email)) {
-        return createErrorResponse("Invalid email format", 400);
+        return new Response("Invalid email format", { status: 400 });
       }
 
       // Here you would save to database or send email
       console.log("Form submission:", body);
 
-      return createResponse({
+      return new Response(JSON.stringify({
         success: true,
         message: "Thank you for your message. We'll be in touch soon!",
         id: Date.now(),
-      }, { status: 201 });
+      }), { status: 201, headers: { "Content-Type": "application/json" } });
 
     } catch (error) {
-      return createErrorResponse(error.message, 500);
+      return new Response(error.message || "Internal Server Error", { status: 500 });
     }
   },
 };
@@ -152,7 +149,6 @@ Create and manage short URLs.
 
 ```javascript
 // functions/shorten.js
-import { createResponse, parseRequest } from "./utils.js";
 
 // In production, store in KV or database
 const shortUrls = {
@@ -163,18 +159,20 @@ const shortUrls = {
 
 export default {
   async fetch(request) {
-    const { pathname, query } = await parseRequest(request);
+    const url = new URL(request.url);
+    const pathname = url.pathname;
+    const queryUrl = url.searchParams.get("url");
 
     // Create short URL
-    if (pathname === "/api/shorten" && query.url) {
+    if (pathname === "/api/shorten" && queryUrl) {
       const code = Math.random().toString(36).substring(7);
-      shortUrls[code] = query.url;
+      shortUrls[code] = queryUrl;
 
-      return createResponse({
+      return new Response(JSON.stringify({
         code,
         short: `https://your-domain.com/${code}`,
-        long: query.url,
-      }, { status: 201 });
+        long: queryUrl,
+      }), { status: 201, headers: { "Content-Type": "application/json" } });
     }
 
     // Redirect to long URL
@@ -186,7 +184,7 @@ export default {
       });
     }
 
-    return createResponse({ error: "Not found" }, { status: 404 });
+    return new Response(JSON.stringify({ error: "Not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -197,7 +195,6 @@ Simple in-memory todo list (for demo only; use database in production).
 
 ```javascript
 // functions/todos.js
-import { createResponse, createErrorResponse, parseRequest, validateMethod } from "./utils.js";
 
 // In-memory store (resets on redeploy)
 let todos = [
@@ -208,18 +205,24 @@ let nextId = 3;
 
 export default {
   async fetch(request) {
-    const { method, pathname, body } = await parseRequest(request);
+    const url = new URL(request.url);
+    const method = request.method;
+    let body = null;
+
+    if (method !== "GET" && method !== "HEAD") {
+      body = await request.json().catch(() => null);
+    }
 
     try {
       if (method === "GET") {
         // List all todos
-        return createResponse({ todos });
+        return new Response(JSON.stringify({ todos }), { headers: { "Content-Type": "application/json" } });
       }
 
-      else if (method === "POST" && pathname === "/api/todos") {
+      else if (method === "POST" && url.pathname === "/api/todos") {
         // Create todo
-        if (!body.text) {
-          return createErrorResponse("Missing 'text' field", 400);
+        if (!body || !body.text) {
+          return new Response("Missing 'text' field", { status: 400 });
         }
 
         const todo = {
@@ -230,7 +233,7 @@ export default {
         };
         todos.push(todo);
 
-        return createResponse(todo, { status: 201 });
+        return new Response(JSON.stringify(todo), { status: 201, headers: { "Content-Type": "application/json" } });
       }
 
       else if (method === "PATCH") {
@@ -239,13 +242,13 @@ export default {
         const todo = todos.find(t => t.id === id);
 
         if (!todo) {
-          return createErrorResponse("Todo not found", 404);
+          return new Response("Todo not found", { status: 404 });
         }
 
         if (body.text !== undefined) todo.text = body.text;
         if (body.completed !== undefined) todo.completed = body.completed;
 
-        return createResponse(todo);
+        return new Response(JSON.stringify(todo), { headers: { "Content-Type": "application/json" } });
       }
 
       else if (method === "DELETE") {
@@ -254,17 +257,17 @@ export default {
         const index = todos.findIndex(t => t.id === id);
 
         if (index === -1) {
-          return createErrorResponse("Todo not found", 404);
+          return new Response("Todo not found", { status: 404 });
         }
 
         todos.splice(index, 1);
-        return createResponse({ deleted: id });
+        return new Response(JSON.stringify({ deleted: id }), { headers: { "Content-Type": "application/json" } });
       }
 
-      return createErrorResponse("Method not allowed", 405);
+      return new Response("Method not allowed", { status: 405 });
 
     } catch (error) {
-      return createErrorResponse(error.message, 500);
+      return new Response(error.message || "Internal Server Error", { status: 500 });
     }
   },
 };
@@ -276,13 +279,12 @@ Fetch and display weather data (requires external API).
 
 ```javascript
 // functions/weather.js
-import { createResponse, createErrorResponse, parseRequest, withCache } from "./utils.js";
 
 export default {
   async fetch(request, env) {
     try {
-      const { query } = await parseRequest(request);
-      const city = query.city || "San Francisco";
+      const url = new URL(request.url);
+      const city = url.searchParams.get("city") || "San Francisco";
 
       // Fetch from external API
       const response = await fetch(
@@ -290,23 +292,23 @@ export default {
       );
 
       if (!response.ok) {
-        return createErrorResponse("Weather service unavailable", 503);
+        return new Response("Weather service unavailable", { status: 503 });
       }
 
       const data = await response.json();
 
-      const weatherResponse = createResponse({
+      const weatherResponse = new Response(JSON.stringify({
         city,
         temperature: data.current.temperature_2m,
         condition: data.current.weather_code,
         updated: new Date().toISOString(),
-      });
+      }), { headers: { "Content-Type": "application/json" } });
 
       // Cache for 10 minutes
-      return withCache(weatherResponse, 600);
+      return weatherResponse;
 
     } catch (error) {
-      return createErrorResponse(error.message, 500);
+      return new Response(error.message || "Internal Server Error", { status: 500 });
     }
   },
 };
@@ -318,7 +320,6 @@ Verify API key or token.
 
 ```javascript
 // functions/protected.js
-import { createResponse, createErrorResponse } from "./utils.js";
 
 export default {
   async fetch(request, env) {
@@ -326,21 +327,21 @@ export default {
     const auth = request.headers.get("Authorization");
 
     if (!auth || !auth.startsWith("Bearer ")) {
-      return createErrorResponse("Missing or invalid authorization", 401);
+      return new Response("Missing or invalid authorization", { status: 401 });
     }
 
     const token = auth.slice(7);
 
     // Verify token (in production, use proper JWT verification)
     if (token !== env.API_TOKEN) {
-      return createErrorResponse("Invalid token", 403);
+      return new Response("Invalid token", { status: 403 });
     }
 
     // Token is valid
-    return createResponse({
+    return new Response(JSON.stringify({
       authenticated: true,
       message: "Welcome to protected API",
-    });
+    }), { headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -360,13 +361,12 @@ Monitor function status.
 
 ```javascript
 // functions/health.js
-import { createResponse, withCache } from "./utils.js";
 
 export default {
   async fetch(request) {
     const health = {
       status: "healthy",
-      version: "0.10.52",
+      version: "Simplified",
       timestamp: new Date().toISOString(),
       uptime: process.uptime?.() || 0,
       checks: {
@@ -376,8 +376,8 @@ export default {
       },
     };
 
-    const response = createResponse(health);
-    return withCache(response, 60); // Cache for 1 minute
+    const response = new Response(JSON.stringify(health), { headers: { "Content-Type": "application/json" } });
+    return response; // Cache for 1 minute
   },
 };
 ```
@@ -390,7 +390,6 @@ Simple rate limiting using request counting.
 
 ```javascript
 // functions/rate-limit.js
-import { createResponse, createErrorResponse } from "./utils.js";
 
 const requestCounts = new Map();
 const LIMIT = 100;
@@ -420,17 +419,17 @@ export default {
     const limit = checkRateLimit(ip);
 
     if (!limit.allowed) {
-      return createErrorResponse(
+      return new Response(
         `Rate limit exceeded. Try again in 1 minute.`,
-        429
+        { status: 429 }
       );
     }
 
-    return createResponse({
+    return new Response(JSON.stringify({
       message: "Request allowed",
       requests: limit.count,
       remaining: limit.remaining,
-    });
+    }), { headers: { "Content-Type": "application/json" } });
   },
 };
 ```
@@ -438,7 +437,6 @@ export default {
 ## Next Steps
 
 - [See Patterns](/cloudflare/patterns/) - More patterns explained
-- [API Reference](/cloudflare/reference/) - All available utilities
 - [Deploy](/cloudflare/deployment/) - Take to production
 
 ---

@@ -1,10 +1,9 @@
 /**
- * @component GitHub Comments Handler
+ * @component Simplified Comments API Endpoint
  * @category Cloudflare Functions
- * @description Handles requests for the GitHub comments system.
- *
- * This file contains the core logic for processing comment submissions,
- * validating environment variables, and handling CORS.
+ * @description A simplified example of a Cloudflare Function for handling comments.
+ * This file now returns a basic response and does not include complex logic,
+ * environment variable validation, or CORS handling internally.
  *
  * @since 0.10.53
  */

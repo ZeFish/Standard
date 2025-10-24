@@ -12,7 +12,6 @@ import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
 import { addEncryptionTransform } from "./encryption.js";
-import { generateWranglerConfig } from "./cloudflare.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,6 +20,11 @@ const colors = {
   reset: "\x1b[0m",
   cyan: "\x1b[36m",
   green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  red: "\x1b[31m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  pink: "\x1b[35m",
 };
 
 // Read package.json for version
@@ -107,24 +111,23 @@ export default function (eleventyConfig, options = {}) {
       outputDir: "functions",
       environment: "production",
     },
-    // GitHub Comments System configuration
-    comments: userComments = {},
   } = options;
 
-  const comments = {
-    enabled: false,
-    outputDir: "functions/api",
-    copyClientLibrary: true,
-    ...userComments,
-  };
-
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
-  eleventyConfig.addPlugin(ShortCode);
   eleventyConfig.addPlugin(Filter);
   eleventyConfig.addPlugin(Backlinks);
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(addEncryptionTransform);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
+
+  let commentsConfig = {
+    enabled: false,
+    apiEndpoint: "/api/comments",
+    clientLibrary: `/${outputDir}/standard.comment.js`,
+    version: pkg.version,
+  };
+
+  eleventyConfig.addPlugin(ShortCode, { comments: commentsConfig });
 
   eleventyConfig.setUseGitIgnore(false);
 
@@ -133,130 +136,82 @@ export default function (eleventyConfig, options = {}) {
     lstripBlocks: true,
   });
 
-  //eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
-  //
-  eleventyConfig.addGlobalData("standard", {
-    layout: {
-      meta: "node_modules/@zefish/standard/src/layouts/meta.njk",
-      encrypted: "node_modules/@zefish/standard/src/layouts/encrypted.njk",
-    },
-  });
-
-  // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardAssets", function () {
-    let html = "";
-
-    if (useCDN) {
-      html = `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
-<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
-    } else {
-      html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">
-<script src="/${outputDir}/standard.min.js" type="module"></script>`;
-    }
-
-    // Add comments client library if comments are enabled
-    if (comments.enabled) {
-      html += `\n<script src="/assets/js/comments-client.js"></script>`;
-    }
-
-    return html;
-  });
-
-  // Shortcode to include Standard CSS local files
-  eleventyConfig.addShortcode("standardCss", function () {
-    if (useCDN) {
-      return `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
-    } else {
-      return `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
-    }
-  });
-
-  // Shortcode to include Standard JS from local files
-  eleventyConfig.addShortcode("standardJs", function () {
-    if (useCDN) {
-      return `<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
-    } else {
-      return `<script src="/${outputDir}/standard.min.js" type="module"></script>`;
-    }
-  });
-
-  // Shortcode to include only CSS
-  eleventyConfig.addShortcode("standardLab", function () {
-    if (useCDN) {
-      return `<script type="module" src="https://unpkg.com/@zefish/standard/lab"></script>`;
-    }
-    return `<script type="module" src="/${outputDir}/standard.lab.js"></script>`;
-  });
-
-  // Add passthrough copy from node_modules using relative path
-  if (copyFiles && !useCDN) {
-    eleventyConfig.addPassthroughCopy({
-      "node_modules/@zefish/standard/dist/standard.min.css": `${outputDir}/standard.min.css`,
-      "node_modules/@zefish/standard/dist/standard.min.js": `${outputDir}/standard.min.js`,
-      "node_modules/@zefish/standard/dist/standard.lab.js": `${outputDir}/standard.lab.js`,
-    });
-  }
-
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
     const cloudflareDir = path.join(__dirname, "../cloudflare");
 
+    // Optionally copy client library to assets
+    const commentsClient = path.join(__dirname, "../js/standard.comment.js");
+    if (fs.existsSync(commentsClient)) {
+      eleventyConfig.addPassthroughCopy({
+        [commentsClient]: `${outputDir}/standard.comment.js`,
+      });
+    }
 
-    eleventyConfig.addGlobalData("cloudflare", {
-      environment: cloudflare.environment || "production",
-      outputDir: cloudflare.outputDir,
-      version: pkg.version,
-    });
+    commentsConfig.enabled = true;
+
+    eleventyConfig.addGlobalData("comments", commentsConfig);
 
     console.log(
       `[Standard] Cloudflare Functions enabled → ${cloudflare.outputDir}/`,
     );
+    console.log(
+      `[Standard] GitHub Comments System enabled via Cloudflare plugin → /api/comments`,
+    );
+    console.log(
+      `[Standard] Comments client library → ${commentsConfig.clientLibrary}`,
+    );
   }
 
-  // ===== GITHUB COMMENTS SYSTEM INTEGRATION =====
-  if (comments.enabled) {
+  console.log(
+    `[Standard] Comments client library → ${commentsConfig.clientLibrary}`,
+  );
 
+  // ===== SHORTCODES =====
+  eleventyConfig.addNunjucksShortcode(
+    "standardAssets",
+    function (options = {}) {
+      const {
+        css = !useCDN,
+        js = !useCDN,
+        cdn = useCDN,
+        attributes = "",
+      } = options;
 
-    // Optionally copy client library to assets
-    if (comments.copyClientLibrary) {
-      const commentsClient = path.join(
-        __dirname,
-        "../cloudflare/comments-client.js",
-      );
-      if (fs.existsSync(commentsClient)) {
-        eleventyConfig.addPassthroughCopy({
-          [commentsClient]: "assets/js/comments-client.js",
-        });
+      let html = "";
+
+      if (css && !cdn) {
+        html += `<link rel="stylesheet" href="/${outputDir}/standard.min.css" ${attributes}>`;
+      } else if (css && cdn) {
+        html += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@zefish/standard@${pkg.version}/dist/standard.min.css" ${attributes}>`;
       }
+
+      if (js && !cdn) {
+        html += `<script src="/${outputDir}/standard.min.js"></script>`;
+      } else if (js && cdn) {
+        html += `<script src="https://cdn.jsdelivr.net/npm/@zefish/standard@${pkg.version}/dist/standard.min.js"><\/script>`;
+      }
+
+      return html;
+    },
+  );
+
+  eleventyConfig.addNunjucksShortcode("standardLab", function (options = {}) {
+    const { attributes = "" } = options;
+    if (useCDN) {
+      return `<script src="https://cdn.jsdelivr.net/npm/@zefish/standard@${pkg.version}/dist/standard.lab.js" ${attributes}><\/script>`;
     }
-
-    eleventyConfig.addGlobalData("comments", {
-      enabled: true,
-      apiEndpoint: "/api/comments",
-      clientLibrary: comments.copyClientLibrary
-        ? "/assets/js/comments-client.js"
-        : null,
-      version: pkg.version,
-    });
-
-    console.log(
-      `[Standard] GitHub Comments System enabled → ${comments.outputDir}/comments.js`,
-    );
-    if (comments.copyClientLibrary)
-      console.log(
-        `[Standard] Comments client library → assets/js/comments-client.js`,
-      );
-  }
-
-  // Log plugin initialization after build completes
-  eleventyConfig.on("eleventy.after", () => {
-    console.log(
-      `${colors.cyan}⚡ Standard Framework${colors.reset} | ${colors.green}${pkg.version}${colors.reset} | https://standard.ffp.co/cheet-sheat`,
-    );
+    return `<script src="/${outputDir}/standard.lab.js" ${attributes}><\/script>`;
   });
 
-  return {
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-  };
+  eleventyConfig.addGlobalData("standard", {
+    layout: {
+      meta: "node_modules/@zefish/standard/src/layouts/meta.njk",
+      encrypted: "node_modules/@zefish/standard/src/layouts/encrypted.njk",
+      pageError: "node_modules/@zefish/standard/src/layouts/404.njk",
+      atomFeed: "node_modules/@zefish/standard/src/layouts/atomfeed.xsl",
+      sitemap: "node_modules/@zefish/standard/src/layouts/sitemap.xml.njk",
+    },
+    comments: commentsConfig,
+  });
 }

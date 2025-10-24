@@ -70,7 +70,7 @@ export default function (eleventyConfig, options = {}) {
       `${sourceDir}/eleventy/**/*.js`,
     ],
     outputDir = "content/docs",
-    layout = "component",
+    layout = "base",
   } = options;
 
   // Create output directory if it doesn't exist

@@ -1,6 +1,6 @@
 import Standard from "./src/eleventy/eleventy.js";
 import DocGenerator from "./src/eleventy/doc-generator.js";
-import { execSync } from "child_process";
+
 import { fileURLToPath } from "url";
 import { dirname, resolve, join } from "path";
 import fs from "fs";
@@ -40,14 +40,18 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
   eleventyConfig.addPlugin(Standard, {
-    copyFiles: false, // Use local dist/ folder, not node_modules
-    comments: {
+    cloudflare: {
       enabled: true,
     },
   });
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
-    patterns: ["styles/**/*.scss", "js/**/*.js", "eleventy/**/*.js"],
+    patterns: [
+      "styles/**/*.scss",
+      "js/**/*.js",
+      "eleventy/**/*.js",
+      "cloudflare/**/*.js",
+    ],
     outputDir: "content/docs",
   });
 
@@ -59,9 +63,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("README.md");
   eleventyConfig.addWatchTarget("claude.md");
   eleventyConfig.on("eleventy.before", () => {
-    // Copy Cloudflare Functions to the root functions directory for Cloudflare Pages
-    execSync("mkdir -p functions && cp -r src/cloudflare/* functions");
-
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");
     const readmeDest = join(__dirname, "content", "README.md");
@@ -112,6 +113,5 @@ export default function (eleventyConfig) {
 
   return {
     markdownTemplateEngine: false, // disables Nunjucks in Markdown files
-    htmlTemplateEngine: "njk",
   };
 }
