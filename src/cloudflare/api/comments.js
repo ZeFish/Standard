@@ -290,7 +290,19 @@ async function handlePost(request, env) {
  * Main Cloudflare Function handler
  */
 export async function onRequest(request, env, ctx) {
-  const method = (request.method || "").toUpperCase();
+  // Debug: check all possible method locations
+  let method = request.method;
+
+  if (!method) {
+    // Try alternate locations
+    method =
+      request.headers?.get?.("x-http-method-override") ||
+      ctx?.request?.method ||
+      ctx?.method ||
+      "UNKNOWN";
+  }
+
+  method = (method || "").toUpperCase();
 
   // Handle CORS preflight
   if (method === "OPTIONS") {
@@ -307,6 +319,11 @@ export async function onRequest(request, env, ctx) {
       JSON.stringify({
         error: "Method not allowed",
         received: method,
+        debug: {
+          hasMethod: !!request.method,
+          hasCtx: !!ctx,
+          ctxKeys: ctx ? Object.keys(ctx) : [],
+        },
       }),
       {
         headers: corsHeaders,
