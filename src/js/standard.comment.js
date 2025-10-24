@@ -295,12 +295,54 @@ class GitHubComments {
 
       const submitBtn = form.querySelector("button[type=submit]");
       const originalText = submitBtn.textContent;
+      const message = form.querySelector(".form-message");
+      const statusDiv = form.querySelector("#form-status");
 
       try {
+        // Show loading state
         submitBtn.disabled = true;
-        submitBtn.textContent = "Submitting...";
+        submitBtn.textContent = "⏳ Submitting...";
+        submitBtn.style.opacity = "0.7";
+
+        if (statusDiv) {
+          statusDiv.style.display = "block";
+          statusDiv.textContent = "📤 Sending your comment...";
+          statusDiv.style.background = "var(--color-background-secondary)";
+          statusDiv.style.borderLeft = "4px solid var(--color-accent)";
+          statusDiv.style.color = "var(--color-foreground)";
+        }
+
+        if (message) {
+          message.style.display = "none";
+        }
 
         const result = await this.submit(data);
+
+        // Show success
+        if (statusDiv) {
+          statusDiv.textContent =
+            "✅ Comment submitted successfully! It will appear after moderation.";
+          statusDiv.style.background = "#d4edda";
+          statusDiv.style.borderLeft = "4px solid #28a745";
+          statusDiv.style.color = "#155724";
+          setTimeout(() => {
+            statusDiv.style.display = "none";
+            statusDiv.textContent = "";
+          }, 6000);
+        }
+
+        if (message) {
+          message.textContent =
+            "✅ Comment submitted! It will appear after moderation.";
+          message.style.display = "block";
+          message.style.background = "#d4edda";
+          message.style.borderLeft = "4px solid #28a745";
+          message.style.color = "#155724";
+          setTimeout(() => {
+            message.style.display = "none";
+            message.textContent = "";
+          }, 6000);
+        }
 
         // Clear form
         form.reset();
@@ -311,29 +353,29 @@ class GitHubComments {
           parentIdField.value = "";
         }
 
-        // Re-render
+        // Re-render comments list
         this.render();
-
-        // Show success message
-        const message = form.querySelector(".form-message");
-        if (message) {
-          message.textContent =
-            "Comment submitted! It will appear after moderation.";
-          message.className = "form-message success";
-          setTimeout(() => {
-            message.textContent = "";
-            message.className = "";
-          }, 5000);
-        }
       } catch (error) {
-        const message = form.querySelector(".form-message");
+        // Show error
+        if (statusDiv) {
+          statusDiv.textContent = `❌ Error: ${error.message}`;
+          statusDiv.style.background = "#f8d7da";
+          statusDiv.style.borderLeft = "4px solid #dc3545";
+          statusDiv.style.color = "#721c24";
+          statusDiv.style.display = "block";
+        }
+
         if (message) {
-          message.textContent = `Error: ${error.message}`;
-          message.className = "form-message error";
+          message.textContent = `❌ Error: ${error.message}`;
+          message.style.background = "#f8d7da";
+          message.style.borderLeft = "4px solid #dc3545";
+          message.style.color = "#721c24";
+          message.style.display = "block";
         }
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
+        submitBtn.style.opacity = "1";
       }
     });
   }

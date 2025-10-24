@@ -96,14 +96,14 @@ export default function (eleventyConfig, options = {}) {
       const pollInterval = this.pollInterval || null;
 
       // Build comments container and form HTML with semantic structure using Standard design tokens
-      const commentsContainer = `<div id="comments" class="comments-list" style="margin-bottom: var(--space-l);"></div>`;
+      const commentsContainer = `<div id="comments" class="comments-list" style="margin-bottom: var(--space-l); margin-top: var(--space-l);"></div>`;
 
-      const form = `<form id="comment-form" class="comment-form" novalidate>
-  <fieldset>
-    <legend>Leave a Comment</legend>
+      const form = `<form id="comment-form" class="comment-form" novalidate style="border: 1px solid var(--color-border); padding: var(--space-l); border-radius: 6px; background: var(--color-background);">
+  <fieldset style="border: none; padding: 0; margin: 0;">
+    <legend style="font-size: var(--scale-l); font-weight: 600; margin-bottom: var(--space-m);">Leave a Comment</legend>
 
-    <div class="form-group">
-      <label for="author">Your Name <span aria-label="required">*</span></label>
+    <div class="form-group" style="margin-bottom: var(--space-m);">
+      <label for="author" style="display: block; font-weight: 500; margin-bottom: var(--space-s);">Your Name <span aria-label="required" style="color: var(--color-red);">*</span></label>
       <input
         type="text"
         id="author"
@@ -111,24 +111,26 @@ export default function (eleventyConfig, options = {}) {
         placeholder="John Doe"
         required
         maxlength="100"
+        style="width: 100%; padding: var(--space-s); border: 1px solid var(--color-border); border-radius: 4px; font-family: inherit; font-size: inherit;"
       />
-      <small class="text-color-subtle">Your name will be displayed with your comment.</small>
+      <small class="text-color-subtle" style="display: block; margin-top: 4px;">Your name will be displayed with your comment.</small>
     </div>
 
-    <div class="form-group">
-      <label for="email">Email Address <span aria-label="required">*</span></label>
+    <div class="form-group" style="margin-bottom: var(--space-m);">
+      <label for="email" style="display: block; font-weight: 500; margin-bottom: var(--space-s);">Email Address <span aria-label="required" style="color: var(--color-red);">*</span></label>
       <input
         type="email"
         id="email"
         name="email"
         placeholder="john@example.com"
         required
+        style="width: 100%; padding: var(--space-s); border: 1px solid var(--color-border); border-radius: 4px; font-family: inherit; font-size: inherit;"
       />
-      <small class="text-color-subtle">Your email will not be displayed publicly.</small>
+      <small class="text-color-subtle" style="display: block; margin-top: 4px;">Your email will not be displayed publicly.</small>
     </div>
 
-    <div class="form-group">
-      <label for="content">Comment <span aria-label="required">*</span></label>
+    <div class="form-group" style="margin-bottom: var(--space-m);">
+      <label for="content" style="display: block; font-weight: 500; margin-bottom: var(--space-s);">Comment <span aria-label="required" style="color: var(--color-red);">*</span></label>
       <textarea
         id="content"
         name="content"
@@ -136,24 +138,28 @@ export default function (eleventyConfig, options = {}) {
         required
         minlength="3"
         maxlength="10000"
+        style="width: 100%; padding: var(--space-s); border: 1px solid var(--color-border); border-radius: 4px; font-family: inherit; font-size: inherit; min-height: 120px; resize: vertical;"
       ></textarea>
-      <small class="text-color-subtle">Markdown formatting supported. Max 10,000 characters.</small>
+      <small class="text-color-subtle" style="display: block; margin-top: 4px;">Markdown formatting supported. Max 10,000 characters.</small>
     </div>
 
     <!-- Hidden field for threaded replies (REQUIRED - do not remove) -->
     <input type="hidden" id="parentId" name="parentId" value="" />
 
+    <!-- Status indicator -->
+    <div id="form-status" style="display: none; padding: var(--space-m); margin-bottom: var(--space-m); border-radius: 4px; font-weight: 500;" role="status" aria-live="polite"></div>
+
     <!-- Success/error message -->
-    <div class="form-message" role="alert"></div>
+    <div class="form-message" role="alert" style="display: none; padding: var(--space-m); margin-bottom: var(--space-m); border-radius: 4px; font-weight: 500;"></div>
 
     <!-- Submit buttons -->
-    <div class="form-actions" style="display: flex; gap: var(--space-s);">
-      ${showSubmit ? '<button type="submit" class="button">Post Comment</button>' : ""}
-      ${showReset ? '<button type="reset" class="button" style="background: var(--color-background-secondary); color: var(--color-foreground); border: 1px solid var(--color-border);">Clear</button>' : ""}
+    <div class="form-actions" style="display: flex; gap: var(--space-s); margin-top: var(--space-l);">
+      ${showSubmit ? '<button type="submit" class="button" style="flex: 1; padding: var(--space-m); font-weight: 600; border: none; border-radius: 4px; cursor: pointer; background: var(--color-accent); color: white; transition: opacity 0.2s;">Post Comment</button>' : ""}
+      ${showReset ? '<button type="reset" class="button" style="padding: var(--space-m); font-weight: 600; border: 1px solid var(--color-border); border-radius: 4px; cursor: pointer; background: transparent; color: var(--color-foreground); transition: background 0.2s;">Clear</button>' : ""}
     </div>
 
     <!-- Privacy notice -->
-    <p class="text-color-subtle" style="font-size: var(--scale-s); margin-top: var(--space-l);">
+    <p class="text-color-subtle" style="font-size: var(--scale-s); margin-top: var(--space-l); margin-bottom: 0;">
       <small>
         By submitting a comment, you agree to our
         <a href="/privacy/">privacy policy</a> and
