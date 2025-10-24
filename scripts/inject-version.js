@@ -12,10 +12,9 @@ const pkg = JSON.parse(
 );
 
 const version = pkg.version;
-const timestamp = new Date().toISOString();
 
 // Version string to inject
-const versionString = `Standard Framework v${version} | ${timestamp}`;
+const versionString = `Standard Framework v${version}`;
 
 // Placeholder to replace
 const placeholder = "@VERSION_PLACEHOLDER@";
