@@ -33,7 +33,7 @@ export default function (eleventyConfig, options = {}) {
     return `<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js"></script>`;
   });
   eleventyConfig.addShortcode("bodyHtmx", function () {
-    return `hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML show:top"`;
+    return `hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML show:window:top"`;
   });
 
   // Shortcode to include Standard CSS and JS from local files
