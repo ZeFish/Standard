@@ -12,6 +12,7 @@ import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
 import { addEncryptionTransform } from "./encryption.js";
+import CloudflarePlugin from "./cloudflare.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -171,6 +172,13 @@ export default function (eleventyConfig, options = {}) {
 
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
+    // Add the Cloudflare plugin with the config
+    eleventyConfig.addPlugin(CloudflarePlugin, {
+      outputDir: cloudflare.outputDir,
+      environment: cloudflare.environment,
+      env: cloudflare.env || {},
+    });
+
     // When Cloudflare is enabled, automatically enable comments system
     comments.enabled = true;
 
