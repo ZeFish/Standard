@@ -183,7 +183,10 @@ export default function (eleventyConfig, options = {}) {
     comments.enabled = true;
 
     // Copy comments client library to assets
-    const commentsClient = path.join(__dirname, "../js/standard.comment.js");
+    const commentsClient = path.join(
+      __dirname,
+      "../../dist/standard.comment.js",
+    );
     eleventyConfig.addPassthroughCopy({
       [commentsClient]: `${outputDir}/standard.comment.js`,
     });
