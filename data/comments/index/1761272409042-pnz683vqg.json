@@ -1,0 +1,13 @@
+{
+  "id": "1761272409042-pnz683vqg",
+  "pageId": "index",
+  "author": "Test User Final",
+  "email": "final@test.com",
+  "content": "Testing if form now submits as POST correctly",
+  "parentId": null,
+  "createdAt": "2025-10-24T02:20:09.042Z",
+  "approved": false,
+  "spam": false,
+  "userAgent": "curl/8.7.1",
+  "ip": "184.162.226.108"
+}
