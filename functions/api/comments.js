@@ -148,7 +148,7 @@ async function saveCommentToGitHub(pageId, commentData, env) {
   try {
     // Convert to base64 for GitHub API
     const fileContent = JSON.stringify(comment, null, 2);
-    const base64Content = Buffer.from(fileContent).toString("base64");
+    const base64Content = btoa(fileContent);
 
     // Create or update file via GitHub API
     const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;

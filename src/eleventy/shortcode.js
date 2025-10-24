@@ -79,7 +79,13 @@ export default function (eleventyConfig, options = {}) {
   // Auto-initializes if comment: true is in frontmatter
   eleventyConfig.addShortcode(
     "standardComment",
-    function (showSubmit = true, showReset = true) {
+    function (showSubmit, showReset) {
+      // Set defaults - 11ty passes empty string when no arg provided, not undefined
+      // Default to true unless explicitly set to false
+      showSubmit =
+        showSubmit === false || showSubmit === "false" ? false : true;
+      showReset = showReset === false || showReset === "false" ? false : true;
+
       // Get frontmatter variables from this context
       // Use comment: true in frontmatter, page ID auto-generated from file slug
       const isCommentsEnabled = this.comment === true;
