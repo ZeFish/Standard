@@ -13,10 +13,10 @@
  * - Markdown support with code blocks
  *
  * Page ID Format:
- * - Uses normalized page.url (e.g., "/blog/my-post/" → "blog--my-post")
+ * - Uses normalized page.url (e.g., "/blog/my-post/" → "blog_my-post")
  * - Comments are stored in: data/comments/{pageId}/{timestamp}-{hash}.md
  * - Homepage "/" becomes "index"
- * - Slashes replaced with double-dash for GitHub file path safety
+ * - Slashes replaced with underscore for GitHub file path safety
  *
  * @example
  * // Initialize on page (auto-initialized by standardComment shortcode)

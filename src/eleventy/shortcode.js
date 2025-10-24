@@ -84,10 +84,10 @@ export default function (eleventyConfig, options = {}) {
   /**
    * Normalize page URL to safe file path for GitHub storage
    * Examples:
-   * - "/blog/my-post/" → "blog-my-post"
+   * - "/blog/my-post/" → "blog_my-post"
    * - "/about/" → "about"
    * - "/" → "index"
-   * - "/blog/2024/article/" → "blog-2024-article"
+   * - "/blog/2024/article/" → "blog_2024_article"
    */
   function normalizePageId(url) {
     if (!url || typeof url !== "string") {
@@ -97,8 +97,8 @@ export default function (eleventyConfig, options = {}) {
       url
         .replace(/^\//, "") // Remove leading slash
         .replace(/\/$/, "") // Remove trailing slash
-        .replace(/\//g, "-") || "index"
-    ); // Replace slashes with single-dash, fallback to 'index'
+        .replace(/\//g, "_") || "index"
+    ); // Replace slashes with underscore, fallback to 'index'
   }
 
   // Shortcode to render comment form with semantic HTML and auto-initialize

@@ -15,9 +15,9 @@
  *
  * Page ID Format:
  * - Uses normalized page.url from 11ty
- * - Examples: "/blog/my-post/" → "blog--my-post"
+ * - Examples: "/blog/my-post/" → "blog_my-post"
  * - Homepage "/" → "index"
- * - Nested URLs: "/blog/2024/article/" → "blog--2024--article"
+ * - Nested URLs: "/blog/2024/article/" → "blog_2024_article"
  * - Normalization done in shortcode.js before reaching API
  *
  * Environment Variables Required:
