@@ -287,37 +287,13 @@ async function handlePost(request, env) {
 }
 
 /**
- * Main Cloudflare Function handler
+ * Main Cloudflare Pages Function handler
+ * Context parameter contains: request, env, data
  */
-export async function onRequest(request, env, ctx) {
-  // For Cloudflare Pages, the request object IS the full context
-  // Try to extract method from different possible locations
-  let method;
-
-  // First check if request has method property
-  if (request?.method) {
-    method = request.method;
-  }
-  // If request IS the full request object with a method property
-  else if (typeof request === "object" && Object.keys(request).length > 0) {
-    // Try common property names
-    for (const key of [
-      "method",
-      "METHOD",
-      "verb",
-      "VERB",
-      "httpMethod",
-      "HTTP_METHOD",
-    ]) {
-      if (request[key]) {
-        method = request[key];
-        break;
-      }
-    }
-  }
-
-  // Fallback
-  method = (method || "UNKNOWN").toUpperCase();
+export async function onRequest(context) {
+  const request = context.request;
+  const env = context.env;
+  const method = request.method;
 
   // Handle CORS preflight
   if (method === "OPTIONS") {
@@ -330,20 +306,9 @@ export async function onRequest(request, env, ctx) {
   } else if (method === "POST") {
     return await handlePost(request, env);
   } else {
-    return new Response(
-      JSON.stringify({
-        error: "Method not allowed",
-        received: method,
-        debug: {
-          hasMethod: !!request.method,
-          hasCtx: !!ctx,
-          ctxKeys: ctx ? Object.keys(ctx) : [],
-        },
-      }),
-      {
-        headers: corsHeaders,
-        status: 405,
-      },
-    );
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      headers: corsHeaders,
+      status: 405,
+    });
   }
 }
