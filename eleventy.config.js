@@ -39,11 +39,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
-  eleventyConfig.addPlugin(Standard, {
-    cloudflare: {
-      enabled: true,
-    },
-  });
+  eleventyConfig.addPlugin(Standard, {});
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: [
