@@ -119,7 +119,7 @@ Add the client library to your page:
 </div>
 
 <!-- Client library -->
-<script src="/path/to/comments-client.js"></script>
+<script src="/path/to/standard.comment.js"></script>
 
 <script>
   const comments = new GitHubComments({
@@ -588,7 +588,7 @@ async function submitToDatabase(comment, env) {
 - [ ] Cloudflare secrets configured (`GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO`)
 - [ ] Function deployed: `wrangler publish --env production`
 - [ ] Frontend form HTML added to page
-- [ ] `comments-client.js` included in page
+- [ ] `standard.comment.js` included in page
 - [ ] CSS styling applied
 - [ ] Tested comment submission
 - [ ] Verified comments appear in GitHub repo
@@ -597,6 +597,6 @@ async function submitToDatabase(comment, env) {
 ## See Also
 
 - [comments.js](./comments.js) - Server-side handler
-- [comments-client.js](./comments-client.js) - Client-side library
+- [standard.comment.js](./standard.comment.js) - Client-side library
 - [utils.js](./utils.js) - Shared utilities
 - [wrangler.toml.template](./wrangler.toml.template) - Cloudflare config template

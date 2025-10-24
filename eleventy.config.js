@@ -39,7 +39,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
-  eleventyConfig.addPlugin(Standard, {});
+  eleventyConfig.addPlugin(Standard, { cloudflare: { enabled: true } });
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: [
@@ -52,7 +52,6 @@ export default function (eleventyConfig) {
   });
 
   // Copy files to output
-  eleventyConfig.addPassthroughCopy({ dist: "assets/standard" });
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
 
   // Watch README.md and claude.md for changes and copy into content directory

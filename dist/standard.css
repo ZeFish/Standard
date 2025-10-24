@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.12.3
+ * @version @VERSION_PLACEHOLDER@
  * @license MIT
  */
 /* Document
@@ -2008,6 +2008,10 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) label:has(+ textarea),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ select) {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+}
+:where(html:not(.no-rhythm), .rhythm) fieldset div,
+:where(html:not(.no-rhythm), .rhythm) fieldset p {
   margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
 }
 :where(html:not(.no-rhythm), .rhythm) {

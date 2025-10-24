@@ -90,8 +90,15 @@ class GitHubComments {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `API error: ${response.status}`);
+        let errorMessage = `API error: ${response.status}`;
+        try {
+          const error = await response.json();
+          errorMessage = error.message || errorMessage;
+        } catch (e) {
+          // Response wasn't JSON, use status message
+          errorMessage = `API endpoint not available (${response.status})`;
+        }
+        throw new Error(errorMessage);
       }
 
       const result = await response.json();
@@ -324,25 +331,18 @@ class GitHubComments {
 
     const submitBtn = form.querySelector("button[type=submit]");
     const originalText = submitBtn.textContent;
-    const message = form.querySelector(".form-message");
     const statusDiv = form.querySelector("#form-status");
 
     try {
       // Show loading state
       submitBtn.disabled = true;
-      submitBtn.textContent = "⏳ Submitting...";
+      submitBtn.textContent = "Submitting...";
       submitBtn.style.opacity = "0.7";
 
       if (statusDiv) {
         statusDiv.style.display = "block";
-        statusDiv.textContent = "📤 Sending your comment...";
-        statusDiv.style.background = "var(--color-background-secondary)";
-        statusDiv.style.borderLeft = "4px solid var(--color-accent)";
+        statusDiv.textContent = "Sending your comment...";
         statusDiv.style.color = "var(--color-foreground)";
-      }
-
-      if (message) {
-        message.style.display = "none";
       }
 
       const result = await this.submit(data);
@@ -350,26 +350,11 @@ class GitHubComments {
       // Show success
       if (statusDiv) {
         statusDiv.textContent =
-          "✅ Comment submitted successfully! It will appear after moderation.";
-        statusDiv.style.background = "#d4edda";
-        statusDiv.style.borderLeft = "4px solid #28a745";
-        statusDiv.style.color = "#155724";
+          "Comment submitted successfully! It will appear after moderation.";
+        statusDiv.style.color = "var(--color-green)";
         setTimeout(() => {
           statusDiv.style.display = "none";
           statusDiv.textContent = "";
-        }, 6000);
-      }
-
-      if (message) {
-        message.textContent =
-          "✅ Comment submitted! It will appear after moderation.";
-        message.style.display = "block";
-        message.style.background = "#d4edda";
-        message.style.borderLeft = "4px solid #28a745";
-        message.style.color = "#155724";
-        setTimeout(() => {
-          message.style.display = "none";
-          message.textContent = "";
         }, 6000);
       }
 
@@ -387,19 +372,9 @@ class GitHubComments {
     } catch (error) {
       // Show error
       if (statusDiv) {
-        statusDiv.textContent = `❌ Error: ${error.message}`;
-        statusDiv.style.background = "#f8d7da";
-        statusDiv.style.borderLeft = "4px solid #dc3545";
-        statusDiv.style.color = "#721c24";
+        statusDiv.textContent = `Error: ${error.message}`;
+        statusDiv.style.color = "var(--color-red)";
         statusDiv.style.display = "block";
-      }
-
-      if (message) {
-        message.textContent = `❌ Error: ${error.message}`;
-        message.style.background = "#f8d7da";
-        message.style.borderLeft = "4px solid #dc3545";
-        message.style.color = "#721c24";
-        message.style.display = "block";
       }
     } finally {
       submitBtn.disabled = false;

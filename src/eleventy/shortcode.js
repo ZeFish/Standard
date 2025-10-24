@@ -130,36 +130,30 @@ export default function (eleventyConfig, options = {}) {
       // Build comments container and form HTML with semantic structure
       const commentsContainer = `<div id="comments" class="comments-list"></div>`;
 
-      const form = `<form id="comment-form" class="comment-form" method="post" action="${apiUrl}" novalidate>
+      const form = `<form id="comment-form" class="small container-small" method="post" action="${apiUrl}" novalidate>
   <fieldset>
     <legend>Leave a Comment</legend>
 
-    <div class="form-group">
+
       <label for="author">Your Name <span aria-label="required">*</span></label>
       <input
         type="text"
         id="author"
         name="author"
-        placeholder="John Doe"
+        placeholder="Your name will be displayed with your comment."
         required
         maxlength="100"
       />
-      <small>Your name will be displayed with your comment.</small>
-    </div>
 
-    <div class="form-group">
       <label for="email">Email Address <span aria-label="required">*</span></label>
       <input
         type="email"
         id="email"
         name="email"
-        placeholder="john@example.com"
+        placeholder="Your email will not be displayed publicly."
         required
       />
-      <small>Your email will not be displayed publicly.</small>
-    </div>
 
-    <div class="form-group">
       <label for="content">Comment <span aria-label="required">*</span></label>
       <textarea
         id="content"
@@ -170,8 +164,7 @@ export default function (eleventyConfig, options = {}) {
         maxlength="10000"
         rows="6"
       ></textarea>
-      <small>Markdown formatting supported. Max 10,000 characters.</small>
-    </div>
+
 
     <!-- Hidden fields (REQUIRED - do not remove) -->
     <input type="hidden" id="pageId" name="pageId" value="${pageId}" />
@@ -180,9 +173,6 @@ export default function (eleventyConfig, options = {}) {
     <!-- Status indicator -->
     <div id="form-status" role="status" aria-live="polite"></div>
 
-    <!-- Success/error message -->
-    <div class="form-message" role="alert"></div>
-
     <!-- Submit buttons -->
     <div class="form-actions">
       ${showSubmit ? '<button type="submit" class="button">Post Comment</button>' : ""}
@@ -190,13 +180,11 @@ export default function (eleventyConfig, options = {}) {
     </div>
 
     <!-- Privacy notice -->
-    <p class="form-privacy">
-      <small>
+    <!--p class="smaller">
         By submitting a comment, you agree to our
         <a href="/privacy/">privacy policy</a> and
         <a href="/terms/">terms of service</a>.
-      </small>
-    </p>
+    </p-->
   </fieldset>
 </form>`;
 

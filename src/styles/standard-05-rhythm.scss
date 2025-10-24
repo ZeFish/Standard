@@ -330,6 +330,10 @@
         margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
         margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
     }
+    fieldset div,
+    fieldset p {
+        margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+    }
 
     /* Checkbox/radio with labels */
     label + input[type="checkbox"],

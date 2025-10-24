@@ -34,9 +34,6 @@ layout: base.njk
     </p>
   </div>
 
-  <!-- Comments container (will be populated by JavaScript) -->
-  <div id="comments" class="comments-list padding-base"></div>
-
   <!-- Comment form using Standard shortcode (auto-initializes) -->
   {% if showForm %}
   <div class="padding-base">
@@ -232,27 +229,15 @@ layout: base.njk
     font-size: 0.85rem;
   }
 
-  .form-message {
+  #form-status {
     margin: 1rem 0;
     padding: 1rem;
     border-radius: 0.5rem;
     display: none;
   }
 
-  .form-message:not(:empty) {
+  #form-status:not(:empty) {
     display: block;
-  }
-
-  .form-message.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
-
-  .form-message.error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
   }
 
   .form-actions {

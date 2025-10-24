@@ -131,6 +131,7 @@ export default function (eleventyConfig, options = {}) {
 
   eleventyConfig.addGlobalData("standard", {
     layout: {
+      hola: [path.join(__dirname, "../layouts/standard.min.css")],
       meta: "node_modules/@zefish/standard/src/layouts/meta.njk",
       encrypted: "node_modules/@zefish/standard/src/layouts/encrypted.njk",
       pageError: "node_modules/@zefish/standard/src/layouts/404.njk",
@@ -147,7 +148,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(addEncryptionTransform);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
-  eleventyConfig.addPlugin(ShortCode, { comments });
+  eleventyConfig.addPlugin(ShortCode);
 
   eleventyConfig.setUseGitIgnore(false);
 
@@ -155,6 +156,18 @@ export default function (eleventyConfig, options = {}) {
     trimBlocks: true,
     lstripBlocks: true,
   });
+
+  // Add passthrough copy from node_modules using relative path
+  if (copyFiles && !useCDN) {
+    eleventyConfig.addPassthroughCopy({
+      [path.join(__dirname, "../../dist/standard.min.css")]:
+        `${outputDir}/standard.min.css`,
+      [path.join(__dirname, "../../dist/standard.min.js")]:
+        `${outputDir}/standard.min.js`,
+      [path.join(__dirname, "../../dist/standard.lab.js")]:
+        `${outputDir}/standard.lab.js`,
+    });
+  }
 
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
@@ -168,8 +181,6 @@ export default function (eleventyConfig, options = {}) {
         [commentsClient]: `${outputDir}/standard.comment.js`,
       });
     }
-
-    eleventyConfig.addGlobalData("comments", comments);
   }
 
   // ===== SHORTCODES =====
@@ -187,7 +198,7 @@ export default function (eleventyConfig, options = {}) {
 
     // Add comments client library if comments are enabled
     if (comments.enabled) {
-      html += `\n<script src="/assets/js/comments-client.js"></script>`;
+      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
     }
 
     return html;

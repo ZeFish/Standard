@@ -28,7 +28,7 @@ export default function (eleventyConfig) {
 
 **Result**:
 - ✅ Comments handler copied to `functions/api/comments.js`
-- ✅ Client library copied to `assets/js/comments-client.js`
+- ✅ Client library copied to `assets/js/standard.comment.js`
 - ✅ Configuration template copied
 
 ---
@@ -62,7 +62,7 @@ export default function (eleventyConfig) {
 **Result**:
 - ✅ Standard CSS/JS in `assets/standard/`
 - ✅ Comments handler in `functions/api/comments.js`
-- ✅ Comments client in `assets/js/comments-client.js`
+- ✅ Comments client in `assets/js/standard.comment.js`
 - ✅ Both plugins work independently
 
 ---
@@ -183,14 +183,14 @@ Use comments selectively on certain pages.
 <!-- article.njk - only on articles -->
 <article>
   {{ content | safe }}
-  
+
   {% if page.url.includes("/blog/") or page.url.includes("/articles/") %}
     <div id="comments"></div>
     <form id="comment-form">
       <!-- form here -->
     </form>
-    
-    <script src="/assets/js/comments-client.js"></script>
+
+    <script src="/assets/js/standard.comment.js"></script>
     <script>
       const comments = new GitHubComments({
         apiUrl: '/api/comments',
@@ -274,7 +274,7 @@ import CommentsPlugin from "@zefish/standard/src/cloudflare/comments-plugin.js";
 import { handleComments } from "@zefish/standard/src/cloudflare/comments.js";
 
 // Browser library
-import GitHubComments from "@zefish/standard/src/cloudflare/comments-client.js";
+import GitHubComments from "@zefish/standard/src/cloudflare/standard.comment.js";
 
 // Utilities
 import { createResponse, parseRequest } from "@zefish/standard/src/cloudflare/utils.js";
@@ -328,7 +328,7 @@ eleventyConfig.addPlugin(CommentsPlugin);
 ```javascript
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(Standard);
-  
+
   eleventyConfig.addPlugin(CommentsPlugin, {
     outputDir: "functions/api",
     copyClientLibrary: true,
@@ -341,7 +341,7 @@ export default function (eleventyConfig) {
 ```javascript
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(Standard);
-  
+
   if (process.env.ELEVENTY_ENV === "production") {
     eleventyConfig.addPlugin(CommentsPlugin);
   }
@@ -352,10 +352,10 @@ export default function (eleventyConfig) {
 ```javascript
 export default function (eleventyConfig) {
   const siteType = process.env.SITE_TYPE || "blog";
-  
+
   // Always include base framework
   eleventyConfig.addPlugin(Standard);
-  
+
   // Conditionally add comments
   if (siteType === "blog" || siteType === "full") {
     eleventyConfig.addPlugin(CommentsPlugin);
@@ -380,7 +380,7 @@ A: Use Pattern 5. Copy your functions to a separate directory.
 A: Yes! Use Pattern 4 with environment checks.
 
 **Q: How do I use just the client library?**
-A: Import directly: `import GitHubComments from "@zefish/standard/src/cloudflare/comments-client.js"`
+A: Import directly: `import GitHubComments from "@zefish/standard/src/cloudflare/standard.comment.js"`
 
 ---
 

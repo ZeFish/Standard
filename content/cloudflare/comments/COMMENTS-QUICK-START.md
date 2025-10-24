@@ -6,7 +6,7 @@ Deploy a fully-functional comments system in 10 minutes.
 
 **Source Code** (`src/cloudflare/`):
 - `comments.js` — Server-side handler (core logic)
-- `comments-client.js` — Client-side library (rendering)
+- `standard.comment.js` — Client-side library (rendering)
 - `comments-example.js` — Ready-to-deploy function handler
 - `wrangler-comments.toml.template` — Cloudflare config template
 - `utils.js` — Shared utilities
@@ -428,7 +428,7 @@ curl https://your-domain/api/comments?pageId=blog/my-post
 
 1. **Monitor**: Check email for moderation alerts
 2. **Review**: Go to GitHub repo, find comment JSON file
-3. **Approve**: 
+3. **Approve**:
    - Edit JSON file
    - Change `"approved": false` to `"approved": true`
    - Save commit
@@ -498,7 +498,7 @@ For complete docs, examples, and advanced features:
 | File | Purpose |
 |------|---------|
 | `comments.js` | Server handler, validation, GitHub API |
-| `comments-client.js` | Browser library, rendering, form |
+| `standard.comment.js` | Browser library, rendering, form |
 | `comments-example.js` | Ready-to-deploy endpoint |
 | `comments-template.html` | HTML + CSS template |
 | `wrangler-comments.toml.template` | Cloudflare config |

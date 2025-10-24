@@ -66,7 +66,7 @@ export default function (eleventyConfig) {
 
 Adds comments system:
 - ✅ Comments handler at `functions/api/comments.js`
-- ✅ Browser client library at `assets/js/comments-client.js`
+- ✅ Browser client library at `assets/js/standard.comment.js`
 - ✅ Spam detection & moderation
 - ✅ Nested threaded replies
 - ✅ Stored in GitHub as JSON files
@@ -81,12 +81,12 @@ export default function (eleventyConfig) {
     outputDir: "assets/standard",
     copyFiles: true,
     useCDN: false,
-    cloudflare: { 
+    cloudflare: {
       enabled: true,
       outputDir: "functions",
       environment: "production"
     },
-    comments: { 
+    comments: {
       enabled: true,
       outputDir: "functions/api",
       copyClientLibrary: true
@@ -178,7 +178,7 @@ See [[Filters]] for complete list.
 ### 2. Initialize JavaScript
 
 ```html
-<script src="/assets/js/comments-client.js"></script>
+<script src="/assets/js/standard.comment.js"></script>
 <script>
   const comments = new GitHubComments({
     apiUrl: '/api/comments',
@@ -186,7 +186,7 @@ See [[Filters]] for complete list.
     container: '#comments',
     form: '#comment-form'
   });
-  
+
   comments.load().then(() => comments.render());
   comments.attachFormHandler();
 </script>
@@ -262,11 +262,11 @@ eleventyConfig.addPlugin(Standard, {
   outputDir: "assets/standard",
   copyFiles: true,
   useCDN: process.env.NODE_ENV === "production",
-  cloudflare: { 
+  cloudflare: {
     enabled: process.env.ENABLE_FUNCTIONS === "true",
     environment: process.env.NODE_ENV || "production"
   },
-  comments: { 
+  comments: {
     enabled: process.env.ENABLE_COMMENTS === "true"
   }
 });
@@ -287,7 +287,7 @@ assets/standard/
 functions/
 ├── example.js
 ├── comments-example.js
-├── comments-client.js
+├── standard.comment.js
 ├── utils.js
 └── ...
 ```
@@ -300,7 +300,7 @@ functions/api/
 └── ...
 
 assets/js/
-└── comments-client.js
+└── standard.comment.js
 ```
 
 ## Troubleshooting

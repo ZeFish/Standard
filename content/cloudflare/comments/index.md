@@ -60,7 +60,7 @@ Comments are associated with **page URLs** (not filenames):
 
 **Source Code** (in `src/cloudflare/`):
 - `comments.js` — Server-side handler (400 lines)
-- `comments-client.js` — Browser library (350 lines)
+- `standard.comment.js` — Browser library (350 lines)
 - `comments-example.js` — Ready-to-deploy endpoint
 - `wrangler-comments.toml.template` — Cloudflare config
 
@@ -104,7 +104,7 @@ wrangler secret put GITHUB_TOKEN --env production
   <button type="submit">Post</button>
 </form>
 
-<script src="/path/to/comments-client.js"></script>
+<script src="/path/to/standard.comment.js"></script>
 <script>
   const comments = new GitHubComments({
     apiUrl: '/api/comments',

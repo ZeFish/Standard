@@ -8,7 +8,7 @@ eleventyNavigation:
   title: GitHub Comments Client
 category: Cloudflare Functions
 type: js
-source: /Users/francisfontaine/Documents/GitHub/Standard/src/js/comments-client.js
+source: /Users/francisfontaine/Documents/GitHub/Standard/src/js/standard.comment.js
 since: 0.10.53
 ---
 
@@ -39,4 +39,4 @@ comments.attachFormHandler('#comment-form');
 
 ---
 
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/js/comments-client.js`
+**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/js/standard.comment.js`

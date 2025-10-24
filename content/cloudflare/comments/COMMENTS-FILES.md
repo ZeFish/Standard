@@ -8,7 +8,7 @@ Complete list of files for the GitHub comments system.
 ```
 src/cloudflare/
 ├── comments.js                 (12 KB) ← Main server handler
-├── comments-client.js          (9.5 KB) ← Browser library
+├── standard.comment.js          (9.5 KB) ← Browser library
 ├── comments-example.js         (2.7 KB) ← Cloudflare endpoint
 ├── wrangler-comments.toml.template (3.3 KB)
 ├── wrangler.toml.template      (already exists)
@@ -61,7 +61,7 @@ content/cloudflare/comments/
 
 ---
 
-#### comments-client.js (9.5 KB)
+#### standard.comment.js (9.5 KB)
 **Purpose**: Browser library for rendering and form handling
 
 **Class**: `GitHubComments`
@@ -294,7 +294,7 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 | File | Size | Lines | Purpose |
 |------|------|-------|---------|
 | comments.js | 12 KB | 400 | Server handler |
-| comments-client.js | 9.5 KB | 350 | Browser library |
+| standard.comment.js | 9.5 KB | 350 | Browser library |
 | comments-template.html | 9.7 KB | 400 | HTML template |
 | COMMENTS-GUIDE.md | 12 KB | 602 | Full docs |
 | COMMENTS-QUICK-START.md | 8 KB | 304 | Quick setup |
@@ -330,7 +330,7 @@ Copy `comments-template.html` into your site template. It includes:
 
 ### What about the JavaScript?
 
-`comments-client.js` provides the `GitHubComments` class:
+`standard.comment.js` provides the `GitHubComments` class:
 
 ```javascript
 const comments = new GitHubComments({
@@ -351,7 +351,7 @@ comments.attachFormHandler();
 - None! Uses built-in Cloudflare APIs and fetch
 - Only dependency: Cloudflare Workers runtime
 
-### Client-Side (comments-client.js)
+### Client-Side (standard.comment.js)
 - None! Pure vanilla JavaScript
 - Browser support: All modern browsers (ES6+)
 
@@ -363,7 +363,7 @@ comments.attachFormHandler();
 
 All files follow security best practices:
 - ✅ HTML sanitization (comments.js)
-- ✅ XSS prevention (comments-client.js)
+- ✅ XSS prevention (standard.comment.js)
 - ✅ Email validation (comments.js)
 - ✅ Rate limiting support (Cloudflare)
 - ✅ Secrets management (wrangler.toml)
