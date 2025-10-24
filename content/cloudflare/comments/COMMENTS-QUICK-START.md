@@ -22,7 +22,7 @@ Deploy a fully-functional comments system in 10 minutes.
 
 ## Setup (10 minutes)
 
-### Step 1: Enable Comments in Standard Plugin (1 min)
+### Step 1: Enable Cloudflare in Standard Plugin (1 min)
 
 Update your `eleventy.config.js`:
 
@@ -31,14 +31,15 @@ import Standard from "@zefish/standard";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(Standard, {
-    comments: { enabled: true }
+    cloudflare: { enabled: true }
   });
 }
 ```
 
 This automatically:
+- ✅ Enables the comments system (comments require Cloudflare Functions backend)
 - ✅ Copies comments handler to `functions/api/comments.js`
-- ✅ Copies client library to `assets/js/comments-client.js`
+- ✅ Copies client library to `assets/standard/standard.comment.js`
 - ✅ Generates `wrangler.toml` from your `.env` file on build
 
 ### Step 2: Create .env File (1 min)
@@ -201,7 +202,7 @@ Customize with options:
 </form>
 
 <!-- Include scripts -->
-<script src="/assets/js/comments-client.js"></script>
+<script src="/assets/standard/standard.comment.js"></script>
 <script>
   const comments = new GitHubComments({
     apiUrl: '/api/comments',

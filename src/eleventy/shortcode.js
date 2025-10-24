@@ -81,6 +81,26 @@ export default function (eleventyConfig, options = {}) {
     return "";
   });
 
+  /**
+   * Normalize page URL to safe file path for GitHub storage
+   * Examples:
+   * - "/blog/my-post/" → "blog--my-post"
+   * - "/about/" → "about"
+   * - "/" → "index"
+   * - "/blog/2024/article/" → "blog--2024--article"
+   */
+  function normalizePageId(url) {
+    if (!url || typeof url !== "string") {
+      return "index";
+    }
+    return (
+      url
+        .replace(/^\//, "") // Remove leading slash
+        .replace(/\/$/, "") // Remove trailing slash
+        .replace(/\//g, "--") || "index"
+    ); // Replace slashes with double-dash, fallback to 'index'
+  }
+
   // Shortcode to render comment form with semantic HTML and auto-initialize
   // Usage: {% standardComment %}
   // Auto-initializes if comment: true is in frontmatter
@@ -94,12 +114,11 @@ export default function (eleventyConfig, options = {}) {
       showReset = showReset === false || showReset === "false" ? false : true;
 
       // Get frontmatter variables from this context (ctx property)
-      // Use comment: true in frontmatter, page ID auto-generated from file slug
+      // Use comment: true in frontmatter, page ID auto-generated from page.url
       const context = this.ctx || this;
       const isCommentsEnabled = context.comment === true;
-      const pageId = isCommentsEnabled
-        ? (context.page && context.page.fileSlug) || null
-        : null;
+      const rawUrl = context.page && context.page.url;
+      const pageId = isCommentsEnabled ? normalizePageId(rawUrl) : null;
       const apiUrl = context.commentApiUrl || "/api/comments";
       const pollInterval = context.pollInterval || null;
 

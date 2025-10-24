@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "src/layouts"
   ],
   "scripts": {
-    "start": "rm -rf _site && npm run build:css && npx @11ty/eleventy --serve --port=8090 --quiet",
+    "start": "rm -rf _site && npm run build:css && npx @11ty/eleventy --serve --port=8090",
     "dev": "concurrently \"npm:watch:*\"",
     "watch:css": "sass --watch --load-path=node_modules src/styles/standard.scss dist/standard.css --no-source-map",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",

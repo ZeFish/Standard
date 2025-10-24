@@ -13,10 +13,18 @@
  * GitHub Storage Structure:
  * data/comments/{pageId}/{timestamp}-{hash}.md
  *
+ * Page ID Format:
+ * - Uses normalized page.url from 11ty
+ * - Examples: "/blog/my-post/" → "blog--my-post"
+ * - Homepage "/" → "index"
+ * - Nested URLs: "/blog/2024/article/" → "blog--2024--article"
+ * - Normalization done in shortcode.js before reaching API
+ *
  * Environment Variables Required:
  * - GITHUB_TOKEN: Personal access token with repo write access
  * - GITHUB_OWNER: Repository owner (e.g., "zefish")
  * - GITHUB_REPO: Repository name (e.g., "standard")
+ * - GITHUB_COMMENTS_PATH: Path for storing comments (default: "data/comments")
  * - MODERATION_EMAIL: Email for notifications
  *
  * @since 0.10.53
@@ -95,15 +103,17 @@ function parseMarkdownComment(markdownContent) {
  * Fetch comments from GitHub for a specific page
  */
 async function fetchCommentsFromGitHub(pageId, env) {
-  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO } = env;
+  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_COMMENTS_PATH } = env;
 
   if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
     throw new Error("Missing GitHub configuration");
   }
 
+  const commentsPath = GITHUB_COMMENTS_PATH || "data/comments";
+
   try {
     // Use GitHub API to list files in comments directory for this page
-    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/data/comments/${encodeURIComponent(
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${commentsPath}/${encodeURIComponent(
       pageId,
     )}`;
 
@@ -172,15 +182,16 @@ async function fetchCommentsFromGitHub(pageId, env) {
  * Save new comment to GitHub as Markdown file
  */
 async function saveCommentToGitHub(pageId, commentData, env) {
-  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO } = env;
+  const { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_COMMENTS_PATH } = env;
 
   if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
     throw new Error("Missing GitHub configuration");
   }
 
+  const commentsPath = GITHUB_COMMENTS_PATH || "data/comments";
   const commentId = generateCommentId();
   const fileName = `${commentId}.md`;
-  const filePath = `data/comments/${pageId}/${fileName}`;
+  const filePath = `${commentsPath}/${pageId}/${fileName}`;
 
   // Prepare comment data
   const comment = {

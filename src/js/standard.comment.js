@@ -12,11 +12,17 @@
  * - Real-time comment updates (optional polling)
  * - Markdown support with code blocks
  *
+ * Page ID Format:
+ * - Uses normalized page.url (e.g., "/blog/my-post/" → "blog--my-post")
+ * - Comments are stored in: data/comments/{pageId}/{timestamp}-{hash}.md
+ * - Homepage "/" becomes "index"
+ * - Slashes replaced with double-dash for GitHub file path safety
+ *
  * @example
- * // Initialize on page
+ * // Initialize on page (auto-initialized by standardComment shortcode)
  * const comments = new GitHubComments({
  *   apiUrl: '/api/comments',
- *   pageId: 'blog/my-post',
+ *   pageId: 'blog--my-post',  // Normalized from page.url
  *   container: '#comments-section'
  * });
  *

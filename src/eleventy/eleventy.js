@@ -25,6 +25,8 @@ const colors = {
   blue: "\x1b[34m",
   magenta: "\x1b[35m",
   pink: "\x1b[35m",
+  grey: "\x1b[90m",
+  orange: "\x1b[38;5;208m",
 };
 
 // Read package.json for version
@@ -51,7 +53,10 @@ const pkg = JSON.parse(
  * @param {boolean} options.useCDN Use CDN instead of local files (default: false)
  * @param {array} options.escapeCodeBlocks Languages to escape code blocks for (default: [])
  * @param {object} options.cloudflare Cloudflare Functions config (default: { enabled: false })
- * @param {object} options.comments GitHub Comments config (default: { enabled: false })
+ * @param {object} options.comments GitHub Comments config
+ * @param {boolean} options.comments.enabled Enable comments system (default: false)
+ * @param {string} options.comments.apiEndpoint API endpoint path (default: "/api/comments")
+ * @param {string} options.comments.commentsPath GitHub storage path (default: "data/comments")
  *
  * @prop {shortcode} standardAssets Include CSS and JS in template
  * @prop {shortcode} standardLab Include lab/experimental features
@@ -80,7 +85,11 @@ const pkg = JSON.parse(
  *
  * // With Comments System
  * eleventyConfig.addPlugin(Standard, {
- *   comments: { enabled: true, outputDir: "functions/api" }
+ *   comments: {
+ *     enabled: true,
+ *     apiEndpoint: "/api/comments",
+ *     commentsPath: "data/comments"  // Configurable GitHub path
+ *   }
  * });
  *
  * // Everything included
@@ -115,6 +124,7 @@ export default function (eleventyConfig, options = {}) {
       enabled: false,
       apiEndpoint: "/api/comments",
       clientLibrary: `/${outputDir}/standard.comment.js`,
+      commentsPath: "data/comments",
       version: pkg.version,
     },
   } = options;
@@ -128,6 +138,7 @@ export default function (eleventyConfig, options = {}) {
       sitemap: "node_modules/@zefish/standard/src/layouts/sitemap.xml.njk",
     },
     option: options,
+    comments: comments,
   });
 
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
@@ -136,7 +147,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(addEncryptionTransform);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
-  eleventyConfig.addPlugin(ShortCode);
+  eleventyConfig.addPlugin(ShortCode, { comments });
 
   eleventyConfig.setUseGitIgnore(false);
 
@@ -147,9 +158,10 @@ export default function (eleventyConfig, options = {}) {
 
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
-    const cloudflareDir = path.join(__dirname, "../cloudflare");
+    // When Cloudflare is enabled, automatically enable comments system
+    comments.enabled = true;
 
-    // Optionally copy client library to assets
+    // Copy comments client library to assets
     const commentsClient = path.join(__dirname, "../js/standard.comment.js");
     if (fs.existsSync(commentsClient)) {
       eleventyConfig.addPassthroughCopy({
@@ -157,9 +169,7 @@ export default function (eleventyConfig, options = {}) {
       });
     }
 
-    commentsConfig.enabled = true;
-
-    eleventyConfig.addGlobalData("comments", commentsConfig);
+    eleventyConfig.addGlobalData("comments", comments);
   }
 
   // ===== SHORTCODES =====
@@ -194,7 +204,7 @@ export default function (eleventyConfig, options = {}) {
   // Log plugin initialization after build completes
   eleventyConfig.on("eleventy.after", () => {
     console.log(
-      `${colors.yellow}⚡⚡ Standard Framework${colors.red} | ${colors.green}${pkg.version}${colors.red} | ${colors.yellow}https://standard.ffp.co/cheet-sheat ⚡⚡`,
+      `${colors.red}⚡⚡ Standard${colors.grey} | ${colors.reset}${pkg.version}${colors.grey} | ${colors.green}https://standard.ffp.co/cheet-sheat ⚡⚡${colors.reset}`,
     );
   });
 

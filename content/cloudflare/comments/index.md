@@ -21,16 +21,29 @@ A production-ready, serverless comments system for Cloudflare that stores each c
 ## How It Works
 
 ```
-User submits comment
+User submits comment on page with URL /blog/my-post/
+    ↓
+Page URL normalized to "blog--my-post" (safe file path)
     ↓
 Cloudflare validates & sanitizes
     ↓
 Spam detection checks
     ↓
-Comment stored as JSON file in GitHub
+Comment stored as Markdown file in GitHub
     ↓
 Browser fetches & renders with threading
 ```
+
+## Page ID System
+
+Comments are associated with **page URLs** (not filenames):
+
+- **URL**: `/blog/my-post/` → **Page ID**: `blog--my-post`
+- **URL**: `/about/` → **Page ID**: `about`
+- **URL**: `/` → **Page ID**: `index`
+- **URL**: `/blog/2024/article/` → **Page ID**: `blog--2024--article`
+
+**Why URLs?** This ensures comments follow the content if you rename files but keep URLs stable via permalinks.
 
 ## Key Features
 
@@ -110,15 +123,17 @@ After deployment, your repo will have:
 
 ```
 data/comments/
-├── blog/
-│   └── my-post/
-│       ├── 1729609945000-a7x9k2m1.json
-│       ├── 1729609967000-b4z2k9p3.json
-│       └── 1729610005000-c8m5l1q7.json
-└── news/
-    └── announcement/
-        └── 1729610100000-d2m8k4r9.json
+├── blog--my-post/
+│   ├── 1729609945000-a7x9k2m1.md
+│   ├── 1729609967000-b4z2k9p3.md
+│   └── 1729610005000-c8m5l1q7.md
+├── about/
+│   └── 1729610045000-e9m2k7p5.md
+└── index/
+    └── 1729610100000-d2m8k4r9.md
 ```
+
+**Note**: Directory names use normalized page IDs (slashes replaced with `--`).
 
 Each comment: ~500-1000 bytes (small, git-friendly)
 
@@ -129,7 +144,7 @@ Submit a new comment
 
 ```json
 {
-  "pageId": "blog/my-post",
+  "pageId": "blog--my-post",
   "author": "John Doe",
   "email": "john@example.com",
   "content": "Great article!",
@@ -137,12 +152,14 @@ Submit a new comment
 }
 ```
 
-### GET /api/comments?pageId=blog/my-post
+**Note**: `pageId` should be normalized (e.g., `blog--my-post` not `blog/my-post`). The `{% standardComment %}` shortcode handles this automatically.
+
+### GET /api/comments?pageId=blog--my-post
 Fetch all comments for a page
 
 ```json
 {
-  "pageId": "blog/my-post",
+  "pageId": "blog--my-post",
   "count": 3,
   "comments": [...]
 }
@@ -150,15 +167,45 @@ Fetch all comments for a page
 
 ## Configuration
 
+### 11ty Plugin Configuration
+
+Configure the comments system in your `eleventy.config.js`:
+
+```javascript
+import Standard from "@zefish/standard";
+
+export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(Standard, {
+    comments: {
+      enabled: true,
+      apiEndpoint: "/api/comments",
+      commentsPath: "data/comments"  // ← Configurable GitHub storage path
+    }
+  });
+}
+```
+
+**Options**:
+- `enabled` (boolean) — Enable/disable comments system
+- `apiEndpoint` (string) — API endpoint path (default: `/api/comments`)
+- `commentsPath` (string) — GitHub storage path (default: `data/comments`)
+
+### Cloudflare Environment Variables
+
 Required environment variables:
-- `GITHUB_TOKEN` — Personal access token
+- `GITHUB_TOKEN` — Personal access token with repo write access
 - `GITHUB_OWNER` — Your GitHub username
 - `GITHUB_REPO` — Repository name
-- `GITHUB_COMMENTS_PATH` — Path for comments (e.g., `data/comments`)
+- `GITHUB_COMMENTS_PATH` — Path for comments (default: `data/comments`, must match `commentsPath` above)
 
 Optional:
 - `MODERATION_EMAIL` — Email for spam alerts
 - `SPAM_CHECK_ENABLED` — Enable spam detection (default: true)
+
+**Example**: To store comments in `comments/` instead of `data/comments/`:
+1. Set `commentsPath: "comments"` in your 11ty config
+2. Set `GITHUB_COMMENTS_PATH=comments` in Cloudflare environment variables
+3. Create `comments/` directory in your GitHub repo
 
 ## Use Cases
 
@@ -204,12 +251,38 @@ Perfect for:
 - ✅ Automatic scaling
 - ✅ Built-in backups
 
+## Breaking Changes (v0.10.53+)
+
+### Page IDs Now Use `page.url` (Not `page.fileSlug`)
+
+Comments are now associated with **page URLs** instead of **file names**.
+
+**Why?** This ensures comments follow the content if you rename files but keep URLs stable via permalinks.
+
+**Migration**: Not backward compatible. If you have existing comments from earlier versions, they used `page.fileSlug`. The system won't automatically find them with the new URL-based IDs.
+
+**Options**:
+1. **Accept fresh start** — Existing comments stay in old directories (won't display), new comments use new structure
+2. **Don't upgrade** — Stay on earlier version if you have existing comments you want to keep
+3. **Manual migration** — Rename directories to match new URL-based IDs (see below)
+
+### Configurable Comments Path
+
+The comments storage path is now configurable (previously hardcoded to `data/comments`).
+
+**What Changed**:
+- **Before**: Always `data/comments/`
+- **After**: Configurable via `commentsPath` option (default: `data/comments`)
+
+**Action Required**: Set `GITHUB_COMMENTS_PATH` environment variable in Cloudflare to match your chosen path.
+
 ## Troubleshooting
 
 **Comments not appearing?**
 - Check Cloudflare function logs: `wrangler tail --env production`
 - Verify GitHub token has `repo` scope
 - Confirm `GITHUB_COMMENTS_PATH` exists
+- Verify `pageId` is normalized (use browser console to check)
 
 **GitHub 401 Unauthorized?**
 - Token expired or incorrect
@@ -219,6 +292,11 @@ Perfect for:
 - Adjust detection in `comments.js`
 - Lower confidence threshold
 - Disable: `SPAM_CHECK_ENABLED = "false"`
+
+**Wrong pageId?**
+- Check browser console for actual `pageId` value
+- Should be normalized (e.g., `blog--my-post` not `blog/my-post`)
+- If manual integration, ensure you normalize URLs yourself
 
 See [COMMENTS-GUIDE.md](./COMMENTS-GUIDE.md) for more troubleshooting.
 
