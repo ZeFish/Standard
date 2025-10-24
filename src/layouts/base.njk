@@ -6,11 +6,11 @@
     {% standardFonts %}
     {% standardAssets %}
     {% standardLab %}
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js"></script>
+    {% htmx %}
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- Load GitHub Comments Client Library (required for comment form) -->
     <script defer src="/assets/standard/standard.comment.js"></script>
-	<body hx-boost="true" hx-target="main" hx-select="main" hx-swap="innerHTML show:none">
+    <body {% bodyHtmx %}>
 		<header>
 			<nav class="display-flex" style="justify-content: space-between; align-items: center; max-width: 100%;">
 				<div class="display-flex" style="align-items: left;">
@@ -26,7 +26,6 @@
 				</ul>
 			</nav>
 		</header>
-
      	<main class="prose md">
           {{ content | safe }}
       </main>
