@@ -290,8 +290,7 @@ async function handlePost(request, env) {
  * Main Cloudflare Function handler
  */
 export async function onRequest(request, env, ctx) {
-  const method = request.method?.toUpperCase();
-  console.log(`[DEBUG] Method: "${method}", Type: ${typeof method}`);
+  const method = (request.method || "").toUpperCase();
 
   // Handle CORS preflight
   if (method === "OPTIONS") {
