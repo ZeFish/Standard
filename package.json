@@ -53,6 +53,7 @@
     "build:css-min": "sass --load-path=node_modules src/styles/standard.scss dist/standard.min.css --style=compressed --no-source-map",
     "build:js": "cp src/js/standard.js dist/standard.js",
     "build:js-min": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js",
+    "clean:comments": "rm -rf data/comments && mkdir -p data/comments && echo '# Comments Storage' > data/comments/README.md",
     "release": "npm run build && release-it --only-version",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md"
   },
