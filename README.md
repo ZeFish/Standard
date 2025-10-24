@@ -1,3 +1,7 @@
+---
+comment: true
+---
+
 # Standard Framework
 
 **A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision.**
