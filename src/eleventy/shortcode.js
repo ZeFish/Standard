@@ -98,7 +98,7 @@ export default function (eleventyConfig, options = {}) {
       // Build comments container and form HTML with semantic structure using Standard design tokens
       const commentsContainer = `<div id="comments" class="comments-list" style="margin-bottom: var(--space-l); margin-top: var(--space-l);"></div>`;
 
-      const form = `<form id="comment-form" class="comment-form" novalidate style="border: 1px solid var(--color-border); padding: var(--space-l); border-radius: 6px; background: var(--color-background);">
+      const form = `<form id="comment-form" class="comment-form" novalidate hx-boost="false" style="border: 1px solid var(--color-border); padding: var(--space-l); border-radius: 6px; background: var(--color-background);">
   <fieldset style="border: none; padding: 0; margin: 0;">
     <legend style="font-size: var(--scale-l); font-weight: 600; margin-bottom: var(--space-m);">Leave a Comment</legend>
 
