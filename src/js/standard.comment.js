@@ -184,7 +184,7 @@ class GitHubComments {
     return `
       <div class="comment" data-id="${comment.id}" data-level="${level}"${approved}${spam}>
         <div class="comment-header">
-          <strong>${this.escapeHTML(comment.author)}</strong>
+          <span class="comment-author">${this.escapeHTML(comment.author)}</span>
           <span class="comment-date">${this.formatTime(comment.createdAt)}</span>
           ${comment.spam ? '<span class="comment-flag">⚠️ Flagged as spam</span>' : ""}
           ${!comment.approved ? '<span class="comment-pending">⏳ Awaiting moderation</span>' : ""}
@@ -192,9 +192,9 @@ class GitHubComments {
         <div class="comment-content">
           ${this.formatContent(comment.content)}
         </div>
-        <div class="comment-actions">
+        <!--div class="comment-actions">
           <button class="comment-reply" data-parent-id="${comment.id}">Reply</button>
-        </div>
+        </div-->
       </div>
     `;
   }
