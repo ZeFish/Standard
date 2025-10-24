@@ -65,7 +65,9 @@ async function fetchCommentsFromGitHub(pageId, env) {
     }
 
     if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`GitHub API error: ${response.status}`, errorText);
+      throw new Error(`GitHub API error: ${response.status} - ${errorText}`);
     }
 
     const files = await response.json();
