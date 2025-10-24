@@ -1,6 +1,3 @@
----
-comment: true
----
 
 # Standard Framework
 
@@ -73,7 +70,7 @@ import Standard from "@zefish/standard";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(Standard);
-  
+
   return {
     dir: { input: "content", output: "_site" }
   };
@@ -95,11 +92,11 @@ Create `_includes/layouts/base.njk`:
   <header class="rhythm-block p-4">
     <h1>My Website</h1>
   </header>
-  
+
   <main class="max-w-prose mx-auto px-4 rhythm-block">
     {{ content | safe }}
   </main>
-  
+
   <footer class="rhythm-block p-4">
     <p>&copy; 2024</p>
   </footer>
@@ -132,13 +129,13 @@ npx @11ty/eleventy --serve
 
 ## What You Get
 
-✅ **Professional Typography** — Golden ratio proportions, perfect spacing  
-✅ **Responsive Design** — Mobile, tablet, desktop — all handled  
-✅ **Dark Mode** — Automatic system preference detection  
-✅ **Accessibility** — WCAG AA compliant from the start  
-✅ **No Configuration** — Works out of the box  
-✅ **Small & Fast** — 15KB CSS, 2KB JS (gzipped)  
-✅ **11ty Integration** — Enhanced markdown, backlinks, encryption  
+✅ **Professional Typography** — Golden ratio proportions, perfect spacing
+✅ **Responsive Design** — Mobile, tablet, desktop — all handled
+✅ **Dark Mode** — Automatic system preference detection
+✅ **Accessibility** — WCAG AA compliant from the start
+✅ **No Configuration** — Works out of the box
+✅ **Small & Fast** — 15KB CSS, 2KB JS (gzipped)
+✅ **11ty Integration** — Enhanced markdown, backlinks, encryption
 
 ---
 

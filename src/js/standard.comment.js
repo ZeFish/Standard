@@ -186,8 +186,8 @@ class GitHubComments {
         <div class="comment-header">
           <span class="comment-author">${this.escapeHTML(comment.author)}</span>
           <span class="comment-date">${this.formatTime(comment.createdAt)}</span>
-          ${comment.spam ? '<span class="comment-flag">⚠️ Flagged as spam</span>' : ""}
-          ${!comment.approved ? '<span class="comment-pending">⏳ Awaiting moderation</span>' : ""}
+          ${comment.spam ? '<span class="comment-flag">Flagged as spam</span>' : ""}
+          ${!comment.approved ? '<span class="comment-pending">Awaiting moderation</span>' : ""}
         </div>
         <div class="comment-content">
           ${this.formatContent(comment.content)}

@@ -6,6 +6,7 @@ eleventyNavigation:
   parent: CSS Framework
   title: Typography
 permalink: /css/typography/
+comment: true
 ---
 
 # Typography System
