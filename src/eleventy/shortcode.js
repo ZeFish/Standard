@@ -130,7 +130,10 @@ export default function (eleventyConfig, options = {}) {
       // Build comments container and form HTML with semantic structure
       const commentsContainer = `<div id="comments" class="comments-list"></div>`;
 
-      const form = `<form id="comment-form" class="small container-small" method="post" action="${apiUrl}" novalidate>
+      const writeButton = `<button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">Write a Comment</button>`;
+
+      const form = `<div id="comment-form-wrapper" style="display: none;">
+  <form id="comment-form" class="small container-small" method="post" action="${apiUrl}" novalidate>
   <fieldset>
     <legend>Leave a Comment</legend>
 
@@ -186,7 +189,8 @@ export default function (eleventyConfig, options = {}) {
         <a href="/terms/">terms of service</a>.
     </p-->
   </fieldset>
-</form>`;
+</form>
+</div>`;
 
       // Build initialization script
       const initOptions = {
@@ -215,7 +219,9 @@ export default function (eleventyConfig, options = {}) {
   });
 </script>`;
 
-      return commentsContainer + "\n" + form + "\n" + initScript;
+      return (
+        commentsContainer + "\n" + writeButton + "\n" + form + "\n" + initScript
+      );
     },
   );
 }
