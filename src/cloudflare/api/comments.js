@@ -56,6 +56,7 @@ async function fetchCommentsFromGitHub(pageId, env) {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: "application/vnd.github.v3+raw",
+        "User-Agent": "Standard-Framework-Comments",
       },
     });
 
@@ -85,6 +86,7 @@ async function fetchCommentsFromGitHub(pageId, env) {
             headers: {
               Authorization: `token ${GITHUB_TOKEN}`,
               Accept: "application/vnd.github.v3.raw",
+              "User-Agent": "Standard-Framework-Comments",
             },
           });
 
@@ -150,6 +152,7 @@ async function saveCommentToGitHub(pageId, commentData, env) {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
         "Content-Type": "application/json",
+        "User-Agent": "Standard-Framework-Comments",
       },
       body: JSON.stringify({
         message: `Add comment from ${comment.author} on ${pageId}`,
