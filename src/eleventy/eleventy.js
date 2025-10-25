@@ -163,10 +163,13 @@ export default function (eleventyConfig, options = {}) {
     eleventyConfig.addPassthroughCopy({
       [path.join(__dirname, "../../dist/standard.min.css")]:
         `${outputDir}/standard.min.css`,
+      [path.join(__dirname, "../../dist/standard.theme.min.css")]:
+        `${outputDir}/standard.theme.min.css`,
       [path.join(__dirname, "../../dist/standard.min.js")]:
         `${outputDir}/standard.min.js`,
       [path.join(__dirname, "../../dist/standard.lab.js")]:
         `${outputDir}/standard.lab.js`,
+      "node_modules/htmx.org/dist/htmx.min.js": `${outputDir}/htmx.min.js`,
     });
   }
 
@@ -197,13 +200,9 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addShortcode("standardAssets", function () {
     let html = "";
 
-    if (useCDN) {
-      html = `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
-<script src="https://unpkg.com/@zefish/standard/js" type="module"></script>`;
-    } else {
-      html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">
-<script src="/${outputDir}/standard.min.js" type="module"></script>`;
-    }
+    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css"><link rel="stylesheet" href="/${outputDir}/standard.theme.min.css">
+<script src="/${outputDir}/standard.min.js" type="module"></script></script>
+<script src="/${outputDir}/htmx.min.js"></script>`;
 
     // Add comments client library if comments are enabled
     if (comments.enabled) {
@@ -218,11 +217,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addShortcode("standardCss", function () {
     let html = "";
 
-    if (useCDN) {
-      html = `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
-    } else {
-      html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
-    }
+    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
 
     // Add comments client library if comments are enabled
     if (comments.enabled) {
@@ -234,9 +229,7 @@ export default function (eleventyConfig, options = {}) {
 
   eleventyConfig.addShortcode("standardLab", function (options = {}) {
     const { attributes = "" } = options;
-    if (useCDN) {
-      return `<script src="https://cdn.jsdelivr.net/npm/@zefish/standard@${pkg.version}/dist/standard.lab.js" ${attributes}><\/script>`;
-    }
+
     return `<script src="/${outputDir}/standard.lab.js" ${attributes}><\/script>`;
   });
 

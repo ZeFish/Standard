@@ -270,7 +270,7 @@
     ul.compact li,
     ol.compact li,
     li:last-of-type {
-        line-height: var(--font-density);
+        line-height: var(--line-height);
         margin-block-end: 0;
     }
 

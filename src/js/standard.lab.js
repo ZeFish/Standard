@@ -17,6 +17,15 @@ class StandardLab {
     this.googleFontsLoaded = new Set();
     this.colorScheme = this.detectColorScheme();
 
+    // Available themes (customize this list)
+    this.availableThemes = [
+      { value: "", label: "Default" },
+      { value: "paper", label: "Paper" },
+      { value: "swiss", label: "Swiss" },
+      { value: "kernel", label: "Kernel" },
+      { value: "forest", label: "Forest" },
+    ];
+
     // Core tokens to expose (curated list)
     this.coreTokens = {
       typography: [
@@ -95,7 +104,7 @@ class StandardLab {
       }
     });
 
-    // ADD THIS NEW SECTION - Toggle debug mode with Cmd+Shift+S / Ctrl+Shift+S
+    // Toggle debug mode with Cmd+Shift+S / Ctrl+Shift+S
     document.addEventListener("keydown", (e) => {
       const isMac = navigator.platform.indexOf("Mac") > -1;
       const matchesMac =
@@ -150,6 +159,43 @@ class StandardLab {
       return "dark";
     }
     return "light";
+  }
+
+  /**
+   * Get current theme from HTML
+   */
+  getCurrentTheme() {
+    return document.documentElement.getAttribute("data-theme") || "";
+  }
+
+  /**
+   * Set theme on HTML element
+   */
+  setTheme(themeName) {
+    if (themeName) {
+      document.documentElement.setAttribute("data-theme", themeName);
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+
+    // Save to localStorage
+    localStorage.setItem("standard-theme", themeName);
+
+    // Show feedback
+    this.showNotification(
+      `✓ Theme changed to: ${themeName || "Default"}`,
+      "success",
+    );
+  }
+
+  /**
+   * Show debug toggle notification
+   */
+  showDebugToggleNotification(isActive) {
+    this.showNotification(
+      `Debug mode ${isActive ? "enabled" : "disabled"}`,
+      isActive ? "success" : "info",
+    );
   }
 
   /**
@@ -256,11 +302,24 @@ class StandardLab {
             true,
           );
 
+    // Generate theme options
+    const themeOptions = this.availableThemes
+      .map(
+        (theme) =>
+          `<option value="${theme.value}" ${this.getCurrentTheme() === theme.value ? "selected" : ""}>${theme.label}</option>`,
+      )
+      .join("");
+
     this.panel.innerHTML = `
       <div class="system-header">
         <div class="system-title-group">
           <h2>Standard System</h2>
-          <span class="system-color-scheme" data-scheme="${this.colorScheme}">${this.colorScheme} mode</span>
+          <div class="system-meta">
+            <span class="system-color-scheme" data-scheme="${this.colorScheme}">${this.colorScheme} mode</span>
+            <select class="system-theme-select" data-action="change-theme" title="Change Theme">
+              ${themeOptions}
+            </select>
+          </div>
         </div>
         <div class="system-actions">
           <button class="system-btn" data-action="toggle-debug" title="Toggle Debug Mode">
@@ -411,6 +470,7 @@ class StandardLab {
       value.startsWith("#") ||
       value.startsWith("rgb") ||
       value.startsWith("hsl") ||
+      value.startsWith("oklch") ||
       value.includes("color-mix") ||
       // Named colors - more specific list
       [
@@ -559,7 +619,7 @@ class StandardLab {
     notification.className = `system-notification system-notification-${type}`;
     notification.textContent = message;
 
-    this.panel.appendChild(notification);
+    document.body.appendChild(notification);
 
     requestAnimationFrame(() => {
       notification.style.opacity = "1";
@@ -608,6 +668,15 @@ class StandardLab {
         }
       });
     });
+
+    // Theme selector change
+    const themeSelect = this.panel.querySelector(".system-theme-select");
+    if (themeSelect) {
+      themeSelect.addEventListener("change", (e) => {
+        e.stopPropagation();
+        this.setTheme(e.target.value);
+      });
+    }
 
     // Attach input listeners
     this.attachInputListeners();
@@ -751,6 +820,13 @@ class StandardLab {
         line-height: 1.2;
       }
 
+      .system-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-s, 0.75rem);
+        flex-wrap: wrap;
+      }
+
       .system-color-scheme {
         font-size: var(--scale-s);
         color: var(--color-muted);
@@ -778,6 +854,30 @@ class StandardLab {
       .system-color-scheme[data-scheme="light"]::before {
         background: var(--color-yellow);
         box-shadow: 0 0 8px var(--color-yellow);
+      }
+
+      .system-theme-select {
+        padding: var(--space-2xs, 0.25rem) var(--space-xs, 0.5rem);
+        background: var(--color-background);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius, 4px);
+        font-size: var(--scale-s, 0.875rem);
+        font-family: inherit;
+        color: var(--color-foreground);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        min-width: 120px;
+      }
+
+      .system-theme-select:hover {
+        border-color: var(--color-accent);
+        background: var(--color-hover);
+      }
+
+      .system-theme-select:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
       }
 
       .system-actions {
@@ -999,9 +1099,9 @@ class StandardLab {
       }
 
       .system-notification-success {
-        background: var(--color-success);
+        background: var(--color-success, var(--color-green));
         color: white;
-        border-color: var(--color-success);
+        border-color: var(--color-success, var(--color-green));
       }
 
       /* Scrollbar styling */

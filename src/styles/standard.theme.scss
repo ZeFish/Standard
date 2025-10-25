@@ -1,0 +1,27 @@
+/*!
+ * Standard Framework - Fine-Art Typography Management
+ *
+ * A comprehensive framework implementing:
+ * - Classical typography rules that CSS cannot handle
+ * - Progressive enhancement with zero-configuration setup
+ * - Multi-locale support with automatic detection
+ * - Dynamic content observation
+ * - Performance-optimized batch processing
+ * - Image zoom with keyboard navigation
+ *
+ * Based on research from:
+ * - The Elements of Typographic Style (Robert Bringhurst)
+ * - Ellen Lupton's typography works
+ * - Classical European typography conventions
+ * - Swiss typography principles
+ * - Modern web accessibility standards
+ *
+ * Philosophy: Respect classic typography rules, but readability always wins.
+ *
+ * @version @VERSION_PLACEHOLDER@
+ * @license MIT
+ */
+
+@use "standard-00-variables" as *;
+@use "standard-theme-paper";
+@use "standard-theme-swiss";

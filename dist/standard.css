@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.12.9
+ * @version Standard Framework v0.13.0
  * @license MIT
  */
 /* Document
@@ -1100,7 +1100,7 @@ mark {
   --font-sans: Diatype, InterVariable, system-ui, -apple-system, sans-serif;
   --font-serif: "Source Serif 4", serif;
   --font-text: var(--font-sans);
-  --font-header: InterVariable, system-ui, -apple-system, sans-serif;
+  --font-header: var(--font-text);
   --font-monospace:
       "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
   /* Font features & variations */
@@ -1118,7 +1118,7 @@ mark {
   --font-header-line-height: 0.75em;
   --font-header-weight: 900;
   /* Interface font tokens */
-  --font-interface: InterVariable, system-ui, -apple-system, sans-serif;
+  --font-interface: var(--font-text);
   --font-interface-feature: "dlig", "zero";
   --font-interface-variation: "opsz" 32;
   --font-list-feature: "dlig", "tnum", "zero";
@@ -1945,7 +1945,7 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) ul.compact li,
 :where(html:not(.no-rhythm), .rhythm) ol.compact li,
 :where(html:not(.no-rhythm), .rhythm) li:last-of-type {
-  line-height: var(--font-density);
+  line-height: var(--line-height);
   margin-block-end: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) {
@@ -3195,7 +3195,7 @@ hr.col-row {
   ); /* responsive full width with margins */
   --line-width: var(--line-width-m);
   /* Layout grid tokens */
-  --gap: clamp(var(--space), 6vw, var(--space-xl));
+  --gap: clamp(var(--space), 6%, var(--space-xl));
   --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
   --content-small: var(--space-l);
   --content-accent: minmax(0, var(--space-l));
@@ -3203,14 +3203,9 @@ hr.col-row {
   --content-full: minmax(0, 1fr);
 }
 
-/* Responsive adjustments - collapse gutters on small screens */
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
   :root {
-    --content-small: 0;
-    --content: min(var(--line-width), 100%); /* ← FIXED */
-    --content-accent: 0;
-    --content-feature: 0;
-    --content-full: 0; /* Just the minimum gap */
+    --gap: 0;
   }
 }
 /* Prose Layout System - Article content grid and positioning */
@@ -3311,17 +3306,6 @@ hr.col-row {
 :where(.prose) h4 + h5,
 :where(.prose) h5 + h6 {
   margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier) * -1);
-}
-:where(.prose) {
-  /* Lists after headings get normal spacing */
-}
-:where(.prose) h1 + ul,
-:where(.prose) h1 + ol,
-:where(.prose) h2 + ul,
-:where(.prose) h2 + ol,
-:where(.prose) h3 + ul,
-:where(.prose) h3 + ol {
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
 }
 :where(.prose) :where(section,
 aside,

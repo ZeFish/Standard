@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ site.language }}" class="rhythm">
+<html lang="{{ site.language }}" class="rhythm" data-theme="paper">
     <head>
       {% include "meta.njk" %}
     </head>
     {% standardFonts %}
-    {% standardCss %}
+    {% standardAssets %}
     {% standardLab %}
-    {% htmx %}
     <link rel="stylesheet" href="/assets/css/style.css">
     <body {% bodyHtmx %}>
 		<header>
@@ -15,9 +14,6 @@
 					<a href="/" style="text-decoration: none;">{{ site.title }}</a>
 				</div>
 				<ul class="display-flex gap-base no-bullet smaller" style="margin: 0; padding: 0;">
-					<li><a href="/css/">CSS</a></li>
-					<li><a href="/11ty/">11ty</a></li>
-					<li><a href="/cloudflare/">Cloudflare</a></li>
 					<li><a href="/docs/" hx-boost="false">Docs</a></li>
 					<li><a href="/getting-started/">Getting Started</a></li>
 					<li><a href="/cheat-sheet/">Cheat Sheet</a></li>

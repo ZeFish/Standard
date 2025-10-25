@@ -54,7 +54,7 @@
     --line-width: var(--line-width-m);
 
     /* Layout grid tokens */
-    --gap: clamp(var(--space), 6vw, var(--space-xl));
+    --gap: clamp(var(--space), 6%, var(--space-xl));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
     --content-small: var(--space-l);
     --content-accent: minmax(0, var(--space-l));
@@ -62,14 +62,9 @@
     --content-full: minmax(0, 1fr);
 }
 
-/* Responsive adjustments - collapse gutters on small screens */
-@media only screen and (max-width: #{$small}) {
+@media (max-width: #{$small}) {
     :root {
-        --content-small: 0;
-        --content: min(var(--line-width), 100%); /* ← FIXED */
-        --content-accent: 0;
-        --content-feature: 0;
-        --content-full: 0; /* Just the minimum gap */
+        --gap: 0;
     }
 }
 
@@ -202,15 +197,6 @@
         );
     }
 
-    /* Lists after headings get normal spacing */
-    h1 + ul,
-    h1 + ol,
-    h2 + ul,
-    h2 + ol,
-    h3 + ul,
-    h3 + ol {
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
-    }
     :where(
         section,
         aside,

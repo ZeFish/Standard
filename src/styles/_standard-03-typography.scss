@@ -34,7 +34,7 @@
     --font-sans: Diatype, InterVariable, system-ui, -apple-system, sans-serif;
     --font-serif: "Source Serif 4", serif;
     --font-text: var(--font-sans);
-    --font-header: InterVariable, system-ui, -apple-system, sans-serif;
+    --font-header: var(--font-text);
     --font-monospace:
         "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
 
@@ -55,7 +55,7 @@
     --font-header-weight: 900;
 
     /* Interface font tokens */
-    --font-interface: InterVariable, system-ui, -apple-system, sans-serif;
+    --font-interface: var(--font-text);
     --font-interface-feature: "dlig", "zero";
     --font-interface-variation: "opsz" 32;
     --font-list-feature: "dlig", "tnum", "zero";
