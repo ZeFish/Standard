@@ -8,16 +8,37 @@ eleventyNavigation:
   title: Grid System
 category: Layout
 type: scss
-source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-06-grid.scss
+source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/_standard-06-grid.scss
 since: 0.1.0
 ---
 
-12-column Swiss-style responsive grid with flexible gaps and alignment.
-Uses CSS Grid with logical properties for RTL support. Supports nested grids,
-asymmetric layouts, gap variants (tight/normal/wide), and responsive column changes.
-All gaps align to the vertical rhythm system.
+# Grid System
 
-## Properties
+12-column Swiss-style responsive grid with flexible gaps and alignment. Uses CSS Grid with logical properties for RTL support. Supports nested grids, asymmetric layouts, gap variants (tight/normal/wide), and responsive column changes. All gaps align to the vertical rhythm system.
+
+```scss
+// Basic 12-column grid with equal width columns
+<div class="grid">
+<div class="col-3">Item 1</div>
+<div class="col-3">Item 2</div>
+<div class="col-3">Item 3</div>
+<div class="col-3">Item 4</div>
+</div>
+
+// Responsive grid layout
+<div class="grid">
+<div class="col-12 col-sm-6 col-lg-3">Card</div>
+<div class="col-12 col-sm-6 col-lg-3">Card</div>
+</div>
+
+// Main content + sidebar layout
+<div class="grid">
+<div class="col-8">Main content</div>
+<div class="col-4">Sidebar</div>
+</div>
+```
+
+### Properties
 
 | Name | Type | Description |
 |------|------|-------------|
@@ -30,33 +51,275 @@ All gaps align to the vertical rhythm system.
 | `{class} .gap-tight Tight gap (1/4 space)` | `mixed` |  |
 | `{class} .gap-wide Wide gap (1.5 space)` | `mixed` |  |
 
-## Examples
+<details>
+<summary><span class="button">Source Code</span></summary>
 
 ```scss
-// Basic 12-column grid with equal width columns
-<div class="grid">
-<div class="col-3">Item 1</div>
-<div class="col-3">Item 2</div>
-<div class="col-3">Item 3</div>
-<div class="col-3">Item 4</div>
-</div>
-// Responsive grid layout
-<div class="grid">
-<div class="col-12 col-sm-6 col-lg-3">Card</div>
-<div class="col-12 col-sm-6 col-lg-3">Card</div>
-</div>
-// Main content + sidebar layout
-<div class="grid">
-<div class="col-8">Main content</div>
-<div class="col-4">Sidebar</div>
-</div>
+:root {
+    /* Grid system tokens */
+    --grid-cols: 12;
+    --grid-gap: var(--space);
+    --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
+
+    /* Container tokens */
+    --container-max: 1200px;
+    --container-standard: var(--space);
+}
+
+/* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
+   Use this as your single grid across the site (replaces old .h-grid API).
+   Relies on logical properties and Harmony tokens: --space, calc(var(--space) / 4), --space-l, borders, etc.
+*/
+
+/* Grid container */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    column-gap: var(--grid-gap);
+    row-gap: var(--grid-row-gap);
+}
+
+/* Gap variants aligned to rhythm */
+.grid.tight {
+    --grid-gap: calc(var(--space) / 4);
+    --grid-row-gap: var(--space-s);
+}
+.grid.wide {
+    --grid-gap: var(--space-l);
+    --grid-row-gap: var(--space-xl);
+}
+
+/* Spans 1..12 */
+@for $i from 1 through 12 {
+    .grid-#{$i} {
+        display: grid;
+        grid-template-columns: repeat(#{$i}, 1fr);
+        column-gap: var(--grid-gap);
+        row-gap: var(--grid-row-gap);
+    }
+}
+
+/* Spans 1..12 */
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        grid-column: span #{$i};
+        margin-block-end: 0;
+    }
+    .start-#{$i} {
+        grid-column-start: #{$i};
+    }
+}
+
+/* Responsive spans/starts: md ≥ #{$small}, lg ≥ #{$large} */
+@media (max-width: #{$small}) {
+    @for $i from 1 through 12 {
+        .grid-sm-#{$i} {
+            display: grid;
+            grid-template-columns: repeat(#{$i}, 1fr);
+            column-gap: var(--grid-gap);
+            row-gap: var(--grid-row-gap);
+        }
+        .col-sm-#{$i} {
+            grid-column: span #{$i};
+        }
+        .start-sm-#{$i} {
+            grid-column-start: #{$i};
+        }
+    }
+    .col-sm-row {
+        grid-column: 1 / -1;
+    }
+}
+@media (min-width: #{$large}) {
+    @for $i from 1 through 12 {
+        .grid-lg-#{$i} {
+            display: grid;
+            grid-template-columns: repeat(#{$i}, 1fr);
+            column-gap: var(--grid-gap);
+            row-gap: var(--grid-row-gap);
+        }
+        .col-lg-#{$i} {
+            grid-column: span #{$i};
+        }
+        .start-lg-#{$i} {
+            grid-column-start: #{$i};
+        }
+    }
+    .col-lg-row {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Full-span helper (replaces old .h-col-full) */
+.col-row,
+.col-full {
+    grid-column: 1 / -1;
+    margin-block-end: 0;
+}
+
+hr.col-row {
+    margin-block: var(--space);
+}
+
+/* Ergonomic presets (optional sugar) */
+.col-half {
+    grid-column: span 6;
+} /* 1/2 */
+.col-third {
+    grid-column: span 4;
+} /* 1/3 */
+.col-two3 {
+    grid-column: span 8;
+} /* 2/3 */
+.col-quarter {
+    grid-column: span 3;
+} /* 1/4 */
+
+/* Rhythm inside grid items: apply to a cell containing prose */
+.grid .rhythm > * {
+    margin-block-end: var(--space);
+}
+
+/* Free columns: place anywhere with CSS vars or utility shorthands */
+.free-col {
+    /* Defaults; authors override via CSS vars or utilities */
+    --start: auto; /* 1..12 or auto */
+    --span: 3; /* 1..12 */
+
+    grid-column: var(--start) / span var(--span);
+
+    /* If the free column contains prose, opt-in to rhythm */
+    &.rhythm > * {
+        margin-block-end: var(--space);
+    }
+}
+
+/* Utility-class interface to set the CSS vars (ergonomic authoring) */
+@for $i from 1 through 12 {
+    .span-#{$i} {
+        --span: #{$i};
+    }
+    .startv-#{$i} {
+        --start: #{$i};
+    } /* 'startv' to avoid clash with .start- utilities */
+}
+
+/* Responsive overrides for the var-based API */
+@media (max-width: #{$small}) {
+    @for $i from 1 through 12 {
+        .span-sm-#{$i} {
+            --span: #{$i};
+        }
+        .startv-sm-#{$i} {
+            --start: #{$i};
+        }
+    }
+}
+@media (min-width: #{$large}) {
+    @for $i from 1 through 12 {
+        .span-lg-#{$i} {
+            --span: #{$i};
+        }
+        .startv-lg-#{$i} {
+            --start: #{$i};
+        }
+    }
+}
+
+/* Mobile fallback: stack free columns full-width */
+@media (max-width: 767.98px) {
+    .free-col {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Optional: sticky marginalia variant for editorial layouts */
+.free-col.sticky {
+    position: sticky;
+    inset-block-start: var(--space);
+    align-self: start;
+    z-index: 1;
+}
+
+/* Row gap utilities for grid system */
+.grid.no-row-gap {
+    row-gap: 0;
+}
+
+.grid.row-gap-xs {
+    --grid-row-gap: var(--space-xs);
+}
+
+.grid.row-gap-s {
+    --grid-row-gap: var(--space-s);
+}
+
+.grid.row-gap-l {
+    --grid-row-gap: var(--space-l);
+}
+
+.grid.row-gap-xl {
+    --grid-row-gap: var(--space-xl);
+}
+
+/* Column gap utilities for grid system */
+.grid.no-col-gap {
+    column-gap: 0;
+}
+
+.grid.col-gap-xs {
+    --grid-gap: var(--space-xs);
+}
+
+.grid.col-gap-s {
+    --grid-gap: var(--space-s);
+}
+
+.grid.col-gap-l {
+    --grid-gap: var(--space-l);
+}
+
+.grid.col-gap-xl {
+    --grid-gap: var(--space-xl);
+}
+
+/* Common layout containers inherit rhythm to cascade deeper */
+.box,
+.grid > .col-1,
+.grid > .col-2,
+.grid > .col-3,
+.grid > .col-4,
+.grid > .col-5,
+.grid > .col-6,
+.grid > .col-7,
+.grid > .col-8,
+.grid > .col-9,
+.grid > .col-10,
+.grid > .col-11,
+.grid > .col-12,
+.grid > .col-half,
+.grid > .col-third,
+.grid > .col-two3,
+.grid > .col-quarter,
+.grid > .col-full {
+    > * {
+        margin-block: 0;
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+    }
+
+    > :last-child {
+        margin-block-end: 0;
+    }
+
+    > :first-child {
+        margin-block-start: 0;
+    }
+}
 ```
 
-## See Also
+</details>
+
+### See Also
 
 - standard-04-rhythm.scss
 
-
----
-
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-06-grid.scss`

@@ -58,6 +58,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("README.md");
   eleventyConfig.addWatchTarget("claude.md");
   eleventyConfig.on("eleventy.before", () => {
+    console.log("[Config] eleventy.before hook triggered");
+
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");
     const readmeDest = join(__dirname, "content", "README.md");
@@ -71,6 +73,7 @@ export default function (eleventyConfig) {
 
       // Only write if content has changed to prevent infinite watch loop
       if (!destExists || srcContent !== destContent) {
+        console.log("[Config] Syncing README.md to content/");
         fs.writeFileSync(readmeDest, srcContent, "utf-8");
       }
     }
@@ -88,17 +91,15 @@ export default function (eleventyConfig) {
 
       // Only write if content has changed to prevent infinite watch loop
       if (!destExists || srcContent !== destContent) {
+        console.log("[Config] Syncing claude.md to content/");
         fs.writeFileSync(claudeDest, srcContent, "utf-8");
       }
     }
+
+    console.log("[Config] eleventy.before hook completed");
   });
 
   eleventyConfig.addGlobalData("eleventyComputed", {
-    permalink: (data) => {
-      if (data.page.fileSlug.toLowerCase() === "readme") {
-        return "/index.html";
-      }
-    },
     title: (data) => {
       if (data.page.fileSlug.toLowerCase() === "readme") {
         return "Standard Framework";

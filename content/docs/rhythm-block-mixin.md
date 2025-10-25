@@ -8,14 +8,35 @@ eleventyNavigation:
   title: Rhythm Block Mixin
 category: Foundation
 type: scss
-source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-00-variables.scss
+source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/_standard-00-variables.scss
 since: 0.1.0
 ---
 
-Applies enhanced spacing to block-level elements that require
-extra visual separation such as callouts, blockquotes, code blocks, and tables.
+# Rhythm Block Mixin
 
+Applies enhanced spacing to block-level elements that require extra visual separation such as callouts, blockquotes, code blocks, and tables.
 
----
+<details>
+<summary><span class="button">Source Code</span></summary>
 
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-00-variables.scss`
+```scss
+@mixin apply-rhythm-block {
+    .callout,
+    blockquote,
+    pre,
+    figure,
+    p:has(img),
+    fieldset,
+    hr,
+    table,
+    .container-small,
+    .container-accent,
+    .container-feature,
+    .container-full {
+        @content;
+    }
+}
+```
+
+</details>
+

@@ -1,63 +1,40 @@
-
 # Standard Framework
 
-**A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision.**
+Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
 
 Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
 
 [CSS Framework](content/css/index.md) - [11ty Plugin](content/11ty/index.md) - [Cloudflare Fonction](content/cloudflare/index.md)
 
----
-
-## Philosophy
-
-Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
-
 > "Typography is the craft of endowing human language with a durable visual form."
 > — Robert Bringhurst
 
-### Core Principles
 
-- **Mathematical Precision** — Every measurement derives from the golden ratio (φ = 1.618)
-- **Fine-Art Typography** — Classical typography rules that CSS cannot handle
-- **Swiss Grid System** — 12-column responsive grid inspired by Josef Müller-Brockmann
-- **Vertical Rhythm** — All elements align to a baseline grid using `1rlh` units
-- **Zero Configuration** — Works beautifully out of the box with 11ty
-- **Zero Dependencies** — Pure CSS and vanilla JavaScript
+#### Mathematical Precision
+Every measurement derives from the golden ratio (φ = 1.618)
 
----
+#### Fine-Art Typography Engine
+Classical typography rules that CSS cannot handle. Automatic enhancement of text with smart quotes, proper punctuation, em-dashes, fraction formatting, and widow prevention.
 
-## Key Features
+#### Swiss Grid System
+12-column responsive grid inspired by Josef Müller-Brockmann with asymmetric layouts and free column positioning.
 
-### 🎨 Typography Engine
-Automatic enhancement of text with smart quotes, proper punctuation, em-dashes, fraction formatting, and widow prevention.
+#### Vertical Rhythm
+Bulletproof spacing system where all elements align to a baseline grid using `1rlh` units
 
-### 📐 Swiss Grid System
-12-column responsive grid with asymmetric layouts and free column positioning.
-
-### 🎵 Vertical Rhythm
-Bulletproof spacing system where all elements align to a baseline grid.
-
-### 🌈 Color System
+#### Color System
 Automatic light/dark theming with semantic colors and high-contrast support.
 
-### 📖 Reading Layout
+#### Reading Layout
 Editorial-quality layouts optimized for long-form content with multiple width variants.
 
-### 11ty Ready
+#### 11ty Ready
 Complete 11ty plugin with Markdown enhancements, backlinks, encryption, and filters.
 
----
+> A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision.
 
 ## Getting Started
 
-### Installation
-
-```bash
-npm install @zefish/standard
-```
-
-### Quick Setup (5 minutes)
 
 ```bash
 npm init -y

@@ -207,6 +207,17 @@
 [data-theme=paper] h1 {
   opacity: 85%;
 }
+[data-theme=paper] table {
+  grid-column: content;
+}
+[data-theme=paper] table,
+[data-theme=paper] table th,
+[data-theme=paper] table td,
+[data-theme=paper] table td code {
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  word-break: keep-all;
+}
 [data-theme=paper] body::before {
   content: "";
   position: fixed;
@@ -286,4 +297,15 @@
   --shadow: none;
   --border-radius: 0;
   --border-color: var(--color-foreground);
+}
+[data-theme=swiss] table {
+  grid-column: content;
+}
+[data-theme=swiss] table,
+[data-theme=swiss] table th,
+[data-theme=swiss] table td,
+[data-theme=swiss] table td code {
+  font-size: var(--scale-xs);
+  font-family: var(--font-monospace);
+  word-break: keep-all;
 }

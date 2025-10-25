@@ -21,6 +21,14 @@ contact form
 shortCode
 .flow -> .column
 
+Documentation
+History, Wikipedia
+The why
+what it can be use for
+Why its great
+what improvement could be done
+link to related function or variable or section
+
 @media print {
     .no-print,
     .no-print *,

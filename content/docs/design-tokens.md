@@ -8,15 +8,13 @@ eleventyNavigation:
   title: Design Tokens
 category: Foundation
 type: scss
-source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-01-token.scss
+source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/_standard-01-token.scss
 since: 0.1.0
 ---
 
-Primitive design tokens forming the foundation of the design system.
-Includes mathematical ratios, modular scales, spacing system, and animation curves.
-All tokens use CSS custom properties for runtime customization.
+# Design Tokens
 
-## Examples
+Primitive design tokens forming the foundation of the design system. Includes mathematical ratios, modular scales, spacing system, and animation curves. All tokens use CSS custom properties for runtime customization.
 
 ```scss
 :root {
@@ -26,11 +24,102 @@ All tokens use CSS custom properties for runtime customization.
 }
 ```
 
-## See Also
+<details>
+<summary><span class="button">Source Code</span></summary>
+
+```scss
+:root {
+    /* Base measurements & ratios - the foundation of everything else */
+    --font-size: 1rem;
+
+    /* Golden Ratio & Mathematical Precision */
+    --ratio-golden: 1.618;
+    --ratio-wholestep: 1.618;
+    --ratio-silver: 1.414;
+    --ratio-halfstep: 1.272; /* sqrt of golden ratio */
+    --ratio-quarterstep: 1.128;
+    --ratio-eighthstep: 1.062;
+
+    /* Current ratio (configurable) */
+    --font-ratio: var(--ratio-silver);
+    --font-density: 1.2;
+    --font-density-s: 1;
+
+    --font-mobile-size: 1rem;
+    --font-mobile-ratio: var(--ratio-halfstep);
+
+    --rhythm-multiplier: 1;
+    --rhythm-multiplier-block: 2;
+
+    --body-padding-multiplier: 1;
+    --body-mobile-padding-multiplier: 1;
+
+    /* Modular Scale - calculated from font-ratio */
+    --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
+    --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
+    --scale: var(--font-size);
+    --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 1));
+    --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
+    --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 4));
+    /* ADD: Extreme scales for display/poster typography */
+    --scale-display: calc(
+        var(--font-size) * pow(var(--font-ratio), 6)
+    ); /* ~10rem */
+    --scale-poster: calc(
+        var(--font-size) * pow(var(--font-ratio), 8)
+    ); /* ~16rem */
+
+    /* ADD: Micro scales for technical labels */
+    --scale-micro: calc(
+        var(--font-size) * pow(var(--font-ratio), -2)
+    ); /* ~0.6rem */
+    --scale-nano: calc(
+        var(--font-size) * pow(var(--font-ratio), -3)
+    ); /* ~0.4rem */
+
+    /* Logical Spacing Scale - based on rhythm unit */
+    --space-3xs: calc(1rlh / 5);
+    --space-2xs: calc(1rlh / 4);
+    --space-xs: calc(1rlh / 3);
+    --space-s: calc(1rlh / 2);
+    --space: 1rlh; /* Base rhythm unit */
+    --space-l: calc(2 * 1rlh);
+    --space-xl: calc(3 * 1rlh);
+    --space-2xl: calc(4 * 1rlh);
+    --space-3xl: calc(5 * 1rlh);
+
+    /* Logical border properties */
+    --hr-thickness: 1px;
+    --border-radius: var(--space-2xs);
+
+    /* Z-index scale */
+    --z-base: 1;
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-offcanvas: 1050;
+    --z-modal: 1060;
+    --z-popover: 1070;
+    --z-tooltip: 1080;
+    --z-toast: 1090;
+    --z-image-zoom: 9999;
+
+    /* Animation scale */
+    --duration-superfast: 0.15s;
+    --duration-fast: 0.25s;
+    --duration-normal: 0.35s;
+    --duration-slow: 0.5s;
+
+    --motion-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --motion-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+```
+
+</details>
+
+### See Also
 
 - standard-00-variables.scss
 
-
----
-
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-01-token.scss`

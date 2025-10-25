@@ -8,17 +8,32 @@ eleventyNavigation:
   title: Debug System
 category: Development
 type: scss
-source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-99-debug.scss
+source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/_standard-99-debug.scss
 since: 0.1.0
 ---
 
-Development debugging utilities for visualizing grid layouts,
-baseline rhythm, reading zones, and typography processing. Activated by adding
-.standard-debug class to body or parent element. Shows overlays for grid columns,
-baseline rhythm, reading layout zones, and other layout metrics. Essential for
-design system development and layout debugging. Automatically hidden in print.
+# Debug System
 
-## Properties
+Development debugging utilities for visualizing grid layouts, baseline rhythm, reading zones, and typography processing. Activated by adding .standard-debug class to body or parent element. Shows overlays for grid columns, baseline rhythm, reading layout zones, and other layout metrics. Essential for design system development and layout debugging. Automatically hidden in print.
+
+```scss
+// Enable debug mode on page
+<body class="standard-debug">
+<!-- All debug overlays visible -->
+</body>
+
+// Debug specific grid
+<div class="grid standard-debug">
+<div class="col-4">Shows grid overlay</div>
+</div>
+
+// Debug reading layout zones
+<article class="reading standard-debug">
+<div class="accent">Zone highlighted</div>
+</article>
+```
+
+### Properties
 
 | Name | Type | Description |
 |------|------|-------------|
@@ -30,24 +45,465 @@ design system development and layout debugging. Automatically hidden in print.
 | `breakpoint` | `indicator` | -indicator Current responsive breakpoint |
 | `debug` | `indicator` | -panel Fixed info panel with metrics |
 
-## Examples
+<details>
+<summary><span class="button">Source Code</span></summary>
 
 ```scss
-// Enable debug mode on page
-<body class="standard-debug">
-<!-- All debug overlays visible -->
-</body>
-// Debug specific grid
-<div class="grid standard-debug">
-<div class="col-4">Shows grid overlay</div>
-</div>
-// Debug reading layout zones
-<article class="reading standard-debug">
-<div class="accent">Zone highlighted</div>
-</article>
+.standard-debug {
+    position: relative;
+}
+
+/* Baseline Grid Overlay */
+.standard-debug::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent calc(var(--space) - 1px),
+        color-mix(in srgb, var(--color-accent) 5%, transparent)
+            calc(var(--space) - 1px),
+        color-mix(in srgb, var(--color-accent) 5%, transparent) var(--space)
+    );
+    pointer-events: none;
+    z-index: var(--z-tooltip);
+    opacity: 0.5;
+}
+
+/* Grid Column Overlay (only for .grid inside debug) */
+.standard-debug .grid,
+.standard-debug .grid-2,
+.standard-debug .grid-3,
+.standard-debug .grid-4,
+.standard-debug .grid-5,
+.standard-debug .grid-6,
+.standard-debug .grid-7,
+.standard-debug .grid-8,
+.standard-debug .grid-9,
+.standard-debug .grid-10,
+.standard-debug .grid-11,
+.standard-debug .grid-12 {
+    position: relative;
+}
+
+.standard-debug .grid::after,
+.standard-debug .grid-2::after,
+.standard-debug .grid-3::after,
+.standard-debug .grid-4::after,
+.standard-debug .grid-5::after,
+.standard-debug .grid-6::after,
+.standard-debug .grid-7::after,
+.standard-debug .grid-8::after,
+.standard-debug .grid-9::after,
+.standard-debug .grid-10::after,
+.standard-debug .grid-11::after,
+.standard-debug .grid-12::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    column-gap: var(--grid-gap);
+    pointer-events: none;
+    z-index: var(--z-tooltip);
+    background-image: repeating-linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-cyan) 10%, transparent) 0,
+        color-mix(in srgb, var(--color-cyan) 10%, transparent)
+            calc(
+                (100% - (var(--grid-gap) * (var(--grid-cols) - 1))) /
+                    var(--grid-cols)
+            ),
+        transparent
+            calc(
+                (100% - (var(--grid-gap) * (var(--grid-cols) - 1))) /
+                    var(--grid-cols)
+            ),
+        transparent
+            calc(
+                (100% - (var(--grid-gap) * (var(--grid-cols) - 1))) /
+                    var(--grid-cols) + var(--grid-gap)
+            )
+    );
+}
+
+/* Reading Layout Debug - show zones */
+.standard-debug.prose::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns:
+        [full-start] var(--content-full)
+        [feature-start] var(--content-feature)
+        [accent-start] var(--content-accent)
+        [content-start] var(--content)
+        [content-end] var(--content-accent)
+        [accent-end] var(--content-feature)
+        [feature-end] var(--content-full)
+        [full-end];
+    pointer-events: none;
+    z-index: var(--z-base);
+    opacity: 0.1;
+    background: linear-gradient(
+        to right,
+        transparent 0,
+        transparent var(--content-full),
+        var(--color-purple) var(--content-full),
+        var(--color-purple) calc(var(--content-full) + var(--content-feature)),
+        var(--color-blue) calc(var(--content-full) + var(--content-feature)),
+        var(--color-blue)
+            calc(
+                var(--content-full) + var(--content-feature) +
+                    var(--content-accent)
+            ),
+        var(--color-accent)
+            calc(
+                var(--content-full) + var(--content-feature) +
+                    var(--content-accent)
+            ),
+        var(--color-accent)
+            calc(
+                100% - var(--content-full) - var(--content-feature) - var(
+                        --content-accent
+                    )
+            ),
+        var(--color-blue)
+            calc(
+                100% - var(--content-full) - var(--content-feature) - var(
+                        --content-accent
+                    )
+            ),
+        var(--color-blue)
+            calc(100% - var(--content-full) - var(--content-feature)),
+        var(--color-purple)
+            calc(100% - var(--content-full) - var(--content-feature)),
+        var(--color-purple) calc(100% - var(--content-full)),
+        transparent calc(100% - var(--content-full))
+    );
+}
+
+/* Rhythm Spacing Debug - outline all elements */
+.standard-debug.rhythm > * {
+    outline: 1px dashed color-mix(in srgb, var(--color-orange) 50%, transparent);
+    outline-offset: -1px;
+    position: relative;
+}
+
+/* Show margin-block-end values */
+.standard-debug.rhythm > *::after {
+    content: "↓ " attr(data-margin-block-end);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--color-orange);
+    color: var(--color-background);
+    font-size: var(--scale-xs);
+    font-family: var(--font-monospace);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: var(--z-tooltip);
+    white-space: nowrap;
+    display: none;
+}
+
+/* Typography Debug - show processed elements */
+.standard-debug [data-typography-processed] {
+    position: relative;
+}
+
+.standard-debug [data-typography-processed]::before {
+    content: "✓ Typo";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--color-success);
+    color: var(--color-background);
+    font-size: var(--scale-xs);
+    font-family: var(--font-monospace);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    opacity: 0.63;
+    z-index: var(--z-tooltip);
+    white-space: nowrap;
+    display: none;
+}
+
+/* Debug Info Panel */
+.standard-debug::after {
+    content: "🔍 Standard Debug" "\A" "Baseline: " var(--space) "\A" "Ratio: "
+        var(--font-ratio) "\A" "Density: " var(--font-density) "\A" "Grid: "
+        var(--grid-cols) " cols";
+    position: fixed;
+    top: var(--space);
+    right: var(--space);
+    background: var(--color-background);
+    color: var(--color-foreground);
+    border: var(--border-accent);
+    border-radius: var(--border-radius);
+    padding: var(--space-s);
+    font-family: var(--font-monospace);
+    font-size: var(--scale-xs);
+    line-height: 1.5;
+    white-space: pre;
+    box-shadow: var(--shadow-xl);
+    z-index: var(--z-toast);
+    pointer-events: none;
+    opacity: 0.95;
+}
+
+/* Grid item debugging */
+.standard-debug .grid > *,
+.standard-debug .grid-2 > *,
+.standard-debug .grid-3 > *,
+.standard-debug .grid-4 > *,
+.standard-debug .grid-5 > *,
+.standard-debug .grid-6 > *,
+.standard-debug .grid-7 > *,
+.standard-debug .grid-8 > *,
+.standard-debug .grid-9 > *,
+.standard-debug .grid-10 > *,
+.standard-debug .grid-11 > *,
+.standard-debug .grid-12 > * {
+    outline: 1px solid color-mix(in srgb, var(--color-cyan) 50%, transparent);
+    outline-offset: -1px;
+    position: relative;
+}
+
+.standard-debug .grid > *::before,
+.standard-debug .grid-2 > *::before,
+.standard-debug .grid-3 > *::before,
+.standard-debug .grid-4 > *::before,
+.standard-debug .grid-5 > *::before,
+.standard-debug .grid-6 > *::before,
+.standard-debug .grid-7 > *::before,
+.standard-debug .grid-8 > *::before,
+.standard-debug .grid-9 > *::before,
+.standard-debug .grid-10 > *::before,
+.standard-debug .grid-11 > *::before,
+.standard-debug .grid-12 > *::before {
+    content: attr(class);
+    position: absolute;
+    top: var(--space-3xs);
+    left: var(--space-3xs);
+    background: var(--color-cyan);
+    color: var(--color-background);
+    font-size: var(--scale-xs);
+    font-family: var(--font-monospace);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: var(--z-tooltip);
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Free column debug */
+.standard-debug .free-col::after {
+    content: "start: " var(--start) " / span: " var(--span);
+    position: absolute;
+    bottom: var(--space-3xs);
+    left: var(--space-3xs);
+    background: var(--color-purple);
+    color: var(--color-background);
+    font-size: var(--scale-xs);
+    font-family: var(--font-monospace);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: var(--z-tooltip);
+    white-space: nowrap;
+}
+
+/* Color token visualization */
+.standard-debug .text-accent,
+.standard-debug .text-success,
+.standard-debug .text-warning,
+.standard-debug .text-error {
+    position: relative;
+}
+
+.standard-debug .text-accent::before {
+    content: "accent";
+    background: var(--color-accent);
+}
+
+.standard-debug .text-success::before {
+    content: "success";
+    background: var(--color-success);
+}
+
+.standard-debug .text-warning::before {
+    content: "warning";
+    background: var(--color-warning);
+}
+
+.standard-debug .text-error::before {
+    content: "error";
+    background: var(--color-error);
+}
+
+.standard-debug .text-accent::before,
+.standard-debug .text-success::before,
+.standard-debug .text-warning::before,
+.standard-debug .text-error::before {
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    color: var(--color-background);
+    font-size: var(--scale-xs);
+    font-family: var(--font-monospace);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: var(--z-tooltip);
+    white-space: nowrap;
+}
+
+/* Responsive breakpoint indicator */
+body.standard-debug::before {
+    content: "md";
+    position: fixed;
+    bottom: var(--space);
+    left: var(--space);
+    color: var(--color-foreground);
+    font-family: var(--font-monospace);
+    font-size: var(--scale-xs);
+    padding: var(--space-xs) var(--space-s);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: var(--z-toast);
+    pointer-events: none;
+    font-weight: bold;
+}
+
+@media (max-width: #{$small}) {
+    body.standard-debug::before {
+        content: "sm (<#{$small})";
+        color: var(--color-foreground);
+    }
+}
+
+@media (max-width: 600px) {
+    body.standard-debug::before {
+        content: "xs (<600px)";
+        color: var(--color-foreground);
+    }
+}
+
+@media (min-width: #{$large}) {
+    body.standard-debug::before {
+        content: "lg (≥#{$large})";
+        color: var(--color-foreground);
+    }
+}
+
+/* Layout zone labels for .prose - CRITICAL FIX */
+.standard-debug .prose .container-small,
+.standard-debug .prose .container-accent,
+.standard-debug .prose .container-feature,
+.standard-debug .prose .container-full {
+    position: relative; /* CRITICAL: Make these positioned containers */
+    outline: 1px dashed; /* Add outline to make zones visible */
+    outline-offset: -1px;
+}
+
+.standard-debug .prose .container-small {
+    outline-color: color-mix(in srgb, var(--color-blue) 85%, transparent);
+}
+
+.standard-debug .prose .container-accent {
+    outline-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+}
+
+.standard-debug .prose .container-feature {
+    outline-color: color-mix(in srgb, var(--color-purple) 85%, transparent);
+}
+
+.standard-debug .prose .container-full {
+    outline-color: color-mix(in srgb, var(--color-pink) 85%, transparent);
+}
+
+.standard-debug .prose .container-small::before,
+.standard-debug .prose .container-accent::before,
+.standard-debug .prose .container-feature::before,
+.standard-debug .prose .container-full::before {
+    position: absolute;
+    top: var(--space-3xs);
+    right: var(--space-3xs);
+    font-size: var(--scale-xs);
+    font-family: var(--font-monospace);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--border-radius);
+    pointer-events: none;
+    opacity: 0.95;
+    z-index: var(--z-tooltip);
+    color: var(--color-background);
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.standard-debug .prose .container-small::before {
+    content: "Small";
+    background: var(--color-blue);
+}
+
+.standard-debug .prose .container-accent::before {
+    content: "Accent";
+    background: var(--color-accent);
+}
+
+.standard-debug .prose .container-feature::before {
+    content: "Feature";
+    background: var(--color-purple);
+}
+
+.standard-debug .prose .container-full::before {
+    content: "Full";
+    background: var(--color-pink);
+}
+
+/* Default content zone indicator (elements without zone class) */
+.standard-debug
+    .prose
+    > :not(.container-small):not(.container-accent):not(.container-feature):not(
+        .container-full
+    ) {
+    outline: 1px dotted color-mix(in srgb, var(--color-green) 60%, transparent);
+    outline-offset: -1px;
+}
+
+/* Print debug styles */
+@media print {
+    .standard-debug::before,
+    .standard-debug::after,
+    .standard-debug .grid::after,
+    .standard-debug .prose::after,
+    body.standard-debug::before {
+        display: none !important;
+    }
+}
+
+/* Dark mode adjustments for debug */
+@media (prefers-color-scheme: dark) {
+    .standard-debug::before {
+        opacity: 0.3;
+    }
+
+    .standard-debug .prose::after {
+        opacity: 0.15;
+    }
+}
 ```
 
+</details>
 
----
-
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-99-debug.scss`

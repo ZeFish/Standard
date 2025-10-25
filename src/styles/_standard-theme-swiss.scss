@@ -2,4 +2,16 @@
     --shadow: none;
     --border-radius: 0;
     --border-color: var(--color-foreground);
+
+    table {
+        grid-column: content;
+    }
+    table,
+    table th,
+    table td,
+    table td code {
+        font-size: var(--scale-xs);
+        font-family: var(--font-monospace);
+        word-break: keep-all;
+    }
 }

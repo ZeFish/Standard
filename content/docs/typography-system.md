@@ -8,27 +8,13 @@ eleventyNavigation:
   title: Typography System
 category: Typography
 type: scss
-source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-03-typography.scss
+source: /Users/francisfontaine/Documents/GitHub/Standard/src/styles/_standard-03-typography.scss
 since: 0.1.0
 ---
 
-Fine-art typography system using variable fonts, OpenType features,
-and mathematical scaling. Implements classical typography rules with modern web capabilities.
-Supports multiple font families, optical sizing, and locale-specific rules.
+# Typography System
 
-## Properties
-
-| Name | Type | Description |
-|------|------|-------------|
-| `{string} --font-text Font family for body text (default: InterVariable)` | `mixed` |  |
-| `{string} --font-header Font family for headings (default: InterVariable)` | `mixed` |  |
-| `{string} --font-monospace Monospace font for code (default: IBM Plex Mono)` | `mixed` |  |
-| `{number} --font-weight Body text weight (default: 400)` | `mixed` |  |
-| `{number} --bold-weight Bold text weight (default: 600)` | `mixed` |  |
-| `{string} --font-feature OpenType features to enable` | `mixed` |  |
-| `{string} --font-variation Variable font axis settings` | `mixed` |  |
-
-## Examples
+Fine-art typography system using variable fonts, OpenType features, and mathematical scaling. Implements classical typography rules with modern web capabilities. Supports multiple font families, optical sizing, and locale-specific rules.
 
 ```scss
 html {
@@ -40,11 +26,244 @@ text-wrap: pretty;
 }
 ```
 
-## See Also
+### Properties
+
+| Name | Type | Description |
+|------|------|-------------|
+| `{string} --font-text Font family for body text (default: InterVariable)` | `mixed` |  |
+| `{string} --font-header Font family for headings (default: InterVariable)` | `mixed` |  |
+| `{string} --font-monospace Monospace font for code (default: IBM Plex Mono)` | `mixed` |  |
+| `{number} --font-weight Body text weight (default: 400)` | `mixed` |  |
+| `{number} --bold-weight Bold text weight (default: 600)` | `mixed` |  |
+| `{string} --font-feature OpenType features to enable` | `mixed` |  |
+| `{string} --font-variation Variable font axis settings` | `mixed` |  |
+
+<details>
+<summary><span class="button">Source Code</span></summary>
+
+```scss
+:root {
+    /* Font stacks */
+    --font-sans: Diatype, InterVariable, system-ui, -apple-system, sans-serif;
+    --font-serif: "Source Serif 4", serif;
+    --font-text: var(--font-sans);
+    --font-header: var(--font-text);
+    --font-monospace:
+        "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
+
+    /* Font features & variations */
+    --font-feature: "dlig", "zero";
+    --font-variation: "";
+    --font-header-feature: "dlig", "cv11", "cv12", "cv13";
+    --font-header-variation: "";
+    --font-monospace-feature: "dlig";
+    --font-monospace-variation: "";
+
+    /* Font properties */
+    --font-weight: 400;
+    --bold-weight: 600;
+    --font-letter-spacing: normal;
+    --font-header-letter-spacing: -0.065em;
+    --font-header-line-height: 0.75em;
+    --font-header-weight: 900;
+
+    /* Interface font tokens */
+    --font-interface: var(--font-text);
+    --font-interface-feature: "dlig", "zero";
+    --font-interface-variation: "opsz" 32;
+    --font-list-feature: "dlig", "tnum", "zero";
+    --font-list-variation: "opsz" 32;
+
+    /* Calculated typography tokens */
+    --line-height: calc(var(--font-size) * var(--font-density));
+
+    /* Heading weight scale */
+    --font-weight-h1: var(--font-header-weight);
+    --font-weight-h2: max(
+        calc(var(--font-header-weight) * 0.95),
+        var(--font-weight)
+    );
+    --font-weight-h3: max(
+        calc(var(--font-header-weight) * 0.9),
+        var(--font-weight)
+    );
+    --font-weight-h4: max(
+        calc(var(--font-header-weight) * 0.85),
+        var(--font-weight)
+    );
+    --font-weight-h5: max(
+        calc(var(--font-header-weight) * 0.8),
+        var(--font-weight)
+    );
+    --font-weight-h6: max(
+        calc(var(--font-header-weight) * 0.75),
+        var(--font-weight)
+    );
+
+    /* List styling */
+    --list-indentation: var(--space);
+}
+
+html.dark {
+    /*--font-density: 1.5;*/
+    --font-weight: 400;
+    --font-letter-spacing: 0.001em;
+}
+
+// ========== Typography ==========
+
+html {
+    scroll-behavior: smooth;
+
+    font-family: var(--font-text), system-ui, sans-serif;
+    font-size: var(--scale);
+    font-weight: var(--font-weight);
+    letter-spacing: var(--font-letter-spacing);
+
+    line-height: var(--line-height);
+
+    text-rendering: optimizeLegibility; /* kerning & ligatures */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-optical-sizing: auto;
+    font-feature-settings: var(--font-feature);
+    font-variation-settings: var(--font-variation);
+
+    text-wrap: pretty;
+    hyphens: none;
+    widows: 2;
+    orphans: 2;
+}
+
+/* Note: Typography-only feature toggles (kept in typography layer) */
+.circular {
+    font-feature-settings: "ss05" on;
+}
+.squared {
+    font-feature-settings: "ss06" on;
+}
+.inter-display {
+    font-variation-settings: "opsz" 32;
+}
+
+/* Responsive adjustments - collapse gutters on small screens */
+@media only screen and (max-width: #{$small}) {
+    :root {
+        --font-size: var(--font-mobile-size) !important;
+        --font-ratio: var(--font-mobile-ratio) !important;
+    }
+}
+
+/* Heading element styling moved to standard-04-elements.scss
+   This file now contains only typography design tokens and rules.
+   See standard-04-elements.scss for h1-h6 element styling. */
+
+/* Note: Text size utilities moved to standard-98-utilities.scss */
+/* .small, .smaller, .compact now defined in utilities layer */
+
+/* Note: Font family utilities (.font-ui, .font-interface, .mono, .code, .bold) */
+/* moved to standard-98-utilities.scss */
+/* Element font families for pre, code, tt kept below as element selectors */
+
+// Strong/bold normalization
+b,
+strong {
+    font-weight: var(--bold-weight);
+}
+:is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
+    font-weight: inherit;
+}
+
+/* Links inherit color by default; article overrides already exist */
+a,
+a:visited {
+    color: inherit;
+}
+
+/* Button and form element styling moved to standard-04-elements.scss
+   This file now contains only typography design tokens and rules.
+   See standard-04-elements.scss for button, input, textarea, select styling. */
+
+textarea {
+    resize: vertical;
+    min-height: calc(var(--space-l) * 3);
+}
+
+/* =========================== */
+/* RHYTHM ELEMENT TYPOGRAPHY   */
+/* =========================== */
+
+/* Typography properties for elements within rhythm containers */
+
+/* List styling */
+li::before {
+    font-feature-settings: var(--font-list-feature);
+    font-variation-settings: var(--font-list-variation);
+}
+
+/* Blockquote typography */
+blockquote {
+    font-style: italic;
+    font-size: var(--scale-s);
+}
+
+/* Code block typography */
+pre,
+code {
+    font-size: var(--scale-s);
+    line-height: var(--font-density-s);
+    overflow-x: auto;
+}
+
+/* Form typography */
+legend {
+    font-weight: var(--bold-weight, bold);
+}
+
+label {
+    font-weight: var(--bold-weight, bold);
+}
+
+/* Figure caption typography */
+figcaption {
+    font-size: var(--scale-s);
+    font-style: italic;
+    text-align: center;
+}
+
+/* Table typography */
+table {
+    border-collapse: collapse;
+    /*font-variant-numeric: tabular-nums;*/
+}
+
+th,
+td {
+    text-align: left;
+}
+
+th {
+    font-weight: var(--bold-weight, bold);
+}
+
+caption {
+    font-weight: var(--bold-weight, bold);
+    text-align: left;
+}
+
+/* Callout typography */
+.callout-title {
+    font-weight: var(--bold-weight, bold);
+}
+
+/* Note: Display scale utilities (.display, .poster, .label, .micro) */
+/* moved to standard-98-utilities.scss */
+```
+
+</details>
+
+### See Also
 
 - standard-01-token.scss
 
-
----
-
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/styles/standard-03-typography.scss`

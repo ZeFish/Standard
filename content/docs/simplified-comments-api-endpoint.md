@@ -12,11 +12,44 @@ source: /Users/francisfontaine/Documents/GitHub/Standard/src/cloudflare/api/comm
 since: 0.10.53
 ---
 
-A simplified example of a Cloudflare Function for handling comments.
-This file now returns a basic response and does not include complex logic,
-environment variable validation, or CORS handling internally.
+# Simplified Comments API Endpoint
 
+Cloudflare Function for handling GitHub-backed comments.
 
----
+Features:
+ - GET: Fetch all comments for a page from GitHub
+ - POST: Store new comment as Markdown file in GitHub
+ - CORS enabled for cross-domain requests
+ - Automatic moderation flag for review
+ - Comments stored as .md files with frontmatter for 11ty integration
 
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/cloudflare/api/comments.js`
+GitHub Storage Structure: data/comments/{pageId}/{timestamp}-{hash}.md
+
+Page ID Format:
+ - Uses normalized page.url from 11ty
+ - Examples: "/blog/my-post/" → "blog_my-post"
+ - Homepage "/" → "index"
+ - Nested URLs: "/blog/2024/article/" → "blog_2024_article"
+ - Normalization done in shortcode.js before reaching API
+
+Environment Variables Required:
+ - GITHUB_TOKEN: Personal access token with repo write access
+ - GITHUB_OWNER: Repository owner (e.g., "zefish")
+ - GITHUB_REPO: Repository name (e.g., "standard")
+ - GITHUB_COMMENTS_PATH: Path for storing comments (default: "data/comments")
+ - MODERATION_EMAIL: Email for notifications
+
+<details>
+<summary><span class="button">Source Code</span></summary>
+
+```javascript
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Content-Type": "application/json",
+};
+```
+
+</details>
+

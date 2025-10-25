@@ -17,14 +17,15 @@ Auto-generated documentation from source code comments.
 ## Utilities
 
 - [Utility Classes](/docs/utility-classes/)
-- [Utilities](/docs/utilities/)
-- [Utilities](/docs/utilities/)
 - [Responsive Display Utilities](/docs/responsive-display-utilities/)
 - [Multi-Column Flow Utilities](/docs/multi-column-flow-utilities/)
+- [Standard](/docs/standard/)
+- [Comment Removal](/docs/comment-removal/)
+- [Comment Callouts Removal](/docs/comment-callouts-removal/)
+- [Highlight Syntax Conversion](/docs/highlight-syntax-conversion/)
+- [Code Block Escaping](/docs/code-block-escaping/)
+- [Date Format Normalization](/docs/date-format-normalization/)
 - [Doc Parser](/docs/doc-parser/)
-- [Cloudflare](/docs/cloudflare/)
-- [Cloudflare](/docs/cloudflare/)
-- [Cloudflare](/docs/cloudflare/)
 
 ## Components
 
@@ -41,7 +42,7 @@ Auto-generated documentation from source code comments.
 
 - [HTML Elements](/docs/html-elements/)
 - [Design Tokens](/docs/design-tokens/)
-- [SCSS Variables & Mixins](/docs/scss-variables-&-mixins/)
+- [SCSS Variables & Mixins](/docs/scss-variables-and-mixins/)
 - [Rhythm Application Mixin](/docs/rhythm-application-mixin/)
 - [Rhythm Block Mixin](/docs/rhythm-block-mixin/)
 
@@ -55,15 +56,14 @@ Auto-generated documentation from source code comments.
 
 ## Cloudflare Functions
 
-- [GitHub Comments Client](/docs/github-comments-client/)
+- [GitHub Comments Client](/docs/git-hub-comments-client/)
 - [Simplified Contact API Endpoint](/docs/simplified-contact-api-endpoint/)
 - [Simplified Comments API Endpoint](/docs/simplified-comments-api-endpoint/)
 
 ## 11ty Plugins
 
 - [Eleventy Shortcode Plugin](/docs/eleventy-shortcode-plugin/)
-- [Markdown Preprocessor Plugin](/docs/markdown-preprocessor-plugin/)
-- [Markdown Plugin](/docs/markdown-plugin/)
+- [Markdown Plugin with Fine-Art Typography](/docs/markdown-plugin-with-fine-art-typography/)
 - [Eleventy Filter Plugin](/docs/eleventy-filter-plugin/)
 - [Content Encryption Plugin](/docs/content-encryption-plugin/)
 - [Standard Framework 11ty Plugin](/docs/standard-framework-11ty-plugin/)

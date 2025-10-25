@@ -21,7 +21,7 @@ This layer bridges the typography system and color system with concrete element 
 - [Design Tokens](/docs/design-tokens/) - Primitive design tokens forming the foundation of the design system.
 Includes mathematical ratios, modular scales, spacing system, and animation curves.
 All tokens use CSS custom properties for runtime customization.
-- [SCSS Variables & Mixins](/docs/scss-variables-&-mixins/) - Responsive breakpoints and rhythm application mixins for consistent
+- [SCSS Variables & Mixins](/docs/scss-variables-and-mixins/) - Responsive breakpoints and rhythm application mixins for consistent
 vertical rhythm and spacing across all elements. These mixins ensure proper
 spacing application for rhythm-aware components.
 - [Rhythm Application Mixin](/docs/rhythm-application-mixin/) - Applies rhythm spacing rules to semantic HTML elements

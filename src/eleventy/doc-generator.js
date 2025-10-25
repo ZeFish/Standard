@@ -41,7 +41,6 @@ async function sourceFilesChanged(patterns) {
   const currentHash = await computeSourceHash(patterns);
 
   if (!fs.existsSync(HASH_FILE)) {
-    // First run, always regenerate
     return true;
   }
 
@@ -58,8 +57,183 @@ async function saveSourceHash(patterns) {
 }
 
 /**
+ * Extract all code following a doc comment until the next doc comment or EOF
+ */
+function extractCodeAfterComment(content, commentEndIndex, filePath) {
+  // Skip whitespace and regular comments after doc comment
+  let pos = commentEndIndex;
+  while (pos < content.length) {
+    // Skip whitespace
+    if (/\s/.test(content[pos])) {
+      pos++;
+      continue;
+    }
+
+    // Skip single-line comments
+    if (content[pos] === "/" && content[pos + 1] === "/") {
+      while (pos < content.length && content[pos] !== "\n") {
+        pos++;
+      }
+      if (content[pos] === "\n") pos++;
+      continue;
+    }
+
+    // Skip multi-line comments (but NOT doc comments)
+    if (content[pos] === "/" && content[pos + 1] === "*") {
+      // Check if it's a doc comment (/**)
+      if (content[pos + 2] === "*") {
+        // This is a doc comment, stop here
+        break;
+      }
+      // Regular comment, skip it
+      while (
+        pos < content.length &&
+        !(content[pos] === "*" && content[pos + 1] === "/")
+      ) {
+        pos++;
+      }
+      if (content[pos] === "*" && content[pos + 1] === "/") {
+        pos += 2;
+      }
+      continue;
+    }
+
+    // Found actual code
+    break;
+  }
+
+  // Find the end: either the next doc comment or EOF
+  let endPos = pos;
+  while (endPos < content.length) {
+    // Look for next doc comment
+    if (
+      content[endPos] === "/" &&
+      content[endPos + 1] === "*" &&
+      content[endPos + 2] === "*"
+    ) {
+      break;
+    }
+    endPos++;
+  }
+
+  // Extract and trim trailing whitespace
+  let code = content.substring(pos, endPos).trim();
+
+  return code || null;
+}
+
+/**
+ * Enhanced DocParser wrapper that extracts code
+ */
+class EnhancedDocParser extends DocParser {
+  /**
+   * Infer the kind of documentation item from the code that follows the comment
+   */
+  inferKindFromContext(content, commentEndIndex) {
+    // Skip whitespace after comment
+    let pos = commentEndIndex;
+    while (pos < content.length && /\s/.test(content[pos])) {
+      pos++;
+    }
+
+    const remaining = content.substring(pos, pos + 500); // Look ahead 500 chars
+
+    // Check for @mixin
+    if (/@mixin\s+/.test(remaining)) {
+      return "mixin";
+    }
+
+    // Check for @function
+    if (/@function\s+/.test(remaining)) {
+      return "function";
+    }
+
+    // Check for class definition (scss)
+    if (/^\.\w+\s*\{/.test(remaining)) {
+      return "component";
+    }
+
+    // Check for function/class definition (javascript)
+    if (/^(export\s+)?(function|class|const|let)\s+/.test(remaining)) {
+      return "function";
+    }
+
+    // Default to component if no inference
+    return "component";
+  }
+
+  /**
+   * Override parse to extract code and infer kinds for all docs
+   */
+  async parse() {
+    const docs = await super.parse();
+
+    // Ensure all docs have kind set, even if not explicitly in the base parser
+    for (const doc of docs) {
+      if (!doc.kind && doc.source) {
+        try {
+          const filePath = path.resolve(projectRoot, doc.source);
+          const content = fs.readFileSync(filePath, "utf-8");
+
+          // Find the doc comment
+          const commentPattern = new RegExp(
+            `/\\*\\*[\\s\\S]*?${escapeRegex(doc.name)}[\\s\\S]*?\\*/`,
+            "g",
+          );
+          const match = commentPattern.exec(content);
+
+          if (match) {
+            const commentEndIndex = match.index + match[0].length;
+            doc.kind = this.inferKindFromContext(content, commentEndIndex);
+          }
+        } catch (err) {
+          // Silently fail - kind will remain null or get inferred later
+        }
+      }
+    }
+
+    // Now extract code and handle the enhanced parsing
+    for (const doc of docs) {
+      if (doc.source) {
+        try {
+          const filePath = path.resolve(projectRoot, doc.source);
+          const content = fs.readFileSync(filePath, "utf-8");
+
+          // Find the doc comment in the file
+          const commentPattern = new RegExp(
+            `/\\*\\*[\\s\\S]*?${escapeRegex(doc.name)}[\\s\\S]*?\\*/`,
+            "g",
+          );
+          const match = commentPattern.exec(content);
+
+          if (match) {
+            const commentEndIndex = match.index + match[0].length;
+            const code = extractCodeAfterComment(
+              content,
+              commentEndIndex,
+              filePath,
+            );
+
+            if (code) {
+              doc.code = code;
+            }
+          }
+        } catch (err) {
+          console.warn(`Could not extract code for ${doc.name}:`, err.message);
+        }
+      }
+    }
+
+    return docs;
+  }
+}
+
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
  * 11ty plugin for generating documentation from JSDoc comments
- * Runs during build to create Markdown documentation files
  */
 export default function (eleventyConfig, options = {}) {
   const {
@@ -73,49 +247,45 @@ export default function (eleventyConfig, options = {}) {
     layout = "base",
   } = options;
 
-  // Create output directory if it doesn't exist
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  // Calculate URL path from outputDir
-  // e.g., "content/docs" -> "/docs", "content/docs/generated" -> "/docs/generated"
   const urlPath = "/" + outputDir.split("/").slice(1).join("/");
 
-  // Add before hook to generate docs before build
   eleventyConfig.on("eleventy.before", async () => {
-    // Check if source files have changed
+    console.log("[Doc Generator] eleventy.before hook triggered");
     const hasChanged = await sourceFilesChanged(patterns);
 
     if (!hasChanged) {
-      // Source files haven't changed, skip regeneration
+      console.log("[Doc Generator] No changes detected, skipping");
       return;
     }
 
-    // Resolve patterns relative to project root
-    // Prepend sourceDir if patterns don't already include it
+    console.log("[Doc Generator] Changes detected, regenerating docs");
     const absolutePatterns = patterns.map((p) => {
       const fullPattern = p.startsWith(sourceDir) ? p : `${sourceDir}/${p}`;
       return path.resolve(projectRoot, fullPattern);
     });
 
-    const parser = new DocParser({
+    const parser = new EnhancedDocParser({
       sourceDir,
       patterns: absolutePatterns,
     });
+
+    console.log("[Doc Generator] Starting parse...");
     const docs = await parser.parse();
+    console.log(`[Doc Generator] Parsed ${docs.length} docs`);
 
-    // Generate Markdown files for each documented component
+    console.log("[Doc Generator] Generating markdown docs...");
     await generateMarkdownDocs(docs, outputDir, layout, urlPath);
-
-    // Generate index/category pages
+    console.log("[Doc Generator] Generating index pages...");
     await generateIndexPages(docs, outputDir, layout, urlPath);
-
-    // Save hash after successful generation
+    console.log("[Doc Generator] Saving hash...");
     await saveSourceHash(patterns);
+    console.log("[Doc Generator] Done!");
   });
 
-  // Add the generated docs directory as a collection
   eleventyConfig.addCollection("docs", function (collection) {
     const docsDir = path.join(process.cwd(), outputDir);
 
@@ -145,10 +315,28 @@ export default function (eleventyConfig, options = {}) {
   });
 }
 
+/**
+ * Convert a name to kebab-case filename format
+ * Handles: camelCase, spaces, special characters
+ */
+function nameToKebabCase(name) {
+  return name
+    .replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase → kebab-case
+    .replace(/\s+/g, "-") // spaces → hyphens
+    .replace(/[&]/g, "and") // & → and
+    .replace(/[^a-z0-9-]/gi, "") // remove other special chars
+    .toLowerCase();
+}
+
 async function generateMarkdownDocs(docs, outputDir, layout, urlPath) {
   for (const doc of docs) {
+    // Only generate markdown for components, skip mixins and functions
+    if (doc.kind === "mixin" || doc.kind === "function") {
+      continue;
+    }
+
     const markdown = generateComponentMarkdown(doc, layout, urlPath);
-    const filename = `${doc.name.replace(/\s+/g, "-").toLowerCase()}.md`;
+    const filename = `${nameToKebabCase(doc.name)}.md`;
     const filepath = path.join(outputDir, filename);
 
     fs.writeFileSync(filepath, markdown, "utf-8");
@@ -156,10 +344,14 @@ async function generateMarkdownDocs(docs, outputDir, layout, urlPath) {
 }
 
 async function generateIndexPages(docs, outputDir, layout, urlPath) {
-  // Group by category
   const grouped = {};
 
   for (const doc of docs) {
+    // Only include components in the index, exclude mixins and functions
+    if (doc.kind === "mixin" || doc.kind === "function") {
+      continue;
+    }
+
     const category = doc.category || "Utilities";
     if (!grouped[category]) {
       grouped[category] = [];
@@ -167,7 +359,6 @@ async function generateIndexPages(docs, outputDir, layout, urlPath) {
     grouped[category].push(doc);
   }
 
-  // Generate category index pages
   for (const [category, items] of Object.entries(grouped)) {
     const categorySlug = category.replace(/\s+/g, "-").toLowerCase();
     const markdown = generateCategoryMarkdown(category, items, layout, urlPath);
@@ -176,16 +367,12 @@ async function generateIndexPages(docs, outputDir, layout, urlPath) {
     fs.writeFileSync(filepath, markdown, "utf-8");
   }
 
-  // Also pass urlPath to generateIndexPages caller
-  // (Already being passed above)
-
-  // Generate main index
   const mainIndex = generateMainIndexMarkdown(grouped, layout, urlPath);
   fs.writeFileSync(path.join(outputDir, "index.md"), mainIndex, "utf-8");
 }
 
 function generateComponentMarkdown(doc, layout, urlPath) {
-  const componentSlug = doc.name.replace(/\s+/g, "-").toLowerCase();
+  const componentSlug = nameToKebabCase(doc.name);
 
   let markdown = "---\n";
   markdown += `title: ${doc.name}\n`;
@@ -203,14 +390,31 @@ function generateComponentMarkdown(doc, layout, urlPath) {
     markdown += `deprecated: ${doc.deprecated === true ? "yes" : doc.deprecated}\n`;
   markdown += "---\n\n";
 
-  // Description
+  // Title
+  markdown += `# ${doc.name}\n\n`;
+
+  // Description with newline process
   if (doc.description) {
-    markdown += `${doc.description}\n\n`;
+    markdown += `${doc.description
+      .replace(/\n(- )/g, "<<<LIST>>>\n$1") // Mark list items
+      .replace(/\n\n/g, "<<<PARAGRAPH>>>") // Mark paragraphs
+      .replace(/\n/g, " ") // Remove single newlines
+      .replace(/<<<LIST>>>/g, "\n") // Restore list newlines
+      .replace(/<<<PARAGRAPH>>>/g, "\n\n")}\n\n`; // Restore paragraphs
+  }
+
+  // Examples
+  if (doc.examples.length > 0) {
+    for (let i = 0; i < doc.examples.length; i++) {
+      if (i > 0) markdown += "\n";
+      markdown += `\`\`\`${doc.type}\n${doc.examples[i]}\n\`\`\`\n`;
+    }
+    markdown += "\n";
   }
 
   // Properties/Parameters
   if (doc.props.length > 0) {
-    markdown += "## Properties\n\n";
+    markdown += "### Properties\n\n";
     markdown += "| Name | Type | Description |\n";
     markdown += "|------|------|-------------|\n";
 
@@ -222,7 +426,7 @@ function generateComponentMarkdown(doc, layout, urlPath) {
 
   // Parameters
   if (doc.params.length > 0) {
-    markdown += "## Parameters\n\n";
+    markdown += "### Parameters\n\n";
     markdown += "| Name | Type | Description |\n";
     markdown += "|------|------|-------------|\n";
 
@@ -234,27 +438,27 @@ function generateComponentMarkdown(doc, layout, urlPath) {
 
   // Return value
   if (doc.returns) {
-    markdown += "## Returns\n\n";
+    markdown += "### Returns\n\n";
     markdown += `**Type:** \`${doc.returns.type}\`\n\n`;
     if (doc.returns.description) {
       markdown += `${doc.returns.description}\n\n`;
     }
   }
 
-  // Examples
-  if (doc.examples.length > 0) {
-    markdown += "## Examples\n\n";
-
-    for (let i = 0; i < doc.examples.length; i++) {
-      if (i > 0) markdown += "\n";
-      markdown += `\`\`\`${doc.type}\n${doc.examples[i]}\n\`\`\`\n`;
-    }
-    markdown += "\n";
+  if (doc.code) {
+    const codeLanguage = doc.type === "scss" ? "scss" : "javascript";
+    markdown += "<details>\n";
+    markdown +=
+      '<summary><span class="button">Source Code</span></summary>\n\n';
+    markdown += `\`\`\`${codeLanguage}\n`;
+    markdown += doc.code;
+    markdown += "\n\`\`\`\n\n";
+    markdown += "</details>\n\n";
   }
 
   // Related/See also
   if (doc.see.length > 0) {
-    markdown += "## See Also\n\n";
+    markdown += "### See Also\n\n";
     for (const link of doc.see) {
       markdown += `- ${link}\n`;
     }
@@ -262,14 +466,16 @@ function generateComponentMarkdown(doc, layout, urlPath) {
   }
 
   // Source reference
+  /*
   markdown += `\n---\n\n`;
   markdown += `**Source:** \`${doc.source}\`\n`;
+  */
 
   return markdown;
 }
 
 function generateCategoryMarkdown(category, items, layout, urlPath) {
-  const categorySlug = category.replace(/\s+/g, "-").toLowerCase();
+  const categorySlug = nameToKebabCase(category);
 
   let markdown = "---\n";
   markdown += `title: ${category}\n`;
@@ -285,8 +491,19 @@ function generateCategoryMarkdown(category, items, layout, urlPath) {
 
   markdown += "## Components\n\n";
 
+  // Deduplicate items by name to avoid duplicate entries
+  const seenNames = new Set();
+  const uniqueItems = [];
+
   for (const item of items) {
-    const itemSlug = item.name.replace(/\s+/g, "-").toLowerCase();
+    if (!seenNames.has(item.name)) {
+      seenNames.add(item.name);
+      uniqueItems.push(item);
+    }
+  }
+
+  for (const item of uniqueItems) {
+    const itemSlug = nameToKebabCase(item.name);
     const itemLink = `${urlPath}/${itemSlug}/`;
     markdown += `- [${item.name}](${itemLink}) - ${item.description || "No description"}\n`;
   }
@@ -311,8 +528,19 @@ function generateMainIndexMarkdown(grouped, layout, urlPath) {
   for (const [category, items] of Object.entries(grouped)) {
     markdown += `## ${category}\n\n`;
 
+    // Deduplicate items by name to avoid duplicate entries
+    const seenNames = new Set();
+    const uniqueItems = [];
+
     for (const item of items) {
-      const itemSlug = item.name.replace(/\s+/g, "-").toLowerCase();
+      if (!seenNames.has(item.name)) {
+        seenNames.add(item.name);
+        uniqueItems.push(item);
+      }
+    }
+
+    for (const item of uniqueItems) {
+      const itemSlug = nameToKebabCase(item.name);
       const itemLink = `${urlPath}/${itemSlug}/`;
       markdown += `- [${item.name}](${itemLink})\n`;
     }
@@ -323,4 +551,9 @@ function generateMainIndexMarkdown(grouped, layout, urlPath) {
   return markdown;
 }
 
-export { DocParser, generateComponentMarkdown, generateCategoryMarkdown };
+export {
+  EnhancedDocParser as DocParser,
+  generateComponentMarkdown,
+  generateCategoryMarkdown,
+  nameToKebabCase,
+};

@@ -149,6 +149,18 @@
         opacity: 85%;
     }
 
+    table {
+        grid-column: content;
+    }
+    table,
+    table th,
+    table td,
+    table td code {
+        font-size: var(--scale-xs);
+        font-family: var(--font-monospace);
+        word-break: keep-all;
+    }
+
     body::before {
         content: "";
         position: fixed;

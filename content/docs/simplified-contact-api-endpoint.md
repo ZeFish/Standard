@@ -11,10 +11,11 @@ type: js
 source: /Users/francisfontaine/Documents/GitHub/Standard/src/cloudflare/api/contact.js
 ---
 
-A simplified example of a Cloudflare Function for handling contact form submissions.
-This file now returns a basic response and does not include complex logic.
+# Simplified Contact API Endpoint
 
-## Parameters
+A simplified example of a Cloudflare Function for handling contact form submissions. This file now returns a basic response and does not include complex logic.
+
+### Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
@@ -22,13 +23,23 @@ This file now returns a basic response and does not include complex logic.
 | `env` | `object` | The environment variables. |
 | `ctx` | `object` | The context object. |
 
-## Returns
+### Returns
 
 **Type:** `Response`
 
 The response to the request.
 
+<details>
+<summary><span class="button">Source Code</span></summary>
 
----
+```javascript
+export async function onRequestPost(request, env, ctx) {
+  return new Response("Contact API - Simplified Response", {
+    headers: { "Content-Type": "text/plain" },
+    status: 200,
+  });
+}
+```
 
-**Source:** `/Users/francisfontaine/Documents/GitHub/Standard/src/cloudflare/api/contact.js`
+</details>
+
