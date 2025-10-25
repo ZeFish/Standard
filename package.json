@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.13.0",
+  "version": "0.13.2",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -53,7 +53,7 @@
     "build:js:prod": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js && cp src/js/standard.comment.js dist/standard.comment.js",
     "clean:comments": "rm -rf data/comments && mkdir -p data/comments && echo '# Comments Storage' > data/comments/README.md",
     "clean:ports": "lsof -ti:8080,8081,8082,8083,8084,8085,8086,8087,8088,8089 | xargs kill -9 2>/dev/null || true",
-    "release": "npm run build && release-it --only-version",
+    "release": "export $(cat .env | xargs) && release-it",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "watch:css": "sass --watch --load-path=node_modules src/styles:dist --no-source-map",
     "build:standard:dev": "sass --load-path=node_modules src/styles/standard.scss:dist/standard.css --no-source-map",
@@ -94,7 +94,8 @@
       "requireUpstream": false
     },
     "npm": {
-      "skipChecks": true
+      "skipChecks": true,
+      "publish": true
     },
     "github": {
       "release": true,
@@ -102,7 +103,7 @@
       "autoGenerate": true
     },
     "hooks": {
-      "after:bump": "npm run changelog"
+      "after:bump": "npm run changelog && npm run build:assets"
     }
   },
   "directories": {

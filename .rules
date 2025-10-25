@@ -7,7 +7,7 @@ eleventyNavigation:
   parent: Documentation
 ---
 
-# Claude.md — Standard Framework Architecture Guide
+AI RULES
 
 **Purpose**: Help Claude AI (and other developers) understand the Standard Framework codebase quickly and effectively.
 
@@ -1649,3 +1649,230 @@ This "Observations & Improvements" log serves as:
 - ✨ Exemplary Patterns
 - ⚠️ Watch Out For
 - 📚 Documentation Opportunities
+
+
+
+---
+
+
+I'm building an educational documentation system for my Standard Framework (an 11ty/typography framework). I want to transform my codebase into a learning resource where documentation lives IN the code, not in external files.
+
+## Requirements
+
+### 1. Documentation Style
+- **Narrative, not checklist** - Write like telling a story, not bullet points
+- **Educational tone** - Teach the history, theory, and practice
+- **Self-contained** - Each item is atomic and complete
+- **Rich linking** - Everything references related concepts
+
+### 2. Comment Structure (for SCSS/JS)
+
+Each documented item (function, mixin, variable, class) should have:
+
+```scss
+/**
+ * [Name] - [Tagline]
+ *
+ * @group [category-name]
+ * @author Francis Fontaine
+ * @since 0.1.0
+ *
+ * [NARRATIVE DESCRIPTION - 2-4 paragraphs combining:]
+ *
+ * - Historical context (when/why this concept emerged)
+ * - The problem it solves (why it exists)
+ * - What it's used for (practical applications)
+ * - Why it's great (benefits and advantages)
+ * - Real-world examples and analogies
+ *
+ * Make it flow naturally like a story, not separate sections.
+ * Reference historical figures, dates, movements (Swiss Style, Bauhaus, etc.)
+ * Use engaging language that makes people WANT to read it.
+ *
+ * ### Future Improvements
+ *
+ * - Specific enhancement idea
+ * - Another improvement
+ *
+ * @see {mixin} other-mixin - Brief description
+ * @see {variable} $other-var - Brief description
+ * @see {function} otherFunc - Brief description
+ * @see {class} .other-class - Brief description
+ * @see {file} _other-file.scss - Brief description
+ *
+ * @link https://external-resource.com Article Title
+ *
+ * @example scss - Example title
+ *   .element {
+ *     @include this-mixin;
+ *   }
+ *
+ * @example html - HTML usage
+ *   <div class="example">Content</div>
+ *
+ * @param {String} $param - Description
+ * @returns {Type} Description
+ */
+```
+
+### 3. Generated Markdown Output
+
+For each documented item, generate:
+
+```markdown
+---
+title: [Name]
+layout: base
+category: [Category]
+type: [mixin|function|variable|class]
+source: [file path]
+since: 0.1.0
+---
+
+[NARRATIVE DESCRIPTION - exactly as written in comment]
+
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `$param` | `String` | Description |
+
+## Returns
+
+**Type:** `Type`
+
+Description of return value
+
+## Examples
+
+```scss
+// Example code
+```
+
+### Future Improvements
+
+- Enhancement 1
+- Enhancement 2
+
+- [`other-mixin`](#other-mixin) - Brief description
+- [`$other-var`](#other-var) - Brief description
+- [External Article](https://url.com)
+
+> [!code]- 📄 View Source Implementation
+>
+> ```scss
+> // ACTUAL SOURCE CODE EXTRACTED FROM FILE
+> @mixin example($param) {
+>   // implementation
+> }
+> ```
+
+---
+
+**Source:** `src/styles/_example.scss`
+```
+
+### 4. Key Features
+
+**Atomic Documentation:**
+- One concept = one complete doc block
+- No external files to maintain
+- Everything is self-contained
+
+**Rich Internal Linking:**
+- `@see {type} name` creates clickable links
+- Links between related functions/mixins/variables/classes
+- External links to articles/resources
+
+**Code Extraction:**
+- Parser extracts the ACTUAL code following each doc comment
+- Includes it in a collapsible Obsidian-style callout
+- Collapsed by default, expandable to see implementation
+
+**Educational Content:**
+- Historical context (Gutenberg, Swiss Style, golden ratio, etc.)
+- Real-world analogies
+- Why it matters, not just what it does
+- Engaging narrative that people enjoy reading
+
+### 5. Example of Great Documentation
+
+```scss
+/**
+ * Flow Spacing Unit
+ *
+ * @group tokens-spacing
+ * @since 0.1.0
+ *
+ * In 1455, Johannes Gutenberg printed his 42-line Bible with something
+ * remarkable: every line of text sat on an invisible grid, spaced with
+ * mathematical precision. He didn't just invent movable type—he invented
+ * the baseline grid.
+ *
+ * Fast forward to 1501, and Aldus Manutius in Venice discovered that
+ * 120% line-height made text sing. Not 100%, not 150%—exactly 120%.
+ * At 16px base font, that's 1.5rem, or 24 pixels. This single number
+ * became the foundation of readable typography for the next 500 years.
+ *
+ * This variable holds that magic number. Change it, and you change the
+ * entire rhythm of your design. Every space, every gap, every breath
+ * between elements traces back to this one value. It's not just a
+ * number—it's the heartbeat of your layout.
+ *
+ * ### Future Improvements
+ *
+ * - Make responsive (smaller on mobile)
+ * - Add CSS custom property version
+ *
+ *
+ * @see {variable} $flow-scale - Multipliers based on this unit
+ * @see {mixin} flow - Uses this for spacing
+ * @see {function} rhythm - Vertical rhythm calculator
+ *
+ * @link https://en.wiipedia.org/wiki/Aldus_Manutius
+ *
+ * @example scss
+ *   .card {
+ *     padding: $flow-space;
+ *   }
+ */
+$flow-space: 1.5rem !default;
+```
+
+### 6. What I Need
+
+Generate documentation comments for:
+- **SCSS variables** (spacing, colors, typography scales)
+- **SCSS mixins** (flow, rhythm, grid utilities)
+- **SCSS functions** (calculations, conversions)
+- **CSS classes** (.flow, .grid, .reading-width, etc.)
+- **JavaScript functions** (typography enhancement, helpers)
+- **JavaScript constants** (configuration objects)
+
+### 7. Tone & Style
+
+- **Conversational but authoritative** - Like a knowledgeable friend teaching you
+- **Historical references** - Dates, people, movements
+- **Analogies** - Compare to familiar concepts
+- **Enthusiasm** - Show why this is cool/important
+- **Practical** - Real use cases, not abstract theory
+- **Interconnected** - Everything links to related concepts
+
+### 8. What to Avoid
+
+- ❌ Bullet-point lists for main description
+- ❌ Dry technical jargon without context
+- ❌ Separate "History" / "Why" / "Use Cases" sections
+- ❌ Generic descriptions ("This mixin applies spacing")
+- ❌ Missing links to related items
+- ❌ No historical context or real-world grounding
+
+---
+
+**Now, given a code snippet, generate documentation that:**
+1. Tells the story of WHY this exists
+2. Connects it to typography/design history
+3. Explains what problems it solves
+4. Links to all related concepts
+5. Provides clear examples
+6. Reads like an engaging article, not a reference manual
