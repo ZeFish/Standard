@@ -14,34 +14,21 @@ eleventyConfig.addPlugin(feedPlugin, {
 
   add layout sitemap also on public collection by default
 
+typography from js to 11ty
+image service to cloudflare
+code and table wraper for horizontal scrolling
+contact form
+shortCode
+.flow -> .column
 
 @media print {
     .no-print,
     .no-print *,
     .footer,
-    .header,
-    section {
+    .header{
         display: none !important;
-    }
-    hr {
-        background: black !important;
-    }
-    article,
-    article h1 {
-        padding: 0 !important;
     }
     body {
         padding: 0;
     }
-    article {
-        --gap: 0;
-        --content: 100%;
-    }
-}
-
-a.external-link::after {
-    content: "↗";
-    font-size: var(--scale-xs);
-    opacity: var(--color-subtle);
-    color: var(--color-foreground);
 }

@@ -213,6 +213,25 @@ export default function (eleventyConfig, options = {}) {
     return html;
   });
 
+  // ===== SHORTCODES =====
+  // Shortcode to include Standard CSS and JS from local files
+  eleventyConfig.addShortcode("standardCss", function () {
+    let html = "";
+
+    if (useCDN) {
+      html = `<link href="https://unpkg.com/@zefish/standard" rel="stylesheet">`;
+    } else {
+      html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
+    }
+
+    // Add comments client library if comments are enabled
+    if (comments.enabled) {
+      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
+    }
+
+    return html;
+  });
+
   eleventyConfig.addShortcode("standardLab", function (options = {}) {
     const { attributes = "" } = options;
     if (useCDN) {

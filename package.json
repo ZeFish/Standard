@@ -108,6 +108,7 @@
     "@11ty/eleventy-navigation": "^1.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@zefish/standard": "^0.11.25",
+    "jsdom": "^27.0.1",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-obsidian-callouts": "^0.3.2",
     "nunjucks": "^3.2.4"
