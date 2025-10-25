@@ -13,7 +13,7 @@
  * - Custom events for extensibility
  * - Configurable selectors
  *
- * @version 1.0.0
+ * @version @VERSION_PLACEHOLDER@
  * @license MIT
  * @author Your Name
  */

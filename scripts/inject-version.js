@@ -19,33 +19,52 @@ const versionString = `Standard Framework v${version}`;
 // Placeholder to replace
 const placeholder = "@VERSION_PLACEHOLDER@";
 
-// Files to update
-const files = [
-  "dist/standard.css",
-  "dist/standard.min.css",
-  "dist/standard.js",
-  "dist/standard.min.js",
-  "dist/standard.lab.js",
-];
+// Get all files in dist/ directory
+const distDir = path.join(projectRoot, "dist");
+
+if (!fs.existsSync(distDir)) {
+  console.error(`✗ dist/ directory not found at ${distDir}`);
+  process.exit(1);
+}
+
+const files = fs.readdirSync(distDir).filter((file) => {
+  const filePath = path.join(distDir, file);
+  return fs.statSync(filePath).isFile(); // Only process files, not directories
+});
+
+if (files.length === 0) {
+  console.warn("⚠ No files found in dist/ directory");
+  process.exit(0);
+}
+
+let replacedCount = 0;
+let skippedCount = 0;
+let notFoundCount = 0;
 
 for (const file of files) {
-  const filePath = path.join(projectRoot, file);
+  const filePath = path.join(distDir, file);
 
-  if (fs.existsSync(filePath)) {
+  try {
     let content = fs.readFileSync(filePath, "utf-8");
 
     // Check if placeholder exists
     if (content.includes(placeholder)) {
       // Replace placeholder with version info
-      content = content.replace(placeholder, versionString);
+      content = content.replace(new RegExp(placeholder, "g"), versionString);
       fs.writeFileSync(filePath, content, "utf-8");
       console.log(`✓ ${file} (placeholder replaced)`);
+      replacedCount++;
     } else {
       console.log(`⚠ ${file} (placeholder not found, skipped)`);
+      skippedCount++;
     }
-  } else {
-    console.log(`✗ ${file} (file not found)`);
+  } catch (error) {
+    console.error(`✗ ${file} (error: ${error.message})`);
+    notFoundCount++;
   }
 }
 
 console.log(`\n✓ Version ${version} injected into dist files`);
+console.log(`  - Replaced: ${replacedCount}`);
+console.log(`  - Skipped: ${skippedCount}`);
+console.log(`  - Errors: ${notFoundCount}`);
