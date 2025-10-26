@@ -15,25 +15,16 @@ Professional typography framework with responsive layouts, semantic colors, dark
 
 ### Installation
 
-```bash
-npm install @zefish/standard
-```
-
-### Include in Your Project
-
-```html
-<link rel="stylesheet" href="/path/to/standard.min.css">
-<script src="/path/to/standard.min.js" type="module"></script>
-```
-
-Or use the CDN:
-
 ```html
 <link rel="stylesheet" href="https://unpkg.com/@zefish/standard/css">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>
 ```
 
-### With 11ty
+#### With 11ty
+
+```bash
+npm install @zefish/standard
+```
 
 ```javascript
 import Standard from "@zefish/standard";
@@ -72,7 +63,7 @@ Then in your templates:
 
 ## Key Features
 
-### 🎨 Color System
+### Color System
 Light/dark theme with semantic colors that automatically adapt to user preferences.
 
 ```html
@@ -81,7 +72,7 @@ Light/dark theme with semantic colors that automatically adapt to user preferenc
 </div>
 ```
 
-### 📐 Typography
+### Typography
 Carefully calibrated font scales based on mathematical ratios.
 
 ```html
@@ -89,7 +80,7 @@ Carefully calibrated font scales based on mathematical ratios.
 <p>Sizes that work together harmoniously</p>
 ```
 
-### 🔲 Responsive Grid
+### Responsive Grid
 Mobile-first grid system with intuitive breakpoints.
 
 ```html
@@ -98,7 +89,7 @@ Mobile-first grid system with intuitive breakpoints.
 </div>
 ```
 
-### 📏 Vertical Rhythm
+### Vertical Rhythm
 Consistent spacing throughout your entire design.
 
 ```html
@@ -108,7 +99,7 @@ Consistent spacing throughout your entire design.
 </article>
 ```
 
-### ♿ Accessible
+### Accessible
 WCAG AA compliant from the start.
 
 - Semantic HTML recommended
@@ -116,7 +107,7 @@ WCAG AA compliant from the start.
 - Keyboard navigation support
 - Screen reader friendly
 
-### 🌓 Dark Mode
+### Dark Mode
 Automatic theme switching respects user preferences.
 
 ```css
