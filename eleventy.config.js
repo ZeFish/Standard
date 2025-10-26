@@ -39,7 +39,21 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
-  eleventyConfig.addPlugin(Standard, { cloudflare: { enabled: true } });
+  eleventyConfig.addPlugin(Standard, {
+    cloudflare: { enabled: true },
+    image: {
+      enabled: true,
+      cdn: "cloudflare", // Uses Cloudflare Pages' free image resizing
+      baseUrl: "https://standard.ffp.co", // Your Cloudflare Pages domain
+      sizes: [640, 960, 1280, 1920],
+      quality: 85,
+      format: "auto", // Cloudflare automatically serves WebP/AVIF
+      sharpen: 0.5,
+      skipExternal: true,
+      generateSrcset: true,
+      lazyLoad: false,
+    },
+  });
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: [

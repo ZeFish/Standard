@@ -12,6 +12,7 @@ import Markdown from "./markdown.js";
 import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
+import Image from "./image.js";
 import { addEncryptionTransform } from "./encryption.js";
 import CloudflarePlugin from "./cloudflare.js";
 
@@ -129,6 +130,14 @@ export default function (eleventyConfig, options = {}) {
       commentsPath: "data/comments",
       version: pkg.version,
     },
+    images = {
+      enabled: false,
+      cdn: "cloudflare",
+      baseUrl: "",
+      sizes: [640, 960, 1280, 1920],
+      quality: 85,
+      format: "auto",
+    },
   } = options;
 
   eleventyConfig.addGlobalData("standard", {
@@ -152,7 +161,12 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
   eleventyConfig.addPlugin(ShortCode);
 
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  //const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+  // Register Images Plugin
+  if (options.image && options.image.enabled) {
+    eleventyConfig.addPlugin(Image, options.image);
+  }
 
   eleventyConfig.setUseGitIgnore(false);
 
