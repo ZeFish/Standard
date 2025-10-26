@@ -66,24 +66,24 @@ Create `_includes/layouts/base.njk`:
 
 ```nunjucks
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="default">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% standardMeta %}
   <title>{{ title or "My Site" }}</title>
   {% standardAssets %}
 </head>
-<body class="bg-background text-foreground">
-  <header class="rhythm-block p-4">
+<body>
+  <header>
     <h1>My Website</h1>
+    {% standardMenu 1 %}
   </header>
 
-  <main class="max-w-prose mx-auto px-4 rhythm-block">
+  <main class="prose md">
     {{ content | safe }}
   </main>
 
-  <footer class="rhythm-block p-4">
-    <p>&copy; 2024</p>
+  <footer>
+    <p>&copy; {% year %}</p>
   </footer>
 </body>
 </html>
