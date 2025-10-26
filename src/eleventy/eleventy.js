@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { readFileSync, existsSync } from "fs";
 import EleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import fs from "fs";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import Backlinks from "./backlinks.js";
 import Markdown from "./markdown.js";
@@ -150,6 +151,8 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(addEncryptionTransform);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
   eleventyConfig.addPlugin(ShortCode);
+
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
   eleventyConfig.setUseGitIgnore(false);
 

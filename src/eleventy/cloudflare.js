@@ -76,9 +76,6 @@ export default function (eleventyConfig, options = {}) {
       };
 
       copyRecursive(cloudflareDir, functionsOutputPath);
-      console.log(
-        `[Cloudflare Plugin] Copied functions to ${path.relative(projectRoot, functionsOutputPath)}`
-      );
     }
   });
 
@@ -89,7 +86,4 @@ export default function (eleventyConfig, options = {}) {
     env,
     version: "0.10.52",
   });
-
-  console.log(`[Cloudflare Plugin] Configured for ${environment} environment`);
-  console.log(`[Cloudflare Plugin] Functions output directory: ${outputDir}`);
 }

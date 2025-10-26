@@ -44,11 +44,12 @@
     "src/layouts"
   ],
   "scripts": {
-    "start": "rm -rf _site & npm run build:css && npx @11ty/eleventy --serve --port=8090",
+    "commit": "git add . && npx opencommit",
+    "start": "rm -rf _site & npm run build:css && npx @11ty/eleventy --serve --port=8090 --quiet",
     "dev": "concurrently \"npm:watch:*\"",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",
     "build": "npm run build:assets && npx @11ty/eleventy",
-    "build:assets": "npm run build:css && npm run build:js && npm run build:js:prod && node scripts/inject-version.js",
+    "build:assets": "npm run build:css & npm run build:js & npm run build:js:prod && node scripts/inject-version.js",
     "build:js": "cp src/js/standard.js dist/standard.js && cp src/js/standard.comment.js dist/standard.comment.js",
     "build:js:prod": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js && cp src/js/standard.comment.js dist/standard.comment.js",
     "clean:comments": "rm -rf data/comments && mkdir -p data/comments && echo '# Comments Storage' > data/comments/README.md",
@@ -56,11 +57,11 @@
     "release": "export $(cat .env | xargs) && release-it --only-version",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "watch:css": "sass --watch --load-path=node_modules src/styles:dist --no-source-map",
-    "build:standard:dev": "sass --load-path=node_modules src/styles/standard.scss:dist/standard.css --no-source-map",
-    "build:standard:prod": "sass --load-path=node_modules src/styles/standard.scss:dist/standard.min.css --style compressed --no-source-map",
-    "build:theme:dev": "sass --load-path=node_modules src/styles/standard.theme.scss:dist/standard.theme.css --no-source-map",
-    "build:theme:prod": "sass --load-path=node_modules src/styles/standard.theme.scss:dist/standard.theme.min.css --style compressed --no-source-map",
-    "build:css": "npm run build:standard:dev && npm run build:theme:dev && npm run build:standard:prod && npm run build:theme:prod"
+    "build:standard:dev": "sass --load-path=node_modules src/styles/standard.scss:dist/standard.css --no-source-map --quiet",
+    "build:standard:prod": "sass --load-path=node_modules src/styles/standard.scss:dist/standard.min.css --style compressed --no-source-map --quiet",
+    "build:theme:dev": "sass --load-path=node_modules src/styles/standard.theme.scss:dist/standard.theme.css --no-source-map --quiet",
+    "build:theme:prod": "sass --load-path=node_modules src/styles/standard.theme.scss:dist/standard.theme.min.css --style compressed --no-source-map --quiet",
+    "build:css": "npm run build:standard:dev & npm run build:theme:dev & npm run build:standard:prod & npm run build:theme:prod"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
@@ -113,6 +114,7 @@
   "dependencies": {
     "@11ty/eleventy-navigation": "^1.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "@google/generative-ai": "^0.24.1",
     "@zefish/standard": "^0.11.25",
     "htmx.org": "^2.0.8",
     "jsdom": "^27.0.1",

@@ -254,15 +254,12 @@ export default function (eleventyConfig, options = {}) {
   const urlPath = "/" + outputDir.split("/").slice(1).join("/");
 
   eleventyConfig.on("eleventy.before", async () => {
-    console.log("[Doc Generator] eleventy.before hook triggered");
     const hasChanged = await sourceFilesChanged(patterns);
 
     if (!hasChanged) {
-      console.log("[Doc Generator] No changes detected, skipping");
       return;
     }
 
-    console.log("[Doc Generator] Changes detected, regenerating docs");
     const absolutePatterns = patterns.map((p) => {
       const fullPattern = p.startsWith(sourceDir) ? p : `${sourceDir}/${p}`;
       return path.resolve(projectRoot, fullPattern);
@@ -273,17 +270,12 @@ export default function (eleventyConfig, options = {}) {
       patterns: absolutePatterns,
     });
 
-    console.log("[Doc Generator] Starting parse...");
     const docs = await parser.parse();
-    console.log(`[Doc Generator] Parsed ${docs.length} docs`);
 
-    console.log("[Doc Generator] Generating markdown docs...");
     await generateMarkdownDocs(docs, outputDir, layout, urlPath);
-    console.log("[Doc Generator] Generating index pages...");
     await generateIndexPages(docs, outputDir, layout, urlPath);
-    console.log("[Doc Generator] Saving hash...");
+
     await saveSourceHash(patterns);
-    console.log("[Doc Generator] Done!");
   });
 
   eleventyConfig.addCollection("docs", function (collection) {
