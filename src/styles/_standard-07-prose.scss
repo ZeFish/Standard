@@ -56,7 +56,7 @@
     /* Layout grid tokens */
     --gap: clamp(var(--space), 6%, var(--space-xl));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: var(--space-l);
+    --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
     --content-accent: minmax(0, var(--space-l));
     --content-feature: minmax(0, var(--space-2xl));
     --content-full: minmax(0, 1fr);
@@ -242,6 +242,16 @@
     figure,
     p:has(img) {
         margin-inline: var(--content-small);
+    }
+    @media (max-width: #{$mobile}) {
+        .container-small,
+        .callout,
+        blockquote,
+        pre,
+        figure,
+        p:has(img) {
+            margin-inline: 0;
+        }
     }
 
     /* Mermaid diagrams */

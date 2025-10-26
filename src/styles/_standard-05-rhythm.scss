@@ -148,7 +148,7 @@
     }
 
     hr {
-        --rhythm-multiplier-block: 3;
+        --rhythm-multiplier-block: calc(var(--rhythm-multiplier) * 3);
     }
 
     /* Adjacent images get reduced spacing */

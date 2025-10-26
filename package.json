@@ -44,7 +44,7 @@
     "src/layouts"
   ],
   "scripts": {
-    "start": "rm -rf _site && npm run build:css && npx @11ty/eleventy --serve --port=8090",
+    "start": "rm -rf _site & npm run build:css && npx @11ty/eleventy --serve --port=8090",
     "dev": "concurrently \"npm:watch:*\"",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",
     "build": "npm run build:assets && npx @11ty/eleventy",

@@ -186,7 +186,7 @@
         );
 
         /* Dark mode shadows */
-        --shadow-color: color-mix(in srgb, #000 40%, transparent);
+        --shadow-color: color-mix(in srgb, #000 20%, transparent);
         --shadow: 0 2px 4px var(--shadow-color);
         --shadow-l: 0 8px 16px var(--shadow-color);
         --shadow-xl: 0 12px 32px var(--shadow-color);

@@ -436,6 +436,7 @@
   --font-density-s: 1;
   --font-mobile-size: 1rem;
   --font-mobile-ratio: var(--ratio-halfstep);
+  --font-mobile-density: 1;
   --rhythm-multiplier: 1;
   --rhythm-multiplier-block: 2;
   --body-padding-multiplier: 1;
@@ -661,7 +662,7 @@
         var(--color-background)
     );
     /* Dark mode shadows */
-    --shadow-color: color-mix(in srgb, #000 40%, transparent);
+    --shadow-color: color-mix(in srgb, #000 20%, transparent);
     --shadow: 0 2px 4px var(--shadow-color);
     --shadow-l: 0 8px 16px var(--shadow-color);
     --shadow-xl: 0 12px 32px var(--shadow-color);
@@ -1194,6 +1195,7 @@ html {
   :root {
     --font-size: var(--font-mobile-size) !important;
     --font-ratio: var(--font-mobile-ratio) !important;
+    --font-density: var(--font-mobile-density) !important;
   }
 }
 /* Heading element styling moved to standard-04-elements.scss
@@ -1830,7 +1832,7 @@ sup {
   margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
-  --rhythm-multiplier-block: 3;
+  --rhythm-multiplier-block: calc(var(--rhythm-multiplier) * 3);
 }
 :where(html:not(.no-rhythm), .rhythm) {
   /* Adjacent images get reduced spacing */
@@ -3197,7 +3199,7 @@ hr.col-row {
   /* Layout grid tokens */
   --gap: clamp(var(--space), 6%, var(--space-xl));
   --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-  --content-small: var(--space-l);
+  --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
   --content-accent: minmax(0, var(--space-l));
   --content-feature: minmax(0, var(--space-2xl));
   --content-full: minmax(0, 1fr);
@@ -3347,6 +3349,16 @@ figure,
 :where(.prose) figure,
 :where(.prose) p:has(img) {
   margin-inline: var(--content-small);
+}
+@media (max-width: 600px) {
+  :where(.prose) .container-small,
+  :where(.prose) .callout,
+  :where(.prose) blockquote,
+  :where(.prose) pre,
+  :where(.prose) figure,
+  :where(.prose) p:has(img) {
+    margin-inline: 0;
+  }
 }
 :where(.prose) {
   /* Mermaid diagrams */

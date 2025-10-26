@@ -3,6 +3,9 @@
     --border-radius: 0;
     --border-color: var(--color-foreground);
 
+    --rhythm-multiplier: 1;
+    --rhythm-multiplier-block: 0;
+
     table {
         grid-column: content;
     }
