@@ -149,17 +149,6 @@ You're absolutely right! I missed the **Future Improvements** section from the o
 - **Impact**: Low - optional shortcode
 - **Related Files**: New shortcode in `shortcode.js`
 
-🟢 **Performance Profiling System**
-- **Observation**: No metrics for build-time typography processing
-- **Suggestion**: Add optional performance tracking mode (dev only)
-  ```javascript
-  enablePerformanceMeasurement: false,
-  // Tracks: processTime, elementsProcessed, batchCount
-  ```
-- **Benefit**: Helps optimize large documents, debugging slow builds
-- **Impact**: Medium - adds event data
-- **Related Files**: `src/eleventy/markdown.js`, `filter.js`
-
 🟢 **Error Reporting Improvements**
 - **Observation**: Limited error messages for configuration issues
 - **Suggestion**: Add user-friendly error messages with suggestions
