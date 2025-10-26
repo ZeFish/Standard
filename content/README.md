@@ -1,5 +1,11 @@
 # Standard Framework
 
+![npm](https://img.shields.io/npm/v/@zefish/standard)
+![license](https://img.shields.io/npm/l/@zefish/standard)
+![11ty](https://img.shields.io/badge/11ty-v3.0%2B-brightgreen)
+![maintained](https://img.shields.io/badge/maintained-yes-green?style=flat-square)
+
+
 Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
 
 Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
