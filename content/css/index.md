@@ -72,14 +72,6 @@ Light/dark theme with semantic colors that automatically adapt to user preferenc
 </div>
 ```
 
-### Typography
-Carefully calibrated font scales based on mathematical ratios.
-
-```html
-<h1>Perfect typography</h1>
-<p>Sizes that work together harmoniously</p>
-```
-
 ### Responsive Grid
 Mobile-first grid system with intuitive breakpoints.
 
@@ -98,14 +90,6 @@ Consistent spacing throughout your entire design.
   <p>Spacing maintains baseline grid</p>
 </article>
 ```
-
-### Accessible
-WCAG AA compliant from the start.
-
-- Semantic HTML recommended
-- High contrast color combinations
-- Keyboard navigation support
-- Screen reader friendly
 
 ### Dark Mode
 Automatic theme switching respects user preferences.
@@ -129,9 +113,9 @@ Customize the framework by overriding CSS variables.
   --line-height-base: 1.618;
 
   /* Colors */
-  --color-background: #ffffff;
-  --color-foreground: #000000;
-  --color-accent: #0066cc;
+  --color-light-background: #ffffff;
+  --color-light-foreground: #000000;
+  --color-light-accent: #0066cc;
 
   /* Spacing */
   --rhythm-unit: 1rem;
@@ -148,34 +132,10 @@ Mobile-first responsive design with four tiers:
 
 | Name | Width | Usage |
 |------|-------|-------|
-| Mobile | 0 - 479px | Default styles |
-| Small | 480px+ | Tablets, small screens |
+| Mobile | 0 - 600px | Default styles |
+| Small | 768px+ | Tablets, small screens |
 | Large | 1024px+ | Desktops |
 | Wide | 1440px+ | Large displays |
-
-## Learning Path
-
-### Beginner
-1. **[Getting Started](/css/getting-started/)** - Installation and basics
-2. **[Typography](/css/typography/)** - Understanding font scales
-3. **[Colors](/css/colors/)** - Using the color system
-
-### Intermediate
-4. **[Grid Layout](/css/grid/)** - Building responsive layouts
-5. **[Spacing & Rhythm](/css/spacing/)** - Vertical rhythm mastery
-6. **[Components](/css/buttons/)** - Using styled components
-
-### Advanced
-7. **[Customization](/css/customization/)** - Overriding defaults
-8. **[Debug System](/css/debug/)** - Finding layout issues
-9. **[Performance](/css/performance/)** - Optimization tips
-
-## Browser Support
-
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## File Sizes
 
@@ -184,20 +144,6 @@ standard.min.css     ~12 KB gzipped
 standard.min.js      ~2 KB gzipped
 ```
 
-## Features by Version
-
-**v0.10.52** includes:
-
-- ✅ Complete typography system
-- ✅ Semantic color system with themes
-- ✅ Responsive grid layout
-- ✅ Vertical rhythm system
-- ✅ Button components
-- ✅ Form styling
-- ✅ Utility classes
-- ✅ Debug mode
-- ✅ Cloudflare Functions plugin (bonus!)
-- ✅ 11ty integration
 
 ## Examples
 
@@ -226,37 +172,3 @@ standard.min.js      ~2 KB gzipped
   </footer>
 </body>
 ```
-
-### Dark Mode Button
-
-```html
-<button class="btn btn-primary">
-  Click me!
-</button>
-
-<!-- Automatically themed based on system preference -->
-```
-
-### Responsive Typography
-
-```html
-<h1>Responsive Headline</h1>
-<!-- Scales appropriately on mobile, tablet, desktop -->
-
-<p class="text-lg">Large paragraph text</p>
-<p class="text-sm">Small caption text</p>
-```
-
-## Next Steps
-
-- **[Getting Started](/css/getting-started/)** - Set up the framework
-- **[Browse Components](/docs/)** - Auto-generated component docs
-- **[View Examples](/css/examples/)** - Real-world usage
-- **[Customize](/css/customization/)** - Make it your own
-
-## Support
-
-- 📖 [Full Documentation](/css/)
-- 🐛 [Report Issues](https://github.com/ZeFish/Standard/issues)
-- 💬 [Discussions](https://github.com/ZeFish/Standard/discussions)
-- ⭐ [Star on GitHub](https://github.com/ZeFish/Standard)
