@@ -77,10 +77,10 @@ wrangler publish
 
 ## Features
 
-✅ Automatic function copying to build output
-✅ Environment variables support
-✅ Global data available in templates
-✅ Cloudflare configuration template
+- Automatic function copying to build output
+- Environment variables support
+- Global data available in templates
+- Cloudflare configuration template
 
 ## Integration with Standard Framework
 
