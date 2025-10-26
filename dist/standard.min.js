@@ -13,7 +13,7 @@
  * - Custom events for extensibility
  * - Configurable selectors
  *
- * @version Standard Framework v0.13.2
+ * @version Standard Framework v0.13.3
  * @license MIT
  * @author Your Name
  */

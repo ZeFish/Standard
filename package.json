@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "commit": "git add . && npx opencommit",
+    "test": "echo \"No tests yet\" && exit 0",
     "start": "rm -rf _site & npm run build:css && npx @11ty/eleventy --serve --port=8090 --quiet",
     "dev": "concurrently \"npm:watch:*\"",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",
@@ -88,21 +89,26 @@
     "access": "public"
   },
   "release-it": {
-    "ci": true,
     "git": {
       "tagName": "v${version}",
       "commitMessage": "chore: release v${version}",
       "requireCleanWorkingDir": false,
-      "requireUpstream": false
-    },
-    "npm": {
-      "skipChecks": true,
-      "publish": true
+      "requireUpstream": false,
+      "push": true
     },
     "github": {
       "release": true,
       "web": false,
       "autoGenerate": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "conventionalcommits"
+        },
+        "infile": "CHANGELOG.md",
+        "header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n"
+      }
     },
     "hooks": {
       "after:bump": "npm run changelog && npm run build:assets"
@@ -115,6 +121,7 @@
     "@11ty/eleventy-navigation": "^1.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@google/generative-ai": "^0.24.1",
+    "@release-it/conventional-changelog": "^10.0.1",
     "@zefish/standard": "^0.11.25",
     "htmx.org": "^2.0.8",
     "jsdom": "^27.0.1",
