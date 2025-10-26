@@ -160,7 +160,7 @@ Comprehensive guides and API reference:
 <!DOCTYPE html>
 <html>
 <head>
-  
+
 </head>
 <body>
   <h1>Hello World</h1>
@@ -202,7 +202,6 @@ Backlinks automatically appear on those pages!
 ---
 layout: layouts/article.njk
 title: Premium Content
-encrypted: true
 password: members-only
 ---
 
@@ -210,24 +209,6 @@ password: members-only
 
 Password protected, decrypts in the browser.
 ```
-
----
-
-## Browser Support
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers
-
----
-
-## File Sizes
-
-- **CSS**: ~15KB gzipped
-- **JavaScript**: ~2KB gzipped
-- **Total**: ~17KB gzipped
-
 ---
 
 ## Customization
@@ -241,18 +222,7 @@ Override CSS variables:
   --line-width: 60rem; /* Optimal reading width */
 }
 ```
-
 ---
-
-## License
-
-MIT — see [LICENSE](LICENSE)
-
----
-
-## Credits
-
-Created by [Francis Fontaine](https://francisfontaine.com)
 
 Inspired by:
 - Robert Bringhurst — *The Elements of Typographic Style*
@@ -270,5 +240,3 @@ Inspired by:
 ---
 
 **Standard Framework** — Stop configuring. Start creating. ✨
-
-Version 0.10.52 · MIT Licensed · Zero Dependencies

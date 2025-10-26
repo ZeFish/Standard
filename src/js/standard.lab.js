@@ -24,6 +24,8 @@ class StandardLab {
       { value: "swiss", label: "Swiss" },
       { value: "kernel", label: "Kernel" },
       { value: "forest", label: "Forest" },
+      { value: "book", label: "Book" },
+      { value: "minimal", label: "Minimal" },
     ];
 
     // Core tokens to expose (curated list)

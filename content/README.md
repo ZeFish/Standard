@@ -66,24 +66,24 @@ Create `_includes/layouts/base.njk`:
 
 ```nunjucks
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="default">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% standardMeta %}
   <title>{{ title or "My Site" }}</title>
   {% standardAssets %}
 </head>
-<body class="bg-background text-foreground">
-  <header class="rhythm-block p-4">
+<body>
+  <header>
     <h1>My Website</h1>
+    {% standardMenu 1 %}
   </header>
 
-  <main class="max-w-prose mx-auto px-4 rhythm-block">
+  <main class="prose md">
     {{ content | safe }}
   </main>
 
-  <footer class="rhythm-block p-4">
-    <p>&copy; 2024</p>
+  <footer>
+    <p>&copy; {% year %}</p>
   </footer>
 </body>
 </html>
@@ -114,13 +114,13 @@ npx @11ty/eleventy --serve
 
 ## What You Get
 
-✅ **Professional Typography** — Golden ratio proportions, perfect spacing
-✅ **Responsive Design** — Mobile, tablet, desktop — all handled
-✅ **Dark Mode** — Automatic system preference detection
-✅ **Accessibility** — WCAG AA compliant from the start
-✅ **No Configuration** — Works out of the box
-✅ **Small & Fast** — 15KB CSS, 2KB JS (gzipped)
-✅ **11ty Integration** — Enhanced markdown, backlinks, encryption
+- **Professional Typography** — Golden ratio proportions, perfect spacing
+- *Responsive Design** — Mobile, tablet, desktop — all handled
+- **Dark Mode** — Automatic system preference detection
+- **Accessibility** — WCAG AA compliant from the start
+- **No Configuration** — Works out of the box
+- **Small & Fast** — 15KB CSS, 2KB JS (gzipped)
+- **11ty Integration** — Enhanced markdown, backlinks, encryption
 
 ---
 
@@ -160,14 +160,11 @@ Comprehensive guides and API reference:
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="standard.min.css">
+
 </head>
-<body class="rhythm reading">
+<body>
   <h1>Hello World</h1>
   <p>Beautiful typography, automatically.</p>
-  <script src="standard.min.js" type="module"></script>
 </body>
 </html>
 ```
@@ -176,11 +173,11 @@ Comprehensive guides and API reference:
 
 ```html
 <div class="grid">
-  <div class="col-12 md:col-6 lg:col-4">
+  <div class="col-sm-row col-6 col-lg-4">
     Full width on mobile, half on tablet, third on desktop
   </div>
-  <div class="col-12 md:col-6 lg:col-4">...</div>
-  <div class="col-12 md:col-12 lg:col-4">...</div>
+  <div class="col-sm-row col-6 col-lg-4">...</div>
+  <div class="col-sm-row col-12 col-lg-4">...</div>
 </div>
 ```
 
@@ -205,7 +202,6 @@ Backlinks automatically appear on those pages!
 ---
 layout: layouts/article.njk
 title: Premium Content
-encrypted: true
 password: members-only
 ---
 
@@ -213,24 +209,6 @@ password: members-only
 
 Password protected, decrypts in the browser.
 ```
-
----
-
-## Browser Support
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers
-
----
-
-## File Sizes
-
-- **CSS**: ~15KB gzipped
-- **JavaScript**: ~2KB gzipped
-- **Total**: ~17KB gzipped
-
 ---
 
 ## Customization
@@ -244,18 +222,7 @@ Override CSS variables:
   --line-width: 60rem; /* Optimal reading width */
 }
 ```
-
 ---
-
-## License
-
-MIT — see [LICENSE](LICENSE)
-
----
-
-## Credits
-
-Created by [Francis Fontaine](https://francisfontaine.com)
 
 Inspired by:
 - Robert Bringhurst — *The Elements of Typographic Style*
@@ -273,5 +240,3 @@ Inspired by:
 ---
 
 **Standard Framework** — Stop configuring. Start creating. ✨
-
-Version 0.10.52 · MIT Licensed · Zero Dependencies

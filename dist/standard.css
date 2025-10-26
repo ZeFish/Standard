@@ -1801,10 +1801,8 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) .container-accent,
 :where(html:not(.no-rhythm), .rhythm) .container-feature,
 :where(html:not(.no-rhythm), .rhythm) .container-full {
-  /* Subtract regular margin to avoid double-spacing */
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier-block) - var(--space) * var(--rhythm-multiplier));
-  /* Bottom margin uses the block multiplier */
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
+  margin-block-start: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)) - var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)));
 }
 :where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
@@ -1815,21 +1813,10 @@ sup {
   /* =========================== */
   /* Exception for grid in a prose div */
 }
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-2,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-3,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-4,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-5,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-6,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-7,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-8,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-9,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-10,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-11,
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid-12 {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier-block) - var(--space) * var(--rhythm-multiplier));
-  /* Bottom margin uses the block multiplier */
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier-block));
+:where(html:not(.no-rhythm), .rhythm) .prose > [class^=grid-],
+:where(html:not(.no-rhythm), .rhythm) .prose > .grid {
+  margin-block-start: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)) - var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)));
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
   --rhythm-multiplier-block: calc(var(--rhythm-multiplier) * 3);
@@ -3254,6 +3241,9 @@ hr.col-row {
   min-width: 1%;
   min-height: 1%;
   object-fit: cover;
+}
+:where(.prose):not(.no-grid) p:has(img) img {
+  flex-grow: 0; /* prevents the image from stretching to fill */
 }
 :where(.prose):not(.no-grid) p:has(video) > * {
   flex: 1 1 auto;

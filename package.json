@@ -55,7 +55,7 @@
     "build:js:prod": "terser src/js/standard.js -o dist/standard.min.js --compress --mangle && terser src/js/standard.lab.js -o dist/standard.lab.js && cp src/js/standard.comment.js dist/standard.comment.js",
     "clean:comments": "rm -rf data/comments && mkdir -p data/comments && echo '# Comments Storage' > data/comments/README.md",
     "clean:ports": "lsof -ti:8080,8081,8082,8083,8084,8085,8086,8087,8088,8089 | xargs kill -9 2>/dev/null || true",
-    "release": "export $(cat .env | xargs) && release-it --only-version",
+    "release": "export $(cat .env | xargs) && release-it --ci",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "watch:css": "sass --watch --load-path=node_modules src/styles:dist --no-source-map",
     "build:standard:dev": "sass --load-path=node_modules src/styles/standard.scss:dist/standard.css --no-source-map --quiet",
@@ -95,6 +95,9 @@
       "requireCleanWorkingDir": false,
       "requireUpstream": false,
       "push": true
+    },
+    "npm": {
+      "publish": true
     },
     "github": {
       "release": true,

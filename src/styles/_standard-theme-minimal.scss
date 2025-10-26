@@ -2,15 +2,9 @@
     --shadow: none;
     --border-radius: 0;
     --border-color: var(--color-foreground);
-    --color-background-secondary: var(--color-background);
 
     --rhythm-multiplier: 1;
     --rhythm-multiplier-block: 0;
-
-    blockquote {
-        border: 0;
-        border-inline-start: var(--space-3xs) solid var(--color-foreground);
-    }
 
     table {
         grid-column: content;

@@ -1,4 +1,20 @@
 @font-face {
+    font-family: "Futura Now Var";
+    src: url("/assets/fonts/FuturaNowVar-Italic.woff2") format("woff2");
+    font-weight: 100 1000;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Futura Now Var";
+    src: url("/assets/fonts/FuturaNowVar-Roman.woff2") format("woff2");
+    font-weight: 100 1000;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: "Courier Prime";
     src: url("/assets/fonts/CourierPrime-BoldItalic.woff2") format("woff2");
     font-weight: bold;
@@ -114,7 +130,7 @@
     --color-light-pink: #df9cbf;
 
     --color-dark-foreground: #9e7f5b;
-    --color-dark-foreground: oklch(65.71% 0.0733 70.41);
+    --color-dark-foreground: oklch(70.71% 0.0733 70.41);
     --color-dark-background: #1d2027;
     --color-dark-red: #9c392e;
     --color-dark-orange: #934b22;
@@ -134,7 +150,7 @@
     --font-ratio: 1.2;
 
     --rhythm-multiplier: 1;
-    --rhythm-multiplier-block: 2;
+    --rhythm-multiplier-block: 1.5;
 
     --font-text: "Courier Prime";
     --font-feature: "";

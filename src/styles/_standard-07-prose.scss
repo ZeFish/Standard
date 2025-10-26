@@ -130,6 +130,10 @@
             object-fit: cover;
         }
 
+        p:has(img) img {
+            flex-grow: 0; /* prevents the image from stretching to fill */
+        }
+
         p:has(video) > * {
             flex: 1 1 auto;
             min-width: 1%;
