@@ -114,13 +114,13 @@ npx @11ty/eleventy --serve
 
 ## What You Get
 
-✅ **Professional Typography** — Golden ratio proportions, perfect spacing
-✅ **Responsive Design** — Mobile, tablet, desktop — all handled
-✅ **Dark Mode** — Automatic system preference detection
-✅ **Accessibility** — WCAG AA compliant from the start
-✅ **No Configuration** — Works out of the box
-✅ **Small & Fast** — 15KB CSS, 2KB JS (gzipped)
-✅ **11ty Integration** — Enhanced markdown, backlinks, encryption
+- **Professional Typography** — Golden ratio proportions, perfect spacing
+- *Responsive Design** — Mobile, tablet, desktop — all handled
+- **Dark Mode** — Automatic system preference detection
+- **Accessibility** — WCAG AA compliant from the start
+- **No Configuration** — Works out of the box
+- **Small & Fast** — 15KB CSS, 2KB JS (gzipped)
+- **11ty Integration** — Enhanced markdown, backlinks, encryption
 
 ---
 
@@ -160,14 +160,11 @@ Comprehensive guides and API reference:
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="standard.min.css">
+  
 </head>
-<body class="rhythm reading">
+<body>
   <h1>Hello World</h1>
   <p>Beautiful typography, automatically.</p>
-  <script src="standard.min.js" type="module"></script>
 </body>
 </html>
 ```
@@ -176,11 +173,11 @@ Comprehensive guides and API reference:
 
 ```html
 <div class="grid">
-  <div class="col-12 md:col-6 lg:col-4">
+  <div class="col-sm-row col-6 col-lg-4">
     Full width on mobile, half on tablet, third on desktop
   </div>
-  <div class="col-12 md:col-6 lg:col-4">...</div>
-  <div class="col-12 md:col-12 lg:col-4">...</div>
+  <div class="col-sm-row col-6 col-lg-4">...</div>
+  <div class="col-sm-row col-12 col-lg-4">...</div>
 </div>
 ```
 
