@@ -148,7 +148,7 @@ export default function Image(eleventyConfig, options = {}) {
     skipExternal: true,
     skipClass: "no-cdn",
     generateSrcset: true,
-    lazyLoad: false,
+    lazyLoad: true,
     fit: "scale-down", // 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad'
     customTemplate: null, // Function for custom CDN URLs
     skipInDev: true, // ✅ NEW: Skip transformation in development

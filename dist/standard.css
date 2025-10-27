@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.13.12
+ * @version @VERSION_PLACEHOLDER@
  * @license MIT
  */
 /* Document
@@ -1620,25 +1620,6 @@ sub {
 
 sup {
   vertical-align: super;
-}
-
-/* ===== UTILITY TEXT SIZES ===== */
-.small {
-  font-size: var(--scale-s);
-}
-
-/* Make all children of .small inherit the font size */
-.small * {
-  font-size: inherit;
-}
-
-.smaller {
-  font-size: var(--scale-xs);
-}
-
-/* Make all children of .smaller inherit the font size */
-.smaller * {
-  font-size: inherit;
 }
 
 .compact {

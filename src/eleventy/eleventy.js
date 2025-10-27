@@ -189,6 +189,9 @@ export default function (eleventyConfig, options = {}) {
       [path.join(__dirname, "../../dist/standard.lab.js")]:
         `${outputDir}/standard.lab.js`,
       "node_modules/htmx.org/dist/htmx.min.js": `${outputDir}/htmx.min.js`,
+      [path.join(__dirname, "../../dist/standard.lab.js")]:
+        `${outputDir}/standard.lab.js`,
+      "node_modules/htmx.org/dist/ext/preload.js": `${outputDir}/htmx.preload.js`,
     });
   }
 
@@ -221,7 +224,8 @@ export default function (eleventyConfig, options = {}) {
 
     html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css"><link rel="stylesheet" href="/${outputDir}/standard.theme.min.css">
 <script src="/${outputDir}/standard.min.js" type="module"></script></script>
-<script src="/${outputDir}/htmx.min.js"></script>`;
+<script src="/${outputDir}/htmx.min.js"></script>
+<script src="/${outputDir}/htmx.preload.js"></script>`;
 
     // Add comments client library if comments are enabled
     if (comments.enabled) {
