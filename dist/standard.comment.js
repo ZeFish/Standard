@@ -31,7 +31,7 @@
  * comments.attachFormHandler('#comment-form');
  *
  * @since 0.10.53
- * @version @VERSION_PLACEHOLDER@
+ * @version Standard Framework v0.13.6
  */
 
 class GitHubComments {
