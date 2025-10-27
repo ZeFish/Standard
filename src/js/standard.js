@@ -25,7 +25,6 @@ class ImageZoom {
       zoomedClass: "zoomed", // Class added to zoomed image
       enableKeyboardNav: true, // Arrow keys to navigate
       enableCustomEvents: true, // Dispatch custom events
-      backdropOpacity: 0.85, // Background darkness (0-1)
       ...options,
     };
 
@@ -39,7 +38,6 @@ class ImageZoom {
    * Initialize the zoom functionality
    */
   init() {
-    this.injectStyles();
     this.bindClickEvents();
 
     if (this.options.enableKeyboardNav) {
@@ -47,63 +45,6 @@ class ImageZoom {
     }
 
     this.dispatchEvent("initialized", {});
-  }
-
-  /**
-   * Inject required styles for zoom functionality
-   */
-  injectStyles() {
-    const styleId = "image-zoom-styles";
-
-    // Check if already injected
-    if (document.getElementById(styleId)) {
-      return;
-    }
-
-    const style = document.createElement("style");
-    style.id = styleId;
-    style.textContent = `
-      /* Image Zoom Styles */
-      img.${this.options.zoomedClass} {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        max-width: 95vw !important;
-        max-height: 95vh !important;
-        width: auto !important;
-        height: auto !important;
-        z-index: 9999 !important;
-        cursor: zoom-out !important;
-        object-fit: contain !important;
-        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, ${this.options.backdropOpacity}) !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        transition: none !important;
-      }
-
-      /* Cursor hint for zoomable images */
-      ${this.options.selector} {
-        cursor: zoom-in;
-        transition: opacity 0.2s ease;
-      }
-
-      ${this.options.selector}:hover {
-        opacity: 0.9;
-      }
-
-      /* Prevent body scroll when zoomed */
-      body.image-zoomed {
-        overflow: hidden !important;
-      }
-
-      /* Smooth transitions */
-      img {
-        transition: opacity 0.2s ease;
-      }
-    `;
-
-    document.head.appendChild(style);
   }
 
   /**
