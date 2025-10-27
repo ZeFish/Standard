@@ -13,7 +13,7 @@
  * - Custom events for extensibility
  * - Configurable selectors
  *
- * @version Standard Framework v0.13.8
+ * @version Standard Framework v0.13.9
  * @license MIT
  * @author Your Name
  */
@@ -291,17 +291,11 @@ if (typeof exports !== "undefined") {
   exports.ImageZoom = ImageZoom;
 }
 
-// Add this script to your base layout
 document.body.addEventListener("htmx:beforeSwap", (evt) => {
   // Parse the full HTML response
   const parser = new DOMParser();
   const doc = parser.parseFromString(evt.detail.xhr.responseText, "text/html");
-
   // Extract theme from the response's <html> tag
   const newTheme = doc.documentElement.dataset.theme;
-
-  if (newTheme) {
-    // Apply it to current page's <html>
-    document.documentElement.dataset.theme = newTheme;
-  }
+  document.documentElement.dataset.theme = newTheme || "default";
 });

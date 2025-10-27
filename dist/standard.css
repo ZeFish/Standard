@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.13.8
+ * @version Standard Framework v0.13.9
  * @license MIT
  */
 /* Document
@@ -1426,7 +1426,7 @@ a.external-link::after {
   content: "↗";
   position: relative;
   text-decoration: none;
-  top: 2px;
+  top: 1px;
   left: 2px;
   font-size: var(--scale-xs);
   color: var(--color-subtle);
