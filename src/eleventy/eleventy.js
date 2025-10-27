@@ -1,3 +1,4 @@
+import "dotenv/config";
 import nunjucks from "nunjucks";
 import * as sass from "sass";
 import path from "path";
@@ -15,6 +16,7 @@ import PreProcessor from "./preprocessor.js";
 import Image from "./image.js";
 import { addEncryptionTransform } from "./encryption.js";
 import CloudflarePlugin from "./cloudflare.js";
+import MenuPlugin from "./menu.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -138,7 +140,10 @@ export default function (eleventyConfig, options = {}) {
       quality: 85,
       format: "auto",
     },
+    menu = { enabled: true },
   } = options;
+
+  const ENV = process.env.ENV || "PROD";
 
   eleventyConfig.addGlobalData("standard", {
     layout: {
@@ -149,7 +154,7 @@ export default function (eleventyConfig, options = {}) {
       atomFeed: "node_modules/@zefish/standard/src/layouts/atomfeed.xsl",
       sitemap: "node_modules/@zefish/standard/src/layouts/sitemap.xml.njk",
     },
-    option: options,
+    options: options,
     comments: comments,
   });
 
@@ -167,6 +172,12 @@ export default function (eleventyConfig, options = {}) {
   if (options.image && options.image.enabled) {
     eleventyConfig.addPlugin(Image, options.image);
   }
+
+  // Register Menu Plugin
+  if (options.menu && options.menu.enabled) {
+    eleventyConfig.addPlugin(MenuPlugin, options.menu);
+  }
+  eleventyConfig.addPlugin(MenuPlugin, options.menu);
 
   eleventyConfig.setUseGitIgnore(false);
 

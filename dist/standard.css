@@ -1772,7 +1772,6 @@ sup {
 :where(html:not(.no-rhythm), .rhythm) header,
 :where(html:not(.no-rhythm), .rhythm) footer,
 :where(html:not(.no-rhythm), .rhythm) main,
-:where(html:not(.no-rhythm), .rhythm) nav,
 :where(html:not(.no-rhythm), .rhythm) .flow,
 :where(html:not(.no-rhythm), .rhythm) .flow-2,
 :where(html:not(.no-rhythm), .rhythm) .flow-3,
@@ -3679,6 +3678,1964 @@ html:not(.no-rhythm) :has(img.zoomed)::before,
   }
 }
 
+/**
+ * @name Card Component
+ * @group components-layout
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1991, Edward Tufte published "Envisioning Information" and introduced
+ * the concept of "small multiples"—the idea that human brains excel at
+ * comparing information when it's presented in identical visual containers.
+ * Show someone seven weather forecasts in seven different layouts, and they'll
+ * struggle. Show them seven identical cards with different data, and patterns
+ * emerge instantly. The structure disappears, the content shines.
+ *
+ * But here's the catch: small multiples only work when they're truly identical.
+ * One card with 16px padding, another with 20px, a third with 18px—your brain
+ * registers the inconsistency before it processes the content. This component
+ * solves that problem by providing a single source of truth for card structure.
+ * Every card gets the same padding, the same borders, the same rhythm. Build
+ * one card or build a hundred—they'll feel like family.
+ *
+ * The Swiss designers understood this in the 1950s. Josef Müller-Brockmann's
+ * concert posters used rigid grids not to constrain creativity, but to amplify
+ * it. When the structure is invisible, when it just works, your content can
+ * breathe. That's what `.card` does—it handles the boring consistency so you
+ * can focus on making something beautiful.
+ *
+ * ### Future Improvements
+ *
+ * - Elevation variants (flat, raised, floating) with shadow scales
+ * - Interactive hover states for clickable cards with smooth transitions
+ * - Horizontal card layout variant for image + content side-by-side
+ * - Dark mode shadow adjustments for better depth perception
+ * - Optional card image hero with object-fit controls
+ *
+ * @see {class} .grid - Often used to layout multiple cards in columns
+ * @see {variable} --space - Controls internal spacing rhythm
+ * @see {class} .prose - Can be used inside card-body for rich content
+ * @see {class} .rhythm - Applied automatically to card children
+ *
+ * @link https://en.wikipedia.org/wiki/Edward_Tufte Information Design Pioneer
+ * @link https://www.nngroup.com/articles/cards-component/ NN/g Cards Research
+ *
+ * @example html - Basic card structure
+ *   <article class="card">
+ *     <header class="card-header">
+ *       <h3>Card Title</h3>
+ *     </header>
+ *     <div class="card-body">
+ *       <p>Card content with automatic spacing and rhythm.</p>
+ *     </div>
+ *     <footer class="card-footer">
+ *       <a href="#">Read more →</a>
+ *     </footer>
+ *   </article>
+ *
+ * @example html - Cards in grid layout (3-column responsive)
+ *   <div class="grid">
+ *     <article class="card col-4 col-sm-12">
+ *       <div class="card-body">
+ *         <h3>Feature One</h3>
+ *         <p>Description...</p>
+ *       </div>
+ *     </article>
+ *     <article class="card col-4 col-sm-12">...</article>
+ *     <article class="card col-4 col-sm-12">...</article>
+ *   </div>
+ *
+ * @example html - Clickable card (entire card is a link)
+ *   <a href="/article" class="card card-clickable">
+ *     <div class="card-body">
+ *       <h3>Article Title</h3>
+ *       <p>Preview text that entices you to click...</p>
+ *     </div>
+ *   </a>
+ *
+ * @example scss - Customizing card via CSS variables
+ *   .card.custom {
+ *     --card-border-color: var(--color-accent);
+ *     --card-padding: calc(var(--space) * 2);
+ *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ *   }
+ */
+.card {
+  /* CSS variables for easy customization */
+  --card-border-color: var(--color-border);
+  --card-border-width: 1px;
+  --card-border-radius: var(--border-radius);
+  --card-padding: var(--space);
+  --card-background: var(--color-background);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--card-background);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ensures children respect border-radius */
+  height: 100%; /* Fill grid cell height */
+}
+
+/**
+ * @name Card Header
+ * @group components-layout
+ * @since 0.11.0
+ *
+ * In traditional Swiss typography, headers weren't just bigger—they commanded
+ * space through proportion and rhythm. A header isn't decoration, it's structure.
+ * It tells you where you are, what you're looking at, why it matters. This
+ * component ensures your card titles maintain that authority while staying
+ * visually connected to the body content below.
+ *
+ * The bottom border acts as a horizon line—subtle, but it anchors the title
+ * and separates it from the prose. Without it, cards feel untethered. With it,
+ * they feel intentional.
+ *
+ * @see {class} .card - Parent container
+ * @see {class} .card-body - Sibling content area
+ */
+.card-header {
+  padding: var(--card-padding);
+  border-bottom: var(--card-border-width) solid var(--card-border-color);
+  /* Remove default margins from first/last children */
+}
+.card-header > :first-child {
+  margin-block-start: 0;
+}
+.card-header > :last-child {
+  margin-block-end: 0;
+}
+
+/**
+ * @name Card Body
+ * @group components-layout
+ * @since 0.11.0
+ *
+ * This is where your prose lives, where images sit, where data displays. It
+ * automatically manages vertical rhythm for any content you nest inside—
+ * paragraphs, lists, images, forms—keeping everything aligned to your
+ * baseline grid without you thinking about it.
+ *
+ * The `flex: 1` property is subtle but critical. If your card has a footer,
+ * this ensures the body takes up all available space, pushing the footer to
+ * the bottom. It's the difference between cards that feel balanced and cards
+ * that feel off.
+ *
+ * @see {class} .card - Parent container
+ * @see {class} .prose - Use for rich editorial content inside body
+ * @see {class} .rhythm - Applied automatically to children
+ */
+.card-body {
+  padding: var(--card-padding);
+  flex: 1; /* Grow to fill available space, pushing footer down */
+  /* Remove default margins from first/last children */
+}
+.card-body > :first-child {
+  margin-block-start: 0;
+}
+.card-body > :last-child {
+  margin-block-end: 0;
+}
+
+/**
+ * @name Card Footer
+ * @group components-layout
+ * @since 0.11.0
+ *
+ * Actions, metadata, timestamps—the footer anchors your card. It's visually
+ * separated but connected, giving closure to the content above. Perfect for
+ * "Read more" links, publish dates, author info, or action buttons.
+ *
+ * The subtle background tint (3% foreground mixed into background) provides
+ * just enough distinction without screaming for attention. In dark mode, it
+ * gets slightly lighter. In light mode, slightly darker. It adapts.
+ *
+ * @see {class} .card - Parent container
+ * @see {class} .card-header - Sibling header area
+ */
+.card-footer {
+  padding: var(--card-padding);
+  border-top: var(--card-border-width) solid var(--card-border-color);
+  background: color-mix(in srgb, var(--color-background) 97%, var(--color-text) 3%);
+  /* Remove default margins from first/last children */
+}
+.card-footer > :first-child {
+  margin-block-start: 0;
+}
+.card-footer > :last-child {
+  margin-block-end: 0;
+}
+
+/**
+ * @name Clickable Card Variant
+ * @group components-layout
+ * @since 0.11.0
+ *
+ * Sometimes your entire card should be clickable—a blog post preview, a product
+ * listing, a project showcase. This variant ensures proper hover states, focus
+ * indicators, and cursor feedback while maintaining the card's structural integrity.
+ *
+ * The subtle lift on hover (2px translateY) and enhanced shadow create the
+ * illusion of depth—like the card is rising toward you. It's a tactile metaphor
+ * for "this is interactive." The focus-visible outline ensures keyboard users
+ * can see exactly where they are.
+ *
+ * Accessibility note: When using clickable cards, ensure the link text is
+ * descriptive. "Read more" alone isn't enough—screen readers need context.
+ * Use "Read more about [article title]" or aria-label.
+ *
+ * @see {class} .card - Base component
+ * @see {element} a - Applied to anchor tag wrapping card content
+ *
+ * @example html - Accessible clickable card
+ *   <a href="/article/typography-history" class="card card-clickable"
+ *      aria-label="Read full article about Typography History">
+ *     <div class="card-body">
+ *       <h3>Typography History</h3>
+ *       <p>The evolution of type from Gutenberg to now...</p>
+ *     </div>
+ *     <div class="card-footer">
+ *       Read more →
+ *     </div>
+ *   </a>
+ */
+.card-clickable {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.card-clickable:hover {
+  transform: translateY(-2px); /* Subtle lift */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+.card-clickable:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.card-clickable:active {
+  transform: translateY(0); /* Press down on click */
+}
+
+/**
+ * @name Alert Component
+ * @group components-feedback
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1964, the New York City Transit Authority hired Massimo Vignelli to
+ * redesign the subway map. Among his innovations: color-coded lines that let
+ * passengers understand their route instantly. Red meant local. Green meant
+ * express. No reading required—your brain processed the information before
+ * conscious thought kicked in.
+ *
+ * Alerts work the same way. Red means danger, stop, error. Green means success,
+ * go, complete. Yellow means caution, warning, attention. Blue means information,
+ * note, reference. These aren't arbitrary choices—they're cultural conventions
+ * refined over centuries of signage, from maritime flags to traffic lights to
+ * warning labels. When you see red, your body reacts before your mind translates.
+ *
+ * But color alone isn't enough. WCAG 2.1 requires that information conveyed by
+ * color must also be available through other means—text labels, icons, semantic
+ * HTML. That's why this component includes `role="alert"` for screen readers,
+ * bold title text for scanning, and semantic class names that work even when
+ * CSS fails. Universal design isn't a constraint—it makes things better for
+ * everyone. A colorblind user benefits from the text. A keyboard user benefits
+ * from focus states. A screen reader user benefits from ARIA roles.
+ *
+ * This is what accessibility means: making your interface work in every context,
+ * for every person, in every lighting condition, with every input method. The
+ * framework handles the foundation. You provide the message.
+ *
+ * ### Future Improvements
+ *
+ * - Dismissible variant with close button and smooth fade-out animation
+ * - Icon support (warning triangle, checkmark, info circle, error X)
+ * - Toast/notification positioning variants (top-right, bottom-left, etc.)
+ * - Animated entrance/exit states with slide-in and fade effects
+ * - Alert stacking system for multiple simultaneous notifications
+ * - Auto-dismiss timer option with countdown indicator
+ *
+ * @see {variable} --color-error - Red alert semantic color
+ * @see {variable} --color-success - Green alert semantic color
+ * @see {variable} --color-warning - Yellow alert semantic color
+ * @see {variable} --color-info - Blue alert semantic color
+ * @see {class} .rhythm - Alerts respect vertical rhythm spacing
+ *
+ * @link https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html WCAG Color Guidelines
+ * @link https://inclusive-components.design/notifications/ Inclusive Notification Patterns
+ *
+ * @example html - Basic alert types
+ *   <div class="alert alert-success" role="alert">
+ *     <strong>Success:</strong> Your changes have been saved.
+ *   </div>
+ *
+ *   <div class="alert alert-warning" role="alert">
+ *     <strong>Warning:</strong> Your session will expire in 5 minutes.
+ *   </div>
+ *
+ *   <div class="alert alert-error" role="alert">
+ *     <strong>Error:</strong> Unable to process your request.
+ *   </div>
+ *
+ *   <div class="alert alert-info" role="alert">
+ *     <strong>Note:</strong> Maintenance scheduled for tonight.
+ *   </div>
+ *
+ * @example html - Alert with action
+ *   <div class="alert alert-warning" role="alert">
+ *     <strong>Warning:</strong> Your password expires soon.
+ *     <a href="/settings/password" class="alert-action">Update now</a>
+ *   </div>
+ */
+.alert {
+  --alert-padding: var(--space-s);
+  --alert-border-width: 1px;
+  --alert-border-radius: var(--border-radius);
+  --alert-background: var(--color-background-secondary);
+  --alert-color: var(--color-foreground);
+  --alert-border-color: var(--color-border);
+  padding: var(--alert-padding);
+  border: var(--alert-border-width) solid var(--alert-border-color);
+  border-radius: var(--alert-border-radius);
+  background: var(--alert-background);
+  color: var(--alert-color);
+  border-left: 4px solid var(--alert-border-color); /* Accent bar */
+  margin-block-end: var(--space);
+  /* Typography adjustments */
+  font-size: var(--scale-s);
+  line-height: var(--font-density);
+  /* Remove margin from first/last children */
+}
+.alert > :first-child {
+  margin-block-start: 0;
+}
+.alert > :last-child {
+  margin-block-end: 0;
+}
+.alert {
+  /* Bold labels */
+}
+.alert strong {
+  font-weight: var(--bold-weight);
+}
+
+/**
+ * @name Alert Variants
+ * @group components-feedback
+ * @since 0.11.0
+ *
+ * Each variant adjusts the color system to convey meaning. The background is
+ * a subtle 10% mix of the semantic color, ensuring it's noticeable without
+ * overwhelming. The left border is the full semantic color, providing a strong
+ * visual anchor. Text remains at full contrast for readability.
+ *
+ * @see {class} .alert - Base component
+ */
+/* Success - Green (complete, go, affirmative) */
+.alert-success {
+  --alert-background: color-mix(
+      in srgb,
+      var(--color-success) 10%,
+      var(--color-background)
+  );
+  --alert-border-color: var(--color-success);
+}
+
+/* Warning - Yellow/Orange (caution, attention, pending) */
+.alert-warning {
+  --alert-background: color-mix(
+      in srgb,
+      var(--color-warning) 10%,
+      var(--color-background)
+  );
+  --alert-border-color: var(--color-warning);
+}
+
+/* Error - Red (danger, stop, critical) */
+.alert-error {
+  --alert-background: color-mix(
+      in srgb,
+      var(--color-error) 10%,
+      var(--color-background)
+  );
+  --alert-border-color: var(--color-error);
+}
+
+/* Info - Blue (information, note, reference) */
+.alert-info {
+  --alert-background: color-mix(
+      in srgb,
+      var(--color-info) 10%,
+      var(--color-background)
+  );
+  --alert-border-color: var(--color-info);
+}
+
+/**
+ * @name Alert Action Links
+ * @group components-feedback
+ * @since 0.11.0
+ *
+ * Actions within alerts (links, buttons) should be visually distinct but not
+ * overwhelming. This provides subtle styling that inherits the alert's color.
+ */
+.alert-action {
+  display: inline-block;
+  margin-inline-start: var(--space-s);
+  color: var(--alert-border-color);
+  text-decoration: underline;
+  font-weight: var(--bold-weight);
+}
+.alert-action:hover {
+  text-decoration-thickness: 0.15em;
+}
+
+/**
+ * @name Skip Link
+ * @group components-navigation
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1998, the Web Content Accessibility Guidelines 1.0 introduced a simple
+ * idea: let keyboard users skip repetitive navigation. Imagine you can't use
+ * a mouse. Every time you visit a website, you Tab through thirty navigation
+ * links just to reach the content. Every. Single. Page. It's exhausting.
+ *
+ * The skip link solves this with elegant simplicity: a hidden link that appears
+ * when you press Tab, jumping straight to the main content. It's the first
+ * thing keyboard users encounter—and the first sign that you've thought about
+ * their experience. Most websites forget it. Don't be most websites.
+ *
+ * This implementation follows current best practices from WebAIM and GOV.UK:
+ * visually hidden by default, visible on focus, high contrast, positioned at
+ * the top-left for predictability. Screen reader users hear it announced.
+ * Keyboard users see it appear. Everyone benefits from faster navigation.
+ *
+ * Here's what makes this elegant: it costs you one line of HTML, improves
+ * accessibility for millions of users, and demonstrates that you care about
+ * inclusive design. That's a remarkable return on investment.
+ *
+ * ### Future Improvements
+ *
+ * - Multiple skip links (skip to main, skip to search, skip to footer)
+ * - Smooth scroll animation when activated
+ * - Color customization via CSS variables
+ * - Support for international languages (translated text)
+ *
+ * @see {class} .visually-hidden - Base class for accessible hiding
+ * @see {attribute} href="#main" - Target element ID (main content landmark)
+ *
+ * @link https://webaim.org/techniques/skipnav/ WebAIM Skip Navigation
+ * @link https://www.w3.org/WAI/WCAG21/Techniques/general/G1 WCAG Skip Technique
+ *
+ * @example html - Basic skip link (place at start of <body>)
+ *   <a href="#main" class="skip-link">Skip to content</a>
+ *
+ *   <header>
+ *     <!-- Navigation here -->
+ *   </header>
+ *
+ *   <main id="main">
+ *     <!-- Main content here -->
+ *   </main>
+ *
+ * @example html - Multiple skip links
+ *   <div class="skip-links">
+ *     <a href="#main" class="skip-link">Skip to main content</a>
+ *     <a href="#search" class="skip-link">Skip to search</a>
+ *     <a href="#footer" class="skip-link">Skip to footer</a>
+ *   </div>
+ */
+.skip-link {
+  /* Positioning - absolute to top-left corner */
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  z-index: var(--z-modal); /* Above everything else */
+  /* Styling - high contrast, unmissable */
+  background: var(--color-accent);
+  color: var(--color-background);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--border-radius);
+  font-weight: var(--bold-weight);
+  font-size: var(--scale-s);
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* Animation */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  /* Hidden by default (accessible hiding) */
+  transform: translateY(-120%);
+  opacity: 0;
+  /* Visible on focus (Tab key) */
+}
+.skip-link:focus {
+  transform: translateY(0);
+  opacity: 1;
+  outline: 3px solid var(--color-background);
+  outline-offset: 2px;
+}
+.skip-link {
+  /* Hover state (if user moves mouse while focused) */
+}
+.skip-link:hover {
+  background: color-mix(in srgb, var(--color-accent) 90%, var(--color-background));
+}
+.skip-link {
+  /* Active state (on click) */
+}
+.skip-link:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/**
+ * @name Skip Links Container
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * When you have multiple skip links (content, search, footer), wrap them in
+ * a container to stack them vertically on focus. Each link appears as the
+ * user tabs through them.
+ */
+.skip-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs);
+}
+
+/**
+ * @name Breadcrumb Navigation
+ * @group components-navigation
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1962, the Brothers Grimm fairy tale "Hansel and Gretel" gave us the
+ * metaphor: breadcrumbs marking the path home. In 1995, the web borrowed it.
+ * Breadcrumb navigation tells users where they are in your site's hierarchy
+ * and how they got there. Home → Products → Laptops → MacBook Pro. It's not
+ * just navigation—it's spatial orientation.
+ *
+ * The power of breadcrumbs lies in their simplicity. They're compact, take
+ * minimal space, never get in the way, yet provide crucial context. Lost in
+ * a documentation site? Breadcrumbs show you're in Docs → CSS → Typography.
+ * Want to go up one level? Click "CSS." It's spatial reasoning made visual.
+ *
+ * This implementation follows current best practices: semantic HTML with
+ * <nav>, <ol>, and aria-label for screen readers. The current page is marked
+ * with aria-current="page" and isn't a link (you're already here). Separators
+ * are CSS-generated, not HTML, so screen readers skip them. Structured data
+ * markup helps search engines understand your hierarchy.
+ *
+ * Nielsen Norman Group's research shows breadcrumbs reduce cognitive load and
+ * improve navigation efficiency. Users don't have to remember the path—they
+ * can see it. That's good design: making the invisible visible.
+ *
+ * ### Future Improvements
+ *
+ * - Collapsed breadcrumbs for mobile (show only first/last with ... between)
+ * - Dropdown menus on intermediate crumbs (show siblings at each level)
+ * - Icons for home/root level
+ * - JSON-LD structured data generation helper
+ * - Keyboard navigation with arrow keys
+ *
+ * @see {element} nav - Semantic navigation landmark
+ * @see {attribute} aria-label="Breadcrumb" - Screen reader label
+ * @see {attribute} aria-current="page" - Current location indicator
+ *
+ * @link https://www.nngroup.com/articles/breadcrumbs/ NN/g Breadcrumb Guidelines
+ * @link https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/ ARIA Breadcrumb Pattern
+ *
+ * @example html - Basic breadcrumb navigation
+ *   <nav aria-label="Breadcrumb" class="breadcrumb">
+ *     <ol>
+ *       <li><a href="/">Home</a></li>
+ *       <li><a href="/products">Products</a></li>
+ *       <li><a href="/products/laptops">Laptops</a></li>
+ *       <li aria-current="page">MacBook Pro</li>
+ *     </ol>
+ *   </nav>
+ *
+ * @example html - With structured data (JSON-LD)
+ *   <nav aria-label="Breadcrumb" class="breadcrumb">
+ *     <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+ *       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+ *         <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+ *         <meta itemprop="position" content="1" />
+ *       </li>
+ *       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+ *         <a itemprop="item" href="/docs"><span itemprop="name">Docs</span></a>
+ *         <meta itemprop="position" content="2" />
+ *       </li>
+ *       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+ *         <span itemprop="name" aria-current="page">Typography</span>
+ *         <meta itemprop="position" content="3" />
+ *       </li>
+ *     </ol>
+ *   </nav>
+ */
+.breadcrumb {
+  /* Container styling */
+  margin-block-end: var(--space);
+  font-size: var(--scale-s);
+  /* List styling */
+}
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+.breadcrumb {
+  /* List items */
+}
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: 0;
+  /* Remove default list item spacing */
+}
+.breadcrumb li::before {
+  display: none;
+}
+.breadcrumb li {
+  /* Separator (not on first item) */
+}
+.breadcrumb li:not(:first-child)::before {
+  content: "→"; /* or "/" or "›" */
+  display: inline-block;
+  color: var(--color-subtle);
+  margin-inline-end: var(--space-xs);
+}
+.breadcrumb {
+  /* Links */
+}
+.breadcrumb a {
+  color: var(--color-foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--color-subtle);
+  text-underline-offset: 0.15em;
+}
+.breadcrumb a:hover {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+.breadcrumb a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.breadcrumb {
+  /* Current page (not a link) */
+}
+.breadcrumb [aria-current=page] {
+  color: var(--color-muted);
+  font-weight: var(--bold-weight);
+}
+
+/**
+ * @name Breadcrumb Variants
+ * @group components-navigation
+ * @since 0.11.0
+ */
+/* Compact variant - smaller text, tighter spacing */
+.breadcrumb-compact {
+  font-size: var(--scale-xs);
+}
+.breadcrumb-compact ol {
+  gap: var(--space-2xs);
+}
+.breadcrumb-compact li {
+  gap: var(--space-2xs);
+}
+.breadcrumb-compact li:not(:first-child)::before {
+  margin-inline-end: var(--space-2xs);
+}
+
+/* Mobile: collapse to first and last with ellipsis */
+@media (max-width: 768px) {
+  .breadcrumb ol li:not(:first-child):not(:last-child) {
+    display: none;
+  }
+  .breadcrumb ol li:last-child::before {
+    content: "…"; /* Ellipsis to show collapsed crumbs */
+  }
+}
+/**
+ * @name Pagination Component
+ * @group components-navigation
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1998, Google launched with a simple idea: ten results per page, numbered
+ * links at the bottom. Click "2" for the next ten, "3" for the next ten after
+ * that. It wasn't revolutionary—pagination had existed in print for centuries—
+ * but Google made it feel inevitable. Fast, clear, predictable.
+ *
+ * Pagination solves a fundamental problem: how do you present large datasets
+ * without overwhelming users? A thousand blog posts can't fit on one page. So
+ * you chunk them—ten at a time, twenty at a time, whatever makes sense. Users
+ * get a sense of scale ("page 3 of 47"), can jump forward or back, and never
+ * feel lost in an endless scroll.
+ *
+ * This implementation follows WCAG 2.1 guidelines: semantic <nav> with
+ * aria-label, proper focus indicators, current page marked with aria-current.
+ * Numbers use tabular figures for consistent width. Previous/Next buttons
+ * provide quick jumps. Ellipsis (…) indicates skipped page ranges without
+ * cluttering the interface.
+ *
+ * The key insight: pagination isn't about showing every page number. It's
+ * about showing the right page numbers—current, adjacent, first, last—and
+ * collapsing everything else. Users rarely need page 47 directly. They need
+ * "next few" or "jump to end."
+ *
+ * ### Future Improvements
+ *
+ * - Page size selector (10, 25, 50, 100 items per page)
+ * - Jump to page input field for large datasets
+ * - Infinite scroll variant (load more on scroll)
+ * - Keyboard shortcuts (arrow keys to navigate pages)
+ * - Summary text ("Showing 21-30 of 487 items")
+ *
+ * @see {element} nav - Semantic navigation landmark
+ * @see {attribute} aria-label="Pagination" - Screen reader label
+ * @see {attribute} aria-current="page" - Current page indicator
+ *
+ * @link https://www.nngroup.com/articles/item-list-view-all/ NN/g Pagination Guidelines
+ * @link https://inclusive-components.design/pagination/ Inclusive Pagination
+ *
+ * @example html - Basic pagination
+ *   <nav aria-label="Pagination" class="pagination">
+ *     <a href="?page=1" class="pagination-prev" aria-label="Previous page">← Previous</a>
+ *     <a href="?page=1">1</a>
+ *     <span aria-current="page" class="pagination-current">2</span>
+ *     <a href="?page=3">3</a>
+ *     <a href="?page=4">4</a>
+ *     <span class="pagination-ellipsis">…</span>
+ *     <a href="?page=20">20</a>
+ *     <a href="?page=3" class="pagination-next" aria-label="Next page">Next →</a>
+ *   </nav>
+ *
+ * @example html - Compact mobile-friendly variant
+ *   <nav aria-label="Pagination" class="pagination pagination-compact">
+ *     <a href="?page=1">← Prev</a>
+ *     <span>Page 2 of 20</span>
+ *     <a href="?page=3">Next →</a>
+ *   </nav>
+ */
+.pagination {
+  /* Container styling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  margin-block: var(--space-l);
+  font-size: var(--scale-s);
+  font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
+  /* Links and current page */
+}
+.pagination a,
+.pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5em;
+  height: 2.5em;
+  padding: 0 var(--space-xs);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  color: var(--color-foreground);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.pagination {
+  /* Link hover states */
+}
+.pagination a:hover {
+  background: var(--color-background-secondary);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.pagination {
+  /* Link focus states */
+}
+.pagination a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.pagination {
+  /* Active link (click) */
+}
+.pagination a:active {
+  transform: scale(0.95);
+}
+
+/**
+ * @name Pagination Current Page
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * The current page is not a link (you're already here). It's visually distinct
+ * with background color, bold text, and aria-current for screen readers.
+ */
+.pagination-current,
+.pagination [aria-current=page] {
+  background: var(--color-accent);
+  color: var(--color-background);
+  border-color: var(--color-accent);
+  font-weight: var(--bold-weight);
+  cursor: default;
+  pointer-events: none; /* Not interactive */
+}
+
+/**
+ * @name Pagination Ellipsis
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * The ellipsis (…) indicates skipped pages. It's not a link, just a visual
+ * indicator. Screen readers ignore it (no semantic meaning).
+ */
+.pagination-ellipsis {
+  border: none;
+  background: transparent;
+  pointer-events: none;
+  color: var(--color-subtle);
+}
+
+/**
+ * @name Pagination Previous/Next Buttons
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Previous/Next provide quick navigation without numbers. They're wider to
+ * accommodate text ("Previous" vs just "2").
+ */
+.pagination-prev,
+.pagination-next {
+  min-width: auto;
+  padding: 0 var(--space-s);
+  font-weight: var(--bold-weight);
+}
+
+/* Disabled state (first/last page) */
+.pagination-prev[aria-disabled=true],
+.pagination-next[aria-disabled=true] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/**
+ * @name Pagination Compact Variant
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * On mobile, showing 10 page numbers is overwhelming. The compact variant
+ * shows only Prev/Next and a page counter ("Page 3 of 20").
+ */
+@media (max-width: 768px) {
+  .pagination {
+    font-size: var(--scale-xs);
+    /* Hide page numbers on mobile */
+  }
+  .pagination a:not(.pagination-prev):not(.pagination-next),
+  .pagination span:not(.pagination-current):not(.pagination-summary) {
+    display: none;
+  }
+  .pagination {
+    /* Show summary text */
+  }
+  .pagination .pagination-summary {
+    display: inline-flex;
+    border: none;
+    background: transparent;
+    font-weight: var(--font-weight);
+  }
+}
+/**
+ * @name Pagination Summary Text
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Summary text provides context ("Showing 21-30 of 487 items"). Useful for
+ * large datasets where page numbers alone aren't enough.
+ *
+ * @example html
+ *   <nav aria-label="Pagination" class="pagination">
+ *     <span class="pagination-summary">Showing 21-30 of 487 items</span>
+ *     <a href="?page=2" class="pagination-prev">← Previous</a>
+ *     <span aria-current="page">3</span>
+ *     <a href="?page=4" class="pagination-next">Next →</a>
+ *   </nav>
+ */
+.pagination-summary {
+  font-size: var(--scale-xs);
+  color: var(--color-muted);
+  border: none;
+  background: transparent;
+  min-width: auto;
+}
+
+/**
+ * @name Table Wrapper
+ * @group components-data
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * Tables are beautiful on desktop. Clear columns, aligned data, easy scanning.
+ * But on mobile? Disaster. A six-column table on a 375px screen becomes an
+ * illegible mess of squished text and broken layouts. You can't just make the
+ * font smaller—at some point, readability collapses.
+ *
+ * The table wrapper solves this with horizontal scrolling. It's not glamorous,
+ * but it works: wrap the table in a scrollable container, add visual indicators
+ * (shadows) at the edges, and users can swipe to see more data. The table
+ * maintains its structure, columns keep their width, and nothing breaks.
+ *
+ * The shadow indicators are subtle but critical. Without them, users don't know
+ * there's more content to the right. They assume the table ends. With shadows,
+ * they see the fade—"oh, I can scroll"—and interaction becomes intuitive.
+ * This is affordance: making interaction possibilities visible.
+ *
+ * This implementation uses CSS scroll shadows (gradient technique) and smooth
+ * scrolling with momentum. Works on touch devices, trackpads, and keyboard
+ * (arrow keys when focused). The table retains full functionality while gaining
+ * mobile responsiveness.
+ *
+ * ### Future Improvements
+ *
+ * - Sticky first column (row headers remain visible while scrolling)
+ * - Sticky header row (column headers stay at top)
+ * - Scroll position indicator (progress bar showing how far scrolled)
+ * - Responsive table transformations (stack columns on mobile)
+ * - CSV/Excel export button integration
+ *
+ * @see {element} table - Wrapped table element
+ * @see {class} .rhythm - Tables respect rhythm spacing
+ *
+ * @link https://adrianroselli.com/2020/11/under-engineered-responsive-tables.html Responsive Table Patterns
+ * @link https://css-tricks.com/fixing-tables-long-strings/ CSS Tricks Table Handling
+ *
+ * @example html - Basic responsive table
+ *   <div class="table-wrapper">
+ *     <table>
+ *       <thead>
+ *         <tr>
+ *           <th>Name</th>
+ *           <th>Email</th>
+ *           <th>Role</th>
+ *           <th>Status</th>
+ *         </tr>
+ *       </thead>
+ *       <tbody>
+ *         <tr>
+ *           <td>John Doe</td>
+ *           <td>john@example.com</td>
+ *           <td>Admin</td>
+ *           <td>Active</td>
+ *         </tr>
+ *       </tbody>
+ *     </table>
+ *   </div>
+ *
+ * @example html - With sticky header
+ *   <div class="table-wrapper table-wrapper-sticky-header">
+ *     <table>...</table>
+ *   </div>
+ */
+.table-wrapper {
+  /* Container styling */
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  margin-block-end: var(--space);
+  /* Smooth scrolling with momentum */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  /* Scroll shadows - indicate more content */
+  background: linear-gradient(to right, var(--color-background) 0%, transparent 2%) 0 0, linear-gradient(to left, var(--color-background) 0%, transparent 2%) 100% 0, var(--color-background);
+  background-repeat: no-repeat;
+  background-size: 20px 100%, 20px 100%, 100% 100%;
+  background-attachment: local, local, scroll;
+  /* Shadow overlays */
+}
+.table-wrapper::before, .table-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  pointer-events: none;
+  z-index: 2;
+}
+.table-wrapper {
+  /* Left shadow */
+}
+.table-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.table-wrapper {
+  /* Right shadow */
+}
+.table-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+}
+.table-wrapper {
+  /* Show left shadow when scrolled */
+}
+.table-wrapper:not(:hover):not(:focus-within)::before {
+  opacity: 0;
+}
+.table-wrapper {
+  /* Table inside wrapper */
+}
+.table-wrapper table {
+  margin-block-end: 0; /* Remove table's own margin */
+  min-width: 100%; /* Ensure table fills wrapper */
+  width: max-content; /* Allow table to grow beyond wrapper */
+}
+
+/**
+ * @name Table Wrapper with Sticky Header
+ * @group components-data
+ * @since 0.11.0
+ *
+ * Keep column headers visible while scrolling vertically. Essential for long
+ * tables where users need context about what each column represents.
+ */
+.table-wrapper-sticky-header {
+  max-height: 400px; /* Or any height */
+  overflow-y: auto;
+}
+.table-wrapper-sticky-header table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-background);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * @name Table Wrapper Compact Variant
+ * @group components-data
+ * @since 0.11.0
+ *
+ * Tighter spacing for dense data tables (admin panels, dashboards).
+ */
+.table-wrapper-compact table {
+  font-size: var(--scale-xs);
+}
+.table-wrapper-compact table td,
+.table-wrapper-compact table th {
+  padding: var(--space-2xs) var(--space-xs);
+}
+
+/**
+ * @name Form Validation States
+ * @group components-forms
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1983, Don Norman wrote "The Design of Everyday Things" and introduced the
+ * concept of affordances—visual cues that tell you how to interact with objects.
+ * A door handle affords pulling. A button affords pressing. But what about form
+ * fields? How do you tell users they've made a mistake—or done something right?
+ *
+ * Form validation is affordance for digital input. Red borders signal errors.
+ * Green borders signal success. Helper text provides guidance. Error messages
+ * explain what went wrong and how to fix it. Without these cues, users are
+ * flying blind—submitting forms, getting rejected, not understanding why.
+ *
+ * This implementation follows WCAG 2.1 guidelines: color is never the only
+ * indicator (we use icons, text, and borders). Error messages are associated
+ * with fields via aria-describedby. Success states provide positive reinforcement.
+ * Helper text guides users before they make mistakes. Live regions (aria-live)
+ * announce errors to screen readers immediately.
+ *
+ * The psychology matters too. Red means "stop, fix this." Green means "great,
+ * keep going." But yellow—warning—means "this works, but maybe reconsider."
+ * Like a password that's technically valid but weak. The framework gives you
+ * all three states. Use them to guide, not punish.
+ *
+ * ### Future Improvements
+ *
+ * - Inline validation (validate on blur, not just on submit)
+ * - Password strength meter with visual indicator
+ * - Character count for textarea fields
+ * - Custom validation messages per field type
+ * - Animated error shake effect
+ * - Autocomplete suggestions styling
+ *
+ * @see {class} .field - Form field container
+ * @see {class} .field-error - Error state styling
+ * @see {class} .field-success - Success state styling
+ * @see {class} .field-warning - Warning state styling
+ * @see {attribute} aria-describedby - Links field to helper/error text
+ * @see {attribute} aria-invalid - Marks field as invalid for screen readers
+ *
+ * @link https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html WCAG Error Identification
+ * @link https://www.nngroup.com/articles/errors-forms-design-guidelines/ NN/g Form Error Guidelines
+ *
+ * @example html - Basic form field with validation
+ *   <div class="field">
+ *     <label for="email">Email</label>
+ *     <input type="email" id="email" aria-describedby="email-helper">
+ *     <span class="field-helper" id="email-helper">We'll never share your email.</span>
+ *   </div>
+ *
+ * @example html - Error state
+ *   <div class="field field-error">
+ *     <label for="email">Email</label>
+ *     <input type="email" id="email" aria-invalid="true" aria-describedby="email-error">
+ *     <span class="field-error-message" id="email-error" role="alert">
+ *       Please enter a valid email address.
+ *     </span>
+ *   </div>
+ *
+ * @example html - Success state
+ *   <div class="field field-success">
+ *     <label for="username">Username</label>
+ *     <input type="text" id="username" aria-describedby="username-success">
+ *     <span class="field-success-message" id="username-success">
+ *       ✓ Username available!
+ *     </span>
+ *   </div>
+ *
+ * @example html - Warning state
+ *   <div class="field field-warning">
+ *     <label for="password">Password</label>
+ *     <input type="password" id="password" aria-describedby="password-warning">
+ *     <span class="field-warning-message" id="password-warning">
+ *       ⚠ Password is weak. Consider adding numbers and symbols.
+ *     </span>
+ *   </div>
+ */
+.field {
+  /* Field container */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin-block-end: var(--space-s);
+  /* Label styling */
+}
+.field label {
+  font-weight: var(--bold-weight);
+  font-size: var(--scale-s);
+  color: var(--color-foreground);
+}
+.field {
+  /* Input base styling (inherited from standard-04-elements.scss) */
+}
+.field input,
+.field textarea,
+.field select {
+  /* Already styled in elements layer */
+}
+
+/**
+ * @name Field Helper Text
+ * @group components-forms
+ * @since 0.11.0
+ *
+ * Helper text appears below fields to provide context or examples. It's subtle—
+ * not as loud as errors—and helps users avoid mistakes in the first place.
+ */
+.field-helper {
+  font-size: var(--scale-xs);
+  color: var(--color-muted);
+  line-height: var(--font-density-s);
+}
+
+/**
+ * @name Error State
+ * @group components-forms
+ * @since 0.11.0
+ *
+ * Red border, error icon, clear message. The input gets visual feedback, the
+ * message explains what went wrong. Screen readers hear the error via aria-live.
+ */
+.field-error input,
+.field-error textarea,
+.field-error select {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 5%, var(--color-background));
+}
+.field-error input:focus,
+.field-error textarea:focus,
+.field-error select:focus {
+  outline-color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.field-error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  font-size: var(--scale-xs);
+  color: var(--color-error);
+  font-weight: var(--bold-weight);
+  line-height: var(--font-density-s);
+  /* Icon (optional, can be added with ::before) */
+}
+.field-error-message::before {
+  content: "✕"; /* or "⚠" or custom SVG */
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/**
+ * @name Success State
+ * @group components-forms
+ * @since 0.11.0
+ *
+ * Green border, checkmark, positive message. Positive reinforcement encourages
+ * users to keep going. Especially useful for username availability, password
+ * strength, or async validation.
+ */
+.field-success input,
+.field-success textarea,
+.field-success select {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 5%, var(--color-background));
+}
+.field-success input:focus,
+.field-success textarea:focus,
+.field-success select:focus {
+  outline-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.field-success-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  font-size: var(--scale-xs);
+  color: var(--color-success);
+  font-weight: var(--bold-weight);
+  line-height: var(--font-density-s);
+}
+.field-success-message::before {
+  content: "✓"; /* Checkmark */
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/**
+ * @name Warning State
+ * @group components-forms
+ * @since 0.11.0
+ *
+ * Yellow/orange border, warning icon, cautionary message. Not an error, but
+ * not ideal. Like a weak password that technically meets requirements.
+ */
+.field-warning input,
+.field-warning textarea,
+.field-warning select {
+  border-color: var(--color-warning);
+  background: color-mix(in srgb, var(--color-warning) 5%, var(--color-background));
+}
+.field-warning input:focus,
+.field-warning textarea:focus,
+.field-warning select:focus {
+  outline-color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+
+.field-warning-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  font-size: var(--scale-xs);
+  color: var(--color-warning);
+  font-weight: var(--bold-weight);
+  line-height: var(--font-density-s);
+}
+.field-warning-message::before {
+  content: "⚠"; /* Warning triangle */
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/**
+ * @name Required Field Indicator
+ * @group components-forms
+ * @since 0.11.0
+ *
+ * Mark required fields with an asterisk (*) or "required" text. Screen readers
+ * should hear "required" via aria-required attribute on the input.
+ *
+ * @example html
+ *   <div class="field field-required">
+ *     <label for="name">Name <span class="required-indicator">*</span></label>
+ *     <input type="text" id="name" required aria-required="true">
+ *   </div>
+ */
+.field-required label::after,
+.required-indicator {
+  content: " *";
+  color: var(--color-error);
+  font-weight: var(--bold-weight);
+}
+
+/**
+ * @name Modal/Dialog Component
+ * @group components-overlay
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1984, Apple introduced the Macintosh with modal dialog boxes—windows that
+ * demanded attention, blocking interaction with everything else until resolved.
+ * "Save your changes?" Yes, No, Cancel. You couldn't ignore it. You had to decide.
+ *
+ * Modals are powerful because they force focus. When something critical needs
+ * attention—confirming a destructive action, capturing essential input, showing
+ * important information—a modal stops the world and says "deal with this first."
+ * But that power comes with responsibility. Overuse modals and users feel trapped.
+ * Misuse them and keyboard users can't escape. Abuse them and screen readers lose
+ * context entirely.
+ *
+ * This implementation follows the ARIA Authoring Practices Guide for dialog
+ * patterns: focus traps (Tab cycles within modal), Escape key closes, click
+ * outside closes (optional), focus returns to trigger on close. The backdrop
+ * prevents interaction with the page beneath. All this happens with semantic
+ * HTML—<dialog> element with proper ARIA attributes.
+ *
+ * The psychology: modals are interruptions. Use them sparingly. Ask yourself:
+ * could this be inline instead? Could this be a slide-out panel? Save modals
+ * for moments that truly matter—deleting accounts, confirming payments, critical
+ * errors. When users see a modal, they should know it's important.
+ *
+ * ### Future Improvements
+ *
+ * - Animation variants (fade, slide, scale)
+ * - Size variants (small, medium, large, fullscreen)
+ * - Non-dismissible variant (for critical actions)
+ * - Stacking support (modal on top of modal)
+ * - Mobile drawer variant (slide up from bottom)
+ * - Video modal variant (fullscreen video player)
+ *
+ * @see {element} dialog - Native HTML dialog element
+ * @see {attribute} role="dialog" - ARIA dialog role
+ * @see {attribute} aria-modal="true" - Marks as modal (blocks outside interaction)
+ * @see {attribute} aria-labelledby - Links to modal title
+ *
+ * @link https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ ARIA Dialog Pattern
+ * @link https://www.nngroup.com/articles/modal-nonmodal-dialog/ NN/g Modal Guidelines
+ *
+ * @example html - Basic modal structure
+ *   <dialog id="my-modal" class="modal" aria-labelledby="modal-title">
+ *     <div class="modal-header">
+ *       <h2 id="modal-title">Confirm Action</h2>
+ *       <button class="modal-close" aria-label="Close dialog">×</button>
+ *     </div>
+ *     <div class="modal-body">
+ *       <p>Are you sure you want to delete this item?</p>
+ *     </div>
+ *     <div class="modal-footer">
+ *       <button class="button">Cancel</button>
+ *       <button class="button">Delete</button>
+ *     </div>
+ *   </dialog>
+ *
+ * @example javascript - Opening/closing modal
+ *   const modal = document.getElementById('my-modal');
+ *   const openBtn = document.getElementById('open-modal');
+ *   const closeBtn = modal.querySelector('.modal-close');
+ *
+ *   openBtn.addEventListener('click', () => {
+ *     modal.showModal(); // Native method, handles focus trap
+ *   });
+ *
+ *   closeBtn.addEventListener('click', () => {
+ *     modal.close();
+ *   });
+ *
+ *   // Close on Escape (built-in)
+ *   // Close on backdrop click
+ *   modal.addEventListener('click', (e) => {
+ *     if (e.target === modal) modal.close();
+ *   });
+ */
+.modal,
+dialog.modal {
+  /* Reset browser default dialog styles */
+  border: none;
+  padding: 0;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 600px; /* Default width */
+  background: var(--color-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: var(--color-foreground);
+  /* Positioning */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-modal);
+  /* Animation (fade in) */
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  /* Open state */
+}
+.modal[open],
+dialog.modal[open] {
+  opacity: 1;
+}
+
+/**
+ * @name Modal Backdrop
+ * @group components-overlay
+ * @since 0.11.0
+ *
+ * The ::backdrop pseudo-element is automatically created by the browser for
+ * <dialog> elements. It covers the entire viewport, prevents interaction with
+ * the page beneath, and provides visual context that you're in a modal.
+ */
+.modal::backdrop,
+dialog.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px); /* Subtle blur effect */
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/**
+ * @name Modal Header
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space);
+  border-bottom: var(--border);
+  /* Title */
+}
+.modal-header h1,
+.modal-header h2,
+.modal-header h3 {
+  margin: 0;
+  font-size: var(--scale-l);
+  font-weight: var(--bold-weight);
+}
+
+/**
+ * @name Modal Close Button
+ * @group components-overlay
+ * @since 0.11.0
+ *
+ * The close button is typically an X in the top-right corner. Must have
+ * aria-label for screen readers ("Close dialog").
+ */
+.modal-close {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-size: var(--scale-xl);
+  line-height: 1;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.modal-close:hover {
+  background: var(--color-background-secondary);
+  color: var(--color-foreground);
+}
+.modal-close:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/**
+ * @name Modal Body
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-body {
+  padding: var(--space);
+  overflow-y: auto; /* Scroll if content too long */
+  max-height: 60vh; /* Prevent modal from growing too tall */
+  /* Apply rhythm to content */
+}
+.modal-body > :first-child {
+  margin-block-start: 0;
+}
+.modal-body > :last-child {
+  margin-block-end: 0;
+}
+
+/**
+ * @name Modal Footer
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-s);
+  padding: var(--space);
+  border-top: var(--border);
+  background: var(--color-background-secondary);
+}
+
+/**
+ * @name Modal Size Variants
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-small {
+  width: 400px;
+}
+
+.modal-large {
+  width: 800px;
+}
+
+.modal-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+/* Mobile: always fullscreen */
+@media (max-width: 768px) {
+  .modal,
+  dialog.modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+/**
+ * @name Tabs Component
+ * @group components-navigation
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1973, Xerox PARC invented the tabbed interface for their Alto computer.
+ * The metaphor was brilliant: file folder tabs. Click a tab, see that folder's
+ * contents. Switch tabs, switch contexts. It mapped physical organization to
+ * digital space so intuitively that every operating system copied it.
+ *
+ * Tabs solve a fundamental UI problem: how do you present multiple related
+ * sections without overwhelming users? Put everything on one page and it's
+ * chaos. Put each on a separate page and navigation becomes tedious. Tabs
+ * let you switch contexts instantly—same page, different view. No page load,
+ * no lost scroll position, no cognitive reset.
+ *
+ * But tabs are complex to build accessibly. ARIA requires specific roles
+ * (tablist, tab, tabpanel), keyboard navigation (arrow keys to switch tabs,
+ * Tab key to move into panel), focus management (active tab is focusable,
+ * others aren't), and proper hiding (inactive panels are aria-hidden). Get
+ * any of this wrong and screen reader users are lost.
+ *
+ * This implementation follows the ARIA Authoring Practices Guide for tabs:
+ * semantic HTML, proper ARIA roles, keyboard navigation, focus management.
+ * It's CSS-only for styling—you'll need JavaScript for the switching logic
+ * (we provide the structure, you provide the behavior).
+ *
+ * ### Future Improvements
+ *
+ * - Vertical tabs variant (tabs on left side)
+ * - Pill-style tabs (rounded, filled background)
+ * - Scrollable tabs for many options (overflow with arrows)
+ * - Lazy loading panels (load content on first click)
+ * - URL hash integration (bookmark specific tab)
+ * - Animation between tab switches
+ *
+ * @see {attribute} role="tablist" - Container for tabs
+ * @see {attribute} role="tab" - Individual tab button
+ * @see {attribute} role="tabpanel" - Content panel for each tab
+ * @see {attribute} aria-selected="true" - Marks active tab
+ * @see {attribute} aria-controls - Links tab to its panel
+ *
+ * @link https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ ARIA Tabs Pattern
+ * @link https://inclusive-components.design/tabbed-interfaces/ Inclusive Tabs
+ *
+ * @example html - Basic tabs structure
+ *   <div class="tabs">
+ *     <div class="tabs-list" role="tablist">
+ *       <button role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">
+ *         Tab One
+ *       </button>
+ *       <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">
+ *         Tab Two
+ *       </button>
+ *       <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">
+ *         Tab Three
+ *       </button>
+ *     </div>
+ *
+ *     <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+ *       <p>Content for tab one...</p>
+ *     </div>
+ *
+ *     <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+ *       <p>Content for tab two...</p>
+ *     </div>
+ *
+ *     <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
+ *       <p>Content for tab three...</p>
+ *     </div>
+ *   </div>
+ *
+ * @example javascript - Basic tab switching
+ *   const tabs = document.querySelectorAll('[role="tab"]');
+ *   const panels = document.querySelectorAll('[role="tabpanel"]');
+ *
+ *   tabs.forEach(tab => {
+ *     tab.addEventListener('click', () => {
+ *       // Deactivate all tabs
+ *       tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+ *       panels.forEach(p => p.hidden = true);
+ *
+ *       // Activate clicked tab
+ *       tab.setAttribute('aria-selected', 'true');
+ *       const panel = document.getElementById(tab.getAttribute('aria-controls'));
+ *       panel.hidden = false;
+ *     });
+ *   });
+ */
+.tabs {
+  /* Container */
+  margin-block-end: var(--space);
+}
+
+/**
+ * @name Tabs List
+ * @group components-navigation
+ * @since 0.11.0
+ */
+.tabs-list {
+  display: flex;
+  gap: var(--space-2xs);
+  border-bottom: 2px solid var(--color-border);
+  margin-block-end: var(--space);
+}
+
+/**
+ * @name Tab Button
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Each tab is a button (not a link—tabs don't navigate, they switch views).
+ * The active tab has a bottom border that extends over the tablist border,
+ * creating the visual "this tab is open" effect.
+ */
+[role=tab] {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-xs) var(--space-s);
+  font-size: var(--scale-s);
+  font-weight: var(--font-weight);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  top: 2px; /* Overlap with tablist border */
+}
+[role=tab]:hover {
+  color: var(--color-foreground);
+}
+[role=tab]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--border-radius);
+}
+[role=tab] {
+  /* Active tab */
+}
+[role=tab][aria-selected=true] {
+  color: var(--color-foreground);
+  font-weight: var(--bold-weight);
+  border-bottom-color: var(--color-accent);
+}
+
+/**
+ * @name Tab Panel
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Each panel contains the content for its tab. Only the active panel is visible;
+ * others are hidden with the `hidden` attribute (not display: none in CSS, so
+ * screen readers respect it).
+ */
+[role=tabpanel] {
+  padding: var(--space);
+  /* Remove margin from first/last children */
+}
+[role=tabpanel] > :first-child {
+  margin-block-start: 0;
+}
+[role=tabpanel] > :last-child {
+  margin-block-end: 0;
+}
+[role=tabpanel] {
+  /* Hidden panels */
+}
+[role=tabpanel][hidden] {
+  display: none;
+}
+
+/**
+ * @name Tabs Variant - Boxed Style
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Panels have a border around them, tabs "attach" to the top border.
+ */
+.tabs-boxed [role=tabpanel] {
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.tabs-boxed [role=tab][aria-selected=true] {
+  background: var(--color-background);
+  border-top: 3px solid var(--color-accent);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 3px solid var(--color-background); /* Hide tablist border */
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+/**
+ * @name Accordion Component
+ * @group components-disclosure
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * The accordion pattern dates back to FAQs in the 1990s. You have a list of
+ * questions. Click one, see the answer. Click another, that one expands. It's
+ * a space-saving pattern—show 20 question titles on screen, hide 20 answers
+ * until needed. Progressive disclosure reveal complexity gradually.
+ *
+ * Accordions shine when you have structured content users need to scan quickly.
+ * FAQ sections, settings panels, table-of-contents navigation. They let users
+ * get an overview (all titles visible) then drill down (expand the relevant one).
+ * The key is making the interaction obvious: titles look clickable, open panels
+ * have a visual indicator, closed panels feel collapsed.
+ *
+ * This implementation uses native HTML <details> and <summary> elements—the
+ * browser handles all the expand/collapse logic, keyboard navigation (Enter/Space
+ * to toggle), and accessibility (screen readers announce "collapsed/expanded").
+ * No JavaScript required for basic functionality. Add JavaScript for "only one
+ * open at a time" behavior or animations.
+ *
+ * The visual indicator (▸ arrow) rotates when expanded, giving immediate feedback.
+ * The panel slides open smoothly (if supported). Hover states make interaction
+ * discoverable. Focus states ensure keyboard accessibility. It's a complete
+ * pattern, ready to use.
+ *
+ * ### Future Improvements
+ *
+ * - Smooth expand/collapse animation (height: 0 to auto)
+ * - "Expand all" / "Collapse all" buttons
+ * - Deep linking (open specific accordion via URL hash)
+ * - Nested accordions support
+ * - Icon customization (arrow, plus/minus, chevron)
+ * - Animated slide + fade transitions
+ *
+ * @see {element} details - Native disclosure widget
+ * @see {element} summary - Clickable trigger for details
+ * @see {attribute} open - Marks details as expanded
+ *
+ * @link https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ ARIA Accordion Pattern
+ * @link https://inclusive-components.design/collapsible-sections/ Inclusive Collapsible Sections
+ *
+ * @example html - Basic accordion
+ *   <details class="accordion">
+ *     <summary class="accordion-trigger">
+ *       What is Standard Framework?
+ *     </summary>
+ *     <div class="accordion-content">
+ *       <p>Standard Framework is a typography-focused design system...</p>
+ *     </div>
+ *   </details>
+ *
+ *   <details class="accordion">
+ *     <summary class="accordion-trigger">
+ *       How do I install it?
+ *     </summary>
+ *     <div class="accordion-content">
+ *       <p>Install via npm: <code>npm install @zefish/standard</code></p>
+ *     </div>
+ *   </details>
+ *
+ * @example html - Accordion group (multiple items)
+ *   <div class="accordion-group">
+ *     <details class="accordion">
+ *       <summary class="accordion-trigger">Question 1</summary>
+ *       <div class="accordion-content">Answer 1</div>
+ *     </details>
+ *     <details class="accordion">
+ *       <summary class="accordion-trigger">Question 2</summary>
+ *       <div class="accordion-content">Answer 2</div>
+ *     </details>
+ *   </div>
+ */
+.accordion {
+  /* Container styling */
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background: var(--color-background);
+  margin-block-end: var(--space-s);
+  overflow: hidden; /* Ensure border-radius clips content */
+  /* Remove default browser styling */
+}
+.accordion::-webkit-details-marker {
+  display: none;
+}
+
+/**
+ * @name Accordion Trigger
+ * @group components-disclosure
+ * @since 0.11.0
+ *
+ * The summary acts as a button—it's clickable, shows hover/focus states, and
+ * includes a visual indicator (arrow) that rotates when expanded.
+ */
+.accordion-trigger {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  cursor: pointer;
+  user-select: none;
+  /* Typography */
+  font-size: var(--scale-s);
+  font-weight: var(--bold-weight);
+  color: var(--color-foreground);
+  /* Remove default list marker */
+  list-style: none;
+  /* Interaction states */
+  transition: background-color 0.2s ease;
+}
+.accordion-trigger:hover {
+  background: var(--color-background-secondary);
+}
+.accordion-trigger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+.accordion-trigger {
+  /* Arrow indicator */
+}
+.accordion-trigger::after {
+  content: "▸"; /* Right-pointing triangle */
+  display: inline-block;
+  font-size: var(--scale-l);
+  color: var(--color-muted);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+/**
+ * @name Accordion Open State
+ * @group components-disclosure
+ * @since 0.11.0
+ *
+ * When the accordion is open, the arrow rotates 90° and the content panel
+ * becomes visible. The trigger gets a bottom border to separate it from content.
+ */
+.accordion[open] .accordion-trigger {
+  border-bottom: var(--border);
+}
+.accordion[open] .accordion-trigger::after {
+  transform: rotate(90deg); /* Point down */
+}
+
+/**
+ * @name Accordion Content
+ * @group components-disclosure
+ * @since 0.11.0
+ */
+.accordion-content {
+  padding: var(--space);
+  /* Remove margin from first/last children */
+}
+.accordion-content > :first-child {
+  margin-block-start: 0;
+}
+.accordion-content > :last-child {
+  margin-block-end: 0;
+}
+
+/**
+ * @name Accordion Group
+ * @group components-disclosure
+ * @since 0.11.0
+ *
+ * When you have multiple accordions in sequence, the group removes redundant
+ * spacing and borders for a cohesive appearance.
+ */
+.accordion-group {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.accordion-group .accordion {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  border-bottom: var(--border);
+}
+.accordion-group .accordion:last-child {
+  border-bottom: none;
+}
+
+/**
+ * @name Accordion Compact Variant
+ * @group components-disclosure
+ * @since 0.11.0
+ */
+.accordion-compact .accordion-trigger,
+.accordion-compact .accordion-content {
+  padding: var(--space-xs);
+  font-size: var(--scale-xs);
+}
+
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
@@ -5278,11 +7235,11 @@ html:not(.no-rhythm) :has(img.zoomed)::before,
  * Automatically stacks to single column on mobile for readability.
  *
  * Classes:
- * - .flow-2, .flow-3, .flow-4: Fixed column count
- * - .flow-auto: Automatic columns based on optimal width
- * - .flow-gap-tight, .flow-gap-wide: Column gap variants
- * - .flow-keep: Prevent breaks inside elements
- * - .flow-rule, .flow-rule-accent: Vertical lines between columns
+ * - .columns-2, .columns-3, .columns-4: Fixed column count
+ * - .columns-auto: Automatic columns based on optimal width
+ * - .columns-gap-tight, .columns-gap-wide: Column gap variants
+ * - .columns-keep: Prevent breaks inside elements
+ * - .columns-rule, .columns-rule-accent: Vertical lines between columns
  *
  * @example
  * <!-- Two-column layout -->
@@ -5303,63 +7260,63 @@ html:not(.no-rhythm) :has(img.zoomed)::before,
  * @since 0.1.0
  */
 /* Fixed column counts */
-.flow-2 {
+.columns-2 {
   columns: 2;
   column-gap: var(--grid-gap);
 }
 
-.flow-3 {
+.columns-3 {
   columns: 3;
   column-gap: var(--grid-gap);
 }
 
-.flow-4 {
+.columns-4 {
   columns: 4;
   column-gap: var(--grid-gap);
 }
 
 /* Responsive column count based on container width */
-.flow-auto {
+.columns-auto {
   columns: auto;
   column-width: var(--line-width-s); /* ~32rem optimal column width */
   column-gap: var(--grid-gap);
 }
 
 /* Column gap variants */
-.flow-gap-tight {
+.columns-gap-tight {
   column-gap: var(--space-s);
 }
 
-.flow-gap-wide {
+.columns-gap-wide {
   column-gap: var(--space-l);
 }
 
 /* Prevent breaks inside elements */
-.flow-keep {
+.columns-keep {
   break-inside: avoid;
   page-break-inside: avoid; /* Legacy support */
 }
 
 /* Column rules (vertical lines between columns) */
-.flow-rule {
+.columns-rule {
   column-rule: var(--border);
 }
 
-.flow-rule-accent {
+.columns-rule-accent {
   column-rule: 1px solid var(--color-accent);
 }
 
 /* Responsive breakpoints */
 @media (max-width: 768px) {
-  .flow-2,
-  .flow-3,
-  .flow-4 {
+  .columns-2,
+  .columns-3,
+  .columns-4 {
     columns: 1; /* Stack on mobile */
   }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
-  .flow-3,
-  .flow-4 {
+  .columns-3,
+  .columns-4 {
     columns: 2; /* Reduce columns on tablets */
   }
 }

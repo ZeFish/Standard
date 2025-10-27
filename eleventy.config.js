@@ -28,6 +28,18 @@ const site = {
     twitter: "@francisfontaine",
     instagram: "@francisfontaine",
   },
+  nav: {
+    header: [
+      { label: "Docs", url: "/docs/" },
+      { label: "Getting Started", url: "/getting-started/" },
+      { label: "Cheat Sheet", url: "/cheat-sheet/" },
+    ],
+    footer: [
+      { label: "Privacy", url: "/privacy/" },
+      { label: "Terms", url: "/terms/" },
+      { label: "GitHub", url: "https://github.com/yourname", external: true },
+    ],
+  },
 };
 
 export default function (eleventyConfig) {
@@ -54,16 +66,19 @@ export default function (eleventyConfig) {
       lazyLoad: false,
     },
   });
+
+  /*
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: [
-      "styles/**/*.scss",
-      "js/**/*.js",
-      "eleventy/**/*.js",
-      "cloudflare/**/*.js",
+      "styles/**/ /*.scss",
+      "js/**/ /*.js",
+      "eleventy/**/ /*.js",
+      "cloudflare/**/ /*.js",
     ],
     outputDir: "content/docs",
   });
+  */
 
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
@@ -71,6 +86,8 @@ export default function (eleventyConfig) {
   // Watch README.md and claude.md for changes and copy into content directory
   eleventyConfig.addWatchTarget("README.md");
   eleventyConfig.addWatchTarget("claude.md");
+
+  eleventyConfig.addWatchTarget("src/");
   eleventyConfig.on("eleventy.before", () => {
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");

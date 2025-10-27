@@ -864,11 +864,11 @@
  * Automatically stacks to single column on mobile for readability.
  *
  * Classes:
- * - .flow-2, .flow-3, .flow-4: Fixed column count
- * - .flow-auto: Automatic columns based on optimal width
- * - .flow-gap-tight, .flow-gap-wide: Column gap variants
- * - .flow-keep: Prevent breaks inside elements
- * - .flow-rule, .flow-rule-accent: Vertical lines between columns
+ * - .columns-2, .columns-3, .columns-4: Fixed column count
+ * - .columns-auto: Automatic columns based on optimal width
+ * - .columns-gap-tight, .columns-gap-wide: Column gap variants
+ * - .columns-keep: Prevent breaks inside elements
+ * - .columns-rule, .columns-rule-accent: Vertical lines between columns
  *
  * @example
  * <!-- Two-column layout -->
@@ -890,64 +890,64 @@
  */
 
 /* Fixed column counts */
-.flow-2 {
+.columns-2 {
     columns: 2;
     column-gap: var(--grid-gap);
 }
 
-.flow-3 {
+.columns-3 {
     columns: 3;
     column-gap: var(--grid-gap);
 }
 
-.flow-4 {
+.columns-4 {
     columns: 4;
     column-gap: var(--grid-gap);
 }
 
 /* Responsive column count based on container width */
-.flow-auto {
+.columns-auto {
     columns: auto;
     column-width: var(--line-width-s); /* ~32rem optimal column width */
     column-gap: var(--grid-gap);
 }
 
 /* Column gap variants */
-.flow-gap-tight {
+.columns-gap-tight {
     column-gap: var(--space-s);
 }
 
-.flow-gap-wide {
+.columns-gap-wide {
     column-gap: var(--space-l);
 }
 
 /* Prevent breaks inside elements */
-.flow-keep {
+.columns-keep {
     break-inside: avoid;
     page-break-inside: avoid; /* Legacy support */
 }
 
 /* Column rules (vertical lines between columns) */
-.flow-rule {
+.columns-rule {
     column-rule: var(--border);
 }
 
-.flow-rule-accent {
+.columns-rule-accent {
     column-rule: 1px solid var(--color-accent);
 }
 
 /* Responsive breakpoints */
 @media (max-width: $small) {
-    .flow-2,
-    .flow-3,
-    .flow-4 {
+    .columns-2,
+    .columns-3,
+    .columns-4 {
         columns: 1; /* Stack on mobile */
     }
 }
 
 @media (min-width: calc($small + 1px)) and (max-width: $large) {
-    .flow-3,
-    .flow-4 {
+    .columns-3,
+    .columns-4 {
         columns: 2; /* Reduce columns on tablets */
     }
 }

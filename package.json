@@ -46,9 +46,10 @@
   "scripts": {
     "commit": "git add . && npx opencommit",
     "test": "echo \"No tests yet\" && exit 0",
-    "start": "rm -rf _site & npm run build:css && npx @11ty/eleventy --serve --port=8090 --quiet",
+    "start": "rm -rf _site & npm run build:css && npx @11ty/eleventy --serve --port=8080 --quiet",
     "dev": "concurrently \"npm:watch:*\"",
     "watch:js": "nodemon --watch src/js/standard.js --exec \"npm run build:js\"",
+    "validate": "node scripts/validate-front-matter.js",
     "build": "npm run build:assets && npx @11ty/eleventy",
     "build:assets": "npm run build:css & npm run build:js & npm run build:js:prod && node scripts/inject-version.js",
     "build:js": "cp src/js/standard.js dist/standard.js && cp src/js/standard.comment.js dist/standard.comment.js",
@@ -69,6 +70,7 @@
     "auto-changelog": "^2.5.0",
     "concurrently": "^8.2.2",
     "glob": "^10.4.5",
+    "gray-matter": "^4.0.3",
     "nodemon": "^3.1.10",
     "opencommit": "^3.2.10",
     "release-it": "^19.0.5",
@@ -126,10 +128,12 @@
     "@google/generative-ai": "^0.24.1",
     "@release-it/conventional-changelog": "^10.0.1",
     "@zefish/standard": "^0.11.25",
+    "dotenv": "^17.2.3",
     "htmx.org": "^2.0.8",
     "jsdom": "^27.0.1",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-obsidian-callouts": "^0.3.2",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "sanitize": "^2.1.2"
   }
 }

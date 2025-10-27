@@ -315,7 +315,7 @@ function nameToKebabCase(name) {
   return name
     .replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase → kebab-case
     .replace(/\s+/g, "-") // spaces → hyphens
-    .replace(/[&]/g, "and") // & → and
+    .replace(/[&:]/g, "") // & and : → removed
     .replace(/[^a-z0-9-]/gi, "") // remove other special chars
     .toLowerCase();
 }
@@ -367,32 +367,27 @@ function generateComponentMarkdown(doc, layout, urlPath) {
   const componentSlug = nameToKebabCase(doc.name);
 
   let markdown = "---\n";
-  markdown += `title: ${doc.name}\n`;
+  markdown += `title: "${doc.name}"\n`;
   markdown += `layout: ${layout}\n`;
   markdown += `permalink: ${urlPath}/${componentSlug}/index.html\n`;
   markdown += `eleventyNavigation:\n`;
-  markdown += `  key: ${doc.name}\n`;
+  markdown += `  key: "${doc.name}"\n`;
   markdown += `  parent: ${doc.category || "API"}\n`;
-  markdown += `  title: ${doc.name}\n`;
+  markdown += `  title: "${doc.name}"\n`;
   markdown += `category: ${doc.category || "Utilities"}\n`;
   markdown += `type: ${doc.type}\n`;
   markdown += `source: ${doc.source}\n`;
   if (doc.since) markdown += `since: ${doc.since}\n`;
   if (doc.deprecated)
     markdown += `deprecated: ${doc.deprecated === true ? "yes" : doc.deprecated}\n`;
-  markdown += "---\n\n";
+  markdown += "---\n\n\n";
 
   // Title
   markdown += `# ${doc.name}\n\n`;
 
-  // Description with newline process
+  // Description
   if (doc.description) {
-    markdown += `${doc.description
-      .replace(/\n(- )/g, "<<<LIST>>>\n$1") // Mark list items
-      .replace(/\n\n/g, "<<<PARAGRAPH>>>") // Mark paragraphs
-      .replace(/\n/g, " ") // Remove single newlines
-      .replace(/<<<LIST>>>/g, "\n") // Restore list newlines
-      .replace(/<<<PARAGRAPH>>>/g, "\n\n")}\n\n`; // Restore paragraphs
+    markdown += `${doc.description}\n\n`;
   }
 
   // Examples

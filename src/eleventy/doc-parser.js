@@ -215,12 +215,6 @@ export class DocParser {
         .trim();
     }
 
-    // Set component name from @component or infer from filename
-    if (!doc.name) {
-      const filename = path.basename(filePath, path.extname(filePath));
-      doc.name = this.formatName(filename);
-    }
-
     return doc;
   }
 

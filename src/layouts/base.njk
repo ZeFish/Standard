@@ -8,17 +8,11 @@
     {% standardLab %}
     <link rel="stylesheet" href="/assets/css/style.css">
     <body {% bodyHtmx %}>
-		<header>
-			<nav class="display-flex" style="justify-content: space-between; align-items: center; max-width: 100%;">
-				<div class="display-flex" style="align-items: left;">
-					<a href="/" style="text-decoration: none;">{{ site.title }}</a>
-				</div>
-				<ul class="display-flex gap-base no-bullet smaller" style="margin: 0; padding: 0;">
-					<li><a href="/docs/">Docs</a></li>
-					<li><a href="/getting-started/">Getting Started</a></li>
-					<li><a href="/cheat-sheet/">Cheat Sheet</a></li>
-				</ul>
-			</nav>
+		<header class="display-flex" style="justify-content: space-between; align-items: center; max-width: 100%;">
+			<div class="display-flex" style="align-items: left;">
+				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
+			</div>
+			{% menu site.nav.header, {className: "smaller margin-0 padding-0"} %}
 		</header>
      	<main class="prose md">
         {{ content | safe }}
