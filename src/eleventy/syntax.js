@@ -233,9 +233,9 @@ function processGrid(content, pageData) {
     `;
 
     return `
-<div class="grid gap-4">
+<div class="grid grid-sm-2">
 {% for item in ${collection} %}
-  <div class="col-12 md:col-${colSpan}">
+  <div class="col-${colSpan}">
 ${itemTemplate}
   </div>
 {% endfor %}

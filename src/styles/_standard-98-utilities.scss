@@ -343,41 +343,31 @@
  * Moved from standard-03-typography.scss for better layer organization
  */
 
-.text-size-small {
+.small {
     font-size: var(--scale-s);
 }
 
-.text-size-smaller {
+.smaller {
     font-size: var(--scale-xs);
 }
 
-.text-size-micro {
-    font-size: var(--scale-micro);
+.micro {
+    font-size: var(--scale-2xs);
 }
 
-.text-size-compact {
+.nano {
+    font-size: var(--scale-3xs);
+}
+
+.small *,
+.smaller *,
+.micro,
+.nano {
+    font-size: inherit;
+}
+
+.compact {
     line-height: var(--font-density-s);
-}
-
-.text-size-display {
-    font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
-    line-height: 0.85;
-    font-weight: var(--font-header-weight);
-    letter-spacing: var(--font-header-letter-spacing);
-}
-
-.text-size-poster {
-    font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
-    line-height: 0.8;
-    font-weight: var(--font-header-weight);
-    letter-spacing: -0.04em;
-}
-
-.text-size-label {
-    font-size: var(--scale-micro);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 700;
 }
 
 /* =========================== */
@@ -389,17 +379,15 @@
  * Moved from standard-03-typography.scss
  */
 
-.font-family-mono,
-.font-family-monospace,
-.font-family-code {
+.monospace {
     font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
     font-feature-settings: var(--font-monospace-feature);
     font-variation-settings: var(--font-monospace-variation);
     font-size: var(--scale-s);
 }
 
-.font-family-ui,
-.font-family-interface {
+.ui,
+.interface {
     font-family: var(--font-interface), system-ui, sans-serif;
     font-variation-settings: var(--font-interface-variation);
     font-feature-settings: var(--font-interface-feature);
@@ -409,11 +397,11 @@
 /* FONT WEIGHT UTILITIES       */
 /* =========================== */
 
-.text-weight-bold {
+.bold {
     font-weight: var(--bold-weight);
 }
 
-.text-weight-normal {
+.normal {
     font-weight: var(--font-weight);
 }
 
@@ -425,7 +413,7 @@
  * Line height utilities for controlling text spacing
  */
 
-.line-height-tight {
+.tight {
     line-height: 0.85;
 }
 
@@ -433,7 +421,7 @@
     line-height: 1;
 }
 
-.line-height-snug {
+.compact {
     line-height: var(--font-density-s);
 }
 
@@ -441,7 +429,7 @@
     line-height: var(--font-density);
 }
 
-.line-height-relaxed {
+.relaxed {
     line-height: 1.6;
 }
 
@@ -449,19 +437,19 @@
 /* TEXT ALIGNMENT UTILITIES    */
 /* =========================== */
 
-.text-align-left {
+.left {
     text-align: left !important;
 }
 
-.text-align-center {
+.center {
     text-align: center !important;
 }
 
-.text-align-right {
+.right {
     text-align: right !important;
 }
 
-.text-align-justify {
+.justify {
     text-align: justify !important;
 }
 
@@ -469,16 +457,16 @@
 /* TEXT TRANSFORMATION         */
 /* =========================== */
 
-.text-transform-uppercase {
+.uppercase {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-.text-transform-lowercase {
+.lowercase {
     text-transform: lowercase;
 }
 
-.text-transform-capitalize {
+.capitalize {
     text-transform: capitalize;
 }
 
@@ -486,11 +474,11 @@
     text-transform: none;
 }
 
-.text-no-wrap {
+.no-wrap {
     white-space: nowrap !important;
 }
 
-.text-ellipsis {
+.ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -506,15 +494,15 @@
  * Moved from standard-02-color.scss
  */
 
-.text-color-muted {
+.muted {
     color: var(--color-muted) !important;
 }
 
-.text-color-subtle {
+.subtle {
     color: var(--color-subtle) !important;
 }
 
-.text-color-accent {
+.accent {
     color: var(--color-accent) !important;
 }
 
@@ -522,7 +510,7 @@
 /* BACKGROUND COLOR UTILITIES  */
 /* =========================== */
 
-.background-color-secondary {
+.background-secondary {
     background: var(--color-background-secondary) !important;
 }
 
@@ -530,11 +518,11 @@
 /* BORDER COLOR UTILITIES      */
 /* =========================== */
 
-.border-color-default {
+.border {
     border: var(--border) !important;
 }
 
-.border-color-accent {
+.border-accent {
     border: var(--border-accent) !important;
 }
 
@@ -546,29 +534,28 @@
  * Display utilities for showing/hiding content
  */
 
-.display-hidden,
 .hidden {
-    display: none !important;
+    display: none;
 }
 
-.display-visible {
-    display: block !important;
+.block {
+    display: block;
 }
 
-.display-inline {
-    display: inline !important;
+.inline {
+    display: inline;
 }
 
-.display-inline-block {
-    display: inline-block !important;
+.inline-block {
+    display: inline-block;
 }
 
-.display-flex {
-    display: flex !important;
+.flex {
+    display: flex;
 }
 
 .display-grid {
-    display: grid !important;
+    display: grid;
 }
 
 /**
@@ -619,11 +606,11 @@
  * Rhythm-aware utilities for consistent spacing
  */
 
-.rhythm-tight {
+.rhythm-compact {
     --rhythm-multiplier: 0.5;
 }
 
-.rhythm-loose {
+.rhythm-relaxed {
     --rhythm-multiplier: 1.5;
 }
 
@@ -659,23 +646,23 @@
  * Width constraints for optimal reading experience
  */
 
-.width-line-extra-small {
+.width-line-xs {
     max-width: var(--line-width-xs);
 }
 
-.width-line-small {
+.width-line-s {
     max-width: var(--line-width-s);
 }
 
-.width-line-base {
+.width-line {
     max-width: var(--line-width);
 }
 
-.width-line-large {
+.width-line-l {
     max-width: var(--line-width-l);
 }
 
-.width-line-extra-large {
+.width-line-xl {
     max-width: var(--line-width-xl);
 }
 

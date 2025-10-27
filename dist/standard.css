@@ -442,6 +442,8 @@
   --body-padding-multiplier: 1;
   --body-mobile-padding-multiplier: 1;
   /* Modular Scale - calculated from font-ratio */
+  --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
+  --scale-2xs: calc(var(--font-size) * pow(var(--font-ratio), -2));
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
   --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
   --scale: var(--font-size);
@@ -449,20 +451,6 @@
   --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
   --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
   --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 4));
-  /* ADD: Extreme scales for display/poster typography */
-  --scale-display: calc(
-      var(--font-size) * pow(var(--font-ratio), 6)
-  ); /* ~10rem */
-  --scale-poster: calc(
-      var(--font-size) * pow(var(--font-ratio), 8)
-  ); /* ~16rem */
-  /* ADD: Micro scales for technical labels */
-  --scale-micro: calc(
-      var(--font-size) * pow(var(--font-ratio), -2)
-  ); /* ~0.6rem */
-  --scale-nano: calc(
-      var(--font-size) * pow(var(--font-ratio), -3)
-  ); /* ~0.4rem */
   /* Logical Spacing Scale - based on rhythm unit */
   --space-3xs: calc(1rlh / 5);
   --space-2xs: calc(1rlh / 4);
@@ -1478,28 +1466,33 @@ a.button {
 button:hover,
 a.button:hover {
   opacity: 0.9;
+  color: var(--color-background);
 }
 
 button:active,
 a.button:active {
   opacity: 0.8;
+  color: var(--color-background);
 }
 
 button:focus-visible,
 a.button:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
   outline-offset: 2px;
+  color: var(--color-background);
 }
 
 button:disabled,
 a.button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  color: var(--color-background);
 }
 
 a.button:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
   outline-offset: 2px;
+  color: var(--color-background);
 }
 
 /* ===== FORM ELEMENTS ===== */
@@ -5641,6 +5634,90 @@ dialog.modal::backdrop {
   font-size: var(--scale-xs);
 }
 
+@media print {
+  /* Optimize for paper */
+  @page {
+    margin-top: 1.5cm;
+    margin-right: 1cm;
+    margin-bottom: 1.5cm;
+    margin-left: 1cm;
+    /*
+    @top-center {
+        content: "Document Title";
+    }
+    */
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+  :root {
+    --color-foreground: black;
+    --color-background: white;
+    --color-background-secondary: white;
+    --font-size: 0.925rem !important;
+    --font-ratio: 1.125 !important;
+    --font-density: 1.4 !important;
+    --rhythm-multiplier: 1;
+    --rhythm-multiplier-block: 0;
+    --body-padding-multiplier: 0;
+    --line-width: var(--line-width-full);
+    --gap: 0;
+  }
+  html .no-print,
+  html .no-print * {
+    /* Also hide children */
+    display: none !important;
+  }
+  html header,
+  html footer,
+  html nav,
+  html aside {
+    display: none !important;
+  }
+  html {
+    /* Reset decorative styles */
+  }
+  html * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  html {
+    /* Show link URLs */
+  }
+  html a[href^=http]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+  html pre,
+  html blockquote,
+  html img {
+    break-inside: avoid;
+  }
+  html h1,
+  html h2,
+  html h3,
+  html h4,
+  html h5,
+  html h6 {
+    margin-block: var(--space); /* Remove !important */
+    break-after: avoid; /* Keep with following content */
+  }
+  html hr {
+    margin-block: var(--space-xs); /* Remove !important */
+  }
+  html html::before,
+  html html::after,
+  html body::before,
+  html body::after {
+    display: none;
+  }
+  html body {
+    border: 0 !important;
+    background: transparent !important;
+    max-width: 100% !important;
+  }
+}
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
@@ -6769,41 +6846,31 @@ dialog.modal::backdrop {
  * Typography size utilities
  * Moved from standard-03-typography.scss for better layer organization
  */
-.text-size-small {
+.small {
   font-size: var(--scale-s);
 }
 
-.text-size-smaller {
+.smaller {
   font-size: var(--scale-xs);
 }
 
-.text-size-micro {
-  font-size: var(--scale-micro);
+.micro {
+  font-size: var(--scale-2xs);
 }
 
-.text-size-compact {
+.nano {
+  font-size: var(--scale-3xs);
+}
+
+.small *,
+.smaller *,
+.micro,
+.nano {
+  font-size: inherit;
+}
+
+.compact {
   line-height: var(--font-density-s);
-}
-
-.text-size-display {
-  font-size: clamp(var(--scale-3xl), 12vw, var(--scale-display));
-  line-height: 0.85;
-  font-weight: var(--font-header-weight);
-  letter-spacing: var(--font-header-letter-spacing);
-}
-
-.text-size-poster {
-  font-size: clamp(var(--scale-display), 15vw, var(--scale-poster));
-  line-height: 0.8;
-  font-weight: var(--font-header-weight);
-  letter-spacing: -0.04em;
-}
-
-.text-size-label {
-  font-size: var(--scale-micro);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-weight: 700;
 }
 
 /* =========================== */
@@ -6813,17 +6880,15 @@ dialog.modal::backdrop {
  * Font family utility classes
  * Moved from standard-03-typography.scss
  */
-.font-family-mono,
-.font-family-monospace,
-.font-family-code {
+.monospace {
   font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
   font-feature-settings: var(--font-monospace-feature);
   font-variation-settings: var(--font-monospace-variation);
   font-size: var(--scale-s);
 }
 
-.font-family-ui,
-.font-family-interface {
+.ui,
+.interface {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-variation-settings: var(--font-interface-variation);
   font-feature-settings: var(--font-interface-feature);
@@ -6832,11 +6897,11 @@ dialog.modal::backdrop {
 /* =========================== */
 /* FONT WEIGHT UTILITIES       */
 /* =========================== */
-.text-weight-bold {
+.bold {
   font-weight: var(--bold-weight);
 }
 
-.text-weight-normal {
+.normal {
   font-weight: var(--font-weight);
 }
 
@@ -6846,7 +6911,7 @@ dialog.modal::backdrop {
 /**
  * Line height utilities for controlling text spacing
  */
-.line-height-tight {
+.tight {
   line-height: 0.85;
 }
 
@@ -6854,7 +6919,7 @@ dialog.modal::backdrop {
   line-height: 1;
 }
 
-.line-height-snug {
+.compact {
   line-height: var(--font-density-s);
 }
 
@@ -6862,42 +6927,42 @@ dialog.modal::backdrop {
   line-height: var(--font-density);
 }
 
-.line-height-relaxed {
+.relaxed {
   line-height: 1.6;
 }
 
 /* =========================== */
 /* TEXT ALIGNMENT UTILITIES    */
 /* =========================== */
-.text-align-left {
+.left {
   text-align: left !important;
 }
 
-.text-align-center {
+.center {
   text-align: center !important;
 }
 
-.text-align-right {
+.right {
   text-align: right !important;
 }
 
-.text-align-justify {
+.justify {
   text-align: justify !important;
 }
 
 /* =========================== */
 /* TEXT TRANSFORMATION         */
 /* =========================== */
-.text-transform-uppercase {
+.uppercase {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.text-transform-lowercase {
+.lowercase {
   text-transform: lowercase;
 }
 
-.text-transform-capitalize {
+.capitalize {
   text-transform: capitalize;
 }
 
@@ -6905,11 +6970,11 @@ dialog.modal::backdrop {
   text-transform: none;
 }
 
-.text-no-wrap {
+.no-wrap {
   white-space: nowrap !important;
 }
 
-.text-ellipsis {
+.ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -6923,33 +6988,33 @@ dialog.modal::backdrop {
  * Text color utilities
  * Moved from standard-02-color.scss
  */
-.text-color-muted {
+.muted {
   color: var(--color-muted) !important;
 }
 
-.text-color-subtle {
+.subtle {
   color: var(--color-subtle) !important;
 }
 
-.text-color-accent {
+.accent {
   color: var(--color-accent) !important;
 }
 
 /* =========================== */
 /* BACKGROUND COLOR UTILITIES  */
 /* =========================== */
-.background-color-secondary {
+.background-secondary {
   background: var(--color-background-secondary) !important;
 }
 
 /* =========================== */
 /* BORDER COLOR UTILITIES      */
 /* =========================== */
-.border-color-default {
+.border {
   border: var(--border) !important;
 }
 
-.border-color-accent {
+.border-accent {
   border: var(--border-accent) !important;
 }
 
@@ -6959,29 +7024,28 @@ dialog.modal::backdrop {
 /**
  * Display utilities for showing/hiding content
  */
-.display-hidden,
 .hidden {
-  display: none !important;
+  display: none;
 }
 
-.display-visible {
-  display: block !important;
+.block {
+  display: block;
 }
 
-.display-inline {
-  display: inline !important;
+.inline {
+  display: inline;
 }
 
-.display-inline-block {
-  display: inline-block !important;
+.inline-block {
+  display: inline-block;
 }
 
-.display-flex {
-  display: flex !important;
+.flex {
+  display: flex;
 }
 
 .display-grid {
-  display: grid !important;
+  display: grid;
 }
 
 /**
@@ -7028,11 +7092,11 @@ dialog.modal::backdrop {
 /**
  * Rhythm-aware utilities for consistent spacing
  */
-.rhythm-tight {
+.rhythm-compact {
   --rhythm-multiplier: 0.5;
 }
 
-.rhythm-loose {
+.rhythm-relaxed {
   --rhythm-multiplier: 1.5;
 }
 
@@ -7059,23 +7123,23 @@ dialog.modal::backdrop {
 /**
  * Width constraints for optimal reading experience
  */
-.width-line-extra-small {
+.width-line-xs {
   max-width: var(--line-width-xs);
 }
 
-.width-line-small {
+.width-line-s {
   max-width: var(--line-width-s);
 }
 
-.width-line-base {
+.width-line {
   max-width: var(--line-width);
 }
 
-.width-line-large {
+.width-line-l {
   max-width: var(--line-width-l);
 }
 
-.width-line-extra-large {
+.width-line-xl {
   max-width: var(--line-width-xl);
 }
 

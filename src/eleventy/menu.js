@@ -216,11 +216,7 @@ export default function MenuPlugin(eleventyConfig, options = {}) {
       .join("");
 
     // Build list classes
-    const ulClasses = [
-      escapeHtml(className),
-      "no-bullet",
-      inline ? "display-flex" : "",
-    ]
+    const ulClasses = [escapeHtml(className), "no-bullet", inline ? "flex" : ""]
       .filter(Boolean)
       .join(" ");
 
