@@ -1,14 +1,6 @@
 # Standard Framework
 
 ![npm](https://img.shields.io/npm/v/@zefish/standard)
-![license](https://img.shields.io/npm/l/@zefish/standard)
-![11ty](https://img.shields.io/badge/11ty-v3.0%2B-brightgreen)
-![maintained](https://img.shields.io/badge/maintained-yes-green?style=flat-square)
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-
-![Image Test](/assets/test.png)
 
 Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
 
