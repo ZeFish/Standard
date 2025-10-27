@@ -192,28 +192,33 @@ a.button {
 button:hover,
 a.button:hover {
     opacity: 0.9;
+    color: var(--color-background);
 }
 
 button:active,
 a.button:active {
     opacity: 0.8;
+    color: var(--color-background);
 }
 
 button:focus-visible,
 a.button:focus-visible {
     outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
     outline-offset: 2px;
+    color: var(--color-background);
 }
 
 button:disabled,
 a.button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    color: var(--color-background);
 }
 
 a.button:focus-visible {
     outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
     outline-offset: 2px;
+    color: var(--color-background);
 }
 
 /* ===== FORM ELEMENTS ===== */

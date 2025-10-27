@@ -19,7 +19,7 @@
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
- * @version Standard Framework v0.13.10
+ * @version Standard Framework v0.13.11
  * @license MIT
  */
 /* Document
@@ -1448,7 +1448,7 @@ nav li.is-active a {
 /* ===== BUTTONS ===== */
 /* Native button element */
 button,
-.button {
+a.button {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-size: var(--scale-s);
   font-weight: var(--font-weight);
@@ -1464,8 +1464,8 @@ button,
   transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
 
-.button:visited,
-.button {
+a.button:visited,
+a.button {
   --hr-thickness: 1px;
   display: inline-block;
   width: fit-content;
@@ -1476,28 +1476,28 @@ button,
 }
 
 button:hover,
-.button:hover {
+a.button:hover {
   opacity: 0.9;
 }
 
 button:active,
-.button:active {
+a.button:active {
   opacity: 0.8;
 }
 
 button:focus-visible,
-.button:focus-visible {
+a.button:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
   outline-offset: 2px;
 }
 
 button:disabled,
-.button:disabled {
+a.button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.button:focus-visible {
+a.button:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
   outline-offset: 2px;
 }
