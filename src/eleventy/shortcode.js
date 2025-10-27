@@ -30,7 +30,7 @@
 
 export default function (eleventyConfig, options = {}) {
   eleventyConfig.addShortcode("bodyHtmx", function () {
-    return `hx-boost="true" hx-target="main" hx-select="main" hx-swap="outerHTML show:window:top"`;
+    return `hx-boost="true" hx-target="body" hx-swap="innerHTML show:window:top"`;
   });
 
   // Shortcode to include Standard CSS and JS from local files
