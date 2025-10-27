@@ -16,3 +16,4 @@ content/claude.md
 .dev.vars
 .env
 /content/docs
+.doc-generator-hash
