@@ -67,18 +67,16 @@ export default function (eleventyConfig) {
     },
   });
 
-  /*
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: [
-      "styles/**/ /*.scss",
-      "js/**/ /*.js",
-      "eleventy/**/ /*.js",
-      "cloudflare/**/ /*.js",
+      "styles/**/*.scss",
+      "js/**/*.js",
+      "eleventy/**/*.js",
+      "cloudflare/**/*.js",
     ],
     outputDir: "content/docs",
   });
-  */
 
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
@@ -130,6 +128,11 @@ export default function (eleventyConfig) {
         return "Standard Framework";
       }
     },
+    theme: (data) => {
+      const pageTheme = data.theme || "default";
+      return pageTheme === "default" ? "paper" : pageTheme;
+    },
+    visibility: (data) => data.visibility || "public",
   });
 
   return {

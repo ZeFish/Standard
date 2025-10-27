@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { createLogger } from "./logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -40,6 +41,11 @@ export default function (eleventyConfig, options = {}) {
     environment = "production",
     env = {},
   } = options;
+
+  const logger = createLogger({
+    verbose: options.verbose,
+    scope: "Cloudflare",
+  });
 
   // Copy Cloudflare functions to project root (not _site output directory)
   // Functions are in src/cloudflare/ in the Standard package

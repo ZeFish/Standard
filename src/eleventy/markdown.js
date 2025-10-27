@@ -40,6 +40,7 @@ export default function (eleventyConfig, options = {}) {
     defaultLocale: "en",
     excludeSelectors: "code, pre, script, style, samp, kbd, var",
     excludeFromWidows: "h1, h2, h3, h4, h5, h6",
+    siteUrl: "", // Add this line
     ...options,
   };
 
@@ -147,6 +148,74 @@ export default function (eleventyConfig, options = {}) {
     bullet: "\u2022",
     middleDot: "\u00B7",
   };
+
+  /**
+   * External Link Marker Plugin
+   *
+   * In the early web, every link was an adventure into the unknown. You'd click
+   * and suddenly find yourself on a completely different site, often with no way
+   * back except the browser's back button. Tim Berners-Lee's original vision
+   * didn't distinguish between internal and external links—all links were equal.
+   *
+   * But as websites grew into complex information architectures, designers realized
+   * users needed signals. "Am I staying here, or leaving?" became a critical question.
+   * The solution emerged from print design: just as footnotes used symbols (†, ‡, *)
+   * to indicate external references, web designers adopted the "external link arrow" (↗).
+   *
+   * This automatically detects external links and marks them with a class, allowing
+   * your CSS to add that visual indicator. It's smart enough to know what "external"
+   * means—checking against your site's actual domain, not just looking for http://.
+   *
+   * @param {String} siteUrl - Your site's base URL (e.g., 'https://standard.ffp.co')
+   * @returns {Boolean} Whether link is external
+   */
+  function markExternalLinks(md) {
+    const defaultLinkRender =
+      md.renderer.rules.link_open ||
+      function (tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+      };
+
+    md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+      const token = tokens[idx];
+      const hrefIndex = token.attrIndex("href");
+
+      if (hrefIndex >= 0) {
+        const href = token.attrs[hrefIndex][1];
+
+        // Handle content/ path rewriting (keep your existing logic)
+        if (href && href.startsWith("content/")) {
+          let rewrittenHref = "/" + href.replace(/^content\//, "");
+          rewrittenHref = rewrittenHref.replace(/\.md$/, "/");
+          if (!rewrittenHref.endsWith("/")) {
+            rewrittenHref += "/";
+          }
+          token.attrs[hrefIndex][1] = rewrittenHref;
+        }
+
+        // Check if link is external (starts with http:// or https://)
+        const currentHref = token.attrs[hrefIndex][1];
+        const isExternal =
+          currentHref.startsWith("http://") ||
+          currentHref.startsWith("https://");
+
+        if (isExternal) {
+          // Add external-link class
+          const classIndex = token.attrIndex("class");
+          if (classIndex < 0) {
+            token.attrPush(["class", "external-link"]);
+          } else {
+            token.attrs[classIndex][1] += " external-link";
+          }
+
+          // Add security attributes
+          token.attrPush(["rel", "noopener noreferrer"]);
+        }
+      }
+
+      return defaultLinkRender(tokens, idx, options, env, self);
+    };
+  }
 
   const orphanWords = {
     en: [
@@ -734,28 +803,7 @@ export default function (eleventyConfig, options = {}) {
     return document.body.innerHTML;
   }
 
-  // Markdown-it integration
-  const defaultLinkRender =
-    md.renderer.rules.link_open ||
-    function (tokens, idx, options, env, renderer) {
-      return renderer.renderToken(tokens, idx, options);
-    };
-
-  md.renderer.rules.link_open = function (tokens, idx, options, env, renderer) {
-    const token = tokens[idx];
-    const href = token.attrGet("href");
-
-    if (href && href.startsWith("content/")) {
-      let rewrittenHref = "/" + href.replace(/^content\//, "");
-      rewrittenHref = rewrittenHref.replace(/\.md$/, "/");
-      if (!rewrittenHref.endsWith("/")) {
-        rewrittenHref += "/";
-      }
-      token.attrSet("href", rewrittenHref);
-    }
-
-    return defaultLinkRender(tokens, idx, options, env, renderer);
-  };
+  markExternalLinks(md);
 
   const originalRender = md.render.bind(md);
   md.render = function (src, env) {

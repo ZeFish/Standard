@@ -312,12 +312,22 @@ export default function (eleventyConfig, options = {}) {
  * Handles: camelCase, spaces, special characters
  */
 function nameToKebabCase(name) {
-  return name
-    .replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase → kebab-case
-    .replace(/\s+/g, "-") // spaces → hyphens
-    .replace(/[&:]/g, "") // & and : → removed
-    .replace(/[^a-z0-9-]/gi, "") // remove other special chars
-    .toLowerCase();
+  if (!name || typeof name !== "string") {
+    return "unnamed";
+  }
+
+  return (
+    name
+      .split("\n")[0] // Only take first line
+      .trim()
+      .replace(/([a-z])([A-Z])/g, "$1-$2") // camelCase → kebab-case
+      .replace(/\s+/g, "-") // spaces → hyphens
+      .replace(/[&:\/\\]/g, "") // & : / \ → removed
+      .replace(/[^a-z0-9-]/gi, "") // remove other special chars
+      .replace(/-+/g, "-") // collapse multiple hyphens
+      .replace(/^-|-$/g, "") // trim leading/trailing hyphens
+      .toLowerCase() || "unnamed"
+  );
 }
 
 async function generateMarkdownDocs(docs, outputDir, layout, urlPath) {
@@ -327,7 +337,7 @@ async function generateMarkdownDocs(docs, outputDir, layout, urlPath) {
       continue;
     }
 
-    const markdown = generateComponentMarkdown(doc, layout, urlPath);
+    const markdown = generateComponentMarkdown(doc, layout, urlPath, docs);
     const filename = `${nameToKebabCase(doc.name)}.md`;
     const filepath = path.join(outputDir, filename);
 
@@ -363,31 +373,69 @@ async function generateIndexPages(docs, outputDir, layout, urlPath) {
   fs.writeFileSync(path.join(outputDir, "index.md"), mainIndex, "utf-8");
 }
 
-function generateComponentMarkdown(doc, layout, urlPath) {
+function generateComponentMarkdown(doc, layout, urlPath, allDocs = []) {
   const componentSlug = nameToKebabCase(doc.name);
 
+  console.log("[DEBUG] generateComponentMarkdown called from LOCAL file");
+
+  // Helper to escape YAML string values (remove newlines, escape quotes)
+  const escapeYamlString = (str) => {
+    if (!str) return "";
+    return String(str)
+      .replace(/\n/g, " ") // Replace newlines with spaces
+      .replace(/\r/g, "") // Remove carriage returns
+      .replace(/"/g, '\\"') // Escape quotes
+      .trim();
+  };
+
   let markdown = "---\n";
-  markdown += `title: "${doc.name}"\n`;
-  markdown += `layout: ${layout}\n`;
-  markdown += `permalink: ${urlPath}/${componentSlug}/index.html\n`;
+  markdown += `title: "${escapeYamlString(doc.name)}"\n`;
+  markdown += `layout: "${layout}"\n`;
+  markdown += `permalink: "${urlPath}/${componentSlug}/index.html"\n`;
   markdown += `eleventyNavigation:\n`;
-  markdown += `  key: "${doc.name}"\n`;
-  markdown += `  parent: ${doc.category || "API"}\n`;
-  markdown += `  title: "${doc.name}"\n`;
-  markdown += `category: ${doc.category || "Utilities"}\n`;
-  markdown += `type: ${doc.type}\n`;
-  markdown += `source: ${doc.source}\n`;
-  if (doc.since) markdown += `since: ${doc.since}\n`;
-  if (doc.deprecated)
-    markdown += `deprecated: ${doc.deprecated === true ? "yes" : doc.deprecated}\n`;
-  markdown += "---\n\n\n";
+  markdown += `  key: "${escapeYamlString(doc.name)}"\n`;
+  markdown += `  parent: "${doc.category || "API"}"\n`;
+  markdown += `  title: "${escapeYamlString(doc.name)}"\n`;
+  markdown += `category: "${escapeYamlString(doc.category || "Utilities")}"\n`;
+  markdown += `type: "${doc.type}"\n`;
+  markdown += `source: "${doc.source}"\n`;
+  if (doc.since) markdown += `since: "${escapeYamlString(doc.since)}"\n`;
+  if (doc.deprecated) {
+    const deprecatedValue =
+      doc.deprecated === true ? "yes" : escapeYamlString(doc.deprecated);
+    markdown += `deprecated: "${deprecatedValue}"\n`;
+  }
+  markdown += "---\n\n";
 
   // Title
   markdown += `# ${doc.name}\n\n`;
 
   // Description
   if (doc.description) {
-    markdown += `${doc.description}\n\n`;
+    // Normalize description: preserve paragraph breaks and lists
+    // but remove single line breaks within regular paragraphs for better text flow
+    const normalizedDescription = doc.description
+      .split(/\n\n+/) // Split by paragraph breaks (double+ newlines)
+      .map((paragraph) => {
+        // Check if this is a list (starts with -, *, or numbered items)
+        const isListBlock =
+          /^[\s]*[-*]/.test(paragraph) || /^[\s]*\d+\./.test(paragraph);
+
+        if (isListBlock) {
+          // Preserve list formatting - keep line breaks between items
+          return paragraph.trim();
+        } else {
+          // Regular paragraph - remove line breaks for better flow
+          return paragraph
+            .replace(/\n/g, " ") // Replace single newlines with spaces
+            .replace(/\s+/g, " ") // Collapse multiple spaces
+            .trim();
+        }
+      })
+      .filter((p) => p.length > 0) // Remove empty paragraphs
+      .join("\n\n"); // Join with double newlines
+
+    markdown += `${normalizedDescription}\n\n`;
   }
 
   // Examples
@@ -446,8 +494,27 @@ function generateComponentMarkdown(doc, layout, urlPath) {
   // Related/See also
   if (doc.see.length > 0) {
     markdown += "### See Also\n\n";
+
+    // Create a lookup map of doc names to slugs for quick matching
+    const docNameToSlug = new Map();
+    for (const d of allDocs) {
+      if (d.kind !== "mixin" && d.kind !== "function") {
+        docNameToSlug.set(d.name.toLowerCase(), nameToKebabCase(d.name));
+      }
+    }
+
     for (const link of doc.see) {
-      markdown += `- ${link}\n`;
+      // Check if this link matches a known component name
+      const linkLower = link.toLowerCase().trim();
+      const slug = docNameToSlug.get(linkLower);
+
+      if (slug) {
+        // Generate a proper markdown link
+        markdown += `- [${link}](${urlPath}/${slug}/)\n`;
+      } else {
+        // Keep as plain text if no match found
+        markdown += `- ${link}\n`;
+      }
     }
     markdown += "\n";
   }
@@ -465,12 +532,12 @@ function generateCategoryMarkdown(category, items, layout, urlPath) {
   const categorySlug = nameToKebabCase(category);
 
   let markdown = "---\n";
-  markdown += `title: ${category}\n`;
-  markdown += `layout: ${layout}\n`;
-  markdown += `permalink: ${urlPath}/${categorySlug}/index.html\n`;
+  markdown += `title: "${category}"\n`;
+  markdown += `layout: "${layout}"\n`;
+  markdown += `permalink: "${urlPath}/${categorySlug}/index.html"\n`;
   markdown += `eleventyNavigation:\n`;
-  markdown += `  key: ${category}\n`;
-  markdown += `  title: ${category}\n`;
+  markdown += `  key: "${category}"\n`;
+  markdown += `  title: "${category}"\n`;
   markdown += "---\n\n";
 
   markdown += `# ${category}\n\n`;
@@ -502,11 +569,11 @@ function generateCategoryMarkdown(category, items, layout, urlPath) {
 
 function generateMainIndexMarkdown(grouped, layout, urlPath) {
   let markdown = "---\n";
-  markdown += "title: API Reference\n";
-  markdown += `layout: ${layout}\n`;
+  markdown += 'title: "API Reference"\n';
+  markdown += `layout: "${layout}"\n`;
   markdown += "eleventyNavigation:\n";
-  markdown += "  key: API Reference\n";
-  markdown += "  title: API Reference\n";
+  markdown += '  key: "API Reference"\n';
+  markdown += '  title: "API Reference"\n';
   markdown += "---\n\n";
 
   markdown += "# API Reference\n\n";

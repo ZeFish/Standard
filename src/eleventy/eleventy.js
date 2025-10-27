@@ -14,25 +14,13 @@ import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
 import Image from "./image.js";
-import { addEncryptionTransform } from "./encryption.js";
 import CloudflarePlugin from "./cloudflare.js";
 import MenuPlugin from "./menu.js";
+import Syntax from "./syntax.js";
+import { createLogger } from "./logger.js";
+import EncryptionPlugin from "./encryption.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// ANSI color codes for console output
-const colors = {
-  reset: "\x1b[0m",
-  cyan: "\x1b[36m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  red: "\x1b[31m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  pink: "\x1b[35m",
-  grey: "\x1b[90m",
-  orange: "\x1b[38;5;208m",
-};
 
 // Read package.json for version
 const pkg = JSON.parse(
@@ -141,18 +129,20 @@ export default function (eleventyConfig, options = {}) {
       format: "auto",
     },
     menu = { enabled: true },
+    verbose = false,
   } = options;
 
   const ENV = process.env.ENV || "PROD";
+  const logger = createLogger({ verbose });
 
   eleventyConfig.addGlobalData("standard", {
     layout: {
       hola: [path.join(__dirname, "../layouts/standard.min.css")],
-      meta: "node_modules/@zefish/standard/src/layouts/meta.njk",
-      encrypted: "node_modules/@zefish/standard/src/layouts/encrypted.njk",
-      pageError: "node_modules/@zefish/standard/src/layouts/404.njk",
-      atomFeed: "node_modules/@zefish/standard/src/layouts/atomfeed.xsl",
-      sitemap: "node_modules/@zefish/standard/src/layouts/sitemap.xml.njk",
+      meta: [path.join(__dirname, "../layouts/meta.njk")],
+      encrypted: [path.join(__dirname, "../layouts/encrypted.njk")],
+      pageError: [path.join(__dirname, "../layouts/404.njk")],
+      atomFeed: [path.join(__dirname, "../layouts/atomfeed.xsl")],
+      sitemap: [path.join(__dirname, "../layouts/sitemap.xml.njk")],
     },
     options: options,
     comments: comments,
@@ -162,9 +152,10 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Filter);
   eleventyConfig.addPlugin(Backlinks);
   eleventyConfig.addPlugin(Markdown);
-  eleventyConfig.addPlugin(addEncryptionTransform);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
   eleventyConfig.addPlugin(ShortCode);
+  eleventyConfig.addPlugin(Syntax);
+  eleventyConfig.addPlugin(EncryptionPlugin);
 
   //const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -263,10 +254,15 @@ export default function (eleventyConfig, options = {}) {
 
   // Log plugin initialization after build completes
   eleventyConfig.on("eleventy.after", () => {
-    console.log(
-      `${colors.red}⚡⚡ Standard${colors.grey} | ${colors.reset}${pkg.version}${colors.grey} | ${colors.green}https://standard.ffp.co/cheet-sheat ⚡⚡${colors.reset}`,
-    );
+    logger.banner(pkg.version, "https://standard.ffp.co/cheat-sheet");
   });
+
+  /*
+  eleventyConfig.addGlobalData("eleventyComputed", {
+    theme: (data) => data.theme || "default",
+    visibility: (data) => data.visibility || "public",
+  });
+  */
 
   return {
     markdownTemplateEngine: "njk",

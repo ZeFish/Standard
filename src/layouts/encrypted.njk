@@ -1,373 +1,163 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cette page est protégée</title>
-    <style>
-        :root {
-            --primary-color: #d78a5a;
-            --error-color: #dc3545;
-            --space-block: #ffffff;
-            --text-color: #333333;
-            --color-border: #ddd;
-            --font-family: InterVariable, system-ui, -apple-system, sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-family);
-            margin: 0;
-            padding: 40px 20px;
-            background-color: var(--space-block);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            max-width: 400px;
-            width: 100%;
-            padding: 2rem;
-            background: white;
-        }
-
-        h2 {
-            margin: 0 0 1.5rem 0;
-            text-align: center;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            font-weight: 900;
-            font-feature-settings:
-                "dlig", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06",
-                "cv09", "cv10", "cv11", "cv12", "cv13";
-            font-variation-settings: "";
-            letter-spacing: -0.065em;
-            line-height: 0.75em;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            letter-spacing: -0.065em;
-            color: var(--text-color);
-        }
-
-        input[type="password"] {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--color-border);
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: inherit;
-            font-weight: 600;
-            letter-spacing: -0.065em;
-            transition: border-color 0.2s ease;
-            text-align:center;
-        }
-
-        input[type="password"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 124, 186, 0.1);
-        }
-
-        button {
-            width: 100%;
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            font-family: inherit;
-        }
-
-        button:hover {
-            background: color-mix(in srgb, var(--primary-color) 40%, var(--text-color));
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .error {
-            color: var(--error-color);
-            text-align: center;
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background: rgba(220, 53, 69, 0.1);
-            border-radius: 4px;
-            display: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 1rem;
-            color: var(--primary-color);
-        }
-
-        @font-face {
-	font-family: InterVariable;
-	font-style: normal;
-	font-weight: 100 900;
-	font-display: swap;
-	src: url('https://rsms.me/inter/font-files/InterVariable.woff2?v=4.0') format('woff2');
-          }
-          @font-face {
-	font-family: InterVariable;
-	font-style: italic;
-	font-weight: 100 900;
-	font-display: swap;
-	src: url('https://rsms.me/inter/font-files/InterVariable-Italic.woff2?v=4.0') format('woff2');
-          }
-          /* legacy name "Inter var" (Oct 2023) */
-          @font-face { font-family:'Inter var'; font-style:normal; font-weight:100 900; font-display:swap; src: url('https://rsms.me/inter/font-files/InterVariable.woff2?v=4.0') format('woff2'); }
-          @font-face { font-family:'Inter var'; font-style:italic; font-weight:100 900; font-display:swap; src: url('https://rsms.me/inter/font-files/InterVariable-Italic.woff2?v=4.0') format('woff2'); }
-          /* static fonts */
-          @font-face { font-family:Inter; font-style:normal; font-weight:100; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Thin.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:100; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-ThinItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:200; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-ExtraLight.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:200; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-ExtraLightItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:300; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Light.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:300; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-LightItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:400; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Regular.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:400; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Italic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:500; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Medium.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:500; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-MediumItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:600; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:600; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-SemiBoldItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:700; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Bold.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:700; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-BoldItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:800; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-ExtraBold.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:800; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-ExtraBoldItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:normal; font-weight:900; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-Black.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:Inter; font-style:italic; font-weight:900; font-display:swap; src:url("https://rsms.me/inter/font-files/Inter-BlackItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:100; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Thin.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:100; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-ThinItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:200; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-ExtraLight.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:200; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-ExtraLightItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:300; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Light.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:300; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-LightItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:400; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Regular.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:400; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Italic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:500; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Medium.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:500; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-MediumItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:600; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-SemiBold.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:600; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-SemiBoldItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:700; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Bold.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:700; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-BoldItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:800; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-ExtraBold.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:800; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-ExtraBoldItalic.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:normal; font-weight:900; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-Black.woff2?v=4.0") format("woff2"); }
-          @font-face { font-family:InterDisplay; font-style:italic; font-weight:900; font-display:swap; src:url("https://rsms.me/inter/font-files/InterDisplay-BlackItalic.woff2?v=4.0") format("woff2"); }
+<html lang="{{ site.language }}" class="rhythm" data-theme="{{ theme }}">
+    <head>
+    </head>
+    <link rel="stylesheet" href="/assets/standard/standard.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <body>
+     	<main class="prose md">
 
 
+<div class="encrypted-container">
+    <h2>Cette page est protégée par un mot de passe</h2>
 
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Cette page est protégée par un mot de passe</h2>
+    <form id="decrypt-form">
+        <div class="form-group">
+            <input
+                type="password"
+                id="password"
+                placeholder="Mot de passe"
+                required
+                autocomplete="current-password"
+            >
+        </div>
+        <button type="submit" id="unlock-btn">
+            <span class="btn-text">Déverrouiller</span>
+            <span class="btn-loading" style="display: none;">Déverrouillage...</span>
+        </button>
+    </form>
 
+    <div id="error" class="error">Mot de passe incorrect. Veuillez réessayer.</div>
+    <div id="loading" class="loading">Déchiffrement du contenu...</div>
+</div>
 
+<div id="encrypted-content" style="display: none;">{{ encryptedData }}</div>
 
-        <form id="decrypt-form">
-            <div class="form-group">
+<script>
+    const encryptedData = document.getElementById('encrypted-content').textContent;
+    const maxAttempts = 5;
+    let attempts = 0;
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Mot de passe"
-                    required
-                    autocomplete="current-password"
-                >
-            </div>
-            <button type="submit" id="unlock-btn">
-                <span class="btn-text">Déverrouiller</span>
-                <span class="btn-loading" style="display: none;">Déverrouillage...</span>
-            </button>
-        </form>
+    const form = document.getElementById('decrypt-form');
+    const passwordInput = document.getElementById('password');
+    const unlockBtn = document.getElementById('unlock-btn');
+    const errorDiv = document.getElementById('error');
+    const loadingDiv = document.getElementById('loading');
+    const btnText = unlockBtn.querySelector('.btn-text');
+    const btnLoading = unlockBtn.querySelector('.btn-loading');
 
-        <div id="error" class="error">Mot de passe incorrect. Veuillez réessayer.</div>
-        <div id="loading" class="loading">Déchiffrement du contenu...</div>
-    </div>
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const password = passwordInput.value;
+        if (!password) return;
+        await attemptDecryption(password);
+    });
 
-    <script>
-        const encryptedData = "{{ encryptedData }}";
-        const maxAttempts = 5;
-        let attempts = 0;
+    function setLoading(loading) {
+        unlockBtn.disabled = loading;
+        btnText.style.display = loading ? 'none' : 'inline';
+        btnLoading.style.display = loading ? 'inline' : 'none';
+        loadingDiv.style.display = loading ? 'block' : 'none';
+    }
 
-        const form = document.getElementById('decrypt-form');
-        const passwordInput = document.getElementById('password');
-        const unlockBtn = document.getElementById('unlock-btn');
-        const errorDiv = document.getElementById('error');
-        const loadingDiv = document.getElementById('loading');
-        const btnText = unlockBtn.querySelector('.btn-text');
-        const btnLoading = unlockBtn.querySelector('.btn-loading');
+    function showError(message) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        errorDiv.style.animation = 'shake 0.5s ease-in-out';
+        setTimeout(() => {
+            errorDiv.style.animation = '';
+        }, 500);
+    }
 
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
+    function hideError() {
+        errorDiv.style.display = 'none';
+    }
 
-            const password = passwordInput.value;
-            if (!password) return;
+    async function decrypt(encryptedData, password) {
+        try {
+            const encrypted = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+            const encoder = new TextEncoder();
+            const passwordBytes = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', passwordBytes);
+            const key = new Uint8Array(hashBuffer);
 
-            await attemptDecryption(password);
-        });
-
-        function setLoading(loading) {
-            unlockBtn.disabled = loading;
-            btnText.style.display = loading ? 'none' : 'inline';
-            btnLoading.style.display = loading ? 'inline' : 'none';
-            loadingDiv.style.display = loading ? 'block' : 'none';
-        }
-
-        function showError(message) {
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-
-            // Add shake animation
-            errorDiv.style.animation = 'shake 0.5s ease-in-out';
-            setTimeout(() => {
-                errorDiv.style.animation = '';
-            }, 500);
-        }
-
-        function hideError() {
-            errorDiv.style.display = 'none';
-        }
-
-        async function decrypt(encryptedData, password) {
-            try {
-                // Simple XOR decryption matching server-side implementation
-                const encrypted = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
-
-                // Generate key from password using SHA-256
-                const encoder = new TextEncoder();
-                const passwordBytes = encoder.encode(password);
-                const hashBuffer = await crypto.subtle.digest('SHA-256', passwordBytes);
-                const key = new Uint8Array(hashBuffer);
-
-                // XOR decrypt
-                const decrypted = new Uint8Array(encrypted.length);
-                for (let i = 0; i < encrypted.length; i++) {
-                    decrypted[i] = encrypted[i] ^ key[i % key.length];
-                }
-
-                const result = new TextDecoder().decode(decrypted);
-
-                // Basic validation that decryption worked
-                if (!result.includes('<!DOCTYPE') && !result.includes('<html')) {
-                    throw new Error('Invalid decryption result');
-                }
-
-                return result;
-            } catch (error) {
-                throw new Error('Decryption failed');
-            }
-        }
-
-        // Check for password in URL hash on page load
-        function checkHashPassword() {
-            const allowHashPassword = true;
-
-            if (!allowHashPassword) {
-                passwordInput.focus();
-                return;
+            const decrypted = new Uint8Array(encrypted.length);
+            for (let i = 0; i < encrypted.length; i++) {
+                decrypted[i] = encrypted[i] ^ key[i % key.length];
             }
 
-            const hash = window.location.hash;
-            if (hash && hash.length > 1) {
-                const passwordFromHash = hash.substring(1); // Remove the # character
-                if (passwordFromHash) {
-                    // Clear the hash from URL for security (if enabled)
-                    const clearHashOnLoad = true;
-                    if (clearHashOnLoad) {
-                        history.replaceState(null, null, window.location.pathname + window.location.search);
-                    }
+            const result = new TextDecoder().decode(decrypted);
+            return result;
+        } catch (error) {
+            throw new Error('Decryption failed');
+        }
+    }
 
-                    // Auto-decrypt with hash password
-                    attemptDecryption(passwordFromHash);
-                    return;
-                }
+    function isValidHTML(str) {
+        // Check if decrypted content looks like valid HTML
+        // Should contain common HTML tags and not be random garbage
+        const hasHTMLTags = /<[a-z][\s\S]*>/i.test(str);
+        const hasDoctype = /<!DOCTYPE/i.test(str);
+        const hasHtmlTag = /<html/i.test(str);
+
+        // Check for excessive non-printable characters (sign of bad decryption)
+        const nonPrintable = str.match(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F-\x9F]/g);
+        const nonPrintableRatio = nonPrintable ? nonPrintable.length / str.length : 0;
+
+        // Valid if it has HTML structure and low garbage ratio
+        return (hasHTMLTags || hasDoctype || hasHtmlTag) && nonPrintableRatio < 0.1;
+    }
+
+    async function attemptDecryption(password) {
+        if (attempts >= maxAttempts) {
+            showError('Trop de tentatives. Veuillez rafraîchir la page.');
+            return;
+        }
+
+        setLoading(true);
+        hideError();
+
+        try {
+            const decrypted = await decrypt(encryptedData, password);
+
+            // CRITICAL: Validate decrypted content before replacing
+            if (!isValidHTML(decrypted)) {
+                throw new Error('Invalid decryption result');
             }
 
-            // Auto-focus password input if no hash password
+            // Only replace if validation passed
+            const container = document.querySelector('.encrypted-container');
+            container.outerHTML = decrypted;
+
+        } catch (error) {
+            attempts++;
+            const remaining = maxAttempts - attempts;
+
+            if (remaining > 0) {
+                showError(`Mot de passe incorrect. Veuillez réessayer. (${remaining} tentatives restantes)`);
+            } else {
+                showError('Trop de tentatives. Veuillez rafraîchir la page.');
+                unlockBtn.disabled = true;
+            }
+
+            passwordInput.value = '';
             passwordInput.focus();
+        } finally {
+            setLoading(false);
         }
+    }
 
-        async function attemptDecryption(password) {
-            if (attempts >= maxAttempts) {
-                showError('Too many failed attempts. Please refresh the page.');
-                return;
-            }
-
-            setLoading(true);
-            hideError();
-
-            try {
-                const decrypted = await decrypt(encryptedData, password);
-
-                // Replace the current page with decrypted content
-                document.open();
-                document.write(decrypted);
-                document.close();
-
-            } catch (error) {
-                attempts++;
-                const remaining = maxAttempts - attempts;
-
-                if (remaining > 0) {
-                    showError(`Mot de passe incorrect. Veuillez réessayer. (${remaining} tentatives restantes)`);
-                } else {
-                    showError('Too many failed attempts. Please refresh the page.');
-                    unlockBtn.disabled = true;
-                }
-
-                passwordInput.value = '';
-                passwordInput.focus();
-            } finally {
-                setLoading(false);
-            }
+    // Check for password in URL hash
+    const hash = window.location.hash;
+    if (hash && hash.length > 1) {
+        const passwordFromHash = hash.substring(1);
+        if (passwordFromHash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+            attemptDecryption(passwordFromHash);
         }
-
-        // Check for hash password on page load
-        checkHashPassword();
-
-        // Add CSS animation for shake effect
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-
-    </script>
-</body>
+    } else {
+        passwordInput.focus();
+    }
+</script>
+	</body>
 </html>

@@ -248,7 +248,8 @@ export class DocParser {
 
       case "category":
       case "cat":
-        doc.category = content;
+        // Only take the first line as the category
+        doc.category = content.split("\n")[0].trim();
         break;
 
       case "param":

@@ -134,6 +134,8 @@
  * @param {string} options.fit Resize mode ('scale-down', 'contain', 'cover', 'crop', 'pad')
  */
 
+import { createLogger } from "./logger.js";
+
 export default function Image(eleventyConfig, options = {}) {
   const defaults = {
     enabled: false,
@@ -158,6 +160,11 @@ export default function Image(eleventyConfig, options = {}) {
     return;
   }
 
+  const logger = createLogger({
+    verbose: options.verbose,
+    scope: "Image",
+  });
+
   // ✅ NEW: Check environment and skip if in development
   const isDevelopment =
     process.env.ENV === "DEV" ||
@@ -165,7 +172,7 @@ export default function Image(eleventyConfig, options = {}) {
     process.env.ELEVENTY_ENV === "development";
 
   if (isDevelopment && config.skipInDev) {
-    console.log("[Standard Images] Skipped in development mode");
+    logger.warn("Skipped in development mode");
     return;
   }
 

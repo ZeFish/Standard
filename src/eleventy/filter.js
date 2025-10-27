@@ -430,4 +430,13 @@ export default function (eleventyConfig, options = {}) {
       return current !== value;
     });
   });
+
+  // Add external link class to URLs starting with http:// or https://
+  // Usage: {% if url | isExternal %}<a href="{{ url }}" class="external-link">{% endif %}
+  eleventyConfig.addFilter("isExternal", (url) => {
+    if (typeof url !== "string") {
+      return false;
+    }
+    return url.startsWith("http://") || url.startsWith("https://");
+  });
 }

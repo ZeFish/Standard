@@ -128,13 +128,24 @@ a:focus-visible {
 
 a.external-link::after {
     content: "↗";
+    position: relative;
+    text-decoration: none;
+    top: 2px;
+    left: 2px;
     font-size: var(--scale-xs);
-    opacity: var(--color-subtle);
-    color: var(--color-foreground);
+    color: var(--color-subtle);
 }
 
 :is(h1, h2, h3, h4, h5, h6) a {
     text-decoration: none;
+}
+
+/* ===== Navigation ===== */
+nav li a {
+    text-decoration: none;
+}
+nav li.is-active a {
+    text-decoration: underline;
 }
 
 /* ===== BUTTONS ===== */

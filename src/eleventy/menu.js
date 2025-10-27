@@ -131,6 +131,8 @@
  * @param {boolean} options.inline Horizontal layout (true) or stacked (false)
  */
 
+import { createLogger } from "./logger.js";
+
 function escapeHtml(str = "") {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -161,10 +163,6 @@ export default function MenuPlugin(eleventyConfig, options = {}) {
   };
 
   const config = { ...defaults, ...options };
-
-  if (!config.enabled) {
-    return;
-  }
 
   /**
    * Menu Shortcode
@@ -233,6 +231,4 @@ export default function MenuPlugin(eleventyConfig, options = {}) {
       label,
     )}"><ul class="${ulClasses}"${ulStyle}>${lis}</ul></nav>`;
   });
-
-  console.log("[Standard Menu] Enabled");
 }

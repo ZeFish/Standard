@@ -12,7 +12,7 @@
  * @prop {class} .small Narrow sidebar width container
  * @prop {class} .accent Accent container with background color
  * @prop {class} .feature Featured content with larger spacing
- * @prop {class} .full Full-width container
+ * @prop {class} .hero Full-width container
  * @prop {variable} --line-width-xs Extra small (24rem / 384px)
  * @prop {variable} --line-width-s Small (32rem / 512px)
  * @prop {variable} --line-width-m Medium (42rem / 672px) - default
@@ -59,7 +59,7 @@
     --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
     --content-accent: minmax(0, var(--space-l));
     --content-feature: minmax(0, var(--space-2xl));
-    --content-full: minmax(0, 1fr);
+    --content-hero: minmax(0, 1fr);
 }
 
 @media (max-width: #{$small}) {
@@ -74,13 +74,13 @@
 :where(.prose) {
     display: grid;
     grid-template-columns:
-        [full-start] var(--content-full)
+        [hero-start] var(--content-hero)
         [feature-start] var(--content-feature)
         [accent-start] var(--content-accent)
         [content-start] var(--content) [content-end]
         var(--content-accent) [accent-end]
         var(--content-feature) [feature-end]
-        var(--content-full) [full-end];
+        var(--content-hero) [hero-end];
 
     transition: grid-template-columns 0.3s ease-out;
 
@@ -107,12 +107,15 @@
         margin-inline: 0;
     }
 
-    .container-full {
-        grid-column: full;
+    .container-hero {
+        grid-column: hero;
         margin-inline: calc(
             (var(--space) * var(--body-padding-multiplier)) * -1
         );
-        padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+        /*padding-inline: calc(var(--space) * var(--body-padding-multiplier));*/
+        > * {
+            margin-inline: 0;
+        }
     }
 
     /* Image gallery layout */
@@ -218,7 +221,7 @@
         .container-small,
         .container-accent,
         .container-feature,
-        .container-full
+        .container-hero
     ) {
         > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
             margin-block-start: 0; /* No top margin */

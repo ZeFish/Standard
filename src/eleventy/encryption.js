@@ -1,6 +1,8 @@
 import { createHash } from "crypto";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import nunjucks from "nunjucks";
+import { readFile } from "fs/promises";
 
 /**
  * @component Content Encryption Plugin
@@ -28,11 +30,12 @@ import nunjucks from "nunjucks";
  * @since 0.1.0
  */
 
-export async function customEncryptHTML(html, password) {
-  const crypto = await import("crypto");
+// Get the directory name in ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+export async function customEncryptHTML(html, password) {
   // Simple XOR encryption with password
-  const key = crypto.createHash("sha256").update(password).digest();
+  const key = createHash("sha256").update(password).digest();
   const htmlBuffer = Buffer.from(html, "utf8");
   const encrypted = Buffer.alloc(htmlBuffer.length);
 
@@ -44,12 +47,13 @@ export async function customEncryptHTML(html, password) {
   const encryptedData = encrypted.toString("base64");
 
   // Configure Nunjucks to load templates from the 'includes' directory
-  nunjucks.configure(path.resolve("includes"), {
+  const includesPath = path.resolve(__dirname, "../layouts");
+  nunjucks.configure(includesPath, {
     autoescape: false, // Disable autoescaping for HTML content
   });
 
   // Render the Nunjucks template
-  const template = nunjucks.render("layouts/encrypted.njk", {
+  const template = nunjucks.render("encrypted.njk", {
     encryptedData,
   });
   return template;
@@ -60,8 +64,17 @@ export function addEncryptionTransform(eleventyConfig) {
     if (!this.page.inputPath.endsWith(".md")) return content;
 
     // Read the original file to get frontmatter since rawInput doesn't contain it
-    const fs = await import("fs/promises");
-    const fileContent = await fs.readFile(this.page.inputPath, "utf8");
+    let fileContent;
+    try {
+      fileContent = await readFile(this.page.inputPath, "utf8");
+    } catch (error) {
+      console.error(
+        "❌ Failed to read file:",
+        this.page.inputPath,
+        error.message,
+      );
+      return content;
+    }
 
     // Extract frontmatter from file content
     const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
@@ -105,4 +118,9 @@ export function addEncryptionTransform(eleventyConfig) {
       return content; // Return unencrypted content on error
     }
   });
+}
+
+// Export as default plugin function
+export default function (eleventyConfig) {
+  addEncryptionTransform(eleventyConfig);
 }
