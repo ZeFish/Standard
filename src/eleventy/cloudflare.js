@@ -22,7 +22,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  *
  * @example
  * // In eleventy.config.js
- * import Standard from "./src/eleventy/eleventy.js";
+ * import Standard from "./src/eleventy/standard.js";
  * import CloudflarePlugin from "./src/eleventy/cloudflare.js";
  *
  * export default function (eleventyConfig) {

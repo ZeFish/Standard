@@ -1,0 +1,48 @@
+[data-theme="mono"] {
+    --color-light-foreground: #100f0f;
+    --color-light-background: #fffcf0;
+
+    --color-light-red: #af3029;
+    --color-light-orange: #bc5215;
+    --color-light-yellow: #ad8301;
+    --color-light-green: #66800b;
+    --color-light-cyan: #142625;
+    --color-light-blue: #205ea6;
+    --color-light-purple: #5e409d;
+    --color-light-pink: #a02f6f;
+
+    /* Dark */
+
+    --color-dark-foreground: #fffcf0;
+    --color-dark-background: #100f0f;
+
+    --color-dark-red: #af3029;
+    --color-dark-orange: #bc5215;
+    --color-dark-yellow: #ad8301;
+    --color-dark-green: #66800b;
+    --color-dark-cyan: #142625;
+    --color-dark-blue: #205ea6;
+    --color-dark-purple: #5e409d;
+    --color-dark-pink: #a02f6f;
+
+    --color-accent: var(--text-normal);
+    --color-code: var(--text-normal);
+    --color-bold: var(--text-normal);
+    --color-italic: var(--text-normal);
+
+    --font-text: "Diatype";
+    --font-header: "InterVariable";
+    --font-monospace: "Diatype";
+    --font-interface: "Diatype";
+
+    --font-density: 1.2;
+    --font-letter-spacing: -0.02em;
+    /*--font-letter-spacing: 	0em;
+	--typo-ratio: 			1.425;
+	--font-text-size: 		18px;*/
+    --font-weight: 400;
+    --bold-weight: 700;
+    --font-feature:
+        "zero", "calt", "cv01", "cv07", "cv10", "cv11", "cv14", "cv16", "cv17",
+        "cv18", "ss01";
+}

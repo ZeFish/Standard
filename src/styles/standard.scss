@@ -22,8 +22,6 @@
  * @license MIT
  */
 
-@use "sanitize.css/sanitize.css";
-
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
@@ -39,9 +37,12 @@
 @use "standard-08-img";
 @use "standard-09-md";
 @use "standard-10-components";
+@use "standard-toast";
 @use "standard-97-print";
 @use "standard-98-utilities";
 @use "standard-99-debug";
+
+@import "sanitize.css/sanitize.css";
 
 /* Add to standard.css */
 

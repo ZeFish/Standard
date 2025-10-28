@@ -1,0 +1,6 @@
+
+> @zefish/standard@0.13.12 watch:11ty
+> eleventy --serve
+
+[31m⚡⚡ Standard[0m [36m[Syntax][0m [34mℹ[0m ✓ Syntax PreProcessor initialized
+[31m⚡⚡ Standard[0m [36m[Image][0m [33m⚠[0m Skipped in development mode

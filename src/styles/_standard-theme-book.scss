@@ -1,20 +1,124 @@
-[data-theme="swiss"] {
-    --shadow: none;
-    --border-radius: 0;
-    --border-color: var(--color-foreground);
+[data-theme="book"] {
+    --color-light-background: #fdfcf3;
+    --color-light-background: #f9f6ef; /* Seashell - Soft warmth, still feels like sunlight on paper. */
+    --color-light-background: #fdfdfc; /* Snow Drift - Near-white with the tiniest touch of warmth. */
+    --color-light-background: #fdf5e6; /* Old Lace - A classic — slightly more yellow but elegant. */
+    --color-light-background: #fefdf9; /* Ivory - Very subtle warmth, almost white — keeps it clean. */
+    --color-light-foreground: black;
 
-    --rhythm-multiplier: 1;
-    --rhythm-multiplier-block: 0;
+    --color-dark-background: #231e16;
+    --color-dark-background: oklch(19.28% 0.0101 70.89);
+    --color-dark-foreground: oklch(75.66% 0.0359 74.51);
 
-    table {
-        grid-column: content;
+    --color-background-secondary: color-mix(
+        in srgb,
+        var(--color-foreground) 2%,
+        var(--color-background)
+    );
+    --color-border: color-mix(
+        in srgb,
+        var(--color-foreground) 7%,
+        var(--color-background)
+    );
+
+    --font-ratio: 1.4;
+    --font-size: 1em;
+    --font-density: 1.5;
+    --marge-block: 1.5;
+    --font-text: Fern;
+    --font-interface: Fern;
+    --font-header: Fern;
+    --font-header-weight: 300;
+    --font-header-letter-spacing: 0em;
+    --font-header-line-height: 1em;
+
+    --font-weight: 450;
+
+    --font-feature: "liga", "onum", "kern";
+    --font-variation: "opsz" 8;
+    --font-header-feature: "liga", "onum", "kern";
+    --font-header-variation: "opsz" 12;
+
+    --color-accent: var(--color-red);
+    --color-italic: var(--color-foreground);
+    --color-bold: color-mix(
+        in srgb,
+        var(--color-foreground) 85%,
+        var(--color-background)
+    );
+    /*--bold-weight: 300;*/
+
+    --color-light-red: #b5483c; /* like aged brick or red clay */
+    --color-light-red: #a12314;
+    --color-light-orange: #c86a3d; /* terra cotta */
+    --color-light-yellow: #c2a84a; /* mustard parchment */
+    --color-light-green: #5e9d80; /* sage green */
+    --color-light-cyan: #6ba4b6; /* antique blue-grey */
+    --color-light-blue: #4f81a4; /* faded denim */
+    --color-light-purple: #7a6c91; /* dusk lavender */
+    --color-light-pink: #b97aa0; /* soft mauve rose */
+
+    /* Dark Mode Accent Colors */
+    --color-dark-red: #e57368; /* warm ember glow */
+    --color-dark-orange: #e88e5a; /* baked clay at dusk */
+    --color-dark-yellow: #e0c168; /* candlelight gold */
+    --color-dark-green: #7eb79c; /* moonlit sage */
+    --color-dark-cyan: #84c3d6; /* cool teal mist */
+    --color-dark-blue: #6da2c7; /* twilight lake */
+    --color-dark-purple: #a58fc0; /* smoky lilac */
+    --color-dark-pink: #e6a3d1; /* fading rose light */
+
+    article p {
+        font-weight: var(--font-weight);
     }
-    table,
-    table th,
-    table td,
-    table td code {
-        font-size: var(--scale-xs);
-        font-family: var(--font-monospace);
-        word-break: keep-all;
+
+    article hr,
+    article hr:not(:first-child) {
+        font-size: var(--scale);
+        line-height: var(--space);
+        padding: 0;
+        border: 0;
+        background: transparent;
     }
+    article hr::after {
+        content: "\2619 \2015 \2767";
+        text-align: center;
+        display: block;
+        font-family: "Fern";
+        position: relative;
+        top: calc(var(--space) * -0.4);
+        color: var(--color-border);
+    }
+
+    article > h1:first-child {
+        text-align: center;
+        grid-column: feature;
+        margin-bottom: var(--space-3xl);
+        font-size: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    }
+
+    article h1 {
+        text-align: center;
+        margin: 0 0 var(--space-2xl) 0;
+        letter-spacing: 0.15em;
+        /* /*text-transform: uppercase;* */
+        font-feature-settings: "liga", "onum", "kern", "smcp";
+    }
+}
+/*
+article p {
+    text-align: justify;
+}
+
+article p:not(:has(img), blockquote, .callout, pre, h1, h2, h3, h4, h5, h6, table, hr, ul, ol) + p:not(:has(img)) {
+    text-indent: var(--space);
+}
+*/
+
+@font-face {
+    font-family: "Fern";
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }

@@ -29,8 +29,49 @@
  */
 
 export default function (eleventyConfig, options = {}) {
+  // Extract options with defaults
+  const { outputDir = "assets/standard", comments = { enabled: false } } =
+    options;
+
+  // ===== SHORTCODES =====
+  // Shortcode to include Standard CSS and JS from local files
+  eleventyConfig.addShortcode("standardAssets", function () {
+    let html = "";
+
+    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css"><link rel="stylesheet" href="/${outputDir}/standard.theme.min.css">
+<script src="/${outputDir}/standard.bundle.full.js" type="module"></script></script>`;
+
+    // Add comments client library if comments are enabled
+    if (comments.enabled) {
+      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
+    }
+
+    return html;
+  });
+
+  // ===== SHORTCODES =====
+  // Shortcode to include Standard CSS and JS from local files
+  eleventyConfig.addShortcode("standardCss", function () {
+    let html = "";
+
+    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
+
+    // Add comments client library if comments are enabled
+    if (comments.enabled) {
+      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
+    }
+
+    return html;
+  });
+
+  eleventyConfig.addShortcode("standardLab", function (labOptions = {}) {
+    const { attributes = "" } = labOptions;
+
+    return `<script src="/${outputDir}/standard.lab.js" ${attributes}><\/script>`;
+  });
+
   eleventyConfig.addShortcode("bodyHtmx", function () {
-    return `hx-boost="true" hx-ext="preload" hx-target="body" hx-swap="innerHTML scroll:window:top"`;
+    return `hx-boost="true" hx-ext="preload" preload="mouseover" hx-target="body" hx-swap="innerHTML scroll:window:top"`;
   });
 
   // Shortcode to include Standard CSS and JS from local files

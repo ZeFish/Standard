@@ -1,0 +1,65 @@
+# Site Configuration
+title: My Website
+description: A beautiful website built with Standard Framework
+url: https://example.com
+
+author:
+  name: Your Name
+  email: you@example.com
+
+language: en
+
+# Standard Framework Configuration
+standard:
+  version: 0.10.53
+
+  css:
+    bundle: true
+    theme: true
+    minify: true
+
+  js:
+    bundle: true
+
+    htmx:
+      enabled: true
+      boost: true
+      preload: true
+      preloadTrigger: mousedown
+      extensions:
+        - preload
+
+    comments:
+      enabled: false
+
+    lab:
+      enabled: false
+
+  typography:
+    locale: en
+    smartQuotes: true
+    punctuation: true
+    widowPrevention: true
+    fractions: true
+    arrowsAndSymbols: true
+
+  assets:
+    outputDir: assets/standard
+    useCDN: false
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Blog
+    url: /blog/
+  - title: Contact
+    url: /contact/
+
+# Features
+features:
+  analytics: false
+  search: false
+  rss: true

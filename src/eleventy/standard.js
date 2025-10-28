@@ -65,7 +65,7 @@ const pkg = JSON.parse(
  *
  * @example
  * // Minimal setup (typography + CSS only)
- * import Standard from "./src/eleventy/eleventy.js";
+ * import Standard from "./src/eleventy/standard.js";
  *
  * export default function (eleventyConfig) {
  *   eleventyConfig.addPlugin(Standard);
@@ -137,23 +137,25 @@ export default function (eleventyConfig, options = {}) {
 
   eleventyConfig.addGlobalData("standard", {
     layout: {
-      hola: [path.join(__dirname, "../layouts/standard.min.css")],
-      meta: [path.join(__dirname, "../layouts/meta.njk")],
-      encrypted: [path.join(__dirname, "../layouts/encrypted.njk")],
-      pageError: [path.join(__dirname, "../layouts/404.njk")],
-      atomFeed: [path.join(__dirname, "../layouts/atomfeed.xsl")],
-      sitemap: [path.join(__dirname, "../layouts/sitemap.xml.njk")],
+      hola: path.join(__dirname, "../layouts/standard.min.css"),
+      meta: path.join(__dirname, "../layouts/meta.njk"),
+      encrypted: path.join(__dirname, "../layouts/encrypted.njk"),
+      pageError: path.join(__dirname, "../layouts/404.njk"),
+      atomFeed: path.join(__dirname, "../layouts/atomfeed.xsl"),
+      sitemap: path.join(__dirname, "../layouts/sitemap.xml.njk"),
     },
     options: options,
     comments: comments,
   });
 
+  logger.info("Plugin Loading...");
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
   eleventyConfig.addPlugin(Filter);
   eleventyConfig.addPlugin(Backlinks);
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
-  eleventyConfig.addPlugin(ShortCode);
+  eleventyConfig.addPlugin(ShortCode, { outputDir, comments });
+  eleventyConfig.addPlugin(MenuPlugin, options.menu);
   eleventyConfig.addPlugin(Syntax);
   eleventyConfig.addPlugin(EncryptionPlugin);
 
@@ -161,14 +163,9 @@ export default function (eleventyConfig, options = {}) {
 
   // Register Images Plugin
   if (options.image && options.image.enabled) {
-    eleventyConfig.addPlugin(Image, options.image);
+    //eleventyConfig.addPlugin(Image, options.image);
   }
-
-  // Register Menu Plugin
-  if (options.menu && options.menu.enabled) {
-    eleventyConfig.addPlugin(MenuPlugin, options.menu);
-  }
-  eleventyConfig.addPlugin(MenuPlugin, options.menu);
+  logger.info("Plugin Loaded.");
 
   eleventyConfig.setUseGitIgnore(false);
 
@@ -182,27 +179,31 @@ export default function (eleventyConfig, options = {}) {
     eleventyConfig.addPassthroughCopy({
       [path.join(__dirname, "../../dist/standard.min.css")]:
         `${outputDir}/standard.min.css`,
+      [path.join(__dirname, "../../dist/standard.bundle.css")]:
+        `${outputDir}/standard.bundle.css`,
       [path.join(__dirname, "../../dist/standard.theme.min.css")]:
         `${outputDir}/standard.theme.min.css`,
       [path.join(__dirname, "../../dist/standard.min.js")]:
         `${outputDir}/standard.min.js`,
+      [path.join(__dirname, "../../dist/standard.bundle.js")]:
+        `${outputDir}/standard.bundle.js`,
+      [path.join(__dirname, "../../dist/standard.bundle.full.js")]:
+        `${outputDir}/standard.bundle.full.js`,
       [path.join(__dirname, "../../dist/standard.lab.js")]:
         `${outputDir}/standard.lab.js`,
-      "node_modules/htmx.org/dist/htmx.min.js": `${outputDir}/htmx.min.js`,
-      [path.join(__dirname, "../../dist/standard.lab.js")]:
-        `${outputDir}/standard.lab.js`,
-      "node_modules/htmx.org/dist/ext/preload.js": `${outputDir}/htmx.preload.js`,
     });
   }
 
   // ===== CLOUDFLARE FUNCTIONS INTEGRATION =====
   if (cloudflare.enabled) {
     // Add the Cloudflare plugin with the config
+    /*
     eleventyConfig.addPlugin(CloudflarePlugin, {
       outputDir: cloudflare.outputDir,
       environment: cloudflare.environment,
       env: cloudflare.env || {},
     });
+  */
 
     // When Cloudflare is enabled, automatically enable comments system
     comments.enabled = true;
@@ -217,45 +218,6 @@ export default function (eleventyConfig, options = {}) {
     });
   }
 
-  // ===== SHORTCODES =====
-  // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardAssets", function () {
-    let html = "";
-
-    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css"><link rel="stylesheet" href="/${outputDir}/standard.theme.min.css">
-<script src="/${outputDir}/standard.min.js" type="module"></script></script>
-<script src="/${outputDir}/htmx.min.js"></script>
-<script src="/${outputDir}/htmx.preload.js"></script>`;
-
-    // Add comments client library if comments are enabled
-    if (comments.enabled) {
-      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
-    }
-
-    return html;
-  });
-
-  // ===== SHORTCODES =====
-  // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardCss", function () {
-    let html = "";
-
-    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
-
-    // Add comments client library if comments are enabled
-    if (comments.enabled) {
-      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
-    }
-
-    return html;
-  });
-
-  eleventyConfig.addShortcode("standardLab", function (options = {}) {
-    const { attributes = "" } = options;
-
-    return `<script src="/${outputDir}/standard.lab.js" ${attributes}><\/script>`;
-  });
-
   // Log plugin initialization after build completes
   eleventyConfig.on("eleventy.after", () => {
     logger.banner(pkg.version, "https://standard.ffp.co/cheat-sheet");
@@ -267,7 +229,7 @@ export default function (eleventyConfig, options = {}) {
     visibility: (data) => data.visibility || "public",
   });
   */
-
+  logger.info("Returning configuration");
   return {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",

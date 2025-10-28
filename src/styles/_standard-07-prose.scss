@@ -203,6 +203,30 @@
             var(--space-xs) * var(--rhythm-multiplier) * -1
         );
     }
+    hr + h2,
+    hr + h3,
+    hr + h4,
+    hr + h5,
+    hr + h6 {
+        margin-block-start: 0;
+    }
+    blockquote + h2,
+    blockquote + h3,
+    blockquote + h4,
+    blockquote + h5,
+    blockquote + h6,
+    pre + h2,
+    pre + h3,
+    pre + h4,
+    pre + h5,
+    pre + h6 {
+        margin-block-start: var(--space);
+    }
+    h2 + pre,
+    h3 + pre,
+    h4 + pre {
+        margin-block-start: var(--space);
+    }
 
     :where(
         section,

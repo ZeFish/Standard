@@ -37,7 +37,7 @@ const colors = {
 export function createLogger(options = {}) {
   const { verbose = false, scope = null } = options;
 
-  const prefix = `${colors.red}⚡⚡ Standard${colors.reset}`;
+  const prefix = `${colors.red}[ :: ] Standard${colors.reset}`;
   const scopeText = scope ? `${colors.cyan}[${scope}]${colors.reset}` : "";
 
   /**
@@ -93,7 +93,7 @@ export function createLogger(options = {}) {
      */
     banner(version, url = "https://standard.ffp.co") {
       console.log(
-        `${colors.red}⚡⚡ Standard${colors.grey} | ${colors.reset}${version}${colors.grey} | ${colors.green}${url} ⚡⚡${colors.reset}`,
+        `${prefix} | ${colors.reset}${version}${colors.grey} | ${colors.green}${url} ⚡⚡${colors.reset}`,
       );
     },
   };

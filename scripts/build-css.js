@@ -8,7 +8,31 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const srcDir = path.join(__dirname, "../src/styles");
 const distDir = path.join(__dirname, "../dist");
 
+// ========================================
+// CONFIGURATION - Edit files to bundle here
+// ========================================
+
+const SCSS_FILES = [
+  {
+    input: "standard.scss", // Source SCSS file
+    output: "standard.min.css", // Output CSS file
+  },
+  {
+    input: "standard.theme.scss",
+    output: "standard.theme.min.css",
+  },
+];
+
+const BUNDLE_FILES = [
+  "standard.min.css", // Files to bundle (in order)
+  "standard.theme.min.css",
+];
+
+const BUNDLE_OUTPUT = "standard.bundle.css"; // Final bundle name
+
 const isWatch = process.argv.includes("--watch");
+
+// ========================================
 
 async function buildCSS() {
   console.log("🎨 Building CSS files...\n");
@@ -19,40 +43,32 @@ async function buildCSS() {
   }
 
   try {
-    // Step 1: Compile SCSS
-    console.log("📦 Compiling SCSS");
+    // Step 1: Compile SCSS files
+    console.log("📦 Step 1: Compiling SCSS");
 
-    const standardResult = compile(path.join(srcDir, "standard.scss"), {
-      style: "compressed",
+    for (const file of SCSS_FILES) {
+      const result = compile(path.join(srcDir, file.input), {
+        style: "compressed",
+      });
+
+      fs.writeFileSync(path.join(distDir, file.output), result.css);
+
+      console.log(
+        `   ✅ ${file.output} (${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)`,
+      );
+    }
+
+    // Step 2: Bundle CSS files
+    console.log("\n📦 Step 2: Bundling CSS");
+
+    const cssContents = BUNDLE_FILES.map((filename) => {
+      return fs.readFileSync(path.join(distDir, filename), "utf8");
     });
-    fs.writeFileSync(
-      path.join(distDir, "standard.min.css"),
-      standardResult.css
-    );
-    console.log(`   ✅ standard.min.css (${(Buffer.byteLength(standardResult.css) / 1024).toFixed(2)} KB)`);
 
-    const themeResult = compile(path.join(srcDir, "standard-theme.scss"), {
-      style: "compressed",
-    });
-    fs.writeFileSync(
-      path.join(distDir, "standard.theme.min.css"),
-      themeResult.css
-    );
-    console.log(`   ✅ standard.theme.min.css (${(Buffer.byteLength(themeResult.css) / 1024).toFixed(2)} KB)`);
+    const bundledCss = cssContents.join("\n\n");
 
-    // Step 2: Bundle & Minify
-    console.log("\n📦 Bundling and minifying");
-
-    const standardCss = fs.readFileSync(
-      path.join(distDir, "standard.min.css"),
-      "utf8"
-    );
-    const themeCss = fs.readFileSync(
-      path.join(distDir, "standard.theme.min.css"),
-      "utf8"
-    );
-
-    const bundledCss = [standardCss, themeCss].join("\n\n");
+    // Step 3: Minify bundle
+    console.log("\n📦 Step 3: Minifying bundle");
 
     const minifier = new CleanCSS({
       level: 2,
@@ -65,20 +81,15 @@ async function buildCSS() {
       throw new Error(minified.errors.join("\n"));
     }
 
-    fs.writeFileSync(
-      path.join(distDir, "standard.bundle.css"),
-      minified.styles
-    );
+    fs.writeFileSync(path.join(distDir, BUNDLE_OUTPUT), minified.styles);
 
     const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
-    console.log(`   ✅ standard.bundle.css (${minifiedSize.toFixed(2)} KB)`);
+    console.log(`   ✅ ${BUNDLE_OUTPUT} (${minifiedSize.toFixed(2)} KB)`);
 
     console.log("\n✅ CSS build complete!\n");
   } catch (error) {
     console.error("❌ CSS build failed:", error.message);
-    if (!isWatch) {
-      process.exit(1);
-    }
+    process.exit(1);
   }
 }
 
@@ -87,8 +98,8 @@ await buildCSS();
 
 // Watch mode
 if (isWatch) {
-  console.log("👀 Watching for changes...\n");
-  
+  console.log("👀 Watching SCSS files for changes...\n");
+
   fs.watch(srcDir, { recursive: true }, async (eventType, filename) => {
     if (filename && filename.endsWith(".scss")) {
       console.log(`\n📝 Changed: ${filename}`);

@@ -1,4 +1,4 @@
-import Standard from "./src/eleventy/eleventy.js";
+import Standard from "./src/eleventy/standard.js";
 import DocGenerator from "./src/eleventy/doc-generator.js";
 
 import { fileURLToPath } from "url";
@@ -54,7 +54,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(Standard, {
     cloudflare: { enabled: true },
     image: {
-      enabled: true,
+      enabled: false,
       cdn: "cloudflare", // Uses Cloudflare Pages' free image resizing
       baseUrl: "https://standard.ffp.co", // Your Cloudflare Pages domain
       sizes: [640, 960, 1280, 1920],
@@ -85,7 +85,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("README.md");
   eleventyConfig.addWatchTarget("claude.md");
 
-  eleventyConfig.addWatchTarget("src/");
+  eleventyConfig.addWatchTarget("src/eleventy");
   eleventyConfig.on("eleventy.before", () => {
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");

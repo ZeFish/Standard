@@ -8,11 +8,11 @@
     {% standardLab %}
     <link rel="stylesheet" href="/assets/css/style.css">
     <body {% bodyHtmx %}>
-		<header class="flex" style="justify-content: space-between; align-items: center; max-width: 100%;">
+		<header class="flex center-content" style="justify-content: space-between; max-width: 100%;">
 			<div class="flex" style="align-items: left;">
 				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
 			</div>
-			{% menu site.nav.header, {className: "smaller margin-0 padding-0"} %}
+			{% menu site.nav.header, {className: "small margin-0 padding-0"} %}
 		</header>
      	<main class="prose md">
         {{ content | safe }}
