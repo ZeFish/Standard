@@ -96,12 +96,13 @@
         margin-inline: var(--content-small);
     }
 
+    table,
+    .table-wrapper,
     .container-accent {
         grid-column: accent;
         margin-inline: 0;
     }
 
-    table,
     .container-feature {
         grid-column: feature;
         margin-inline: 0;

@@ -1,65 +1,30 @@
-# Site Configuration
-title: My Website
-description: A beautiful website built with Standard Framework
-url: https://example.com
-
+title: "Standard Framework"
+url: "https://standard.ffp.co"
+docs: "https://standard.ffp.co/docs"
+language: "fr"
+description: ""
+keywords: ""
 author:
-  name: Your Name
-  email: you@example.com
-
-language: en
-
-# Standard Framework Configuration
-standard:
-  version: 0.10.53
-
-  css:
-    bundle: true
-    theme: true
-    minify: true
-
-  js:
-    bundle: true
-
-    htmx:
-      enabled: true
-      boost: true
-      preload: true
-      preloadTrigger: mousedown
-      extensions:
-        - preload
-
-    comments:
-      enabled: false
-
-    lab:
-      enabled: false
-
-  typography:
-    locale: en
-    smartQuotes: true
-    punctuation: true
-    widowPrevention: true
-    fractions: true
-    arrowsAndSymbols: true
-
-  assets:
-    outputDir: assets/standard
-    useCDN: false
-
-# Navigation
-navigation:
-  - title: Home
-    url: /
-  - title: About
-    url: /about/
-  - title: Blog
-    url: /blog/
-  - title: Contact
-    url: /contact/
-
-# Features
-features:
-  analytics: false
-  search: false
-  rss: true
+  name: "Francis Fontaine"
+  email: "francisfontaine@gmail.com"
+  url: "https://francisfontaine.com/now/"
+  twitter: "francisfontaine"
+social:
+  twitter: "@francisfontaine"
+  instagram: "@francisfontaine"
+nav:
+  header:
+    - label: "Docs"
+      url: "/docs/"
+    - label: "Getting Started"
+      url: "/getting-started/"
+    - label: "Cheat Sheet"
+      url: "/cheat-sheet/"
+  footer:
+    - label: "Privacy"
+      url: "/privacy/"
+    - label: "Terms"
+      url: "/terms/"
+    - label: "GitHub"
+      url: "https://github.com/yourname"
+      external: true

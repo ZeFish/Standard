@@ -1063,7 +1063,7 @@
         left: 0;
         background: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.1) 0%,
+            var(--color-background) 0%,
             transparent 100%
         );
         opacity: 0;
@@ -1075,7 +1075,7 @@
         right: 0;
         background: linear-gradient(
             to left,
-            rgba(0, 0, 0, 0.1) 0%,
+            var(--color-background) 0%,
             transparent 100%
         );
     }

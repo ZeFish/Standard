@@ -147,7 +147,7 @@
     --line-height-normal: 1.7em;
     --font-size: 1rem;
     --font-density: 1.1;
-    --font-ratio: var(--ratio-golden);
+    --font-ratio: var(--ratio-silver);
 
     --rhythm-multiplier: 1;
     --rhythm-multiplier-block: 0;
@@ -194,10 +194,10 @@
     h1,
     > h1:where(:first-child) {
         margin-block-start: calc(var(--space) * 8);
-        margin-block-end: calc(var(--space) * 8);
+        margin-block-end: calc(var(--space) * 10);
     }
     h1:first-child + p {
-        margin-block-start: calc(var(--space) * -6);
+        margin-block-start: calc(var(--space) * -8);
     }
 
     body::before {

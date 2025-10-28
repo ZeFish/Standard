@@ -13,6 +13,7 @@ import Markdown from "./markdown.js";
 import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
+import Transform from "./transform.js";
 import Image from "./image.js";
 import CloudflarePlugin from "./cloudflare.js";
 import MenuPlugin from "./menu.js";
@@ -150,6 +151,7 @@ export default function (eleventyConfig, options = {}) {
 
   logger.info("Plugin Loading...");
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
+  eleventyConfig.addPlugin(Transform);
   eleventyConfig.addPlugin(Filter);
   eleventyConfig.addPlugin(Backlinks);
   eleventyConfig.addPlugin(Markdown);

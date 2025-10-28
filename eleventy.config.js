@@ -4,50 +4,24 @@ import DocGenerator from "./src/eleventy/doc-generator.js";
 import { fileURLToPath } from "url";
 import { dirname, resolve, join } from "path";
 import fs from "fs";
+import yaml from "js-yaml";
+import path from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(
   fs.readFileSync(resolve(__dirname, "package.json"), "utf-8"),
 );
 
-const site = {
-  title: "Standard Framework",
-  url: "https://standard.ffp.co",
-  version: pkg.version,
-  docs: "https://standard.ffp.co/docs",
-  language: "fr",
-  description: "",
-  keywords: "",
-  author: {
-    name: "Francis Fontaine",
-    email: "francisfontaine@gmail.com",
-    url: "https://francisfontaine.com/now/",
-    twitter: "francisfontaine",
-  },
-  social: {
-    twitter: "@francisfontaine",
-    instagram: "@francisfontaine",
-  },
-  nav: {
-    header: [
-      { label: "Docs", url: "/docs/" },
-      { label: "Getting Started", url: "/getting-started/" },
-      { label: "Cheat Sheet", url: "/cheat-sheet/" },
-    ],
-    footer: [
-      { label: "Privacy", url: "/privacy/" },
-      { label: "Terms", url: "/terms/" },
-      { label: "GitHub", url: "https://github.com/yourname", external: true },
-    ],
-  },
-};
-
 export default function (eleventyConfig) {
+  const basePath = path.join(__dirname, "site.config.yml");
+  const baseConfig = yaml.load(fs.readFileSync(basePath, "utf8"));
+  eleventyConfig.addGlobalData("site", baseConfig);
+  eleventyConfig.addGlobalData("version", pkg.version);
+
   eleventyConfig.setInputDirectory("content");
   eleventyConfig.setIncludesDirectory("../src/layouts");
   eleventyConfig.setOutputDirectory("_site");
 
-  eleventyConfig.addGlobalData("site", site); // 👈 Add metadata globally
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
 
