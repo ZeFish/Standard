@@ -26,8 +26,8 @@ import yaml from "js-yaml";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = process.cwd();
-const srcDir = path.join(projectRoot, "src/styles");
-let distDir = path.join(projectRoot, "dist");
+let srcDir = path.join(projectRoot, "src/styles");
+let destDir = path.join(projectRoot, "public/assets/css");
 
 const isWatch = process.argv.includes("--watch");
 const isDev = process.argv.includes("--dev") || isWatch; // --dev or --watch = dev mode
@@ -61,8 +61,12 @@ if (fs.existsSync(configPath)) {
     config = fullConfig.build?.css || {};
 
     // Override distDir if outputDir is specified in config
+    if (config.srcDir) {
+      srcDir = path.join(projectRoot, config.srcDir);
+    }
+    // Override distDir if outputDir is specified in config
     if (config.outputDir) {
-      distDir = path.join(projectRoot, config.outputDir);
+      destDir = path.join(projectRoot, config.outputDir);
     }
   } catch (error) {
     console.warn(
@@ -94,12 +98,12 @@ const BUNDLE_OUTPUT = BUNDLE_CONFIG.output;
 
 // Override distDir based on mode
 if (isDev && config.devOutputDir) {
-  distDir = path.join(projectRoot, config.devOutputDir);
+  destDir = path.join(projectRoot, config.devOutputDir);
 } else if (isDev) {
   // Default dev output: straight to _site
-  distDir = path.join(projectRoot, "_site/assets/standard");
+  destDir = path.join(projectRoot, "_site/assets/standard");
 } else if (config.outputDir) {
-  distDir = path.join(projectRoot, config.outputDir);
+  destDir = path.join(projectRoot, config.outputDir);
 }
 
 // ========================================
@@ -108,8 +112,8 @@ async function buildCSS() {
   //console.log(`${prefix}🎨 Building CSS files...`);
 
   // Ensure dist exists
-  if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true });
   }
 
   try {
@@ -121,7 +125,7 @@ async function buildCSS() {
         style: "compressed",
       });
 
-      fs.writeFileSync(path.join(distDir, file.output), result.css);
+      fs.writeFileSync(path.join(destDir, file.output), result.css);
 
       console.log(
         `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)`,
@@ -132,7 +136,7 @@ async function buildCSS() {
     //console.log(`${prefix}📦 Step 2: Bundling CSS`);
 
     const cssContents = BUNDLE_FILES.map((filename) => {
-      return fs.readFileSync(path.join(distDir, filename), "utf8");
+      return fs.readFileSync(path.join(destDir, filename), "utf8");
     });
 
     const bundledCss = cssContents.join("\n\n");
@@ -151,7 +155,7 @@ async function buildCSS() {
       throw new Error(minified.errors.join("\n"));
     }
 
-    fs.writeFileSync(path.join(distDir, BUNDLE_OUTPUT), minified.styles);
+    fs.writeFileSync(path.join(destDir, BUNDLE_OUTPUT), minified.styles);
 
     const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
     console.log(
