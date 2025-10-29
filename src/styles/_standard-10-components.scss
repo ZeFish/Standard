@@ -1022,7 +1022,7 @@
     position: relative;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: auto;
     margin-block-end: var(--space);
 
     /* Smooth scrolling with momentum */
