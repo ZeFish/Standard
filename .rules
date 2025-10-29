@@ -1,17 +1,8 @@
----
-title: Claude Architecture Guide
-description: AI-friendly architecture documentation for Standard Framework developers
-permalink: /claude/
-eleventyNavigation:
-  key: Claude Guide
-  parent: Documentation
----
-
 AI RULES
 
 **Purpose**: Help Claude AI (and other developers) understand the Standard Framework codebase quickly and effectively.
 
-> 📖 **This guide is rendered as a web page** at `https://standard.ffp.co/claude/` during build (synced from root via eleventy.config.js)
+
 
 ---
 

@@ -2,42 +2,24 @@ import Standard from "./src/eleventy/standard.js";
 import DocGenerator from "./src/eleventy/doc-generator.js";
 
 import { fileURLToPath } from "url";
-import { dirname, resolve, join } from "path";
+import { dirname, join } from "path";
 import fs from "fs";
-import yaml from "js-yaml";
-import path from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const pkg = JSON.parse(
-  fs.readFileSync(resolve(__dirname, "package.json"), "utf-8"),
-);
 
 export default function (eleventyConfig) {
-  eleventyConfig.addGlobalData("version", pkg.version);
-
-  eleventyConfig.setInputDirectory("content");
-  eleventyConfig.setIncludesDirectory("../src/layouts");
-  eleventyConfig.setOutputDirectory("_site");
-
-  eleventyConfig.addGlobalData("layout", "base");
-  eleventyConfig.addGlobalData("now", new Date()); // For dynamic year in footer
-
+  eleventyConfig.setUseGitIgnore(false);
+  // ===== STANDARD FRAMEWORK PLUGIN =====
+  // Uses smart defaults:
+  // - dirs: { input: "content", includes: "../src/layouts", output: "_site" }
+  // - publicDir: "../public" (copies to _site/ root)
+  // - Watches: src/scss/, src/js/, .trigger
+  // - Server: Hot-reloads _site/assets/**
   eleventyConfig.addPlugin(Standard, {
-    cloudflare: { enabled: true },
-    image: {
-      enabled: false,
-      cdn: "cloudflare", // Uses Cloudflare Pages' free image resizing
-      baseUrl: "https://standard.ffp.co", // Your Cloudflare Pages domain
-      sizes: [640, 960, 1280, 1920],
-      quality: 85,
-      format: "auto", // Cloudflare automatically serves WebP/AVIF
-      sharpen: 0.5,
-      skipExternal: true,
-      generateSrcset: true,
-      lazyLoad: false,
-    },
+    verbose: false, // Set to true for debugging
   });
 
+  // ===== AUTO-DOCUMENTATION GENERATOR =====
   eleventyConfig.addPlugin(DocGenerator, {
     sourceDir: "src",
     patterns: [
@@ -49,25 +31,20 @@ export default function (eleventyConfig) {
     outputDir: "content/docs",
   });
 
-  // Copy files to output
+  // ===== ADDITIONAL ASSET FOLDERS =====
+  // Standard copies public/ automatically, but if you also have content/assets:
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
 
+  // ===== WATCH IGNORES =====
+  // Standard watches src/eleventy/ automatically, but ignore compiled files
+  eleventyConfig.watchIgnores.add("**/dist/**");
+  eleventyConfig.watchIgnores.add("**/.cache/**");
+
+  // ===== README SYNC =====
+  // Sync README.md to content/ before each build
   eleventyConfig.addWatchTarget("README.md");
 
-  // Ignore src/js and src/styles - they are watched by build scripts
-  eleventyConfig.addWatchTarget("src/eleventy");
-  eleventyConfig.watchIgnores.add("**/src/js/**");
-  eleventyConfig.watchIgnores.add("**/src/styles/**");
-  eleventyConfig.watchIgnores.add("**/dist/**");
-
-  // Configure dev server to watch files for browser reload only (no rebuild)
-  eleventyConfig.setServerOptions({
-    watch: ["**/_site/assets/standard/**/*.css", "**/_site/assets/standard/**/*.js"],
-    watchDelay: 100,
-  });
-
   eleventyConfig.on("eleventy.before", () => {
-    // Sync README.md
     const readmeSrc = join(__dirname, "README.md");
     const readmeDest = join(__dirname, "content", "README.md");
 
@@ -78,27 +55,32 @@ export default function (eleventyConfig) {
         ? fs.readFileSync(readmeDest, "utf-8")
         : null;
 
-      // Only write if content has changed to prevent infinite watch loop
+      // Only write if changed (prevents infinite watch loop)
       if (!destExists || srcContent !== destContent) {
         fs.writeFileSync(readmeDest, srcContent, "utf-8");
       }
     }
   });
 
+  // ===== COMPUTED DATA =====
   eleventyConfig.addGlobalData("eleventyComputed", {
+    // Special handling for README.md
     title: (data) => {
       if (data.page.fileSlug.toLowerCase() === "readme") {
         return "Standard Framework";
       }
+      return data.title; // Fallback to frontmatter
     },
-    theme: (data) => {
-      const pageTheme = data.theme || "default";
-      return pageTheme === "default" ? "paper" : pageTheme;
-    },
-    visibility: (data) => data.visibility || "public",
   });
-
+  // ===== RETURN CONFIG =====
+  // Standard plugin already returns these, but explicit is fine
   return {
-    markdownTemplateEngine: false, // disables Nunjucks in Markdown files
+    markdownTemplateEngine: false, // Disable Nunjucks in Markdown
+    htmlTemplateEngine: "njk",
+    dir: {
+      input: "content",
+      includes: "../src/layouts",
+      output: "_site",
+    },
   };
 }

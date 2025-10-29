@@ -20,14 +20,6 @@ nav:
       url: "/getting-started/"
     - label: "Cheat Sheet"
       url: "/cheat-sheet/"
-  footer:
-    - label: "Privacy"
-      url: "/privacy/"
-    - label: "Terms"
-      url: "/terms/"
-    - label: "GitHub"
-      url: "https://github.com/yourname"
-      external: true
 
 # ========================================
 # BUILD CONFIGURATION

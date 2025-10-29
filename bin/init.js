@@ -108,36 +108,23 @@ build:
   const eleventyConfig = `import Standard from "@zefish/standard";
 
 export default function (eleventyConfig) {
+  eleventyConfig.setInputDirectory("content/");
+  eleventyConfig.setIncludesDirectory("../src/layouts");
+
   // Add Standard Framework plugin
   eleventyConfig.addPlugin(Standard, {
-    outputDir: "assets/standard",
-    copyFiles: true,
-    cloudflare: { enabled: false },
   });
-
-  // Configure input/output directories
-  eleventyConfig.setInputDirectory("content");
-  eleventyConfig.setIncludesDirectory("../src/layouts");
-  eleventyConfig.setOutputDirectory("_site");
 
   // Add default layout
   eleventyConfig.addGlobalData("layout", "base");
 
   // Copy assets to output
-  eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "public": "." });
 
   // Ignore src/js and src/styles - they are watched by build scripts
   eleventyConfig.watchIgnores.add("src/js/**");
   eleventyConfig.watchIgnores.add("src/styles/**");
-
-  // Also ignore public files from triggering rebuilds
   eleventyConfig.watchIgnores.add("public/**");
-
-  // Configure dev server to watch files for browser reload only (no rebuild)
-  eleventyConfig.setServerOptions({
-    watch: [".trigger-reload"],
-  });
 
   return {
     markdownTemplateEngine: "njk",

@@ -12,7 +12,7 @@
  *
  * Configuration:
  *   Read from ./site.config.yml in the project root (build.js section)
- *   Falls back to sensible defaults if config is missing
+ *   Exits if no config found
  *
  * @since 0.14.0
  */
@@ -25,13 +25,11 @@ import yaml from "js-yaml";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = process.cwd();
-const srcDir = path.join(projectRoot, "src/js");
-let distDir = path.join(projectRoot, "dist");
+let srcDir = path.join(projectRoot, "src/js");
+let destDir = path.join(projectRoot, "public/assets/js");
 
 const isWatch = process.argv.includes("--watch");
-const isDev = process.argv.includes("--dev") || isWatch; // --dev or --watch = dev mode
-
-
+const isDev = process.argv.includes("--dev") || isWatch;
 
 const colors = {
   reset: "\x1b[0m",
@@ -51,95 +49,79 @@ const prefix = `${colors.grey}::std  ${colors.reset}${colors.cyan}[JS ]${colors.
 // LOAD CONFIGURATION FROM site.config.yml
 // ========================================
 
-let config = {};
 const configPath = path.join(projectRoot, "site.config.yml");
 
-if (fs.existsSync(configPath)) {
-  try {
-    const configContent = fs.readFileSync(configPath, "utf-8");
-    const fullConfig = yaml.load(configContent);
-    config = fullConfig.build?.js || {};
-
-    // Override distDir if outputDir is specified in config
-    if (config.outputDir) {
-      distDir = path.join(projectRoot, config.outputDir);
-    }
-  } catch (error) {
-    console.warn(
-      `${prefix}⚠️  Failed to parse site.config.yml: ${error.message}`,
-    );
-    console.warn(`${prefix}⚠️  Using fallback configuration`);
-  }
+// Exit early if no config file
+if (!fs.existsSync(configPath)) {
+  console.log(`${prefix}No site.config.yml found. Skipping JS build.`);
+  process.exit(0);
 }
 
-// Fallback configuration if site.config.yml is missing
-const JS_FILES = config.files || [
-  {
-    input: "standard.js",
-    output: "standard.min.js",
-    minify: true,
-  },
-  {
-    input: "standard.comment.js",
-    output: "standard.comment.js",
-    minify: true,
-  },
-  {
-    input: "standard.lab.js",
-    output: "standard.lab.js",
-    minify: false,
-  },
-];
+let config = {};
 
-const BUNDLES = config.bundles || [
-  {
-    name: "standard.bundle.js",
-    files: [
-      "node_modules/htmx.org/dist/htmx.min.js",
-      "node_modules/htmx.org/dist/ext/preload.js",
-      "dist/standard.min.js",
-    ],
-  },
-  {
-    name: "standard.bundle.full.js",
-    files: [
-      "node_modules/htmx.org/dist/htmx.min.js",
-      "node_modules/htmx.org/dist/ext/preload.js",
-      "dist/standard.min.js",
-      "dist/standard.comment.js",
-      "src/js/standard.toast.js",
-    ],
-  },
-];
+try {
+  const configContent = fs.readFileSync(configPath, "utf-8");
+  const fullConfig = yaml.load(configContent);
+  config = fullConfig.build?.js || {};
 
+  // Exit early if no JS config section exists
+  if (!config || Object.keys(config).length === 0) {
+    console.log(`${prefix}No build.js configuration found. Skipping JS build.`);
+    process.exit(0);
+  }
 
-// Override distDir based on mode
-if (isDev && config.devOutputDir) {
-  distDir = path.join(projectRoot, config.devOutputDir);
-} else if (isDev) {
-  // Default dev output: straight to _site
-  distDir = path.join(projectRoot, "_site/assets/standard");
-} else if (config.outputDir) {
-  distDir = path.join(projectRoot, config.outputDir);
+  // Override directories if specified in config
+  if (config.srcDir) {
+    srcDir = path.join(projectRoot, config.srcDir);
+  }
+  if (config.outputDir) {
+    destDir = path.join(projectRoot, config.outputDir);
+  }
+} catch (error) {
+  console.error(
+    `${prefix}❌ Failed to parse site.config.yml: ${error.message}`,
+  );
+  process.exit(1);
+}
+
+// Validate required config
+if (!config.files || !Array.isArray(config.files)) {
+  console.error(
+    `${prefix}❌ Missing required 'files' array in build.js config`,
+  );
+  process.exit(1);
+}
+
+const JS_FILES = config.files;
+
+// Bundling is optional
+const BUNDLES = config.bundles || [];
+const shouldBundle = BUNDLES.length > 0;
+
+if (shouldBundle) {
+  console.log(`${prefix}Bundling enabled: ${BUNDLES.length} bundle(s)`);
 }
 
 // ========================================
 
 async function buildJS() {
-  //console.log(`${prefix}🔨 Building JavaScript files...`);
-
-  // Ensure dist exists
-  if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
+  // Ensure dest directory exists
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true });
   }
 
   try {
     // Step 1: Build individual files
-    //console.log(`${prefix}📦 Step 1: Building individual files`);
-
     for (const file of JS_FILES) {
       const inputPath = path.join(srcDir, file.input);
-      const outputPath = path.join(distDir, file.output);
+      const outputPath = path.join(destDir, file.output);
+
+      // Check if source file exists
+      if (!fs.existsSync(inputPath)) {
+        console.warn(`${prefix}⚠️  Source file not found: ${file.input}`);
+        continue;
+      }
+
       const source = fs.readFileSync(inputPath, "utf8");
 
       if (file.minify) {
@@ -147,6 +129,15 @@ async function buildJS() {
           compress: true,
           mangle: true,
         });
+
+        if (result.error) {
+          console.error(
+            `${prefix}❌ Minification failed for ${file.input}:`,
+            result.error,
+          );
+          continue;
+        }
+
         fs.writeFileSync(outputPath, result.code);
         console.log(
           `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)`,
@@ -159,30 +150,54 @@ async function buildJS() {
       }
     }
 
-    // Step 2: Create bundles
-    //console.log(`${prefix}📦 Step 2: Creating bundles`);
+    // Step 2: Create bundles (optional)
+    if (shouldBundle) {
+      for (const bundle of BUNDLES) {
+        const contents = [];
 
-    for (const bundle of BUNDLES) {
-      const contents = bundle.files.map((filepath) => {
-        // Handle both absolute and relative paths
-        const fullPath = filepath.startsWith("node_modules")
-          ? path.join(projectRoot, filepath)
-          : path.join(projectRoot, filepath);
+        for (const filepath of bundle.files) {
+          // Handle both absolute and relative paths
+          const fullPath = path.isAbsolute(filepath)
+            ? filepath
+            : filepath.startsWith("node_modules")
+              ? path.join(projectRoot, filepath)
+              : path.join(projectRoot, filepath);
 
-        return fs.readFileSync(fullPath, "utf8");
-      });
+          if (!fs.existsSync(fullPath)) {
+            console.warn(`${prefix}⚠️  Bundle file not found: ${filepath}`);
+            continue;
+          }
 
-      const bundled = contents.join("\n\n");
-      const minified = await minify(bundled, {
-        compress: true,
-        mangle: true,
-      });
+          contents.push(fs.readFileSync(fullPath, "utf8"));
+        }
 
-      fs.writeFileSync(path.join(distDir, bundle.name), minified.code);
+        if (contents.length === 0) {
+          console.warn(
+            `${prefix}⚠️  No files found for bundle: ${bundle.name}`,
+          );
+          continue;
+        }
 
-      console.log(
-        `${prefix}${colors.grey}${bundle.name} ${colors.reset}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)`,
-      );
+        const bundled = contents.join("\n\n");
+        const minified = await minify(bundled, {
+          compress: true,
+          mangle: true,
+        });
+
+        if (minified.error) {
+          console.error(
+            `${prefix}❌ Bundle minification failed for ${bundle.name}:`,
+            minified.error,
+          );
+          continue;
+        }
+
+        fs.writeFileSync(path.join(destDir, bundle.name), minified.code);
+
+        console.log(
+          `${prefix}${colors.grey}${bundle.name} ${colors.reset}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)`,
+        );
+      }
     }
 
     if (!isWatch) console.log(`${prefix}Completed`);
@@ -195,23 +210,6 @@ async function buildJS() {
 // Initial build
 await buildJS();
 
-// Trigger browser reload by touching a trigger file
-function triggerBrowserReload() {
-  try {
-    const triggerFile = path.join(projectRoot, "_site/.trigger-reload");
-    const now = new Date();
-
-    // Create or touch the trigger file
-    if (!fs.existsSync(triggerFile)) {
-      fs.writeFileSync(triggerFile, now.toISOString());
-    } else {
-      fs.utimesSync(triggerFile, now, now);
-    }
-  } catch (error) {
-    // Ignore errors - reload is best-effort
-  }
-}
-
 // Watch mode
 if (isWatch) {
   console.log(`${prefix}Watching...`);
@@ -220,7 +218,6 @@ if (isWatch) {
     if (filename && filename.endsWith(".js")) {
       console.log(`${prefix}Changed: ${filename}`);
       await buildJS();
-      triggerBrowserReload();
     }
   });
 }

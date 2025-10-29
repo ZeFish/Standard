@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.language }}" class="rhythm" data-theme="{{ theme }}">
     <head>
-      {% include standard.layouts.meta %}
+      {% include site.standard.layouts.meta %}
     </head>
     {% standardFonts %}
     {% standardAssets %}
@@ -20,7 +20,7 @@
       </main>
 			<footer class="prose smaller">
 			  <hr >
-				<p>© {{ now.getFullYear() }} {{ site.author.name }}. <a href="/">{{ site.title }}</a> | <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> | {{ pkg.version }}</p>
+				<p>© {{ year }} {{ site.author.name }}. <a href="/">{{ site.title }}</a> | <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> | {{ pkg.version }}</p>
 			</footer>
 	</body>
 </html>

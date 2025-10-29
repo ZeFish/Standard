@@ -12,7 +12,7 @@
  *
  * Configuration:
  *   Read from ./site.config.yml in the project root (build.css section)
- *   Falls back to sensible defaults if config is missing
+ *   Exits if no config found
  *
  * @since 0.14.0
  */
@@ -30,8 +30,7 @@ let srcDir = path.join(projectRoot, "src/styles");
 let destDir = path.join(projectRoot, "public/assets/css");
 
 const isWatch = process.argv.includes("--watch");
-const isDev = process.argv.includes("--dev") || isWatch; // --dev or --watch = dev mode
-
+const isDev = process.argv.includes("--dev") || isWatch;
 
 const colors = {
   reset: "\x1b[0m",
@@ -51,77 +50,82 @@ const prefix = `${colors.grey}::std  ${colors.reset}${colors.cyan}[CSS]${colors.
 // LOAD CONFIGURATION FROM site.config.yml
 // ========================================
 
-let config = {};
 const configPath = path.join(projectRoot, "site.config.yml");
 
-if (fs.existsSync(configPath)) {
-  try {
-    const configContent = fs.readFileSync(configPath, "utf-8");
-    const fullConfig = yaml.load(configContent);
-    config = fullConfig.build?.css || {};
-
-    // Override distDir if outputDir is specified in config
-    if (config.srcDir) {
-      srcDir = path.join(projectRoot, config.srcDir);
-    }
-    // Override distDir if outputDir is specified in config
-    if (config.outputDir) {
-      destDir = path.join(projectRoot, config.outputDir);
-    }
-  } catch (error) {
-    console.warn(
-      `${prefix}⚠️  Failed to parse site.config.yml: ${error.message}`,
-    );
-    console.warn(`${prefix}⚠️  Using fallback configuration`);
-  }
+// Exit early if no config file
+if (!fs.existsSync(configPath)) {
+  console.log(`${prefix}No site.config.yml found. Skipping CSS build.`);
+  process.exit(0);
 }
 
-// Fallback configuration if site.config.yml is missing
-const SCSS_FILES = config.files || [
-  {
-    input: "standard.scss",
-    output: "standard.min.css",
-  },
-  {
-    input: "standard.theme.scss",
-    output: "standard.theme.min.css",
-  },
-];
+let config = {};
 
-const BUNDLE_CONFIG = config.bundle || {
-  files: ["standard.min.css", "standard.theme.min.css"],
-  output: "standard.bundle.css",
-};
+try {
+  const configContent = fs.readFileSync(configPath, "utf-8");
+  const fullConfig = yaml.load(configContent);
+  config = fullConfig.build?.css || {};
 
-const BUNDLE_FILES = BUNDLE_CONFIG.files;
-const BUNDLE_OUTPUT = BUNDLE_CONFIG.output;
+  // Exit early if no CSS config section exists
+  if (!config || Object.keys(config).length === 0) {
+    console.log(
+      `${prefix}No build.css configuration found. Skipping CSS build.`,
+    );
+    process.exit(0);
+  }
 
-// Override distDir based on mode
-if (isDev && config.devOutputDir) {
-  destDir = path.join(projectRoot, config.devOutputDir);
-} else if (isDev) {
-  // Default dev output: straight to _site
-  destDir = path.join(projectRoot, "_site/assets/standard");
-} else if (config.outputDir) {
-  destDir = path.join(projectRoot, config.outputDir);
+  // Override directories if specified in config
+  if (config.srcDir) {
+    srcDir = path.join(projectRoot, config.srcDir);
+  }
+  if (config.outputDir) {
+    destDir = path.join(projectRoot, config.outputDir);
+  }
+} catch (error) {
+  console.error(
+    `${prefix}❌ Failed to parse site.config.yml: ${error.message}`,
+  );
+  process.exit(1);
+}
+
+// Validate required config
+if (!config.files || !Array.isArray(config.files)) {
+  console.error(
+    `${prefix}❌ Missing required 'files' array in build.css config`,
+  );
+  process.exit(1);
+}
+
+const SCSS_FILES = config.files;
+
+// Bundling is optional
+const BUNDLE_CONFIG = config.bundle;
+const shouldBundle =
+  BUNDLE_CONFIG && BUNDLE_CONFIG.files && BUNDLE_CONFIG.output;
+
+if (shouldBundle) {
+  console.log(`${prefix}Bundling enabled: ${BUNDLE_CONFIG.output}`);
 }
 
 // ========================================
 
 async function buildCSS() {
-  //console.log(`${prefix}🎨 Building CSS files...`);
-
-  // Ensure dist exists
+  // Ensure dest directory exists
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
   }
 
   try {
     // Step 1: Compile SCSS files
-    //console.log(`${prefix}📦 Step 1: Compiling SCSS`);
-
     for (const file of SCSS_FILES) {
-      const result = compile(path.join(srcDir, file.input), {
+      const inputPath = path.join(srcDir, file.input);
+
+      // Check if source file exists
+      if (!fs.existsSync(inputPath)) {
+        console.warn(`${prefix}⚠️  Source file not found: ${file.input}`);
+        continue;
+      }
+
+      const result = compile(inputPath, {
         style: "compressed",
       });
 
@@ -132,35 +136,46 @@ async function buildCSS() {
       );
     }
 
-    // Step 2: Bundle CSS files
-    //console.log(`${prefix}📦 Step 2: Bundling CSS`);
+    // Step 2: Bundle CSS files (optional)
+    if (shouldBundle) {
+      const cssContents = [];
 
-    const cssContents = BUNDLE_FILES.map((filename) => {
-      return fs.readFileSync(path.join(destDir, filename), "utf8");
-    });
+      for (const filename of BUNDLE_CONFIG.files) {
+        const filePath = path.join(destDir, filename);
 
-    const bundledCss = cssContents.join("\n\n");
+        if (fs.existsSync(filePath)) {
+          cssContents.push(fs.readFileSync(filePath, "utf8"));
+        } else {
+          console.warn(`${prefix}⚠️  Bundle file not found: ${filename}`);
+        }
+      }
 
-    // Step 3: Minify bundle
-    //console.log(`${prefix}📦 Step 3: Minifying bundle`);
+      if (cssContents.length > 0) {
+        const bundledCss = cssContents.join("\n\n");
 
-    const minifier = new CleanCSS({
-      level: 2,
-      compatibility: "*",
-    });
+        // Step 3: Minify bundle
+        const minifier = new CleanCSS({
+          level: 2,
+          compatibility: "*",
+        });
 
-    const minified = minifier.minify(bundledCss);
+        const minified = minifier.minify(bundledCss);
 
-    if (minified.errors.length > 0) {
-      throw new Error(minified.errors.join("\n"));
+        if (minified.errors.length > 0) {
+          throw new Error(minified.errors.join("\n"));
+        }
+
+        fs.writeFileSync(
+          path.join(destDir, BUNDLE_CONFIG.output),
+          minified.styles,
+        );
+
+        const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
+        console.log(
+          `${prefix}${colors.grey}${BUNDLE_CONFIG.output} ${colors.reset}(${minifiedSize.toFixed(2)} KB)`,
+        );
+      }
     }
-
-    fs.writeFileSync(path.join(destDir, BUNDLE_OUTPUT), minified.styles);
-
-    const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
-    console.log(
-      `${prefix}${colors.grey}${BUNDLE_OUTPUT} ${colors.reset}(${minifiedSize.toFixed(2)} KB)`,
-    );
 
     if (!isWatch) console.log(`${prefix}Completed`);
   } catch (error) {
@@ -172,23 +187,6 @@ async function buildCSS() {
 // Initial build
 await buildCSS();
 
-// Trigger browser reload by touching a trigger file
-function triggerBrowserReload() {
-  try {
-    const triggerFile = path.join(projectRoot, "_site/.trigger-reload");
-    const now = new Date();
-
-    // Create or touch the trigger file
-    if (!fs.existsSync(triggerFile)) {
-      fs.writeFileSync(triggerFile, now.toISOString());
-    } else {
-      fs.utimesSync(triggerFile, now, now);
-    }
-  } catch (error) {
-    // Ignore errors - reload is best-effort
-  }
-}
-
 // Watch mode
 if (isWatch) {
   console.log(`${prefix}Watching...`);
@@ -197,7 +195,6 @@ if (isWatch) {
     if (filename && filename.endsWith(".scss")) {
       console.log(`${prefix}Changed: ${filename}`);
       await buildCSS();
-      triggerBrowserReload();
     }
   });
 }
