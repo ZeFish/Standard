@@ -146,9 +146,9 @@ export default function (eleventyConfig, options = {}) {
     try {
       const configContent = readFileSync(userConfigPath, "utf-8");
       userConfig = yaml.load(configContent) || {};
-      logger.info(`📋 Loaded site config from ${userConfigPath}`);
+      logger.info(`Config loaded`);
     } catch (error) {
-      logger.warn(`⚠️  Failed to parse site.config.yml: ${error.message}`);
+      logger.error(`Failed to parse site.config.yml: ${error.message}`);
     }
   }
 
@@ -163,10 +163,9 @@ export default function (eleventyConfig, options = {}) {
   };
 
   eleventyConfig.addGlobalData("site", siteConfig);
-  logger.info("✅ Site configuration loaded and merged");
 
   eleventyConfig.addGlobalData("standard", {
-    layout: {
+    layouts: {
       hola: path.join(__dirname, "../layouts/standard.min.css"),
       meta: path.join(__dirname, "../layouts/meta.njk"),
       encrypted: path.join(__dirname, "../layouts/encrypted.njk"),
@@ -178,7 +177,6 @@ export default function (eleventyConfig, options = {}) {
     comments: comments,
   });
 
-  logger.info("Plugin Loading...");
   eleventyConfig.addPlugin(PreProcessor, { escapeCodeBlocks });
   eleventyConfig.addPlugin(Transform);
   eleventyConfig.addPlugin(Filter);
@@ -196,7 +194,6 @@ export default function (eleventyConfig, options = {}) {
   if (options.image && options.image.enabled) {
     //eleventyConfig.addPlugin(Image, options.image);
   }
-  logger.info("Plugin Loaded.");
 
   eleventyConfig.setUseGitIgnore(false);
 
@@ -260,7 +257,6 @@ export default function (eleventyConfig, options = {}) {
     visibility: (data) => data.visibility || "public",
   });
   */
-  logger.info("Returning configuration");
   return {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",

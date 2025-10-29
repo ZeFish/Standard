@@ -50,7 +50,8 @@ try {
     "src/styles",
     "src/js",
     "src/layouts",
-    "dist",
+    "public/assets/css",
+    "public/assets/js",
     "_site",
   ];
 
@@ -73,27 +74,31 @@ social:
   twitter: "@yourhandle"
 
 # Build configuration (read by build-css and build-js scripts)
+# Outputs to public/assets which is watched by 11ty for browser reload
 build:
   css:
+    outputDir: "public/assets/css"
     files:
       - input: "custom.scss"
         output: "custom.min.css"
     bundle:
       files:
-        - "standard.min.css"
-        - "custom.min.css"
-      output: "standard.bundle.css"
+        - "node_modules/@zefish/standard/dist/standard.min.css"
+        - "public/assets/css/custom.min.css"
+      output: "site.min.css"
 
   js:
+    outputDir: "public/assets/js"
     files:
       - input: "custom.js"
         output: "custom.min.js"
         minify: true
     bundles:
-      - name: "standard.bundle.js"
+      - name: "site.bundle.js"
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
-          - "dist/standard.min.js"
+          - "node_modules/@zefish/standard/dist/standard.min.js"
+          - "public/assets/js/custom.min.js"
 `;
 
   fs.writeFileSync(path.join(projectPath, "site.config.yml"), siteConfig);
@@ -120,6 +125,19 @@ export default function (eleventyConfig) {
 
   // Copy assets to output
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({ "public": "." });
+
+  // Ignore src/js and src/styles - they are watched by build scripts
+  eleventyConfig.watchIgnores.add("src/js/**");
+  eleventyConfig.watchIgnores.add("src/styles/**");
+
+  // Also ignore public files from triggering rebuilds
+  eleventyConfig.watchIgnores.add("public/**");
+
+  // Configure dev server to watch files for browser reload only (no rebuild)
+  eleventyConfig.setServerOptions({
+    watch: [".trigger-reload"],
+  });
 
   return {
     markdownTemplateEngine: "njk",
@@ -128,7 +146,10 @@ export default function (eleventyConfig) {
 };
 `;
 
-  fs.writeFileSync(path.join(projectPath, "eleventy.config.js"), eleventyConfig);
+  fs.writeFileSync(
+    path.join(projectPath, "eleventy.config.js"),
+    eleventyConfig,
+  );
   console.log("✅ Created eleventy.config.js");
 
   // Create package.json
@@ -143,8 +164,7 @@ export default function (eleventyConfig) {
       build: "npm run build:css && npm run build:js && eleventy",
       "watch:css": "standard-build-css --watch",
       "watch:js": "standard-build-js --watch",
-      "watch:11ty": "eleventy --serve",
-      dev: "npm-run-all build --parallel watch:*",
+      dev: 'concurrently --kill-others "npm run watch:css" "npm run watch:js" "eleventy --serve"',
       start: "npm run dev",
     },
     keywords: ["standard-framework", "typography", "11ty"],
@@ -153,10 +173,10 @@ export default function (eleventyConfig) {
     dependencies: {
       "@zefish/standard": "latest",
       "@11ty/eleventy": "^3.1.0",
-      "dotenv": "^17.0.0",
+      dotenv: "^17.0.0",
     },
     devDependencies: {
-      "npm-run-all": "^4.1.5",
+      concurrently: "^8.2.2",
     },
   };
 
@@ -208,8 +228,8 @@ console.log("Standard Framework initialized!");
   <title>{{ title or site.title }}</title>
   <meta name="description" content="{{ description or site.description }}">
 
-  <!-- Standard Framework CSS -->
-  <link rel="stylesheet" href="/assets/standard/standard.bundle.css">
+  <!-- Site CSS (Standard Framework + Custom) -->
+  <link rel="stylesheet" href="/assets/css/site.min.css">
 </head>
 <body>
   <header>
@@ -224,8 +244,8 @@ console.log("Standard Framework initialized!");
     <p>&copy; {{ now.getFullYear() }} {{ site.author.name }}. All rights reserved.</p>
   </footer>
 
-  <!-- Standard Framework JS -->
-  <script src="/assets/standard/standard.bundle.js"></script>
+  <!-- Site JS (Standard Framework + Custom) -->
+  <script src="/assets/js/site.bundle.js"></script>
 </body>
 </html>
 `;
@@ -252,11 +272,12 @@ npm install
 npm start
 \`\`\`
 
-This will:
-- Compile SCSS and bundle CSS
-- Minify and bundle JavaScript
-- Start 11ty dev server with live reload
-- Watch for file changes
+This starts an optimized development workflow:
+- Watches SCSS files and recompiles CSS on changes
+- Watches JS files and recompiles JavaScript on changes
+- Runs 11ty dev server with live reload
+- CSS/JS changes only trigger browser reload (fast)
+- Content changes trigger full 11ty rebuild (as needed)
 
 ### Building
 
@@ -285,14 +306,17 @@ Edit \`site.config.yml\` to customize:
 ${projectName}/
 ├── content/          # Markdown/HTML content
 ├── src/
-│   ├── styles/      # SCSS files
-│   ├── js/          # JavaScript files
+│   ├── styles/      # Custom SCSS files
+│   ├── js/          # Custom JavaScript files
 │   └── layouts/     # Nunjucks templates
-├── dist/            # Compiled CSS/JS (generated)
+├── public/          # Compiled assets (generated, watched by 11ty)
+│   └── assets/
+│       ├── css/     # Compiled CSS bundles
+│       └── js/      # Compiled JS bundles
 ├── _site/           # Built site (generated)
-├── site.config.yml  # Configuration
+├── site.config.yml  # Site & build configuration
 ├── eleventy.config.js # 11ty configuration
-└── package.json     # Dependencies
+└── package.json     # Dependencies & scripts
 \`\`\`
 
 ## Learn More
@@ -336,8 +360,9 @@ Powered by [Standard Framework](https://standard.ffp.co)
 
   // Create .gitignore
   const gitignore = `node_modules/
-dist/
+public/
 _site/
+.trigger-reload
 .DS_Store
 .env
 .env.local

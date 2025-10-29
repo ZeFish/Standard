@@ -17,3 +17,4 @@ content/claude.md
 .env
 /content/docs
 .doc-generator-hash
+.trigger-reload

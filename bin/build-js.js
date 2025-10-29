@@ -26,9 +26,26 @@ import yaml from "js-yaml";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = process.cwd();
 const srcDir = path.join(projectRoot, "src/js");
-const distDir = path.join(projectRoot, "dist");
+let distDir = path.join(projectRoot, "dist");
 
 const isWatch = process.argv.includes("--watch");
+const isDev = process.argv.includes("--dev") || isWatch; // --dev or --watch = dev mode
+
+
+
+const colors = {
+  reset: "\x1b[0m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  cyan: "\x1b[36m",
+  grey: "\x1b[90m",
+  white: "\x1b[97m",
+};
+
+const prefix = `${colors.grey}::std  ${colors.reset}${colors.cyan}[JS ]${colors.reset} `;
 
 // ========================================
 // LOAD CONFIGURATION FROM site.config.yml
@@ -42,10 +59,16 @@ if (fs.existsSync(configPath)) {
     const configContent = fs.readFileSync(configPath, "utf-8");
     const fullConfig = yaml.load(configContent);
     config = fullConfig.build?.js || {};
-    console.log("📋 Loaded build configuration from site.config.yml\n");
+
+    // Override distDir if outputDir is specified in config
+    if (config.outputDir) {
+      distDir = path.join(projectRoot, config.outputDir);
+    }
   } catch (error) {
-    console.warn(`⚠️  Failed to parse site.config.yml: ${error.message}`);
-    console.warn("⚠️  Using fallback configuration\n");
+    console.warn(
+      `${prefix}⚠️  Failed to parse site.config.yml: ${error.message}`,
+    );
+    console.warn(`${prefix}⚠️  Using fallback configuration`);
   }
 }
 
@@ -89,10 +112,21 @@ const BUNDLES = config.bundles || [
   },
 ];
 
+
+// Override distDir based on mode
+if (isDev && config.devOutputDir) {
+  distDir = path.join(projectRoot, config.devOutputDir);
+} else if (isDev) {
+  // Default dev output: straight to _site
+  distDir = path.join(projectRoot, "_site/assets/standard");
+} else if (config.outputDir) {
+  distDir = path.join(projectRoot, config.outputDir);
+}
+
 // ========================================
 
 async function buildJS() {
-  console.log("🔨 Building JavaScript files...\n");
+  //console.log(`${prefix}🔨 Building JavaScript files...`);
 
   // Ensure dist exists
   if (!fs.existsSync(distDir)) {
@@ -101,7 +135,7 @@ async function buildJS() {
 
   try {
     // Step 1: Build individual files
-    console.log("📦 Step 1: Building individual files");
+    //console.log(`${prefix}📦 Step 1: Building individual files`);
 
     for (const file of JS_FILES) {
       const inputPath = path.join(srcDir, file.input);
@@ -115,16 +149,18 @@ async function buildJS() {
         });
         fs.writeFileSync(outputPath, result.code);
         console.log(
-          `   ✅ ${file.output} (${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)`,
+          `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)`,
         );
       } else {
         fs.copyFileSync(inputPath, outputPath);
-        console.log(`   ✅ ${file.output} (copied)`);
+        console.log(
+          `${prefix}${colors.grey}${file.output} ${colors.reset}(copied)`,
+        );
       }
     }
 
     // Step 2: Create bundles
-    console.log("\n📦 Step 2: Creating bundles");
+    //console.log(`${prefix}📦 Step 2: Creating bundles`);
 
     for (const bundle of BUNDLES) {
       const contents = bundle.files.map((filepath) => {
@@ -145,13 +181,13 @@ async function buildJS() {
       fs.writeFileSync(path.join(distDir, bundle.name), minified.code);
 
       console.log(
-        `   ✅ ${bundle.name} (${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)`,
+        `${prefix}${colors.grey}${bundle.name} ${colors.reset}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)`,
       );
     }
 
-    console.log("\n✅ JavaScript build complete!\n");
+    if (!isWatch) console.log(`${prefix}Completed`);
   } catch (error) {
-    console.error("❌ JavaScript build failed:", error.message);
+    console.error(`${prefix}❌ JavaScript build failed:`, error.message);
     process.exit(1);
   }
 }
@@ -159,14 +195,32 @@ async function buildJS() {
 // Initial build
 await buildJS();
 
+// Trigger browser reload by touching a trigger file
+function triggerBrowserReload() {
+  try {
+    const triggerFile = path.join(projectRoot, "_site/.trigger-reload");
+    const now = new Date();
+
+    // Create or touch the trigger file
+    if (!fs.existsSync(triggerFile)) {
+      fs.writeFileSync(triggerFile, now.toISOString());
+    } else {
+      fs.utimesSync(triggerFile, now, now);
+    }
+  } catch (error) {
+    // Ignore errors - reload is best-effort
+  }
+}
+
 // Watch mode
 if (isWatch) {
-  console.log("👀 Watching JS files for changes...\n");
+  console.log(`${prefix}Watching...`);
 
   fs.watch(srcDir, { recursive: true }, async (eventType, filename) => {
     if (filename && filename.endsWith(".js")) {
-      console.log(`\n📝 Changed: ${filename}`);
+      console.log(`${prefix}Changed: ${filename}`);
       await buildJS();
+      triggerBrowserReload();
     }
   });
 }

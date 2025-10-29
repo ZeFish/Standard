@@ -52,10 +52,20 @@ export default function (eleventyConfig) {
   // Copy files to output
   eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
 
-  // Watch README.md and claude.md for changes and copy into content directory
   eleventyConfig.addWatchTarget("README.md");
 
+  // Ignore src/js and src/styles - they are watched by build scripts
   eleventyConfig.addWatchTarget("src/eleventy");
+  eleventyConfig.watchIgnores.add("**/src/js/**");
+  eleventyConfig.watchIgnores.add("**/src/styles/**");
+  eleventyConfig.watchIgnores.add("**/dist/**");
+
+  // Configure dev server to watch files for browser reload only (no rebuild)
+  eleventyConfig.setServerOptions({
+    watch: ["**/_site/assets/standard/**/*.css", "**/_site/assets/standard/**/*.js"],
+    watchDelay: 100,
+  });
+
   eleventyConfig.on("eleventy.before", () => {
     // Sync README.md
     const readmeSrc = join(__dirname, "README.md");

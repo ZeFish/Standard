@@ -27,9 +27,25 @@ import yaml from "js-yaml";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = process.cwd();
 const srcDir = path.join(projectRoot, "src/styles");
-const distDir = path.join(projectRoot, "dist");
+let distDir = path.join(projectRoot, "dist");
 
 const isWatch = process.argv.includes("--watch");
+const isDev = process.argv.includes("--dev") || isWatch; // --dev or --watch = dev mode
+
+
+const colors = {
+  reset: "\x1b[0m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  cyan: "\x1b[36m",
+  grey: "\x1b[90m",
+  white: "\x1b[97m",
+};
+
+const prefix = `${colors.grey}::std  ${colors.reset}${colors.cyan}[CSS]${colors.reset} `;
 
 // ========================================
 // LOAD CONFIGURATION FROM site.config.yml
@@ -43,10 +59,16 @@ if (fs.existsSync(configPath)) {
     const configContent = fs.readFileSync(configPath, "utf-8");
     const fullConfig = yaml.load(configContent);
     config = fullConfig.build?.css || {};
-    console.log("📋 Loaded build configuration from site.config.yml\n");
+
+    // Override distDir if outputDir is specified in config
+    if (config.outputDir) {
+      distDir = path.join(projectRoot, config.outputDir);
+    }
   } catch (error) {
-    console.warn(`⚠️  Failed to parse site.config.yml: ${error.message}`);
-    console.warn("⚠️  Using fallback configuration\n");
+    console.warn(
+      `${prefix}⚠️  Failed to parse site.config.yml: ${error.message}`,
+    );
+    console.warn(`${prefix}⚠️  Using fallback configuration`);
   }
 }
 
@@ -70,10 +92,20 @@ const BUNDLE_CONFIG = config.bundle || {
 const BUNDLE_FILES = BUNDLE_CONFIG.files;
 const BUNDLE_OUTPUT = BUNDLE_CONFIG.output;
 
+// Override distDir based on mode
+if (isDev && config.devOutputDir) {
+  distDir = path.join(projectRoot, config.devOutputDir);
+} else if (isDev) {
+  // Default dev output: straight to _site
+  distDir = path.join(projectRoot, "_site/assets/standard");
+} else if (config.outputDir) {
+  distDir = path.join(projectRoot, config.outputDir);
+}
+
 // ========================================
 
 async function buildCSS() {
-  console.log("🎨 Building CSS files...\n");
+  //console.log(`${prefix}🎨 Building CSS files...`);
 
   // Ensure dist exists
   if (!fs.existsSync(distDir)) {
@@ -82,7 +114,7 @@ async function buildCSS() {
 
   try {
     // Step 1: Compile SCSS files
-    console.log("📦 Step 1: Compiling SCSS");
+    //console.log(`${prefix}📦 Step 1: Compiling SCSS`);
 
     for (const file of SCSS_FILES) {
       const result = compile(path.join(srcDir, file.input), {
@@ -92,12 +124,12 @@ async function buildCSS() {
       fs.writeFileSync(path.join(distDir, file.output), result.css);
 
       console.log(
-        `   ✅ ${file.output} (${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)`,
+        `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)`,
       );
     }
 
     // Step 2: Bundle CSS files
-    console.log("\n📦 Step 2: Bundling CSS");
+    //console.log(`${prefix}📦 Step 2: Bundling CSS`);
 
     const cssContents = BUNDLE_FILES.map((filename) => {
       return fs.readFileSync(path.join(distDir, filename), "utf8");
@@ -106,7 +138,7 @@ async function buildCSS() {
     const bundledCss = cssContents.join("\n\n");
 
     // Step 3: Minify bundle
-    console.log("\n📦 Step 3: Minifying bundle");
+    //console.log(`${prefix}📦 Step 3: Minifying bundle`);
 
     const minifier = new CleanCSS({
       level: 2,
@@ -122,11 +154,13 @@ async function buildCSS() {
     fs.writeFileSync(path.join(distDir, BUNDLE_OUTPUT), minified.styles);
 
     const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
-    console.log(`   ✅ ${BUNDLE_OUTPUT} (${minifiedSize.toFixed(2)} KB)`);
+    console.log(
+      `${prefix}${colors.grey}${BUNDLE_OUTPUT} ${colors.reset}(${minifiedSize.toFixed(2)} KB)`,
+    );
 
-    console.log("\n✅ CSS build complete!\n");
+    if (!isWatch) console.log(`${prefix}Completed`);
   } catch (error) {
-    console.error("❌ CSS build failed:", error.message);
+    console.error(`${prefix}❌ CSS build failed:`, error.message);
     process.exit(1);
   }
 }
@@ -134,14 +168,32 @@ async function buildCSS() {
 // Initial build
 await buildCSS();
 
+// Trigger browser reload by touching a trigger file
+function triggerBrowserReload() {
+  try {
+    const triggerFile = path.join(projectRoot, "_site/.trigger-reload");
+    const now = new Date();
+
+    // Create or touch the trigger file
+    if (!fs.existsSync(triggerFile)) {
+      fs.writeFileSync(triggerFile, now.toISOString());
+    } else {
+      fs.utimesSync(triggerFile, now, now);
+    }
+  } catch (error) {
+    // Ignore errors - reload is best-effort
+  }
+}
+
 // Watch mode
 if (isWatch) {
-  console.log("👀 Watching SCSS files for changes...\n");
+  console.log(`${prefix}Watching...`);
 
   fs.watch(srcDir, { recursive: true }, async (eventType, filename) => {
     if (filename && filename.endsWith(".scss")) {
-      console.log(`\n📝 Changed: ${filename}`);
+      console.log(`${prefix}Changed: ${filename}`);
       await buildCSS();
+      triggerBrowserReload();
     }
   });
 }
