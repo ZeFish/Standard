@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/**
+/***
  * @component Standard Framework Init Command
  * @category Build Tools
  * @description Scaffolds a new website using Standard Framework.
