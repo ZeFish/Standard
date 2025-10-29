@@ -50,6 +50,7 @@
     "src/layouts"
   ],
   "scripts": {
+    "build:prod": "npm run build:css && nom run build:js && eleventy",
     "build:css": "node bin/build-css.js",
     "build:js": "node bin/build-js.js",
     "build": "npm run build:css & npm run build:js",
