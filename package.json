@@ -30,6 +30,11 @@
   ],
   "main": "src/eleventy/standard.js",
   "type": "module",
+  "bin": {
+    "standard-init": "./bin/init.js",
+    "standard-build-css": "./bin/build-css.js",
+    "standard-build-js": "./bin/build-js.js"
+  },
   "exports": {
     "./css": "./dist/standard.min.css",
     "./theme": "./dist/standard.theme.min.css",
@@ -39,6 +44,7 @@
     "./cloudflare": "./src/eleventy/cloudflare.js"
   },
   "files": [
+    "bin",
     "dist",
     "src/eleventy",
     "src/layouts"
