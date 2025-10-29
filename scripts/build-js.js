@@ -2,22 +2,40 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { minify } from "terser";
+import yaml from "js-yaml";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const srcDir = path.join(__dirname, "../src/js");
-const distDir = path.join(__dirname, "../dist");
+const projectRoot = path.join(__dirname, "..");
+const srcDir = path.join(projectRoot, "src/js");
+const distDir = path.join(projectRoot, "dist");
 
 const isWatch = process.argv.includes("--watch");
 
 // ========================================
-// CONFIGURATION - Edit files to bundle here
+// LOAD CONFIGURATION FROM site.config.yml
 // ========================================
 
-const JS_FILES = [
+let config = {};
+const configPath = path.join(projectRoot, "site.config.yml");
+
+if (fs.existsSync(configPath)) {
+  try {
+    const configContent = fs.readFileSync(configPath, "utf-8");
+    const fullConfig = yaml.load(configContent);
+    config = fullConfig.build?.js || {};
+    console.log("📋 Loaded build configuration from site.config.yml\n");
+  } catch (error) {
+    console.warn(`⚠️  Failed to parse site.config.yml: ${error.message}`);
+    console.warn("⚠️  Using fallback configuration\n");
+  }
+}
+
+// Fallback configuration if site.config.yml is missing
+const JS_FILES = config.files || [
   {
-    input: "standard.js", // Source JS file (in src/js/)
-    output: "standard.min.js", // Output minified file
-    minify: true, // Should minify?
+    input: "standard.js",
+    output: "standard.min.js",
+    minify: true,
   },
   {
     input: "standard.comment.js",
@@ -27,15 +45,14 @@ const JS_FILES = [
   {
     input: "standard.lab.js",
     output: "standard.lab.js",
-    minify: false, // Just copy, don't minify
+    minify: false,
   },
 ];
 
-const BUNDLES = [
+const BUNDLES = config.bundles || [
   {
-    name: "standard.bundle.js", // Bundle name
+    name: "standard.bundle.js",
     files: [
-      // Files to include (in order)
       "node_modules/htmx.org/dist/htmx.min.js",
       "node_modules/htmx.org/dist/ext/preload.js",
       "dist/standard.min.js",

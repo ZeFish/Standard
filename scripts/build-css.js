@@ -3,19 +3,39 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { compile } from "sass";
 import CleanCSS from "clean-css";
+import yaml from "js-yaml";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const srcDir = path.join(__dirname, "../src/styles");
-const distDir = path.join(__dirname, "../dist");
+const projectRoot = path.join(__dirname, "..");
+const srcDir = path.join(projectRoot, "src/styles");
+const distDir = path.join(projectRoot, "dist");
+
+const isWatch = process.argv.includes("--watch");
 
 // ========================================
-// CONFIGURATION - Edit files to bundle here
+// LOAD CONFIGURATION FROM site.config.yml
 // ========================================
 
-const SCSS_FILES = [
+let config = {};
+const configPath = path.join(projectRoot, "site.config.yml");
+
+if (fs.existsSync(configPath)) {
+  try {
+    const configContent = fs.readFileSync(configPath, "utf-8");
+    const fullConfig = yaml.load(configContent);
+    config = fullConfig.build?.css || {};
+    console.log("📋 Loaded build configuration from site.config.yml\n");
+  } catch (error) {
+    console.warn(`⚠️  Failed to parse site.config.yml: ${error.message}`);
+    console.warn("⚠️  Using fallback configuration\n");
+  }
+}
+
+// Fallback configuration if site.config.yml is missing
+const SCSS_FILES = config.files || [
   {
-    input: "standard.scss", // Source SCSS file
-    output: "standard.min.css", // Output CSS file
+    input: "standard.scss",
+    output: "standard.min.css",
   },
   {
     input: "standard.theme.scss",
@@ -23,14 +43,13 @@ const SCSS_FILES = [
   },
 ];
 
-const BUNDLE_FILES = [
-  "standard.min.css", // Files to bundle (in order)
-  "standard.theme.min.css",
-];
+const BUNDLE_CONFIG = config.bundle || {
+  files: ["standard.min.css", "standard.theme.min.css"],
+  output: "standard.bundle.css",
+};
 
-const BUNDLE_OUTPUT = "standard.bundle.css"; // Final bundle name
-
-const isWatch = process.argv.includes("--watch");
+const BUNDLE_FILES = BUNDLE_CONFIG.files;
+const BUNDLE_OUTPUT = BUNDLE_CONFIG.output;
 
 // ========================================
 
