@@ -7,6 +7,7 @@ import { readFileSync, existsSync } from "fs";
 import EleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import fs from "fs";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import yaml from "js-yaml";
 
 import Backlinks from "./backlinks.js";
 import Markdown from "./markdown.js";
@@ -135,6 +136,34 @@ export default function (eleventyConfig, options = {}) {
 
   const ENV = process.env.ENV || "PROD";
   const logger = createLogger({ verbose });
+
+  // ===== LOAD AND MERGE SITE CONFIGURATION =====
+  // Load site config from user's project root
+  const userConfigPath = path.join(process.cwd(), "site.config.yml");
+  let userConfig = {};
+
+  if (existsSync(userConfigPath)) {
+    try {
+      const configContent = readFileSync(userConfigPath, "utf-8");
+      userConfig = yaml.load(configContent) || {};
+      logger.info(`📋 Loaded site config from ${userConfigPath}`);
+    } catch (error) {
+      logger.warn(`⚠️  Failed to parse site.config.yml: ${error.message}`);
+    }
+  }
+
+  // Provide merged config as global data
+  const siteConfig = {
+    ...userConfig,
+    standard: {
+      ...(userConfig.standard || {}),
+      version: pkg.version,
+      options: options,
+    },
+  };
+
+  eleventyConfig.addGlobalData("site", siteConfig);
+  logger.info("✅ Site configuration loaded and merged");
 
   eleventyConfig.addGlobalData("standard", {
     layout: {

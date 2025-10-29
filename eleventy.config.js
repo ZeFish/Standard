@@ -13,9 +13,6 @@ const pkg = JSON.parse(
 );
 
 export default function (eleventyConfig) {
-  const basePath = path.join(__dirname, "site.config.yml");
-  const baseConfig = yaml.load(fs.readFileSync(basePath, "utf8"));
-  eleventyConfig.addGlobalData("site", baseConfig);
   eleventyConfig.addGlobalData("version", pkg.version);
 
   eleventyConfig.setInputDirectory("content");
@@ -57,7 +54,6 @@ export default function (eleventyConfig) {
 
   // Watch README.md and claude.md for changes and copy into content directory
   eleventyConfig.addWatchTarget("README.md");
-  eleventyConfig.addWatchTarget("claude.md");
 
   eleventyConfig.addWatchTarget("src/eleventy");
   eleventyConfig.on("eleventy.before", () => {
@@ -75,23 +71,6 @@ export default function (eleventyConfig) {
       // Only write if content has changed to prevent infinite watch loop
       if (!destExists || srcContent !== destContent) {
         fs.writeFileSync(readmeDest, srcContent, "utf-8");
-      }
-    }
-
-    // Sync claude.md
-    const claudeSrc = join(__dirname, "claude.md");
-    const claudeDest = join(__dirname, "content", "claude.md");
-
-    if (fs.existsSync(claudeSrc)) {
-      const srcContent = fs.readFileSync(claudeSrc, "utf-8");
-      const destExists = fs.existsSync(claudeDest);
-      const destContent = destExists
-        ? fs.readFileSync(claudeDest, "utf-8")
-        : null;
-
-      // Only write if content has changed to prevent infinite watch loop
-      if (!destExists || srcContent !== destContent) {
-        fs.writeFileSync(claudeDest, srcContent, "utf-8");
       }
     }
   });
