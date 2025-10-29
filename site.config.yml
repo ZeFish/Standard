@@ -28,3 +28,55 @@ nav:
     - label: "GitHub"
       url: "https://github.com/yourname"
       external: true
+
+# ========================================
+# BUILD CONFIGURATION
+# ========================================
+# These arrays define which files to compile, bundle, and minify
+# during build processes (build:css and build:js)
+
+build:
+  # CSS/SCSS Build Configuration
+  css:
+    # Individual SCSS files to compile
+    files:
+      - input: "standard.scss"
+        output: "standard.min.css"
+      - input: "standard.theme.scss"
+        output: "standard.theme.min.css"
+
+    # Files to bundle together (in order)
+    bundle:
+      files:
+        - "standard.min.css"
+        - "standard.theme.min.css"
+      output: "standard.bundle.css"
+
+  # JavaScript Build Configuration
+  js:
+    # Individual JS files to minify
+    files:
+      - input: "standard.js"
+        output: "standard.min.js"
+        minify: true
+      - input: "standard.comment.js"
+        output: "standard.comment.js"
+        minify: true
+      - input: "standard.lab.js"
+        output: "standard.lab.js"
+        minify: false
+
+    # JS bundles to create
+    bundles:
+      - name: "standard.bundle.js"
+        files:
+          - "node_modules/htmx.org/dist/htmx.min.js"
+          - "node_modules/htmx.org/dist/ext/preload.js"
+          - "dist/standard.min.js"
+      - name: "standard.bundle.full.js"
+        files:
+          - "node_modules/htmx.org/dist/htmx.min.js"
+          - "node_modules/htmx.org/dist/ext/preload.js"
+          - "dist/standard.min.js"
+          - "dist/standard.comment.js"
+          - "src/js/standard.toast.js"
