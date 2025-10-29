@@ -1020,8 +1020,8 @@
 .table-wrapper {
     /* Container styling */
     position: relative;
-    /*width: 100%;*/
-    overflow-x: auto;
+    width: 100%;
+    overflow-x: hidden;
     overflow-y: visible;
     margin-block-end: var(--space);
 
