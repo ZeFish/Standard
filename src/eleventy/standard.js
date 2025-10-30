@@ -6,7 +6,6 @@ import { fileURLToPath } from "url";
 import { readFileSync, existsSync } from "fs";
 import EleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import fs from "fs";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import yaml from "js-yaml";
 
 import Backlinks from "./backlinks.js";
