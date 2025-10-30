@@ -303,3 +303,9 @@ hr.col-row {
         margin-block-start: 0;
     }
 }
+
+
+[class^="grid"] .container-hero,
+[class*=" grid"] .container-hero {
+    margin-inline: 0;
+}
