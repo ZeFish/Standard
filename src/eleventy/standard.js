@@ -23,6 +23,7 @@ import EncryptionPlugin from "./encryption.js";
 import Sitemap from "./sitemap.js";
 import Feed from "./feed.js";
 import Manifest from "./manifest.js";
+import Robots from "./robots.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -165,6 +166,10 @@ export default function (eleventyConfig, options = {}) {
     },
 
     manifest: {
+      enabled: true
+    },
+
+    robots: {
       enabled: true
     },
 
@@ -330,6 +335,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Feed, site);
   eleventyConfig.addPlugin(Manifest, site);
   eleventyConfig.addPlugin(Sitemap, site);
+  eleventyConfig.addPlugin(Robots, site);
   eleventyConfig.addPlugin(ShortCode, {
     outputDir: site.standard.outputDir,
     comments: site.standard.comments,
