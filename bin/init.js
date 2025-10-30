@@ -830,7 +830,7 @@ console.log("Standard Framework initialized!");
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or site.title }}</title>
+  <title>{{ title or site.title }}{% if title and title != site.title %} · {{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
 
   <!-- Site CSS (Standard Framework + Custom) -->

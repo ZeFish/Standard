@@ -2,6 +2,7 @@
 <html lang="{{ site.language }}" data-theme="{{ theme }}">
     <head>
       {% include site.standard.layouts.meta %}
+      <title>{{ title or site.title }}{% if title and title != site.title %} · {{ site.title }}{% endif %}</title>
     </head>
     {% standardFonts %}
     {% standardAssets %}
