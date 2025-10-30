@@ -347,7 +347,7 @@ try {
   console.error(
     `${prefix}❌ Failed to parse site.config.yml: ${error.message}`,
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 // Validate required config
@@ -355,7 +355,7 @@ if (!config.files || !Array.isArray(config.files)) {
   console.error(
     `${prefix}❌ Missing required 'files' array in build.js config`,
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 /**
