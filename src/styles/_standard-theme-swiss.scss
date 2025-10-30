@@ -1,13 +1,63 @@
 [data-theme="swiss"] {
     --color-red: red;
+    --color-green: red;
+    --color-blue: red;
+    --color-yellow: red;
+    --color-purple: red;
+    --color-orange: red;
+    --color-pink: red;
     --color-accent: red;
     --shadow: none;
     --border-radius: 0;
     --border-color: var(--color-foreground);
     --color-background-secondary: var(--color-background);
 
+    --font-ratio: 1.8;
+    --body-padding-multiplier: 3;
+    --font-monospace: "Helvetica Monospaced Pro", monospace;
+
     --rhythm-multiplier: 1;
     --rhythm-multiplier-block: 0;
+
+    --gap: clamp(var(--space), 6%, var(--space-xl));
+    --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
+    --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
+    --content-accent: minmax(0, var(--space-l));
+    --content-feature: minmax(0, var(--space-2xl));
+    --content-hero: minmax(0, 1fr);
+
+    --gap: 0;
+
+    code,
+    .token {
+        color: var(--color-foreground) !important;
+    }
+
+    body {
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+        max-width: 1400px;
+        padding-left: 33%;
+    }
+
+    pre {
+        padding: 0;
+    }
+
+    .prose {
+        display: inherit;
+    }
+
+    footer hr {
+        display: none;
+    }
+
+    .comment {
+        opacity: 0.2;
+    }
+
+    --color-border: var(--color-background);
+    --color-muted: var(--color-foreground);
 
     blockquote {
         border: 0;
@@ -25,4 +75,36 @@
         font-family: var(--font-monospace);
         word-break: keep-all;
     }
+}
+
+@font-face {
+    font-family: "Helvetica Monospaced Pro";
+    src: url("/assets/fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Helvetica Monospaced Pro";
+    src: url("/assets/fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Helvetica Monospaced Pro";
+    src: url("/assets/fonts/HelveticaMonospacedPro-BdIt.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Helvetica Monospaced Pro";
+    src: url("/assets/fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
 }

@@ -142,18 +142,28 @@ const projectRoot = process.cwd();
 let srcDir = path.join(projectRoot, "src/styles");
 
 /**
- * Destination Directory Path
+ * Destination Directory Path(s)
  *
  * @group Configuration
  * @since 0.14.0
  *
- * Where compiled CSS files are written. Can be overridden via build.css.outputDir
- * in site.config.yml. The default (public/assets/css) works for most 11ty and
- * static site projects, but adjust to match your deployment structure.
+ * Where compiled CSS files are written. Can be a single string or an array of strings.
+ * Can be overridden via build.css.outputDir in site.config.yml. The default
+ * (public/assets/css) works for most 11ty and static site projects, but adjust to
+ * match your deployment structure. When an array is provided, CSS is written to all
+ * specified directories simultaneously.
  *
  * @see {constant} srcDir - Where SCSS source files live
+ * @example
+ *   # Single destination
+ *   outputDir: "public/assets/css"
+ *
+ *   # Multiple destinations
+ *   outputDir:
+ *     - "_site/assets/standard"
+ *     - "dist"
  */
-let destDir = path.join(projectRoot, "public/assets/css");
+let destDirs = [path.join(projectRoot, "public/assets/css")];
 
 /**
  * Command-Line Flags
@@ -321,7 +331,12 @@ try {
     srcDir = path.join(projectRoot, config.srcDir);
   }
   if (config.outputDir) {
-    destDir = path.join(projectRoot, config.outputDir);
+    // Support both single string and array of strings
+    if (Array.isArray(config.outputDir)) {
+      destDirs = config.outputDir.map((dir) => path.join(projectRoot, dir));
+    } else {
+      destDirs = [path.join(projectRoot, config.outputDir)];
+    }
   }
 } catch (error) {
   console.error(
@@ -461,9 +476,11 @@ if (shouldBundle) {
  * @returns {Promise<void>} Resolves when build completes
  */
 async function buildCSS() {
-  // Ensure dest directory exists
-  if (!fs.existsSync(destDir)) {
-    fs.mkdirSync(destDir, { recursive: true });
+  // Ensure all dest directories exist
+  for (const destDir of destDirs) {
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
   }
 
   try {
@@ -483,10 +500,13 @@ async function buildCSS() {
         style: "compressed",
       });
 
-      fs.writeFileSync(path.join(destDir, file.output), result.css);
+      // Write to all destination directories
+      for (const destDir of destDirs) {
+        fs.writeFileSync(path.join(destDir, file.output), result.css);
+      }
 
       console.log(
-        `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)`,
+        `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
       );
     }
 
@@ -497,7 +517,7 @@ async function buildCSS() {
       const cssContents = [];
 
       for (const filename of BUNDLE_CONFIG.files) {
-        const filePath = path.join(destDir, filename);
+        const filePath = path.join(destDirs[0], filename);
 
         if (fs.existsSync(filePath)) {
           cssContents.push(fs.readFileSync(filePath, "utf8"));
@@ -523,14 +543,17 @@ async function buildCSS() {
           throw new Error(minified.errors.join("\n"));
         }
 
-        fs.writeFileSync(
-          path.join(destDir, BUNDLE_CONFIG.output),
-          minified.styles,
-        );
+        // Write bundle to all destination directories
+        for (const destDir of destDirs) {
+          fs.writeFileSync(
+            path.join(destDir, BUNDLE_CONFIG.output),
+            minified.styles,
+          );
+        }
 
         const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
         console.log(
-          `${prefix}${colors.grey}${BUNDLE_CONFIG.output} ${colors.reset}(${minifiedSize.toFixed(2)} KB)`,
+          `${prefix}${colors.grey}${BUNDLE_CONFIG.output} ${colors.reset}(${minifiedSize.toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
     }

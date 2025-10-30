@@ -52,9 +52,11 @@
   "scripts": {
     "build:css": "node bin/build-css.js",
     "build:js": "node bin/build-js.js",
+    "watch:css": "node bin/build-css.js --watch",
+    "watch:js": "node bin/build-js.js --watch",
     "build": "npm run build:css & npm run build:js",
     "watch:assets": "node bin/build-css.js --watch",
-    "dev": "concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start\"",
+    "dev": "concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start --quiet\"",
     "start": "npm run clean:ports && eleventy --serve --port=8083  --quiet",
     "release": "export $(cat .env | xargs) && release-it --ci",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",

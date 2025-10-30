@@ -169,11 +169,11 @@
 
     h2 {
         margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
-        margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     h3 {
-        margin-block-start: calc(var(--space-xl) * var(--rhythm-multiplier));
+        margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     h4 {
@@ -182,7 +182,7 @@
 
     h5 {
         margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
-        margin-block-end: calc(var(--space-s) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
 
     h6 {
@@ -215,18 +215,17 @@
     blockquote + h3,
     blockquote + h4,
     blockquote + h5,
-    blockquote + h6,
-    pre + h2,
-    pre + h3,
-    pre + h4,
-    pre + h5,
-    pre + h6 {
+    blockquote + h6 {
         margin-block-start: var(--space);
     }
     h2 + pre,
     h3 + pre,
     h4 + pre {
-        margin-block-start: var(--space);
+        margin-block-start: 0;
+    }
+
+    .token {
+        color: var(--color-subtle) !important;
     }
 
     :where(

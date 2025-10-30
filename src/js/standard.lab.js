@@ -387,7 +387,8 @@ class StandardLab {
       .querySelector('[data-toggle="debug"]')
       ?.addEventListener("change", (e) => {
         document.body.classList.toggle("standard-debug", e.target.checked);
-        this.showNotification(
+        //toast.info(
+        toast.info(
           `Debug mode ${e.target.checked ? "enabled" : "disabled"}`,
           e.target.checked ? "success" : "info",
         );
@@ -404,7 +405,7 @@ class StandardLab {
           document.documentElement.removeAttribute("data-theme");
         }
         localStorage.setItem("standard-theme", theme);
-        this.showNotification(`Theme: ${theme || "Default"}`, "success");
+        toast.info(`Theme: ${theme || "Default"}`, "success");
       });
 
     // Edit tokens button
@@ -715,7 +716,7 @@ class StandardLab {
 
       this.updateBadge();
       this.refreshTokenList();
-      this.showNotification(`Reset ${token}`, "info");
+      toast.info(`Reset ${token}`, "info");
     }
   }
 
@@ -734,7 +735,7 @@ class StandardLab {
       this.refreshTokenList();
     }
 
-    this.showNotification("All tokens reset", "success");
+    toast.info("All tokens reset", "success");
   }
 
   /**
@@ -757,7 +758,7 @@ class StandardLab {
     navigator.clipboard
       .writeText(css)
       .then(() => {
-        this.showNotification("✓ CSS copied to clipboard!", "success");
+        toast.info("✓ CSS copied to clipboard!", "success");
       })
       .catch(() => {
         // Fallback
@@ -769,7 +770,7 @@ class StandardLab {
         textarea.select();
         document.execCommand("copy");
         document.body.removeChild(textarea);
-        this.showNotification("✓ CSS copied to clipboard!", "success");
+        toast.info("✓ CSS copied to clipboard!", "success");
       });
   }
 
@@ -925,7 +926,7 @@ class StandardLab {
         e.preventDefault();
         document.body.classList.toggle("standard-debug");
         const isActive = document.body.classList.contains("standard-debug");
-        this.showNotification(
+        toast.info(
           `Debug mode ${isActive ? "enabled" : "disabled"}`,
           isActive ? "success" : "info",
         );

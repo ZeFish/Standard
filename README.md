@@ -11,6 +11,9 @@ Typography is the voice · Grid is the structure · Rhythm is the flow · Color 
 > "Typography is the craft of endowing human language with a durable visual form."
 > — Robert Bringhurst
 
+> [!info]- Here's a callout title
+> Here's a callout block.
+
 
 ### Mathematical Precision
 Every measurement derives from the golden ratio (φ = 1.618)

@@ -39,7 +39,7 @@ export default function (eleventyConfig, options = {}) {
     let html = "";
 
     html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css"><link rel="stylesheet" href="/${outputDir}/standard.theme.min.css">
-<script src="/${outputDir}/standard.bundle.full.js" type="module"></script></script>`;
+    <script src="/${outputDir}/standard.bundle.full.js" type="module"></script>`;
 
     // Add comments client library if comments are enabled
     if (comments.enabled) {

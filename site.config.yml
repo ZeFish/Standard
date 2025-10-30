@@ -31,7 +31,9 @@ build:
   # CSS/SCSS Build Configuration
   css:
     srcDir: "src/styles" # SCSS source directory
-    outputDir: "_site/assets/standard"
+    outputDir:
+      - "_site/assets/standard"
+      - "dist"
     # Individual SCSS files to compile
     files:
       - input: "standard.scss"
@@ -55,6 +57,9 @@ build:
       - input: "standard.js"
         output: "standard.min.js"
         minify: true
+      - input: "standard.toast.js"
+        output: "standard.toast.js"
+        minify: true
       - input: "standard.comment.js"
         output: "standard.comment.js"
         minify: true
@@ -69,10 +74,11 @@ build:
           - "node_modules/htmx.org/dist/htmx.min.js"
           - "node_modules/htmx.org/dist/ext/preload.js"
           - "dist/standard.min.js"
+          - "dist/standard.toast.min.js"
       - name: "standard.bundle.full.js"
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
           - "node_modules/htmx.org/dist/ext/preload.js"
           - "dist/standard.min.js"
           - "dist/standard.comment.js"
-          - "src/js/standard.toast.js"
+          - "dist/standard.toast.js"

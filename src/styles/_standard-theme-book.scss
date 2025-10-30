@@ -22,22 +22,27 @@
     );
 
     --font-ratio: 1.4;
-    --font-size: 1em;
+    --font-size: 1.2em;
     --font-density: 1.5;
     --marge-block: 1.5;
     --font-text: Fern;
     --font-interface: Fern;
     --font-header: Fern;
-    --font-header-weight: 300;
+    --font-header-weight: 100;
     --font-header-letter-spacing: 0em;
     --font-header-line-height: 1em;
-
-    --font-weight: 450;
 
     --font-feature: "liga", "onum", "kern";
     --font-variation: "opsz" 8;
     --font-header-feature: "liga", "onum", "kern";
     --font-header-variation: "opsz" 12;
+
+    --body-padding-multiplier: 3;
+    --rhythm-multiplier: 1;
+    --rhythm-multiplier-block: 1.5;
+    --shadow: 0;
+    --border-radius: 0;
+    --border: none;
 
     --color-accent: var(--color-red);
     --color-italic: var(--color-foreground);
@@ -68,19 +73,29 @@
     --color-dark-purple: #a58fc0; /* smoky lilac */
     --color-dark-pink: #e6a3d1; /* fading rose light */
 
-    article p {
+    p {
         font-weight: var(--font-weight);
     }
 
-    article hr,
-    article hr:not(:first-child) {
+    .prose {
+        position: relative;
+        left: -3%;
+    }
+
+    blockquote,
+    pre {
+        padding: calc(var(--space) * 0.5);
+    }
+
+    hr,
+    hr:not(:first-child) {
         font-size: var(--scale);
         line-height: var(--space);
         padding: 0;
         border: 0;
         background: transparent;
     }
-    article hr::after {
+    hr::after {
         content: "\2619 \2015 \2767";
         text-align: center;
         display: block;
@@ -90,16 +105,15 @@
         color: var(--color-border);
     }
 
-    article > h1:first-child {
+    .prose > h1:first-child {
         text-align: center;
         grid-column: feature;
-        margin-bottom: var(--space-3xl);
+        margin-block-end: var(--space-3xl);
         font-size: calc(var(--font-size) * pow(var(--font-ratio), 3));
     }
 
-    article h1 {
+    h1 {
         text-align: center;
-        margin: 0 0 var(--space-2xl) 0;
         letter-spacing: 0.15em;
         /* /*text-transform: uppercase;* */
         font-feature-settings: "liga", "onum", "kern", "smcp";
@@ -111,11 +125,11 @@ tufte
 
 
 
-article p {
+p {
     text-align: justify;
 }
 
-article p:not(:has(img), blockquote, .callout, pre, h1, h2, h3, h4, h5, h6, table, hr, ul, ol) + p:not(:has(img)) {
+p:not(:has(img), blockquote, .callout, pre, h1, h2, h3, h4, h5, h6, table, hr, ul, ol) + p:not(:has(img)) {
     text-indent: var(--space);
 }
 */

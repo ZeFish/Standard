@@ -68,7 +68,6 @@
     gap: var(--space-xs);
     pointer-events: none; /* Allow clicks to pass through container */
     max-width: 400px;
-    padding: var(--space);
 }
 
 /* Re-enable pointer events on toasts */
@@ -78,8 +77,8 @@
 
 /* Top-right (default) */
 .toast-container-top-right {
-    top: 0;
-    right: 0;
+    top: calc((var(--space) * 1) + var(--space));
+    right: calc(var(--space) * 1);
 }
 
 /* Top-left */
@@ -142,12 +141,14 @@
     min-width: 300px;
     max-width: 100%;
 
+    font-size: var(--scale-xs);
+
     /* Appearance */
-    background: var(--color-background);
+    background: var(--color-background-secondary);
     border: var(--border);
-    border-left-width: 4px; /* Accent border */
+    /*border-left-width: 4px;  Accent border */
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow);
 
     /* Animation setup */
     opacity: 0;
@@ -216,7 +217,7 @@
     display: flex;
     align-items: flex-start;
     gap: var(--space-xs);
-    padding: var(--space-s);
+    padding: var(--space-xs);
 }
 
 /* Toast icon */

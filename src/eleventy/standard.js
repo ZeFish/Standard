@@ -246,7 +246,7 @@ export default function (eleventyConfig, options = {}) {
   // ===== DIRECTORY STRUCTURE =====
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("visibility", "public");
-  eleventyConfig.addGlobalData("theme", "default");
+  //eleventyConfig.addGlobalData("theme", "swiss");
   // ===== PASSTHROUGH COPY =====
 
   // Copy public/ directory to root of _site/
@@ -306,7 +306,7 @@ export default function (eleventyConfig, options = {}) {
     showVersion: true,
 
     // Inject CSS changes without full page reload (faster)
-    injectChanges: true,
+    injectChanges: false,
 
     // Custom port (optional)
     port: 8090,

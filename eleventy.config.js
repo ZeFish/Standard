@@ -24,8 +24,16 @@ export default function (eleventyConfig) {
       copyFunctions: true,
     },
   });
+  /*
 
-  eleventyConfig.addGlobalData("theme", "paper");
+ai: {
+  enabled: true,
+  model: "anthropic/claude-3.5-sonnet",
+  copyFunctions: true,
+},
+
+*/
+  eleventyConfig.addGlobalData("theme", "book");
 
   // ===== AUTO-DOCUMENTATION GENERATOR =====
   eleventyConfig.addPlugin(DocGenerator, {

@@ -88,3 +88,10 @@
         text-edge: cap alphabetic;
     }
 }
+
+.standard-lab-panel {
+    --gap: 0;
+    --rhythm-multiplier: 0;
+    --rhythm-multiplier-block: 0;
+    font-size: var(--scale-s);
+}
