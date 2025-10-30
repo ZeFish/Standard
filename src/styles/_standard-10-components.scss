@@ -2067,3 +2067,17 @@ dialog.modal::backdrop {
     padding: var(--space-xs);
     font-size: var(--scale-xs);
 }
+
+/**
+ * @name Menu Helper
+ * @group components-disclosure
+ * @since 0.15.0
+ */
+.menu {
+    list-style: none;
+    padding-inline-start: 0;
+    gap: var(--space-xs);
+}
+.menu li::before {
+    display: none;
+}
