@@ -33,7 +33,8 @@
   "bin": {
     "standard-init": "./bin/init.js",
     "standard-build-css": "./bin/build-css.js",
-    "standard-build-js": "./bin/build-js.js"
+    "standard-build-js": "./bin/build-js.js",
+    "standard-check": "./bin/analyzer.js"
   },
   "exports": {
     "./css": "./dist/standard.min.css",
@@ -54,6 +55,7 @@
     "build:js": "node bin/build-js.js",
     "watch:css": "node bin/build-css.js --watch",
     "watch:js": "node bin/build-js.js --watch",
+    "check": "node bin/analyzer.js",
     "build": "npm run build:css && npm run build:js && eleventy",
     "watch:assets": "node bin/build-css.js --watch",
     "dev": "concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start --quiet\"",
@@ -112,30 +114,31 @@
     "@11ty/eleventy-navigation": "^1.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "cheerio": "^1.1.2",
+    "clean-css": "^5.3.3",
     "dotenv": "^17.2.3",
+    "glob": "^10.4.5",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
     "jsdom": "^27.0.1",
     "markdown-it": "^14.1.0",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-obsidian-callouts": "^0.3.2",
     "nunjucks": "^3.2.4",
     "sass": "^1.93.2",
-    "js-yaml": "^4.1.0",
-    "terser": "^5.44.0",
-    "clean-css": "^5.3.3",
-    "glob": "^10.4.5",
-    "gray-matter": "^4.0.3"
+    "terser": "^5.44.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@release-it/conventional-changelog": "^10.0.1",
     "auto-changelog": "^2.5.0",
+    "concurrently": "^8.2.2",
+    "htmx-ext-preload": "^2.1.2",
     "htmx.org": "^2.0.8",
     "nodemon": "^3.1.10",
     "opencommit": "^3.2.10",
     "release-it": "^19.0.5",
     "rimraf": "^5.0.5",
-    "sanitize.css": "^13.0.0",
-    "htmx-ext-preload": "^2.1.2",
-    "concurrently": "^8.2.2"
+    "sanitize.css": "^13.0.0"
   }
 }

@@ -138,5 +138,5 @@ export default function (eleventyConfig, options = {}) {
 
     return map;
   });
-  logger.info("Initialized");
+  logger.success("Initialized");
 }

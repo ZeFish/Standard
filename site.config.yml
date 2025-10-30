@@ -25,6 +25,9 @@ standard:
   cloudflare:
     images:
       enabled: true
+  ai:
+    enabled: true
+    model: "meta-llama/llama-4-maverick:free"
   verbose: true
 
 # ========================================

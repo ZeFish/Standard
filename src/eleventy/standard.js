@@ -14,6 +14,7 @@ import Filter from "./filter.js";
 import ShortCode from "./shortcode.js";
 import PreProcessor from "./preprocessor.js";
 import Transform from "./transform.js";
+import { OpenRouterPlugin } from "./openrouter.js";
 import CloudflarePagesPlugin from "./cloudflare.js";
 import MenuPlugin from "./menu.js";
 import Syntax from "./syntax.js";
@@ -320,6 +321,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(MenuPlugin, site.standard.menu);
   eleventyConfig.addPlugin(Syntax);
   eleventyConfig.addPlugin(EncryptionPlugin);
+  eleventyConfig.addPlugin(OpenRouterPlugin, site.standard.ai);
 
   // ===== CLOUDFLARE PAGES PLUGIN =====
   // Handles both functions AND image optimization

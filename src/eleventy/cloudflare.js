@@ -220,7 +220,7 @@ export default function CloudflarePages(eleventyConfig, options = {}) {
 
     eleventyConfig.on("eleventy.before", async () => {
       if (!fs.existsSync(cloudflareDir)) {
-        logger.warn("Cloudflare functions directory not found");
+        logger.warn("Functions directory not found");
         return;
       }
 
@@ -391,6 +391,7 @@ export default function CloudflarePages(eleventyConfig, options = {}) {
     enabledFeatures.push("Images");
 
   if (enabledFeatures.length > 0) {
-    logger.success(`Cloudflare Pages: ${enabledFeatures.join(" + ")}`);
+    logger.success(`Pages: ${enabledFeatures.join(" + ")}`);
   }
+  logger.success("Initialized");
 }

@@ -130,7 +130,7 @@ export function addEncryptionTransform(eleventyConfig) {
       return content; // Return unencrypted content on error
     }
   });
-  logger.info("Initialized");
+  logger.success("Initialized");
 }
 
 // Export as default plugin function

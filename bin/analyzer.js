@@ -4,8 +4,8 @@
  * SEO Analyzer - Standalone CLI Tool
  *
  * Usage:
- *   node scripts/seo-analyzer.js [directory]
- *   npm run seo:check
+ *   node scripts/analyzer.js [directory]
+ *   npm run check
  */
 
 import * as cheerio from "cheerio";
@@ -18,17 +18,9 @@ class SEOAnalyzer {
     const defaults = {
       outputDir: "_site",
       generateReport: true,
-      reportPath: "_site/seo-report.json",
+      reportPath: "content/report.md", // ✨ Changed to .md
       standardChecks: true,
-      ignore: [
-        "**/index.html",
-        "**/tags/**",
-        "**/category/**",
-        "**/author/**",
-        "**/sitemap.*",
-        "**/robots.*",
-        "**/404.*",
-      ],
+      ignore: ["**/sitemap.*", "**/robots.*", "**/404.*", "**/report/**"],
       minWordCount: 300,
       titleLength: { min: 30, max: 60 },
       descriptionLength: { min: 120, max: 155 },
@@ -179,9 +171,6 @@ class SEOAnalyzer {
       );
     }
   }
-
-  // [ALL CHECK METHODS HERE - same as before]
-  // I'll include them all below...
 
   checkH1Tags($) {
     const h1Count = $("h1").length;
@@ -1319,9 +1308,9 @@ class SEOAnalyzer {
     this.config.outputDir = targetDir;
 
     try {
-      const pattern = `${targetDir}/**/*.html`;
+      const pattern = path.join(targetDir, "**", "*.html");
       const htmlFiles = await glob(pattern, {
-        ignore: this.config.ignore.map((p) => `${targetDir}/${p}`),
+        ignore: this.config.ignore.map((p) => path.join(targetDir, p)),
       });
 
       if (htmlFiles.length === 0) {
@@ -1421,25 +1410,165 @@ class SEOAnalyzer {
     console.log("");
   }
 
+  escapeHtmlInText(text) {
+    // Wrap HTML tags in backticks for inline display
+    return text.replace(/(<[^>]+>)/g, "`$1`");
+  }
+
+  // ✨ NEW: Generate Markdown Report
+  generateMarkdownReport(results) {
+    const timestamp = new Date().toISOString();
+    const filesAnalyzed = results.filter((r) => !r.error).length;
+    const totalPassed = results.reduce((sum, r) => sum + r.summary.passed, 0);
+    const totalFailed = results.reduce((sum, r) => sum + r.summary.failed, 0);
+    const totalInfo = results.reduce((sum, r) => sum + r.summary.info, 0);
+    const totalChecks = totalPassed + totalFailed + totalInfo;
+    const overallScore = Math.round((totalPassed / totalChecks) * 100);
+
+    let md = `---\n`;
+    md += `permalink: "/report/"\n`;
+    md += `---\n\n`;
+
+    md += `# SEO Analysis Report\n\n`;
+    md += `**Generated:** ${new Date(timestamp).toLocaleString()}\n\n`;
+    md += `---\n\n`;
+
+    // Overall Summary
+    md += `## 📊 Overall Summary\n\n`;
+    md += `| Metric | Value |\n`;
+    md += `|--------|-------|\n`;
+    md += `| Files Analyzed | ${filesAnalyzed} |\n`;
+    md += `| Total Checks | ${totalChecks} |\n`;
+    md += `| ✅ Passed | ${totalPassed} |\n`;
+    md += `| ❌ Failed | ${totalFailed} |\n`;
+    md += `| ℹ️ Info | ${totalInfo} |\n`;
+    md += `| 🎯 Overall Score | **${overallScore}%** |\n\n`;
+
+    // Score interpretation
+    const scoreEmoji =
+      overallScore >= 90
+        ? "🎉 Excellent"
+        : overallScore >= 75
+          ? "👍 Good"
+          : overallScore >= 50
+            ? "⚠️ Needs Improvement"
+            : "🔥 Critical Issues";
+    md += `**Status:** ${scoreEmoji}\n\n`;
+
+    md += `---\n\n`;
+
+    // Individual File Results
+    md += `## 📄 Detailed Results\n\n`;
+
+    results.forEach((result, index) => {
+      if (result.error) {
+        md += `### ❌ ${result.file}\n\n`;
+        md += `**Error:** ${result.error}\n\n`;
+        return;
+      }
+
+      const score = Math.round(
+        (result.summary.passed / result.checks.length) * 100,
+      );
+      const scoreEmoji =
+        score >= 90 ? "🎉" : score >= 75 ? "👍" : score >= 50 ? "⚠️" : "🔥";
+
+      md += `### ${index + 1}. ${result.file}\n\n`;
+      md += `${scoreEmoji} **Score: ${score}%** (${result.summary.passed}/${result.checks.length} passed)\n\n`;
+
+      // Failed checks (critical first)
+      const criticalFailed = result.checks.filter(
+        (c) => c.status === "fail" && c.critical,
+      );
+      const normalFailed = result.checks.filter(
+        (c) => c.status === "fail" && !c.critical,
+      );
+      const infoChecks = result.checks.filter((c) => c.status === "info");
+
+      if (criticalFailed.length > 0) {
+        md += `#### 🔴 Critical Issues (${criticalFailed.length})\n\n`;
+        criticalFailed.forEach((check) => {
+          md += `**${check.name}**\n`;
+          md += `- ❌ ${this.escapeHtmlInText(check.message)}\n`;
+          if (check.fix) {
+            md += `- 💡 **Fix:** ${this.escapeHtmlInText(check.fix)}\n`;
+          }
+          md += `\n`;
+        });
+      }
+
+      if (normalFailed.length > 0) {
+        md += `#### ❌ Failed Checks (${normalFailed.length})\n\n`;
+        normalFailed.forEach((check) => {
+          md += `**${check.name}**\n`;
+          md += `- ${this.escapeHtmlInText(check.message)}\n`;
+          if (check.fix) {
+            md += `- 💡 **Fix:** ${this.escapeHtmlInText(check.fix)}\n`;
+          }
+          md += `\n`;
+        });
+      }
+
+      if (infoChecks.length > 0) {
+        md += `#### ℹ️ Suggestions & Info (${infoChecks.length})\n\n`;
+        md += `<details>\n<summary>Click to expand</summary>\n\n`;
+        infoChecks.forEach((check) => {
+          md += `**${check.name}**\n`;
+          md += `- ${this.escapeHtmlInText(check.message)}\n`;
+          if (check.fix) {
+            md += `- 💡 ${this.escapeHtmlInText(check.fix)}\n`;
+          }
+          md += `\n`;
+        });
+        md += `</details>\n\n`;
+      }
+
+      // Passed checks (collapsed by default)
+      const passedChecks = result.checks.filter((c) => c.status === "pass");
+      if (passedChecks.length > 0) {
+        md += `<details>\n<summary>✅ Passed Checks (${passedChecks.length})</summary>\n\n`;
+        passedChecks.forEach((check) => {
+          md += `- ✅ ${check.name}: ${this.escapeHtmlInText(check.message)}\n`;
+        });
+        md += `\n</details>\n\n`;
+      }
+
+      md += `---\n\n`;
+    });
+
+    // Recommendations section
+    md += `## 💡 General Recommendations\n\n`;
+
+    if (totalFailed > 0) {
+      md += `### Priority Actions\n\n`;
+      md += `1. **Fix Critical Issues First** - Address all 🔴 critical failures immediately\n`;
+      md += `2. **Address Failed Checks** - Work through ❌ failed checks by priority\n`;
+      md += `3. **Review Suggestions** - Consider implementing ℹ️ informational suggestions\n\n`;
+    }
+
+    md += `### SEO Best Practices\n\n`;
+    md += `- Ensure every page has a unique, descriptive title (30-60 characters)\n`;
+    md += `- Write compelling meta descriptions (120-155 characters)\n`;
+    md += `- Use a single H1 tag per page that describes the main topic\n`;
+    md += `- Structure content with proper heading hierarchy (H1 → H2 → H3)\n`;
+    md += `- Add descriptive alt text to all images\n`;
+    md += `- Implement structured data (JSON-LD) for rich search results\n`;
+    md += `- Configure Open Graph tags for social media sharing\n`;
+    md += `- Maintain a sitemap.xml and robots.txt file\n`;
+    md += `- Use HTTPS and ensure canonical URLs are set\n\n`;
+
+    md += `---\n\n`;
+    md += `*Report generated by SEO Analyzer v1.0*\n`;
+
+    return md;
+  }
+
+  // ✨ UPDATED: Save Markdown Report
   saveReport(results) {
     try {
-      const report = {
-        timestamp: new Date().toISOString(),
-        config: this.config,
-        results: results,
-        summary: {
-          filesAnalyzed: results.filter((r) => !r.error).length,
-          totalPassed: results.reduce((sum, r) => sum + r.summary.passed, 0),
-          totalFailed: results.reduce((sum, r) => sum + r.summary.failed, 0),
-          totalInfo: results.reduce((sum, r) => sum + r.summary.info, 0),
-        },
-      };
+      const report = this.generateMarkdownReport(results);
 
-      fs.writeFileSync(
-        this.config.reportPath,
-        JSON.stringify(report, null, 2),
-        "utf8",
-      );
+      fs.writeFileSync(this.config.reportPath, report, "utf8");
 
       console.log(`📋 Report saved to ${this.config.reportPath}`);
     } catch (error) {
