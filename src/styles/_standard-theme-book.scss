@@ -81,6 +81,9 @@
         position: relative;
         left: -3%;
     }
+    .token {
+        color: var(--color-subtle) !important;
+    }
 
     blockquote,
     pre {
