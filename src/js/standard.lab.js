@@ -158,7 +158,7 @@ class StandardLab {
 
     // SVG icon (Standard "S" logo)
     this.badge.innerHTML = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="24" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 2L2 7v10c0 5.5 10 9 10 9s10-3.5 10-9V7l-10-5z"/>
         <path d="M12 8v8"/>
       </svg>

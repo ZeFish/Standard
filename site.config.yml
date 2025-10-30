@@ -21,6 +21,12 @@ nav:
     - label: "Cheat Sheet"
       url: "/cheat-sheet/"
 
+standard:
+  cloudflare:
+    images:
+      enabled: true
+  verbose: true
+
 # ========================================
 # BUILD CONFIGURATION
 # ========================================

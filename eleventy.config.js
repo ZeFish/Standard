@@ -34,6 +34,8 @@ ai: {
 
 */
   eleventyConfig.addGlobalData("theme", "book");
+  eleventyConfig.addGlobalData("layout", "base");
+  eleventyConfig.watchIgnores.add("_site/assets/**/*");
 
   // ===== AUTO-DOCUMENTATION GENERATOR =====
   eleventyConfig.addPlugin(DocGenerator, {
