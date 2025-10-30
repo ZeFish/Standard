@@ -37,8 +37,8 @@ const colors = {
 export function createLogger(options = {}) {
   const { verbose = false, scope = null } = options;
 
-  const prefix = `${colors.grey}::std ${colors.reset}`;
-  const scopeText = scope ? `${colors.cyan}[${scope}]${colors.reset}` : "";
+  const prefix = `${colors.reset} ::std${colors.reset}`;
+  const scopeText = scope ? `${colors.cyan}[${scope}]${colors.cyan}` : "";
 
   /**
    * Format log message with prefix and scope
@@ -55,28 +55,28 @@ export function createLogger(options = {}) {
      * General info message (always shown)
      */
     info(...args) {
-      console.log(...format(`${colors.blue}ℹ${colors.reset}`, ...args));
+      console.log(...format(`${colors.blue}ℹ${colors.blue}`, ...args));
     },
 
     /**
      * Success message (always shown)
      */
     success(...args) {
-      console.log(...format(`${colors.green}✓${colors.reset}`, ...args));
+      console.log(...format(`${colors.green}✓${colors.green}`, ...args));
     },
 
     /**
      * Warning message (always shown)
      */
     warn(...args) {
-      console.warn(...format(`${colors.yellow}⚠${colors.reset}`, ...args));
+      console.warn(...format(`${colors.yellow}⚠${colors.yellow}`, ...args));
     },
 
     /**
      * Error message (always shown)
      */
     error(...args) {
-      console.error(...format(`${colors.red}✖${colors.reset}`, ...args));
+      console.error(...format(`${colors.red}✖${colors.red}`, ...args));
     },
 
     /**
@@ -84,7 +84,7 @@ export function createLogger(options = {}) {
      */
     debug(...args) {
       if (verbose) {
-        console.log(...format(`${colors.grey}[debug]${colors.reset}`, ...args));
+        console.log(...format(`${colors.grey}[debug]${colors.grey}`, ...args));
       }
     },
 

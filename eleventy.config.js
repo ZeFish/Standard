@@ -16,8 +16,16 @@ export default function (eleventyConfig) {
   // - Watches: src/scss/, src/js/, .trigger
   // - Server: Hot-reloads _site/assets/**
   eleventyConfig.addPlugin(Standard, {
-    verbose: false, // Set to true for debugging
+    verbose: true, // Set to true for debugging
+    // NEW: Enable AI features
+    ai: {
+      enabled: true,
+      model: "anthropic/claude-3.5-sonnet",
+      copyFunctions: true,
+    },
   });
+
+  eleventyConfig.addGlobalData("theme", "paper");
 
   // ===== AUTO-DOCUMENTATION GENERATOR =====
   eleventyConfig.addPlugin(DocGenerator, {

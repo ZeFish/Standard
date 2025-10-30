@@ -376,8 +376,6 @@ async function generateIndexPages(docs, outputDir, layout, urlPath) {
 function generateComponentMarkdown(doc, layout, urlPath, allDocs = []) {
   const componentSlug = nameToKebabCase(doc.name);
 
-  console.log("[DEBUG] generateComponentMarkdown called from LOCAL file");
-
   // Helper to escape YAML string values (remove newlines, escape quotes)
   const escapeYamlString = (str) => {
     if (!str) return "";

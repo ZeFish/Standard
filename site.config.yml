@@ -30,6 +30,8 @@ nav:
 build:
   # CSS/SCSS Build Configuration
   css:
+    srcDir: "src/styles" # SCSS source directory
+    outputDir: "_site/assets/standard"
     # Individual SCSS files to compile
     files:
       - input: "standard.scss"
@@ -46,6 +48,8 @@ build:
 
   # JavaScript Build Configuration
   js:
+    srcDir: "src/js" # SCSS source directory
+    outputDir: "dist"
     # Individual JS files to minify
     files:
       - input: "standard.js"

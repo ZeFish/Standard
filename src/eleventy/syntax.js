@@ -1716,7 +1716,7 @@ export default function Syntax(eleventyConfig, options = {}) {
   // Expose processor for custom syntax
   eleventyConfig.Syntax = processor;
 
-  processor.logger.info("✓ Syntax PreProcessor initialized");
+  processor.logger.info("initialized");
 
   // Use preprocessor (runs before markdown)
   eleventyConfig.addPreprocessor("syntax", "md", (data, content) => {
