@@ -54,7 +54,7 @@
     "build:js": "node bin/build-js.js",
     "watch:css": "node bin/build-css.js --watch",
     "watch:js": "node bin/build-js.js --watch",
-    "build": "npm run build:css & npm run build:js",
+    "build": "npm run build:css && npm run build:js && eleventy",
     "watch:assets": "node bin/build-css.js --watch",
     "dev": "concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start --quiet\"",
     "start": "npm run clean:ports && eleventy --serve --port=8083  --quiet",
