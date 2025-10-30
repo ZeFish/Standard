@@ -252,6 +252,7 @@ export default function (eleventyConfig, options = {}) {
 
       // Deep merge YAML into site (YAML wins on conflicts)
       site = deepMerge(baseSite, userSiteData);
+      eleventyConfig.addWatchTarget(userConfigPath);
 
       logger.info("Site config loaded from site.config.yml");
     } catch (error) {
