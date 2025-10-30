@@ -3,6 +3,7 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 import nunjucks from "nunjucks";
 import { readFile } from "fs/promises";
+import { createLogger } from "./logger.js";
 
 /**
  * @component Content Encryption Plugin
@@ -38,6 +39,9 @@ export async function customEncryptHTML(html, password) {
   const key = createHash("sha256").update(password).digest();
   const htmlBuffer = Buffer.from(html, "utf8");
   const encrypted = Buffer.alloc(htmlBuffer.length);
+  const logger = createLogger({
+    scope: "Encryption",
+  });
 
   for (let i = 0; i < htmlBuffer.length; i++) {
     encrypted[i] = htmlBuffer[i] ^ key[i % key.length];
@@ -60,6 +64,9 @@ export async function customEncryptHTML(html, password) {
 }
 
 export function addEncryptionTransform(eleventyConfig) {
+  const logger = createLogger({
+    scope: "Encryption",
+  });
   eleventyConfig.addTransform("protect-notes", async function (content) {
     if (!this.page.inputPath.endsWith(".md")) return content;
 
@@ -68,6 +75,11 @@ export function addEncryptionTransform(eleventyConfig) {
     try {
       fileContent = await readFile(this.page.inputPath, "utf8");
     } catch (error) {
+      this.logger.error(
+        "❌ Failed to read file:",
+        this.page.inputPath,
+        error.message,
+      );
       console.error(
         "❌ Failed to read file:",
         this.page.inputPath,
@@ -107,7 +119,7 @@ export function addEncryptionTransform(eleventyConfig) {
     try {
       // Encrypt the rendered HTML with our custom function
       const encryptedHtml = await customEncryptHTML(content, password);
-      console.log("Successfully encrypted:", this.page.inputPath);
+      logger.info("Successfully encrypted:", this.page.inputPath);
       return encryptedHtml;
     } catch (error) {
       console.error(
@@ -118,6 +130,7 @@ export function addEncryptionTransform(eleventyConfig) {
       return content; // Return unencrypted content on error
     }
   });
+  logger.info("Initialized");
 }
 
 // Export as default plugin function

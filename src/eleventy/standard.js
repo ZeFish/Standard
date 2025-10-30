@@ -206,7 +206,7 @@ export default function (eleventyConfig, options = {}) {
     try {
       const configContent = readFileSync(userConfigPath, "utf-8");
       userSiteData = yaml.load(configContent) || {};
-      logger.info("Site config loaded from site.config.yml");
+      logger.info("Config loaded");
     } catch (error) {
       logger.error(`Failed to parse site.config.yml: ${error.message}`);
     }

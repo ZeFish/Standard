@@ -247,7 +247,7 @@ const colors = {
  *
  * @see {object} colors - Color definitions used here
  */
-const prefix = `${colors.grey}::std  ${colors.reset}${colors.cyan}[JS ]${colors.reset} `;
+const prefix = `${colors.reset} ::std ${colors.reset}${colors.cyan}[_JS] ${colors.blue}ℹ `;
 
 // ============================================================================
 // CONFIGURATION LOADING

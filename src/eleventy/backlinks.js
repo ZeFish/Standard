@@ -1,4 +1,5 @@
 import fs from "fs";
+import { createLogger } from "./logger.js";
 
 /**
  * @component Backlinks Plugin
@@ -36,6 +37,10 @@ function slugify(str) {
 
 export default function (eleventyConfig, options = {}) {
   let backlinksMap = null;
+  const logger = createLogger({
+    verbose: options.verbose,
+    scope: "Backlinks",
+  });
 
   eleventyConfig.on("eleventy.before", () => {
     backlinksMap = null;
@@ -133,4 +138,5 @@ export default function (eleventyConfig, options = {}) {
 
     return map;
   });
+  logger.info("Initialized");
 }
