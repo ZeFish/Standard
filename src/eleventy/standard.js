@@ -20,7 +20,9 @@ import MenuPlugin from "./menu.js";
 import Syntax from "./syntax.js";
 import { createLogger } from "./logger.js";
 import EncryptionPlugin from "./encryption.js";
-import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import Sitemap from "./sitemap.js";
+import Feed from "./feed.js";
+import Manifest from "./manifest.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -154,6 +156,18 @@ export default function (eleventyConfig, options = {}) {
       output: "_site",
     },
 
+    sitemap: {
+      enabled: true
+    },
+
+    feed: {
+      enabled: true
+    },
+
+    manifest: {
+      enabled: true
+    },
+
     // Cloudflare Pages (functions + images)
     cloudflare: {
       functions: {
@@ -236,7 +250,6 @@ export default function (eleventyConfig, options = {}) {
         encrypted: path.join(__dirname, "../layouts/encrypted.njk"),
         pageError: path.join(__dirname, "../layouts/404.njk"),
         atomFeed: path.join(__dirname, "../layouts/atomfeed.xsl"),
-        sitemap: path.join(__dirname, "../layouts/sitemap.xml.njk"),
       },
     },
   };
@@ -314,6 +327,9 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Backlinks);
   eleventyConfig.addPlugin(Markdown);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
+  eleventyConfig.addPlugin(Feed, site);
+  eleventyConfig.addPlugin(Manifest, site);
+  eleventyConfig.addPlugin(Sitemap, site);
   eleventyConfig.addPlugin(ShortCode, {
     outputDir: site.standard.outputDir,
     comments: site.standard.comments,

@@ -2,8 +2,7 @@ title: "Standard Framework"
 url: "https://standard.ffp.co"
 docs: "https://standard.ffp.co/docs"
 language: "fr"
-description: ""
-keywords: ""
+description: "Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."
 author:
   name: "Francis Fontaine"
   email: "francisfontaine@gmail.com"
@@ -29,6 +28,17 @@ standard:
     enabled: true
     model: "meta-llama/llama-4-maverick:free"
   verbose: true
+  feed:
+    enabled: true
+    type: atom
+    collection: posts
+    limit: 20
+
+  # Add manifest configuration
+  manifest:
+    enabled: true
+    theme_color: "#0066cc"
+    background_color: "#ffffff"
 
 # ========================================
 # BUILD CONFIGURATION

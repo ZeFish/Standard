@@ -589,7 +589,7 @@ export default function (eleventyConfig) {
       check: "standard-check",
       "watch:css": "standard-build-css --watch",
       "watch:js": "standard-build-js --watch",
-      dev: 'npm run clean:ports && concurrently --kill-others "npm run watch:css" "npm run watch:js" "eleventy --serve --port=8080"',
+      dev: 'rm -r _site/ && npm run clean:ports && concurrently --kill-others "npm run watch:css" "npm run watch:js" "eleventy --serve --port=8080"',
       "clean:ports": "lsof -ti:8080 | xargs kill -9 2>/dev/null || true",
       "kill-node": "killall node || taskkill /F /IM node.exe",
       start: "npm run dev",
