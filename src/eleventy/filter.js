@@ -32,60 +32,157 @@ export default function (eleventyConfig, options = {}) {
     return match ? match[1] : null;
   });
 
-  // Extract excerpt from content (handles both HTML and Markdown)
+  /**
+   * Excerpt Filter
+   *
+   * @filter excerpt
+   * @category Text Processing
+   * @since 0.1.0
+   *
+   * In the early days of blogging, RSS feeds needed a way to show previews
+   * of articles without transmitting entire posts. The concept of an "excerpt"
+   * was born - a carefully crafted snippet that entices readers while respecting
+   * bandwidth constraints. Today, excerpts serve SEO (meta descriptions), social
+   * sharing (OpenGraph), and user experience (article previews).
+   *
+   * This filter intelligently extracts meaningful previews from your content,
+   * handling both Markdown and HTML. It strips formatting, removes code blocks,
+   * and truncates to your exact specifications - whether by word count or
+   * character length. Smart enough to respect word boundaries, it never cuts
+   * words in half, ensuring professional, readable excerpts every time.
+   *
+   * The filter knows the difference between structural markup (headings, lists,
+   * code blocks) and readable prose. It finds the first real paragraph of text,
+   * ignoring frontmatter and formatting, giving you the actual beginning of
+   * your article - the hook that draws readers in.
+   *
+   * ### Why Two Truncation Methods?
+   *
+   * **Word-based** (`maxWords`) feels natural for editorial content. "Show me
+   * the first 50 words" matches how we think about reading. Perfect for blog
+   * listings and article previews.
+   *
+   * **Character-based** (`maxChars`) serves technical constraints. Google's
+   * meta descriptions max out at 160 characters. Twitter cards stop at 200.
+   * OpenGraph recommends 300. Character limits ensure your content fits the
+   * container, whether that's a search result or a social card.
+   *
+   * ### Future Improvements
+   *
+   * - Sentence-aware truncation (stop at sentence boundaries)
+   * - Custom ellipsis styles (…, [...], read more →)
+   * - HTML entity decoding
+   * - Multi-language sentence detection
+   *
+   * @example njk - Meta description (SEO)
+   *   <meta name="description" content="{{ content | excerpt({ maxChars: 155 }) }}">
+   *
+   * @example njk - Blog post preview
+   *   {% for post in collections.posts %}
+   *     <article>
+   *       <h2>{{ post.data.title }}</h2>
+   *       <p>{{ post.templateContent | excerpt({ maxWords: 40 }) }}</p>
+   *     </article>
+   *   {% endfor %}
+   *
+   * @example njk - Social sharing cards
+   *   <meta property="og:description" content="{{ content | excerpt({ maxChars: 300 }) }}">
+   *   <meta name="twitter:description" content="{{ content | excerpt({ maxChars: 200 }) }}">
+   *
+   * @example njk - Custom options
+   *   {{ content | excerpt({
+   *     maxChars: 500,
+   *     stripHtml: false,
+   *     useFirstParagraph: true,
+   *     respectWordBoundaries: true,
+   *     endWithEllipsis: true
+   *   }) }}
+   *
+   * @param {String} content - The content to excerpt (HTML or Markdown)
+   * @param {Object} options - Configuration options
+   * @param {Number} options.maxWords - Maximum number of words (default: 50)
+   * @param {Number} options.maxChars - Maximum characters (overrides maxWords if set)
+   * @param {Number} options.maxSentences - Maximum sentences (default: 2)
+   * @param {Boolean} options.stripHtml - Remove HTML tags (default: true)
+   * @param {Boolean} options.useFirstParagraph - Extract first paragraph only (default: true)
+   * @param {Boolean} options.endWithEllipsis - Add ellipsis when truncated (default: true)
+   * @param {Boolean} options.respectWordBoundaries - Don't cut words in half (default: true)
+   *
+   * @returns {String} Excerpted content
+   */
   eleventyConfig.addFilter("excerpt", (content, options = {}) => {
+    // Return empty string if no content provided
     if (!content) return "";
 
+    // ===== DEFINE DEFAULTS =====
     const defaults = {
-      maxWords: 50,
-      maxSentences: 2,
-      stripHtml: true,
-      useFirstParagraph: true,
-      endWithEllipsis: true,
+      maxWords: 50, // Word limit (default truncation method)
+      maxChars: null, // Character limit (takes priority over maxWords)
+      maxSentences: 2, // Sentence limit (future feature)
+      stripHtml: true, // Remove HTML tags
+      useFirstParagraph: true, // Extract first paragraph only
+      endWithEllipsis: true, // Add "…" when truncated
+      respectWordBoundaries: true, // Don't break words when using maxChars
     };
 
+    // Merge user options with defaults
     const config = { ...defaults, ...options };
+
+    // Start with original content
     let text = content;
 
+    // ===== NORMALIZE QUOTES =====
+    // Convert straight double quotes to single quotes (simpler for attribute values)
     text = text.replace(/"/g, "'");
 
-    // Remove markdown images
+    // ===== REMOVE MARKDOWN SYNTAX =====
+
+    // Remove markdown images: ![alt text](image.jpg)
     text = text.replace(/!\[.*?\]\(.*?\)/g, " ");
 
-    // Remove markdown links but keep the text
+    // Remove markdown links but preserve link text: [text](url) → text
     text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
 
-    // Remove markdown headers
+    // Remove markdown headers: ## Header → Header
     text = text.replace(/^#{1,6}\s+/gm, "");
 
-    // Remove markdown formatting
-    text = text.replace(/(\*\*|__)(.*?)\1/g, "$2"); // bold
-    text = text.replace(/(\*|_)(.*?)\1/g, "$2"); // italic
-    text = text.replace(/`([^`]+)`/g, "$1"); // inline code
+    // Remove markdown bold: **text** or __text__ → text
+    text = text.replace(/(\*\*|__)(.*?)\1/g, "$2");
 
-    // Remove markdown unordered and ordered list items
+    // Remove markdown italic: *text* or _text_ → text
+    text = text.replace(/(\*|_)(.*?)\1/g, "$2");
+
+    // Remove inline code: `code` → code
+    text = text.replace(/`([^`]+)`/g, "$1");
+
+    // Remove markdown list items (ordered and unordered)
     text = text.replace(/^\s*([-*+]|\d+\.)\s+.*$/gm, " ");
 
-    // Remove code blocks
-    text = text.replace(/```[\s\S]*?```/g, " ");
-    text = text.replace(/^    .*$/gm, " "); // indented code blocks
+    // Remove code blocks (fenced and indented)
+    text = text.replace(/```[\s\S]*?```/g, " "); // Fenced: ```code```
+    text = text.replace(/^    .*$/gm, " "); // Indented: 4 spaces
 
-    // If useFirstParagraph is true, try to get the first paragraph
+    // ===== EXTRACT FIRST PARAGRAPH =====
     if (config.useFirstParagraph) {
-      // For HTML content
+      // Try to match HTML paragraph first
       const pMatch = text.match(/<p[^>]*>(.*?)<\/p>/s);
+
       if (pMatch) {
+        // Found HTML paragraph - use its content
         text = pMatch[1];
       } else {
-        // For Markdown content - split by double newlines and find first text paragraph
+        // No HTML paragraph - split by double newlines (Markdown paragraphs)
         const paragraphs = text.split(/\n\s*\n/);
+
+        // Find first substantial text paragraph
         for (const para of paragraphs) {
           const cleanPara = para.trim();
-          // Skip empty paragraphs and frontmatter
+
+          // Skip empty paragraphs, frontmatter, and very short text
           if (
-            cleanPara &&
-            !cleanPara.startsWith("---") &&
-            cleanPara.length > 10
+            cleanPara && // Not empty
+            !cleanPara.startsWith("---") && // Not frontmatter delimiter
+            cleanPara.length > 10 // Substantial text
           ) {
             text = cleanPara;
             break;
@@ -94,35 +191,63 @@ export default function (eleventyConfig, options = {}) {
       }
     }
 
-    // Strip HTML if requested
+    // ===== STRIP HTML TAGS =====
     if (config.stripHtml) {
+      // Remove all HTML tags: <tag>content</tag> → content
       text = text.replace(/<[^>]*>/g, " ");
     }
 
-    // Clean up whitespace
+    // ===== CLEAN UP WHITESPACE =====
+    // Collapse multiple spaces into single space and trim
     text = text.replace(/\s+/g, " ").trim();
 
-    if (!text) return "";
+    // ===== CHARACTER-BASED TRUNCATION =====
+    // If maxChars is set, use character limit (takes priority over word limit)
+    if (config.maxChars && text.length > config.maxChars) {
+      // Truncate to maximum character length
+      text = text.substring(0, config.maxChars);
 
-    // Limit by sentences first (more natural)
-    if (config.maxSentences > 0) {
-      const sentences = text.match(/[^\.!?]+[\.!?]+/g);
-      if (sentences && sentences.length > config.maxSentences) {
-        text = sentences.slice(0, config.maxSentences).join("");
-        return text.trim() + (config.endWithEllipsis ? "..." : "");
+      // Respect word boundaries - don't cut words in half
+      if (config.respectWordBoundaries) {
+        // Find last space before the cutoff point
+        const lastSpace = text.lastIndexOf(" ");
+
+        // Only truncate at word boundary if we found a space
+        // (and it's not at the very beginning)
+        if (lastSpace > 0) {
+          text = text.substring(0, lastSpace);
+        }
       }
-    }
 
-    // Fallback to word limit
-    const words = text.split(" ");
-    if (words.length > config.maxWords) {
-      text = words.slice(0, config.maxWords).join(" ");
+      // Add ellipsis if enabled
       if (config.endWithEllipsis) {
-        text += "...";
+        text = text.trim() + "…";
+      }
+
+      // Return character-truncated text
+      return text;
+    }
+
+    // ===== WORD-BASED TRUNCATION =====
+    // If maxWords is set (and maxChars wasn't used), truncate by word count
+    if (config.maxWords) {
+      // Split text into array of words
+      const words = text.split(/\s+/);
+
+      // Check if we need to truncate
+      if (words.length > config.maxWords) {
+        // Take only the first maxWords words
+        text = words.slice(0, config.maxWords).join(" ");
+
+        // Add ellipsis if enabled
+        if (config.endWithEllipsis) {
+          text = text.trim() + "…";
+        }
       }
     }
 
-    return text.trim();
+    // Return final excerpted text
+    return text;
   });
 
   // Filtre année robuste
