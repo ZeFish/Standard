@@ -216,12 +216,12 @@ export default function MenuPlugin(eleventyConfig, options = {}) {
       .join("");
 
     // Build list classes
-    const ulClasses = [escapeHtml(className), "no-bullet", inline ? "flex" : ""]
+    const ulClasses = [escapeHtml(className), "", inline ? "" : ""]
       .filter(Boolean)
       .join(" ");
 
     // Use inline style for gap (until we add .gap-s utility)
-    const ulStyle = inline ? ` style="gap: var(--space-s);"` : "";
+    const ulStyle = inline ? ` ` : "";
 
     return `<nav aria-label="${escapeHtml(
       label,
