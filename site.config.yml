@@ -46,10 +46,13 @@ build:
         output: "standard.min.css"
       - input: "standard.theme.scss"
         output: "standard.theme.min.css"
+      - input: "../../node_modules/sanitize.css/sanitize.css"
+        output: "sanitize.min.css"
 
     # Files to bundle together (in order)
     bundle:
       files:
+        - "sanitize.min.css"
         - "standard.min.css"
         - "standard.theme.min.css"
       output: "standard.bundle.css"
@@ -57,7 +60,9 @@ build:
   # JavaScript Build Configuration
   js:
     srcDir: "src/js" # SCSS source directory
-    outputDir: "dist"
+    outputDir:
+      - "_site/assets/standard"
+      - "dist"
     # Individual JS files to minify
     files:
       - input: "standard.js"
@@ -78,13 +83,13 @@ build:
       - name: "standard.bundle.js"
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
-          - "node_modules/htmx.org/dist/ext/preload.js"
+          - "node_modules/htmx-ext-preload/dist/preload.min.js"
           - "dist/standard.min.js"
           - "dist/standard.toast.min.js"
       - name: "standard.bundle.full.js"
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
-          - "node_modules/htmx.org/dist/ext/preload.js"
+          - "node_modules/htmx-ext-preload/dist/preload.min.js"
           - "dist/standard.min.js"
           - "dist/standard.comment.js"
           - "dist/standard.toast.js"
