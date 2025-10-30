@@ -586,7 +586,7 @@ export default function (eleventyConfig) {
       "build:css": "standard-build-css",
       "build:js": "standard-build-js",
       build: "npm run build:css && npm run build:js && eleventy",
-      check: "standard-check",
+      check: "npm run build && standard-check",
       "watch:css": "standard-build-css --watch",
       "watch:js": "standard-build-js --watch",
       dev: 'rm -r _site/ && npm run clean:ports && concurrently --kill-others "npm run watch:css" "npm run watch:js" "eleventy --serve --port=8080"',

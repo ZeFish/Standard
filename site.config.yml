@@ -21,6 +21,26 @@ nav:
       url: "/cheat-sheet/"
 
 standard:
+  security:
+    enabled: true
+
+    # Customize CSP if needed
+    csp:
+      scriptSrc:
+        - "'self'"
+        - "'unsafe-inline'"
+        - "https://cdn.jsdelivr.net"
+        - "https://unpkg.com"
+
+      imgSrc:
+        - "'self'"
+        - "data:"
+        - "https:"
+        - "https://imagedelivery.net" # Cloudflare Images
+
+    # Allow specific features
+    permissions:
+      geolocation: ["self"] # Allow geolocation from same origin
   cloudflare:
     images:
       enabled: true

@@ -24,6 +24,7 @@ import Sitemap from "./sitemap.js";
 import Feed from "./feed.js";
 import Manifest from "./manifest.js";
 import Robots from "./robots.js";
+import Security from "./security.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -158,19 +159,41 @@ export default function (eleventyConfig, options = {}) {
     },
 
     sitemap: {
-      enabled: true
+      enabled: true,
     },
 
     feed: {
-      enabled: true
+      enabled: true,
     },
 
     manifest: {
-      enabled: true
+      enabled: true,
     },
 
     robots: {
-      enabled: true
+      enabled: true,
+    },
+    security: {
+      enabled: true,
+      csp: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https:"],
+        fontSrc: ["'self'", "data:"],
+        connectSrc: ["'self'"],
+        frameAncestors: ["'none'"],
+      },
+      permissions: {
+        geolocation: [],
+        camera: [],
+        microphone: [],
+        payment: [],
+        usb: [],
+      },
+      xFrameOptions: "DENY",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      enableCaching: true,
     },
 
     // Cloudflare Pages (functions + images)
@@ -336,6 +359,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Manifest, site);
   eleventyConfig.addPlugin(Sitemap, site);
   eleventyConfig.addPlugin(Robots, site);
+  eleventyConfig.addPlugin(Security, site);
   eleventyConfig.addPlugin(ShortCode, {
     outputDir: site.standard.outputDir,
     comments: site.standard.comments,
