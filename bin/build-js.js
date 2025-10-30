@@ -561,7 +561,7 @@ async function buildJS() {
 
       // Check if source file exists
       if (!fs.existsSync(inputPath)) {
-        console.warn(`${prefix}⚠️  Source file not found: ${file.input}`);
+        console.error(`${prefix}Source file not found: ${file.input}`);
         continue;
       }
 
@@ -603,7 +603,7 @@ async function buildJS() {
 
         if (result.error) {
           console.error(
-            `${prefix}❌ Minification failed for ${file.input}:`,
+            `${prefix}Minification failed for ${file.input}:`,
             result.error,
           );
           continue;
@@ -685,7 +685,7 @@ async function buildJS() {
               : path.join(projectRoot, filepath);
 
           if (!fs.existsSync(fullPath)) {
-            console.warn(`${prefix}⚠️  Bundle file not found: ${filepath}`);
+            console.error(`${prefix}⚠️  Bundle file not found: ${filepath}`);
             continue;
           }
 
@@ -693,7 +693,7 @@ async function buildJS() {
         }
 
         if (contents.length === 0) {
-          console.warn(
+          console.error(
             `${prefix}⚠️  No files found for bundle: ${bundle.name}`,
           );
           continue;

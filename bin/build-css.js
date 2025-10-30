@@ -492,7 +492,7 @@ async function buildCSS() {
 
       // Check if source file exists
       if (!fs.existsSync(inputPath)) {
-        console.warn(`${prefix}⚠️  Source file not found: ${file.input}`);
+        console.error(`${prefix}⚠️  Source file not found: ${file.input}`);
         continue;
       }
 
@@ -522,7 +522,7 @@ async function buildCSS() {
         if (fs.existsSync(filePath)) {
           cssContents.push(fs.readFileSync(filePath, "utf8"));
         } else {
-          console.warn(`${prefix}⚠️  Bundle file not found: ${filename}`);
+          console.error(`${prefix}⚠️  Bundle file not found: ${filename}`);
         }
       }
 
