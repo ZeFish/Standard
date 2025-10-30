@@ -21,6 +21,7 @@ import MenuPlugin from "./menu.js";
 import Syntax from "./syntax.js";
 import { createLogger } from "./logger.js";
 import EncryptionPlugin from "./encryption.js";
+import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -242,9 +243,23 @@ export default function (eleventyConfig, options = {}) {
       },
     },
   });
-
+  /*
+  eleventyConfig.addPlugin(feedPlugin, {
+    type: "atom",
+    outputPath: "/feed.xml",
+    stylesheet: "/pretty-atom-feed.xsl",
+    collection: { name: "public", limit: 10 },
+    site: {
+      language: userSiteData.language,
+      title: userSiteData.title,
+      subtitle: userSiteData.description,
+      base: userSiteData.url,
+      author: { name: userSiteData.author.name },
+    },
+  });
+*/
   // ===== DIRECTORY STRUCTURE =====
-  eleventyConfig.addGlobalData("layout", "base");
+  //eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.addGlobalData("visibility", "public");
   //eleventyConfig.addGlobalData("theme", "swiss");
   // ===== PASSTHROUGH COPY =====

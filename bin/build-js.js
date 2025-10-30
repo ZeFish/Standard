@@ -138,23 +138,34 @@ const projectRoot = process.cwd();
  * in site.config.yml. The src/js convention matches most modern project structures,
  * but you can use any directory (lib/, scripts/, client/, etc.).
  *
- * @see {constant} destDir - Where compiled JavaScript goes
+ * @see {constant} destDirs - Where compiled JavaScript goes
  */
 let srcDir = path.join(projectRoot, "src/js");
 
 /**
- * Destination Directory Path
+ * Destination Directory Path(s)
  *
  * @group Configuration
  * @since 0.14.0
  *
- * Where minified/bundled JavaScript is written. Defaults to public/assets/js,
- * which works for most static site generators and CDN deployments. Adjust via
- * build.js.outputDir to match your deployment structure (dist/js, build/assets, etc.).
+ * Where minified/bundled JavaScript files are written. Can be a single string or
+ * an array of strings. Can be overridden via build.js.outputDir in site.config.yml.
+ * The default (public/assets/js) works for most static site generators and CDN
+ * deployments. When an array is provided, JavaScript is written to all specified
+ * directories simultaneously—useful for parallel builds or multi-target deployments
+ * (e.g., both _site/assets/standard and dist/).
  *
  * @see {constant} srcDir - Where JavaScript source files live
+ * @example
+ *   # Single destination
+ *   outputDir: "public/assets/js"
+ *
+ *   # Multiple destinations
+ *   outputDir:
+ *     - "_site/assets/standard"
+ *     - "dist"
  */
-let destDir = path.join(projectRoot, "public/assets/js");
+let destDirs = [path.join(projectRoot, "public/assets/js")];
 
 /**
  * Command-Line Flags
@@ -187,7 +198,7 @@ const isDev = process.argv.includes("--dev") || isWatch;
  * Before graphical user interfaces, computers communicated through text terminals.
  * In 1970, ANSI (American National Standards Institute) standardized escape codes
  * for controlling these terminals—moving the cursor, changing colors, clearing
- * screens. These codes start with ESC (escape character, \x1b in hex) followed by
+ * screens. These codes start with ESC (escape character, \\x1b in hex) followed by
  * control sequences. Despite being 55+ years old, they power every modern terminal
  * emulator—from Windows Terminal to iTerm to VS Code's integrated terminal.
  *
@@ -341,7 +352,12 @@ try {
     srcDir = path.join(projectRoot, config.srcDir);
   }
   if (config.outputDir) {
-    destDir = path.join(projectRoot, config.outputDir);
+    // Support both single string and array of strings
+    if (Array.isArray(config.outputDir)) {
+      destDirs = config.outputDir.map((dir) => path.join(projectRoot, dir));
+    } else {
+      destDirs = [path.join(projectRoot, config.outputDir)];
+    }
   }
 } catch (error) {
   console.error(
@@ -355,7 +371,7 @@ if (!config.files || !Array.isArray(config.files)) {
   console.error(
     `${prefix}❌ Missing required 'files' array in build.js config`,
   );
-  process.exit(0);
+  process.exit(1);
 }
 
 /**
@@ -500,7 +516,7 @@ if (shouldBundle) {
  * @see {array} JS_FILES - Files to process
  * @see {array} BUNDLES - Bundle configurations
  * @see {constant} srcDir - Source file location
- * @see {constant} destDir - Output file location
+ * @see {constant} destDirs - Output file locations
  *
  * @link https://terser.org/docs/api-reference Terser API Reference
  * @link https://github.com/terser/terser/blob/master/README.md Terser Options
@@ -529,9 +545,11 @@ if (shouldBundle) {
  * @returns {Promise<void>} Resolves when build completes
  */
 async function buildJS() {
-  // Ensure dest directory exists
-  if (!fs.existsSync(destDir)) {
-    fs.mkdirSync(destDir, { recursive: true });
+  // Ensure all dest directories exist
+  for (const destDir of destDirs) {
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
   }
 
   try {
@@ -540,7 +558,6 @@ async function buildJS() {
     // ========================================================================
     for (const file of JS_FILES) {
       const inputPath = path.join(srcDir, file.input);
-      const outputPath = path.join(destDir, file.output);
 
       // Check if source file exists
       if (!fs.existsSync(inputPath)) {
@@ -592,9 +609,13 @@ async function buildJS() {
           continue;
         }
 
-        fs.writeFileSync(outputPath, result.code);
+        // Write to all destination directories
+        for (const destDir of destDirs) {
+          fs.writeFileSync(path.join(destDir, file.output), result.code);
+        }
+
         console.log(
-          `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)`,
+          `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       } else {
         /**
@@ -610,14 +631,17 @@ async function buildJS() {
          * - Files with eval() or other dynamic code (minification might break)
          * - Files that are generated by other tools
          *
-         * copyFileSync() is a simple byte-for-byte copy at the OS level—fast
-         * and reliable.
+         * We read once and write to all destinations to avoid multiple disk reads.
          *
          * @see {function} buildJS - Caller
          */
-        fs.copyFileSync(inputPath, outputPath);
+        // Write to all destination directories
+        for (const destDir of destDirs) {
+          fs.writeFileSync(path.join(destDir, file.output), source);
+        }
+
         console.log(
-          `${prefix}${colors.grey}${file.output} ${colors.reset}(copied)`,
+          `${prefix}${colors.grey}${file.output} ${colors.reset}(copied)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
     }
@@ -681,7 +705,7 @@ async function buildJS() {
          * @group Core Functions
          * @since 0.14.0
          *
-         * Files are joined with double newlines (\n\n) for readability if you
+         * Files are joined with double newlines (\\n\\n) for readability if you
          * ever need to inspect the bundle before minification. The minifier
          * removes these anyway, so it doesn't affect output size.
          *
@@ -710,10 +734,13 @@ async function buildJS() {
           continue;
         }
 
-        fs.writeFileSync(path.join(destDir, bundle.name), minified.code);
+        // Write bundle to all destination directories
+        for (const destDir of destDirs) {
+          fs.writeFileSync(path.join(destDir, bundle.name), minified.code);
+        }
 
         console.log(
-          `${prefix}${colors.grey}${bundle.name} ${colors.reset}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)`,
+          `${prefix}${colors.grey}${bundle.name} ${colors.reset}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
     }

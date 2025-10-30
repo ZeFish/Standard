@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.15.2",
+  "version": "0.15.3",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -110,6 +110,7 @@
   },
   "dependencies": {
     "@11ty/eleventy-navigation": "^1.0.4",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.2.3",
