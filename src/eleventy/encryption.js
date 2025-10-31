@@ -39,7 +39,7 @@ export async function customEncryptHTML(html, password) {
   const key = createHash("sha256").update(password).digest();
   const htmlBuffer = Buffer.from(html, "utf8");
   const encrypted = Buffer.alloc(htmlBuffer.length);
-  const logger = createLogger({
+  const logger = Logger({
     scope: "Encryption",
   });
 

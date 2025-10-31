@@ -259,12 +259,7 @@ export default function (eleventyConfig, site = {}) {
       }
 
       // List of AI function files to copy
-      const functionFiles = [
-        "ai-chat.js",
-        "ai-search.js",
-        "ai-enhance.js",
-        "ai-usage.js",
-      ];
+      const functionFiles = ["ai-search.js"];
 
       functionFiles.forEach((file) => {
         const src = path.join(sourceDir, file);
