@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.15.18",
+  "version": "0.15.19",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -48,7 +48,8 @@
     "bin",
     "dist",
     "src/eleventy",
-    "src/layouts"
+    "src/layouts",
+    "src/cloudflare"
   ],
   "scripts": {
     "build:css": "node bin/build-css.js",
