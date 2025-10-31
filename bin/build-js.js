@@ -580,7 +580,7 @@ async function buildJS() {
           fs.writeFileSync(path.join(destDir, file.output), result.code);
         }
 
-        logger.info(
+        logger.success(
           `${file.output} ${colors.grey}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       } else {
@@ -606,7 +606,7 @@ async function buildJS() {
           fs.writeFileSync(path.join(destDir, file.output), source);
         }
 
-        logger.info(
+        logger.success(
           `${file.output} ${colors.grey}(copied)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
@@ -703,7 +703,7 @@ async function buildJS() {
           fs.writeFileSync(path.join(destDir, bundle.name), minified.code);
         }
 
-        logger.info(
+        logger.success(
           `${bundle.name} ${colors.grey}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
@@ -711,7 +711,7 @@ async function buildJS() {
 
     if (!isWatch) logger.info(`Completed`);
   } catch (error) {
-    logger.error(`❌ JavaScript build failed:`, error.message);
+    logger.error(`Build failed:`, error.message);
     process.exit(1);
   }
 }

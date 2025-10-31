@@ -103,5 +103,5 @@ ${headersContent}`,
   logger.debug("Security headers configured:");
   logger.debug(`_headers file: generated`);
   logger.debug(` Meta tags: ${addMetaTags ? "enabled" : "disabled"}`);
-  logger.success("Initialized");
+  logger.success();
 }

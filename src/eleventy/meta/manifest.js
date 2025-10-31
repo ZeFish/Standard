@@ -162,5 +162,5 @@ ${JSON.stringify(manifest, null, 2)}`, // Pretty-printed JSON with 2-space inden
   );
 
   // ===== SUCCESS LOG =====
-  logger.success(`Initialized`);
+  logger.success();
 }

@@ -4,6 +4,7 @@ import fs from "fs";
 import { glob } from "glob";
 import { fileURLToPath } from "url";
 import crypto from "crypto";
+import Logger from "./logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "../../");
@@ -243,22 +244,30 @@ export default function (eleventyConfig, options = {}) {
       `${sourceDir}/js/**/*.js`,
       `${sourceDir}/eleventy/**/*.js`,
     ],
-    outputDir = "content/docs",
+    outputDir = "content/concepts",
     layout = "base",
   } = options;
+
+  const logger = Logger({
+    scope: "DOC",
+    verbose: options.verbose,
+  });
 
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const urlPath = "/" + outputDir.split("/").slice(1).join("/");
+  const urlPath = "/concepts";
 
   eleventyConfig.on("eleventy.before", async () => {
     const hasChanged = await sourceFilesChanged(patterns);
 
     if (!hasChanged) {
+      logger.debug("Unchanged, skipping...");
       return;
     }
+
+    logger.info("Generating...");
 
     const absolutePatterns = patterns.map((p) => {
       const fullPattern = p.startsWith(sourceDir) ? p : `${sourceDir}/${p}`;
@@ -272,38 +281,42 @@ export default function (eleventyConfig, options = {}) {
 
     const docs = await parser.parse();
 
+    logger.debug(`Found ${docs.length} documented components`);
+
     await generateMarkdownDocs(docs, outputDir, layout, urlPath);
     await generateIndexPages(docs, outputDir, layout, urlPath);
 
     await saveSourceHash(patterns);
+
+    logger.success("Generated");
   });
 
-  eleventyConfig.addCollection("docs", function (collection) {
-    const docsDir = path.join(process.cwd(), outputDir);
+  eleventyConfig.addCollection("concepts", function (collection) {
+    const conceptsDir = path.join(process.cwd(), outputDir);
 
-    if (!fs.existsSync(docsDir)) {
+    if (!fs.existsSync(conceptsDir)) {
       return [];
     }
 
-    const markdownFiles = fs.readdirSync(docsDir);
-    const docs = [];
+    const markdownFiles = fs.readdirSync(conceptsDir);
+    const concepts = [];
 
     for (const file of markdownFiles) {
-      if (file.endsWith(".md")) {
-        const filePath = path.join(docsDir, file);
+      if (file.endsWith(".md") && !file.startsWith("_")) {
+        const filePath = path.join(conceptsDir, file);
         const content = fs.readFileSync(filePath, "utf-8");
-        const componentSlug = file.replace(".md", "");
-        const url = `${urlPath}/${componentSlug}/`;
+        const conceptSlug = file.replace(".md", "");
+        const url = `${urlPath}/${conceptSlug}/`;
 
-        docs.push({
-          title: componentSlug,
+        concepts.push({
+          title: conceptSlug,
           url,
           content,
         });
       }
     }
 
-    return docs;
+    return concepts;
   });
 }
 
@@ -332,12 +345,12 @@ function nameToKebabCase(name) {
 
 async function generateMarkdownDocs(docs, outputDir, layout, urlPath) {
   for (const doc of docs) {
-    // Only generate markdown for components, skip mixins and functions
-    if (doc.kind === "mixin" || doc.kind === "function") {
+    // Skip if no component name
+    if (!doc.name) {
       continue;
     }
 
-    const markdown = generateComponentMarkdown(doc, layout, urlPath, docs);
+    const markdown = generateConceptMarkdown(doc, layout, urlPath, docs);
     const filename = `${nameToKebabCase(doc.name)}.md`;
     const filepath = path.join(outputDir, filename);
 
@@ -349,185 +362,277 @@ async function generateIndexPages(docs, outputDir, layout, urlPath) {
   const grouped = {};
 
   for (const doc of docs) {
-    // Only include components in the index, exclude mixins and functions
-    if (doc.kind === "mixin" || doc.kind === "function") {
-      continue;
-    }
-
-    const category = doc.category || "Utilities";
+    const category = doc.category || "Uncategorized";
     if (!grouped[category]) {
       grouped[category] = [];
     }
     grouped[category].push(doc);
   }
 
+  // Generate category index pages
   for (const [category, items] of Object.entries(grouped)) {
-    const categorySlug = category.replace(/\s+/g, "-").toLowerCase();
+    const categorySlug = nameToKebabCase(category);
     const markdown = generateCategoryMarkdown(category, items, layout, urlPath);
     const filepath = path.join(outputDir, `_${categorySlug}-index.md`);
 
     fs.writeFileSync(filepath, markdown, "utf-8");
   }
 
+  // Generate main index
   const mainIndex = generateMainIndexMarkdown(grouped, layout, urlPath);
   fs.writeFileSync(path.join(outputDir, "index.md"), mainIndex, "utf-8");
 }
 
-function generateComponentMarkdown(doc, layout, urlPath, allDocs = []) {
-  const componentSlug = nameToKebabCase(doc.name);
+/**
+ * Generate concept-driven documentation page
+ */
+function generateConceptMarkdown(doc, layout, urlPath, allDocs = []) {
+  const conceptSlug = nameToKebabCase(doc.name);
 
-  // Helper to escape YAML string values (remove newlines, escape quotes)
+  // Helper to escape YAML string values
   const escapeYamlString = (str) => {
     if (!str) return "";
     return String(str)
-      .replace(/\n/g, " ") // Replace newlines with spaces
-      .replace(/\r/g, "") // Remove carriage returns
-      .replace(/"/g, '\\"') // Escape quotes
+      .replace(/\n/g, " ")
+      .replace(/\r/g, "")
+      .replace(/"/g, '\\"')
       .trim();
   };
 
+  // Frontmatter
   let markdown = "---\n";
   markdown += `title: "${escapeYamlString(doc.name)}"\n`;
   markdown += `layout: "${layout}"\n`;
-  markdown += `permalink: "${urlPath}/${componentSlug}/index.html"\n`;
-  markdown += `eleventyNavigation:\n`;
-  markdown += `  key: "${escapeYamlString(doc.name)}"\n`;
-  markdown += `  parent: "${doc.category || "API"}"\n`;
-  markdown += `  title: "${escapeYamlString(doc.name)}"\n`;
-  markdown += `category: "${escapeYamlString(doc.category || "Utilities")}"\n`;
+  markdown += `category: "${escapeYamlString(doc.category || "Uncategorized")}"\n`;
   markdown += `type: "${doc.type}"\n`;
-  markdown += `source: "${doc.source}"\n`;
   if (doc.since) markdown += `since: "${escapeYamlString(doc.since)}"\n`;
-  if (doc.deprecated) {
-    const deprecatedValue =
-      doc.deprecated === true ? "yes" : escapeYamlString(doc.deprecated);
-    markdown += `deprecated: "${deprecatedValue}"\n`;
-  }
   markdown += "---\n\n";
 
   // Title
   markdown += `# ${doc.name}\n\n`;
 
-  // Description
-  if (doc.description) {
-    // Normalize description: preserve paragraph breaks and lists
-    // but remove single line breaks within regular paragraphs for better text flow
-    const normalizedDescription = doc.description
-      .split(/\n\n+/) // Split by paragraph breaks (double+ newlines)
-      .map((paragraph) => {
-        // Check if this is a list (starts with -, *, or numbered items)
-        const isListBlock =
-          /^[\s]*[-*]/.test(paragraph) || /^[\s]*\d+\./.test(paragraph);
-
-        if (isListBlock) {
-          // Preserve list formatting - keep line breaks between items
-          return paragraph.trim();
-        } else {
-          // Regular paragraph - remove line breaks for better flow
-          return paragraph
-            .replace(/\n/g, " ") // Replace single newlines with spaces
-            .replace(/\s+/g, " ") // Collapse multiple spaces
-            .trim();
-        }
-      })
-      .filter((p) => p.length > 0) // Remove empty paragraphs
-      .join("\n\n"); // Join with double newlines
-
-    markdown += `${normalizedDescription}\n\n`;
+  // CONCEPT SECTION (main essay)
+  if (doc.concept) {
+    markdown += formatLongFormContent(doc.concept);
+    markdown += "\n\n";
   }
 
-  // Examples
+  // Regular description (if no concept)
+  if (!doc.concept && doc.description) {
+    markdown += formatLongFormContent(doc.description);
+    markdown += "\n\n";
+  }
+
+  // THEORY SECTION
+  if (doc.theory) {
+    markdown += "## The Theory\n\n";
+    markdown += formatLongFormContent(doc.theory);
+    markdown += "\n\n";
+  }
+
+  // IMPLEMENTATION SECTION
+  if (doc.implementation) {
+    markdown += "## The Implementation\n\n";
+    markdown += formatLongFormContent(doc.implementation);
+    markdown += "\n\n";
+  }
+
+  // EXAMPLES
   if (doc.examples.length > 0) {
-    for (let i = 0; i < doc.examples.length; i++) {
-      if (i > 0) markdown += "\n";
-      markdown += `\`\`\`${doc.type}\n${doc.examples[i]}\n\`\`\`\n`;
-    }
-    markdown += "\n";
-  }
+    markdown += "## Examples\n\n";
 
-  // Properties/Parameters
-  if (doc.props.length > 0) {
-    markdown += "### Properties\n\n";
-    markdown += "| Name | Type | Description |\n";
-    markdown += "|------|------|-------------|\n";
+    for (const example of doc.examples) {
+      const exampleData = parseExample(example);
 
-    for (const prop of doc.props) {
-      markdown += `| \`${prop.name}\` | \`${prop.type}\` | ${prop.description} |\n`;
-    }
-    markdown += "\n";
-  }
+      // Title
+      if (exampleData.title) {
+        markdown += `### ${exampleData.title}\n\n`;
+      }
 
-  // Parameters
-  if (doc.params.length > 0) {
-    markdown += "### Parameters\n\n";
-    markdown += "| Name | Type | Description |\n";
-    markdown += "|------|------|-------------|\n";
+      // Render preview (for HTML examples)
+      if (exampleData.language === "html") {
+        markdown += `<div class="example-preview">\n${exampleData.code}\n</div>\n\n`;
+      }
 
-    for (const param of doc.params) {
-      markdown += `| \`${param.name}\` | \`${param.type}\` | ${param.description} |\n`;
-    }
-    markdown += "\n";
-  }
-
-  // Return value
-  if (doc.returns) {
-    markdown += "### Returns\n\n";
-    markdown += `**Type:** \`${doc.returns.type}\`\n\n`;
-    if (doc.returns.description) {
-      markdown += `${doc.returns.description}\n\n`;
+      // Code block
+      markdown += `\`\`\`${exampleData.language}\n${exampleData.code}\n\`\`\`\n\n`;
     }
   }
 
+  // API REFERENCE SECTION
+  const hasApiContent =
+    doc.variables.length > 0 ||
+    doc.mixins.length > 0 ||
+    doc.functions.length > 0 ||
+    doc.classes.length > 0 ||
+    doc.params.length > 0 ||
+    doc.returns;
+
+  if (hasApiContent) {
+    markdown += "---\n\n";
+    markdown += "## API Reference\n\n";
+
+    // Variables
+    if (doc.variables.length > 0) {
+      markdown += "### Variables\n\n";
+      for (const variable of doc.variables) {
+        markdown += `#### ${variable.name} {#${nameToKebabCase(variable.name)}}\n\n`;
+        if (variable.description) {
+          markdown += `${variable.description}\n\n`;
+        }
+      }
+    }
+
+    // Mixins
+    if (doc.mixins.length > 0) {
+      markdown += "### Mixins\n\n";
+      for (const mixin of doc.mixins) {
+        markdown += `#### ${mixin.name} {#${nameToKebabCase(mixin.name)}}\n\n`;
+        if (mixin.description) {
+          markdown += `${mixin.description}\n\n`;
+        }
+      }
+    }
+
+    // Functions
+    if (doc.functions.length > 0) {
+      markdown += "### Functions\n\n";
+      for (const func of doc.functions) {
+        markdown += `#### ${func.name} {#${nameToKebabCase(func.name)}}\n\n`;
+        if (func.description) {
+          markdown += `${func.description}\n\n`;
+        }
+      }
+    }
+
+    // Classes
+    if (doc.classes.length > 0) {
+      markdown += "### Classes\n\n";
+      for (const cls of doc.classes) {
+        markdown += `#### ${cls.name} {#${nameToKebabCase(cls.name)}}\n\n`;
+        if (cls.description) {
+          markdown += `${cls.description}\n\n`;
+        }
+      }
+    }
+
+    // Parameters
+    if (doc.params.length > 0) {
+      markdown += "### Parameters\n\n";
+      markdown += "| Name | Type | Description |\n";
+      markdown += "|------|------|-------------|\n";
+      for (const param of doc.params) {
+        markdown += `| \`${param.name}\` | \`${param.type}\` | ${param.description} |\n`;
+      }
+      markdown += "\n";
+    }
+
+    // Returns
+    if (doc.returns) {
+      markdown += "### Returns\n\n";
+      markdown += `**Type:** \`${doc.returns.type}\`\n\n`;
+      if (doc.returns.description) {
+        markdown += `${doc.returns.description}\n\n`;
+      }
+    }
+  }
+
+  // SOURCE CODE (collapsible)
   if (doc.code) {
-    const codeLanguage = doc.type === "scss" ? "scss" : "javascript";
-    markdown += `<details class="callout" data-callout="info" data-callout-fold="-">
-      <summary class="callout-title">
-      <div class="callout-title-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-      </div>
-      <div class="callout-title-inner">Source Code</div>
-      <div class="callout-fold"></div></div></summary><div class="callout-content">\n\n`;
-    markdown += `\`\`\`${codeLanguage}\n`;
-    markdown += doc.code;
-    markdown += "\n\`\`\`\n\n";
-    markdown += "</div></details>\n\n";
+    const lang = doc.type === "scss" ? "scss" : "javascript";
+    markdown += `<details class="source-code">\n`;
+    markdown += `<summary>📄 View Source Code</summary>\n\n`;
+    markdown += `\`\`\`${lang}\n${doc.code}\n\`\`\`\n\n`;
+    markdown += `</details>\n\n`;
   }
 
-  // Related/See also
-  if (doc.see.length > 0) {
-    markdown += "### See Also\n\n";
-
-    // Create a lookup map of doc names to slugs for quick matching
-    const docNameToSlug = new Map();
-    for (const d of allDocs) {
-      if (d.kind !== "mixin" && d.kind !== "function") {
-        docNameToSlug.set(d.name.toLowerCase(), nameToKebabCase(d.name));
-      }
-    }
-
-    for (const link of doc.see) {
-      // Check if this link matches a known component name
-      const linkLower = link.toLowerCase().trim();
-      const slug = docNameToSlug.get(linkLower);
-
-      if (slug) {
-        // Generate a proper markdown link
-        markdown += `- [${link}](${urlPath}/${slug}/)\n`;
-      } else {
-        // Keep as plain text if no match found
-        markdown += `- ${link}\n`;
-      }
+  // RELATED CONCEPTS
+  if (doc.related && doc.related.length > 0) {
+    markdown += "---\n\n";
+    markdown += "## Related Concepts\n\n";
+    for (const related of doc.related) {
+      const relatedSlug = nameToKebabCase(related);
+      markdown += `- [${related}](${urlPath}/${relatedSlug}/)\n`;
     }
     markdown += "\n";
   }
 
-  // Source reference
-  /*
-  markdown += `\n---\n\n`;
-  markdown += `**Source:** \`${doc.source}\`\n`;
-  */
+  // FURTHER READING
+  if (doc.reading && doc.reading.length > 0) {
+    markdown += "## Further Reading\n\n";
+    for (const link of doc.reading) {
+      markdown += `- [${link.title}](${link.url})\n`;
+    }
+    markdown += "\n";
+  }
+
+  // SEE ALSO (legacy support)
+  if (doc.see.length > 0) {
+    markdown += "## See Also\n\n";
+    for (const link of doc.see) {
+      markdown += `- ${link}\n`;
+    }
+    markdown += "\n";
+  }
 
   return markdown;
+}
+
+/**
+ * Format long-form content (preserve paragraphs, clean up line breaks)
+ */
+function formatLongFormContent(content) {
+  if (!content) return "";
+
+  return content
+    .split(/\n\n+/) // Split by double+ newlines (paragraph breaks)
+    .map((para) => {
+      // Check if this is a list (starts with -, *, or numbers)
+      const isListBlock = /^[\s]*[-*]/.test(para) || /^[\s]*\d+\./.test(para);
+
+      if (isListBlock) {
+        // Preserve list formatting
+        return para.trim();
+      } else {
+        // Regular paragraph - join lines with spaces
+        return para.replace(/\n/g, " ").replace(/\s+/g, " ").trim();
+      }
+    })
+    .filter((p) => p.length > 0)
+    .join("\n\n");
+}
+
+/**
+ * Parse example text to extract language, title, and code
+ */
+function parseExample(exampleText) {
+  // Format: "language - title\ncode..."
+  const match = exampleText.match(/^(\w+)\s*-\s*(.+?)\n([\s\S]+)$/);
+
+  if (match) {
+    return {
+      language: match[1].trim(),
+      title: match[2].trim(),
+      code: match[3].trim(),
+    };
+  }
+
+  // Try format: "language\ncode..." (no title)
+  const langMatch = exampleText.match(/^(\w+)\n([\s\S]+)$/);
+  if (langMatch) {
+    return {
+      language: langMatch[1].trim(),
+      title: null,
+      code: langMatch[2].trim(),
+    };
+  }
+
+  // Default: treat as plain code
+  return {
+    language: "text",
+    title: null,
+    code: exampleText.trim(),
+  };
 }
 
 function generateCategoryMarkdown(category, items, layout, urlPath) {
@@ -536,18 +641,11 @@ function generateCategoryMarkdown(category, items, layout, urlPath) {
   let markdown = "---\n";
   markdown += `title: "${category}"\n`;
   markdown += `layout: "${layout}"\n`;
-  markdown += `permalink: "${urlPath}/${categorySlug}/index.html"\n`;
-  markdown += `eleventyNavigation:\n`;
-  markdown += `  key: "${category}"\n`;
-  markdown += `  title: "${category}"\n`;
   markdown += "---\n\n";
 
   markdown += `# ${category}\n\n`;
-  markdown += `Documentation for ${category.toLowerCase()} components and utilities.\n\n`;
 
-  markdown += "## Components\n\n";
-
-  // Deduplicate items by name to avoid duplicate entries
+  // Deduplicate items
   const seenNames = new Set();
   const uniqueItems = [];
 
@@ -561,7 +659,10 @@ function generateCategoryMarkdown(category, items, layout, urlPath) {
   for (const item of uniqueItems) {
     const itemSlug = nameToKebabCase(item.name);
     const itemLink = `${urlPath}/${itemSlug}/`;
-    markdown += `- [${item.name}](${itemLink}) - ${item.description || "No description"}\n`;
+    const description = item.concept
+      ? item.concept.split("\n")[0]
+      : item.description || "No description";
+    markdown += `- [**${item.name}**](${itemLink}) — ${description}\n`;
   }
 
   markdown += "\n";
@@ -571,20 +672,18 @@ function generateCategoryMarkdown(category, items, layout, urlPath) {
 
 function generateMainIndexMarkdown(grouped, layout, urlPath) {
   let markdown = "---\n";
-  markdown += 'title: "API Reference"\n';
+  markdown += 'title: "Concepts"\n';
   markdown += `layout: "${layout}"\n`;
-  markdown += "eleventyNavigation:\n";
-  markdown += '  key: "API Reference"\n';
-  markdown += '  title: "API Reference"\n';
   markdown += "---\n\n";
 
-  markdown += "# API Reference\n\n";
-  markdown += "Auto-generated documentation from source code comments.\n\n";
+  markdown += "# Concepts\n\n";
+  markdown +=
+    "Learn typography, color theory, and layout design through working code.\n\n";
 
   for (const [category, items] of Object.entries(grouped)) {
     markdown += `## ${category}\n\n`;
 
-    // Deduplicate items by name to avoid duplicate entries
+    // Deduplicate
     const seenNames = new Set();
     const uniqueItems = [];
 
@@ -609,7 +708,7 @@ function generateMainIndexMarkdown(grouped, layout, urlPath) {
 
 export {
   EnhancedDocParser as DocParser,
-  generateComponentMarkdown,
+  generateConceptMarkdown,
   generateCategoryMarkdown,
   nameToKebabCase,
 };

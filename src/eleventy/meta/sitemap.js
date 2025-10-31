@@ -55,5 +55,5 @@ eleventyExcludeFromCollections: true
 {%- endfor %}
 </urlset>`,
   );
-  logger.success("initialized");
+  logger.success();
 }

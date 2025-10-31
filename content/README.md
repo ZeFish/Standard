@@ -14,7 +14,6 @@ Typography is the voice · Grid is the structure · Rhythm is the flow · Color 
 > [!info]- Here's a callout title
 > Here's a callout block.
 
-
 ### Mathematical Precision
 Every measurement derives from the golden ratio (φ = 1.618)
 

@@ -3,23 +3,35 @@ import path from "path";
 import { glob } from "glob";
 
 /**
- * JSDoc-style documentation parser for SCSS and JavaScript files
+ * Documentation parser for concept-driven documentation
  * Extracts structured documentation from code comments
  *
  * Expected format:
  * /**
- *  * @component ComponentName
- *  * @description Short description
- *  * @category Category Name
- *  * @example
- *  *   Code example here
- *  * @param {type} name Description
- *  * @prop {type} name Description
- *  * @return {type} Description
- *  * @deprecated Reason if deprecated
- *  * @see Related files
- *  * @since 0.10.0
- *  * /
+ * @component ComponentName
+ * @category Category Name
+ *
+ * @concept
+ * Long-form essay content here.
+ * Multiple paragraphs supported.
+ *
+ * @theory
+ * Theory section content.
+ *
+ * @implementation
+ * Implementation details.
+ *
+ * @variable $name - Description
+ * @mixin name - Description
+ * @function name - Description
+ * @class .name - Description
+ *
+ * @example html - Title
+ * <div>Example code</div>
+ *
+ * @related concept-one, concept-two
+ * @reading https://url.com Title
+ * /
  */
 
 export class DocParser {
@@ -51,7 +63,7 @@ export class DocParser {
   parseFile(filePath, content) {
     const docs = [];
 
-    // Match JSDoc-style comments: /** ... */
+    // Match doc comments: /** ... */
     const docRegex = /\/\*\*\s*([\s\S]*?)\*\//g;
     let match;
 
@@ -63,9 +75,9 @@ export class DocParser {
         continue;
       }
 
-      // Skip if not a documentation comment (must have @component, @prop, @param, etc.)
+      // Skip if not a documentation comment (must have @component or other doc tags)
       if (
-        !/@(component|prop|param|return|category|description|example|mixin|function|name)/i.test(
+        !/@(component|concept|theory|implementation|variable|mixin|function|class|category|example)/i.test(
           commentBlock,
         )
       ) {
@@ -75,12 +87,6 @@ export class DocParser {
       const doc = this.parseCommentBlock(commentBlock, filePath);
 
       if (doc && doc.name) {
-        // If no explicit @component tag and has params, infer kind from following code
-        if (!doc.kind && doc.params.length > 0) {
-          const commentEndIndex = match.index + match[0].length;
-          doc.kind = this.inferKindFromFollowingCode(content, commentEndIndex);
-        }
-
         docs.push(doc);
       }
     }
@@ -88,131 +94,72 @@ export class DocParser {
     return docs;
   }
 
-  inferKindFromFollowingCode(content, commentEndIndex) {
-    let pos = commentEndIndex;
-    while (pos < content.length && /\s/.test(content[pos])) {
-      pos++;
-    }
-
-    const remaining = content.substring(pos, pos + 500);
-
-    // Check for @mixin
-    if (/@mixin\s+/.test(remaining)) {
-      return "mixin";
-    }
-
-    // Check for @function
-    if (/@function\s+/.test(remaining)) {
-      return "function";
-    }
-
-    // Default to component
-    return "component";
-  }
-
-  parseCommentBlock(block, filePath, fileContent = null, commentIndex = -1) {
+  parseCommentBlock(block, filePath) {
     const doc = {
       source: filePath,
       type: this.getType(filePath),
-      kind: null, // Track what kind of item this is (component, mixin, function, etc.)
+      kind: null,
       name: null,
       description: null,
       category: null,
+      concept: null,
+      theory: null,
+      implementation: null,
+      variables: [],
+      mixins: [],
+      functions: [],
+      classes: [],
       params: [],
       props: [],
       returns: null,
       examples: [],
+      related: [],
+      reading: [],
       see: [],
       since: null,
       deprecated: null,
       tags: [],
     };
 
-    // Remove comment markers and normalize lines
+    // Remove leading/trailing whitespace and split into lines
+    // Handle both formats: with * and without *
     const lines = block
       .split("\n")
-      .map((line) => line.replace(/^\s*\*\s?/, "").trim());
+      .map((line) => {
+        // Remove leading * if present, otherwise just trim
+        return line.replace(/^\s*\*\s?/, "").trim();
+      })
+      .filter((line) => line.length > 0); // Remove empty lines
 
-    // Identify metadata tags and narrative sections
-    const metadataTags = [
-      "name",
-      "group",
-      "author",
-      "since",
-      "category",
-      "type",
-    ];
-
-    // Find where metadata ends and narrative begins
-    let narrativeStart = 0;
-    let narrativeEnd = lines.length;
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      if (line.startsWith("@")) {
-        const tagName = line.match(/@(\w+)/)?.[1]?.toLowerCase();
-        // Once we hit a non-metadata tag, narrative ends
-        if (!metadataTags.includes(tagName)) {
-          narrativeEnd = i;
-          break;
-        }
-      } else if (line.trim().length > 0 && narrativeStart === 0) {
-        // First non-empty, non-tag line after metadata is where narrative starts
-        if (i > 0 && lines[i - 1].startsWith("@")) {
-          narrativeStart = i;
-        }
-      }
-    }
-
-    // Collect narrative content
-    const narrativeContent = [];
-    for (let i = narrativeStart; i < narrativeEnd; i++) {
-      const line = lines[i];
-      if (!line.startsWith("@")) {
-        narrativeContent.push(line);
-      }
-    }
-
-    // Process all lines for tags and remaining content
+    // Process lines
     let currentTag = null;
     let currentContent = [];
 
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-
+    for (const line of lines) {
+      // Check if line starts with @ (position 0 after trim)
       if (line.startsWith("@")) {
         // Process previous tag
         if (currentTag) {
           this.processTag(doc, currentTag, currentContent.join("\n"));
         }
 
-        // Start new tag
-        const tagMatch = line.match(/@(\w+)\s*(.*)/);
-        if (tagMatch) {
-          currentTag = tagMatch[1].toLowerCase();
-          currentContent = [tagMatch[2]];
+        // Parse new tag
+        const match = line.match(/^@(\w+)(?:\s+(.*))?$/);
+        if (match) {
+          currentTag = match[1].toLowerCase();
+          currentContent = match[2] ? [match[2]] : [];
         }
-      } else if (currentTag) {
-        // Collect tag content
-        currentContent.push(line);
+      } else {
+        // Accumulate content for current tag
+        if (currentTag) {
+          currentContent.push(line);
+        }
       }
     }
 
     // Process last tag
     if (currentTag) {
       this.processTag(doc, currentTag, currentContent.join("\n"));
-    }
-
-    // Set description from narrative content
-    if (narrativeContent.length > 0) {
-      doc.description = narrativeContent
-        .map((l) => l.trim())
-        .filter((l, idx, arr) => {
-          // Keep non-empty or lines between content
-          return l.length > 0 || (idx > 0 && idx < arr.length - 1);
-        })
-        .join("\n")
-        .trim();
     }
 
     return doc;
@@ -227,16 +174,6 @@ export class DocParser {
         doc.name = content;
         break;
 
-      case "mixin":
-        doc.kind = "mixin";
-        doc.name = content;
-        break;
-
-      case "function":
-        doc.kind = "function";
-        doc.name = content;
-        break;
-
       case "name":
         doc.name = content;
         break;
@@ -248,8 +185,39 @@ export class DocParser {
 
       case "category":
       case "cat":
-        // Only take the first line as the category
         doc.category = content.split("\n")[0].trim();
+        break;
+
+      // NEW: Long-form content tags
+      case "concept":
+        doc.concept = content;
+        break;
+
+      case "theory":
+        doc.theory = content;
+        break;
+
+      case "implementation":
+        doc.implementation = content;
+        break;
+
+      // NEW: Multi-value reference tags
+      case "variable":
+        doc.variables.push(this.parseReferenceTag(content));
+        break;
+
+      case "mixin":
+        doc.kind = doc.kind || "mixin"; // Set kind if not already set
+        doc.mixins.push(this.parseReferenceTag(content));
+        break;
+
+      case "function":
+        doc.kind = doc.kind || "function"; // Set kind if not already set
+        doc.functions.push(this.parseReferenceTag(content));
+        break;
+
+      case "class":
+        doc.classes.push(this.parseReferenceTag(content));
         break;
 
       case "param":
@@ -268,10 +236,22 @@ export class DocParser {
         break;
 
       case "example":
-        // Examples can span multiple lines
         if (content) {
           doc.examples.push(content.trim());
         }
+        break;
+
+      // NEW: Related concepts (comma-separated)
+      case "related":
+        doc.related = content
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s.length > 0);
+        break;
+
+      // NEW: External reading (URL + title)
+      case "reading":
+        doc.reading.push(this.parseReadingTag(content));
         break;
 
       case "see":
@@ -290,6 +270,40 @@ export class DocParser {
         // Store unknown tags
         doc.tags.push({ name: tag, value: content });
     }
+  }
+
+  // NEW: Parse reference tags (format: "name - description")
+  parseReferenceTag(content) {
+    const match = content.match(/^([^\s-]+)\s*-\s*(.*)$/);
+
+    if (match) {
+      return {
+        name: match[1].trim(),
+        description: match[2].trim(),
+      };
+    }
+
+    return {
+      name: content,
+      description: "",
+    };
+  }
+
+  // NEW: Parse reading tags (format: "url Title")
+  parseReadingTag(content) {
+    const match = content.match(/^(https?:\/\/\S+)\s+(.+)$/);
+
+    if (match) {
+      return {
+        url: match[1].trim(),
+        title: match[2].trim(),
+      };
+    }
+
+    return {
+      url: content,
+      title: content,
+    };
   }
 
   parseParamTag(content) {

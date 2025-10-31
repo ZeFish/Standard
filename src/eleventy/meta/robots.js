@@ -145,5 +145,5 @@ eleventyExcludeFromCollections: true
 ${content}`,
   );
 
-  logger.success(`Initialized`);
+  logger.success();
 }

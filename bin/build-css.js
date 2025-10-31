@@ -482,7 +482,7 @@ async function buildCSS() {
         fs.writeFileSync(path.join(destDir, file.output), result.css);
       }
 
-      logger.info(
+      logger.success(
         `${file.output} ${colors.grey}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
       );
     }
@@ -529,7 +529,7 @@ async function buildCSS() {
         }
 
         const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
-        logger.info(
+        logger.success(
           `${BUNDLE_CONFIG.output} ${colors.grey}(${minifiedSize.toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
@@ -537,7 +537,7 @@ async function buildCSS() {
 
     if (!isWatch) logger.info(`Completed`);
   } catch (error) {
-    logger.error(`CSS build failed:`, error.message);
+    logger.error(`Build failed:`, error.message);
     process.exit(1);
   }
 }

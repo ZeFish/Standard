@@ -3,7 +3,7 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 import nunjucks from "nunjucks";
 import { readFile } from "fs/promises";
-import { createLogger } from "./logger.js";
+import Logger from "./logger.js";
 
 /**
  * @component Content Encryption Plugin
@@ -64,7 +64,7 @@ export async function customEncryptHTML(html, password) {
 }
 
 export function addEncryptionTransform(eleventyConfig) {
-  const logger = createLogger({
+  const logger = Logger({
     scope: "Encryption",
   });
   eleventyConfig.addTransform("protect-notes", async function (content) {
@@ -130,7 +130,7 @@ export function addEncryptionTransform(eleventyConfig) {
       return content; // Return unencrypted content on error
     }
   });
-  logger.success("Initialized");
+  logger.success();
 }
 
 // Export as default plugin function

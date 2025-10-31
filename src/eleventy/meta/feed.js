@@ -233,5 +233,5 @@ ${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ""}
 </rss>`,
     );
   }
-  logger.success("initialized");
+  logger.success();
 }

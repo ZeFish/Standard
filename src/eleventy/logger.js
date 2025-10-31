@@ -146,16 +146,16 @@ export function createLogger(options = {}) {
 
   return {
     info(...args) {
-      console.log(...format(`${colors.blue.fg}ℹ${colors.reset}`, ...args));
+      console.log(...format(`${colors.blue.fg}ℹ${colors.grey.fg}`, ...args));
     },
     success(...args) {
-      console.log(...format(`${colors.green.fg}✓${colors.reset}`, ...args));
+      console.log(...format(`${colors.green.fg}✓`, ...args));
     },
     warn(...args) {
-      console.warn(...format(`${colors.yellow.fg}⚠${colors.reset}`, ...args));
+      console.warn(...format(`${colors.yellow.fg}⚠`, ...args));
     },
     error(...args) {
-      console.error(...format(`${colors.red.fg}✖${colors.reset}`, ...args));
+      console.error(...format(`${colors.red.fg}✖`, ...args));
     },
     debug(...args) {
       if (verbose) {

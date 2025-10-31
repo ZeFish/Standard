@@ -220,5 +220,5 @@ export default function CloudflarePages(eleventyConfig, site = {}) {
   if (enabledFeatures.length > 0) {
     logger.success(`Pages: ${enabledFeatures.join(" + ")}`);
   }
-  logger.success("Initialized");
+  logger.success();
 }

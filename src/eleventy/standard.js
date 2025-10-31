@@ -125,8 +125,15 @@ export default function (eleventyConfig, options = {}) {
   }
   standard.version = pkg.version;
 
+  standard.layouts = {
+    base: path.join(__dirname, "../layouts/base.njk"),
+    meta: path.join(__dirname, "../layouts/meta.njk"),
+    encrypted: path.join(__dirname, "../layouts/encrypted.njk"),
+    pageError: path.join(__dirname, "../layouts/404.njk"),
+    atomFeed: path.join(__dirname, "../layouts/atomfeed.xsl"),
+  };
+
   const ENV = process.env.ENV || "PROD";
-  const logger = Logger({ verbose: standard.verbose });
 
   // 2) Build initial site object once
   let site = {
@@ -135,7 +142,7 @@ export default function (eleventyConfig, options = {}) {
     env: ENV,
     standard,
   };
-
+  let logger = Logger({ verbose: site.standard.verbose });
   // 3) Merge site.config.yml over it (highest priority)
   const userConfigPath = path.join(process.cwd(), "site.config.yml");
   if (existsSync(userConfigPath)) {
@@ -143,6 +150,7 @@ export default function (eleventyConfig, options = {}) {
       const userSiteData =
         yaml.load(readFileSync(userConfigPath, "utf-8")) || {};
       site = deepMerge(site, userSiteData);
+      logger = Logger({ verbose: site.standard?.verbose === true });
       eleventyConfig.addWatchTarget(userConfigPath);
       logger.debug("Config loaded");
     } catch (error) {
@@ -158,7 +166,7 @@ export default function (eleventyConfig, options = {}) {
   const publicPath = path.join(process.cwd(), site.standard.publicDir);
   if (existsSync(publicPath)) {
     eleventyConfig.addPassthroughCopy({ [site.standard.publicDir]: "." });
-    logger.info(
+    logger.debug(
       `Static assets: ${site.standard.publicDir} → ${site.standard.dirs.output}/`,
     );
   }
@@ -167,7 +175,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPassthroughCopy({
     [path.join(__dirname, "../../dist")]: site.standard.outputDir,
   });
-  logger.info(`Standard assets: dist/ → ${site.standard.outputDir}/`);
+  logger.debug(`Standard assets: dist/ → ${site.standard.outputDir}/`);
 
   // 7) Watch targets
   const srcPath = path.join(process.cwd(), "src");
@@ -177,6 +185,7 @@ export default function (eleventyConfig, options = {}) {
   }
 
   // 8) Plugins
+  eleventyConfig.addPlugin(OpenRouter, site);
   eleventyConfig.addPlugin(PreProcessor, site);
   eleventyConfig.addPlugin(Transform);
   eleventyConfig.addPlugin(Filter);
@@ -190,9 +199,9 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(Security, site);
   eleventyConfig.addPlugin(ShortCode, site);
   eleventyConfig.addPlugin(MenuPlugin, site);
-  eleventyConfig.addPlugin(Syntax);
+  eleventyConfig.addPlugin(Syntax, site);
   eleventyConfig.addPlugin(Encryption);
-  eleventyConfig.addPlugin(OpenRouter, site);
+
   eleventyConfig.addPlugin(CloudflarePages, site); // self-guarded
 
   // 9) Nunjucks
