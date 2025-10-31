@@ -61,67 +61,18 @@ const defaults = {
   feed: { enabled: true },
   manifest: { enabled: true },
   robots: { enabled: true },
-  security: {
-    enabled: true,
-    csp: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:"],
-      fontSrc: ["'self'", "data:"],
-      connectSrc: ["'self'"],
-      frameAncestors: ["'none'"],
-    },
-    permissions: {
-      geolocation: [],
-      camera: [],
-      microphone: [],
-      payment: [],
-      usb: [],
-    },
-    xFrameOptions: "DENY",
-    referrerPolicy: "strict-origin-when-cross-origin",
-    enableCaching: true,
-  },
+  security: { enabled: true },
   cloudflare: {
-    functions: {
-      outputDir: "functions/api",
-      environment: "production",
-      env: {},
-    },
-    images: {
-      enabled: false,
-      baseUrl: "",
-      sizes: [640, 960, 1280, 1920],
-      quality: 85,
-      format: "auto",
-      sharpen: 0.5,
-      skipExternal: true,
-      skipClass: "no-cdn",
-      generateSrcset: true,
-      lazyLoad: true,
-      fit: "scale-down",
-      skipInDev: true,
-    },
     comments: {
-      enabled: false,
-      apiEndpoint: "/api/comments",
-      commentsPath: "data/comments",
-      version: pkg.version,
-      clientLibrary: "",
+      clientLibrary: `/assets/standard/standard.comment.js`,
     },
   },
-  menu: { enabled: true },
 };
 
 export default function (eleventyConfig, options = {}) {
   // 1) Normalize standard config (defaults + options)
   const standard = deepMerge(defaults, options);
 
-  // Derived fields
-  if (!standard.cloudflare.comments.clientLibrary) {
-    standard.cloudflare.comments.clientLibrary = `/${standard.outputDir}/standard.comment.js`;
-  }
   standard.version = pkg.version;
 
   standard.layouts = {

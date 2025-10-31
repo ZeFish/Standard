@@ -3,17 +3,21 @@
 import { createLogger } from "../logger.js";
 
 export default function (eleventyConfig, site = {}) {
-  const securityConfig = site.standard?.security || {};
+  // Read user config
+  const user = site.standard?.security || {};
 
-  if (securityConfig.enabled === false) return;
+  // Normalize top-level enabled first so we can short-circuit early
+  const enabled = user.enabled ?? true;
+  if (enabled === false) return;
 
   const logger = createLogger({
     scope: "Security",
     verbose: site.standard?.verbose || false,
   });
 
-  const {
-    csp = {
+  // Defaults
+  const defaults = {
+    csp: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
@@ -22,21 +26,37 @@ export default function (eleventyConfig, site = {}) {
       connectSrc: ["'self'"],
       frameAncestors: ["'none'"],
     },
-
-    permissions = {
+    permissions: {
       geolocation: [],
       camera: [],
       microphone: [],
       payment: [],
       usb: [],
     },
+    xFrameOptions: "DENY",
+    xContentTypeOptions: "nosniff",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    enableCaching: true,
+    addMetaTags: true,
+  };
 
-    xFrameOptions = "DENY",
-    xContentTypeOptions = "nosniff",
-    referrerPolicy = "strict-origin-when-cross-origin",
-    enableCaching = true,
-    addMetaTags = true, // NEW: Add meta tags for local dev
-  } = securityConfig;
+  // Shallow-merge objects, but keep arrays as provided by the user when present
+  const csp = {
+    ...defaults.csp,
+    ...(user.csp || {}),
+  };
+
+  const permissions = {
+    ...defaults.permissions,
+    ...(user.permissions || {}),
+  };
+
+  const xFrameOptions = user.xFrameOptions ?? defaults.xFrameOptions;
+  const xContentTypeOptions =
+    user.xContentTypeOptions ?? defaults.xContentTypeOptions;
+  const referrerPolicy = user.referrerPolicy ?? defaults.referrerPolicy;
+  const enableCaching = user.enableCaching ?? defaults.enableCaching;
+  const addMetaTags = user.addMetaTags ?? defaults.addMetaTags;
 
   // Build CSP string
   const cspDirectives = Object.entries(csp)

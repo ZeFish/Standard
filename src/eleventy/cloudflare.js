@@ -39,6 +39,18 @@ export default function Cloudflare(eleventyConfig, site = {}) {
       fit: cf.images?.fit ?? "scale-down",
       skipInDev: cf.images?.skipInDev ?? true,
     },
+    // Keep comments under cloudflare namespace (not top-level), derived from comment(s) block
+    comments: {
+      enabled: commentsEnabled,
+      // Endpoint under Functions; adjust if you copy to a subfolder (e.g., /api/comments)
+      apiEndpoint: commentsBlock.apiEndpoint ?? "/api/comments",
+      commentsPath: commentsBlock.commentsPath ?? "data/comments",
+      // If you want to pass through a version, inject it here from your package
+      version:
+        commentsBlock.version ??
+        (typeof pkg !== "undefined" ? pkg.version : "0.0.0"),
+      clientLibrary: commentsBlock.clientLibrary ?? "",
+    },
     verbose: cf.verbose ?? false,
   };
 

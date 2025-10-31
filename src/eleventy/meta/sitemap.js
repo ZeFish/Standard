@@ -5,44 +5,57 @@
  *
  * @component Standard Framework Sitemap Plugin
  * @category 11ty Plugins
- * @author Francis Fontaine
- * @since 0.10.53
  */
 
 import { createLogger } from "./../logger.js";
 
-export default function (eleventyConfig, site = {}) {
-  const sitemapConfig = site.standard?.sitemap || {};
+export default function Sitemap(eleventyConfig, site = {}) {
+  const user = site.standard?.sitemap || {};
 
-  if (sitemapConfig.enabled === false) return;
-
-  const {
-    hostname = site.url || "https://example.com",
-    exclude = ["/404/", "/admin/", "/private/"],
-  } = sitemapConfig;
+  // Enabled guard
+  const enabled = user.enabled ?? true;
+  if (enabled === false) return;
 
   const logger = createLogger({
     scope: "Sitemap",
+    verbose: site.standard?.verbose || false,
   });
 
+  // Defaults
+  const defaults = {
+    hostname: site.url || "https://example.com",
+    exclude: ["/404/", "/admin/", "/private/"],
+    filename: "sitemap.xml",
+  };
+
+  // Normalize
+  const hostname = user.hostname ?? defaults.hostname;
+  const exclude = Array.isArray(user.exclude) ? user.exclude : defaults.exclude;
+  const filename = user.filename ?? defaults.filename;
+
+  // Collection for sitemap
   eleventyConfig.addCollection("sitemap", (collectionApi) => {
     return collectionApi
       .getAll()
       .filter((item) => {
         if (!item.url) return false;
-        if (item.data.excludeFromSitemap) return false;
-        if (item.data.permalink === false) return false;
+        // Explicit opt-out
+        if (item.data?.excludeFromSitemap) return false;
+        // No permalink
+        if (item.data?.permalink === false) return false;
+        // Pattern exclusions
         if (exclude.some((pattern) => item.url.includes(pattern))) return false;
         return true;
       })
       .sort((a, b) => (b.date || 0) - (a.date || 0));
   });
 
+  // Emit sitemap
   eleventyConfig.addTemplate(
-    "sitemap.xml.njk",
+    `${filename}.njk`,
     `---
 layout: false
-permalink: sitemap.xml
+permalink: ${filename}
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
@@ -50,10 +63,11 @@ eleventyExcludeFromCollections: true
 {%- for page in collections.sitemap %}
   <url>
     <loc>${hostname}{{ page.url }}</loc>
-    <lastmod>{{ page.date.toISOString() }}</lastmod>
+    <lastmod>{{ (page.date or site.now) | dateToRfc3339 }}</lastmod>
   </url>
 {%- endfor %}
 </urlset>`,
   );
+
   logger.success();
 }

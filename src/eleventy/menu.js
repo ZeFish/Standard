@@ -155,15 +155,13 @@ function isActive(itemUrl, currentUrl, exact = false) {
 }
 
 export default function MenuPlugin(eleventyConfig, site = {}) {
-  const menuConfig = site.standard?.menu || {};
-
-  // Normalize config (like your feed plugin)
-  const config = {
+  const defaults = {
     enabled: true,
     label: "Navigation",
     className: "menu",
     inline: true,
   };
+  const config = { ...defaults, ...(site.standard?.menu || {}) };
 
   if (config.enabled === false) return;
 

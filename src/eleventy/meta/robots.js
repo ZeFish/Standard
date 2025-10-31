@@ -5,85 +5,51 @@
  *
  * @component Standard Framework Robots Plugin
  * @category 11ty Plugins
- * @author Francis Fontaine
- * @since 0.10.53
- *
- * In 1994, Martijn Koster created the Robots Exclusion Protocol to give
- * website owners control over which parts of their sites search engines
- * could crawl. A simple text file at the root of your domain tells bots
- * like Googlebot, Bingbot, and others where they're welcome and where
- * they should stay away.
- *
- * This plugin generates a standards-compliant robots.txt file that:
- * - Controls search engine crawler access
- * - Points crawlers to your sitemap
- * - Blocks private/admin areas
- * - Sets crawl rate limits
- * - Respects SEO best practices
- *
- * The robots.txt file is the first place search engines look when visiting
- * your site. It's not a security feature (anyone can read it), but a polite
- * request that reputable bots will honor.
- *
- * @see {plugin} Sitemap - Companion plugin for crawlers
- * @see {plugin} Manifest - PWA installation
- *
- * @link https://developers.google.com/search/docs/crawling-indexing/robots/intro
- * @link https://www.robotstxt.org/robotstxt.html Original Spec
- *
- * @example yaml - In site.config.yml
- *   url: https://example.com
- *
- *   standard:
- *     robots:
- *       enabled: true
- *       disallow:
- *         - /admin/
- *         - /private/
- *
- * @example yaml - Block all crawlers
- *   standard:
- *     robots:
- *       enabled: true
- *       userAgent: "*"
- *       disallow:
- *         - /
- *
- * @param {Object} eleventyConfig - 11ty configuration object
- * @param {Object} site - Complete site configuration
- * @param {String} site.url - Site base URL (for sitemap location)
- * @param {Object} site.standard.robots - Robots configuration
- * @param {Boolean} site.standard.robots.enabled - Enable robots.txt generation
- * @param {String} site.standard.robots.userAgent - Target user agent (default: *)
- * @param {Array} site.standard.robots.disallow - Paths to block
- * @param {Array} site.standard.robots.allow - Paths to explicitly allow
- * @param {Number} site.standard.robots.crawlDelay - Delay between requests (seconds)
- * @param {String} site.standard.robots.sitemapUrl - Sitemap location (auto-detected)
  */
 
 import { createLogger } from "../logger.js";
 
-export default function (eleventyConfig, site = {}) {
-  // Extract robots config
-  const robotsConfig = site.standard?.robots || {};
+export default function Robots(eleventyConfig, site = {}) {
+  const user = site.standard?.robots || {};
 
-  if (robotsConfig.enabled === false) return;
+  // Enabled guard
+  const enabled = user.enabled ?? true;
+  if (enabled === false) return;
 
   const logger = createLogger({
     scope: "Robots",
     verbose: site.standard?.verbose || false,
   });
 
-  // Extract configuration with fallbacks
-  const {
-    filename = "robots.txt",
-    userAgent = "*",
-    disallow = ["/admin/", "/private/"],
-    allow = [],
-    crawlDelay = null,
-    sitemapUrl = site.url ? `${site.url}/sitemap.xml` : null,
-    customRules = [],
-  } = robotsConfig;
+  // Defaults
+  const defaults = {
+    filename: "robots.txt",
+    userAgent: "*",
+    disallow: ["/admin/", "/private/"],
+    allow: [],
+    crawlDelay: null, // seconds
+    sitemapUrl: site.url ? `${site.url}/sitemap.xml` : null,
+    customRules: [],
+  };
+
+  // Normalize scalars (user → defaults)
+  const filename = user.filename ?? defaults.filename;
+  const userAgent = user.userAgent ?? defaults.userAgent;
+
+  // Arrays (guard shapes)
+  const disallow = Array.isArray(user.disallow)
+    ? user.disallow
+    : defaults.disallow;
+  const allow = Array.isArray(user.allow) ? user.allow : defaults.allow;
+  const customRules = Array.isArray(user.customRules)
+    ? user.customRules
+    : defaults.customRules;
+
+  // Numbers and strings with sensible fallback
+  const crawlDelay = Number.isFinite(user.crawlDelay)
+    ? user.crawlDelay
+    : defaults.crawlDelay;
+  const sitemapUrl = user.sitemapUrl ?? defaults.sitemapUrl;
 
   // Build robots.txt content
   let content = `# robots.txt for ${site.url || "your site"}
@@ -92,49 +58,48 @@ export default function (eleventyConfig, site = {}) {
 User-agent: ${userAgent}
 `;
 
-  // Add disallow rules
+  // Disallow rules
   if (disallow.length > 0) {
-    disallow.forEach((path) => {
-      content += `Disallow: ${path}\n`;
-    });
+    for (const p of disallow) content += `Disallow: ${p}\n`;
   } else {
-    // If no disallow rules, allow everything
+    // Explicitly allow everything when no disallow rules
     content += `Disallow:\n`;
   }
 
-  // Add allow rules (overrides disallow)
+  // Allow rules (override disallow when relevant)
   if (allow.length > 0) {
-    allow.forEach((path) => {
-      content += `Allow: ${path}\n`;
-    });
+    for (const p of allow) content += `Allow: ${p}\n`;
   }
 
-  // Add crawl delay if specified
-  if (crawlDelay) {
+  // Crawl delay
+  if (crawlDelay !== null && crawlDelay !== undefined) {
     content += `Crawl-delay: ${crawlDelay}\n`;
   }
 
-  // Add custom rules
+  // Custom rules
   if (customRules.length > 0) {
     content += `\n# Custom rules\n`;
-    customRules.forEach((rule) => {
-      content += `${rule}\n`;
-    });
+    for (const rule of customRules) content += `${rule}\n`;
   }
 
-  // Add sitemap reference
+  // Sitemap
   if (sitemapUrl) {
     content += `\n# Sitemap\nSitemap: ${sitemapUrl}\n`;
   }
 
-  // Log configuration
-  logger.debug(`Generating robots.txt:`);
-  logger.debug(`User-agent: ${userAgent}`);
-  logger.debug(`Disallowed: ${disallow.length} paths`);
-  logger.debug(`Allowed: ${allow.length} paths`);
-  if (sitemapUrl) logger.debug(`  Sitemap: ${sitemapUrl}`);
+  // Debug logging
+  logger.debug("Generating robots.txt:");
+  logger.debug(`  User-agent: ${userAgent}`);
+  logger.debug(`  Disallow: ${disallow.length} path(s)`);
+  logger.debug(`  Allow: ${allow.length} path(s)`);
+  if (crawlDelay !== null && crawlDelay !== undefined) {
+    logger.debug(`  Crawl-delay: ${crawlDelay}s`);
+  }
+  if (sitemapUrl) {
+    logger.debug(`  Sitemap: ${sitemapUrl}`);
+  }
 
-  // Generate robots.txt file
+  // Emit robots.txt
   eleventyConfig.addTemplate(
     `${filename}.njk`,
     `---
