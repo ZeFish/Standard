@@ -85,7 +85,7 @@ const defaults = {
   },
   cloudflare: {
     functions: {
-      outputDir: "functions",
+      outputDir: "functions/api",
       environment: "production",
       env: {},
     },

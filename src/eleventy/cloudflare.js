@@ -21,7 +21,7 @@ export default function Cloudflare(eleventyConfig, site = {}) {
   const config = {
     functions: {
       enabled: functionsEnabled,
-      outputDir: cf.functions?.outputDir ?? "functions",
+      outputDir: cf.functions?.outputDir ?? "functions/api",
       environment: cf.functions?.environment ?? "production",
       env: cf.functions?.env ?? {},
     },
