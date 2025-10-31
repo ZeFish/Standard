@@ -655,6 +655,7 @@ async function buildJS() {
             continue;
           }
 
+          logger.warn(`Bundling ${fullPath}`);
           contents.push(fs.readFileSync(fullPath, "utf8"));
         }
 

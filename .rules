@@ -1902,3 +1902,852 @@ Generate documentation comments for:
 4. Links to all related concepts
 5. Provides clear examples
 6. Reads like an engaging article, not a reference manual
+
+
+# Claude Architecture Guide for Standard Framework
+
+---
+
+**Purpose**: Help Claude AI (and other developers) understand the Standard Framework codebase quickly and effectively, with emphasis on concept-driven documentation.
+
+> 📖 **This guide is rendered as a web page** at `https://standard.ffp.co/claude/` during build (synced from root via eleventy.config.js)
+
+---
+
+## Quick Facts
+
+- **Type**: Multi-component design system (11ty plugin + CSS framework + JS library + Cloudflare functions)
+- **Version**: 0.10.52
+- **License**: MIT
+- **Package**: `@zefish/standard`
+- **Philosophy**: Fine-art typography, Swiss grid systems, mathematical precision (golden ratio)
+- **Size**: 15KB CSS + 2KB JS (gzipped)
+- **Dependencies**: Zero runtime dependencies (build-only: Sass, 11ty, Terser)
+- **Documentation Approach**: Concept-driven (essays + code in one place)
+
+---
+
+## Repository Structure
+
+```
+Standard/
+├── src/
+│   ├── eleventy/              ← 11ty plugin system (main entry)
+│   │   ├── eleventy.js        ← Plugin orchestrator
+│   │   ├── markdown.js        ← Markdown processing
+│   │   ├── filter.js          ← Template filters
+│   │   ├── shortcode.js       ← Template shortcodes
+│   │   ├── backlinks.js       ← Wiki-style backlinks
+│   │   ├── encryption.js      ← Content encryption
+│   │   ├── preprocessor.js    ← Markdown preprocessing
+│   │   ├── doc-parser.js      ← Documentation parser (NEW FORMAT)
+│   │   └── doc-generator.js   ← Concept documentation generator
+│   ├── js/
+│   │   ├── standard.js        ← Main typography engine (2.2.0)
+│   │   ├── standard.lab.js    ← Experimental features
+│   │   └── standard.comment.js ← Browser library for comments
+│   ├── cloudflare/            ← Serverless Cloudflare functions
+│   │   ├── api/
+│   │   │   ├── comments.js    ← Comments API endpoint
+│   │   │   └── contact.js     ← Contact API endpoint
+│   │   └── example.js         ← Example function
+│   ├── styles/                ← CSS framework (12-layer ITCSS)
+│   │   ├── standard.scss      ← Entry point
+│   │   ├── standard-00-variables.scss
+│   │   ├── standard-01-token.scss
+│   │   ├── standard-02-color.scss
+│   │   ├── standard-03-typography.scss
+│   │   ├── standard-04-elements.scss
+│   │   ├── standard-05-rhythm.scss
+│   │   ├── standard-06-grid.scss
+│   │   ├── standard-07-prose.scss
+│   │   ├── standard-08-img.scss
+│   │   ├── standard-09-md.scss
+│   │   ├── standard-98-utilities.scss
+│   │   └── standard-99-debug.scss
+│   └── layouts/               ← Nunjucks templates
+│       ├── base.njk           ← Root template
+│       ├── meta.njk           ← Meta tags
+│       ├── article.njk        ← Article layout
+│       └── encrypted.njk      ← Encrypted content
+├── content/                   ← Documentation site content
+│   ├── concepts/              ← AUTO-GENERATED concept pages (NEW)
+│   │   ├── vertical-rhythm.md
+│   │   ├── paragraph-indentation.md
+│   │   └── index.md
+│   ├── 11ty/                  ← Hand-written 11ty guides
+│   ├── css/                   ← Hand-written CSS guides
+│   ├── cloudflare/            ← Hand-written Cloudflare guides
+│   ├── example/               ← Example files
+│   ├── template/              ← Template files
+│   └── assets/                ← Fonts, images
+├── dist/                      ← Compiled output
+│   ├── standard.css           ← Unminified
+│   ├── standard.min.css       ← Minified
+│   ├── standard.js            ← Unminified
+│   ├── standard.min.js        ← Minified
+│   └── standard.lab.js        ← Lab features (minified)
+├── _site/                     ← Built website
+│   ├── concepts/              ← Generated concept pages
+│   ├── 11ty/                  ← Static guides
+│   ├── css/                   ← Static guides
+│   └── assets/                ← Compiled assets
+├── scripts/                   ← Build utilities
+├── package.json               ← NPM config
+├── eleventy.config.js         ← 11ty config for docs site
+├── README.md                  ← Main project README
+└── claude.md                  ← This file
+```
+
+---
+
+## The Revolutionary Documentation System
+
+### **Concept-Driven Documentation Philosophy**
+
+Standard Framework uses a **unique documentation approach**: essays and code live together in source files.
+
+**Traditional approach (BAD):**
+```
+README.md (separate)
+    docs/guide.md (separate)
+        src/code.scss (separate)
+```
+
+**Standard Framework approach (GOOD):**
+```scss
+/**
+@component vertical-rhythm
+@category typography
+
+@concept
+In 1455, Johannes Gutenberg printed his 42-line Bible...
+[2000-word essay explaining WHY and HOW]
+
+@theory
+Vertical rhythm works because...
+
+@implementation
+We implement this with...
+
+@variable $flow-space - Base unit
+@mixin flow - Apply spacing
+
+@example html - Basic usage
+<div class="rhythm">...</div>
+
+@related paragraph-indentation, line-height
+@reading https://example.com Article Title
+*/
+
+$flow-space: 1.5rem;
+
+.rhythm {
+  > * + * {
+    margin-block-start: $flow-space;
+  }
+}
+```
+
+↓ **Auto-generates** ↓
+
+`content/concepts/vertical-rhythm.md` with:
+- ✅ Full essay explaining the concept
+- ✅ Theory and implementation details
+- ✅ Live code examples (rendered + source)
+- ✅ API reference (variables, mixins, classes)
+- ✅ Related concepts (bidirectional links)
+- ✅ Further reading
+- ✅ Collapsible source code
+
+---
+
+## Documentation Tag System
+
+### **Format: Minimal, No Asterisks Required**
+
+```scss
+/**
+@component name
+@category path/to/category
+
+@concept
+Long-form essay content.
+Write naturally without asterisks.
+Multiple paragraphs supported.
+
+@theory
+Theoretical explanation.
+
+@implementation
+Technical details.
+
+@variable $name - Description
+@mixin name - Description
+@function name - Description
+@class .name - Description
+
+@param {Type} $name - Description
+@returns {Type} Description
+
+@example html - Title
+<div>Code here</div>
+
+@related concept-one, concept-two
+@reading https://url.com Title
+*/
+```
+
+### **Key Rules**
+
+1. ✅ **Tags at position 0** — `@tag` must start at beginning of line (after trimming)
+2. ✅ **No asterisks required** — Can write with or without `* ` prefix
+3. ✅ **Content until next tag** — Everything between tags is content
+4. ✅ **Multi-line support** — Essays can be thousands of words
+
+### **Tag Reference**
+
+| Tag | Type | Purpose | Format |
+|-----|------|---------|--------|
+| `@component` | Required | Component name | `@component name` |
+| `@category` | Required | Category path | `@category typography` |
+| `@concept` | Content | Main essay (2000+ words) | Multi-line text |
+| `@theory` | Content | Theory section | Multi-line text |
+| `@implementation` | Content | Technical explanation | Multi-line text |
+| `@variable` | List | Variable reference | `@variable $name - Description` |
+| `@mixin` | List | Mixin reference | `@mixin name - Description` |
+| `@function` | List | Function reference | `@function name - Description` |
+| `@class` | List | Class reference | `@class .name - Description` |
+| `@param` | List | Parameter | `@param {Type} $name - Description` |
+| `@returns` | Single | Return value | `@returns {Type} Description` |
+| `@example` | List | Code example | `@example lang - Title\ncode...` |
+| `@related` | List | Related concepts | `@related name1, name2` |
+| `@reading` | List | External links | `@reading https://url.com Title` |
+| `@since` | Single | Version introduced | `@since 0.10.0` |
+| `@deprecated` | Single | Deprecation notice | `@deprecated Reason` |
+
+---
+
+## The Documentation Flow
+
+### **How It Works**
+
+```
+1. Write documentation IN source files
+   (SCSS, JS with /** @component ... */)
+   ↓
+2. doc-parser.js scans files
+   Extracts all /** ... */ blocks
+   Parses tags (position 0 detection)
+   ↓
+3. doc-generator.js generates markdown
+   Creates content/concepts/name.md
+   Formats essays, embeds API refs
+   ↓
+4. 11ty builds HTML
+   content/concepts/ → _site/concepts/
+   ↓
+5. Beautiful concept pages
+   https://standard.ffp.co/concepts/vertical-rhythm/
+```
+
+### **Build Trigger Logic**
+
+```javascript
+// Caches source file hashes in .doc-generator-hash
+// Only regenerates if source files changed
+
+if (sourceFilesChanged) {
+  generateDocs();
+} else {
+  console.log("Documentation unchanged, skipping");
+}
+```
+
+---
+
+## The Four Core Components
+
+### **1. 11ty Plugin System** (`src/eleventy/`)
+
+**Entry Point**: `src/eleventy/eleventy.js`
+
+**What It Does**:
+- Plugin orchestrator that registers all sub-plugins
+- Copies compiled assets (CSS/JS) to output directory
+- Provides shortcodes: `{% standardAssets %}` and `{% standardLab %}`
+- Can use local files or CDN
+
+**Key Sub-Plugins**:
+
+| Plugin | File | Purpose |
+|--------|------|---------|
+| DocGenerator | `doc-generator.js` | **NEW: Generates concept-driven docs from source code** |
+| DocParser | `doc-parser.js` | **NEW: Parses minimal-format doc comments** |
+| Markdown | `markdown.js` | Enhanced markdown with syntax highlighting, callouts |
+| Filter | `filter.js` | Template filters (excerpt, dates, etc.) |
+| ShortCode | `shortcode.js` | Custom template shortcodes |
+| Backlinks | `backlinks.js` | Wiki-style `[[page]]` links |
+| Encryption | `encryption.js` | Password-protected content |
+| PreProcessor | `preprocessor.js` | Markdown preprocessing |
+
+**Usage**:
+```javascript
+import Standard from "@zefish/standard";
+
+export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(Standard, {
+    outputDir: "assets/standard",
+    copyFiles: true,
+    useCDN: false
+  });
+}
+```
+
+---
+
+### **2. JavaScript Typography Engine** (`src/js/standard.js`)
+
+**Version**: 2.2.0
+
+**What It Does**:
+- Implements classical typography rules CSS cannot handle
+- Processes text nodes while preserving HTML structure
+- Supports 5 locales with locale-specific rules
+- Auto-detects language from `<html lang>` attribute
+
+**Key Features**:
+
+| Feature | Purpose | Controlled By |
+|---------|---------|---------------|
+| Smart Quotes | Converts straight quotes to curly quotes (locale-aware) | `enableSmartQuotes` |
+| Punctuation | Converts `--` to em-dash, `...` to ellipsis | `enablePunctuation` |
+| Fractions | Converts `1/2` to `½` using Unicode | `enableFractions` |
+| Arrows & Symbols | Converts `->` to `→`, `(c)` to `©` | `enableArrowsAndSymbols` |
+| Number Formatting | Adds locale-specific thousands separators | `enableNumberFormatting` |
+| Spacing | Fixes spacing around punctuation (French thin spaces) | `enableSpacing` |
+| Widow Prevention | Prevents single word on last line | `enableWidowPrevention` |
+| Image Zoom | Click to zoom images with arrow navigation | Built-in |
+
+**Supported Locales**: `en`, `fr`, `de`, `es`, `it`
+
+---
+
+### **3. CSS Framework** (`src/styles/`)
+
+**Entry Point**: `src/styles/standard.scss`
+
+**Architecture**: ITCSS-inspired 12-layer system
+
+| Layer | File | Purpose |
+|-------|------|---------|
+| 0 | `standard-00-variables.scss` | CSS custom properties, design tokens |
+| 1 | `standard-01-token.scss` | Token system setup |
+| 2 | `standard-02-color.scss` | Color system, light/dark theming |
+| 3 | `standard-03-typography.scss` | Font scales, sizing, weights |
+| 4 | `standard-04-elements.scss` | HTML element styling |
+| 5 | `standard-05-rhythm.scss` | Vertical rhythm, baseline grid |
+| 6 | `standard-06-grid.scss` | 12-column responsive grid |
+| 7 | `standard-07-prose.scss` | Editorial layouts, reading experience |
+| 8 | `standard-08-img.scss` | Image system, responsive |
+| 9 | `standard-09-md.scss` | Markdown-generated elements |
+| 98 | `standard-98-utilities.scss` | Utility classes |
+| 99 | `standard-99-debug.scss` | Debug utilities |
+
+**Key Design Principles**:
+- **Golden Ratio**: φ = 1.618 — all measurements derive from this
+- **Vertical Rhythm**: `1rlh` unit — all elements align to baseline grid
+- **Swiss Grid System**: 12-column layout with mathematical precision
+- **Automatic Theming**: Light/dark mode with CSS custom properties
+
+---
+
+### **4. Cloudflare Pages Functions** (`src/cloudflare/`)
+
+**What It Does**:
+- Serverless functions for Cloudflare Pages (NOT Wrangler)
+- GitHub-backed comments system with moderation
+- CORS-enabled for cross-domain requests
+- Auto-deployed when pushing to GitHub
+
+**Key Functions**:
+- `api/comments.js` → Comments system (GET/POST)
+- `api/contact.js` → Contact form handler
+- `example.js` → Example function template
+
+**Environment Variables** (set in Cloudflare Pages dashboard):
+```bash
+GITHUB_TOKEN=ghp_your_token
+GITHUB_OWNER=your-username
+GITHUB_REPO=your-repo
+GITHUB_COMMENTS_PATH=data/comments
+MODERATION_EMAIL=admin@example.com
+```
+
+---
+
+## Writing Documentation
+
+### **Step 1: Write in Source File**
+
+```scss
+// src/styles/standard-05-rhythm.scss
+
+/**
+@component vertical-rhythm
+@category typography/spacing
+
+@concept
+In 1455, Johannes Gutenberg printed his 42-line Bible with something
+remarkable: every line of text sat on an invisible grid, spaced with
+mathematical precision. He didn't just invent movable type—he invented
+the baseline grid.
+
+Fast forward to 1501, and Aldus Manutius in Venice discovered that
+120% line-height made text sing. Not 100%, not 150%—exactly 120%.
+At 16px base font, that's 1.5rem, or 24 pixels. This single number
+became the foundation of readable typography for the next 500 years.
+
+@theory
+Vertical rhythm works because of how your eyes move. When you finish
+a line and return to the left margin, your eye makes a diagonal sweep.
+If the spacing is consistent—mathematically predictable—your eye learns
+the pattern. Reading becomes effortless.
+
+@implementation
+Standard Framework implements vertical rhythm through a single base unit:
+$flow-space. This 1.5rem (24px) unit divides evenly into half rhythm
+(0.75rem), full rhythm (1.5rem), and double rhythm (3rem). Every spacing
+value is a multiple of this base.
+
+@variable $flow-space - Base vertical rhythm unit (1.5rem)
+@variable $flow-scale - Multiplier for rhythm variations (1.5)
+@mixin flow - Apply vertical spacing between sibling elements
+@function rhythm - Calculate rhythm units from multiplier
+@class .rhythm - Enable rhythm system on container
+
+@example html - Basic vertical rhythm
+<div class="rhythm">
+  <h1>Heading</h1>
+  <p>First paragraph sits on the grid.</p>
+  <p>Second paragraph maintains rhythm.</p>
+  <h2>Subheading</h2>
+  <p>Still aligned to baseline.</p>
+</div>
+
+@example scss - Custom rhythm spacing
+.article {
+  @include flow($spacing: rhythm(2));
+}
+
+@related paragraph-indentation, line-height, golden-ratio
+@reading https://practicaltypography.com/line-spacing.html Butterick's Practical Typography
+@reading https://alistapart.com/article/settingtypeontheweb/ Setting Type on the Web
+*/
+
+$flow-space: 1.5rem !default;
+$flow-scale: 1.5 !default;
+
+@function rhythm($multiplier: 1) {
+  @return $flow-space * $multiplier;
+}
+
+@mixin flow($spacing: $flow-space) {
+  > * + * {
+    margin-block-start: $spacing;
+  }
+}
+
+.rhythm {
+  @include flow;
+}
+```
+
+### **Step 2: Build Automatically Generates Docs**
+
+```bash
+npm run build
+```
+
+**What happens:**
+1. ✅ `doc-parser.js` scans `src/styles/standard-05-rhythm.scss`
+2. ✅ Extracts `/** ... */` block
+3. ✅ Parses all tags (concept, theory, implementation, etc.)
+4. ✅ Extracts following code (`$flow-space`, `@mixin flow`, etc.)
+5. ✅ Generates `content/concepts/vertical-rhythm.md`
+6. ✅ 11ty builds to `_site/concepts/vertical-rhythm/index.html`
+
+### **Step 3: Result**
+
+A beautiful, rich documentation page at:
+```
+https://standard.ffp.co/concepts/vertical-rhythm/
+```
+
+With:
+- ✅ Full essay (2000+ words)
+- ✅ Theory and implementation sections
+- ✅ Live HTML examples (rendered + code)
+- ✅ API reference (variables, mixins, functions, classes)
+- ✅ Related concepts (clickable links)
+- ✅ Further reading (external links)
+- ✅ Collapsible source code view
+
+---
+
+## Documentation Best Practices
+
+### **When to Write Documentation**
+
+| Change Type | Documentation Needed |
+|-------------|---------------------|
+| Add new SCSS variable | `@component` block with `@concept` essay |
+| Add new mixin | `@component` block with `@theory` + `@implementation` |
+| Add utility class | Add to existing component with `@class` tag |
+| Modify behavior | Update `@implementation` section |
+| Add example | Add `@example` tag with code |
+| Fix bug | Update `@example` to reflect correct behavior |
+
+### **Essay Writing Guidelines**
+
+**For `@concept` sections:**
+- ✅ Start with historical context (dates, people, movements)
+- ✅ Explain WHY this exists (problem it solves)
+- ✅ Use analogies and real-world examples
+- ✅ Write 500-3000 words (don't be brief)
+- ✅ Engage and educate, not just inform
+
+**For `@theory` sections:**
+- ✅ Explain HOW it works (principles, mathematics)
+- ✅ Connect to design theory
+- ✅ Reference established practices
+- ✅ 200-800 words
+
+**For `@implementation` sections:**
+- ✅ Explain technical approach
+- ✅ Why this code pattern?
+- ✅ Trade-offs and decisions
+- ✅ 200-500 words
+
+### **Example Quality Levels**
+
+**❌ Bad (too brief):**
+```scss
+/**
+@component flow-space
+@category spacing
+
+@concept
+Base spacing unit.
+
+@variable $flow-space - Spacing
+*/
+```
+
+**✅ Good (engaging essay):**
+```scss
+/**
+@component flow-space
+@category spacing
+
+@concept
+In 1501, Aldus Manutius discovered that 120% line-height made text sing.
+Not 100%, not 150%—exactly 120%. At 16px base font, that's 1.5rem, or
+24 pixels. This single number became the foundation of readable typography
+for the next 500 years.
+
+When you set $flow-space to 1.5rem, you're not just picking a number.
+You're connecting your work to five centuries of typographic refinement.
+You're saying: I understand that reading is a physical act, and rhythm matters.
+
+@variable $flow-space - The fundamental spacing unit (1.5rem)
+*/
+```
+
+---
+
+## File Organization
+
+### **What Goes Where**
+
+```
+src/
+  styles/
+    standard-05-rhythm.scss    ← Documentation lives HERE
+
+content/
+  concepts/
+    vertical-rhythm.md         ← Auto-generated (DON'T EDIT)
+
+  css/
+    rhythm.md                  ← Hand-written guides (if needed)
+```
+
+**Rule of thumb:**
+- ✅ **Concept documentation** → In source files (SCSS/JS)
+- ✅ **Getting started guides** → Hand-written in `content/`
+- ✅ **Tutorials** → Hand-written in `content/`
+- ✅ **API reference** → Auto-generated from source
+
+---
+
+## Build System
+
+### **Commands**
+
+```bash
+npm start              # Dev server (11ty on port 8090)
+npm run dev            # Watch CSS/JS and rebuild
+npm run build          # Full production build
+npm run build:assets   # Compile CSS/JS only
+npm run build:css      # SCSS → CSS
+npm run build:js       # Copy/minify JS
+npm release            # Version release
+```
+
+### **Build Pipeline**
+
+```
+1. SCSS compilation (Sass)
+2. JavaScript minification (Terser)
+3. Version injection
+4. doc-parser.js scans source files
+   ↓
+5. doc-generator.js creates markdown
+   ↓
+6. 11ty builds static site
+   ↓
+7. Asset copying (CSS/JS/fonts)
+   ↓
+8. Cloudflare function copying (to functions/)
+   ↓
+9. Output to _site/
+```
+
+---
+
+## Key Architectural Decisions
+
+### **1. Documentation Lives in Code**
+
+**Why?**
+- ✅ Single source of truth
+- ✅ Can't get out of sync
+- ✅ Context is immediate (code right there)
+- ✅ Encourages thoughtful documentation
+
+### **2. Concept-Driven, Not API-Driven**
+
+**Why?**
+- ✅ Teaches WHY, not just HOW
+- ✅ Makes documentation browsable and engaging
+- ✅ Builds expertise, not just usage
+- ✅ Creates advocates, not just users
+
+### **3. Minimal Format (No Asterisks)**
+
+**Why?**
+- ✅ Write essays in any editor (Obsidian, Notion, etc.)
+- ✅ Paste directly into code
+- ✅ Focus on content, not formatting
+- ✅ 2000-word essays are feasible
+
+### **4. Auto-Generation with Caching**
+
+**Why?**
+- ✅ Fast builds (only regenerate when changed)
+- ✅ Deterministic (same input = same output)
+- ✅ No manual maintenance
+- ✅ Always up-to-date
+
+---
+
+## Common Tasks
+
+### **Add a New Concept**
+
+1. **Create doc block in source file:**
+   ```scss
+   /**
+   @component new-concept
+   @category typography
+
+   @concept
+   [Your essay here]
+
+   @variable $name - Description
+   */
+   ```
+
+2. **Build:**
+   ```bash
+   npm run build
+   ```
+
+3. **Verify:**
+   - Check `content/concepts/new-concept.md` exists
+   - Visit `http://localhost:8090/concepts/new-concept/`
+
+### **Update Existing Documentation**
+
+1. **Edit the `@concept`, `@theory`, or `@implementation` section** in source file
+2. **Build** (docs regenerate automatically)
+3. **No need to edit generated markdown** (it will be overwritten)
+
+### **Add Related Concepts**
+
+```scss
+/**
+@related concept-one, concept-two, concept-three
+*/
+```
+
+Links generate automatically with bidirectional connections.
+
+### **Add External Reading**
+
+```scss
+/**
+@reading https://practicaltypography.com Practical Typography
+@reading https://alistapart.com A List Apart
+*/
+```
+
+### **Add Live Examples**
+
+```scss
+/**
+@example html - Example title
+<div class="example">
+  <p>This renders twice:</p>
+  <p>Once as live preview, once as code.</p>
+</div>
+*/
+```
+
+---
+
+## Debugging Documentation
+
+### **Doc block not appearing?**
+
+**Check:**
+1. ✅ `@component` tag present?
+2. ✅ Tags at position 0 (start of line)?
+3. ✅ File matches pattern in `eleventy.config.js`?
+4. ✅ Hash file preventing regeneration? (delete `.doc-generator-hash`)
+
+**Debug commands:**
+```bash
+# Force regeneration
+rm .doc-generator-hash
+npm run build
+
+# Check parser output
+# Add console.log in doc-parser.js parseCommentBlock()
+```
+
+### **Content not formatting correctly?**
+
+**Check:**
+1. ✅ Paragraph breaks (double newline) in `@concept`?
+2. ✅ Lists starting with `-` or `*` at line start?
+3. ✅ Code examples in proper format?
+   ```scss
+   @example html - Title
+   <code here>
+   ```
+
+### **Related links broken?**
+
+**Check:**
+1. ✅ Concept exists? (check `content/concepts/`)
+2. ✅ Name matches exactly? (case-sensitive)
+3. ✅ Slugification correct? (spaces → hyphens, lowercase)
+
+---
+
+## What Makes This System Special
+
+### **Traditional Documentation:**
+```
+1. Write code
+2. Write separate docs
+3. Docs get out of date
+4. Nobody reads them
+5. Users confused
+```
+
+### **Standard Framework Documentation:**
+```
+1. Write code + essay together
+2. Build auto-generates beautiful pages
+3. Code changes = docs update
+4. Users learn WHY and HOW
+5. Users become experts
+```
+
+### **The Result:**
+
+✅ **Documentation people actually read** (it's engaging)
+✅ **Documentation that stays current** (it's in the code)
+✅ **Documentation that teaches** (essays, not lists)
+✅ **Documentation as marketing** (shows expertise)
+✅ **Documentation as community building** (creates advocates)
+
+---
+
+## Questions to Ask When Making Changes
+
+- **Does this need documentation?** → YES (always document public APIs)
+- **Where should the essay live?** → In the source file with the code
+- **How long should the essay be?** → As long as needed (500-3000 words typical)
+- **Should I update generated markdown?** → NO (edit source, regenerate)
+- **Do I need to add related concepts?** → YES (build the knowledge graph)
+- **Does this connect to design history?** → If yes, include it! (Gutenberg, Bauhaus, Swiss Style)
+
+---
+
+## File Locations Quick Reference
+
+| Task | File to Edit |
+|------|--------------|
+| Add concept doc | Source SCSS/JS file |
+| Change doc format | `src/eleventy/doc-parser.js` |
+| Change generated layout | `src/eleventy/doc-generator.js` |
+| Add hand-written guide | `content/css/` or `content/11ty/` |
+| Configure doc generation | `eleventy.config.js` |
+| Debug doc parsing | `src/eleventy/doc-parser.js` (add console.log) |
+
+---
+
+## Next Steps for New Contributors
+
+1. **Read an existing concept page** — See the output format
+2. **Find the source** — Locate the `/** @component ... */` block in source
+3. **Understand the flow** — Source → Parser → Generator → Markdown → HTML
+4. **Write your first concept** — Pick a small utility and document it fully
+5. **Build and verify** — Run `npm run build` and check the result
+
+---
+
+## Further Reading
+
+- **README.md** — Project overview and quick start
+- **content/concepts/** — Browse existing concept documentation
+- **src/eleventy/doc-parser.js** — See how parsing works
+- **src/eleventy/doc-generator.js** — See how markdown is generated
+
+---
+
+**Last Updated**: October 2024
+**Maintained By**: Francis Fontaine
+**Documentation Philosophy**: Education through Code™
+
+---
+
+## Key Insight
+
+> "The best documentation teaches not just HOW to use the code, but WHY the code exists in the first place. When users understand the historical context, design theory, and practical application, they don't just use your framework—they become advocates for the craft itself."
+
+**This is what Standard Framework's documentation system achieves.**

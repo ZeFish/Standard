@@ -1,1 +1,669 @@
-!function(e){"use strict";class t{constructor(e={}){this.apiUrl=e.apiUrl||"/api/comments",this.pageId=e.pageId,this.container="string"==typeof e.container?document.querySelector(e.container):e.container||document.querySelector("#comments"),this.formSelector=e.form||"#comment-form",this.comments=[],this.loading=!1,this.pollInterval=e.pollInterval||null,this.pollTimer=null,this.onLoad=e.onLoad||null,this.onRender=e.onRender||null}async load(){if(!this.pageId)return console.error("GitHubComments: pageId is required"),[];this.loading=!0;try{const e=await fetch(`${this.apiUrl}?pageId=${encodeURIComponent(this.pageId)}`);if(!e.ok)throw new Error(`API error: ${e.status}`);const t=await e.json();if(this.comments=t.comments||[],this.loading=!1,"function"==typeof this.onLoad)try{this.onLoad(this.comments)}catch(e){}return this.comments}catch(e){return console.error("Error loading comments:",e),this.loading=!1,[]}}async submit(e){try{const t=await fetch(this.apiUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pageId:this.pageId,...e})});if(!t.ok){let e=`API error: ${t.status}`;try{e=(await t.json()).message||e}catch(n){e=`API endpoint not available (${t.status})`}throw new Error(e)}const n=await t.json();return n.comment&&(this.comments.push(n.comment),this.comments.sort((e,t)=>new Date(t.createdAt)-new Date(e.createdAt))),n}catch(e){throw console.error("Error submitting comment:",e),e}}formatTime(e){const t=new Date(e),n=new Date,o=Math.floor((n-t)/1e3);return o<60?"just now":o<3600?`${Math.floor(o/60)}m ago`:o<86400?`${Math.floor(o/3600)}h ago`:o<604800?`${Math.floor(o/86400)}d ago`:t.toLocaleDateString()}escapeHTML(e){const t=document.createElement("div");return t.textContent=e,t.innerHTML}formatContent(e){let t=this.escapeHTML(e);return t=t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>"),t=t.replace(/\*(.+?)\*/g,"<em>$1</em>"),t=t.replace(/_(.+?)_/g,"<em>$1</em>"),t=t.replace(/```(.*?)```/gs,"<pre><code>$1</code></pre>"),t=t.replace(/`(.+?)`/g,"<code>$1</code>"),t=t.replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'),t=t.replace(/\n/g,"<br>"),t}renderComment(e,t=0){const n=!1!==e.approved?"":' data-pending="true"',o=e.spam?' data-spam="true"':"";return`\n      <div class="comment" data-id="${this.escapeHTML(String(e.id))}" data-level="${t}"${n}${o}>\n        <div class="comment-header">\n          <span class="comment-author">${this.escapeHTML(e.author||"Anonymous")}</span>\n          <span class="comment-date">${this.formatTime(e.createdAt)}</span>\n          ${e.spam?'<span class="comment-flag">Flagged as spam</span>':""}\n          ${e.approved?"":'<span class="comment-pending">Awaiting moderation</span>'}\n        </div>\n        <div class="comment-content">\n          ${this.formatContent(e.content||"")}\n        </div>\n      </div>\n    `}buildCommentTree(){const e={},t=[];for(const t of this.comments)e[t.id]={...t,replies:[]};for(const n of this.comments)n.parentId&&e[n.parentId]?e[n.parentId].replies.push(e[n.id]):t.push(e[n.id]);return t}renderTree(e,t=0){return e.map(e=>{let n=this.renderComment(e,t);return e.replies&&e.replies.length>0&&(n+=`<div class="comment-replies">${this.renderTree(e.replies,t+1)}</div>`),n}).join("")}render(){if(!this.container)return void console.error("GitHubComments: container not found");if(0===this.comments.length)return void(this.container.innerHTML='<p class="comments-empty">No comments yet. Be the first to comment!</p>');const e=this.buildCommentTree();if(this.container.innerHTML=this.renderTree(e),this.attachReplyHandlers(),"function"==typeof this.onRender)try{this.onRender(this.container)}catch(e){}}attachReplyHandlers(){this.container&&this.container.querySelectorAll(".comment-reply").forEach(e=>{e.addEventListener("click",e=>{const t=e.target.dataset.parentId,n=document.querySelector(this.formSelector);if(n){const e=n.querySelector('[name="parentId"]');e&&(e.value=t),n.scrollIntoView({behavior:"smooth"})}})})}attachFormHandler(e=null){const t=document.querySelector(e||this.formSelector);if(t){if(t.removeAttribute("hx-boost"),t.setAttribute("hx-disable","true"),window.htmx){const n=t.cloneNode(!0);t.parentNode.replaceChild(n,t);return void document.querySelector(e||this.formSelector).addEventListener("submit",this._handleFormSubmit.bind(this))}t.addEventListener("submit",this._handleFormSubmit.bind(this))}else console.error("GitHubComments: form not found")}async _handleFormSubmit(e){e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation();const t=e.target,n=new FormData(t),o={author:n.get("author"),email:n.get("email"),content:n.get("content"),parentId:n.get("parentId")||null},r=t.querySelector("button[type=submit]"),a=r?r.textContent:"",i=t.querySelector("#form-status");try{r&&(r.disabled=!0,r.textContent="Submitting...",r.style.opacity="0.7"),i&&(i.style.display="block",i.textContent="Sending your comment...",i.style.color="var(--color-foreground, #000)");const e=await this.submit(o);i&&(i.textContent="Comment submitted successfully! It will appear after moderation.",i.style.color="var(--color-green, green)",setTimeout(()=>{i.style.display="none",i.textContent=""},6e3)),t.reset();const n=t.querySelector('[name="parentId"]');return n&&(n.value=""),this.render(),e}catch(e){throw i&&(i.textContent=`Error: ${e.message}`,i.style.color="var(--color-red, red)",i.style.display="block"),e}finally{r&&(r.disabled=!1,r.textContent=a,r.style.opacity="1")}}startPolling(){this.pollInterval&&(this.stopPolling(),this.pollTimer=setInterval(async()=>{const e=this.comments.length;await this.load(),this.comments.length>e&&this.render()},this.pollInterval))}stopPolling(){this.pollTimer&&(clearInterval(this.pollTimer),this.pollTimer=null)}}function n(e){if(!e||"string"!=typeof e)return"index";let t=e.trim();try{t=new URL(t,window.location.origin).pathname}catch(e){}return t=t.replace(/^\/+|\/+$/g,""),""===t?"index":(t=t.replace(/[\/]+/g,"_"),t=t.replace(/[^A-Za-z0-9_\-]/g,"_"),t)}let o=null,r={apiUrl:"/api/comments",containerSelector:"#comments",formSelector:"#comment-form",pollInterval:null,autoInit:!0,pageId:null,onLoad:null,onRender:null};const a={version:"@VERSION_PLACEHOLDER@",configure:(e={})=>(Object.assign(r,e||{}),r),getInstance:()=>o,createInstance(e={}){const a={apiUrl:r.apiUrl,container:e.container||r.containerSelector,form:e.formSelector||r.formSelector,pollInterval:null!=e.pollInterval?e.pollInterval:r.pollInterval,onLoad:e.onLoad||r.onLoad,onRender:e.onRender||r.onRender},s=e.pageId||r.pageId||i();return a.pageId=n(s||window.location.pathname),o=new t(a),o},async init(e={}){if("undefined"==typeof document)return null;if(o&&!e.recreate)return o;let t=e.container;if(!t){t=document.querySelector("[data-comments]")||document.querySelector(r.containerSelector)||r.containerSelector}const n=this.createInstance({...e,container:t});try{await n.load(),n.render()}catch(e){}try{n.attachFormHandler(e.formSelector||r.formSelector)}catch(e){}return n.pollInterval&&n.startPolling(),n},async load(){return o||await this.init(),o?o.load():[]},render(){if(o)return o.render();console.error("comments: not initialized (call comments.init())")},attachFormHandler(e){if(o)return o.attachFormHandler(e);console.error("comments: not initialized (call comments.init())")},submit:e=>o?o.submit(e):(console.error("comments: not initialized (call comments.init())"),Promise.reject(new Error("comments: not initialized"))),startPolling(){if(o)return o.startPolling();console.error("comments: not initialized (call comments.init())")},stopPolling(){if(o)return o.stopPolling()},getPageId(){if(o&&o.pageId)return o.pageId;return n(r.pageId||i()||("undefined"!=typeof window?window.location.pathname:"index"))}};function i(){if("undefined"==typeof document)return null;const e=document.querySelector("[data-page-id]")||document.body,t=e&&e.getAttribute&&e.getAttribute("data-page-id");if(t)return t;const n=document.querySelector('meta[name="page-id"]');if(n&&n.content)return n.content;const o=document.querySelector('meta[property="og:url"]');if(o&&o.content)try{return new URL(o.content).pathname}catch(e){return o.content}const r=document.querySelector('link[rel="canonical"]');if(r&&r.href)try{return new URL(r.href).pathname}catch(e){return r.href}return null}try{!function(){if(!r.autoInit)return;if(o)return;if("undefined"==typeof document)return;const e=()=>{try{a.init().catch(()=>{})}catch(e){}};"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0}):e()}()}catch(e){}"undefined"!=typeof module&&module.exports?module.exports=a:(e.comments=a,e.GitHubComments=t)}("undefined"!=typeof window?window:this);
+/**
+ * GitHub Comment
+ *
+ * A lightweight image zoom library with keyboard navigation.
+ * Click any image to zoom, use arrow keys to navigate, ESC to close.
+ *
+ * Features:
+ * - Click to zoom in/out
+ * - Keyboard navigation (←/→ arrows)
+ * - ESC to close
+ * - Wraps around image gallery
+ * - Auto-injects required CSS
+ * - Custom events for extensibility
+ * - Configurable selectors
+ *
+ * @version @VERSION_PLACEHOLDER@
+ * @license MIT
+ * @author Your Name
+ */
+
+(function (global) {
+  "use strict";
+
+  /**
+   * @component GitHub Comments Client
+   * @category Cloudflare Functions
+   * @description Client-side library for interacting with the GitHub comments API.
+   * Exposes a global singleton `comments` API and auto-initializes on DOM ready.
+   *
+   * Features:
+   * - Singleton API: `comments.init()`, `comments.load()`, `comments.render()`, `comments.submit()`, etc.
+   * - Auto-initialize when DOM is ready (scans for comment container)
+   * - Graceful in environments without DOM (no-ops)
+   *
+   * Example:
+   *   comments.configure({ apiUrl: '/api/comments', pollInterval: 15000 });
+   *   comments.init(); // optional; auto-init runs on DOM ready
+   *
+   * @since 0.10.53
+   * @version @VERSION_PLACEHOLDER@
+   */
+
+  /* --------------------------------------------------------
+   * Core GitHubComments class (kept small and focused)
+   * --------------------------------------------------------*/
+  class GitHubComments {
+    constructor(options = {}) {
+      this.apiUrl = options.apiUrl || "/api/comments";
+      this.pageId = options.pageId;
+      this.container =
+        typeof options.container === "string"
+          ? document.querySelector(options.container)
+          : options.container || document.querySelector("#comments");
+      this.formSelector = options.form || "#comment-form";
+      this.comments = [];
+      this.loading = false;
+      this.pollInterval = options.pollInterval || null; // ms, null = disabled
+      this.pollTimer = null;
+      this.onLoad = options.onLoad || null;
+      this.onRender = options.onRender || null;
+    }
+
+    async load() {
+      if (!this.pageId) {
+        console.error("GitHubComments: pageId is required");
+        return [];
+      }
+
+      this.loading = true;
+      try {
+        const response = await fetch(
+          `${this.apiUrl}?pageId=${encodeURIComponent(this.pageId)}`,
+        );
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.comments = data.comments || [];
+        this.loading = false;
+
+        if (typeof this.onLoad === "function") {
+          try {
+            this.onLoad(this.comments);
+          } catch (e) {
+            /* swallow user onLoad errors */
+          }
+        }
+
+        return this.comments;
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        this.loading = false;
+        return [];
+      }
+    }
+
+    async submit(data) {
+      try {
+        const response = await fetch(this.apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pageId: this.pageId,
+            ...data,
+          }),
+        });
+
+        if (!response.ok) {
+          let errorMessage = `API error: ${response.status}`;
+          try {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } catch (e) {
+            errorMessage = `API endpoint not available (${response.status})`;
+          }
+          throw new Error(errorMessage);
+        }
+
+        const result = await response.json();
+
+        if (result.comment) {
+          this.comments.push(result.comment);
+          this.comments.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          );
+        }
+
+        return result;
+      } catch (error) {
+        console.error("Error submitting comment:", error);
+        throw error;
+      }
+    }
+
+    formatTime(dateStr) {
+      const date = new Date(dateStr);
+      const now = new Date();
+      const seconds = Math.floor((now - date) / 1000);
+
+      if (seconds < 60) return "just now";
+      if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+      if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+      if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`;
+
+      return date.toLocaleDateString();
+    }
+
+    escapeHTML(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    formatContent(content) {
+      let html = this.escapeHTML(content);
+
+      html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+      html = html.replace(/_(.+?)_/g, "<em>$1</em>");
+      html = html.replace(/```(.*?)```/gs, "<pre><code>$1</code></pre>");
+      html = html.replace(/`(.+?)`/g, "<code>$1</code>");
+      html = html.replace(
+        /\[(.+?)\]\((.+?)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+      );
+      html = html.replace(/\n/g, "<br>");
+
+      return html;
+    }
+
+    renderComment(comment, level = 0) {
+      const approved = comment.approved !== false ? "" : ' data-pending="true"';
+      const spam = comment.spam ? ' data-spam="true"' : "";
+
+      return `
+      <div class="comment" data-id="${this.escapeHTML(
+        String(comment.id),
+      )}" data-level="${level}"${approved}${spam}>
+        <div class="comment-header">
+          <span class="comment-author">${this.escapeHTML(
+            comment.author || "Anonymous",
+          )}</span>
+          <span class="comment-date">${this.formatTime(
+            comment.createdAt,
+          )}</span>
+          ${
+            comment.spam
+              ? '<span class="comment-flag">Flagged as spam</span>'
+              : ""
+          }
+          ${
+            !comment.approved
+              ? '<span class="comment-pending">Awaiting moderation</span>'
+              : ""
+          }
+        </div>
+        <div class="comment-content">
+          ${this.formatContent(comment.content || "")}
+        </div>
+      </div>
+    `;
+    }
+
+    buildCommentTree() {
+      const byId = {};
+      const roots = [];
+
+      for (const comment of this.comments) {
+        byId[comment.id] = { ...comment, replies: [] };
+      }
+
+      for (const comment of this.comments) {
+        if (comment.parentId && byId[comment.parentId]) {
+          byId[comment.parentId].replies.push(byId[comment.id]);
+        } else {
+          roots.push(byId[comment.id]);
+        }
+      }
+
+      return roots;
+    }
+
+    renderTree(comments, level = 0) {
+      return comments
+        .map((comment) => {
+          let html = this.renderComment(comment, level);
+
+          if (comment.replies && comment.replies.length > 0) {
+            html += `<div class="comment-replies">${this.renderTree(
+              comment.replies,
+              level + 1,
+            )}</div>`;
+          }
+
+          return html;
+        })
+        .join("");
+    }
+
+    render() {
+      if (!this.container) {
+        console.error("GitHubComments: container not found");
+        return;
+      }
+
+      if (this.comments.length === 0) {
+        this.container.innerHTML =
+          '<p class="comments-empty">No comments yet. Be the first to comment!</p>';
+        return;
+      }
+
+      const tree = this.buildCommentTree();
+      this.container.innerHTML = this.renderTree(tree);
+
+      this.attachReplyHandlers();
+
+      if (typeof this.onRender === "function") {
+        try {
+          this.onRender(this.container);
+        } catch (e) {
+          /* swallow user errors */
+        }
+      }
+    }
+
+    attachReplyHandlers() {
+      if (!this.container) return;
+      this.container.querySelectorAll(".comment-reply").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const parentId = e.target.dataset.parentId;
+          const form = document.querySelector(this.formSelector);
+
+          if (form) {
+            const parentInput = form.querySelector('[name="parentId"]');
+            if (parentInput) {
+              parentInput.value = parentId;
+            }
+            form.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    }
+
+    attachFormHandler(formSelector = null) {
+      const form = document.querySelector(formSelector || this.formSelector);
+      if (!form) {
+        console.error("GitHubComments: form not found");
+        return;
+      }
+
+      form.removeAttribute("hx-boost");
+      form.setAttribute("hx-disable", "true");
+
+      if (window.htmx) {
+        const clone = form.cloneNode(true);
+        form.parentNode.replaceChild(clone, form);
+        const newForm = document.querySelector(
+          formSelector || this.formSelector,
+        );
+        newForm.addEventListener("submit", this._handleFormSubmit.bind(this));
+        return;
+      }
+
+      form.addEventListener("submit", this._handleFormSubmit.bind(this));
+    }
+
+    async _handleFormSubmit(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      const form = e.target;
+
+      const formData = new FormData(form);
+      const data = {
+        author: formData.get("author"),
+        email: formData.get("email"),
+        content: formData.get("content"),
+        parentId: formData.get("parentId") || null,
+      };
+
+      const submitBtn = form.querySelector("button[type=submit]");
+      const originalText = submitBtn ? submitBtn.textContent : "";
+      const statusDiv = form.querySelector("#form-status");
+
+      try {
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Submitting...";
+          submitBtn.style.opacity = "0.7";
+        }
+
+        if (statusDiv) {
+          statusDiv.style.display = "block";
+          statusDiv.textContent = "Sending your comment...";
+          statusDiv.style.color = "var(--color-foreground, #000)";
+        }
+
+        const result = await this.submit(data);
+
+        if (statusDiv) {
+          statusDiv.textContent =
+            "Comment submitted successfully! It will appear after moderation.";
+          statusDiv.style.color = "var(--color-green, green)";
+          setTimeout(() => {
+            statusDiv.style.display = "none";
+            statusDiv.textContent = "";
+          }, 6000);
+        }
+
+        form.reset();
+
+        const parentIdField = form.querySelector('[name="parentId"]');
+        if (parentIdField) {
+          parentIdField.value = "";
+        }
+
+        this.render();
+        return result;
+      } catch (error) {
+        if (statusDiv) {
+          statusDiv.textContent = `Error: ${error.message}`;
+          statusDiv.style.color = "var(--color-red, red)";
+          statusDiv.style.display = "block";
+        }
+        throw error;
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          submitBtn.style.opacity = "1";
+        }
+      }
+    }
+
+    startPolling() {
+      if (!this.pollInterval) return;
+
+      this.stopPolling();
+
+      this.pollTimer = setInterval(async () => {
+        const before = this.comments.length;
+        await this.load();
+
+        if (this.comments.length > before) {
+          this.render();
+        }
+      }, this.pollInterval);
+    }
+
+    stopPolling() {
+      if (this.pollTimer) {
+        clearInterval(this.pollTimer);
+        this.pollTimer = null;
+      }
+    }
+  }
+
+  /* --------------------------------------------------------
+   * Helper: normalize page id
+   * --------------------------------------------------------*/
+  function normalizePageId(pathOrId) {
+    if (!pathOrId || typeof pathOrId !== "string") return "index";
+    // If already looks like an id (contains underscores), keep it
+    let id = pathOrId.trim();
+    // Common case: full URL or path
+    try {
+      // If a full URL passed, extract pathname
+      const u = new URL(id, window.location.origin);
+      id = u.pathname;
+    } catch (e) {
+      // not a full URL, keep as-is
+    }
+    // Normalize: trim slashes, replace with underscore, collapse multiple underscores
+    id = id.replace(/^\/+|\/+$/g, "");
+    if (id === "") return "index";
+    id = id.replace(/[\/]+/g, "_");
+    // Replace characters not safe for filenames
+    id = id.replace(/[^A-Za-z0-9_\-]/g, "_");
+    return id;
+  }
+
+  /* --------------------------------------------------------
+   * Singleton wrapper & public API
+   * --------------------------------------------------------*/
+  const DEFAULTS = {
+    apiUrl: "/api/comments",
+    containerSelector: "#comments",
+    formSelector: "#comment-form",
+    pollInterval: null,
+    autoInit: true,
+    pageId: null,
+    onLoad: null,
+    onRender: null,
+  };
+
+  let _instance = null;
+  let _configured = { ...DEFAULTS };
+
+  const comments = {
+    version: "@VERSION_PLACEHOLDER@",
+
+    configure(options = {}) {
+      Object.assign(_configured, options || {});
+      return _configured;
+    },
+
+    getInstance() {
+      return _instance;
+    },
+
+    createInstance(options = {}) {
+      const opts = {
+        apiUrl: _configured.apiUrl,
+        container: options.container || _configured.containerSelector,
+        form: options.formSelector || _configured.formSelector,
+        pollInterval:
+          options.pollInterval != null
+            ? options.pollInterval
+            : _configured.pollInterval,
+        onLoad: options.onLoad || _configured.onLoad,
+        onRender: options.onRender || _configured.onRender,
+      };
+
+      // Resolve pageId (prefer explicit, then meta, then normalized location)
+      const explicitPageId =
+        options.pageId || _configured.pageId || _getPageIdFromDOM();
+      opts.pageId = normalizePageId(explicitPageId || window.location.pathname);
+
+      _instance = new GitHubComments(opts);
+      return _instance;
+    },
+
+    async init(options = {}) {
+      if (typeof document === "undefined") {
+        // Not in a browser environment
+        return null;
+      }
+
+      // If an instance already exists and user doesn't request recreate, keep it
+      if (_instance && !options.recreate) {
+        return _instance;
+      }
+
+      // Allow user to pass container selector(s). If multiple containers exist, pick first.
+      let container = options.container;
+      if (!container) {
+        // Look for element with data-comments attribute or default selector
+        const el =
+          document.querySelector("[data-comments]") ||
+          document.querySelector(_configured.containerSelector);
+        container = el || _configured.containerSelector;
+      }
+
+      const inst = this.createInstance({
+        ...options,
+        container,
+      });
+
+      // Attempt to load and render but do not throw on failure
+      try {
+        await inst.load();
+        inst.render();
+      } catch (e) {
+        // swallow
+      }
+
+      // Attach form handler if form exists
+      try {
+        inst.attachFormHandler(
+          options.formSelector || _configured.formSelector,
+        );
+      } catch (e) {
+        // swallow
+      }
+
+      // Start polling if configured
+      if (inst.pollInterval) {
+        inst.startPolling();
+      }
+
+      return inst;
+    },
+
+    async load() {
+      if (!_instance) await this.init();
+      if (!_instance) return [];
+      return _instance.load();
+    },
+
+    render() {
+      if (!_instance) {
+        console.error("comments: not initialized (call comments.init())");
+        return;
+      }
+      return _instance.render();
+    },
+
+    attachFormHandler(selector) {
+      if (!_instance) {
+        console.error("comments: not initialized (call comments.init())");
+        return;
+      }
+      return _instance.attachFormHandler(selector);
+    },
+
+    submit(data) {
+      if (!_instance) {
+        console.error("comments: not initialized (call comments.init())");
+        return Promise.reject(new Error("comments: not initialized"));
+      }
+      return _instance.submit(data);
+    },
+
+    startPolling() {
+      if (!_instance) {
+        console.error("comments: not initialized (call comments.init())");
+        return;
+      }
+      return _instance.startPolling();
+    },
+
+    stopPolling() {
+      if (!_instance) {
+        return;
+      }
+      return _instance.stopPolling();
+    },
+
+    // Utility: return normalized page id that will be used if not provided explicitly
+    getPageId() {
+      if (_instance && _instance.pageId) return _instance.pageId;
+      const explicit = _configured.pageId || _getPageIdFromDOM();
+      return normalizePageId(
+        explicit ||
+          (typeof window !== "undefined" ? window.location.pathname : "index"),
+      );
+    },
+  };
+
+  /* --------------------------------------------------------
+   * DOM helpers
+   * --------------------------------------------------------*/
+  function _getPageIdFromDOM() {
+    if (typeof document === "undefined") return null;
+
+    // 1. data-page-id on root or container
+    const el = document.querySelector("[data-page-id]") || document.body;
+    const attr = el && el.getAttribute && el.getAttribute("data-page-id");
+    if (attr) return attr;
+
+    // 2. meta[name="page-id"]
+    const meta = document.querySelector('meta[name="page-id"]');
+    if (meta && meta.content) return meta.content;
+
+    // 3. og:url or canonical
+    const og = document.querySelector('meta[property="og:url"]');
+    if (og && og.content) {
+      try {
+        const u = new URL(og.content);
+        return u.pathname;
+      } catch (e) {
+        return og.content;
+      }
+    }
+
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical && canonical.href) {
+      try {
+        const u = new URL(canonical.href);
+        return u.pathname;
+      } catch (e) {
+        return canonical.href;
+      }
+    }
+
+    return null;
+  }
+
+  /* --------------------------------------------------------
+   * Auto-initialize on DOM ready (if enabled)
+   * --------------------------------------------------------*/
+  function _autoInitIfNeeded() {
+    if (!_configured.autoInit) return;
+
+    // If already initialized, do nothing
+    if (_instance) return;
+
+    // Initialize after DOM is ready
+    if (typeof document === "undefined") return;
+
+    const runInit = () => {
+      try {
+        comments.init().catch(() => {
+          // ignore init errors
+        });
+      } catch (e) {
+        // ignore
+      }
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", runInit, { once: true });
+    } else {
+      // DOM already ready
+      runInit();
+    }
+  }
+
+  // If configured.autoInit default true, schedule auto init
+  try {
+    _autoInitIfNeeded();
+  } catch (e) {
+    // ignore
+  }
+
+  /* --------------------------------------------------------
+   * Export to global / module systems
+   * --------------------------------------------------------*/
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = comments;
+  } else {
+    global.comments = comments;
+    // For backward compatibility, also expose class
+    global.GitHubComments = GitHubComments;
+  }
+})(typeof window !== "undefined" ? window : this);

@@ -65,13 +65,13 @@ build:
     files:
       - input: "standard.js"
         output: "standard.min.js"
-        minify: true
+        minify: false
       - input: "standard.toast.js"
         output: "standard.toast.js"
-        minify: true
+        minify: false
       - input: "standard.comment.js"
         output: "standard.comment.js"
-        minify: true
+        minify: false
       - input: "standard.lab.js"
         output: "standard.lab.js"
         minify: false
@@ -83,11 +83,11 @@ build:
           - "node_modules/htmx.org/dist/htmx.min.js"
           - "node_modules/htmx-ext-preload/dist/preload.min.js"
           - "dist/standard.min.js"
-          - "dist/standard.toast.min.js"
+          - "dist/standard.toast.js"
       - name: "standard.bundle.full.js"
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
           - "node_modules/htmx-ext-preload/dist/preload.min.js"
           - "dist/standard.min.js"
-          - "dist/standard.comment.js"
           - "dist/standard.toast.js"
+          - "dist/standard.comment.js"

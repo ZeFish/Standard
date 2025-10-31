@@ -1,3 +1,23 @@
+/**
+ * GitHub Comment
+ *
+ * A lightweight image zoom library with keyboard navigation.
+ * Click any image to zoom, use arrow keys to navigate, ESC to close.
+ *
+ * Features:
+ * - Click to zoom in/out
+ * - Keyboard navigation (←/→ arrows)
+ * - ESC to close
+ * - Wraps around image gallery
+ * - Auto-injects required CSS
+ * - Custom events for extensibility
+ * - Configurable selectors
+ *
+ * @version @VERSION_PLACEHOLDER@
+ * @license MIT
+ * @author Your Name
+ */
+
 (function (global) {
   "use strict";
 
