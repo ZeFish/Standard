@@ -31,7 +31,7 @@ export default function Cloudflare(eleventyConfig, site = {}) {
       sizes: cf.images?.sizes ?? [640, 960, 1280, 1920],
       quality: cf.images?.quality ?? 85,
       format: cf.images?.format ?? "auto",
-      sharpen: cf.images?.sharpen ?? 0.5,
+      sharpen: cf.images?.sharpen ?? 1,
       skipExternal: cf.images?.skipExternal ?? true,
       skipClass: cf.images?.skipClass ?? "no-cdn",
       generateSrcset: cf.images?.generateSrcset ?? true,

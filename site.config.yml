@@ -20,44 +20,10 @@ nav:
       url: "/cheat-sheet/"
 
 standard:
-  security:
-    enabled: true
-    csp:
-      scriptSrc:
-        - "'self'"
-        - "'unsafe-inline'"
-        - "https://cdn.jsdelivr.net"
-        - "https://unpkg.com"
-
-      imgSrc:
-        - "'self'"
-        - "data:"
-        - "https:"
-        - "https://imagedelivery.net" # Cloudflare Images
-
-    # Allow specific features
-    permissions:
-      geolocation: ["self"] # Allow geolocation from same origin
-  cloudflare:
-    comments:
-      enabled: true
-    images:
-      enabled: true
+  verbose: true
   ai:
     enabled: true
     model: "meta-llama/llama-4-maverick:free"
-  verbose: true
-  feed:
-    enabled: true
-    type: atom
-    collection: posts
-    limit: 20
-
-  # Add manifest configuration
-  manifest:
-    enabled: true
-    theme_color: "#0066cc"
-    background_color: "#ffffff"
 
 # ========================================
 # BUILD CONFIGURATION
