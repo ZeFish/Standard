@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.language }}" data-theme="{{ theme }}">
+<html lang="{{ site.language }}" data-standard-version="{{ site.standard.version }}" data-theme="{{ theme }}">
     <head>
       {% include site.standard.layouts.meta %}
       <title>{{ title or site.title }}{% if title and title != site.title %} · {{ site.title }}{% endif %}</title>
@@ -9,6 +9,7 @@
     {% standardLab %}
     <link rel="stylesheet" href="/assets/css/style.css">
     <body {% bodyHtmx %}>
+    <a href="#main" class="skip-link">Skip to content</a>
 		<header class="flex center-content" style="justify-content: space-between; max-width: 100%;">
 			<div class="flex" style="align-items: left;">
 				<a href="/" style="text-decoration: none;">{{ site.title }}</a>

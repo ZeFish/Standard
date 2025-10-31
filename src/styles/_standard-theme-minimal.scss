@@ -1,10 +1,17 @@
-[data-theme="swiss"] {
+[data-theme="minimal"] {
     --shadow: none;
     --border-radius: 0;
     --border-color: var(--color-foreground);
 
     --rhythm-multiplier: 1;
     --rhythm-multiplier-block: 0;
+
+    --font-header: "Kalice", sans-serif;
+    --font-header-weight: 500;
+    --font-header-letter-spacing: 1;
+    --font-text: "Diatype", "Kalice", sans-serif;
+
+    --body-padding-multiplier: 2;
 
     table {
         grid-column: content;
@@ -17,4 +24,69 @@
         font-family: var(--font-monospace);
         word-break: keep-all;
     }
+}
+
+@font-face {
+    font-family: "Diatype";
+    font-weight: 200 1000;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff");
+}
+
+@font-face {
+    font-family: "Diatype";
+    font-weight: 200 1000;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2")
+        format("woff");
+}
+
+@font-face {
+    font-family: "Kalice";
+    src: url("/assets/fonts/Kalice-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kalice";
+    src: url("/assets/fonts/Kalice-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kalice";
+    src: url("/assets/fonts/Kalice-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kalice";
+    src: url("/assets/fonts/Kalice-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kalice";
+    src: url("/assets/fonts/Kalice-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kalice";
+    src: url("/assets/fonts/Kalice-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }

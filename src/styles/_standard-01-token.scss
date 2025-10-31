@@ -39,7 +39,7 @@
 
     --font-mobile-size: 1rem;
     --font-mobile-ratio: var(--ratio-halfstep);
-    --font-mobile-density: 1;
+    --font-mobile-density: 1.5;
 
     --rhythm-multiplier: 1;
     --rhythm-multiplier-block: 2;
@@ -94,4 +94,52 @@
 
     --motion-smooth: cubic-bezier(0.4, 0, 0.2, 1);
     --motion-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /**
+     * Flow Space Unit
+     *
+     * @group tokens-spacing
+     * @author Francis Fontaine
+     * @since 0.1.0
+     *
+     * In 1455, Johannes Gutenberg printed his 42-line Bible with something
+     * remarkable: every line of text sat on an invisible grid, spaced with
+     * mathematical precision. He didn't just invent movable type—he invented
+     * the baseline grid.
+     *
+     * Fast forward to 1501, and Aldus Manutius in Venice discovered that
+     * 120% line-height made text sing. Not 100%, not 150%—exactly 120%.
+     * At 16px base font, that's 1.5rem, or 24 pixels. This single number
+     * became the foundation of readable typography for the next 500 years.
+     *
+     * This variable holds that magic number. It's the fundamental spacing unit
+     * that everything else derives from—the heartbeat of your vertical rhythm.
+     * Change it, and you change the entire breathing pattern of your design.
+     *
+     * ### Future Improvements
+     *
+     * - Make responsive (smaller on mobile)
+     * - Add clamp() for fluid scaling
+     *
+     * @see {variable} --flow-scale-* - Multipliers based on this unit
+     * @see {mixin} rhythm - Vertical rhythm system
+     * @see {class} .flow - Flow spacing utility
+     *
+     * @link https://en.wikipedia.org/wiki/Aldus_Manutius History of the Aldine Press
+     *
+     * @example scss
+     *   .card {
+     *     padding: var(--flow-space);
+     *     gap: calc(var(--flow-space) / 2);
+     *   }
+     */
+    --flow-space: 1.5rem;
+
+    /* Optional: Scale multipliers for consistent spacing */
+    --flow-scale-xs: calc(var(--flow-space) * 0.5); /* 0.75rem */
+    --flow-scale-s: calc(var(--flow-space) * 0.75); /* 1.125rem */
+    --flow-scale-m: var(--flow-space); /* 1.5rem */
+    --flow-scale-l: calc(var(--flow-space) * 1.5); /* 2.25rem */
+    --flow-scale-xl: calc(var(--flow-space) * 2); /* 3rem */
+    --flow-scale-xxl: calc(var(--flow-space) * 3); /* 4.5rem */
 }

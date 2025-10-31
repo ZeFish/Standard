@@ -39,7 +39,7 @@
     duration: 4000, // Auto-dismiss after 4 seconds
     position: "top-right", // top-right, top-left, top-center, bottom-right, bottom-left, bottom-center
     pauseOnHover: true, // Pause auto-dismiss when hovering
-    showProgress: false, // Show countdown progress bar
+    showProgress: true, // Show countdown progress bar
     closeButton: false, // Show close button
     maxToasts: 5, // Maximum simultaneous toasts (queue others)
     animation: "slide", // slide, fade

@@ -138,13 +138,19 @@
     /* Layout */
     display: flex;
     flex-direction: column;
-    min-width: 300px;
+    min-width: 100px;
     max-width: 100%;
 
-    font-size: var(--scale-xs);
+    font-size: var(--scale);
+    font-family: var(--font-interface);
 
     /* Appearance */
-    background: var(--color-background-secondary);
+    background: color-mix(
+        in srgb,
+        var(--color-background-secondary) 60%,
+        transparent
+    );
+    backdrop-filter: blur(5px);
     border: var(--border);
     /*border-left-width: 4px;  Accent border */
     border-radius: var(--border-radius);
@@ -223,7 +229,7 @@
 /* Toast icon */
 .toast-icon {
     flex-shrink: 0;
-    font-size: var(--scale-l);
+    font-size: var(--scale);
     line-height: 1;
     font-weight: bold;
 }
@@ -274,9 +280,10 @@
 /* =========================== */
 
 .toast-progress {
-    height: 4px;
-    background: color-mix(in srgb, var(--toast-color) 30%, transparent);
+    height: 1px;
+    background: color-mix(in srgb, var(--toast-color) 5%, transparent);
     width: 100%;
+    opacity: 0.5;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     transform-origin: left;
     transition: width 0s linear; /* Duration set via JS */
@@ -331,7 +338,7 @@
 /* Info - Blue */
 .toast-info {
     --toast-color: var(--color-info);
-    border-left-color: var(--color-info);
+    /*border-left-color: var(--color-info);*/
 
     .toast-icon {
         color: var(--color-info);

@@ -493,7 +493,7 @@
  *   </div>
  */
 
-.skip-link {
+a.skip-link {
     /* Positioning - absolute to top-left corner */
     position: absolute;
     top: var(--space-2xs);
@@ -503,7 +503,7 @@
     /* Styling - high contrast, unmissable */
     background: var(--color-accent);
     color: var(--color-background);
-    padding: var(--space-xs) var(--space-s);
+    padding: var(--space-2xs) var(--space-xs);
     border-radius: var(--border-radius);
     font-weight: var(--bold-weight);
     font-size: var(--scale-s);
@@ -534,6 +534,7 @@
             var(--color-accent) 90%,
             var(--color-background)
         );
+        color: var(--color-background);
     }
 
     /* Active state (on click) */
@@ -2077,6 +2078,9 @@ dialog.modal::backdrop {
     list-style: none;
     padding-inline-start: 0;
     gap: var(--space-xs);
+}
+.menu li {
+    margin: 0;
 }
 .menu li::before {
     display: none;

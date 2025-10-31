@@ -33,7 +33,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "forest");
+  eleventyConfig.addGlobalData("theme", "minimal");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 
@@ -51,7 +51,7 @@ ai: {
 
   // ===== ADDITIONAL ASSET FOLDERS =====
   // Standard copies public/ automatically, but if you also have content/assets:
-  eleventyConfig.addPassthroughCopy({ "content/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({ public: "." });
 
   // ===== WATCH IGNORES =====
   // Standard watches src/eleventy/ automatically, but ignore compiled files

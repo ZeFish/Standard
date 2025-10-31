@@ -20,6 +20,7 @@ class StandardLab {
     this.colorScheme = this.detectColorScheme();
     this.modifiedTokens = new Set();
     this.position = this.loadPosition();
+    this.version = document.documentElement.dataset.standardVersion;
 
     // Core tokens organized by category
     this.coreTokens = {
@@ -299,7 +300,7 @@ class StandardLab {
 
     this.panel.innerHTML = `
       <header class="standard-lab-panel-header">
-        <h2>Inspector</h2>
+        <h2>Inspector v${this.version}</h2>
         <button class="standard-lab-btn-icon" data-action="close" title="Close (Esc)">×</button>
       </header>
 
@@ -1026,8 +1027,8 @@ class StandardLab {
       /* Panel Base */
       .standard-lab-panel {
         position: fixed;
-        background: color-mix(in srgb, var(--color-background) 95%, transparent);
-        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, var(--color-background) 60%, transparent);
+        backdrop-filter: blur(5px);
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -1037,8 +1038,8 @@ class StandardLab {
         transition: opacity 0.2s ease, transform 0.2s ease;
         display: flex;
         flex-direction: column;
-        font-family: var(--font-interface, system-ui);
-        font-size: var(--scale-s);
+        font-family: var(--font-interface);
+        font-size: var(--scale);
       }
 
       /* Quick Panel */
@@ -1055,7 +1056,7 @@ class StandardLab {
 
       /* Panel Header */
       .standard-lab-panel-header {
-        padding: var(--space-s);
+        padding: var(--space-xs);
         border-bottom: 1px solid var(--color-border);
         display: flex;
         align-items: center;
@@ -1077,7 +1078,7 @@ class StandardLab {
 
       /* Sections */
       .standard-lab-section {
-        padding: var(--space-s);
+        padding: var(--space-xs);
         border-bottom: 1px solid var(--color-border);
       }
 
@@ -1103,7 +1104,6 @@ class StandardLab {
         gap: var(--space-xs);
         cursor: pointer;
         user-select: none;
-        padding: var(--space-2xs) 0;
       }
 
       .standard-lab-toggle input[type="checkbox"] {
@@ -1135,7 +1135,6 @@ class StandardLab {
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
         font-size: var(--scale-s);
-        font-family: inherit;
         color: var(--color-foreground);
         cursor: pointer;
       }
@@ -1153,7 +1152,7 @@ class StandardLab {
       /* Buttons */
       .standard-lab-btn {
         width: 100%;
-        padding: var(--space-xs);
+        padding: var(--space-3xs);
         background: var(--color-accent);
         color: var(--color-background);
         border: none;
@@ -1162,7 +1161,6 @@ class StandardLab {
         font-weight: 600;
         cursor: pointer;
         transition: opacity 0.2s ease;
-        font-family: inherit;
       }
 
       .standard-lab-btn:hover {
@@ -1214,12 +1212,11 @@ class StandardLab {
         background: transparent;
         border: none;
         border-bottom: 2px solid transparent;
-        font-size: var(--scale-xs);
+        font-size: var(--scale-s);
         font-weight: 500;
         color: var(--color-muted);
         cursor: pointer;
         transition: all 0.2s ease;
-        font-family: inherit;
       }
 
       .standard-lab-tab:hover {

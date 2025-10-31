@@ -22,12 +22,12 @@
     );
 
     --font-ratio: 1.4;
-    --font-size: 1.2em;
     --font-density: 1.5;
     --marge-block: 1.5;
     --font-text: Fern;
     --font-interface: Fern;
     --font-header: Fern;
+    --font-monospace: "Monaspace Xenon Var";
     --font-header-weight: 100;
     --font-header-letter-spacing: 0em;
     --font-header-line-height: 1em;
@@ -42,7 +42,6 @@
     --rhythm-multiplier-block: 1.5;
     --shadow: 0;
     --border-radius: 0;
-    --border: none;
 
     --color-accent: var(--color-red);
     --color-italic: var(--color-foreground);
@@ -51,6 +50,7 @@
         var(--color-foreground) 85%,
         var(--color-background)
     );
+
     /*--bold-weight: 300;*/
 
     --color-light-red: #b5483c; /* like aged brick or red clay */
@@ -75,19 +75,49 @@
 
     p {
         font-weight: var(--font-weight);
+        font-size: 1.1em;
     }
 
     .prose {
-        position: relative;
-        left: -3%;
+        margin-left: 15%;
+    }
+
+    .prose,
+    p:has(img) {
+        display: block;
+    }
+
+    .prose :is(p, blockquote, pre, details) {
+        max-width: var(--line-width-s);
+        margin-inline: 0;
     }
     .token {
         color: var(--color-subtle) !important;
     }
 
+    a:hover {
+        color: var(--color-foreground);
+    }
+
+    aside {
+        display: inline;
+        position: absolute;
+        left: calc(var(--space) + var(--line-width-s));
+        margin-top: calc(var(--line-height) * -2);
+        font-size: var(--scale-s);
+        color: var(--color-muted);
+        line-height: var(--font-density-s);
+        max-width: 33%;
+    }
+
     blockquote,
     pre {
         padding: calc(var(--space) * 0.5);
+        border-top: 0;
+        border-bottom: 0;
+        border-right: 0;
+        border-left-width: var(--space-3xs);
+        background: transparent;
     }
 
     hr,
@@ -109,79 +139,32 @@
     }
 
     .prose > h1:first-child {
-        text-align: center;
+        text-align: left;
         grid-column: feature;
-        margin-block-end: var(--space-3xl);
+        margin-block-start: calc(var(--space) * 6);
+        margin-block-end: calc(var(--space) * 6);
         font-size: calc(var(--font-size) * pow(var(--font-ratio), 3));
     }
 
     h1 {
-        text-align: center;
+        text-align: left;
         letter-spacing: 0.15em;
         /* /*text-transform: uppercase;* */
         font-feature-settings: "liga", "onum", "kern", "smcp";
     }
-}
-/*
 
-tufte
-
-
-
-p {
-    text-align: justify;
-}
-
-p:not(:has(img), blockquote, .callout, pre, h1, h2, h3, h4, h5, h6, table, hr, ul, ol) + p:not(:has(img)) {
-    text-indent: var(--space);
-}
-*/
-
-/* =========================== */
-/* ASYMMETRIC WIDTH UTILITIES  */
-/* =========================== */
-
-.width-third {
-    max-width: 33.333%;
-}
-.width-half {
-    max-width: 50%;
-}
-.width-two-thirds {
-    max-width: 66.666%;
-}
-.width-three-quarters {
-    max-width: 75%;
-}
-
-.align-start {
-    margin-inline-start: 0;
-    margin-inline-end: auto;
-}
-.align-end {
-    margin-inline-start: auto;
-    margin-inline-end: 0;
-}
-
-.aside-left {
-    max-width: 33.333%;
-    margin-inline-start: 0;
-    margin-inline-end: auto;
-}
-.aside-right {
-    max-width: 33.333%;
-    margin-inline-start: auto;
-    margin-inline-end: 0;
-}
-.content-left {
-    max-width: 66.666%;
-    margin-inline-start: 0;
-    margin-inline-end: auto;
-}
-.content-right {
-    max-width: 66.666%;
-    margin-inline-start: auto;
-    margin-inline-end: 0;
+    @media (max-width: 1000px) {
+        .prose {
+            margin-left: 0;
+            max-width: 100%;
+        }
+        aside {
+            position: relative;
+            left: 0;
+            top: calc(var(--space) * -1);
+            margi-bottom: calc(var(--space) * -2);
+        }
+    }
 }
 
 @font-face {

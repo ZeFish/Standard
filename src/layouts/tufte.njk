@@ -1,0 +1,136 @@
+---
+layout: base
+---
+</main>
+<style>
+/* Base */
+.tufte {
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.5;
+    max-width: 38rem;         /* control measure */
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Layout with outer margin (for wide screens) */
+@media (min-width: 960px) {
+    .tufte {
+        max-width: 52rem;     /* main + margin */
+        padding-right: 18rem; /* reserve gutter for margin notes */
+        position: relative;
+    }
+}
+
+/* Headings – understated weight, spacing */
+.tufte h1, .tufte h2, .tufte h3 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 2rem 0 1rem;
+}
+
+/* Sidenotes: checkbox/label pattern */
+.sidenote-number {
+    counter-increment: sidenote;
+    cursor: pointer;
+}
+.sidenote-number::after {
+    content: counter(sidenote);
+    vertical-align: super;
+    font-size: 0.8em;
+    margin-left: 0.2em;
+}
+
+/* Hide the checkbox */
+.sidenote-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Sidenote content */
+.sidenote {
+    display: inline;
+    color: #555;
+}
+
+/* Margin placement on wide screens */
+@media (min-width: 960px) {
+    .sidenote {
+        position: absolute;
+        width: 16rem;
+        right: 1rem;          /* sits in reserved gutter */
+        margin-top: 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    /* Toggle visibility for accessibility on small screens only */
+    .sidenote-toggle ~ .sidenote { display: none; }
+}
+@media (max-width: 959.98px) {
+    /* Inline notes on small screens with tap-to-toggle */
+    .sidenote-toggle ~ .sidenote { display: none; }
+    .sidenote-toggle:checked ~ .sidenote { display: inline; }
+}
+
+/* Margin figures */
+.marginnote-figure {
+    margin: 1.5rem 0;
+}
+@media (min-width: 960px) {
+    .marginnote-figure {
+        position: absolute;
+        right: 1rem;
+        width: 16rem;
+        margin: 0.5rem 0;
+    }
+    .marginnote-figure img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .marginnote-figure figcaption {
+        color: #555;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+    }
+}
+
+/* Figures and rules */
+figure {
+    margin: 1.5rem 0;
+}
+figcaption {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Links and emphasis */
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Subtle dividers */
+.hr {
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+    margin: 2rem 0;
+}
+
+</style>
+
+
+<article class="tufte">
+    <h1>Designing for Clarity</h1>
+
+    <p>
+        Good design is as little design as possible
+        <label for="sn-1" class="sidenote-number"></label>
+        <input type="checkbox" id="sn-1" class="sidenote-toggle">
+        <span class="sidenote">Attributed to Dieter Rams; Tufte emphasizes similar restraint.</span>
+        —a principle aligned with Tufte’s low-ink philosophy.
+    </p>
+
+    <figure class="marginnote-figure">
+        <figcaption>Sparklines: data-intense, word-sized graphics.</figcaption>
+    </figure>
+</article>
+<main>

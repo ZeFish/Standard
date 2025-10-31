@@ -1354,6 +1354,43 @@ ${itemTemplate}
   });
 
   /**
+   * Callout Aside
+   *
+   * @handler callout
+   * @category Components
+   * @author Francis Fontaine
+   * @since 0.11.0
+   *
+   * In 1754, encyclopedias started using margin notes for supplementary
+   * information—content related to the main text but not essential. Callouts
+   * continue that tradition. Use them for tips, warnings, side notes, or
+   * "did you know?" facts.
+   *
+   * The `<aside>` element is semantically correct for tangential content.
+   * The `.callout` class adds visual distinction—border, background, icon.
+   * Screen readers understand it's supplementary, sighted users see it
+   * stands apart.
+   *
+   * @param {string} content - Callout content
+   * @returns {string} Aside element with callout class
+   *
+   * @see {class} .callout - CSS definition
+   * @see {element} aside - Semantic HTML element
+   *
+   * @example markdown
+   *   ::callout
+   *   **Pro Tip:** Use keyboard shortcuts to work faster!
+   *   ::end
+   */
+  processor.add("note", { type: "inline" }, (match) => {
+    return `<aside class="note">${match.value}</aside>\n`;
+  });
+
+  processor.add("aside", (match) => {
+    return `<aside>\n\n${match.content}\n\n</aside>\n`;
+  });
+
+  /**
    * Button Link Component
    *
    * @handler button

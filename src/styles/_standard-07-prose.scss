@@ -43,8 +43,8 @@
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
     /* Content area tokens */
-    --line-width-xs: 24rem; /* ~384px - narrow sidebar content */
-    --line-width-s: 32rem; /* ~512px - short form content */
+    --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
+    --line-width-s: 38rem; /* ~512px - short form content */
     --line-width-m: 42rem; /* ~672px - optimal reading (60-75 chars) - DEFAULT */
     --line-width-l: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
