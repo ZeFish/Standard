@@ -54,6 +54,7 @@ export default function (eleventyConfig, site = {}) {
 
   if (!config.apiKey) {
     logger.warn("OPENROUTER_KEY not set. AI features will not work.");
+    return;
   }
 
   logger.debug(`Initializing with model: ${config.model}`);
