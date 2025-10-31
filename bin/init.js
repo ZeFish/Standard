@@ -479,8 +479,6 @@ build:
   const eleventyConfig = `import Standard from "@zefish/standard";
 
 export default function (eleventyConfig) {
-  eleventyConfig.setInputDirectory("content/");
-  eleventyConfig.setIncludesDirectory("../src/layouts");
 
   // Add Standard Framework plugin
   eleventyConfig.addPlugin(Standard, {
@@ -500,6 +498,11 @@ export default function (eleventyConfig) {
   return {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
+    dir: {
+      input: "content",
+      includes: "../src/layouts",
+      output: "_site",
+    },
   };
 };
 `;
