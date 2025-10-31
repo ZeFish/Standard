@@ -82,12 +82,16 @@
         margin-left: 15%;
     }
 
+    header {
+        display: block;
+    }
+
     .prose,
     p:has(img) {
         display: block;
     }
 
-    .prose :is(p, blockquote, pre, details) {
+    .prose :is(p, blockquote, pre, details, li) {
         max-width: var(--line-width-s);
         margin-inline: 0;
     }

@@ -33,7 +33,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "default");
+  eleventyConfig.addGlobalData("theme", "swiss");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 

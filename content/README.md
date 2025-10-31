@@ -14,25 +14,25 @@ Typography is the voice · Grid is the structure · Rhythm is the flow · Color 
 > [!info]- Here's a callout title
 > Here's a callout block.
 
-### Mathematical Precision
+## Mathematical Precision
 Every measurement derives from the golden ratio (φ = 1.618)
 
-### Fine-Art Typography Engine
+## Fine-Art Typography Engine
 Classical typography rules that CSS cannot handle. Automatic enhancement of text with smart quotes, proper punctuation, em-dashes, fraction formatting, and widow prevention.
 
-### Swiss Grid System
+## Swiss Grid System
 12-column responsive grid inspired by Josef Müller-Brockmann with asymmetric layouts and free column positioning.
 
-### Vertical Rhythm
+## Vertical Rhythm
 Bulletproof spacing system where all elements align to a baseline grid using `1rlh` units
 
-### Color System
+## Color System
 Automatic light/dark theming with semantic colors and high-contrast support.
 
-### Reading Layout
+## Reading Layout
 Editorial-quality layouts optimized for long-form content with multiple width variants.
 
-### 11ty Ready
+## 11ty Ready
 Complete 11ty plugin with Markdown enhancements, backlinks, encryption, and filters.
 
 > A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision.
@@ -126,33 +126,33 @@ npx @11ty/eleventy --serve
 
 Comprehensive guides and API reference:
 
-### User Guides
+## User Guides
 - **[CSS Framework](content/css/index.md)** - Typography, grid, spacing, colors
 - **[11ty Plugin](content/11ty/index.md)** - Setup, markdown, filters, backlinks
 - **[Quick Start](content/11ty/quick-start.md)** - Build your first site in 5 minutes
 - **[Getting Started](content/11ty/getting-started.md)** - Complete setup guide
 
-### 11ty Features
+## 11ty Features
 - **[Markdown Enhancements](content/11ty/markdown.md)** - Extended markdown syntax
 - **[Filters & Helpers](content/11ty/filters.md)** - Data transformation
 - **[Backlinks](content/11ty/backlinks.md)** - Wiki-style linking
 - **[Encryption](content/11ty/encryption.md)** - Password protection
 - **[Advanced Features](content/11ty/advanced.md)** - Power user techniques
 
-### CSS Features
+## CSS Features
 - **[Typography System](content/css/typography.md)** - Font scales and sizing
 - **[Grid System](content/css/grid.md)** - Responsive layouts
 - **[Color System](content/css/colors.md)** - Light/dark theming
 - **[Spacing & Rhythm](content/css/spacing.md)** - Vertical rhythm
 
-### API Reference
+## API Reference
 - **[Full API Docs](content/docs/index.md)** - Auto-generated from source code
 
 ---
 
 ## Examples
 
-### Basic HTML
+## Basic HTML
 
 ```html
 <!DOCTYPE html>
@@ -167,7 +167,7 @@ Comprehensive guides and API reference:
 </html>
 ```
 
-### Responsive Grid
+## Responsive Grid
 
 ```html
 <div class="grid">
@@ -179,7 +179,7 @@ Comprehensive guides and API reference:
 </div>
 ```
 
-### 11ty with Backlinks
+## 11ty with Backlinks
 
 ```markdown
 ---
@@ -194,7 +194,7 @@ Learn about [[TypeScript]] and [[Web Development]].
 Backlinks automatically appear on those pages!
 ```
 
-### Protected Content
+## Protected Content
 
 ```markdown
 ---

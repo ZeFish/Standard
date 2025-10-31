@@ -13,8 +13,10 @@
     --color-background-secondary: var(--color-background);
 
     --font-ratio: 1.8;
+    --font-mobile-ratio: 2;
     --body-padding-multiplier: 3;
     --font-monospace: "Helvetica Monospaced Pro", monospace;
+    --font-text: Diatype;
 
     --rhythm-multiplier: 1;
     --rhythm-multiplier-block: 0;
@@ -33,11 +35,37 @@
         color: var(--color-foreground) !important;
     }
 
+    .prose {
+        margin-left: 0%;
+    }
+
+    .prose,
+    p:has(img) {
+        display: block;
+    }
+
+    .prose :is(p, blockquote, pre, details, li) {
+        max-width: var(--line-width-s);
+        margin-inline: 0;
+    }
+
     body {
         background-color: var(--color-background);
         color: var(--color-foreground);
         max-width: 1400px;
-        padding-left: 33%;
+    }
+
+    h1 {
+        margin-block-start: calc(var(--space) * 8);
+        margin-block-end: calc(var(--space) * 4);
+    }
+    h2,
+    h3 {
+        margin-bottom: var(--space-s);
+    }
+
+    header {
+        display: block;
     }
 
     pre {

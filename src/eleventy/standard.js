@@ -161,6 +161,17 @@ export default function (eleventyConfig, options = {}) {
     lstripBlocks: true,
   });
 
+  // ===== DEV SERVER OPTIONS =====
+  eleventyConfig.setServerOptions({
+    watch: [
+      `${site.standard.dirs.output}/assets/**/*.css`,
+      `${site.standard.dirs.output}/assets/**/*.js`,
+    ],
+    notify: false,
+    showVersion: true,
+    injectChanges: true,
+  });
+
   // 10) Banner
   eleventyConfig.on("eleventy.after", () => {
     logger.banner(pkg.version, "https://standard.ffp.co/cheat-sheet");
