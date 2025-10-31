@@ -33,7 +33,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "minimal");
+  eleventyConfig.addGlobalData("theme", "default");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 
