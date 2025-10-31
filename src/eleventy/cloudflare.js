@@ -5,18 +5,22 @@ import { createLogger } from "./logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default function CloudflarePages(eleventyConfig, site = {}) {
-  // Read Cloudflare config from the site object
-  const cf = site.standard?.cloudflare ?? {
-    functions: { enabled: false },
-    images: { enabled: false },
-    verbose: false,
-  };
+export default function Cloudflare(eleventyConfig, site = {}) {
+  // Read Cloudflare config safely
+  const cf = site.standard?.cloudflare ?? {};
 
-  // Normalize with defaults
+  // Accept both keys: comment and comments; prefer plural if both exist
+  const commentsBlock = cf.comments ?? cf.comment ?? {};
+  const commentsEnabled = !!commentsBlock.enabled;
+
+  // Respect explicit functions.enabled; otherwise inherit from commentsEnabled
+  const explicitFunctions = cf.functions?.enabled;
+  const functionsEnabled =
+    explicitFunctions !== undefined ? explicitFunctions : commentsEnabled;
+
   const config = {
     functions: {
-      enabled: cf.functions?.enabled ?? false,
+      enabled: functionsEnabled,
       outputDir: cf.functions?.outputDir ?? "functions",
       environment: cf.functions?.environment ?? "production",
       env: cf.functions?.env ?? {},
@@ -39,67 +43,91 @@ export default function CloudflarePages(eleventyConfig, site = {}) {
   };
 
   const logger = createLogger({
-    verbose: config.verbose,
+    verbose: site.standard.verbose,
     scope: "Cloudflare",
   });
 
-  // Internal guard: if nothing is enabled, skip plugin work
+  if (commentsEnabled && config.functions.enabled === false) {
+    logger.warn(
+      "Comments are enabled but functions are explicitly disabled; comment API won’t work.",
+    );
+  }
+  // Internal guard
   if (!config.functions.enabled && !config.images.enabled) {
-    logger.info("Disabled (no functions or images enabled)");
+    logger.warn("Cloudflare plugin disabled (no features enabled)");
     return;
   }
 
-  // If functions are enabled, you also wanted to auto-enable comments
+  // If functions ended up enabled, auto-enable comments in site.standard for downstream usage
   if (config.functions.enabled && site.standard) {
     site.standard.comments = site.standard.comments || {};
     site.standard.comments.enabled = true;
   }
-
   // =====================================================================
   // FUNCTIONS DEPLOYMENT
   // =====================================================================
 
   if (config.functions.enabled) {
-    const cloudflareDir = path.join(__dirname, "../cloudflare");
+    // Adjusted source to src/cloudflare/api
+    const cloudflareDir = path.join(__dirname, "..", "cloudflare", "api");
     const projectRoot = process.cwd();
     const functionsOutputPath = path.join(
       projectRoot,
       config.functions.outputDir,
     );
 
+    logger.debug(`Project root :: ${projectRoot}`);
+    logger.debug(`Source :: ${cloudflareDir}`);
+    logger.debug(`Output :: ${functionsOutputPath}`);
+
     eleventyConfig.on("eleventy.before", async () => {
       if (!fs.existsSync(cloudflareDir)) {
-        logger.warn("Functions directory not found");
+        logger.warn(`Functions directory not found: ${cloudflareDir}`);
         return;
       }
 
-      // Ensure output directory exists
-      if (!fs.existsSync(functionsOutputPath)) {
+      try {
         fs.mkdirSync(functionsOutputPath, { recursive: true });
+      } catch (e) {
+        logger.error(
+          `Failed to create functions output dir: ${functionsOutputPath}: ${e.message}`,
+        );
+        return;
       }
 
-      // Recursively copy function files
       const copyRecursive = (src, dest) => {
         if (!fs.existsSync(dest)) {
           fs.mkdirSync(dest, { recursive: true });
         }
 
-        const files = fs.readdirSync(src);
-        files.forEach((file) => {
-          const srcPath = path.join(src, file);
-          const destPath = path.join(dest, file);
+        const entries = fs.readdirSync(src);
+        if (entries.length === 0) {
+          logger.warn(`No function files in ${src}`);
+        }
+
+        entries.forEach((name) => {
+          const srcPath = path.join(src, name);
+          const destPath = path.join(dest, name);
           const stat = fs.statSync(srcPath);
 
           if (stat.isDirectory()) {
             copyRecursive(srcPath, destPath);
           } else {
-            fs.copyFileSync(srcPath, destPath);
+            try {
+              const fileName = path.basename(srcPath);
+              fs.copyFileSync(srcPath, destPath);
+              logger.debug(`Copied: ${fileName}`);
+            } catch (e) {
+              logger.error(
+                `Copy failed ${srcPath} -> ${destPath}: ${e.message}`,
+              );
+            }
           }
         });
       };
 
       copyRecursive(cloudflareDir, functionsOutputPath);
-      logger.info(`Functions copied to ${config.functions.outputDir}/`);
+      logger.debug(`Functions copied to /${config.functions.outputDir}/`);
     });
 
     // Expose Cloudflare data to templates
@@ -207,7 +235,7 @@ export default function CloudflarePages(eleventyConfig, site = {}) {
         return processed;
       });
 
-      logger.info("Image optimization enabled");
+      logger.success("Image optimization");
     }
   }
 
@@ -217,8 +245,5 @@ export default function CloudflarePages(eleventyConfig, site = {}) {
   if (config.images.enabled && !config.images.skipInDev)
     enabledFeatures.push("Images");
 
-  if (enabledFeatures.length > 0) {
-    logger.success(`Pages: ${enabledFeatures.join(" + ")}`);
-  }
   logger.success();
 }

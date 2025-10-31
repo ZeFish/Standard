@@ -85,7 +85,6 @@ const defaults = {
   },
   cloudflare: {
     functions: {
-      enabled: false,
       outputDir: "functions",
       environment: "production",
       env: {},
@@ -104,13 +103,13 @@ const defaults = {
       fit: "scale-down",
       skipInDev: true,
     },
-  },
-  comments: {
-    enabled: false,
-    apiEndpoint: "/api/comments",
-    commentsPath: "data/comments",
-    version: pkg.version,
-    clientLibrary: "",
+    comments: {
+      enabled: false,
+      apiEndpoint: "/api/comments",
+      commentsPath: "data/comments",
+      version: pkg.version,
+      clientLibrary: "",
+    },
   },
   menu: { enabled: true },
 };
@@ -120,8 +119,8 @@ export default function (eleventyConfig, options = {}) {
   const standard = deepMerge(defaults, options);
 
   // Derived fields
-  if (!standard.comments.clientLibrary) {
-    standard.comments.clientLibrary = `/${standard.outputDir}/standard.comment.js`;
+  if (!standard.cloudflare.comments.clientLibrary) {
+    standard.cloudflare.comments.clientLibrary = `/${standard.outputDir}/standard.comment.js`;
   }
   standard.version = pkg.version;
 

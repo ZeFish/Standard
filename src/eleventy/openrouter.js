@@ -47,7 +47,6 @@ export default function (eleventyConfig, site = {}) {
 
   // Respect enabled early and still expose stdAI as disabled for downstream consumers
   if (!config.enabled) {
-    logger.info("AI plugin disabled");
     eleventyConfig.stdAI = { enabled: false, call: async () => "" };
     return;
   }

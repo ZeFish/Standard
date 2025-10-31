@@ -22,8 +22,6 @@ nav:
 standard:
   security:
     enabled: true
-
-    # Customize CSP if needed
     csp:
       scriptSrc:
         - "'self'"
@@ -41,12 +39,14 @@ standard:
     permissions:
       geolocation: ["self"] # Allow geolocation from same origin
   cloudflare:
+    comments:
+      enabled: true
     images:
       enabled: true
   ai:
     enabled: true
     model: "meta-llama/llama-4-maverick:free"
-  verbose: false
+  verbose: true
   feed:
     enabled: true
     type: atom
