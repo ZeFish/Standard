@@ -154,15 +154,18 @@ function isActive(itemUrl, currentUrl, exact = false) {
   return exact ? a === b : b.startsWith(a);
 }
 
-export default function MenuPlugin(eleventyConfig, options = {}) {
-  const defaults = {
+export default function MenuPlugin(eleventyConfig, site = {}) {
+  const menuConfig = site.standard?.menu || {};
+
+  // Normalize config (like your feed plugin)
+  const config = {
     enabled: true,
     label: "Navigation",
     className: "menu",
     inline: true,
   };
 
-  const config = { ...defaults, ...options };
+  if (config.enabled === false) return;
 
   /**
    * Menu Shortcode

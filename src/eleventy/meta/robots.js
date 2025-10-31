@@ -61,7 +61,7 @@
  * @param {String} site.standard.robots.sitemapUrl - Sitemap location (auto-detected)
  */
 
-import { createLogger } from "./logger.js";
+import { createLogger } from "../logger.js";
 
 export default function (eleventyConfig, site = {}) {
   // Extract robots config
@@ -71,7 +71,7 @@ export default function (eleventyConfig, site = {}) {
 
   const logger = createLogger({
     scope: "Robots",
-    verbose: site.standard?.verbose || false
+    verbose: site.standard?.verbose || false,
   });
 
   // Extract configuration with fallbacks
@@ -82,7 +82,7 @@ export default function (eleventyConfig, site = {}) {
     allow = [],
     crawlDelay = null,
     sitemapUrl = site.url ? `${site.url}/sitemap.xml` : null,
-    customRules = []
+    customRules = [],
   } = robotsConfig;
 
   // Build robots.txt content
@@ -94,7 +94,7 @@ User-agent: ${userAgent}
 
   // Add disallow rules
   if (disallow.length > 0) {
-    disallow.forEach(path => {
+    disallow.forEach((path) => {
       content += `Disallow: ${path}\n`;
     });
   } else {
@@ -104,7 +104,7 @@ User-agent: ${userAgent}
 
   // Add allow rules (overrides disallow)
   if (allow.length > 0) {
-    allow.forEach(path => {
+    allow.forEach((path) => {
       content += `Allow: ${path}\n`;
     });
   }
@@ -117,7 +117,7 @@ User-agent: ${userAgent}
   // Add custom rules
   if (customRules.length > 0) {
     content += `\n# Custom rules\n`;
-    customRules.forEach(rule => {
+    customRules.forEach((rule) => {
       content += `${rule}\n`;
     });
   }
@@ -132,7 +132,7 @@ User-agent: ${userAgent}
   logger.debug(`User-agent: ${userAgent}`);
   logger.debug(`Disallowed: ${disallow.length} paths`);
   logger.debug(`Allowed: ${allow.length} paths`);
-  if (sitemapUrl) logger.info(`  Sitemap: ${sitemapUrl}`);
+  if (sitemapUrl) logger.debug(`  Sitemap: ${sitemapUrl}`);
 
   // Generate robots.txt file
   eleventyConfig.addTemplate(
@@ -142,8 +142,8 @@ layout: false
 permalink: ${filename}
 eleventyExcludeFromCollections: true
 ---
-${content}`
+${content}`,
   );
 
-  logger.success(`Initialized → /${filename}`);
+  logger.success(`Initialized`);
 }

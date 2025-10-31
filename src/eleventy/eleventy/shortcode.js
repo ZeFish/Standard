@@ -28,10 +28,10 @@
  * @since 0.1.0
  */
 
-export default function (eleventyConfig, options = {}) {
-  // Extract options with defaults
-  const { outputDir = "assets/standard", comments = { enabled: false } } =
-    options;
+export default function (eleventyConfig, site = {}) {
+  const standard = site.standard || {};
+  const outputDir = standard.outputDir || "assets/standard";
+  const comments = standard.comments || { enabled: false };
 
   // ===== SHORTCODES =====
   // Shortcode to include Standard CSS and JS from local files

@@ -35,8 +35,12 @@
  * @link https://en.wikipedia.org/wiki/Literate_programming Knuth's Literate Programming
  */
 
-export default function (eleventyConfig, options = {}) {
-  const { escapeCodeBlocks: globalEscapeCodeBlocks = [] } = options;
+export default function (eleventyConfig, site = {}) {
+  const globalEscapeCodeBlocks = Array.isArray(site.standard?.escapeCodeBlocks)
+    ? site.standard.escapeCodeBlocks
+    : site.standard?.escapeCodeBlocks === true
+      ? ["html", "xml"]
+      : []; // optional default if boolean true
 
   /**
    * Comment Removal - Author's Internal Monologue Stripping

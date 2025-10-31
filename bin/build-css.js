@@ -89,6 +89,10 @@ import { fileURLToPath } from "url";
 import { compile } from "sass";
 import CleanCSS from "clean-css";
 import yaml from "js-yaml";
+import { createLogger } from "../src/eleventy/logger.js";
+const logger = createLogger({
+  scope: "CSS",
+});
 
 // ============================================================================
 // ENVIRONMENT SETUP
@@ -185,60 +189,6 @@ const isWatch = process.argv.includes("--watch");
 const isDev = process.argv.includes("--dev") || isWatch;
 
 // ============================================================================
-// CONSOLE OUTPUT STYLING
-// ============================================================================
-
-/**
- * ANSI Color Codes
- *
- * @group Utilities
- * @since 0.14.0
- *
- * In 1970, the ANSI X3.64 standard defined escape sequences for controlling
- * terminal displays. These special character sequences (starting with \x1b)
- * tell terminals to change text color, move the cursor, clear lines, and more.
- * Despite being 50+ years old, they still power modern terminal UIs—including
- * npm's colored output, git's diff highlighting, and this build script's logs.
- *
- * We use them here to make build output scannable. Grey for metadata, cyan for
- * labels, green for success, red for errors. Your eyes can instantly spot what
- * matters without reading every word. It's the difference between a wall of
- * monochrome text and a well-designed interface.
- *
- * @see {constant} prefix - Uses these colors for log formatting
- *
- * @link https://en.wikipedia.org/wiki/ANSI_escape_code ANSI Escape Codes
- */
-const colors = {
-  reset: "\x1b[0m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-  grey: "\x1b[90m",
-  white: "\x1b[97m",
-};
-
-/**
- * Log Message Prefix
- *
- * @group Utilities
- * @since 0.14.0
- *
- * Every log message starts with this prefix: "::std [CSS]" in colored text.
- * The :: prefix mimics GitHub Actions' logging format, making output feel
- * professional and CI/CD-ready. The [CSS] label immediately identifies which
- * part of the build system is talking—crucial when running multiple build
- * scripts in parallel (CSS, JS, HTML). Grey makes metadata fade into the
- * background; cyan makes the label pop.
- *
- * @see {object} colors - Color definitions used here
- */
-const prefix = `${colors.reset} ::std ${colors.reset}${colors.cyan}[CSS] ${colors.blue}ℹ `;
-
-// ============================================================================
 // CONFIGURATION LOADING
 // ============================================================================
 
@@ -307,7 +257,7 @@ const configPath = path.join(projectRoot, "site.config.yml");
  *         output: "bundle.min.css"
  */
 if (!fs.existsSync(configPath)) {
-  console.log(`${prefix}No site.config.yml found. Skipping CSS build.`);
+  logger.info(`No site.config.yml found. Skipping CSS build.`);
   process.exit(0);
 }
 
@@ -320,9 +270,7 @@ try {
 
   // Exit early if no CSS config section exists
   if (!config || Object.keys(config).length === 0) {
-    console.log(
-      `${prefix}No build.css configuration found. Skipping CSS build.`,
-    );
+    logger.info(`No build.css configuration found. Skipping CSS build.`);
     process.exit(0);
   }
 
@@ -339,17 +287,13 @@ try {
     }
   }
 } catch (error) {
-  console.error(
-    `${prefix}❌ Failed to parse site.config.yml: ${error.message}`,
-  );
+  logger.error(`Failed to parse site.config.yml: ${error.message}`);
   process.exit(0);
 }
 
 // Validate required config
 if (!config.files || !Array.isArray(config.files)) {
-  console.error(
-    `${prefix}❌ Missing required 'files' array in build.css config`,
-  );
+  logger.error(`Missing required 'files' array in build.css config`);
   process.exit(1);
 }
 
@@ -376,6 +320,39 @@ if (!config.files || !Array.isArray(config.files)) {
  *       output: "print.css"
  */
 const SCSS_FILES = config.files;
+
+/**
+ * ANSI Color Codes
+ *
+ * @group Utilities
+ * @since 0.14.0
+ *
+ * In 1970, the ANSI X3.64 standard defined escape sequences for controlling
+ * terminal displays. These special character sequences (starting with \x1b)
+ * tell terminals to change text color, move the cursor, clear lines, and more.
+ * Despite being 50+ years old, they still power modern terminal UIs—including
+ * npm's colored output, git's diff highlighting, and this build script's logs.
+ *
+ * We use them here to make build output scannable. Grey for metadata, cyan for
+ * labels, green for success, red for errors. Your eyes can instantly spot what
+ * matters without reading every word. It's the difference between a wall of
+ * monochrome text and a well-designed interface.
+ *
+ * @see {constant} prefix - Uses these colors for log formatting
+ *
+ * @link https://en.wikipedia.org/wiki/ANSI_escape_code ANSI Escape Codes
+ */
+const colors = {
+  reset: "\x1b[0m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  cyan: "\x1b[36m",
+  grey: "\x1b[90m",
+  white: "\x1b[97m",
+};
 
 /**
  * Bundle Configuration
@@ -410,7 +387,7 @@ const shouldBundle =
   BUNDLE_CONFIG && BUNDLE_CONFIG.files && BUNDLE_CONFIG.output;
 
 if (shouldBundle) {
-  console.log(`${prefix}Bundling enabled: ${BUNDLE_CONFIG.output}`);
+  logger.debug(`Bundling enabled: ${BUNDLE_CONFIG.output}`);
 }
 
 // ============================================================================
@@ -492,7 +469,7 @@ async function buildCSS() {
 
       // Check if source file exists
       if (!fs.existsSync(inputPath)) {
-        console.error(`${prefix}⚠️  Source file not found: ${file.input}`);
+        logger.error(`Source file not found: ${file.input}`);
         continue;
       }
 
@@ -505,8 +482,8 @@ async function buildCSS() {
         fs.writeFileSync(path.join(destDir, file.output), result.css);
       }
 
-      console.log(
-        `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+      logger.info(
+        `${file.output} ${colors.grey}(${(Buffer.byteLength(result.css) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
       );
     }
 
@@ -522,7 +499,7 @@ async function buildCSS() {
         if (fs.existsSync(filePath)) {
           cssContents.push(fs.readFileSync(filePath, "utf8"));
         } else {
-          console.error(`${prefix}⚠️  Bundle file not found: ${filename}`);
+          logger.error(`Bundle file not found: ${filename}`);
         }
       }
 
@@ -552,15 +529,15 @@ async function buildCSS() {
         }
 
         const minifiedSize = Buffer.byteLength(minified.styles) / 1024;
-        console.log(
-          `${prefix}${colors.grey}${BUNDLE_CONFIG.output} ${colors.reset}(${minifiedSize.toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+        logger.info(
+          `${BUNDLE_CONFIG.output} ${colors.grey}(${minifiedSize.toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
     }
 
-    if (!isWatch) console.log(`${prefix}Completed`);
+    if (!isWatch) logger.info(`Completed`);
   } catch (error) {
-    console.error(`${prefix}❌ CSS build failed:`, error.message);
+    logger.error(`CSS build failed:`, error.message);
     process.exit(1);
   }
 }
@@ -629,11 +606,11 @@ await buildCSS();
  *   ::std  [CSS] main.css (24.58 KB)
  */
 if (isWatch) {
-  console.log(`${prefix}Watching...`);
+  logger.info(`Watching...`);
 
   fs.watch(srcDir, { recursive: true }, async (eventType, filename) => {
     if (filename && filename.endsWith(".scss")) {
-      console.log(`${prefix}Changed: ${filename}`);
+      logger.info(`Changed: ${filename}`);
       await buildCSS();
     }
   });

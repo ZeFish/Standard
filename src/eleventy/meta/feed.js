@@ -83,7 +83,7 @@
  * @param {String} options.author.email - Author email
  */
 
-import { createLogger } from "./logger.js";
+import { createLogger } from "../logger.js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -106,13 +106,13 @@ export default function (eleventyConfig, site = {}) {
     baseUrl = site.url,
     author = {
       name: site.author?.name || "Site Author",
-      email: site.author?.email || null
+      email: site.author?.email || null,
     },
-    stylesheet = "assets/pretty-atom-feed.xsl"
+    stylesheet = "assets/pretty-atom-feed.xsl",
   } = feedConfig;
 
   const logger = createLogger({
-    scope: "Feed"
+    scope: "Feed",
   });
 
   // Register official RSS plugin (provides filters)
@@ -135,7 +135,9 @@ export default function (eleventyConfig, site = {}) {
 
       case "custom":
         // By custom collection name
-        items = collectionApi.getFilteredByGlob(`content/${collection}/**/*.md`);
+        items = collectionApi.getFilteredByGlob(
+          `content/${collection}/**/*.md`,
+        );
         break;
 
       case "glob":
@@ -155,12 +157,11 @@ export default function (eleventyConfig, site = {}) {
 
     // Filter and sort
     return items
-      .filter(item => !item.data.draft)
-      .filter(item => !item.data.excludeFromFeed)
-      .filter(item => item.url)  // Must have a URL
+      .filter((item) => !item.data.draft)
+      .filter((item) => !item.data.excludeFromFeed)
+      .filter((item) => item.url) // Must have a URL
       .sort((a, b) => b.date - a.date)
       .slice(0, limit || items.length);
-
   });
 
   // Generate Atom feed template
@@ -173,17 +174,17 @@ eleventyExcludeFromCollections: true
 layout: false
 ---
 <?xml version="1.0" encoding="utf-8"?>
-${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ''}
+${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ""}
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${language}">
   <title>${title}</title>
-  ${subtitle ? `<subtitle>${subtitle}</subtitle>` : ''}
+  ${subtitle ? `<subtitle>${subtitle}</subtitle>` : ""}
   <link href="${baseUrl}/${filename}" rel="self"/>
   <link href="${baseUrl}/"/>
   <updated>{{ collections.feed | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <id>${baseUrl}</id>
   <author>
     <name>${author.name}</name>
-    ${author.email ? `<email>${author.email}</email>` : ''}
+    ${author.email ? `<email>${author.email}</email>` : ""}
   </author>
   {%- for post in collections.feed %}
   {%- set absolutePostUrl = post.url | absoluteUrl(baseUrl) %}
@@ -195,7 +196,7 @@ ${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ''}
     <content xml:lang="${language}" type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) | excerpt }}</content>
   </entry>
   {%- endfor %}
-</feed>`
+</feed>`,
     );
   }
 
@@ -209,13 +210,13 @@ eleventyExcludeFromCollections: true
 layout: false
 ---
 <?xml version="1.0" encoding="utf-8"?>
-${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ''}
+${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ""}
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="${baseUrl}" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${title}</title>
     <link>${baseUrl}</link>
     <atom:link href="${baseUrl}${filename}" rel="self" type="application/rss+xml" />
-    ${subtitle ? `<description>${subtitle}</description>` : ''}
+    ${subtitle ? `<description>${subtitle}</description>` : ""}
     <language>${language}</language>
     {%- for post in collections.feed %}
     {%- set absolutePostUrl = post.url | absoluteUrl(baseUrl) %}
@@ -229,7 +230,7 @@ ${stylesheet ? `<?xml-stylesheet href="/${stylesheet}" type="text/xsl"?>` : ''}
     </item>
     {%- endfor %}
   </channel>
-</rss>`
+</rss>`,
     );
   }
   logger.success("initialized");

@@ -1,7 +1,7 @@
 <meta charset="utf-8">
       <!-- Standard Framework v{{ site.standard.version }} | https://standard.ffp.co -->
       {% set page_excerpt = (page.rawInput or '') | string %}
-      {%- set meta_description = pageExcerpt or (site.description | string) or "" -%}
+      {%- set meta_description = page_excerpt or (site.description | string) or "" -%}
       <meta name="description" content="{{ meta_description | excerpt({ maxChars: 150 }) }}">
       <meta name="author" content="{{ site.author.name }}">
       <meta name="language" content="{{ site.language }}">

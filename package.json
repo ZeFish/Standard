@@ -58,7 +58,7 @@
     "check": "npm run build && node bin/analyzer.js",
     "build": "npm run build:css && npm run build:js && eleventy",
     "watch:assets": "node bin/build-css.js --watch",
-    "dev": "rm -r _site/ && npm run clean:ports && concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start --quiet --port=8083\"",
+    "dev": "rm -rf _site/ && npm run clean:ports && concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start --quiet --port=8083\"",
     "start": "npm run clean:ports && eleventy --serve --port=8083  --quiet",
     "release": "export $(cat .env | xargs) && release-it --ci",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",

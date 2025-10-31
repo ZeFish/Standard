@@ -92,6 +92,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { minify } from "terser";
 import yaml from "js-yaml";
+import { createLogger } from "../src/eleventy/logger.js";
+const logger = createLogger({
+  scope: "JS ",
+});
 
 // ============================================================================
 // ENVIRONMENT SETUP
@@ -186,70 +190,6 @@ const isWatch = process.argv.includes("--watch");
 const isDev = process.argv.includes("--dev") || isWatch;
 
 // ============================================================================
-// CONSOLE OUTPUT STYLING
-// ============================================================================
-
-/**
- * ANSI Color Codes - Terminal Typography
- *
- * @group Utilities
- * @since 0.14.0
- *
- * Before graphical user interfaces, computers communicated through text terminals.
- * In 1970, ANSI (American National Standards Institute) standardized escape codes
- * for controlling these terminals—moving the cursor, changing colors, clearing
- * screens. These codes start with ESC (escape character, \\x1b in hex) followed by
- * control sequences. Despite being 55+ years old, they power every modern terminal
- * emulator—from Windows Terminal to iTerm to VS Code's integrated terminal.
- *
- * We use ANSI colors to make build output scannable at a glance. Grey for metadata
- * (fades into the background), cyan for labels ([JS]), green for success, red for
- * errors. This visual hierarchy lets you spot problems instantly without reading
- * every character. It's the same principle designers use in typography—hierarchy
- * through contrast.
- *
- * The ${colors.reset} token returns text to the default style, preventing color
- * bleed. Without it, everything after a colored string would stay colored—creating
- * a rainbow mess instead of strategic highlights.
- *
- * @see {constant} prefix - Uses these colors for log formatting
- *
- * @link https://en.wikipedia.org/wiki/ANSI_escape_code ANSI Escape Codes
- * @link https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 ANSI Color Reference
- */
-const colors = {
-  reset: "\x1b[0m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-  grey: "\x1b[90m",
-  white: "\x1b[97m",
-};
-
-/**
- * Log Message Prefix
- *
- * @group Utilities
- * @since 0.14.0
- *
- * Every log message starts with "::std [JS ]" in styled text. The :: prefix mimics
- * GitHub Actions' convention, making output feel professional and CI/CD-ready. The
- * [JS ] label (note the extra space for alignment with [CSS]) immediately identifies
- * this build step—crucial when running CSS and JS builds in parallel. Grey makes
- * the prefix recede, cyan makes the label visible.
- *
- * This consistent prefix pattern creates visual cohesion across all build scripts.
- * Your eyes learn to recognize the format, making it easy to scan logs even during
- * complex multi-step builds.
- *
- * @see {object} colors - Color definitions used here
- */
-const prefix = `${colors.reset} ::std ${colors.reset}${colors.cyan}[_JS] ${colors.blue}ℹ `;
-
-// ============================================================================
 // CONFIGURATION LOADING
 // ============================================================================
 
@@ -330,7 +270,7 @@ const configPath = path.join(projectRoot, "site.config.yml");
  *             - "src/js/app.js"
  */
 if (!fs.existsSync(configPath)) {
-  console.log(`${prefix}No site.config.yml found. Skipping JS build.`);
+  logger.info(`No site.config.yml found. Skipping JS build.`);
   process.exit(0);
 }
 
@@ -343,7 +283,7 @@ try {
 
   // Exit early if no JS config section exists
   if (!config || Object.keys(config).length === 0) {
-    console.log(`${prefix}No build.js configuration found. Skipping JS build.`);
+    logger.info(`No build.js configuration found. Skipping JS build.`);
     process.exit(0);
   }
 
@@ -360,17 +300,13 @@ try {
     }
   }
 } catch (error) {
-  console.error(
-    `${prefix}❌ Failed to parse site.config.yml: ${error.message}`,
-  );
+  logger.error(`Failed to parse site.config.yml: ${error.message}`);
   process.exit(0);
 }
 
 // Validate required config
 if (!config.files || !Array.isArray(config.files)) {
-  console.error(
-    `${prefix}❌ Missing required 'files' array in build.js config`,
-  );
+  logger.error(`Missing required 'files' array in build.js config`);
   process.exit(1);
 }
 
@@ -453,8 +389,41 @@ const BUNDLES = config.bundles || [];
 const shouldBundle = BUNDLES.length > 0;
 
 if (shouldBundle) {
-  console.log(`${prefix}Bundling enabled: ${BUNDLES.length} bundle(s)`);
+  logger.debug(`Bundling enabled: ${BUNDLES.length} bundle(s)`);
 }
+
+/**
+ * ANSI Color Codes
+ *
+ * @group Utilities
+ * @since 0.14.0
+ *
+ * In 1970, the ANSI X3.64 standard defined escape sequences for controlling
+ * terminal displays. These special character sequences (starting with \x1b)
+ * tell terminals to change text color, move the cursor, clear lines, and more.
+ * Despite being 50+ years old, they still power modern terminal UIs—including
+ * npm's colored output, git's diff highlighting, and this build script's logs.
+ *
+ * We use them here to make build output scannable. Grey for metadata, cyan for
+ * labels, green for success, red for errors. Your eyes can instantly spot what
+ * matters without reading every word. It's the difference between a wall of
+ * monochrome text and a well-designed interface.
+ *
+ * @see {constant} prefix - Uses these colors for log formatting
+ *
+ * @link https://en.wikipedia.org/wiki/ANSI_escape_code ANSI Escape Codes
+ */
+const colors = {
+  reset: "\x1b[0m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  cyan: "\x1b[36m",
+  grey: "\x1b[90m",
+  white: "\x1b[97m",
+};
 
 // ============================================================================
 // BUILD FUNCTION
@@ -537,10 +506,10 @@ if (shouldBundle) {
  *            calculateFibonacci(number - 2);
  *   }
  *   const result = calculateFibonacci(10);
- *   console.log('Fibonacci result:', result);
+ *   logger.info('Fibonacci result:', result);
  *
  * @example javascript - After minification
- *   function c(n){return n<=1?n:c(n-1)+c(n-2)}const r=c(10);console.log("Fibonacci result:",r);
+ *   function c(n){return n<=1?n:c(n-1)+c(n-2)}const r=c(10);logger.info("Fibonacci result:",r);
  *
  * @returns {Promise<void>} Resolves when build completes
  */
@@ -561,7 +530,7 @@ async function buildJS() {
 
       // Check if source file exists
       if (!fs.existsSync(inputPath)) {
-        console.error(`${prefix}Source file not found: ${file.input}`);
+        logger.error(`Source file not found: ${file.input}`);
         continue;
       }
 
@@ -602,10 +571,7 @@ async function buildJS() {
         });
 
         if (result.error) {
-          console.error(
-            `${prefix}Minification failed for ${file.input}:`,
-            result.error,
-          );
+          logger.error(`Minification failed for ${file.input}:`, result.error);
           continue;
         }
 
@@ -614,8 +580,8 @@ async function buildJS() {
           fs.writeFileSync(path.join(destDir, file.output), result.code);
         }
 
-        console.log(
-          `${prefix}${colors.grey}${file.output} ${colors.reset}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+        logger.info(
+          `${file.output} ${colors.grey}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       } else {
         /**
@@ -640,8 +606,8 @@ async function buildJS() {
           fs.writeFileSync(path.join(destDir, file.output), source);
         }
 
-        console.log(
-          `${prefix}${colors.grey}${file.output} ${colors.reset}(copied)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+        logger.info(
+          `${file.output} ${colors.grey}(copied)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
     }
@@ -685,7 +651,7 @@ async function buildJS() {
               : path.join(projectRoot, filepath);
 
           if (!fs.existsSync(fullPath)) {
-            console.error(`${prefix}⚠️  Bundle file not found: ${filepath}`);
+            logger.warn(`Bundle file not found: ${filepath}`);
             continue;
           }
 
@@ -693,9 +659,7 @@ async function buildJS() {
         }
 
         if (contents.length === 0) {
-          console.error(
-            `${prefix}⚠️  No files found for bundle: ${bundle.name}`,
-          );
+          logger.warn(`No files found for bundle: ${bundle.name}`);
           continue;
         }
 
@@ -727,8 +691,8 @@ async function buildJS() {
         });
 
         if (minified.error) {
-          console.error(
-            `${prefix}❌ Bundle minification failed for ${bundle.name}:`,
+          logger.error(
+            `Bundle minification failed for ${bundle.name}:`,
             minified.error,
           );
           continue;
@@ -739,15 +703,15 @@ async function buildJS() {
           fs.writeFileSync(path.join(destDir, bundle.name), minified.code);
         }
 
-        console.log(
-          `${prefix}${colors.grey}${bundle.name} ${colors.reset}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+        logger.info(
+          `${bundle.name} ${colors.grey}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
         );
       }
     }
 
-    if (!isWatch) console.log(`${prefix}Completed`);
+    if (!isWatch) logger.info(`Completed`);
   } catch (error) {
-    console.error(`${prefix}❌ JavaScript build failed:`, error.message);
+    logger.error(`❌ JavaScript build failed:`, error.message);
     process.exit(1);
   }
 }
@@ -821,11 +785,11 @@ await buildJS();
  *   ::std  [JS ] app.min.js (45.31 KB)
  */
 if (isWatch) {
-  console.log(`${prefix}Watching...`);
+  logger.info(`Watching...`);
 
   fs.watch(srcDir, { recursive: true }, async (eventType, filename) => {
     if (filename && filename.endsWith(".js")) {
-      console.log(`${prefix}Changed: ${filename}`);
+      logger.info(`Changed: ${filename}`);
       await buildJS();
     }
   });

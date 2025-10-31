@@ -46,7 +46,7 @@ standard:
   ai:
     enabled: true
     model: "meta-llama/llama-4-maverick:free"
-  verbose: true
+  verbose: false
   feed:
     enabled: true
     type: atom

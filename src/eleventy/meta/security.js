@@ -1,6 +1,6 @@
 // src/eleventy/security.js
 
-import { createLogger } from "./logger.js";
+import { createLogger } from "../logger.js";
 
 export default function (eleventyConfig, site = {}) {
   const securityConfig = site.standard?.security || {};

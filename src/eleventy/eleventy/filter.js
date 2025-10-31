@@ -28,6 +28,7 @@
 export default function (eleventyConfig, options = {}) {
   // Extract first image from content
   eleventyConfig.addFilter("extractFirstImage", (content) => {
+    if (typeof content !== "string") return null;
     const match = content.match(/<img[^>]*src=["']([^"']+)["']/);
     return match ? match[1] : null;
   });
@@ -113,6 +114,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addFilter("excerpt", (content, options = {}) => {
     // Return empty string if no content provided
     if (!content) return "";
+    let text = String(content);
 
     // ===== DEFINE DEFAULTS =====
     const defaults = {
@@ -127,9 +129,6 @@ export default function (eleventyConfig, options = {}) {
 
     // Merge user options with defaults
     const config = { ...defaults, ...options };
-
-    // Start with original content
-    let text = content;
 
     // ===== NORMALIZE QUOTES =====
     // Convert straight double quotes to single quotes (simpler for attribute values)
@@ -261,7 +260,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addFilter("firstParagraph", (content) => {
     if (!content) return "";
 
-    let text = content;
+    let text = String(content);
     text = text.replace(/"/g, "'");
 
     // Remove markdown images
@@ -320,7 +319,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addFilter("excerptWords", (content, maxWords = 30) => {
     if (!content) return "";
 
-    let text = content;
+    let text = String(content);
 
     text = text.replace(/"/g, "'");
 
@@ -402,6 +401,7 @@ export default function (eleventyConfig, options = {}) {
   // Keep only specific HTML tags
   eleventyConfig.addFilter("filterTags", (content, tags = "p") => {
     if (!content) return "";
+    const source = String(content);
 
     let tagArray;
     if (Array.isArray(tags)) {
@@ -420,7 +420,7 @@ export default function (eleventyConfig, options = {}) {
       } else {
         regex = new RegExp(`<${tag}[^>]*>.*?<\/${tag}>`, "gs");
       }
-      const found = content.match(regex);
+      const found = source.match(regex);
       if (found) {
         matches = matches.concat(found);
       }
@@ -432,35 +432,23 @@ export default function (eleventyConfig, options = {}) {
   // Remove empty HTML tags
   eleventyConfig.addFilter("removeEmptyTags", (content) => {
     if (!content) return "";
+    let result = String(content);
     // This regex finds tags that are empty or contain only whitespace.
-    return content.replace(/<(\w+)[^>]*>\s*<\/(\1)>/g, "");
+    return result.replace(/<(\w+)[^>]*>\s*<\/(\1)>/g, "");
   });
 
   eleventyConfig.addFilter("stripText", (content) => {
-    if (!content) {
-      return "";
-    }
-    // Regular expression to match all HTML tags
-    const tags = content.match(/<[^>]*>/g);
-
-    // Join all matched tags together
+    if (!content) return "";
+    const tags = String(content).match(/<[^>]*>/g);
     return tags ? tags.join("") : "";
   });
 
   // New filter to keep only <p> tags containing an <img> tag
   eleventyConfig.addFilter("keepParagraphsWithImages", (content) => {
-    if (!content) {
-      return "";
-    }
-
-    // Regular expression to find all <p>...</p> blocks
+    if (!content) return "";
+    const source = String(content);
     const paragraphRegex = /<p[^>]*>.*?<\/p>/gs;
-    const paragraphs = content.match(paragraphRegex);
-
-    // If no paragraphs are found, return an empty string
-    if (!paragraphs) {
-      return "";
-    }
+    const paragraphs = source.match(paragraphRegex);
 
     // Filter the paragraphs to keep only those containing an <img> tag
     const paragraphsWithImages = paragraphs.filter((p) => {
@@ -473,51 +461,33 @@ export default function (eleventyConfig, options = {}) {
   });
 
   eleventyConfig.addFilter("sliceFromFirstImage", (content) => {
-    if (!content) {
-      return "";
-    }
-
-    // This regex finds the starting position of a <p> tag that contains an <img> tag.
-    // It correctly handles attributes on the <p> tag (like <p class="...">)
-    // and any whitespace between the <p> and <img> tags.
-    const searchPattern = /<p[^>]*>\s*<img/;
-
-    // Find the index of the first match
-    const startIndex = content.search(searchPattern);
-
-    // If a match is found (startIndex is not -1), slice the string from that index.
-    // Otherwise, return an empty string.
-    return startIndex !== -1 ? content.slice(startIndex) : "";
+    if (!content) return "";
+    const source = String(content);
+    const startIndex = source.search(/<p[^>]*>\s*<img/);
+    return startIndex !== -1 ? source.slice(startIndex) : "";
   });
 
   eleventyConfig.addFilter("sliceBeforeFirstImage", (content) => {
-    if (!content) {
-      return "";
-    }
-
-    // The same pattern to find the start of a <p> with an <img> inside.
-    const searchPattern = /<p[^>]*>\s*<img/;
-
-    // Find the index of the first match.
-    const endIndex = content.search(searchPattern);
-
-    // If a match is found, slice the string from the beginning up to that index.
-    // If no match is found, return the entire original content.
-    return endIndex !== -1 ? content.slice(0, endIndex) : content;
+    if (!content) return "";
+    const source = String(content);
+    const endIndex = source.search(/<p[^>]*>\s*<img/);
+    return endIndex !== -1 ? source.slice(0, endIndex) : source;
   });
 
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     // Returns YYYY-MM-DD format for HTML datetime attributes
-    return dateObj.toISOString().split("T")[0];
+    const d = dateObj instanceof Date ? dateObj : new Date(dateObj);
+    return isNaN(d) ? "" : d.toISOString().split("T")[0];
   });
 
   eleventyConfig.addFilter("dateToXmlschema", (dateObj) => {
-    // Returns ISO 8601 format for XML/RSS feeds
-    return dateObj.toISOString();
+    const d = dateObj instanceof Date ? dateObj : new Date(dateObj);
+    return isNaN(d) ? "" : d.toISOString();
   });
 
   eleventyConfig.addFilter("numberOfWords", (text) => {
-    return text.split(/\s+/).length;
+    if (typeof text !== "string") return 0;
+    return text.trim().length ? text.trim().split(/\s+/).length : 0;
   });
 
   eleventyConfig.addFilter("dotDate", (dateObj) => {

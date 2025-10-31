@@ -76,6 +76,14 @@
  * @param {String} options.siteUrl - Site URL for OpenRouter tracking
  */
 
+/**
+ * Standard Framework OpenRouter AI Plugin
+ *
+ * @component OpenRouter AI Integration
+ * @category 11ty Plugins
+ * @author ...
+ */
+
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -84,286 +92,263 @@ import { createLogger } from "./logger.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const OpenRouterPlugin = {
-  configFunction: (eleventyConfig, options = {}) => {
-    const config = {
-      enabled: options.enabled ?? true,
-      apiKey: options.apiKey || process.env.OPENROUTER_KEY,
-      model: options.model || "anthropic/claude-3.5-sonnet",
-      copyFunctions: options.copyFunctions ?? true,
-      siteUrl:
-        options.siteUrl || process.env.SITE_URL || "https://standard.ffp.co",
-      ...options,
-    };
+export default function (eleventyConfig, site = {}) {
+  const aiConfig = site.standard?.ai || {};
 
-    const logger = createLogger({
-      verbose: options.verbose,
-      scope: "OpenRouter",
-    });
+  // Normalize config (like your feed plugin)
+  const config = {
+    enabled: aiConfig.enabled ?? true,
+    apiKey: aiConfig.apiKey || process.env.OPENROUTER_KEY,
+    model: aiConfig.model || "anthropic/claude-3.5-sonnet",
+    // Optional smart routing
+    models: Array.isArray(aiConfig.models) ? aiConfig.models : undefined,
+    route: aiConfig.route, // e.g., "cheapest", "smart", etc.
 
-    if (!config.enabled) {
-      logger.info("Plugin disabled");
-      return;
-    }
+    copyFunctions: aiConfig.copyFunctions ?? true,
+    siteUrl:
+      aiConfig.siteUrl ||
+      aiConfig.env?.SITE_URL ||
+      process.env.SITE_URL ||
+      "https://standard.ffp.co",
+    verbose: aiConfig.verbose ?? false,
+  };
 
+  if (config.enabled === false) return;
+
+  const logger = createLogger({
+    scope: "ai",
+  });
+
+  if (!config.enabled) {
+    logger.info("Plugin disabled");
+    return;
+  }
+
+  if (!config.apiKey) {
+    logger.warn("OPENROUTER_KEY not set. AI features will not work.");
+  }
+
+  logger.debug(`Initializing with model: ${config.model}`);
+
+  // Helper function to call OpenRouter
+  const callOpenRouter = async (messages, options = {}) => {
     if (!config.apiKey) {
-      logger.warn("OPENROUTER_KEY not set. AI features will not work.");
+      throw new Error("OpenRouter API key not configured");
     }
 
-    logger.info(`Initializing with model: ${config.model}`);
+    try {
+      // Build request body
+      const requestBody = {
+        messages: Array.isArray(messages)
+          ? messages
+          : [{ role: "user", content: messages }],
+      };
 
-    // Helper function to call OpenRouter
-    const callOpenRouter = async (messages, options = {}) => {
-      if (!config.apiKey) {
-        throw new Error("OpenRouter API key not configured");
-      }
+      // SMART ROUTING: Check if models array is configured (either globally or per-call)
+      const models = options.models || config.models;
+      const route = options.route || config.route;
 
-      try {
-        // Build request body
-        const requestBody = {
-          messages: Array.isArray(messages)
-            ? messages
-            : [{ role: "user", content: messages }],
-        };
+      if (models && Array.isArray(models) && models.length > 0) {
+        // Multi-model routing mode
+        requestBody.models = models;
+        requestBody.route = route || "cheapest"; // Default to fallback if not specified
 
-        // SMART ROUTING: Check if models array is configured (either globally or per-call)
-        const models = options.models || config.models;
-        const route = options.route || config.route;
-
-        if (models && Array.isArray(models) && models.length > 0) {
-          // Multi-model routing mode
-          requestBody.models = models;
-          requestBody.route = route || "cheapest"; // Default to fallback if not specified
-
-          logger.info(`Using ${route} routing with ${models.length} models`);
-        } else {
-          // Single model mode (backward compatible)
-          requestBody.model = options.model || config.model;
-
-          logger.info(`Using single model: ${requestBody.model}`);
-        }
-
-        const response = await fetch(
-          "https://openrouter.ai/api/v1/chat/completions",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${config.apiKey}`,
-              "HTTP-Referer": config.siteUrl,
-              "X-Title": "Standard Framework",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-          },
+        logger.info(
+          `Using ${requestBody.route} routing with ${models.length} models`,
         );
+      } else {
+        // Single model mode (backward compatible)
+        requestBody.model = options.model || config.model;
 
-        if (!response.ok) {
-          const error = await response.text();
-          throw new Error(
-            `OpenRouter API error: ${response.status} - ${error}`,
-          );
-        }
-
-        const data = await response.json();
-
-        // Log which model was actually used (helpful for cost tracking)
-        logger.info(`OpenRouter selected model: ${data.model}`);
-
-        return data.choices[0].message.content;
-      } catch (error) {
-        logger.error("Error calling OpenRouter:", error.message);
-        return `[AI Error: ${error.message}]`;
+        logger.info(`Using single model: ${requestBody.model}`);
       }
-    };
 
-    // ==========================================
-    // ASYNC FILTERS (Build-time AI)
-    // ==========================================
+      const response = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${config.apiKey}`,
+            "HTTP-Referer": config.siteUrl,
+            "X-Title": "Standard Framework",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        },
+      );
 
-    /**
-     * @component aiSummarize Filter
-     * @category AI Filters
-     * @description Summarize content to a specific word/character count using AI
-     *
-     * @example nunjucks
-     *   {{ content | aiSummarize(50) }}
-     *   {{ article | aiSummarize(160, 'chars') }}
-     */
-    eleventyConfig.addNunjucksAsyncFilter(
-      "aiSummarize",
-      async function (content, length = 100, unit = "words") {
-        const prompt = `Summarize the following in ${length} ${unit} or less:\n\n${content}`;
-        return await callOpenRouter(prompt);
-      },
-    );
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`OpenRouter API error: ${response.status} - ${error}`);
+      }
 
-    /**
-     * @component aiTranslate Filter
-     * @category AI Filters
-     * @description Translate content to another language
-     *
-     * @example nunjucks
-     *   {{ content | aiTranslate('French') }}
-     *   {{ title | aiTranslate('es') }}
-     */
-    eleventyConfig.addNunjucksAsyncFilter(
-      "aiTranslate",
-      async function (content, language) {
-        const prompt = `Translate the following to ${language}:\n\n${content}`;
-        return await callOpenRouter(prompt);
-      },
-    );
+      const data = await response.json();
 
-    /**
-     * @component aiEnhance Filter
-     * @category AI Filters
-     * @description Enhance content with better writing, fix grammar, improve clarity
-     *
-     * @example nunjucks
-     *   {{ draft | aiEnhance }}
-     */
-    eleventyConfig.addNunjucksAsyncFilter(
-      "aiEnhance",
-      async function (content) {
-        const prompt = `Improve this text by fixing grammar, enhancing clarity, and making it more engaging. Keep the same meaning and tone:\n\n${content}`;
-        return await callOpenRouter(prompt);
-      },
-    );
+      // Log which model was actually used (helpful for cost tracking)
+      const usedModel =
+        data?.model ||
+        data?.choices?.[0]?.model ||
+        requestBody.model ||
+        (requestBody.models ? "(routed)" : "(unknown)");
+      logger.info(`OpenRouter selected model: ${usedModel}`);
 
-    /**
-     * @component aiKeywords Filter
-     * @category AI Filters
-     * @description Extract keywords/tags from content
-     *
-     * @example nunjucks
-     *   {{ content | aiKeywords }}
-     */
-    eleventyConfig.addNunjucksAsyncFilter(
-      "aiKeywords",
-      async function (content) {
-        const prompt = `Extract 5-10 relevant keywords/tags from this content. Return as comma-separated values:\n\n${content}`;
-        return await callOpenRouter(prompt);
-      },
-    );
-
-    // ==========================================
-    // SHORTCODES (Build-time AI)
-    // ==========================================
-
-    /**
-     * @component aiGenerate Shortcode
-     * @category AI Shortcodes
-     * @description Generate content from a prompt at build time
-     *
-     * @example nunjucks
-     *   {% aiGenerate "Write 3 bullet points about typography" %}
-     *   {% aiGenerate "Suggest related articles for: " + title %}
-     */
-    eleventyConfig.addNunjucksAsyncShortcode(
-      "aiGenerate",
-      async function (prompt, model) {
-        return await callOpenRouter(prompt, model);
-      },
-    );
-
-    /**
-     * @component aiChat Shortcode
-     * @category AI Shortcodes
-     * @description Insert interactive chat widget (uses Cloudflare Functions)
-     *
-     * @example nunjucks
-     *   {% aiChat "Ask me about the Standard Framework!" %}
-     *   {% aiChat "Documentation Assistant", "anthropic/claude-3.5-sonnet" %}
-     */
-    eleventyConfig.addShortcode(
-      "aiChat",
-      function (placeholder = "Ask a question...", model = config.model) {
-        return `
-<div class="ai-chat" data-ai-model="${model}">
-  <div class="ai-messages"></div>
-  <form class="ai-input">
-    <input type="text" placeholder="${placeholder}" required>
-    <button type="submit">Ask</button>
-  </form>
-</div>
-<script src="/assets/standard/standard.ai.js"></script>
-<script>
-  new StandardAI.Chat('.ai-chat', { model: '${model}' });
-</script>`;
-      },
-    );
-
-    /**
-     * @component aiSearch Shortcode
-     * @category AI Shortcodes
-     * @description Insert semantic AI search widget
-     *
-     * @example nunjucks
-     *   {% aiSearch %}
-     */
-    eleventyConfig.addShortcode("aiSearch", function () {
-      return `
-<div class="ai-search">
-  <form class="ai-search-form">
-    <input type="text" placeholder="Search documentation..." required>
-    <button type="submit">Search</button>
-  </form>
-  <div class="ai-search-results"></div>
-</div>
-<script src="/assets/standard/standard.ai.js"></script>
-<script>
-  new StandardAI.Search('.ai-search');
-</script>`;
-    });
-
-    // ==========================================
-    // COPY CLOUDFLARE FUNCTIONS
-    // ==========================================
-
-    if (config.copyFunctions) {
-      eleventyConfig.on("eleventy.before", () => {
-        const functionsDir = path.join(process.cwd(), "functions", "api");
-        const sourceDir = path.join(__dirname, "..", "cloudflare", "api");
-
-        // Ensure functions directory exists
-        fs.mkdirSync(functionsDir, { recursive: true });
-
-        // List of AI function files to copy
-        const functionFiles = [
-          "ai-chat.js",
-          "ai-search.js",
-          "ai-enhance.js",
-          "ai-usage.js",
-        ];
-
-        functionFiles.forEach((file) => {
-          const src = path.join(sourceDir, file);
-          const dest = path.join(functionsDir, file);
-
-          if (fs.existsSync(src)) {
-            fs.copyFileSync(src, dest);
-            logger.debug(`Copied ${file} to functions/api/`);
-          }
-        });
-      });
+      return data.choices?.[0]?.message?.content ?? "";
+    } catch (error) {
+      logger.error("Error calling OpenRouter:", error.message);
+      return `[AI Error: ${error.message}]`;
     }
+  };
 
-    // ==========================================
-    // DATA CASCADE (Make config available to templates)
-    // ==========================================
+  // ==========================================
+  // ASYNC FILTERS (Build-time AI)
+  // ==========================================
 
-    eleventyConfig.addGlobalData("ai", () => ({
-      enabled: config.enabled,
-      model: config.model,
-      models: {
-        "anthropic/claude-3.5-sonnet": "Claude 3.5 Sonnet",
-        "openai/gpt-4": "GPT-4",
-        "google/gemini-pro": "Gemini Pro",
-        "meta-llama/llama-3-70b": "LLaMA 3 70B",
-        "mistralai/mistral-large": "Mistral Large",
-      },
-    }));
+  /**
+   * @component aiSummarize Filter
+   * @category AI Filters
+   */
+  eleventyConfig.addNunjucksAsyncFilter(
+    "aiSummarize",
+    async function (content, length = 100, unit = "words") {
+      const prompt = `Summarize the following in ${length} ${unit} or less:\n\n${content}`;
+      return await callOpenRouter(prompt);
+    },
+  );
 
-    logger.success("Initialized");
-  },
-};
+  /**
+   * @component aiTranslate Filter
+   * @category AI Filters
+   */
+  eleventyConfig.addNunjucksAsyncFilter(
+    "aiTranslate",
+    async function (content, language) {
+      const prompt = `Translate the following to ${language}:\n\n${content}`;
+      return await callOpenRouter(prompt);
+    },
+  );
+
+  /**
+   * @component aiEnhance Filter
+   * @category AI Filters
+   */
+  eleventyConfig.addNunjucksAsyncFilter("aiEnhance", async function (content) {
+    const prompt = `Improve this text by fixing grammar, enhancing clarity, and making it more engaging. Keep the same meaning and tone:\n\n${content}`;
+    return await callOpenRouter(prompt);
+  });
+
+  /**
+   * @component aiKeywords Filter
+   * @category AI Filters
+   */
+  eleventyConfig.addNunjucksAsyncFilter("aiKeywords", async function (content) {
+    const prompt = `Extract 5-10 relevant keywords/tags from this content. Return as comma-separated values:\n\n${content}`;
+    return await callOpenRouter(prompt);
+  });
+
+  // ==========================================
+  // SHORTCODES (Build-time AI)
+  // ==========================================
+
+  /**
+   * @component aiGenerate Shortcode
+   * @category AI Shortcodes
+   */
+  eleventyConfig.addNunjucksAsyncShortcode(
+    "aiGenerate",
+    async function (prompt, model) {
+      const opts = model ? { model } : undefined;
+      return await callOpenRouter(prompt, opts);
+    },
+  );
+
+  /**
+   * @component aiChat Shortcode
+   * @category AI Shortcodes
+   */
+  eleventyConfig.addShortcode(
+    "aiChat",
+    function (placeholder = "Ask a question...", model = config.model) {
+      return `
+ <div class="ai-chat" data-ai-model="${model}">
+   <div class="ai-messages"></div>
+   <form class="ai-input">
+     <input type="text" placeholder="${placeholder}" required>
+     <button type="submit">Ask</button>
+   </form>
+ </div>
+ <script src="/assets/standard/standard.ai.js"></script>
+ <script>
+   new StandardAI.Chat('.ai-chat', { model: '${model}' });
+ </script>`;
+    },
+  );
+
+  /**
+   * @component aiSearch Shortcode
+   * @category AI Shortcodes
+   */
+  eleventyConfig.addShortcode("aiSearch", function () {
+    return `
+ <div class="ai-search">
+   <form class="ai-search-form">
+     <input type="text" placeholder="Search documentation..." required>
+     <button type="submit">Search</button>
+   </form>
+   <div class="ai-search-results"></div>
+ </div>
+ <script src="/assets/standard/standard.ai.js"></script>
+ <script>
+   new StandardAI.Search('.ai-search');
+ </script>`;
+  });
+
+  // ==========================================
+  // COPY CLOUDFLARE FUNCTIONS
+  // ==========================================
+
+  if (config.copyFunctions) {
+    eleventyConfig.on("eleventy.before", () => {
+      const functionsDir = path.join(process.cwd(), "functions", "api");
+      const sourceDir = path.join(__dirname, "..", "cloudflare", "api");
+
+      // Ensure functions directory exists
+      fs.mkdirSync(functionsDir, { recursive: true });
+
+      // List of AI function files to copy
+      const functionFiles = [
+        "ai-chat.js",
+        "ai-search.js",
+        "ai-enhance.js",
+        "ai-usage.js",
+      ];
+
+      functionFiles.forEach((file) => {
+        const src = path.join(sourceDir, file);
+        const dest = path.join(functionsDir, file);
+
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, dest);
+          logger.debug(`Copied ${file} to functions/api/`);
+        }
+      });
+    });
+  }
+
+  // ==========================================
+  // DATA CASCADE (Make config available to templates)
+  // ==========================================
+
+  eleventyConfig.addGlobalData("ai", () => ({
+    enabled: config.enabled,
+    model: config.model,
+    models: {
+      "anthropic/claude-3.5-sonnet": "Claude 3.5 Sonnet",
+      "openai/gpt-4": "GPT-4",
+      "google/gemini-pro": "Gemini Pro",
+      "meta-llama/llama-3-70b": "LLaMA 3 70B",
+      "mistralai/mistral-large": "Mistral Large",
+    },
+  }));
+
+  logger.success(`Initialized [with ${config.model}]`);
+}

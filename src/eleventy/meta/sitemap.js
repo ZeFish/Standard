@@ -9,7 +9,7 @@
  * @since 0.10.53
  */
 
-import { createLogger } from "./logger.js";
+import { createLogger } from "./../logger.js";
 
 export default function (eleventyConfig, site = {}) {
   const sitemapConfig = site.standard?.sitemap || {};
@@ -18,21 +18,21 @@ export default function (eleventyConfig, site = {}) {
 
   const {
     hostname = site.url || "https://example.com",
-    exclude = ["/404/", "/admin/", "/private/"]
+    exclude = ["/404/", "/admin/", "/private/"],
   } = sitemapConfig;
 
   const logger = createLogger({
-    scope: "Sitemap"
+    scope: "Sitemap",
   });
 
   eleventyConfig.addCollection("sitemap", (collectionApi) => {
     return collectionApi
       .getAll()
-      .filter(item => {
+      .filter((item) => {
         if (!item.url) return false;
         if (item.data.excludeFromSitemap) return false;
         if (item.data.permalink === false) return false;
-        if (exclude.some(pattern => item.url.includes(pattern))) return false;
+        if (exclude.some((pattern) => item.url.includes(pattern))) return false;
         return true;
       })
       .sort((a, b) => (b.date || 0) - (a.date || 0));
@@ -53,7 +53,7 @@ eleventyExcludeFromCollections: true
     <lastmod>{{ page.date.toISOString() }}</lastmod>
   </url>
 {%- endfor %}
-</urlset>`
+</urlset>`,
   );
   logger.success("initialized");
 }

@@ -63,7 +63,7 @@
  * @link https://web.dev/add-manifest/ Google's Manifest Guide
  */
 
-import { createLogger } from "./logger.js";
+import { createLogger } from "./../logger.js";
 
 export default function (eleventyConfig, site = {}) {
   // ===== EXTRACT MANIFEST CONFIGURATION =====
@@ -76,22 +76,22 @@ export default function (eleventyConfig, site = {}) {
   // ===== INITIALIZE LOGGER =====
   const logger = createLogger({
     scope: "Manifest",
-    verbose: site.standard?.verbose || false
+    verbose: site.standard?.verbose || false,
   });
 
   // ===== EXTRACT NON-TEXT FIELDS WITH DEFAULTS =====
   // These fields don't need site-level fallbacks
   const {
-    filename = "site.webmanifest",           // Output filename
-    display = "standalone",                // Display mode (standalone = no browser UI)
-    orientation = "any",                   // Screen orientation (any/portrait/landscape)
-    theme_color = "#000000",               // Toolbar/status bar color
-    background_color = "#ffffff",          // Splash screen background
-    icons = [],                            // Array of icon objects
-    categories = [],                       // App store categories
-    screenshots = [],                      // App store screenshots
-    shortcuts = [],                        // App shortcuts (jump list)
-    start_url = "/"                        // Starting URL when launched
+    filename = "site.webmanifest", // Output filename
+    display = "standalone", // Display mode (standalone = no browser UI)
+    orientation = "any", // Screen orientation (any/portrait/landscape)
+    theme_color = "#000000", // Toolbar/status bar color
+    background_color = "#ffffff", // Splash screen background
+    icons = [], // Array of icon objects
+    categories = [], // App store categories
+    screenshots = [], // App store screenshots
+    shortcuts = [], // App shortcuts (jump list)
+    start_url = "/", // Starting URL when launched
   } = manifestConfig;
 
   // ===== HANDLE TEXT FIELDS WITH FALLBACK CHAIN =====
@@ -102,14 +102,12 @@ export default function (eleventyConfig, site = {}) {
 
   // Short name (12 chars max recommended): Use manifest.short_name,
   // fall back to truncated site.title, finally "Site"
-  const short_name = manifestConfig.short_name ||
-                     site.title?.substring(0, 12) ||
-                     "Site";
+  const short_name =
+    manifestConfig.short_name || site.title?.substring(0, 12) || "Site";
 
   // Description: Use manifest.description, fall back to site.description, finally generic
-  const description = manifestConfig.description ||
-                      site.description ||
-                      "A website";
+  const description =
+    manifestConfig.description || site.description || "A website";
 
   // ===== DEBUG LOGGING =====
   // Log what values we're actually using (helps debug configuration issues)
@@ -123,15 +121,15 @@ export default function (eleventyConfig, site = {}) {
   // ===== BUILD MANIFEST OBJECT =====
   // Create the JSON object that will be written to manifest.json
   const manifest = {
-    name,                    // Full app name (shown on splash screen)
-    short_name,              // Short name (shown under icon)
-    description,             // App description
-    start_url,               // URL to open when app launches
-    display,                 // How the app should display
-    orientation,             // Screen orientation preference
-    theme_color,             // OS theme color (status bar, etc.)
-    background_color,        // Splash screen background
-    icons,                   // App icons (various sizes)
+    name, // Full app name (shown on splash screen)
+    short_name, // Short name (shown under icon)
+    description, // App description
+    start_url, // URL to open when app launches
+    display, // How the app should display
+    orientation, // Screen orientation preference
+    theme_color, // OS theme color (status bar, etc.)
+    background_color, // Splash screen background
+    icons, // App icons (various sizes)
   };
 
   // ===== ADD OPTIONAL FIELDS =====
@@ -139,30 +137,30 @@ export default function (eleventyConfig, site = {}) {
   // (keeps manifest.json clean and validates correctly)
 
   if (categories.length > 0) {
-    manifest.categories = categories;       // App categories for stores
+    manifest.categories = categories; // App categories for stores
   }
 
   if (screenshots.length > 0) {
-    manifest.screenshots = screenshots;     // App store screenshots
+    manifest.screenshots = screenshots; // App store screenshots
   }
 
   if (shortcuts.length > 0) {
-    manifest.shortcuts = shortcuts;         // Jump list / quick actions
+    manifest.shortcuts = shortcuts; // Jump list / quick actions
   }
 
   // ===== GENERATE MANIFEST.JSON FILE =====
   // Use 11ty's addTemplate to create a virtual file
   // This generates manifest.json at build time
   eleventyConfig.addTemplate(
-    `${filename}.njk`,           // Virtual template name
+    `${filename}.njk`, // Virtual template name
     `---
 layout: false
 permalink: ${filename}
 eleventyExcludeFromCollections: true
 ---
-${JSON.stringify(manifest, null, 2)}`   // Pretty-printed JSON with 2-space indent
+${JSON.stringify(manifest, null, 2)}`, // Pretty-printed JSON with 2-space indent
   );
 
   // ===== SUCCESS LOG =====
-  logger.success(`Manifest plugin initialized → /${filename}`);
+  logger.success(`Initialized`);
 }
