@@ -308,7 +308,7 @@ class StandardLab {
         <label class="standard-lab-toggle">
           <input type="checkbox" ${debugActive ? "checked" : ""} data-toggle="debug">
           <span>Debug Mode</span>
-          <kbd>⇧⌘S</kbd>
+          <kbd>⇧⌘D</kbd>
         </label>
       </section>
 
@@ -904,11 +904,11 @@ class StandardLab {
     document.addEventListener("keydown", (e) => {
       const isMac = navigator.platform.indexOf("Mac") > -1;
 
-      // Shift+Cmd+D / Shift+Ctrl+D - Toggle inspector
+      // Shift+Cmd+S / Shift+Ctrl+S - Toggle inspector
       if (
         e.shiftKey &&
         (isMac ? e.metaKey : e.ctrlKey) &&
-        e.key.toLowerCase() === "d"
+        e.key.toLowerCase() === "s"
       ) {
         e.preventDefault();
         if (this.state === "dormant") {
@@ -918,11 +918,11 @@ class StandardLab {
         }
       }
 
-      // Shift+Cmd+S / Shift+Ctrl+S - Toggle debug mode
+      // Shift+Cmd+D / Shift+Ctrl+D - Toggle debug mode
       if (
         e.shiftKey &&
         (isMac ? e.metaKey : e.ctrlKey) &&
-        e.key.toLowerCase() === "s"
+        e.key.toLowerCase() === "d"
       ) {
         e.preventDefault();
         document.body.classList.toggle("standard-debug");
