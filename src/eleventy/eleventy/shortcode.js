@@ -35,10 +35,10 @@ export default function (eleventyConfig, site = {}) {
 
   // ===== SHORTCODES =====
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardAssets", function () {
+  eleventyConfig.addShortcode("standard_assets", function () {
     let html = "";
 
-    html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css"><link rel="stylesheet" href="/${outputDir}/standard.theme.min.css">
+    html = `\n<link rel="stylesheet" href="/${outputDir}/standard.bundle.css">
     <script src="/${outputDir}/standard.bundle.full.js" type="module"></script>`;
 
     // Add comments client library if comments are enabled
@@ -51,7 +51,7 @@ export default function (eleventyConfig, site = {}) {
 
   // ===== SHORTCODES =====
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardCss", function () {
+  eleventyConfig.addShortcode("standard_css", function () {
     let html = "";
 
     html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
@@ -64,33 +64,23 @@ export default function (eleventyConfig, site = {}) {
     return html;
   });
 
-  eleventyConfig.addShortcode("standardLab", function (labOptions = {}) {
+  eleventyConfig.addShortcode("standard_lab", function (labOptions = {}) {
     const { attributes = "" } = labOptions;
 
     return `<script src="/${outputDir}/standard.lab.js" ${attributes}><\/script>`;
   });
 
-  eleventyConfig.addShortcode("bodyHtmx", function () {
+  eleventyConfig.addShortcode("htmx", function () {
     return `hx-boost="true" hx-ext="preload" preload="mouseover" hx-target="body" hx-swap="innerHTML scroll:window:top"`;
   });
 
   // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("standardFonts", function () {
+  eleventyConfig.addShortcode("standard_fonts", function () {
     return `<link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">`;
-  });
-
-  // Shortcode to include Standard CSS and JS from local files
-  eleventyConfig.addShortcode("metaMobile", function () {
-    return `<!-- Mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">`;
   });
 
   eleventyConfig.addShortcode("readingTime", function (text) {
@@ -140,10 +130,10 @@ export default function (eleventyConfig, site = {}) {
   }
 
   // Shortcode to render comment form with semantic HTML and auto-initialize
-  // Usage: {% standardComment %}
+  // Usage: {% standard_comments %}
   // Auto-initializes if comment: true is in frontmatter
   eleventyConfig.addShortcode(
-    "standardComment",
+    "standard_comments",
     function (showSubmit, showReset) {
       // Set defaults - 11ty passes empty string when no arg provided, not undefined
       // Default to true unless explicitly set to false
@@ -154,7 +144,7 @@ export default function (eleventyConfig, site = {}) {
       // Get frontmatter variables from this context (ctx property)
       // Use comment: true in frontmatter, page ID auto-generated from page.url
       const context = this.ctx || this;
-      const isCommentsEnabled = context.comment === true;
+      const isCommentsEnabled = context.comments === true;
       const rawUrl = context.page && context.page.url;
       const pageId = isCommentsEnabled ? normalizePageId(rawUrl) : null;
       const apiUrl = context.commentApiUrl || "/api/comments";

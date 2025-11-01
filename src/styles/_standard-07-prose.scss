@@ -163,13 +163,13 @@
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
-        margin-block-end: calc(var(--space-xl) * var(--rhythm-multiplier));
+        margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
     }
 
     h2 {
-        margin-block-start: calc(var(--space-l) * var(--rhythm-multiplier));
-        margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+        margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
     }
 
     h3 {

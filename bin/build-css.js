@@ -390,6 +390,24 @@ if (shouldBundle) {
   logger.debug(`Bundling enabled: ${BUNDLE_CONFIG.output}`);
 }
 
+function stripCssComments(css) {
+  // Remove /*! ... */ and /* ... */ comments
+  return css.replace(/\/\*![\s\S]*?\*\/|\/\*[\s\S]*?\*\//g, "");
+}
+
+function removeEmptyRuleSets(css) {
+  // Iteratively remove blocks like "selector{   }"
+  // Handles whitespace/newlines; repeats until stable in case of nested empties
+  let prev;
+  do {
+    prev = css;
+    css = css.replace(/[^{}]+\{\s*\}/g, "");
+    // Also remove @media/@supports blocks that became empty
+    css = css.replace(/@(?:media|supports|layer|keyframes)[^{]*\{\s*\}/g, "");
+  } while (css !== prev);
+  return css;
+}
+
 // ============================================================================
 // BUILD FUNCTION
 // ============================================================================
@@ -473,9 +491,16 @@ async function buildCSS() {
         continue;
       }
 
-      const result = compile(inputPath, {
-        style: "compressed",
+      let result = compile(inputPath, {
+        style: "expanded",
       });
+
+      // Normalize
+      result.css = result.css.replace(/^\uFEFF/, ""); // BOM
+      result.css = result.css.replace(/@charset\s+("[^"]+"|'[^']+');?/gi, ""); // mid-file charset
+      result.css = stripCssComments(result.css); // remove comments
+      result.css = removeEmptyRuleSets(result.css); // remove empty blocks
+      result.css = result.css.trim();
 
       // Write to all destination directories
       for (const destDir of destDirs) {
@@ -510,7 +535,7 @@ async function buildCSS() {
         // PHASE 3: MINIFICATION
         // ====================================================================
         const minifier = new CleanCSS({
-          level: 2, // Advanced optimizations (safe)
+          level: 0, // Advanced optimizations (safe)
           compatibility: "*", // All browsers
         });
 

@@ -1,11 +1,11 @@
 ---
 layout: base.njk
-title: Standard Framework Cheat Sheet
+title: Cheat Sheet
 description: The essential commands you'll use every day and always forget
 permalink: /cheat-sheet/
 ---
 
-# Standard Framework Cheat Sheet
+# Cheat Sheet
 
 The **20% of commands you'll use 80% of the time**. Copy-paste ready.
 
@@ -13,7 +13,7 @@ The **20% of commands you'll use 80% of the time**. Copy-paste ready.
 
 ---
 
-### Keyboard Shortcuts
+## Keyboard Shortcuts
 
 ```bash
 Shift + Cmd/Ctrl + D    # Open/close Inspector (your new best friend)
@@ -25,7 +25,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Spacing (The Ones You Forget)
+## Spacing (The Ones You Forget)
 
 ```html
 <!-- Center horizontally (THE most-used utility) -->
@@ -53,7 +53,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Width (Reading & Centering)
+## Width (Reading & Centering)
 
 ```html
 <!-- Optimal reading width (60-75 chars) - YOU FORGET THIS CONSTANTLY -->
@@ -85,7 +85,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Typography (Common Patterns)
+## Typography (Common Patterns)
 
 ```html
 <!-- Small muted text (captions, metadata, timestamps) -->
@@ -120,7 +120,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Centering (Every Single Time)
+## Centering (Every Single Time)
 
 ```html
 <!-- Center everything (flex center, vertical + horizontal) -->
@@ -158,9 +158,9 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Layout Patterns (Copy These)
+## Layout Patterns (Copy These)
 
-##### Card Grid (3 columns, responsive)
+### Card Grid (3 columns, responsive)
 
 ```html
 <div class="grid gap-base">
@@ -189,7 +189,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-##### Hero Section (landing page header)
+### Hero Section (landing page header)
 
 ```html
 <header class="padding-xl center">
@@ -208,7 +208,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-##### Two-Column Layout (Content + Sidebar)
+### Two-Column Layout (Content + Sidebar)
 
 ```html
 <div class="grid gap-l">
@@ -237,7 +237,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-##### Centered Container (classic article layout)
+### Centered Container (classic article layout)
 
 ```html
 <div class="width-line margin-inline-auto padding-base">
@@ -255,7 +255,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Colors (Semantic)
+## Colors (Semantic)
 
 ```html
 <!-- Muted text (secondary info, less important) -->
@@ -287,7 +287,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ---
 
-### Visibility (The Useful Ones)
+## Visibility (The Useful Ones)
 
 ```html
 <!-- Hide from everyone (display: none) -->
@@ -322,7 +322,7 @@ Sighted users see: "Read more"
 
 ---
 
-### Responsive (Mobile-First)
+## Responsive (Mobile-First)
 
 ```html
 <!-- Stack on mobile, side-by-side on desktop -->
@@ -355,9 +355,9 @@ Sighted users see: "Read more"
 
 ---
 
-### Common Fixes (Save These)
+## Common Fixes (Save These)
 
-##### Remove Default List Styling
+### Remove Default List Styling
 
 ```html
 <ul class="margin-0 padding-0" style="list-style: none;">
@@ -371,7 +371,7 @@ Sighted users see: "Read more"
 
 ---
 
-##### Remove Button Styling
+### Remove Button Styling
 
 ```html
 <button class="padding-0 margin-0"
@@ -383,7 +383,7 @@ Sighted users see: "Read more"
 
 ---
 
-##### Full-Width Section (edge-to-edge background)
+### Full-Width Section (edge-to-edge background)
 
 ```html
 <section class="width-full padding-base background-secondary">
@@ -394,7 +394,7 @@ Sighted users see: "Read more"
 
 ---
 
-##### Tight Spacing (compact UI, dense layouts)
+### Tight Spacing (compact UI, dense layouts)
 
 ```html
 <div class="padding-xs gap-xs">
@@ -406,7 +406,7 @@ Sighted users see: "Read more"
 
 ---
 
-### Size Scale (Memorize These 5)
+## Size Scale (Memorize These 5)
 
 | Size | Usage | Value | When to use |
 |------|-------|-------|-------------|
@@ -424,22 +424,22 @@ Sighted users see: "Read more"
 
 ---
 
-### Inspector Quick Reference
+## Inspector Quick Reference
 
-##### What is the Inspector?
+### What is the Inspector?
 The Inspector is Standard's built-in design tool. Open it with `Shift + Cmd/Ctrl + D` to:
 - **Edit design tokens** (colors, fonts, spacing) in real-time
 - **Toggle debug mode** to see baseline grid and layout zones
 - **Export CSS** of your changes
 - **Switch themes** instantly
 
-##### When to use it:
+### When to use it:
 - **Debugging rhythm issues** — Turn on debug mode to see if elements align to baseline
 - **Trying different fonts** — Load Google Fonts on the fly
 - **Adjusting colors** — See color changes immediately without rebuilding
 - **Client presentations** — Toggle between themes live in a meeting
 
-##### Toggle Debug Mode
+### Toggle Debug Mode
 Shows baseline grid, grid columns, rhythm spacing overlays
 
 **Shortcut**: `Shift + Cmd/Ctrl + S`
@@ -453,9 +453,9 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-### Pro Tips (The Non-Obvious Stuff)
+## Pro Tips (The Non-Obvious Stuff)
 
-##### Combine utilities (no custom CSS needed)
+### Combine utilities (no custom CSS needed)
 
 ```html
 <!-- DON'T write custom CSS -->
@@ -468,7 +468,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Use `margin-inline-auto` to center block elements
+### Use `margin-inline-auto` to center block elements
 
 ```html
 <div class="width-line margin-inline-auto">
@@ -479,7 +479,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Use `gap-base` instead of margin on children
+### Use `gap-base` instead of margin on children
 
 ```html
 <!-- DON'T do this -->
@@ -500,7 +500,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Remember `.uppercase` includes letter-spacing
+### Remember `.uppercase` includes letter-spacing
 
 ```html
 <!-- DON'T manually uppercase in HTML -->
@@ -513,7 +513,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Use reading widths for articles
+### Use reading widths for articles
 
 ```html
 <article class="width-line margin-inline-auto">
@@ -525,9 +525,9 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-### Common Mistakes (Learn From Others' Pain)
+## Common Mistakes (Learn From Others' Pain)
 
-##### Forgetting to add `display: flex`
+### Forgetting to add `display: flex`
 
 ```html
 <!-- DOESN'T WORK -->
@@ -546,7 +546,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Using `width-full` without understanding container context
+### Using `width-full` without understanding container context
 
 ```html
 <!-- Breaks out of parent container (usually not what you want) -->
@@ -557,7 +557,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Adding inline styles when utilities exist
+### Adding inline styles when utilities exist
 
 ```html
 <!-- DON'T -->
@@ -569,7 +569,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-##### Forgetting `.col-sm-12` for responsive cards
+### Forgetting `.col-sm-12` for responsive cards
 
 ```html
 <!-- Cards won't stack on mobile -->
@@ -589,7 +589,7 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 ---
 
-### Remember
+## Remember
 
 **The Pattern**: `[property]-[side]-[size]`
 

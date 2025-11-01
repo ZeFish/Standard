@@ -9,16 +9,19 @@
     --color-accent: red;
     --shadow: none;
     --border-radius: 0;
-    --border-color: var(--color-foreground);
-    --color-background-secondary: var(--color-background);
+    --color-border: var(--color-foreground);
+    --color-muted: var(--color-foreground);
+
+    --color-dark-foreground: #ccc;
 
     --font-ratio: 1.8;
     --font-mobile-ratio: 2;
     --body-padding-multiplier: 3;
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
+    --font-density: 1.5;
 
-    --rhythm-multiplier: 0.66;
+    --rhythm-multiplier: calc(1 / var(--font-density));
     --rhythm-multiplier-block: 0;
 
     --gap: clamp(var(--space), 6%, var(--space-xl));
@@ -43,8 +46,11 @@
     p:has(img) {
         display: block;
     }
+    img {
+        border: 0;
+    }
 
-    .prose :is(p, blockquote, pre, details, li) {
+    .prose :is(p, blockquote, pre, details, li, hr) {
         max-width: var(--line-width-s);
         margin-inline: 0;
     }
@@ -70,10 +76,9 @@
 
     pre {
         padding: 0;
-    }
-
-    .prose {
-        display: block;
+        padding-block: var(--space-s);
+        margin-block: var(--space-s);
+        border: 0;
     }
 
     footer hr {
@@ -84,12 +89,9 @@
         opacity: 0.2;
     }
 
-    --color-border: var(--color-background);
-    --color-muted: var(--color-foreground);
-
     blockquote {
         border: 0;
-        border-inline-start: var(--space-3xs) solid var(--color-foreground);
+        border-inline-start: 1px solid var(--color-foreground);
     }
 
     table {
@@ -102,14 +104,6 @@
         font-size: var(--scale-xs);
         font-family: var(--font-monospace);
         word-break: keep-all;
-    }
-
-@media (max-width: 767px) {
-        .prose,
-p:has(img) {
-            display:grid;
-        }
-        
     }
 }
 

@@ -95,8 +95,8 @@
 }
 
 /* Elements within rhythm containers */
+/* Enhanced spacing relationships for typography */
 :where(html:not(.no-rhythm), .rhythm) {
-    /* Enhanced spacing relationships for typography */
     @include apply-rhythm {
         margin-block-start: 0;
         margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
