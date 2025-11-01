@@ -223,11 +223,6 @@ html {
         color 0.2s ease;
 }
 
-body {
-    background: var(--color-background);
-    color: var(--color-foreground);
-}
-
 /* ===== SEMANTIC STATE CLASSES ===== */
 /* Kept in color layer for system coherence (semantic messaging) */
 .text-success {

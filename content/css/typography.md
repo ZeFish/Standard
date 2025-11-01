@@ -101,9 +101,9 @@ Optimal line heights for different contexts, designed for readability:
 
 ```css
 --line-height-base: 1.618;        /* Body text */
---line-height-headings: 1.2;      /* Headings are tighter */
---line-height-loose: 1.875;       /* Comfortable reading */
+--line-height-headings: 1.2;      /* Headings are tighter */relaxed
 --line-height-tight: 1.4;         /* Dense content */
+--line-height-relaxed: 1.875;       /* Comfortable reading */
 ```
 
 ### Examples
@@ -112,8 +112,8 @@ Optimal line heights for different contexts, designed for readability:
 <!-- Default line height (1.618 for body) -->
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
 
-<!-- Loose line height for accessibility -->
-<p class="leading-loose">Text with more breathing room</p>
+<!-- relaxed line height for accessibility -->
+<p class="leading-relaxed">Text with more breathing room</p>
 
 <!-- Tight line height for headlines -->
 <h1 class="leading-tight">Headline with less space between lines</h1>

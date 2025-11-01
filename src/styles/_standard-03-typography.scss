@@ -93,30 +93,6 @@
 
 // ========== Typography ==========
 
-html {
-    scroll-behavior: smooth;
-
-    font-family: var(--font-text), system-ui, sans-serif;
-    font-size: var(--scale);
-    font-weight: var(--font-weight);
-    letter-spacing: var(--font-letter-spacing);
-
-    line-height: var(--line-height);
-
-    text-rendering: optimizeLegibility; /* kerning & ligatures */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    font-optical-sizing: auto;
-    font-feature-settings: var(--font-feature);
-    font-variation-settings: var(--font-variation);
-
-    text-wrap: pretty;
-    hyphens: none;
-    widows: 2;
-    orphans: 2;
-}
-
 /* Note: Typography-only feature toggles (kept in typography layer) */
 .circular {
     font-feature-settings: "ss05" on;
@@ -142,7 +118,7 @@ html {
    See standard-04-elements.scss for h1-h6 element styling. */
 
 /* Note: Text size utilities moved to standard-98-utilities.scss */
-/* .small, .smaller, .compact now defined in utilities layer */
+/* .small, .smaller, .tight now defined in utilities layer */
 
 /* Note: Font family utilities (.font-ui, .font-interface, .mono, .code, .bold) */
 /* moved to standard-98-utilities.scss */

@@ -1,5 +1,33 @@
 @use "standard-00-variables" as *;
 
+html {
+    background: var(--color-background);
+    color: var(--color-foreground);
+
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    font-family: var(--font-text), system-ui, sans-serif;
+    font-size: var(--scale);
+    font-weight: var(--font-weight);
+    letter-spacing: var(--font-letter-spacing);
+
+    line-height: var(--line-height);
+
+    text-rendering: optimizeLegibility; /* kerning & ligatures */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    font-optical-sizing: auto;
+    font-feature-settings: var(--font-feature);
+    font-variation-settings: var(--font-variation);
+
+    text-wrap: pretty;
+    hyphens: none;
+    widows: 2;
+    orphans: 2;
+}
+
 /* =========================== */
 /* Base normalization          */
 /* =========================== */
@@ -432,7 +460,7 @@ iframe {
 /* Utilities                   */
 /* =========================== */
 
-.compact {
+.tight {
     line-height: var(--font-density-s);
 }
 

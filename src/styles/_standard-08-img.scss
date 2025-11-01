@@ -64,13 +64,13 @@ img {
         box-shadow: unset;
     }
 
-    img:hover,
+    img:not(.zoomed):hover,
     img.zoomed {
         mix-blend-mode: normal;
         filter: none;
     }
 
-    img:active,
+    img:not(.zoomed):active,
     img.zoomed {
         cursor: zoom-out;
         display: block;
@@ -92,17 +92,10 @@ img {
 }
 
 /* Zoom overlay backgrounds */
-html:not(.no-rhythm) :has(img:active)::before,
-html:not(.no-rhythm) :has(img.zoomed)::before,
-.prose :has(img:active)::before,
-.prose :has(img.zoomed)::before,
-.rhythm :has(img:active)::before,
-.rhythm :has(img.zoomed)::before {
+html.image-zoomed::before {
     content: "";
     position: fixed;
     inset: 0;
     background: var(--color-background);
     z-index: calc(var(--z-image-zoom) - 1);
-
-    z-index: unset;
 }

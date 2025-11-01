@@ -71,6 +71,10 @@
     --space-2xl: calc(4 * var(--baseline));
     --space-3xl: calc(5 * var(--baseline));
 
+    /* Grid system tokens */
+    --grid-gap: var(--space);
+    --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
+
     /* Logical border properties */
     --hr-thickness: 1px;
     --border-radius: var(--space-2xs);

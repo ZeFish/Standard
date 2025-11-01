@@ -1,4 +1,48 @@
 /**
+ * Manages the visibility of "end-of-scroll" shadow indicators on a .table-wrapper.
+ *
+ * This script implements an inverse shadow logic:
+ * - A right shadow appears only when the user has scrolled fully to the left.
+ * - A left shadow appears only when the user has scrolled fully to the right.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const tableWrappers = document.querySelectorAll(".scroll");
+
+  tableWrappers.forEach((wrapper) => {
+    const handleScroll = () => {
+      // First, check if there is any overflow content at all
+      const hasOverflow = wrapper.scrollWidth > wrapper.clientWidth;
+
+      // If there's no overflow, ensure no shadows are shown and stop.
+      if (!hasOverflow) {
+        wrapper.classList.remove("show-left-shadow", "show-right-shadow");
+        return;
+      }
+
+      const scrollLeft = wrapper.scrollLeft;
+      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+
+      // --- YOUR CUSTOM LOGIC ---
+
+      // Rule 1: Show right shadow ONLY when scroll is at the very beginning.
+      wrapper.classList.toggle("show-right-shadow", scrollLeft === 0);
+
+      // Rule 2: Show left shadow ONLY when scroll is at the very end.
+      wrapper.classList.toggle("show-left-shadow", scrollLeft >= maxScroll - 1);
+    };
+
+    // Run once on load to set the initial state
+    handleScroll();
+
+    // Run on every scroll event
+    wrapper.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Also run if the window is resized, as this might change the overflow
+    window.addEventListener("resize", handleScroll);
+  });
+});
+
+/**
  * Image Zoom - Standalone
  *
  * A lightweight image zoom library with keyboard navigation.
@@ -135,7 +179,7 @@ class ImageZoom {
     this.currentZoomedImage = img;
 
     // Prevent body scroll
-    document.body.classList.add("image-zoomed");
+    document.documentElement.classList.add("image-zoomed");
 
     // Dispatch custom event
     this.dispatchEvent("open", { image: img });
@@ -153,7 +197,7 @@ class ImageZoom {
     this.currentZoomedImage = null;
 
     // Restore body scroll
-    document.body.classList.remove("image-zoomed");
+    document.documentElement.classList.remove("image-zoomed");
 
     // Dispatch custom event
     this.dispatchEvent("close", { image: img });

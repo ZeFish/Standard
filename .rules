@@ -25,7 +25,7 @@ Standard/
 ├── src/
 │   ├── eleventy/              ← 11ty plugin system (main entry)
 │   │   ├── eleventy.js        ← Plugin orchestrator
-│   │   ├── markdown.js        ← Markdown processing
+│   │   ├── down.js        ← Markdown processing
 │   │   ├── filter.js          ← Template filters
 │   │   ├── shortcode.js       ← Template shortcodes
 │   │   ├── backlinks.js       ← Wiki-style backlinks

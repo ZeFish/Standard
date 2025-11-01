@@ -57,7 +57,13 @@
  * @include generate-scale(margin-top, margin-top);
  * Creates: .margin-top-3xs, .margin-top-2xs, .margin-top-xs, .margin-top-s, .margin-top-base, etc.
  */
-@mixin generate-scale($property, $prefix) {
+@mixin generate-scale($prefix, $property) {
+    .#{$prefix}-none {
+        #{$property}: 0 !important;
+    }
+    .#{$prefix}-auto {
+        #{$property}: auto !important;
+    }
     .#{$prefix}-3xs {
         #{$property}: var(--space-3xs) !important;
     }
@@ -70,7 +76,7 @@
     .#{$prefix}-s {
         #{$property}: var(--space-s) !important;
     }
-    .#{$prefix}-base {
+    .#{$prefix} {
         #{$property}: var(--space) !important;
     }
     .#{$prefix}-l {
@@ -102,133 +108,30 @@
 /* =========================== */
 /* MARGIN UTILITIES            */
 /* =========================== */
-
-/* Margin - Top */
-@include generate-scale(margin-top, margin-top);
-.margin-top-0 {
-    margin-top: 0 !important;
-}
-
-/* Margin - Right (inline-end) */
-@include generate-scale(margin-right, margin-right);
-.margin-right-0 {
-    margin-right: 0 !important;
-}
-
-/* Margin - Bottom */
-@include generate-scale(margin-bottom, margin-bottom);
-.margin-bottom-0 {
-    margin-bottom: 0 !important;
-}
-
-/* Margin - Left (inline-start) */
-@include generate-scale(margin-left, margin-left);
-.margin-left-0 {
-    margin-left: 0 !important;
-}
-
-/* Margin - Block (top & bottom) */
-@include generate-scale(margin-block, margin-block);
-.margin-block-0 {
-    margin-block: 0 !important;
-}
-
-/* Margin - Inline (left & right) */
-@include generate-scale(margin-inline, margin-inline);
-.margin-inline-0 {
-    margin-inline: 0 !important;
-}
-
-/* Margin - Auto (centering) */
-.margin-inline-auto {
-    margin-inline: auto !important;
-}
-.margin-left-auto {
-    margin-left: auto !important;
-}
-.margin-right-auto {
-    margin-right: auto !important;
-}
-.margin-top-auto {
-    margin-top: auto !important;
-}
-.margin-bottom-auto {
-    margin-bottom: auto !important;
-}
-
-/* Margin - All sides */
-@include generate-scale(margin, margin);
-.margin-0 {
-    margin: 0 !important;
-}
+@include generate-scale(mt, margin-top);
+@include generate-scale(mr, margin-right);
+@include generate-scale(mb, margin-bottom);
+@include generate-scale(ml, margin-left);
+@include generate-scale(mv, margin-block);
+@include generate-scale(mh, margin-inline);
+@include generate-scale(m, margin);
 
 /* =========================== */
 /* PADDING UTILITIES           */
 /* =========================== */
-
-/* Padding - Top */
-@include generate-scale(padding-top, padding-top);
-.padding-top-0 {
-    padding-top: 0 !important;
-}
-
-/* Padding - Right */
-@include generate-scale(padding-right, padding-right);
-.padding-right-0 {
-    padding-right: 0 !important;
-}
-
-/* Padding - Bottom */
-@include generate-scale(padding-bottom, padding-bottom);
-.padding-bottom-0 {
-    padding-bottom: 0 !important;
-}
-
-/* Padding - Left */
-@include generate-scale(padding-left, padding-left);
-.padding-left-0 {
-    padding-left: 0 !important;
-}
-
-/* Padding - Block (top & bottom) */
-@include generate-scale(padding-block, padding-block);
-.padding-block-0 {
-    padding-block: 0 !important;
-}
-
-/* Padding - Inline (left & right) */
-@include generate-scale(padding-inline, padding-inline);
-.padding-inline-0 {
-    padding-inline: 0 !important;
-}
-
-/* Padding - All sides */
-@include generate-scale(padding, padding);
-.padding-0 {
-    padding: 0 !important;
-}
+@include generate-scale(pt, padding-top);
+@include generate-scale(pr, padding-right);
+@include generate-scale(pb, padding-bottom);
+@include generate-scale(pl, padding-left);
+@include generate-scale(pv, padding-block);
+@include generate-scale(ph, padding-inline);
+@include generate-scale(p, padding);
 
 /* =========================== */
 /* GAP UTILITIES               */
 /* =========================== */
-
-/* Gap (flexbox/grid) */
 @include generate-scale(gap, gap);
-.gap-0 {
-    gap: 0 !important;
-}
-
-/* Row Gap */
-@include generate-scale(row-gap, row-gap);
-.row-gap-0 {
-    row-gap: 0 !important;
-}
-
-/* Column Gap */
 @include generate-scale(column-gap, column-gap);
-.column-gap-0 {
-    column-gap: 0 !important;
-}
 
 /* =========================== */
 /* WIDTH UTILITIES             */
@@ -236,9 +139,6 @@
 
 @include generate-scale(width, width);
 
-.width-0 {
-    width: 0 !important;
-}
 .width-auto {
     width: auto !important;
 }
@@ -366,7 +266,7 @@
     font-size: inherit;
 }
 
-.compact {
+.tight {
     line-height: var(--font-density-s);
 }
 
@@ -413,23 +313,19 @@
  * Line height utilities for controlling text spacing
  */
 
-.tight {
-    line-height: 0.85;
-}
-
-.line-height-none {
+.lh-none {
     line-height: 1;
 }
 
-.compact {
+.lh-tight {
     line-height: var(--font-density-s);
 }
 
-.line-height-normal {
+.lh-base {
     line-height: var(--font-density);
 }
 
-.relaxed {
+.lh-relaxed {
     line-height: 1.6;
 }
 
@@ -470,7 +366,7 @@
     text-transform: capitalize;
 }
 
-.text-transform-normal {
+.text-transform-none {
     text-transform: none;
 }
 
@@ -506,11 +402,60 @@
     color: var(--color-accent) !important;
 }
 
+.red {
+    color: var(--color-red) !important;
+}
+.orange {
+    color: var(--color-orange) !important;
+}
+.yellow {
+    color: var(--color-yellow) !important;
+}
+.green {
+    color: var(--color-green) !important;
+}
+.cyan {
+    color: var(--color-cyan) !important;
+}
+.blue {
+    color: var(--color-blue) !important;
+}
+.purple {
+    color: var(--color-purple) !important;
+}
+.pink {
+    color: var(--color-pink) !important;
+}
+.bg-red {
+    background-color: var(--color-red) !important;
+}
+.bg-orange {
+    background-: var(--color-orange) !important;
+}
+.bg-yellow {
+    background-color: var(--color-yellow) !important;
+}
+.bg-green {
+    background-color: var(--color-green) !important;
+}
+.bg-cyan {
+    background-color: var(--color-cyan) !important;
+}
+.bg-blue {
+    background-color: var(--color-blue) !important;
+}
+.bg-purple {
+    background-color: var(--color-purple) !important;
+}
+.bg-pink {
+    background-color: var(--color-pink) !important;
+}
+
 /* =========================== */
 /* BACKGROUND COLOR UTILITIES  */
 /* =========================== */
 
-.background-secondary {
+.bg-secondary {
     background: var(--color-background-secondary) !important;
 }
 
@@ -552,10 +497,6 @@
 
 .flex {
     display: flex;
-}
-
-.display-grid {
-    display: grid;
 }
 
 /**
@@ -606,12 +547,12 @@
  * Rhythm-aware utilities for consistent spacing
  */
 
-.rhythm-compact {
-    --rhythm-multiplier: 0.5;
+.rhythm-tight {
+    --rhythm-multiplier: var(--space-s);
 }
 
 .rhythm-relaxed {
-    --rhythm-multiplier: 1.5;
+    --rhythm-multiplier: var(--space-l);
 }
 
 /* =========================== */
@@ -646,27 +587,27 @@
  * Width constraints for optimal reading experience
  */
 
-.width-line-xs {
+.line-xs {
     max-width: var(--line-width-xs);
 }
 
-.width-line-s {
+.ine-s {
     max-width: var(--line-width-s);
 }
 
-.width-line {
+.line {
     max-width: var(--line-width);
 }
 
-.width-line-l {
+.line-l {
     max-width: var(--line-width-l);
 }
 
-.width-line-xl {
+.line-xl {
     max-width: var(--line-width-xl);
 }
 
-.width-line-full {
+.line-full {
     max-width: var(--line-width-full);
 }
 
@@ -692,7 +633,7 @@
  * Negate horizontal body padding (left/right)
  * Allows full-width backgrounds while keeping vertical padding
  */
-.negate-body-padding {
+.body-p-neg {
     margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
     padding-inline: calc(var(--space) * var(--body-padding-multiplier));
 
@@ -711,7 +652,7 @@
  * Removes the generous bottom padding applied to body elements
  * Useful when you want footer to sit flush at bottom
  */
-.negate-body-padding-bottom {
+.body-p-neg-footer {
     margin-block-end: calc(
         (var(--space) * var(--body-padding-multiplier) * 1.5) * -1
     );
@@ -723,7 +664,7 @@
     }
 }
 
-.negate-body-padding-top {
+.body-p-neg-header {
     margin-block-start: calc(
         (var(--space) * var(--body-padding-multiplier) * 1) * -1
     );
@@ -740,7 +681,7 @@
  * Full-width element that extends to viewport edges on all sides except top
  * Combines .negate-body-padding + .negate-body-padding-bottom
  */
-.negate-body-padding-full {
+.body-p-neg-full {
     margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
     margin-block-end: calc(
         (var(--space) * var(--body-padding-multiplier) * 1.5) * -1
@@ -793,48 +734,48 @@
 
 /* Small screens (mobile): ≤768px */
 @media (max-width: $small) {
-    .sm-hidden {
+    .sm\:hidden {
         display: none !important;
     }
-    .sm-only {
+    .sm\:only {
         display: inherit !important;
     }
-    .md-only {
+    .md\:only {
         display: none !important;
     }
-    .lg-only {
+    .lg\:only {
         display: none !important;
     }
 }
 
 /* Medium screens (tablet): 769px-1024px */
 @media (min-width: calc($small + 1px)) and (max-width: $large) {
-    .md-hidden {
+    .md\:hidden {
         display: none !important;
     }
-    .sm-only {
+    .sm\:only {
         display: none !important;
     }
-    .md-only {
+    .md\:only {
         display: inherit !important;
     }
-    .lg-only {
+    .lg\:only {
         display: none !important;
     }
 }
 
 /* Large screens (desktop): ≥1024px */
 @media (min-width: calc($large + 1px)) {
-    .lg-hidden {
+    .lg\:hidden {
         display: none !important;
     }
-    .sm-only {
+    .sm\:only {
         display: none !important;
     }
-    .md-only {
+    .md\:only {
         display: none !important;
     }
-    .lg-only {
+    .lg\:only {
         display: inherit !important;
     }
 }
@@ -877,6 +818,7 @@
  */
 
 /* Fixed column counts */
+.columns,
 .columns-2 {
     columns: 2;
     column-gap: var(--grid-gap);
@@ -899,6 +841,13 @@
     column-gap: var(--grid-gap);
 }
 
+[class|="columns"].tight {
+    column-gap: var(--space-s);
+}
+
+[class|="columns"].relaxed {
+    column-gap: var(--space-l);
+}
 /* Column gap variants */
 .columns-gap-tight {
     column-gap: var(--space-s);

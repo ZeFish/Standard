@@ -40,7 +40,7 @@
 
 export default function (eleventyConfig, options = {}) {
   const {
-    wrapperClass = "table-wrapper",
+    wrapperClass = "scroll",
     onlyHtml = true,
     skipWrappedTables = true,
   } = options;

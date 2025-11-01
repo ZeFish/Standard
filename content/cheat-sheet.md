@@ -394,7 +394,7 @@ Sighted users see: "Read more"
 
 ---
 
-### Tight Spacing (compact UI, dense layouts)
+### Tight Spacing (tight UI, dense layouts)
 
 ```html
 <div class="padding-xs gap-xs">
@@ -402,7 +402,7 @@ Sighted users see: "Read more"
   <button>Action 2</button>
 </div>
 ```
-**Why**: Default spacing (1rem) is too generous for toolbars, inline buttons, compact cards. Use `xs` (0.5rem) for tighter layouts.
+**Why**: Default spacing (1rem) is too generous for toolbars, inline buttons, tight cards. Use `xs` (0.5rem) for tighter layouts.
 
 ---
 
@@ -410,7 +410,7 @@ Sighted users see: "Read more"
 
 | Size | Usage | Value | When to use |
 |------|-------|-------|-------------|
-| `xs` | Tiny gaps, compact UI | ~0.5rem | Button groups, inline icons |
+| `xs` | Tiny gaps, tight UI | ~0.5rem | Button groups, inline icons |
 | `s` | Small spacing | ~0.75rem | Form fields, card padding |
 | `base` | **Normal spacing** | ~1rem | Default gaps, standard rhythm |
 | `l` | Section spacing | ~2rem | Between major sections |

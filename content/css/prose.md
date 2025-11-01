@@ -44,22 +44,33 @@ The `.prose` class transforms any container into a beautifully styled, readable 
 The prose system includes six levels of heading hierarchy, each with carefully calculated sizing and spacing:
 
 **All heading levels:**
-<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <h1>H1 - Main Article Heading</h1>
   <p style="font-size: 0.875rem; color: #666;">This is your primary page heading, largest and most prominent.</p>
-  
+
+  <p class="small">
+      <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
+      <img src="https://picsum.photos/400/300?random=2" alt="Demo 2" />
+      <img src="https://picsum.photos/400/300?random=3" alt="Demo 3" />
+    </p>
+    <p class="small">
+      <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
+      <img src="https://picsum.photos/400/300?random=2" alt="Demo 2" />
+      <img src="https://picsum.photos/400/300?random=3" alt="Demo 3" />
+    </p>
+
   <h2>H2 - Section Heading</h2>
   <p style="font-size: 0.875rem; color: #666;">Divides content into major sections within the article.</p>
-  
+
   <h3>H3 - Subsection Heading</h3>
   <p style="font-size: 0.875rem; color: #666;">Creates a third level of organization for detailed content.</p>
-  
+
   <h4>H4 - Minor Heading</h4>
   <p style="font-size: 0.875rem; color: #666;">Breaks up content within subsections.</p>
-  
+
   <h5>H5 - Sub-minor Heading</h5>
   <p style="font-size: 0.875rem; color: #666;">Rarely used but available for deep nesting.</p>
-  
+
   <h6>H6 - Small Heading</h6>
   <p style="font-size: 0.875rem; color: #666;">The smallest heading level, typically used for special sections.</p>
 </div>
@@ -68,13 +79,13 @@ The prose system includes six levels of heading hierarchy, each with carefully c
 <article class="prose">
   <h1>Main Article Heading</h1>
   <p>Introduction paragraph...</p>
-  
+
   <h2>First Major Section</h2>
   <p>Content for this section...</p>
-  
+
   <h3>Subsection within first section</h3>
   <p>More detailed content...</p>
-  
+
   <h2>Second Major Section</h2>
   <p>More content...</p>
 </article>
@@ -85,7 +96,7 @@ The prose system includes six levels of heading hierarchy, each with carefully c
 Paragraphs automatically receive optimal line height, spacing, and typography:
 
 **Paragraphs with rhythm spacing:**
-<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <p>This paragraph has proper line-height (1.618 for body text) for comfortable reading. The golden ratio ensures each line has optimal spacing. Longer paragraphs are easier to read when line-height is generous but not excessive.</p>
   <p>Each paragraph is automatically separated from the next by the rhythm spacing. This creates visual breathing room and helps readers process content in digestible chunks. The spacing is based on your typography's line-height multiplier.</p>
   <p>The prose system applies these styles automatically. You don't need to add classes to individual paragraphs—just write semantic HTML and the system handles the rest.</p>
@@ -104,7 +115,7 @@ Paragraphs automatically receive optimal line height, spacing, and typography:
 Lists are automatically styled with proper indentation and spacing within prose containers:
 
 **Unordered list example:**
-<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <h3>Benefits of the Prose System</h3>
   <ul>
     <li>Automatic vertical rhythm keeps content visually harmonious</li>
@@ -116,7 +127,7 @@ Lists are automatically styled with proper indentation and spacing within prose 
 </div>
 
 **Ordered list example:**
-<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <h3>Steps to Create a Prose Container</h3>
   <ol>
     <li>Add the <code>.prose</code> class to your container element</li>
@@ -128,7 +139,7 @@ Lists are automatically styled with proper indentation and spacing within prose 
 </div>
 
 **Description list example:**
-<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <h3>Typography Terms</h3>
   <dl>
     <dt>Line Height</dt>
@@ -211,7 +222,7 @@ console.log('Prose styling activated!');
 ```html
 <article class="prose">
   <p>Inline code example: use <code>variable_name</code> in your code.</p>
-  
+
   <pre><code>
 // Code block with multiple lines
 function exampleFunction() {
@@ -346,7 +357,7 @@ Combine prose with sidebar layouts for more complex article structures:
     <h1>Article Title</h1>
     <p>Main article content with optimal reading width...</p>
   </article>
-  
+
   <aside>
     <h3>Related Content</h3>
     <ul>
@@ -364,15 +375,15 @@ The prose system carefully manages spacing before and after headings for visual 
 **Heading spacing in context:**
 <div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <p>This paragraph comes before a heading. Notice the spacing below it.</p>
-  
+
   <h2>This is an H2 Heading</h2>
-  
+
   <p>The paragraph after a heading has consistent spacing. H2 headings have larger top margin (spacing above) than bottom margin (spacing below) to maintain rhythm.</p>
-  
+
   <h3>This is an H3 Heading</h3>
-  
+
   <p>Smaller headings like H3 have proportionally smaller spacing. The rhythm system maintains perfect alignment throughout the entire document.</p>
-  
+
   <p>Multiple paragraphs between headings maintain the same consistent spacing.</p>
 </div>
 
@@ -380,11 +391,11 @@ The prose system carefully manages spacing before and after headings for visual 
 <article class="prose">
   <h1>Main Heading</h1>
   <p>Paragraph after main heading...</p>
-  
+
   <h2>Section Heading</h2>
   <p>Content under this section...</p>
   <p>Another paragraph...</p>
-  
+
   <h3>Subsection Heading</h3>
   <p>More detailed content...</p>
 </article>
@@ -407,12 +418,12 @@ Special content can be highlighted using callout styling:
 ```html
 <article class="prose">
   <p>Regular prose content...</p>
-  
+
   <div class="callout">
     <div class="callout-title">Important Note</div>
     <p>Content inside the callout gets highlighted styling.</p>
   </div>
-  
+
   <p>More prose continues below...</p>
 </article>
 ```
@@ -436,12 +447,12 @@ Images within prose maintain visual harmony:
 ```html
 <article class="prose">
   <p>Introduction before the image...</p>
-  
+
   <figure>
     <img src="/images/example.jpg" alt="Description of image">
     <figcaption>Caption text appears below the image</figcaption>
   </figure>
-  
+
   <p>Content continues after the image...</p>
 </article>
 ```
@@ -504,14 +515,14 @@ Sometimes you need full-width elements inside prose containers:
 ```html
 <article class="prose">
   <p>Regular prose content...</p>
-  
+
   <div class="full">
     <!-- Full-width element breaks out of prose constraints -->
     <section style="background: var(--color-accent);">
       Full-width impactful content
     </section>
   </div>
-  
+
   <p>Prose continues at normal width after the full-width section...</p>
 </article>
 ```
@@ -524,7 +535,7 @@ You can nest prose containers for different contexts:
 <div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <h2>Main Article Section</h2>
   <p>This is the main prose content. You can have different prose containers for different sections of content.</p>
-  
+
   <div style="margin-top: 2rem; padding: 1.5rem; background-color: #fff9e6; border-radius: 0.5rem;">
     <h3>Nested Prose Container</h3>
     <p>This nested section has its own prose styling applied. It might represent a sidebar, special section, or supplementary content with different styling context.</p>
@@ -535,7 +546,7 @@ You can nest prose containers for different contexts:
 <article class="prose">
   <h1>Main Article</h1>
   <p>Main content...</p>
-  
+
   <section class="prose">
     <h2>Special Section</h2>
     <p>This section has its own prose styling context...</p>
@@ -551,16 +562,16 @@ Override prose defaults with CSS variables:
 :root {
   /* Heading spacing multiplier */
   --rhythm-multiplier: 1;
-  
+
   /* Line height for body text */
   --line-height-base: 1.618;
-  
+
   /* Line height for headings */
   --line-height-headings: 1.2;
-  
+
   /* Font sizes (automatically scaled) */
   --font-size-base: 16px;
-  
+
   /* Reading width (prose container max-width) */
   --line-width: 42rem;
 }
@@ -598,19 +609,19 @@ Override prose defaults with CSS variables:
 <article class="prose">
   <h1>Complete Guide to Prose Styling</h1>
   <p>Introduction paragraph setting up the article topic...</p>
-  
+
   <h2>Getting Started</h2>
   <p>Section content here...</p>
-  
+
   <h3>First Concept</h3>
   <p>Details about the first concept...</p>
-  
+
   <h3>Second Concept</h3>
   <p>Details about the second concept...</p>
-  
+
   <h2>Advanced Topics</h2>
   <p>Moving into more complex territory...</p>
-  
+
   <h3>Deep Dive</h3>
   <p>In-depth exploration of advanced topics...</p>
 </article>
@@ -624,7 +635,7 @@ Override prose defaults with CSS variables:
     <h1>In-Depth Article</h1>
     <p>Long-form content with perfect readability...</p>
   </article>
-  
+
   <aside class="prose" style="width: 100%;">
     <h3>Quick Reference</h3>
     <ul>
@@ -640,17 +651,17 @@ Override prose defaults with CSS variables:
 ```html
 <article class="prose">
   <h1>API Documentation</h1>
-  
+
   <h2>Installation</h2>
   <pre><code>npm install @example/package</code></pre>
-  
+
   <h2>Basic Usage</h2>
   <p>Here's how to use the package:</p>
   <pre><code class="language-javascript">
 import { example } from '@example/package';
 example();
   </code></pre>
-  
+
   <h2>Advanced Configuration</h2>
   <p>For advanced use cases...</p>
 </article>

@@ -3925,7 +3925,7 @@ permalink: "/report/"
 
 ---
 
-### 46. docs/table-wrapper-compact-variant/index.html
+### 46. docs/table-wrapper-tight-variant/index.html
 
 ⚠️ **Score: 72%** (28/39 passed)
 
@@ -3982,8 +3982,8 @@ permalink: "/report/"
 <details>
 <summary>✅ Passed Checks (28)</summary>
 
-- ✅ H1 Tag: Found 1 H1 tag: "Table Wrapper Compact Variant"
-- ✅ Title Length: Title length is optimal (50 chars): "Table Wrapper Compact Variant · Standard Framework"
+- ✅ H1 Tag: Found 1 H1 tag: "Table Wrapper tight Variant"
+- ✅ Title Length: Title length is optimal (50 chars): "Table Wrapper tight Variant · Standard Framework"
 - ✅ Meta Description: Meta description is optimal (149 chars)
 - ✅ Language Attribute: Language declared: fr
 - ✅ Canonical URL: Canonical URL found
@@ -5824,7 +5824,7 @@ permalink: "/report/"
 
 ---
 
-### 67. docs/pagination-compact-variant/index.html
+### 67. docs/pagination-tight-variant/index.html
 
 ⚠️ **Score: 72%** (28/39 passed)
 
@@ -5881,8 +5881,8 @@ permalink: "/report/"
 <details>
 <summary>✅ Passed Checks (28)</summary>
 
-- ✅ H1 Tag: Found 1 H1 tag: "Pagination Compact Variant"
-- ✅ Title Length: Title length is optimal (47 chars): "Pagination Compact Variant · Standard Framework"
+- ✅ H1 Tag: Found 1 H1 tag: "Pagination tight Variant"
+- ✅ Title Length: Title length is optimal (47 chars): "Pagination tight Variant · Standard Framework"
 - ✅ Meta Description: Meta description is optimal (149 chars)
 - ✅ Language Attribute: Language declared: fr
 - ✅ Canonical URL: Canonical URL found
@@ -12061,7 +12061,7 @@ permalink: "/report/"
 
 ---
 
-### 136. docs/accordion-compact-variant/index.html
+### 136. docs/accordion-tight-variant/index.html
 
 ⚠️ **Score: 72%** (28/39 passed)
 
@@ -12118,8 +12118,8 @@ permalink: "/report/"
 <details>
 <summary>✅ Passed Checks (28)</summary>
 
-- ✅ H1 Tag: Found 1 H1 tag: "Accordion Compact Variant"
-- ✅ Title Length: Title length is optimal (46 chars): "Accordion Compact Variant · Standard Framework"
+- ✅ H1 Tag: Found 1 H1 tag: "Accordion tight Variant"
+- ✅ Title Length: Title length is optimal (46 chars): "Accordion tight Variant · Standard Framework"
 - ✅ Meta Description: Meta description is optimal (149 chars)
 - ✅ Language Attribute: Language declared: fr
 - ✅ Canonical URL: Canonical URL found

@@ -156,14 +156,6 @@
         --rhythm-multiplier-block: calc(var(--rhythm-multiplier) * 3);
     }
 
-    /* Adjacent images get reduced spacing */
-    p:has(img) + p:has(img) {
-        margin-block-start: calc(
-            (var(--space-l) * var(--rhythm-multiplier) * -1) +
-                (var(--space) / 4)
-        ) !important;
-    }
-
     /* Reset first-child spacing for special blocks */
     blockquote > :first-child,
     pre > :first-child,
@@ -272,8 +264,8 @@
         margin-block-end: 0;
     }
 
-    ul.compact li,
-    ol.compact li,
+    ul.tight li,
+    ol.tight li,
     li:last-of-type {
         /*line-height: var(--line-height);*/
         margin-block-end: 0;
@@ -409,9 +401,9 @@
         background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
     }
 
-    /* ADD: Compact table variant */
-    .compact th,
-    .compact td {
+    /* ADD: tight table variant */
+    .tight th,
+    .tight td {
         padding-block: calc(var(--space-2xs) * var(--rhythm-multiplier));
         padding-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
     }
@@ -426,7 +418,7 @@
     --rhythm-multiplier: 0.5;
 }
 
-.rhythm-loose {
+.rhythm-relaxed {
     --rhythm-multiplier: 1.5;
 }
 

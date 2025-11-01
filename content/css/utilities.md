@@ -588,7 +588,7 @@ All three utilities automatically adjust for mobile breakpoints using `--body-mo
 // Automatically switches at mobile breakpoint
 .negate-body-padding {
     margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
-    
+
     @media (max-width: 768px) {
         margin-inline: calc(var(--space) * var(--body-mobile-padding-multiplier) * -1);
     }
@@ -636,9 +636,9 @@ Control rhythm multiplier for consistent spacing.
   <p>Elements follow the vertical rhythm system</p>
 </div>
 
-<div class="rhythm rhythm-loose padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem;">
-  <h4 class="margin-top-0">Loose Rhythm</h4>
-  <p>Increased spacing between elements (.rhythm-loose)</p>
+<div class="rhythm rhythm-relaxed padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem;">
+  <h4 class="margin-top-0">relaxed Rhythm</h4>
+  <p>Increased spacing between elements (.rhythm-relaxed)</p>
   <p>Elements are spaced at 150% of normal rhythm</p>
 </div>
 ```

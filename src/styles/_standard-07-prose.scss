@@ -123,7 +123,8 @@
     &:not(.no-grid) {
         p:has(img) {
             display: flex;
-            gap: calc(var(--space) / 4);
+            --gap: var(--space-2xs);
+            gap: var(--gap);
             border-radius: var(--border-radius);
         }
 
@@ -158,6 +159,13 @@
         .callout p:has(img),
         .callout p:has(img) br {
             display: block;
+        }
+
+        /* Adjacent images get reduced spacing */
+        p:has(img) + p:has(img) {
+            margin-block-start: calc(
+                (var(--space) * var(--rhythm-multiplier) * -1) + (var(--gap))
+            ) !important;
         }
     }
 

@@ -42,18 +42,6 @@
  * @see standard-04-rhythm.scss
  */
 
-/* Grid Design Tokens - Using logical properties */
-:root {
-    /* Grid system tokens */
-    --grid-cols: 12;
-    --grid-gap: var(--space);
-    --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
-
-    /* Container tokens */
-    --container-max: 1200px;
-    --container-standard: var(--space);
-}
-
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
    Use this as your single grid across the site (replaces old .h-grid API).
    Relies on logical properties and Harmony tokens: --space, calc(var(--space) / 4), --space-l, borders, etc.
@@ -62,17 +50,18 @@
 /* Grid container */
 .grid {
     display: grid;
-    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
     column-gap: var(--grid-gap);
     row-gap: var(--grid-row-gap);
 }
 
 /* Gap variants aligned to rhythm */
 .grid.tight {
-    --grid-gap: calc(var(--space) / 4);
+    --grid-gap: var(--space-3xs);
     --grid-row-gap: var(--space-s);
 }
-.grid.wide {
+.grid.relaxed {
     --grid-gap: var(--space-l);
     --grid-row-gap: var(--space-xl);
 }
@@ -101,39 +90,39 @@
 /* Responsive spans/starts: md ≥ #{$small}, lg ≥ #{$large} */
 @media (max-width: #{$small}) {
     @for $i from 1 through 12 {
-        .grid-sm-#{$i} {
+        .sm\:grid-#{$i} {
             display: grid;
             grid-template-columns: repeat(#{$i}, 1fr);
             column-gap: var(--grid-gap);
             row-gap: var(--grid-row-gap);
         }
-        .col-sm-#{$i} {
+        .sm\:col-#{$i} {
             grid-column: span #{$i};
         }
-        .start-sm-#{$i} {
+        .sm\:start-#{$i} {
             grid-column-start: #{$i};
         }
     }
-    .col-sm-row {
+    .sm\:col-row {
         grid-column: 1 / -1;
     }
 }
 @media (min-width: #{$large}) {
     @for $i from 1 through 12 {
-        .grid-lg-#{$i} {
+        .lg\:grid-#{$i} {
             display: grid;
             grid-template-columns: repeat(#{$i}, 1fr);
             column-gap: var(--grid-gap);
             row-gap: var(--grid-row-gap);
         }
-        .col-lg-#{$i} {
+        .lg\:col-#{$i} {
             grid-column: span #{$i};
         }
-        .start-lg-#{$i} {
+        .lg\:start-#{$i} {
             grid-column-start: #{$i};
         }
     }
-    .col-lg-row {
+    .lg\:col-row {
         grid-column: 1 / -1;
     }
 }
@@ -195,27 +184,27 @@ hr.col-row {
 /* Responsive overrides for the var-based API */
 @media (max-width: #{$small}) {
     @for $i from 1 through 12 {
-        .span-sm-#{$i} {
+        .sm\:span-#{$i} {
             --span: #{$i};
         }
-        .startv-sm-#{$i} {
+        .sm\:startv-#{$i} {
             --start: #{$i};
         }
     }
 }
 @media (min-width: #{$large}) {
     @for $i from 1 through 12 {
-        .span-lg-#{$i} {
+        .lg\:span-#{$i} {
             --span: #{$i};
         }
-        .startv-lg-#{$i} {
+        .lg\:startv-#{$i} {
             --start: #{$i};
         }
     }
 }
 
 /* Mobile fallback: stack free columns full-width */
-@media (max-width: 767.98px) {
+@media (max-width: #{$small}) {
     .free-col {
         grid-column: 1 / -1;
     }
@@ -304,8 +293,6 @@ hr.col-row {
     }
 }
 
-
-[class^="grid"] .container-hero,
-[class*=" grid"] .container-hero {
+[class|="grid"] .container-hero {
     margin-inline: 0;
 }
