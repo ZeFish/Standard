@@ -161,7 +161,7 @@ export default function (eleventyConfig, site = {}) {
       const writeButton = `<button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">Write a Comment</button>`;
 
       const form = `<div id="comment-form-wrapper" style="display: none;">
-  <form id="comment-form" class="small container-small" method="post" action="${apiUrl}" novalidate>
+  <form id="comment-form" method="post" action="${apiUrl}" novalidate>
   <fieldset>
     <legend>Leave a Comment</legend>
 
@@ -248,7 +248,7 @@ export default function (eleventyConfig, site = {}) {
 </script>`;
 
       return (
-        "<div class='container-small smaller'>" +
+        "<div class='comments-box container-small'>" +
         commentsContainer +
         "\n" +
         writeButton +

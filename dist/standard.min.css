@@ -10,13 +10,13 @@
   --ratio-eighthstep: 1.062;
   
   --font-ratio: var(--ratio-silver);
-  --font-density: 1.2;
-  --font-density-s: 1;
+  --font-density: 1.5;
+  --font-density-s: max(calc(var(--font-density) * 0.75), 1);
   --font-mobile-size: 1.1rem;
   --font-mobile-ratio: var(--ratio-halfstep);
   --font-mobile-density: 1.2;
-  --rhythm-multiplier: 0.66;
-  --rhythm-multiplier-block: 1;
+  --rhythm-multiplier: var(--font-density);
+  --rhythm-multiplier-block: var(--font-density);
   --body-padding-multiplier: 1;
   --body-mobile-padding-multiplier: 1;
   
@@ -29,16 +29,17 @@
   --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 1));
   --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
   --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+  --baseline: calc(1rlh / var(--font-density));
   
-  --space-3xs: calc(1rlh / 5);
-  --space-2xs: calc(1rlh / 4);
-  --space-xs: calc(1rlh / 3);
-  --space-s: calc(1rlh / 2);
-  --space: 1rlh; 
-  --space-l: calc(2 * 1rlh);
-  --space-xl: calc(3 * 1rlh);
-  --space-2xl: calc(4 * 1rlh);
-  --space-3xl: calc(5 * 1rlh);
+  --space-3xs: calc(var(--baseline) / 5);
+  --space-2xs: calc(var(--baseline) / 4);
+  --space-xs: calc(var(--baseline) / 3);
+  --space-s: calc(var(--baseline) / 2);
+  --space: var(--baseline); 
+  --space-l: calc(2 * var(--baseline));
+  --space-xl: calc(3 * var(--baseline));
+  --space-2xl: calc(4 * var(--baseline));
+  --space-3xl: calc(5 * var(--baseline));
   
   --hr-thickness: 1px;
   --border-radius: var(--space-2xs);
@@ -85,6 +86,7 @@
   
   --color-light-background: white;
   --color-light-foreground: #262626;
+  --color-light-accent: var(--color-blue);
   --color-light-red: #b14c42; 
   --color-light-orange: #d78a5a; 
   --color-light-yellow: #c8a840; 
@@ -97,6 +99,7 @@
   
   --color-dark-background: #0f0f0f; 
   --color-dark-foreground: #dbdbdb; 
+  --color-dark-accent: var(--color-yellow);
   --color-dark-red: #db6057; 
   --color-dark-orange: #e58f5c; 
   --color-dark-yellow: #dcb757; 
@@ -105,14 +108,10 @@
   --color-dark-blue: #6d96b8; 
   --color-dark-purple: #a18db6; 
   --color-dark-pink: #d49ab8; 
-  --color-dark-accent: var(--color-dark-yellow);
-  --color-dark-success: var(--color-dark-green);
-  --color-dark-warning: var(--color-dark-orange);
-  --color-dark-error: var(--color-dark-red);
-  --color-dark-info: var(--color-dark-blue);
   
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
+  --color-accent: var(--color-light-accent);
   --color-header: var(--color-light-header, var(--color-foreground));
   --color-red: var(--color-light-red);
   --color-orange: var(--color-light-orange);
@@ -122,11 +121,10 @@
   --color-blue: var(--color-light-blue);
   --color-purple: var(--color-light-purple);
   --color-pink: var(--color-light-pink);
-  --color-accent: var(--color-accent);
-  --color-success: var(--color-success);
-  --color-warning: var(--color-warning);
-  --color-error: var(--color-error);
-  --color-info: var(--color-info);
+  --color-success: var(--color-green);
+  --color-warning: var(--color-yellow);
+  --color-error: var(--color-red);
+  --color-info: var(--color-blue);
   
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(
@@ -163,6 +161,7 @@
     
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
+    --color-accent: var(--color-dark-accent);
     --color-header: var(--color-dark-header), var(--color-foreground);
     --color-red: var(--color-dark-red);
     --color-orange: var(--color-dark-orange);
@@ -172,11 +171,6 @@
     --color-blue: var(--color-dark-blue);
     --color-purple: var(--color-dark-purple);
     --color-pink: var(--color-dark-pink);
-    --color-accent: var(--color-dark-accent);
-    --color-success: var(--color-dark-success);
-    --color-warning: var(--color-dark-warning);
-    --color-error: var(--color-dark-error);
-    --color-info: var(--color-dark-info);
     
     --color-muted: color-mix(
         in srgb,
@@ -686,7 +680,7 @@ pre {
   font-size: var(--scale-s);
   border: var(--border);
   border-radius: var(--border-radius);
-  padding: var(--space-s);
+  padding: var(--space);
   overflow-x: auto;
   line-height: 1.5;
   box-shadow: inset var(--shadow);
@@ -712,6 +706,7 @@ blockquote {
   border-inline-start: var(--space-3xs) solid var(--color-muted);
   background: var(--color-background-secondary);
   color: var(--color-muted);
+  padding: var(--space);
 }
 
 
@@ -823,12 +818,11 @@ nav li.is-active a {
 button,
 a.button {
   font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--scale-s);
-  font-weight: var(--font-weight);
+  font-weight: var(--bold-weight);
   line-height: var(--font-density);
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-2xs) var(--space-xs);
   border-radius: var(--border-radius);
-  background: color-mix(in srgb, var(--color-accent) 85%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: var(--color-background);
   border: var(--border);
   border-color: var(--color-border);
@@ -850,14 +844,12 @@ a.button {
 
 button:hover,
 a.button:hover {
-  opacity: 0.9;
-  color: var(--color-background);
+  background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
 }
 
 button:active,
 a.button:active {
-  opacity: 0.8;
-  color: var(--color-background);
+  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-background-secondary));
 }
 
 button:focus-visible,
@@ -882,8 +874,6 @@ input,
 textarea,
 select {
   font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--font-size);
-  line-height: var(--line-height);
   padding: var(--space-xs);
   border-radius: var(--border-radius);
   color: var(--color-foreground);
@@ -916,8 +906,6 @@ legend {
 label {
   display: inline-block;
   font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--font-size);
-  color: var(--color-foreground);
   cursor: pointer;
   font-weight: var(--bold-weight, bold);
 }
@@ -1225,10 +1213,6 @@ mark {
   
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) blockquote,
-:where(html:not(.no-rhythm), .rhythm) pre {
-  padding: var(--space);
-}
 :where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
   display: grid;
   gap: calc(var(--space-s) * var(--rhythm-multiplier));
@@ -1241,7 +1225,7 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) fieldset {
   padding: calc(var(--space-s) * var(--rhythm-multiplier));
   display: grid;
-  gap: calc(var(--space-xs) * var(--rhythm-multiplier));
+  gap: calc(var(--space-3xs) * var(--rhythm-multiplier));
 }
 :where(html:not(.no-rhythm), .rhythm) legend {
   padding-inline: calc(var(--space-xs) * var(--rhythm-multiplier));
@@ -2406,7 +2390,7 @@ hr.col-row {
 }
 :where(.prose) h2 {
   margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
 }
 :where(.prose) h3 {
   margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
@@ -2643,7 +2627,6 @@ html:not(.no-rhythm) :has(img.zoomed)::before,
 }
 .md blockquote {
   line-height: var(--font-density-s);
-  padding: var(--space);
   font-style: italic;
 }
 .md .callout {
@@ -3650,6 +3633,14 @@ dialog.modal::backdrop {
 
 .menu li::before {
   display: none;
+}
+
+.comments-box {
+  font-size: var(--scale-s);
+}
+.comments-box #form-status {
+  font-family: var(--font-interface);
+  font-size: var(--scale-xs);
 }
 
 

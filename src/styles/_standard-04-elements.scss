@@ -111,7 +111,7 @@ pre {
     font-size: var(--scale-s);
     border: var(--border);
     border-radius: var(--border-radius);
-    padding: var(--space-s);
+    padding: var(--space);
     overflow-x: auto;
     line-height: 1.5;
     box-shadow: inset var(--shadow);
@@ -137,6 +137,7 @@ blockquote {
     border-inline-start: var(--space-3xs) solid var(--color-muted);
     background: var(--color-background-secondary);
     color: var(--color-muted);
+    padding: var(--space);
 }
 
 /* Tables (typography) */
@@ -252,16 +253,16 @@ nav li.is-active a {
 button,
 a.button {
     font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--scale-s);
-    font-weight: var(--font-weight);
+
+    font-weight: var(--bold-weight);
     line-height: var(--font-density);
 
-    padding: var(--space-xs) var(--space-s);
+    padding: var(--space-2xs) var(--space-xs);
     border-radius: var(--border-radius);
 
     background: color-mix(
         in srgb,
-        var(--color-accent) 85%,
+        var(--color-accent) 65%,
         var(--color-background-secondary)
     );
     color: var(--color-background);
@@ -290,14 +291,20 @@ a.button {
 
 button:hover,
 a.button:hover {
-    opacity: 0.9;
-    color: var(--color-background);
+    background: color-mix(
+        in srgb,
+        var(--color-accent) 80%,
+        var(--color-background-secondary)
+    );
 }
 
 button:active,
 a.button:active {
-    opacity: 0.8;
-    color: var(--color-background);
+    background: color-mix(
+        in srgb,
+        var(--color-accent) 50%,
+        var(--color-background-secondary)
+    );
 }
 
 button:focus-visible,
@@ -323,8 +330,6 @@ input,
 textarea,
 select {
     font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--font-size);
-    line-height: var(--line-height);
 
     padding: var(--space-xs);
     border-radius: var(--border-radius);
@@ -367,8 +372,6 @@ legend {
 label {
     display: inline-block;
     font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--font-size);
-    color: var(--color-foreground);
     cursor: pointer;
     font-weight: var(--bold-weight, bold);
 }

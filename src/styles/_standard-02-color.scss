@@ -45,6 +45,7 @@
     /* Natural, paper-like, analog-inspired colors */
     --color-light-background: white;
     --color-light-foreground: #262626;
+    --color-light-accent: var(--color-blue);
 
     --color-light-red: #b14c42; /* dusty red clay */
     --color-light-orange: #d78a5a; /* trail-worn orange */
@@ -59,6 +60,8 @@
     /* Soft-glow, night-usable, retro tech inspired */
     --color-dark-background: #0f0f0f; /* #111 */
     --color-dark-foreground: #dbdbdb; /* #aaa */
+    --color-dark-accent: var(--color-yellow);
+
     --color-dark-red: #db6057; /* ember red */
     --color-dark-orange: #e58f5c; /* lantern orange */
     --color-dark-yellow: #dcb757; /* candlelight gold */
@@ -68,15 +71,10 @@
     --color-dark-purple: #a18db6; /* smoky violet dusk */
     --color-dark-pink: #d49ab8; /* faded polaroid blush */
 
-    --color-dark-accent: var(--color-dark-yellow);
-    --color-dark-success: var(--color-dark-green);
-    --color-dark-warning: var(--color-dark-orange);
-    --color-dark-error: var(--color-dark-red);
-    --color-dark-info: var(--color-dark-blue);
-
     /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
     --color-background: var(--color-light-background);
     --color-foreground: var(--color-light-foreground);
+    --color-accent: var(--color-light-accent);
 
     --color-header: var(--color-light-header, var(--color-foreground));
 
@@ -89,11 +87,10 @@
     --color-purple: var(--color-light-purple);
     --color-pink: var(--color-light-pink);
 
-    --color-accent: var(--color-accent);
-    --color-success: var(--color-success);
-    --color-warning: var(--color-warning);
-    --color-error: var(--color-error);
-    --color-info: var(--color-info);
+    --color-success: var(--color-green);
+    --color-warning: var(--color-yellow);
+    --color-error: var(--color-red);
+    --color-info: var(--color-blue);
 
     /* ===== COMPUTED SEMANTIC COLORS ===== */
     --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
@@ -138,6 +135,7 @@
         /* Override semantic tokens to use dark palette */
         --color-background: var(--color-dark-background);
         --color-foreground: var(--color-dark-foreground);
+        --color-accent: var(--color-dark-accent);
 
         --color-header: var(--color-dark-header), var(--color-foreground);
 
@@ -149,12 +147,6 @@
         --color-blue: var(--color-dark-blue);
         --color-purple: var(--color-dark-purple);
         --color-pink: var(--color-dark-pink);
-
-        --color-accent: var(--color-dark-accent);
-        --color-success: var(--color-dark-success);
-        --color-warning: var(--color-dark-warning);
-        --color-error: var(--color-dark-error);
-        --color-info: var(--color-dark-info);
 
         /* Adjusted computed colors for dark mode */
         --color-muted: color-mix(

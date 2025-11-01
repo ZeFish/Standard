@@ -34,15 +34,15 @@
 
     /* Current ratio (configurable) */
     --font-ratio: var(--ratio-silver);
-    --font-density: 1.2;
-    --font-density-s: 1;
+    --font-density: 1.5;
+    --font-density-s: max(calc(var(--font-density) * 0.75), 1);
 
     --font-mobile-size: 1.1rem;
     --font-mobile-ratio: var(--ratio-halfstep);
     --font-mobile-density: 1.2;
 
-    --rhythm-multiplier: 0.66;
-    --rhythm-multiplier-block: 1;
+    --rhythm-multiplier: var(--font-density);
+    --rhythm-multiplier-block: var(--font-density);
 
     --body-padding-multiplier: 1;
     --body-mobile-padding-multiplier: 1;
@@ -58,16 +58,17 @@
     --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
     --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
 
+    --baseline: calc(1rlh / var(--font-density));
     /* Logical Spacing Scale - based on rhythm unit */
-    --space-3xs: calc(1rlh / 5);
-    --space-2xs: calc(1rlh / 4);
-    --space-xs: calc(1rlh / 3);
-    --space-s: calc(1rlh / 2);
-    --space: 1rlh; /* Base rhythm unit */
-    --space-l: calc(2 * 1rlh);
-    --space-xl: calc(3 * 1rlh);
-    --space-2xl: calc(4 * 1rlh);
-    --space-3xl: calc(5 * 1rlh);
+    --space-3xs: calc(var(--baseline) / 5);
+    --space-2xs: calc(var(--baseline) / 4);
+    --space-xs: calc(var(--baseline) / 3);
+    --space-s: calc(var(--baseline) / 2);
+    --space: var(--baseline); /* Base rhythm unit */
+    --space-l: calc(2 * var(--baseline));
+    --space-xl: calc(3 * var(--baseline));
+    --space-2xl: calc(4 * var(--baseline));
+    --space-3xl: calc(5 * var(--baseline));
 
     /* Logical border properties */
     --hr-thickness: 1px;

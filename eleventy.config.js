@@ -16,13 +16,7 @@ export default function (eleventyConfig) {
   // - Watches: src/scss/, src/js/, .trigger
   // - Server: Hot-reloads _site/assets/**
   eleventyConfig.addPlugin(Standard, {
-    verbose: true, // Set to true for debugging
-    // NEW: Enable AI features
-    ai: {
-      enabled: true,
-      model: "anthropic/claude-3.5-sonnet",
-      copyFunctions: true,
-    },
+    verbose: true,
   });
   /*
 
@@ -33,7 +27,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "swiss");
+  eleventyConfig.addGlobalData("theme", "default");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 

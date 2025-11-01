@@ -2085,3 +2085,11 @@ dialog.modal::backdrop {
 .menu li::before {
     display: none;
 }
+
+.comments-box {
+    font-size: var(--scale-s);
+    #form-status {
+        font-family: var(--font-interface);
+        font-size: var(--scale-xs);
+    }
+}
