@@ -1101,6 +1101,8 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) .flow-3,
 :where(html:not(.no-rhythm), .rhythm) .flow-4,
 :where(html:not(.no-rhythm), .rhythm) .box,
+:where(html:not(.no-rhythm), .rhythm) .card,
+:where(html:not(.no-rhythm), .rhythm) .card-inset,
 :where(html:not(.no-rhythm), .rhythm) .box-inset,
 :where(html:not(.no-rhythm), .rhythm) .scroll {
   margin-block-start: 0;
