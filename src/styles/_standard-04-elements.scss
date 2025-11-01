@@ -281,6 +281,7 @@ nav li.is-active a {
 button,
 a.button {
     font-family: var(--font-interface), system-ui, sans-serif;
+    font-size: var(--scale-s);
 
     font-weight: var(--bold-weight);
     line-height: var(--font-density);
