@@ -49,6 +49,7 @@
     --body-mobile-padding-multiplier: 1;
 
     --blur: blur(10px);
+    /* modal background transparency */
 
     /* Modular Scale - calculated from font-ratio */
     --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));

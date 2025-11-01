@@ -22,6 +22,7 @@
   --body-mobile-padding-multiplier: 1;
   --blur: blur(10px);
   
+  
   --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
   --scale-2xs: calc(var(--font-size) * pow(var(--font-ratio), -2));
   --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
