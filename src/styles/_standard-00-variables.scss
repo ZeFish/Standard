@@ -71,7 +71,8 @@ $wide: 1440px;
     .flow-3,
     .flow-4,
     .box,
-    .box-inset {
+    .box-inset,
+    .scroll {
         @content;
     }
 }
@@ -99,7 +100,7 @@ $wide: 1440px;
     p:has(img),
     fieldset,
     hr,
-    .table-wrapper,
+    .scroll,
     .container-small,
     .container-accent,
     .container-feature,
