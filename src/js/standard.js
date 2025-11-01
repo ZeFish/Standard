@@ -5,15 +5,25 @@
  * - A right shadow appears only when the user has scrolled fully to the left.
  * - A left shadow appears only when the user has scrolled fully to the right.
  */
-document.addEventListener("DOMContentLoaded", () => {
-  const tableWrappers = document.querySelectorAll(".scroll");
+/**
+ * Finds all scroll wrappers that haven't been initialized yet and attaches
+ * the necessary event listeners for the shadow effect.
+ *
+ * @param {Element} [rootElement=document] - The element to search within.
+ *   Defaults to the entire document. Scoping this makes it more efficient
+ *   for HTMX swaps.
+ */
+function initializeScrollWrappers(rootElement = document) {
+  // Find all .scroll elements that DO NOT have our initialized marker
+  const newWrappers = rootElement.querySelectorAll(
+    ".scroll:not([data-scroll-initialized])",
+  );
 
-  tableWrappers.forEach((wrapper) => {
+  newWrappers.forEach((wrapper) => {
+    // The core logic is the same as your original script
     const handleScroll = () => {
-      // First, check if there is any overflow content at all
       const hasOverflow = wrapper.scrollWidth > wrapper.clientWidth;
 
-      // If there's no overflow, ensure no shadows are shown and stop.
       if (!hasOverflow) {
         wrapper.classList.remove("show-left-shadow", "show-right-shadow");
         return;
@@ -22,24 +32,45 @@ document.addEventListener("DOMContentLoaded", () => {
       const scrollLeft = wrapper.scrollLeft;
       const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
 
-      // --- YOUR CUSTOM LOGIC ---
-
-      // Rule 1: Show right shadow ONLY when scroll is at the very beginning.
       wrapper.classList.toggle("show-right-shadow", scrollLeft === 0);
-
-      // Rule 2: Show left shadow ONLY when scroll is at the very end.
       wrapper.classList.toggle("show-left-shadow", scrollLeft >= maxScroll - 1);
     };
 
-    // Run once on load to set the initial state
+    // Run the check immediately to set the initial state
     handleScroll();
 
-    // Run on every scroll event
+    // Add the event listeners
     wrapper.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll); // Re-check on resize
 
-    // Also run if the window is resized, as this might change the overflow
-    window.addEventListener("resize", handleScroll);
+    // --- THIS IS THE KEY ---
+    // Mark this element as "initialized" so we don't process it again.
+    wrapper.dataset.scrollInitialized = "true";
   });
+}
+
+// Add this script to your base layout
+document.body.addEventListener("htmx:beforeSwap", (evt) => {
+  // Parse the full HTML response
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(evt.detail.xhr.responseText, "text/html");
+
+  // Extract theme from the response's <html> tag
+  const newTheme = doc.documentElement.dataset.theme;
+
+  if (newTheme) {
+    // Apply it to current page's <html>
+    document.documentElement.dataset.theme = newTheme;
+  }
+});
+
+document.body.addEventListener("htmx:load", function (event) {
+  // Check if our global imageZoom instance exists
+  if (window.imageZoom) {
+    // Tell the existing instance to find any new images
+    // that were just loaded onto the page.
+    window.imageZoom.rescan();
+  }
 });
 
 /**
@@ -105,6 +136,22 @@ class ImageZoom {
   init() {
     document.documentElement.classList.add("js-image-zoom-enabled");
     document.addEventListener("click", this.handleClick.bind(this));
+  }
+
+  /**
+   * Public method to re-scan the document for zoomable images.
+   * Ideal for calling after new content has been loaded by HTMX or other libraries.
+   */
+  rescan() {
+    // The refreshImages method already contains the logic to find all images.
+    // We're just exposing it through a clean public method.
+    this.refreshImages();
+    console.log(`ImageZoom rescanned. Found ${this.images.length} images.`);
+  }
+
+  refreshImages() {
+    this.images = Array.from(document.querySelectorAll(this.options.selector));
+    return this.images.length;
   }
 
   handleClick(e) {
