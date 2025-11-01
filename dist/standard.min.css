@@ -11,9 +11,9 @@
   
   --font-ratio: 1.8;
   --font-density: 1.2;
-  --font-density-s: max(calc(var(--font-density) * 0.75), 1);
+  --font-density-s: max(calc(var(--font-density) * 0.75), 1.2);
   --rhythm-gap: 1;
-  --rhythm-gap-block: 1;
+  --rhythm-gap-block: var(--font-ratio);
   --body-padding: var(--space-l);
   --blur: blur(7px);
   --modal-background: color-mix(
@@ -2377,7 +2377,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--space) * var(--rhythm-gap) * -1 + (var(--gap))) !important;
+  margin-block-start: calc(var(--space) * -1 - var(--gap) * 2) !important;
 }
 :where(.prose) h1,
 :where(.prose) > h1:where(:first-child) {

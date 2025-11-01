@@ -35,9 +35,9 @@
     /* Current ratio (configurable) */
     --font-ratio: 1.8;
     --font-density: 1.2;
-    --font-density-s: max(calc(var(--font-density) * 0.75), 1);
+    --font-density-s: max(calc(var(--font-density) * 0.75), 1.2);
     --rhythm-gap: 1;
-    --rhythm-gap-block: 1;
+    --rhythm-gap-block: var(--font-ratio);
     --body-padding: var(--space-l);
 
     --blur: blur(7px);
