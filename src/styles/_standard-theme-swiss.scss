@@ -18,7 +18,7 @@
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
 
-    --rhythm-multiplier: 1;
+    --rhythm-multiplier: 0.66;
     --rhythm-multiplier-block: 0;
 
     --gap: clamp(var(--space), 6%, var(--space-xl));
@@ -105,7 +105,8 @@
     }
 
 @media (max-width: 767px) {
-        .prose {
+        .prose,
+p:has(img) {
             display:grid;
         }
         
