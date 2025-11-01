@@ -2322,7 +2322,7 @@ hr.col-row {
   margin-inline: var(--content-small);
 }
 :where(.prose) table,
-:where(.prose) .table-wrapper,
+:where(.prose) .scroll:has(table),
 :where(.prose) .container-accent {
   grid-column: accent;
   margin-inline: 0;

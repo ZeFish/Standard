@@ -97,7 +97,7 @@
     }
 
     table,
-    .table-wrapper,
+    .scroll:has(table),
     .container-accent {
         grid-column: accent;
         margin-inline: 0;
