@@ -1120,7 +1120,7 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) .container-small,
 :where(html:not(.no-rhythm), .rhythm) .container-accent,
 :where(html:not(.no-rhythm), .rhythm) .container-feature,
-:where(html:not(.no-rhythm), .rhythm) .container-full {
+:where(html:not(.no-rhythm), .rhythm) .container-hero {
   margin-block-start: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)) - var(--space) * var(--rhythm-multiplier));
   margin-block-end: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)));
 }

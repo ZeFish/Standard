@@ -104,7 +104,7 @@ $wide: 1440px;
     .container-small,
     .container-accent,
     .container-feature,
-    .container-full {
+    .container-hero {
         @content;
     }
 }
