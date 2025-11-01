@@ -825,7 +825,7 @@ a.button {
   font-size: var(--scale-s);
   font-weight: var(--bold-weight);
   line-height: var(--font-density);
-  padding: var(--space-2xs) var(--space-xs);
+  padding: var(--space-2xs) var(--space-s);
   border-radius: var(--border-radius);
   background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: var(--color-background);
@@ -850,6 +850,7 @@ a.button {
 button:hover,
 a.button:hover {
   background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
+  color: var(--color-background);
 }
 
 button:active,
