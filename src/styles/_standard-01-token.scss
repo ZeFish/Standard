@@ -44,7 +44,7 @@
     --rhythm-multiplier: var(--font-density);
     --rhythm-multiplier-block: var(--font-density);
 
-    --body-padding-multiplier: 1;
+    --body-padding-multiplier: var(--font-density);
     --body-mobile-padding-multiplier: 1;
 
     /* Modular Scale - calculated from font-ratio */

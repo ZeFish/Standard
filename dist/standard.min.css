@@ -17,7 +17,7 @@
   --font-mobile-density: 1.2;
   --rhythm-multiplier: var(--font-density);
   --rhythm-multiplier-block: var(--font-density);
-  --body-padding-multiplier: 1;
+  --body-padding-multiplier: var(--font-density);
   --body-mobile-padding-multiplier: 1;
   
   --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
