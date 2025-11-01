@@ -49,6 +49,10 @@ function initializeScrollWrappers(rootElement = document) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  initializeScrollWrappers(document);
+});
+
 // Add this script to your base layout
 document.body.addEventListener("htmx:beforeSwap", (evt) => {
   // Parse the full HTML response
@@ -71,6 +75,7 @@ document.body.addEventListener("htmx:load", function (event) {
     // that were just loaded onto the page.
     window.imageZoom.rescan();
   }
+  initializeScrollWrappers(event.detail.elt);
 });
 
 /**
