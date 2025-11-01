@@ -2377,7 +2377,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--space) * -1 - var(--gap) * 2) !important;
+  margin-block-start: calc(var(--space) * -1 - var(--gap) * 1) !important;
 }
 :where(.prose) h1,
 :where(.prose) > h1:where(:first-child) {
