@@ -18,7 +18,7 @@
   --blur: blur(7px);
   --modal-background: color-mix(
       in srgb,
-      var(--color-background-secondary) 65%,
+      var(--color-background-secondary) 85%,
       transparent
   );
   --block-padding-inner: calc(var(--space) / var(--font-density));
