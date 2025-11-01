@@ -150,7 +150,7 @@
         var(--color-background-secondary) 60%,
         transparent
     );
-    backdrop-filter: blur(5px);
+    backdrop-filter: var(--blur);
     border: var(--border);
     /*border-left-width: 4px;  Accent border */
     border-radius: var(--border-radius);

@@ -20,6 +20,7 @@
   --rhythm-multiplier-block: var(--ratio);
   --body-padding-multiplier: var(--ratio);
   --body-mobile-padding-multiplier: 1;
+  --blur: blur(10px);
   
   --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
   --scale-2xs: calc(var(--font-size) * pow(var(--font-ratio), -2));
@@ -2517,15 +2518,6 @@ figure,
     transform: translateY(0);
   }
 }
-
-
-
-
-
-
-img {
-  max-inline-size: 100%;
-}
 :where(html:not(.no-rhythm), .rhythm) * + img,
 :where(html:not(.no-rhythm), .rhythm) img,
 :where(html:not(.no-rhythm), .rhythm) img:first-child,
@@ -2537,6 +2529,7 @@ img {
 :where(html:not(.no-rhythm), .rhythm) img {
   max-width: 100%;
   cursor: zoom-in;
+  
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
 :where(html:not(.no-rhythm), .rhythm) img.fx {
@@ -2548,25 +2541,22 @@ img {
   border: unset;
   box-shadow: unset;
 }
-:where(html:not(.no-rhythm), .rhythm) img:not(.zoomed):hover,
-:where(html:not(.no-rhythm), .rhythm) img.zoomed {
-  mix-blend-mode: normal;
-  filter: none;
-}
-:where(html:not(.no-rhythm), .rhythm) img:not(.zoomed):active,
-:where(html:not(.no-rhythm), .rhythm) img.zoomed {
+
+
+
+
+
+
+
+html:not(.js-image-zoom-enabled) img:active {
   cursor: zoom-out;
   display: block;
-  z-index: var(--z-image-zoom);
   position: fixed;
-  max-height: 88vh;
-  max-width: 88vw;
+  z-index: var(--z-image-zoom);
   max-height: calc(100vh - var(--space) * 2);
   max-width: calc(100vw - var(--space) * 2);
   object-fit: contain;
   margin: 0 auto;
-  text-align: center;
-  padding: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -2574,12 +2564,49 @@ img {
 }
 
 
-html.image-zoomed::before {
+html:not(.js-image-zoom-enabled):has(img:active)::before {
   content: "";
   position: fixed;
   inset: 0;
   background: var(--color-background);
   z-index: calc(var(--z-image-zoom) - 1);
+}
+
+
+
+
+
+
+
+
+.image-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-image-zoom);
+  background: color-mix(in srgb, var(--color-background) 90%, transparent);
+  backdrop-filter: var(--blur);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: zoom-out;
+}
+
+
+.image-zoom-overlay.is-visible {
+  opacity: 1;
+}
+
+
+.image-zoom-overlay img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  cursor: default; 
 }
 
 
@@ -3711,7 +3738,7 @@ dialog.modal::backdrop {
   font-family: var(--font-interface);
   
   background: color-mix(in srgb, var(--color-background-secondary) 60%, transparent);
-  backdrop-filter: blur(5px);
+  backdrop-filter: var(--blur);
   border: var(--border);
   
   border-radius: var(--border-radius);

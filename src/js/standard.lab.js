@@ -985,7 +985,7 @@ class StandardLab {
         background: color-mix(in srgb, var(--color-background) 30%, transparent);
         border: 1px solid var(--color-border);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        backdrop-filter: blur(10px);
+        backdrop-filter: var(--blur);
         cursor: pointer;
         z-index: var(--z-toast);
         display: flex;
@@ -1029,7 +1029,7 @@ class StandardLab {
       .standard-lab-panel {
         position: fixed;
         background: color-mix(in srgb, var(--color-background) 60%, transparent);
-        backdrop-filter: blur(5px);
+        backdrop-filter: var(--blur);
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);

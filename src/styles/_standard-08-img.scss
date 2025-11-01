@@ -2,40 +2,25 @@
 
 /**
  * @component Image System
- * @category Components
  * @description Responsive image handling with interactive zoom functionality.
- * Images automatically scale to 100% width, support smooth zoom on click,
- * and include keyboard navigation for dismissing zoomed images.
- * Works seamlessly with rhythm and reading layouts.
- *
- * @prop {element} img Default responsive image
- * @prop {class} .fx Images with border and effects
- * @prop {class} .nofx Images without border/effects
- * @prop {state} img:hover Prepare for zoom interaction
- * @prop {state} img:active Active zoom state
- * @prop {class} .zoomed Zoomed image state
- *
- * @example
- * // Basic responsive image
- * <img src="image.jpg" alt="Description">
- *
- * // Image with border and effects
- * <img src="image.jpg" class="fx" alt="Description">
- *
- * // Click to zoom, click again to close
- * // ESC key also closes zoomed image
+ * This system is progressively enhanced. Without JavaScript, it provides a
+ * basic zoom-on-click-and-hold. With JavaScript, it provides a full
+ * feature-rich lightbox experience.
  *
  * @since 0.1.0
  */
 
-/* Image Styles - Works with both .reading (layout) and .rhythm (spacing) - Using logical properties */
+/* ================================================================ */
+/* PART 1: BASE IMAGE STYLES                                        */
+/* These are the default styles for all images.                     */
+/* ================================================================ */
 
-img {
-    max-inline-size: 100%;
-}
-
+/*
+ * The `:where` block keeps your original logic of only applying
+ * these base styles inside a `.rhythm` or `<html>` context.
+ */
 :where(html:not(.no-rhythm), .rhythm) {
-    /* Basic image styling */
+    /* Basic image reset */
     * + img,
     img,
     img:first-child,
@@ -45,15 +30,18 @@ img {
         block-size: auto;
     }
 
+    /* Default styles for a zoomable image */
     img {
         max-width: 100%;
         cursor: zoom-in;
-
+        /* Optional: a subtle transition for other effects you might have */
         transition:
             mix-blend-mode 0.2s,
             opacity 0.2s,
             filter 0.2s;
     }
+
+    /* Your cosmetic classes for adding/removing borders are preserved */
     img.fx {
         border-radius: var(--border-radius);
         border: var(--border);
@@ -63,39 +51,77 @@ img {
         border: unset;
         box-shadow: unset;
     }
-
-    img:not(.zoomed):hover,
-    img.zoomed {
-        mix-blend-mode: normal;
-        filter: none;
-    }
-
-    img:not(.zoomed):active,
-    img.zoomed {
-        cursor: zoom-out;
-        display: block;
-        z-index: var(--z-image-zoom);
-        position: fixed;
-        max-height: 88vh;
-        max-width: 88vw;
-        max-height: calc(100vh - (var(--space) * 2));
-        max-width: calc(100vw - (var(--space) * 2));
-        object-fit: contain;
-        margin: 0 auto;
-        text-align: center;
-        padding: 0;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        user-select: none;
-    }
 }
 
-/* Zoom overlay backgrounds */
-html.image-zoomed::before {
+/* ================================================================ */
+/* PART 2: NO-JAVASCRIPT FALLBACK (using :active)                   */
+/* These rules only apply if the JavaScript has not run.            */
+/* They provide a simple "zoom-on-hold" experience.                 */
+/* ================================================================ */
+
+/* When JS is off, holding click on an image will trigger this zoom effect. */
+html:not(.js-image-zoom-enabled) img:active {
+    cursor: zoom-out;
+    display: block;
+    position: fixed;
+    z-index: var(--z-image-zoom);
+    max-height: calc(100vh - (var(--space) * 2));
+    max-width: calc(100vw - (var(--space) * 2));
+    object-fit: contain;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+/* Creates a backdrop for the :active zoom. */
+html:not(.js-image-zoom-enabled):has(img:active)::before {
     content: "";
     position: fixed;
     inset: 0;
     background: var(--color-background);
     z-index: calc(var(--z-image-zoom) - 1);
+}
+
+/* ================================================================ */
+/* PART 3: JAVASCRIPT-ENHANCED STYLES (HTML overlay)                */
+/* These styles are used by the JavaScript class to create the full */
+/* lightbox experience with keyboard navigation, etc.               */
+/* ================================================================ */
+
+/* Lock the page scroll when the JS overlay is active
+html.image-zoomed-active {
+    overflow: hidden;
+}
+*/
+/* The overlay container created by the JS */
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-image-zoom);
+    background: color-mix(in srgb, var(--color-background) 90%, transparent);
+    backdrop-filter: var(--blur);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: zoom-out;
+}
+
+/* The class added by JS to fade the overlay in */
+.image-zoom-overlay.is-visible {
+    opacity: 1;
+}
+
+/* The image element inside the JS overlay */
+.image-zoom-overlay img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    user-select: none;
+    cursor: default; /* The overlay already has the zoom-out cursor */
 }
