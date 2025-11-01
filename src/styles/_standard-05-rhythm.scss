@@ -69,7 +69,7 @@
 :where(body:not(.no-rhythm)),
 :where(html:not(.no-rhythm)) > body {
     margin: 0;
-    padding: calc(var(--space) * var(--body-padding-multiplier));
+    padding: var(--body-padding);
     padding-bottom: calc((var(--space) * var(--body-padding-multiplier) * 1.5));
     [id] {
         scroll-margin-top: calc(

@@ -587,7 +587,7 @@ All three utilities automatically adjust for mobile breakpoints using `--body-mo
 ```scss
 // Automatically switches at mobile breakpoint
 .negate-body-padding {
-    margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+    margin-inline: calc(var(--body-padding) * -1);
 
     @media (max-width: 768px) {
         margin-inline: calc(var(--space) * var(--body-mobile-padding-multiplier) * -1);

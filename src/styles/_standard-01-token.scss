@@ -46,9 +46,11 @@
     --rhythm-multiplier-block: var(--ratio);
 
     --body-padding-multiplier: var(--ratio);
+    --body-padding: var(--body-padding);
     --body-mobile-padding-multiplier: 1;
 
     --blur: blur(7px);
+    --modal-background: var(--modal-background);
     /* modal background transparency */
 
     /* Modular Scale - calculated from font-ratio */

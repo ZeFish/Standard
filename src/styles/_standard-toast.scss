@@ -61,7 +61,7 @@
 
 .toast-container {
     /* Define the spacing from viewport edges */
-    --toast-spacing: calc(var(--space) * var(--body-padding-multiplier));
+    --toast-spacing: var(--body-padding);
 
     /* Fixed positioning for all containers */
     position: fixed;
@@ -141,11 +141,7 @@
     font-family: var(--font-interface);
 
     /* Appearance */
-    background: color-mix(
-        in srgb,
-        var(--color-background-secondary) 60%,
-        transparent
-    );
+    background: var(--modal-background);
     backdrop-filter: var(--blur);
     border: var(--border);
     /*border-left-width: 4px;  Accent border */

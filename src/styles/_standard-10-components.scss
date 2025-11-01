@@ -83,7 +83,7 @@
 
 .card {
     /* CSS variables for easy customization */
-    --card-border-color: var(--color-border);
+    --card-border: var(--border);
     --card-border-width: 1px;
     --card-border-radius: var(--border-radius);
     --card-padding: var(--space);
@@ -1501,8 +1501,8 @@ dialog.modal {
  */
 .modal::backdrop,
 dialog.modal::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px); /* Subtle blur effect */
+    background: var(--modal-background);
+    backdrop-filter: var(--blur); /* Subtle blur effect */
     animation: fadeIn 0.2s ease;
 }
 

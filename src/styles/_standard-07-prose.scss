@@ -113,7 +113,7 @@
         margin-inline: calc(
             (var(--space) * var(--body-padding-multiplier)) * -1
         );
-        /*padding-inline: calc(var(--space) * var(--body-padding-multiplier));*/
+        /*padding-inline: var(--body-padding);*/
         > * {
             margin-inline: 0;
         }

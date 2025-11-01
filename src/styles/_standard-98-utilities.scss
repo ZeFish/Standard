@@ -648,8 +648,8 @@
 .body-p-neg,
 .body-p-neg-header,
 .body-p-neg-footer {
-    margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
-    padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+    margin-inline: calc(var(--body-padding) * -1);
+    padding-inline: var(--body-padding);
 
     @media (max-width: #{$small}) {
         margin-inline: calc(

@@ -19,8 +19,10 @@
   --rhythm-multiplier: var(--ratio);
   --rhythm-multiplier-block: var(--ratio);
   --body-padding-multiplier: var(--ratio);
+  --body-padding: var(--body-padding);
   --body-mobile-padding-multiplier: 1;
   --blur: blur(7px);
+  --modal-background: var(--modal-background);
   
   
   --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
@@ -1052,7 +1054,7 @@ mark {
 :where(body:not(.no-rhythm)),
 :where(html:not(.no-rhythm)) > body {
   margin: 0;
-  padding: calc(var(--space) * var(--body-padding-multiplier));
+  padding: var(--body-padding);
   padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
 }
 :where(body:not(.no-rhythm)) [id],
@@ -2589,7 +2591,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   position: fixed;
   inset: 0;
   z-index: var(--z-image-zoom);
-  background: color-mix(in srgb, var(--color-background) 90%, transparent);
+  background: var(--modal-background);
   backdrop-filter: var(--blur);
   display: flex;
   align-items: center;
@@ -2764,7 +2766,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 
 .card {
   
-  --card-border-color: var(--color-border);
+  --card-border: var(--border);
   --card-border-width: 1px;
   --card-border-radius: var(--border-radius);
   --card-padding: var(--space);
@@ -3359,8 +3361,8 @@ dialog.modal[open] {
 
 .modal::backdrop,
 dialog.modal::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px); 
+  background: var(--modal-background);
+  backdrop-filter: var(--blur); 
   animation: fadeIn 0.2s ease;
 }
 
@@ -3663,7 +3665,7 @@ dialog.modal::backdrop {
 
 .toast-container {
   
-  --toast-spacing: calc(var(--space) * var(--body-padding-multiplier));
+  --toast-spacing: var(--body-padding);
   
   position: fixed;
   z-index: var(--z-toast);
@@ -3738,7 +3740,7 @@ dialog.modal::backdrop {
   font-size: var(--scale);
   font-family: var(--font-interface);
   
-  background: color-mix(in srgb, var(--color-background-secondary) 60%, transparent);
+  background: var(--modal-background);
   backdrop-filter: var(--blur);
   border: var(--border);
   
@@ -5480,8 +5482,8 @@ dialog.modal::backdrop {
 .body-p-neg,
 .body-p-neg-header,
 .body-p-neg-footer {
-  margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
-  padding-inline: calc(var(--space) * var(--body-padding-multiplier));
+  margin-inline: calc(var(--body-padding) * -1);
+  padding-inline: var(--body-padding);
 }
 @media (max-width: 768px) {
   .body-p-neg,

@@ -100,7 +100,7 @@ html.image-zoomed-active {
     position: fixed;
     inset: 0;
     z-index: var(--z-image-zoom);
-    background: color-mix(in srgb, var(--color-background) 90%, transparent);
+    background: var(--modal-background);
     backdrop-filter: var(--blur);
     display: flex;
     align-items: center;
