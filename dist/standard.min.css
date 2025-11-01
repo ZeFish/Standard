@@ -5472,12 +5472,16 @@ dialog.modal::backdrop {
 
 
 
-.body-p-neg {
+.body-p-neg,
+.body-p-neg-header,
+.body-p-neg-footer {
   margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
   padding-inline: calc(var(--space) * var(--body-padding-multiplier));
 }
 @media (max-width: 768px) {
-  .body-p-neg {
+  .body-p-neg,
+  .body-p-neg-header,
+  .body-p-neg-footer {
     margin-inline: calc(var(--space) * var(--body-mobile-padding-multiplier) * -1);
     padding-inline: calc(var(--space) * var(--body-mobile-padding-multiplier));
   }
@@ -5499,20 +5503,6 @@ dialog.modal::backdrop {
 @media (max-width: 768px) {
   .body-p-neg-header {
     margin-block-start: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1 * -1);
-  }
-}
-
-
-.body-p-neg-full {
-  margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
-  margin-block-end: calc(var(--space) * var(--body-padding-multiplier) * 1.5 * -1);
-  padding-inline: calc(var(--space) * var(--body-padding-multiplier));
-}
-@media (max-width: 768px) {
-  .body-p-neg-full {
-    margin-inline: calc(var(--space) * var(--body-mobile-padding-multiplier) * -1);
-    margin-block-end: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
-    padding-inline: calc(var(--space) * var(--body-mobile-padding-multiplier));
   }
 }
 

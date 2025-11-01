@@ -645,7 +645,9 @@
  * Negate horizontal body padding (left/right)
  * Allows full-width backgrounds while keeping vertical padding
  */
-.body-p-neg {
+.body-p-neg,
+.body-p-neg-header,
+.body-p-neg-footer {
     margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
     padding-inline: calc(var(--space) * var(--body-padding-multiplier));
 
@@ -684,31 +686,6 @@
     @media (max-width: #{$small}) {
         margin-block-start: calc(
             (var(--space) * var(--body-mobile-padding-multiplier) * 1) * -1
-        );
-    }
-}
-
-/**
- * Negate all body padding (horizontal + bottom)
- * Full-width element that extends to viewport edges on all sides except top
- * Combines .negate-body-padding + .negate-body-padding-bottom
- */
-.body-p-neg-full {
-    margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
-    margin-block-end: calc(
-        (var(--space) * var(--body-padding-multiplier) * 1.5) * -1
-    );
-    padding-inline: calc(var(--space) * var(--body-padding-multiplier));
-
-    @media (max-width: #{$small}) {
-        margin-inline: calc(
-            var(--space) * var(--body-mobile-padding-multiplier) * -1
-        );
-        margin-block-end: calc(
-            (var(--space) * var(--body-mobile-padding-multiplier) * 1.5) * -1
-        );
-        padding-inline: calc(
-            var(--space) * var(--body-mobile-padding-multiplier)
         );
     }
 }
