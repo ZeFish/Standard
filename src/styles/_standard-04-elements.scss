@@ -139,7 +139,7 @@ pre {
     font-size: var(--scale-s);
     border: var(--border);
     border-radius: var(--border-radius);
-    padding: var(--baseline);
+    padding: var(--block-padding-inner);
     overflow-x: auto;
     line-height: 1.5;
     box-shadow: inset var(--shadow);
@@ -165,7 +165,7 @@ blockquote {
     border-inline-start: var(--space-3xs) solid var(--color-muted);
     background: var(--color-background-secondary);
     color: var(--color-muted);
-    padding: var(--space);
+    padding: var(--block-padding-inner);
 }
 
 /* Tables (typography) */
@@ -245,16 +245,14 @@ a:focus {
 }
 
 a:focus-visible {
-    outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
     border-radius: 2px;
 }
 
 a.external-link::after {
     content: "↗";
-    position: relative;
     text-decoration: none;
-    top: 1px;
-    left: 2px;
+    font-size: inherit;
     font-size: var(--scale-xs);
     color: var(--color-subtle);
 }
@@ -340,7 +338,7 @@ a.button:active {
 button:focus-visible,
 a.button:focus-visible,
 a.button:focus-visible {
-    outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
     outline-offset: 2px;
     color: var(--color-background);
 }
@@ -377,7 +375,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-    outline: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
     outline-offset: 0px;
     border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
     background-color: color-mix(
@@ -428,7 +426,7 @@ input[type="radio"]:checked {
 
 input[type="checkbox"]:focus,
 input[type="radio"]:focus {
-    outline: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    outline: 2px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
     outline-offset: 2px;
 }
 

@@ -1,17 +1,16 @@
 [data-theme="minimal"] {
     --shadow: none;
-    --border-radius: 0;
-    --border-color: var(--color-foreground);
+    --color-border: transparent;
 
-    --rhythm-multiplier: 1;
-    --rhythm-multiplier-block: 0;
+    --rhythm-gap: 1;
+    --rhythm-gap-block: 2;
 
     --font-header: "Kalice", sans-serif;
     --font-header-weight: 500;
     --font-header-letter-spacing: 1;
     --font-text: "Diatype", "Kalice", sans-serif;
 
-    --body-padding-multiplier: 2;
+    --body-padding: var(--space-2xl);
 
     table {
         grid-column: content;
@@ -23,6 +22,10 @@
         font-size: var(--scale-xs);
         font-family: var(--font-monospace);
         word-break: keep-all;
+    }
+
+    h1 {
+        margin-block: var(--space-5xl);
     }
 }
 

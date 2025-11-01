@@ -12,9 +12,9 @@
  * @prop {class} .rhythm Apply rhythm spacing to <html> root or any container
  * @prop {class} .no-rhythm Disable rhythm for specific elements
  * @prop {variable} --space Base rhythm unit (1rlh)
- * @prop {variable} --rhythm-multiplier Normal element spacing multiplier (default: 1)
- * @prop {variable} --rhythm-multiplier-block Block element spacing multiplier
- * @prop {variable} --body-padding-multiplier Padding multiplier for <body> (desktop)
+ * @prop {variable} --rhythm-gap Normal element spacing multiplier (default: 1)
+ * @prop {variable} --rhythm-gap-block Block element spacing multiplier
+ * @prop {variable} --body-padding Padding multiplier for <body> (desktop)
  * @prop {variable} --body-mobile-padding-multiplier Padding multiplier for <body> (mobile)
  *
  * @example
@@ -61,7 +61,7 @@
     /* Apply rhythm spacing to all direct children */
     > * {
         margin-block-start: 0;
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space) * var(--rhythm-gap));
     }
 }
 
@@ -70,10 +70,10 @@
 :where(html:not(.no-rhythm)) > body {
     margin: 0;
     padding: var(--body-padding);
-    padding-bottom: calc((var(--space) * var(--body-padding-multiplier) * 1.5));
+    padding-bottom: calc((var(--space) * var(--body-padding) * 1.5));
     [id] {
         scroll-margin-top: calc(
-            var(--space) * var(--body-padding-multiplier)
+            var(--space) * var(--body-padding)
         ); /* Adjust value as needed */
     }
 }
@@ -82,15 +82,6 @@
     :where(body:not(.no-rhythm)),
     :where(html:not(.no-rhythm)) > body {
         margin: 0;
-        padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
-        padding-bottom: calc(
-            (var(--space) * var(--body-mobile-padding-multiplier) * 1.5)
-        );
-        [id] {
-            scroll-margin-top: calc(
-                var(--space) * var(--body-mobile-padding-multiplier)
-            ); /* Adjust value as needed */
-        }
     }
 }
 
@@ -99,29 +90,22 @@
 :where(html:not(.no-rhythm), .rhythm) {
     @include apply-rhythm {
         margin-block-start: 0;
-        margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space) * var(--rhythm-gap));
     }
 
     .rhythm {
-        --rhythm-multiplier: 1; /* Reset for nested contexts */
+        --rhythm-gap: 1; /* Reset for nested contexts */
     }
 
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     @include apply-rhythm-block {
         margin-block-start: calc(
-            (
-                    var(--space) *
-                        max(
-                            var(--rhythm-multiplier-block),
-                            var(--rhythm-multiplier)
-                        )
-                ) -
-                (var(--space) * var(--rhythm-multiplier))
+            (var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap))) -
+                (var(--space) * var(--rhythm-gap))
         );
         margin-block-end: calc(
-            var(--space) *
-                max(var(--rhythm-multiplier-block), var(--rhythm-multiplier))
+            var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap))
         );
     }
 
@@ -137,23 +121,16 @@
     .prose > [class^="grid-"],
     .prose > .grid {
         margin-block-start: calc(
-            (
-                    var(--space) *
-                        max(
-                            var(--rhythm-multiplier-block),
-                            var(--rhythm-multiplier)
-                        )
-                ) -
-                (var(--space) * var(--rhythm-multiplier))
+            (var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap))) -
+                (var(--space) * var(--rhythm-gap))
         );
         margin-block-end: calc(
-            var(--space) *
-                max(var(--rhythm-multiplier-block), var(--rhythm-multiplier))
+            var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap))
         );
     }
 
     hr {
-        --rhythm-multiplier-block: calc(var(--rhythm-multiplier) * 3);
+        --rhythm-gap-block: calc(var(--rhythm-gap) * 3);
     }
 
     /* Reset first-child spacing for special blocks */
@@ -188,16 +165,14 @@
     }
     p + ul,
     p + ol {
-        margin-block-start: calc(
-            var(--space) * -0.5 * var(--rhythm-multiplier)
-        );
+        margin-block-start: calc(var(--space) * -0.5 * var(--rhythm-gap));
     }
 
     ol ul,
     ol ol,
     ul ul,
     ul ol {
-        margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
+        margin-block-start: calc(var(--space-xs) * var(--rhythm-gap));
     }
 
     /* Nested lists */
@@ -212,7 +187,7 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-xs) * var(--rhythm-gap));
     }
 
     /* Unordered list bullets */
@@ -278,25 +253,25 @@
     /* Form containers - avoid nested grids */
     form:not(.grid *) {
         display: grid;
-        gap: calc(var(--space-s) * var(--rhythm-multiplier));
+        gap: calc(var(--space-s) * var(--rhythm-gap));
     }
 
     /* Forms inside grids use flex layout to avoid nesting issues */
     .grid form {
         display: flex;
         flex-direction: column;
-        gap: calc(var(--space-s) * var(--rhythm-multiplier));
+        gap: calc(var(--space-s) * var(--rhythm-gap));
     }
 
     /* Form field groups - spacing only */
     fieldset {
-        padding: calc(var(--space-s) * var(--rhythm-multiplier));
+        padding: calc(var(--space-s) * var(--rhythm-gap));
         display: grid;
-        gap: calc(var(--space-3xs) * var(--rhythm-multiplier));
+        gap: calc(var(--space-3xs) * var(--rhythm-gap));
     }
 
     legend {
-        padding-inline: calc(var(--space-xs) * var(--rhythm-multiplier));
+        padding-inline: calc(var(--space-xs) * var(--rhythm-gap));
     }
 
     /* Form inputs */
@@ -317,24 +292,24 @@
     label:has(+ input[type="password"]),
     label:has(+ textarea),
     label:has(+ select) {
-        margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
-        margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+        margin-block-start: calc(var(--space-xs) * var(--rhythm-gap));
+        margin-inline-start: calc(var(--space-s) * var(--rhythm-gap));
     }
     fieldset div,
     fieldset p {
-        margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+        margin-inline-start: calc(var(--space-s) * var(--rhythm-gap));
     }
 
     /* Checkbox/radio with labels */
     label + input[type="checkbox"],
     label + input[type="radio"] {
-        margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+        margin-inline-start: calc(var(--space-s) * var(--rhythm-gap));
     }
 
     /* Button groups */
     .button-group {
         display: flex;
-        gap: calc(var(--space-s) * var(--rhythm-multiplier));
+        gap: calc(var(--space-s) * var(--rhythm-gap));
         flex-wrap: wrap;
     }
 
@@ -354,7 +329,7 @@
     /* Figures */
     figure {
         display: grid;
-        gap: calc(var(--space-xs) * var(--rhythm-multiplier));
+        gap: calc(var(--space-xs) * var(--rhythm-gap));
     }
 
     figcaption {
@@ -366,7 +341,7 @@
     /* =========================== */
 
     caption {
-        margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+        margin-block-end: calc(var(--space-xs) * var(--rhythm-gap));
     }
 
     /* Swiss-style data tables */
@@ -380,8 +355,8 @@
     th {
         border-bottom: var(--border);
         font-size: var(--scale-s);
-        padding-block: calc(var(--space-xs) * var(--rhythm-multiplier));
-        padding-inline: calc(var(--space-s) * var(--rhythm-multiplier));
+        padding-block: calc(var(--space-xs) * var(--rhythm-gap));
+        padding-inline: calc(var(--space-s) * var(--rhythm-gap));
     }
 
     th {
@@ -404,8 +379,8 @@
     /* ADD: tight table variant */
     .tight th,
     .tight td {
-        padding-block: calc(var(--space-2xs) * var(--rhythm-multiplier));
-        padding-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+        padding-block: calc(var(--space-2xs) * var(--rhythm-gap));
+        padding-inline-end: calc(var(--space-xs) * var(--rhythm-gap));
     }
 }
 
@@ -415,15 +390,15 @@
 
 /* Spacing override utilities */
 .rhythm-tight {
-    --rhythm-multiplier: 0.5;
+    --rhythm-gap: 0.5;
 }
 
 .rhythm-relaxed {
-    --rhythm-multiplier: 1.5;
+    --rhythm-gap: 1.5;
 }
 
 .rhythm-xl {
-    --rhythm-multiplier: 2;
+    --rhythm-gap: 2;
 }
 
 /* Individual element overrides */
@@ -440,9 +415,7 @@
 }
 
 .stick-next {
-    margin-block-end: calc(
-        var(--space-xs) * var(--rhythm-multiplier)
-    ) !important;
+    margin-block-end: calc(var(--space-xs) * var(--rhythm-gap)) !important;
 }
 
 /* =========================== */
@@ -484,7 +457,7 @@
         display: block;
 
         > * {
-            margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+            margin-block-end: calc(var(--space) * var(--rhythm-gap));
         }
 
         > :last-child {

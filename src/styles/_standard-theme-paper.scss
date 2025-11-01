@@ -156,8 +156,8 @@
     --font-density: 1.1;
     --font-ratio: var(--ratio-silver);
 
-    --rhythm-multiplier: 1;
-    --rhythm-multiplier-block: 0;
+    --rhythm-gap: 1;
+    --rhythm-gap-block: 0;
 
     --font-text: "Courier Prime";
     --font-feature: "";
@@ -194,16 +194,26 @@
     }
 
     blockquote {
-        border-inline-start: calc(var(--space-2xs) * var(--rhythm-multiplier))
-            solid var(--color-muted);
+        border-inline-start: calc(var(--space-2xs) * var(--rhythm-gap)) solid
+            var(--color-muted);
     }
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: calc(var(--space) * 8);
-        margin-block-end: calc(var(--space) * 10);
+        margin-block-start: var(--space-7xl);
+        margin-block-end: var(--space-8xl);
     }
     h1:first-child + p {
         margin-block-start: calc(var(--space) * -8);
+        margin-block-end: var(--space-8xl);
+    }
+
+    background: var(--color-background-secondary);
+
+    body {
+        max-width: 768px;
+        border: var(--border);
+        box-shadow: var(--shadow);
+        background: var(--color-background);
     }
 }

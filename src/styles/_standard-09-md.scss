@@ -65,8 +65,10 @@
     }
 
     .box,
-    .box-inset {
-        padding: var(--baseline);
+    .box-inset,
+    .card,
+    .card-inset {
+        padding: var(--block-padding-inner);
         font-size: var(--scale-s);
     }
 
@@ -105,10 +107,9 @@
                 var(--color-foreground)
             );
             font-weight: bold;
-            font-size: var(--scale-s);
             user-select: none;
-            padding: var(--space-3xs) calc(var(--space) - var(--space-xs))
-                var(--space-3xs) calc(var(--space) - var(--space-xs));
+            padding: var(--space-3xs) calc(var(--space) - var(--space-2xs))
+                var(--space-3xs) calc(var(--space) - var(--space-2xs));
         }
 
         .callout-content {
@@ -120,10 +121,10 @@
             );
 
             box-shadow: inset var(--shadow);
-            font-size: var(--scale-s);
             overflow: hidden;
             border-radius: var(--border-radius);
-            padding: var(--baseline);
+            padding: var(--block-padding-inner);
+            padding-top: var(--block-padding-inner);
             margin-top: var(--space-2xs);
             margin-left: 0;
             border: var(--border);
@@ -187,6 +188,9 @@
         display: inline-block;
         transform: rotate(0deg);
         transition: transform 0.2s ease;
+        width: var(--space-s);
+        margin-left: calc(var(--space-s) * -1);
+        text-align: center;
     }
 
     details[open] .callout-title::before {

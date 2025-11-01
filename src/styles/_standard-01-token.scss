@@ -33,25 +33,25 @@
     --ratio-eighthstep: 1.062;
 
     /* Current ratio (configurable) */
-    --ratio: var(--ratio-silver);
-    --font-ratio: var(--ratio);
-    --font-density: var(--ratio);
+    --font-ratio: 1.8;
+    --font-density: 1.2;
     --font-density-s: max(calc(var(--font-density) * 0.75), 1);
+    --rhythm-gap: 1;
+    --rhythm-gap-block: 1;
+    --body-padding: var(--space-l);
+
+    --blur: blur(7px);
+    --modal-background: color-mix(
+        in srgb,
+        var(--color-background-secondary) 65%,
+        transparent
+    );
+    --block-padding-inner: calc(var(--space) / var(--font-density));
 
     --font-mobile-size: 1.1rem;
     --font-mobile-ratio: var(--ratio-halfstep);
     --font-mobile-density: 1.2;
-
-    --rhythm-multiplier: var(--ratio);
-    --rhythm-multiplier-block: var(--ratio);
-
-    --body-padding-multiplier: var(--ratio);
-    --body-padding: var(--body-padding);
     --body-mobile-padding-multiplier: 1;
-
-    --blur: blur(7px);
-    --modal-background: var(--modal-background);
-    /* modal background transparency */
 
     /* Modular Scale - calculated from font-ratio */
     --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
@@ -64,17 +64,21 @@
     --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
     --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
 
-    --baseline: calc(1rlh / var(--font-density));
     /* Logical Spacing Scale - based on rhythm unit */
-    --space-3xs: calc(var(--baseline) / 5);
-    --space-2xs: calc(var(--baseline) / 4);
-    --space-xs: calc(var(--baseline) / 3);
-    --space-s: calc(var(--baseline) / 2);
-    --space: var(--baseline); /* Base rhythm unit */
-    --space-l: calc(2 * var(--baseline));
-    --space-xl: calc(3 * var(--baseline));
-    --space-2xl: calc(4 * var(--baseline));
-    --space-3xl: calc(5 * var(--baseline));
+    --space-3xs: calc(1rlh / 5);
+    --space-2xs: calc(1rlh / 4);
+    --space-xs: calc(1rlh / 3);
+    --space-s: calc(1rlh / 2);
+    --space: 1rlh; /* Base rhythm unit */
+    --space-l: calc(2 * 1rlh);
+    --space-xl: calc(3 * 1rlh);
+    --space-2xl: calc(4 * 1rlh);
+    --space-3xl: calc(5 * 1rlh);
+    --space-4xl: calc(6 * 1rlh);
+    --space-5xl: calc(7 * 1rlh);
+    --space-6xl: calc(8 * 1rlh);
+    --space-7xl: calc(9 * 1rlh);
+    --space-8xl: calc(10 * 1rlh);
 
     /* Grid system tokens */
     --grid-gap: var(--space);
@@ -153,4 +157,16 @@
     --flow-scale-l: calc(var(--flow-space) * 1.5); /* 2.25rem */
     --flow-scale-xl: calc(var(--flow-space) * 2); /* 3rem */
     --flow-scale-xxl: calc(var(--flow-space) * 3); /* 4.5rem */
+}
+
+/* Responsive adjustments - collapse gutters on small screens */
+@media only screen and (max-width: #{$small}) {
+    :root {
+        --font-size: var(--font-mobile-size) !important;
+        --font-ratio: var(--font-mobile-ratio) !important;
+        --font-density: var(--font-mobile-density);
+        --body-padding: calc(
+            var(--space) * var(--body-mobile-padding-multiplier)
+        ) !important;
+    }
 }

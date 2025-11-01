@@ -561,7 +561,7 @@ Override prose defaults with CSS variables:
 ```css
 :root {
   /* Heading spacing multiplier */
-  --rhythm-multiplier: 1;
+  --rhythm-gap: 1;
 
   /* Line height for body text */
   --line-height-base: 1.618;

@@ -87,7 +87,7 @@ $wide: 1440px;
  *
  * @example
  * @include apply-rhythm-block {
- *   margin-bottom: calc(var(--space) * var(--rhythm-multiplier-block));
+ *   margin-bottom: calc(var(--space) * var(--rhythm-gap-block));
  * }
  *
  * @since 0.1.0

@@ -72,7 +72,7 @@ When rhythm is active on `<html>`, the `<body>` element automatically gets rhyth
 
 | Breakpoint | Padding | Variable |
 |------------|---------|----------|
-| Desktop | `calc(--space × --body-padding-multiplier)` | `--body-padding-multiplier` |
+| Desktop | `calc(--space × --body-padding)` | `--body-padding` |
 | Mobile | `calc(--space × --body-mobile-padding-multiplier)` | `--body-mobile-padding-multiplier` |
 
 **Note**: Direct `.rhythm` containers (like `<div class="rhythm">`) do NOT receive body padding — only `<body>` does.

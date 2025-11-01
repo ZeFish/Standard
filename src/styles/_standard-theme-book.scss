@@ -37,9 +37,9 @@
     --font-header-feature: "liga", "onum", "kern";
     --font-header-variation: "opsz" 12;
 
-    --body-padding-multiplier: 3;
-    --rhythm-multiplier: 1;
-    --rhythm-multiplier-block: 1.5;
+    --body-padding: var(--space-xl);
+    --rhythm-gap: 1;
+    --rhythm-gap-block: 1.5;
     --shadow: 0;
     --border-radius: 0;
 
@@ -79,7 +79,8 @@
     }
 
     .prose {
-        margin-left: 15%;
+        margin-left: 10%;
+        transition: margin-left 0.3s ease;
     }
 
     header {
@@ -155,6 +156,12 @@
         letter-spacing: 0.15em;
         /* /*text-transform: uppercase;* */
         font-feature-settings: "liga", "onum", "kern", "smcp";
+    }
+
+    @media (min-width: 1200px) {
+        .prose {
+            margin-left: 20%;
+        }
     }
 
     @media (max-width: 1000px) {

@@ -489,7 +489,7 @@ When a list uses `.display-flex` or has `display: flex` inline style, list items
 
 Remove body padding from specific elements to create full-width layouts. Useful for footers, headers, or full-bleed sections that should extend to the viewport edges.
 
-The framework applies default padding to `<body>` via `--body-padding-multiplier` and `--body-mobile-padding-multiplier` tokens. These utilities negate that padding while maintaining responsive breakpoint handling.
+The framework applies default padding to `<body>` via `--body-padding` and `--body-mobile-padding-multiplier` tokens. These utilities negate that padding while maintaining responsive breakpoint handling.
 
 ### `.negate-body-padding`
 
@@ -582,7 +582,7 @@ Negates **all body padding** (horizontal + bottom). Creates full-width elements 
 
 ### Responsive Behavior
 
-All three utilities automatically adjust for mobile breakpoints using `--body-mobile-padding-multiplier` instead of `--body-padding-multiplier` on screens smaller than 768px. No additional media queries needed.
+All three utilities automatically adjust for mobile breakpoints using `--body-mobile-padding-multiplier` instead of `--body-padding` on screens smaller than 768px. No additional media queries needed.
 
 ```scss
 // Automatically switches at mobile breakpoint
@@ -605,14 +605,14 @@ These utilities work by:
 
 **CSS Variables Used:**
 - `--space` — Base rhythm unit (1rlh)
-- `--body-padding-multiplier` — Desktop padding multiplier (default: 1)
+- `--body-padding` — Desktop padding multiplier (default: 1)
 - `--body-mobile-padding-multiplier` — Mobile padding multiplier (default: 1)
 
 You can customize body padding by adjusting these variables in your CSS:
 
 ```css
 :root {
-    --body-padding-multiplier: 1.5;        /* Increase desktop padding */
+    --body-padding: 1.5;        /* Increase desktop padding */
     --body-mobile-padding-multiplier: 0.5; /* Decrease mobile padding */
 }
 ```

@@ -560,11 +560,11 @@
  */
 
 .rhythm-tight {
-    --rhythm-multiplier: var(--space-s);
+    --rhythm-gap: var(--space-s);
 }
 
 .rhythm-relaxed {
-    --rhythm-multiplier: var(--space-l);
+    --rhythm-gap: var(--space-l);
 }
 
 /* =========================== */
@@ -580,9 +580,7 @@
         display: block;
 
         > * {
-            margin-block-end: calc(
-                var(--space-block) * var(--rhythm-multiplier)
-            );
+            margin-block-end: calc(var(--space-block) * var(--rhythm-gap));
         }
 
         > :last-child {
@@ -667,9 +665,7 @@
  * Useful when you want footer to sit flush at bottom
  */
 .body-p-neg-footer {
-    margin-block-end: calc(
-        (var(--space) * var(--body-padding-multiplier) * 1.5) * -1
-    );
+    margin-block-end: calc((var(--space) * var(--body-padding) * 1.5) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-end: calc(
@@ -679,9 +675,7 @@
 }
 
 .body-p-neg-header {
-    margin-block-start: calc(
-        (var(--space) * var(--body-padding-multiplier) * 1) * -1
-    );
+    margin-block-start: calc((var(--space) * var(--body-padding) * 1) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-start: calc(

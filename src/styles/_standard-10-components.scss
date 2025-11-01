@@ -76,7 +76,7 @@
  * @example scss - Customizing card via CSS variables
  *   .card.custom {
  *     --card-border-color: var(--color-accent);
- *     --card-padding: calc(var(--space) * 2);
+ *     --card-padding: var(--space-l);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
  */

@@ -9,29 +9,33 @@
     --color-accent: red;
     --shadow: none;
     --border-radius: 0;
-    --color-border: var(--color-foreground);
+    --color-border: none;
     --color-muted: var(--color-foreground);
 
     --color-dark-foreground: #ccc;
 
     --font-ratio: 1.8;
     --font-mobile-ratio: 2;
-    --body-padding-multiplier: 3;
+    --body-padding: var(--space-2xl);
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
     --font-density: 1.5;
 
-    --rhythm-multiplier: calc(1 / var(--font-density));
-    --rhythm-multiplier-block: 0;
+    --rhythm-gap: calc(1 / var(--font-density));
+    --rhythm-gap-block: 0;
 
     --gap: clamp(var(--space), 6%, var(--space-xl));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
+    --content-small: calc(var(--space) * var(--rhythm-gap-block));
     --content-accent: minmax(0, var(--space-l));
     --content-feature: minmax(0, var(--space-2xl));
     --content-hero: minmax(0, 1fr);
 
     --gap: 0;
+
+    hr {
+        background: var(--color-foreground);
+    }
 
     code,
     .token {
@@ -62,8 +66,8 @@
     }
 
     h1 {
-        margin-block-start: calc(var(--space) * 8);
-        margin-block-end: calc(var(--space) * 4);
+        margin-block-start: var(--space-6xl);
+        margin-block-end: var(--space-2xl);
     }
     h2,
     h3 {

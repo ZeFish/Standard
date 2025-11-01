@@ -9,21 +9,23 @@
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   
-  --ratio: var(--ratio-silver);
-  --font-ratio: var(--ratio);
-  --font-density: var(--ratio);
+  --font-ratio: 1.8;
+  --font-density: 1.2;
   --font-density-s: max(calc(var(--font-density) * 0.75), 1);
+  --rhythm-gap: 1;
+  --rhythm-gap-block: 1;
+  --body-padding: var(--space-l);
+  --blur: blur(7px);
+  --modal-background: color-mix(
+      in srgb,
+      var(--color-background-secondary) 65%,
+      transparent
+  );
+  --block-padding-inner: calc(var(--space) / var(--font-density));
   --font-mobile-size: 1.1rem;
   --font-mobile-ratio: var(--ratio-halfstep);
   --font-mobile-density: 1.2;
-  --rhythm-multiplier: var(--ratio);
-  --rhythm-multiplier-block: var(--ratio);
-  --body-padding-multiplier: var(--ratio);
-  --body-padding: var(--body-padding);
   --body-mobile-padding-multiplier: 1;
-  --blur: blur(7px);
-  --modal-background: var(--modal-background);
-  
   
   --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
   --scale-2xs: calc(var(--font-size) * pow(var(--font-ratio), -2));
@@ -34,17 +36,21 @@
   --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 1));
   --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
   --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
-  --baseline: calc(1rlh / var(--font-density));
   
-  --space-3xs: calc(var(--baseline) / 5);
-  --space-2xs: calc(var(--baseline) / 4);
-  --space-xs: calc(var(--baseline) / 3);
-  --space-s: calc(var(--baseline) / 2);
-  --space: var(--baseline); 
-  --space-l: calc(2 * var(--baseline));
-  --space-xl: calc(3 * var(--baseline));
-  --space-2xl: calc(4 * var(--baseline));
-  --space-3xl: calc(5 * var(--baseline));
+  --space-3xs: calc(1rlh / 5);
+  --space-2xs: calc(1rlh / 4);
+  --space-xs: calc(1rlh / 3);
+  --space-s: calc(1rlh / 2);
+  --space: 1rlh; 
+  --space-l: calc(2 * 1rlh);
+  --space-xl: calc(3 * 1rlh);
+  --space-2xl: calc(4 * 1rlh);
+  --space-3xl: calc(5 * 1rlh);
+  --space-4xl: calc(6 * 1rlh);
+  --space-5xl: calc(7 * 1rlh);
+  --space-6xl: calc(8 * 1rlh);
+  --space-7xl: calc(9 * 1rlh);
+  --space-8xl: calc(10 * 1rlh);
   
   --grid-gap: var(--space);
   --grid-row-gap: var(--grid-gap); 
@@ -81,6 +87,17 @@
   --flow-scale-xxl: calc(var(--flow-space) * 3); 
 }
 
+
+@media only screen and (max-width: 768px) {
+  :root {
+    --font-size: var(--font-mobile-size) !important;
+    --font-ratio: var(--font-mobile-ratio) !important;
+    --font-density: var(--font-mobile-density);
+    --body-padding: calc(
+        var(--space) * var(--body-mobile-padding-multiplier)
+    ) !important;
+  }
+}
 
 
 
@@ -538,20 +555,6 @@ html {
 }
 
 
-@media only screen and (max-width: 768px) {
-  :root {
-    --font-size: var(--font-mobile-size) !important;
-    --font-ratio: var(--font-mobile-ratio) !important;
-    --font-density: var(--font-mobile-density) !important;
-  }
-}
-
-
-
-
-
-
-
 
 
 
@@ -686,7 +689,7 @@ pre {
   font-size: var(--scale-s);
   border: var(--border);
   border-radius: var(--border-radius);
-  padding: var(--baseline);
+  padding: var(--block-padding-inner);
   overflow-x: auto;
   line-height: 1.5;
   box-shadow: inset var(--shadow);
@@ -712,7 +715,7 @@ blockquote {
   border-inline-start: var(--space-3xs) solid var(--color-muted);
   background: var(--color-background-secondary);
   color: var(--color-muted);
-  padding: var(--space);
+  padding: var(--block-padding-inner);
 }
 
 
@@ -789,16 +792,14 @@ a:focus {
 }
 
 a:focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   border-radius: 2px;
 }
 
 a.external-link::after {
   content: "↗";
-  position: relative;
   text-decoration: none;
-  top: 1px;
-  left: 2px;
+  font-size: inherit;
   font-size: var(--scale-xs);
   color: var(--color-subtle);
 }
@@ -863,7 +864,7 @@ a.button:active {
 button:focus-visible,
 a.button:focus-visible,
 a.button:focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 2px;
   color: var(--color-background);
 }
@@ -893,7 +894,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 0px;
   border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
   background-color: color-mix(in srgb, var(--color-accent) 5%, var(--color-background));
@@ -940,7 +941,7 @@ input[type=radio]:checked {
 
 input[type=checkbox]:focus,
 input[type=radio]:focus {
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 2px;
 }
 
@@ -1047,7 +1048,7 @@ mark {
 :where(html:not(.no-rhythm)) > *,
 :where(.rhythm) > * {
   margin-block-start: 0;
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * var(--rhythm-gap));
 }
 
 
@@ -1055,23 +1056,17 @@ mark {
 :where(html:not(.no-rhythm)) > body {
   margin: 0;
   padding: var(--body-padding);
-  padding-bottom: calc(var(--space) * var(--body-padding-multiplier) * 1.5);
+  padding-bottom: calc(var(--space) * var(--body-padding) * 1.5);
 }
 :where(body:not(.no-rhythm)) [id],
 :where(html:not(.no-rhythm)) > body [id] {
-  scroll-margin-top: calc(var(--space) * var(--body-padding-multiplier)); 
+  scroll-margin-top: calc(var(--space) * var(--body-padding)); 
 }
 
 @media (max-width: 768px) {
   :where(body:not(.no-rhythm)),
   :where(html:not(.no-rhythm)) > body {
     margin: 0;
-    padding: calc(var(--space) * var(--body-mobile-padding-multiplier));
-    padding-bottom: calc(var(--space) * var(--body-mobile-padding-multiplier) * 1.5);
-  }
-  :where(body:not(.no-rhythm)) [id],
-  :where(html:not(.no-rhythm)) > body [id] {
-    scroll-margin-top: calc(var(--space) * var(--body-mobile-padding-multiplier)); 
   }
 }
 
@@ -1108,10 +1103,10 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) .box-inset,
 :where(html:not(.no-rhythm), .rhythm) .scroll {
   margin-block-start: 0;
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) .rhythm {
-  --rhythm-multiplier: 1; 
+  --rhythm-gap: 1; 
 }
 :where(html:not(.no-rhythm), .rhythm) .callout,
 :where(html:not(.no-rhythm), .rhythm) blockquote,
@@ -1125,19 +1120,19 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) .container-accent,
 :where(html:not(.no-rhythm), .rhythm) .container-feature,
 :where(html:not(.no-rhythm), .rhythm) .container-hero {
-  margin-block-start: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)) - var(--space) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)));
+  margin-block-start: calc(var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap)) - var(--space) * var(--rhythm-gap));
+  margin-block-end: calc(var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap)));
 }
 :where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) .prose > [class^=grid-],
 :where(html:not(.no-rhythm), .rhythm) .prose > .grid {
-  margin-block-start: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)) - var(--space) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space) * max(var(--rhythm-multiplier-block), var(--rhythm-multiplier)));
+  margin-block-start: calc(var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap)) - var(--space) * var(--rhythm-gap));
+  margin-block-end: calc(var(--space) * max(var(--rhythm-gap-block), var(--rhythm-gap)));
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
-  --rhythm-multiplier-block: calc(var(--rhythm-multiplier) * 3);
+  --rhythm-gap-block: calc(var(--rhythm-gap) * 3);
 }
 :where(html:not(.no-rhythm), .rhythm) blockquote > :first-child,
 :where(html:not(.no-rhythm), .rhythm) pre > :first-child,
@@ -1158,13 +1153,13 @@ mark {
 }
 :where(html:not(.no-rhythm), .rhythm) p + ul,
 :where(html:not(.no-rhythm), .rhythm) p + ol {
-  margin-block-start: calc(var(--space) * -0.5 * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space) * -0.5 * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) ol ul,
 :where(html:not(.no-rhythm), .rhythm) ol ol,
 :where(html:not(.no-rhythm), .rhythm) ul ul,
 :where(html:not(.no-rhythm), .rhythm) ul ol {
-  margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space-xs) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) li > ul,
 :where(html:not(.no-rhythm), .rhythm) li > ol {
@@ -1175,7 +1170,7 @@ mark {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-xs) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";
@@ -1223,20 +1218,20 @@ mark {
 }
 :where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
   display: grid;
-  gap: calc(var(--space-s) * var(--rhythm-multiplier));
+  gap: calc(var(--space-s) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) .grid form {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space-s) * var(--rhythm-multiplier));
+  gap: calc(var(--space-s) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) fieldset {
-  padding: calc(var(--space-s) * var(--rhythm-multiplier));
+  padding: calc(var(--space-s) * var(--rhythm-gap));
   display: grid;
-  gap: calc(var(--space-3xs) * var(--rhythm-multiplier));
+  gap: calc(var(--space-3xs) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) legend {
-  padding-inline: calc(var(--space-xs) * var(--rhythm-multiplier));
+  padding-inline: calc(var(--space-xs) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) input,
 :where(html:not(.no-rhythm), .rhythm) textarea,
@@ -1251,20 +1246,20 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=password]),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ textarea),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ select) {
-  margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier));
-  margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+  margin-block-start: calc(var(--space-xs) * var(--rhythm-gap));
+  margin-inline-start: calc(var(--space-s) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) fieldset div,
 :where(html:not(.no-rhythm), .rhythm) fieldset p {
-  margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+  margin-inline-start: calc(var(--space-s) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) label + input[type=checkbox],
 :where(html:not(.no-rhythm), .rhythm) label + input[type=radio] {
-  margin-inline-start: calc(var(--space-s) * var(--rhythm-multiplier));
+  margin-inline-start: calc(var(--space-s) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) .button-group {
   display: flex;
-  gap: calc(var(--space-s) * var(--rhythm-multiplier));
+  gap: calc(var(--space-s) * var(--rhythm-gap));
   flex-wrap: wrap;
 }
 :where(html:not(.no-rhythm), .rhythm) img,
@@ -1276,10 +1271,10 @@ mark {
 }
 :where(html:not(.no-rhythm), .rhythm) figure {
   display: grid;
-  gap: calc(var(--space-xs) * var(--rhythm-multiplier));
+  gap: calc(var(--space-xs) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) caption {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space-xs) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) table {
   
@@ -1290,8 +1285,8 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) th {
   border-bottom: var(--border);
   font-size: var(--scale-s);
-  padding-block: calc(var(--space-xs) * var(--rhythm-multiplier));
-  padding-inline: calc(var(--space-s) * var(--rhythm-multiplier));
+  padding-block: calc(var(--space-xs) * var(--rhythm-gap));
+  padding-inline: calc(var(--space-s) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) th {
   
@@ -1307,8 +1302,8 @@ mark {
 }
 :where(html:not(.no-rhythm), .rhythm) .tight th,
 :where(html:not(.no-rhythm), .rhythm) .tight td {
-  padding-block: calc(var(--space-2xs) * var(--rhythm-multiplier));
-  padding-inline-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+  padding-block: calc(var(--space-2xs) * var(--rhythm-gap));
+  padding-inline-end: calc(var(--space-xs) * var(--rhythm-gap));
 }
 
 
@@ -1316,15 +1311,15 @@ mark {
 
 
 .rhythm-tight {
-  --rhythm-multiplier: 0.5;
+  --rhythm-gap: 0.5;
 }
 
 .rhythm-relaxed {
-  --rhythm-multiplier: 1.5;
+  --rhythm-gap: 1.5;
 }
 
 .rhythm-xl {
-  --rhythm-multiplier: 2;
+  --rhythm-gap: 2;
 }
 
 
@@ -1341,7 +1336,7 @@ mark {
 }
 
 .stick-next {
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier)) !important;
+  margin-block-end: calc(var(--space-xs) * var(--rhythm-gap)) !important;
 }
 
 
@@ -1359,7 +1354,7 @@ mark {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+    margin-block-end: calc(var(--space) * var(--rhythm-gap));
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -2235,7 +2230,7 @@ hr.col-row {
 .grid > .col-quarter > *,
 .grid > .col-full > * {
   margin-block: 0;
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-end: calc(var(--space) * var(--rhythm-gap));
 }
 .box > :last-child,
 .grid > .col-1 > :last-child,
@@ -2302,7 +2297,7 @@ hr.col-row {
   
   --gap: clamp(var(--space), 6%, var(--space-xl));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
+  --content-small: calc(var(--space) * var(--rhythm-gap-block));
   --content-accent: minmax(0, var(--space-l));
   --content-feature: minmax(0, var(--space-2xl));
   --content-hero: minmax(0, 1fr);
@@ -2342,7 +2337,7 @@ hr.col-row {
 }
 :where(.prose) .container-hero {
   grid-column: hero;
-  margin-inline: calc(var(--space) * var(--body-padding-multiplier) * -1);
+  margin-inline: calc(var(--space) * var(--body-padding) * -1);
   
 }
 :where(.prose) .container-hero > * {
@@ -2382,40 +2377,40 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier) * -1 + (var(--gap))) !important;
+  margin-block-start: calc(var(--space) * var(--rhythm-gap) * -1 + (var(--gap))) !important;
 }
 :where(.prose) h1,
 :where(.prose) > h1:where(:first-child) {
-  margin-block-start: calc(var(--space-3xl) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-start: var(--space-3xl);
+  margin-block-end: var(--space-l);
 }
 :where(.prose) h2 {
-  margin-block-start: calc(var(--space-2xl) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-block-start: var(--space-2xl);
+  margin-block-end: var(--space);
 }
 :where(.prose) h3 {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-start: var(--space);
 }
 :where(.prose) h4 {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-start: var(--space);
 }
 :where(.prose) h5 {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space) * var(--rhythm-multiplier));
+  margin-block-start: var(--space);
+  margin-block-end: var(--space);
 }
 :where(.prose) h6 {
-  margin-block-start: calc(var(--space) * var(--rhythm-multiplier));
-  margin-block-end: calc(var(--space-xs) * var(--rhythm-multiplier));
+  margin-block-start: var(--space);
+  margin-block-end: var(--space-xs);
 }
 :where(.prose) hr {
-  margin-inline: calc(var(--space-l) * var(--rhythm-multiplier));
+  margin-inline: calc(var(--space-l) * var(--rhythm-gap));
 }
 :where(.prose) h1 + h2,
 :where(.prose) h2 + h3,
 :where(.prose) h3 + h4,
 :where(.prose) h4 + h5,
 :where(.prose) h5 + h6 {
-  margin-block-start: calc(var(--space-xs) * var(--rhythm-multiplier) * -1);
+  margin-block-start: calc(var(--space-xs) * var(--rhythm-gap) * -1);
 }
 :where(.prose) hr + h2,
 :where(.prose) hr + h3,
@@ -2489,30 +2484,6 @@ figure,
 }
 :where(.prose) p img {
   max-inline-size: 100%;
-}
-
-.width-xs {
-  max-width: var(--line-width-xs);
-}
-
-.width-s {
-  max-width: var(--line-width-s);
-}
-
-.width-m {
-  max-width: var(--line-width-m);
-}
-
-.width-l {
-  max-width: var(--line-width-l);
-}
-
-.width-xl {
-  max-width: var(--line-width-xl);
-}
-
-.width-full {
-  max-width: var(--line-width-full);
 }
 
 
@@ -2642,8 +2613,10 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   box-shadow: inset var(--shadow);
 }
 .md .box,
-.md .box-inset {
-  padding: var(--baseline);
+.md .box-inset,
+.md .card,
+.md .card-inset {
+  padding: var(--block-padding-inner);
   font-size: var(--scale-s);
 }
 .md blockquote {
@@ -2666,18 +2639,17 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 .md .callout .callout-title {
   color: color-mix(in srgb, var(--color-callout) 50%, var(--color-foreground));
   font-weight: bold;
-  font-size: var(--scale-s);
   user-select: none;
-  padding: var(--space-3xs) calc(var(--space) - var(--space-xs)) var(--space-3xs) calc(var(--space) - var(--space-xs));
+  padding: var(--space-3xs) calc(var(--space) - var(--space-2xs)) var(--space-3xs) calc(var(--space) - var(--space-2xs));
 }
 .md .callout .callout-content {
   color: var(--color-foreground);
   background: color-mix(in srgb, var(--color-callout) 2.5%, var(--color-background));
   box-shadow: inset var(--shadow);
-  font-size: var(--scale-s);
   overflow: hidden;
   border-radius: var(--border-radius);
-  padding: var(--baseline);
+  padding: var(--block-padding-inner);
+  padding-top: var(--block-padding-inner);
   margin-top: var(--space-2xs);
   margin-left: 0;
   border: var(--border);
@@ -2727,6 +2699,9 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   display: inline-block;
   transform: rotate(0deg);
   transition: transform 0.2s ease;
+  width: var(--space-s);
+  margin-left: calc(var(--space-s) * -1);
+  text-align: center;
 }
 .md details[open] .callout-title::before {
   transform: rotate(90deg);
@@ -3683,13 +3658,13 @@ dialog.modal::backdrop {
 
 
 .toast-container-top-right {
-  top: calc(var(--toast-spacing) * 2.25);
+  top: calc(var(--toast-spacing) * 1.8);
   right: var(--toast-spacing);
 }
 
 
 .toast-container-top-left {
-  top: calc(var(--toast-spacing) * 1);
+  top: calc(var(--toast-spacing) * 1.8);
   left: var(--toast-spacing);
   transform: translateX(100%);
 }
@@ -3805,14 +3780,14 @@ dialog.modal::backdrop {
   display: flex;
   align-items: flex-start;
   gap: var(--space-xs);
-  padding: var(--space-xs);
+  padding: calc(var(--space-xs) / var(--font-density)) var(--space-s) var(--space-xs) var(--space-xs);
 }
 
 
 .toast-icon {
   flex-shrink: 0;
-  font-size: var(--scale);
-  line-height: 1;
+  font-size: var(--scale-s);
+  line-height: var(--font-density);
   font-weight: bold;
 }
 
@@ -3858,9 +3833,9 @@ dialog.modal::backdrop {
 
 .toast-progress {
   height: 1px;
-  background: color-mix(in srgb, var(--toast-color) 5%, transparent);
+  background: color-mix(in srgb, var(--toast-color) 100%, transparent);
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.2;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   transform-origin: left;
   transition: width 0s linear; 
@@ -3965,9 +3940,9 @@ dialog.modal::backdrop {
     --font-size: 0.925rem !important;
     --font-ratio: 1.125 !important;
     --font-density: 1.4 !important;
-    --rhythm-multiplier: 1;
-    --rhythm-multiplier-block: 0;
-    --body-padding-multiplier: 0;
+    --rhythm-gap: 1;
+    --rhythm-gap-block: 0;
+    --body-padding: 0;
     --line-width: var(--line-width-full);
     --gap: 0;
   }
@@ -5424,11 +5399,11 @@ dialog.modal::backdrop {
 
 
 .rhythm-tight {
-  --rhythm-multiplier: var(--space-s);
+  --rhythm-gap: var(--space-s);
 }
 
 .rhythm-relaxed {
-  --rhythm-multiplier: var(--space-l);
+  --rhythm-gap: var(--space-l);
 }
 
 
@@ -5440,7 +5415,7 @@ dialog.modal::backdrop {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: calc(var(--space-block) * var(--rhythm-multiplier));
+    margin-block-end: calc(var(--space-block) * var(--rhythm-gap));
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -5496,7 +5471,7 @@ dialog.modal::backdrop {
 
 
 .body-p-neg-footer {
-  margin-block-end: calc(var(--space) * var(--body-padding-multiplier) * 1.5 * -1);
+  margin-block-end: calc(var(--space) * var(--body-padding) * 1.5 * -1);
 }
 @media (max-width: 768px) {
   .body-p-neg-footer {
@@ -5505,7 +5480,7 @@ dialog.modal::backdrop {
 }
 
 .body-p-neg-header {
-  margin-block-start: calc(var(--space) * var(--body-padding-multiplier) * 1 * -1);
+  margin-block-start: calc(var(--space) * var(--body-padding) * 1 * -1);
 }
 @media (max-width: 768px) {
   .body-p-neg-header {
@@ -6027,7 +6002,7 @@ body.standard-debug::before {
 
 .standard-lab-panel {
   --gap: 0;
-  --rhythm-multiplier: 0;
-  --rhythm-multiplier-block: 0;
+  --rhythm-gap: 0;
+  --rhythm-gap-block: 0;
   font-size: var(--scale-s);
 }

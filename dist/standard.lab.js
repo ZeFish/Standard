@@ -31,7 +31,7 @@ class StandardLab {
         "--font-ratio",
         "--font-density",
       ],
-      layout: ["--line-width", "--rhythm-multiplier", "--space"],
+      layout: ["--line-width", "--rhythm-gap", "--space"],
       colors: this.getColorTokens(),
     };
 
@@ -690,10 +690,10 @@ class StandardLab {
     styles.textContent = `
       /* Badge, Panel, and other UI styles... (Content is long and unchanged) */
       .standard-lab-badge { position: fixed; width: var(--space); height: var(--space); border-radius: 50%; background: color-mix(in srgb, var(--color-background-secondary) 30%, transparent); border: var(--border); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); display: flex; align-items: center; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
-      .standard-lab-badge:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transform: scale(1.05); color: var(--color-accent); }
+      .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-xs); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
-      .standard-lab-panel { position: fixed; background: color-mix(in srgb, var(--color-background) 60%, transparent); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); z-index: var(--z-toast); opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; display: flex; flex-direction: column; font-family: var(--font-interface); font-size: var(--scale); }
+      .standard-lab-panel { position: fixed; background: var(--modal-background); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--border-radius); box-shadow: var(--shadow); z-index: var(--z-toast); opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; display: flex; flex-direction: column; font-family: var(--font-interface); font-size: var(--scale); }
       .standard-lab-panel-quick { width: 280px; max-height: 400px; }
       .standard-lab-panel-full { width: 360px; max-height: 600px; }
       .standard-lab-panel-header { padding: var(--space-xs); border-bottom: var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
@@ -705,7 +705,7 @@ class StandardLab {
       .standard-lab-toggle { display: flex; align-items: center; gap: var(--space-xs); cursor: pointer; user-select: none; }
       .standard-lab-toggle input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; margin: 0; }
       .standard-lab-toggle span { flex: 1; font-size: var(--scale-s); }
-      .standard-lab-toggle kbd { font-size: var(--scale-xs); font-family: var(--font-monospace); color: var(--color-subtle); padding: var(--space-3xs) var(--space-2xs); background: var(--color-background-secondary); border-radius: 3px; }
+      .standard-lab-toggle kbd { font-size: var(--scale-s); font-family: var(--font-monospace); color: var(--color-subtle); padding: var(--space-3xs) var(--space-2xs); background: var(--color-background-secondary); border-radius: 3px; }
       .standard-lab-select { width: 100%; padding: var(--space-xs); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); font-size: var(--scale-s); color: var(--color-foreground); cursor: pointer; }
       .standard-lab-actions { padding: var(--space-s); border-top: var(--border); display: flex; flex-direction: column; gap: var(--space-2xs); flex-shrink: 0; }
       .standard-lab-btn { width: 100%; padding: var(--space-3xs); background: var(--color-accent); color: var(--color-background); border: none; border-radius: var(--border-radius); font-size: var(--scale-s); font-weight: 600; cursor: pointer; transition: opacity 0.2s ease; }
@@ -738,7 +738,7 @@ class StandardLab {
       .standard-lab-token-row:hover .standard-lab-btn-reset:not(:disabled) { opacity: 1; }
       .standard-lab-btn-reset:disabled { opacity: 0; cursor: not-allowed; }
       .standard-lab-empty { padding: var(--space); text-align: center; color: var(--color-subtle); font-size: var(--scale-s); }
-      .standard-lab-notification { position: fixed; top: var(--space); left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); padding: var(--space-xs) var(--space-s); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); z-index: calc(var(--z-toast) + 1); font-size: var(--scale-s); opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; }
+      .standard-lab-notification { position: fixed; top: var(--space); left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); padding: var(--space-xs) var(--space-s); box-shadow: var(--shadow); z-index: calc(var(--z-toast) + 1); font-size: var(--scale-s); opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; }
       .standard-lab-notification-success { background: var(--color-success); color: white; border-color: var(--color-success); }
       .standard-lab-notification-info { background: var(--color-info); color: white; border-color: var(--color-info); }
       @media (prefers-color-scheme: dark) { .standard-lab-panel { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); } }

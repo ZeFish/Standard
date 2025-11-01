@@ -116,7 +116,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  * @example scss - Customizing card via CSS variables
  *   .card.custom {
  *     --card-border-color: var(--color-accent);
- *     --card-padding: calc(var(--space) * 2);
+ *     --card-padding: var(--space-l);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
  */
@@ -1954,8 +1954,8 @@ description: Live examples of all Standard Framework components
   <style>
     /* Demo-specific styling */
     .demo-section {
-      margin-block-end: calc(var(--space) * 3);
-      padding-block-end: calc(var(--space) * 2);
+      margin-block-end: var(--space-xl);
+      padding-block-end: var(--space-l);
       border-bottom: var(--border);
     }
 
@@ -2484,7 +2484,7 @@ description: Live examples of all Standard Framework components
     <!-- ========================================
          FOOTER
     ========================================= -->
-    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: calc(var(--space) * 2) var(--space); text-align: center; margin-top: calc(var(--space) * 3);">
+    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: var(--space-l) var(--space); text-align: center; margin-top: var(--space-xl);">
       <p style="margin: 0;">
         <strong>Standard Framework</strong> v0.11.0 ·
         <a href="#">Documentation</a> ·

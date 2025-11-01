@@ -139,8 +139,8 @@
   --font-size: 1rem;
   --font-density: 1.1;
   --font-ratio: var(--ratio-silver);
-  --rhythm-multiplier: 1;
-  --rhythm-multiplier-block: 0;
+  --rhythm-gap: 1;
+  --rhythm-gap-block: 0;
   --font-text: "Courier Prime";
   --font-feature: "";
   --font-variation: "wght" 300;
@@ -171,15 +171,25 @@
   word-break: keep-all;
 }
 [data-theme=paper] blockquote {
-  border-inline-start: calc(var(--space-2xs) * var(--rhythm-multiplier)) solid var(--color-muted);
+  border-inline-start: calc(var(--space-2xs) * var(--rhythm-gap)) solid var(--color-muted);
 }
 [data-theme=paper] h1,
 [data-theme=paper] > h1:where(:first-child) {
-  margin-block-start: calc(var(--space) * 8);
-  margin-block-end: calc(var(--space) * 10);
+  margin-block-start: var(--space-7xl);
+  margin-block-end: var(--space-8xl);
 }
 [data-theme=paper] h1:first-child + p {
   margin-block-start: calc(var(--space) * -8);
+  margin-block-end: var(--space-8xl);
+}
+[data-theme=paper] {
+  background: var(--color-background-secondary);
+}
+[data-theme=paper] body {
+  max-width: 768px;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--color-background);
 }
 
 [data-theme=swiss] {
@@ -193,24 +203,27 @@
   --color-accent: red;
   --shadow: none;
   --border-radius: 0;
-  --color-border: var(--color-foreground);
+  --color-border: none;
   --color-muted: var(--color-foreground);
   --color-dark-foreground: #ccc;
   --font-ratio: 1.8;
   --font-mobile-ratio: 2;
-  --body-padding-multiplier: 3;
+  --body-padding: var(--space-2xl);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
   --font-density: 1.5;
-  --rhythm-multiplier: calc(1 / var(--font-density));
-  --rhythm-multiplier-block: 0;
+  --rhythm-gap: calc(1 / var(--font-density));
+  --rhythm-gap-block: 0;
   --gap: clamp(var(--space), 6%, var(--space-xl));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: calc(var(--space) * var(--rhythm-multiplier-block));
+  --content-small: calc(var(--space) * var(--rhythm-gap-block));
   --content-accent: minmax(0, var(--space-l));
   --content-feature: minmax(0, var(--space-2xl));
   --content-hero: minmax(0, 1fr);
   --gap: 0;
+}
+[data-theme=swiss] hr {
+  background: var(--color-foreground);
 }
 [data-theme=swiss] code,
 [data-theme=swiss] .token {
@@ -236,8 +249,8 @@
   max-width: 1400px;
 }
 [data-theme=swiss] h1 {
-  margin-block-start: calc(var(--space) * 8);
-  margin-block-end: calc(var(--space) * 4);
+  margin-block-start: var(--space-6xl);
+  margin-block-end: var(--space-2xl);
 }
 [data-theme=swiss] h2,
 [data-theme=swiss] h3 {
@@ -349,8 +362,8 @@
   --font-size: 1em;
   --font-header-letter-spacing: -0.035em;
   --font-header-line-height: 1em;
-  --rhythm-multiplier: 1;
-  --rhythm-multiplier-block: 0.25;
+  --rhythm-gap: 1;
+  --rhythm-gap-block: 0.25;
 }
 [data-theme=forest] blockquote,
 [data-theme=forest] pre {
@@ -604,15 +617,14 @@
 }
 [data-theme=minimal] {
   --shadow: none;
-  --border-radius: 0;
-  --border-color: var(--color-foreground);
-  --rhythm-multiplier: 1;
-  --rhythm-multiplier-block: 0;
+  --color-border: transparent;
+  --rhythm-gap: 1;
+  --rhythm-gap-block: 2;
   --font-header: "Kalice", sans-serif;
   --font-header-weight: 500;
   --font-header-letter-spacing: 1;
   --font-text: "Diatype", "Kalice", sans-serif;
-  --body-padding-multiplier: 2;
+  --body-padding: var(--space-2xl);
 }
 [data-theme=minimal] table {
   grid-column: content;
@@ -624,6 +636,9 @@
   font-size: var(--scale-xs);
   font-family: var(--font-monospace);
   word-break: keep-all;
+}
+[data-theme=minimal] h1 {
+  margin-block: var(--space-5xl);
 }
 
 @font-face {
@@ -716,9 +731,9 @@
   --font-variation: "opsz" 8;
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
-  --body-padding-multiplier: 3;
-  --rhythm-multiplier: 1;
-  --rhythm-multiplier-block: 1.5;
+  --body-padding: var(--space-xl);
+  --rhythm-gap: 1;
+  --rhythm-gap-block: 1.5;
   --shadow: 0;
   --border-radius: 0;
   --color-accent: var(--color-red);
@@ -753,7 +768,8 @@
   font-size: 1.1em;
 }
 [data-theme=book] .prose {
-  margin-left: 15%;
+  margin-left: 10%;
+  transition: margin-left 0.3s ease;
 }
 [data-theme=book] header {
   display: block;
@@ -820,6 +836,11 @@
   letter-spacing: 0.15em;
   
   font-feature-settings: "liga", "onum", "kern", "smcp";
+}
+@media (min-width: 1200px) {
+  [data-theme=book] .prose {
+    margin-left: 20%;
+  }
 }
 @media (max-width: 1000px) {
   [data-theme=book] .prose {

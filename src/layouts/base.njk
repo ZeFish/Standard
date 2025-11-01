@@ -14,15 +14,15 @@
 			<div class="flex" style="align-items: left;">
 				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
 			</div>
-			{% menu site.nav.header, {className: "menu flex small m-none p-none"} %}
+			{% menu site.nav.header, {className: "menu flex m-none p-none"} %}
 		</header>
      	<main class="prose md">
         {{ content | safe }}
         {% standard_comments %}
       </main>
-			<footer class="prose smaller">
+			<footer class="prose small">
 			  <hr >
-				<p>© {{ year }} {{ site.author.name }}. <a href="/">{{ site.title }}</a> | <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> | {{ pkg.version }}</p>
+				<p>© {{ year }} {{ site.author.name }} · <a href="/">{{ site.title }}</a> · <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> · {{ pkg.version }}</p>
 			</footer>
 	</body>
 </html>
