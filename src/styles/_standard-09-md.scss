@@ -66,7 +66,7 @@
 
     .box,
     .box-inset {
-        padding: var(--space);
+        padding: var(--baseline);
         font-size: var(--scale-s);
     }
 
@@ -123,7 +123,7 @@
             font-size: var(--scale-s);
             overflow: hidden;
             border-radius: var(--border-radius);
-            padding: var(--space-s) calc(var(--space) - var(--space-xs));
+            padding: var(--baseline);
             margin-top: var(--space-2xs);
             margin-left: 0;
             border: var(--border);

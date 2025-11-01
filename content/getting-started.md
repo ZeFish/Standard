@@ -3,6 +3,7 @@ layout: base.njk
 title: Getting Started
 description: Quick start guide for Standard Framework - from setup to your first website
 permalink: /getting-started/
+comments: true
 ---
 
 # Getting Started with Standard Framework

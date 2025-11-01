@@ -60,13 +60,16 @@
 /* =========================== */
 
 .toast-container {
+    /* Define the spacing from viewport edges */
+    --toast-spacing: calc(var(--space) * var(--body-padding-multiplier));
+
     /* Fixed positioning for all containers */
     position: fixed;
     z-index: var(--z-toast);
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
-    pointer-events: none; /* Allow clicks to pass through container */
+    pointer-events: none;
     max-width: 400px;
 }
 
@@ -77,42 +80,35 @@
 
 /* Top-right (default) */
 .toast-container-top-right {
-    top: calc((var(--space) * 1) + var(--space));
-    right: calc(var(--space) * 1);
+    top: calc(var(--toast-spacing) * 2.25);
+    right: var(--toast-spacing);
 }
 
 /* Top-left */
 .toast-container-top-left {
-    top: 0;
-    left: 0;
+    top: calc(var(--toast-spacing) * 1);
+    left: var(--toast-spacing);
+    transform: translateX(100%);
 }
 
 /* Top-center */
 .toast-container-top-center {
-    top: 0;
+    top: calc(var(--toast-spacing) * 2.25);
     left: 50%;
     transform: translateX(-50%);
 }
 
 /* Bottom-right */
 .toast-container-bottom-right {
-    bottom: 0;
-    right: 0;
-    flex-direction: column-reverse; /* New toasts appear at bottom */
+    bottom: calc(var(--toast-spacing) * 2.5);
+    right: var(--toast-spacing);
+    flex-direction: column-reverse;
 }
 
 /* Bottom-left */
 .toast-container-bottom-left {
-    bottom: 0;
-    left: 0;
-    flex-direction: column-reverse;
-}
-
-/* Bottom-center */
-.toast-container-bottom-center {
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: calc(var(--toast-spacing) * 2.5);
+    left: var(--toast-spacing);
     flex-direction: column-reverse;
 }
 
@@ -160,8 +156,8 @@
     opacity: 0;
     transform: translateX(100%); /* Start off-screen right */
     transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+        opacity 0.5s ease,
+        transform 0.5s ease;
 
     /* Cursor */
     cursor: default;
@@ -198,8 +194,8 @@
     opacity: 0;
     transform: scale(0.95);
     transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 /* Mobile: slide from bottom */
@@ -261,8 +257,8 @@
     justify-content: center;
     border-radius: var(--border-radius);
     transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+        background-color 0.5s ease,
+        color 0.5s ease;
 
     &:hover {
         background: var(--color-background-secondary);

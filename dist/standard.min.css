@@ -20,7 +20,7 @@
   --rhythm-multiplier-block: var(--ratio);
   --body-padding-multiplier: var(--ratio);
   --body-mobile-padding-multiplier: 1;
-  --blur: blur(10px);
+  --blur: blur(7px);
   
   
   --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
@@ -684,7 +684,7 @@ pre {
   font-size: var(--scale-s);
   border: var(--border);
   border-radius: var(--border-radius);
-  padding: var(--space);
+  padding: var(--baseline);
   overflow-x: auto;
   line-height: 1.5;
   box-shadow: inset var(--shadow);
@@ -2636,7 +2636,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 }
 .md .box,
 .md .box-inset {
-  padding: var(--space);
+  padding: var(--baseline);
   font-size: var(--scale-s);
 }
 .md blockquote {
@@ -2670,7 +2670,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   font-size: var(--scale-s);
   overflow: hidden;
   border-radius: var(--border-radius);
-  padding: var(--space-s) calc(var(--space) - var(--space-xs));
+  padding: var(--baseline);
   margin-top: var(--space-2xs);
   margin-left: 0;
   border: var(--border);
@@ -3658,12 +3658,14 @@ dialog.modal::backdrop {
 
 .toast-container {
   
+  --toast-spacing: calc(var(--space) * var(--body-padding-multiplier));
+  
   position: fixed;
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  pointer-events: none; 
+  pointer-events: none;
   max-width: 400px;
 }
 
@@ -3674,42 +3676,35 @@ dialog.modal::backdrop {
 
 
 .toast-container-top-right {
-  top: calc(var(--space) * 1 + var(--space));
-  right: calc(var(--space) * 1);
+  top: calc(var(--toast-spacing) * 2.25);
+  right: var(--toast-spacing);
 }
 
 
 .toast-container-top-left {
-  top: 0;
-  left: 0;
+  top: calc(var(--toast-spacing) * 1);
+  left: var(--toast-spacing);
+  transform: translateX(100%);
 }
 
 
 .toast-container-top-center {
-  top: 0;
+  top: calc(var(--toast-spacing) * 2.25);
   left: 50%;
   transform: translateX(-50%);
 }
 
 
 .toast-container-bottom-right {
-  bottom: 0;
-  right: 0;
-  flex-direction: column-reverse; 
-}
-
-
-.toast-container-bottom-left {
-  bottom: 0;
-  left: 0;
+  bottom: calc(var(--toast-spacing) * 2.5);
+  right: var(--toast-spacing);
   flex-direction: column-reverse;
 }
 
 
-.toast-container-bottom-center {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+.toast-container-bottom-left {
+  bottom: calc(var(--toast-spacing) * 2.5);
+  left: var(--toast-spacing);
   flex-direction: column-reverse;
 }
 
@@ -3747,7 +3742,7 @@ dialog.modal::backdrop {
   
   opacity: 0;
   transform: translateX(100%); 
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   
   cursor: default;
 }
@@ -3782,7 +3777,7 @@ dialog.modal::backdrop {
 .toast-dismissing {
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 
@@ -3840,7 +3835,7 @@ dialog.modal::backdrop {
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 .toast-close:hover {
   background: var(--color-background-secondary);
@@ -5259,6 +5254,22 @@ dialog.modal::backdrop {
 
 .accent {
   color: var(--color-accent) !important;
+}
+
+.success {
+  color: var(--color-success) !important;
+}
+
+.warning {
+  color: var(--color-warning) !important;
+}
+
+.error {
+  color: var(--color-error) !important;
+}
+
+.info {
+  color: var(--color-info) !important;
 }
 
 .red {

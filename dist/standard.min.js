@@ -68,7 +68,7 @@ document.body.addEventListener("htmx:beforeSwap", (evt) => {
   }
 });
 
-document.body.addEventListener("htmx:load", function (event) {
+document.body.addEventListener("htmx:afterSettle", function (event) {
   // Check if our global imageZoom instance exists
   if (window.imageZoom) {
     // Tell the existing instance to find any new images

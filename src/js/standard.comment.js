@@ -1,48 +1,20 @@
 /**
  * GitHub Comment
  *
- * A lightweight image zoom library with keyboard navigation.
- * Click any image to zoom, use arrow keys to navigate, ESC to close.
- *
- * Features:
- * - Click to zoom in/out
- * - Keyboard navigation (←/→ arrows)
- * - ESC to close
- * - Wraps around image gallery
- * - Auto-injects required CSS
- * - Custom events for extensibility
- * - Configurable selectors
+ * HTMX-COMPATIBLE VERSION: Includes a robust event listener at the end
+ * to re-initialize the comments widget safely after HTMX page loads.
+ * This version moves all initialization logic inside a DOMContentLoaded
+ * check to prevent minification-related variable collisions and timing errors.
  *
  * @version @VERSION_PLACEHOLDER@
- * @license MIT
- * @author Your Name
  */
 
 (function (global) {
   "use strict";
 
-  /**
-   * @component GitHub Comments Client
-   * @category Cloudflare Functions
-   * @description Client-side library for interacting with the GitHub comments API.
-   * Exposes a global singleton `comments` API and auto-initializes on DOM ready.
-   *
-   * Features:
-   * - Singleton API: `comments.init()`, `comments.load()`, `comments.render()`, `comments.submit()`, etc.
-   * - Auto-initialize when DOM is ready (scans for comment container)
-   * - Graceful in environments without DOM (no-ops)
-   *
-   * Example:
-   *   comments.configure({ apiUrl: '/api/comments', pollInterval: 15000 });
-   *   comments.init(); // optional; auto-init runs on DOM ready
-   *
-   * @since 0.10.53
-   * @version @VERSION_PLACEHOLDER@
-   */
-
-  /* --------------------------------------------------------
-   * Core GitHubComments class (kept small and focused)
-   * --------------------------------------------------------*/
+  /* ========================================================
+   * ORIGINAL GITHUB COMMENTS LIBRARY (Unchanged)
+   * ======================================================== */
   class GitHubComments {
     constructor(options = {}) {
       this.apiUrl = options.apiUrl || "/api/comments";
@@ -54,7 +26,7 @@
       this.formSelector = options.form || "#comment-form";
       this.comments = [];
       this.loading = false;
-      this.pollInterval = options.pollInterval || null; // ms, null = disabled
+      this.pollInterval = options.pollInterval || null;
       this.pollTimer = null;
       this.onLoad = options.onLoad || null;
       this.onRender = options.onRender || null;
@@ -63,10 +35,13 @@
     async load() {
       if (!this.pageId) {
         console.error("GitHubComments: pageId is required");
+        this.error = "Configuration error: pageId is required";
         return [];
       }
 
       this.loading = true;
+      this.error = null; // Clear any previous errors
+
       try {
         const response = await fetch(
           `${this.apiUrl}?pageId=${encodeURIComponent(this.pageId)}`,
@@ -84,14 +59,19 @@
           try {
             this.onLoad(this.comments);
           } catch (e) {
-            /* swallow user onLoad errors */
+            /* swallow user errors */
           }
         }
-
         return this.comments;
       } catch (error) {
         console.error("Error loading comments:", error);
         this.loading = false;
+
+        // --- ADD THESE LINES ---
+        // Store a user-friendly error message
+        this.error =
+          error.message || "Failed to load comments. Please try again later.";
+
         return [];
       }
     }
@@ -101,12 +81,8 @@
         const response = await fetch(this.apiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            pageId: this.pageId,
-            ...data,
-          }),
+          body: JSON.stringify({ pageId: this.pageId, ...data }),
         });
-
         if (!response.ok) {
           let errorMessage = `API error: ${response.status}`;
           try {
@@ -117,16 +93,13 @@
           }
           throw new Error(errorMessage);
         }
-
         const result = await response.json();
-
         if (result.comment) {
           this.comments.push(result.comment);
           this.comments.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
           );
         }
-
         return result;
       } catch (error) {
         console.error("Error submitting comment:", error);
@@ -138,12 +111,10 @@
       const date = new Date(dateStr);
       const now = new Date();
       const seconds = Math.floor((now - date) / 1000);
-
       if (seconds < 60) return "just now";
       if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
       if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
       if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`;
-
       return date.toLocaleDateString();
     }
 
@@ -155,7 +126,6 @@
 
     formatContent(content) {
       let html = this.escapeHTML(content);
-
       html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
       html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
       html = html.replace(/_(.+?)_/g, "<em>$1</em>");
@@ -166,51 +136,31 @@
         '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
       );
       html = html.replace(/\n/g, "<br>");
-
       return html;
     }
 
     renderComment(comment, level = 0) {
       const approved = comment.approved !== false ? "" : ' data-pending="true"';
       const spam = comment.spam ? ' data-spam="true"' : "";
-
       return `
-      <div class="comment" data-id="${this.escapeHTML(
-        String(comment.id),
-      )}" data-level="${level}"${approved}${spam}>
-        <div class="comment-header">
-          <span class="comment-author">${this.escapeHTML(
-            comment.author || "Anonymous",
-          )}</span>
-          <span class="comment-date">${this.formatTime(
-            comment.createdAt,
-          )}</span>
-          ${
-            comment.spam
-              ? '<span class="comment-flag">Flagged as spam</span>'
-              : ""
-          }
-          ${
-            !comment.approved
-              ? '<span class="comment-pending">Awaiting moderation</span>'
-              : ""
-          }
+        <div class="comment" data-id="${this.escapeHTML(String(comment.id))}" data-level="${level}"${approved}${spam}">
+          <div class="comment-header">
+            <span class="comment-author">${this.escapeHTML(comment.author || "Anonymous")}</span>
+            <span class="comment-date">${this.formatTime(comment.createdAt)}</span>
+            ${comment.spam ? '<span class="comment-flag">Flagged as spam</span>' : ""}
+            ${!comment.approved ? '<span class="comment-pending">Awaiting moderation</span>' : ""}
+          </div>
+          <div class="comment-content">${this.formatContent(comment.content || "")}</div>
         </div>
-        <div class="comment-content">
-          ${this.formatContent(comment.content || "")}
-        </div>
-      </div>
-    `;
+      `;
     }
 
     buildCommentTree() {
       const byId = {};
       const roots = [];
-
       for (const comment of this.comments) {
         byId[comment.id] = { ...comment, replies: [] };
       }
-
       for (const comment of this.comments) {
         if (comment.parentId && byId[comment.parentId]) {
           byId[comment.parentId].replies.push(byId[comment.id]);
@@ -218,7 +168,6 @@
           roots.push(byId[comment.id]);
         }
       }
-
       return roots;
     }
 
@@ -226,17 +175,27 @@
       return comments
         .map((comment) => {
           let html = this.renderComment(comment, level);
-
           if (comment.replies && comment.replies.length > 0) {
-            html += `<div class="comment-replies">${this.renderTree(
-              comment.replies,
-              level + 1,
-            )}</div>`;
+            html += `<div class="comment-replies">${this.renderTree(comment.replies, level + 1)}</div>`;
           }
-
           return html;
         })
         .join("");
+    }
+
+    /**
+     * Show or hide the comment form based on current state
+     */
+    updateFormVisibility() {
+      const showFormBtn = document.getElementById("show-comment-form-btn");
+      if (!showFormBtn) return;
+
+      // Hide button if there's an error, show it otherwise
+      if (this.error) {
+        showFormBtn.style.display = "none";
+      } else {
+        showFormBtn.style.display = "";
+      }
     }
 
     render() {
@@ -245,22 +204,36 @@
         return;
       }
 
-      if (this.comments.length === 0) {
-        this.container.innerHTML =
-          '<p class="comments-empty">No comments yet. Be the first to comment!</p>';
+      // If there's an error, show it and stop
+      if (this.error) {
+        this.container.innerHTML = `
+            <div class="comments error interface" role="alert">
+              <strong>Error loading comments:</strong> ${this.escapeHTML(this.error)}
+            </div>
+          `;
+        this.updateFormVisibility(); // <-- ADD THIS LINE
         return;
       }
 
+      // If no comments and no error, show empty state
+      if (this.comments.length === 0) {
+        this.container.innerHTML =
+          '<p class="comments-empty">No comments yet. Be the first to comment!</p>';
+        this.updateFormVisibility(); // <-- ADD THIS LINE
+        return;
+      }
+
+      // Otherwise, render the comments as normal
       const tree = this.buildCommentTree();
       this.container.innerHTML = this.renderTree(tree);
-
       this.attachReplyHandlers();
+      this.updateFormVisibility(); // <-- ADD THIS LINE
 
       if (typeof this.onRender === "function") {
         try {
           this.onRender(this.container);
         } catch (e) {
-          /* swallow user errors */
+          /* swallow */
         }
       }
     }
@@ -271,12 +244,9 @@
         btn.addEventListener("click", (e) => {
           const parentId = e.target.dataset.parentId;
           const form = document.querySelector(this.formSelector);
-
           if (form) {
             const parentInput = form.querySelector('[name="parentId"]');
-            if (parentInput) {
-              parentInput.value = parentId;
-            }
+            if (parentInput) parentInput.value = parentId;
             form.scrollIntoView({ behavior: "smooth" });
           }
         });
@@ -285,14 +255,9 @@
 
     attachFormHandler(formSelector = null) {
       const form = document.querySelector(formSelector || this.formSelector);
-      if (!form) {
-        console.error("GitHubComments: form not found");
-        return;
-      }
-
+      if (!form) return;
       form.removeAttribute("hx-boost");
       form.setAttribute("hx-disable", "true");
-
       if (window.htmx) {
         const clone = form.cloneNode(true);
         form.parentNode.replaceChild(clone, form);
@@ -302,7 +267,6 @@
         newForm.addEventListener("submit", this._handleFormSubmit.bind(this));
         return;
       }
-
       form.addEventListener("submit", this._handleFormSubmit.bind(this));
     }
 
@@ -310,9 +274,7 @@
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
-
       const form = e.target;
-
       const formData = new FormData(form);
       const data = {
         author: formData.get("author"),
@@ -320,26 +282,21 @@
         content: formData.get("content"),
         parentId: formData.get("parentId") || null,
       };
-
       const submitBtn = form.querySelector("button[type=submit]");
       const originalText = submitBtn ? submitBtn.textContent : "";
       const statusDiv = form.querySelector("#form-status");
-
       try {
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.textContent = "Submitting...";
           submitBtn.style.opacity = "0.7";
         }
-
         if (statusDiv) {
           statusDiv.style.display = "block";
           statusDiv.textContent = "Sending your comment...";
           statusDiv.style.color = "var(--color-foreground, #000)";
         }
-
         const result = await this.submit(data);
-
         if (statusDiv) {
           statusDiv.textContent =
             "Comment submitted successfully! It will appear after moderation.";
@@ -349,14 +306,9 @@
             statusDiv.textContent = "";
           }, 6000);
         }
-
         form.reset();
-
         const parentIdField = form.querySelector('[name="parentId"]');
-        if (parentIdField) {
-          parentIdField.value = "";
-        }
-
+        if (parentIdField) parentIdField.value = "";
         this.render();
         return result;
       } catch (error) {
@@ -377,13 +329,10 @@
 
     startPolling() {
       if (!this.pollInterval) return;
-
       this.stopPolling();
-
       this.pollTimer = setInterval(async () => {
         const before = this.comments.length;
         await this.load();
-
         if (this.comments.length > before) {
           this.render();
         }
@@ -398,33 +347,22 @@
     }
   }
 
-  /* --------------------------------------------------------
-   * Helper: normalize page id
-   * --------------------------------------------------------*/
   function normalizePageId(pathOrId) {
     if (!pathOrId || typeof pathOrId !== "string") return "index";
-    // If already looks like an id (contains underscores), keep it
     let id = pathOrId.trim();
-    // Common case: full URL or path
     try {
-      // If a full URL passed, extract pathname
       const u = new URL(id, window.location.origin);
       id = u.pathname;
     } catch (e) {
-      // not a full URL, keep as-is
+      /* not a full URL */
     }
-    // Normalize: trim slashes, replace with underscore, collapse multiple underscores
-    id = id.replace(/^\/+|\/+$/g, "");
+    id = id.replace(/^\/|\/$/g, "");
     if (id === "") return "index";
     id = id.replace(/[\/]+/g, "_");
-    // Replace characters not safe for filenames
-    id = id.replace(/[^A-Za-z0-9_\-]/g, "_");
+    id = id.replace(/[^A-Za-z0-9_-]/g, "_");
     return id;
   }
 
-  /* --------------------------------------------------------
-   * Singleton wrapper & public API
-   * --------------------------------------------------------*/
   const DEFAULTS = {
     apiUrl: "/api/comments",
     containerSelector: "#comments",
@@ -441,16 +379,13 @@
 
   const comments = {
     version: "@VERSION_PLACEHOLDER@",
-
     configure(options = {}) {
       Object.assign(_configured, options || {});
       return _configured;
     },
-
     getInstance() {
       return _instance;
     },
-
     createInstance(options = {}) {
       const opts = {
         apiUrl: _configured.apiUrl,
@@ -463,113 +398,77 @@
         onLoad: options.onLoad || _configured.onLoad,
         onRender: options.onRender || _configured.onRender,
       };
-
-      // Resolve pageId (prefer explicit, then meta, then normalized location)
       const explicitPageId =
         options.pageId || _configured.pageId || _getPageIdFromDOM();
       opts.pageId = normalizePageId(explicitPageId || window.location.pathname);
-
       _instance = new GitHubComments(opts);
       return _instance;
     },
-
     async init(options = {}) {
-      if (typeof document === "undefined") {
-        // Not in a browser environment
-        return null;
-      }
-
-      // If an instance already exists and user doesn't request recreate, keep it
-      if (_instance && !options.recreate) {
-        return _instance;
-      }
-
-      // Allow user to pass container selector(s). If multiple containers exist, pick first.
+      if (typeof document === "undefined") return null;
+      if (_instance && !options.recreate) return _instance;
       let container = options.container;
       if (!container) {
-        // Look for element with data-comments attribute or default selector
         const el =
           document.querySelector("[data-comments]") ||
           document.querySelector(_configured.containerSelector);
         container = el || _configured.containerSelector;
       }
-
-      const inst = this.createInstance({
-        ...options,
-        container,
-      });
-
-      // Attempt to load and render but do not throw on failure
+      const inst = this.createInstance({ ...options, container });
       try {
         await inst.load();
         inst.render();
       } catch (e) {
-        // swallow
+        /* swallow */
       }
-
-      // Attach form handler if form exists
       try {
         inst.attachFormHandler(
           options.formSelector || _configured.formSelector,
         );
       } catch (e) {
-        // swallow
+        /* swallow */
       }
-
-      // Start polling if configured
       if (inst.pollInterval) {
         inst.startPolling();
       }
-
       return inst;
     },
-
     async load() {
       if (!_instance) await this.init();
       if (!_instance) return [];
       return _instance.load();
     },
-
     render() {
       if (!_instance) {
-        console.error("comments: not initialized (call comments.init())");
+        console.error("comments: not initialized");
         return;
       }
       return _instance.render();
     },
-
     attachFormHandler(selector) {
       if (!_instance) {
-        console.error("comments: not initialized (call comments.init())");
+        console.error("comments: not initialized");
         return;
       }
       return _instance.attachFormHandler(selector);
     },
-
     submit(data) {
       if (!_instance) {
-        console.error("comments: not initialized (call comments.init())");
         return Promise.reject(new Error("comments: not initialized"));
       }
       return _instance.submit(data);
     },
-
     startPolling() {
       if (!_instance) {
-        console.error("comments: not initialized (call comments.init())");
+        console.error("comments: not initialized");
         return;
       }
       return _instance.startPolling();
     },
-
     stopPolling() {
-      if (!_instance) {
-        return;
-      }
+      if (!_instance) return;
       return _instance.stopPolling();
     },
-
-    // Utility: return normalized page id that will be used if not provided explicitly
     getPageId() {
       if (_instance && _instance.pageId) return _instance.pageId;
       const explicit = _configured.pageId || _getPageIdFromDOM();
@@ -580,22 +479,13 @@
     },
   };
 
-  /* --------------------------------------------------------
-   * DOM helpers
-   * --------------------------------------------------------*/
   function _getPageIdFromDOM() {
     if (typeof document === "undefined") return null;
-
-    // 1. data-page-id on root or container
     const el = document.querySelector("[data-page-id]") || document.body;
     const attr = el && el.getAttribute && el.getAttribute("data-page-id");
     if (attr) return attr;
-
-    // 2. meta[name="page-id"]
     const meta = document.querySelector('meta[name="page-id"]');
     if (meta && meta.content) return meta.content;
-
-    // 3. og:url or canonical
     const og = document.querySelector('meta[property="og:url"]');
     if (og && og.content) {
       try {
@@ -605,7 +495,6 @@
         return og.content;
       }
     }
-
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical && canonical.href) {
       try {
@@ -615,55 +504,66 @@
         return canonical.href;
       }
     }
-
     return null;
   }
 
-  /* --------------------------------------------------------
-   * Auto-initialize on DOM ready (if enabled)
-   * --------------------------------------------------------*/
-  function _autoInitIfNeeded() {
-    if (!_configured.autoInit) return;
+  /* ========================================================
+   * ROBUST AUTO-INITIALIZATION & HTMX INTEGRATION (The Fix)
+   * ======================================================== */
 
-    // If already initialized, do nothing
-    if (_instance) return;
-
-    // Initialize after DOM is ready
-    if (typeof document === "undefined") return;
-
-    const runInit = () => {
+  // This setup function contains all logic that needs to run once the DOM is ready.
+  function setupCommentsAndHTMX() {
+    // --- Step 1: Run the original auto-initialization for the first page load ---
+    if (_configured.autoInit && !_instance) {
       try {
+        // The `comments` object is available here in our private scope.
         comments.init().catch(() => {
-          // ignore init errors
+          /* ignore initial init errors */
         });
       } catch (e) {
-        // ignore
+        /* ignore */
       }
-    };
+    }
 
+    // --- Step 2: Add the HTMX listener to handle subsequent page loads ---
+    // Using htmx:afterSettle which fires ONCE per request after all swaps are complete.
+    document.body.addEventListener("htmx:afterSettle", function (event) {
+      // Check if a comments section now exists on the page after the swap
+      const commentsContainer = document.querySelector(
+        "#comments, [data-comments]",
+      );
+
+      if (commentsContainer) {
+        // 1. Stop any existing polling timer
+        const oldInstance = comments.getInstance();
+        if (oldInstance) {
+          oldInstance.stopPolling();
+        }
+
+        // 2. Re-initialize the comments library for the new page content
+        comments.init({ recreate: true });
+      }
+    });
+  }
+
+  // --- Main execution block ---
+  // If in a browser, wait for the DOM to be ready, then run our setup function.
+  if (typeof document !== "undefined") {
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", runInit, { once: true });
+      document.addEventListener("DOMContentLoaded", setupCommentsAndHTMX);
     } else {
-      // DOM already ready
-      runInit();
+      // DOM is already ready
+      setupCommentsAndHTMX();
     }
   }
 
-  // If configured.autoInit default true, schedule auto init
-  try {
-    _autoInitIfNeeded();
-  } catch (e) {
-    // ignore
-  }
-
-  /* --------------------------------------------------------
-   * Export to global / module systems
-   * --------------------------------------------------------*/
+  /* ========================================================
+   * EXPORTS (Unchanged)
+   * ======================================================== */
   if (typeof module !== "undefined" && module.exports) {
     module.exports = comments;
   } else {
     global.comments = comments;
-    // For backward compatibility, also expose class
     global.GitHubComments = GitHubComments;
   }
 })(typeof window !== "undefined" ? window : this);

@@ -3,6 +3,7 @@ layout: base.njk
 title: Cheat Sheet
 description: The essential commands you'll use every day and always forget
 permalink: /cheat-sheet/
+comments: true
 ---
 
 # Cheat Sheet
