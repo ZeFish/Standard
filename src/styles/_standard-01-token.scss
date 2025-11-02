@@ -113,7 +113,7 @@
     // */
 
     --line-height: var(--ratio);
-    --line-height-s: max(var(--scale-d2), 1);
+    --line-height-s: max(var(--scale-d2), 1.2);
     --rhythm-gap: var(--rhythm);
     --rhythm-gap-block: var(--rhythm);
     --body-padding: var(--rhythm-2);
