@@ -5135,7 +5135,8 @@ dialog.modal::backdrop {
 }
 
 .tight {
-  line-height: var(--line-height-s);
+  line-height: var(--rhythm-d2);
+  min-height: var(--rhythm-d2);
 }
 
 
