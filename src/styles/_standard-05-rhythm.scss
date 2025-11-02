@@ -163,16 +163,12 @@
         list-style: none;
         padding-inline-start: var(--base);
     }
-    p + ul,
-    p + ol {
-        margin-block-start: calc(var(--base) * -0.5 * var(--rhythm-gap));
-    }
 
     ol ul,
     ol ol,
     ul ul,
     ul ol {
-        margin-block-start: calc(var(--base-d3) * var(--rhythm-gap));
+        margin-block-start: var(--base);
     }
 
     /* Nested lists */
@@ -187,7 +183,7 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: calc(var(--base-d3) * var(--rhythm-gap));
+        margin-block-end: var(--base-d2);
     }
 
     /* Unordered list bullets */

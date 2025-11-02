@@ -9,7 +9,7 @@
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   
-  --font-ratio: var(--ratio-golden);
+  --font-ratio: var(--ratio-silver);
   --font-density: var(--font-ratio);
   --font-density-s: max(calc(var(--font-density) * 0.75), var(--font-size));
   --rhythm-gap: 1;
@@ -583,8 +583,9 @@ label,
 pre,
 code,
 .lined,
-a,
-aside {
+aside,
+li::before,
+a::before {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
   line-height: var(--base);
@@ -628,12 +629,6 @@ strong,
 
 :is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
   font-weight: inherit;
-}
-
-
-a,
-a:visited {
-  color: inherit;
 }
 
 
@@ -727,7 +722,8 @@ pre {
   font-size: var(--scale-d2);
   border: var(--border);
   border-radius: var(--border-radius);
-  padding: var(--block-padding-inner);
+  padding-block: var(--base-d2);
+  padding-inline: var(--base);
   overflow-x: auto;
   line-height: 1.5;
   box-shadow: inset var(--shadow);
@@ -753,7 +749,8 @@ blockquote {
   border-inline-start: var(--base-d5) solid var(--color-muted);
   background: var(--color-background-secondary);
   color: var(--color-muted);
-  padding: var(--block-padding-inner);
+  padding-block: var(--base-d2);
+  padding-inline: var(--base);
 }
 
 
@@ -815,9 +812,10 @@ em {
 
 a,
 a:visited {
+  color: inherit;
   text-decoration: underline;
   text-decoration-thickness: 0.1em;
-  text-underline-offset: 0.15em;
+  text-underline-offset: auto;
   text-decoration-color: var(--color-subtle);
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
@@ -1188,15 +1186,11 @@ mark {
   list-style: none;
   padding-inline-start: var(--base);
 }
-:where(html:not(.no-rhythm), .rhythm) p + ul,
-:where(html:not(.no-rhythm), .rhythm) p + ol {
-  margin-block-start: calc(var(--base) * -0.5 * var(--rhythm-gap));
-}
 :where(html:not(.no-rhythm), .rhythm) ol ul,
 :where(html:not(.no-rhythm), .rhythm) ol ol,
 :where(html:not(.no-rhythm), .rhythm) ul ul,
 :where(html:not(.no-rhythm), .rhythm) ul ol {
-  margin-block-start: calc(var(--base-d3) * var(--rhythm-gap));
+  margin-block-start: var(--base);
 }
 :where(html:not(.no-rhythm), .rhythm) li > ul,
 :where(html:not(.no-rhythm), .rhythm) li > ol {
@@ -1207,7 +1201,7 @@ mark {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: calc(var(--base-d3) * var(--rhythm-gap));
+  margin-block-end: var(--base-d2);
 }
 :where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";

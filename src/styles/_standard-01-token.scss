@@ -33,7 +33,7 @@
     --ratio-eighthstep: 1.062;
 
     /* Current ratio (configurable) */
-    --font-ratio: var(--ratio-golden);
+    --font-ratio: var(--ratio-silver);
     --font-density: var(--font-ratio);
     --font-density-s: max(calc(var(--font-density) * 0.75), var(--font-size));
     --rhythm-gap: 1;

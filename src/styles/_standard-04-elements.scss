@@ -43,12 +43,6 @@ strong,
     font-weight: inherit;
 }
 
-/* Links inherit color by default (refined later) */
-a,
-a:visited {
-    color: inherit;
-}
-
 /* =========================== */
 /* Typography                  */
 /* =========================== */
@@ -142,7 +136,8 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--border-radius);
-    padding: var(--block-padding-inner);
+    padding-block: var(--base-d2);
+    padding-inline: var(--base);
     overflow-x: auto;
     line-height: 1.5;
     box-shadow: inset var(--shadow);
@@ -168,7 +163,8 @@ blockquote {
     border-inline-start: var(--base-d5) solid var(--color-muted);
     background: var(--color-background-secondary);
     color: var(--color-muted);
-    padding: var(--block-padding-inner);
+    padding-block: var(--base-d2);
+    padding-inline: var(--base);
 }
 
 /* Tables (typography) */
@@ -231,9 +227,10 @@ em {
 
 a,
 a:visited {
+    color: inherit;
     text-decoration: underline;
     text-decoration-thickness: 0.1em;
-    text-underline-offset: 0.15em;
+    text-underline-offset: auto;
     text-decoration-color: var(--color-subtle);
     transition:
         color 0.2s ease,
