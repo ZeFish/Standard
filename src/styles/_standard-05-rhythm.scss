@@ -164,6 +164,11 @@
         padding-inline-start: var(--base);
     }
 
+    p:has(+ ul),
+    p:has(+ ol) {
+        margin-block-end: var(--base-small);
+    }
+
     ol ul,
     ol ol,
     ul ul,
@@ -183,8 +188,7 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: var(--base-d2);
-        line-height: var(--base-small);
+        margin-block-end: var(--base-small);
     }
 
     /* Unordered list bullets */

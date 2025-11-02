@@ -41,7 +41,7 @@
   --base-d4: calc(1rlh / 4);
   --base-d3: calc(1rlh / 3);
   --base-d2: calc(1rlh / 2);
-  --base-small: calc(1rlh * 0.75);
+  --base-small: calc(1rlh / var(--font-ratio));
   --base: 1rlh; 
   --base-2: calc(2 * 1rlh);
   --base-3: calc(3 * 1rlh);
@@ -1187,6 +1187,10 @@ mark {
   list-style: none;
   padding-inline-start: var(--base);
 }
+:where(html:not(.no-rhythm), .rhythm) p:has(+ ul),
+:where(html:not(.no-rhythm), .rhythm) p:has(+ ol) {
+  margin-block-end: var(--base-small);
+}
 :where(html:not(.no-rhythm), .rhythm) ol ul,
 :where(html:not(.no-rhythm), .rhythm) ol ol,
 :where(html:not(.no-rhythm), .rhythm) ul ul,
@@ -1202,8 +1206,7 @@ mark {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--base-d2);
-  line-height: var(--base-small);
+  margin-block-end: var(--base-small);
 }
 :where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";
