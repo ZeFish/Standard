@@ -123,9 +123,10 @@ label,
 pre,
 code,
 .lined,
-aside {
+aside,
+li::before {
     text-box-trim: trim-both;
     text-box-edge: cap alphabetic;
     line-height: var(--rhythm);
-    min-height: var(--rhythm);
+    min-height: 1lh;
 }
