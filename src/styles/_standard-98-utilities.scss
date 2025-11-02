@@ -266,7 +266,8 @@
     font-size: inherit;
 }
 
-.tight {
+.tight,
+.tight * {
     line-height: var(--rhythm-d2);
     min-height: var(--rhythm-d2);
 }
