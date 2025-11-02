@@ -67,7 +67,7 @@
   --rhythm-10: var(--baseline-10);
   
   --line-height: var(--ratio);
-  --line-height-s: max(var(--rhythm-d2), 1.3);
+  --line-height-s: max(var(--rhythm-d2), 1);
   --rhythm-gap: var(--rhythm);
   --rhythm-gap-block: var(--rhythm);
   --body-padding: var(--rhythm-2);
