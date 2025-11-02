@@ -74,37 +74,37 @@ h6 {
 h1 {
     font-weight: var(--font-weight-h1);
     font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
-    line-height: var(--base-4);
+    line-height: var(--rhythm-3);
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
     font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
-    line-height: var(--base-3);
+    line-height: var(--rhythm-2);
 }
 
 h3 {
     font-weight: var(--font-weight-h3);
     font-size: var(--scale-3);
-    line-height: var(--base-3);
+    line-height: var(--rhythm-2);
 }
 
 h4 {
     font-weight: var(--font-weight-h4);
     font-size: var(--scale-2);
-    line-height: var(--base-2);
+    line-height: var(--rhythm);
 }
 
 h5 {
     font-weight: var(--font-weight-h5);
     font-size: var(--scale-2);
-    line-height: var(--base-2);
+    line-height: var(--rhythm);
 }
 
 h6 {
     font-weight: var(--font-weight-h6);
     font-size: var(--scale-2);
-    line-height: var(--base-2);
+    line-height: var(--rhythm);
 }
 
 /* Inline code, monospace families */
@@ -121,11 +121,11 @@ tt,
 }
 
 code {
-    background: var(--color-background-secondary);
+    /*background: var(--color-background-secondary);
     background-blend-mode: darken;
-    color: var(--color-foreground);
     border-radius: var(--radius);
-    padding: var(--base-d4);
+    padding: var(--rhythm-d5);*/
+    color: var(--color-foreground);
     word-break: break-word;
     box-shadow: unset;
 }
@@ -136,12 +136,13 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--border-radius);
-    padding-block: var(--base-d2);
-    padding-inline: var(--base);
+    padding-block: var(--rhythm);
+    padding-inline: var(--rhythm);
     overflow-x: auto;
+    overflow-y: hidden;
     line-height: 1.5;
     box-shadow: inset var(--shadow);
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 }
 
 pre code {
@@ -160,11 +161,11 @@ li::before {
 /* Blockquotes (typography + color) */
 blockquote {
     font-style: italic;
-    border-inline-start: var(--base-d5) solid var(--color-muted);
+    border-inline-start: var(--rhythm-d5) solid var(--color-muted);
     background: var(--color-background-secondary);
     color: var(--color-muted);
-    padding-block: var(--base-d2);
-    padding-inline: var(--base);
+    padding-block: var(--rhythm-d2);
+    padding-inline: var(--rhythm);
 }
 
 /* Tables (typography) */
@@ -282,9 +283,9 @@ a.button {
     font-size: var(--scale-d2);
 
     font-weight: var(--bold-weight);
-    line-height: var(--font-density);
+    line-height: var(--line-height);
 
-    padding: var(--base-d4) var(--base-d2);
+    padding: var(--rhythm-d4) var(--rhythm-d2);
     border-radius: var(--border-radius);
 
     background: color-mix(
@@ -359,7 +360,7 @@ textarea,
 select {
     font-family: var(--font-interface), system-ui, sans-serif;
 
-    padding: var(--base-d3);
+    padding: var(--rhythm-d3);
     border-radius: var(--border-radius);
 
     color: var(--color-foreground);
@@ -390,7 +391,7 @@ textarea {
     resize: vertical;
     min-height: 6em;
     /* keep rhythm-aware variant */
-    min-height: calc(var(--base-2) * 3);
+    min-height: calc(var(--rhythm-2) * 3);
 }
 
 legend {
@@ -461,7 +462,7 @@ iframe {
 /* =========================== */
 
 .tight {
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 }
 
 .font-interface {

@@ -363,11 +363,11 @@ All colors, spacing, and typography use CSS variables:
 ```css
 :root {
   /* Spacing - standard scale */
-  --base-d3: 0.25rem;
-  --base-d2: 0.5rem;
-  --base: 1rem;           /* base/default */
-  --base-2: 2rem;
-  --base-3: 4rem;
+  --rhythm-d3: 0.25rem;
+  --rhythm-d2: 0.5rem;
+  --rhythm: 1rem;           /* base/default */
+  --rhythm-2: 2rem;
+  --rhythm-3: 4rem;
 
   /* Colors */
   --color-background: #ffffff;

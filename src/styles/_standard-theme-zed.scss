@@ -34,9 +34,7 @@
     --color-dark-accent: var(--color-purple);
     --color-dark-bold: var(--color-pink);
 
-    --body-padding: var(--base);
-    --rhythm-gap: 1;
-    --rhythm-gap-block: 1;
+    --body-padding: var(--rhythm);
     --shadow: 0;
     --border-radius: 0;
 
@@ -62,8 +60,8 @@
 }
 
 h1 {
-    margin-block-start: var(--base-8);
-    margin-block-end: var(--base-8);
+    margin-block-start: var(--rhythm-8);
+    margin-block-end: var(--rhythm-8);
 }
 h1,
 h2,
@@ -74,11 +72,6 @@ h3 {
 .font-interface {
     opacity: 0.5;
     font-size: var(--scale-d2);
-}
-
-code {
-    border: var(--border);
-    box-shadow: var(--shadow);
 }
 
 @font-face {

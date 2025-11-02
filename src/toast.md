@@ -397,10 +397,10 @@ Perfect! Here's a complete toast notification system with rich documentation:
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
-  gap: var(--base-d3);
+  gap: var(--rhythm-d3);
   pointer-events: none; /* Allow clicks to pass through container */
   max-width: 400px;
-  padding: var(--base);
+  padding: var(--rhythm);
 }
 
 /* Re-enable pointer events on toasts */
@@ -458,7 +458,7 @@ Perfect! Here's a complete toast notification system with rich documentation:
     top: auto !important;
     transform: none !important;
     max-width: 100%;
-    padding: var(--base-d3);
+    padding: var(--rhythm-d3);
     flex-direction: column-reverse;
   }
 }
@@ -543,8 +543,8 @@ Perfect! Here's a complete toast notification system with rich documentation:
 .toast-content {
   display: flex;
   align-items: flex-start;
-  gap: var(--base-d3);
-  padding: var(--base-d2);
+  gap: var(--rhythm-d3);
+  padding: var(--rhythm-d2);
 }
 
 /* Toast icon */
@@ -559,7 +559,7 @@ Perfect! Here's a complete toast notification system with rich documentation:
 .toast-message {
   flex: 1;
   font-size: var(--scale-d2);
-  line-height: var(--font-density);
+  line-height: var(--line-height);
   color: var(--color-foreground);
   word-break: break-word;
 }
@@ -738,7 +738,7 @@ Add this section after the Alert Component section in `components-demo.html`:
     <p>Dynamic, auto-dismissing notifications that appear on user actions.</p>
   </div>
 
-  <div style="display: flex; gap: var(--base-d2); flex-wrap: wrap;">
+  <div style="display: flex; gap: var(--rhythm-d2); flex-wrap: wrap;">
     <button onclick="toast.success('Changes saved successfully!')" class="button">
       Show Success Toast
     </button>
@@ -753,7 +753,7 @@ Add this section after the Alert Component section in `components-demo.html`:
     </button>
   </div>
 
-  <div style="margin-top: var(--base);">
+  <div style="margin-top: var(--rhythm);">
     <button onclick="toast.success('This toast lasts 10 seconds', { duration: 10000 })" class="button">
       Long Duration (10s)
     </button>
@@ -768,7 +768,7 @@ Add this section after the Alert Component section in `components-demo.html`:
     </button>
   </div>
 
-  <div class="callout" data-callout="note" style="margin-top: var(--base);">
+  <div class="callout" data-callout="note" style="margin-top: var(--rhythm);">
     <div class="callout-title">Features</div>
     <div class="callout-content">
       <ul>

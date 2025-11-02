@@ -24,7 +24,7 @@
 
     --color-accent: var(--color-orange);
 
-    --font-ratio: 1.6;
+    --ratio: 1.6;
     --font-text: "Diatype"; /* "Solitaire MVB Pro"; */
     --font-header: "ITC Avant Garde Pro";
     --font-monospace: "Diatype";
@@ -86,7 +86,7 @@
     article ul,
     article ul:not([start]) {
         list-style: none;
-        padding: 0 calc(var(--base) * 1);
+        padding: 0 calc(var(--rhythm) * 1);
     }
 }
 @font-face {

@@ -9,8 +9,8 @@
  *
  * @example
  * :root {
- *   --font-ratio: var(--ratio-silver);
- *   --base: 1rlh;
+ *   --ratio: var(--ratio-silver);
+ *   --rhythm: 1rlh;
  *   --scale-2: calc(1rem * 1.414);
  * }
  *
@@ -33,12 +33,7 @@
     --ratio-eighthstep: 1.062;
 
     /* Current ratio (configurable) */
-    --font-ratio: var(--ratio-silver);
-    --font-density: var(--font-ratio);
-    --font-density-s: max(calc(var(--font-density) * 0.75), var(--font-size));
-    --rhythm-gap: 1;
-    --rhythm-gap-block: var(--font-ratio);
-    --body-padding: var(--base-2);
+    --ratio: var(--ratio-golden);
 
     --blur: blur(7px);
     --modal-background: color-mix(
@@ -46,7 +41,7 @@
         var(--color-background-secondary) 85%,
         transparent
     );
-    --block-padding-inner: var(--base-d2);
+    --block-padding-inner: var(--rhythm-d2);
 
     --font-mobile-size: 1.1rem;
     --font-mobile-ratio: var(--ratio-halfstep);
@@ -54,40 +49,82 @@
     --body-mobile-padding-multiplier: 1;
 
     /* Modular Scale - calculated from font-ratio */
-    --scale-d5: calc(var(--font-size) * pow(var(--font-ratio), -3));
-    --scale-d4: calc(var(--font-size) * pow(var(--font-ratio), -2));
-    --scale-d3: calc(var(--font-size) * pow(var(--font-ratio), -1));
-    --scale-d2: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
+    --scale-d5: calc(var(--font-size) * pow(var(--ratio), -3));
+    --scale-d4: calc(var(--font-size) * pow(var(--ratio), -2));
+    --scale-d3: calc(var(--font-size) * pow(var(--ratio), -1));
+    --scale-d2: calc(var(--font-size) * pow(var(--ratio), -0.5));
     --scale: var(--font-size);
-    --scale-2: calc(var(--font-size) * pow(var(--font-ratio), 0.5));
-    --scale-3: calc(var(--font-size) * pow(var(--font-ratio), 1));
-    --scale-4: calc(var(--font-size) * pow(var(--font-ratio), 2));
-    --scale-5: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    --scale-2: calc(var(--font-size) * pow(var(--ratio), 0.5));
+    --scale-3: calc(var(--font-size) * pow(var(--ratio), 1));
+    --scale-4: calc(var(--font-size) * pow(var(--ratio), 2));
+    --scale-5: calc(var(--font-size) * pow(var(--ratio), 3));
+    --scale-6: calc(var(--font-size) * pow(var(--ratio), 4));
+    --scale-7: calc(var(--font-size) * pow(var(--ratio), 5));
+    --scale-8: calc(var(--font-size) * pow(var(--ratio), 6));
+    --scale-9: calc(var(--font-size) * pow(var(--ratio), 7));
+    --scale-10: calc(var(--font-size) * pow(var(--ratio), 8));
 
     /* Logical Spacing Scale - based on rhythm unit */
-    --base-d5: calc(1rlh / 5);
-    --base-d4: calc(1rlh / 4);
-    --base-d3: calc(1rlh / 3);
-    --base-d2: calc(1rlh / 2);
-    --base-small: calc(1rlh / var(--font-ratio));
-    --base: 1rlh; /* Base rhythm unit */
-    --base-2: calc(2 * 1rlh);
-    --base-3: calc(3 * 1rlh);
-    --base-4: calc(4 * 1rlh);
-    --base-5: calc(5 * 1rlh);
-    --base-6: calc(6 * 1rlh);
-    --base-7: calc(7 * 1rlh);
-    --base-8: calc(8 * 1rlh);
-    --base-9: calc(9 * 1rlh);
-    --base-10: calc(10 * 1rlh);
+    --baseline-d5: calc(1rlh / 5);
+    --baseline-d4: calc(1rlh / 4);
+    --baseline-d3: calc(1rlh / 3);
+    --baseline-d2: calc(1rlh / 2);
+    --baseline: 1rlh; /* Base rhythm unit */
+    --baseline-2: calc(2 * 1rlh);
+    --baseline-3: calc(3 * 1rlh);
+    --baseline-4: calc(4 * 1rlh);
+    --baseline-5: calc(5 * 1rlh);
+    --baseline-6: calc(6 * 1rlh);
+    --baseline-7: calc(7 * 1rlh);
+    --baseline-8: calc(8 * 1rlh);
+    --baseline-9: calc(9 * 1rlh);
+    --baseline-10: calc(10 * 1rlh);
+
+    --rhythm-d5: var(--baseline-d5);
+    --rhythm-d4: var(--baseline-d4);
+    --rhythm-d3: var(--baseline-d3);
+    --rhythm-d2: var(--baseline-d2);
+    --rhythm: var(--baseline);
+    --rhythm-2: var(--baseline-2);
+    --rhythm-3: var(--baseline-3);
+    --rhythm-4: var(--baseline-4);
+    --rhythm-5: var(--baseline-5);
+    --rhythm-6: var(--baseline-6);
+    --rhythm-7: var(--baseline-7);
+    --rhythm-8: var(--baseline-8);
+    --rhythm-9: var(--baseline-9);
+    --rhythm-10: var(--baseline-10);
+
+    /*
+    --rhythm-d5: var(--scale-d5);
+    --rhythm-d4: var(--scale-d4);
+    --rhythm-d3: var(--scale-d3);
+    --rhythm-d2: var(--scale-d2);
+    --rhythm: var(--scale);
+    --rhythm-2: var(--scale-2);
+    --rhythm-3: var(--scale-3);
+    --rhythm-4: var(--scale-4);
+    --rhythm-5: var(--scale-5);
+    --rhythm-6: var(--scale-6);
+    --rhythm-7: var(--scale-7);
+    --rhythm-8: var(--scale-8);
+    --rhythm-9: var(--scale-9);
+    --rhythm-10: var(--scale-10);
+    // */
+
+    --line-height: var(--ratio);
+    --line-height-s: max(var(--scale-d2), 1);
+    --rhythm-gap: var(--rhythm);
+    --rhythm-gap-block: var(--rhythm);
+    --body-padding: var(--rhythm-2);
 
     /* Grid system tokens */
-    --grid-gap: var(--base);
+    --grid-gap: var(--rhythm);
     --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
 
     /* Logical border properties */
     --hr-thickness: 1px;
-    --border-radius: var(--base-d4);
+    --border-radius: var(--rhythm-d4);
 
     /* Content area tokens */
     --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
@@ -96,7 +133,7 @@
     --line-width-l: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
     --line-width-full: calc(
-        100vw - (var(--base) * 2)
+        100vw - (var(--rhythm) * 2)
     ); /* responsive full width with margins */
     --line-width: var(--line-width-m);
 
@@ -175,10 +212,10 @@
 @media only screen and (max-width: #{$small}) {
     :root {
         --font-size: var(--font-mobile-size) !important;
-        --font-ratio: var(--font-mobile-ratio) !important;
-        --font-density: var(--font-mobile-density);
+        --ratio: var(--font-mobile-ratio) !important;
+        --line-height: var(--font-mobile-density);
         --body-padding: calc(
-            var(--base) * var(--body-mobile-padding-multiplier)
+            var(--rhythm) * var(--body-mobile-padding-multiplier)
         ) !important;
     }
 }

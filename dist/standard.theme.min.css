@@ -137,10 +137,8 @@
   --color-dark-accent: var(--color-light-yellow) !important;
   --line-height-normal: 1.7em;
   --font-size: 1rem;
-  --font-density: 1.1;
-  --font-ratio: var(--ratio-silver);
-  --rhythm-gap: 1;
-  --rhythm-gap-block: 0;
+  --line-height: 1.1;
+  --ratio: var(--ratio-silver);
   --font-text: "Courier Prime";
   --font-feature: "";
   --font-variation: "wght" 300;
@@ -154,7 +152,7 @@
 }
 [data-theme=paper] blockquote,
 [data-theme=paper] pre {
-  padding: calc(var(--base) * 0.75);
+  padding: calc(var(--rhythm) * 0.75);
 }
 [data-theme=paper] h1 {
   opacity: 85%;
@@ -171,16 +169,16 @@
   word-break: keep-all;
 }
 [data-theme=paper] blockquote {
-  border-inline-start: calc(var(--base-d4) * var(--rhythm-gap)) solid var(--color-muted);
+  border-inline-start: calc(var(--rhythm-d4) * var(--rhythm-gap)) solid var(--color-muted);
 }
 [data-theme=paper] h1,
 [data-theme=paper] > h1:where(:first-child) {
-  margin-block-start: var(--base-9);
-  margin-block-end: var(--base-10);
+  margin-block-start: var(--rhythm-9);
+  margin-block-end: var(--rhythm-10);
 }
 [data-theme=paper] h1:first-child + p {
-  margin-block-start: calc(var(--base) * -8);
-  margin-block-end: var(--base-10);
+  margin-block-start: calc(var(--rhythm) * -8);
+  margin-block-end: var(--rhythm-10);
 }
 [data-theme=paper] {
   background: var(--color-background-secondary);
@@ -206,19 +204,16 @@
   --color-border: none;
   --color-muted: var(--color-foreground);
   --color-dark-foreground: #ccc;
-  --font-ratio: 1.8;
+  --ratio: 1.8;
   --font-mobile-ratio: 2;
-  --body-padding: var(--base-4);
+  --body-padding: var(--rhythm-4);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
-  --font-density: 1.5;
-  --rhythm-gap: calc(1 / var(--font-density));
-  --rhythm-gap-block: 0;
-  --gap: clamp(var(--base), 6%, var(--base-3));
+  --line-height: 1.5;
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: calc(var(--base) * var(--rhythm-gap-block));
-  --content-accent: minmax(0, var(--base-2));
-  --content-feature: minmax(0, var(--base-4));
+  --content-small: var(--rhythm-gap-block);
+  --content-accent: minmax(0, var(--rhythm-2));
+  --content-feature: minmax(0, var(--rhythm-4));
   --content-hero: minmax(0, 1fr);
   --gap: 0;
 }
@@ -249,20 +244,20 @@
   max-width: 1400px;
 }
 [data-theme=swiss] h1 {
-  margin-block-start: var(--base-8);
-  margin-block-end: var(--base-4);
+  margin-block-start: var(--rhythm-8);
+  margin-block-end: var(--rhythm-4);
 }
 [data-theme=swiss] h2,
 [data-theme=swiss] h3 {
-  margin-bottom: var(--base-d2);
+  margin-bottom: var(--rhythm-d2);
 }
 [data-theme=swiss] header {
   display: block;
 }
 [data-theme=swiss] pre {
   padding: 0;
-  padding-block: var(--base-d2);
-  margin-block: var(--base-d2);
+  padding-block: var(--rhythm-d2);
+  margin-block: var(--rhythm-d2);
   border: 0;
 }
 [data-theme=swiss] footer hr {
@@ -354,16 +349,12 @@
   --color-code: var(--color-red);
   --color-bold: var(--color-foreground);
   --color-italic: var(--color-foreground);
-  --font-density: 1.5;
-  --font-letter-spacing: 0;
-  --font-ratio: 1.425;
+  --ratio: 1.6;
+  --line-height: var(--ratio);
   --font-weight: 400;
   --bold-weight: 500;
-  --font-size: 1em;
   --font-header-letter-spacing: -0.035em;
   --font-header-line-height: 1em;
-  --rhythm-gap: 1;
-  --rhythm-gap-block: 0.25;
 }
 [data-theme=forest] blockquote,
 [data-theme=forest] pre {
@@ -371,7 +362,7 @@
 }
 [data-theme=forest] blockquote,
 [data-theme=forest] pre {
-  padding: calc(var(--base) * 0.5);
+  padding: calc(var(--rhythm) * 0.5);
 }
 [data-theme=forest] .operator,
 [data-theme=forest] .punctuation {
@@ -394,7 +385,7 @@
 [data-theme=forest] hr,
 [data-theme=forest] hr:not(:first-child) {
   font-size: var(--h1-size);
-  line-height: var(--base);
+  line-height: var(--rhythm);
   padding: 0;
   border: 0;
   background: transparent;
@@ -405,7 +396,7 @@
   display: block;
   font-family: "Type Embellishments One";
   position: relative;
-  top: calc(var(--base) * -0.4);
+  top: calc(var(--rhythm) * -0.4);
   opacity: 0.2;
 }
 
@@ -570,7 +561,6 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --marge-block: 1;
   --font-text: "Diatype", "Oktah Round Variable";
   --font-feature: "tnum", "liga", "clig", "kern", "calt", "zero", "ss05";
   --font-variation: "MONO" 1;
@@ -579,7 +569,7 @@
   --font-monospace-feature:
       "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
   --font-interface: "Diatype";
-  --font-ratio: 1.425;
+  --ratio: 1.425;
   --font-header-weight: 900;
   --font-header-feature:
       "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
@@ -624,7 +614,7 @@
   --font-header-weight: 500;
   --font-header-letter-spacing: 1;
   --font-text: "Diatype", "Kalice", sans-serif;
-  --body-padding: var(--base-4);
+  --body-padding: var(--rhythm-4);
 }
 [data-theme=minimal] table {
   grid-column: content;
@@ -638,7 +628,7 @@
   word-break: keep-all;
 }
 [data-theme=minimal] h1 {
-  margin-block: var(--base-7);
+  margin-block: var(--rhythm-7);
 }
 
 @font-face {
@@ -717,8 +707,8 @@
       var(--color-foreground) 7%,
       var(--color-background)
   );
-  --font-ratio: 1.4;
-  --font-density: 1.5;
+  --ratio: 1.4;
+  --line-height: 1.5;
   --marge-block: 1.5;
   --font-text: Fern;
   --font-interface: Fern;
@@ -731,9 +721,7 @@
   --font-variation: "opsz" 8;
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
-  --body-padding: var(--base-3);
-  --rhythm-gap: 1;
-  --rhythm-gap-block: 1.5;
+  --body-padding: var(--rhythm-3);
   --shadow: 0;
   --border-radius: 0;
   --color-accent: var(--color-red);
@@ -791,26 +779,29 @@
 [data-theme=book] aside {
   display: inline;
   position: absolute;
-  left: calc(var(--base) + var(--line-width-s));
+  left: calc(var(--rhythm) + var(--line-width-s));
   margin-top: calc(var(--line-height) * -2);
   font-size: var(--scale-d2);
   color: var(--color-muted);
-  line-height: var(--font-density-s);
+  line-height: var(--line-height-s);
   max-width: 33%;
 }
 [data-theme=book] blockquote,
 [data-theme=book] pre {
-  padding: calc(var(--base) * 0.5);
+  padding: calc(var(--rhythm) * 0.5);
+  padding-block: 0;
   border-top: 0;
   border-bottom: 0;
   border-right: 0;
-  border-left-width: var(--base-d5);
+  border-left-width: 1px;
+  border-left-color: var(--color-foreground);
   background: transparent;
+  color: var(--color-foreground);
 }
 [data-theme=book] hr,
 [data-theme=book] hr:not(:first-child) {
   font-size: var(--scale);
-  line-height: var(--base);
+  line-height: var(--rhythm);
   padding: 0;
   border: 0;
   background: transparent;
@@ -821,15 +812,15 @@
   display: block;
   font-family: "Fern";
   position: relative;
-  top: calc(var(--base) * -0.4);
+  top: calc(var(--rhythm) * -0.4);
   color: var(--color-border);
 }
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
   grid-column: feature;
-  margin-block-start: calc(var(--base) * 6);
-  margin-block-end: calc(var(--base) * 6);
-  font-size: calc(var(--font-size) * pow(var(--font-ratio), 3));
+  margin-block-start: calc(var(--rhythm) * 6);
+  margin-block-end: calc(var(--rhythm) * 6);
+  font-size: calc(var(--font-size) * pow(var(--ratio), 3));
 }
 [data-theme=book] h1 {
   text-align: left;
@@ -850,8 +841,8 @@
   [data-theme=book] aside {
     position: relative;
     left: 0;
-    top: calc(var(--base) * -1);
-    margi-bottom: calc(var(--base) * -2);
+    top: calc(var(--rhythm) * -1);
+    margi-bottom: calc(var(--rhythm) * -2);
   }
 }
 
@@ -892,9 +883,7 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --body-padding: var(--base);
-  --rhythm-gap: 1;
-  --rhythm-gap-block: 1;
+  --body-padding: var(--rhythm);
   --shadow: 0;
   --border-radius: 0;
   --font-text: "MonoLisa";
@@ -917,8 +906,8 @@
 }
 
 h1 {
-  margin-block-start: var(--base-8);
-  margin-block-end: var(--base-8);
+  margin-block-start: var(--rhythm-8);
+  margin-block-end: var(--rhythm-8);
 }
 
 h1,
@@ -930,11 +919,6 @@ h3 {
 .font-interface {
   opacity: 0.5;
   font-size: var(--scale-d2);
-}
-
-code {
-  border: var(--border);
-  box-shadow: var(--shadow);
 }
 
 @font-face {

@@ -18,7 +18,7 @@
  *
  * // Using rhythm mixin
  * @include apply-rhythm {
- *   margin-bottom: var(--base);
+ *   margin-bottom: var(--rhythm);
  * }
  *
  * @since 0.1.0
@@ -38,7 +38,7 @@ $wide: 1440px;
  *
  * @example
  * @include apply-rhythm {
- *   margin-bottom: var(--base);
+ *   margin-bottom: var(--rhythm);
  * }
  *
  * @since 0.1.0
@@ -87,7 +87,7 @@ $wide: 1440px;
  *
  * @example
  * @include apply-rhythm-block {
- *   margin-bottom: calc(var(--base) * var(--rhythm-gap-block));
+ *   margin-bottom: var(--rhythm-gap-block);
  * }
  *
  * @since 0.1.0

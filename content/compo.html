@@ -7,8 +7,8 @@ description: Live examples of all Standard Framework components
     <style>
       /* Demo-specific styling */
       .demo-section {
-        margin-block-end: var(--base-3);
-        padding-block-end: var(--base-2);
+        margin-block-end: var(--rhythm-3);
+        padding-block-end: var(--rhythm-2);
         border-bottom: var(--border);
       }
 
@@ -17,7 +17,7 @@ description: Live examples of all Standard Framework components
       }
 
       .demo-header {
-        margin-block-end: var(--base);
+        margin-block-end: var(--rhythm);
       }
 
       .demo-label {
@@ -26,13 +26,13 @@ description: Live examples of all Standard Framework components
         letter-spacing: 0.1em;
         color: var(--color-muted);
         font-weight: var(--bold-weight);
-        margin-block-end: var(--base-d3);
+        margin-block-end: var(--rhythm-d3);
       }
 
       .demo-grid {
         display: grid;
-        gap: var(--base);
-        margin-block: var(--base);
+        gap: var(--rhythm);
+        margin-block: var(--rhythm);
       }
     </style>
   </head>
@@ -42,12 +42,12 @@ description: Live examples of all Standard Framework components
 
     <!-- Header with Navigation -->
     <header class="negate-body-padding">
-      <nav style="padding: var(--base); border-bottom: var(--border)">
+      <nav style="padding: var(--rhythm); border-bottom: var(--border)">
         <div style="display: flex; justify-content: space-between; align-items: center">
           <strong style="font-size: var(--scale-2)">Standard Framework</strong>
           <ul
             class="no-bullet"
-            style="display: flex; gap: var(--base-d2); list-style: none; padding: 0; margin: 0"
+            style="display: flex; gap: var(--rhythm-d2); list-style: none; padding: 0; margin: 0"
           >
             <li><a href="#cards">Cards</a></li>
             <li><a href="#alerts">Alerts</a></li>
@@ -419,7 +419,7 @@ description: Live examples of all Standard Framework components
         <button
           onclick="openModal('confirm-modal')"
           class="button"
-          style="margin-left: var(--base-d2)"
+          style="margin-left: var(--rhythm-d2)"
         >
           Open Confirmation Modal
         </button>
@@ -630,9 +630,9 @@ description: Live examples of all Standard Framework components
         class="negate-body-padding-full smaller"
         style="
           background: var(--color-background-secondary);
-          padding: var(--base-2) var(--base);
+          padding: var(--rhythm-2) var(--rhythm);
           text-align: center;
-          margin-top: var(--base-3);
+          margin-top: var(--rhythm-3);
         "
       >
         <p style="margin: 0">
@@ -640,7 +640,7 @@ description: Live examples of all Standard Framework components
           <a href="#">GitHub</a> ·
           <a href="#">MIT License</a>
         </p>
-        <p style="margin-top: var(--base-d3); color: var(--color-muted)">
+        <p style="margin-top: var(--rhythm-d3); color: var(--color-muted)">
           Built with fine-art typography and Swiss precision.
         </p>
       </footer>

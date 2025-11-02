@@ -21,8 +21,8 @@
         --color-background: white;
         --color-background-secondary: white;
         --font-size: 0.925rem !important;
-        --font-ratio: 1.125 !important;
-        --font-density: 1.4 !important;
+        --ratio: 1.125 !important;
+        --line-height: 1.4 !important;
 
         --rhythm-gap: 1;
         --rhythm-gap-block: 0;
@@ -71,11 +71,11 @@
         h4,
         h5,
         h6 {
-            margin-block: var(--base); /* Remove !important */
+            margin-block: var(--rhythm); /* Remove !important */
             break-after: avoid; /* Keep with following content */
         }
         hr {
-            margin-block: var(--base-d3); /* Remove !important */
+            margin-block: var(--rhythm-d3); /* Remove !important */
         }
 
         html::before,

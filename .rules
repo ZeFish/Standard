@@ -539,7 +539,7 @@ document.addEventListener('standard:afterProcessAll', (e) => {
   --font-family-serif: "Georgia", serif;
   --font-family-sans: "system-ui", sans-serif;
   --line-width: 60rem;  /* Optimal reading width */
-  --baseline-trim-support: 0;  /* Set to 1 when supported */
+  --rhythmline-trim-support: 0;  /* Set to 1 when supported */
 }
 ```
 

@@ -111,7 +111,7 @@
  *
  * @example html - Generated output (horizontal)
  *   <nav class="menu__nav" aria-label="Main navigation">
- *     <ul class="menu no-bullet display-flex" style="gap: var(--base-d2);">
+ *     <ul class="menu no-bullet display-flex" style="gap: var(--rhythm-d2);">
  *       <li class="menu__item is-active">
  *         <a class="menu__link" href="/" aria-current="page">Home</a>
  *       </li>

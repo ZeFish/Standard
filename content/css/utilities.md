@@ -21,8 +21,8 @@ Self-documenting utility classes for spacing, sizing, typography, colors, and la
 Every utility follows an intuitive pattern **[property]-[side/variant]-[size]** that's easy to guess and remember:
 
 ```
-.margin-top-base        // margin-top: var(--base)
-.padding-right-l        // padding-right: var(--base-2)
+.margin-top-base        // margin-top: var(--rhythm)
+.padding-right-l        // padding-right: var(--rhythm-2)
 .text-size-small        // font-size: var(--scale-d2)
 .text-color-accent      // color: var(--color-accent)
 .display-hidden         // display: none
@@ -169,7 +169,7 @@ Control element width and constrain content.
 Control element height.
 
 ```html
-<div class="display-flex gap-base" style="border: 1px solid var(--color-subtle); border-radius: 0.5rem; padding: var(--base); background: var(--color-background-secondary);">
+<div class="display-flex gap-base" style="border: 1px solid var(--color-subtle); border-radius: 0.5rem; padding: var(--rhythm); background: var(--color-background-secondary);">
   <div class="height-full padding-s" style="border: 1px solid var(--color-accent); border-radius: 0.25rem;">
     .height-full
   </div>
@@ -225,17 +225,17 @@ Control text weight.
 Control spacing between lines of text.
 
 ```html
-<div class="line-height-tight border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="line-height-tight border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <strong>Tight line height</strong>
   <p class="margin-0">The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
 </div>
 
-<div class="line-height-snug border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="line-height-snug border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <strong>Snug line height</strong>
   <p class="margin-0">The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
 </div>
 
-<div class="line-height-normal border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="line-height-normal border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <strong>Normal line height</strong>
   <p class="margin-0">The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
 </div>
@@ -248,8 +248,8 @@ Control spacing between lines of text.
 
 **Line height utilities:**
 - `.line-height-tight` (0.85)
-- `.line-height-snug` (var(--font-density-s))
-- `.line-height-normal` (var(--font-density))
+- `.line-height-snug` (var(--line-height-s))
+- `.line-height-normal` (var(--line-height))
 - `.line-height-relaxed` (1.6)
 
 ### Text Alignment
@@ -257,11 +257,11 @@ Control spacing between lines of text.
 Control text horizontal alignment.
 
 ```html
-<p class="text-align-left border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<p class="text-align-left border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <strong>Left aligned text</strong> (.text-align-left)
 </p>
 
-<p class="text-align-center border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<p class="text-align-center border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <strong>Center aligned text</strong> (.text-align-center)
 </p>
 
@@ -311,7 +311,7 @@ Control background color.
 Control border color.
 
 ```html
-<div class="border-color-default padding-base" style="border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="border-color-default padding-base" style="border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   Default border (.border-color-default)
 </div>
 
@@ -329,12 +329,12 @@ Control border color.
 Control element visibility and display type.
 
 ```html
-<div class="display-flex gap-base padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="display-flex gap-base padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <div class="background-color-secondary padding-s">Flex item 1</div>
   <div class="background-color-secondary padding-s">Flex item 2</div>
 </div>
 
-<div class="display-grid" style="gap: var(--base-base); grid-template-columns: repeat(2, 1fr); padding: var(--base-base); border: 1px solid var(--color-subtle); border-radius: 0.5rem;">
+<div class="display-grid" style="gap: var(--rhythm-base); grid-template-columns: repeat(2, 1fr); padding: var(--rhythm-base); border: 1px solid var(--color-subtle); border-radius: 0.5rem;">
   <div class="background-color-secondary padding-s">Grid item 1</div>
   <div class="background-color-secondary padding-s">Grid item 2</div>
 </div>
@@ -497,7 +497,7 @@ Negates **horizontal body padding only** (left and right), allowing full-width b
 
 ```html
 <!-- Full-width header with content inside -->
-<header class="negate-body-padding" style="background-color: #f0f0f0; margin-bottom: var(--base);">
+<header class="negate-body-padding" style="background-color: #f0f0f0; margin-bottom: var(--rhythm);">
   <nav class="padding-base">
     <ul class="no-bullet display-flex gap-base">
       <li><a href="/">Home</a></li>
@@ -520,7 +520,7 @@ Negates **bottom body padding only** (the extra 1.5× multiplier). Removes the g
 
 ```html
 <!-- Footer sitting flush at bottom -->
-<footer class="negate-body-padding-bottom" style="background-color: #f0f0f0; border-top: 1px solid #ddd; margin-top: var(--base-3);">
+<footer class="negate-body-padding-bottom" style="background-color: #f0f0f0; border-top: 1px solid #ddd; margin-top: var(--rhythm-3);">
   <p class="padding-base margin-0">© 2024 Your Company. All rights reserved.</p>
 </footer>
 ```
@@ -590,7 +590,7 @@ All three utilities automatically adjust for mobile breakpoints using `--body-mo
     margin-inline: calc(var(--body-padding) * -1);
 
     @media (max-width: 768px) {
-        margin-inline: calc(var(--base) * var(--body-mobile-padding-multiplier) * -1);
+        margin-inline: calc(var(--rhythm) * var(--body-mobile-padding-multiplier) * -1);
     }
 }
 ```
@@ -604,7 +604,7 @@ These utilities work by:
 4. Using logical properties for RTL language support
 
 **CSS Variables Used:**
-- `--base` — Base rhythm unit (1rlh)
+- `--rhythm` — Base rhythm unit (1rlh)
 - `--body-padding` — Desktop padding multiplier (default: 1)
 - `--body-mobile-padding-multiplier` — Mobile padding multiplier (default: 1)
 
@@ -624,13 +624,13 @@ You can customize body padding by adjusting these variables in your CSS:
 Control rhythm multiplier for consistent spacing.
 
 ```html
-<div class="rhythm rhythm-tight padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="rhythm rhythm-tight padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <h4 class="margin-top-0">Tight Rhythm</h4>
   <p>Reduced spacing between elements (.rhythm-tight)</p>
   <p>Elements are spaced at 50% of normal rhythm</p>
 </div>
 
-<div class="rhythm padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--base-base);">
+<div class="rhythm padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
   <h4 class="margin-top-0">Normal Rhythm</h4>
   <p>Standard spacing between elements (default rhythm)</p>
   <p>Elements follow the vertical rhythm system</p>
@@ -675,15 +675,15 @@ All spacing utilities use the same size tokens defined in the design system:
 
 | Token | Value |
 |-------|-------|
-| `3xs` | var(--base-d5) |
-| `2xs` | var(--base-d4) |
-| `xs` | var(--base-d3) |
-| `s` | var(--base-d2) |
-| `base` | var(--base) |
-| `l` | var(--base-2) |
-| `xl` | var(--base-3) |
-| `2xl` | var(--base-4) |
-| `3xl` | var(--base-5) |
+| `3xs` | var(--rhythm-d5) |
+| `2xs` | var(--rhythm-d4) |
+| `xs` | var(--rhythm-d3) |
+| `s` | var(--rhythm-d2) |
+| `base` | var(--rhythm) |
+| `l` | var(--rhythm-2) |
+| `xl` | var(--rhythm-3) |
+| `2xl` | var(--rhythm-4) |
+| `3xl` | var(--rhythm-5) |
 
 ---
 

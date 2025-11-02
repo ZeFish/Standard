@@ -73,7 +73,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  * - Optional card image hero with object-fit controls
  *
  * @see {class} .grid - Often used to layout multiple cards in columns
- * @see {variable} --base - Controls internal spacing rhythm
+ * @see {variable} --rhythm - Controls internal spacing rhythm
  * @see {class} .prose - Can be used inside card-body for rich content
  * @see {class} .rhythm - Applied automatically to card children
  *
@@ -116,7 +116,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  * @example scss - Customizing card via CSS variables
  *   .card.custom {
  *     --card-border-color: var(--color-accent);
- *     --card-padding: var(--base-2);
+ *     --card-padding: var(--rhythm-2);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
  */
@@ -126,7 +126,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
   --card-border-color: var(--color-border);
   --card-border-width: 1px;
   --card-border-radius: var(--border-radius);
-  --card-padding: var(--base);
+  --card-padding: var(--rhythm);
   --card-background: var(--color-background);
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
@@ -374,7 +374,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  */
 
 .alert {
-  --alert-padding: var(--base-d2);
+  --alert-padding: var(--rhythm-d2);
   --alert-border-width: 1px;
   --alert-border-radius: var(--border-radius);
   --alert-background: var(--color-background-secondary);
@@ -387,11 +387,11 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
   background: var(--alert-background);
   color: var(--alert-color);
   border-left: 4px solid var(--alert-border-color); /* Accent bar */
-  margin-block-end: var(--base);
+  margin-block-end: var(--rhythm);
 
   /* Typography adjustments */
   font-size: var(--scale-d2);
-  line-height: var(--font-density);
+  line-height: var(--line-height);
 
   /* Remove margin from first/last children */
   > :first-child {
@@ -457,7 +457,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  */
 .alert-action {
   display: inline-block;
-  margin-inline-start: var(--base-d2);
+  margin-inline-start: var(--rhythm-d2);
   color: var(--alert-border-color);
   text-decoration: underline;
   font-weight: var(--bold-weight);
@@ -540,14 +540,14 @@ Perfect! Continuing with the remaining 8 components...
 .skip-link {
   /* Positioning - absolute to top-left corner */
   position: absolute;
-  top: var(--base-d4);
-  left: var(--base-d4);
+  top: var(--rhythm-d4);
+  left: var(--rhythm-d4);
   z-index: var(--z-modal); /* Above everything else */
 
   /* Styling - high contrast, unmissable */
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--base-d3) var(--base-d2);
+  padding: var(--rhythm-d3) var(--rhythm-d2);
   border-radius: var(--border-radius);
   font-weight: var(--bold-weight);
   font-size: var(--scale-d2);
@@ -597,8 +597,8 @@ Perfect! Continuing with the remaining 8 components...
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--base-d4);
-  padding: var(--base-d4);
+  gap: var(--rhythm-d4);
+  padding: var(--rhythm-d4);
 }
 ```
 
@@ -681,7 +681,7 @@ Perfect! Continuing with the remaining 8 components...
 
 .breadcrumb {
   /* Container styling */
-  margin-block-end: var(--base);
+  margin-block-end: var(--rhythm);
   font-size: var(--scale-d2);
 
   /* List styling */
@@ -691,7 +691,7 @@ Perfect! Continuing with the remaining 8 components...
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--base-d3);
+    gap: var(--rhythm-d3);
     align-items: center;
   }
 
@@ -699,7 +699,7 @@ Perfect! Continuing with the remaining 8 components...
   li {
     display: inline-flex;
     align-items: center;
-    gap: var(--base-d3);
+    gap: var(--rhythm-d3);
     margin: 0;
 
     /* Remove default list item spacing */
@@ -712,7 +712,7 @@ Perfect! Continuing with the remaining 8 components...
       content: "→"; /* or "/" or "›" */
       display: inline-block;
       color: var(--color-subtle);
-      margin-inline-end: var(--base-d3);
+      margin-inline-end: var(--rhythm-d3);
     }
   }
 
@@ -754,14 +754,14 @@ Perfect! Continuing with the remaining 8 components...
   font-size: var(--scale-d3);
 
   ol {
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
   }
 
   li {
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
 
     &:not(:first-child)::before {
-      margin-inline-end: var(--base-d4);
+      margin-inline-end: var(--rhythm-d4);
     }
   }
 }
@@ -852,8 +852,8 @@ Perfect! Continuing with the remaining 8 components...
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--base-d4);
-  margin-block: var(--base-2);
+  gap: var(--rhythm-d4);
+  margin-block: var(--rhythm-2);
   font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
 
@@ -865,7 +865,7 @@ Perfect! Continuing with the remaining 8 components...
     justify-content: center;
     min-width: 2.5em;
     height: 2.5em;
-    padding: 0 var(--base-d3);
+    padding: 0 var(--rhythm-d3);
     border: var(--border);
     border-radius: var(--border-radius);
     text-decoration: none;
@@ -939,7 +939,7 @@ Perfect! Continuing with the remaining 8 components...
 .pagination-prev,
 .pagination-next {
   min-width: auto;
-  padding: 0 var(--base-d2);
+  padding: 0 var(--rhythm-d2);
   font-weight: var(--bold-weight);
 }
 
@@ -1086,7 +1086,7 @@ Perfect! Continuing with the remaining 8 components...
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;
-  margin-block-end: var(--base);
+  margin-block-end: var(--rhythm);
 
   /* Smooth scrolling with momentum */
   -webkit-overflow-scrolling: touch;
@@ -1194,7 +1194,7 @@ Perfect! Continuing with the remaining 8 components...
   font-size: var(--scale-d3);
 
   td, th {
-    padding: var(--base-d4) var(--base-d3);
+    padding: var(--rhythm-d4) var(--rhythm-d3);
   }
 }
 ```
@@ -1269,14 +1269,14 @@ Perfect! Continuing with the remaining 8 components...
 .skip-link {
   /* Positioning - absolute to top-left corner */
   position: absolute;
-  top: var(--base-d4);
-  left: var(--base-d4);
+  top: var(--rhythm-d4);
+  left: var(--rhythm-d4);
   z-index: var(--z-modal); /* Above everything else */
 
   /* Styling - high contrast, unmissable */
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--base-d3) var(--base-d2);
+  padding: var(--rhythm-d3) var(--rhythm-d2);
   border-radius: var(--border-radius);
   font-weight: var(--bold-weight);
   font-size: var(--scale-d2);
@@ -1326,8 +1326,8 @@ Perfect! Continuing with the remaining 8 components...
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--base-d4);
-  padding: var(--base-d4);
+  gap: var(--rhythm-d4);
+  padding: var(--rhythm-d4);
 }
 ```
 
@@ -1410,7 +1410,7 @@ Perfect! Continuing with the remaining 8 components...
 
 .breadcrumb {
   /* Container styling */
-  margin-block-end: var(--base);
+  margin-block-end: var(--rhythm);
   font-size: var(--scale-d2);
 
   /* List styling */
@@ -1420,7 +1420,7 @@ Perfect! Continuing with the remaining 8 components...
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--base-d3);
+    gap: var(--rhythm-d3);
     align-items: center;
   }
 
@@ -1428,7 +1428,7 @@ Perfect! Continuing with the remaining 8 components...
   li {
     display: inline-flex;
     align-items: center;
-    gap: var(--base-d3);
+    gap: var(--rhythm-d3);
     margin: 0;
 
     /* Remove default list item spacing */
@@ -1441,7 +1441,7 @@ Perfect! Continuing with the remaining 8 components...
       content: "→"; /* or "/" or "›" */
       display: inline-block;
       color: var(--color-subtle);
-      margin-inline-end: var(--base-d3);
+      margin-inline-end: var(--rhythm-d3);
     }
   }
 
@@ -1483,14 +1483,14 @@ Perfect! Continuing with the remaining 8 components...
   font-size: var(--scale-d3);
 
   ol {
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
   }
 
   li {
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
 
     &:not(:first-child)::before {
-      margin-inline-end: var(--base-d4);
+      margin-inline-end: var(--rhythm-d4);
     }
   }
 }
@@ -1581,8 +1581,8 @@ Perfect! Continuing with the remaining 8 components...
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--base-d4);
-  margin-block: var(--base-2);
+  gap: var(--rhythm-d4);
+  margin-block: var(--rhythm-2);
   font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
 
@@ -1594,7 +1594,7 @@ Perfect! Continuing with the remaining 8 components...
     justify-content: center;
     min-width: 2.5em;
     height: 2.5em;
-    padding: 0 var(--base-d3);
+    padding: 0 var(--rhythm-d3);
     border: var(--border);
     border-radius: var(--border-radius);
     text-decoration: none;
@@ -1668,7 +1668,7 @@ Perfect! Continuing with the remaining 8 components...
 .pagination-prev,
 .pagination-next {
   min-width: auto;
-  padding: 0 var(--base-d2);
+  padding: 0 var(--rhythm-d2);
   font-weight: var(--bold-weight);
 }
 
@@ -1815,7 +1815,7 @@ Perfect! Continuing with the remaining 8 components...
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;
-  margin-block-end: var(--base);
+  margin-block-end: var(--rhythm);
 
   /* Smooth scrolling with momentum */
   -webkit-overflow-scrolling: touch;
@@ -1923,7 +1923,7 @@ Perfect! Continuing with the remaining 8 components...
   font-size: var(--scale-d3);
 
   td, th {
-    padding: var(--base-d4) var(--base-d3);
+    padding: var(--rhythm-d4) var(--rhythm-d3);
   }
 }
 ```
@@ -1954,8 +1954,8 @@ description: Live examples of all Standard Framework components
   <style>
     /* Demo-specific styling */
     .demo-section {
-      margin-block-end: var(--base-3);
-      padding-block-end: var(--base-2);
+      margin-block-end: var(--rhythm-3);
+      padding-block-end: var(--rhythm-2);
       border-bottom: var(--border);
     }
 
@@ -1964,7 +1964,7 @@ description: Live examples of all Standard Framework components
     }
 
     .demo-header {
-      margin-block-end: var(--base);
+      margin-block-end: var(--rhythm);
     }
 
     .demo-label {
@@ -1973,13 +1973,13 @@ description: Live examples of all Standard Framework components
       letter-spacing: 0.1em;
       color: var(--color-muted);
       font-weight: var(--bold-weight);
-      margin-block-end: var(--base-d3);
+      margin-block-end: var(--rhythm-d3);
     }
 
     .demo-grid {
       display: grid;
-      gap: var(--base);
-      margin-block: var(--base);
+      gap: var(--rhythm);
+      margin-block: var(--rhythm);
     }
   </style>
 </head>
@@ -1990,10 +1990,10 @@ description: Live examples of all Standard Framework components
 
   <!-- Header with Navigation -->
   <header class="negate-body-padding">
-    <nav style="padding: var(--base); border-bottom: var(--border);">
+    <nav style="padding: var(--rhythm); border-bottom: var(--border);">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <strong style="font-size: var(--scale-2);">Standard Framework</strong>
-        <ul class="no-bullet" style="display: flex; gap: var(--base-d2); list-style: none; padding: 0; margin: 0;">
+        <ul class="no-bullet" style="display: flex; gap: var(--rhythm-d2); list-style: none; padding: 0; margin: 0;">
           <li><a href="#cards">Cards</a></li>
           <li><a href="#alerts">Alerts</a></li>
           <li><a href="#forms">Forms</a></li>
@@ -2329,7 +2329,7 @@ description: Live examples of all Standard Framework components
       </div>
 
       <button onclick="openModal('demo-modal')" class="button">Open Demo Modal</button>
-      <button onclick="openModal('confirm-modal')" class="button" style="margin-left: var(--base-d2);">Open Confirmation Modal</button>
+      <button onclick="openModal('confirm-modal')" class="button" style="margin-left: var(--rhythm-d2);">Open Confirmation Modal</button>
 
       <!-- Demo Modal -->
       <dialog id="demo-modal" class="modal" aria-labelledby="demo-modal-title">
@@ -2484,14 +2484,14 @@ description: Live examples of all Standard Framework components
     <!-- ========================================
          FOOTER
     ========================================= -->
-    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: var(--base-2) var(--base); text-align: center; margin-top: var(--base-3);">
+    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: var(--rhythm-2) var(--rhythm); text-align: center; margin-top: var(--rhythm-3);">
       <p style="margin: 0;">
         <strong>Standard Framework</strong> v0.11.0 ·
         <a href="#">Documentation</a> ·
         <a href="#">GitHub</a> ·
         <a href="#">MIT License</a>
       </p>
-      <p style="margin-top: var(--base-d3); color: var(--color-muted);">
+      <p style="margin-top: var(--rhythm-d3); color: var(--color-muted);">
         Built with fine-art typography and Swiss precision.
       </p>
     </footer>

@@ -3,7 +3,7 @@
     border-radius: var(--border-radius);
     background: var(--color-background-secondary);
     box-shadow: inset var(--shadow);
-    padding: var(--base);
+    padding: var(--rhythm);
     font-size: var(--scale-d2);
     font-family: var(--font-monospace);
 }
@@ -11,7 +11,7 @@
 .grid-sidebar-left {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    gap: var(--base);
+    gap: var(--rhythm);
 }
 .grid-sidebar-left {
     grid-template-columns: 1fr 3fr;

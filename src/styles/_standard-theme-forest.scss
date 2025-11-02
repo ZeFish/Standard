@@ -44,18 +44,13 @@
     --color-bold: var(--color-foreground);
     --color-italic: var(--color-foreground);
 
-    --font-density: 1.5;
-    --font-letter-spacing: 0;
-    --font-ratio: 1.425;
+    --ratio: 1.6;
+    --line-height: var(--ratio);
     --font-weight: 400;
     --bold-weight: 500;
-    --font-size: 1em;
 
     --font-header-letter-spacing: -0.035em;
     --font-header-line-height: 1em;
-
-    --rhythm-gap: 1;
-    --rhythm-gap-block: 0.25;
 
     blockquote,
     pre {
@@ -63,7 +58,7 @@
     }
     blockquote,
     pre {
-        padding: calc(var(--base) * 0.5);
+        padding: calc(var(--rhythm) * 0.5);
     }
 
     .operator,
@@ -91,7 +86,7 @@
     hr,
     hr:not(:first-child) {
         font-size: var(--h1-size);
-        line-height: var(--base);
+        line-height: var(--rhythm);
         padding: 0;
         border: 0;
         background: transparent;
@@ -102,7 +97,7 @@
         display: block;
         font-family: "Type Embellishments One";
         position: relative;
-        top: calc(var(--base) * -0.4);
+        top: calc(var(--rhythm) * -0.4);
         opacity: 0.2;
     }
 }

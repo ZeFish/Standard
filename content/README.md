@@ -112,7 +112,7 @@ npx @11ty/eleventy --serve
 ## What You Get
 
 - **Professional Typography** — Golden ratio proportions, perfect spacing
-- *Responsive Design** — Mobile, tablet, desktop — all handled
+- **Responsive Design** — Mobile, tablet, desktop — all handled
 - **Dark Mode** — Automatic system preference detection
 - **Accessibility** — WCAG AA compliant from the start
 - **No Configuration** — Works out of the box

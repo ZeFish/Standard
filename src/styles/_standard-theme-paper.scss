@@ -153,11 +153,8 @@
 
     --line-height-normal: 1.7em;
     --font-size: 1rem;
-    --font-density: 1.1;
-    --font-ratio: var(--ratio-silver);
-
-    --rhythm-gap: 1;
-    --rhythm-gap-block: 0;
+    --line-height: 1.1;
+    --ratio: var(--ratio-silver);
 
     --font-text: "Courier Prime";
     --font-feature: "";
@@ -174,7 +171,7 @@
 
     blockquote,
     pre {
-        padding: calc(var(--base) * 0.75);
+        padding: calc(var(--rhythm) * 0.75);
     }
 
     h1 {
@@ -194,18 +191,18 @@
     }
 
     blockquote {
-        border-inline-start: calc(var(--base-d4) * var(--rhythm-gap)) solid
+        border-inline-start: calc(var(--rhythm-d4) * var(--rhythm-gap)) solid
             var(--color-muted);
     }
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: var(--base-9);
-        margin-block-end: var(--base-10);
+        margin-block-start: var(--rhythm-9);
+        margin-block-end: var(--rhythm-10);
     }
     h1:first-child + p {
-        margin-block-start: calc(var(--base) * -8);
-        margin-block-end: var(--base-10);
+        margin-block-start: calc(var(--rhythm) * -8);
+        margin-block-end: var(--rhythm-10);
     }
 
     background: var(--color-background-secondary);

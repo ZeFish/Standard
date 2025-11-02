@@ -33,7 +33,7 @@
  * - Optional card image hero with object-fit controls
  *
  * @see {class} .grid - Often used to layout multiple cards in columns
- * @see {variable} --base - Controls internal spacing rhythm
+ * @see {variable} --rhythm - Controls internal spacing rhythm
  * @see {class} .prose - Can be used inside card-body for rich content
  * @see {class} .rhythm - Applied automatically to card children
  *
@@ -76,7 +76,7 @@
  * @example scss - Customizing card via CSS variables
  *   .card.custom {
  *     --card-border-color: var(--color-accent);
- *     --card-padding: var(--base-2);
+ *     --card-padding: var(--rhythm-2);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
  */
@@ -86,7 +86,7 @@
     --card-border: var(--border);
     --card-border-width: 1px;
     --card-border-radius: var(--border-radius);
-    --card-padding: var(--base);
+    --card-padding: var(--rhythm);
     --card-background: var(--color-background);
     --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
@@ -329,7 +329,7 @@
  */
 
 .alert {
-    --alert-padding: var(--base-d2);
+    --alert-padding: var(--rhythm-d2);
     --alert-border-width: 1px;
     --alert-border-radius: var(--border-radius);
     --alert-background: var(--color-background-secondary);
@@ -342,11 +342,11 @@
     background: var(--alert-background);
     color: var(--alert-color);
     border-left: 4px solid var(--alert-border-color); /* Accent bar */
-    margin-block-end: var(--base);
+    margin-block-end: var(--rhythm);
 
     /* Typography adjustments */
     font-size: var(--scale-d2);
-    line-height: var(--font-density);
+    line-height: var(--line-height);
 
     /* Remove margin from first/last children */
     > :first-child {
@@ -426,7 +426,7 @@
  */
 .alert-action {
     display: inline-block;
-    margin-inline-start: var(--base-d2);
+    margin-inline-start: var(--rhythm-d2);
     color: var(--alert-border-color);
     text-decoration: underline;
     font-weight: var(--bold-weight);
@@ -496,14 +496,14 @@
 a.skip-link {
     /* Positioning - absolute to top-left corner */
     position: absolute;
-    top: var(--base-d4);
-    left: var(--base-d4);
+    top: var(--rhythm-d4);
+    left: var(--rhythm-d4);
     z-index: var(--z-modal); /* Above everything else */
 
     /* Styling - high contrast, unmissable */
     background: var(--color-accent);
     color: var(--color-background);
-    padding: var(--base-d4) var(--base-d3);
+    padding: var(--rhythm-d4) var(--rhythm-d3);
     border-radius: var(--border-radius);
     font-weight: var(--bold-weight);
     font-size: var(--scale-d2);
@@ -559,8 +559,8 @@ a.skip-link {
     z-index: var(--z-modal);
     display: flex;
     flex-direction: column;
-    gap: var(--base-d4);
-    padding: var(--base-d4);
+    gap: var(--rhythm-d4);
+    padding: var(--rhythm-d4);
 }
 
 /**
@@ -636,7 +636,7 @@ a.skip-link {
 
 .breadcrumb {
     /* Container styling */
-    margin-block-end: var(--base);
+    margin-block-end: var(--rhythm);
     font-size: var(--scale-d2);
 
     /* List styling */
@@ -646,7 +646,7 @@ a.skip-link {
         margin: 0;
         display: flex;
         flex-wrap: wrap;
-        gap: var(--base-d3);
+        gap: var(--rhythm-d3);
         align-items: center;
     }
 
@@ -654,7 +654,7 @@ a.skip-link {
     li {
         display: inline-flex;
         align-items: center;
-        gap: var(--base-d3);
+        gap: var(--rhythm-d3);
         margin: 0;
 
         /* Remove default list item spacing */
@@ -667,7 +667,7 @@ a.skip-link {
             content: "→"; /* or "/" or "›" */
             display: inline-block;
             color: var(--color-subtle);
-            margin-inline-end: var(--base-d3);
+            margin-inline-end: var(--rhythm-d3);
         }
     }
 
@@ -708,14 +708,14 @@ a.skip-link {
     font-size: var(--scale-d3);
 
     ol {
-        gap: var(--base-d4);
+        gap: var(--rhythm-d4);
     }
 
     li {
-        gap: var(--base-d4);
+        gap: var(--rhythm-d4);
 
         &:not(:first-child)::before {
-            margin-inline-end: var(--base-d4);
+            margin-inline-end: var(--rhythm-d4);
         }
     }
 }
@@ -799,8 +799,8 @@ a.skip-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--base-d4);
-    margin-block: var(--base-2);
+    gap: var(--rhythm-d4);
+    margin-block: var(--rhythm-2);
     font-size: var(--scale-d2);
     font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
 
@@ -812,7 +812,7 @@ a.skip-link {
         justify-content: center;
         min-width: 2.5em;
         height: 2.5em;
-        padding: 0 var(--base-d3);
+        padding: 0 var(--rhythm-d3);
         border: var(--border);
         border-radius: var(--border-radius);
         text-decoration: none;
@@ -886,7 +886,7 @@ a.skip-link {
 .pagination-prev,
 .pagination-next {
     min-width: auto;
-    padding: 0 var(--base-d2);
+    padding: 0 var(--rhythm-d2);
     font-weight: var(--bold-weight);
 }
 
@@ -1036,7 +1036,7 @@ a.skip-link {
         z-index: 2;
         pointer-events: none;
         transition: opacity 0.05s linear;
-        width: var(--base-2);
+        width: var(--rhythm-2);
         opacity: 0;
     }
 
@@ -1108,7 +1108,7 @@ a.skip-link {
 
     td,
     th {
-        padding: var(--base-d4) var(--base-d3);
+        padding: var(--rhythm-d4) var(--rhythm-d3);
     }
 }
 
@@ -1197,8 +1197,8 @@ a.skip-link {
     /* Field container */
     display: flex;
     flex-direction: column;
-    gap: var(--base-d4);
-    margin-block-end: var(--base-d2);
+    gap: var(--rhythm-d4);
+    margin-block-end: var(--rhythm-d2);
 
     /* Label styling */
     label {
@@ -1226,7 +1226,7 @@ a.skip-link {
 .field-helper {
     font-size: var(--scale-d3);
     color: var(--color-muted);
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 }
 
 /**
@@ -1258,11 +1258,11 @@ a.skip-link {
 .field-error-message {
     display: flex;
     align-items: flex-start;
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
     font-size: var(--scale-d3);
     color: var(--color-error);
     font-weight: var(--bold-weight);
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 
     /* Icon (optional, can be added with ::before) */
     &::before {
@@ -1302,11 +1302,11 @@ a.skip-link {
 .field-success-message {
     display: flex;
     align-items: flex-start;
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
     font-size: var(--scale-d3);
     color: var(--color-success);
     font-weight: var(--bold-weight);
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 
     &::before {
         content: "✓"; /* Checkmark */
@@ -1344,11 +1344,11 @@ a.skip-link {
 .field-warning-message {
     display: flex;
     align-items: flex-start;
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
     font-size: var(--scale-d3);
     color: var(--color-warning);
     font-weight: var(--bold-weight);
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 
     &::before {
         content: "⚠"; /* Warning triangle */
@@ -1524,7 +1524,7 @@ dialog.modal::backdrop {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--base);
+    padding: var(--rhythm);
     border-bottom: var(--border);
 
     /* Title */
@@ -1581,7 +1581,7 @@ dialog.modal::backdrop {
  * @since 0.11.0
  */
 .modal-body {
-    padding: var(--base);
+    padding: var(--rhythm);
     overflow-y: auto; /* Scroll if content too long */
     max-height: 60vh; /* Prevent modal from growing too tall */
 
@@ -1604,8 +1604,8 @@ dialog.modal::backdrop {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--base-d2);
-    padding: var(--base);
+    gap: var(--rhythm-d2);
+    padding: var(--rhythm);
     border-top: var(--border);
     background: var(--color-background-secondary);
 }
@@ -1736,7 +1736,7 @@ dialog.modal::backdrop {
 
 .tabs {
     /* Container */
-    margin-block-end: var(--base);
+    margin-block-end: var(--rhythm);
 }
 
 /**
@@ -1746,9 +1746,9 @@ dialog.modal::backdrop {
  */
 .tabs-list {
     display: flex;
-    gap: var(--base-d4);
+    gap: var(--rhythm-d4);
     border-bottom: 2px solid var(--color-border);
-    margin-block-end: var(--base);
+    margin-block-end: var(--rhythm);
 }
 
 /**
@@ -1765,7 +1765,7 @@ dialog.modal::backdrop {
     background: transparent;
     border: none;
     border-bottom: 3px solid transparent;
-    padding: var(--base-d3) var(--base-d2);
+    padding: var(--rhythm-d3) var(--rhythm-d2);
     font-size: var(--scale-d2);
     font-weight: var(--font-weight);
     color: var(--color-muted);
@@ -1804,7 +1804,7 @@ dialog.modal::backdrop {
  * screen readers respect it).
  */
 [role="tabpanel"] {
-    padding: var(--base);
+    padding: var(--rhythm);
 
     /* Remove margin from first/last children */
     > :first-child {
@@ -1923,7 +1923,7 @@ dialog.modal::backdrop {
     border: var(--border);
     border-radius: var(--border-radius);
     background: var(--color-background);
-    margin-block-end: var(--base-d2);
+    margin-block-end: var(--rhythm-d2);
     overflow: hidden; /* Ensure border-radius clips content */
 
     /* Remove default browser styling */
@@ -1945,8 +1945,8 @@ dialog.modal::backdrop {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--base-d2);
-    padding: var(--base-d2);
+    gap: var(--rhythm-d2);
+    padding: var(--rhythm-d2);
     cursor: pointer;
     user-select: none;
 
@@ -2003,7 +2003,7 @@ dialog.modal::backdrop {
  * @since 0.11.0
  */
 .accordion-content {
-    padding: var(--base);
+    padding: var(--rhythm);
 
     /* Remove margin from first/last children */
     > :first-child {
@@ -2047,7 +2047,7 @@ dialog.modal::backdrop {
  */
 .accordion-tight .accordion-trigger,
 .accordion-tight .accordion-content {
-    padding: var(--base-d3);
+    padding: var(--rhythm-d3);
     font-size: var(--scale-d3);
 }
 
@@ -2059,7 +2059,7 @@ dialog.modal::backdrop {
 .menu {
     list-style: none;
     padding-inline-start: 0;
-    gap: var(--base-d3);
+    gap: var(--rhythm-d3);
 }
 .menu li {
     margin: 0;

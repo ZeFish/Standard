@@ -10,9 +10,9 @@
  *
  * @pattern [property]-[side]-[size]
  * Examples:
- *   - .margin-top-xs (margin-top: var(--base-d3))
- *   - .padding-right-base (padding-right: var(--base))
- *   - .gap-l (gap: var(--base-2))
+ *   - .margin-top-xs (margin-top: var(--rhythm-d3))
+ *   - .padding-right-base (padding-right: var(--rhythm))
+ *   - .gap-l (gap: var(--rhythm-2))
  *
  * @prop {class} .margin-* Margin utilities (top, right, bottom, left, block, inline)
  * @prop {class} .padding-* Padding utilities (top, right, bottom, left, block, inline)
@@ -65,31 +65,31 @@
         #{$property}: auto !important;
     }
     .#{$prefix}-d5 {
-        #{$property}: var(--base-d5) !important;
+        #{$property}: var(--rhythm-d5) !important;
     }
     .#{$prefix}-d4 {
-        #{$property}: var(--base-d4) !important;
+        #{$property}: var(--rhythm-d4) !important;
     }
     .#{$prefix}-d3 {
-        #{$property}: var(--base-d3) !important;
+        #{$property}: var(--rhythm-d3) !important;
     }
     .#{$prefix}-d2 {
-        #{$property}: var(--base-d2) !important;
+        #{$property}: var(--rhythm-d2) !important;
     }
     .#{$prefix} {
-        #{$property}: var(--base) !important;
+        #{$property}: var(--rhythm) !important;
     }
     .#{$prefix}-2 {
-        #{$property}: var(--base-2) !important;
+        #{$property}: var(--rhythm-2) !important;
     }
     .#{$prefix}-3 {
-        #{$property}: var(--base-3) !important;
+        #{$property}: var(--rhythm-3) !important;
     }
     .#{$prefix}-4 {
-        #{$property}: var(--base-4) !important;
+        #{$property}: var(--rhythm-4) !important;
     }
     .#{$prefix}-5 {
-        #{$property}: var(--base-5) !important;
+        #{$property}: var(--rhythm-5) !important;
     }
 }
 
@@ -267,7 +267,7 @@
 }
 
 .tight {
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 }
 
 /* =========================== */
@@ -318,11 +318,11 @@
 }
 
 .lh-tight {
-    line-height: var(--font-density-s);
+    line-height: var(--line-height-s);
 }
 
 .lh-base {
-    line-height: var(--font-density);
+    line-height: var(--line-height);
 }
 
 .lh-relaxed {
@@ -560,11 +560,11 @@
  */
 
 .rhythm-tight {
-    --rhythm-gap: var(--base-d2);
+    --rhythm-gap: var(--rhythm-d2);
 }
 
 .rhythm-relaxed {
-    --rhythm-gap: var(--base-2);
+    --rhythm-gap: var(--rhythm-2);
 }
 
 /* =========================== */
@@ -580,7 +580,7 @@
         display: block;
 
         > * {
-            margin-block-end: calc(var(--base-block) * var(--rhythm-gap));
+            margin-block-end: calc(var(--rhythm-block) * var(--rhythm-gap));
         }
 
         > :last-child {
@@ -651,10 +651,10 @@
 
     @media (max-width: #{$small}) {
         margin-inline: calc(
-            var(--base) * var(--body-mobile-padding-multiplier) * -1
+            var(--rhythm) * var(--body-mobile-padding-multiplier) * -1
         );
         padding-inline: calc(
-            var(--base) * var(--body-mobile-padding-multiplier)
+            var(--rhythm) * var(--body-mobile-padding-multiplier)
         );
     }
 }
@@ -665,21 +665,21 @@
  * Useful when you want footer to sit flush at bottom
  */
 .body-p-neg-footer {
-    margin-block-end: calc((var(--base) * var(--body-padding) * 1.5) * -1);
+    margin-block-end: calc((var(--rhythm) * var(--body-padding) * 1.5) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-end: calc(
-            (var(--base) * var(--body-mobile-padding-multiplier) * 1.5) * -1
+            (var(--rhythm) * var(--body-mobile-padding-multiplier) * 1.5) * -1
         );
     }
 }
 
 .body-p-neg-header {
-    margin-block-start: calc((var(--base) * var(--body-padding) * 1) * -1);
+    margin-block-start: calc((var(--rhythm) * var(--body-padding) * 1) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-start: calc(
-            (var(--base) * var(--body-mobile-padding-multiplier) * 1) * -1
+            (var(--rhythm) * var(--body-mobile-padding-multiplier) * 1) * -1
         );
     }
 }
@@ -825,19 +825,19 @@
 }
 
 [class|="columns"].tight {
-    column-gap: var(--base-d2);
+    column-gap: var(--rhythm-d2);
 }
 
 [class|="columns"].relaxed {
-    column-gap: var(--base-2);
+    column-gap: var(--rhythm-2);
 }
 /* Column gap variants */
 .columns-gap-tight {
-    column-gap: var(--base-d2);
+    column-gap: var(--rhythm-d2);
 }
 
 .columns-gap-wide {
-    column-gap: var(--base-2);
+    column-gap: var(--rhythm-2);
 }
 
 /* Prevent breaks inside elements */

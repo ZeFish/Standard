@@ -43,11 +43,11 @@
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
     /* Layout grid tokens */
-    --gap: clamp(var(--base), 6%, var(--base-3));
+    --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: calc(var(--base) * var(--rhythm-gap-block));
-    --content-accent: minmax(0, var(--base-2));
-    --content-feature: minmax(0, var(--base-4));
+    --content-small: var(--rhythm-gap-block);
+    --content-accent: minmax(0, var(--rhythm-2));
+    --content-feature: minmax(0, var(--rhythm-4));
     --content-hero: minmax(0, 1fr);
 }
 
@@ -99,7 +99,7 @@
 
     .container-hero {
         grid-column: hero;
-        margin-inline: calc((var(--base) * var(--body-padding)) * -1);
+        margin-inline: calc((var(--rhythm) * var(--body-padding)) * -1);
         /*padding-inline: var(--body-padding);*/
         > * {
             margin-inline: 0;
@@ -110,7 +110,7 @@
     &:not(.no-grid) {
         p:has(img) {
             display: flex;
-            --gap: var(--base-d4);
+            --gap: var(--rhythm-d4);
             gap: var(--gap);
             border-radius: var(--border-radius);
         }
@@ -151,70 +151,46 @@
         /* Adjacent images get reduced spacing */
         p:has(img) + p:has(img) {
             margin-block-start: calc(
-                (var(--base) * -1) - (var(--gap) * 1.5)
+                (var(--rhythm) * -1) - (var(--gap) * 1.5)
             ) !important;
         }
     }
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: var(--base-5);
-        margin-block-end: var(--base-2);
+        margin-block-start: var(--rhythm-5);
+        margin-block-end: var(--rhythm-gap-block);
     }
 
     h2 {
-        margin-block-start: var(--base-4);
-        margin-block-end: var(--base);
+        margin-block-start: var(--rhythm-4);
+        margin-block-end: var(--rhythm-gap);
     }
 
     h3 {
-        margin-block-start: var(--base);
+        margin-block-start: var(--rhythm-gap);
     }
 
     h4 {
-        margin-block-start: var(--base);
+        margin-block-start: var(--rhythm-gap);
     }
 
     h5 {
-        margin-block-start: var(--base);
-        margin-block-end: var(--base);
+        margin-block-start: var(--rhythm);
+        margin-block-end: var(--rhythm-gap);
     }
 
     h6 {
-        margin-block-start: var(--base);
-        margin-block-end: var(--base-d3);
+        margin-block-start: var(--rhythm);
+        margin-block-end: var(--rhythm-d3);
     }
 
     hr {
-        margin-inline: calc(var(--base-2) * var(--rhythm-gap));
+        margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
     }
 
-    /* Heading after heading gets reduced spacing */
-    h1 + h2,
-    h2 + h3,
-    h3 + h4,
-    h4 + h5,
-    h5 + h6 {
-        margin-block-start: calc(var(--base-d3) * var(--rhythm-gap) * -1);
-    }
-    hr + h2,
-    hr + h3,
-    hr + h4,
-    hr + h5,
-    hr + h6 {
-        margin-block-start: 0;
-    }
-    blockquote + h2,
-    blockquote + h3,
-    blockquote + h4,
-    blockquote + h5,
-    blockquote + h6 {
-        margin-block-start: var(--base);
-    }
-    h2 + pre,
-    h3 + pre,
-    h4 + pre {
-        margin-block-start: 0;
+    :is(blockquote, pre, ul, li, hr, h1, h2, h3):has(+ :is(h1, h2, h3)) {
+        margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
     }
 
     :where(
@@ -276,9 +252,9 @@
 
     /* Mermaid diagrams */
     .mermaid {
-        margin-block-end: var(--base);
+        margin-block-end: var(--rhythm);
         margin-inline: auto;
-        padding: var(--base);
+        padding: var(--rhythm);
     }
 
     p img {

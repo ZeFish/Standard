@@ -68,8 +68,6 @@
     --color-dark-accent: var(--color-purple);
     --color-dark-bold: var(--color-pink);
 
-    --marge-block: 1;
-
     --font-text: "Diatype", "Oktah Round Variable";
     --font-feature: "tnum", "liga", "clig", "kern", "calt", "zero", "ss05";
     --font-variation: "MONO" 1;
@@ -79,7 +77,7 @@
         "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
     --font-interface: "Diatype";
 
-    --font-ratio: 1.425;
+    --ratio: 1.425;
     --font-header-weight: 900;
     --font-header-feature:
         "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",

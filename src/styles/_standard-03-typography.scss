@@ -62,7 +62,7 @@
     --font-list-variation: "opsz" 32;
 
     /* Calculated typography tokens */
-    --line-height: calc(var(--font-size) * var(--font-density));
+    --line-height: calc(var(--font-size) * var(--line-height));
 
     /* Heading weight scale */
     --font-weight-h1: var(--font-header-weight);
@@ -88,7 +88,7 @@
     );
 
     /* List styling */
-    --list-indentation: var(--base);
+    --list-indentation: var(--rhythm);
 }
 
 // ========== Typography ==========
@@ -123,10 +123,8 @@ label,
 pre,
 code,
 .lined,
-aside,
-li::before,
-a::before {
+aside {
     text-box-trim: trim-both;
     text-box-edge: cap alphabetic;
-    line-height: var(--base);
+    line-height: var(--rhythm);
 }
