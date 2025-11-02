@@ -192,27 +192,6 @@ export default function (eleventyConfig, options = {}) {
           }
           token.attrs[hrefIndex][1] = rewrittenHref;
         }
-
-        const currentHref = token.attrs[hrefIndex][1];
-        const isExternal =
-          currentHref.startsWith("http://") ||
-          currentHref.startsWith("https://") ||
-          currentHref.startsWith("mailto:") ||
-          currentHref.startsWith("tel:");
-
-        if (isExternal) {
-          const classIndex = token.attrIndex("class");
-          if (classIndex < 0) {
-            token.attrPush(["class", "external-link"]);
-          } else {
-            token.attrs[classIndex][1] += " external-link";
-          }
-
-          token.attrSet("rel", "noopener noreferrer");
-          token.attrSet("target", "_blank");
-        } else {
-          token.attrSet("preload", "");
-        }
       }
 
       return defaultLinkRender(tokens, idx, options, env, self);
