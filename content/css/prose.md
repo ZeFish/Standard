@@ -25,11 +25,9 @@ Create beautifully styled, readable articles with automatic vertical rhythm, opt
 The `.prose` class transforms any container into a beautifully styled, readable article or content area:
 
 **Default prose container:**
-<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
   <h1>Article Title</h1>
   <p>This is how prose content looks when styled with the prose system. All typography, spacing, and layout are automatically applied. The prose container ensures your content is readable with optimal line length and professional appearance.</p>
   <p>Paragraphs have consistent spacing based on the vertical rhythm system. Each paragraph is separated by proper spacing that creates visual breathing room without appearing disconnected.</p>
-</div>
 
 ```html
 <article class="prose">
@@ -44,7 +42,6 @@ The `.prose` class transforms any container into a beautifully styled, readable 
 The prose system includes six levels of heading hierarchy, each with carefully calculated sizing and spacing:
 
 **All heading levels:**
-<div>
   <h1>H1 - Main Article Heading</h1>
   <p>This is your primary page heading, largest and most prominent.</p>
 
@@ -73,7 +70,6 @@ The prose system includes six levels of heading hierarchy, each with carefully c
 
   <h6>H6 - Small Heading</h6>
   <p style="font-size: 0.875rem; color: #666;">The smallest heading level, typically used for special sections.</p>
-</div>
 
 ```html
 <article class="prose">
