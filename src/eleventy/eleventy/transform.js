@@ -166,4 +166,110 @@ export default function (eleventyConfig, options = {}) {
       `<div class="${wrapperClass}">$1</div>`,
     );
   });
+
+  /**
+   * Internal Link Preload Transform - Performance Enhancement for Navigation
+   *
+   * @name Internal Link Preload Transform
+   * @group transforms
+   *
+   * In the early days of the web, every click was a fresh page load. Users waited
+   * for DNS resolution, TCP handshakes, HTML parsing—sometimes seconds for what
+   * felt like nothing. Then came HTTP/1.1 keep-alive, then HTTP/2 multiplexing,
+   * then service workers. But the fundamental problem remained: navigation still
+   * required round-trips to the server.
+   *
+   * Modern browsers solved this with prefetching. Instead of waiting for clicks,
+   * smart developers could hint to browsers: "this page will likely be visited
+   * next." The browser would fetch it in the background, storing it in memory.
+   * When the user clicked, the page appeared instantly. It was like having a
+   * time machine for web navigation.
+   *
+   * This transform adds `rel="prefetch"` to all internal anchor links—links that
+   * point to pages within your own site. External links (to other domains) are
+   * left untouched, as prefetching them would waste bandwidth and potentially
+   * violate privacy expectations. Only HTML files are processed, and the transform
+   * runs after all content is rendered, ensuring every `<a>` tag from markdown,
+   * templates, or shortcodes gets the treatment.
+   *
+   * The result is smoother navigation: users click internal links and pages load
+   * instantly. It's especially powerful for documentation sites like this one,
+   * where users often follow chains of related concepts. Think of it as giving
+   * your users a glimpse of the future—pages they haven't clicked yet, but will.
+   *
+   * ### Future Improvements
+   *
+   * - [ ] Add configurable prefetch priority (high, low, auto)
+   * - [ ] Support intersection observer for viewport-based prefetching
+   * - [ ] Add analytics to measure prefetch effectiveness
+   * - [ ] Implement predictive prefetching based on user behavior patterns
+   * - [ ] Add option to prefetch only links in navigation or main content
+   * - [ ] Support preload for critical resources (fonts, images) alongside links
+   *
+   * ### Related
+   *
+   * @see {transform} wrapTables - Similar HTML manipulation approach
+   * @see {preprocessor} escapeCodeBlock - Content protection pattern
+   * @see {class} .link-prefetch - Optional CSS styling for prefetched links
+   *
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Link_prefetching_FAQ Link Prefetching Guide
+   * @link https://web.dev/link-prefetch/ Web.dev Prefetch Documentation
+   *
+   * @example html - Input HTML
+   *   <a href="/concepts/vertical-rhythm/">Vertical Rhythm</a>
+   *   <a href="https://external-site.com">External Link</a>
+   *
+   * @example html - Output HTML
+   *   <a href="/concepts/vertical-rhythm/" rel="prefetch">Vertical Rhythm</a>
+   *   <a href="https://external-site.com">External Link</a>
+   *
+   * @example javascript - Plugin configuration
+   *   eleventyConfig.addPlugin(TransformPlugin, {
+   *     // No additional options needed - works automatically
+   *   });
+   *
+   * @param {String} content - Fully rendered HTML content
+   * @param {String} outputPath - Output file path (e.g., "_site/blog/post.html")
+   * @returns {String} HTML with rel="prefetch" added to internal links
+   */
+  eleventyConfig.addTransform("preloadInternalLinks", function (content) {
+    // Only process HTML files
+    if (!this.page.outputPath || !this.page.outputPath.endsWith(".html")) {
+      return content;
+    }
+
+    // Replace all anchor tags with internal links
+    return content.replace(
+      /<a([^>]*href="([^"]*)"[^>]*)>/gi,
+      (match, attrsBeforeHref, href) => {
+        // Check if href is internal (not external protocol)
+        const isInternal = !/^https?:\/\/|^mailto:|^tel:|^ftp:|^file:/.test(
+          href,
+        );
+
+        if (!isInternal) {
+          return match; // Leave external links unchanged
+        }
+
+        // Check if hx-boost or preload attribute already exists
+        const hasHxBoost = /hx-boost=/i.test(attrsBeforeHref);
+        const hasPreload = /preload/i.test(attrsBeforeHref);
+
+        let result = match;
+
+        // Add preload attribute if not present
+        if (!hasPreload) {
+          result = result.replace(/<a([^>]*)>/, "<a$1 preload>");
+        }
+
+        // Optionally add hx-boost="true" if you want HTMX to handle navigation
+        // Uncomment the following lines if you want to enable hx-boost
+        // if (!hasHxBoost) {
+        //   result = result.replace(/<a([^>]*)>/, '<a$1 hx-boost="true">');
+        // }
+
+        return result;
+      },
+    );
+  });
 }
