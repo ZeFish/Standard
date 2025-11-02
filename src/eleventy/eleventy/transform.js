@@ -272,4 +272,67 @@ export default function (eleventyConfig, options = {}) {
       },
     );
   });
+
+  // Transform for links in templates (footer, header, etc.)
+  eleventyConfig.addTransform("enhanceLinks", function (content) {
+    if (!this.page.outputPath || !this.page.outputPath.endsWith(".html")) {
+      return content;
+    }
+
+    return content.replace(
+      /<a([^>]*href="([^"]*)"[^>]*)>/gi,
+      (match, attrsBeforeHref, href) => {
+        const isExternal = /^https?:\/\/|^mailto:|^tel:|^ftp:/.test(href);
+
+        if (isExternal) {
+          // Add external-link class
+          const classMatch = attrsBeforeHref.match(/class="([^"]*)"/i);
+          let result = match;
+
+          if (classMatch) {
+            const existingClasses = classMatch[1];
+            const classList = existingClasses.split(/\s+/);
+            if (!classList.includes("external-link")) {
+              classList.push("external-link");
+              result = result.replace(
+                /class="[^"]*"/i,
+                `class="${classList.join(" ")}"`,
+              );
+            }
+          } else {
+            result = result.replace(
+              /<a([^>]*)>/,
+              '<a$1 class="external-link">',
+            );
+          }
+
+          // Add rel if not present
+          if (!/rel=/i.test(result)) {
+            result = result.replace(
+              /<a([^>]*)>/,
+              '<a$1 rel="noopener noreferrer">',
+            );
+          }
+
+          // Add target if not present
+          if (!/target=/i.test(result)) {
+            result = result.replace(/<a([^>]*)>/, '<a$1 target="_blank">');
+          }
+
+          // Tell HTMX to ignore this link
+          if (!/hx-disable/i.test(result)) {
+            result = result.replace(/<a([^>]*)>/, "<a$1 hx-disable>");
+          }
+
+          return result;
+        } else {
+          // Internal link - add preload if not present
+          if (!/preload/i.test(match)) {
+            return match.replace(/<a([^>]*)>/, "<a$1 preload>");
+          }
+          return match;
+        }
+      },
+    );
+  });
 }

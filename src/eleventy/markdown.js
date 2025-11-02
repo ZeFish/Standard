@@ -183,7 +183,7 @@ export default function (eleventyConfig, options = {}) {
       if (hrefIndex >= 0) {
         const href = token.attrs[hrefIndex][1];
 
-        // Handle content/ path rewriting (keep your existing logic)
+        // Handle content/ path rewriting
         if (href && href.startsWith("content/")) {
           let rewrittenHref = "/" + href.replace(/^content\//, "");
           rewrittenHref = rewrittenHref.replace(/\.md$/, "/");
@@ -193,14 +193,14 @@ export default function (eleventyConfig, options = {}) {
           token.attrs[hrefIndex][1] = rewrittenHref;
         }
 
-        // Check if link is external (starts with http:// or https://)
         const currentHref = token.attrs[hrefIndex][1];
         const isExternal =
           currentHref.startsWith("http://") ||
-          currentHref.startsWith("https://");
+          currentHref.startsWith("https://") ||
+          currentHref.startsWith("mailto:") ||
+          currentHref.startsWith("tel:");
 
         if (isExternal) {
-          // Add external-link class
           const classIndex = token.attrIndex("class");
           if (classIndex < 0) {
             token.attrPush(["class", "external-link"]);
@@ -208,8 +208,10 @@ export default function (eleventyConfig, options = {}) {
             token.attrs[classIndex][1] += " external-link";
           }
 
-          // Add security attributes
-          token.attrPush(["rel", "noopener noreferrer"]);
+          token.attrSet("rel", "noopener noreferrer");
+          token.attrSet("target", "_blank");
+        } else {
+          token.attrSet("preload", "");
         }
       }
 
