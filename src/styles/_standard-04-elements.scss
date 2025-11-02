@@ -67,7 +67,7 @@ h6 {
     font-feature-settings: var(--font-header-feature);
     font-variation-settings: var(--font-header-variation);
     font-style: var(--font-header-style, normal);
-    line-height: var(--font-header-line-height);
+
     letter-spacing: var(--font-header-letter-spacing);
     white-space: normal;
     overflow-wrap: normal;
@@ -79,35 +79,38 @@ h6 {
 
 h1 {
     font-weight: var(--font-weight-h1);
-    font-size: clamp(var(--scale-2xl), 10vw, var(--scale-3xl));
+    font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
+    line-height: var(--base-4);
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
-    font-size: clamp(var(--scale-xl), 7vw, var(--scale-2xl));
+    font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
+    line-height: var(--base-3);
 }
 
 h3 {
     font-weight: var(--font-weight-h3);
-    font-size: var(--scale-xl);
+    font-size: var(--scale-3);
+    line-height: var(--base-3);
 }
 
 h4 {
     font-weight: var(--font-weight-h4);
-    font-size: var(--scale-l);
-    line-height: var(--line-height);
+    font-size: var(--scale-2);
+    line-height: var(--base-2);
 }
 
 h5 {
     font-weight: var(--font-weight-h5);
-    font-size: var(--scale-l);
-    line-height: var(--line-height);
+    font-size: var(--scale-2);
+    line-height: var(--base-2);
 }
 
 h6 {
     font-weight: var(--font-weight-h6);
-    font-size: var(--scale-l);
-    line-height: var(--line-height);
+    font-size: var(--scale-2);
+    line-height: var(--base-2);
 }
 
 /* Inline code, monospace families */
@@ -125,10 +128,10 @@ tt,
 
 code {
     background: var(--color-background-secondary);
+    background-blend-mode: darken;
     color: var(--color-foreground);
     border-radius: var(--radius);
-    padding: calc(var(--space) * 0.1);
-    padding-bottom: 0;
+    padding: var(--base-d4);
     word-break: break-word;
     box-shadow: unset;
 }
@@ -136,7 +139,7 @@ code {
 pre {
     background: var(--color-background-secondary);
     color: var(--color-foreground);
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--border-radius);
     padding: var(--block-padding-inner);
@@ -162,7 +165,7 @@ li::before {
 /* Blockquotes (typography + color) */
 blockquote {
     font-style: italic;
-    border-inline-start: var(--space-3xs) solid var(--color-muted);
+    border-inline-start: var(--base-d5) solid var(--color-muted);
     background: var(--color-background-secondary);
     color: var(--color-muted);
     padding: var(--block-padding-inner);
@@ -192,19 +195,19 @@ caption {
 
 /* Figure caption */
 figcaption {
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
     font-style: italic;
     text-align: center;
 }
 
 /* Small, sub, sup */
 small {
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
 }
 
 sub,
 sup {
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     line-height: 0;
 }
 
@@ -253,7 +256,7 @@ a.external-link::after {
     content: "↗";
     text-decoration: none;
     font-size: inherit;
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     color: var(--color-subtle);
 }
 
@@ -279,12 +282,12 @@ nav li.is-active a {
 button,
 a.button {
     font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
 
     font-weight: var(--bold-weight);
     line-height: var(--font-density);
 
-    padding: var(--space-2xs) var(--space-s);
+    padding: var(--base-d4) var(--base-d2);
     border-radius: var(--border-radius);
 
     background: color-mix(
@@ -359,7 +362,7 @@ textarea,
 select {
     font-family: var(--font-interface), system-ui, sans-serif;
 
-    padding: var(--space-xs);
+    padding: var(--base-d3);
     border-radius: var(--border-radius);
 
     color: var(--color-foreground);
@@ -390,7 +393,7 @@ textarea {
     resize: vertical;
     min-height: 6em;
     /* keep rhythm-aware variant */
-    min-height: calc(var(--space-l) * 3);
+    min-height: calc(var(--base-2) * 3);
 }
 
 legend {

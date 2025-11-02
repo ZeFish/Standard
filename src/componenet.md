@@ -73,7 +73,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  * - Optional card image hero with object-fit controls
  *
  * @see {class} .grid - Often used to layout multiple cards in columns
- * @see {variable} --space - Controls internal spacing rhythm
+ * @see {variable} --base - Controls internal spacing rhythm
  * @see {class} .prose - Can be used inside card-body for rich content
  * @see {class} .rhythm - Applied automatically to card children
  *
@@ -116,7 +116,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  * @example scss - Customizing card via CSS variables
  *   .card.custom {
  *     --card-border-color: var(--color-accent);
- *     --card-padding: var(--space-l);
+ *     --card-padding: var(--base-2);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
  */
@@ -126,7 +126,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
   --card-border-color: var(--color-border);
   --card-border-width: 1px;
   --card-border-radius: var(--border-radius);
-  --card-padding: var(--space);
+  --card-padding: var(--base);
   --card-background: var(--color-background);
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
@@ -374,7 +374,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  */
 
 .alert {
-  --alert-padding: var(--space-s);
+  --alert-padding: var(--base-d2);
   --alert-border-width: 1px;
   --alert-border-radius: var(--border-radius);
   --alert-background: var(--color-background-secondary);
@@ -387,10 +387,10 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
   background: var(--alert-background);
   color: var(--alert-color);
   border-left: 4px solid var(--alert-border-color); /* Accent bar */
-  margin-block-end: var(--space);
+  margin-block-end: var(--base);
 
   /* Typography adjustments */
-  font-size: var(--scale-s);
+  font-size: var(--scale-d2);
   line-height: var(--font-density);
 
   /* Remove margin from first/last children */
@@ -457,7 +457,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  */
 .alert-action {
   display: inline-block;
-  margin-inline-start: var(--space-s);
+  margin-inline-start: var(--base-d2);
   color: var(--alert-border-color);
   text-decoration: underline;
   font-weight: var(--bold-weight);
@@ -540,17 +540,17 @@ Perfect! Continuing with the remaining 8 components...
 .skip-link {
   /* Positioning - absolute to top-left corner */
   position: absolute;
-  top: var(--space-2xs);
-  left: var(--space-2xs);
+  top: var(--base-d4);
+  left: var(--base-d4);
   z-index: var(--z-modal); /* Above everything else */
 
   /* Styling - high contrast, unmissable */
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--base-d3) var(--base-d2);
   border-radius: var(--border-radius);
   font-weight: var(--bold-weight);
-  font-size: var(--scale-s);
+  font-size: var(--scale-d2);
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
@@ -597,8 +597,8 @@ Perfect! Continuing with the remaining 8 components...
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
-  padding: var(--space-2xs);
+  gap: var(--base-d4);
+  padding: var(--base-d4);
 }
 ```
 
@@ -681,8 +681,8 @@ Perfect! Continuing with the remaining 8 components...
 
 .breadcrumb {
   /* Container styling */
-  margin-block-end: var(--space);
-  font-size: var(--scale-s);
+  margin-block-end: var(--base);
+  font-size: var(--scale-d2);
 
   /* List styling */
   ol {
@@ -691,7 +691,7 @@ Perfect! Continuing with the remaining 8 components...
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-xs);
+    gap: var(--base-d3);
     align-items: center;
   }
 
@@ -699,7 +699,7 @@ Perfect! Continuing with the remaining 8 components...
   li {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-xs);
+    gap: var(--base-d3);
     margin: 0;
 
     /* Remove default list item spacing */
@@ -712,7 +712,7 @@ Perfect! Continuing with the remaining 8 components...
       content: "→"; /* or "/" or "›" */
       display: inline-block;
       color: var(--color-subtle);
-      margin-inline-end: var(--space-xs);
+      margin-inline-end: var(--base-d3);
     }
   }
 
@@ -751,17 +751,17 @@ Perfect! Continuing with the remaining 8 components...
 
 /* tight variant - smaller text, tighter spacing */
 .breadcrumb-tight {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
 
   ol {
-    gap: var(--space-2xs);
+    gap: var(--base-d4);
   }
 
   li {
-    gap: var(--space-2xs);
+    gap: var(--base-d4);
 
     &:not(:first-child)::before {
-      margin-inline-end: var(--space-2xs);
+      margin-inline-end: var(--base-d4);
     }
   }
 }
@@ -852,9 +852,9 @@ Perfect! Continuing with the remaining 8 components...
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2xs);
-  margin-block: var(--space-l);
-  font-size: var(--scale-s);
+  gap: var(--base-d4);
+  margin-block: var(--base-2);
+  font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
 
   /* Links and current page */
@@ -865,7 +865,7 @@ Perfect! Continuing with the remaining 8 components...
     justify-content: center;
     min-width: 2.5em;
     height: 2.5em;
-    padding: 0 var(--space-xs);
+    padding: 0 var(--base-d3);
     border: var(--border);
     border-radius: var(--border-radius);
     text-decoration: none;
@@ -939,7 +939,7 @@ Perfect! Continuing with the remaining 8 components...
 .pagination-prev,
 .pagination-next {
   min-width: auto;
-  padding: 0 var(--space-s);
+  padding: 0 var(--base-d2);
   font-weight: var(--bold-weight);
 }
 
@@ -962,7 +962,7 @@ Perfect! Continuing with the remaining 8 components...
  */
 @media (max-width: 768px) {
   .pagination {
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
 
     /* Hide page numbers on mobile */
     a:not(.pagination-prev):not(.pagination-next),
@@ -998,7 +998,7 @@ Perfect! Continuing with the remaining 8 components...
  *   </nav>
  */
 .pagination-summary {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
   color: var(--color-muted);
   border: none;
   background: transparent;
@@ -1086,7 +1086,7 @@ Perfect! Continuing with the remaining 8 components...
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;
-  margin-block-end: var(--space);
+  margin-block-end: var(--base);
 
   /* Smooth scrolling with momentum */
   -webkit-overflow-scrolling: touch;
@@ -1191,10 +1191,10 @@ Perfect! Continuing with the remaining 8 components...
  * Tighter spacing for dense data tables (admin panels, dashboards).
  */
 .table-wrapper-tight table {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
 
   td, th {
-    padding: var(--space-2xs) var(--space-xs);
+    padding: var(--base-d4) var(--base-d3);
   }
 }
 ```
@@ -1269,17 +1269,17 @@ Perfect! Continuing with the remaining 8 components...
 .skip-link {
   /* Positioning - absolute to top-left corner */
   position: absolute;
-  top: var(--space-2xs);
-  left: var(--space-2xs);
+  top: var(--base-d4);
+  left: var(--base-d4);
   z-index: var(--z-modal); /* Above everything else */
 
   /* Styling - high contrast, unmissable */
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--base-d3) var(--base-d2);
   border-radius: var(--border-radius);
   font-weight: var(--bold-weight);
-  font-size: var(--scale-s);
+  font-size: var(--scale-d2);
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
@@ -1326,8 +1326,8 @@ Perfect! Continuing with the remaining 8 components...
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
-  padding: var(--space-2xs);
+  gap: var(--base-d4);
+  padding: var(--base-d4);
 }
 ```
 
@@ -1410,8 +1410,8 @@ Perfect! Continuing with the remaining 8 components...
 
 .breadcrumb {
   /* Container styling */
-  margin-block-end: var(--space);
-  font-size: var(--scale-s);
+  margin-block-end: var(--base);
+  font-size: var(--scale-d2);
 
   /* List styling */
   ol {
@@ -1420,7 +1420,7 @@ Perfect! Continuing with the remaining 8 components...
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-xs);
+    gap: var(--base-d3);
     align-items: center;
   }
 
@@ -1428,7 +1428,7 @@ Perfect! Continuing with the remaining 8 components...
   li {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-xs);
+    gap: var(--base-d3);
     margin: 0;
 
     /* Remove default list item spacing */
@@ -1441,7 +1441,7 @@ Perfect! Continuing with the remaining 8 components...
       content: "→"; /* or "/" or "›" */
       display: inline-block;
       color: var(--color-subtle);
-      margin-inline-end: var(--space-xs);
+      margin-inline-end: var(--base-d3);
     }
   }
 
@@ -1480,17 +1480,17 @@ Perfect! Continuing with the remaining 8 components...
 
 /* tight variant - smaller text, tighter spacing */
 .breadcrumb-tight {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
 
   ol {
-    gap: var(--space-2xs);
+    gap: var(--base-d4);
   }
 
   li {
-    gap: var(--space-2xs);
+    gap: var(--base-d4);
 
     &:not(:first-child)::before {
-      margin-inline-end: var(--space-2xs);
+      margin-inline-end: var(--base-d4);
     }
   }
 }
@@ -1581,9 +1581,9 @@ Perfect! Continuing with the remaining 8 components...
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2xs);
-  margin-block: var(--space-l);
-  font-size: var(--scale-s);
+  gap: var(--base-d4);
+  margin-block: var(--base-2);
+  font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
 
   /* Links and current page */
@@ -1594,7 +1594,7 @@ Perfect! Continuing with the remaining 8 components...
     justify-content: center;
     min-width: 2.5em;
     height: 2.5em;
-    padding: 0 var(--space-xs);
+    padding: 0 var(--base-d3);
     border: var(--border);
     border-radius: var(--border-radius);
     text-decoration: none;
@@ -1668,7 +1668,7 @@ Perfect! Continuing with the remaining 8 components...
 .pagination-prev,
 .pagination-next {
   min-width: auto;
-  padding: 0 var(--space-s);
+  padding: 0 var(--base-d2);
   font-weight: var(--bold-weight);
 }
 
@@ -1691,7 +1691,7 @@ Perfect! Continuing with the remaining 8 components...
  */
 @media (max-width: 768px) {
   .pagination {
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
 
     /* Hide page numbers on mobile */
     a:not(.pagination-prev):not(.pagination-next),
@@ -1727,7 +1727,7 @@ Perfect! Continuing with the remaining 8 components...
  *   </nav>
  */
 .pagination-summary {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
   color: var(--color-muted);
   border: none;
   background: transparent;
@@ -1815,7 +1815,7 @@ Perfect! Continuing with the remaining 8 components...
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;
-  margin-block-end: var(--space);
+  margin-block-end: var(--base);
 
   /* Smooth scrolling with momentum */
   -webkit-overflow-scrolling: touch;
@@ -1920,10 +1920,10 @@ Perfect! Continuing with the remaining 8 components...
  * Tighter spacing for dense data tables (admin panels, dashboards).
  */
 .table-wrapper-tight table {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
 
   td, th {
-    padding: var(--space-2xs) var(--space-xs);
+    padding: var(--base-d4) var(--base-d3);
   }
 }
 ```
@@ -1954,8 +1954,8 @@ description: Live examples of all Standard Framework components
   <style>
     /* Demo-specific styling */
     .demo-section {
-      margin-block-end: var(--space-xl);
-      padding-block-end: var(--space-l);
+      margin-block-end: var(--base-3);
+      padding-block-end: var(--base-2);
       border-bottom: var(--border);
     }
 
@@ -1964,22 +1964,22 @@ description: Live examples of all Standard Framework components
     }
 
     .demo-header {
-      margin-block-end: var(--space);
+      margin-block-end: var(--base);
     }
 
     .demo-label {
-      font-size: var(--scale-xs);
+      font-size: var(--scale-d3);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--color-muted);
       font-weight: var(--bold-weight);
-      margin-block-end: var(--space-xs);
+      margin-block-end: var(--base-d3);
     }
 
     .demo-grid {
       display: grid;
-      gap: var(--space);
-      margin-block: var(--space);
+      gap: var(--base);
+      margin-block: var(--base);
     }
   </style>
 </head>
@@ -1990,10 +1990,10 @@ description: Live examples of all Standard Framework components
 
   <!-- Header with Navigation -->
   <header class="negate-body-padding">
-    <nav style="padding: var(--space); border-bottom: var(--border);">
+    <nav style="padding: var(--base); border-bottom: var(--border);">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <strong style="font-size: var(--scale-l);">Standard Framework</strong>
-        <ul class="no-bullet" style="display: flex; gap: var(--space-s); list-style: none; padding: 0; margin: 0;">
+        <strong style="font-size: var(--scale-2);">Standard Framework</strong>
+        <ul class="no-bullet" style="display: flex; gap: var(--base-d2); list-style: none; padding: 0; margin: 0;">
           <li><a href="#cards">Cards</a></li>
           <li><a href="#alerts">Alerts</a></li>
           <li><a href="#forms">Forms</a></li>
@@ -2329,7 +2329,7 @@ description: Live examples of all Standard Framework components
       </div>
 
       <button onclick="openModal('demo-modal')" class="button">Open Demo Modal</button>
-      <button onclick="openModal('confirm-modal')" class="button" style="margin-left: var(--space-s);">Open Confirmation Modal</button>
+      <button onclick="openModal('confirm-modal')" class="button" style="margin-left: var(--base-d2);">Open Confirmation Modal</button>
 
       <!-- Demo Modal -->
       <dialog id="demo-modal" class="modal" aria-labelledby="demo-modal-title">
@@ -2484,14 +2484,14 @@ description: Live examples of all Standard Framework components
     <!-- ========================================
          FOOTER
     ========================================= -->
-    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: var(--space-l) var(--space); text-align: center; margin-top: var(--space-xl);">
+    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: var(--base-2) var(--base); text-align: center; margin-top: var(--base-3);">
       <p style="margin: 0;">
         <strong>Standard Framework</strong> v0.11.0 ·
         <a href="#">Documentation</a> ·
         <a href="#">GitHub</a> ·
         <a href="#">MIT License</a>
       </p>
-      <p style="margin-top: var(--space-xs); color: var(--color-muted);">
+      <p style="margin-top: var(--base-d3); color: var(--color-muted);">
         Built with fine-art typography and Swiss precision.
       </p>
     </footer>

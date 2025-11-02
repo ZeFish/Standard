@@ -88,7 +88,7 @@
     );
 
     /* List styling */
-    --list-indentation: var(--space);
+    --list-indentation: var(--base);
 }
 
 // ========== Typography ==========
@@ -102,4 +102,30 @@
 }
 .inter-display {
     font-variation-settings: "opsz" 32;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+blockquote,
+figcaption,
+td,
+th,
+dt,
+dd,
+label,
+.callout,
+pre,
+code,
+.lined,
+a,
+aside {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+    line-height: var(--base);
 }

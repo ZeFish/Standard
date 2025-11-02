@@ -69,7 +69,7 @@
     .card,
     .card-inset {
         padding: var(--block-padding-inner);
-        font-size: var(--scale-s);
+        font-size: var(--scale-d2);
     }
 
     // ==========================
@@ -86,7 +86,7 @@
     .callout {
         line-height: var(--font-density-s);
         transition: var(--duration-superfast) var(--motion-smooth);
-        padding: var(--space-2xs);
+        padding: var(--base-d4);
         --color-callout: var(--color-background-secondary);
         --color-border: color-mix(
             in srgb,
@@ -108,8 +108,8 @@
             );
             font-weight: bold;
             user-select: none;
-            padding: var(--space-3xs) calc(var(--space) - var(--space-2xs))
-                var(--space-3xs) calc(var(--space) - var(--space-2xs));
+            padding: var(--base-d5) calc(var(--base) - var(--base-d4))
+                var(--base-d5) calc(var(--base) - var(--base-d4));
         }
 
         .callout-content {
@@ -125,7 +125,7 @@
             border-radius: var(--border-radius);
             padding: var(--block-padding-inner);
             padding-top: var(--block-padding-inner);
-            margin-top: var(--space-2xs);
+            margin-top: var(--base-d4);
             margin-left: 0;
             border: var(--border);
             text-align: left;
@@ -139,23 +139,23 @@
 
             ul,
             ol {
-                padding: 0 calc(var(--space) * 0.75);
+                padding: 0 calc(var(--base) * 0.75);
             }
 
             pre {
-                margin: var(--space) 0;
+                margin: var(--base) 0;
             }
 
             > .callout {
-                margin: calc(var(--space-xs) * -1);
+                margin: calc(var(--base-d3) * -1);
 
                 .callout-content {
-                    padding: var(--space-s);
+                    padding: var(--base-d2);
                 }
 
                 .callout-title {
-                    padding-left: var(--space-s);
-                    padding-right: var(--space-s);
+                    padding-left: var(--base-d2);
+                    padding-right: var(--base-d2);
                 }
             }
         }
@@ -188,8 +188,8 @@
         display: inline-block;
         transform: rotate(0deg);
         transition: transform 0.2s ease;
-        width: var(--space-s);
-        margin-left: calc(var(--space-s) * -1);
+        width: var(--base-d2);
+        margin-left: calc(var(--base-d2) * -1);
         text-align: center;
     }
 
@@ -206,9 +206,9 @@
         padding: 0;
         background: none;
         border: none;
-        margin: 0 var(--space-l);
+        margin: 0 var(--base-2);
         position: relative;
-        top: calc(var(--space) * -1.75);
+        top: calc(var(--base) * -1.75);
         box-shadow: none;
 
         .callout-title {
@@ -233,7 +233,7 @@
         ul:not([start]),
         ol:not([start]) {
             padding: 0;
-            padding-left: var(--space);
+            padding-left: var(--base);
         }
     }
 }

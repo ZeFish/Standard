@@ -1307,11 +1307,11 @@ Standard Framework Documentation
   - `src/styles/standard-04-elements.scss` — Added comprehensive font-size inheritance:
     ```scss
     small {
-        font-size: var(--scale-s);
+        font-size: var(--scale-d2);
     }
 
     .small {
-        font-size: var(--scale-s);
+        font-size: var(--scale-d2);
     }
 
     .small * {
@@ -1319,7 +1319,7 @@ Standard Framework Documentation
     }
 
     .smaller {
-        font-size: var(--scale-xs);
+        font-size: var(--scale-d3);
     }
 
     .smaller * {

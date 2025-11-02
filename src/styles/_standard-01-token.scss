@@ -10,8 +10,8 @@
  * @example
  * :root {
  *   --font-ratio: var(--ratio-silver);
- *   --space: 1rlh;
- *   --scale-l: calc(1rem * 1.414);
+ *   --base: 1rlh;
+ *   --scale-2: calc(1rem * 1.414);
  * }
  *
  * @since 0.1.0
@@ -33,12 +33,12 @@
     --ratio-eighthstep: 1.062;
 
     /* Current ratio (configurable) */
-    --font-ratio: 1.8;
-    --font-density: 1.2;
-    --font-density-s: max(calc(var(--font-density) * 0.75), 1.2);
+    --font-ratio: var(--ratio-golden);
+    --font-density: var(--font-ratio);
+    --font-density-s: max(calc(var(--font-density) * 0.75), var(--font-size));
     --rhythm-gap: 1;
     --rhythm-gap-block: var(--font-ratio);
-    --body-padding: var(--space-l);
+    --body-padding: var(--base-2);
 
     --blur: blur(7px);
     --modal-background: color-mix(
@@ -46,7 +46,7 @@
         var(--color-background-secondary) 85%,
         transparent
     );
-    --block-padding-inner: calc(var(--space) / var(--font-density));
+    --block-padding-inner: var(--base-d2);
 
     --font-mobile-size: 1.1rem;
     --font-mobile-ratio: var(--ratio-halfstep);
@@ -54,39 +54,39 @@
     --body-mobile-padding-multiplier: 1;
 
     /* Modular Scale - calculated from font-ratio */
-    --scale-3xs: calc(var(--font-size) * pow(var(--font-ratio), -3));
-    --scale-2xs: calc(var(--font-size) * pow(var(--font-ratio), -2));
-    --scale-xs: calc(var(--font-size) * pow(var(--font-ratio), -1));
-    --scale-s: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
+    --scale-d5: calc(var(--font-size) * pow(var(--font-ratio), -3));
+    --scale-d4: calc(var(--font-size) * pow(var(--font-ratio), -2));
+    --scale-d3: calc(var(--font-size) * pow(var(--font-ratio), -1));
+    --scale-d2: calc(var(--font-size) * pow(var(--font-ratio), -0.5));
     --scale: var(--font-size);
-    --scale-l: calc(var(--font-size) * pow(var(--font-ratio), 0.5));
-    --scale-xl: calc(var(--font-size) * pow(var(--font-ratio), 1));
-    --scale-2xl: calc(var(--font-size) * pow(var(--font-ratio), 2));
-    --scale-3xl: calc(var(--font-size) * pow(var(--font-ratio), 3));
+    --scale-2: calc(var(--font-size) * pow(var(--font-ratio), 0.5));
+    --scale-3: calc(var(--font-size) * pow(var(--font-ratio), 1));
+    --scale-4: calc(var(--font-size) * pow(var(--font-ratio), 2));
+    --scale-5: calc(var(--font-size) * pow(var(--font-ratio), 3));
 
     /* Logical Spacing Scale - based on rhythm unit */
-    --space-3xs: calc(1rlh / 5);
-    --space-2xs: calc(1rlh / 4);
-    --space-xs: calc(1rlh / 3);
-    --space-s: calc(1rlh / 2);
-    --space: 1rlh; /* Base rhythm unit */
-    --space-l: calc(2 * 1rlh);
-    --space-xl: calc(3 * 1rlh);
-    --space-2xl: calc(4 * 1rlh);
-    --space-3xl: calc(5 * 1rlh);
-    --space-4xl: calc(6 * 1rlh);
-    --space-5xl: calc(7 * 1rlh);
-    --space-6xl: calc(8 * 1rlh);
-    --space-7xl: calc(9 * 1rlh);
-    --space-8xl: calc(10 * 1rlh);
+    --base-d5: calc(1rlh / 5);
+    --base-d4: calc(1rlh / 4);
+    --base-d3: calc(1rlh / 3);
+    --base-d2: calc(1rlh / 2);
+    --base: 1rlh; /* Base rhythm unit */
+    --base-2: calc(2 * 1rlh);
+    --base-3: calc(3 * 1rlh);
+    --base-4: calc(4 * 1rlh);
+    --base-5: calc(5 * 1rlh);
+    --base-6: calc(6 * 1rlh);
+    --base-7: calc(7 * 1rlh);
+    --base-8: calc(8 * 1rlh);
+    --base-9: calc(9 * 1rlh);
+    --base-10: calc(10 * 1rlh);
 
     /* Grid system tokens */
-    --grid-gap: var(--space);
+    --grid-gap: var(--base);
     --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
 
     /* Logical border properties */
     --hr-thickness: 1px;
-    --border-radius: var(--space-2xs);
+    --border-radius: var(--base-d4);
 
     /* Content area tokens */
     --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
@@ -95,7 +95,7 @@
     --line-width-l: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
     --line-width-full: calc(
-        100vw - (var(--space) * 2)
+        100vw - (var(--base) * 2)
     ); /* responsive full width with margins */
     --line-width: var(--line-width-m);
 
@@ -177,7 +177,7 @@
         --font-ratio: var(--font-mobile-ratio) !important;
         --font-density: var(--font-mobile-density);
         --body-padding: calc(
-            var(--space) * var(--body-mobile-padding-multiplier)
+            var(--base) * var(--body-mobile-padding-multiplier)
         ) !important;
     }
 }

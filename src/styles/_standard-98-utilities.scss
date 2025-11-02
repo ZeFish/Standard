@@ -10,9 +10,9 @@
  *
  * @pattern [property]-[side]-[size]
  * Examples:
- *   - .margin-top-xs (margin-top: var(--space-xs))
- *   - .padding-right-base (padding-right: var(--space))
- *   - .gap-l (gap: var(--space-l))
+ *   - .margin-top-xs (margin-top: var(--base-d3))
+ *   - .padding-right-base (padding-right: var(--base))
+ *   - .gap-l (gap: var(--base-2))
  *
  * @prop {class} .margin-* Margin utilities (top, right, bottom, left, block, inline)
  * @prop {class} .padding-* Padding utilities (top, right, bottom, left, block, inline)
@@ -58,38 +58,38 @@
  * Creates: .margin-top-3xs, .margin-top-2xs, .margin-top-xs, .margin-top-s, .margin-top-base, etc.
  */
 @mixin generate-scale($prefix, $property) {
-    .#{$prefix}-none {
+    .#{$prefix}-d {
         #{$property}: 0 !important;
     }
     .#{$prefix}-auto {
         #{$property}: auto !important;
     }
-    .#{$prefix}-3xs {
-        #{$property}: var(--space-3xs) !important;
+    .#{$prefix}-d5 {
+        #{$property}: var(--base-d5) !important;
     }
-    .#{$prefix}-2xs {
-        #{$property}: var(--space-2xs) !important;
+    .#{$prefix}-d4 {
+        #{$property}: var(--base-d4) !important;
     }
-    .#{$prefix}-xs {
-        #{$property}: var(--space-xs) !important;
+    .#{$prefix}-d3 {
+        #{$property}: var(--base-d3) !important;
     }
-    .#{$prefix}-s {
-        #{$property}: var(--space-s) !important;
+    .#{$prefix}-d2 {
+        #{$property}: var(--base-d2) !important;
     }
     .#{$prefix} {
-        #{$property}: var(--space) !important;
+        #{$property}: var(--base) !important;
     }
-    .#{$prefix}-l {
-        #{$property}: var(--space-l) !important;
+    .#{$prefix}-2 {
+        #{$property}: var(--base-2) !important;
     }
-    .#{$prefix}-xl {
-        #{$property}: var(--space-xl) !important;
+    .#{$prefix}-3 {
+        #{$property}: var(--base-3) !important;
     }
-    .#{$prefix}-2xl {
-        #{$property}: var(--space-2xl) !important;
+    .#{$prefix}-4 {
+        #{$property}: var(--base-4) !important;
     }
-    .#{$prefix}-3xl {
-        #{$property}: var(--space-3xl) !important;
+    .#{$prefix}-5 {
+        #{$property}: var(--base-5) !important;
     }
 }
 
@@ -160,8 +160,8 @@
 
 /* Min Width */
 @include generate-scale(min-width, min-width);
-.min-width-0 {
-    min-width: 0 !important;
+.min-width-d {
+    min-width: d !important;
 }
 .min-width-full {
     min-width: 100% !important;
@@ -188,8 +188,8 @@
 
 @include generate-scale(height, height);
 
-.height-0 {
-    height: 0 !important;
+.height-d {
+    height: d !important;
 }
 .height-auto {
     height: auto !important;
@@ -212,8 +212,8 @@
 
 /* Min Height */
 @include generate-scale(min-height, min-height);
-.min-height-0 {
-    min-height: 0 !important;
+.min-height-d {
+    min-height: d !important;
 }
 .min-height-full {
     min-height: 100% !important;
@@ -244,19 +244,19 @@
  */
 
 .small {
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
 }
 
 .smaller {
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
 }
 
 .micro {
-    font-size: var(--scale-2xs);
+    font-size: var(--scale-d4);
 }
 
 .nano {
-    font-size: var(--scale-3xs);
+    font-size: var(--scale-d5);
 }
 
 .small *,
@@ -283,7 +283,7 @@
     font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
     font-feature-settings: var(--font-monospace-feature);
     font-variation-settings: var(--font-monospace-variation);
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
 }
 
 .ui,
@@ -366,7 +366,7 @@
     text-transform: capitalize;
 }
 
-.text-transform-none {
+.text-transform-d {
     text-transform: none;
 }
 
@@ -560,11 +560,11 @@
  */
 
 .rhythm-tight {
-    --rhythm-gap: var(--space-s);
+    --rhythm-gap: var(--base-d2);
 }
 
 .rhythm-relaxed {
-    --rhythm-gap: var(--space-l);
+    --rhythm-gap: var(--base-2);
 }
 
 /* =========================== */
@@ -580,7 +580,7 @@
         display: block;
 
         > * {
-            margin-block-end: calc(var(--space-block) * var(--rhythm-gap));
+            margin-block-end: calc(var(--base-block) * var(--rhythm-gap));
         }
 
         > :last-child {
@@ -651,10 +651,10 @@
 
     @media (max-width: #{$small}) {
         margin-inline: calc(
-            var(--space) * var(--body-mobile-padding-multiplier) * -1
+            var(--base) * var(--body-mobile-padding-multiplier) * -1
         );
         padding-inline: calc(
-            var(--space) * var(--body-mobile-padding-multiplier)
+            var(--base) * var(--body-mobile-padding-multiplier)
         );
     }
 }
@@ -665,21 +665,21 @@
  * Useful when you want footer to sit flush at bottom
  */
 .body-p-neg-footer {
-    margin-block-end: calc((var(--space) * var(--body-padding) * 1.5) * -1);
+    margin-block-end: calc((var(--base) * var(--body-padding) * 1.5) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-end: calc(
-            (var(--space) * var(--body-mobile-padding-multiplier) * 1.5) * -1
+            (var(--base) * var(--body-mobile-padding-multiplier) * 1.5) * -1
         );
     }
 }
 
 .body-p-neg-header {
-    margin-block-start: calc((var(--space) * var(--body-padding) * 1) * -1);
+    margin-block-start: calc((var(--base) * var(--body-padding) * 1) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-start: calc(
-            (var(--space) * var(--body-mobile-padding-multiplier) * 1) * -1
+            (var(--base) * var(--body-mobile-padding-multiplier) * 1) * -1
         );
     }
 }
@@ -825,19 +825,19 @@
 }
 
 [class|="columns"].tight {
-    column-gap: var(--space-s);
+    column-gap: var(--base-d2);
 }
 
 [class|="columns"].relaxed {
-    column-gap: var(--space-l);
+    column-gap: var(--base-2);
 }
 /* Column gap variants */
 .columns-gap-tight {
-    column-gap: var(--space-s);
+    column-gap: var(--base-d2);
 }
 
 .columns-gap-wide {
-    column-gap: var(--space-l);
+    column-gap: var(--base-2);
 }
 
 /* Prevent breaks inside elements */

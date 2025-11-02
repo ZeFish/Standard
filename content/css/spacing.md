@@ -72,8 +72,8 @@ When rhythm is active on `<html>`, the `<body>` element automatically gets rhyth
 
 | Breakpoint | Padding | Variable |
 |------------|---------|----------|
-| Desktop | `calc(--space × --body-padding)` | `--body-padding` |
-| Mobile | `calc(--space × --body-mobile-padding-multiplier)` | `--body-mobile-padding-multiplier` |
+| Desktop | `calc(--base × --body-padding)` | `--body-padding` |
+| Mobile | `calc(--base × --body-mobile-padding-multiplier)` | `--body-mobile-padding-multiplier` |
 
 **Note**: Direct `.rhythm` containers (like `<div class="rhythm">`) do NOT receive body padding — only `<body>` does.
 
@@ -347,8 +347,8 @@ space-x-{value}  - horizontal spacing between children
 
 ```html
 <div class="card p-4">
-  <h3 class="mt-0">Card Title</h3>
-  <p class="mb-0">Card content</p>
+  <h3 class="mt-d">Card Title</h3>
+  <p class="mb-d">Card content</p>
 </div>
 ```
 

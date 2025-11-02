@@ -63,7 +63,7 @@
     }
     blockquote,
     pre {
-        padding: calc(var(--space) * 0.5);
+        padding: calc(var(--base) * 0.5);
     }
 
     .operator,
@@ -91,7 +91,7 @@
     hr,
     hr:not(:first-child) {
         font-size: var(--h1-size);
-        line-height: var(--space);
+        line-height: var(--base);
         padding: 0;
         border: 0;
         background: transparent;
@@ -102,7 +102,7 @@
         display: block;
         font-family: "Type Embellishments One";
         position: relative;
-        top: calc(var(--space) * -0.4);
+        top: calc(var(--base) * -0.4);
         opacity: 0.2;
     }
 }

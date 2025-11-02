@@ -34,25 +34,24 @@
     --color-dark-accent: var(--color-purple);
     --color-dark-bold: var(--color-pink);
 
-    --body-padding: var(--space);
+    --body-padding: var(--base);
     --rhythm-gap: 1;
-    --rhythm-gap-block: 1.5;
+    --rhythm-gap-block: 1;
     --shadow: 0;
     --border-radius: 0;
 
     --font-text: "MonoLisa";
-    --font-feature: "tnum", "liga", "clig", "kern", "calt", "zero", "ss05";
+    --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
     --font-variation: "MONO" 1;
-    --font-header: "BM Plex Mono";
+    --font-header: "MonoLisa";
     --font-monospace: "MonoLisa";
     --font-monospace-feature:
         "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
     --font-interface: "Monolisa";
 
-    --font-ratio: 1.425;
-    --font-header-weight: 900;
+    --font-header-weight: 700;
     --font-header-feature:
-        "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
+        "onum", "liga", "calt", "case", "cv01", "cv02", "cv03", "cv04", "cv06",
         "cv09", "cv10", "cv11", "cv12", "cv13";
     --font-header-variation: "";
     --font-header-letter-spacing: -0.065em;
@@ -63,8 +62,8 @@
 }
 
 h1 {
-    margin-block-start: var(--space-6xl);
-    margin-block-end: var(--space-6xl);
+    margin-block-start: var(--base-8);
+    margin-block-end: var(--base-8);
 }
 h1,
 h2,
@@ -74,7 +73,12 @@ h3 {
 
 .font-interface {
     opacity: 0.5;
-    font-size: var(--scale-s);
+    font-size: var(--scale-d2);
+}
+
+code {
+    border: var(--border);
+    box-shadow: var(--shadow);
 }
 
 @font-face {

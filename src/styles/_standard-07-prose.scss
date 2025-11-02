@@ -43,11 +43,11 @@
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
     /* Layout grid tokens */
-    --gap: clamp(var(--space), 6%, var(--space-xl));
+    --gap: clamp(var(--base), 6%, var(--base-3));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: calc(var(--space) * var(--rhythm-gap-block));
-    --content-accent: minmax(0, var(--space-l));
-    --content-feature: minmax(0, var(--space-2xl));
+    --content-small: calc(var(--base) * var(--rhythm-gap-block));
+    --content-accent: minmax(0, var(--base-2));
+    --content-feature: minmax(0, var(--base-4));
     --content-hero: minmax(0, 1fr);
 }
 
@@ -99,7 +99,7 @@
 
     .container-hero {
         grid-column: hero;
-        margin-inline: calc((var(--space) * var(--body-padding)) * -1);
+        margin-inline: calc((var(--base) * var(--body-padding)) * -1);
         /*padding-inline: var(--body-padding);*/
         > * {
             margin-inline: 0;
@@ -110,7 +110,7 @@
     &:not(.no-grid) {
         p:has(img) {
             display: flex;
-            --gap: var(--space-2xs);
+            --gap: var(--base-d4);
             gap: var(--gap);
             border-radius: var(--border-radius);
         }
@@ -151,42 +151,42 @@
         /* Adjacent images get reduced spacing */
         p:has(img) + p:has(img) {
             margin-block-start: calc(
-                (var(--space) * -1) - (var(--gap) * 1.5)
+                (var(--base) * -1) - (var(--gap) * 1.5)
             ) !important;
         }
     }
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: var(--space-3xl);
-        margin-block-end: var(--space-l);
+        margin-block-start: var(--base-5);
+        margin-block-end: var(--base-2);
     }
 
     h2 {
-        margin-block-start: var(--space-2xl);
-        margin-block-end: var(--space);
+        margin-block-start: var(--base-4);
+        margin-block-end: var(--base);
     }
 
     h3 {
-        margin-block-start: var(--space);
+        margin-block-start: var(--base);
     }
 
     h4 {
-        margin-block-start: var(--space);
+        margin-block-start: var(--base);
     }
 
     h5 {
-        margin-block-start: var(--space);
-        margin-block-end: var(--space);
+        margin-block-start: var(--base);
+        margin-block-end: var(--base);
     }
 
     h6 {
-        margin-block-start: var(--space);
-        margin-block-end: var(--space-xs);
+        margin-block-start: var(--base);
+        margin-block-end: var(--base-d3);
     }
 
     hr {
-        margin-inline: calc(var(--space-l) * var(--rhythm-gap));
+        margin-inline: calc(var(--base-2) * var(--rhythm-gap));
     }
 
     /* Heading after heading gets reduced spacing */
@@ -195,7 +195,7 @@
     h3 + h4,
     h4 + h5,
     h5 + h6 {
-        margin-block-start: calc(var(--space-xs) * var(--rhythm-gap) * -1);
+        margin-block-start: calc(var(--base-d3) * var(--rhythm-gap) * -1);
     }
     hr + h2,
     hr + h3,
@@ -209,7 +209,7 @@
     blockquote + h4,
     blockquote + h5,
     blockquote + h6 {
-        margin-block-start: var(--space);
+        margin-block-start: var(--base);
     }
     h2 + pre,
     h3 + pre,
@@ -276,9 +276,9 @@
 
     /* Mermaid diagrams */
     .mermaid {
-        margin-block-end: var(--space);
+        margin-block-end: var(--base);
         margin-inline: auto;
-        padding: var(--space);
+        padding: var(--base);
     }
 
     p img {

@@ -10,7 +10,7 @@
     --font-header-letter-spacing: 1;
     --font-text: "Diatype", "Kalice", sans-serif;
 
-    --body-padding: var(--space-2xl);
+    --body-padding: var(--base-4);
 
     table {
         grid-column: content;
@@ -19,13 +19,13 @@
     table th,
     table td,
     table td code {
-        font-size: var(--scale-xs);
+        font-size: var(--scale-d3);
         font-family: var(--font-monospace);
         word-break: keep-all;
     }
 
     h1 {
-        margin-block: var(--space-5xl);
+        margin-block: var(--base-7);
     }
 }
 

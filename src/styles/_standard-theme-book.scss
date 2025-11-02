@@ -37,7 +37,7 @@
     --font-header-feature: "liga", "onum", "kern";
     --font-header-variation: "opsz" 12;
 
-    --body-padding: var(--space-xl);
+    --body-padding: var(--base-3);
     --rhythm-gap: 1;
     --rhythm-gap-block: 1.5;
     --shadow: 0;
@@ -107,9 +107,9 @@
     aside {
         display: inline;
         position: absolute;
-        left: calc(var(--space) + var(--line-width-s));
+        left: calc(var(--base) + var(--line-width-s));
         margin-top: calc(var(--line-height) * -2);
-        font-size: var(--scale-s);
+        font-size: var(--scale-d2);
         color: var(--color-muted);
         line-height: var(--font-density-s);
         max-width: 33%;
@@ -117,18 +117,18 @@
 
     blockquote,
     pre {
-        padding: calc(var(--space) * 0.5);
+        padding: calc(var(--base) * 0.5);
         border-top: 0;
         border-bottom: 0;
         border-right: 0;
-        border-left-width: var(--space-3xs);
+        border-left-width: var(--base-d5);
         background: transparent;
     }
 
     hr,
     hr:not(:first-child) {
         font-size: var(--scale);
-        line-height: var(--space);
+        line-height: var(--base);
         padding: 0;
         border: 0;
         background: transparent;
@@ -139,15 +139,15 @@
         display: block;
         font-family: "Fern";
         position: relative;
-        top: calc(var(--space) * -0.4);
+        top: calc(var(--base) * -0.4);
         color: var(--color-border);
     }
 
     .prose > h1:first-child {
         text-align: left;
         grid-column: feature;
-        margin-block-start: calc(var(--space) * 6);
-        margin-block-end: calc(var(--space) * 6);
+        margin-block-start: calc(var(--base) * 6);
+        margin-block-end: calc(var(--base) * 6);
         font-size: calc(var(--font-size) * pow(var(--font-ratio), 3));
     }
 
@@ -172,8 +172,8 @@
         aside {
             position: relative;
             left: 0;
-            top: calc(var(--space) * -1);
-            margi-bottom: calc(var(--space) * -2);
+            top: calc(var(--base) * -1);
+            margi-bottom: calc(var(--base) * -2);
         }
     }
 }

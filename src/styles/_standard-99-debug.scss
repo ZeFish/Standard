@@ -48,21 +48,53 @@
 /* Baseline Grid Overlay */
 .standard-debug::before {
     --color-grid: var(--color-cyan);
-    --percent-grid: 50%;
+    --percent-grid: 5%;
     content: "";
     position: fixed;
     inset: 0;
     background-image: repeating-linear-gradient(
         to bottom,
         transparent 0,
-        transparent calc(var(--space) - 1px),
+        transparent calc(var(--base) - 1px),
         color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-            calc(var(--space) - 1px),
+            calc(var(--base) - 1px),
         color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-            var(--space)
+            var(--base)
     );
     pointer-events: none;
     z-index: 10000;
+}
+
+.standard-debug
+    :is(
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        li,
+        blockquote,
+        figcaption,
+        td,
+        th,
+        dt,
+        dd,
+        label,
+        .callout,
+        pre,
+        code,
+        .lined,
+        a,
+        aside
+    ) {
+    background-color: color-mix(in srgb, var(--color-cyan) 5%, transparent);
+    outline: 1px dotted var(--color-cyan);
+    outline-offset: 1rlh;
+
+    box-shadow: 0 0 0 1rlh
+        color-mix(in srgb, var(--color-cyan) 15%, var(--color-background));
 }
 
 /* Grid Column Overlay (only for .grid inside debug) */
@@ -193,9 +225,9 @@
     right: 0;
     background: var(--color-orange);
     color: var(--color-background);
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--space-3xs) var(--space-2xs);
+    padding: var(--base-d5) var(--base-d4);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -216,9 +248,9 @@
     left: 0;
     background: var(--color-success);
     color: var(--color-background);
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--space-3xs) var(--space-2xs);
+    padding: var(--base-d5) var(--base-d4);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.63;
@@ -229,19 +261,19 @@
 
 /* Debug Info Panel */
 .standard-debug::after {
-    content: "🔍 Standard Debug" "\A" "Baseline: " var(--space) "\A" "Ratio: "
+    content: "🔍 Standard Debug" "\A" "Baseline: " var(--base) "\A" "Ratio: "
         var(--font-ratio) "\A" "Density: " var(--font-density) "\A" "Grid: "
         var(--grid-cols) " cols";
     position: fixed;
-    top: var(--space);
-    right: var(--space);
+    top: var(--base);
+    right: var(--base);
     background: var(--color-background);
     color: var(--color-foreground);
     border: var(--border-accent);
     border-radius: var(--border-radius);
-    padding: var(--space-s);
+    padding: var(--base-d2);
     font-family: var(--font-monospace);
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     line-height: 1.5;
     white-space: pre;
     box-shadow: var(--shadow-xl);
@@ -282,13 +314,13 @@
 .standard-debug .grid-12 > *::before {
     content: attr(class);
     position: absolute;
-    top: var(--space-3xs);
-    left: var(--space-3xs);
+    top: var(--base-d5);
+    left: var(--base-d5);
     background: var(--color-cyan);
     color: var(--color-background);
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--space-3xs) var(--space-2xs);
+    padding: var(--base-d5) var(--base-d4);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -303,13 +335,13 @@
 .standard-debug .free-col::after {
     content: "start: " var(--start) " / span: " var(--span);
     position: absolute;
-    bottom: var(--space-3xs);
-    left: var(--space-3xs);
+    bottom: var(--base-d5);
+    left: var(--base-d5);
     background: var(--color-purple);
     color: var(--color-background);
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--space-3xs) var(--space-2xs);
+    padding: var(--base-d5) var(--base-d4);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -353,9 +385,9 @@
     top: -1.5em;
     left: 0;
     color: var(--color-background);
-    font-size: var(--scale-xs);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--space-3xs) var(--space-2xs);
+    padding: var(--base-d5) var(--base-d4);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.9;
@@ -367,12 +399,12 @@
 body.standard-debug::before {
     content: "md";
     position: fixed;
-    bottom: var(--space);
-    left: var(--space);
+    bottom: var(--base);
+    left: var(--base);
     color: var(--color-foreground);
     font-family: var(--font-monospace);
-    font-size: var(--scale-xs);
-    padding: var(--space-xs) var(--space-s);
+    font-size: var(--scale-d3);
+    padding: var(--base-d3) var(--base-d2);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     z-index: var(--z-toast);
@@ -432,11 +464,11 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature::before,
 .standard-debug .prose .container-full::before {
     position: absolute;
-    top: var(--space-3xs);
-    right: var(--space-3xs);
-    font-size: var(--scale-xs);
+    top: var(--base-d5);
+    right: var(--base-d5);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--space-3xs) var(--space-2xs);
+    padding: var(--base-d5) var(--base-d4);
     border-radius: var(--border-radius);
     pointer-events: none;
     opacity: 0.95;

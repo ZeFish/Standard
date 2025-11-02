@@ -174,7 +174,7 @@
 
     blockquote,
     pre {
-        padding: calc(var(--space) * 0.75);
+        padding: calc(var(--base) * 0.75);
     }
 
     h1 {
@@ -188,24 +188,24 @@
     table th,
     table td,
     table td code {
-        font-size: var(--scale-xs);
+        font-size: var(--scale-d3);
         font-family: var(--font-monospace);
         word-break: keep-all;
     }
 
     blockquote {
-        border-inline-start: calc(var(--space-2xs) * var(--rhythm-gap)) solid
+        border-inline-start: calc(var(--base-d4) * var(--rhythm-gap)) solid
             var(--color-muted);
     }
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: var(--space-7xl);
-        margin-block-end: var(--space-8xl);
+        margin-block-start: var(--base-9);
+        margin-block-end: var(--base-10);
     }
     h1:first-child + p {
-        margin-block-start: calc(var(--space) * -8);
-        margin-block-end: var(--space-8xl);
+        margin-block-start: calc(var(--base) * -8);
+        margin-block-end: var(--base-10);
     }
 
     background: var(--color-background-secondary);

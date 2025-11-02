@@ -71,11 +71,11 @@
         h4,
         h5,
         h6 {
-            margin-block: var(--space); /* Remove !important */
+            margin-block: var(--base); /* Remove !important */
             break-after: avoid; /* Keep with following content */
         }
         hr {
-            margin-block: var(--space-xs); /* Remove !important */
+            margin-block: var(--base-d3); /* Remove !important */
         }
 
         html::before,

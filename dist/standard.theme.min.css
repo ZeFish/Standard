@@ -154,7 +154,7 @@
 }
 [data-theme=paper] blockquote,
 [data-theme=paper] pre {
-  padding: calc(var(--space) * 0.75);
+  padding: calc(var(--base) * 0.75);
 }
 [data-theme=paper] h1 {
   opacity: 85%;
@@ -166,21 +166,21 @@
 [data-theme=paper] table th,
 [data-theme=paper] table td,
 [data-theme=paper] table td code {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   word-break: keep-all;
 }
 [data-theme=paper] blockquote {
-  border-inline-start: calc(var(--space-2xs) * var(--rhythm-gap)) solid var(--color-muted);
+  border-inline-start: calc(var(--base-d4) * var(--rhythm-gap)) solid var(--color-muted);
 }
 [data-theme=paper] h1,
 [data-theme=paper] > h1:where(:first-child) {
-  margin-block-start: var(--space-7xl);
-  margin-block-end: var(--space-8xl);
+  margin-block-start: var(--base-9);
+  margin-block-end: var(--base-10);
 }
 [data-theme=paper] h1:first-child + p {
-  margin-block-start: calc(var(--space) * -8);
-  margin-block-end: var(--space-8xl);
+  margin-block-start: calc(var(--base) * -8);
+  margin-block-end: var(--base-10);
 }
 [data-theme=paper] {
   background: var(--color-background-secondary);
@@ -208,17 +208,17 @@
   --color-dark-foreground: #ccc;
   --font-ratio: 1.8;
   --font-mobile-ratio: 2;
-  --body-padding: var(--space-2xl);
+  --body-padding: var(--base-4);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
   --font-density: 1.5;
   --rhythm-gap: calc(1 / var(--font-density));
   --rhythm-gap-block: 0;
-  --gap: clamp(var(--space), 6%, var(--space-xl));
+  --gap: clamp(var(--base), 6%, var(--base-3));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: calc(var(--space) * var(--rhythm-gap-block));
-  --content-accent: minmax(0, var(--space-l));
-  --content-feature: minmax(0, var(--space-2xl));
+  --content-small: calc(var(--base) * var(--rhythm-gap-block));
+  --content-accent: minmax(0, var(--base-2));
+  --content-feature: minmax(0, var(--base-4));
   --content-hero: minmax(0, 1fr);
   --gap: 0;
 }
@@ -249,20 +249,20 @@
   max-width: 1400px;
 }
 [data-theme=swiss] h1 {
-  margin-block-start: var(--space-6xl);
-  margin-block-end: var(--space-2xl);
+  margin-block-start: var(--base-8);
+  margin-block-end: var(--base-4);
 }
 [data-theme=swiss] h2,
 [data-theme=swiss] h3 {
-  margin-bottom: var(--space-s);
+  margin-bottom: var(--base-d2);
 }
 [data-theme=swiss] header {
   display: block;
 }
 [data-theme=swiss] pre {
   padding: 0;
-  padding-block: var(--space-s);
-  margin-block: var(--space-s);
+  padding-block: var(--base-d2);
+  margin-block: var(--base-d2);
   border: 0;
 }
 [data-theme=swiss] footer hr {
@@ -282,7 +282,7 @@
 [data-theme=swiss] table th,
 [data-theme=swiss] table td,
 [data-theme=swiss] table td code {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   word-break: keep-all;
 }
@@ -371,7 +371,7 @@
 }
 [data-theme=forest] blockquote,
 [data-theme=forest] pre {
-  padding: calc(var(--space) * 0.5);
+  padding: calc(var(--base) * 0.5);
 }
 [data-theme=forest] .operator,
 [data-theme=forest] .punctuation {
@@ -394,7 +394,7 @@
 [data-theme=forest] hr,
 [data-theme=forest] hr:not(:first-child) {
   font-size: var(--h1-size);
-  line-height: var(--space);
+  line-height: var(--base);
   padding: 0;
   border: 0;
   background: transparent;
@@ -405,7 +405,7 @@
   display: block;
   font-family: "Type Embellishments One";
   position: relative;
-  top: calc(var(--space) * -0.4);
+  top: calc(var(--base) * -0.4);
   opacity: 0.2;
 }
 
@@ -624,7 +624,7 @@
   --font-header-weight: 500;
   --font-header-letter-spacing: 1;
   --font-text: "Diatype", "Kalice", sans-serif;
-  --body-padding: var(--space-2xl);
+  --body-padding: var(--base-4);
 }
 [data-theme=minimal] table {
   grid-column: content;
@@ -633,12 +633,12 @@
 [data-theme=minimal] table th,
 [data-theme=minimal] table td,
 [data-theme=minimal] table td code {
-  font-size: var(--scale-xs);
+  font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   word-break: keep-all;
 }
 [data-theme=minimal] h1 {
-  margin-block: var(--space-5xl);
+  margin-block: var(--base-7);
 }
 
 @font-face {
@@ -731,7 +731,7 @@
   --font-variation: "opsz" 8;
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
-  --body-padding: var(--space-xl);
+  --body-padding: var(--base-3);
   --rhythm-gap: 1;
   --rhythm-gap-block: 1.5;
   --shadow: 0;
@@ -791,26 +791,26 @@
 [data-theme=book] aside {
   display: inline;
   position: absolute;
-  left: calc(var(--space) + var(--line-width-s));
+  left: calc(var(--base) + var(--line-width-s));
   margin-top: calc(var(--line-height) * -2);
-  font-size: var(--scale-s);
+  font-size: var(--scale-d2);
   color: var(--color-muted);
   line-height: var(--font-density-s);
   max-width: 33%;
 }
 [data-theme=book] blockquote,
 [data-theme=book] pre {
-  padding: calc(var(--space) * 0.5);
+  padding: calc(var(--base) * 0.5);
   border-top: 0;
   border-bottom: 0;
   border-right: 0;
-  border-left-width: var(--space-3xs);
+  border-left-width: var(--base-d5);
   background: transparent;
 }
 [data-theme=book] hr,
 [data-theme=book] hr:not(:first-child) {
   font-size: var(--scale);
-  line-height: var(--space);
+  line-height: var(--base);
   padding: 0;
   border: 0;
   background: transparent;
@@ -821,14 +821,14 @@
   display: block;
   font-family: "Fern";
   position: relative;
-  top: calc(var(--space) * -0.4);
+  top: calc(var(--base) * -0.4);
   color: var(--color-border);
 }
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
   grid-column: feature;
-  margin-block-start: calc(var(--space) * 6);
-  margin-block-end: calc(var(--space) * 6);
+  margin-block-start: calc(var(--base) * 6);
+  margin-block-end: calc(var(--base) * 6);
   font-size: calc(var(--font-size) * pow(var(--font-ratio), 3));
 }
 [data-theme=book] h1 {
@@ -850,8 +850,8 @@
   [data-theme=book] aside {
     position: relative;
     left: 0;
-    top: calc(var(--space) * -1);
-    margi-bottom: calc(var(--space) * -2);
+    top: calc(var(--base) * -1);
+    margi-bottom: calc(var(--base) * -2);
   }
 }
 
@@ -892,23 +892,22 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --body-padding: var(--space);
+  --body-padding: var(--base);
   --rhythm-gap: 1;
-  --rhythm-gap-block: 1.5;
+  --rhythm-gap-block: 1;
   --shadow: 0;
   --border-radius: 0;
   --font-text: "MonoLisa";
-  --font-feature: "tnum", "liga", "clig", "kern", "calt", "zero", "ss05";
+  --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
   --font-variation: "MONO" 1;
-  --font-header: "BM Plex Mono";
+  --font-header: "MonoLisa";
   --font-monospace: "MonoLisa";
   --font-monospace-feature:
       "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
   --font-interface: "Monolisa";
-  --font-ratio: 1.425;
-  --font-header-weight: 900;
+  --font-header-weight: 700;
   --font-header-feature:
-      "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
+      "onum", "liga", "calt", "case", "cv01", "cv02", "cv03", "cv04", "cv06",
       "cv09", "cv10", "cv11", "cv12", "cv13";
   --font-header-variation: "";
   --font-header-letter-spacing: -0.065em;
@@ -918,8 +917,8 @@
 }
 
 h1 {
-  margin-block-start: var(--space-6xl);
-  margin-block-end: var(--space-6xl);
+  margin-block-start: var(--base-8);
+  margin-block-end: var(--base-8);
 }
 
 h1,
@@ -930,7 +929,12 @@ h3 {
 
 .font-interface {
   opacity: 0.5;
-  font-size: var(--scale-s);
+  font-size: var(--scale-d2);
+}
+
+code {
+  border: var(--border);
+  box-shadow: var(--shadow);
 }
 
 @font-face {
