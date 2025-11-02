@@ -88,6 +88,17 @@
     --hr-thickness: 1px;
     --border-radius: var(--space-2xs);
 
+    /* Content area tokens */
+    --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
+    --line-width-s: 38rem; /* ~512px - short form content */
+    --line-width-m: 42rem; /* ~672px - optimal reading (60-75 chars) - DEFAULT */
+    --line-width-l: 50rem; /* ~800px - wider articles */
+    --line-width-xl: 60rem; /* ~960px - documentation/wide content */
+    --line-width-full: calc(
+        100vw - (var(--space) * 2)
+    ); /* responsive full width with margins */
+    --line-width: var(--line-width-m);
+
     /* Z-index scale */
     --z-base: 1;
     --z-dropdown: 1000;

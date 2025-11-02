@@ -862,3 +862,102 @@
   font-display: swap;
   src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }
+[data-theme=zed] {
+  --color-light-background: #f7f3ee;
+  --color-light-foreground: #4a341c;
+  
+  --color-light-red: #df453a; 
+  --color-light-orange: #e08e1f; 
+  --color-light-yellow: #d69a00; 
+  --color-light-green: #4ca06b; 
+  --color-light-cyan: #2aa198; 
+  --color-light-blue: #2882c3; 
+  --color-light-purple: #d16d92; 
+  --color-light-pink: #ea76cb; 
+  --color-dark-background: #231e1a;
+  --color-dark-foreground: #e6cfb3;
+  
+  --color-dark-red: #d0483e;
+  --color-dark-orange: #da702c;
+  --color-dark-yellow: #d69a00;
+  --color-dark-green: #27a06c;
+  --color-dark-cyan: #81c8be;
+  --color-dark-blue: #8caaee;
+  --color-dark-purple: #8b7ec8;
+  --color-dark-pink: #f4b8e4;
+  
+  --color-accent: var(--color-blue);
+  --color-code: var(--color-foreground);
+  --color-bold: var(--color-red);
+  --color-italic: var(--color-green);
+  --color-dark-accent: var(--color-purple);
+  --color-dark-bold: var(--color-pink);
+  --body-padding: var(--space);
+  --rhythm-gap: 1;
+  --rhythm-gap-block: 1.5;
+  --shadow: 0;
+  --border-radius: 0;
+  --font-text: "MonoLisa";
+  --font-feature: "tnum", "liga", "clig", "kern", "calt", "zero", "ss05";
+  --font-variation: "MONO" 1;
+  --font-header: "BM Plex Mono";
+  --font-monospace: "MonoLisa";
+  --font-monospace-feature:
+      "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
+  --font-interface: "Monolisa";
+  --font-ratio: 1.425;
+  --font-header-weight: 900;
+  --font-header-feature:
+      "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
+      "cv09", "cv10", "cv11", "cv12", "cv13";
+  --font-header-variation: "";
+  --font-header-letter-spacing: -0.065em;
+  --font-header-line-height: 0.75em;
+  --line-width: var(--line-width-xs);
+  
+}
+
+h1 {
+  margin-block-start: var(--space-6xl);
+  margin-block-end: var(--space-6xl);
+}
+
+h1,
+h2,
+h3 {
+  opacity: 0.85;
+}
+
+.font-interface {
+  opacity: 0.5;
+  font-size: var(--scale-s);
+}
+
+@font-face {
+  font-family: "Oktah Round Variable";
+  
+  font-weight: 100 900;
+  font-style: normal;
+  src: url("https://cdn.ffp.co/oktah_round_variable.woff2");
+}
+@font-face {
+  font-family: "MonoLisa";
+  
+  font-weight: 100 1000;
+  font-style: normal;
+  src: url("https://cdn.ffp.co/MonoLisa-Regular-Variable.woff2");
+}
+@font-face {
+  font-family: "MonoLisa";
+  
+  font-weight: 100 1000;
+  font-style: italic;
+  src: url("https://cdn.ffp.co/MonoLisa-RegularItalic-Variable.woff2");
+}
+@font-face {
+  font-family: "National Park";
+  src: url("/assets/fonts/NationalPark-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

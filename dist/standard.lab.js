@@ -304,6 +304,7 @@ class StandardLab {
       { value: "forest", label: "Forest" },
       { value: "book", label: "Book" },
       { value: "minimal", label: "Minimal" },
+      { value: "zed", label: "Zed" },
     ];
     const current = document.documentElement.getAttribute("data-theme") || "";
     return themes

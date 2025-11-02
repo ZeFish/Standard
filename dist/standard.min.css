@@ -58,6 +58,16 @@
   --hr-thickness: 1px;
   --border-radius: var(--space-2xs);
   
+  --line-width-xs: 32rem; 
+  --line-width-s: 38rem; 
+  --line-width-m: 42rem; 
+  --line-width-l: 50rem; 
+  --line-width-xl: 60rem; 
+  --line-width-full: calc(
+      100vw - (var(--space) * 2)
+  ); 
+  --line-width: var(--line-width-m);
+  
   --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -976,7 +986,6 @@ iframe {
   line-height: var(--font-density-s);
 }
 
-.font-ui,
 .font-interface {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-variation-settings: var(--font-interface-variation);
@@ -2284,16 +2293,6 @@ hr.col-row {
 
 
 :root {
-  
-  --line-width-xs: 32rem; 
-  --line-width-s: 38rem; 
-  --line-width-m: 42rem; 
-  --line-width-l: 50rem; 
-  --line-width-xl: 60rem; 
-  --line-width-full: calc(
-      100vw - (var(--space) * 2)
-  ); 
-  --line-width: var(--line-width-m);
   
   --gap: clamp(var(--space), 6%, var(--space-xl));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
@@ -3921,6 +3920,34 @@ dialog.modal::backdrop {
     display: none !important;
   }
 }
+
+:root {
+  --baseline-unit: var(--space);
+  line-height: var(--space) !important;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+blockquote,
+figcaption,
+td,
+th,
+dt,
+dd,
+label,
+.lined {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+
 @media print {
   
   @page {
@@ -5626,13 +5653,14 @@ dialog.modal::backdrop {
 
 
 .standard-debug::before {
+  --color-grid: var(--color-cyan);
+  --percent-grid: 50%;
   content: "";
   position: fixed;
   inset: 0;
-  background-image: repeating-linear-gradient(to bottom, transparent, transparent calc(var(--space) - 1px), color-mix(in srgb, var(--color-accent) 5%, transparent) calc(var(--space) - 1px), color-mix(in srgb, var(--color-accent) 5%, transparent) var(--space));
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--space) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--space) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--space));
   pointer-events: none;
-  z-index: var(--z-tooltip);
-  opacity: 0.5;
+  z-index: 10000;
 }
 
 

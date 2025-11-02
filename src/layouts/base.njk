@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <body {% htmx %}>
     <a href="#main" class="skip-link">Skip to content</a>
-		<header class="flex center-content" style="justify-content: space-between; max-width: 100%;">
+		<header class="flex center-content font-interface" style="justify-content: space-between; max-width: 100%;">
 			<div class="flex" style="align-items: left;">
 				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
 			</div>
@@ -20,7 +20,7 @@
         {{ content | safe }}
         {% standard_comments %}
       </main>
-			<footer class="prose small">
+			<footer class="prose small font-interface">
 			  <hr >
 				<p>© {{ year }} {{ site.author.name }} · <a href="/">{{ site.title }}</a> · <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> · {{ pkg.version }}</p>
 			</footer>

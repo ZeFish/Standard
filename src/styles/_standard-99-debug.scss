@@ -47,20 +47,22 @@
 
 /* Baseline Grid Overlay */
 .standard-debug::before {
+    --color-grid: var(--color-cyan);
+    --percent-grid: 50%;
     content: "";
     position: fixed;
     inset: 0;
     background-image: repeating-linear-gradient(
         to bottom,
-        transparent,
+        transparent 0,
         transparent calc(var(--space) - 1px),
-        color-mix(in srgb, var(--color-accent) 5%, transparent)
+        color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
             calc(var(--space) - 1px),
-        color-mix(in srgb, var(--color-accent) 5%, transparent) var(--space)
+        color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+            var(--space)
     );
     pointer-events: none;
-    z-index: var(--z-tooltip);
-    opacity: 0.5;
+    z-index: 10000;
 }
 
 /* Grid Column Overlay (only for .grid inside debug) */
