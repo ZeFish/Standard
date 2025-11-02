@@ -44,23 +44,23 @@ The `.prose` class transforms any container into a beautifully styled, readable 
 The prose system includes six levels of heading hierarchy, each with carefully calculated sizing and spacing:
 
 **All heading levels:**
-<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+<div>
   <h1>H1 - Main Article Heading</h1>
-  <p style="font-size: 0.875rem; color: #666;">This is your primary page heading, largest and most prominent.</p>
+  <p>This is your primary page heading, largest and most prominent.</p>
 
-  <p class="small">
+  <p>
       <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
       <img src="https://picsum.photos/400/300?random=2" alt="Demo 2" />
       <img src="https://picsum.photos/400/300?random=3" alt="Demo 3" />
     </p>
-    <p class="small">
+    <p>
       <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
       <img src="https://picsum.photos/400/300?random=2" alt="Demo 2" />
       <img src="https://picsum.photos/400/300?random=3" alt="Demo 3" />
     </p>
 
   <h2>H2 - Section Heading</h2>
-  <p style="font-size: 0.875rem; color: #666;">Divides content into major sections within the article.</p>
+  <p>Divides content into major sections within the article.</p>
 
   <h3>H3 - Subsection Heading</h3>
   <p style="font-size: 0.875rem; color: #666;">Creates a third level of organization for detailed content.</p>
