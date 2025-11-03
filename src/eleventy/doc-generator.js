@@ -244,7 +244,7 @@ export default function (eleventyConfig, options = {}) {
       `${sourceDir}/js/**/*.js`,
       `${sourceDir}/eleventy/**/*.js`,
     ],
-    outputDir = "content/concepts",
+    outputDir = "content/docs",
     layout = "base",
   } = options;
 

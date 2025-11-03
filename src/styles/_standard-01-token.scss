@@ -111,8 +111,8 @@
     --rhythm-9: var(--scale-9);
     --rhythm-10: var(--scale-10);
     // */
-
-    --line-height: var(--ratio);
+    --font-density: 1.5;
+    --line-height: calc(var(--ratio) * var(--font-density));
     --line-height-s: max(var(--rhythm-d2), 1);
     --rhythm-gap: var(--rhythm);
     --rhythm-gap-block: var(--rhythm);

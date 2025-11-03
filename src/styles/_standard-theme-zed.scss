@@ -26,7 +26,7 @@
     --color-dark-pink: #f4b8e4;
 
     /* Code and UI extras */
-    --color-accent: var(--color-blue);
+    --color-accent: var(--color-green);
     --color-code: var(--color-foreground);
     --color-bold: var(--color-red);
     --color-italic: var(--color-green);
@@ -34,7 +34,7 @@
     --color-dark-accent: var(--color-purple);
     --color-dark-bold: var(--color-pink);
 
-    --body-padding: var(--rhythm);
+    --body-padding: var(--rhythm-2);
     --shadow: 0;
     --border-radius: 0;
 
@@ -71,16 +71,8 @@ h3 {
 
 .font-interface {
     opacity: 0.5;
-    font-size: var(--scale-d2);
 }
 
-@font-face {
-    font-family: "Oktah Round Variable";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 900;
-    font-style: normal;
-    src: url("https://cdn.ffp.co/oktah_round_variable.woff2");
-}
 @font-face {
     font-family: "MonoLisa";
     /* Add other properties here, as needed. For example: */
@@ -94,11 +86,4 @@ h3 {
     font-weight: 100 1000;
     font-style: italic;
     src: url("https://cdn.ffp.co/MonoLisa-RegularItalic-Variable.woff2");
-}
-@font-face {
-    font-family: "National Park";
-    src: url("/assets/fonts/NationalPark-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
 }

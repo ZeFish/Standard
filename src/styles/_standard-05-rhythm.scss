@@ -93,8 +93,6 @@
         margin-block-end: var(--rhythm-gap);
     }
 
-    
-
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
@@ -127,7 +125,7 @@
     }
 
     hr {
-        --rhythm-gap-block: calc(var(--rhythm-gap) * 3);
+        --rhythm-gap-block: calc(var(--rhythm-gap) * 2);
     }
 
     /* Reset first-child spacing for special blocks */

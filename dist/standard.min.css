@@ -66,7 +66,8 @@
   --rhythm-9: var(--baseline-9);
   --rhythm-10: var(--baseline-10);
   
-  --line-height: var(--ratio);
+  --font-density: 1.5;
+  --line-height: calc(var(--ratio) * var(--font-density));
   --line-height-s: max(var(--rhythm-d2), 1);
   --rhythm-gap: var(--rhythm);
   --rhythm-gap-block: var(--rhythm);
@@ -603,11 +604,11 @@ label,
 pre,
 code,
 .lined,
-aside {
+aside,
+li::before {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
   line-height: var(--rhythm);
-  min-height: var(--rhythm);
 }
 
 
@@ -831,7 +832,7 @@ a,
 a:visited {
   color: inherit;
   text-decoration: underline;
-  text-decoration-thickness: 0.1em;
+  text-decoration-thickness: 1px;
   text-underline-offset: auto;
   text-decoration-color: var(--color-subtle);
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
@@ -1119,60 +1120,19 @@ mark {
 }
 
 
-:where(html:not(.no-rhythm), .rhythm) h1,
-:where(html:not(.no-rhythm), .rhythm) h2,
-:where(html:not(.no-rhythm), .rhythm) h3,
-:where(html:not(.no-rhythm), .rhythm) h4,
-:where(html:not(.no-rhythm), .rhythm) h5,
-:where(html:not(.no-rhythm), .rhythm) h6,
-:where(html:not(.no-rhythm), .rhythm) p,
-:where(html:not(.no-rhythm), .rhythm) ul,
-:where(html:not(.no-rhythm), .rhythm) ol,
-:where(html:not(.no-rhythm), .rhythm) dl,
-:where(html:not(.no-rhythm), .rhythm) blockquote,
-:where(html:not(.no-rhythm), .rhythm) pre,
-:where(html:not(.no-rhythm), .rhythm) table,
-:where(html:not(.no-rhythm), .rhythm) figure,
-:where(html:not(.no-rhythm), .rhythm) form,
-:where(html:not(.no-rhythm), .rhythm) fieldset,
-:where(html:not(.no-rhythm), .rhythm) section,
-:where(html:not(.no-rhythm), .rhythm) article,
-:where(html:not(.no-rhythm), .rhythm) aside,
-:where(html:not(.no-rhythm), .rhythm) header,
-:where(html:not(.no-rhythm), .rhythm) footer,
-:where(html:not(.no-rhythm), .rhythm) main,
-:where(html:not(.no-rhythm), .rhythm) .flow,
-:where(html:not(.no-rhythm), .rhythm) .flow-2,
-:where(html:not(.no-rhythm), .rhythm) .flow-3,
-:where(html:not(.no-rhythm), .rhythm) .flow-4,
-:where(html:not(.no-rhythm), .rhythm) .box,
-:where(html:not(.no-rhythm), .rhythm) .card,
-:where(html:not(.no-rhythm), .rhythm) .card-inset,
-:where(html:not(.no-rhythm), .rhythm) .box-inset,
-:where(html:not(.no-rhythm), .rhythm) .scroll {
+:where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) p, :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset {
   margin-block-start: 0;
   margin-block-end: var(--rhythm-gap);
 }
-:where(html:not(.no-rhythm), .rhythm) .rhythm {
-  --rhythm-gap: 1; 
-}
-:where(html:not(.no-rhythm), .rhythm) .callout,
-:where(html:not(.no-rhythm), .rhythm) blockquote,
-:where(html:not(.no-rhythm), .rhythm) pre,
-:where(html:not(.no-rhythm), .rhythm) figure,
-:where(html:not(.no-rhythm), .rhythm) p:has(img),
-:where(html:not(.no-rhythm), .rhythm) fieldset,
-:where(html:not(.no-rhythm), .rhythm) hr,
-:where(html:not(.no-rhythm), .rhythm) .scroll,
-:where(html:not(.no-rhythm), .rhythm) .container-small,
-:where(html:not(.no-rhythm), .rhythm) .container-accent,
-:where(html:not(.no-rhythm), .rhythm) .container-feature,
-:where(html:not(.no-rhythm), .rhythm) .container-hero {
+:where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) fieldset, :where(html:not(.no-rhythm), .rhythm) hr, :where(html:not(.no-rhythm), .rhythm) .scroll {
   margin-block-start: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
   margin-block-end: calc(var(--rhythm-gap-block));
 }
 :where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
+}
+:where(html:not(.no-rhythm), .rhythm) .rhythm {
+  --rhythm-gap: 1; 
 }
 :where(html:not(.no-rhythm), .rhythm) .prose > [class^=grid-],
 :where(html:not(.no-rhythm), .rhythm) .prose > .grid {
@@ -1180,7 +1140,7 @@ mark {
   margin-block-end: calc(var(--rhythm) * max(var(--rhythm-gap-block), var(--rhythm-gap)));
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
-  --rhythm-gap-block: calc(var(--rhythm-gap) * 3);
+  --rhythm-gap-block: calc(var(--rhythm-gap) * 2);
 }
 :where(html:not(.no-rhythm), .rhythm) blockquote > :first-child,
 :where(html:not(.no-rhythm), .rhythm) pre > :first-child,
@@ -2443,26 +2403,10 @@ hr.col-row {
 :where(.prose) hr {
   margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
 }
-:where(.prose) :is(blockquote, pre, ul, li, hr, h1, h2, h3):has(+ :is(h1, h2, h3)) {
+:where(.prose) :is(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll):has(+ :is(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll)) {
   margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
 }
-:where(.prose) :where(section,
-aside,
-header,
-footer,
-main,
-nav,
-blockquote,
-pre,
-figure,
-.box,
-.box-inset,
-.callout,
-.grid,
-.container-small,
-.container-accent,
-.container-feature,
-.container-hero) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
   
 }
