@@ -55,6 +55,7 @@
   --rhythm-d4: var(--baseline-d4);
   --rhythm-d3: var(--baseline-d3);
   --rhythm-d2: var(--baseline-d2);
+  --rhythm-tight: calc(var(--baseline) * 0.75);
   --rhythm: var(--baseline);
   --rhythm-2: var(--baseline-2);
   --rhythm-3: var(--baseline-3);
@@ -5077,8 +5078,8 @@ dialog.modal::backdrop {
 
 .tight,
 .tight * {
-  line-height: var(--rhythm-d2);
-  min-height: var(--rhythm-d2);
+  line-height: var(--rhythm-tight);
+  min-height: var(--rhythm-tight);
 }
 
 
