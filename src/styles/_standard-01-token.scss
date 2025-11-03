@@ -58,8 +58,8 @@
 
     /* Mobile */
     --mobile-font-size: 1.1rem;
-    --mobile-font-ratio: max(var(--optical-ratio-silver), var(--optical-ratio));
-    --mobile-line-height: max(var(--line-height), 1.5);
+    --mobile-optical-ratio: max(var(--ratio-silver), var(--optical-ratio));
+    --mobile-line-height: 1.2;
     --body-mobile-padding-multiplier: 1;
 
     /* Content area tokens */
@@ -218,7 +218,7 @@
 @media only screen and (max-width: #{$small}) {
     :root {
         --font-size: var(--mobile-font-size) !important;
-        --optical-ratio: var(--mobile-font-ratio) !important;
+        --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
         --body-padding: calc(
             var(--rhythm) * var(--body-mobile-padding-multiplier)
