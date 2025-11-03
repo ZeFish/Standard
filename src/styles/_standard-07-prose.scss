@@ -193,25 +193,7 @@
         margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
     }
 
-    :where(
-        section,
-        aside,
-        header,
-        footer,
-        main,
-        nav,
-        blockquote,
-        pre,
-        figure,
-        .box,
-        .box-inset,
-        .callout,
-        .grid,
-        .container-small,
-        .container-accent,
-        .container-feature,
-        .container-hero
-    ) {
+    :where(#{$rhythm-block-elements}) {
         > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
             margin-block-start: 0; /* No top margin */
             /* Keep the heading's natural bottom margin */
