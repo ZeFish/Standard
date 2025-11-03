@@ -2403,9 +2403,6 @@ hr.col-row {
 :where(.prose) hr {
   margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
 }
-:where(.prose) :is(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll):has(+ :is(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll)) {
-  margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
-}
 :where(.prose) :where(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
   

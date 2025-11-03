@@ -189,9 +189,11 @@
         margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
     }
 
+    /* because it bugged with image gallery
     :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
         margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
     }
+    */
 
     :where(#{$rhythm-block-elements}) {
         > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
