@@ -88,24 +88,26 @@
 /* Elements within rhythm containers */
 /* Enhanced spacing relationships for typography */
 :where(html:not(.no-rhythm), .rhythm) {
-    @include apply-rhythm {
+    #{$rhythm-elements} {
         margin-block-start: 0;
         margin-block-end: var(--rhythm-gap);
     }
 
-    .rhythm {
-        --rhythm-gap: 1; /* Reset for nested contexts */
-    }
+    
 
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
-    @include apply-rhythm-block {
+    #{$rhythm-block-elements} {
         margin-block-start: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
         margin-block-end: calc(var(--rhythm-gap-block));
     }
 
     * > :where(:last-child) {
         margin-block-end: 0;
+    }
+
+    .rhythm {
+        --rhythm-gap: 1; /* Reset for nested contexts */
     }
 
     /* =========================== */
