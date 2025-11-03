@@ -30,6 +30,22 @@ $small: 768px;
 $large: 1024px;
 $wide: 1440px;
 
+$text-elements: h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption, dt, dd, label, td, th;
+$rhythm-elements: h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table, figure, form, fieldset;
+$rhythm-block-elements: .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll;
+
+@mixin apply-rhythm {
+    #{$rhythm-elements} {
+        @content;
+    }
+}
+
+@mixin apply-rhythm-block {
+    #{$rhythm-block-elements} {
+        @content;
+    }
+}
+
 /**
  * @component Rhythm Application Mixin
  * @category Foundation
