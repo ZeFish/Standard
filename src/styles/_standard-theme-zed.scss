@@ -57,20 +57,20 @@
 
     --line-width: var(--line-width-xs);
     /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
-}
 
-h1 {
-    margin-block-start: var(--rhythm-8);
-    margin-block-end: var(--rhythm-8);
-}
-h1,
-h2,
-h3 {
-    opacity: 0.85;
-}
+    h1 {
+        margin-block-start: var(--rhythm-8);
+        margin-block-end: var(--rhythm-8);
+    }
+    h1,
+    h2,
+    h3 {
+        opacity: 0.85;
+    }
 
-.font-interface {
-    opacity: 0.5;
+    .font-interface {
+        opacity: 0.5;
+    }
 }
 
 @font-face {

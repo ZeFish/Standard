@@ -902,19 +902,16 @@
   --line-width: var(--line-width-xs);
   
 }
-
-h1 {
+[data-theme=zed] h1 {
   margin-block-start: var(--rhythm-8);
   margin-block-end: var(--rhythm-8);
 }
-
-h1,
-h2,
-h3 {
+[data-theme=zed] h1,
+[data-theme=zed] h2,
+[data-theme=zed] h3 {
   opacity: 0.85;
 }
-
-.font-interface {
+[data-theme=zed] .font-interface {
   opacity: 0.5;
 }
 
