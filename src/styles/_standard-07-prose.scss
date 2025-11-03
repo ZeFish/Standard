@@ -189,7 +189,7 @@
         margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
     }
 
-    :is(#{$rhythm-block-elements}):has(+ :is(h1, h2, h3)) {
+    :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
         margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
     }
 
