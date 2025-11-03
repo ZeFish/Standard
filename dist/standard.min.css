@@ -2378,6 +2378,11 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--rhythm) * -1 + var(--gap)) !important;
 }
+@media only screen and (max-width: 768px) {
+  :where(.prose) p:has(img) {
+    display: block;
+  }
+}
 :where(.prose) h1,
 :where(.prose) > h1:where(:first-child) {
   margin-block-start: var(--rhythm-5);
