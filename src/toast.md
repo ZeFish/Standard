@@ -559,7 +559,7 @@ Perfect! Here's a complete toast notification system with rich documentation:
 .toast-message {
   flex: 1;
   font-size: var(--scale-d2);
-  line-height: var(--line-height);
+  line-height: var(--lh-lrh);
   color: var(--color-foreground);
   word-break: break-word;
 }

@@ -33,6 +33,8 @@ export default function (eleventyConfig, site = {}) {
   const outputDir = standard.outputDir || "assets/standard";
   const comments = standard.comments || { enabled: false };
 
+  eleventyConfig.addShortcode("currentTime", () => new Date().toISOString());
+
   // ===== SHORTCODES =====
   // Shortcode to include Standard CSS and JS from local files
   eleventyConfig.addShortcode("standard_assets", function () {

@@ -135,7 +135,7 @@
   --color-dark-pink: #8b376a;
   --color-light-accent: var(--color-light-yellow) !important;
   --color-dark-accent: var(--color-light-yellow) !important;
-  --ratio: 1.6;
+  --optical-ratio: 1.6;
   --font-text: "Courier Prime";
   --font-feature: "";
   --font-variation: "wght" 300;
@@ -201,15 +201,15 @@
   --color-border: none;
   --color-muted: var(--color-foreground);
   --color-dark-foreground: #ccc;
-  --ratio: 1.8;
-  --font-mobile-ratio: 2;
+  --optical-ratio: 1.8;
+  --mobile-font-ratio: 2;
   --body-padding: var(--rhythm-4);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
   --line-height: 1.5;
   --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: var(--rhythm-gap-block);
+  --content-small: var(--rhythm-block-gap);
   --content-accent: minmax(0, var(--rhythm-2));
   --content-feature: minmax(0, var(--rhythm-4));
   --content-hero: minmax(0, 1fr);
@@ -225,14 +225,13 @@
 [data-theme=swiss] .prose {
   margin-left: 0%;
 }
-[data-theme=swiss] .prose,
-[data-theme=swiss] p:has(img) {
+[data-theme=swiss] .prose {
   display: block;
 }
 [data-theme=swiss] img {
   border: 0;
 }
-[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr) {
+[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll) {
   max-width: var(--line-width-s);
   margin-inline: 0;
 }
@@ -257,6 +256,10 @@
   padding-block: var(--rhythm-d2);
   margin-block: var(--rhythm-d2);
   border: 0;
+  background-color: var(--color-background);
+}
+[data-theme=swiss] pre code {
+  opacity: 1;
 }
 [data-theme=swiss] footer hr {
   display: none;
@@ -347,8 +350,8 @@
   --color-code: var(--color-red);
   --color-bold: var(--color-foreground);
   --color-italic: var(--color-foreground);
-  --ratio: 1.6;
-  --line-height: var(--ratio);
+  --optical-ratio: 1.6;
+  --line-height: var(--optical-ratio);
   --font-weight: 400;
   --bold-weight: 500;
   --font-header-letter-spacing: -0.035em;
@@ -403,7 +406,7 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/font/Forrest-Regular.woff2") format("woff22");
+  src: url("/assets/fonts/Forrest-Regular.woff2") format("woff22");
 }
 @font-face {
   font-family: "Forrest";
@@ -431,7 +434,7 @@
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/font/Forrest-Medium.woff2") format("woff2");
+  src: url("/assets/fonts/Forrest-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
@@ -503,10 +506,6 @@
   --color-light-background: #fffcf0;
   --color-light-foreground: #100f0f;
   
-  --color-light-gray: #6b7280; 
-  --color-light-muted: #a0a0a0; 
-  --color-light-soft: #e2e2df; 
-  
   --color-light-red: #c92a2a; 
   --color-light-orange: #e08e1f; 
   --color-light-yellow: #d4af37; 
@@ -567,7 +566,7 @@
   --font-monospace-feature:
       "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
   --font-interface: "Diatype";
-  --ratio: 1.425;
+  --optical-ratio: 1.425;
   --font-header-weight: 900;
   --font-header-feature:
       "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
@@ -606,8 +605,6 @@
 [data-theme=minimal] {
   --shadow: none;
   --color-border: transparent;
-  --rhythm-gap: 1;
-  --rhythm-gap-block: 2;
   --font-header: "Kalice", sans-serif;
   --font-header-weight: 500;
   --font-header-letter-spacing: 1;
@@ -705,9 +702,7 @@
       var(--color-foreground) 7%,
       var(--color-background)
   );
-  --ratio: 1.4;
-  --line-height: 1.5;
-  --marge-block: 1.5;
+  --optical-ratio: 1.2;
   --font-text: Fern;
   --font-interface: Fern;
   --font-header: Fern;
@@ -755,17 +750,20 @@
 }
 [data-theme=book] .prose {
   margin-left: 10%;
-  transition: margin-left 0.3s ease;
+  transition: margin-left var(--transition);
 }
 [data-theme=book] header {
   display: block;
 }
-[data-theme=book] .prose,
-[data-theme=book] p:has(img) {
+[data-theme=book] .prose {
   display: block;
 }
 [data-theme=book] .prose :is(p, blockquote, pre, details, li) {
   max-width: var(--line-width-s);
+  margin-inline: 0;
+}
+[data-theme=book] .prose :is(.scroll, p:has(img)) {
+  max-width: var(--line-width);
   margin-inline: 0;
 }
 [data-theme=book] .token {
@@ -796,6 +794,12 @@
   background: transparent;
   color: var(--color-foreground);
 }
+[data-theme=book] blockquote .copy-button,
+[data-theme=book] pre .copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 [data-theme=book] hr,
 [data-theme=book] hr:not(:first-child) {
   font-size: var(--scale);
@@ -818,7 +822,7 @@
   grid-column: feature;
   margin-block-start: calc(var(--rhythm) * 6);
   margin-block-end: calc(var(--rhythm) * 6);
-  font-size: calc(var(--font-size) * pow(var(--ratio), 3));
+  font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
 }
 [data-theme=book] h1 {
   text-align: left;
@@ -902,10 +906,6 @@
   --line-width: var(--line-width-xs);
   
 }
-[data-theme=zed] h1 {
-  margin-block-start: var(--rhythm-8);
-  margin-block-end: var(--rhythm-8);
-}
 [data-theme=zed] h1,
 [data-theme=zed] h2,
 [data-theme=zed] h3 {
@@ -913,6 +913,23 @@
 }
 [data-theme=zed] .font-interface {
   opacity: 0.5;
+}
+[data-theme=zed] pre code {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  opacity: 0.75;
+  transition: opacity var(--transition);
+  text-shadow: -0.25px -0.25px 0.25px color-mix(in srgb, var(--color-foreground) 5%, transparent), 0.25px -0.25px 0.25px color-mix(in srgb, var(--color-foreground) 5%, transparent), -0.25px 0.25px 0.25px color-mix(in srgb, var(--color-foreground) 5%, transparent), 0.25px 0.25px 0.25px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+[data-theme=zed] pre:hover code {
+  opacity: 1;
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme=zed] pre code {
+    text-shadow: -0.25px -0.25px 0.25px color-mix(in srgb, var(--color-background) 5%, transparent), 0.25px -0.25px 0.25px color-mix(in srgb, var(--color-background) 5%, transparent), -0.25px 0.25px 0.25px color-mix(in srgb, var(--color-background) 5%, transparent), 0.25px 0.25px 0.25px color-mix(in srgb, var(--color-background) 5%, transparent);
+  }
 }
 
 @font-face {

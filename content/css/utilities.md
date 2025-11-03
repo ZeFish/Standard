@@ -225,8 +225,8 @@ Control text weight.
 Control spacing between lines of text.
 
 ```html
-<div class="line-height-tight border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
-  <strong>Tight line height</strong>
+<div class="line-height-compact border-color-default padding-s" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
+  <strong>compact line height</strong>
   <p class="margin-0">The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
 </div>
 
@@ -247,9 +247,9 @@ Control spacing between lines of text.
 ```
 
 **Line height utilities:**
-- `.line-height-tight` (0.85)
-- `.line-height-snug` (var(--line-height-s))
-- `.line-height-normal` (var(--line-height))
+- `.line-height-compact` (0.85)
+- `.line-height-snug` (var(--lh-lrh-s))
+- `.line-height-normal` (var(--lh-lrh))
 - `.line-height-relaxed` (1.6)
 
 ### Text Alignment
@@ -624,9 +624,9 @@ You can customize body padding by adjusting these variables in your CSS:
 Control rhythm multiplier for consistent spacing.
 
 ```html
-<div class="rhythm rhythm-tight padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
-  <h4 class="margin-top-0">Tight Rhythm</h4>
-  <p>Reduced spacing between elements (.rhythm-tight)</p>
+<div class="rhythm rhythm-compact padding-base border-color-default" style="border: 1px solid; border-radius: 0.5rem; margin-bottom: var(--rhythm-base);">
+  <h4 class="margin-top-0">compact Rhythm</h4>
+  <p>Reduced spacing between elements (.rhythm-compact)</p>
   <p>Elements are spaced at 50% of normal rhythm</p>
 </div>
 

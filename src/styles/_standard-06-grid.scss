@@ -5,7 +5,7 @@
  * @category Layout
  * @description 12-column Swiss-style responsive grid with flexible gaps and alignment.
  * Uses CSS Grid with logical properties for RTL support. Supports nested grids,
- * asymmetric layouts, gap variants (tight/normal/wide), and responsive column changes.
+ * asymmetric layouts, gap variants (compact/normal/wide), and responsive column changes.
  * All gaps align to the vertical rhythm system.
  *
  * @prop {class} .grid 12-column grid container
@@ -14,7 +14,7 @@
  * @prop {class} .col-sm-* Responsive columns at 768px+
  * @prop {class} .col-lg-* Responsive columns at 1024px+
  * @prop {class} .start-{n} Start column position (1-12)
- * @prop {class} .gap-tight Tight gap (1/4 space)
+ * @prop {class} .gap-compact compact gap (1/4 space)
  * @prop {class} .gap-wide Wide gap (1.5 space)
  *
  * @example
@@ -57,7 +57,7 @@
 }
 
 /* Gap variants aligned to rhythm */
-.grid.tight {
+.grid.compact {
     --grid-gap: var(--rhythm-d5);
     --grid-row-gap: var(--rhythm-d2);
 }

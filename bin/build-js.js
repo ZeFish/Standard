@@ -759,7 +759,7 @@ await buildJS();
  * builds as a future improvement.
  *
  * Watch mode is the developer's force multiplier. Save your JavaScript file, switch
- * to the browser, refresh—your changes are live. This tight feedback loop enables
+ * to the browser, refresh—your changes are live. This compact feedback loop enables
  * rapid iteration and experimentation. Without it, you'd spend significant mental
  * energy remembering to run the build command, breaking your flow state.
  *

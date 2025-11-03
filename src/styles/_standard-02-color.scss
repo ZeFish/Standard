@@ -124,9 +124,9 @@
 
     /* Theme transition for smooth switching */
     transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
+        background-color var(--transition),
+        color var(--transition),
+        border-color var(--transition);
 }
 
 /* ===== AUTOMATIC DARK MODE (System Preference) ===== */
@@ -219,8 +219,8 @@ html {
 
     /* Smooth theme transitions */
     transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+        background-color var(--transition),
+        color var(--transition);
 }
 
 /* ===== SEMANTIC STATE CLASSES ===== */

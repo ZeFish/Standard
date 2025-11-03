@@ -21,9 +21,7 @@
         var(--color-background)
     );
 
-    --ratio: 1.4;
-    --line-height: 1.5;
-    --marge-block: 1.5;
+    --optical-ratio: 1.2;
     --font-text: Fern;
     --font-interface: Fern;
     --font-header: Fern;
@@ -78,20 +76,23 @@
 
     .prose {
         margin-left: 10%;
-        transition: margin-left 0.3s ease;
+        transition: margin-left var(--transition);
     }
 
     header {
         display: block;
     }
 
-    .prose,
-    p:has(img) {
+    .prose {
         display: block;
     }
 
     .prose :is(p, blockquote, pre, details, li) {
         max-width: var(--line-width-s);
+        margin-inline: 0;
+    }
+    .prose :is(.scroll, p:has(img)) {
+        max-width: var(--line-width);
         margin-inline: 0;
     }
     .token {
@@ -124,6 +125,11 @@
         border-left-color: var(--color-foreground);
         background: transparent;
         color: var(--color-foreground);
+        .copy-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 
     hr,
@@ -149,7 +155,7 @@
         grid-column: feature;
         margin-block-start: calc(var(--rhythm) * 6);
         margin-block-end: calc(var(--rhythm) * 6);
-        font-size: calc(var(--font-size) * pow(var(--ratio), 3));
+        font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
     }
 
     h1 {

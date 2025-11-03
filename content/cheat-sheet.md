@@ -10,7 +10,7 @@ comments: true
 
 The **20% of commands you'll use 80% of the time**. Copy-paste ready.
 
-> **💡 Philosophy**: This isn't a complete reference—it's the stuff you'll actually use. If you need exhaustive documentation, see the [full utilities guide](/css/utilities/).
+> **Philosophy**: This isn't a complete reference—it's the stuff you'll actually use. If you need exhaustive documentation, see the [full utilities guide](/css/utilities/).
 
 ---
 
@@ -194,7 +194,7 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 ```html
 <header class="padding-xl center">
-  <h1 class="tight">Welcome to Our Product</h1>
+  <h1 class="compact">Welcome to Our Product</h1>
   <p class="small muted">The tagline that explains what you do</p>
   <a href="#" class="button margin-top-base">Get Started →</a>
 </header>
@@ -202,10 +202,10 @@ ESC                     # Close Inspector (when you're done tweaking)
 **Why this works**:
 - `.padding-xl` = generous white space (4rem top/bottom)
 - `.center` = centers all inline content
-- `.tight` on h1 = reduces line-height for display text
+- `.compact` on h1 = reduces line-height for display text
 - `.margin-top-base` = adds space above button
 
-**Pro tip**: Use `.tight` on large headings to reduce awkward line spacing. Default line-height (1.5) looks weird on 3rem+ text.
+**Pro tip**: Use `.compact` on large headings to reduce awkward line spacing. Default line-height (1.5) looks weird on 3rem+ text.
 
 ---
 
@@ -395,7 +395,7 @@ Sighted users see: "Read more"
 
 ---
 
-### Tight Spacing (tight UI, dense layouts)
+### compact Spacing (compact UI, dense layouts)
 
 ```html
 <div class="padding-xs gap-xs">
@@ -403,7 +403,7 @@ Sighted users see: "Read more"
   <button>Action 2</button>
 </div>
 ```
-**Why**: Default spacing (1rem) is too generous for toolbars, inline buttons, tight cards. Use `xs` (0.5rem) for tighter layouts.
+**Why**: Default spacing (1rem) is too generous for toolbars, inline buttons, compact cards. Use `xs` (0.5rem) for compacter layouts.
 
 ---
 
@@ -411,7 +411,7 @@ Sighted users see: "Read more"
 
 | Size | Usage | Value | When to use |
 |------|-------|-------|-------------|
-| `xs` | Tiny gaps, tight UI | ~0.5rem | Button groups, inline icons |
+| `xs` | Tiny gaps, compact UI | ~0.5rem | Button groups, inline icons |
 | `s` | Small spacing | ~0.75rem | Form fields, card padding |
 | `base` | **Normal spacing** | ~1rem | Default gaps, standard rhythm |
 | `l` | Section spacing | ~2rem | Between major sections |

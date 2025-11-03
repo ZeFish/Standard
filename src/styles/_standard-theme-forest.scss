@@ -44,8 +44,8 @@
     --color-bold: var(--color-foreground);
     --color-italic: var(--color-foreground);
 
-    --ratio: 1.6;
-    --line-height: var(--ratio);
+    --optical-ratio: 1.6;
+    --line-height: var(--optical-ratio);
     --font-weight: 400;
     --bold-weight: 500;
 
@@ -106,7 +106,7 @@
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-    src: url("/assets/font/Forrest-Regular.woff2") format("woff22");
+    src: url("/assets/fonts/Forrest-Regular.woff2") format("woff22");
 }
 
 @font-face {
@@ -138,7 +138,7 @@
     font-weight: 500;
     font-style: normal;
     font-display: swap;
-    src: url("/assets/font/Forrest-Medium.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-Medium.woff2") format("woff2");
 }
 @font-face {
     font-family: "Forrest";

@@ -560,10 +560,10 @@ Override prose defaults with CSS variables:
   --rhythm-gap: 1;
 
   /* Line height for body text */
-  --line-height-base: 1.618;
+  --lh-lrh-base: 1.618;
 
   /* Line height for headings */
-  --line-height-headings: 1.2;
+  --lh-lrh-headings: 1.2;
 
   /* Font sizes (automatically scaled) */
   --font-size-base: 16px;

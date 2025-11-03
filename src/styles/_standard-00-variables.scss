@@ -30,9 +30,8 @@ $small: 768px;
 $large: 1024px;
 $wide: 1440px;
 
-$text-elements: "h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside, li::before";
-$rhythm-elements:
-    h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table, figure, form,
-    fieldset;
-$rhythm-block-elements: "section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll";
-$rhythm-block-small: ".container-small, .callout, blockquote, pre, figure, p:has(img)";
+$text-elements: "h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside";
+$rhythm-elements: "h1, h2, h3, h4, h5, h6, p:not(:has(img)), ul, ol, dl, blockquote, pre, table, figure, form, fieldset";
+
+$rhythm-block-elements: ".callout, blockquote,  pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll";
+$rhythm-block-small: ".container-small, .callout, blockquote,  pre, figure, p:has(img)";

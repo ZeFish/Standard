@@ -45,10 +45,12 @@
     /* Layout grid tokens */
     --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: var(--rhythm-gap-block);
+
     --content-accent: minmax(0, var(--rhythm-2));
     --content-feature: minmax(0, var(--rhythm-4));
     --content-hero: minmax(0, 1fr);
+
+    --content-small: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
 }
 
 @media (max-width: #{$small}) {
@@ -71,7 +73,7 @@
         var(--content-feature) [feature-end]
         var(--content-hero) [hero-end];
 
-    transition: grid-template-columns 0.3s ease-out;
+    transition: grid-template-columns var(--transition);
 
     position: relative;
     z-index: var(--z-base);
@@ -110,8 +112,8 @@
     &:not(.no-grid) {
         p:has(img) {
             display: flex;
-            --gap: var(--rhythm-d4);
-            gap: var(--gap);
+            --img-gap: var(--rhythm-d);
+            gap: var(--img-gap);
             border-radius: var(--border-radius);
         }
 
@@ -148,58 +150,11 @@
             display: block;
         }
 
-        /* Adjacent images get reduced spacing */
+        /* Adjacent images get reduced spacing  + var(--img-gap)    */
         p:has(img) + p:has(img) {
-            margin-block-start: calc(
-                (var(--rhythm) * -1) + var(--gap)
-            ) !important;
+            margin-block-start: calc((var(--rhythm-block-gap) * -1));
         }
     }
-
-    @media only screen and (max-width: #{$small}) {
-        p:has(img) {
-            display: block;
-        }
-    }
-
-    h1,
-    > h1:where(:first-child) {
-        margin-block-start: var(--rhythm-5);
-        margin-block-end: var(--rhythm-gap-block);
-    }
-
-    h2 {
-        margin-block-start: var(--rhythm-4);
-        margin-block-end: var(--rhythm-gap);
-    }
-
-    h3 {
-        margin-block-start: var(--rhythm-gap);
-    }
-
-    h4 {
-        margin-block-start: var(--rhythm-gap);
-    }
-
-    h5 {
-        margin-block-start: var(--rhythm);
-        margin-block-end: var(--rhythm-gap);
-    }
-
-    h6 {
-        margin-block-start: var(--rhythm);
-        margin-block-end: var(--rhythm-d3);
-    }
-
-    hr {
-        margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
-    }
-
-    /* because it bugged with image gallery
-    :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
-        margin-block-end: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
-    }
-    */
 
     :where(#{$rhythm-block-elements}) {
         > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {

@@ -260,7 +260,7 @@ Make items span multiple columns:
 Control space between grid items:
 
 **Small gap (0.5rem):**
-<div class="grid tight">
+<div class="grid compact">
   <div style="text-align: center;">Item 1</div>
   <div style="text-align: center;">Item 2</div>
 </div>

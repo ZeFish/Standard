@@ -93,7 +93,7 @@ Based on the golden ratio, creating a harmonious scale:
 
 | Multiplier | Size | CSS Variable | Usage |
 |-----------|------|--------------|-------|
-| 0.5x | 0.5rem | `gap-1` | Tight spacing |
+| 0.5x | 0.5rem | `gap-1` | compact spacing |
 | 1x | 1rem | `gap-2` | Default spacing |
 | 1.618x | 1.618rem | `gap-3` | More space |
 | 2.618x | 2.618rem | `gap-4` | Generous space |
@@ -175,7 +175,7 @@ Perfect vertical rhythm requires understanding line heights:
 ```css
 :root {
   --font-size-base: 16px;
-  --line-height-base: 1.618;     /* 25.8px */
+  --lh-lrh-base: 1.618;     /* 25.8px */
   --rhythm-unit: 1rem;            /* 16px */
 }
 ```
@@ -422,7 +422,7 @@ Override rhythm unit for different base:
   /* Increase rhythm for more generous spacing */
   --rhythm-unit: 1.25rem;
 
-  /* Or decrease for tighter layouts */
+  /* Or decrease for compacter layouts */
   --rhythm-unit: 0.75rem;
 }
 ```

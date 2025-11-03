@@ -61,9 +61,6 @@
     --font-list-feature: "dlig", "tnum", "zero";
     --font-list-variation: "opsz" 32;
 
-    /* Calculated typography tokens */
-    --line-height: calc(var(--font-size) * var(--line-height));
-
     /* Heading weight scale */
     --font-weight-h1: var(--font-header-weight);
     --font-weight-h2: max(
@@ -104,28 +101,7 @@
     font-variation-settings: "opsz" 32;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-li,
-blockquote,
-figcaption,
-td,
-th,
-dt,
-dd,
-label,
-.callout,
-pre,
-code,
-.lined,
-aside,
-li::before {
+#{$text-elements} {
     text-box-trim: trim-both;
     text-box-edge: cap alphabetic;
-    line-height: var(--rhythm);
 }

@@ -29,7 +29,7 @@ class StandardLab {
         "--font-monospace",
         "--font-size",
         "--ratio",
-        "--line-height",
+        "--lh-lrh",
       ],
       layout: ["--line-width", "--rhythm-gap", "--rhythm"],
       colors: this.getColorTokens(),

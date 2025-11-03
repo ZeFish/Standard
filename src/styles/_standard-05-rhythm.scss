@@ -13,7 +13,7 @@
  * @prop {class} .no-rhythm Disable rhythm for specific elements
  * @prop {variable} --rhythm Base rhythm unit (1rlh)
  * @prop {variable} --rhythm-gap Normal element spacing multiplier (default: 1)
- * @prop {variable} --rhythm-gap-block Block element spacing multiplier
+ * @prop {variable} --rhythm-block-gap Block element spacing multiplier
  * @prop {variable} --body-padding Padding multiplier for <body> (desktop)
  * @prop {variable} --body-mobile-padding-multiplier Padding multiplier for <body> (mobile)
  *
@@ -54,12 +54,15 @@
 :where(html:not(.no-rhythm)),
 :where(.rhythm) {
     /* Rhythm control - can be overridden per instance */
+    display: inline-flex;
+    align-items: baseline;
 
     /* Modern margin collapse prevention */
     display: flow-root;
 
     /* Apply rhythm spacing to all direct children */
     > * {
+        vertical-align: baseline;
         margin-block-start: 0;
         margin-block-end: var(--rhythm-gap);
     }
@@ -93,17 +96,27 @@
         margin-block-end: var(--rhythm-gap);
     }
 
+    /* The i that two specal block would bit a bit closer */
+    :is(#{$rhythm-elements}) + :is(#{$rhythm-block-elements}) {
+        margin-block-start: 0;
+    }
+
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
-        margin-block-end: calc(var(--rhythm-gap-block));
+        margin-block-start: max(var(--rhythm-gap), var(--rhythm-block-gap));
+        margin-block-end: max(var(--rhythm-gap), var(--rhythm-block-gap));
     }
+
+    /* The i that two specal block would bit a bit closer
+    debug when  its image
+    :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
+        margin-block-end: max(var(--rhythm-gap), 0);
+    }*/
 
     * > :where(:last-child) {
         margin-block-end: 0;
     }
-
     .rhythm {
         --rhythm-gap: 1; /* Reset for nested contexts */
     }
@@ -116,16 +129,52 @@
     .prose > [class^="grid-"],
     .prose > .grid {
         margin-block-start: calc(
-            (var(--rhythm) * max(var(--rhythm-gap-block), var(--rhythm-gap))) -
+            (var(--rhythm) * max(var(--rhythm-block-gap), var(--rhythm-gap))) -
                 (var(--rhythm) * var(--rhythm-gap))
         );
         margin-block-end: calc(
-            var(--rhythm) * max(var(--rhythm-gap-block), var(--rhythm-gap))
+            var(--rhythm) * max(var(--rhythm-block-gap), var(--rhythm-gap))
         );
     }
 
+    h1,
+    > h1:where(:first-child) {
+        margin-block-start: calc(var(--rhythm-gap) * 5);
+        margin-block-end: calc(var(--rhythm-gap) * 2);
+        line-height: 1;
+    }
+
+    h2 {
+        margin-block-start: calc(var(--rhythm-gap) * 2);
+        margin-block-end: calc(var(--rhythm-gap) * 1);
+        line-height: 1;
+    }
+
+    h3 {
+        margin-block-start: calc(var(--rhythm-gap) * 1);
+        line-height: 1;
+    }
+
+    h4 {
+        margin-block-start: var(--rhythm-gap);
+    }
+
+    h5 {
+        margin-block-start: var(--rhythm-gap);
+        margin-block-end: var(--rhythm-gap);
+    }
+
+    h6 {
+        margin-block-start: var(--rhythm-gap);
+        margin-block-end: var(--rhythm-gap);
+    }
+
     hr {
-        --rhythm-gap-block: calc(var(--rhythm-gap) * 2);
+        margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
+    }
+
+    hr {
+        --rhythm-block-gap: calc(var(--rhythm-gap) * 2);
     }
 
     /* Reset first-child spacing for special blocks */
@@ -157,9 +206,12 @@
     ol {
         list-style: none;
         padding-inline-start: var(--rhythm);
+        padding-inline-end: var(--rhythm);
     }
 
+    ul,
     p:has(+ ul),
+    ol,
     p:has(+ ol) {
         margin-block-end: var(--rhythm-d2);
     }
@@ -175,6 +227,7 @@
     li > ul,
     li > ol {
         padding-inline-start: var(--rhythm);
+
         margin-block-end: 0;
     }
 
@@ -183,7 +236,7 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: var(--rhythm-d2);
+        margin-block-end: var(--rhythm-d);
     }
 
     /* Unordered list bullets */
@@ -217,16 +270,6 @@
         width: calc(var(--rhythm) * 1.5);
     }
 
-    ul.no-bullet,
-    ol.no-bullet {
-        list-style: none;
-        padding-inline-start: 0;
-    }
-    ul.no-bullet li::before,
-    ol.no-bullet li::before {
-        display: none;
-    }
-
     /* Inline lists - remove margin-bottom from list items */
     ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
         li,
@@ -235,10 +278,9 @@
         margin-block-end: 0;
     }
 
-    ul.tight li,
-    ol.tight li,
+    ul.compact li,
+    ol.compact li,
     li:last-of-type {
-        /*line-height: var(--line-height);*/
         margin-block-end: 0;
     }
 
@@ -351,8 +393,8 @@
     th {
         border-bottom: var(--border);
         font-size: var(--scale-d2);
-        padding-block: calc(var(--rhythm-d3) * var(--rhythm-gap));
-        padding-inline: calc(var(--rhythm-d2) * var(--rhythm-gap));
+        padding-block: calc(var(--rhythm-d4));
+        padding-inline: calc(var(--rhythm-d2));
     }
 
     th {
@@ -372,9 +414,9 @@
         background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
     }
 
-    /* ADD: tight table variant */
-    .tight th,
-    .tight td {
+    /* ADD: compact table variant */
+    .compact th,
+    .compact td {
         padding-block: calc(var(--rhythm-d4) * var(--rhythm-gap));
         padding-inline-end: calc(var(--rhythm-d3) * var(--rhythm-gap));
     }
@@ -385,7 +427,7 @@
 /* =========================== */
 
 /* Spacing override utilities */
-.rhythm-tight {
+.rhythm-compact {
     --rhythm-gap: 0.5;
 }
 

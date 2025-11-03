@@ -237,8 +237,8 @@
     text-decoration: none;
     color: inherit;
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform var(--transition),
+        box-shadow var(--transition);
     cursor: pointer;
 
     &:hover {
@@ -512,8 +512,8 @@ a.skip-link {
 
     /* Animation */
     transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
+        transform var(--transition),
+        opacity var(--transition);
 
     /* Hidden by default (accessible hiding) */
     transform: translateY(-120%);
@@ -575,7 +575,7 @@ a.skip-link {
  * and how they got there. Home → Products → Laptops → MacBook Pro. It's not
  * just navigation—it's spatial orientation.
  *
- * The power of breadcrumbs lies in their simplicity. They're tight, take
+ * The power of breadcrumbs lies in their simplicity. They're compact, take
  * minimal space, never get in the way, yet provide crucial context. Lost in
  * a documentation site? Breadcrumbs show you're in Docs → CSS → Typography.
  * Want to go up one level? Click "CSS." It's spatial reasoning made visual.
@@ -703,8 +703,8 @@ a.skip-link {
  * @since 0.11.0
  */
 
-/* tight variant - smaller text, tighter spacing */
-.breadcrumb-tight {
+/* compact variant - smaller text, compacter spacing */
+.breadcrumb-compact {
     font-size: var(--scale-d3);
 
     ol {
@@ -786,8 +786,8 @@ a.skip-link {
  *     <a href="?page=3" class="pagination-next" aria-label="Next page">Next →</a>
  *   </nav>
  *
- * @example html - tight mobile-friendly variant
- *   <nav aria-label="Pagination" class="pagination pagination-tight">
+ * @example html - compact mobile-friendly variant
+ *   <nav aria-label="Pagination" class="pagination pagination-compact">
  *     <a href="?page=1">← Prev</a>
  *     <span>Page 2 of 20</span>
  *     <a href="?page=3">Next →</a>
@@ -818,9 +818,9 @@ a.skip-link {
         text-decoration: none;
         color: var(--color-foreground);
         transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease;
+            background-color var(--transition),
+            border-color var(--transition),
+            color var(--transition);
     }
 
     /* Link hover states */
@@ -899,11 +899,11 @@ a.skip-link {
 }
 
 /**
- * @name Pagination tight Variant
+ * @name Pagination compact Variant
  * @group components-navigation
  * @since 0.11.0
  *
- * On mobile, showing 10 page numbers is overwhelming. The tight variant
+ * On mobile, showing 10 page numbers is overwhelming. The compact variant
  * shows only Prev/Next and a page counter ("Page 3 of 20").
  */
 @media (max-width: 768px) {
@@ -1097,13 +1097,13 @@ a.skip-link {
 }
 
 /**
- * @name Table Wrapper tight Variant
+ * @name Table Wrapper compact Variant
  * @group components-data
  * @since 0.11.0
  *
- * Tighter spacing for dense data tables (admin panels, dashboards).
+ * compacter spacing for dense data tables (admin panels, dashboards).
  */
-.table-wrapper-tight table {
+.table-wrapper-compact table {
     font-size: var(--scale-d3);
 
     td,
@@ -1481,8 +1481,8 @@ dialog.modal {
     /* Animation (fade in) */
     opacity: 0;
     transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
+        opacity var(--transition),
+        transform var(--transition);
 
     /* Open state */
     &[open] {
@@ -1503,7 +1503,7 @@ dialog.modal {
 dialog.modal::backdrop {
     background: var(--modal-background);
     backdrop-filter: var(--blur); /* Subtle blur effect */
-    animation: fadeIn 0.2s ease;
+    animation: fadeIn var(--transition);
 }
 
 @keyframes fadeIn {
@@ -1561,8 +1561,8 @@ dialog.modal::backdrop {
     justify-content: center;
     border-radius: var(--border-radius);
     transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+        background-color var(--transition),
+        color var(--transition);
 
     &:hover {
         background: var(--color-background-secondary);
@@ -1771,8 +1771,8 @@ dialog.modal::backdrop {
     color: var(--color-muted);
     cursor: pointer;
     transition:
-        color 0.2s ease,
-        border-color 0.2s ease;
+        color var(--transition),
+        border-color var(--transition);
     position: relative;
     top: 2px; /* Overlap with tablist border */
 
@@ -1959,7 +1959,7 @@ dialog.modal::backdrop {
     list-style: none;
 
     /* Interaction states */
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition);
 
     &:hover {
         background: var(--color-background-secondary);
@@ -1976,7 +1976,7 @@ dialog.modal::backdrop {
         display: inline-block;
         font-size: var(--scale-2);
         color: var(--color-muted);
-        transition: transform 0.2s ease;
+        transition: transform var(--transition);
         flex-shrink: 0;
     }
 }
@@ -2041,12 +2041,12 @@ dialog.modal::backdrop {
 }
 
 /**
- * @name Accordion tight Variant
+ * @name Accordion compact Variant
  * @group components-disclosure
  * @since 0.11.0
  */
-.accordion-tight .accordion-trigger,
-.accordion-tight .accordion-content {
+.accordion-compact .accordion-trigger,
+.accordion-compact .accordion-content {
     padding: var(--rhythm-d3);
     font-size: var(--scale-d3);
 }

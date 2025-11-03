@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="{{ site.language }}" data-standard-version="{{ site.standard.version }}" data-theme="{{ theme }}">
-    <head>
+
+
+  <head>
       {% include site.standard.layouts.meta %}
       <title>{{ title or site.title }}{% if title and title != site.title %} · {{ site.title }}{% endif %}</title>
     </head>
+
+
     {% standard_fonts %}
     {% standard_assets %}
     {% standard_lab %}
     <link rel="stylesheet" href="/assets/css/style.css">
+
+
     <body {% htmx %}>
-    <a href="#main" class="skip-link">Skip to content</a>
-		<header class="flex center-content font-interface small" style="justify-content: space-between; max-width: 100%;">
-			<div class="flex" style="align-items: left;">
-				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
-			</div>
-			{% menu site.nav.header, {className: "menu flex m-d p-none"} %}
-		</header>
+
+
+      <a href="#main" class="skip-link">Skip to content</a>
+
+
+  		<header class="flex font-interface small" style="justify-content: space-between; max-width: 100%;">
+  			<p>
+  				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
+  			</p>
+  			{% menu site.nav.header, {className: "menu-h"} %}
+  		</header>
+
+
      	<main class="prose md">
         {{ content | safe }}
         {% standard_comments %}
       </main>
-			<footer class="prose smaller font-interface">
-			  <hr >
+
+
+      <hr >
+			<footer class="smaller font-interface">
 				<p>© {{ year }} {{ site.author.name }} · <a href="/">{{ site.title }}</a> · <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> · {{ pkg.version }}</p>
 			</footer>
+
+
 	</body>
 </html>

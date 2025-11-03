@@ -136,11 +136,9 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--border-radius);
-    padding-block: var(--rhythm);
-    padding-inline: var(--rhythm);
+    padding: var(--rhythm-d2);
     overflow-x: auto;
     overflow-y: hidden;
-    line-height: 1.5;
     box-shadow: inset var(--shadow);
     line-height: var(--line-height-s);
 }
@@ -150,6 +148,31 @@ pre code {
     border: none;
     outline: none;
     padding: 0;
+    opacity: 0.75;
+    transition: opacity var(--transition);
+}
+pre:hover code {
+    opacity: 1;
+}
+
+pre {
+    position: relative;
+    .copy-button {
+        position: absolute;
+        top: var(--rhythm-d2);
+        right: var(--rhythm-d2);
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        font-family: var(--font-interface);
+    }
+    &:hover .copy-button {
+        opacity: 0.5;
+        transition: opacity 0.5s;
+    }
+    .copy-button:hover {
+        opacity: 1;
+    }
 }
 
 /* Lists */
@@ -161,11 +184,10 @@ li::before {
 /* Blockquotes (typography + color) */
 blockquote {
     font-style: italic;
-    border-inline-start: var(--rhythm-d5) solid var(--color-muted);
-    background: var(--color-background-secondary);
+    border-left: calc(var(--rhythm) / 8) solid var(--color-border);
     color: var(--color-muted);
-    padding-block: var(--rhythm-d2);
-    padding-inline: var(--rhythm);
+    padding: var(--rhythm-d2);
+    font-size: var(--scale-d2);
 }
 
 /* Tables (typography) */
@@ -177,6 +199,7 @@ th,
 td {
     text-align: left;
     border: var(--border);
+    padding: var(--rhythm-d5) var(--rhythm-d3);
 }
 
 th {
@@ -234,8 +257,8 @@ a:visited {
     text-underline-offset: auto;
     text-decoration-color: var(--color-subtle);
     transition:
-        color 0.2s ease,
-        text-decoration-color 0.2s ease;
+        color var(--transition),
+        text-decoration-color var(--transition);
 }
 
 a:visited:hover,
@@ -280,12 +303,12 @@ nav li.is-active a {
 button,
 a.button {
     font-family: var(--font-interface), system-ui, sans-serif;
-    font-size: var(--scale-d2);
+    font-size: var(--scale-d3);
 
     font-weight: var(--bold-weight);
     line-height: var(--line-height);
 
-    padding: var(--rhythm-d4) var(--rhythm-d2);
+    padding: var(--rhythm-d5) var(--rhythm-d3);
     border-radius: var(--border-radius);
 
     background: color-mix(
@@ -301,9 +324,9 @@ a.button {
 
     cursor: pointer;
     transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        opacity 0.2s ease;
+        background-color var(--transition),
+        border-color var(--transition),
+        opacity var(--transition);
 }
 
 a.button:visited,
@@ -368,9 +391,9 @@ select {
     border: var(--border);
 
     transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        outline-color 0.2s ease;
+        background-color var(--transition),
+        border-color var(--transition),
+        outline-color var(--transition);
 }
 
 input:focus,
@@ -513,3 +536,231 @@ mark {
     );
     color: var(--color-foreground);
 }
+
+
+/**
+ * @component Markdown Styling
+ * @category Components
+ * @description Beautiful styling for markdown-generated HTML. Includes support for
+ * blockquotes, callouts, code blocks, tables, lists, and other common markdown elements.
+ * Designed to work seamlessly with the rhythm and reading layout systems.
+ * Automatically styles headings, paragraphs, links with proper typography.
+ *
+ * @prop {class} .md Apply markdown styling to container
+ * @prop {element} blockquote Styled blockquote with italic text
+ * @prop {class} .callout Highlighted callout/admonition blocks
+ * @prop {class} .callout-title Title for callout blocks
+ * @prop {element} pre Code block with syntax highlighting
+ * @prop {element} code Inline code styling
+ * @prop {element} table Responsive table styling
+ * @prop {element} a Link styling with underline
+ * @prop {element} h1-h6 Heading hierarchy with proper sizing
+ *
+ * @example
+ * // Apply markdown styling to content
+ * <article class="reading md">
+ *   <h1>Title</h1>
+ *   <p>Paragraph text...</p>
+ *   <blockquote>Quote</blockquote>
+ *   <pre><code>Code block</code></pre>
+ * </article>
+ *
+ * // Callout admonition block
+ * <div class="callout">
+ *   <div class="callout-title">Note</div>
+ *   <div class="callout-content">Important information</div>
+ * </div>
+ *
+ * @since 0.1.0
+ * @see standard-09-md.scss
+ */
+
+// Harmonized Markdown Styles - Using logical properties
+// Works with both .prose (layout) and .rhythm (spacing) classes
+
+    // ==========================
+    // General Element Styling
+    // ==========================
+    .callout,
+    img,
+    iframe,
+    .outset,
+    .box,
+    .card {
+        background: var(--color-background-secondary);
+        border-radius: var(--border-radius);
+        border: var(--border);
+        box-shadow: var(--shadow);
+    }
+    pre,
+    blockquote,
+    .inset {
+        box-shadow: inset var(--shadow);
+    }
+
+    .box,
+    .box-inset,
+    .card,
+    .card-inset {
+        padding: var(--scale-d2);
+        font-size: var(--scale-d2);
+    }
+
+
+
+    // ==========================
+    // CALLOUT
+    // ==========================
+    .callout {
+        line-height: var(--line-height-s);
+        transition: var(--duration-superfast) ease;
+        padding: var(--rhythm-d4);
+        --color-callout: var(--color-background-secondary);
+        --color-border: color-mix(
+            in srgb,
+            var(--color-callout) 15%,
+            transparent
+        );
+        background: color-mix(
+            in srgb,
+            var(--color-callout) 5%,
+            var(--color-background-secondary)
+        );
+        border: var(--border);
+
+        .callout-title {
+            color: color-mix(
+                in srgb,
+                var(--color-callout) 50%,
+                var(--color-foreground)
+            );
+            font-weight: bold;
+            user-select: none;
+            padding: var(--rhythm-d5) calc(var(--rhythm) - var(--rhythm-d4))
+                var(--rhythm-d5) calc(var(--rhythm) - var(--rhythm-d4));
+        }
+
+        .callout-content {
+            color: var(--color-foreground);
+            background: color-mix(
+                in srgb,
+                var(--color-callout) 2.5%,
+                var(--color-background)
+            );
+
+            box-shadow: inset var(--shadow);
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            padding: var(--scale-d2);
+            padding-top: var(--scale-d2);
+            margin-top: var(--rhythm-d4);
+            margin-left: 0;
+            border: var(--border);
+            text-align: left;
+
+            p:first-child {
+                margin-top: 0;
+            }
+            p:last-child {
+                margin-bottom: 0;
+            }
+
+            ul,
+            ol {
+                padding: 0 calc(var(--rhythm) * 0.75);
+            }
+
+            pre {
+                margin: var(--rhythm) 0;
+            }
+
+            > .callout {
+                margin: calc(var(--rhythm-d3) * -1);
+
+                .callout-content {
+                    padding: var(--rhythm-d2);
+                }
+
+                .callout-title {
+                    padding-left: var(--rhythm-d2);
+                    padding-right: var(--rhythm-d2);
+                }
+            }
+        }
+
+        .callout-title-icon {
+            display: none;
+        }
+
+        img {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    // Callout Color Variants
+    .callout[data-callout="warning" i] {
+        --color-callout: var(--color-red);
+    }
+    .callout[data-callout="important" i] {
+        --color-callout: var(--color-orange);
+    }
+
+    // Details/Summary specific callout styles
+    details > summary {
+        list-style: none; /* removes marker in Firefox */
+    }
+
+    details .callout-title::before {
+        content: "▸";
+        display: inline-block;
+        transform: rotate(0deg);
+        transition: transform var(--transition);
+        width: var(--rhythm-d2);
+        margin-left: calc(var(--rhythm-d2) * -1);
+        text-align: center;
+    }
+
+    details[open] .callout-title::before {
+        transform: rotate(90deg);
+    }
+
+    details .callout-title-inner {
+        display: inline;
+    }
+
+    // Caption Callout (after an image)
+    p:has(img) + .callout[data-callout="caption" i] {
+        padding: 0;
+        background: none;
+        border: none;
+        margin: 0 var(--rhythm-2);
+        position: relative;
+        top: calc(var(--rhythm) * -1.75);
+        box-shadow: none;
+
+        .callout-title {
+            display: none;
+        }
+
+        .callout-content {
+            padding: 0;
+            background: none;
+            border: none;
+            box-shadow: none;
+            line-height: 1;
+            text-align: center !important;
+            text-wrap: balance !important;
+        }
+    }
+
+    // ==========================
+    // Mobile Specific Styles
+    // ==========================
+    @media only screen and (max-width: #{$small}) {
+        ul:not([start]),
+        ol:not([start]) {
+            padding: 0;
+            padding-left: var(--rhythm);
+        }
+    }

@@ -378,7 +378,7 @@ All colors, spacing, and typography use CSS variables:
   --font-text: InterVariable, system-ui, sans-serif;
   --font-header: InterVariable, system-ui, sans-serif;
   --scale: 1rem;           /* base font size */
-  --line-height: 1.5;
+  --lh-lrh: 1.5;
 }
 ```
 

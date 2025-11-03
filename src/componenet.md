@@ -391,7 +391,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
 
   /* Typography adjustments */
   font-size: var(--scale-d2);
-  line-height: var(--line-height);
+  line-height: var(--lh-lrh);
 
   /* Remove margin from first/last children */
   > :first-child {
@@ -620,7 +620,7 @@ Perfect! Continuing with the remaining 8 components...
  * and how they got there. Home → Products → Laptops → MacBook Pro. It's not
  * just navigation—it's spatial orientation.
  *
- * The power of breadcrumbs lies in their simplicity. They're tight, take
+ * The power of breadcrumbs lies in their simplicity. They're compact, take
  * minimal space, never get in the way, yet provide crucial context. Lost in
  * a documentation site? Breadcrumbs show you're in Docs → CSS → Typography.
  * Want to go up one level? Click "CSS." It's spatial reasoning made visual.
@@ -743,14 +743,14 @@ Perfect! Continuing with the remaining 8 components...
 }
 
 /**
- * Breadcrumb Variants - tight and Mobile-Optimized
+ * Breadcrumb Variants - compact and Mobile-Optimized
  *
  * @group components-navigation
  * @since 0.11.0
  */
 
-/* tight variant - smaller text, tighter spacing */
-.breadcrumb-tight {
+/* compact variant - smaller text, compacter spacing */
+.breadcrumb-compact {
   font-size: var(--scale-d3);
 
   ol {
@@ -839,8 +839,8 @@ Perfect! Continuing with the remaining 8 components...
  *     <a href="?page=3" class="pagination-next" aria-label="Next page">Next →</a>
  *   </nav>
  *
- * @example html - tight mobile-friendly variant
- *   <nav aria-label="Pagination" class="pagination pagination-tight">
+ * @example html - compact mobile-friendly variant
+ *   <nav aria-label="Pagination" class="pagination pagination-compact">
  *     <a href="?page=1">← Prev</a>
  *     <span>Page 2 of 20</span>
  *     <a href="?page=3">Next →</a>
@@ -952,12 +952,12 @@ Perfect! Continuing with the remaining 8 components...
 }
 
 /**
- * Pagination tight Variant - Mobile-Optimized
+ * Pagination compact Variant - Mobile-Optimized
  *
  * @group components-navigation
  * @since 0.11.0
  *
- * On mobile, showing 10 page numbers is overwhelming. The tight variant
+ * On mobile, showing 10 page numbers is overwhelming. The compact variant
  * shows only Prev/Next and a page counter ("Page 3 of 20").
  */
 @media (max-width: 768px) {
@@ -1183,14 +1183,14 @@ Perfect! Continuing with the remaining 8 components...
 }
 
 /**
- * Table Wrapper tight Variant
+ * Table Wrapper compact Variant
  *
  * @group components-data
  * @since 0.11.0
  *
- * Tighter spacing for dense data tables (admin panels, dashboards).
+ * compacter spacing for dense data tables (admin panels, dashboards).
  */
-.table-wrapper-tight table {
+.table-wrapper-compact table {
   font-size: var(--scale-d3);
 
   td, th {
@@ -1349,7 +1349,7 @@ Perfect! Continuing with the remaining 8 components...
  * and how they got there. Home → Products → Laptops → MacBook Pro. It's not
  * just navigation—it's spatial orientation.
  *
- * The power of breadcrumbs lies in their simplicity. They're tight, take
+ * The power of breadcrumbs lies in their simplicity. They're compact, take
  * minimal space, never get in the way, yet provide crucial context. Lost in
  * a documentation site? Breadcrumbs show you're in Docs → CSS → Typography.
  * Want to go up one level? Click "CSS." It's spatial reasoning made visual.
@@ -1472,14 +1472,14 @@ Perfect! Continuing with the remaining 8 components...
 }
 
 /**
- * Breadcrumb Variants - tight and Mobile-Optimized
+ * Breadcrumb Variants - compact and Mobile-Optimized
  *
  * @group components-navigation
  * @since 0.11.0
  */
 
-/* tight variant - smaller text, tighter spacing */
-.breadcrumb-tight {
+/* compact variant - smaller text, compacter spacing */
+.breadcrumb-compact {
   font-size: var(--scale-d3);
 
   ol {
@@ -1568,8 +1568,8 @@ Perfect! Continuing with the remaining 8 components...
  *     <a href="?page=3" class="pagination-next" aria-label="Next page">Next →</a>
  *   </nav>
  *
- * @example html - tight mobile-friendly variant
- *   <nav aria-label="Pagination" class="pagination pagination-tight">
+ * @example html - compact mobile-friendly variant
+ *   <nav aria-label="Pagination" class="pagination pagination-compact">
  *     <a href="?page=1">← Prev</a>
  *     <span>Page 2 of 20</span>
  *     <a href="?page=3">Next →</a>
@@ -1681,12 +1681,12 @@ Perfect! Continuing with the remaining 8 components...
 }
 
 /**
- * Pagination tight Variant - Mobile-Optimized
+ * Pagination compact Variant - Mobile-Optimized
  *
  * @group components-navigation
  * @since 0.11.0
  *
- * On mobile, showing 10 page numbers is overwhelming. The tight variant
+ * On mobile, showing 10 page numbers is overwhelming. The compact variant
  * shows only Prev/Next and a page counter ("Page 3 of 20").
  */
 @media (max-width: 768px) {
@@ -1912,14 +1912,14 @@ Perfect! Continuing with the remaining 8 components...
 }
 
 /**
- * Table Wrapper tight Variant
+ * Table Wrapper compact Variant
  *
  * @group components-data
  * @since 0.11.0
  *
- * Tighter spacing for dense data tables (admin panels, dashboards).
+ * compacter spacing for dense data tables (admin panels, dashboards).
  */
-.table-wrapper-tight table {
+.table-wrapper-compact table {
   font-size: var(--scale-d3);
 
   td, th {
@@ -2154,8 +2154,8 @@ description: Live examples of all Standard Framework components
         </ol>
       </nav>
 
-      <div class="demo-label">tight Breadcrumb</div>
-      <nav aria-label="Breadcrumb example 2" class="breadcrumb breadcrumb-tight">
+      <div class="demo-label">compact Breadcrumb</div>
+      <nav aria-label="Breadcrumb example 2" class="breadcrumb breadcrumb-compact">
         <ol>
           <li><a href="#">Docs</a></li>
           <li><a href="#">CSS</a></li>
@@ -2574,8 +2574,8 @@ description: Live examples of all Standard Framework components
 1. **Cards** - 3-column grid with header/body/footer, clickable variant, customized styling
 2. **Alerts** - All 4 types (success, info, warning, error) with action links
 3. **Skip Link** - Functional at top of page (press Tab to see)
-4. **Breadcrumb** - Two examples (standard + tight)
-5. **Pagination** - Full pagination with numbers + tight summary version
+4. **Breadcrumb** - Two examples (standard + compact)
+5. **Pagination** - Full pagination with numbers + compact summary version
 6. **Table Wrapper** - Scrollable data table with 7 columns
 7. **Form Validation** - All states (normal, error, success, warning, required)
 8. **Modal** - Two modals (info + confirmation) with backdrop dismissal

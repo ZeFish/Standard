@@ -152,8 +152,8 @@
     opacity: 0;
     transform: translateX(100%); /* Start off-screen right */
     transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+        opacity var(--transition),
+        transform var(--transition);
 
     /* Cursor */
     cursor: default;
@@ -190,8 +190,8 @@
     opacity: 0;
     transform: scale(0.95);
     transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+        opacity var(--transition),
+        transform var(--transition);
 }
 
 /* Mobile: slide from bottom */
@@ -254,8 +254,8 @@
     justify-content: center;
     border-radius: var(--border-radius);
     transition:
-        background-color 0.5s ease,
-        color 0.5s ease;
+        background-color var(--transition),
+        color var(--transition);
 
     &:hover {
         background: var(--color-background-secondary);

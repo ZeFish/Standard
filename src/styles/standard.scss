@@ -35,7 +35,6 @@
 @use "standard-06-grid";
 @use "standard-07-prose";
 @use "standard-08-img";
-@use "standard-09-md";
 @use "standard-10-components";
 @use "standard-toast";
 @use "standard-97-print";
@@ -51,6 +50,6 @@
 .standard-lab-panel {
     --gap: 0;
     --rhythm-gap: 0;
-    --rhythm-gap-block: 0;
+    --rhythm-block-gap: 0;
     font-size: var(--scale-d2);
 }

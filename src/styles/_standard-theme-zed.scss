@@ -58,10 +58,6 @@
     --line-width: var(--line-width-xs);
     /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
 
-    h1 {
-        margin-block-start: var(--rhythm-8);
-        margin-block-end: var(--rhythm-8);
-    }
     h1,
     h2,
     h3 {
@@ -70,6 +66,41 @@
 
     .font-interface {
         opacity: 0.5;
+    }
+
+    pre code {
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 0;
+        opacity: 0.75;
+        transition: opacity var(--transition);
+        text-shadow:
+            -0.25px -0.25px 0.25px
+                color-mix(in srgb, var(--color-foreground) 5%, transparent),
+            0.25px -0.25px 0.25px
+                color-mix(in srgb, var(--color-foreground) 5%, transparent),
+            -0.25px 0.25px 0.25px
+                color-mix(in srgb, var(--color-foreground) 5%, transparent),
+            0.25px 0.25px 0.25px
+                color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    }
+    pre:hover code {
+        opacity: 1;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        pre code {
+            text-shadow:
+                -0.25px -0.25px 0.25px
+                    color-mix(in srgb, var(--color-background) 5%, transparent),
+                0.25px -0.25px 0.25px
+                    color-mix(in srgb, var(--color-background) 5%, transparent),
+                -0.25px 0.25px 0.25px
+                    color-mix(in srgb, var(--color-background) 5%, transparent),
+                0.25px 0.25px 0.25px
+                    color-mix(in srgb, var(--color-background) 5%, transparent);
+        }
     }
 }
 

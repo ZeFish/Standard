@@ -5,6 +5,23 @@
  * - A right shadow appears only when the user has scrolled fully to the left.
  * - A left shadow appears only when the user has scrolled fully to the right.
  */
+
+document.querySelectorAll("pre > code").forEach((el) => {
+  const btn = document.createElement("button");
+  btn.className = "copy-button";
+  btn.textContent = "Copy";
+
+  btn.onclick = async () => {
+    await navigator.clipboard.writeText(el.innerText);
+    btn.textContent = "Copied!";
+    setTimeout(() => {
+      btn.textContent = "Copy";
+    }, 2000);
+  };
+
+  el.parentNode.append(btn);
+});
+
 /**
  * Finds all scroll wrappers that haven't been initialized yet and attaches
  * the necessary event listeners for the shadow effect.
@@ -13,6 +30,7 @@
  *   Defaults to the entire document. Scoping this makes it more efficient
  *   for HTMX swaps.
  */
+
 function initializeScrollWrappers(rootElement = document) {
   // Find all .scroll elements that DO NOT have our initialized marker
   const newWrappers = rootElement.querySelectorAll(

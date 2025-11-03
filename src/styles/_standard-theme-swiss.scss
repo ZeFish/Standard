@@ -14,8 +14,8 @@
 
     --color-dark-foreground: #ccc;
 
-    --ratio: 1.8;
-    --font-mobile-ratio: 2;
+    --optical-ratio: 1.8;
+    --mobile-font-ratio: 2;
     --body-padding: var(--rhythm-4);
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
@@ -23,7 +23,7 @@
 
     --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: var(--rhythm-gap-block);
+    --content-small: var(--rhythm-block-gap);
     --content-accent: minmax(0, var(--rhythm-2));
     --content-feature: minmax(0, var(--rhythm-4));
     --content-hero: minmax(0, 1fr);
@@ -43,15 +43,14 @@
         margin-left: 0%;
     }
 
-    .prose,
-    p:has(img) {
+    .prose {
         display: block;
     }
     img {
         border: 0;
     }
 
-    .prose :is(p, blockquote, pre, details, li, hr) {
+    .prose :is(p, blockquote, pre, details, li, hr, .scroll) {
         max-width: var(--line-width-s);
         margin-inline: 0;
     }
@@ -80,6 +79,10 @@
         padding-block: var(--rhythm-d2);
         margin-block: var(--rhythm-d2);
         border: 0;
+        background-color: var(--color-background);
+        code {
+            opacity: 1;
+        }
     }
 
     footer hr {

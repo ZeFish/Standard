@@ -110,7 +110,7 @@ Customize the framework by overriding CSS variables.
   --font-family-serif: Georgia, serif;
   --font-family-sans: -apple-system, BlinkMacSystemFont, sans-serif;
   --font-size-base: 16px;
-  --line-height-base: 1.618;
+  --lh-lrh-base: 1.618;
 
   /* Colors */
   --color-light-background: #ffffff;

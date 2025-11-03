@@ -1,7 +1,5 @@
 :root {
   
-  --font-size: 1rem;
-  
   --ratio-golden: 1.618;
   --ratio-wholestep: 1.618;
   --ratio-silver: 1.414;
@@ -9,33 +7,63 @@
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   
-  --ratio: var(--ratio-golden);
+  --optical-ratio: 1.618;
+  
+  --line-height: 1.5;
+  
+  --rhythm-gap: calc(var(--rhythm) * var(--line-height));
+  
+  
+  --rhythm-block-gap: max(var(--rhythm-gap), var(--rhythm));
+  
+  --body-padding: var(--rhythm-2);
+  
   --blur: blur(7px);
+  --hr-thickness: 1px;
+  --transition: 0.5s ease;
+  --border-radius: var(--rhythm-d4);
   --modal-background: color-mix(
       in srgb,
       var(--color-background-secondary) 85%,
       transparent
   );
-  --block-padding-inner: var(--rhythm-d2);
-  --font-mobile-size: 1.1rem;
-  --font-mobile-ratio: var(--ratio-halfstep);
-  --font-mobile-density: 1.2;
+  
+  --mobile-font-size: 1.1rem;
+  --mobile-font-ratio: max(var(--optical-ratio-silver), var(--optical-ratio));
+  --mobile-line-height: max(var(--line-height), 1.5);
   --body-mobile-padding-multiplier: 1;
   
-  --scale-d5: calc(var(--font-size) * pow(var(--ratio), -3));
-  --scale-d4: calc(var(--font-size) * pow(var(--ratio), -2));
-  --scale-d3: calc(var(--font-size) * pow(var(--ratio), -1));
-  --scale-d2: calc(var(--font-size) * pow(var(--ratio), -0.5));
+  --line-width-xs: 32rem; 
+  --line-width-s: 38rem; 
+  --line-width-m: 42rem; 
+  --line-width-l: 50rem; 
+  --line-width-xl: 60rem; 
+  --line-width-full: calc(
+      100vw - (var(--rhythm) * 2)
+  ); 
+  --line-width: var(--line-width-m);
+  
+  --grid-gap: var(--rhythm);
+  --grid-row-gap: var(--grid-gap); 
+  
+  --line-height-s: max(cac(var(--line-height) / 2), 1);
+  
+  --font-size: 1rem;
+  
+  --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
+  --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
+  --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
+  --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
   --scale: var(--font-size);
-  --scale-2: calc(var(--font-size) * pow(var(--ratio), 0.5));
-  --scale-3: calc(var(--font-size) * pow(var(--ratio), 1));
-  --scale-4: calc(var(--font-size) * pow(var(--ratio), 2));
-  --scale-5: calc(var(--font-size) * pow(var(--ratio), 3));
-  --scale-6: calc(var(--font-size) * pow(var(--ratio), 4));
-  --scale-7: calc(var(--font-size) * pow(var(--ratio), 5));
-  --scale-8: calc(var(--font-size) * pow(var(--ratio), 6));
-  --scale-9: calc(var(--font-size) * pow(var(--ratio), 7));
-  --scale-10: calc(var(--font-size) * pow(var(--ratio), 8));
+  --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 0.5));
+  --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 1));
+  --scale-4: calc(var(--font-size) * pow(var(--optical-ratio), 2));
+  --scale-5: calc(var(--font-size) * pow(var(--optical-ratio), 3));
+  --scale-6: calc(var(--font-size) * pow(var(--optical-ratio), 4));
+  --scale-7: calc(var(--font-size) * pow(var(--optical-ratio), 5));
+  --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 6));
+  --scale-9: calc(var(--font-size) * pow(var(--optical-ratio), 7));
+  --scale-10: calc(var(--font-size) * pow(var(--optical-ratio), 8));
   
   --baseline-d5: calc(1rlh / 5);
   --baseline-d4: calc(1rlh / 4);
@@ -51,11 +79,12 @@
   --baseline-8: calc(8 * 1rlh);
   --baseline-9: calc(9 * 1rlh);
   --baseline-10: calc(10 * 1rlh);
+  
   --rhythm-d5: var(--baseline-d5);
   --rhythm-d4: var(--baseline-d4);
   --rhythm-d3: var(--baseline-d3);
   --rhythm-d2: var(--baseline-d2);
-  --rhythm-tight: calc(var(--baseline) * 0.75);
+  --rhythm-compact: calc(var(--baseline) * 0.75);
   --rhythm: var(--baseline);
   --rhythm-2: var(--baseline-2);
   --rhythm-3: var(--baseline-3);
@@ -67,28 +96,6 @@
   --rhythm-9: var(--baseline-9);
   --rhythm-10: var(--baseline-10);
   
-  --font-density: 1.5;
-  --line-height: calc(var(--ratio) * var(--font-density));
-  --line-height-s: max(var(--rhythm-d2), 1);
-  --rhythm-gap: var(--rhythm);
-  --rhythm-gap-block: var(--rhythm);
-  --body-padding: var(--rhythm-2);
-  
-  --grid-gap: var(--rhythm);
-  --grid-row-gap: var(--grid-gap); 
-  
-  --hr-thickness: 1px;
-  --border-radius: var(--rhythm-d4);
-  
-  --line-width-xs: 32rem; 
-  --line-width-s: 38rem; 
-  --line-width-m: 42rem; 
-  --line-width-l: 50rem; 
-  --line-width-xl: 60rem; 
-  --line-width-full: calc(
-      100vw - (var(--rhythm) * 2)
-  ); 
-  --line-width: var(--line-width-m);
   
   --z-base: 1;
   --z-dropdown: 1000;
@@ -103,11 +110,6 @@
   --z-image-zoom: 9999;
   
   --duration-superfast: 0.15s;
-  --duration-fast: 0.25s;
-  --duration-normal: 0.35s;
-  --duration-slow: 0.5s;
-  --motion-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --motion-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   
   --flow-space: 1.5rem;
   
@@ -122,9 +124,9 @@
 
 @media only screen and (max-width: 768px) {
   :root {
-    --font-size: var(--font-mobile-size) !important;
-    --ratio: var(--font-mobile-ratio) !important;
-    --line-height: var(--font-mobile-density);
+    --font-size: var(--mobile-font-size) !important;
+    --optical-ratio: var(--mobile-font-ratio) !important;
+    --line-height: var(--mobile-line-height);
     --body-padding: calc(
         var(--rhythm) * var(--body-mobile-padding-multiplier)
     ) !important;
@@ -209,7 +211,7 @@
   --border: 1px solid var(--color-border);
   --border-accent: 2px solid var(--color-accent);
   
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
 
 
@@ -290,7 +292,7 @@ html {
   color: var(--color-foreground);
   background: var(--color-background);
   
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color var(--transition), color var(--transition);
 }
 
 
@@ -546,8 +548,6 @@ html {
   --font-list-feature: "dlig", "tnum", "zero";
   --font-list-variation: "opsz" 32;
   
-  --line-height: calc(var(--font-size) * var(--line-height));
-  
   --font-weight-h1: var(--font-header-weight);
   --font-weight-h2: max(
       calc(var(--font-header-weight) * 0.95),
@@ -586,30 +586,9 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-li,
-blockquote,
-figcaption,
-td,
-th,
-dt,
-dd,
-label,
-.callout,
-pre,
-code,
-.lined,
-aside,
-li::before {
+h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
-  line-height: var(--rhythm);
 }
 
 
@@ -740,11 +719,9 @@ pre {
   font-size: var(--scale-d2);
   border: var(--border);
   border-radius: var(--border-radius);
-  padding-block: var(--rhythm);
-  padding-inline: var(--rhythm);
+  padding: var(--rhythm-d2);
   overflow-x: auto;
   overflow-y: hidden;
-  line-height: 1.5;
   box-shadow: inset var(--shadow);
   line-height: var(--line-height-s);
 }
@@ -754,6 +731,31 @@ pre code {
   border: none;
   outline: none;
   padding: 0;
+  opacity: 0.75;
+  transition: opacity var(--transition);
+}
+
+pre:hover code {
+  opacity: 1;
+}
+
+pre {
+  position: relative;
+}
+pre .copy-button {
+  position: absolute;
+  top: var(--rhythm-d2);
+  right: var(--rhythm-d2);
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-family: var(--font-interface);
+}
+pre:hover .copy-button {
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+pre .copy-button:hover {
+  opacity: 1;
 }
 
 
@@ -765,11 +767,10 @@ li::before {
 
 blockquote {
   font-style: italic;
-  border-inline-start: var(--rhythm-d5) solid var(--color-muted);
-  background: var(--color-background-secondary);
+  border-left: calc(var(--rhythm) / 8) solid var(--color-border);
   color: var(--color-muted);
-  padding-block: var(--rhythm-d2);
-  padding-inline: var(--rhythm);
+  padding: var(--rhythm-d2);
+  font-size: var(--scale-d2);
 }
 
 
@@ -781,6 +782,7 @@ th,
 td {
   text-align: left;
   border: var(--border);
+  padding: var(--rhythm-d5) var(--rhythm-d3);
 }
 
 th {
@@ -836,7 +838,7 @@ a:visited {
   text-decoration-thickness: 1px;
   text-underline-offset: auto;
   text-decoration-color: var(--color-subtle);
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition: color var(--transition), text-decoration-color var(--transition);
 }
 
 a:visited:hover,
@@ -880,10 +882,10 @@ nav li.is-active a {
 button,
 a.button {
   font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--scale-d2);
+  font-size: var(--scale-d3);
   font-weight: var(--bold-weight);
   line-height: var(--line-height);
-  padding: var(--rhythm-d4) var(--rhythm-d2);
+  padding: var(--rhythm-d5) var(--rhythm-d3);
   border-radius: var(--border-radius);
   background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: var(--color-background);
@@ -891,7 +893,7 @@ a.button {
   border-color: var(--color-border);
   box-shadow: var(--shadow);
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
 }
 
 a.button:visited,
@@ -943,7 +945,7 @@ select {
   color: var(--color-foreground);
   background: var(--color-background-secondary);
   border: var(--border);
-  transition: background-color 0.2s ease, border-color 0.2s ease, outline-color 0.2s ease;
+  transition: background-color var(--transition), border-color var(--transition), outline-color var(--transition);
 }
 
 input:focus,
@@ -1076,6 +1078,155 @@ mark {
 }
 
 
+.callout,
+img,
+iframe,
+.outset,
+.box,
+.card {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  box-shadow: var(--shadow);
+}
+
+pre,
+blockquote,
+.inset {
+  box-shadow: inset var(--shadow);
+}
+
+.box,
+.box-inset,
+.card,
+.card-inset {
+  padding: var(--scale-d2);
+  font-size: var(--scale-d2);
+}
+
+.callout {
+  line-height: var(--line-height-s);
+  transition: var(--duration-superfast) ease;
+  padding: var(--rhythm-d4);
+  --color-callout: var(--color-background-secondary);
+  --color-border: color-mix(
+      in srgb,
+      var(--color-callout) 15%,
+      transparent
+  );
+  background: color-mix(in srgb, var(--color-callout) 5%, var(--color-background-secondary));
+  border: var(--border);
+}
+.callout .callout-title {
+  color: color-mix(in srgb, var(--color-callout) 50%, var(--color-foreground));
+  font-weight: bold;
+  user-select: none;
+  padding: var(--rhythm-d5) calc(var(--rhythm) - var(--rhythm-d4)) var(--rhythm-d5) calc(var(--rhythm) - var(--rhythm-d4));
+}
+.callout .callout-content {
+  color: var(--color-foreground);
+  background: color-mix(in srgb, var(--color-callout) 2.5%, var(--color-background));
+  box-shadow: inset var(--shadow);
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  padding: var(--scale-d2);
+  padding-top: var(--scale-d2);
+  margin-top: var(--rhythm-d4);
+  margin-left: 0;
+  border: var(--border);
+  text-align: left;
+}
+.callout .callout-content p:first-child {
+  margin-top: 0;
+}
+.callout .callout-content p:last-child {
+  margin-bottom: 0;
+}
+.callout .callout-content ul,
+.callout .callout-content ol {
+  padding: 0 calc(var(--rhythm) * 0.75);
+}
+.callout .callout-content pre {
+  margin: var(--rhythm) 0;
+}
+.callout .callout-content > .callout {
+  margin: calc(var(--rhythm-d3) * -1);
+}
+.callout .callout-content > .callout .callout-content {
+  padding: var(--rhythm-d2);
+}
+.callout .callout-content > .callout .callout-title {
+  padding-left: var(--rhythm-d2);
+  padding-right: var(--rhythm-d2);
+}
+.callout .callout-title-icon {
+  display: none;
+}
+.callout img {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.callout[data-callout=warning i] {
+  --color-callout: var(--color-red);
+}
+
+.callout[data-callout=important i] {
+  --color-callout: var(--color-orange);
+}
+
+details > summary {
+  list-style: none; 
+}
+
+details .callout-title::before {
+  content: "▸";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform var(--transition);
+  width: var(--rhythm-d2);
+  margin-left: calc(var(--rhythm-d2) * -1);
+  text-align: center;
+}
+
+details[open] .callout-title::before {
+  transform: rotate(90deg);
+}
+
+details .callout-title-inner {
+  display: inline;
+}
+
+p:has(img) + .callout[data-callout=caption i] {
+  padding: 0;
+  background: none;
+  border: none;
+  margin: 0 var(--rhythm-2);
+  position: relative;
+  top: calc(var(--rhythm) * -1.75);
+  box-shadow: none;
+}
+p:has(img) + .callout[data-callout=caption i] .callout-title {
+  display: none;
+}
+p:has(img) + .callout[data-callout=caption i] .callout-content {
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  line-height: 1;
+  text-align: center !important;
+  text-wrap: balance !important;
+}
+
+@media only screen and (max-width: 768px) {
+  ul:not([start]),
+  ol:not([start]) {
+    padding: 0;
+    padding-left: var(--rhythm);
+  }
+}
+
 
 
 
@@ -1091,12 +1242,15 @@ mark {
 :where(html:not(.no-rhythm)),
 :where(.rhythm) {
   
+  display: inline-flex;
+  align-items: baseline;
   
   display: flow-root;
   
 }
 :where(html:not(.no-rhythm)) > *,
 :where(.rhythm) > * {
+  vertical-align: baseline;
   margin-block-start: 0;
   margin-block-end: var(--rhythm-gap);
 }
@@ -1121,13 +1275,16 @@ mark {
 }
 
 
-:where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) p, :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset {
+:where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) p:not(:has(img)), :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset {
   margin-block-start: 0;
   margin-block-end: var(--rhythm-gap);
 }
-:where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) fieldset, :where(html:not(.no-rhythm), .rhythm) hr, :where(html:not(.no-rhythm), .rhythm) .scroll {
-  margin-block-start: calc(var(--rhythm-gap-block) - var(--rhythm-gap));
-  margin-block-end: calc(var(--rhythm-gap-block));
+:where(html:not(.no-rhythm), .rhythm) :is(h1, h2, h3, h4, h5, h6, p:not(:has(img)), ul, ol, dl, blockquote, pre, table, figure, form, fieldset) + :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll) {
+  margin-block-start: 0;
+}
+:where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .scroll {
+  margin-block-start: max(var(--rhythm-gap), var(--rhythm-block-gap));
+  margin-block-end: max(var(--rhythm-gap), var(--rhythm-block-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
@@ -1137,11 +1294,40 @@ mark {
 }
 :where(html:not(.no-rhythm), .rhythm) .prose > [class^=grid-],
 :where(html:not(.no-rhythm), .rhythm) .prose > .grid {
-  margin-block-start: calc(var(--rhythm) * max(var(--rhythm-gap-block), var(--rhythm-gap)) - var(--rhythm) * var(--rhythm-gap));
-  margin-block-end: calc(var(--rhythm) * max(var(--rhythm-gap-block), var(--rhythm-gap)));
+  margin-block-start: calc(var(--rhythm) * max(var(--rhythm-block-gap), var(--rhythm-gap)) - var(--rhythm) * var(--rhythm-gap));
+  margin-block-end: calc(var(--rhythm) * max(var(--rhythm-block-gap), var(--rhythm-gap)));
+}
+:where(html:not(.no-rhythm), .rhythm) h1,
+:where(html:not(.no-rhythm), .rhythm) > h1:where(:first-child) {
+  margin-block-start: calc(var(--rhythm-gap) * 5);
+  margin-block-end: calc(var(--rhythm-gap) * 2);
+  line-height: 1;
+}
+:where(html:not(.no-rhythm), .rhythm) h2 {
+  margin-block-start: calc(var(--rhythm-gap) * 2);
+  margin-block-end: calc(var(--rhythm-gap) * 1);
+  line-height: 1;
+}
+:where(html:not(.no-rhythm), .rhythm) h3 {
+  margin-block-start: calc(var(--rhythm-gap) * 1);
+  line-height: 1;
+}
+:where(html:not(.no-rhythm), .rhythm) h4 {
+  margin-block-start: var(--rhythm-gap);
+}
+:where(html:not(.no-rhythm), .rhythm) h5 {
+  margin-block-start: var(--rhythm-gap);
+  margin-block-end: var(--rhythm-gap);
+}
+:where(html:not(.no-rhythm), .rhythm) h6 {
+  margin-block-start: var(--rhythm-gap);
+  margin-block-end: var(--rhythm-gap);
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
-  --rhythm-gap-block: calc(var(--rhythm-gap) * 2);
+  margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
+}
+:where(html:not(.no-rhythm), .rhythm) hr {
+  --rhythm-block-gap: calc(var(--rhythm-gap) * 2);
 }
 :where(html:not(.no-rhythm), .rhythm) blockquote > :first-child,
 :where(html:not(.no-rhythm), .rhythm) pre > :first-child,
@@ -1159,8 +1345,11 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) ol {
   list-style: none;
   padding-inline-start: var(--rhythm);
+  padding-inline-end: var(--rhythm);
 }
+:where(html:not(.no-rhythm), .rhythm) ul,
 :where(html:not(.no-rhythm), .rhythm) p:has(+ ul),
+:where(html:not(.no-rhythm), .rhythm) ol,
 :where(html:not(.no-rhythm), .rhythm) p:has(+ ol) {
   margin-block-end: var(--rhythm-d2);
 }
@@ -1179,7 +1368,7 @@ mark {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--rhythm-d2);
+  margin-block-end: var(--rhythm-d);
 }
 :where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";
@@ -1206,23 +1395,13 @@ mark {
   overflow: hidden;
   width: calc(var(--rhythm) * 1.5);
 }
-:where(html:not(.no-rhythm), .rhythm) ul.no-bullet,
-:where(html:not(.no-rhythm), .rhythm) ol.no-bullet {
-  list-style: none;
-  padding-inline-start: 0;
-}
-:where(html:not(.no-rhythm), .rhythm) ul.no-bullet li::before,
-:where(html:not(.no-rhythm), .rhythm) ol.no-bullet li::before {
-  display: none;
-}
 :where(html:not(.no-rhythm), .rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
 :where(html:not(.no-rhythm), .rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) ul.tight li,
-:where(html:not(.no-rhythm), .rhythm) ol.tight li,
+:where(html:not(.no-rhythm), .rhythm) ul.compact li,
+:where(html:not(.no-rhythm), .rhythm) ol.compact li,
 :where(html:not(.no-rhythm), .rhythm) li:last-of-type {
-  
   margin-block-end: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
@@ -1294,8 +1473,8 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) th {
   border-bottom: var(--border);
   font-size: var(--scale-d2);
-  padding-block: calc(var(--rhythm-d3) * var(--rhythm-gap));
-  padding-inline: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  padding-block: calc(var(--rhythm-d4));
+  padding-inline: calc(var(--rhythm-d2));
 }
 :where(html:not(.no-rhythm), .rhythm) th {
   
@@ -1309,8 +1488,8 @@ mark {
 :where(html:not(.no-rhythm), .rhythm) .striped tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
 }
-:where(html:not(.no-rhythm), .rhythm) .tight th,
-:where(html:not(.no-rhythm), .rhythm) .tight td {
+:where(html:not(.no-rhythm), .rhythm) .compact th,
+:where(html:not(.no-rhythm), .rhythm) .compact td {
   padding-block: calc(var(--rhythm-d4) * var(--rhythm-gap));
   padding-inline-end: calc(var(--rhythm-d3) * var(--rhythm-gap));
 }
@@ -1319,7 +1498,7 @@ mark {
 
 
 
-.rhythm-tight {
+.rhythm-compact {
   --rhythm-gap: 0.5;
 }
 
@@ -1385,7 +1564,7 @@ mark {
 }
 
 
-.grid.tight {
+.grid.compact {
   --grid-gap: var(--rhythm-d5);
   --grid-row-gap: var(--rhythm-d2);
 }
@@ -2296,10 +2475,10 @@ hr.col-row {
   
   --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: var(--rhythm-gap-block);
   --content-accent: minmax(0, var(--rhythm-2));
   --content-feature: minmax(0, var(--rhythm-4));
   --content-hero: minmax(0, 1fr);
+  --content-small: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
 }
 
 @media (max-width: 768px) {
@@ -2312,7 +2491,7 @@ hr.col-row {
 :where(.prose) {
   display: grid;
   grid-template-columns: [hero-start] var(--content-hero) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-hero) [hero-end];
-  transition: grid-template-columns 0.3s ease-out;
+  transition: grid-template-columns var(--transition);
   position: relative;
   z-index: var(--z-base);
   
@@ -2344,8 +2523,8 @@ hr.col-row {
 }
 :where(.prose):not(.no-grid) p:has(img) {
   display: flex;
-  --gap: var(--rhythm-d4);
-  gap: var(--gap);
+  --img-gap: var(--rhythm-d);
+  gap: var(--img-gap);
   border-radius: var(--border-radius);
 }
 :where(.prose):not(.no-grid) p:has(img) > * {
@@ -2376,40 +2555,9 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--rhythm) * -1 + var(--gap)) !important;
+  margin-block-start: calc(var(--rhythm-block-gap) * -1);
 }
-@media only screen and (max-width: 768px) {
-  :where(.prose) p:has(img) {
-    display: block;
-  }
-}
-:where(.prose) h1,
-:where(.prose) > h1:where(:first-child) {
-  margin-block-start: var(--rhythm-5);
-  margin-block-end: var(--rhythm-gap-block);
-}
-:where(.prose) h2 {
-  margin-block-start: var(--rhythm-4);
-  margin-block-end: var(--rhythm-gap);
-}
-:where(.prose) h3 {
-  margin-block-start: var(--rhythm-gap);
-}
-:where(.prose) h4 {
-  margin-block-start: var(--rhythm-gap);
-}
-:where(.prose) h5 {
-  margin-block-start: var(--rhythm);
-  margin-block-end: var(--rhythm-gap);
-}
-:where(.prose) h6 {
-  margin-block-start: var(--rhythm);
-  margin-block-end: var(--rhythm-d3);
-}
-:where(.prose) hr {
-  margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
-}
-:where(.prose) :where(section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .callout, blockquote, pre, figure, p:has(img), fieldset, hr, .scroll) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
   
 }
@@ -2551,156 +2699,6 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 }
 
 
-
-
-
-
-.md .callout,
-.md pre,
-.md blockquote,
-.md img,
-.md iframe,
-.md .outset,
-.md .inset,
-.md .box,
-.md .box-inset {
-  background: var(--color-background-secondary);
-  border-radius: var(--border-radius);
-  border: var(--border);
-  box-shadow: var(--shadow);
-}
-.md pre,
-.md blockquote .inset,
-.md .box-inset {
-  box-shadow: inset var(--shadow);
-}
-.md .box,
-.md .box-inset,
-.md .card,
-.md .card-inset {
-  padding: var(--block-padding-inner);
-  font-size: var(--scale-d2);
-}
-.md blockquote {
-  line-height: var(--line-height-s);
-  font-style: italic;
-}
-.md .callout {
-  line-height: var(--line-height-s);
-  transition: var(--duration-superfast) var(--motion-smooth);
-  padding: var(--rhythm-d4);
-  --color-callout: var(--color-background-secondary);
-  --color-border: color-mix(
-      in srgb,
-      var(--color-callout) 15%,
-      transparent
-  );
-  background: color-mix(in srgb, var(--color-callout) 5%, var(--color-background-secondary));
-  border: var(--border);
-}
-.md .callout .callout-title {
-  color: color-mix(in srgb, var(--color-callout) 50%, var(--color-foreground));
-  font-weight: bold;
-  user-select: none;
-  padding: var(--rhythm-d5) calc(var(--rhythm) - var(--rhythm-d4)) var(--rhythm-d5) calc(var(--rhythm) - var(--rhythm-d4));
-}
-.md .callout .callout-content {
-  color: var(--color-foreground);
-  background: color-mix(in srgb, var(--color-callout) 2.5%, var(--color-background));
-  box-shadow: inset var(--shadow);
-  overflow: hidden;
-  border-radius: var(--border-radius);
-  padding: var(--block-padding-inner);
-  padding-top: var(--block-padding-inner);
-  margin-top: var(--rhythm-d4);
-  margin-left: 0;
-  border: var(--border);
-  text-align: left;
-}
-.md .callout .callout-content p:first-child {
-  margin-top: 0;
-}
-.md .callout .callout-content p:last-child {
-  margin-bottom: 0;
-}
-.md .callout .callout-content ul,
-.md .callout .callout-content ol {
-  padding: 0 calc(var(--rhythm) * 0.75);
-}
-.md .callout .callout-content pre {
-  margin: var(--rhythm) 0;
-}
-.md .callout .callout-content > .callout {
-  margin: calc(var(--rhythm-d3) * -1);
-}
-.md .callout .callout-content > .callout .callout-content {
-  padding: var(--rhythm-d2);
-}
-.md .callout .callout-content > .callout .callout-title {
-  padding-left: var(--rhythm-d2);
-  padding-right: var(--rhythm-d2);
-}
-.md .callout .callout-title-icon {
-  display: none;
-}
-.md .callout img {
-  margin-left: 0;
-  margin-right: 0;
-}
-.md .callout[data-callout=warning i] {
-  --color-callout: var(--color-red);
-}
-.md .callout[data-callout=important i] {
-  --color-callout: var(--color-orange);
-}
-.md details > summary {
-  list-style: none; 
-}
-.md details .callout-title::before {
-  content: "▸";
-  display: inline-block;
-  transform: rotate(0deg);
-  transition: transform 0.2s ease;
-  width: var(--rhythm-d2);
-  margin-left: calc(var(--rhythm-d2) * -1);
-  text-align: center;
-}
-.md details[open] .callout-title::before {
-  transform: rotate(90deg);
-}
-.md details .callout-title-inner {
-  display: inline;
-}
-.md p:has(img) + .callout[data-callout=caption i] {
-  padding: 0;
-  background: none;
-  border: none;
-  margin: 0 var(--rhythm-2);
-  position: relative;
-  top: calc(var(--rhythm) * -1.75);
-  box-shadow: none;
-}
-.md p:has(img) + .callout[data-callout=caption i] .callout-title {
-  display: none;
-}
-.md p:has(img) + .callout[data-callout=caption i] .callout-content {
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
-  line-height: 1;
-  text-align: center !important;
-  text-wrap: balance !important;
-}
-@media only screen and (max-width: 768px) {
-  .md ul:not([start]),
-  .md ol:not([start]) {
-    padding: 0;
-    padding-left: var(--rhythm);
-  }
-}
-
-
 .card {
   
   --card-border: var(--border);
@@ -2763,7 +2761,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 .card-clickable {
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--transition), box-shadow var(--transition);
   cursor: pointer;
 }
 .card-clickable:hover {
@@ -2878,7 +2876,7 @@ a.skip-link {
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform var(--transition), opacity var(--transition);
   
   transform: translateY(-120%);
   opacity: 0;
@@ -2964,16 +2962,16 @@ a.skip-link:active {
 
 
 
-.breadcrumb-tight {
+.breadcrumb-compact {
   font-size: var(--scale-d3);
 }
-.breadcrumb-tight ol {
+.breadcrumb-compact ol {
   gap: var(--rhythm-d4);
 }
-.breadcrumb-tight li {
+.breadcrumb-compact li {
   gap: var(--rhythm-d4);
 }
-.breadcrumb-tight li:not(:first-child)::before {
+.breadcrumb-compact li:not(:first-child)::before {
   margin-inline-end: var(--rhythm-d4);
 }
 
@@ -3010,7 +3008,7 @@ a.skip-link:active {
   border-radius: var(--border-radius);
   text-decoration: none;
   color: var(--color-foreground);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
 }
 .pagination a:hover {
   background: var(--color-background-secondary);
@@ -3140,11 +3138,11 @@ a.skip-link:active {
 }
 
 
-.table-wrapper-tight table {
+.table-wrapper-compact table {
   font-size: var(--scale-d3);
 }
-.table-wrapper-tight table td,
-.table-wrapper-tight table th {
+.table-wrapper-compact table td,
+.table-wrapper-compact table th {
   padding: var(--rhythm-d4) var(--rhythm-d3);
 }
 
@@ -3287,7 +3285,7 @@ dialog.modal {
   z-index: var(--z-modal);
   
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity var(--transition), transform var(--transition);
   
 }
 .modal[open],
@@ -3300,7 +3298,7 @@ dialog.modal[open] {
 dialog.modal::backdrop {
   background: var(--modal-background);
   backdrop-filter: var(--blur); 
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--transition);
 }
 
 @keyframes fadeIn {
@@ -3344,7 +3342,7 @@ dialog.modal::backdrop {
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color var(--transition), color var(--transition);
 }
 .modal-close:hover {
   background: var(--color-background-secondary);
@@ -3433,7 +3431,7 @@ dialog.modal::backdrop {
   font-weight: var(--font-weight);
   color: var(--color-muted);
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color var(--transition), border-color var(--transition);
   position: relative;
   top: 2px; 
 }
@@ -3512,7 +3510,7 @@ dialog.modal::backdrop {
   
   list-style: none;
   
-  transition: background-color 0.2s ease;
+  transition: background-color var(--transition);
 }
 .accordion-trigger:hover {
   background: var(--color-background-secondary);
@@ -3526,7 +3524,7 @@ dialog.modal::backdrop {
   display: inline-block;
   font-size: var(--scale-2);
   color: var(--color-muted);
-  transition: transform 0.2s ease;
+  transition: transform var(--transition);
   flex-shrink: 0;
 }
 
@@ -3567,8 +3565,8 @@ dialog.modal::backdrop {
 }
 
 
-.accordion-tight .accordion-trigger,
-.accordion-tight .accordion-content {
+.accordion-compact .accordion-trigger,
+.accordion-compact .accordion-content {
   padding: var(--rhythm-d3);
   font-size: var(--scale-d3);
 }
@@ -3686,7 +3684,7 @@ dialog.modal::backdrop {
   
   opacity: 0;
   transform: translateX(100%); 
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity var(--transition), transform var(--transition);
   
   cursor: default;
 }
@@ -3721,7 +3719,7 @@ dialog.modal::backdrop {
 .toast-dismissing {
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity var(--transition), transform var(--transition);
 }
 
 
@@ -3779,7 +3777,7 @@ dialog.modal::backdrop {
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius);
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color var(--transition), color var(--transition);
 }
 .toast-close:hover {
   background: var(--color-background-secondary);
@@ -3900,10 +3898,10 @@ dialog.modal::backdrop {
     --color-background: white;
     --color-background-secondary: white;
     --font-size: 0.925rem !important;
-    --ratio: 1.125 !important;
+    --optical-ratio: 1.125 !important;
     --line-height: 1.4 !important;
     --rhythm-gap: 1;
-    --rhythm-gap-block: 0;
+    --rhythm-block-gap: 0;
     --body-padding: 0;
     --line-width: var(--line-width-full);
     --gap: 0;
@@ -5081,12 +5079,6 @@ dialog.modal::backdrop {
   font-size: inherit;
 }
 
-.tight,
-.tight * {
-  line-height: var(--rhythm-tight);
-  min-height: var(--rhythm-tight);
-}
-
 
 
 
@@ -5124,7 +5116,7 @@ dialog.modal::backdrop {
   line-height: 1;
 }
 
-.lh-tight {
+.lh-compact {
   line-height: var(--line-height-s);
 }
 
@@ -5362,7 +5354,7 @@ dialog.modal::backdrop {
 
 
 
-.rhythm-tight {
+.rhythm-compact {
   --rhythm-gap: var(--rhythm-d2);
 }
 
@@ -5379,7 +5371,7 @@ dialog.modal::backdrop {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: calc(var(--rhythm-block) * var(--rhythm-gap));
+    margin-block-end: calc(var(--rhythm-block-gap) * var(--rhythm-gap));
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -5529,7 +5521,7 @@ dialog.modal::backdrop {
   column-gap: var(--grid-gap);
 }
 
-[class|=columns].tight {
+[class|=columns].compact {
   column-gap: var(--rhythm-d2);
 }
 
@@ -5538,7 +5530,7 @@ dialog.modal::backdrop {
 }
 
 
-.columns-gap-tight {
+.columns-gap-compact {
   column-gap: var(--rhythm-d2);
 }
 
@@ -5576,6 +5568,42 @@ dialog.modal::backdrop {
   }
 }
 
+ul.no-bullet,
+ol.no-bullet {
+  list-style: none;
+  padding-inline-start: 0;
+}
+ul.no-bullet li::before,
+ol.no-bullet li::before {
+  display: none;
+}
+
+ul.menu-v {
+  padding-inline-start: 0;
+}
+ul.menu-v li {
+  margin-block-end: 0;
+  list-style: none;
+}
+ul.menu-v li::before {
+  display: none;
+}
+
+ul.menu-h {
+  display: flex;
+  gap: var(--rhythm);
+  padding-inline-start: 0;
+}
+ul.menu-h li {
+  margin-block-end: 0;
+  list-style: none;
+  padding-inline-start: 0;
+}
+ul.menu-h li::before {
+  display: none;
+}
+
+
 
 
 
@@ -5591,7 +5619,7 @@ dialog.modal::backdrop {
 
 .standard-debug::before {
   --color-grid: var(--color-cyan);
-  --percent-grid: 5%;
+  --percent-grid: 25%;
   content: "";
   position: fixed;
   inset: 0;
@@ -5617,14 +5645,12 @@ dd,
 label,
 .callout,
 pre,
-code,
 .lined,
 a,
 aside) {
-  background-color: color-mix(in srgb, var(--color-cyan) 5%, transparent);
-  outline: 1px dotted var(--color-cyan);
+  background-color: color-mix(in srgb, var(--color-orange) 5%, transparent);
+  outline: 1px dotted color-mix(in srgb, var(--color-orange) 25%, transparent);
   outline-offset: 1rlh;
-  box-shadow: 0 0 0 1rlh color-mix(in srgb, var(--color-cyan) 15%, var(--color-background));
 }
 
 
@@ -5663,19 +5689,19 @@ aside) {
   column-gap: var(--grid-gap);
   pointer-events: none;
   z-index: var(--z-tooltip);
-  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-cyan) 10%, transparent) 0, color-mix(in srgb, var(--color-cyan) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
+  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-red) 10%, transparent) 0, color-mix(in srgb, var(--color-red) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
 }
 
 
-.standard-debug.prose::after {
+.standard-debug .prose::after {
   content: "";
   position: absolute;
   inset: 0;
   display: grid;
   grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
   pointer-events: none;
-  z-index: var(--z-base);
-  opacity: 0.1;
+  z-index: 122;
+  opacity: 1;
   background: linear-gradient(to right, transparent 0, transparent var(--content-full), var(--color-purple) var(--content-full), var(--color-purple) calc(var(--content-full) + var(--content-feature)), var(--color-blue) calc(var(--content-full) + var(--content-feature)), var(--color-blue) calc(var(--content-full) + var(--content-feature) + var(--content-accent)), var(--color-accent) calc(var(--content-full) + var(--content-feature) + var(--content-accent)), var(--color-accent) calc(100% - var(--content-full) - var(--content-feature) - var(--content-accent)), var(--color-blue) calc(100% - var(--content-full) - var(--content-feature) - var(--content-accent)), var(--color-blue) calc(100% - var(--content-full) - var(--content-feature)), var(--color-purple) calc(100% - var(--content-full) - var(--content-feature)), var(--color-purple) calc(100% - var(--content-full)), transparent calc(100% - var(--content-full)));
 }
 
@@ -5730,7 +5756,7 @@ aside) {
 
 
 .standard-debug::after {
-  content: "🔍 Standard Debug" "\a" "Baseline: " var(--rhythm) "\a" "Ratio: " var(--ratio) "\a" "Density: " var(--line-height) "\a" "Grid: " var(--grid-cols) " cols";
+  content: "🔍 Standard Debug" "\a" "Baseline: " var(--rhythm) "\a" "Ratio: " var(--optical-ratio) "\a" "Density: " var(--line-height) "\a" "Grid: " var(--grid-cols) " cols";
   position: fixed;
   top: var(--rhythm);
   right: var(--rhythm);
@@ -5908,19 +5934,19 @@ body.standard-debug::before {
 }
 
 .standard-debug .prose .container-small {
-  outline-color: color-mix(in srgb, var(--color-blue) 85%, transparent);
+  outline-color: color-mix(in srgb, var(--color-blue) 95%, transparent);
 }
 
 .standard-debug .prose .container-accent {
-  outline-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+  outline-color: color-mix(in srgb, var(--color-accent) 95%, transparent);
 }
 
 .standard-debug .prose .container-feature {
-  outline-color: color-mix(in srgb, var(--color-purple) 85%, transparent);
+  outline-color: color-mix(in srgb, var(--color-purple) 95%, transparent);
 }
 
 .standard-debug .prose .container-full {
-  outline-color: color-mix(in srgb, var(--color-pink) 85%, transparent);
+  outline-color: color-mix(in srgb, var(--color-pink) 95%, transparent);
 }
 
 .standard-debug .prose .container-small::before,
@@ -5964,8 +5990,9 @@ body.standard-debug::before {
 
 
 .standard-debug .prose > :not(.container-small):not(.container-accent):not(.container-feature):not(.container-full) {
-  outline: 1px dotted color-mix(in srgb, var(--color-green) 60%, transparent);
+  outline: 1px dotted color-mix(in srgb, var(--color-green) 50%, transparent);
   outline-offset: -1px;
+  background-color: color-mix(in srgb, var(--color-green) 5%, transparent);
 }
 
 
@@ -5995,6 +6022,6 @@ body.standard-debug::before {
 .standard-lab-panel {
   --gap: 0;
   --rhythm-gap: 0;
-  --rhythm-gap-block: 0;
+  --rhythm-block-gap: 0;
   font-size: var(--scale-d2);
 }

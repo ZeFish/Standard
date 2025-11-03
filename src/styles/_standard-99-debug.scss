@@ -48,7 +48,7 @@
 /* Baseline Grid Overlay */
 .standard-debug::before {
     --color-grid: var(--color-cyan);
-    --percent-grid: 5%;
+    --percent-grid: 25%;
     content: "";
     position: fixed;
     inset: 0;
@@ -64,7 +64,6 @@
     pointer-events: none;
     z-index: 10000;
 }
-
 .standard-debug
     :is(
         h1,
@@ -84,17 +83,13 @@
         label,
         .callout,
         pre,
-        code,
         .lined,
         a,
         aside
     ) {
-    background-color: color-mix(in srgb, var(--color-cyan) 5%, transparent);
-    outline: 1px dotted var(--color-cyan);
+    background-color: color-mix(in srgb, var(--color-orange) 5%, transparent);
+    outline: 1px dotted color-mix(in srgb, var(--color-orange) 25%, transparent);
     outline-offset: 1rlh;
-
-    box-shadow: 0 0 0 1rlh
-        color-mix(in srgb, var(--color-cyan) 15%, var(--color-background));
 }
 
 /* Grid Column Overlay (only for .grid inside debug) */
@@ -135,8 +130,8 @@
     z-index: var(--z-tooltip);
     background-image: repeating-linear-gradient(
         to right,
-        color-mix(in srgb, var(--color-cyan) 10%, transparent) 0,
-        color-mix(in srgb, var(--color-cyan) 10%, transparent)
+        color-mix(in srgb, var(--color-red) 10%, transparent) 0,
+        color-mix(in srgb, var(--color-red) 10%, transparent)
             calc(
                 (100% - (var(--grid-gap) * (var(--grid-cols) - 1))) /
                     var(--grid-cols)
@@ -155,7 +150,7 @@
 }
 
 /* Reading Layout Debug - show zones */
-.standard-debug.prose::after {
+.standard-debug .prose::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -170,8 +165,8 @@
         [feature-end] var(--content-full)
         [full-end];
     pointer-events: none;
-    z-index: var(--z-base);
-    opacity: 0.1;
+    z-index: 122;
+    opacity: 1;
     background: linear-gradient(
         to right,
         transparent 0,
@@ -262,7 +257,7 @@
 /* Debug Info Panel */
 .standard-debug::after {
     content: "🔍 Standard Debug" "\A" "Baseline: " var(--rhythm) "\A" "Ratio: "
-        var(--ratio) "\A" "Density: " var(--line-height) "\A" "Grid: "
+        var(--optical-ratio) "\A" "Density: " var(--line-height) "\A" "Grid: "
         var(--grid-cols) " cols";
     position: fixed;
     top: var(--rhythm);
@@ -444,19 +439,19 @@ body.standard-debug::before {
 }
 
 .standard-debug .prose .container-small {
-    outline-color: color-mix(in srgb, var(--color-blue) 85%, transparent);
+    outline-color: color-mix(in srgb, var(--color-blue) 95%, transparent);
 }
 
 .standard-debug .prose .container-accent {
-    outline-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+    outline-color: color-mix(in srgb, var(--color-accent) 95%, transparent);
 }
 
 .standard-debug .prose .container-feature {
-    outline-color: color-mix(in srgb, var(--color-purple) 85%, transparent);
+    outline-color: color-mix(in srgb, var(--color-purple) 95%, transparent);
 }
 
 .standard-debug .prose .container-full {
-    outline-color: color-mix(in srgb, var(--color-pink) 85%, transparent);
+    outline-color: color-mix(in srgb, var(--color-pink) 95%, transparent);
 }
 
 .standard-debug .prose .container-small::before,
@@ -504,8 +499,9 @@ body.standard-debug::before {
     > :not(.container-small):not(.container-accent):not(.container-feature):not(
         .container-full
     ) {
-    outline: 1px dotted color-mix(in srgb, var(--color-green) 60%, transparent);
+    outline: 1px dotted color-mix(in srgb, var(--color-green) 50%, transparent);
     outline-offset: -1px;
+    background-color: color-mix(in srgb, var(--color-green) 5%, transparent);
 }
 
 /* Print debug styles */

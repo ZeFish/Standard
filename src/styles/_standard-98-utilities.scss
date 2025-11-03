@@ -266,12 +266,6 @@
     font-size: inherit;
 }
 
-.tight,
-.tight * {
-    line-height: var(--rhythm-tight);
-    min-height: var(--rhythm-tight);
-}
-
 /* =========================== */
 /* FONT FAMILY UTILITIES       */
 /* =========================== */
@@ -319,7 +313,7 @@
     line-height: 1;
 }
 
-.lh-tight {
+.lh-compact {
     line-height: var(--line-height-s);
 }
 
@@ -561,7 +555,7 @@
  * Rhythm-aware utilities for consistent spacing
  */
 
-.rhythm-tight {
+.rhythm-compact {
     --rhythm-gap: var(--rhythm-d2);
 }
 
@@ -582,7 +576,7 @@
         display: block;
 
         > * {
-            margin-block-end: calc(var(--rhythm-block) * var(--rhythm-gap));
+            margin-block-end: calc(var(--rhythm-block-gap) * var(--rhythm-gap));
         }
 
         > :last-child {
@@ -779,7 +773,7 @@
  * Classes:
  * - .columns-2, .columns-3, .columns-4: Fixed column count
  * - .columns-auto: Automatic columns based on optimal width
- * - .columns-gap-tight, .columns-gap-wide: Column gap variants
+ * - .columns-gap-compact, .columns-gap-wide: Column gap variants
  * - .columns-keep: Prevent breaks inside elements
  * - .columns-rule, .columns-rule-accent: Vertical lines between columns
  *
@@ -826,7 +820,7 @@
     column-gap: var(--grid-gap);
 }
 
-[class|="columns"].tight {
+[class|="columns"].compact {
     column-gap: var(--rhythm-d2);
 }
 
@@ -834,7 +828,7 @@
     column-gap: var(--rhythm-2);
 }
 /* Column gap variants */
-.columns-gap-tight {
+.columns-gap-compact {
     column-gap: var(--rhythm-d2);
 }
 
@@ -870,5 +864,44 @@
     .columns-3,
     .columns-4 {
         columns: 2; /* Reduce columns on tablets */
+    }
+}
+
+/* UL Menu Helper */
+
+ul.no-bullet,
+ol.no-bullet {
+    list-style: none;
+    padding-inline-start: 0;
+
+    li::before {
+        display: none;
+    }
+}
+
+ul.menu-v {
+    padding-inline-start: 0;
+    li {
+        margin-block-end: 0;
+        list-style: none;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+ul.menu-h {
+    display: flex;
+    gap: var(--rhythm);
+    padding-inline-start: 0;
+    li {
+        margin-block-end: 0;
+        list-style: none;
+        padding-inline-start: 0;
+
+        &::before {
+            display: none;
+        }
     }
 }

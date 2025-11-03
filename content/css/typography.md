@@ -100,10 +100,10 @@ Sizes scale using the golden ratio, creating perfect proportions:
 Optimal line heights for different contexts, designed for readability:
 
 ```css
---line-height-base: 1.618;        /* Body text */
---line-height-headings: 1.2;      /* Headings are tighter */relaxed
---line-height-tight: 1.4;         /* Dense content */
---line-height-relaxed: 1.875;       /* Comfortable reading */
+--lh-lrh-base: 1.618;        /* Body text */
+--lh-lrh-headings: 1.2;      /* Headings are compacter */relaxed
+--lh-lrh-compact: 1.4;         /* Dense content */
+--lh-lrh-relaxed: 1.875;       /* Comfortable reading */
 ```
 
 ### Examples
@@ -115,8 +115,8 @@ Optimal line heights for different contexts, designed for readability:
 <!-- relaxed line height for accessibility -->
 <p class="leading-relaxed">Text with more breathing room</p>
 
-<!-- Tight line height for headlines -->
-<h1 class="leading-tight">Headline with less space between lines</h1>
+<!-- compact line height for headlines -->
+<h1 class="leading-compact">Headline with less space between lines</h1>
 ```
 
 ## Font Weights
@@ -150,7 +150,7 @@ Professional weight hierarchy for visual distinction:
 Refined letter spacing for different contexts:
 
 ```css
---letter-spacing-tight: -0.02em;   /* Condensed headlines */
+--letter-spacing-compact: -0.02em;   /* Condensed headlines */
 --letter-spacing-normal: 0;         /* Default */
 --letter-spacing-wide: 0.05em;      /* Spaced text */
 --letter-spacing-wider: 0.1em;      /* Very spaced */
@@ -159,8 +159,8 @@ Refined letter spacing for different contexts:
 ### Examples
 
 ```html
-<!-- Tight spacing for headlines -->
-<h1 class="tracking-tight">Condensed Headline</h1>
+<!-- compact spacing for headlines -->
+<h1 class="tracking-compact">Condensed Headline</h1>
 
 <!-- Wide spacing for emphasis -->
 <p class="tracking-wide">SPACED OUT TEXT</p>
@@ -337,14 +337,14 @@ Override typography defaults with CSS variables:
   --font-size-base: 18px;
 
   /* Change line height */
-  --line-height-base: 1.8;
+  --lh-lrh-base: 1.8;
 
   /* Change font family */
   --font-family-serif: 'Garamond', Georgia, serif;
   --font-family-sans: 'Helvetica Neue', Arial, sans-serif;
 
   /* Change letter spacing */
-  --letter-spacing-tight: -0.03em;
+  --letter-spacing-compact: -0.03em;
 }
 ```
 
