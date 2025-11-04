@@ -6,21 +6,59 @@
  * - A left shadow appears only when the user has scrolled fully to the right.
  */
 
-document.querySelectorAll("pre > code").forEach((el) => {
-  const btn = document.createElement("button");
-  btn.className = "copy-button";
-  btn.textContent = "Copy";
+function initCopyButtons() {
+  // Defensive check: does clipboard API exist?
+  if (!navigator.clipboard) {
+    console.warn("Clipboard API not available (requires HTTPS)");
+    return;
+  }
 
-  btn.onclick = async () => {
-    await navigator.clipboard.writeText(el.innerText);
-    btn.textContent = "Copied!";
-    setTimeout(() => {
-      btn.textContent = "Copy";
-    }, 2000);
-  };
+  document.querySelectorAll("pre > code").forEach((el) => {
+    // Don't add button twice if called multiple times
+    if (el.parentNode.querySelector(".copy-button")) {
+      return;
+    }
 
-  el.parentNode.append(btn);
-});
+    const btn = document.createElement("button");
+    btn.className = "copy-button";
+    btn.textContent = "Copy";
+    btn.setAttribute("aria-label", "Copy code to clipboard");
+
+    btn.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(el.innerText);
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+
+        setTimeout(() => {
+          btn.textContent = "Copy";
+          btn.classList.remove("copied");
+        }, 2000);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+        btn.textContent = "Failed";
+        setTimeout(() => {
+          btn.textContent = "Copy";
+        }, 2000);
+      }
+    };
+
+    el.parentNode.append(btn);
+  });
+}
+
+// Wait for DOM to be ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCopyButtons);
+} else {
+  // DOM already loaded (script at end of body)
+  initCopyButtons();
+}
+
+// Optional: Export for manual triggering
+if (typeof window !== "undefined") {
+  window.initCopyButtons = initCopyButtons;
+}
 
 /**
  * Finds all scroll wrappers that haven't been initialized yet and attaches
@@ -94,6 +132,7 @@ document.body.addEventListener("htmx:afterSettle", function (event) {
     window.imageZoom.rescan();
   }
   initializeScrollWrappers(event.detail.elt);
+  initCopyButtons();
 });
 
 /**
