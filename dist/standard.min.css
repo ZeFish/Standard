@@ -874,7 +874,7 @@ nav li.is-active a {
 }
 
 li {
-  overflow: visible;
+  overflow-y: visible;
 }
 
 
@@ -5165,7 +5165,8 @@ dialog.modal::backdrop {
 
 .ellipsis,
 .ellipsis li {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
