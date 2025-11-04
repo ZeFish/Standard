@@ -605,25 +605,50 @@
 [data-theme=minimal] {
   --shadow: none;
   --color-border: transparent;
+  --border-radius: 0;
+  --color-dark-foreground: #ccc;
+  --color-dark-background: #222;
   --font-header: "Kalice", sans-serif;
   --font-header-weight: 500;
   --font-header-letter-spacing: 1;
-  --font-text: "Diatype", "Kalice", sans-serif;
-  --body-padding: var(--rhythm-4);
-}
-[data-theme=minimal] table {
-  grid-column: content;
-}
-[data-theme=minimal] table,
-[data-theme=minimal] table th,
-[data-theme=minimal] table td,
-[data-theme=minimal] table td code {
-  font-size: var(--scale-d3);
-  font-family: var(--font-monospace);
-  word-break: keep-all;
+  --font-text: "CalSans", "Diatype", "Kalice", sans-serif;
+  --font-variation: "MODE" 1;
+  --body-padding: var(--rhythm);
+  --line-width: var(--line-width-s);
+  --font-size: 1.2em;
+  --line-height: 1.8;
+  --rhythm-gap: var(--rhythm);
+  --rhythm-block-gap: var(--rhythm);
 }
 [data-theme=minimal] h1 {
-  margin-block: var(--rhythm-7);
+  margin-block-start: var(--rhythm-5);
+  margin-block-end: var(--rhythm-7);
+  text-align: center;
+}
+[data-theme=minimal] blockquote,
+[data-theme=minimal] pre {
+  padding: var(--rhythm-d2);
+  padding-block: 0;
+  border: 0;
+  border-left: 1px solid var(--color-foreground);
+  background: transparent;
+  color: var(--color-foreground);
+}
+[data-theme=minimal] blockquote .copy-button,
+[data-theme=minimal] pre .copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+[data-theme=minimal] pre {
+  padding: var(--rhythm-d2);
+  border: 0;
+  background: var(--color-background-secondary);
+}
+[data-theme=minimal] pre .copy-button {
+  position: absolute;
+  top: var(--rhythm-d2);
+  right: var(--rhythm-d2);
 }
 
 @font-face {
@@ -632,6 +657,20 @@
   font-style: normal;
   font-display: swap;
   src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff");
+}
+@font-face {
+  font-family: "Diatype";
+  font-weight: 200 1000;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2") format("woff");
+}
+@font-face {
+  font-family: "CalSans";
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
 }
 @font-face {
   font-family: "Diatype";
@@ -772,7 +811,7 @@
 [data-theme=book] a:hover {
   color: var(--color-foreground);
 }
-[data-theme=book] aside {
+[data-theme=book] aside.note {
   display: inline;
   position: absolute;
   left: calc(var(--rhythm) + var(--line-width-s));
@@ -786,9 +825,7 @@
 [data-theme=book] pre {
   padding: calc(var(--rhythm) * 0.5);
   padding-block: 0;
-  border-top: 0;
-  border-bottom: 0;
-  border-right: 0;
+  border: 0;
   border-left-width: 1px;
   border-left-color: var(--color-foreground);
   background: transparent;
@@ -840,11 +877,11 @@
     margin-left: 0;
     max-width: 100%;
   }
-  [data-theme=book] aside {
+  [data-theme=book] aside.note {
     position: relative;
     left: 0;
     top: calc(var(--rhythm) * -1);
-    margi-bottom: calc(var(--rhythm) * -2);
+    margin-bottom: calc(var(--rhythm) * -2);
   }
 }
 
@@ -886,8 +923,7 @@
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
   --body-padding: var(--rhythm-2);
-  --shadow: 0;
-  --border-radius: 0;
+  --border-radius: var(--rhythm-d5);
   --font-text: "MonoLisa";
   --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
   --font-variation: "MONO" 1;

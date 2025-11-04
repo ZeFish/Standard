@@ -27,7 +27,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "zed");
+  eleventyConfig.addGlobalData("theme", "minimal");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 

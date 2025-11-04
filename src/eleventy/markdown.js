@@ -634,12 +634,33 @@ export default function (eleventyConfig, options = {}) {
   }
 
   function preventOrphans(text, locale, rules) {
-    const words = orphanWords[locale] || orphanWords.en;
-    const pattern = `\\b(${words.join("|")})\\b\\s`;
-    const regex = new RegExp(pattern, "gi");
+    const orphanWordList = orphanWords[locale] || orphanWords.en;
 
-    text = text.replace(regex, `$1${rules.nonBreakingSpace}`);
+    // Create a pattern that matches complete words only
+    // Handle accented characters by using explicit character classes
+    const wordPattern = orphanWordList
+      .map((word) => {
+        // Escape special regex characters
+        const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+        // For words with accented characters, use explicit matching
+        if (/[àâäéèêëïîôöùûüÿç]/i.test(word)) {
+          // Use lookaround to match complete words including accented chars
+          return `(?<![\\p{L}\\p{N}'])${escaped}(?![\\p{L}\\p{N}'])`;
+        } else {
+          // For regular words, use word boundaries
+          return `\\b${escaped}\\b`;
+        }
+      })
+      .join("|");
+
+    // Replace orphan words followed by space with NBSP
+    const nbspPattern = `(${wordPattern})\\s`;
+    const nbspRegex = new RegExp(nbspPattern, "gi");
+
+    let result = text.replace(nbspRegex, `$1${rules.nonBreakingSpace}`);
+
+    // Handle titles (Mr., Dr., etc.)
     const titleMap = {
       en: ["Mr", "Mrs", "Ms", "Dr", "Prof", "St"],
       fr: ["M", "Mme", "Mlle", "Dr", "Pr", "St", "Ste"],
@@ -651,18 +672,19 @@ export default function (eleventyConfig, options = {}) {
     const titles = titleMap[locale] || titleMap.en;
     const titlePattern = `\\b(${titles.join("|")})\\.\\s`;
     const titleRegex = new RegExp(titlePattern, "gi");
-    text = text.replace(titleRegex, `$1.${rules.nonBreakingSpace}`);
+    result = result.replace(titleRegex, `$1.${rules.nonBreakingSpace}`);
 
-    text = text.replace(
+    // Handle numbers and units
+    result = result.replace(
       /\b(\d+)\s+(am|pm|h|min|s|kg|g|m|km|cm|mm|€|%)\b/gi,
       `$1${rules.nonBreakingSpace}$2`,
     );
 
-    return text;
+    return result;
   }
 
   function preventWidows(text, rules) {
-    const nbspRegex = /\s+(\S+)\s*$/;
+    const nbspRegex = /(?<!\u00A0)\s+(\S+)\s*$/;
     text = text.replace(nbspRegex, `${rules.nonBreakingSpace}$1`);
     return text;
   }

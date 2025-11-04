@@ -96,15 +96,18 @@
         margin-block-end: var(--rhythm-gap);
     }
 
-    /* The i that two specal block would bit a bit closer */
+    /* The i that two specal block would bit a bit closer
     :is(#{$rhythm-elements}) + :is(#{$rhythm-block-elements}) {
         margin-block-start: 0;
     }
-
+    */
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: max(var(--rhythm-gap), var(--rhythm-block-gap));
+        margin-block-start: max(
+            0,
+            calc(var(--rhythm-block-gap) - var(--rhythm-gap))
+        );
         margin-block-end: max(var(--rhythm-gap), var(--rhythm-block-gap));
     }
 
@@ -112,8 +115,8 @@
     debug when  its image
     :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
         margin-block-end: max(var(--rhythm-gap), 0);
-    }*/
-
+    }
+*/
     * > :where(:last-child) {
         margin-block-end: 0;
     }
@@ -145,13 +148,13 @@
     }
 
     h2 {
-        margin-block-start: calc(var(--rhythm-gap) * 2);
-        margin-block-end: calc(var(--rhythm-gap) * 1);
-        line-height: 1;
+        margin-block-start: calc(var(--rhythm-gap) * 3);
+        margin-block-end: calc(var(--rhythm-gap) * 2);
     }
 
     h3 {
-        margin-block-start: calc(var(--rhythm-gap) * 1);
+        margin-block-start: calc(var(--rhythm-gap) * 2);
+        margin-block-end: var(--rhythm-gap);
         line-height: 1;
     }
 
@@ -207,13 +210,6 @@
         list-style: none;
         padding-inline-start: var(--rhythm);
         padding-inline-end: var(--rhythm);
-    }
-
-    ul,
-    p:has(+ ul),
-    ol,
-    p:has(+ ol) {
-        margin-block-end: var(--rhythm-d2);
     }
 
     ol ul,
@@ -393,8 +389,7 @@
     th {
         border-bottom: var(--border);
         font-size: var(--scale-d2);
-        padding-block: calc(var(--rhythm-d4));
-        padding-inline: calc(var(--rhythm-d2));
+        padding: var(--rhythm-d2);
     }
 
     th {

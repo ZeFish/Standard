@@ -103,7 +103,7 @@
         color: var(--color-foreground);
     }
 
-    aside {
+    aside.note {
         display: inline;
         position: absolute;
         left: calc(var(--rhythm) + var(--line-width-s));
@@ -118,9 +118,7 @@
     pre {
         padding: calc(var(--rhythm) * 0.5);
         padding-block: 0;
-        border-top: 0;
-        border-bottom: 0;
-        border-right: 0;
+        border: 0;
         border-left-width: 1px;
         border-left-color: var(--color-foreground);
         background: transparent;
@@ -176,11 +174,11 @@
             margin-left: 0;
             max-width: 100%;
         }
-        aside {
+        aside.note {
             position: relative;
             left: 0;
             top: calc(var(--rhythm) * -1);
-            margi-bottom: calc(var(--rhythm) * -2);
+            margin-bottom: calc(var(--rhythm) * -2);
         }
     }
 }

@@ -1,28 +1,55 @@
 [data-theme="minimal"] {
     --shadow: none;
     --color-border: transparent;
+    --border-radius: 0;
+
+    --color-dark-foreground: #ccc;
+    --color-dark-background: #222;
 
     --font-header: "Kalice", sans-serif;
     --font-header-weight: 500;
     --font-header-letter-spacing: 1;
-    --font-text: "Diatype", "Kalice", sans-serif;
+    --font-text: "CalSans", "Diatype", "Kalice", sans-serif;
+    --font-variation: "MODE" 1;
 
-    --body-padding: var(--rhythm-4);
+    --body-padding: var(--rhythm);
 
-    table {
-        grid-column: content;
-    }
-    table,
-    table th,
-    table td,
-    table td code {
-        font-size: var(--scale-d3);
-        font-family: var(--font-monospace);
-        word-break: keep-all;
-    }
+    --line-width: var(--line-width-s);
+    --font-size: 1.2em;
+    --line-height: 1.8;
+
+    --rhythm-gap: var(--rhythm);
+    --rhythm-block-gap: var(--rhythm);
 
     h1 {
-        margin-block: var(--rhythm-7);
+        margin-block-start: var(--rhythm-5);
+        margin-block-end: var(--rhythm-7);
+        text-align: center;
+    }
+
+    blockquote,
+    pre {
+        padding: var(--rhythm-d2);
+        padding-block: 0;
+        border: 0;
+        border-left: 1px solid var(--color-foreground);
+        background: transparent;
+        color: var(--color-foreground);
+        .copy-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+    pre {
+        padding: var(--rhythm-d2);
+        border: 0;
+        background: var(--color-background-secondary);
+        .copy-button {
+            position: absolute;
+            top: var(--rhythm-d2);
+            right: var(--rhythm-d2);
+        }
     }
 }
 
@@ -32,6 +59,23 @@
     font-style: normal;
     font-display: swap;
     src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff");
+}
+
+@font-face {
+    font-family: "Diatype";
+    font-weight: 200 1000;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2")
+        format("woff");
+}
+
+@font-face {
+    font-family: "CalSans";
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
 }
 
 @font-face {

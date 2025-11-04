@@ -41,8 +41,16 @@
 /* =========================== */
 
 /* Single class to enable all debug features */
+.debug {
+    display: none;
+}
+
 .standard-debug {
     position: relative;
+}
+
+.standard-debug .debug {
+    display: inherit;
 }
 
 /* Baseline Grid Overlay */

@@ -7,6 +7,7 @@ maturity:
 publish: false
 tags: []
 type: note
+lang: fr
 visibility: public
 ---
 

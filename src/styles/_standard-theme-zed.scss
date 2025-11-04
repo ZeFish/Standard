@@ -35,8 +35,7 @@
     --color-dark-bold: var(--color-pink);
 
     --body-padding: var(--rhythm-2);
-    --shadow: 0;
-    --border-radius: 0;
+    --border-radius: var(--rhythm-d5);
 
     --font-text: "MonoLisa";
     --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";

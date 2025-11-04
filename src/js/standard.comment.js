@@ -207,9 +207,9 @@
       // If there's an error, show it and stop
       if (this.error) {
         this.container.innerHTML = `
-            <div class="comments error interface" role="alert">
-              <strong>Error loading comments:</strong> ${this.escapeHTML(this.error)}
-            </div>
+            <aside class="comments debug" role="alert">
+              Error loading comments: ${this.escapeHTML(this.error)}
+            </aside>
           `;
         this.updateFormVisibility(); // <-- ADD THIS LINE
         return;

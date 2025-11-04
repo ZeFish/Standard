@@ -6,6 +6,13 @@ permalink: /test/
 comments: true
 ---
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+::cards
+hola
+::end
+
+
 # Test
 
 ## Size Scale (Memorize These 5)
@@ -35,7 +42,36 @@ The Inspector is Standard's built-in design tool. Open it with `Shift + Cmd/Ctrl
 - **Export CSS** of your changes
 - **Switch themes** instantly
 
-qwdqdwd
+qwdqdwd Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## Obsidian-Style Callout Tests
+
+::info hola
+
+
+This error callout can be collapsed and expanded. It contains multiple lines of content to test the collapsible functionality.
+
+::callout hola
+This callout has a custom title instead of the default "Success" title.
+::end
+
+
+Multiple callouts can be stacked:
+
+- They each get their own styling
+- Icons are automatically assigned
+- Colors match the callout type
+
+::callout [!bug]
+This is a bug callout to test the icon and styling.
+::end
+
+[!question]
+Questions get their own icon and color scheme.
+
+[/!callout]
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
   <p>
       <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
