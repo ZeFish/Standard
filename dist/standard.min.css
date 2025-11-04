@@ -1128,7 +1128,7 @@ blockquote,
   box-shadow: inset var(--shadow);
   overflow: hidden;
   border-radius: var(--border-radius);
-  padding: var(--rhythm-d4) var(--rhythm-d2);
+  padding: var(--rhythm-d2) var(--rhythm-d2);
   margin-left: 0;
   border: var(--border);
   text-align: left;

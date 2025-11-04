@@ -213,7 +213,7 @@
   --content-accent: minmax(0, var(--rhythm-2));
   --content-feature: minmax(0, var(--rhythm-4));
   --content-hero: minmax(0, 1fr);
-  --gap: 0;
+  --gap: 1;
 }
 [data-theme=swiss] hr {
   background: var(--color-foreground);
@@ -231,7 +231,7 @@
 [data-theme=swiss] img {
   border: 0;
 }
-[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll) {
+[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout) {
   max-width: var(--line-width-s);
   margin-inline: 0;
 }

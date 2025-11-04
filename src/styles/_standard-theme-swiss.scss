@@ -28,7 +28,7 @@
     --content-feature: minmax(0, var(--rhythm-4));
     --content-hero: minmax(0, 1fr);
 
-    --gap: 0;
+    --gap: 1;
 
     hr {
         background: var(--color-foreground);
@@ -50,7 +50,7 @@
         border: 0;
     }
 
-    .prose :is(p, blockquote, pre, details, li, hr, .scroll) {
+    .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout) {
         max-width: var(--line-width-s);
         margin-inline: 0;
     }
