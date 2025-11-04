@@ -586,7 +586,7 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
-li::before, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
