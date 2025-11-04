@@ -532,6 +532,11 @@
   --color-dark-bold: var(--color-pink);
   --body-padding: var(--rhythm-2);
   --radius: var(--rhythm-d8);
+  --optical-ratio: 1.414;
+  --rhythm-gap: var(--rhythm);
+  
+  
+  --rhythm-block-gap: var(--rhythm);
   --font-text: "MonoLisa";
   --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
   --font-variation: "MONO" 1;
@@ -879,7 +884,7 @@
   font-display: swap;
   src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }
-[data-theme=kernel] {
+[data-theme=terminal] {
   --color-light-background: #f4f5f3;
   --color-light-foreground: #1d3557;
   --color-light-background: #fffcf0;
@@ -954,10 +959,6 @@
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 0.75em;
   
-}
-[data-theme=kernel] .dark {
-  --color-accent: var(--color-purple);
-  --color-bold: var(--color-pink);
 }
 
 @font-face {

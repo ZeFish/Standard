@@ -873,6 +873,10 @@ nav li.is-active a {
   text-decoration: underline;
 }
 
+li {
+  overflow: visible;
+}
+
 
 
 
@@ -1283,7 +1287,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-start: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .scroll, :where(html:not(.no-rhythm), .rhythm) hr {
-  margin-block-start: var(--rhythm-block-gap);
+  margin-block-start: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
   margin-block-end: var(--rhythm-block-gap);
 }
 :where(html:not(.no-rhythm), .rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)) {
@@ -1302,32 +1306,47 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(html:not(.no-rhythm), .rhythm) h1,
 :where(html:not(.no-rhythm), .rhythm) > h1:where(:first-child) {
-  margin-block-start: calc(var(--rhythm) * 5);
-  margin-block-end: calc(var(--rhythm) * 2);
+  margin-block-start: calc(var(--rhythm-gap) * 4);
+  margin-block-end: calc(var(--rhythm-gap) * 4);
   line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h2 {
-  margin-block-start: calc(var(--rhythm) * 2);
-  margin-block-end: calc(var(--rhythm) * 2);
+  margin-block-start: calc(var(--rhythm-gap) * 2);
+  margin-block-end: calc(var(--rhythm-gap) * 2);
 }
 :where(html:not(.no-rhythm), .rhythm) h3 {
-  margin-block-start: calc(var(--rhythm) * 2);
-  margin-block-end: calc(var(--rhythm) * 1);
+  margin-block-start: calc(var(--rhythm-gap) * 1);
+  margin-block-end: calc(var(--rhythm-gap) * 1);
   line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h4 {
-  margin-block-start: var(--rhythm);
+  margin-block-start: var(--rhythm-gap);
+  margin-block-end: var(--rhythm-d2);
   line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h5 {
-  margin-block-start: var(--rhythm);
-  margin-block-end: var(--rhythm);
+  margin-block-start: var(--rhythm-gap);
+  margin-block-end: var(--rhythm-d2);
   line-height: var(--line-height);
+  font-size: var(--scale-d2);
 }
 :where(html:not(.no-rhythm), .rhythm) h6 {
-  margin-block-start: var(--rhythm);
-  margin-block-end: var(--rhythm);
+  margin-block-start: var(--rhythm-gap);
+  margin-block-end: var(--rhythm-d2);
   line-height: var(--line-height);
+  font-size: var(--scale-d2);
+  text-align: center;
+}
+@media (max-width: 768px) {
+  :where(html:not(.no-rhythm), .rhythm) h1,
+  :where(html:not(.no-rhythm), .rhythm) h2,
+  :where(html:not(.no-rhythm), .rhythm) h3 {
+    margin-block-start: var(--rhythm-gap);
+    margin-block-end: var(--rhythm-gap);
+  }
+  :where(html:not(.no-rhythm), .rhythm) h1 {
+    margin-block: calc(var(--rhythm-gap) * 2);
+  }
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
   margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
@@ -2554,7 +2573,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--rhythm-gap) * -1 + var(--img-gap)) !important;
+  margin-block-start: calc(var(--rhythm-block-gap) * -1 + var(--img-gap)) !important;
 }
 :where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 

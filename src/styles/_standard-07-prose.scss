@@ -153,7 +153,7 @@
         /* Adjacent images get reduced spacing  + var(--img-gap)    */
         p:has(img) + p:has(img) {
             margin-block-start: calc(
-                (var(--rhythm-gap) * -1) + var(--img-gap)
+                (var(--rhythm-block-gap) * -1) + var(--img-gap)
             ) !important;
         }
     }

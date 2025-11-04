@@ -104,7 +104,7 @@
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: var(--rhythm-block-gap);
+        margin-block-start: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
         margin-block-end: var(--rhythm-block-gap);
     }
 
@@ -138,37 +138,54 @@
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: calc(var(--rhythm) * 5);
-        margin-block-end: calc(var(--rhythm) * 2);
+        margin-block-start: calc(var(--rhythm-gap) * 4);
+        margin-block-end: calc(var(--rhythm-gap) * 4);
         line-height: var(--line-height);
     }
 
     h2 {
-        margin-block-start: calc(var(--rhythm) * 2);
-        margin-block-end: calc(var(--rhythm) * 2);
+        margin-block-start: calc(var(--rhythm-gap) * 2);
+        margin-block-end: calc(var(--rhythm-gap) * 2);
     }
 
     h3 {
-        margin-block-start: calc(var(--rhythm) * 2);
-        margin-block-end: calc(var(--rhythm) * 1);
+        margin-block-start: calc(var(--rhythm-gap) * 1);
+        margin-block-end: calc(var(--rhythm-gap) * 1);
         line-height: var(--line-height);
     }
 
     h4 {
-        margin-block-start: var(--rhythm);
+        margin-block-start: var(--rhythm-gap);
+        margin-block-end: var(--rhythm-d2);
         line-height: var(--line-height);
     }
 
     h5 {
-        margin-block-start: var(--rhythm);
-        margin-block-end: var(--rhythm);
+        margin-block-start: var(--rhythm-gap);
+        margin-block-end: var(--rhythm-d2);
         line-height: var(--line-height);
+        font-size: var(--scale-d2);
     }
 
     h6 {
-        margin-block-start: var(--rhythm);
-        margin-block-end: var(--rhythm);
+        margin-block-start: var(--rhythm-gap);
+        margin-block-end: var(--rhythm-d2);
         line-height: var(--line-height);
+        font-size: var(--scale-d2);
+        text-align: center;
+    }
+
+    /* Medium screens (tablet): 769px-1024px */
+    @media (max-width: $small) {
+        h1,
+        h2,
+        h3 {
+            margin-block-start: var(--rhythm-gap);
+            margin-block-end: var(--rhythm-gap);
+        }
+        h1 {
+            margin-block: calc(var(--rhythm-gap) * 2);
+        }
     }
 
     hr {
