@@ -37,7 +37,7 @@
    */
   const DEFAULTS = {
     duration: 4000, // Auto-dismiss after 4 seconds
-    position: "top-right", // top-right, top-left, top-center, bottom-right, bottom-left, bottom-center
+    position: "top-center", // top-right, top-left, top-center, bottom-right, bottom-left, bottom-center
     pauseOnHover: true, // Pause auto-dismiss when hovering
     showProgress: true, // Show countdown progress bar
     closeButton: false, // Show close button

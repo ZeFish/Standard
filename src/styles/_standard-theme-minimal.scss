@@ -1,7 +1,5 @@
 [data-theme="minimal"] {
     --shadow: none;
-    --color-border: transparent;
-    --border-radius: 0;
 
     --color-dark-foreground: #ccc;
     --color-dark-background: #222;
@@ -13,13 +11,14 @@
     --font-variation: "MODE" 1;
 
     --body-padding: var(--rhythm);
-
+    --optical-ratio: 1.3;
     --line-width: var(--line-width-s);
-    --font-size: 1.2em;
-    --line-height: 1.8;
+    --font-size: 1.1em;
+
+    --line-height: 1.5;
 
     --rhythm-gap: var(--rhythm);
-    --rhythm-block-gap: var(--rhythm);
+    --rhythm-block-gap: var(--rhythm-2);
 
     h1 {
         margin-block-start: var(--rhythm-5);

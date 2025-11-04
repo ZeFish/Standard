@@ -40,7 +40,7 @@
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
-    --rhythm-block-gap: var(--rhythm);
+    --rhythm-block-gap: var(--rhythm-2);
 
     /* Padding around the body, can be negated by .body-p-neg, .body-p-neg-header, .body-p-neg-footer */
     --body-padding: var(--rhythm-2);
@@ -49,7 +49,7 @@
     --blur: blur(7px);
     --hr-thickness: 1px;
     --transition: 0.5s ease;
-    --border-radius: var(--rhythm-d4);
+    --radius: var(--rhythm-d8);
     --modal-background: color-mix(
         in srgb,
         var(--color-background-secondary) 85%,
@@ -116,38 +116,21 @@
     --baseline-10: calc(10 * 1rlh);
 
     /* Name use for actual spacing in the framework  */
-    --rhythm-d5: var(--baseline-d5);
-    --rhythm-d4: var(--baseline-d4);
-    --rhythm-d3: var(--baseline-d3);
-    --rhythm-d2: var(--baseline-d2);
-    --rhythm-compact: calc(var(--baseline) * 0.75);
-    --rhythm: var(--baseline);
-    --rhythm-2: var(--baseline-2);
-    --rhythm-3: var(--baseline-3);
-    --rhythm-4: var(--baseline-4);
-    --rhythm-5: var(--baseline-5);
-    --rhythm-6: var(--baseline-6);
-    --rhythm-7: var(--baseline-7);
-    --rhythm-8: var(--baseline-8);
-    --rhythm-9: var(--baseline-9);
-    --rhythm-10: var(--baseline-10);
 
-    /*
-    --rhythm-d5: var(--scale-d5);
-    --rhythm-d4: var(--scale-d4);
-    --rhythm-d3: var(--scale-d3);
-    --rhythm-d2: var(--scale-d2);
-    --rhythm: var(--scale);
-    --rhythm-2: var(--scale-2);
-    --rhythm-3: var(--scale-3);
-    --rhythm-4: var(--scale-4);
-    --rhythm-5: var(--scale-5);
-    --rhythm-6: var(--scale-6);
-    --rhythm-7: var(--scale-7);
-    --rhythm-8: var(--scale-8);
-    --rhythm-9: var(--scale-9);
-    --rhythm-10: var(--scale-10);
-    // */
+    --rhythm-d8: calc(var(--baseline) / 8);
+    --rhythm-d5: calc(var(--baseline) / 5);
+    --rhythm-d4: calc(var(--baseline) / 4);
+    --rhythm-d2: calc(var(--baseline) / 2);
+    --rhythm: var(--baseline);
+    --rhythm-2: calc(var(--baseline) * 2);
+    --rhythm-3: calc(var(--baseline) * 3);
+    --rhythm-4: calc(var(--baseline) * 4);
+    --rhythm-5: calc(var(--baseline) * 5);
+    --rhythm-6: calc(var(--baseline) * 6);
+    --rhythm-7: calc(var(--baseline) * 7);
+    --rhythm-8: calc(var(--baseline) * 8);
+    --rhythm-9: calc(var(--baseline) * 9);
+    --rhythm-10: calc(var(--baseline) * 10);
 
     /* Z-index scale */
     --z-base: 1;

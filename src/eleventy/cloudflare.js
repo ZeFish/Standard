@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { createLogger } from "./logger.js";
+import Logger from "./logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -51,10 +51,10 @@ export default function Cloudflare(eleventyConfig, site = {}) {
         (typeof pkg !== "undefined" ? pkg.version : "0.0.0"),
       clientLibrary: commentsBlock.clientLibrary ?? "",
     },
-    verbose: cf.verbose ?? false,
+    verbose: site.standard.verbose ?? false,
   };
 
-  const logger = createLogger({
+  const logger = Logger({
     verbose: site.standard.verbose,
     scope: "Cloudflare",
   });

@@ -7,7 +7,7 @@
  * @category 11ty Plugins
  */
 
-import { createLogger } from "../logger.js";
+import Logger from "../logger.js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -20,7 +20,7 @@ export default function Feed(eleventyConfig, site = {}) {
   const enabled = user.enabled ?? true;
   if (enabled === false) return;
 
-  const logger = createLogger({
+  const logger = Logger({
     scope: "Feed",
     verbose: site.standard?.verbose || false,
   });

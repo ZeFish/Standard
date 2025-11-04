@@ -12,7 +12,7 @@
  * @returns {object} Logger instance with methods: info, success, warn, error, debug
  *
  * @example
- * const logger = createLogger({ verbose: true, scope: 'Markdown' });
+ * const logger = Logger({ verbose: true, scope: 'Markdown' });
  * logger.info('Processing markdown files...');
  * logger.success('Compiled 42 files');
  * logger.warn('Missing frontmatter in post.md');
@@ -130,7 +130,7 @@ colors.reset = ANSI16.reset;
 /**
  * Logger factory
  */
-export function createLogger(options = {}) {
+export default function createLogger(options = {}) {
   const { verbose = false, scope = null } = options;
 
   const prefix = `${colors.yellow.fg} ::std${colors.reset}`;
@@ -170,9 +170,4 @@ export function createLogger(options = {}) {
       );
     },
   };
-}
-
-// Default export (same factory)
-export default function defaultCreateLogger(options = {}) {
-  return createLogger(options);
 }

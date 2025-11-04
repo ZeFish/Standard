@@ -7,7 +7,7 @@
  * @category 11ty Plugins
  */
 
-import { createLogger } from "../logger.js";
+import Logger from "../logger.js";
 
 export default function Robots(eleventyConfig, site = {}) {
   const user = site.standard?.robots || {};
@@ -16,7 +16,7 @@ export default function Robots(eleventyConfig, site = {}) {
   const enabled = user.enabled ?? true;
   if (enabled === false) return;
 
-  const logger = createLogger({
+  const logger = Logger({
     scope: "Robots",
     verbose: site.standard?.verbose || false,
   });

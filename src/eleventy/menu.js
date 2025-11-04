@@ -48,6 +48,13 @@
  * site's domain automatically gets `target="_blank"` and `rel="noopener noreferrer"`.
  * This prevents security issues and makes external links obvious to users.
  *
+ * **Item Limiting:**
+ *
+ * You can limit the number of items shown using the `limit` option. This is
+ * especially useful for backlinks, recent posts, or any dynamic list that
+ * might grow large. For example, `limit: 5` shows only the first 5 items.
+ * Perfect for "Recent Posts" or "Top 10 Pages" lists.
+ *
  * ### Future Improvements
  *
  * - Support for nested/dropdown menus
@@ -56,6 +63,7 @@
  * - Icon support (SVG icons in menu items)
  * - Mega-menu support for large sites
  * - Breadcrumb generation from menu structure
+ * - "Show more" link when items are truncated
  *
  * @see {file} src/styles/standard-10-navigation.scss - Navigation styling
  * @see {utility} .no-bullet - Removes list bullets
@@ -71,9 +79,8 @@
  *     eleventyConfig.addPlugin(Standard, {
  *       menu: {
  *         enabled: true,
- *         label: "Main navigation",
- *         className: "menu",
- *         inline: true
+ *         ariaLabel: "Main navigation",
+ *         class: "menu"
  *       }
  *     });
  *   }
@@ -82,31 +89,40 @@
  *   module.exports = {
  *     nav: {
  *       header: [
- *         { label: "Home", url: "/", exact: true },
- *         { label: "Blog", url: "/blog/" },
- *         { label: "About", url: "/about/" },
- *         { label: "Contact", url: "/contact/" }
+ *         { title: "Home", url: "/", exact: true },
+ *         { title: "Blog", url: "/blog/" },
+ *         { title: "About", url: "/about/" },
+ *         { title: "Contact", url: "/contact/" }
  *       ],
  *       footer: [
- *         { label: "Privacy", url: "/privacy/" },
- *         { label: "Terms", url: "/terms/" },
- *         { label: "GitHub", url: "https://github.com/you", external: true }
+ *         { title: "Privacy", url: "/privacy/" },
+ *         { title: "Terms", url: "/terms/" },
+ *         { title: "GitHub", url: "https://github.com/you", external: true }
  *       ]
  *     }
  *   };
  *
  * @example njk - Horizontal header menu
  *   {% menu site.nav.header, {
- *     label: "Main navigation",
- *     inline: true,
- *     className: "menu"
+ *     ariaLabel: "Main navigation",
+ *     class: "horizontal"
  *   } %}
  *
  * @example njk - Stacked footer menu
  *   {% menu site.nav.footer, {
- *     label: "Footer links",
- *     inline: false,
- *     className: "menu menu--footer"
+ *     ariaLabel: "Footer links"
+ *   } %}
+ *
+ * @example njk - Limited backlinks (show only 5)
+ *   {% menu backlinks, {
+ *     ariaLabel: "Related pages",
+ *     limit: 5
+ *   } %}
+ *
+ * @example njk - Recent posts (limited to 10)
+ *   {% menu collections.blog | reverse, {
+ *     ariaLabel: "Recent posts",
+ *     limit: 10
  *   } %}
  *
  * @example html - Generated output (horizontal)
@@ -126,12 +142,12 @@
  *
  * @param {object} options Configuration options
  * @param {boolean} options.enabled Enable menu plugin (default: true)
- * @param {string} options.label Default ARIA label for navigation
- * @param {string} options.className Default CSS class for menu
- * @param {boolean} options.inline Horizontal layout (true) or stacked (false)
+ * @param {string} options.ariaLabel Default ARIA label for navigation
+ * @param {string} options.class Default CSS class for menu
+ * @param {number} options.limit Maximum number of items to show (default: unlimited)
  */
 
-import { createLogger } from "./logger.js";
+import Logger from "./logger.js";
 
 function escapeHtml(str = "") {
   return String(str)
@@ -157,44 +173,55 @@ function isActive(itemUrl, currentUrl, exact = false) {
 export default function MenuPlugin(eleventyConfig, site = {}) {
   const defaults = {
     enabled: true,
-    label: "Navigation",
-    className: "menu",
-    inline: true,
+    ariaLabel: "Navigation",
+    class: "",
+    limit: null, // No limit by default
   };
   const config = { ...defaults, ...(site.standard?.menu || {}) };
 
   if (config.enabled === false) return;
+
+  const logger = Logger({
+    verbose: site.standard?.verbose,
+    scope: "Menu",
+  });
 
   /**
    * Menu Shortcode
    *
    * Generates semantic navigation HTML from array of links.
    *
-   * @param {array} items Array of menu items
+   * @param {array} items Array of menu items with { title, url }
    * @param {object} opts Per-use configuration options
+   * @param {string} opts.ariaLabel ARIA label for this navigation
+   * @param {string} opts.class CSS classes for the menu
+   * @param {number} opts.limit Maximum number of items to show
    * @returns {string} HTML navigation markup
    */
   eleventyConfig.addShortcode("menu", function menuShortcode(items, opts = {}) {
     const currentUrl = (opts.currentUrl ?? this.page?.url) || "/";
-    const label = opts.label || config.label;
-    const className = opts.className || config.className;
-    const inline = opts.inline ?? config.inline;
+    const ariaLabel = opts.ariaLabel || config.ariaLabel;
+    const className = opts.class || config.class;
+    const limit = opts.limit ?? config.limit;
 
-    // Generate list items
-    const lis = (items || [])
+    // Apply limit if specified
+    const itemsToRender =
+      limit && limit > 0 ? (items || []).slice(0, limit) : items || [];
+
+    const lis = itemsToRender
       .map((item) => {
-        const text = escapeHtml(item.label || item.name || "");
+        const text = escapeHtml(
+          item.title || item.data?.title || item.label || item.fileSlug || "",
+        );
         const href = item.url || "#";
         const active = isActive(href, currentUrl, item.exact);
 
-        // External link detection
         const isAbsolute = /^https?:\/\//i.test(href);
         const siteUrl = this.site?.url || "";
         const external =
           item.external ||
           (isAbsolute && !href.startsWith(normalizePath(siteUrl)));
 
-        // Build link attributes
         const rel = item.rel || (external ? "noopener noreferrer" : undefined);
         const target = item.target || (external ? "_blank" : undefined);
 
@@ -208,24 +235,16 @@ export default function MenuPlugin(eleventyConfig, site = {}) {
           .filter(Boolean)
           .join(" ");
 
-        const liClass = ["", active ? "is-active" : ""]
-          .filter(Boolean)
-          .join(" ");
+        const liClass = [active ? "is-active" : ""].filter(Boolean).join(" ");
 
         return `<li class="${liClass}"><a ${aAttrs}>${text}</a></li>`;
       })
       .join("");
 
-    // Build list classes
-    const ulClasses = [escapeHtml(className), "", inline ? "" : ""]
-      .filter(Boolean)
-      .join(" ");
+    const classes = ["menu", escapeHtml(className)].filter(Boolean).join(" ");
 
-    // Use inline style for gap (until we add .gap-s utility)
-    const ulStyle = inline ? ` ` : "";
-
-    return `<nav aria-label="${escapeHtml(
-      label,
-    )}"><ul class="${ulClasses}"${ulStyle}>${lis}</ul></nav>`;
+    return `<nav class="${classes}" aria-label="${escapeHtml(ariaLabel)}"><ul>${lis}</ul></nav>`;
   });
+
+  logger.success();
 }

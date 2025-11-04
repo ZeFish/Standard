@@ -7,7 +7,7 @@
  * @category 11ty Plugins
  */
 
-import { createLogger } from "./../logger.js";
+import Logger from "./../logger.js";
 
 export default function Manifest(eleventyConfig, site = {}) {
   // Read user config
@@ -17,7 +17,7 @@ export default function Manifest(eleventyConfig, site = {}) {
   const enabled = user.enabled ?? true;
   if (enabled === false) return;
 
-  const logger = createLogger({
+  const logger = Logger({
     scope: "Manifest",
     verbose: site.standard?.verbose || false,
   });

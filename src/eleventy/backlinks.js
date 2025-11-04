@@ -1,5 +1,5 @@
 import fs from "fs";
-import { createLogger } from "./logger.js";
+import Logger from "./logger.js";
 
 /**
  * @component Backlinks Plugin
@@ -35,10 +35,10 @@ function slugify(str) {
     .replace(/(^-|-$)+/g, "");
 }
 
-export default function (eleventyConfig, options = {}) {
+export default function (eleventyConfig, site = {}) {
   let backlinksMap = null;
-  const logger = createLogger({
-    verbose: options.verbose,
+  const logger = Logger({
+    verbose: site.standard.verbose,
     scope: "Backlinks",
   });
 

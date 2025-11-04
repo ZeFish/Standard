@@ -10,7 +10,7 @@
  *
  * @pattern [property]-[side]-[size]
  * Examples:
- *   - .margin-top-xs (margin-top: var(--rhythm-d3))
+ *   - .margin-top-xs (margin-top: var(--rhythm-d4))
  *   - .padding-right-base (padding-right: var(--rhythm))
  *   - .gap-l (gap: var(--rhythm-2))
  *
@@ -65,13 +65,13 @@
         #{$property}: auto !important;
     }
     .#{$prefix}-d5 {
-        #{$property}: var(--rhythm-d5) !important;
+        #{$property}: var(--rhythm-d8) !important;
     }
     .#{$prefix}-d4 {
         #{$property}: var(--rhythm-d4) !important;
     }
     .#{$prefix}-d3 {
-        #{$property}: var(--rhythm-d3) !important;
+        #{$property}: var(--rhythm-d4) !important;
     }
     .#{$prefix}-d2 {
         #{$property}: var(--rhythm-d2) !important;
@@ -370,7 +370,8 @@
     white-space: nowrap !important;
 }
 
-.ellipsis {
+.ellipsis,
+.ellipsis li {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -405,7 +406,7 @@ aside.info {
     border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: var(--rhythm-d3);
+    padding: var(--rhythm-d4);
     font-size: var(--scale-d3);
     font-family: var(--font-interface);
 }
@@ -901,31 +902,24 @@ ol.no-bullet {
     }
 }
 
-ul.menu-v {
+nav.menu ul,
+ul.menu {
     display: flex;
     flex-direction: column;
     padding-inline: 0;
+    gap: 0;
     li {
-        margin-block-end: 0;
+        margin-block-end: var(--rhythm-d4);
         list-style: none;
-
+        padding-inline-start: 0;
         &::before {
             display: none;
         }
     }
 }
 
-ul.menu-h {
-    display: flex;
+nav.menu.horizontal ul,
+ul.menu.horizontal {
+    flex-direction: row;
     gap: var(--rhythm);
-    padding-inline: 0;
-    li {
-        margin-block-end: 0;
-        list-style: none;
-        padding-inline-start: 0;
-
-        &::before {
-            display: none;
-        }
-    }
 }

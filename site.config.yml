@@ -12,11 +12,11 @@ social:
   instagram: "@francisfontaine"
 nav:
   header:
-    - label: "Docs"
+    - title: "Docs"
       url: "/docs/"
-    - label: "Getting Started"
+    - title: "Getting Started"
       url: "/getting-started/"
-    - label: "Cheat Sheet"
+    - title: "Cheat Sheet"
       url: "/cheat-sheet/"
 
 standard:

@@ -92,8 +92,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { minify } from "terser";
 import yaml from "js-yaml";
-import { createLogger } from "../src/eleventy/logger.js";
-const logger = createLogger({
+import Logger from "../src/eleventy/logger.js";
+const logger = Logger({
   scope: "JS ",
 });
 

@@ -29,12 +29,7 @@ export default function (eleventyConfig, site = {}) {
       : undefined,
     route: site.standard.ai.route, // e.g., "cheapest", "smart"
     copyFunctions: site.standard.ai.copyFunctions ?? true,
-    siteUrl:
-      site.standard.ai.siteUrl ||
-      site.standard.ai.env?.SITE_URL ||
-      process.env.SITE_URL ||
-      "https://standard.ffp.co",
-    verbose: site.standard.ai.verbose ?? false,
+    siteUrl: site.url,
   };
 
   // Write back to site (single source of truth)
@@ -43,7 +38,7 @@ export default function (eleventyConfig, site = {}) {
   // Use the same object everywhere
   const config = site.standard.ai;
 
-  const logger = Logger({ scope: "ai", verbose: config.verbose });
+  const logger = Logger({ scope: "ai", verbose: site.standard.verbose });
 
   // Respect enabled early and still expose stdAI as disabled for downstream consumers
   if (!config.enabled) {

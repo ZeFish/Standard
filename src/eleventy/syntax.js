@@ -9,17 +9,17 @@
  * @since 0.11.0
  */
 
-import { createLogger } from "./logger.js";
+import Logger from "./logger.js";
 
 /**
  * Syntax Processor Class
  */
 class SyntaxProcessor {
-  constructor(options = {}) {
-    this.options = options;
+  constructor(site = {}) {
+    this.options = site;
     this.handlers = new Map();
-    this.logger = createLogger({
-      verbose: options.verbose,
+    this.logger = Logger({
+      verbose: site.standard.verbose,
       scope: "Syntax",
     });
   }
@@ -60,14 +60,9 @@ class SyntaxProcessor {
     }
 
     const unprocessed = this.findUnprocessedSyntax(content);
-    if (unprocessed.length > 0 && this.options.verbose) {
-      this.logger.warn(`Removed unprocessed syntax:`);
-      unprocessed.forEach((pattern) => {
-        this.logger.warn(`  - ::${pattern}`);
-      });
-    }
-    this.logger.debug(`Page Done`);
-    //content = this.cleanup(content);
+    unprocessed.forEach((pattern) => {
+      this.logger.warn(`Unprocessed  - ::${pattern}`);
+    });
     return content;
   }
 
@@ -121,14 +116,6 @@ class SyntaxProcessor {
     }
 
     return [...new Set(patterns)];
-  }
-
-  cleanup(content) {
-    // Remove block syntax
-    content = content.replace(/^::[\w-]+[^\n]*\n[\s\\S]*?^::end/gm, "");
-    // Remove single-line syntax
-    content = content.replace(/^::[\w-]+.*$/gm, "");
-    return content;
   }
 
   parseArgs(argsString) {
@@ -520,8 +507,8 @@ function evaluateCondition(condition, pageData) {
 /**
  * Syntax Plugin Export (default)
  */
-export default function Syntax(eleventyConfig, options = {}) {
-  const processor = new SyntaxProcessor(options);
+export default function Syntax(eleventyConfig, site = {}) {
+  const processor = new SyntaxProcessor(site);
 
   // Register built-in syntax
   registerBuiltIns(processor);

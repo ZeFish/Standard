@@ -29,9 +29,7 @@
  */
 
 export default function (eleventyConfig, site = {}) {
-  const standard = site.standard || {};
-  const outputDir = standard.outputDir || "assets/standard";
-  const comments = standard.comments || { enabled: false };
+  const outputDir = site.standard.outputDir || "assets/standard";
 
   eleventyConfig.addShortcode("currentTime", () => new Date().toISOString());
 
@@ -44,8 +42,14 @@ export default function (eleventyConfig, site = {}) {
     <script src="/${outputDir}/standard.bundle.full.js" type="module"></script>`;
 
     // Add comments client library if comments are enabled
-    if (comments.enabled) {
+    if (site.standard?.comments?.enabled) {
       html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
+    }
+    if (site.standard?.mermaid?.enabled) {
+      html += `\n<script type="module">
+          import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+          mermaid.initialize({ startOnLoad: true });
+        </script>`;
     }
 
     return html;
@@ -57,11 +61,6 @@ export default function (eleventyConfig, site = {}) {
     let html = "";
 
     html = `<link rel="stylesheet" href="/${outputDir}/standard.min.css">`;
-
-    // Add comments client library if comments are enabled
-    if (comments.enabled) {
-      html += `\n<script src="/${outputDir}/standard.comment.js"></script>`;
-    }
 
     return html;
   });

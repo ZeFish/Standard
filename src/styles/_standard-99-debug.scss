@@ -230,8 +230,8 @@
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d5) var(--rhythm-d4);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d8) var(--rhythm-d4);
+    border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
     z-index: var(--z-tooltip);
@@ -253,8 +253,8 @@
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d5) var(--rhythm-d4);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d8) var(--rhythm-d4);
+    border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.63;
     z-index: var(--z-tooltip);
@@ -273,7 +273,7 @@
     background: var(--color-background);
     color: var(--color-foreground);
     border: var(--border-accent);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     padding: var(--rhythm-d2);
     font-family: var(--font-monospace);
     font-size: var(--scale-d3);
@@ -317,14 +317,14 @@
 .standard-debug .grid-12 > *::before {
     content: attr(class);
     position: absolute;
-    top: var(--rhythm-d5);
-    left: var(--rhythm-d5);
+    top: var(--rhythm-d8);
+    left: var(--rhythm-d8);
     background: var(--color-cyan);
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d5) var(--rhythm-d4);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d8) var(--rhythm-d4);
+    border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
     z-index: var(--z-tooltip);
@@ -338,14 +338,14 @@
 .standard-debug .free-col::after {
     content: "start: " var(--start) " / span: " var(--span);
     position: absolute;
-    bottom: var(--rhythm-d5);
-    left: var(--rhythm-d5);
+    bottom: var(--rhythm-d8);
+    left: var(--rhythm-d8);
     background: var(--color-purple);
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d5) var(--rhythm-d4);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d8) var(--rhythm-d4);
+    border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
     z-index: var(--z-tooltip);
@@ -390,8 +390,8 @@
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d5) var(--rhythm-d4);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d8) var(--rhythm-d4);
+    border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
     z-index: var(--z-tooltip);
@@ -407,8 +407,8 @@ body.standard-debug::before {
     color: var(--color-foreground);
     font-family: var(--font-monospace);
     font-size: var(--scale-d3);
-    padding: var(--rhythm-d3) var(--rhythm-d2);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d4) var(--rhythm-d2);
+    border-radius: var(--radius);
     box-shadow: var(--shadow);
     z-index: var(--z-toast);
     pointer-events: none;
@@ -467,12 +467,12 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature::before,
 .standard-debug .prose .container-full::before {
     position: absolute;
-    top: var(--rhythm-d5);
-    right: var(--rhythm-d5);
+    top: var(--rhythm-d8);
+    right: var(--rhythm-d8);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d5) var(--rhythm-d4);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d8) var(--rhythm-d4);
+    border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.95;
     z-index: var(--z-tooltip);

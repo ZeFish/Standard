@@ -1,6 +1,6 @@
 // src/eleventy/security.js
 
-import { createLogger } from "../logger.js";
+import Logger from "../logger.js";
 
 export default function (eleventyConfig, site = {}) {
   // Read user config
@@ -10,7 +10,7 @@ export default function (eleventyConfig, site = {}) {
   const enabled = user.enabled ?? true;
   if (enabled === false) return;
 
-  const logger = createLogger({
+  const logger = Logger({
     scope: "Security",
     verbose: site.standard?.verbose || false,
   });

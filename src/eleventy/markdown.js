@@ -4,6 +4,7 @@ import markdownIt from "markdown-it";
 import markdown_it_obsidian_callouts from "markdown-it-obsidian-callouts";
 import markdownItFootnote from "markdown-it-footnote";
 import { JSDOM } from "jsdom";
+import Logger from "./logger.js";
 
 /**
  * @component Markdown Plugin with Fine-Art Typography
@@ -23,28 +24,36 @@ import { JSDOM } from "jsdom";
  * - Legal symbols (©, ®, ™)
  * - French spacing rules
  *
- * @version 0.2.1
+ * @version 0.2.2
  * @since 0.1.0
  */
 
-export default function (eleventyConfig, options = {}) {
+export default function (eleventyConfig, site = {}) {
+  // Read markdown config safely
+  const md = site.standard?.markdown ?? {};
+
   const config = {
-    enableSmartQuotes: true,
-    enablePunctuation: true,
-    enableWidowPrevention: true,
-    enableOrphanPrevention: true,
-    enableSpacing: true,
-    enableFractions: true,
-    enableArrowsAndSymbols: true,
-    enableNumberFormatting: false,
-    defaultLocale: "en",
-    excludeSelectors: "code, pre, script, style, samp, kbd, var",
-    excludeFromWidows: "h1, h2, h3, h4, h5, h6",
-    siteUrl: "", // Add this line
-    ...options,
+    enableSmartQuotes: md.enableSmartQuotes ?? true,
+    enablePunctuation: md.enablePunctuation ?? true,
+    enableWidowPrevention: md.enableWidowPrevention ?? true,
+    enableOrphanPrevention: md.enableOrphanPrevention ?? true,
+    enableSpacing: md.enableSpacing ?? true,
+    enableFractions: md.enableFractions ?? true,
+    enableArrowsAndSymbols: md.enableArrowsAndSymbols ?? true,
+    enableNumberFormatting: md.enableNumberFormatting ?? false,
+    defaultLocale: site.language ?? "en",
+    excludeSelectors:
+      md.excludeSelectors ?? "code, pre, script, style, samp, kbd, var",
+    excludeFromWidows: md.excludeFromWidows ?? "h1, h2, h3, h4, h5, h6",
+    siteUrl: site.url ?? "",
   };
 
-  const md = markdownIt({
+  const logger = Logger({
+    verbose: site.standard.verbose,
+    scope: "Markdown",
+  });
+
+  const mdParser = markdownIt({
     html: true,
     breaks: true,
     linkify: true,
@@ -148,55 +157,6 @@ export default function (eleventyConfig, options = {}) {
     bullet: "\u2022",
     middleDot: "\u00B7",
   };
-
-  /**
-   * External Link Marker Plugin
-   *
-   * In the early web, every link was an adventure into the unknown. You'd click
-   * and suddenly find yourself on a completely different site, often with no way
-   * back except the browser's back button. Tim Berners-Lee's original vision
-   * didn't distinguish between internal and external links—all links were equal.
-   *
-   * But as websites grew into complex information architectures, designers realized
-   * users needed signals. "Am I staying here, or leaving?" became a critical question.
-   * The solution emerged from print design: just as footnotes used symbols (†, ‡, *)
-   * to indicate external references, web designers adopted the "external link arrow" (↗).
-   *
-   * This automatically detects external links and marks them with a class, allowing
-   * your CSS to add that visual indicator. It's smart enough to know what "external"
-   * means—checking against your site's actual domain, not just looking for http://.
-   *
-   * @param {String} siteUrl - Your site's base URL (e.g., 'https://standard.ffp.co')
-   * @returns {Boolean} Whether link is external
-   */
-  function markExternalLinks(md) {
-    const defaultLinkRender =
-      md.renderer.rules.link_open ||
-      function (tokens, idx, options, env, self) {
-        return self.renderToken(tokens, idx, options);
-      };
-
-    md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
-      const token = tokens[idx];
-      const hrefIndex = token.attrIndex("href");
-
-      if (hrefIndex >= 0) {
-        const href = token.attrs[hrefIndex][1];
-
-        // Handle content/ path rewriting
-        if (href && href.startsWith("content/")) {
-          let rewrittenHref = "/" + href.replace(/^content\//, "");
-          rewrittenHref = rewrittenHref.replace(/\.md$/, "/");
-          if (!rewrittenHref.endsWith("/")) {
-            rewrittenHref += "/";
-          }
-          token.attrs[hrefIndex][1] = rewrittenHref;
-        }
-      }
-
-      return defaultLinkRender(tokens, idx, options, env, self);
-    };
-  }
 
   const orphanWords = {
     en: [
@@ -576,14 +536,14 @@ export default function (eleventyConfig, options = {}) {
     text = text.replace(/==>/g, globalSymbols.doubleRightArrow);
     text = text.replace(/<==/g, globalSymbols.doubleLeftArrow);
     text = text.replace(/<=>/g, globalSymbols.leftRightArrow);
-    text = text.replace(/(\s)->(\s)/g, `$1${globalSymbols.rightArrow}$2`);
-    text = text.replace(/(\s)<->(\s)/g, `$1${globalSymbols.leftRightArrow}$2`);
-    text = text.replace(/(\s)<-(\s)/g, `$1${globalSymbols.leftArrow}$2`);
+    text = text.replace(/(\s)->(s)/g, `$1${globalSymbols.rightArrow}$2`);
+    text = text.replace(/(\s)<->(s)/g, `$1${globalSymbols.leftRightArrow}$2`);
+    text = text.replace(/(\s)<-(s)/g, `$1${globalSymbols.leftArrow}$2`);
     text = text.replace(/\s+x\s+/gi, ` ${globalSymbols.multiplication} `);
     text = text.replace(/\s+\*\s+/g, ` ${globalSymbols.multiplication} `);
     text = text.replace(/\+\/-/g, globalSymbols.plusMinus);
-    text = text.replace(/(\s)!=(\s)/g, `$1${globalSymbols.notEqual}$2`);
-    text = text.replace(/(\s)~=(\s)/g, `$1${globalSymbols.approximately}$2`);
+    text = text.replace(/(\s)!=(s)/g, `$1${globalSymbols.notEqual}$2`);
+    text = text.replace(/(\s)~=(s)/g, `$1${globalSymbols.approximately}$2`);
     text = text.replace(/\(c\)/gi, globalSymbols.copyright);
     text = text.replace(/\(r\)/gi, globalSymbols.registered);
     text = text.replace(/\(tm\)/gi, globalSymbols.trademark);
@@ -636,31 +596,23 @@ export default function (eleventyConfig, options = {}) {
   function preventOrphans(text, locale, rules) {
     const orphanWordList = orphanWords[locale] || orphanWords.en;
 
-    // Create a pattern that matches complete words only
-    // Handle accented characters by using explicit character classes
     const wordPattern = orphanWordList
       .map((word) => {
-        // Escape special regex characters
         const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-        // For words with accented characters, use explicit matching
         if (/[àâäéèêëïîôöùûüÿç]/i.test(word)) {
-          // Use lookaround to match complete words including accented chars
-          return `(?<![\\p{L}\\p{N}'])${escaped}(?![\\p{L}\\p{N}'])`;
+          return `(?![\\p{L}\\p{N}'])${escaped}(?![\\p{L}\\p{N}'])`;
         } else {
-          // For regular words, use word boundaries
           return `\\b${escaped}\\b`;
         }
       })
       .join("|");
 
-    // Replace orphan words followed by space with NBSP
     const nbspPattern = `(${wordPattern})\\s`;
     const nbspRegex = new RegExp(nbspPattern, "gi");
 
     let result = text.replace(nbspRegex, `$1${rules.nonBreakingSpace}`);
 
-    // Handle titles (Mr., Dr., etc.)
     const titleMap = {
       en: ["Mr", "Mrs", "Ms", "Dr", "Prof", "St"],
       fr: ["M", "Mme", "Mlle", "Dr", "Pr", "St", "Ste"],
@@ -674,7 +626,6 @@ export default function (eleventyConfig, options = {}) {
     const titleRegex = new RegExp(titlePattern, "gi");
     result = result.replace(titleRegex, `$1.${rules.nonBreakingSpace}`);
 
-    // Handle numbers and units
     result = result.replace(
       /\b(\d+)\s+(am|pm|h|min|s|kg|g|m|km|cm|mm|€|%)\b/gi,
       `$1${rules.nonBreakingSpace}$2`,
@@ -806,10 +757,8 @@ export default function (eleventyConfig, options = {}) {
     return document.body.innerHTML;
   }
 
-  markExternalLinks(md);
-
-  const originalRender = md.render.bind(md);
-  md.render = function (src, env) {
+  const originalRender = mdParser.render.bind(mdParser);
+  mdParser.render = function (src, env) {
     let html = originalRender(src, env);
     const locale = env?.locale || env?.lang || config.defaultLocale;
     html = applyTypography(html, locale);
@@ -818,13 +767,11 @@ export default function (eleventyConfig, options = {}) {
 
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
-  eleventyConfig.setLibrary("md", md);
+  eleventyConfig.setLibrary("md", mdParser);
 
   eleventyConfig.addFilter("typography", function (content, locale) {
     return applyTypography(content, locale || config.defaultLocale);
   });
 
-  eleventyConfig.addShortcode("typographyConfig", function () {
-    return JSON.stringify(config, null, 2);
-  });
+  logger.success();
 }

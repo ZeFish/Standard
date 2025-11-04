@@ -85,7 +85,7 @@
     /* CSS variables for easy customization */
     --card-border: var(--border);
     --card-border-width: 1px;
-    --card-border-radius: var(--border-radius);
+    --card-border-radius: var(--radius);
     --card-padding: var(--rhythm);
     --card-background: var(--color-background);
     --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -331,7 +331,7 @@
 .alert {
     --alert-padding: var(--rhythm-d2);
     --alert-border-width: 1px;
-    --alert-border-radius: var(--border-radius);
+    --alert-border-radius: var(--radius);
     --alert-background: var(--color-background-secondary);
     --alert-color: var(--color-foreground);
     --alert-border-color: var(--color-border);
@@ -503,8 +503,8 @@ a.skip-link {
     /* Styling - high contrast, unmissable */
     background: var(--color-accent);
     color: var(--color-background);
-    padding: var(--rhythm-d4) var(--rhythm-d3);
-    border-radius: var(--border-radius);
+    padding: var(--rhythm-d4) var(--rhythm-d4);
+    border-radius: var(--radius);
     font-weight: var(--bold-weight);
     font-size: var(--scale-d2);
     text-decoration: none;
@@ -646,7 +646,7 @@ a.skip-link {
         margin: 0;
         display: flex;
         flex-wrap: wrap;
-        gap: var(--rhythm-d3);
+        gap: var(--rhythm-d4);
         align-items: center;
     }
 
@@ -654,7 +654,7 @@ a.skip-link {
     li {
         display: inline-flex;
         align-items: center;
-        gap: var(--rhythm-d3);
+        gap: var(--rhythm-d4);
         margin: 0;
 
         /* Remove default list item spacing */
@@ -667,7 +667,7 @@ a.skip-link {
             content: "→"; /* or "/" or "›" */
             display: inline-block;
             color: var(--color-subtle);
-            margin-inline-end: var(--rhythm-d3);
+            margin-inline-end: var(--rhythm-d4);
         }
     }
 
@@ -812,9 +812,9 @@ a.skip-link {
         justify-content: center;
         min-width: 2.5em;
         height: 2.5em;
-        padding: 0 var(--rhythm-d3);
+        padding: 0 var(--rhythm-d4);
         border: var(--border);
-        border-radius: var(--border-radius);
+        border-radius: var(--radius);
         text-decoration: none;
         color: var(--color-foreground);
         transition:
@@ -1093,22 +1093,6 @@ a.skip-link {
         z-index: 1;
         background: var(--color-background);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-}
-
-/**
- * @name Table Wrapper compact Variant
- * @group components-data
- * @since 0.11.0
- *
- * compacter spacing for dense data tables (admin panels, dashboards).
- */
-.table-wrapper-compact table {
-    font-size: var(--scale-d3);
-
-    td,
-    th {
-        padding: var(--rhythm-d4) var(--rhythm-d3);
     }
 }
 
@@ -1467,7 +1451,7 @@ dialog.modal {
     max-height: 90vh;
     width: 600px; /* Default width */
     background: var(--color-background);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     color: var(--color-foreground);
 
@@ -1559,7 +1543,7 @@ dialog.modal::backdrop {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     transition:
         background-color var(--transition),
         color var(--transition);
@@ -1765,7 +1749,7 @@ dialog.modal::backdrop {
     background: transparent;
     border: none;
     border-bottom: 3px solid transparent;
-    padding: var(--rhythm-d3) var(--rhythm-d2);
+    padding: var(--rhythm-d4) var(--rhythm-d2);
     font-size: var(--scale-d2);
     font-weight: var(--font-weight);
     color: var(--color-muted);
@@ -1783,7 +1767,7 @@ dialog.modal::backdrop {
     &:focus-visible {
         outline: 2px solid var(--color-accent);
         outline-offset: 2px;
-        border-radius: var(--border-radius);
+        border-radius: var(--radius);
     }
 
     /* Active tab */
@@ -1830,7 +1814,7 @@ dialog.modal::backdrop {
  */
 .tabs-boxed [role="tabpanel"] {
     border: var(--border);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
 }
 
 .tabs-boxed [role="tab"][aria-selected="true"] {
@@ -1839,7 +1823,7 @@ dialog.modal::backdrop {
     border-left: 1px solid var(--color-border);
     border-right: 1px solid var(--color-border);
     border-bottom: 3px solid var(--color-background); /* Hide tablist border */
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
 /**
@@ -1921,7 +1905,7 @@ dialog.modal::backdrop {
 .accordion {
     /* Container styling */
     border: var(--border);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     background: var(--color-background);
     margin-block-end: var(--rhythm-d2);
     overflow: hidden; /* Ensure border-radius clips content */
@@ -2025,7 +2009,7 @@ dialog.modal::backdrop {
  */
 .accordion-group {
     border: var(--border);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     overflow: hidden;
 
     .accordion {
@@ -2047,7 +2031,7 @@ dialog.modal::backdrop {
  */
 .accordion-compact .accordion-trigger,
 .accordion-compact .accordion-content {
-    padding: var(--rhythm-d3);
+    padding: var(--rhythm-d4);
     font-size: var(--scale-d3);
 }
 
@@ -2059,7 +2043,7 @@ dialog.modal::backdrop {
 .menu {
     list-style: none;
     padding-inline-start: 0;
-    gap: var(--rhythm-d3);
+    gap: var(--rhythm-d4);
 }
 .menu li {
     margin: 0;

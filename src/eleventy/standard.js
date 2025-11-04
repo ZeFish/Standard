@@ -139,8 +139,8 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(PreProcessor, site);
   eleventyConfig.addPlugin(Transform);
   eleventyConfig.addPlugin(Filter);
-  eleventyConfig.addPlugin(Backlinks);
-  eleventyConfig.addPlugin(Markdown);
+  eleventyConfig.addPlugin(Backlinks, site);
+  eleventyConfig.addPlugin(Markdown, site);
   eleventyConfig.addPlugin(EleventyNavigationPlugin);
   eleventyConfig.addPlugin(Feed, site);
   eleventyConfig.addPlugin(Manifest, site);
@@ -150,7 +150,7 @@ export default function (eleventyConfig, options = {}) {
   eleventyConfig.addPlugin(ShortCode, site);
   eleventyConfig.addPlugin(MenuPlugin, site);
   eleventyConfig.addPlugin(Syntax, site);
-  eleventyConfig.addPlugin(Encryption);
+  eleventyConfig.addPlugin(Encryption, site);
 
   eleventyConfig.addPlugin(CloudflarePages, site); // self-guarded
 

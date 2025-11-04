@@ -89,8 +89,8 @@ import { fileURLToPath } from "url";
 import { compile } from "sass";
 import CleanCSS from "clean-css";
 import yaml from "js-yaml";
-import { createLogger } from "../src/eleventy/logger.js";
-const logger = createLogger({
+import Logger from "../src/eleventy/logger.js";
+const logger = Logger({
   scope: "CSS",
 });
 

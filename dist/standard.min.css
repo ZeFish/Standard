@@ -14,14 +14,14 @@
   --rhythm-gap: var(--rhythm);
   
   
-  --rhythm-block-gap: var(--rhythm);
+  --rhythm-block-gap: var(--rhythm-2);
   
   --body-padding: var(--rhythm-2);
   
   --blur: blur(7px);
   --hr-thickness: 1px;
   --transition: 0.5s ease;
-  --border-radius: var(--rhythm-d4);
+  --radius: var(--rhythm-d8);
   --modal-background: color-mix(
       in srgb,
       var(--color-background-secondary) 85%,
@@ -80,22 +80,20 @@
   --baseline-9: calc(9 * 1rlh);
   --baseline-10: calc(10 * 1rlh);
   
-  --rhythm-d5: var(--baseline-d5);
-  --rhythm-d4: var(--baseline-d4);
-  --rhythm-d3: var(--baseline-d3);
-  --rhythm-d2: var(--baseline-d2);
-  --rhythm-compact: calc(var(--baseline) * 0.75);
+  --rhythm-d8: calc(var(--baseline) / 8);
+  --rhythm-d5: calc(var(--baseline) / 5);
+  --rhythm-d4: calc(var(--baseline) / 4);
+  --rhythm-d2: calc(var(--baseline) / 2);
   --rhythm: var(--baseline);
-  --rhythm-2: var(--baseline-2);
-  --rhythm-3: var(--baseline-3);
-  --rhythm-4: var(--baseline-4);
-  --rhythm-5: var(--baseline-5);
-  --rhythm-6: var(--baseline-6);
-  --rhythm-7: var(--baseline-7);
-  --rhythm-8: var(--baseline-8);
-  --rhythm-9: var(--baseline-9);
-  --rhythm-10: var(--baseline-10);
-  
+  --rhythm-2: calc(var(--baseline) * 2);
+  --rhythm-3: calc(var(--baseline) * 3);
+  --rhythm-4: calc(var(--baseline) * 4);
+  --rhythm-5: calc(var(--baseline) * 5);
+  --rhythm-6: calc(var(--baseline) * 6);
+  --rhythm-7: calc(var(--baseline) * 7);
+  --rhythm-8: calc(var(--baseline) * 8);
+  --rhythm-9: calc(var(--baseline) * 9);
+  --rhythm-10: calc(var(--baseline) * 10);
   
   --z-base: 1;
   --z-dropdown: 1000;
@@ -588,7 +586,7 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
-h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -720,12 +718,11 @@ pre {
   color: var(--color-foreground);
   font-size: var(--scale-d2);
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   padding: var(--rhythm-d2);
   overflow-x: auto;
   overflow-y: hidden;
   box-shadow: inset var(--shadow);
-  line-height: var(--line-height-s);
 }
 
 pre code {
@@ -886,8 +883,8 @@ a.button {
   font-size: var(--scale-d3);
   font-weight: var(--bold-weight);
   line-height: var(--line-height);
-  padding: var(--rhythm-d5) var(--rhythm-d3);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: var(--color-background);
   border: var(--border);
@@ -941,8 +938,8 @@ input,
 textarea,
 select {
   font-family: var(--font-interface), system-ui, sans-serif;
-  padding: var(--rhythm-d3);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d4);
+  border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-background-secondary);
   border: var(--border);
@@ -979,7 +976,7 @@ label {
 
 fieldset {
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
 }
 
 
@@ -1010,7 +1007,7 @@ img,
 video,
 audio,
 iframe {
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   border: var(--border);
 }
 
@@ -1020,7 +1017,7 @@ iframe {
 .callout {
   background: var(--color-background-secondary);
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
 }
 
 .callout-title {
@@ -1086,13 +1083,12 @@ iframe,
 .box,
 .card {
   background: var(--color-background-secondary);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   border: var(--border);
   box-shadow: var(--shadow);
 }
 
 pre,
-blockquote,
 .inset {
   box-shadow: inset var(--shadow);
 }
@@ -1104,9 +1100,8 @@ blockquote,
 }
 
 .callout {
-  line-height: var(--line-height-s);
   transition: var(--duration-superfast) ease;
-  padding: var(--rhythm-d4);
+  padding: var(--rhythm-d8);
   padding-top: 0;
   --color-callout: var(--color-background-secondary);
   --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
@@ -1127,7 +1122,7 @@ blockquote,
   background: color-mix(in srgb, var(--color-callout) 2.5%, var(--color-background));
   box-shadow: inset var(--shadow);
   overflow: hidden;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   padding: var(--rhythm-d2) var(--rhythm-d2);
   margin-left: 0;
   border: var(--border);
@@ -1147,7 +1142,7 @@ blockquote,
   margin: var(--rhythm) 0;
 }
 .callout .callout-content > .callout {
-  margin: calc(var(--rhythm-d3) * -1);
+  margin: calc(var(--rhythm-d4) * -1);
 }
 .callout .callout-content > .callout .callout-content {
   padding: var(--rhythm-d2);
@@ -1211,7 +1206,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   background: none;
   border: none;
   box-shadow: none;
-  line-height: 1;
   text-align: center !important;
   text-wrap: balance !important;
 }
@@ -1223,6 +1217,15 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
     padding-left: var(--rhythm);
   }
 }
+.mermaid {
+  background: var(--color-background-secondary);
+  border-radius: var(--radius);
+  border: var(--border);
+  text-align: center;
+  margin: 0 auto var(--rhythm) auto;
+  padding: var(--rhythm);
+}
+
 
 
 
@@ -1276,9 +1279,15 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-start: 0;
   margin-block-end: var(--rhythm-gap);
 }
+:where(html:not(.no-rhythm), .rhythm) :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) + :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) {
+  margin-block-start: 0;
+}
 :where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .scroll, :where(html:not(.no-rhythm), .rhythm) hr {
-  margin-block-start: max(0, var(--rhythm-block-gap) - var(--rhythm-gap));
-  margin-block-end: max(var(--rhythm-gap), var(--rhythm-block-gap));
+  margin-block-start: var(--rhythm-block-gap);
+  margin-block-end: var(--rhythm-block-gap);
+}
+:where(html:not(.no-rhythm), .rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)) {
+  margin-block-end: var(--rhythm-gap);
 }
 :where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
@@ -1293,29 +1302,32 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(html:not(.no-rhythm), .rhythm) h1,
 :where(html:not(.no-rhythm), .rhythm) > h1:where(:first-child) {
-  margin-block-start: calc(var(--rhythm-gap) * 5);
-  margin-block-end: calc(var(--rhythm-gap) * 2);
-  line-height: 1;
+  margin-block-start: calc(var(--rhythm) * 5);
+  margin-block-end: calc(var(--rhythm) * 2);
+  line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h2 {
-  margin-block-start: calc(var(--rhythm-gap) * 3);
-  margin-block-end: calc(var(--rhythm-gap) * 2);
+  margin-block-start: calc(var(--rhythm) * 2);
+  margin-block-end: calc(var(--rhythm) * 2);
 }
 :where(html:not(.no-rhythm), .rhythm) h3 {
-  margin-block-start: calc(var(--rhythm-gap) * 2);
-  margin-block-end: var(--rhythm-gap);
-  line-height: 1;
+  margin-block-start: calc(var(--rhythm) * 2);
+  margin-block-end: calc(var(--rhythm) * 1);
+  line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h4 {
-  margin-block-start: var(--rhythm-gap);
+  margin-block-start: var(--rhythm);
+  line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h5 {
-  margin-block-start: var(--rhythm-gap);
-  margin-block-end: var(--rhythm-gap);
+  margin-block-start: var(--rhythm);
+  margin-block-end: var(--rhythm);
+  line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h6 {
-  margin-block-start: var(--rhythm-gap);
-  margin-block-end: var(--rhythm-gap);
+  margin-block-start: var(--rhythm);
+  margin-block-end: var(--rhythm);
+  line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
   margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
@@ -1356,7 +1368,13 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--rhythm-d);
+  margin-block-end: var(--rhythm-d2);
+}
+:where(html:not(.no-rhythm), .rhythm) .compact li {
+  margin-block-end: var(--rhythm-d2);
+}
+:where(html:not(.no-rhythm), .rhythm) .tight li {
+  margin-block-end: var(--rhythm-d4);
 }
 :where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";
@@ -1387,11 +1405,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) ul.compact li,
-:where(html:not(.no-rhythm), .rhythm) ol.compact li,
-:where(html:not(.no-rhythm), .rhythm) li:last-of-type {
-  margin-block-end: 0;
-}
 :where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
   display: grid;
   gap: calc(var(--rhythm-d2) * var(--rhythm-gap));
@@ -1404,10 +1417,10 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) fieldset {
   padding: calc(var(--rhythm-d2) * var(--rhythm-gap));
   display: grid;
-  gap: calc(var(--rhythm-d5) * var(--rhythm-gap));
+  gap: calc(var(--rhythm-d8) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) legend {
-  padding-inline: calc(var(--rhythm-d3) * var(--rhythm-gap));
+  padding-inline: calc(var(--rhythm-d4) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) input,
 :where(html:not(.no-rhythm), .rhythm) textarea,
@@ -1422,7 +1435,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=password]),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ textarea),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ select) {
-  margin-block-start: calc(var(--rhythm-d3) * var(--rhythm-gap));
+  margin-block-start: calc(var(--rhythm-d4) * var(--rhythm-gap));
   margin-inline-start: calc(var(--rhythm-d2) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) fieldset div,
@@ -1447,10 +1460,10 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(html:not(.no-rhythm), .rhythm) figure {
   display: grid;
-  gap: calc(var(--rhythm-d3) * var(--rhythm-gap));
+  gap: calc(var(--rhythm-d4) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) caption {
-  margin-block-end: calc(var(--rhythm-d3) * var(--rhythm-gap));
+  margin-block-end: calc(var(--rhythm-d4) * var(--rhythm-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) table {
   
@@ -1474,11 +1487,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(html:not(.no-rhythm), .rhythm) .striped tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
-}
-:where(html:not(.no-rhythm), .rhythm) .compact th,
-:where(html:not(.no-rhythm), .rhythm) .compact td {
-  padding-block: calc(var(--rhythm-d4) * var(--rhythm-gap));
-  padding-inline-end: calc(var(--rhythm-d3) * var(--rhythm-gap));
 }
 
 
@@ -1511,7 +1519,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 .stick-next {
-  margin-block-end: calc(var(--rhythm-d3) * var(--rhythm-gap)) !important;
+  margin-block-end: calc(var(--rhythm-d4) * var(--rhythm-gap)) !important;
 }
 
 
@@ -1550,9 +1558,13 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   row-gap: var(--grid-row-gap);
 }
 
+.grid > * {
+  min-width: 0; 
+}
+
 
 .grid.compact {
-  --grid-gap: var(--rhythm-d5);
+  --grid-gap: var(--rhythm-d8);
   --grid-row-gap: var(--rhythm-d2);
 }
 
@@ -1564,84 +1576,84 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 
 .grid-1 {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-2 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-5 {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-6 {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-7 {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-8 {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-9 {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(9, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-10 {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-11 {
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(11, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
 
 .grid-12 {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--grid-gap);
   row-gap: var(--grid-row-gap);
 }
@@ -2349,7 +2361,7 @@ hr.col-row {
 }
 
 .grid.row-gap-xs {
-  --grid-row-gap: var(--rhythm-d3);
+  --grid-row-gap: var(--rhythm-d4);
 }
 
 .grid.row-gap-s {
@@ -2370,7 +2382,7 @@ hr.col-row {
 }
 
 .grid.col-gap-xs {
-  --grid-gap: var(--rhythm-d3);
+  --grid-gap: var(--rhythm-d4);
 }
 
 .grid.col-gap-s {
@@ -2512,7 +2524,7 @@ hr.col-row {
   display: flex;
   --img-gap: var(--rhythm-d4);
   gap: var(--img-gap);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
 }
 :where(.prose):not(.no-grid) p:has(img) > * {
   flex: 1 1 auto;
@@ -2542,7 +2554,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--rhythm-block-gap) * -1 + var(--img-gap));
+  margin-block-start: calc(var(--rhythm-gap) * -1 + var(--img-gap)) !important;
 }
 :where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
@@ -2554,7 +2566,7 @@ hr.col-row {
   margin: 0;
   margin-inline: auto;
   max-inline-size: 100%;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   border: var(--border);
 }
 :where(.prose) .callout,
@@ -2609,7 +2621,7 @@ hr.col-row {
   transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
 :where(html:not(.no-rhythm), .rhythm) img.fx {
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   border: var(--border);
 }
 :where(html:not(.no-rhythm), .rhythm) img.nofx {
@@ -2690,7 +2702,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   
   --card-border: var(--border);
   --card-border-width: 1px;
-  --card-border-radius: var(--border-radius);
+  --card-border-radius: var(--radius);
   --card-padding: var(--rhythm);
   --card-background: var(--color-background);
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -2767,7 +2779,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 .alert {
   --alert-padding: var(--rhythm-d2);
   --alert-border-width: 1px;
-  --alert-border-radius: var(--border-radius);
+  --alert-border-radius: var(--radius);
   --alert-background: var(--color-background-secondary);
   --alert-color: var(--color-foreground);
   --alert-border-color: var(--color-border);
@@ -2856,8 +2868,8 @@ a.skip-link {
   
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--rhythm-d4) var(--rhythm-d3);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d4) var(--rhythm-d4);
+  border-radius: var(--radius);
   font-weight: var(--bold-weight);
   font-size: var(--scale-d2);
   text-decoration: none;
@@ -2908,13 +2920,13 @@ a.skip-link:active {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--rhythm-d3);
+  gap: var(--rhythm-d4);
   align-items: center;
 }
 .breadcrumb li {
   display: inline-flex;
   align-items: center;
-  gap: var(--rhythm-d3);
+  gap: var(--rhythm-d4);
   margin: 0;
   
 }
@@ -2925,7 +2937,7 @@ a.skip-link:active {
   content: "→"; 
   display: inline-block;
   color: var(--color-subtle);
-  margin-inline-end: var(--rhythm-d3);
+  margin-inline-end: var(--rhythm-d4);
 }
 .breadcrumb a {
   color: var(--color-foreground);
@@ -2990,9 +3002,9 @@ a.skip-link:active {
   justify-content: center;
   min-width: 2.5em;
   height: 2.5em;
-  padding: 0 var(--rhythm-d3);
+  padding: 0 var(--rhythm-d4);
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   text-decoration: none;
   color: var(--color-foreground);
   transition: background-color var(--transition), border-color var(--transition), color var(--transition);
@@ -3125,15 +3137,6 @@ a.skip-link:active {
 }
 
 
-.table-wrapper-compact table {
-  font-size: var(--scale-d3);
-}
-.table-wrapper-compact table td,
-.table-wrapper-compact table th {
-  padding: var(--rhythm-d4) var(--rhythm-d3);
-}
-
-
 .field {
   
   display: flex;
@@ -3261,7 +3264,7 @@ dialog.modal {
   max-height: 90vh;
   width: 600px; 
   background: var(--color-background);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   color: var(--color-foreground);
   
@@ -3328,7 +3331,7 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   transition: background-color var(--transition), color var(--transition);
 }
 .modal-close:hover {
@@ -3413,7 +3416,7 @@ dialog.modal::backdrop {
   background: transparent;
   border: none;
   border-bottom: 3px solid transparent;
-  padding: var(--rhythm-d3) var(--rhythm-d2);
+  padding: var(--rhythm-d4) var(--rhythm-d2);
   font-size: var(--scale-d2);
   font-weight: var(--font-weight);
   color: var(--color-muted);
@@ -3428,7 +3431,7 @@ dialog.modal::backdrop {
 [role=tab]:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
 }
 [role=tab][aria-selected=true] {
   color: var(--color-foreground);
@@ -3454,7 +3457,7 @@ dialog.modal::backdrop {
 
 .tabs-boxed [role=tabpanel] {
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
 }
 
 .tabs-boxed [role=tab][aria-selected=true] {
@@ -3463,14 +3466,14 @@ dialog.modal::backdrop {
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
   border-bottom: 3px solid var(--color-background); 
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 
 .accordion {
   
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   background: var(--color-background);
   margin-block-end: var(--rhythm-d2);
   overflow: hidden; 
@@ -3538,7 +3541,7 @@ dialog.modal::backdrop {
 
 .accordion-group {
   border: var(--border);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   overflow: hidden;
 }
 .accordion-group .accordion {
@@ -3554,7 +3557,7 @@ dialog.modal::backdrop {
 
 .accordion-compact .accordion-trigger,
 .accordion-compact .accordion-content {
-  padding: var(--rhythm-d3);
+  padding: var(--rhythm-d4);
   font-size: var(--scale-d3);
 }
 
@@ -3562,7 +3565,7 @@ dialog.modal::backdrop {
 .menu {
   list-style: none;
   padding-inline-start: 0;
-  gap: var(--rhythm-d3);
+  gap: var(--rhythm-d4);
 }
 
 .menu li {
@@ -3593,7 +3596,7 @@ dialog.modal::backdrop {
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
-  gap: var(--rhythm-d3);
+  gap: var(--rhythm-d4);
   pointer-events: none;
   max-width: 400px;
 }
@@ -3605,34 +3608,37 @@ dialog.modal::backdrop {
 
 
 .toast-container-top-right {
-  top: calc(var(--toast-spacing) * 1.8);
-  right: var(--toast-spacing);
+  position: fixed;
+  top: var(--body-padding);
+  right: var(--body-padding);
+  display: flex;
+  flex-direction: column;
 }
 
 
 .toast-container-top-left {
-  top: calc(var(--toast-spacing) * 1.8);
-  left: var(--toast-spacing);
+  top: var(--body-padding);
+  left: var(--body-padding);
   transform: translateX(100%);
 }
 
 
 .toast-container-top-center {
-  top: calc(var(--toast-spacing) * 2.25);
+  top: var(--body-padding);
   left: 50%;
   transform: translateX(-50%);
 }
 
 
 .toast-container-bottom-right {
-  bottom: calc(var(--toast-spacing) * 2.5);
+  bottom: var(--body-padding);
   right: var(--toast-spacing);
   flex-direction: column-reverse;
 }
 
 
 .toast-container-bottom-left {
-  bottom: calc(var(--toast-spacing) * 2.5);
+  bottom: var(--body-padding);
   left: var(--toast-spacing);
   flex-direction: column-reverse;
 }
@@ -3646,7 +3652,7 @@ dialog.modal::backdrop {
     top: auto !important;
     transform: none !important;
     max-width: 100%;
-    padding: var(--rhythm-d3);
+    padding: var(--rhythm-d4);
     flex-direction: column-reverse;
   }
 }
@@ -3666,34 +3672,13 @@ dialog.modal::backdrop {
   backdrop-filter: var(--blur);
   border: var(--border);
   
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
   
   opacity: 0;
-  transform: translateX(100%); 
   transition: opacity var(--transition), transform var(--transition);
   
   cursor: default;
-}
-
-
-.toast-container-top-right .toast,
-.toast-container-top-left .toast,
-.toast-container-top-center .toast {
-  transform: translateY(-100%);
-}
-
-
-.toast-container-top-left .toast,
-.toast-container-bottom-left .toast {
-  transform: translateX(-100%);
-}
-
-
-.toast-container-bottom-right .toast,
-.toast-container-bottom-left .toast,
-.toast-container-bottom-center .toast {
-  transform: translateY(100%);
 }
 
 
@@ -3726,8 +3711,9 @@ dialog.modal::backdrop {
 .toast-content {
   display: flex;
   align-items: flex-start;
-  gap: var(--rhythm-d3);
-  padding: calc(var(--rhythm-d3) / var(--line-height)) var(--rhythm-d2) var(--rhythm-d3) var(--rhythm-d3);
+  gap: var(--rhythm-d4);
+  padding: calc(var(--rhythm-d4) / var(--line-height)) var(--rhythm-d2) var(--rhythm-d4) var(--rhythm-d4);
+  transition: transform var(--transition);
 }
 
 
@@ -3763,7 +3749,7 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   transition: background-color var(--transition), color var(--transition);
 }
 .toast-close:hover {
@@ -3782,8 +3768,8 @@ dialog.modal::backdrop {
   height: 1px;
   background: color-mix(in srgb, var(--toast-color) 100%, transparent);
   width: 100%;
-  opacity: 0.2;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  opacity: 0.4;
+  border-radius: 0 0 var(--radius) var(--radius);
   transform-origin: left;
   transition: width 0s linear; 
 }
@@ -3928,7 +3914,7 @@ dialog.modal::backdrop {
     break-after: avoid; 
   }
   html hr {
-    margin-block: var(--rhythm-d3); 
+    margin-block: var(--rhythm-d4); 
   }
   html html::before,
   html html::after,
@@ -3964,7 +3950,7 @@ dialog.modal::backdrop {
 }
 
 .mt-d5 {
-  margin-top: var(--rhythm-d5) !important;
+  margin-top: var(--rhythm-d8) !important;
 }
 
 .mt-d4 {
@@ -3972,7 +3958,7 @@ dialog.modal::backdrop {
 }
 
 .mt-d3 {
-  margin-top: var(--rhythm-d3) !important;
+  margin-top: var(--rhythm-d4) !important;
 }
 
 .mt-d2 {
@@ -4008,7 +3994,7 @@ dialog.modal::backdrop {
 }
 
 .mr-d5 {
-  margin-right: var(--rhythm-d5) !important;
+  margin-right: var(--rhythm-d8) !important;
 }
 
 .mr-d4 {
@@ -4016,7 +4002,7 @@ dialog.modal::backdrop {
 }
 
 .mr-d3 {
-  margin-right: var(--rhythm-d3) !important;
+  margin-right: var(--rhythm-d4) !important;
 }
 
 .mr-d2 {
@@ -4052,7 +4038,7 @@ dialog.modal::backdrop {
 }
 
 .mb-d5 {
-  margin-bottom: var(--rhythm-d5) !important;
+  margin-bottom: var(--rhythm-d8) !important;
 }
 
 .mb-d4 {
@@ -4060,7 +4046,7 @@ dialog.modal::backdrop {
 }
 
 .mb-d3 {
-  margin-bottom: var(--rhythm-d3) !important;
+  margin-bottom: var(--rhythm-d4) !important;
 }
 
 .mb-d2 {
@@ -4096,7 +4082,7 @@ dialog.modal::backdrop {
 }
 
 .ml-d5 {
-  margin-left: var(--rhythm-d5) !important;
+  margin-left: var(--rhythm-d8) !important;
 }
 
 .ml-d4 {
@@ -4104,7 +4090,7 @@ dialog.modal::backdrop {
 }
 
 .ml-d3 {
-  margin-left: var(--rhythm-d3) !important;
+  margin-left: var(--rhythm-d4) !important;
 }
 
 .ml-d2 {
@@ -4140,7 +4126,7 @@ dialog.modal::backdrop {
 }
 
 .mv-d5 {
-  margin-block: var(--rhythm-d5) !important;
+  margin-block: var(--rhythm-d8) !important;
 }
 
 .mv-d4 {
@@ -4148,7 +4134,7 @@ dialog.modal::backdrop {
 }
 
 .mv-d3 {
-  margin-block: var(--rhythm-d3) !important;
+  margin-block: var(--rhythm-d4) !important;
 }
 
 .mv-d2 {
@@ -4184,7 +4170,7 @@ dialog.modal::backdrop {
 }
 
 .mh-d5 {
-  margin-inline: var(--rhythm-d5) !important;
+  margin-inline: var(--rhythm-d8) !important;
 }
 
 .mh-d4 {
@@ -4192,7 +4178,7 @@ dialog.modal::backdrop {
 }
 
 .mh-d3 {
-  margin-inline: var(--rhythm-d3) !important;
+  margin-inline: var(--rhythm-d4) !important;
 }
 
 .mh-d2 {
@@ -4228,7 +4214,7 @@ dialog.modal::backdrop {
 }
 
 .m-d5 {
-  margin: var(--rhythm-d5) !important;
+  margin: var(--rhythm-d8) !important;
 }
 
 .m-d4 {
@@ -4236,7 +4222,7 @@ dialog.modal::backdrop {
 }
 
 .m-d3 {
-  margin: var(--rhythm-d3) !important;
+  margin: var(--rhythm-d4) !important;
 }
 
 .m-d2 {
@@ -4275,7 +4261,7 @@ dialog.modal::backdrop {
 }
 
 .pt-d5 {
-  padding-top: var(--rhythm-d5) !important;
+  padding-top: var(--rhythm-d8) !important;
 }
 
 .pt-d4 {
@@ -4283,7 +4269,7 @@ dialog.modal::backdrop {
 }
 
 .pt-d3 {
-  padding-top: var(--rhythm-d3) !important;
+  padding-top: var(--rhythm-d4) !important;
 }
 
 .pt-d2 {
@@ -4319,7 +4305,7 @@ dialog.modal::backdrop {
 }
 
 .pr-d5 {
-  padding-right: var(--rhythm-d5) !important;
+  padding-right: var(--rhythm-d8) !important;
 }
 
 .pr-d4 {
@@ -4327,7 +4313,7 @@ dialog.modal::backdrop {
 }
 
 .pr-d3 {
-  padding-right: var(--rhythm-d3) !important;
+  padding-right: var(--rhythm-d4) !important;
 }
 
 .pr-d2 {
@@ -4363,7 +4349,7 @@ dialog.modal::backdrop {
 }
 
 .pb-d5 {
-  padding-bottom: var(--rhythm-d5) !important;
+  padding-bottom: var(--rhythm-d8) !important;
 }
 
 .pb-d4 {
@@ -4371,7 +4357,7 @@ dialog.modal::backdrop {
 }
 
 .pb-d3 {
-  padding-bottom: var(--rhythm-d3) !important;
+  padding-bottom: var(--rhythm-d4) !important;
 }
 
 .pb-d2 {
@@ -4407,7 +4393,7 @@ dialog.modal::backdrop {
 }
 
 .pl-d5 {
-  padding-left: var(--rhythm-d5) !important;
+  padding-left: var(--rhythm-d8) !important;
 }
 
 .pl-d4 {
@@ -4415,7 +4401,7 @@ dialog.modal::backdrop {
 }
 
 .pl-d3 {
-  padding-left: var(--rhythm-d3) !important;
+  padding-left: var(--rhythm-d4) !important;
 }
 
 .pl-d2 {
@@ -4451,7 +4437,7 @@ dialog.modal::backdrop {
 }
 
 .pv-d5 {
-  padding-block: var(--rhythm-d5) !important;
+  padding-block: var(--rhythm-d8) !important;
 }
 
 .pv-d4 {
@@ -4459,7 +4445,7 @@ dialog.modal::backdrop {
 }
 
 .pv-d3 {
-  padding-block: var(--rhythm-d3) !important;
+  padding-block: var(--rhythm-d4) !important;
 }
 
 .pv-d2 {
@@ -4495,7 +4481,7 @@ dialog.modal::backdrop {
 }
 
 .ph-d5 {
-  padding-inline: var(--rhythm-d5) !important;
+  padding-inline: var(--rhythm-d8) !important;
 }
 
 .ph-d4 {
@@ -4503,7 +4489,7 @@ dialog.modal::backdrop {
 }
 
 .ph-d3 {
-  padding-inline: var(--rhythm-d3) !important;
+  padding-inline: var(--rhythm-d4) !important;
 }
 
 .ph-d2 {
@@ -4539,7 +4525,7 @@ dialog.modal::backdrop {
 }
 
 .p-d5 {
-  padding: var(--rhythm-d5) !important;
+  padding: var(--rhythm-d8) !important;
 }
 
 .p-d4 {
@@ -4547,7 +4533,7 @@ dialog.modal::backdrop {
 }
 
 .p-d3 {
-  padding: var(--rhythm-d3) !important;
+  padding: var(--rhythm-d4) !important;
 }
 
 .p-d2 {
@@ -4586,7 +4572,7 @@ dialog.modal::backdrop {
 }
 
 .gap-d5 {
-  gap: var(--rhythm-d5) !important;
+  gap: var(--rhythm-d8) !important;
 }
 
 .gap-d4 {
@@ -4594,7 +4580,7 @@ dialog.modal::backdrop {
 }
 
 .gap-d3 {
-  gap: var(--rhythm-d3) !important;
+  gap: var(--rhythm-d4) !important;
 }
 
 .gap-d2 {
@@ -4630,7 +4616,7 @@ dialog.modal::backdrop {
 }
 
 .column-gap-d5 {
-  column-gap: var(--rhythm-d5) !important;
+  column-gap: var(--rhythm-d8) !important;
 }
 
 .column-gap-d4 {
@@ -4638,7 +4624,7 @@ dialog.modal::backdrop {
 }
 
 .column-gap-d3 {
-  column-gap: var(--rhythm-d3) !important;
+  column-gap: var(--rhythm-d4) !important;
 }
 
 .column-gap-d2 {
@@ -4677,7 +4663,7 @@ dialog.modal::backdrop {
 }
 
 .width-d5 {
-  width: var(--rhythm-d5) !important;
+  width: var(--rhythm-d8) !important;
 }
 
 .width-d4 {
@@ -4685,7 +4671,7 @@ dialog.modal::backdrop {
 }
 
 .width-d3 {
-  width: var(--rhythm-d3) !important;
+  width: var(--rhythm-d4) !important;
 }
 
 .width-d2 {
@@ -4746,7 +4732,7 @@ dialog.modal::backdrop {
 }
 
 .min-width-d5 {
-  min-width: var(--rhythm-d5) !important;
+  min-width: var(--rhythm-d8) !important;
 }
 
 .min-width-d4 {
@@ -4754,7 +4740,7 @@ dialog.modal::backdrop {
 }
 
 .min-width-d3 {
-  min-width: var(--rhythm-d3) !important;
+  min-width: var(--rhythm-d4) !important;
 }
 
 .min-width-d2 {
@@ -4803,7 +4789,7 @@ dialog.modal::backdrop {
 }
 
 .max-width-d5 {
-  max-width: var(--rhythm-d5) !important;
+  max-width: var(--rhythm-d8) !important;
 }
 
 .max-width-d4 {
@@ -4811,7 +4797,7 @@ dialog.modal::backdrop {
 }
 
 .max-width-d3 {
-  max-width: var(--rhythm-d3) !important;
+  max-width: var(--rhythm-d4) !important;
 }
 
 .max-width-d2 {
@@ -4862,7 +4848,7 @@ dialog.modal::backdrop {
 }
 
 .height-d5 {
-  height: var(--rhythm-d5) !important;
+  height: var(--rhythm-d8) !important;
 }
 
 .height-d4 {
@@ -4870,7 +4856,7 @@ dialog.modal::backdrop {
 }
 
 .height-d3 {
-  height: var(--rhythm-d3) !important;
+  height: var(--rhythm-d4) !important;
 }
 
 .height-d2 {
@@ -4935,7 +4921,7 @@ dialog.modal::backdrop {
 }
 
 .min-height-d5 {
-  min-height: var(--rhythm-d5) !important;
+  min-height: var(--rhythm-d8) !important;
 }
 
 .min-height-d4 {
@@ -4943,7 +4929,7 @@ dialog.modal::backdrop {
 }
 
 .min-height-d3 {
-  min-height: var(--rhythm-d3) !important;
+  min-height: var(--rhythm-d4) !important;
 }
 
 .min-height-d2 {
@@ -4992,7 +4978,7 @@ dialog.modal::backdrop {
 }
 
 .max-height-d5 {
-  max-height: var(--rhythm-d5) !important;
+  max-height: var(--rhythm-d8) !important;
 }
 
 .max-height-d4 {
@@ -5000,7 +4986,7 @@ dialog.modal::backdrop {
 }
 
 .max-height-d3 {
-  max-height: var(--rhythm-d3) !important;
+  max-height: var(--rhythm-d4) !important;
 }
 
 .max-height-d2 {
@@ -5158,7 +5144,8 @@ dialog.modal::backdrop {
   white-space: nowrap !important;
 }
 
-.ellipsis {
+.ellipsis,
+.ellipsis li {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -5188,7 +5175,7 @@ aside.info {
   border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: var(--rhythm-d3);
+  padding: var(--rhythm-d4);
   font-size: var(--scale-d3);
   font-family: var(--font-interface);
 }
@@ -5588,31 +5575,28 @@ ol.no-bullet li::before {
   display: none;
 }
 
-ul.menu-v {
+nav.menu ul,
+ul.menu {
   display: flex;
   flex-direction: column;
   padding-inline: 0;
+  gap: 0;
 }
-ul.menu-v li {
-  margin-block-end: 0;
-  list-style: none;
-}
-ul.menu-v li::before {
-  display: none;
-}
-
-ul.menu-h {
-  display: flex;
-  gap: var(--rhythm);
-  padding-inline: 0;
-}
-ul.menu-h li {
-  margin-block-end: 0;
+nav.menu ul li,
+ul.menu li {
+  margin-block-end: var(--rhythm-d4);
   list-style: none;
   padding-inline-start: 0;
 }
-ul.menu-h li::before {
+nav.menu ul li::before,
+ul.menu li::before {
   display: none;
+}
+
+nav.menu.horizontal ul,
+ul.menu.horizontal {
+  flex-direction: row;
+  gap: var(--rhythm);
 }
 
 
@@ -5742,8 +5726,8 @@ aside) {
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d5) var(--rhythm-d4);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
   z-index: var(--z-tooltip);
@@ -5765,8 +5749,8 @@ aside) {
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d5) var(--rhythm-d4);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.63;
   z-index: var(--z-tooltip);
@@ -5783,7 +5767,7 @@ aside) {
   background: var(--color-background);
   color: var(--color-foreground);
   border: var(--border-accent);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   padding: var(--rhythm-d2);
   font-family: var(--font-monospace);
   font-size: var(--scale-d3);
@@ -5827,14 +5811,14 @@ aside) {
 .standard-debug .grid-12 > *::before {
   content: attr(class);
   position: absolute;
-  top: var(--rhythm-d5);
-  left: var(--rhythm-d5);
+  top: var(--rhythm-d8);
+  left: var(--rhythm-d8);
   background: var(--color-cyan);
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d5) var(--rhythm-d4);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
   z-index: var(--z-tooltip);
@@ -5848,14 +5832,14 @@ aside) {
 .standard-debug .free-col::after {
   content: "start: " var(--start) " / span: " var(--span);
   position: absolute;
-  bottom: var(--rhythm-d5);
-  left: var(--rhythm-d5);
+  bottom: var(--rhythm-d8);
+  left: var(--rhythm-d8);
   background: var(--color-purple);
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d5) var(--rhythm-d4);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
   z-index: var(--z-tooltip);
@@ -5900,8 +5884,8 @@ aside) {
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d5) var(--rhythm-d4);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
   z-index: var(--z-tooltip);
@@ -5917,8 +5901,8 @@ body.standard-debug::before {
   color: var(--color-foreground);
   font-family: var(--font-monospace);
   font-size: var(--scale-d3);
-  padding: var(--rhythm-d3) var(--rhythm-d2);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d4) var(--rhythm-d2);
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
   z-index: var(--z-toast);
   pointer-events: none;
@@ -5974,12 +5958,12 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature::before,
 .standard-debug .prose .container-full::before {
   position: absolute;
-  top: var(--rhythm-d5);
-  right: var(--rhythm-d5);
+  top: var(--rhythm-d8);
+  right: var(--rhythm-d8);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d5) var(--rhythm-d4);
-  border-radius: var(--border-radius);
+  padding: var(--rhythm-d8) var(--rhythm-d4);
+  border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.95;
   z-index: var(--z-tooltip);

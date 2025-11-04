@@ -34,39 +34,12 @@ import Logger from "./logger.js";
 // Get the directory name in ES modules
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export async function customEncryptHTML(html, password) {
-  // Simple XOR encryption with password
-  const key = createHash("sha256").update(password).digest();
-  const htmlBuffer = Buffer.from(html, "utf8");
-  const encrypted = Buffer.alloc(htmlBuffer.length);
+export default function addEncryptionTransform(eleventyConfig, site) {
   const logger = Logger({
+    verbose: site.standard.verbose,
     scope: "Encryption",
   });
 
-  for (let i = 0; i < htmlBuffer.length; i++) {
-    encrypted[i] = htmlBuffer[i] ^ key[i % key.length];
-  }
-
-  // Use Buffer.toString('base64') to avoid stack overflow
-  const encryptedData = encrypted.toString("base64");
-
-  // Configure Nunjucks to load templates from the 'includes' directory
-  const includesPath = path.resolve(__dirname, "../layouts");
-  nunjucks.configure(includesPath, {
-    autoescape: false, // Disable autoescaping for HTML content
-  });
-
-  // Render the Nunjucks template
-  const template = nunjucks.render("encrypted.njk", {
-    encryptedData,
-  });
-  return template;
-}
-
-export function addEncryptionTransform(eleventyConfig) {
-  const logger = Logger({
-    scope: "Encryption",
-  });
   eleventyConfig.addTransform("protect-notes", async function (content) {
     if (!this.page.inputPath.endsWith(".md")) return content;
 
@@ -133,7 +106,31 @@ export function addEncryptionTransform(eleventyConfig) {
   logger.success();
 }
 
-// Export as default plugin function
-export default function (eleventyConfig) {
-  addEncryptionTransform(eleventyConfig);
+export async function customEncryptHTML(html, password) {
+  // Simple XOR encryption with password
+  const key = createHash("sha256").update(password).digest();
+  const htmlBuffer = Buffer.from(html, "utf8");
+  const encrypted = Buffer.alloc(htmlBuffer.length);
+  const logger = Logger({
+    scope: "Encryption",
+  });
+
+  for (let i = 0; i < htmlBuffer.length; i++) {
+    encrypted[i] = htmlBuffer[i] ^ key[i % key.length];
+  }
+
+  // Use Buffer.toString('base64') to avoid stack overflow
+  const encryptedData = encrypted.toString("base64");
+
+  // Configure Nunjucks to load templates from the 'includes' directory
+  const includesPath = path.resolve(__dirname, "../layouts");
+  nunjucks.configure(includesPath, {
+    autoescape: false, // Disable autoescaping for HTML content
+  });
+
+  // Render the Nunjucks template
+  const template = nunjucks.render("encrypted.njk", {
+    encryptedData,
+  });
+  return template;
 }

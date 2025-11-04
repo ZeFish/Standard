@@ -55,10 +55,13 @@
     column-gap: var(--grid-gap);
     row-gap: var(--grid-row-gap);
 }
+.grid > * {
+    min-width: 0; /* ← Force items to shrink below content size */
+}
 
 /* Gap variants aligned to rhythm */
 .grid.compact {
-    --grid-gap: var(--rhythm-d5);
+    --grid-gap: var(--rhythm-d8);
     --grid-row-gap: var(--rhythm-d2);
 }
 .grid.relaxed {
@@ -70,7 +73,7 @@
 @for $i from 1 through 12 {
     .grid-#{$i} {
         display: grid;
-        grid-template-columns: repeat(#{$i}, 1fr);
+        grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
         column-gap: var(--grid-gap);
         row-gap: var(--grid-row-gap);
     }
@@ -224,7 +227,7 @@ hr.col-row {
 }
 
 .grid.row-gap-xs {
-    --grid-row-gap: var(--rhythm-d3);
+    --grid-row-gap: var(--rhythm-d4);
 }
 
 .grid.row-gap-s {
@@ -245,7 +248,7 @@ hr.col-row {
 }
 
 .grid.col-gap-xs {
-    --grid-gap: var(--rhythm-d3);
+    --grid-gap: var(--rhythm-d4);
 }
 
 .grid.col-gap-s {
