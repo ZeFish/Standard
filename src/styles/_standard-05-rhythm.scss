@@ -79,8 +79,8 @@
 }
 
 @media (max-width: #{$small}) {
-    :where(body:not(.no-rhythm)),
-    :where(html:not(.no-rhythm)) > body {
+    :where(.rhythm),
+    :where(.rhythm) > body {
         margin: 0;
     }
 }
