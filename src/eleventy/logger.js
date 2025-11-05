@@ -152,7 +152,7 @@ export default function createLogger(options = {}) {
       console.log(...format(`${colors.green.fg}✓`, ...args));
     },
     warn(...args) {
-      console.warn(...format(`${colors.yellow.fg}▲﻿ ...args));
+      console.warn(...format(`${colors.yellow.fg}⚠`, ...args));
     },
     error(...args) {
       console.error(...format(`${colors.red.fg}✖`, ...args));
