@@ -36,7 +36,7 @@
     --line-height: 1.5;
 
     /* Space between standard block like paragraph */
-    --base-gap: calc(var(--base) + var(--base-mistery));
+    --base-gap: calc(var(--base) + 1rem + var(--base-mistery));
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
