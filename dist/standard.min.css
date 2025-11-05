@@ -11,7 +11,7 @@
   
   --line-height: 1.5;
   
-  --base-gap: var(--base);
+  --base-gap: calc(var(--base) + 1rem + var(--base-mistery));
   
   
   --base-block-gap: var(--base-2);
@@ -53,6 +53,7 @@
   --base-d8: calc(1rlh / 8);
   --base-d4: calc(1rlh / 4);
   --base-d2: calc(1rlh / 2);
+  --base-mistery: calc(var(--base) / var(--line-height));
   --base: 1rlh;
   --base-2: calc(1rlh * 2);
   --base-4: calc(1rlh * 4);
@@ -1265,7 +1266,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 
-:where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) p, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) dt, :where(html:not(.no-rhythm), .rhythm) dd, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset, :where(html:not(.no-rhythm), .rhythm) aside {
+:where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) p, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) dt, :where(html:not(.no-rhythm), .rhythm) dd, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset, :where(html:not(.no-rhythm), .rhythm) aside, :where(html:not(.no-rhythm), .rhythm) .callout {
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
 }
@@ -5630,42 +5631,111 @@ ul.menu.horizontal {
   display: inherit;
 }
 
+:root {
+  --debug-line-opacity: 15%;
+  --debug-outline-opacity: 50%;
+}
+
+.standard-debug::before,
+.standard-debug::after,
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)::before,
+.standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
+  content: "";
+  color: var(--color-muted);
+  border-radius: var(--radius);
+  font-family: var(--font-monospace);
+  font-size: var(--scale-d2);
+  padding: var(--base-d8) var(--base-d4);
+  border-radius: var(--radius);
+  z-index: var(--z-toast);
+  pointer-events: none;
+  white-space: pre;
+}
+
 
 .standard-debug::before {
   --color-grid: var(--color-cyan);
-  --percent-grid: 25%;
+  --percent-grid: var(--debug-line-opacity);
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--base) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--base) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--base));
   pointer-events: none;
   z-index: 10000;
 }
 
-.standard-debug :is(h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-li,
-blockquote,
-figcaption,
-td,
-th,
-dt,
-dd,
-label,
-.callout,
-pre,
-.lined,
-a,
-aside) {
-  background-color: color-mix(in srgb, var(--color-orange) 5%, transparent);
-  outline: 1px dotted color-mix(in srgb, var(--color-orange) 25%, transparent);
-  outline-offset: 1rlh;
+.standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
+  outline: 1px dashed color-mix(in srgb, var(--color-cyan) var(--debug-outline-opacity), transparent);
+  outline-offset: var(--base);
 }
+
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr) {
+  position: relative;
+}
+
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)::before {
+  content: "Block";
+  position: absolute;
+  top: 0;
+  left: calc(var(--base) * -2);
+  transform: translateX(-100%);
+  z-index: 999999999;
+}
+
+.standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) {
+  position: relative;
+  border: none;
+}
+
+.standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
+  content: "Small";
+  position: absolute;
+  top: 0;
+  left: calc(var(--base) * -2);
+  transform: translateX(-100%);
+}
+
+
+.standard-debug .prose {
+  position: relative;
+}
+
+.standard-debug .grid-debug-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: inherit;
+  pointer-events: none;
+  z-index: 9999;
+  grid-column: hero;
+}
+.standard-debug .grid-debug-overlay span:nth-child(1) {
+  grid-column: hero-start/feature-start;
+}
+.standard-debug .grid-debug-overlay span:nth-child(2) {
+  grid-column: feature-start/accent-start;
+  border-inline-start: 1px solid color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
+}
+.standard-debug .grid-debug-overlay span:nth-child(3) {
+  grid-column: accent-start/content-start;
+  border-inline-start: 1px solid color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
+}
+.standard-debug .grid-debug-overlay span:nth-child(4) {
+  grid-column: content;
+  outline: 1px solid color-mix(in srgb, var(--color-green) var(--debug-line-opacity), transparent);
+}
+.standard-debug .grid-debug-overlay span:nth-child(5) {
+  grid-column: content-end/accent-end;
+  border-inline-end: 1px solid color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
+}
+.standard-debug .grid-debug-overlay span:nth-child(6) {
+  grid-column: accent-end/feature-end;
+  border-inline-end: 1px solid color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
+}
+.standard-debug .grid-debug-overlay span:nth-child(7) {
+  grid-column: feature-end/hero-end;
+}
+
 
 
 .standard-debug .grid,
@@ -5705,90 +5775,6 @@ aside) {
   z-index: var(--z-tooltip);
   background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-red) 10%, transparent) 0, color-mix(in srgb, var(--color-red) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
 }
-
-
-.standard-debug .prose::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: [full-start] var(--content-full) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-full) [full-end];
-  pointer-events: none;
-  z-index: 122;
-  opacity: 1;
-  background: linear-gradient(to right, transparent 0, transparent var(--content-full), var(--color-purple) var(--content-full), var(--color-purple) calc(var(--content-full) + var(--content-feature)), var(--color-blue) calc(var(--content-full) + var(--content-feature)), var(--color-blue) calc(var(--content-full) + var(--content-feature) + var(--content-accent)), var(--color-accent) calc(var(--content-full) + var(--content-feature) + var(--content-accent)), var(--color-accent) calc(100% - var(--content-full) - var(--content-feature) - var(--content-accent)), var(--color-blue) calc(100% - var(--content-full) - var(--content-feature) - var(--content-accent)), var(--color-blue) calc(100% - var(--content-full) - var(--content-feature)), var(--color-purple) calc(100% - var(--content-full) - var(--content-feature)), var(--color-purple) calc(100% - var(--content-full)), transparent calc(100% - var(--content-full)));
-}
-
-
-.standard-debug.rhythm > * {
-  outline: 1px dashed color-mix(in srgb, var(--color-orange) 50%, transparent);
-  outline-offset: -1px;
-  position: relative;
-}
-
-
-.standard-debug.rhythm > *::after {
-  content: "↓ " attr(data-margin-block-end);
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: var(--color-orange);
-  color: var(--color-background);
-  font-size: var(--scale-d3);
-  font-family: var(--font-monospace);
-  padding: var(--base-d8) var(--base-d4);
-  border-radius: var(--radius);
-  pointer-events: none;
-  opacity: 0.9;
-  z-index: var(--z-tooltip);
-  white-space: nowrap;
-  display: none;
-}
-
-
-.standard-debug [data-typography-processed] {
-  position: relative;
-}
-
-.standard-debug [data-typography-processed]::before {
-  content: "✓ Typo";
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: var(--color-success);
-  color: var(--color-background);
-  font-size: var(--scale-d3);
-  font-family: var(--font-monospace);
-  padding: var(--base-d8) var(--base-d4);
-  border-radius: var(--radius);
-  pointer-events: none;
-  opacity: 0.63;
-  z-index: var(--z-tooltip);
-  white-space: nowrap;
-  display: none;
-}
-
-
-.standard-debug::after {
-  content: "🔍 Standard Debug" "\a" "Baseline: " var(--base) "\a" "Ratio: " var(--optical-ratio) "\a" "Density: " var(--line-height) "\a" "Grid: " var(--grid-cols) " cols";
-  position: fixed;
-  top: var(--base);
-  right: var(--base);
-  background: var(--color-background);
-  color: var(--color-foreground);
-  border: var(--border-accent);
-  border-radius: var(--radius);
-  padding: var(--base-d2);
-  font-family: var(--font-monospace);
-  font-size: var(--scale-d3);
-  line-height: 1.5;
-  white-space: pre;
-  box-shadow: var(--shadow-xl);
-  z-index: var(--z-toast);
-  pointer-events: none;
-  opacity: 0.95;
-}
-
 
 .standard-debug .grid > *,
 .standard-debug .grid-2 > *,
@@ -5857,158 +5843,28 @@ aside) {
 }
 
 
-.standard-debug .text-accent,
-.standard-debug .text-success,
-.standard-debug .text-warning,
-.standard-debug .text-error {
-  position: relative;
-}
-
-.standard-debug .text-accent::before {
-  content: "accent";
-  background: var(--color-accent);
-}
-
-.standard-debug .text-success::before {
-  content: "success";
-  background: var(--color-success);
-}
-
-.standard-debug .text-warning::before {
-  content: "warning";
-  background: var(--color-warning);
-}
-
-.standard-debug .text-error::before {
-  content: "error";
-  background: var(--color-error);
-}
-
-.standard-debug .text-accent::before,
-.standard-debug .text-success::before,
-.standard-debug .text-warning::before,
-.standard-debug .text-error::before {
-  position: absolute;
-  top: -1.5em;
-  left: 0;
-  color: var(--color-background);
-  font-size: var(--scale-d3);
-  font-family: var(--font-monospace);
-  padding: var(--base-d8) var(--base-d4);
-  border-radius: var(--radius);
-  pointer-events: none;
-  opacity: 0.9;
-  z-index: var(--z-tooltip);
-  white-space: nowrap;
-}
-
-
-body.standard-debug::before {
-  content: "md";
+.standard-debug::after {
+  content: "Debug";
   position: fixed;
-  bottom: var(--base);
+  top: var(--base);
   left: var(--base);
-  color: var(--color-foreground);
-  font-family: var(--font-monospace);
-  font-size: var(--scale-d3);
-  padding: var(--base-d4) var(--base-d2);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  z-index: var(--z-toast);
-  pointer-events: none;
-  font-weight: bold;
 }
 
 @media (max-width: 768px) {
-  body.standard-debug::before {
-    content: "sm (<768px)";
-    color: var(--color-foreground);
+  .standard-debug::after {
+    content: "Debug : sm (<768px)";
   }
 }
 @media (max-width: 600px) {
-  body.standard-debug::before {
-    content: "xs (<600px)";
-    color: var(--color-foreground);
+  .standard-debug::after {
+    content: "Debug : xs (<600px)";
   }
 }
 @media (min-width: 1024px) {
-  body.standard-debug::before {
-    content: "lg (≥1024px)";
-    color: var(--color-foreground);
+  .standard-debug::after {
+    content: "Debug : lg (≥1024px)";
   }
 }
-
-.standard-debug .prose .container-small,
-.standard-debug .prose .container-accent,
-.standard-debug .prose .container-feature,
-.standard-debug .prose .container-full {
-  position: relative; 
-  outline: 1px dashed; 
-  outline-offset: -1px;
-}
-
-.standard-debug .prose .container-small {
-  outline-color: color-mix(in srgb, var(--color-blue) 95%, transparent);
-}
-
-.standard-debug .prose .container-accent {
-  outline-color: color-mix(in srgb, var(--color-accent) 95%, transparent);
-}
-
-.standard-debug .prose .container-feature {
-  outline-color: color-mix(in srgb, var(--color-purple) 95%, transparent);
-}
-
-.standard-debug .prose .container-full {
-  outline-color: color-mix(in srgb, var(--color-pink) 95%, transparent);
-}
-
-.standard-debug .prose .container-small::before,
-.standard-debug .prose .container-accent::before,
-.standard-debug .prose .container-feature::before,
-.standard-debug .prose .container-full::before {
-  position: absolute;
-  top: var(--base-d8);
-  right: var(--base-d8);
-  font-size: var(--scale-d3);
-  font-family: var(--font-monospace);
-  padding: var(--base-d8) var(--base-d4);
-  border-radius: var(--radius);
-  pointer-events: none;
-  opacity: 0.95;
-  z-index: var(--z-tooltip);
-  color: var(--color-background);
-  white-space: nowrap;
-  font-weight: bold;
-}
-
-.standard-debug .prose .container-small::before {
-  content: "Small";
-  background: var(--color-blue);
-}
-
-.standard-debug .prose .container-accent::before {
-  content: "Accent";
-  background: var(--color-accent);
-}
-
-.standard-debug .prose .container-feature::before {
-  content: "Feature";
-  background: var(--color-purple);
-}
-
-.standard-debug .prose .container-full::before {
-  content: "Full";
-  background: var(--color-pink);
-}
-
-
-.standard-debug .prose > :not(.container-small):not(.container-accent):not(.container-feature):not(.container-full) {
-  outline: 1px dotted color-mix(in srgb, var(--color-green) 50%, transparent);
-  outline-offset: -1px;
-  background-color: color-mix(in srgb, var(--color-green) 5%, transparent);
-}
-
 
 @media print {
   .standard-debug::before,

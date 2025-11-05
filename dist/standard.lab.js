@@ -27,12 +27,43 @@ class StandardLab {
         "--font-text",
         "--font-header",
         "--font-monospace",
+        "--font-interface",
         "--font-size",
-        "--ratio",
-        "--lh-lrh",
+        "--optical-ratio",
+        "--line-height",
+        "--font-weight",
+        "--bold-weight",
+        "--font-letter-spacing",
+        "--font-header-letter-spacing",
+        "--font-header-weight",
       ],
-      layout: ["--line-width", "--base-gap", "--base"],
+      layout: [
+        "--line-width",
+        "--line-width-xs",
+        "--line-width-s",
+        "--line-width-m",
+        "--line-width-l",
+        "--line-width-xl",
+        "--base",
+        "--base-gap",
+        "--base-block-gap",
+        "--body-padding",
+        "--gap",
+        "--grid-gap",
+      ],
       colors: this.getColorTokens(),
+      advanced: [
+        "--ratio-golden",
+        "--ratio-silver",
+        "--ratio-wholestep",
+        "--ratio-halfstep",
+        "--radius",
+        "--blur",
+        "--transition",
+        "--hr-thickness",
+        "--shadow",
+        "--border",
+      ],
     };
 
     this.defaults = {};
@@ -43,6 +74,11 @@ class StandardLab {
     this.storeDefaults();
     this.createBadge();
     this.initKeyboardShortcuts();
+
+    // Check if debug mode is already active
+    if (document.documentElement.classList.contains("standard-debug")) {
+      this.injectGridDebugOverlays();
+    }
 
     if (window.matchMedia) {
       window
@@ -62,6 +98,7 @@ class StandardLab {
       ...this.coreTokens.typography,
       ...this.coreTokens.layout,
       ...this.coreTokens.colors,
+      ...this.coreTokens.advanced,
     ];
     allTokens.forEach((token) => {
       const value = getComputedStyle(document.documentElement)
@@ -118,14 +155,13 @@ class StandardLab {
   createBadge() {
     if (this.badge) return;
     this.badge = document.createElement("button");
-    // --- HTMX CHANGE (1/4): Add stable ID for hx-preserve ---
     this.badge.id = "standard-lab-badge-container";
     this.badge.className = "standard-lab-badge";
     this.badge.setAttribute("aria-label", "Open Standard Inspector");
-    this.badge.setAttribute("title", "Standard Inspector (Shift+Cmd+D)");
+    this.badge.setAttribute("title", "Standard Inspector (Shift+Cmd+S)");
     this.badge.style.bottom = `${this.position.bottom}px`;
     this.badge.style.right = `${this.position.right}px`;
-    this.badge.innerHTML = ``;
+    this.badge.innerHTML = `🔍`;
     this.badge.addEventListener("click", () => this.openQuick());
     this.makeDraggable(this.badge);
     document.body.appendChild(this.badge);
@@ -213,18 +249,22 @@ class StandardLab {
     this.state = "dormant";
   }
 
-  // --- HTMX CHANGE (2/4): Add public refresh method ---
   /**
    * Public method to refresh the panel's UI.
    * Ideal for calling after HTMX swaps change the page state (e.g., theme).
    */
   refresh() {
-    // Re-run the default value storage in case a theme changed them
     console.log("refresh");
     this.storeDefaults();
 
     this.badge = null;
     this.init();
+
+    // Re-inject overlays if debug is active
+    if (document.documentElement.classList.contains("standard-debug")) {
+      this.removeGridDebugOverlays();
+      this.injectGridDebugOverlays();
+    }
 
     // Do nothing if the panel is closed
     if (this.state === "dormant") {
@@ -232,14 +272,12 @@ class StandardLab {
     }
 
     // Re-run the appropriate panel creation method to rebuild the UI
-    // with the latest data (e.g., new theme from data-theme attribute).
     if (this.state === "quick") {
       this.createQuickPanel();
     } else if (this.state === "full") {
       const showModifiedOnly =
         this.panel?.querySelector('[data-filter="modified"]')?.checked || false;
       this.createFullPanel();
-      // Restore tab and filter after rebuilding
       this.switchTab(this.currentTab);
       const modifiedFilter = this.panel?.querySelector(
         '[data-filter="modified"]',
@@ -254,12 +292,12 @@ class StandardLab {
   createQuickPanel() {
     if (this.panel) this.panel.remove();
     this.panel = document.createElement("div");
-    // --- HTMX CHANGE (3/4): Add stable ID for hx-preserve ---
     this.panel.id = "standard-lab-panel-container";
     this.panel.className = "standard-lab-panel standard-lab-panel-quick";
     this.panel.style.bottom = `calc(${this.position.bottom}px + var(--base-2))`;
     this.panel.style.right = `${this.position.right}px`;
-    const debugActive = document.body.classList.contains("standard-debug");
+    const debugActive =
+      document.documentElement.classList.contains("standard-debug");
     const modifiedCount = this.modifiedTokens.size;
     this.panel.innerHTML = `
       <header class="standard-lab-panel-header">
@@ -322,7 +360,13 @@ class StandardLab {
     this.panel
       .querySelector('[data-toggle="debug"]')
       ?.addEventListener("change", (e) => {
-        document.body.classList.toggle("standard-debug", e.target.checked);
+        const isEnabled = e.target.checked;
+        document.documentElement.classList.toggle("standard-debug", isEnabled);
+        if (isEnabled) {
+          this.injectGridDebugOverlays();
+        } else {
+          this.removeGridDebugOverlays();
+        }
         toast.info(`Debug mode ${e.target.checked ? "enabled" : "disabled"}`);
       });
     this.panel
@@ -351,7 +395,7 @@ class StandardLab {
   createFullPanel() {
     if (this.panel) this.panel.remove();
     this.panel = document.createElement("div");
-    this.panel.id = "standard-lab-panel-container"; // Also add ID here
+    this.panel.id = "standard-lab-panel-container";
     this.panel.className = "standard-lab-panel standard-lab-panel-full";
     this.panel.style.bottom = `calc(${this.position.bottom}px + var(--base-2))`;
     this.panel.style.right = `${this.position.right}px`;
@@ -369,6 +413,7 @@ class StandardLab {
         <button class="standard-lab-tab" data-tab="typography" aria-selected="true">Typography</button>
         <button class="standard-lab-tab" data-tab="layout">Layout</button>
         <button class="standard-lab-tab" data-tab="colors">Colors</button>
+        <button class="standard-lab-tab" data-tab="advanced">Advanced</button>
       </nav>
       ${modifiedCount > 0 ? `<div class="standard-lab-filter"><label class="standard-lab-toggle"><input type="checkbox" ${showModifiedOnly ? "checked" : ""} data-filter="modified"><span>Show modified only (${modifiedCount})</span></label></div>` : ""}
       <div class="standard-lab-content">${this.renderTokenList("typography", showModifiedOnly)}</div>
@@ -474,7 +519,6 @@ class StandardLab {
     const content = this.panel?.querySelector(".standard-lab-content");
     if (!content) return;
     content.innerHTML = this.renderTokenList(this.currentTab, modifiedOnly);
-    // Re-attach listeners to the new content
     this.attachFullPanelListeners();
   }
 
@@ -534,6 +578,7 @@ class StandardLab {
       ...this.coreTokens.typography,
       ...this.coreTokens.layout,
       ...this.coreTokens.colors,
+      ...this.coreTokens.advanced,
     ];
     const css = `:root {\n${allTokens.map((token) => `  ${token}: ${this.getPropertyValue(token)};`).join("\n")}\n}`;
     navigator.clipboard
@@ -658,8 +703,17 @@ class StandardLab {
         e.key.toLowerCase() === "d"
       ) {
         e.preventDefault();
-        document.body.classList.toggle("standard-debug");
-        const isActive = document.body.classList.contains("standard-debug");
+
+        document.documentElement.classList.toggle("standard-debug");
+        const isActive =
+          document.documentElement.classList.contains("standard-debug");
+
+        if (isActive) {
+          this.injectGridDebugOverlays();
+        } else {
+          this.removeGridDebugOverlays();
+        }
+
         toast.info(`Debug mode ${isActive ? "enabled" : "disabled"}`);
       }
       if (e.key === "Escape" && this.state !== "dormant") {
@@ -673,6 +727,7 @@ class StandardLab {
       ...this.coreTokens.typography,
       ...this.coreTokens.layout,
       ...this.coreTokens.colors,
+      ...this.coreTokens.advanced,
     ];
     allTokens.forEach((token) => {
       const currentValue = this.getPropertyValue(token);
@@ -684,12 +739,46 @@ class StandardLab {
     this.updateBadge();
   }
 
+  /**
+   * Inject grid debug overlays into all .prose containers
+   */
+  injectGridDebugOverlays() {
+    const proseContainers = document.querySelectorAll(".prose");
+
+    proseContainers.forEach((prose) => {
+      // Check if overlay already exists
+      if (prose.querySelector(".grid-debug-overlay")) {
+        return;
+      }
+
+      const overlay = document.createElement("div");
+      overlay.className = "grid-debug-overlay";
+      overlay.setAttribute("aria-hidden", "true");
+
+      // Add 7 spans for grid columns
+      for (let i = 0; i < 7; i++) {
+        overlay.appendChild(document.createElement("span"));
+      }
+
+      // Insert as first child
+      prose.insertBefore(overlay, prose.firstChild);
+    });
+  }
+
+  /**
+   * Remove grid debug overlays from all .prose containers
+   */
+  removeGridDebugOverlays() {
+    document
+      .querySelectorAll(".grid-debug-overlay")
+      .forEach((overlay) => overlay.remove());
+  }
+
   injectStyles() {
     if (document.getElementById("standard-lab-styles")) return;
     const styles = document.createElement("style");
     styles.id = "standard-lab-styles";
     styles.textContent = `
-      /* Badge, Panel, and other UI styles... (Content is long and unchanged) */
       .standard-lab-badge { position: fixed; width: var(--base); height: var(--base); border-radius: 50%; background: color-mix(in srgb, var(--color-background-secondary) 30%, transparent); border: var(--border); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); display: flex; align-items: center; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
@@ -749,8 +838,9 @@ class StandardLab {
     document.head.appendChild(styles);
   }
 }
+
 // ================================================================
-// AUTO-INITIALIZATION AND HTMX INTEGRATION (THE CORRECTED PART)
+// AUTO-INITIALIZATION AND HTMX INTEGRATION
 // ================================================================
 
 if (typeof window !== "undefined") {
@@ -761,11 +851,9 @@ if (typeof window !== "undefined") {
     }
 
     // 2. Add the HTMX integration listener.
-    // We are now safely inside a DOMContentLoaded block, so document.body exists.
     document.body.addEventListener("htmx:afterSettle", function (event) {
-      console.log("HTMX loaded, refreshing StandardLab..."); // For debugging
+      console.log("HTMX loaded, refreshing StandardLab...");
       if (window.StandardLab) {
-        // Tell the existing instance to refresh its view.
         window.StandardLab.refresh();
       }
     });
@@ -775,7 +863,6 @@ if (typeof window !== "undefined") {
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", setupStandardLab);
   } else {
-    // DOM is already ready
     setupStandardLab();
   }
 }

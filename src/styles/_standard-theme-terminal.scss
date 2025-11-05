@@ -1,0 +1,110 @@
+[data-theme="kernel"] {
+    --color-light-background: #f4f5f3;
+    --color-light-foreground: #1d3557;
+    --color-light-background: #fffcf0;
+    --color-light-foreground: #100f0f;
+
+    /* Accent system */
+    --color-light-red: #c92a2a; /* warning, highlight */
+    --color-light-orange: #e08e1f; /* attention blocks */
+    --color-light-yellow: #d4af37; /* vintage punchcard yellow */
+    --color-light-green: #4ca06b; /* success, approval */
+    --color-light-cyan: #2aa198; /* teal-y terminal feel */
+    --color-light-blue: #3b82f6; /* link, info */
+    --color-light-purple: #7e5bef; /* utility, label tags */
+    --color-light-pink: #d16d92; /* softer technical touch */
+    --color-light-red: #af3029; /* warning, highlight */
+    --color-light-orange: #bc5215; /* attention blocks */
+    --color-light-yellow: #ad8301; /* vintage punchcard yellow */
+    --color-light-green: #66800b; /* success, approval */
+    --color-light-cyan: #24837b; /* teal-y terminal feel */
+    --color-light-blue: #205ea6; /* link, info */
+    --color-light-purple: #5e409d; /* utility, label tags */
+    --color-light-pink: #a02f6f; /* softer technical touch */
+
+    --color-dark-foreground: #f4f5f3;
+    --color-dark-background: #1d3557;
+    /* Core colors */
+    --color-dark-background: #1d1e21; /* dark terminal feel */
+    --color-dark-foreground: #f4f5f3; /* same warm white as light bg */
+    --color-dark-background: #1c1b1a;
+    --color-dark-foreground: #e6e4d9;
+
+    /* Neutrals */
+    --color-dark-gray: #c9c9c9; /* text gray */
+    --color-dark-muted: #999; /* borders, UI frame */
+    --color-dark-soft: #2d2f33; /* dark gray blocks */
+
+    /* Accent system */
+    --color-dark-red: #ff6b6b;
+    --color-dark-orange: #f0a03d;
+    --color-dark-yellow: #f7d774;
+    --color-dark-green: #6dd3a4;
+    --color-dark-cyan: #63d2c6;
+    --color-dark-blue: #5fa8ff;
+    --color-dark-purple: #a593f8;
+    --color-dark-pink: #ec9abc;
+    /* Accent system */
+    --color-dark-red: #d14d41;
+    --color-dark-orange: #da702c;
+    --color-dark-yellow: #ad8301;
+    --color-dark-green: #879a39;
+    --color-dark-cyan: #24837b;
+    --color-dark-blue: #4385be;
+    --color-dark-purple: #8b7ec8;
+    --color-dark-pink: #ce5d97;
+
+    /* Code and UI extras */
+    --color-accent: var(--color-blue);
+    --color-code: var(--color-foreground);
+    --color-bold: var(--color-red);
+    --color-italic: var(--color-green);
+
+    --color-dark-accent: var(--color-purple);
+    --color-dark-bold: var(--color-pink);
+
+    --font-text: "Diatype", "Oktah Round Variable";
+    --font-feature: "tnum", "liga", "clig", "kern", "calt", "zero", "ss05";
+    --font-variation: "MONO" 1;
+    --font-header: InterVariable;
+    --font-monospace: "MonoLisa";
+    --font-monospace-feature:
+        "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
+    --font-interface: "Diatype";
+
+    --optical-ratio: 1.425;
+    --font-header-weight: 900;
+    --font-header-feature:
+        "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
+        "cv09", "cv10", "cv11", "cv12", "cv13";
+    --font-header-variation: "";
+    --font-header-letter-spacing: -0.065em;
+    --font-header-line-height: 0.75em;
+    /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
+
+    .dark {
+        --color-accent: var(--color-purple);
+        --color-bold: var(--color-pink);
+    }
+}
+@font-face {
+    font-family: "Oktah Round Variable";
+    /* Add other properties here, as needed. For example: */
+    font-weight: 100 900;
+    font-style: normal;
+    src: url("https://cdn.ffp.co/oktah_round_variable.woff2");
+}
+@font-face {
+    font-family: "MonoLisa";
+    /* Add other properties here, as needed. For example: */
+    font-weight: 100 1000;
+    font-style: normal;
+    src: url("https://cdn.ffp.co/MonoLisa-Regular-Variable.woff2");
+}
+@font-face {
+    font-family: "MonoLisa";
+    /* Add other properties here, as needed. For example: */
+    font-weight: 100 1000;
+    font-style: italic;
+    src: url("https://cdn.ffp.co/MonoLisa-RegularItalic-Variable.woff2");
+}

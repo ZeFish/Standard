@@ -751,9 +751,9 @@
   --font-variation: "opsz" 8;
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
-  --body-padding: var(--base-4);
+  --body-padding: var(--rhythm-3);
   --shadow: 0;
-  --radius: 0;
+  --border-radius: 0;
   --color-accent: var(--color-red);
   --color-italic: var(--color-foreground);
   --color-bold: color-mix(
@@ -781,9 +781,6 @@
   --color-dark-purple: #a58fc0; 
   --color-dark-pink: #e6a3d1; 
 }
-[data-theme=book] body {
-  margin: 0;
-}
 [data-theme=book] p {
   font-weight: var(--font-weight);
   font-size: 1.1em;
@@ -798,12 +795,12 @@
 [data-theme=book] .prose {
   display: block;
 }
-[data-theme=book] .prose :is(h4, h5, h6, p, blockquote, pre, details, li) {
+[data-theme=book] .prose :is(p, blockquote, pre, details, li) {
   max-width: var(--line-width-s);
   margin-inline: 0;
 }
 [data-theme=book] .prose :is(.scroll, p:has(img)) {
-  max-width: var(--line-width-s);
+  max-width: var(--line-width);
   margin-inline: 0;
 }
 [data-theme=book] .token {
@@ -815,7 +812,7 @@
 [data-theme=book] aside.note {
   display: inline;
   position: absolute;
-  left: calc(var(--base) + var(--line-width-s));
+  left: calc(var(--rhythm) + var(--line-width-s));
   margin-top: calc(var(--line-height) * -2);
   font-size: var(--scale-d2);
   color: var(--color-muted);
@@ -824,7 +821,7 @@
 }
 [data-theme=book] blockquote,
 [data-theme=book] pre {
-  padding: calc(var(--base) * 0.5);
+  padding: calc(var(--rhythm) * 0.5);
   padding-block: 0;
   border: 0;
   border-left-width: 1px;
@@ -841,7 +838,7 @@
 [data-theme=book] hr,
 [data-theme=book] hr:not(:first-child) {
   font-size: var(--scale);
-  line-height: var(--base);
+  line-height: var(--rhythm);
   padding: 0;
   border: 0;
   background: transparent;
@@ -852,14 +849,14 @@
   display: block;
   font-family: "Fern";
   position: relative;
-  top: calc(var(--base) * -0.4);
+  top: calc(var(--rhythm) * -0.4);
   color: var(--color-border);
 }
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
   grid-column: feature;
-  margin-block-start: calc(var(--base) * 6);
-  margin-block-end: calc(var(--base) * 6);
+  margin-block-start: calc(var(--rhythm) * 6);
+  margin-block-end: calc(var(--rhythm) * 6);
   font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
 }
 [data-theme=book] h1 {
@@ -881,8 +878,8 @@
   [data-theme=book] aside.note {
     position: relative;
     left: 0;
-    top: calc(var(--base) * -1);
-    margin-bottom: calc(var(--base) * -2);
+    top: calc(var(--rhythm) * -1);
+    margin-bottom: calc(var(--rhythm) * -2);
   }
 }
 
@@ -893,7 +890,7 @@
   font-display: swap;
   src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }
-[data-theme=terminal] {
+[data-theme=kernel] {
   --color-light-background: #f4f5f3;
   --color-light-foreground: #1d3557;
   --color-light-background: #fffcf0;
@@ -968,6 +965,10 @@
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 0.75em;
   
+}
+[data-theme=kernel] .dark {
+  --color-accent: var(--color-purple);
+  --color-bold: var(--color-pink);
 }
 
 @font-face {
