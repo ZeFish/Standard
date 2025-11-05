@@ -73,7 +73,7 @@
     padding-bottom: calc(var(--body-padding) * 1.5);
     [id] {
         scroll-margin-top: calc(
-            var(--base) * var(--body-padding)
+            var(--base-2) + var(--body-padding)
         ); /* Adjust value as needed */
     }
 }
