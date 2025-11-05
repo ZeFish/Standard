@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="standard-debug" lang="{{ site.language }}" data-standard-version="{{ site.standard.version }}" data-theme="{{ theme }}">
+<html class="standard-debug rhythm" lang="{{ site.language }}" data-standard-version="{{ site.standard.version }}" data-theme="{{ theme }}">
 
 
   <head>
@@ -20,15 +20,15 @@
       <a href="#main" class="skip-link">Skip to content</a>
 
 
-  		<header class="flex font-interface small" style="justify-content: space-between; max-width: 100%;">
+  		<header class="flex font-interface" style="justify-content: space-between; max-width: 100%;">
   			<p>
   				<a href="/" style="text-decoration: none;">{{ site.title }}</a>
   			</p>
   			{% menu site.nav.header, {class: "horizontal"} %}
-  		</header>
+   		</header>
 
 
-     	<main class="prose md">
+     	<main class="prose">
         {{ content | safe }}
         {% standard_comments %}
       </main>

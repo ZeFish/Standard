@@ -202,23 +202,31 @@
   --color-border: none;
   --color-muted: var(--color-foreground);
   --color-dark-foreground: #ccc;
-  --optical-ratio: 1.8;
+  --optical-ratio: 2;
   --mobile-font-ratio: 2;
   --body-padding: var(--base-4);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
-  --line-height: 1.5;
-  --font-size: 2em;
-  --gap: clamp(var(--base), 6%, var(--base-4));
-  --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-small: var(--base-block-gap);
-  --content-accent: minmax(0, var(--base-2));
-  --content-feature: minmax(0, var(--base-4));
-  --content-hero: minmax(0, 1fr);
-  --gap: 1;
+  --line-height: 1.2;
+  --font-size: 1.5em;
+  --body-padding: var(--base);
 }
 [data-theme=swiss] hr {
   background: var(--color-foreground);
+}
+[data-theme=swiss] .callout-content {
+  background: none;
+}
+[data-theme=swiss] .callout {
+  background: none;
+  border: 1px solid var(--color-foreground);
+  font-size: var(--scale-d2);
+}
+[data-theme=swiss] .callout-title {
+  color: var(--color-foreground);
+  border: none;
+  margin-block-end: calc(var(--base-d2) * -1);
+  margin-block-start: var(--base-d2);
 }
 [data-theme=swiss] code,
 [data-theme=swiss] .token {
@@ -233,22 +241,18 @@
 [data-theme=swiss] img {
   border: 0;
 }
-[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout) {
+[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
   max-width: var(--line-width-s);
   margin-inline: 0;
+}
+[data-theme=swiss] aside {
+  background: none;
+  border: 0;
 }
 [data-theme=swiss] body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   max-width: 1400px;
-}
-[data-theme=swiss] h1 {
-  margin-block-start: var(--base-8);
-  margin-block-end: var(--base-4);
-}
-[data-theme=swiss] h2,
-[data-theme=swiss] h3 {
-  margin-bottom: var(--base-d2);
 }
 [data-theme=swiss] header {
   display: block;
@@ -536,10 +540,7 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --body-padding: var(--base-2);
   --radius: var(--base-d8);
-  --optical-ratio: 1.414;
-  --base-gap: var(--base);
   
   
   --base-block-gap: var(--base);
@@ -605,21 +606,31 @@
   --shadow: none;
   --color-dark-foreground: #ccc;
   --color-dark-background: #222;
-  --font-header: "Kalice", sans-serif;
-  --font-header-weight: 500;
+  --font-header: InterVariable;
+  --font-header-weight: 300;
   --font-header-letter-spacing: 1;
-  --font-text: "CalSans", "Diatype", "Kalice", sans-serif;
-  --font-variation: "MODE" 1;
-  --body-padding: var(--base);
-  --optical-ratio: 1.3;
+  --font-text: "Kalice";
+  --font-interface: Diatype;
+  --optical-ratio: 1.414;
   --line-width: var(--line-width-s);
-  --font-size: 1.1em;
+  --font-size: 1.2em;
+}
+[data-theme=minimal] .font-interface {
+  font-size: var(--scale-d4);
+}
+[data-theme=minimal] {
   --line-height: 1.5;
   --base-gap: var(--base);
   --base-block-gap: var(--base-2);
+  --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
+  --color-background-secondary: color-mix(
+      in srgb,
+      var(--color-foreground) 2%,
+      var(--color-background)
+  );
 }
 [data-theme=minimal] h1 {
-  margin-block-start: var(--base-8);
+  margin-block-start: calc(var(--base) * 7);
   margin-block-end: var(--base-8);
   text-align: center;
 }
@@ -739,7 +750,7 @@
       var(--color-foreground) 7%,
       var(--color-background)
   );
-  --optical-ratio: 1.2;
+  --optical-ratio: 1.414;
   --font-text: Fern;
   --font-interface: Fern;
   --font-header: Fern;
@@ -751,7 +762,7 @@
   --font-variation: "opsz" 8;
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
-  --body-padding: var(--rhythm-3);
+  --body-padding: var(--base-4);
   --shadow: 0;
   --border-radius: 0;
   --color-accent: var(--color-red);
@@ -799,7 +810,7 @@
   max-width: var(--line-width-s);
   margin-inline: 0;
 }
-[data-theme=book] .prose :is(.scroll, p:has(img)) {
+[data-theme=book] .prose :is(.scroll, p:has(img), .callout, aside) {
   max-width: var(--line-width);
   margin-inline: 0;
 }
@@ -812,7 +823,7 @@
 [data-theme=book] aside.note {
   display: inline;
   position: absolute;
-  left: calc(var(--rhythm) + var(--line-width-s));
+  left: calc(var(--base) + var(--line-width-s));
   margin-top: calc(var(--line-height) * -2);
   font-size: var(--scale-d2);
   color: var(--color-muted);
@@ -821,7 +832,7 @@
 }
 [data-theme=book] blockquote,
 [data-theme=book] pre {
-  padding: calc(var(--rhythm) * 0.5);
+  padding: calc(var(--base) * 0.5);
   padding-block: 0;
   border: 0;
   border-left-width: 1px;
@@ -838,7 +849,7 @@
 [data-theme=book] hr,
 [data-theme=book] hr:not(:first-child) {
   font-size: var(--scale);
-  line-height: var(--rhythm);
+  line-height: var(--base);
   padding: 0;
   border: 0;
   background: transparent;
@@ -849,14 +860,14 @@
   display: block;
   font-family: "Fern";
   position: relative;
-  top: calc(var(--rhythm) * -0.4);
+  top: calc(var(--base) * -0.4);
   color: var(--color-border);
 }
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
   grid-column: feature;
-  margin-block-start: calc(var(--rhythm) * 6);
-  margin-block-end: calc(var(--rhythm) * 6);
+  margin-block-start: calc(var(--base) * 6);
+  margin-block-end: calc(var(--base) * 6);
   font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
 }
 [data-theme=book] h1 {
@@ -878,8 +889,8 @@
   [data-theme=book] aside.note {
     position: relative;
     left: 0;
-    top: calc(var(--rhythm) * -1);
-    margin-bottom: calc(var(--rhythm) * -2);
+    top: calc(var(--base) * -1);
+    margin-bottom: calc(var(--base) * -2);
   }
 }
 
@@ -890,7 +901,7 @@
   font-display: swap;
   src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }
-[data-theme=kernel] {
+[data-theme=terminal] {
   --color-light-background: #f4f5f3;
   --color-light-foreground: #1d3557;
   --color-light-background: #fffcf0;
@@ -966,7 +977,7 @@
   --font-header-line-height: 0.75em;
   
 }
-[data-theme=kernel] .dark {
+[data-theme=terminal] .dark {
   --color-accent: var(--color-purple);
   --color-bold: var(--color-pink);
 }

@@ -14,27 +14,33 @@
 
     --color-dark-foreground: #ccc;
 
-    --optical-ratio: 1.8;
+    --optical-ratio: 2;
     --mobile-font-ratio: 2;
     --body-padding: var(--base-4);
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
-    --line-height: 1.5;
-    --font-size: 2em;
-
-    --gap: clamp(var(--base), 6%, var(--base-4));
-    --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: var(--base-block-gap);
-    --content-accent: minmax(0, var(--base-2));
-    --content-feature: minmax(0, var(--base-4));
-    --content-hero: minmax(0, 1fr);
-
-    --gap: 1;
+    --line-height: 1.2;
+    --font-size: 1.5em;
+    --body-padding: var(--base);
 
     hr {
         background: var(--color-foreground);
     }
 
+    .callout-content {
+        background: none;
+    }
+    .callout {
+        background: none;
+        border: 1px solid var(--color-foreground);
+        font-size: var(--scale-d2);
+    }
+    .callout-title {
+        color: var(--color-foreground);
+        border: none;
+        margin-block-end: calc(var(--base-d2) * -1);
+        margin-block-start: var(--base-d2);
+    }
     code,
     .token {
         color: var(--color-foreground) !important;
@@ -51,24 +57,20 @@
         border: 0;
     }
 
-    .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout) {
+    .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
         max-width: var(--line-width-s);
         margin-inline: 0;
+    }
+
+    aside {
+        background: none;
+        border: 0;
     }
 
     body {
         background-color: var(--color-background);
         color: var(--color-foreground);
         max-width: 1400px;
-    }
-
-    h1 {
-        margin-block-start: var(--base-8);
-        margin-block-end: var(--base-4);
-    }
-    h2,
-    h3 {
-        margin-bottom: var(--base-d2);
     }
 
     header {

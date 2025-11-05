@@ -21,7 +21,7 @@
         var(--color-background)
     );
 
-    --optical-ratio: 1.2;
+    --optical-ratio: 1.414;
     --font-text: Fern;
     --font-interface: Fern;
     --font-header: Fern;
@@ -35,7 +35,7 @@
     --font-header-feature: "liga", "onum", "kern";
     --font-header-variation: "opsz" 12;
 
-    --body-padding: var(--rhythm-3);
+    --body-padding: var(--base-4);
     --shadow: 0;
     --border-radius: 0;
 
@@ -91,7 +91,7 @@
         max-width: var(--line-width-s);
         margin-inline: 0;
     }
-    .prose :is(.scroll, p:has(img)) {
+    .prose :is(.scroll, p:has(img), .callout, aside) {
         max-width: var(--line-width);
         margin-inline: 0;
     }
@@ -106,7 +106,7 @@
     aside.note {
         display: inline;
         position: absolute;
-        left: calc(var(--rhythm) + var(--line-width-s));
+        left: calc(var(--base) + var(--line-width-s));
         margin-top: calc(var(--line-height) * -2);
         font-size: var(--scale-d2);
         color: var(--color-muted);
@@ -116,7 +116,7 @@
 
     blockquote,
     pre {
-        padding: calc(var(--rhythm) * 0.5);
+        padding: calc(var(--base) * 0.5);
         padding-block: 0;
         border: 0;
         border-left-width: 1px;
@@ -133,7 +133,7 @@
     hr,
     hr:not(:first-child) {
         font-size: var(--scale);
-        line-height: var(--rhythm);
+        line-height: var(--base);
         padding: 0;
         border: 0;
         background: transparent;
@@ -144,15 +144,15 @@
         display: block;
         font-family: "Fern";
         position: relative;
-        top: calc(var(--rhythm) * -0.4);
+        top: calc(var(--base) * -0.4);
         color: var(--color-border);
     }
 
     .prose > h1:first-child {
         text-align: left;
         grid-column: feature;
-        margin-block-start: calc(var(--rhythm) * 6);
-        margin-block-end: calc(var(--rhythm) * 6);
+        margin-block-start: calc(var(--base) * 6);
+        margin-block-end: calc(var(--base) * 6);
         font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
     }
 
@@ -177,8 +177,8 @@
         aside.note {
             position: relative;
             left: 0;
-            top: calc(var(--rhythm) * -1);
-            margin-bottom: calc(var(--rhythm) * -2);
+            top: calc(var(--base) * -1);
+            margin-bottom: calc(var(--base) * -2);
         }
     }
 }

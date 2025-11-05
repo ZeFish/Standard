@@ -51,7 +51,6 @@
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 /* Applied to <html> root for global cascade (best practice for frameworks) */
-:where(html:not(.no-rhythm)),
 :where(.rhythm) {
     /* Rhythm control - can be overridden per instance */
     display: inline-flex;
@@ -69,8 +68,7 @@
 }
 
 /* Padding only applied to <body> when rhythm is active */
-:where(body:not(.no-rhythm)),
-:where(html:not(.no-rhythm)) > body {
+:where(.rhythm) > body {
     margin: 0;
     padding: var(--body-padding);
     padding-bottom: calc((var(--base) * var(--body-padding) * 1.5));
@@ -90,21 +88,16 @@
 
 /* Elements within rhythm containers */
 /* Enhanced spacing relationships for typography */
-:where(html:not(.no-rhythm), .rhythm) {
+:where(.rhythm) {
     #{$rhythm-elements} {
         margin-block-start: 0;
         margin-block-end: var(--base-gap);
     }
 
-    /* The i that two specal block would bit a bit closer */
-    :is(#{$rhythm-block-small}) + :is(#{$rhythm-block-small}) {
-        margin-block-start: 0;
-    }
-
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: calc(var(--base-block-gap));
+        margin-block-start: calc(var(--base-block-gap) - var(--base-gap));
         margin-block-end: var(--base-block-gap);
     }
 
@@ -113,6 +106,7 @@
     :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
         margin-block-end: var(--base-gap);
     }
+
     * > :where(:last-child) {
         margin-block-end: 0;
     }
@@ -139,8 +133,7 @@
     h1,
     > h1:where(:first-child) {
         margin-block-start: calc(var(--base-gap) * 4);
-        margin-block-end: calc(var(--base-gap) * 4);
-        line-height: var(--line-height);
+        margin-block-end: calc(var(--base-gap) * 2);
     }
 
     h2 {
@@ -189,11 +182,8 @@
     }
 
     hr {
+        --base-block-gap: calc(2rlh - (1rlh / var(--line-height)));
         margin-inline: calc(var(--base-2) * var(--base-gap));
-    }
-
-    hr {
-        --base-block-gap: calc(var(--base-gap) * 2);
     }
 
     /* Reset first-child spacing for special blocks */
@@ -255,6 +245,9 @@
     }
     .tight li {
         margin-block-end: var(--base-d4);
+    }
+    li:last-child {
+        margin-block-end: 0;
     }
 
     /* Unordered list bullets */
@@ -403,18 +396,16 @@
 
     td,
     th {
-        border-bottom: var(--border);
+        padding: var(--base-d4);
         font-size: var(--scale-d2);
-        padding: var(--base-d2);
+        min-height: var(--line-height);
     }
 
     th {
         /* You already have: text-align: left; font-weight: bold; */
         text-transform: uppercase; /* ADD */
         letter-spacing: 0.05em; /* ADD */
-    }
-
-    /* ADD: Numeric column alignment */
+    } /* ADD: Numeric column alignment */
     .numeric {
         text-align: right;
         font-variant-numeric: tabular-nums;

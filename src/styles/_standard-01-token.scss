@@ -30,13 +30,15 @@
     --ratio-eighthstep: 1.062;
 
     /* Optical Harmony ratio (font size) */
-    --optical-ratio: 1.618;
+    --optical-ratio: 1.5;
 
     /* The actual line-height of html */
     --line-height: 1.5;
 
     /* Space between standard block like paragraph */
-    --base-gap: calc(var(--base) + 1rem + var(--base-mistery));
+    --base-gap: var(--base);
+
+    --newbase: calc((1rem / var(--line-height)) / 2);
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
@@ -78,20 +80,19 @@
     --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
 
     /* Compact variation */
-    --line-height-s: max(cac(var(--line-height) / 2), 1);
+    --line-height-s: max(calc(var(--line-height) / 2), 1);
 
     /* Base measurements & ratios - the foundation of everything else */
     --font-size: 1rem;
-
+    --base: calc(1rem * 0.7);
     /* Name use for actual spacing in the framework  */
-    --base-d8: calc(1rlh / 8);
-    --base-d4: calc(1rlh / 4);
-    --base-d2: calc(1rlh / 2);
---base-mistery: calc(var(--base) / var(--line-height));
-    --base: 1rlh;
-    --base-2: calc(1rlh * 2);
-    --base-4: calc(1rlh * 4);
-    --base-8: calc(1rlh * 8);
+    --base-d8: calc(var(--base) / 8);
+    --base-d4: calc(var(--base) / 4);
+    --base-d2: calc(var(--base) / 2);
+    --base: calc(1rlh);
+    --base-2: calc(var(--base) * 2);
+    --base-4: calc(var(--base) * 4);
+    --base-8: calc(var(--base) * 8);
 
     /* Optical Harmony Scale */
     --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
@@ -174,7 +175,7 @@
     --flow-scale-xxl: calc(var(--flow-space) * 3); /* 4.5rem */
 }
 
-/* Responsive adjustments - collapse gutters on small screens */
+/* Responsive adjustments - collapse gutters on small screens
 @media only screen and (max-width: #{$small}) {
     :root {
         --font-size: var(--mobile-font-size) !important;
@@ -186,4 +187,36 @@
             var(--base) * var(--body-mobile-padding-multiplier)
         ) !important;
     }
+}
+*/
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    opacity: 0.1;
+    z-index: 99999;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    background-size: 100px;
+    background-repeat: repeat;
+
+    background-image: url("/assets/img/paper.png");
+}
+body.theme-dark::after {
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    opacity: 0.04;
+    z-index: 999;
+    pointer-events: none;
+    background-size: 256px;
+    background-repeat: repeat;
+    mix-blend-mode: multiply;
+    /* noise */
+    background-image: url("/assets/img/noise.png");
 }

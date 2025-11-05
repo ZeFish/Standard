@@ -47,6 +47,20 @@
 
 .standard-debug {
     position: relative;
+
+    :is(#{$text-elements}) {
+        overflow: hidden;
+    }
+    hr {
+        display: none;
+    }
+    h1,
+    h2,
+    h3,
+    p,
+    ul {
+        border-radius: var(--radius);
+    }
 }
 
 .standard-debug .debug {
@@ -54,8 +68,8 @@
 }
 
 :root {
-    --debug-line-opacity: 15%;
-    --debug-outline-opacity: 50%;
+    --debug-line-opacity: 25%;
+    --debug-outline-opacity: 75%;
 }
 
 .standard-debug::before,
@@ -78,17 +92,18 @@
 .standard-debug::before {
     --color-grid: var(--color-cyan);
     --percent-grid: var(--debug-line-opacity);
+    --grid-unit: var(--base);
     content: "";
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
         to bottom,
         transparent 0,
-        transparent calc(var(--base) - 1px),
+        transparent calc(var(--grid-unit) - 1px),
         color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-            calc(var(--base) - 1px),
+            calc(var(--grid-unit) - 1px),
         color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-            var(--base)
+            var(--grid-unit)
     );
     pointer-events: none;
     z-index: 10000;
@@ -100,11 +115,12 @@
             var(--color-cyan) var(--debug-outline-opacity),
             transparent
         );
-    outline-offset: var(--base);
+    outline-offset: var(--base-gap);
 }
 
 .standard-debug :is(#{$rhythm-block-elements}) {
     position: relative;
+    outline-offset: var(--base-block-gap);
 }
 .standard-debug :is(#{$rhythm-block-elements})::before {
     content: "Block";
@@ -145,7 +161,7 @@
     }
     span:nth-child(2) {
         grid-column: feature-start / accent-start;
-        border-inline-start: 1px solid
+        border-inline-start: 1px dotted
             color-mix(
                 in srgb,
                 var(--color-cyan) var(--debug-line-opacity),
@@ -154,7 +170,7 @@
     }
     span:nth-child(3) {
         grid-column: accent-start / content-start;
-        border-inline-start: 1px solid
+        border-inline-start: 1px dotted
             color-mix(
                 in srgb,
                 var(--color-accent) var(--debug-line-opacity),
@@ -163,7 +179,7 @@
     }
     span:nth-child(4) {
         grid-column: content;
-        outline: 1px solid
+        outline: 1px dotted
             color-mix(
                 in srgb,
                 var(--color-green) var(--debug-line-opacity),
@@ -172,7 +188,7 @@
     }
     span:nth-child(5) {
         grid-column: content-end / accent-end;
-        border-inline-end: 1px solid
+        border-inline-end: 1px dotted
             color-mix(
                 in srgb,
                 var(--color-accent) var(--debug-line-opacity),
@@ -181,7 +197,7 @@
     }
     span:nth-child(6) {
         grid-column: accent-end / feature-end;
-        border-inline-end: 1px solid
+        border-inline-end: 1px dotted
             color-mix(
                 in srgb,
                 var(--color-cyan) var(--debug-line-opacity),

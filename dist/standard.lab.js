@@ -159,9 +159,10 @@ class StandardLab {
     this.badge.className = "standard-lab-badge";
     this.badge.setAttribute("aria-label", "Open Standard Inspector");
     this.badge.setAttribute("title", "Standard Inspector (Shift+Cmd+S)");
+    this.badge.setAttribute("style", "color:var(--color-subtle);");
     this.badge.style.bottom = `${this.position.bottom}px`;
     this.badge.style.right = `${this.position.right}px`;
-    this.badge.innerHTML = `🔍`;
+    this.badge.innerHTML = `※`;
     this.badge.addEventListener("click", () => this.openQuick());
     this.makeDraggable(this.badge);
     document.body.appendChild(this.badge);
@@ -342,7 +343,7 @@ class StandardLab {
       { value: "forest", label: "Forest" },
       { value: "book", label: "Book" },
       { value: "minimal", label: "Minimal" },
-      { value: "zed", label: "Zed" },
+      { value: "terminal", label: "Terminal" },
     ];
     const current = document.documentElement.getAttribute("data-theme") || "";
     return themes
@@ -783,7 +784,7 @@ class StandardLab {
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
-      .standard-lab-panel { position: fixed; background: var(--modal-background); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--border-radius); box-shadow: var(--shadow); z-index: var(--z-toast); opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; display: flex; flex-direction: column; font-family: var(--font-interface); font-size: var(--scale); }
+      .standard-lab-panel { position: fixed; font-size:16px !important; background: var(--modal-background); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--border-radius); box-shadow: var(--shadow); z-index: var(--z-toast); opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; display: flex; flex-direction: column; font-family: var(--font-interface); font-size: var(--scale); }
       .standard-lab-panel-quick { max-width: 280px; max-height: 400px; }
       .standard-lab-panel-full { max-width: 360px; max-height: 600px; }
       .standard-lab-panel-header { padding: var(--base-d4); border-bottom: var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }

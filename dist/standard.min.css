@@ -7,11 +7,12 @@
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   
-  --optical-ratio: 1.618;
+  --optical-ratio: 1.5;
   
   --line-height: 1.5;
   
-  --base-gap: calc(var(--base) + 1rem + var(--base-mistery));
+  --base-gap: var(--base);
+  --newbase: calc((1rem / var(--line-height)) / 2);
   
   
   --base-block-gap: var(--base-2);
@@ -46,18 +47,18 @@
   --grid-gap: var(--base);
   --grid-row-gap: var(--grid-gap); 
   
-  --line-height-s: max(cac(var(--line-height) / 2), 1);
+  --line-height-s: max(calc(var(--line-height) / 2), 1);
   
   --font-size: 1rem;
+  --base: calc(1rem * 0.7);
   
-  --base-d8: calc(1rlh / 8);
-  --base-d4: calc(1rlh / 4);
-  --base-d2: calc(1rlh / 2);
-  --base-mistery: calc(var(--base) / var(--line-height));
-  --base: 1rlh;
-  --base-2: calc(1rlh * 2);
-  --base-4: calc(1rlh * 4);
-  --base-8: calc(1rlh * 8);
+  --base-d8: calc(var(--base) / 8);
+  --base-d4: calc(var(--base) / 4);
+  --base-d2: calc(var(--base) / 2);
+  --base: calc(1rlh);
+  --base-2: calc(var(--base) * 2);
+  --base-4: calc(var(--base) * 4);
+  --base-8: calc(var(--base) * 8);
   
   --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
   --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
@@ -99,18 +100,38 @@
 }
 
 
-@media only screen and (max-width: 768px) {
-  :root {
-    --font-size: var(--mobile-font-size) !important;
-    --optical-ratio: var(--mobile-optical-ratio) !important;
-    --line-height: var(--mobile-line-height);
-    --base-gap: var(--base);
-    --base-block-gap: var(--base);
-    --body-padding: calc(
-        var(--base) * var(--body-mobile-padding-multiplier)
-    ) !important;
-  }
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.1;
+  z-index: 99999;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background-size: 100px;
+  background-repeat: repeat;
+  background-image: url("/assets/img/paper.png");
 }
+
+body.theme-dark::after {
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.04;
+  z-index: 999;
+  pointer-events: none;
+  background-size: 256px;
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  
+  background-image: url("/assets/img/noise.png");
+}
+
 
 
 
@@ -756,6 +777,11 @@ table {
   border-collapse: collapse;
 }
 
+tr {
+  padding: 0;
+  margin: 0;
+}
+
 th,
 td {
   text-align: left;
@@ -765,9 +791,7 @@ td {
 th {
   font-weight: var(--bold-weight, 600);
   background: var(--color-background-secondary);
-}
-
-
+} 
 caption {
   font-weight: var(--bold-weight, bold);
   text-align: left;
@@ -1230,7 +1254,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 
 
 
-:where(html:not(.no-rhythm)),
 :where(.rhythm) {
   
   display: inline-flex;
@@ -1239,7 +1262,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   display: flow-root;
   
 }
-:where(html:not(.no-rhythm)) > *,
 :where(.rhythm) > * {
   vertical-align: baseline;
   margin-block-start: 0;
@@ -1247,14 +1269,12 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 
-:where(body:not(.no-rhythm)),
-:where(html:not(.no-rhythm)) > body {
+:where(.rhythm) > body {
   margin: 0;
   padding: var(--body-padding);
   padding-bottom: calc(var(--base) * var(--body-padding) * 1.5);
 }
-:where(body:not(.no-rhythm)) [id],
-:where(html:not(.no-rhythm)) > body [id] {
+:where(.rhythm) > body [id] {
   scroll-margin-top: calc(var(--base) * var(--body-padding)); 
 }
 
@@ -1266,58 +1286,54 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 
-:where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) p, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) dt, :where(html:not(.no-rhythm), .rhythm) dd, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset, :where(html:not(.no-rhythm), .rhythm) aside, :where(html:not(.no-rhythm), .rhythm) .callout {
+:where(.rhythm) h1, :where(.rhythm) h2, :where(.rhythm) h3, :where(.rhythm) h4, :where(.rhythm) h5, :where(.rhythm) h6, :where(.rhythm) ul, :where(.rhythm) ol, :where(.rhythm) dl, :where(.rhythm) p, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) dt, :where(.rhythm) dd, :where(.rhythm) table, :where(.rhythm) figure, :where(.rhythm) form, :where(.rhythm) fieldset, :where(.rhythm) aside, :where(.rhythm) .callout {
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
 }
-:where(html:not(.no-rhythm), .rhythm) :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) + :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) {
-  margin-block-start: 0;
-}
-:where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .scroll, :where(html:not(.no-rhythm), .rhythm) hr {
-  margin-block-start: calc(var(--base-block-gap));
+:where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside {
+  margin-block-start: calc(var(--base-block-gap) - var(--base-gap));
   margin-block-end: var(--base-block-gap);
 }
-:where(html:not(.no-rhythm), .rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)) {
+:where(.rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)) {
   margin-block-end: var(--base-gap);
 }
-:where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
+:where(.rhythm) * > :where(:last-child) {
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) .rhythm {
+:where(.rhythm) .rhythm {
   --base-gap: 1; 
 }
-:where(html:not(.no-rhythm), .rhythm) .prose > [class^=grid-],
-:where(html:not(.no-rhythm), .rhythm) .prose > .grid {
+:where(.rhythm) .prose > [class^=grid-],
+:where(.rhythm) .prose > .grid {
   margin-block-start: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)) - var(--base) * var(--base-gap));
   margin-block-end: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)));
 }
-:where(html:not(.no-rhythm), .rhythm) h1,
-:where(html:not(.no-rhythm), .rhythm) > h1:where(:first-child) {
+:where(.rhythm) h1,
+:where(.rhythm) > h1:where(:first-child) {
   margin-block-start: calc(var(--base-gap) * 4);
-  margin-block-end: calc(var(--base-gap) * 4);
-  line-height: var(--line-height);
+  margin-block-end: calc(var(--base-gap) * 2);
 }
-:where(html:not(.no-rhythm), .rhythm) h2 {
+:where(.rhythm) h2 {
   margin-block-start: calc(var(--base-gap) * 2);
   margin-block-end: calc(var(--base-gap) * 2);
 }
-:where(html:not(.no-rhythm), .rhythm) h3 {
+:where(.rhythm) h3 {
   margin-block-start: calc(var(--base-gap) * 1);
   margin-block-end: calc(var(--base-gap) * 1);
   line-height: var(--line-height);
 }
-:where(html:not(.no-rhythm), .rhythm) h4 {
+:where(.rhythm) h4 {
   margin-block-start: var(--base-gap);
   margin-block-end: var(--base-d2);
   line-height: var(--line-height);
 }
-:where(html:not(.no-rhythm), .rhythm) h5 {
+:where(.rhythm) h5 {
   margin-block-start: var(--base-gap);
   margin-block-end: var(--base-d2);
   line-height: var(--line-height);
   font-size: var(--scale-d2);
 }
-:where(html:not(.no-rhythm), .rhythm) h6 {
+:where(.rhythm) h6 {
   margin-block-start: var(--base-gap);
   margin-block-end: var(--base-d2);
   line-height: var(--line-height);
@@ -1325,64 +1341,65 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   text-align: center;
 }
 @media (max-width: 768px) {
-  :where(html:not(.no-rhythm), .rhythm) h1,
-  :where(html:not(.no-rhythm), .rhythm) h2,
-  :where(html:not(.no-rhythm), .rhythm) h3 {
+  :where(.rhythm) h1,
+  :where(.rhythm) h2,
+  :where(.rhythm) h3 {
     margin-block-start: var(--base-gap);
     margin-block-end: var(--base-gap);
   }
-  :where(html:not(.no-rhythm), .rhythm) h1 {
+  :where(.rhythm) h1 {
     margin-block: calc(var(--base-gap) * 2);
   }
 }
-:where(html:not(.no-rhythm), .rhythm) hr {
+:where(.rhythm) hr {
+  --base-block-gap: calc(2rlh - (1rlh / var(--line-height)));
   margin-inline: calc(var(--base-2) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) hr {
-  --base-block-gap: calc(var(--base-gap) * 2);
-}
-:where(html:not(.no-rhythm), .rhythm) blockquote > :first-child,
-:where(html:not(.no-rhythm), .rhythm) pre > :first-child,
-:where(html:not(.no-rhythm), .rhythm) figure > :first-child,
-:where(html:not(.no-rhythm), .rhythm) .callout .callout-content > :first-child {
+:where(.rhythm) blockquote > :first-child,
+:where(.rhythm) pre > :first-child,
+:where(.rhythm) figure > :first-child,
+:where(.rhythm) .callout .callout-content > :first-child {
   margin-block-start: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) blockquote > :last-child,
-:where(html:not(.no-rhythm), .rhythm) pre > :last-child,
-:where(html:not(.no-rhythm), .rhythm) figure > :last-child,
-:where(html:not(.no-rhythm), .rhythm) .callout .callout-content > :last-child {
+:where(.rhythm) blockquote > :last-child,
+:where(.rhythm) pre > :last-child,
+:where(.rhythm) figure > :last-child,
+:where(.rhythm) .callout .callout-content > :last-child {
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) ul,
-:where(html:not(.no-rhythm), .rhythm) ol {
+:where(.rhythm) ul,
+:where(.rhythm) ol {
   list-style: none;
   padding-inline-start: var(--base);
   padding-inline-end: var(--base);
 }
-:where(html:not(.no-rhythm), .rhythm) ol ul,
-:where(html:not(.no-rhythm), .rhythm) ol ol,
-:where(html:not(.no-rhythm), .rhythm) ul ul,
-:where(html:not(.no-rhythm), .rhythm) ul ol {
+:where(.rhythm) ol ul,
+:where(.rhythm) ol ol,
+:where(.rhythm) ul ul,
+:where(.rhythm) ul ol {
   margin-block-start: var(--base);
 }
-:where(html:not(.no-rhythm), .rhythm) li > ul,
-:where(html:not(.no-rhythm), .rhythm) li > ol {
+:where(.rhythm) li > ul,
+:where(.rhythm) li > ol {
   padding-inline-start: var(--base);
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) li {
+:where(.rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
   margin-block-end: var(--base);
 }
-:where(html:not(.no-rhythm), .rhythm) .compact li {
+:where(.rhythm) .compact li {
   margin-block-end: var(--base-d2);
 }
-:where(html:not(.no-rhythm), .rhythm) .tight li {
+:where(.rhythm) .tight li {
   margin-block-end: var(--base-d4);
 }
-:where(html:not(.no-rhythm), .rhythm) ul > li::before {
+:where(.rhythm) li:last-child {
+  margin-block-end: 0;
+}
+:where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
   left: calc(var(--base) * -1);
@@ -1390,13 +1407,13 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   text-align: center;
   color: var(--color-subtle);
 }
-:where(html:not(.no-rhythm), .rhythm) ol {
+:where(.rhythm) ol {
   counter-reset: ol-counter;
 }
-:where(html:not(.no-rhythm), .rhythm) ol > li {
+:where(.rhythm) ol > li {
   counter-increment: ol-counter;
 }
-:where(html:not(.no-rhythm), .rhythm) ol > li::before {
+:where(.rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
   left: calc(var(--base) * -1.75);
@@ -1407,91 +1424,91 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   overflow: hidden;
   width: calc(var(--base) * 1.5);
 }
-:where(html:not(.no-rhythm), .rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
-:where(html:not(.no-rhythm), .rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
+:where(.rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
+:where(.rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
   margin-block-end: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
+:where(.rhythm) form:not(.grid *) {
   display: grid;
   gap: calc(var(--base-d2) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) .grid form {
+:where(.rhythm) .grid form {
   display: flex;
   flex-direction: column;
   gap: calc(var(--base-d2) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) fieldset {
+:where(.rhythm) fieldset {
   padding: calc(var(--base-d2) * var(--base-gap));
   display: grid;
   gap: calc(var(--base-d8) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) legend {
+:where(.rhythm) legend {
   padding-inline: calc(var(--base-d4) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) input,
-:where(html:not(.no-rhythm), .rhythm) textarea,
-:where(html:not(.no-rhythm), .rhythm) select {
+:where(.rhythm) input,
+:where(.rhythm) textarea,
+:where(.rhythm) select {
   margin: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) label {
+:where(.rhythm) label {
   margin: 0;
 }
-:where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=text]),
-:where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=email]),
-:where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=password]),
-:where(html:not(.no-rhythm), .rhythm) label:has(+ textarea),
-:where(html:not(.no-rhythm), .rhythm) label:has(+ select) {
+:where(.rhythm) label:has(+ input[type=text]),
+:where(.rhythm) label:has(+ input[type=email]),
+:where(.rhythm) label:has(+ input[type=password]),
+:where(.rhythm) label:has(+ textarea),
+:where(.rhythm) label:has(+ select) {
   margin-block-start: calc(var(--base-d4) * var(--base-gap));
   margin-inline-start: calc(var(--base-d2) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) fieldset div,
-:where(html:not(.no-rhythm), .rhythm) fieldset p {
+:where(.rhythm) fieldset div,
+:where(.rhythm) fieldset p {
   margin-inline-start: calc(var(--base-d2) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) label + input[type=checkbox],
-:where(html:not(.no-rhythm), .rhythm) label + input[type=radio] {
+:where(.rhythm) label + input[type=checkbox],
+:where(.rhythm) label + input[type=radio] {
   margin-inline-start: calc(var(--base-d2) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) .button-group {
+:where(.rhythm) .button-group {
   display: flex;
   gap: calc(var(--base-d2) * var(--base-gap));
   flex-wrap: wrap;
 }
-:where(html:not(.no-rhythm), .rhythm) img,
-:where(html:not(.no-rhythm), .rhythm) video,
-:where(html:not(.no-rhythm), .rhythm) audio,
-:where(html:not(.no-rhythm), .rhythm) iframe {
+:where(.rhythm) img,
+:where(.rhythm) video,
+:where(.rhythm) audio,
+:where(.rhythm) iframe {
   max-width: 100%;
   height: auto;
 }
-:where(html:not(.no-rhythm), .rhythm) figure {
+:where(.rhythm) figure {
   display: grid;
   gap: calc(var(--base-d4) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) caption {
+:where(.rhythm) caption {
   margin-block-end: calc(var(--base-d4) * var(--base-gap));
 }
-:where(html:not(.no-rhythm), .rhythm) table {
+:where(.rhythm) table {
   
   width: 100%;
    
 }
-:where(html:not(.no-rhythm), .rhythm) td,
-:where(html:not(.no-rhythm), .rhythm) th {
-  border-bottom: var(--border);
+:where(.rhythm) td,
+:where(.rhythm) th {
+  padding: var(--base-d4);
   font-size: var(--scale-d2);
-  padding: var(--base-d2);
+  min-height: var(--line-height);
 }
-:where(html:not(.no-rhythm), .rhythm) th {
+:where(.rhythm) th {
   
   text-transform: uppercase; 
   letter-spacing: 0.05em; 
 }
-:where(html:not(.no-rhythm), .rhythm) .numeric {
+:where(.rhythm) .numeric {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-:where(html:not(.no-rhythm), .rhythm) .striped tbody tr:nth-child(even) {
+:where(.rhythm) .striped tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
 }
 
@@ -2562,7 +2579,7 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--base-block-gap) * -1 + var(--img-gap)) !important;
 }
-:where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
   
 }
@@ -5595,7 +5612,6 @@ ul.menu {
 }
 nav.menu ul li,
 ul.menu li {
-  margin-block-end: var(--base-d4);
   list-style: none;
   padding-inline-start: 0;
 }
@@ -5626,19 +5642,32 @@ ul.menu.horizontal {
 .standard-debug {
   position: relative;
 }
+.standard-debug :is(li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
+  overflow: hidden;
+}
+.standard-debug hr {
+  display: none;
+}
+.standard-debug h1,
+.standard-debug h2,
+.standard-debug h3,
+.standard-debug p,
+.standard-debug ul {
+  border-radius: var(--radius);
+}
 
 .standard-debug .debug {
   display: inherit;
 }
 
 :root {
-  --debug-line-opacity: 15%;
-  --debug-outline-opacity: 50%;
+  --debug-line-opacity: 25%;
+  --debug-outline-opacity: 75%;
 }
 
 .standard-debug::before,
 .standard-debug::after,
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)::before,
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before,
 .standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
   content: "";
   color: var(--color-muted);
@@ -5656,24 +5685,26 @@ ul.menu.horizontal {
 .standard-debug::before {
   --color-grid: var(--color-cyan);
   --percent-grid: var(--debug-line-opacity);
+  --grid-unit: var(--base);
   content: "";
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--base) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--base) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--base));
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--grid-unit));
   pointer-events: none;
   z-index: 10000;
 }
 
 .standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
   outline: 1px dashed color-mix(in srgb, var(--color-cyan) var(--debug-outline-opacity), transparent);
-  outline-offset: var(--base);
+  outline-offset: var(--base-gap);
 }
 
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr) {
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside) {
   position: relative;
+  outline-offset: var(--base-block-gap);
 }
 
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)::before {
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before {
   content: "Block";
   position: absolute;
   top: 0;
@@ -5714,23 +5745,23 @@ ul.menu.horizontal {
 }
 .standard-debug .grid-debug-overlay span:nth-child(2) {
   grid-column: feature-start/accent-start;
-  border-inline-start: 1px solid color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
+  border-inline-start: 1px dotted color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(3) {
   grid-column: accent-start/content-start;
-  border-inline-start: 1px solid color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
+  border-inline-start: 1px dotted color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(4) {
   grid-column: content;
-  outline: 1px solid color-mix(in srgb, var(--color-green) var(--debug-line-opacity), transparent);
+  outline: 1px dotted color-mix(in srgb, var(--color-green) var(--debug-line-opacity), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(5) {
   grid-column: content-end/accent-end;
-  border-inline-end: 1px solid color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
+  border-inline-end: 1px dotted color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(6) {
   grid-column: accent-end/feature-end;
-  border-inline-end: 1px solid color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
+  border-inline-end: 1px dotted color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(7) {
   grid-column: feature-end/hero-end;
