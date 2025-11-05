@@ -32,7 +32,7 @@
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
   --mobile-line-height: 1.3;
-  --body-mobile-padding-multiplier: 1;
+  --mobile-body-padding: var(--base);
   
   --line-width-xs: 32rem; 
   --line-width-s: 38rem; 
@@ -100,6 +100,16 @@
 }
 
 
+@media only screen and (max-width: 768px) {
+  :root {
+    --font-size: var(--mobile-font-size) !important;
+    --optical-ratio: var(--mobile-optical-ratio) !important;
+    --line-height: var(--mobile-line-height);
+    --base-gap: var(--base);
+    --base-block-gap: var(--base);
+    --body-padding: var(--mobile-body-padding) !important;
+  }
+}
 body::after {
   content: "";
   position: fixed;
@@ -1267,25 +1277,14 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
 }
-
-
 :where(.rhythm) > body {
   margin: 0;
   padding: var(--body-padding);
   padding-bottom: calc(var(--body-padding) * 1.5);
 }
 :where(.rhythm) > body [id] {
-  scroll-margin-top: calc(var(--base) * var(--body-padding)); 
+  scroll-margin-top: calc(var(--base-2) + var(--body-padding)); 
 }
-
-@media (max-width: 768px) {
-  :where(body:not(.no-rhythm)),
-  :where(html:not(.no-rhythm)) > body {
-    margin: 0;
-  }
-}
-
-
 :where(.rhythm) h1, :where(.rhythm) h2, :where(.rhythm) h3, :where(.rhythm) h4, :where(.rhythm) h5, :where(.rhythm) h6, :where(.rhythm) ul, :where(.rhythm) ol, :where(.rhythm) dl, :where(.rhythm) p, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) dt, :where(.rhythm) dd, :where(.rhythm) table, :where(.rhythm) figure, :where(.rhythm) form, :where(.rhythm) fieldset, :where(.rhythm) aside, :where(.rhythm) .callout {
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
