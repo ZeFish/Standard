@@ -78,13 +78,6 @@
     }
 }
 
-@media (max-width: #{$small}) {
-    :where(.rhythm),
-    :where(.rhythm) > body {
-        margin: 0;
-    }
-}
-
 /* Elements within rhythm containers */
 /* Enhanced spacing relationships for typography */
 :where(.rhythm) {
