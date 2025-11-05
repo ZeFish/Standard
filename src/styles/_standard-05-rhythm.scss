@@ -66,12 +66,11 @@
         margin-block-end: var(--base-gap);
     }
 }
-
 /* Padding only applied to <body> when rhythm is active */
 :where(.rhythm) > body {
     margin: 0;
     padding: var(--body-padding);
-    padding-bottom: calc((var(--base) * var(--body-padding) * 1.5));
+    padding-bottom: calc(var(--body-padding) * 1.5);
     [id] {
         scroll-margin-top: calc(
             var(--base) * var(--body-padding)
@@ -144,26 +143,22 @@
     h3 {
         margin-block-start: calc(var(--base-gap) * 1);
         margin-block-end: calc(var(--base-gap) * 1);
-        line-height: var(--line-height);
     }
 
     h4 {
         margin-block-start: var(--base-gap);
         margin-block-end: var(--base-d2);
-        line-height: var(--line-height);
     }
 
     h5 {
         margin-block-start: var(--base-gap);
         margin-block-end: var(--base-d2);
-        line-height: var(--line-height);
         font-size: var(--scale-d2);
     }
 
     h6 {
         margin-block-start: var(--base-gap);
         margin-block-end: var(--base-d2);
-        line-height: var(--line-height);
         font-size: var(--scale-d2);
         text-align: center;
     }

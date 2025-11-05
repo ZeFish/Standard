@@ -58,6 +58,7 @@
  * Creates: .margin-top-3xs, .margin-top-2xs, .margin-top-xs, .margin-top-s, .margin-top-base, etc.
  */
 @mixin generate-scale($prefix, $property) {
+    .#{$prefix}-0,
     .#{$prefix}-d {
         #{$property}: 0 !important;
     }
@@ -666,15 +667,9 @@ aside.info {
 .body-p-neg-header,
 .body-p-neg-footer {
     margin-inline: calc(var(--body-padding) * -1);
-    padding-inline: var(--body-padding);
 
     @media (max-width: #{$small}) {
-        margin-inline: calc(
-            var(--base) * var(--body-mobile-padding-multiplier) * -1
-        );
-        padding-inline: calc(
-            var(--base) * var(--body-mobile-padding-multiplier)
-        );
+        margin-inline: calc(var(--mobile-body-padding) * -1);
     }
 }
 
@@ -684,22 +679,18 @@ aside.info {
  * Useful when you want footer to sit flush at bottom
  */
 .body-p-neg-footer {
-    margin-block-end: calc((var(--base) * var(--body-padding) * 1.5) * -1);
+    margin-block-end: calc(var(--body-padding) * -1.5);
 
     @media (max-width: #{$small}) {
-        margin-block-end: calc(
-            (var(--base) * var(--body-mobile-padding-multiplier) * 1.5) * -1
-        );
+        margin-block-end: calc(var(--mobile-body-padding) * -1.5);
     }
 }
 
 .body-p-neg-header {
-    margin-block-start: calc((var(--base) * var(--body-padding) * 1) * -1);
+    margin-block-start: calc(var(--body-padding) * -1);
 
     @media (max-width: #{$small}) {
-        margin-block-start: calc(
-            (var(--base) * var(--body-mobile-padding-multiplier) * 1) * -1
-        );
+        margin-block-start: calc(var(--body-padding) * -1);
     }
 }
 

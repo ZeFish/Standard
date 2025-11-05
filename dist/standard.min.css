@@ -1272,7 +1272,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) > body {
   margin: 0;
   padding: var(--body-padding);
-  padding-bottom: calc(var(--base) * var(--body-padding) * 1.5);
+  padding-bottom: calc(var(--body-padding) * 1.5);
 }
 :where(.rhythm) > body [id] {
   scroll-margin-top: calc(var(--base) * var(--body-padding)); 
@@ -1320,23 +1320,19 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) h3 {
   margin-block-start: calc(var(--base-gap) * 1);
   margin-block-end: calc(var(--base-gap) * 1);
-  line-height: var(--line-height);
 }
 :where(.rhythm) h4 {
   margin-block-start: var(--base-gap);
   margin-block-end: var(--base-d2);
-  line-height: var(--line-height);
 }
 :where(.rhythm) h5 {
   margin-block-start: var(--base-gap);
   margin-block-end: var(--base-d2);
-  line-height: var(--line-height);
   font-size: var(--scale-d2);
 }
 :where(.rhythm) h6 {
   margin-block-start: var(--base-gap);
   margin-block-end: var(--base-d2);
-  line-height: var(--line-height);
   font-size: var(--scale-d2);
   text-align: center;
 }
@@ -3969,6 +3965,7 @@ dialog.modal::backdrop {
 
 
 
+.mt-0,
 .mt-d {
   margin-top: 0 !important;
 }
@@ -4013,6 +4010,7 @@ dialog.modal::backdrop {
   margin-top: var(--base-8) !important;
 }
 
+.mr-0,
 .mr-d {
   margin-right: 0 !important;
 }
@@ -4057,6 +4055,7 @@ dialog.modal::backdrop {
   margin-right: var(--base-8) !important;
 }
 
+.mb-0,
 .mb-d {
   margin-bottom: 0 !important;
 }
@@ -4101,6 +4100,7 @@ dialog.modal::backdrop {
   margin-bottom: var(--base-8) !important;
 }
 
+.ml-0,
 .ml-d {
   margin-left: 0 !important;
 }
@@ -4145,6 +4145,7 @@ dialog.modal::backdrop {
   margin-left: var(--base-8) !important;
 }
 
+.mv-0,
 .mv-d {
   margin-block: 0 !important;
 }
@@ -4189,6 +4190,7 @@ dialog.modal::backdrop {
   margin-block: var(--base-8) !important;
 }
 
+.mh-0,
 .mh-d {
   margin-inline: 0 !important;
 }
@@ -4233,6 +4235,7 @@ dialog.modal::backdrop {
   margin-inline: var(--base-8) !important;
 }
 
+.m-0,
 .m-d {
   margin: 0 !important;
 }
@@ -4280,6 +4283,7 @@ dialog.modal::backdrop {
 
 
 
+.pt-0,
 .pt-d {
   padding-top: 0 !important;
 }
@@ -4324,6 +4328,7 @@ dialog.modal::backdrop {
   padding-top: var(--base-8) !important;
 }
 
+.pr-0,
 .pr-d {
   padding-right: 0 !important;
 }
@@ -4368,6 +4373,7 @@ dialog.modal::backdrop {
   padding-right: var(--base-8) !important;
 }
 
+.pb-0,
 .pb-d {
   padding-bottom: 0 !important;
 }
@@ -4412,6 +4418,7 @@ dialog.modal::backdrop {
   padding-bottom: var(--base-8) !important;
 }
 
+.pl-0,
 .pl-d {
   padding-left: 0 !important;
 }
@@ -4456,6 +4463,7 @@ dialog.modal::backdrop {
   padding-left: var(--base-8) !important;
 }
 
+.pv-0,
 .pv-d {
   padding-block: 0 !important;
 }
@@ -4500,6 +4508,7 @@ dialog.modal::backdrop {
   padding-block: var(--base-8) !important;
 }
 
+.ph-0,
 .ph-d {
   padding-inline: 0 !important;
 }
@@ -4544,6 +4553,7 @@ dialog.modal::backdrop {
   padding-inline: var(--base-8) !important;
 }
 
+.p-0,
 .p-d {
   padding: 0 !important;
 }
@@ -4591,6 +4601,7 @@ dialog.modal::backdrop {
 
 
 
+.gap-0,
 .gap-d {
   gap: 0 !important;
 }
@@ -4635,6 +4646,7 @@ dialog.modal::backdrop {
   gap: var(--base-8) !important;
 }
 
+.column-gap-0,
 .column-gap-d {
   column-gap: 0 !important;
 }
@@ -4682,6 +4694,7 @@ dialog.modal::backdrop {
 
 
 
+.width-0,
 .width-d {
   width: 0 !important;
 }
@@ -4751,6 +4764,7 @@ dialog.modal::backdrop {
 }
 
 
+.min-width-0,
 .min-width-d {
   min-width: 0 !important;
 }
@@ -4808,6 +4822,7 @@ dialog.modal::backdrop {
 }
 
 
+.max-width-0,
 .max-width-d {
   max-width: 0 !important;
 }
@@ -4867,6 +4882,7 @@ dialog.modal::backdrop {
 
 
 
+.height-0,
 .height-d {
   height: 0 !important;
 }
@@ -4940,6 +4956,7 @@ dialog.modal::backdrop {
 }
 
 
+.min-height-0,
 .min-height-d {
   min-height: 0 !important;
 }
@@ -4997,6 +5014,7 @@ dialog.modal::backdrop {
 }
 
 
+.max-height-0,
 .max-height-d {
   max-height: 0 !important;
 }
@@ -5439,33 +5457,31 @@ aside.info {
 .body-p-neg-header,
 .body-p-neg-footer {
   margin-inline: calc(var(--body-padding) * -1);
-  padding-inline: var(--body-padding);
 }
 @media (max-width: 768px) {
   .body-p-neg,
   .body-p-neg-header,
   .body-p-neg-footer {
-    margin-inline: calc(var(--base) * var(--body-mobile-padding-multiplier) * -1);
-    padding-inline: calc(var(--base) * var(--body-mobile-padding-multiplier));
+    margin-inline: calc(var(--mobile-body-padding) * -1);
   }
 }
 
 
 .body-p-neg-footer {
-  margin-block-end: calc(var(--base) * var(--body-padding) * 1.5 * -1);
+  margin-block-end: calc(var(--body-padding) * -1.5);
 }
 @media (max-width: 768px) {
   .body-p-neg-footer {
-    margin-block-end: calc(var(--base) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
+    margin-block-end: calc(var(--mobile-body-padding) * -1.5);
   }
 }
 
 .body-p-neg-header {
-  margin-block-start: calc(var(--base) * var(--body-padding) * 1 * -1);
+  margin-block-start: calc(var(--body-padding) * -1);
 }
 @media (max-width: 768px) {
   .body-p-neg-header {
-    margin-block-start: calc(var(--base) * var(--body-mobile-padding-multiplier) * 1 * -1);
+    margin-block-start: calc(var(--body-padding) * -1);
   }
 }
 
