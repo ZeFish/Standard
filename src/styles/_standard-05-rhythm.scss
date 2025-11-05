@@ -65,22 +65,21 @@
         margin-block-start: 0;
         margin-block-end: var(--base-gap);
     }
-}
-/* Padding only applied to <body> when rhythm is active */
-:where(.rhythm) > body {
-    margin: 0;
-    padding: var(--body-padding);
-    padding-bottom: calc(var(--body-padding) * 1.5);
-    [id] {
-        scroll-margin-top: calc(
-            var(--base-2) + var(--body-padding)
-        ); /* Adjust value as needed */
-    }
-}
 
-/* Elements within rhythm containers */
-/* Enhanced spacing relationships for typography */
-:where(.rhythm) {
+    /* Padding only applied to <body> when rhythm is active */
+    > body {
+        margin: 0;
+        padding: var(--body-padding);
+        padding-bottom: calc(var(--body-padding) * 1.5);
+        [id] {
+            scroll-margin-top: calc(
+                var(--base-2) + var(--body-padding)
+            ); /* Adjust value as needed */
+        }
+
+
+    /* Elements within rhythm containers */
+    /* Enhanced spacing relationships for typography */
     #{$rhythm-elements} {
         margin-block-start: 0;
         margin-block-end: var(--base-gap);
