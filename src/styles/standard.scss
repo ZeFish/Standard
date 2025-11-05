@@ -44,12 +44,12 @@
 /* Add to standard.css */
 
 :root {
-    --rhythmline-trim-support: 0; /* Will be 1 when supported */
+    --baseline-trim-support: 0; /* Will be 1 when supported */
 }
 
 .standard-lab-panel {
     --gap: 0;
-    --rhythm-gap: 0;
-    --rhythm-block-gap: 0;
+    --base-gap: 0;
+    --base-block-gap: 0;
     font-size: var(--scale-d2);
 }

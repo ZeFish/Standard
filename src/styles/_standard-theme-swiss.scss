@@ -16,16 +16,17 @@
 
     --optical-ratio: 1.8;
     --mobile-font-ratio: 2;
-    --body-padding: var(--rhythm-4);
+    --body-padding: var(--base-4);
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
     --line-height: 1.5;
+    --font-size: 2em;
 
-    --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
+    --gap: clamp(var(--base), 6%, var(--base-4));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-    --content-small: var(--rhythm-block-gap);
-    --content-accent: minmax(0, var(--rhythm-2));
-    --content-feature: minmax(0, var(--rhythm-4));
+    --content-small: var(--base-block-gap);
+    --content-accent: minmax(0, var(--base-2));
+    --content-feature: minmax(0, var(--base-4));
     --content-hero: minmax(0, 1fr);
 
     --gap: 1;
@@ -62,12 +63,12 @@
     }
 
     h1 {
-        margin-block-start: var(--rhythm-8);
-        margin-block-end: var(--rhythm-4);
+        margin-block-start: var(--base-8);
+        margin-block-end: var(--base-4);
     }
     h2,
     h3 {
-        margin-bottom: var(--rhythm-d2);
+        margin-bottom: var(--base-d2);
     }
 
     header {
@@ -76,8 +77,8 @@
 
     pre {
         padding: 0;
-        padding-block: var(--rhythm-d2);
-        margin-block: var(--rhythm-d2);
+        padding-block: var(--base-d2);
+        margin-block: var(--base-d2);
         border: 0;
         background-color: var(--color-background);
         code {

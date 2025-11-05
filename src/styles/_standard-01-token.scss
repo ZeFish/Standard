@@ -10,7 +10,7 @@
  * @example
  * :root {
  *   --optical-ratio: var(--optical-ratio-silver);
- *   --rhythm: 1rlh;
+ *   --base: 1rlh;
  *   --scale-2: calc(1rem * 1.414);
  * }
  *
@@ -36,20 +36,20 @@
     --line-height: 1.5;
 
     /* Space between standard block like paragraph */
-    --rhythm-gap: var(--rhythm);
+    --base-gap: var(--base);
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
-    --rhythm-block-gap: var(--rhythm-2);
+    --base-block-gap: var(--base-2);
 
     /* Padding around the body, can be negated by .body-p-neg, .body-p-neg-header, .body-p-neg-footer */
-    --body-padding: var(--rhythm-2);
+    --body-padding: var(--base-2);
 
     /* Ui Guide */
     --blur: blur(7px);
     --hr-thickness: 1px;
     --transition: 0.5s ease;
-    --radius: var(--rhythm-d8);
+    --radius: var(--base-d8);
     --modal-background: color-mix(
         in srgb,
         var(--color-background-secondary) 85%,
@@ -69,12 +69,12 @@
     --line-width-l: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
     --line-width-full: calc(
-        100vw - (var(--rhythm) * 2)
+        100vw - (var(--base) * 2)
     ); /* responsive full width with margins */
     --line-width: var(--line-width-m);
 
     /* Grid system tokens */
-    --grid-gap: var(--rhythm);
+    --grid-gap: var(--base);
     --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
 
     /* Compact variation */
@@ -82,6 +82,15 @@
 
     /* Base measurements & ratios - the foundation of everything else */
     --font-size: 1rem;
+
+    /* Name use for actual spacing in the framework  */
+    --base-d8: calc(1rlh / 8);
+    --base-d4: calc(1rlh / 4);
+    --base-d2: calc(1rlh / 2);
+    --base: 1rlh;
+    --base-2: calc(1rlh * 2);
+    --base-4: calc(1rlh * 4);
+    --base-8: calc(1rlh * 8);
 
     /* Optical Harmony Scale */
     --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
@@ -98,39 +107,6 @@
     --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 6));
     --scale-9: calc(var(--font-size) * pow(var(--optical-ratio), 7));
     --scale-10: calc(var(--font-size) * pow(var(--optical-ratio), 8));
-
-    /* Baseline grid space unit  */
-    --baseline-d5: calc(1rlh / 5);
-    --baseline-d4: calc(1rlh / 4);
-    --baseline-d3: calc(1rlh / 3);
-    --baseline-d2: calc(1rlh / 2);
-    --baseline: 1rlh; /* Base rhythm unit */
-    --baseline-2: calc(2 * 1rlh);
-    --baseline-3: calc(3 * 1rlh);
-    --baseline-4: calc(4 * 1rlh);
-    --baseline-5: calc(5 * 1rlh);
-    --baseline-6: calc(6 * 1rlh);
-    --baseline-7: calc(7 * 1rlh);
-    --baseline-8: calc(8 * 1rlh);
-    --baseline-9: calc(9 * 1rlh);
-    --baseline-10: calc(10 * 1rlh);
-
-    /* Name use for actual spacing in the framework  */
-
-    --rhythm-d8: calc(var(--baseline) / 8);
-    --rhythm-d5: calc(var(--baseline) / 5);
-    --rhythm-d4: calc(var(--baseline) / 4);
-    --rhythm-d2: calc(var(--baseline) / 2);
-    --rhythm: var(--baseline);
-    --rhythm-2: calc(var(--baseline) * 2);
-    --rhythm-3: calc(var(--baseline) * 3);
-    --rhythm-4: calc(var(--baseline) * 4);
-    --rhythm-5: calc(var(--baseline) * 5);
-    --rhythm-6: calc(var(--baseline) * 6);
-    --rhythm-7: calc(var(--baseline) * 7);
-    --rhythm-8: calc(var(--baseline) * 8);
-    --rhythm-9: calc(var(--baseline) * 9);
-    --rhythm-10: calc(var(--baseline) * 10);
 
     /* Z-index scale */
     --z-base: 1;
@@ -203,10 +179,10 @@
         --font-size: var(--mobile-font-size) !important;
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
-        --rhythm-gap: var(--rhythm);
-        --rhythm-block-gap: var(--rhythm);
+        --base-gap: var(--base);
+        --base-block-gap: var(--base);
         --body-padding: calc(
-            var(--rhythm) * var(--body-mobile-padding-multiplier)
+            var(--base) * var(--body-mobile-padding-multiplier)
         ) !important;
     }
 }

@@ -63,11 +63,11 @@
     background-image: repeating-linear-gradient(
         to bottom,
         transparent 0,
-        transparent calc(var(--rhythm) - 1px),
+        transparent calc(var(--base) - 1px),
         color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-            calc(var(--rhythm) - 1px),
+            calc(var(--base) - 1px),
         color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-            var(--rhythm)
+            var(--base)
     );
     pointer-events: none;
     z-index: 10000;
@@ -230,7 +230,7 @@
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
@@ -253,7 +253,7 @@
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.63;
@@ -264,17 +264,17 @@
 
 /* Debug Info Panel */
 .standard-debug::after {
-    content: "🔍 Standard Debug" "\A" "Baseline: " var(--rhythm) "\A" "Ratio: "
+    content: "🔍 Standard Debug" "\A" "Baseline: " var(--base) "\A" "Ratio: "
         var(--optical-ratio) "\A" "Density: " var(--line-height) "\A" "Grid: "
         var(--grid-cols) " cols";
     position: fixed;
-    top: var(--rhythm);
-    right: var(--rhythm);
+    top: var(--base);
+    right: var(--base);
     background: var(--color-background);
     color: var(--color-foreground);
     border: var(--border-accent);
     border-radius: var(--radius);
-    padding: var(--rhythm-d2);
+    padding: var(--base-d2);
     font-family: var(--font-monospace);
     font-size: var(--scale-d3);
     line-height: 1.5;
@@ -317,13 +317,13 @@
 .standard-debug .grid-12 > *::before {
     content: attr(class);
     position: absolute;
-    top: var(--rhythm-d8);
-    left: var(--rhythm-d8);
+    top: var(--base-d8);
+    left: var(--base-d8);
     background: var(--color-cyan);
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
@@ -338,13 +338,13 @@
 .standard-debug .free-col::after {
     content: "start: " var(--start) " / span: " var(--span);
     position: absolute;
-    bottom: var(--rhythm-d8);
-    left: var(--rhythm-d8);
+    bottom: var(--base-d8);
+    left: var(--base-d8);
     background: var(--color-purple);
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
@@ -390,7 +390,7 @@
     color: var(--color-background);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.9;
@@ -402,12 +402,12 @@
 body.standard-debug::before {
     content: "md";
     position: fixed;
-    bottom: var(--rhythm);
-    left: var(--rhythm);
+    bottom: var(--base);
+    left: var(--base);
     color: var(--color-foreground);
     font-family: var(--font-monospace);
     font-size: var(--scale-d3);
-    padding: var(--rhythm-d4) var(--rhythm-d2);
+    padding: var(--base-d4) var(--base-d2);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     z-index: var(--z-toast);
@@ -467,11 +467,11 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature::before,
 .standard-debug .prose .container-full::before {
     position: absolute;
-    top: var(--rhythm-d8);
-    right: var(--rhythm-d8);
+    top: var(--base-d8);
+    right: var(--base-d8);
     font-size: var(--scale-d3);
     font-family: var(--font-monospace);
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
     pointer-events: none;
     opacity: 0.95;

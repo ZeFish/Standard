@@ -7,6 +7,189 @@ import { JSDOM } from "jsdom";
 import Logger from "./logger.js";
 
 /**
+ * Tag Wrapper Plugin for markdown-it
+ *
+ * @group markdown-enhancement
+ * @author Francis Fontaine
+ * @since 0.10.52
+ *
+ * In the early days of social media, Chris Messina proposed the hashtag
+ * on Twitter in 2007 as a way to group conversations. What started as a
+ * simple IRC convention became the lingua franca of digital organization.
+ * Tags aren't just metadata—they're how humans naturally categorize and
+ * connect ideas across the noise of information overload.
+ *
+ * This plugin brings that same organizational power to your markdown content.
+ * It scans text for hashtag patterns (#tag, #design-systems, #typography-2024)
+ * and wraps them in semantic spans, making them styleable, clickable, or
+ * filterable. Unlike regex-based approaches that break inside code blocks,
+ * this works at the token level—respecting markdown's structure while
+ * enhancing plain text with meaningful markup.
+ *
+ * The magic happens during markdown-it's inline parsing phase, where we
+ * intercept text tokens and split them whenever a hashtag appears. Each
+ * tag becomes its own span.tag element, ready for styling, JavaScript
+ * enhancement, or link generation. It's fast, safe, and plays nicely
+ * with every other markdown feature.
+ *
+ * ### Future Improvements
+ *
+ * - Add automatic linking to tag archive pages
+ * - Support multiple tag formats (@mentions, +categories)
+ * - Generate tag index automatically
+ * - Add data attributes for filtering/search
+ * - Support tag taxonomy/hierarchy
+ *
+ * @see {function} applyTypography - Works alongside typography enhancements
+ * @see {class} .tag - CSS styling for tags (in standard-04-elements.scss)
+ *
+ * @link https://en.wikipedia.org/wiki/Hashtag History of hashtags
+ * @link https://www.chris.com/2007/08/25/groups-for-twitter-or-a-proposal-for-twitter-tag-channels/ Original hashtag proposal
+ *
+ * @example markdown - Usage in content
+ *   This post is about #design-systems and #typography.
+ *   Learn more about #11ty and #jamstack architecture.
+ *
+ *   Tags work in paragraphs, lists, and quotes:
+ *   - #responsive-design principles
+ *   - #accessibility standards
+ *
+ *   > Design with #intent and #purpose.
+ *
+ * @example css - Style the tags
+ *   .tag {
+ *     display: inline-block;
+ *     padding: 0.125em 0.5em;
+ *     background: var(--color-accent-subtle);
+ *     color: var(--color-accent);
+ *     border-radius: 0.25em;
+ *     font-size: 0.875em;
+ *     font-weight: 500;
+ *     text-decoration: none;
+ *     transition: background 0.2s;
+ *   }
+ *
+ *   .tag:hover {
+ *     background: var(--color-accent);
+ *     color: var(--color-background);
+ *   }
+ *
+ * @example javascript - Make tags clickable
+ *   document.querySelectorAll('.tag').forEach(tag => {
+ *     tag.addEventListener('click', () => {
+ *       const tagName = tag.dataset.tag;
+ *       window.location.href = `/tags/${tagName}/`;
+ *     });
+ *   });
+ *
+ * @param {Object} md - markdown-it instance
+ * @returns {void} Modifies markdown-it instance with inline rule
+ */
+function tagWrapperPlugin(md) {
+  // Regular expression to match hashtags
+  // Matches: #word, #word-with-dashes, #word_with_underscores, #word123
+  // Does NOT match: # alone, #123 (must start with letter)
+  const tagRegex = /#([a-zA-Z][a-zA-Z0-9_-]*(?:\/[a-zA-Z][a-zA-Z0-9_-]*)*)/g;
+
+  /**
+   * Process text tokens and wrap hashtags in spans
+   *
+   * This function walks through all inline tokens in the markdown AST,
+   * finds text nodes containing hashtags, and splits them into multiple
+   * tokens: plain text + wrapped tags. It preserves the document structure
+   * while injecting semantic markup only where needed.
+   */
+  function processTextToken(state) {
+    const blockTokens = state.tokens;
+
+    for (let i = 0; i < blockTokens.length; i++) {
+      const blockToken = blockTokens[i];
+
+      // Only process inline tokens (where text lives)
+      if (blockToken.type !== "inline" || !blockToken.children) {
+        continue;
+      }
+
+      const tokens = blockToken.children;
+      let j = 0;
+
+      while (j < tokens.length) {
+        const token = tokens[j];
+
+        // Only process text tokens (skip code, links, etc.)
+        if (token.type !== "text") {
+          j++;
+          continue;
+        }
+
+        const text = token.content;
+        const matches = [];
+        let match;
+
+        // Find all hashtags in this text token
+        tagRegex.lastIndex = 0; // Reset regex state
+        while ((match = tagRegex.exec(text)) !== null) {
+          matches.push({
+            tag: match[0], // Full match: #tag
+            name: match[1], // Captured group: tag
+            index: match.index,
+            length: match[0].length,
+          });
+        }
+
+        // If no tags found, move to next token
+        if (matches.length === 0) {
+          j++;
+          continue;
+        }
+
+        // Split the text token into multiple tokens
+        const newTokens = [];
+        let lastIndex = 0;
+
+        matches.forEach((m) => {
+          // Add text before the tag
+          if (m.index > lastIndex) {
+            const textToken = new state.Token("text", "", 0);
+            textToken.content = text.substring(lastIndex, m.index);
+            newTokens.push(textToken);
+          }
+
+          // Add the tag wrapped in span
+          const spanOpen = new state.Token("html_inline", "", 0);
+          spanOpen.content = `<span class="tag" data-tag="${m.name}">`;
+          newTokens.push(spanOpen);
+
+          const tagText = new state.Token("text", "", 0);
+          tagText.content = m.tag;
+          newTokens.push(tagText);
+
+          const spanClose = new state.Token("html_inline", "", 0);
+          spanClose.content = "</span>";
+          newTokens.push(spanClose);
+
+          lastIndex = m.index + m.length;
+        });
+
+        // Add remaining text after last tag
+        if (lastIndex < text.length) {
+          const textToken = new state.Token("text", "", 0);
+          textToken.content = text.substring(lastIndex);
+          newTokens.push(textToken);
+        }
+
+        // Replace the original token with new tokens
+        tokens.splice(j, 1, ...newTokens);
+        j += newTokens.length;
+      }
+    }
+  }
+
+  // Add as a core rule that runs after inline parsing
+  md.core.ruler.after("inline", "tag-wrapper", processTextToken);
+}
+
+/**
  * @component Markdown Plugin with Fine-Art Typography
  * @category 11ty Plugins
  * @description Configures markdown-it parser with plugins for syntax highlighting,
@@ -60,7 +243,26 @@ export default function (eleventyConfig, site = {}) {
     typographer: false, // We handle this ourselves
   })
     .use(markdown_it_obsidian_callouts)
-    .use(markdownItFootnote);
+    .use(markdownItFootnote)
+    .use(tagWrapperPlugin);
+
+  /* not used, here for the future */
+  function codeBlockPlugin(md) {
+    const defaultFence = md.renderer.rules.fence;
+    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+      const token = tokens[idx];
+      const info = token.info.trim();
+
+      if (info === "mermaid")
+        return `<div class="mermaid">${token.content}</div>`;
+      if (info === "js p5" || info === "javascript p5") {
+        const sketchId = `p5-sketch-${Math.random().toString(36).substr(2, 9)}`;
+        return `<pre class="language-js p5"><code class="language-js p5" data-sketch-id="${sketchId}">${token.content}</code></pre>`;
+      }
+
+      return defaultFence(tokens, idx, options, env, self);
+    };
+  }
 
   // Typography rules by locale
   const typographyRules = {

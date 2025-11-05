@@ -65,8 +65,8 @@ html:not(.js-image-zoom-enabled) img:active {
     display: block;
     position: fixed;
     z-index: var(--z-image-zoom);
-    max-height: calc(100vh - (var(--rhythm) * 2));
-    max-width: calc(100vw - (var(--rhythm) * 2));
+    max-height: calc(100vh - (var(--base) * 2));
+    max-width: calc(100vw - (var(--base) * 2));
     object-fit: contain;
     margin: 0 auto;
     top: 50%;
@@ -105,7 +105,7 @@ html.image-zoomed-active {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--rhythm);
+    padding: var(--base);
     opacity: 0;
     transition: opacity 0.3s ease;
     cursor: zoom-out;

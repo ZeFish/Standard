@@ -79,6 +79,16 @@ export default function (eleventyConfig, site = {}) {
   eleventyConfig.addPreprocessor("comment", "md", (data, content) => {
     return content.replaceAll(/%%[\s\S]*?%%/g, "");
   });
+  eleventyConfig.addPreprocessor(
+    "remove-base-blocks",
+    "md",
+    (data, content) => {
+      // Remove ```base blocks (handles spaces/tabs after language name)
+      content = content.replaceAll(/```base\s*\n[\s\S]*?```/g, "");
+
+      return content;
+    },
+  );
   /**
    * Comment Callouts Removal - Structured Annotation Filtering
    *

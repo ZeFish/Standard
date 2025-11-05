@@ -68,7 +68,7 @@
     z-index: var(--z-toast);
     display: flex;
     flex-direction: column;
-    gap: var(--rhythm-d4);
+    gap: var(--base-d4);
     pointer-events: none;
     max-width: 400px;
 }
@@ -125,7 +125,7 @@
         top: auto !important;
         transform: none !important;
         max-width: 100%;
-        padding: var(--rhythm-d4);
+        padding: var(--base-d4);
         flex-direction: column-reverse;
     }
 }
@@ -197,9 +197,9 @@
 .toast-content {
     display: flex;
     align-items: flex-start;
-    gap: var(--rhythm-d4);
-    padding: calc(var(--rhythm-d4) / var(--line-height)) var(--rhythm-d2)
-        var(--rhythm-d4) var(--rhythm-d4);
+    gap: var(--base-d4);
+    padding: calc(var(--base-d4) / var(--line-height)) var(--base-d2)
+        var(--base-d4) var(--base-d4);
     transition: transform var(--transition);
 }
 

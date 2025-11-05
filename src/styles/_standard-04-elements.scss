@@ -74,37 +74,37 @@ h6 {
 h1 {
     font-weight: var(--font-weight-h1);
     font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
-    line-height: var(--rhythm-3);
+    line-height: var(--base-4);
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
     font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
-    line-height: var(--rhythm-2);
+    line-height: var(--base-2);
 }
 
 h3 {
     font-weight: var(--font-weight-h3);
     font-size: var(--scale-3);
-    line-height: var(--rhythm-2);
+    line-height: var(--base-2);
 }
 
 h4 {
     font-weight: var(--font-weight-h4);
     font-size: var(--scale-2);
-    line-height: var(--rhythm);
+    line-height: var(--base);
 }
 
 h5 {
     font-weight: var(--font-weight-h5);
     font-size: var(--scale-2);
-    line-height: var(--rhythm);
+    line-height: var(--base);
 }
 
 h6 {
     font-weight: var(--font-weight-h6);
     font-size: var(--scale-2);
-    line-height: var(--rhythm);
+    line-height: var(--base);
 }
 
 /* Inline code, monospace families */
@@ -124,7 +124,7 @@ code {
     /*background: var(--color-background-secondary);
     background-blend-mode: darken;
     border-radius: var(--radius);
-    padding: var(--rhythm-d8);*/
+    padding: var(--base-d8);*/
     color: var(--color-foreground);
     word-break: break-word;
     box-shadow: unset;
@@ -136,7 +136,7 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--radius);
-    padding: var(--rhythm-d2);
+    padding: var(--base-d2);
     overflow-x: auto;
     overflow-y: hidden;
     box-shadow: inset var(--shadow);
@@ -158,8 +158,8 @@ pre {
     position: relative;
     .copy-button {
         position: absolute;
-        top: var(--rhythm-d2);
-        right: var(--rhythm-d2);
+        top: var(--base-d2);
+        right: var(--base-d2);
         opacity: 0;
         transition: opacity 0.5s;
 
@@ -183,9 +183,9 @@ li::before {
 /* Blockquotes (typography + color) */
 blockquote {
     font-style: italic;
-    border-left: calc(var(--rhythm) / 8) solid var(--color-border);
+    border-left: calc(var(--base) / 8) solid var(--color-border);
     color: var(--color-muted);
-    padding: var(--rhythm-d2);
+    padding: var(--base-d2);
     font-size: var(--scale-d2);
 }
 
@@ -310,7 +310,7 @@ a.button {
     font-weight: var(--bold-weight);
     line-height: var(--line-height);
 
-    padding: var(--rhythm-d8) var(--rhythm-d4);
+    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
 
     background: color-mix(
@@ -329,6 +329,13 @@ a.button {
         background-color var(--transition),
         border-color var(--transition),
         opacity var(--transition);
+}
+
+.tag {
+    color: var(--color-muted);
+}
+.tag:hover {
+    color: var(--color-accent);
 }
 
 a.button:visited,
@@ -385,7 +392,7 @@ textarea,
 select {
     font-family: var(--font-interface), system-ui, sans-serif;
 
-    padding: var(--rhythm-d4);
+    padding: var(--base-d4);
     border-radius: var(--radius);
 
     color: var(--color-foreground);
@@ -416,7 +423,7 @@ textarea {
     resize: vertical;
     min-height: 6em;
     /* keep rhythm-aware variant */
-    min-height: calc(var(--rhythm-2) * 3);
+    min-height: calc(var(--base-2) * 3);
 }
 
 legend {
@@ -609,7 +616,7 @@ pre,
 // ==========================
 .callout {
     transition: var(--duration-superfast) ease;
-    padding: var(--rhythm-d8);
+    padding: var(--base-d8);
     padding-top: 0;
     --color-callout: var(--color-background-secondary);
     --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
@@ -631,7 +638,7 @@ pre,
         font-weight: bold;
 
         user-select: none;
-        padding: var(--rhythm-d4) var(--rhythm-d2);
+        padding: var(--base-d4) var(--base-d2);
         margin: 0;
     }
 
@@ -646,7 +653,7 @@ pre,
         box-shadow: inset var(--shadow);
         overflow: hidden;
         border-radius: var(--radius);
-        padding: var(--rhythm-d2) var(--rhythm-d2);
+        padding: var(--base-d2) var(--base-d2);
         margin-left: 0;
         border: var(--border);
         text-align: left;
@@ -660,23 +667,23 @@ pre,
 
         ul,
         ol {
-            padding: 0 calc(var(--rhythm) * 0.75);
+            padding: 0 calc(var(--base) * 0.75);
         }
 
         pre {
-            margin: var(--rhythm) 0;
+            margin: var(--base) 0;
         }
 
         > .callout {
-            margin: calc(var(--rhythm-d4) * -1);
+            margin: calc(var(--base-d4) * -1);
 
             .callout-content {
-                padding: var(--rhythm-d2);
+                padding: var(--base-d2);
             }
 
             .callout-title {
-                padding-left: var(--rhythm-d2);
-                padding-right: var(--rhythm-d2);
+                padding-left: var(--base-d2);
+                padding-right: var(--base-d2);
             }
         }
     }
@@ -709,8 +716,8 @@ details .callout-title::before {
     display: inline-block;
     transform: rotate(0deg);
     transition: transform var(--transition);
-    width: var(--rhythm-d2);
-    margin-left: calc(var(--rhythm-d2) * -1);
+    width: var(--base-d2);
+    margin-left: calc(var(--base-d2) * -1);
     text-align: center;
 }
 
@@ -727,9 +734,9 @@ p:has(img) + .callout[data-callout="caption" i] {
     padding: 0;
     background: none;
     border: none;
-    margin: 0 var(--rhythm-2);
+    margin: 0 var(--base-2);
     position: relative;
-    top: calc(var(--rhythm) * -1.75);
+    top: calc(var(--base) * -1.75);
     box-shadow: none;
 
     .callout-title {
@@ -753,7 +760,7 @@ p:has(img) + .callout[data-callout="caption" i] {
     ul:not([start]),
     ol:not([start]) {
         padding: 0;
-        padding-left: var(--rhythm);
+        padding-left: var(--base);
     }
 }
 
@@ -762,6 +769,6 @@ p:has(img) + .callout[data-callout="caption" i] {
     border-radius: var(--radius);
     border: var(--border);
     text-align: center;
-    margin: 0 auto var(--rhythm) auto;
-    padding: var(--rhythm);
+    margin: 0 auto var(--base) auto;
+    padding: var(--base);
 }

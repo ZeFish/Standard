@@ -44,7 +44,7 @@
 
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
    Use this as your single grid across the site (replaces old .h-grid API).
-   Relies on logical properties and Harmony tokens: --rhythm, calc(var(--rhythm) / 4), --rhythm-2, borders, etc.
+   Relies on logical properties and Harmony tokens: --base, calc(var(--base) / 4), --base-2, borders, etc.
 */
 
 /* Grid container */
@@ -61,12 +61,12 @@
 
 /* Gap variants aligned to rhythm */
 .grid.compact {
-    --grid-gap: var(--rhythm-d8);
-    --grid-row-gap: var(--rhythm-d2);
+    --grid-gap: var(--base-d8);
+    --grid-row-gap: var(--base-d2);
 }
 .grid.relaxed {
-    --grid-gap: var(--rhythm-2);
-    --grid-row-gap: var(--rhythm-3);
+    --grid-gap: var(--base-2);
+    --grid-row-gap: var(--base-4);
 }
 
 /* Spans 1..12 */
@@ -138,7 +138,7 @@
 }
 
 hr.col-row {
-    margin-block: var(--rhythm);
+    margin-block: var(--base);
 }
 
 /* Ergonomic presets (optional sugar) */
@@ -157,7 +157,7 @@ hr.col-row {
 
 /* Rhythm inside grid items: apply to a cell containing prose */
 .grid .rhythm > * {
-    margin-block-end: var(--rhythm);
+    margin-block-end: var(--base);
 }
 
 /* Free columns: place anywhere with CSS vars or utility shorthands */
@@ -170,7 +170,7 @@ hr.col-row {
 
     /* If the free column contains prose, opt-in to rhythm */
     &.rhythm > * {
-        margin-block-end: var(--rhythm);
+        margin-block-end: var(--base);
     }
 }
 
@@ -216,7 +216,7 @@ hr.col-row {
 /* Optional: sticky marginalia variant for editorial layouts */
 .free-col.sticky {
     position: sticky;
-    inset-block-start: var(--rhythm);
+    inset-block-start: var(--base);
     align-self: start;
     z-index: 1;
 }
@@ -227,19 +227,19 @@ hr.col-row {
 }
 
 .grid.row-gap-xs {
-    --grid-row-gap: var(--rhythm-d4);
+    --grid-row-gap: var(--base-d4);
 }
 
 .grid.row-gap-s {
-    --grid-row-gap: var(--rhythm-d2);
+    --grid-row-gap: var(--base-d2);
 }
 
 .grid.row-gap-l {
-    --grid-row-gap: var(--rhythm-2);
+    --grid-row-gap: var(--base-2);
 }
 
 .grid.row-gap-xl {
-    --grid-row-gap: var(--rhythm-3);
+    --grid-row-gap: var(--base-4);
 }
 
 /* Column gap utilities for grid system */
@@ -248,19 +248,19 @@ hr.col-row {
 }
 
 .grid.col-gap-xs {
-    --grid-gap: var(--rhythm-d4);
+    --grid-gap: var(--base-d4);
 }
 
 .grid.col-gap-s {
-    --grid-gap: var(--rhythm-d2);
+    --grid-gap: var(--base-d2);
 }
 
 .grid.col-gap-l {
-    --grid-gap: var(--rhythm-2);
+    --grid-gap: var(--base-2);
 }
 
 .grid.col-gap-xl {
-    --grid-gap: var(--rhythm-3);
+    --grid-gap: var(--base-4);
 }
 
 /* Common layout containers inherit rhythm to cascade deeper */
@@ -284,7 +284,7 @@ hr.col-row {
 .grid > .col-full {
     > * {
         margin-block: 0;
-        margin-block-end: var(--rhythm-gap);
+        margin-block-end: var(--base-gap);
     }
 
     > :last-child {

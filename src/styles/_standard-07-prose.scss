@@ -43,14 +43,14 @@
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
     /* Layout grid tokens */
-    --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
+    --gap: clamp(var(--base), 6%, var(--base-4));
     --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
 
-    --content-accent: minmax(0, var(--rhythm-2));
-    --content-feature: minmax(0, var(--rhythm-4));
+    --content-accent: minmax(0, var(--base-2));
+    --content-feature: minmax(0, var(--base-4));
     --content-hero: minmax(0, 1fr);
 
-    --content-small: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
+    --content-small: calc(var(--base-block-gap) - var(--base-gap));
 }
 
 @media (max-width: #{$small}) {
@@ -101,7 +101,7 @@
 
     .container-hero {
         grid-column: hero;
-        margin-inline: calc((var(--rhythm) * var(--body-padding)) * -1);
+        margin-inline: calc((var(--base) * var(--body-padding)) * -1);
         /*padding-inline: var(--body-padding);*/
         > * {
             margin-inline: 0;
@@ -112,7 +112,7 @@
     &:not(.no-grid) {
         p:has(img) {
             display: flex;
-            --img-gap: var(--rhythm-d4);
+            --img-gap: var(--base-d4);
             gap: var(--img-gap);
             border-radius: var(--radius);
         }
@@ -153,7 +153,7 @@
         /* Adjacent images get reduced spacing  + var(--img-gap)    */
         p:has(img) + p:has(img) {
             margin-block-start: calc(
-                (var(--rhythm-block-gap) * -1) + var(--img-gap)
+                (var(--base-block-gap) * -1) + var(--img-gap)
             ) !important;
         }
     }
@@ -199,13 +199,19 @@
 
     /* Mermaid diagrams */
     .mermaid {
-        margin-block-end: var(--rhythm);
+        margin-block-end: var(--base);
         margin-inline: auto;
-        padding: var(--rhythm);
+        padding: var(--base);
     }
 
     p img {
         max-inline-size: 100%;
+    }
+
+    a {
+        word-break: break-all;
+        ellipsis: 1;
+        text-overflow: ellipsis;
     }
 }
 

@@ -11,17 +11,17 @@
   
   --line-height: 1.5;
   
-  --rhythm-gap: var(--rhythm);
+  --base-gap: var(--base);
   
   
-  --rhythm-block-gap: var(--rhythm-2);
+  --base-block-gap: var(--base-2);
   
-  --body-padding: var(--rhythm-2);
+  --body-padding: var(--base-2);
   
   --blur: blur(7px);
   --hr-thickness: 1px;
   --transition: 0.5s ease;
-  --radius: var(--rhythm-d8);
+  --radius: var(--base-d8);
   --modal-background: color-mix(
       in srgb,
       var(--color-background-secondary) 85%,
@@ -39,16 +39,24 @@
   --line-width-l: 50rem; 
   --line-width-xl: 60rem; 
   --line-width-full: calc(
-      100vw - (var(--rhythm) * 2)
+      100vw - (var(--base) * 2)
   ); 
   --line-width: var(--line-width-m);
   
-  --grid-gap: var(--rhythm);
+  --grid-gap: var(--base);
   --grid-row-gap: var(--grid-gap); 
   
   --line-height-s: max(cac(var(--line-height) / 2), 1);
   
   --font-size: 1rem;
+  
+  --base-d8: calc(1rlh / 8);
+  --base-d4: calc(1rlh / 4);
+  --base-d2: calc(1rlh / 2);
+  --base: 1rlh;
+  --base-2: calc(1rlh * 2);
+  --base-4: calc(1rlh * 4);
+  --base-8: calc(1rlh * 8);
   
   --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
   --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
@@ -64,36 +72,6 @@
   --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 6));
   --scale-9: calc(var(--font-size) * pow(var(--optical-ratio), 7));
   --scale-10: calc(var(--font-size) * pow(var(--optical-ratio), 8));
-  
-  --baseline-d5: calc(1rlh / 5);
-  --baseline-d4: calc(1rlh / 4);
-  --baseline-d3: calc(1rlh / 3);
-  --baseline-d2: calc(1rlh / 2);
-  --baseline: 1rlh; 
-  --baseline-2: calc(2 * 1rlh);
-  --baseline-3: calc(3 * 1rlh);
-  --baseline-4: calc(4 * 1rlh);
-  --baseline-5: calc(5 * 1rlh);
-  --baseline-6: calc(6 * 1rlh);
-  --baseline-7: calc(7 * 1rlh);
-  --baseline-8: calc(8 * 1rlh);
-  --baseline-9: calc(9 * 1rlh);
-  --baseline-10: calc(10 * 1rlh);
-  
-  --rhythm-d8: calc(var(--baseline) / 8);
-  --rhythm-d5: calc(var(--baseline) / 5);
-  --rhythm-d4: calc(var(--baseline) / 4);
-  --rhythm-d2: calc(var(--baseline) / 2);
-  --rhythm: var(--baseline);
-  --rhythm-2: calc(var(--baseline) * 2);
-  --rhythm-3: calc(var(--baseline) * 3);
-  --rhythm-4: calc(var(--baseline) * 4);
-  --rhythm-5: calc(var(--baseline) * 5);
-  --rhythm-6: calc(var(--baseline) * 6);
-  --rhythm-7: calc(var(--baseline) * 7);
-  --rhythm-8: calc(var(--baseline) * 8);
-  --rhythm-9: calc(var(--baseline) * 9);
-  --rhythm-10: calc(var(--baseline) * 10);
   
   --z-base: 1;
   --z-dropdown: 1000;
@@ -125,10 +103,10 @@
     --font-size: var(--mobile-font-size) !important;
     --optical-ratio: var(--mobile-optical-ratio) !important;
     --line-height: var(--mobile-line-height);
-    --rhythm-gap: var(--rhythm);
-    --rhythm-block-gap: var(--rhythm);
+    --base-gap: var(--base);
+    --base-block-gap: var(--base);
     --body-padding: calc(
-        var(--rhythm) * var(--body-mobile-padding-multiplier)
+        var(--base) * var(--body-mobile-padding-multiplier)
     ) !important;
   }
 }
@@ -206,7 +184,7 @@
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
   
   --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
-  --shadow: 0 0 var(--rhythm-d4) var(--shadow-color);
+  --shadow: 0 0 var(--base-d4) var(--shadow-color);
   
   --border: 1px solid var(--color-border);
   --border-accent: 2px solid var(--color-accent);
@@ -570,7 +548,7 @@ html {
       var(--font-weight)
   );
   
-  --list-indentation: var(--rhythm);
+  --list-indentation: var(--base);
 }
 
 
@@ -660,37 +638,37 @@ h6 {
 h1 {
   font-weight: var(--font-weight-h1);
   font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
-  line-height: var(--rhythm-3);
+  line-height: var(--base-4);
 }
 
 h2 {
   font-weight: var(--font-weight-h2);
   font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
-  line-height: var(--rhythm-2);
+  line-height: var(--base-2);
 }
 
 h3 {
   font-weight: var(--font-weight-h3);
   font-size: var(--scale-3);
-  line-height: var(--rhythm-2);
+  line-height: var(--base-2);
 }
 
 h4 {
   font-weight: var(--font-weight-h4);
   font-size: var(--scale-2);
-  line-height: var(--rhythm);
+  line-height: var(--base);
 }
 
 h5 {
   font-weight: var(--font-weight-h5);
   font-size: var(--scale-2);
-  line-height: var(--rhythm);
+  line-height: var(--base);
 }
 
 h6 {
   font-weight: var(--font-weight-h6);
   font-size: var(--scale-2);
-  line-height: var(--rhythm);
+  line-height: var(--base);
 }
 
 
@@ -719,7 +697,7 @@ pre {
   font-size: var(--scale-d2);
   border: var(--border);
   border-radius: var(--radius);
-  padding: var(--rhythm-d2);
+  padding: var(--base-d2);
   overflow-x: auto;
   overflow-y: hidden;
   box-shadow: inset var(--shadow);
@@ -743,8 +721,8 @@ pre {
 }
 pre .copy-button {
   position: absolute;
-  top: var(--rhythm-d2);
-  right: var(--rhythm-d2);
+  top: var(--base-d2);
+  right: var(--base-d2);
   opacity: 0;
   transition: opacity 0.5s;
   font-family: var(--font-interface);
@@ -766,9 +744,9 @@ li::before {
 
 blockquote {
   font-style: italic;
-  border-left: calc(var(--rhythm) / 8) solid var(--color-border);
+  border-left: calc(var(--base) / 8) solid var(--color-border);
   color: var(--color-muted);
-  padding: var(--rhythm-d2);
+  padding: var(--base-d2);
   font-size: var(--scale-d2);
 }
 
@@ -887,7 +865,7 @@ a.button {
   font-size: var(--scale-d3);
   font-weight: var(--bold-weight);
   line-height: var(--line-height);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: var(--color-background);
@@ -896,6 +874,14 @@ a.button {
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
+}
+
+.tag {
+  color: var(--color-muted);
+}
+
+.tag:hover {
+  color: var(--color-accent);
 }
 
 a.button:visited,
@@ -942,7 +928,7 @@ input,
 textarea,
 select {
   font-family: var(--font-interface), system-ui, sans-serif;
-  padding: var(--rhythm-d4);
+  padding: var(--base-d4);
   border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-background-secondary);
@@ -964,7 +950,7 @@ textarea {
   resize: vertical;
   min-height: 6em;
   
-  min-height: calc(var(--rhythm-2) * 3);
+  min-height: calc(var(--base-2) * 3);
 }
 
 legend {
@@ -1105,7 +1091,7 @@ pre,
 
 .callout {
   transition: var(--duration-superfast) ease;
-  padding: var(--rhythm-d8);
+  padding: var(--base-d8);
   padding-top: 0;
   --color-callout: var(--color-background-secondary);
   --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
@@ -1118,7 +1104,7 @@ pre,
   display: flex;
   font-weight: bold;
   user-select: none;
-  padding: var(--rhythm-d4) var(--rhythm-d2);
+  padding: var(--base-d4) var(--base-d2);
   margin: 0;
 }
 .callout .callout-content {
@@ -1127,7 +1113,7 @@ pre,
   box-shadow: inset var(--shadow);
   overflow: hidden;
   border-radius: var(--radius);
-  padding: var(--rhythm-d2) var(--rhythm-d2);
+  padding: var(--base-d2) var(--base-d2);
   margin-left: 0;
   border: var(--border);
   text-align: left;
@@ -1140,20 +1126,20 @@ pre,
 }
 .callout .callout-content ul,
 .callout .callout-content ol {
-  padding: 0 calc(var(--rhythm) * 0.75);
+  padding: 0 calc(var(--base) * 0.75);
 }
 .callout .callout-content pre {
-  margin: var(--rhythm) 0;
+  margin: var(--base) 0;
 }
 .callout .callout-content > .callout {
-  margin: calc(var(--rhythm-d4) * -1);
+  margin: calc(var(--base-d4) * -1);
 }
 .callout .callout-content > .callout .callout-content {
-  padding: var(--rhythm-d2);
+  padding: var(--base-d2);
 }
 .callout .callout-content > .callout .callout-title {
-  padding-left: var(--rhythm-d2);
-  padding-right: var(--rhythm-d2);
+  padding-left: var(--base-d2);
+  padding-right: var(--base-d2);
 }
 .callout .callout-title-icon {
   display: none;
@@ -1180,8 +1166,8 @@ details .callout-title::before {
   display: inline-block;
   transform: rotate(0deg);
   transition: transform var(--transition);
-  width: var(--rhythm-d2);
-  margin-left: calc(var(--rhythm-d2) * -1);
+  width: var(--base-d2);
+  margin-left: calc(var(--base-d2) * -1);
   text-align: center;
 }
 
@@ -1197,9 +1183,9 @@ p:has(img) + .callout[data-callout=caption i] {
   padding: 0;
   background: none;
   border: none;
-  margin: 0 var(--rhythm-2);
+  margin: 0 var(--base-2);
   position: relative;
-  top: calc(var(--rhythm) * -1.75);
+  top: calc(var(--base) * -1.75);
   box-shadow: none;
 }
 p:has(img) + .callout[data-callout=caption i] .callout-title {
@@ -1218,7 +1204,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   ul:not([start]),
   ol:not([start]) {
     padding: 0;
-    padding-left: var(--rhythm);
+    padding-left: var(--base);
   }
 }
 .mermaid {
@@ -1226,8 +1212,8 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   border-radius: var(--radius);
   border: var(--border);
   text-align: center;
-  margin: 0 auto var(--rhythm) auto;
-  padding: var(--rhythm);
+  margin: 0 auto var(--base) auto;
+  padding: var(--base);
 }
 
 
@@ -1256,7 +1242,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) > * {
   vertical-align: baseline;
   margin-block-start: 0;
-  margin-block-end: var(--rhythm-gap);
+  margin-block-end: var(--base-gap);
 }
 
 
@@ -1264,11 +1250,11 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm)) > body {
   margin: 0;
   padding: var(--body-padding);
-  padding-bottom: calc(var(--rhythm) * var(--body-padding) * 1.5);
+  padding-bottom: calc(var(--base) * var(--body-padding) * 1.5);
 }
 :where(body:not(.no-rhythm)) [id],
 :where(html:not(.no-rhythm)) > body [id] {
-  scroll-margin-top: calc(var(--rhythm) * var(--body-padding)); 
+  scroll-margin-top: calc(var(--base) * var(--body-padding)); 
 }
 
 @media (max-width: 768px) {
@@ -1281,58 +1267,58 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 
 :where(html:not(.no-rhythm), .rhythm) h1, :where(html:not(.no-rhythm), .rhythm) h2, :where(html:not(.no-rhythm), .rhythm) h3, :where(html:not(.no-rhythm), .rhythm) h4, :where(html:not(.no-rhythm), .rhythm) h5, :where(html:not(.no-rhythm), .rhythm) h6, :where(html:not(.no-rhythm), .rhythm) ul, :where(html:not(.no-rhythm), .rhythm) ol, :where(html:not(.no-rhythm), .rhythm) dl, :where(html:not(.no-rhythm), .rhythm) p, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) dt, :where(html:not(.no-rhythm), .rhythm) dd, :where(html:not(.no-rhythm), .rhythm) table, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) form, :where(html:not(.no-rhythm), .rhythm) fieldset, :where(html:not(.no-rhythm), .rhythm) aside {
   margin-block-start: 0;
-  margin-block-end: var(--rhythm-gap);
+  margin-block-end: var(--base-gap);
 }
 :where(html:not(.no-rhythm), .rhythm) :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) + :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) {
   margin-block-start: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) .callout, :where(html:not(.no-rhythm), .rhythm) blockquote, :where(html:not(.no-rhythm), .rhythm) pre, :where(html:not(.no-rhythm), .rhythm) figure, :where(html:not(.no-rhythm), .rhythm) p:has(img), :where(html:not(.no-rhythm), .rhythm) section, :where(html:not(.no-rhythm), .rhythm) .box, :where(html:not(.no-rhythm), .rhythm) .card, :where(html:not(.no-rhythm), .rhythm) .grid, :where(html:not(.no-rhythm), .rhythm) .container-small, :where(html:not(.no-rhythm), .rhythm) .container-accent, :where(html:not(.no-rhythm), .rhythm) .containe-feature, :where(html:not(.no-rhythm), .rhythm) .container-hero, :where(html:not(.no-rhythm), .rhythm) .scroll, :where(html:not(.no-rhythm), .rhythm) hr {
-  margin-block-start: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
-  margin-block-end: var(--rhythm-block-gap);
+  margin-block-start: calc(var(--base-block-gap));
+  margin-block-end: var(--base-block-gap);
 }
 :where(html:not(.no-rhythm), .rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr)) {
-  margin-block-end: var(--rhythm-gap);
+  margin-block-end: var(--base-gap);
 }
 :where(html:not(.no-rhythm), .rhythm) * > :where(:last-child) {
   margin-block-end: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) .rhythm {
-  --rhythm-gap: 1; 
+  --base-gap: 1; 
 }
 :where(html:not(.no-rhythm), .rhythm) .prose > [class^=grid-],
 :where(html:not(.no-rhythm), .rhythm) .prose > .grid {
-  margin-block-start: calc(var(--rhythm) * max(var(--rhythm-block-gap), var(--rhythm-gap)) - var(--rhythm) * var(--rhythm-gap));
-  margin-block-end: calc(var(--rhythm) * max(var(--rhythm-block-gap), var(--rhythm-gap)));
+  margin-block-start: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)) - var(--base) * var(--base-gap));
+  margin-block-end: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)));
 }
 :where(html:not(.no-rhythm), .rhythm) h1,
 :where(html:not(.no-rhythm), .rhythm) > h1:where(:first-child) {
-  margin-block-start: calc(var(--rhythm-gap) * 4);
-  margin-block-end: calc(var(--rhythm-gap) * 4);
+  margin-block-start: calc(var(--base-gap) * 4);
+  margin-block-end: calc(var(--base-gap) * 4);
   line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h2 {
-  margin-block-start: calc(var(--rhythm-gap) * 2);
-  margin-block-end: calc(var(--rhythm-gap) * 2);
+  margin-block-start: calc(var(--base-gap) * 2);
+  margin-block-end: calc(var(--base-gap) * 2);
 }
 :where(html:not(.no-rhythm), .rhythm) h3 {
-  margin-block-start: calc(var(--rhythm-gap) * 1);
-  margin-block-end: calc(var(--rhythm-gap) * 1);
+  margin-block-start: calc(var(--base-gap) * 1);
+  margin-block-end: calc(var(--base-gap) * 1);
   line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h4 {
-  margin-block-start: var(--rhythm-gap);
-  margin-block-end: var(--rhythm-d2);
+  margin-block-start: var(--base-gap);
+  margin-block-end: var(--base-d2);
   line-height: var(--line-height);
 }
 :where(html:not(.no-rhythm), .rhythm) h5 {
-  margin-block-start: var(--rhythm-gap);
-  margin-block-end: var(--rhythm-d2);
+  margin-block-start: var(--base-gap);
+  margin-block-end: var(--base-d2);
   line-height: var(--line-height);
   font-size: var(--scale-d2);
 }
 :where(html:not(.no-rhythm), .rhythm) h6 {
-  margin-block-start: var(--rhythm-gap);
-  margin-block-end: var(--rhythm-d2);
+  margin-block-start: var(--base-gap);
+  margin-block-end: var(--base-d2);
   line-height: var(--line-height);
   font-size: var(--scale-d2);
   text-align: center;
@@ -1341,18 +1327,18 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   :where(html:not(.no-rhythm), .rhythm) h1,
   :where(html:not(.no-rhythm), .rhythm) h2,
   :where(html:not(.no-rhythm), .rhythm) h3 {
-    margin-block-start: var(--rhythm-gap);
-    margin-block-end: var(--rhythm-gap);
+    margin-block-start: var(--base-gap);
+    margin-block-end: var(--base-gap);
   }
   :where(html:not(.no-rhythm), .rhythm) h1 {
-    margin-block: calc(var(--rhythm-gap) * 2);
+    margin-block: calc(var(--base-gap) * 2);
   }
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
-  margin-inline: calc(var(--rhythm-2) * var(--rhythm-gap));
+  margin-inline: calc(var(--base-2) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) hr {
-  --rhythm-block-gap: calc(var(--rhythm-gap) * 2);
+  --base-block-gap: calc(var(--base-gap) * 2);
 }
 :where(html:not(.no-rhythm), .rhythm) blockquote > :first-child,
 :where(html:not(.no-rhythm), .rhythm) pre > :first-child,
@@ -1369,37 +1355,37 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) ul,
 :where(html:not(.no-rhythm), .rhythm) ol {
   list-style: none;
-  padding-inline-start: var(--rhythm);
-  padding-inline-end: var(--rhythm);
+  padding-inline-start: var(--base);
+  padding-inline-end: var(--base);
 }
 :where(html:not(.no-rhythm), .rhythm) ol ul,
 :where(html:not(.no-rhythm), .rhythm) ol ol,
 :where(html:not(.no-rhythm), .rhythm) ul ul,
 :where(html:not(.no-rhythm), .rhythm) ul ol {
-  margin-block-start: var(--rhythm);
+  margin-block-start: var(--base);
 }
 :where(html:not(.no-rhythm), .rhythm) li > ul,
 :where(html:not(.no-rhythm), .rhythm) li > ol {
-  padding-inline-start: var(--rhythm);
+  padding-inline-start: var(--base);
   margin-block-end: 0;
 }
 :where(html:not(.no-rhythm), .rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--rhythm-d2);
+  margin-block-end: var(--base);
 }
 :where(html:not(.no-rhythm), .rhythm) .compact li {
-  margin-block-end: var(--rhythm-d2);
+  margin-block-end: var(--base-d2);
 }
 :where(html:not(.no-rhythm), .rhythm) .tight li {
-  margin-block-end: var(--rhythm-d4);
+  margin-block-end: var(--base-d4);
 }
 :where(html:not(.no-rhythm), .rhythm) ul > li::before {
   content: "•";
   position: absolute;
-  left: calc(var(--rhythm) * -1);
-  width: var(--rhythm);
+  left: calc(var(--base) * -1);
+  width: var(--base);
   text-align: center;
   color: var(--color-subtle);
 }
@@ -1412,13 +1398,13 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
-  left: calc(var(--rhythm) * -1.75);
+  left: calc(var(--base) * -1.75);
   text-align: right;
   line-height: inherit;
   color: var(--color-subtle);
   font-variant-numeric: tabular-nums;
   overflow: hidden;
-  width: calc(var(--rhythm) * 1.5);
+  width: calc(var(--base) * 1.5);
 }
 :where(html:not(.no-rhythm), .rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
 :where(html:not(.no-rhythm), .rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
@@ -1426,20 +1412,20 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(html:not(.no-rhythm), .rhythm) form:not(.grid *) {
   display: grid;
-  gap: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  gap: calc(var(--base-d2) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) .grid form {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  gap: calc(var(--base-d2) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) fieldset {
-  padding: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  padding: calc(var(--base-d2) * var(--base-gap));
   display: grid;
-  gap: calc(var(--rhythm-d8) * var(--rhythm-gap));
+  gap: calc(var(--base-d8) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) legend {
-  padding-inline: calc(var(--rhythm-d4) * var(--rhythm-gap));
+  padding-inline: calc(var(--base-d4) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) input,
 :where(html:not(.no-rhythm), .rhythm) textarea,
@@ -1454,20 +1440,20 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) label:has(+ input[type=password]),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ textarea),
 :where(html:not(.no-rhythm), .rhythm) label:has(+ select) {
-  margin-block-start: calc(var(--rhythm-d4) * var(--rhythm-gap));
-  margin-inline-start: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  margin-block-start: calc(var(--base-d4) * var(--base-gap));
+  margin-inline-start: calc(var(--base-d2) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) fieldset div,
 :where(html:not(.no-rhythm), .rhythm) fieldset p {
-  margin-inline-start: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  margin-inline-start: calc(var(--base-d2) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) label + input[type=checkbox],
 :where(html:not(.no-rhythm), .rhythm) label + input[type=radio] {
-  margin-inline-start: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  margin-inline-start: calc(var(--base-d2) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) .button-group {
   display: flex;
-  gap: calc(var(--rhythm-d2) * var(--rhythm-gap));
+  gap: calc(var(--base-d2) * var(--base-gap));
   flex-wrap: wrap;
 }
 :where(html:not(.no-rhythm), .rhythm) img,
@@ -1479,10 +1465,10 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(html:not(.no-rhythm), .rhythm) figure {
   display: grid;
-  gap: calc(var(--rhythm-d4) * var(--rhythm-gap));
+  gap: calc(var(--base-d4) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) caption {
-  margin-block-end: calc(var(--rhythm-d4) * var(--rhythm-gap));
+  margin-block-end: calc(var(--base-d4) * var(--base-gap));
 }
 :where(html:not(.no-rhythm), .rhythm) table {
   
@@ -1493,7 +1479,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(html:not(.no-rhythm), .rhythm) th {
   border-bottom: var(--border);
   font-size: var(--scale-d2);
-  padding: var(--rhythm-d2);
+  padding: var(--base-d2);
 }
 :where(html:not(.no-rhythm), .rhythm) th {
   
@@ -1513,15 +1499,15 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 
 
 .rhythm-compact {
-  --rhythm-gap: 0.5;
+  --base-gap: 0.5;
 }
 
 .rhythm-relaxed {
-  --rhythm-gap: 1.5;
+  --base-gap: 1.5;
 }
 
 .rhythm-xl {
-  --rhythm-gap: 2;
+  --base-gap: 2;
 }
 
 
@@ -1538,7 +1524,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 .stick-next {
-  margin-block-end: calc(var(--rhythm-d4) * var(--rhythm-gap)) !important;
+  margin-block-end: calc(var(--base-d4) * var(--base-gap)) !important;
 }
 
 
@@ -1556,7 +1542,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: var(--rhythm-gap);
+    margin-block-end: var(--base-gap);
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -1583,13 +1569,13 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 
 
 .grid.compact {
-  --grid-gap: var(--rhythm-d8);
-  --grid-row-gap: var(--rhythm-d2);
+  --grid-gap: var(--base-d8);
+  --grid-row-gap: var(--base-d2);
 }
 
 .grid.relaxed {
-  --grid-gap: var(--rhythm-2);
-  --grid-row-gap: var(--rhythm-3);
+  --grid-gap: var(--base-2);
+  --grid-row-gap: var(--base-4);
 }
 
 
@@ -2093,7 +2079,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 hr.col-row {
-  margin-block: var(--rhythm);
+  margin-block: var(--base);
 }
 
 
@@ -2111,7 +2097,7 @@ hr.col-row {
 } 
 
 .grid .rhythm > * {
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
 }
 
 
@@ -2123,7 +2109,7 @@ hr.col-row {
   
 }
 .free-col.rhythm > * {
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
 }
 
 
@@ -2369,7 +2355,7 @@ hr.col-row {
 
 .free-col.sticky {
   position: sticky;
-  inset-block-start: var(--rhythm);
+  inset-block-start: var(--base);
   align-self: start;
   z-index: 1;
 }
@@ -2380,19 +2366,19 @@ hr.col-row {
 }
 
 .grid.row-gap-xs {
-  --grid-row-gap: var(--rhythm-d4);
+  --grid-row-gap: var(--base-d4);
 }
 
 .grid.row-gap-s {
-  --grid-row-gap: var(--rhythm-d2);
+  --grid-row-gap: var(--base-d2);
 }
 
 .grid.row-gap-l {
-  --grid-row-gap: var(--rhythm-2);
+  --grid-row-gap: var(--base-2);
 }
 
 .grid.row-gap-xl {
-  --grid-row-gap: var(--rhythm-3);
+  --grid-row-gap: var(--base-4);
 }
 
 
@@ -2401,19 +2387,19 @@ hr.col-row {
 }
 
 .grid.col-gap-xs {
-  --grid-gap: var(--rhythm-d4);
+  --grid-gap: var(--base-d4);
 }
 
 .grid.col-gap-s {
-  --grid-gap: var(--rhythm-d2);
+  --grid-gap: var(--base-d2);
 }
 
 .grid.col-gap-l {
-  --grid-gap: var(--rhythm-2);
+  --grid-gap: var(--base-2);
 }
 
 .grid.col-gap-xl {
-  --grid-gap: var(--rhythm-3);
+  --grid-gap: var(--base-4);
 }
 
 
@@ -2436,7 +2422,7 @@ hr.col-row {
 .grid > .col-quarter > *,
 .grid > .col-full > * {
   margin-block: 0;
-  margin-block-end: var(--rhythm-gap);
+  margin-block-end: var(--base-gap);
 }
 .box > :last-child,
 .grid > .col-1 > :last-child,
@@ -2491,12 +2477,12 @@ hr.col-row {
 
 :root {
   
-  --gap: clamp(var(--rhythm), 6%, var(--rhythm-3));
+  --gap: clamp(var(--base), 6%, var(--base-4));
   --content: min(var(--line-width), 100% - var(--gap) * 2); 
-  --content-accent: minmax(0, var(--rhythm-2));
-  --content-feature: minmax(0, var(--rhythm-4));
+  --content-accent: minmax(0, var(--base-2));
+  --content-feature: minmax(0, var(--base-4));
   --content-hero: minmax(0, 1fr);
-  --content-small: calc(var(--rhythm-block-gap) - var(--rhythm-gap));
+  --content-small: calc(var(--base-block-gap) - var(--base-gap));
 }
 
 @media (max-width: 768px) {
@@ -2533,7 +2519,7 @@ hr.col-row {
 }
 :where(.prose) .container-hero {
   grid-column: hero;
-  margin-inline: calc(var(--rhythm) * var(--body-padding) * -1);
+  margin-inline: calc(var(--base) * var(--body-padding) * -1);
   
 }
 :where(.prose) .container-hero > * {
@@ -2541,7 +2527,7 @@ hr.col-row {
 }
 :where(.prose):not(.no-grid) p:has(img) {
   display: flex;
-  --img-gap: var(--rhythm-d4);
+  --img-gap: var(--base-d4);
   gap: var(--img-gap);
   border-radius: var(--radius);
 }
@@ -2573,7 +2559,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--rhythm-block-gap) * -1 + var(--img-gap)) !important;
+  margin-block-start: calc(var(--base-block-gap) * -1 + var(--img-gap)) !important;
 }
 :where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
@@ -2606,12 +2592,17 @@ hr.col-row {
   }
 }
 :where(.prose) .mermaid {
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
   margin-inline: auto;
-  padding: var(--rhythm);
+  padding: var(--base);
 }
 :where(.prose) p img {
   max-inline-size: 100%;
+}
+:where(.prose) a {
+  word-break: break-all;
+  ellipsis: 1;
+  text-overflow: ellipsis;
 }
 
 
@@ -2660,8 +2651,8 @@ html:not(.js-image-zoom-enabled) img:active {
   display: block;
   position: fixed;
   z-index: var(--z-image-zoom);
-  max-height: calc(100vh - var(--rhythm) * 2);
-  max-width: calc(100vw - var(--rhythm) * 2);
+  max-height: calc(100vh - var(--base) * 2);
+  max-width: calc(100vw - var(--base) * 2);
   object-fit: contain;
   margin: 0 auto;
   top: 50%;
@@ -2695,7 +2686,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--rhythm);
+  padding: var(--base);
   opacity: 0;
   transition: opacity 0.3s ease;
   cursor: zoom-out;
@@ -2722,7 +2713,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   --card-border: var(--border);
   --card-border-width: 1px;
   --card-border-radius: var(--radius);
-  --card-padding: var(--rhythm);
+  --card-padding: var(--base);
   --card-background: var(--color-background);
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   background: var(--card-background);
@@ -2796,7 +2787,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 
 
 .alert {
-  --alert-padding: var(--rhythm-d2);
+  --alert-padding: var(--base-d2);
   --alert-border-width: 1px;
   --alert-border-radius: var(--radius);
   --alert-background: var(--color-background-secondary);
@@ -2808,7 +2799,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   background: var(--alert-background);
   color: var(--alert-color);
   border-left: 4px solid var(--alert-border-color); 
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
   
   font-size: var(--scale-d2);
   line-height: var(--line-height);
@@ -2868,7 +2859,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 
 .alert-action {
   display: inline-block;
-  margin-inline-start: var(--rhythm-d2);
+  margin-inline-start: var(--base-d2);
   color: var(--alert-border-color);
   text-decoration: underline;
   font-weight: var(--bold-weight);
@@ -2881,13 +2872,13 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 a.skip-link {
   
   position: absolute;
-  top: var(--rhythm-d4);
-  left: var(--rhythm-d4);
+  top: var(--base-d4);
+  left: var(--base-d4);
   z-index: var(--z-modal); 
   
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--rhythm-d4) var(--rhythm-d4);
+  padding: var(--base-d4) var(--base-d4);
   border-radius: var(--radius);
   font-weight: var(--bold-weight);
   font-size: var(--scale-d2);
@@ -2922,14 +2913,14 @@ a.skip-link:active {
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--rhythm-d4);
-  padding: var(--rhythm-d4);
+  gap: var(--base-d4);
+  padding: var(--base-d4);
 }
 
 
 .breadcrumb {
   
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
   font-size: var(--scale-d2);
   
 }
@@ -2939,13 +2930,13 @@ a.skip-link:active {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   align-items: center;
 }
 .breadcrumb li {
   display: inline-flex;
   align-items: center;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   margin: 0;
   
 }
@@ -2956,7 +2947,7 @@ a.skip-link:active {
   content: "→"; 
   display: inline-block;
   color: var(--color-subtle);
-  margin-inline-end: var(--rhythm-d4);
+  margin-inline-end: var(--base-d4);
 }
 .breadcrumb a {
   color: var(--color-foreground);
@@ -2984,13 +2975,13 @@ a.skip-link:active {
   font-size: var(--scale-d3);
 }
 .breadcrumb-compact ol {
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
 }
 .breadcrumb-compact li {
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
 }
 .breadcrumb-compact li:not(:first-child)::before {
-  margin-inline-end: var(--rhythm-d4);
+  margin-inline-end: var(--base-d4);
 }
 
 
@@ -3008,8 +2999,8 @@ a.skip-link:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--rhythm-d4);
-  margin-block: var(--rhythm-2);
+  gap: var(--base-d4);
+  margin-block: var(--base-2);
   font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums; 
   
@@ -3021,7 +3012,7 @@ a.skip-link:active {
   justify-content: center;
   min-width: 2.5em;
   height: 2.5em;
-  padding: 0 var(--rhythm-d4);
+  padding: 0 var(--base-d4);
   border: var(--border);
   border-radius: var(--radius);
   text-decoration: none;
@@ -3064,7 +3055,7 @@ a.skip-link:active {
 .pagination-prev,
 .pagination-next {
   min-width: auto;
-  padding: 0 var(--rhythm-d2);
+  padding: 0 var(--base-d2);
   font-weight: var(--bold-weight);
 }
 
@@ -3119,7 +3110,7 @@ a.skip-link:active {
   z-index: 2;
   pointer-events: none;
   transition: opacity 0.05s linear;
-  width: var(--rhythm-2);
+  width: var(--base-2);
   opacity: 0;
 }
 .scroll::before {
@@ -3160,8 +3151,8 @@ a.skip-link:active {
   
   display: flex;
   flex-direction: column;
-  gap: var(--rhythm-d4);
-  margin-block-end: var(--rhythm-d2);
+  gap: var(--base-d4);
+  margin-block-end: var(--base-d2);
   
 }
 .field label {
@@ -3194,7 +3185,7 @@ a.skip-link:active {
 .field-error-message {
   display: flex;
   align-items: flex-start;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   font-size: var(--scale-d3);
   color: var(--color-error);
   font-weight: var(--bold-weight);
@@ -3224,7 +3215,7 @@ a.skip-link:active {
 .field-success-message {
   display: flex;
   align-items: flex-start;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   font-size: var(--scale-d3);
   color: var(--color-success);
   font-weight: var(--bold-weight);
@@ -3253,7 +3244,7 @@ a.skip-link:active {
 .field-warning-message {
   display: flex;
   align-items: flex-start;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   font-size: var(--scale-d3);
   color: var(--color-warning);
   font-weight: var(--bold-weight);
@@ -3323,7 +3314,7 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--rhythm);
+  padding: var(--base);
   border-bottom: var(--border);
   
 }
@@ -3364,7 +3355,7 @@ dialog.modal::backdrop {
 
 
 .modal-body {
-  padding: var(--rhythm);
+  padding: var(--base);
   overflow-y: auto; 
   max-height: 60vh; 
   
@@ -3381,8 +3372,8 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--rhythm-d2);
-  padding: var(--rhythm);
+  gap: var(--base-d2);
+  padding: var(--base);
   border-top: var(--border);
   background: var(--color-background-secondary);
 }
@@ -3418,15 +3409,15 @@ dialog.modal::backdrop {
 
 .tabs {
   
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
 }
 
 
 .tabs-list {
   display: flex;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   border-bottom: 2px solid var(--color-border);
-  margin-block-end: var(--rhythm);
+  margin-block-end: var(--base);
 }
 
 
@@ -3435,7 +3426,7 @@ dialog.modal::backdrop {
   background: transparent;
   border: none;
   border-bottom: 3px solid transparent;
-  padding: var(--rhythm-d4) var(--rhythm-d2);
+  padding: var(--base-d4) var(--base-d2);
   font-size: var(--scale-d2);
   font-weight: var(--font-weight);
   color: var(--color-muted);
@@ -3460,7 +3451,7 @@ dialog.modal::backdrop {
 
 
 [role=tabpanel] {
-  padding: var(--rhythm);
+  padding: var(--base);
   
 }
 [role=tabpanel] > :first-child {
@@ -3494,7 +3485,7 @@ dialog.modal::backdrop {
   border: var(--border);
   border-radius: var(--radius);
   background: var(--color-background);
-  margin-block-end: var(--rhythm-d2);
+  margin-block-end: var(--base-d2);
   overflow: hidden; 
   
 }
@@ -3508,8 +3499,8 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--rhythm-d2);
-  padding: var(--rhythm-d2);
+  gap: var(--base-d2);
+  padding: var(--base-d2);
   cursor: pointer;
   user-select: none;
   
@@ -3547,7 +3538,7 @@ dialog.modal::backdrop {
 
 
 .accordion-content {
-  padding: var(--rhythm);
+  padding: var(--base);
   
 }
 .accordion-content > :first-child {
@@ -3576,7 +3567,7 @@ dialog.modal::backdrop {
 
 .accordion-compact .accordion-trigger,
 .accordion-compact .accordion-content {
-  padding: var(--rhythm-d4);
+  padding: var(--base-d4);
   font-size: var(--scale-d3);
 }
 
@@ -3584,7 +3575,7 @@ dialog.modal::backdrop {
 .menu {
   list-style: none;
   padding-inline-start: 0;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
 }
 
 .menu li {
@@ -3615,7 +3606,7 @@ dialog.modal::backdrop {
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
-  gap: var(--rhythm-d4);
+  gap: var(--base-d4);
   pointer-events: none;
   max-width: 400px;
 }
@@ -3671,7 +3662,7 @@ dialog.modal::backdrop {
     top: auto !important;
     transform: none !important;
     max-width: 100%;
-    padding: var(--rhythm-d4);
+    padding: var(--base-d4);
     flex-direction: column-reverse;
   }
 }
@@ -3730,8 +3721,8 @@ dialog.modal::backdrop {
 .toast-content {
   display: flex;
   align-items: flex-start;
-  gap: var(--rhythm-d4);
-  padding: calc(var(--rhythm-d4) / var(--line-height)) var(--rhythm-d2) var(--rhythm-d4) var(--rhythm-d4);
+  gap: var(--base-d4);
+  padding: calc(var(--base-d4) / var(--line-height)) var(--base-d2) var(--base-d4) var(--base-d4);
   transition: transform var(--transition);
 }
 
@@ -3892,8 +3883,8 @@ dialog.modal::backdrop {
     --font-size: 0.925rem !important;
     --optical-ratio: 1.125 !important;
     --line-height: 1.4 !important;
-    --rhythm-gap: 1;
-    --rhythm-block-gap: 0;
+    --base-gap: 1;
+    --base-block-gap: 0;
     --body-padding: 0;
     --line-width: var(--line-width-full);
     --gap: 0;
@@ -3929,11 +3920,11 @@ dialog.modal::backdrop {
   html h4,
   html h5,
   html h6 {
-    margin-block: var(--rhythm); 
+    margin-block: var(--base); 
     break-after: avoid; 
   }
   html hr {
-    margin-block: var(--rhythm-d4); 
+    margin-block: var(--base-d4); 
   }
   html html::before,
   html html::after,
@@ -3969,39 +3960,39 @@ dialog.modal::backdrop {
 }
 
 .mt-d5 {
-  margin-top: var(--rhythm-d8) !important;
+  margin-top: var(--base-d8) !important;
 }
 
 .mt-d4 {
-  margin-top: var(--rhythm-d4) !important;
+  margin-top: var(--base-d4) !important;
 }
 
 .mt-d3 {
-  margin-top: var(--rhythm-d4) !important;
+  margin-top: var(--base-d4) !important;
 }
 
 .mt-d2 {
-  margin-top: var(--rhythm-d2) !important;
+  margin-top: var(--base-d2) !important;
 }
 
 .mt {
-  margin-top: var(--rhythm) !important;
+  margin-top: var(--base) !important;
 }
 
 .mt-2 {
-  margin-top: var(--rhythm-2) !important;
+  margin-top: var(--base-2) !important;
 }
 
 .mt-3 {
-  margin-top: var(--rhythm-3) !important;
+  margin-top: var(--base-4) !important;
 }
 
 .mt-4 {
-  margin-top: var(--rhythm-4) !important;
+  margin-top: var(--base-4) !important;
 }
 
 .mt-5 {
-  margin-top: var(--rhythm-5) !important;
+  margin-top: var(--base-8) !important;
 }
 
 .mr-d {
@@ -4013,39 +4004,39 @@ dialog.modal::backdrop {
 }
 
 .mr-d5 {
-  margin-right: var(--rhythm-d8) !important;
+  margin-right: var(--base-d8) !important;
 }
 
 .mr-d4 {
-  margin-right: var(--rhythm-d4) !important;
+  margin-right: var(--base-d4) !important;
 }
 
 .mr-d3 {
-  margin-right: var(--rhythm-d4) !important;
+  margin-right: var(--base-d4) !important;
 }
 
 .mr-d2 {
-  margin-right: var(--rhythm-d2) !important;
+  margin-right: var(--base-d2) !important;
 }
 
 .mr {
-  margin-right: var(--rhythm) !important;
+  margin-right: var(--base) !important;
 }
 
 .mr-2 {
-  margin-right: var(--rhythm-2) !important;
+  margin-right: var(--base-2) !important;
 }
 
 .mr-3 {
-  margin-right: var(--rhythm-3) !important;
+  margin-right: var(--base-4) !important;
 }
 
 .mr-4 {
-  margin-right: var(--rhythm-4) !important;
+  margin-right: var(--base-4) !important;
 }
 
 .mr-5 {
-  margin-right: var(--rhythm-5) !important;
+  margin-right: var(--base-8) !important;
 }
 
 .mb-d {
@@ -4057,39 +4048,39 @@ dialog.modal::backdrop {
 }
 
 .mb-d5 {
-  margin-bottom: var(--rhythm-d8) !important;
+  margin-bottom: var(--base-d8) !important;
 }
 
 .mb-d4 {
-  margin-bottom: var(--rhythm-d4) !important;
+  margin-bottom: var(--base-d4) !important;
 }
 
 .mb-d3 {
-  margin-bottom: var(--rhythm-d4) !important;
+  margin-bottom: var(--base-d4) !important;
 }
 
 .mb-d2 {
-  margin-bottom: var(--rhythm-d2) !important;
+  margin-bottom: var(--base-d2) !important;
 }
 
 .mb {
-  margin-bottom: var(--rhythm) !important;
+  margin-bottom: var(--base) !important;
 }
 
 .mb-2 {
-  margin-bottom: var(--rhythm-2) !important;
+  margin-bottom: var(--base-2) !important;
 }
 
 .mb-3 {
-  margin-bottom: var(--rhythm-3) !important;
+  margin-bottom: var(--base-4) !important;
 }
 
 .mb-4 {
-  margin-bottom: var(--rhythm-4) !important;
+  margin-bottom: var(--base-4) !important;
 }
 
 .mb-5 {
-  margin-bottom: var(--rhythm-5) !important;
+  margin-bottom: var(--base-8) !important;
 }
 
 .ml-d {
@@ -4101,39 +4092,39 @@ dialog.modal::backdrop {
 }
 
 .ml-d5 {
-  margin-left: var(--rhythm-d8) !important;
+  margin-left: var(--base-d8) !important;
 }
 
 .ml-d4 {
-  margin-left: var(--rhythm-d4) !important;
+  margin-left: var(--base-d4) !important;
 }
 
 .ml-d3 {
-  margin-left: var(--rhythm-d4) !important;
+  margin-left: var(--base-d4) !important;
 }
 
 .ml-d2 {
-  margin-left: var(--rhythm-d2) !important;
+  margin-left: var(--base-d2) !important;
 }
 
 .ml {
-  margin-left: var(--rhythm) !important;
+  margin-left: var(--base) !important;
 }
 
 .ml-2 {
-  margin-left: var(--rhythm-2) !important;
+  margin-left: var(--base-2) !important;
 }
 
 .ml-3 {
-  margin-left: var(--rhythm-3) !important;
+  margin-left: var(--base-4) !important;
 }
 
 .ml-4 {
-  margin-left: var(--rhythm-4) !important;
+  margin-left: var(--base-4) !important;
 }
 
 .ml-5 {
-  margin-left: var(--rhythm-5) !important;
+  margin-left: var(--base-8) !important;
 }
 
 .mv-d {
@@ -4145,39 +4136,39 @@ dialog.modal::backdrop {
 }
 
 .mv-d5 {
-  margin-block: var(--rhythm-d8) !important;
+  margin-block: var(--base-d8) !important;
 }
 
 .mv-d4 {
-  margin-block: var(--rhythm-d4) !important;
+  margin-block: var(--base-d4) !important;
 }
 
 .mv-d3 {
-  margin-block: var(--rhythm-d4) !important;
+  margin-block: var(--base-d4) !important;
 }
 
 .mv-d2 {
-  margin-block: var(--rhythm-d2) !important;
+  margin-block: var(--base-d2) !important;
 }
 
 .mv {
-  margin-block: var(--rhythm) !important;
+  margin-block: var(--base) !important;
 }
 
 .mv-2 {
-  margin-block: var(--rhythm-2) !important;
+  margin-block: var(--base-2) !important;
 }
 
 .mv-3 {
-  margin-block: var(--rhythm-3) !important;
+  margin-block: var(--base-4) !important;
 }
 
 .mv-4 {
-  margin-block: var(--rhythm-4) !important;
+  margin-block: var(--base-4) !important;
 }
 
 .mv-5 {
-  margin-block: var(--rhythm-5) !important;
+  margin-block: var(--base-8) !important;
 }
 
 .mh-d {
@@ -4189,39 +4180,39 @@ dialog.modal::backdrop {
 }
 
 .mh-d5 {
-  margin-inline: var(--rhythm-d8) !important;
+  margin-inline: var(--base-d8) !important;
 }
 
 .mh-d4 {
-  margin-inline: var(--rhythm-d4) !important;
+  margin-inline: var(--base-d4) !important;
 }
 
 .mh-d3 {
-  margin-inline: var(--rhythm-d4) !important;
+  margin-inline: var(--base-d4) !important;
 }
 
 .mh-d2 {
-  margin-inline: var(--rhythm-d2) !important;
+  margin-inline: var(--base-d2) !important;
 }
 
 .mh {
-  margin-inline: var(--rhythm) !important;
+  margin-inline: var(--base) !important;
 }
 
 .mh-2 {
-  margin-inline: var(--rhythm-2) !important;
+  margin-inline: var(--base-2) !important;
 }
 
 .mh-3 {
-  margin-inline: var(--rhythm-3) !important;
+  margin-inline: var(--base-4) !important;
 }
 
 .mh-4 {
-  margin-inline: var(--rhythm-4) !important;
+  margin-inline: var(--base-4) !important;
 }
 
 .mh-5 {
-  margin-inline: var(--rhythm-5) !important;
+  margin-inline: var(--base-8) !important;
 }
 
 .m-d {
@@ -4233,39 +4224,39 @@ dialog.modal::backdrop {
 }
 
 .m-d5 {
-  margin: var(--rhythm-d8) !important;
+  margin: var(--base-d8) !important;
 }
 
 .m-d4 {
-  margin: var(--rhythm-d4) !important;
+  margin: var(--base-d4) !important;
 }
 
 .m-d3 {
-  margin: var(--rhythm-d4) !important;
+  margin: var(--base-d4) !important;
 }
 
 .m-d2 {
-  margin: var(--rhythm-d2) !important;
+  margin: var(--base-d2) !important;
 }
 
 .m {
-  margin: var(--rhythm) !important;
+  margin: var(--base) !important;
 }
 
 .m-2 {
-  margin: var(--rhythm-2) !important;
+  margin: var(--base-2) !important;
 }
 
 .m-3 {
-  margin: var(--rhythm-3) !important;
+  margin: var(--base-4) !important;
 }
 
 .m-4 {
-  margin: var(--rhythm-4) !important;
+  margin: var(--base-4) !important;
 }
 
 .m-5 {
-  margin: var(--rhythm-5) !important;
+  margin: var(--base-8) !important;
 }
 
 
@@ -4280,39 +4271,39 @@ dialog.modal::backdrop {
 }
 
 .pt-d5 {
-  padding-top: var(--rhythm-d8) !important;
+  padding-top: var(--base-d8) !important;
 }
 
 .pt-d4 {
-  padding-top: var(--rhythm-d4) !important;
+  padding-top: var(--base-d4) !important;
 }
 
 .pt-d3 {
-  padding-top: var(--rhythm-d4) !important;
+  padding-top: var(--base-d4) !important;
 }
 
 .pt-d2 {
-  padding-top: var(--rhythm-d2) !important;
+  padding-top: var(--base-d2) !important;
 }
 
 .pt {
-  padding-top: var(--rhythm) !important;
+  padding-top: var(--base) !important;
 }
 
 .pt-2 {
-  padding-top: var(--rhythm-2) !important;
+  padding-top: var(--base-2) !important;
 }
 
 .pt-3 {
-  padding-top: var(--rhythm-3) !important;
+  padding-top: var(--base-4) !important;
 }
 
 .pt-4 {
-  padding-top: var(--rhythm-4) !important;
+  padding-top: var(--base-4) !important;
 }
 
 .pt-5 {
-  padding-top: var(--rhythm-5) !important;
+  padding-top: var(--base-8) !important;
 }
 
 .pr-d {
@@ -4324,39 +4315,39 @@ dialog.modal::backdrop {
 }
 
 .pr-d5 {
-  padding-right: var(--rhythm-d8) !important;
+  padding-right: var(--base-d8) !important;
 }
 
 .pr-d4 {
-  padding-right: var(--rhythm-d4) !important;
+  padding-right: var(--base-d4) !important;
 }
 
 .pr-d3 {
-  padding-right: var(--rhythm-d4) !important;
+  padding-right: var(--base-d4) !important;
 }
 
 .pr-d2 {
-  padding-right: var(--rhythm-d2) !important;
+  padding-right: var(--base-d2) !important;
 }
 
 .pr {
-  padding-right: var(--rhythm) !important;
+  padding-right: var(--base) !important;
 }
 
 .pr-2 {
-  padding-right: var(--rhythm-2) !important;
+  padding-right: var(--base-2) !important;
 }
 
 .pr-3 {
-  padding-right: var(--rhythm-3) !important;
+  padding-right: var(--base-4) !important;
 }
 
 .pr-4 {
-  padding-right: var(--rhythm-4) !important;
+  padding-right: var(--base-4) !important;
 }
 
 .pr-5 {
-  padding-right: var(--rhythm-5) !important;
+  padding-right: var(--base-8) !important;
 }
 
 .pb-d {
@@ -4368,39 +4359,39 @@ dialog.modal::backdrop {
 }
 
 .pb-d5 {
-  padding-bottom: var(--rhythm-d8) !important;
+  padding-bottom: var(--base-d8) !important;
 }
 
 .pb-d4 {
-  padding-bottom: var(--rhythm-d4) !important;
+  padding-bottom: var(--base-d4) !important;
 }
 
 .pb-d3 {
-  padding-bottom: var(--rhythm-d4) !important;
+  padding-bottom: var(--base-d4) !important;
 }
 
 .pb-d2 {
-  padding-bottom: var(--rhythm-d2) !important;
+  padding-bottom: var(--base-d2) !important;
 }
 
 .pb {
-  padding-bottom: var(--rhythm) !important;
+  padding-bottom: var(--base) !important;
 }
 
 .pb-2 {
-  padding-bottom: var(--rhythm-2) !important;
+  padding-bottom: var(--base-2) !important;
 }
 
 .pb-3 {
-  padding-bottom: var(--rhythm-3) !important;
+  padding-bottom: var(--base-4) !important;
 }
 
 .pb-4 {
-  padding-bottom: var(--rhythm-4) !important;
+  padding-bottom: var(--base-4) !important;
 }
 
 .pb-5 {
-  padding-bottom: var(--rhythm-5) !important;
+  padding-bottom: var(--base-8) !important;
 }
 
 .pl-d {
@@ -4412,39 +4403,39 @@ dialog.modal::backdrop {
 }
 
 .pl-d5 {
-  padding-left: var(--rhythm-d8) !important;
+  padding-left: var(--base-d8) !important;
 }
 
 .pl-d4 {
-  padding-left: var(--rhythm-d4) !important;
+  padding-left: var(--base-d4) !important;
 }
 
 .pl-d3 {
-  padding-left: var(--rhythm-d4) !important;
+  padding-left: var(--base-d4) !important;
 }
 
 .pl-d2 {
-  padding-left: var(--rhythm-d2) !important;
+  padding-left: var(--base-d2) !important;
 }
 
 .pl {
-  padding-left: var(--rhythm) !important;
+  padding-left: var(--base) !important;
 }
 
 .pl-2 {
-  padding-left: var(--rhythm-2) !important;
+  padding-left: var(--base-2) !important;
 }
 
 .pl-3 {
-  padding-left: var(--rhythm-3) !important;
+  padding-left: var(--base-4) !important;
 }
 
 .pl-4 {
-  padding-left: var(--rhythm-4) !important;
+  padding-left: var(--base-4) !important;
 }
 
 .pl-5 {
-  padding-left: var(--rhythm-5) !important;
+  padding-left: var(--base-8) !important;
 }
 
 .pv-d {
@@ -4456,39 +4447,39 @@ dialog.modal::backdrop {
 }
 
 .pv-d5 {
-  padding-block: var(--rhythm-d8) !important;
+  padding-block: var(--base-d8) !important;
 }
 
 .pv-d4 {
-  padding-block: var(--rhythm-d4) !important;
+  padding-block: var(--base-d4) !important;
 }
 
 .pv-d3 {
-  padding-block: var(--rhythm-d4) !important;
+  padding-block: var(--base-d4) !important;
 }
 
 .pv-d2 {
-  padding-block: var(--rhythm-d2) !important;
+  padding-block: var(--base-d2) !important;
 }
 
 .pv {
-  padding-block: var(--rhythm) !important;
+  padding-block: var(--base) !important;
 }
 
 .pv-2 {
-  padding-block: var(--rhythm-2) !important;
+  padding-block: var(--base-2) !important;
 }
 
 .pv-3 {
-  padding-block: var(--rhythm-3) !important;
+  padding-block: var(--base-4) !important;
 }
 
 .pv-4 {
-  padding-block: var(--rhythm-4) !important;
+  padding-block: var(--base-4) !important;
 }
 
 .pv-5 {
-  padding-block: var(--rhythm-5) !important;
+  padding-block: var(--base-8) !important;
 }
 
 .ph-d {
@@ -4500,39 +4491,39 @@ dialog.modal::backdrop {
 }
 
 .ph-d5 {
-  padding-inline: var(--rhythm-d8) !important;
+  padding-inline: var(--base-d8) !important;
 }
 
 .ph-d4 {
-  padding-inline: var(--rhythm-d4) !important;
+  padding-inline: var(--base-d4) !important;
 }
 
 .ph-d3 {
-  padding-inline: var(--rhythm-d4) !important;
+  padding-inline: var(--base-d4) !important;
 }
 
 .ph-d2 {
-  padding-inline: var(--rhythm-d2) !important;
+  padding-inline: var(--base-d2) !important;
 }
 
 .ph {
-  padding-inline: var(--rhythm) !important;
+  padding-inline: var(--base) !important;
 }
 
 .ph-2 {
-  padding-inline: var(--rhythm-2) !important;
+  padding-inline: var(--base-2) !important;
 }
 
 .ph-3 {
-  padding-inline: var(--rhythm-3) !important;
+  padding-inline: var(--base-4) !important;
 }
 
 .ph-4 {
-  padding-inline: var(--rhythm-4) !important;
+  padding-inline: var(--base-4) !important;
 }
 
 .ph-5 {
-  padding-inline: var(--rhythm-5) !important;
+  padding-inline: var(--base-8) !important;
 }
 
 .p-d {
@@ -4544,39 +4535,39 @@ dialog.modal::backdrop {
 }
 
 .p-d5 {
-  padding: var(--rhythm-d8) !important;
+  padding: var(--base-d8) !important;
 }
 
 .p-d4 {
-  padding: var(--rhythm-d4) !important;
+  padding: var(--base-d4) !important;
 }
 
 .p-d3 {
-  padding: var(--rhythm-d4) !important;
+  padding: var(--base-d4) !important;
 }
 
 .p-d2 {
-  padding: var(--rhythm-d2) !important;
+  padding: var(--base-d2) !important;
 }
 
 .p {
-  padding: var(--rhythm) !important;
+  padding: var(--base) !important;
 }
 
 .p-2 {
-  padding: var(--rhythm-2) !important;
+  padding: var(--base-2) !important;
 }
 
 .p-3 {
-  padding: var(--rhythm-3) !important;
+  padding: var(--base-4) !important;
 }
 
 .p-4 {
-  padding: var(--rhythm-4) !important;
+  padding: var(--base-4) !important;
 }
 
 .p-5 {
-  padding: var(--rhythm-5) !important;
+  padding: var(--base-8) !important;
 }
 
 
@@ -4591,39 +4582,39 @@ dialog.modal::backdrop {
 }
 
 .gap-d5 {
-  gap: var(--rhythm-d8) !important;
+  gap: var(--base-d8) !important;
 }
 
 .gap-d4 {
-  gap: var(--rhythm-d4) !important;
+  gap: var(--base-d4) !important;
 }
 
 .gap-d3 {
-  gap: var(--rhythm-d4) !important;
+  gap: var(--base-d4) !important;
 }
 
 .gap-d2 {
-  gap: var(--rhythm-d2) !important;
+  gap: var(--base-d2) !important;
 }
 
 .gap {
-  gap: var(--rhythm) !important;
+  gap: var(--base) !important;
 }
 
 .gap-2 {
-  gap: var(--rhythm-2) !important;
+  gap: var(--base-2) !important;
 }
 
 .gap-3 {
-  gap: var(--rhythm-3) !important;
+  gap: var(--base-4) !important;
 }
 
 .gap-4 {
-  gap: var(--rhythm-4) !important;
+  gap: var(--base-4) !important;
 }
 
 .gap-5 {
-  gap: var(--rhythm-5) !important;
+  gap: var(--base-8) !important;
 }
 
 .column-gap-d {
@@ -4635,39 +4626,39 @@ dialog.modal::backdrop {
 }
 
 .column-gap-d5 {
-  column-gap: var(--rhythm-d8) !important;
+  column-gap: var(--base-d8) !important;
 }
 
 .column-gap-d4 {
-  column-gap: var(--rhythm-d4) !important;
+  column-gap: var(--base-d4) !important;
 }
 
 .column-gap-d3 {
-  column-gap: var(--rhythm-d4) !important;
+  column-gap: var(--base-d4) !important;
 }
 
 .column-gap-d2 {
-  column-gap: var(--rhythm-d2) !important;
+  column-gap: var(--base-d2) !important;
 }
 
 .column-gap {
-  column-gap: var(--rhythm) !important;
+  column-gap: var(--base) !important;
 }
 
 .column-gap-2 {
-  column-gap: var(--rhythm-2) !important;
+  column-gap: var(--base-2) !important;
 }
 
 .column-gap-3 {
-  column-gap: var(--rhythm-3) !important;
+  column-gap: var(--base-4) !important;
 }
 
 .column-gap-4 {
-  column-gap: var(--rhythm-4) !important;
+  column-gap: var(--base-4) !important;
 }
 
 .column-gap-5 {
-  column-gap: var(--rhythm-5) !important;
+  column-gap: var(--base-8) !important;
 }
 
 
@@ -4682,39 +4673,39 @@ dialog.modal::backdrop {
 }
 
 .width-d5 {
-  width: var(--rhythm-d8) !important;
+  width: var(--base-d8) !important;
 }
 
 .width-d4 {
-  width: var(--rhythm-d4) !important;
+  width: var(--base-d4) !important;
 }
 
 .width-d3 {
-  width: var(--rhythm-d4) !important;
+  width: var(--base-d4) !important;
 }
 
 .width-d2 {
-  width: var(--rhythm-d2) !important;
+  width: var(--base-d2) !important;
 }
 
 .width {
-  width: var(--rhythm) !important;
+  width: var(--base) !important;
 }
 
 .width-2 {
-  width: var(--rhythm-2) !important;
+  width: var(--base-2) !important;
 }
 
 .width-3 {
-  width: var(--rhythm-3) !important;
+  width: var(--base-4) !important;
 }
 
 .width-4 {
-  width: var(--rhythm-4) !important;
+  width: var(--base-4) !important;
 }
 
 .width-5 {
-  width: var(--rhythm-5) !important;
+  width: var(--base-8) !important;
 }
 
 .width-auto {
@@ -4751,39 +4742,39 @@ dialog.modal::backdrop {
 }
 
 .min-width-d5 {
-  min-width: var(--rhythm-d8) !important;
+  min-width: var(--base-d8) !important;
 }
 
 .min-width-d4 {
-  min-width: var(--rhythm-d4) !important;
+  min-width: var(--base-d4) !important;
 }
 
 .min-width-d3 {
-  min-width: var(--rhythm-d4) !important;
+  min-width: var(--base-d4) !important;
 }
 
 .min-width-d2 {
-  min-width: var(--rhythm-d2) !important;
+  min-width: var(--base-d2) !important;
 }
 
 .min-width {
-  min-width: var(--rhythm) !important;
+  min-width: var(--base) !important;
 }
 
 .min-width-2 {
-  min-width: var(--rhythm-2) !important;
+  min-width: var(--base-2) !important;
 }
 
 .min-width-3 {
-  min-width: var(--rhythm-3) !important;
+  min-width: var(--base-4) !important;
 }
 
 .min-width-4 {
-  min-width: var(--rhythm-4) !important;
+  min-width: var(--base-4) !important;
 }
 
 .min-width-5 {
-  min-width: var(--rhythm-5) !important;
+  min-width: var(--base-8) !important;
 }
 
 .min-width-d {
@@ -4808,39 +4799,39 @@ dialog.modal::backdrop {
 }
 
 .max-width-d5 {
-  max-width: var(--rhythm-d8) !important;
+  max-width: var(--base-d8) !important;
 }
 
 .max-width-d4 {
-  max-width: var(--rhythm-d4) !important;
+  max-width: var(--base-d4) !important;
 }
 
 .max-width-d3 {
-  max-width: var(--rhythm-d4) !important;
+  max-width: var(--base-d4) !important;
 }
 
 .max-width-d2 {
-  max-width: var(--rhythm-d2) !important;
+  max-width: var(--base-d2) !important;
 }
 
 .max-width {
-  max-width: var(--rhythm) !important;
+  max-width: var(--base) !important;
 }
 
 .max-width-2 {
-  max-width: var(--rhythm-2) !important;
+  max-width: var(--base-2) !important;
 }
 
 .max-width-3 {
-  max-width: var(--rhythm-3) !important;
+  max-width: var(--base-4) !important;
 }
 
 .max-width-4 {
-  max-width: var(--rhythm-4) !important;
+  max-width: var(--base-4) !important;
 }
 
 .max-width-5 {
-  max-width: var(--rhythm-5) !important;
+  max-width: var(--base-8) !important;
 }
 
 .max-width-none {
@@ -4867,39 +4858,39 @@ dialog.modal::backdrop {
 }
 
 .height-d5 {
-  height: var(--rhythm-d8) !important;
+  height: var(--base-d8) !important;
 }
 
 .height-d4 {
-  height: var(--rhythm-d4) !important;
+  height: var(--base-d4) !important;
 }
 
 .height-d3 {
-  height: var(--rhythm-d4) !important;
+  height: var(--base-d4) !important;
 }
 
 .height-d2 {
-  height: var(--rhythm-d2) !important;
+  height: var(--base-d2) !important;
 }
 
 .height {
-  height: var(--rhythm) !important;
+  height: var(--base) !important;
 }
 
 .height-2 {
-  height: var(--rhythm-2) !important;
+  height: var(--base-2) !important;
 }
 
 .height-3 {
-  height: var(--rhythm-3) !important;
+  height: var(--base-4) !important;
 }
 
 .height-4 {
-  height: var(--rhythm-4) !important;
+  height: var(--base-4) !important;
 }
 
 .height-5 {
-  height: var(--rhythm-5) !important;
+  height: var(--base-8) !important;
 }
 
 .height-d {
@@ -4940,39 +4931,39 @@ dialog.modal::backdrop {
 }
 
 .min-height-d5 {
-  min-height: var(--rhythm-d8) !important;
+  min-height: var(--base-d8) !important;
 }
 
 .min-height-d4 {
-  min-height: var(--rhythm-d4) !important;
+  min-height: var(--base-d4) !important;
 }
 
 .min-height-d3 {
-  min-height: var(--rhythm-d4) !important;
+  min-height: var(--base-d4) !important;
 }
 
 .min-height-d2 {
-  min-height: var(--rhythm-d2) !important;
+  min-height: var(--base-d2) !important;
 }
 
 .min-height {
-  min-height: var(--rhythm) !important;
+  min-height: var(--base) !important;
 }
 
 .min-height-2 {
-  min-height: var(--rhythm-2) !important;
+  min-height: var(--base-2) !important;
 }
 
 .min-height-3 {
-  min-height: var(--rhythm-3) !important;
+  min-height: var(--base-4) !important;
 }
 
 .min-height-4 {
-  min-height: var(--rhythm-4) !important;
+  min-height: var(--base-4) !important;
 }
 
 .min-height-5 {
-  min-height: var(--rhythm-5) !important;
+  min-height: var(--base-8) !important;
 }
 
 .min-height-d {
@@ -4997,39 +4988,39 @@ dialog.modal::backdrop {
 }
 
 .max-height-d5 {
-  max-height: var(--rhythm-d8) !important;
+  max-height: var(--base-d8) !important;
 }
 
 .max-height-d4 {
-  max-height: var(--rhythm-d4) !important;
+  max-height: var(--base-d4) !important;
 }
 
 .max-height-d3 {
-  max-height: var(--rhythm-d4) !important;
+  max-height: var(--base-d4) !important;
 }
 
 .max-height-d2 {
-  max-height: var(--rhythm-d2) !important;
+  max-height: var(--base-d2) !important;
 }
 
 .max-height {
-  max-height: var(--rhythm) !important;
+  max-height: var(--base) !important;
 }
 
 .max-height-2 {
-  max-height: var(--rhythm-2) !important;
+  max-height: var(--base-2) !important;
 }
 
 .max-height-3 {
-  max-height: var(--rhythm-3) !important;
+  max-height: var(--base-4) !important;
 }
 
 .max-height-4 {
-  max-height: var(--rhythm-4) !important;
+  max-height: var(--base-4) !important;
 }
 
 .max-height-5 {
-  max-height: var(--rhythm-5) !important;
+  max-height: var(--base-8) !important;
 }
 
 .max-height-none {
@@ -5165,8 +5156,7 @@ dialog.modal::backdrop {
 
 .ellipsis,
 .ellipsis li {
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
@@ -5195,7 +5185,7 @@ aside.info {
   border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: var(--rhythm-d4);
+  padding: var(--base-d4);
   font-size: var(--scale-d3);
   font-family: var(--font-interface);
 }
@@ -5372,11 +5362,11 @@ aside.info {
 
 
 .rhythm-compact {
-  --rhythm-gap: var(--rhythm-d2);
+  --base-gap: var(--base-d2);
 }
 
 .rhythm-relaxed {
-  --rhythm-gap: var(--rhythm-2);
+  --base-gap: var(--base-2);
 }
 
 
@@ -5388,7 +5378,7 @@ aside.info {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: calc(var(--rhythm-block-gap) * var(--rhythm-gap));
+    margin-block-end: calc(var(--base-block-gap) * var(--base-gap));
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -5437,27 +5427,27 @@ aside.info {
   .body-p-neg,
   .body-p-neg-header,
   .body-p-neg-footer {
-    margin-inline: calc(var(--rhythm) * var(--body-mobile-padding-multiplier) * -1);
-    padding-inline: calc(var(--rhythm) * var(--body-mobile-padding-multiplier));
+    margin-inline: calc(var(--base) * var(--body-mobile-padding-multiplier) * -1);
+    padding-inline: calc(var(--base) * var(--body-mobile-padding-multiplier));
   }
 }
 
 
 .body-p-neg-footer {
-  margin-block-end: calc(var(--rhythm) * var(--body-padding) * 1.5 * -1);
+  margin-block-end: calc(var(--base) * var(--body-padding) * 1.5 * -1);
 }
 @media (max-width: 768px) {
   .body-p-neg-footer {
-    margin-block-end: calc(var(--rhythm) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
+    margin-block-end: calc(var(--base) * var(--body-mobile-padding-multiplier) * 1.5 * -1);
   }
 }
 
 .body-p-neg-header {
-  margin-block-start: calc(var(--rhythm) * var(--body-padding) * 1 * -1);
+  margin-block-start: calc(var(--base) * var(--body-padding) * 1 * -1);
 }
 @media (max-width: 768px) {
   .body-p-neg-header {
-    margin-block-start: calc(var(--rhythm) * var(--body-mobile-padding-multiplier) * 1 * -1);
+    margin-block-start: calc(var(--base) * var(--body-mobile-padding-multiplier) * 1 * -1);
   }
 }
 
@@ -5539,20 +5529,20 @@ aside.info {
 }
 
 [class|=columns].compact {
-  column-gap: var(--rhythm-d2);
+  column-gap: var(--base-d2);
 }
 
 [class|=columns].relaxed {
-  column-gap: var(--rhythm-2);
+  column-gap: var(--base-2);
 }
 
 
 .columns-gap-compact {
-  column-gap: var(--rhythm-d2);
+  column-gap: var(--base-d2);
 }
 
 .columns-gap-wide {
-  column-gap: var(--rhythm-2);
+  column-gap: var(--base-2);
 }
 
 
@@ -5604,7 +5594,7 @@ ul.menu {
 }
 nav.menu ul li,
 ul.menu li {
-  margin-block-end: var(--rhythm-d4);
+  margin-block-end: var(--base-d4);
   list-style: none;
   padding-inline-start: 0;
 }
@@ -5616,7 +5606,7 @@ ul.menu li::before {
 nav.menu.horizontal ul,
 ul.menu.horizontal {
   flex-direction: row;
-  gap: var(--rhythm);
+  gap: var(--base);
 }
 
 
@@ -5647,7 +5637,7 @@ ul.menu.horizontal {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--rhythm) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--rhythm) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--rhythm));
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--base) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--base) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--base));
   pointer-events: none;
   z-index: 10000;
 }
@@ -5746,7 +5736,7 @@ aside) {
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
@@ -5769,7 +5759,7 @@ aside) {
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.63;
@@ -5780,15 +5770,15 @@ aside) {
 
 
 .standard-debug::after {
-  content: "🔍 Standard Debug" "\a" "Baseline: " var(--rhythm) "\a" "Ratio: " var(--optical-ratio) "\a" "Density: " var(--line-height) "\a" "Grid: " var(--grid-cols) " cols";
+  content: "🔍 Standard Debug" "\a" "Baseline: " var(--base) "\a" "Ratio: " var(--optical-ratio) "\a" "Density: " var(--line-height) "\a" "Grid: " var(--grid-cols) " cols";
   position: fixed;
-  top: var(--rhythm);
-  right: var(--rhythm);
+  top: var(--base);
+  right: var(--base);
   background: var(--color-background);
   color: var(--color-foreground);
   border: var(--border-accent);
   border-radius: var(--radius);
-  padding: var(--rhythm-d2);
+  padding: var(--base-d2);
   font-family: var(--font-monospace);
   font-size: var(--scale-d3);
   line-height: 1.5;
@@ -5831,13 +5821,13 @@ aside) {
 .standard-debug .grid-12 > *::before {
   content: attr(class);
   position: absolute;
-  top: var(--rhythm-d8);
-  left: var(--rhythm-d8);
+  top: var(--base-d8);
+  left: var(--base-d8);
   background: var(--color-cyan);
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
@@ -5852,13 +5842,13 @@ aside) {
 .standard-debug .free-col::after {
   content: "start: " var(--start) " / span: " var(--span);
   position: absolute;
-  bottom: var(--rhythm-d8);
-  left: var(--rhythm-d8);
+  bottom: var(--base-d8);
+  left: var(--base-d8);
   background: var(--color-purple);
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
@@ -5904,7 +5894,7 @@ aside) {
   color: var(--color-background);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.9;
@@ -5916,12 +5906,12 @@ aside) {
 body.standard-debug::before {
   content: "md";
   position: fixed;
-  bottom: var(--rhythm);
-  left: var(--rhythm);
+  bottom: var(--base);
+  left: var(--base);
   color: var(--color-foreground);
   font-family: var(--font-monospace);
   font-size: var(--scale-d3);
-  padding: var(--rhythm-d4) var(--rhythm-d2);
+  padding: var(--base-d4) var(--base-d2);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   z-index: var(--z-toast);
@@ -5978,11 +5968,11 @@ body.standard-debug::before {
 .standard-debug .prose .container-feature::before,
 .standard-debug .prose .container-full::before {
   position: absolute;
-  top: var(--rhythm-d8);
-  right: var(--rhythm-d8);
+  top: var(--base-d8);
+  right: var(--base-d8);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--rhythm-d8) var(--rhythm-d4);
+  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: 0.95;
@@ -6040,12 +6030,12 @@ body.standard-debug::before {
 }
 
 :root {
-  --rhythmline-trim-support: 0; 
+  --baseline-trim-support: 0; 
 }
 
 .standard-lab-panel {
   --gap: 0;
-  --rhythm-gap: 0;
-  --rhythm-block-gap: 0;
+  --base-gap: 0;
+  --base-block-gap: 0;
   font-size: var(--scale-d2);
 }

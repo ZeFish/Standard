@@ -10,9 +10,9 @@
  *
  * @pattern [property]-[side]-[size]
  * Examples:
- *   - .margin-top-xs (margin-top: var(--rhythm-d4))
- *   - .padding-right-base (padding-right: var(--rhythm))
- *   - .gap-l (gap: var(--rhythm-2))
+ *   - .margin-top-xs (margin-top: var(--base-d4))
+ *   - .padding-right-base (padding-right: var(--base))
+ *   - .gap-l (gap: var(--base-2))
  *
  * @prop {class} .margin-* Margin utilities (top, right, bottom, left, block, inline)
  * @prop {class} .padding-* Padding utilities (top, right, bottom, left, block, inline)
@@ -65,31 +65,31 @@
         #{$property}: auto !important;
     }
     .#{$prefix}-d5 {
-        #{$property}: var(--rhythm-d8) !important;
+        #{$property}: var(--base-d8) !important;
     }
     .#{$prefix}-d4 {
-        #{$property}: var(--rhythm-d4) !important;
+        #{$property}: var(--base-d4) !important;
     }
     .#{$prefix}-d3 {
-        #{$property}: var(--rhythm-d4) !important;
+        #{$property}: var(--base-d4) !important;
     }
     .#{$prefix}-d2 {
-        #{$property}: var(--rhythm-d2) !important;
+        #{$property}: var(--base-d2) !important;
     }
     .#{$prefix} {
-        #{$property}: var(--rhythm) !important;
+        #{$property}: var(--base) !important;
     }
     .#{$prefix}-2 {
-        #{$property}: var(--rhythm-2) !important;
+        #{$property}: var(--base-2) !important;
     }
     .#{$prefix}-3 {
-        #{$property}: var(--rhythm-3) !important;
+        #{$property}: var(--base-4) !important;
     }
     .#{$prefix}-4 {
-        #{$property}: var(--rhythm-4) !important;
+        #{$property}: var(--base-4) !important;
     }
     .#{$prefix}-5 {
-        #{$property}: var(--rhythm-5) !important;
+        #{$property}: var(--base-8) !important;
     }
 }
 
@@ -372,8 +372,7 @@
 
 .ellipsis,
 .ellipsis li {
-    overflow-x: hidden;
-    overflow-y: visible;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 100%;
@@ -407,7 +406,7 @@ aside.info {
     border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: var(--rhythm-d4);
+    padding: var(--base-d4);
     font-size: var(--scale-d3);
     font-family: var(--font-interface);
 }
@@ -580,11 +579,11 @@ aside.info {
  */
 
 .rhythm-compact {
-    --rhythm-gap: var(--rhythm-d2);
+    --base-gap: var(--base-d2);
 }
 
 .rhythm-relaxed {
-    --rhythm-gap: var(--rhythm-2);
+    --base-gap: var(--base-2);
 }
 
 /* =========================== */
@@ -600,7 +599,7 @@ aside.info {
         display: block;
 
         > * {
-            margin-block-end: calc(var(--rhythm-block-gap) * var(--rhythm-gap));
+            margin-block-end: calc(var(--base-block-gap) * var(--base-gap));
         }
 
         > :last-child {
@@ -671,10 +670,10 @@ aside.info {
 
     @media (max-width: #{$small}) {
         margin-inline: calc(
-            var(--rhythm) * var(--body-mobile-padding-multiplier) * -1
+            var(--base) * var(--body-mobile-padding-multiplier) * -1
         );
         padding-inline: calc(
-            var(--rhythm) * var(--body-mobile-padding-multiplier)
+            var(--base) * var(--body-mobile-padding-multiplier)
         );
     }
 }
@@ -685,21 +684,21 @@ aside.info {
  * Useful when you want footer to sit flush at bottom
  */
 .body-p-neg-footer {
-    margin-block-end: calc((var(--rhythm) * var(--body-padding) * 1.5) * -1);
+    margin-block-end: calc((var(--base) * var(--body-padding) * 1.5) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-end: calc(
-            (var(--rhythm) * var(--body-mobile-padding-multiplier) * 1.5) * -1
+            (var(--base) * var(--body-mobile-padding-multiplier) * 1.5) * -1
         );
     }
 }
 
 .body-p-neg-header {
-    margin-block-start: calc((var(--rhythm) * var(--body-padding) * 1) * -1);
+    margin-block-start: calc((var(--base) * var(--body-padding) * 1) * -1);
 
     @media (max-width: #{$small}) {
         margin-block-start: calc(
-            (var(--rhythm) * var(--body-mobile-padding-multiplier) * 1) * -1
+            (var(--base) * var(--body-mobile-padding-multiplier) * 1) * -1
         );
     }
 }
@@ -845,19 +844,19 @@ aside.info {
 }
 
 [class|="columns"].compact {
-    column-gap: var(--rhythm-d2);
+    column-gap: var(--base-d2);
 }
 
 [class|="columns"].relaxed {
-    column-gap: var(--rhythm-2);
+    column-gap: var(--base-2);
 }
 /* Column gap variants */
 .columns-gap-compact {
-    column-gap: var(--rhythm-d2);
+    column-gap: var(--base-d2);
 }
 
 .columns-gap-wide {
-    column-gap: var(--rhythm-2);
+    column-gap: var(--base-2);
 }
 
 /* Prevent breaks inside elements */
@@ -910,7 +909,7 @@ ul.menu {
     padding-inline: 0;
     gap: 0;
     li {
-        margin-block-end: var(--rhythm-d4);
+        margin-block-end: var(--base-d4);
         list-style: none;
         padding-inline-start: 0;
         &::before {
@@ -922,5 +921,5 @@ ul.menu {
 nav.menu.horizontal ul,
 ul.menu.horizontal {
     flex-direction: row;
-    gap: var(--rhythm);
+    gap: var(--base);
 }

@@ -34,15 +34,15 @@
     --color-dark-accent: var(--color-purple);
     --color-dark-bold: var(--color-pink);
 
-    --body-padding: var(--rhythm-2);
-    --radius: var(--rhythm-d8);
+    --body-padding: var(--base-2);
+    --radius: var(--base-d8);
 
     --optical-ratio: 1.414;
-    --rhythm-gap: var(--rhythm);
+    --base-gap: var(--base);
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
-    --rhythm-block-gap: var(--rhythm);
+    --base-block-gap: var(--base);
 
     --font-text: "MonoLisa";
     --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";

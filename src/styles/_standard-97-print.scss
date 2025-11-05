@@ -24,8 +24,8 @@
         --optical-ratio: 1.125 !important;
         --line-height: 1.4 !important;
 
-        --rhythm-gap: 1;
-        --rhythm-block-gap: 0;
+        --base-gap: 1;
+        --base-block-gap: 0;
 
         --body-padding: 0;
         --line-width: var(--line-width-full);
@@ -71,11 +71,11 @@
         h4,
         h5,
         h6 {
-            margin-block: var(--rhythm); /* Remove !important */
+            margin-block: var(--base); /* Remove !important */
             break-after: avoid; /* Keep with following content */
         }
         hr {
-            margin-block: var(--rhythm-d4); /* Remove !important */
+            margin-block: var(--base-d4); /* Remove !important */
         }
 
         html::before,

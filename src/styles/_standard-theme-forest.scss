@@ -49,16 +49,22 @@
     --font-weight: 400;
     --bold-weight: 500;
 
+    --radius: var(--base);
+
     --font-header-letter-spacing: -0.035em;
     --font-header-line-height: 1em;
 
     blockquote,
     pre {
         box-shadow: inset var(--shadow);
+        background: var(--color-background-secondary);
+        border: var(--border);
+        border-radius: var(--radius);
     }
+
     blockquote,
     pre {
-        padding: calc(var(--rhythm) * 0.5);
+        padding: calc(var(--base) * 0.5);
     }
 
     .operator,
@@ -86,7 +92,7 @@
     hr,
     hr:not(:first-child) {
         font-size: var(--h1-size);
-        line-height: var(--rhythm);
+        line-height: var(--base);
         padding: 0;
         border: 0;
         background: transparent;
@@ -97,7 +103,7 @@
         display: block;
         font-family: "Type Embellishments One";
         position: relative;
-        top: calc(var(--rhythm) * -0.4);
+        top: calc(var(--base) * -0.4);
         opacity: 0.2;
     }
 }
