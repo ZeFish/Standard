@@ -146,7 +146,7 @@ export default function createLogger(options = {}) {
 
   return {
     info(...args) {
-      console.log(...format(`${colors.blue.fg}ℹ${colors.grey.fg}`, ...args));
+      console.log(...format(`${colors.blue.fg}ⓘ﻿{$colors.grey.fg}`, ...args));
     },
     success(...args) {
       console.log(...format(`${colors.green.fg}✓`, ...args));
@@ -160,7 +160,7 @@ export default function createLogger(options = {}) {
     debug(...args) {
       if (verbose) {
         console.log(
-          ...format(`${colors.grey.fg}[debug]${colors.reset}`, ...args),
+          ...format(`${colors.magenta.fg}⊙﻿`, ...args),
         );
       }
     },
