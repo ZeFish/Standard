@@ -175,7 +175,7 @@
     --flow-scale-xxl: calc(var(--flow-space) * 3); /* 4.5rem */
 }
 
-/* Responsive adjustments - collapse gutters on small screens
+/* Responsive adjustments - collapse gutters on small screens */
 @media only screen and (max-width: #{$small}) {
     :root {
         --font-size: var(--mobile-font-size) !important;
@@ -188,7 +188,7 @@
         ) !important;
     }
 }
-*/
+
 body::after {
     content: "";
     position: fixed;
