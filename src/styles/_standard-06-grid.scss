@@ -61,11 +61,11 @@
 
 /* Gap variants aligned to rhythm */
 .grid.compact {
-    --grid-gap: var(--base-d8);
-    --grid-row-gap: var(--base-d2);
+    --grid-gap: var(--base-d4);
+    --grid-row-gap: var(--base-d4);
 }
 .grid.relaxed {
-    --grid-gap: var(--base-2);
+    --grid-gap: var(--base-4);
     --grid-row-gap: var(--base-4);
 }
 

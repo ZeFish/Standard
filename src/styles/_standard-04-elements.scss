@@ -393,6 +393,7 @@ a.button:disabled {
 input,
 textarea,
 select {
+    width: 100%;
     font-family: var(--font-interface), system-ui, sans-serif;
 
     padding: var(--base-d4);
@@ -595,9 +596,7 @@ mark {
 .callout,
 img,
 iframe,
-.outset,
-.box,
-.card {
+.outset {
     background: var(--color-background-secondary);
     border-radius: var(--radius);
     border: var(--border);
@@ -606,12 +605,6 @@ iframe,
 pre,
 .inset {
     box-shadow: inset var(--shadow);
-}
-
-.box,
-.card {
-    padding: var(--scale-d2);
-    font-size: var(--scale-d2);
 }
 
 // ==========================

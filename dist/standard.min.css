@@ -601,7 +601,7 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
-li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+li::before, buttonlegend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -967,6 +967,7 @@ a.button:disabled {
 input,
 textarea,
 select {
+  width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
   padding: var(--base-d4);
   border-radius: var(--radius);
@@ -1109,9 +1110,7 @@ mark {
 .callout,
 img,
 iframe,
-.outset,
-.box,
-.card {
+.outset {
   background: var(--color-background-secondary);
   border-radius: var(--radius);
   border: var(--border);
@@ -1121,12 +1120,6 @@ iframe,
 pre,
 .inset {
   box-shadow: inset var(--shadow);
-}
-
-.box,
-.card {
-  padding: var(--scale-d2);
-  font-size: var(--scale-d2);
 }
 
 .callout {
@@ -1294,11 +1287,11 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
 }
-:where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside {
+:where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside, :where(.rhythm) [class^=grid-] {
   margin-block-start: calc(var(--base-block-gap) - var(--base-gap));
   margin-block-end: var(--base-block-gap);
 }
-:where(.rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)) {
+:where(.rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])) {
   margin-block-end: var(--base-gap);
 }
 :where(.rhythm) * > :where(:last-child) {
@@ -1389,11 +1382,23 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   padding-inline-start: 0;
   margin-block-end: var(--base);
 }
+:where(.rhythm) .compact {
+  --base-gap: var(--base-d2);
+}
 :where(.rhythm) .compact li {
   margin-block-end: var(--base-d2);
 }
+:where(.rhythm) .tight {
+  --base-gap: var(--base-d4);
+}
 :where(.rhythm) .tight li {
   margin-block-end: var(--base-d4);
+}
+:where(.rhythm) .relaxed {
+  --base-gap: var(--base-2);
+}
+:where(.rhythm) .relaxed li {
+  margin-block-end: var(--base-2);
 }
 :where(.rhythm) li:last-child {
   margin-block-end: 0;
@@ -1437,41 +1442,34 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   gap: calc(var(--base-d2) * var(--base-gap));
 }
 :where(.rhythm) fieldset {
-  padding: calc(var(--base-d2) * var(--base-gap));
+  padding-inline: var(--base-d2);
   display: grid;
-  gap: calc(var(--base-d8) * var(--base-gap));
+  gap: 0;
 }
 :where(.rhythm) legend {
-  padding-inline: calc(var(--base-d4) * var(--base-gap));
+  margin-block-end: var(--base-d2);
 }
 :where(.rhythm) input,
 :where(.rhythm) textarea,
 :where(.rhythm) select {
-  margin: 0;
+  padding-inline: var(--base-d2);
+  margin-block-end: var(--base-d2);
 }
 :where(.rhythm) label {
-  margin: 0;
+  margin-inline: var(--base-d2);
+  margin-block-end: var(--base-d4);
 }
-:where(.rhythm) label:has(+ input[type=text]),
-:where(.rhythm) label:has(+ input[type=email]),
-:where(.rhythm) label:has(+ input[type=password]),
-:where(.rhythm) label:has(+ textarea),
-:where(.rhythm) label:has(+ select) {
-  margin-block-start: calc(var(--base-d4) * var(--base-gap));
-  margin-inline-start: calc(var(--base-d2) * var(--base-gap));
+:where(.rhythm) input[type=checkbox] + label,
+:where(.rhythm) input[type=radio] + label {
+  margin-inline-start: var(--base-d8);
 }
 :where(.rhythm) fieldset div,
 :where(.rhythm) fieldset p {
-  margin-inline-start: calc(var(--base-d2) * var(--base-gap));
+  margin: 0;
+  padding: 0;
 }
-:where(.rhythm) label + input[type=checkbox],
-:where(.rhythm) label + input[type=radio] {
-  margin-inline-start: calc(var(--base-d2) * var(--base-gap));
-}
-:where(.rhythm) .button-group {
-  display: flex;
-  gap: calc(var(--base-d2) * var(--base-gap));
-  flex-wrap: wrap;
+:where(.rhythm) fieldset + button {
+  margin-block-start: var(--base-d2);
 }
 :where(.rhythm) img,
 :where(.rhythm) video,
@@ -1586,12 +1584,12 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 
 
 .grid.compact {
-  --grid-gap: var(--base-d8);
-  --grid-row-gap: var(--base-d2);
+  --grid-gap: var(--base-d4);
+  --grid-row-gap: var(--base-d4);
 }
 
 .grid.relaxed {
-  --grid-gap: var(--base-2);
+  --grid-gap: var(--base-4);
   --grid-row-gap: var(--base-4);
 }
 
@@ -2567,7 +2565,7 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--base-block-gap) * -1 + var(--img-gap)) !important;
 }
-:where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
   
 }
@@ -2717,19 +2715,16 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 .card {
   
   --card-border: var(--border);
-  --card-border-width: 1px;
   --card-border-radius: var(--radius);
   --card-padding: var(--base);
-  --card-background: var(--color-background);
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --card-background: var(--color-background-secondary);
+  --card-shadow: var(--shadow);
   background: var(--card-background);
-  border: var(--card-border-width) solid var(--card-border-color);
+  border: var(--card-border);
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-shadow);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; 
-  height: 100%; 
+  padding: var(--scale-d2);
+  font-size: var(--scale-d2);
 }
 
 
@@ -5663,7 +5658,7 @@ ul.menu.horizontal li {
 .standard-debug {
   position: relative;
 }
-.standard-debug :is(li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
+.standard-debug :is(li::before, buttonlegend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
   overflow: hidden;
 }
 .standard-debug h1,
@@ -5686,7 +5681,7 @@ ul.menu.horizontal li {
 
 .standard-debug::before,
 .standard-debug::after,
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before,
+.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])::before,
 .standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
   content: "";
   color: var(--debug-color);
@@ -5720,14 +5715,14 @@ ul.menu.horizontal li {
 }
 
 .standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
-.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside,
+.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-],
 .container-small, .callout, blockquote, pre, figure, p:has(img)) {
   position: relative;
   outline-offset: var(--base-block-gap);
 }
 
 .standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
-.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside,
+.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-],
 .container-small, .callout, blockquote, pre, figure, p:has(img))::before {
   content: attr(class);
   position: absolute;

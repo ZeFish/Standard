@@ -84,20 +84,18 @@
 .card {
     /* CSS variables for easy customization */
     --card-border: var(--border);
-    --card-border-width: 1px;
     --card-border-radius: var(--radius);
     --card-padding: var(--base);
-    --card-background: var(--color-background);
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --card-background: var(--color-background-secondary);
+    --card-shadow: var(--shadow);
 
     background: var(--card-background);
-    border: var(--card-border-width) solid var(--card-border-color);
+    border: var(--card-border);
     border-radius: var(--card-border-radius);
     box-shadow: var(--card-shadow);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Ensures children respect border-radius */
-    height: 100%; /* Fill grid cell height */
+
+    padding: var(--scale-d2);
+    font-size: var(--scale-d2);
 }
 
 /**

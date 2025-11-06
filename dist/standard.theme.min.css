@@ -944,11 +944,11 @@
   border-radius: var(--base);
   outline-offset: var(--base-gap);
 }
-[data-theme=blueprint] :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside) {
+[data-theme=blueprint] :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) {
   position: relative;
   outline-offset: var(--base-block-gap);
 }
-[data-theme=blueprint] :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before {
+[data-theme=blueprint] :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])::before {
   content: "Block";
   position: absolute;
   opacity: var(--blueprint-opacity);
