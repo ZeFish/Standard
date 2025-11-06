@@ -320,7 +320,7 @@ a.button {
         var(--color-accent) 65%,
         var(--color-background-secondary)
     );
-    color: var(--color-background);
+    color: color-mix(in srgb, var(--color-background) 85%, transparent);
     border: var(--border);
     border-color: var(--color-border);
     padding: var(--base-d4) var(--base-d4);
@@ -331,6 +331,13 @@ a.button {
         background-color var(--transition),
         border-color var(--transition),
         opacity var(--transition);
+}
+@media (prefers-color-scheme: dark) {
+    button,
+    a.button,
+    a.button:visited {
+        color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+    }
 }
 
 .tag {

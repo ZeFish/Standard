@@ -78,7 +78,10 @@
         font-family: Forrest;
         font-weight: 600;
         letter-spacing: -0.05em;
-        color: color-mix(in srgb, var(--color-background) 85%, transparent);
+    }
+
+    textarea {
+        padding: var(--base-d2);
     }
 
     fieldset input,
@@ -118,6 +121,23 @@
         position: relative;
         top: calc(var(--base) * -0.4);
         opacity: 0.2;
+    }
+    article,
+    .comment {
+        border: var(--border);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        background: var(--color-background-secondary);
+        padding: var(--base-d2) var(--base);
+    }
+    #comments .comment-author {
+        color: var(--color-muted);
+    }
+    #comments .comment-content {
+        border-left: var(--border);
+        margin-inline: var(--base-d2);
+        padding-inline: var(--base-d2);
+        color: var(--color-muted);
     }
 }
 @font-face {

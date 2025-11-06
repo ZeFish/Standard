@@ -428,7 +428,55 @@ visibility: public
 <p>
   <img src="https://picsum.photos/800/400?random=4" alt="Wide demo" />
 </p>
-<div class="accent">
+<div class="comments-box container-small"><div id="comments">
+        <div class="comment" data-id="1762449150577-juzyfccm8" data-level="0" data-pending="true" "="">
+          <div class="comment-header">
+            <span class="comment-author">Francis</span>
+            <span class="comment-date">3h ago</span>
+            <span class="comment-pending">Awaiting moderation</span>
+          </div>
+          <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        </div>
+        <div class="comment" data-id="1762449106853-7dcdhny1w" data-level="0" data-pending="true" "="">
+          <div class="comment-header">
+            <span class="comment-author">awdawdawdawd</span>
+            <span class="comment-date">3h ago</span>
+            <span class="comment-pending">Awaiting moderation</span>
+          </div>
+          <div class="comment-content">adw</div>
+        </div>
+      </div>
+<button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">Write a Comment</button>
+<div id="comment-form-wrapper" style="display: none;">
+  <form id="comment-form" method="post" action="/api/comments" novalidate="" hx-disable="true">
+  <fieldset>
+    <legend>Leave a Comment</legend>
+    <label for="author">Your Name <span aria-label="required">*</span></label>
+      <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required="" maxlength="100">
+      <label for="email">Email Address <span aria-label="required">*</span></label>
+      <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required="">
+      <label for="content">Comment <span aria-label="required">*</span></label>
+      <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required="" minlength="3" maxlength="10000" rows="6"></textarea>
+    <!-- Hidden fields (REQUIRED - do not remove) -->
+    <input type="hidden" id="pageId" name="pageId" value="n_camping">
+    <input type="hidden" id="parentId" name="parentId" value="">
+    <!-- Status indicator -->
+    <div id="form-status" role="status" aria-live="polite"></div>
+    <!-- Submit buttons -->
+    <div class="form-actions">
+      <button type="submit" class="button">Post Comment</button>
+      <button type="reset" class="button">Clear</button>
+    </div>
+    <!-- Privacy notice -->
+    <!--p class="smaller">
+        By submitting a comment, you agree to our
+        <a href="/privacy/" preload>privacy policy</a> and
+        <a href="/terms/" preload>terms of service</a>.
+    </p-->
+  </fieldset>
+</form>
+</div></div>
+<div>
   <h2 id="forms">Form Elements</h2>
   <p>Consistent form styling that integrates with the rhythm system and color management.</p>
   <form class="small">
