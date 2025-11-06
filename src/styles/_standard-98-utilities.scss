@@ -407,8 +407,8 @@ aside.info {
     border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: var(--base-d4);
-    font-size: var(--scale-d3);
+    padding: var(--base-d4) var(--base-d2);
+    font-size: var(--scale-d2);
     font-family: var(--font-interface);
 }
 .accent {

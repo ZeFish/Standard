@@ -5214,8 +5214,8 @@ aside.info {
   border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: var(--base-d4);
-  font-size: var(--scale-d3);
+  padding: var(--base-d4) var(--base-d2);
+  font-size: var(--scale-d2);
   font-family: var(--font-interface);
 }
 
@@ -5682,8 +5682,9 @@ ul.menu.horizontal li {
 }
 
 :root {
-  --debug-line-opacity: 25%;
+  --debug-opacity: 50%;
   --debug-outline-opacity: 75%;
+  --debug-color: var(--color-cyan);
 }
 
 .standard-debug::before,
@@ -5691,7 +5692,8 @@ ul.menu.horizontal li {
 .standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before,
 .standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
   content: "";
-  color: var(--color-muted);
+  color: var(--debug-color);
+  opacity: var(--debug-opacity);
   border-radius: var(--radius);
   font-family: var(--font-monospace);
   font-size: var(--scale-d2);
@@ -5705,7 +5707,7 @@ ul.menu.horizontal li {
 
 .standard-debug::before {
   --color-grid: var(--color-cyan);
-  --percent-grid: var(--debug-line-opacity);
+  --percent-grid: calc(var(--debug-opacity) / 2);
   --grid-unit: var(--base);
   content: "";
   position: absolute;
@@ -5716,35 +5718,26 @@ ul.menu.horizontal li {
 }
 
 .standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
-  outline: 1px dashed color-mix(in srgb, var(--color-cyan) var(--debug-outline-opacity), transparent);
+  outline: 1px dashed color-mix(in srgb, var(--color-cyan) calc(var(--debug-opacity) / 1.2), transparent);
   outline-offset: var(--base-gap);
 }
 
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside) {
+.standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
+.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside,
+.container-small, .callout, blockquote, pre, figure, p:has(img)) {
   position: relative;
   outline-offset: var(--base-block-gap);
 }
 
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before {
-  content: "Block";
+.standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
+.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside,
+.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
+  content: attr(class);
   position: absolute;
   top: 0;
   left: calc(var(--base) * -2);
   transform: translateX(-100%);
   z-index: 999999999;
-}
-
-.standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img)) {
-  position: relative;
-  border: none;
-}
-
-.standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
-  content: "Small";
-  position: absolute;
-  top: 0;
-  left: calc(var(--base) * -2);
-  transform: translateX(-100%);
 }
 
 
@@ -5766,23 +5759,23 @@ ul.menu.horizontal li {
 }
 .standard-debug .grid-debug-overlay span:nth-child(2) {
   grid-column: feature-start/accent-start;
-  border-inline-start: 1px dotted color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
+  border-inline-start: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(3) {
   grid-column: accent-start/content-start;
-  border-inline-start: 1px dotted color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
+  border-inline-start: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(4) {
   grid-column: content;
-  outline: 1px dotted color-mix(in srgb, var(--color-green) var(--debug-line-opacity), transparent);
+  outline: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(5) {
   grid-column: content-end/accent-end;
-  border-inline-end: 1px dotted color-mix(in srgb, var(--color-accent) var(--debug-line-opacity), transparent);
+  border-inline-end: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(6) {
   grid-column: accent-end/feature-end;
-  border-inline-end: 1px dotted color-mix(in srgb, var(--color-cyan) var(--debug-line-opacity), transparent);
+  border-inline-end: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(7) {
   grid-column: feature-end/hero-end;
@@ -5840,7 +5833,7 @@ ul.menu.horizontal li {
 .standard-debug .grid-10 > *,
 .standard-debug .grid-11 > *,
 .standard-debug .grid-12 > * {
-  outline: 1px solid color-mix(in srgb, var(--color-cyan) 50%, transparent);
+  outline: 1px dashed color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 1.2), transparent);
   outline-offset: -1px;
   position: relative;
 }
@@ -5859,16 +5852,13 @@ ul.menu.horizontal li {
 .standard-debug .grid-12 > *::before {
   content: attr(class);
   position: absolute;
-  top: var(--base-d8);
+  top: calc(var(--base-d2) * -1);
   left: var(--base-d8);
-  background: var(--color-cyan);
-  color: var(--color-background);
+  color: var(--debug-color);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--base-d8) var(--base-d4);
-  border-radius: var(--radius);
   pointer-events: none;
-  opacity: 0.9;
+  opacity: var(--debug-opacity);
   z-index: var(--z-tooltip);
   white-space: nowrap;
   max-width: 90%;
@@ -5882,39 +5872,41 @@ ul.menu.horizontal li {
   position: absolute;
   bottom: var(--base-d8);
   left: var(--base-d8);
-  background: var(--color-purple);
-  color: var(--color-background);
+  color: var(--debug-color);
+  opacity: var(--debug-opacity);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   pointer-events: none;
-  opacity: 0.9;
+  opacity: var(--debug-opacity);
   z-index: var(--z-tooltip);
   white-space: nowrap;
 }
 
 
 .standard-debug::after {
-  content: "Debug";
+  content: "Debug : " attr(data-standard-version);
   position: fixed;
   top: var(--base);
   left: var(--base);
+  color: var(--debug-color);
+  opacity: var(--debug-opacity);
 }
 
 @media (max-width: 768px) {
   .standard-debug::after {
-    content: "Debug : sm (<768px)";
+    content: "Debug : " attr(data-standard-version) " : sm (<768px)";
   }
 }
 @media (max-width: 600px) {
   .standard-debug::after {
-    content: "Debug : xs (<600px)";
+    content: "Debug : " attr(data-standard-version) " : xs (<600px)";
   }
 }
 @media (min-width: 1024px) {
   .standard-debug::after {
-    content: "Debug : lg (≥1024px)";
+    content: "Debug : " attr(data-standard-version) " : lg (≥1024px)";
   }
 }
 
@@ -5925,15 +5917,6 @@ ul.menu.horizontal li {
   .standard-debug .prose::after,
   body.standard-debug::before {
     display: none !important;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .standard-debug::before {
-    opacity: 0.3;
-  }
-  .standard-debug .prose::after {
-    opacity: 0.15;
   }
 }
 
