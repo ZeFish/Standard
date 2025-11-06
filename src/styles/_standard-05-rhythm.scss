@@ -169,7 +169,6 @@
     }
 
     hr {
-        --base-block-gap: calc(2rlh - (1rlh / var(--line-height)));
         margin-inline: calc(var(--base-2) * var(--base-gap));
     }
 

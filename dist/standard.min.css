@@ -1352,7 +1352,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   }
 }
 :where(.rhythm) hr {
-  --base-block-gap: calc(2rlh - (1rlh / var(--line-height)));
   margin-inline: calc(var(--base-2) * var(--base-gap));
 }
 :where(.rhythm) blockquote > :first-child,
