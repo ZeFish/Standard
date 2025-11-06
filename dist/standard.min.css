@@ -25,7 +25,7 @@
   --radius: var(--base-d8);
   --modal-background: color-mix(
       in srgb,
-      var(--color-background-secondary) 85%,
+      var(--color-background) 60%,
       transparent
   );
   
@@ -3724,7 +3724,7 @@ aside.note {
   display: flex;
   align-items: flex-start;
   gap: var(--base-d4);
-  padding: calc(var(--base-d4) / var(--line-height)) var(--base-d2) var(--base-d4) var(--base-d4);
+  padding: var(--base-d8) var(--base-d4);
   transition: transform var(--transition);
 }
 

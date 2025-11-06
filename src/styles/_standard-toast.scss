@@ -198,8 +198,7 @@
     display: flex;
     align-items: flex-start;
     gap: var(--base-d4);
-    padding: calc(var(--base-d4) / var(--line-height)) var(--base-d2)
-        var(--base-d4) var(--base-d4);
+    padding: var(--base-d8) var(--base-d4);
     transition: transform var(--transition);
 }
 
