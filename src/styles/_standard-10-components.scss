@@ -2035,23 +2035,6 @@ dialog.modal::backdrop {
     font-size: var(--scale-d3);
 }
 
-/**
- * @name Menu Helper
- * @group components-disclosure
- * @since 0.15.0
- */
-.menu {
-    list-style: none;
-    padding-inline-start: 0;
-    gap: var(--base-d4);
-}
-.menu li {
-    margin: 0;
-}
-.menu li::before {
-    display: none;
-}
-
 .comments-box {
     font-size: var(--scale-d2);
     #form-status {

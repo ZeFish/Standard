@@ -893,6 +893,11 @@ ol.no-bullet {
     }
 }
 
+/**
+ * @name Menu Helper
+ * @group components-disclosure
+ * @since 0.15.0
+ */
 nav.menu ul,
 ul.menu {
     display: flex;
@@ -902,14 +907,22 @@ ul.menu {
     li {
         list-style: none;
         padding-inline-start: 0;
+        margin-block-end: var(--base-d2);
         &::before {
             display: none;
         }
     }
 }
+.tight nav.menu ul li {
+    margin-block-end: var(--base-d4);
+}
 
 nav.menu.horizontal ul,
 ul.menu.horizontal {
     flex-direction: row;
-    gap: var(--base);
+    gap: var(--base-d2);
+    li {
+        padding-inline-start: 0;
+        margin-block: 0;
+    }
 }

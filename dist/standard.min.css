@@ -1495,7 +1495,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(.rhythm) td,
 :where(.rhythm) th {
-  padding: var(--base-d4);
+  padding: var(--base-d2);
   font-size: var(--scale-d2);
   min-height: var(--line-height);
 }
@@ -3578,21 +3578,6 @@ dialog.modal::backdrop {
   font-size: var(--scale-d3);
 }
 
-
-.menu {
-  list-style: none;
-  padding-inline-start: 0;
-  gap: var(--base-d4);
-}
-
-.menu li {
-  margin: 0;
-}
-
-.menu li::before {
-  display: none;
-}
-
 .comments-box {
   font-size: var(--scale-d2);
 }
@@ -5613,6 +5598,7 @@ ol.no-bullet li::before {
   display: none;
 }
 
+
 nav.menu ul,
 ul.menu {
   display: flex;
@@ -5624,16 +5610,26 @@ nav.menu ul li,
 ul.menu li {
   list-style: none;
   padding-inline-start: 0;
+  margin-block-end: var(--base-d2);
 }
 nav.menu ul li::before,
 ul.menu li::before {
   display: none;
 }
 
+.tight nav.menu ul li {
+  margin-block-end: var(--base-d4);
+}
+
 nav.menu.horizontal ul,
 ul.menu.horizontal {
   flex-direction: row;
-  gap: var(--base);
+  gap: var(--base-d2);
+}
+nav.menu.horizontal ul li,
+ul.menu.horizontal li {
+  padding-inline-start: 0;
+  margin-block: 0;
 }
 
 
