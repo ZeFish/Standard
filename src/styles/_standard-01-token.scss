@@ -176,14 +176,20 @@
 }
 
 /* Responsive adjustments - collapse gutters on small screens */
+@media only screen and (max-width: #{$small}) {
+    :root {
+        --base-gap: var(--base);
+        --base-block-gap: var(--base);
+        --body-padding: var(--mobile-body-padding) !important;
+    }
+}
+
+/* Responsive adjustments - collapse gutters on small screens */
 @media only screen and (max-width: #{$mobile}) {
     :root {
         --font-size: var(--mobile-font-size) !important;
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
-        --base-gap: var(--base);
-        --base-block-gap: var(--base);
-        --body-padding: var(--mobile-body-padding) !important;
     }
 }
 

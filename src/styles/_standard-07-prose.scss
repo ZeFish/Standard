@@ -104,8 +104,7 @@
 
     .container-hero {
         grid-column: hero;
-        margin-inline: calc((var(--base) * var(--body-padding)) * -1);
-        /*padding-inline: var(--body-padding);*/
+        margin-inline: calc(var(--body-padding) * -1);
         > * {
             margin-inline: 0;
         }

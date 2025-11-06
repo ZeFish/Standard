@@ -668,7 +668,7 @@ aside.info {
 .body-p-neg-footer {
     margin-inline: calc(var(--body-padding) * -1);
     padding-inline: calc(var(--body-padding) * 1);
-    @media (max-width: #{$mobile}) {
+    @media (max-width: #{$small}) {
         margin-inline: calc(var(--mobile-body-padding) * -1);
     }
 }
@@ -681,7 +681,7 @@ aside.info {
 .body-p-neg-footer {
     margin-block-end: calc(var(--body-padding) * -1.5);
 
-    @media (max-width: #{$mobile}) {
+    @media (max-width: #{$small}) {
         margin-block-end: calc(var(--mobile-body-padding) * -1.5);
     }
 }
@@ -689,7 +689,7 @@ aside.info {
 .body-p-neg-header {
     margin-block-start: calc(var(--body-padding) * -1);
 
-    @media (max-width: #{$mobile}) {
+    @media (max-width: #{$small}) {
         margin-block-end: calc(var(--mobile-body-padding) * -1);
     }
 }
