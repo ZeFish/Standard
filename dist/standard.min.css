@@ -2525,8 +2525,11 @@ hr.col-row {
   grid-column: feature;
   margin-inline: 0;
 }
+:where(.prose) .container-hero-marge,
 :where(.prose) .container-hero {
   grid-column: hero;
+}
+:where(.prose) .container-hero {
   margin-inline: calc(var(--body-padding) * -1);
 }
 :where(.prose) .container-hero > * {

@@ -102,8 +102,11 @@
         margin-inline: 0;
     }
 
+    .container-hero-marge,
     .container-hero {
         grid-column: hero;
+    }
+    .container-hero {
         margin-inline: calc(var(--body-padding) * -1);
         > * {
             margin-inline: 0;
