@@ -1,4 +1,4 @@
-/**!
+/*!
  * Standard System Inspector - Minimal Debug Interface
  *
  * A minimalist debug interface for the Standard Framework
@@ -21,6 +21,27 @@ class StandardLab {
     this.modifiedTokens = new Set();
     this.position = this.loadPosition();
     this.version = document.documentElement.dataset.standardVersion;
+
+    // Slider configuration for numeric tokens
+    this.sliderConfig = {
+      "--optical-ratio": { min: 1, max: 2, step: 0.01, unit: "" },
+      "--line-height": { min: 1, max: 2, step: 0.05, unit: "" },
+      "--font-size": { min: 0, max: 2, step: 0.05, unit: "em" },
+      "--ratio-golden": { min: 1, max: 2, step: 0.01, unit: "" },
+      "--ratio-silver": { min: 1, max: 3, step: 0.01, unit: "" },
+      "--ratio-wholestep": { min: 1, max: 3, step: 0.01, unit: "" },
+      "--ratio-halfstep": { min: 1, max: 2, step: 0.01, unit: "" },
+      "--font-weight": { min: 100, max: 900, step: 100, unit: "" },
+      "--bold-weight": { min: 100, max: 900, step: 100, unit: "" },
+      "--radius": { min: 0, max: 2, step: 0.05, unit: "rem" },
+      "--hr-thickness": { min: 0, max: 10, step: 0.5, unit: "px" },
+      "--base": { min: 0.5, max: 3, step: 0.05, unit: "rem" },
+      "--base-gap": { min: 0, max: 3, step: 0.05, unit: "rem" },
+      "--base-block-gap": { min: 0, max: 3, step: 0.05, unit: "rem" },
+      "--body-padding": { min: 0, max: 5, step: 0.25, unit: "rem" },
+      "--gap": { min: 0, max: 3, step: 0.05, unit: "rem" },
+      "--grid-gap": { min: 0, max: 3, step: 0.05, unit: "rem" },
+    };
 
     this.coreTokens = {
       typography: [
@@ -443,14 +464,104 @@ class StandardLab {
     return `<div class="standard-lab-token-list">${filteredTokens.map((token) => this.renderTokenRow(token)).join("")}</div>`;
   }
 
+  /**
+   * Check if a value is numeric (with optional unit)
+   */
+  isNumericValue(value) {
+    if (!value) return false;
+    // Match patterns like: 1.5, 1.5rem, 16px, 1.618, 500
+    return /^-?\d+(\.\d+)?(rem|em|px|%|ch|vh|vw)?$/.test(value.trim());
+  }
+
+  /**
+   * Extract numeric portion from a CSS value
+   */
+  extractNumericValue(value) {
+    if (!value) return 0;
+    const match = value.match(/^(-?\d+(\.\d+)?)/);
+    return match ? parseFloat(match[1]) : 0;
+  }
+
+  /**
+   * Extract unit from a CSS value (rem, px, em, etc.)
+   */
+  extractUnit(value) {
+    if (!value) return "";
+    const match = value.match(/[a-z%]+$/i);
+    return match ? match[0] : "";
+  }
+
   renderTokenRow(token) {
     const value = this.getPropertyValue(token);
     const isModified = this.modifiedTokens.has(token);
     const isColor = token.includes("color") && this.isColorValue(value);
+    const sliderConfig = this.sliderConfig[token];
+
+    // Detect if this is a slider-enabled numeric token
+    const isSlider = sliderConfig && this.isNumericValue(value);
+
+    if (isSlider) {
+      const numericValue = this.extractNumericValue(value);
+      return `
+        <div class="standard-lab-token-row ${isModified ? "is-modified" : ""}">
+          <div class="standard-lab-slider-container">
+            <label class="standard-lab-slider-label">${token}</label>
+            <div class="standard-lab-slider-controls">
+              <input
+                type="range"
+                class="standard-lab-slider-input"
+                data-token="${token}"
+                value="${numericValue}"
+                min="${sliderConfig.min}"
+                max="${sliderConfig.max}"
+                step="${sliderConfig.step}"
+                title="${token}">
+              <input
+                type="text"
+                class="standard-lab-text-input standard-lab-slider-value"
+                data-token="${token}"
+                value="${value}"
+                spellcheck="false">
+            </div>
+          </div>
+          <button class="standard-lab-btn-icon standard-lab-btn-reset" data-action="reset-token" data-token="${token}" title="Reset" ${!isModified ? "disabled" : ""}>↺</button>
+        </div>
+      `;
+    }
+
+    if (isColor) {
+      return `
+        <div class="standard-lab-token-row ${isModified ? "is-modified" : ""}">
+          <div class="standard-lab-color-container">
+            <label class="standard-lab-color-label">${token}</label>
+            <div class="standard-lab-color-controls">
+              <input
+                type="color"
+                class="standard-lab-color-input"
+                data-token="${token}"
+                value="${this.extractHexColor(value)}"
+                title="Pick color">
+              <input
+                type="text"
+                class="standard-lab-text-input standard-lab-color-value"
+                data-token="${token}"
+                value="${value}"
+                placeholder="${token}"
+                spellcheck="false">
+            </div>
+          </div>
+          <button class="standard-lab-btn-icon standard-lab-btn-reset" data-action="reset-token" data-token="${token}" title="Reset" ${!isModified ? "disabled" : ""}>↺</button>
+        </div>
+      `;
+    }
+
+    // Default text input (for font names, etc.)
     return `
       <div class="standard-lab-token-row ${isModified ? "is-modified" : ""}">
-        ${isColor ? `<input type="color" class="standard-lab-color-input" data-token="${token}" value="${this.extractHexColor(value)}" title="Pick color">` : ""}
-        <input type="text" class="standard-lab-text-input ${isColor ? "has-color" : ""}" data-token="${token}" value="${value}" placeholder="${token}" spellcheck="false">
+        <div class="standard-lab-text-container">
+          <label class="standard-lab-text-label">${token}</label>
+          <input type="text" class="standard-lab-text-input" data-token="${token}" value="${value}" placeholder="${token}" spellcheck="false">
+        </div>
         <button class="standard-lab-btn-icon standard-lab-btn-reset" data-action="reset-token" data-token="${token}" title="Reset" ${!isModified ? "disabled" : ""}>↺</button>
       </div>
     `;
@@ -473,11 +584,60 @@ class StandardLab {
       ?.addEventListener("change", (e) =>
         this.refreshTokenList(e.target.checked),
       );
-    this.panel.querySelectorAll(".standard-lab-text-input").forEach((input) => {
-      input.addEventListener("input", (e) =>
-        this.updateToken(e.target.dataset.token, e.target.value),
-      );
-    });
+
+    // Slider input listeners
+    this.panel
+      .querySelectorAll(".standard-lab-slider-input")
+      .forEach((slider) => {
+        slider.addEventListener("input", (e) => {
+          const token = e.target.dataset.token;
+          const numericValue = e.target.value;
+          const config = this.sliderConfig[token];
+          const unit =
+            config.unit || this.extractUnit(this.getPropertyValue(token));
+          const fullValue = `${numericValue}${unit}`;
+
+          this.updateToken(token, fullValue);
+
+          // Update the text input to reflect slider value
+          const textInput = this.panel.querySelector(
+            `.standard-lab-slider-value[data-token="${token}"]`,
+          );
+          if (textInput) textInput.value = fullValue;
+        });
+      });
+
+    // Text input for sliders (allows manual override)
+    this.panel
+      .querySelectorAll(".standard-lab-slider-value")
+      .forEach((input) => {
+        input.addEventListener("input", (e) => {
+          const token = e.target.dataset.token;
+          const value = e.target.value;
+          const numericValue = this.extractNumericValue(value);
+
+          this.updateToken(token, value);
+
+          // Sync slider position
+          const slider = this.panel.querySelector(
+            `.standard-lab-slider-input[data-token="${token}"]`,
+          );
+          if (slider) slider.value = numericValue;
+        });
+      });
+
+    // Regular text inputs
+    this.panel
+      .querySelectorAll(
+        ".standard-lab-text-input:not(.standard-lab-slider-value):not(.standard-lab-color-value)",
+      )
+      .forEach((input) => {
+        input.addEventListener("input", (e) =>
+          this.updateToken(e.target.dataset.token, e.target.value),
+        );
+      });
+
+    // Color pickers
     this.panel
       .querySelectorAll(".standard-lab-color-input")
       .forEach((input) => {
@@ -486,11 +646,30 @@ class StandardLab {
           const color = e.target.value;
           this.updateToken(token, color);
           const textInput = this.panel.querySelector(
-            `.standard-lab-text-input[data-token="${token}"]`,
+            `.standard-lab-color-value[data-token="${token}"]`,
           );
           if (textInput) textInput.value = color;
         });
       });
+
+    // Color text inputs
+    this.panel
+      .querySelectorAll(".standard-lab-color-value")
+      .forEach((input) => {
+        input.addEventListener("input", (e) => {
+          const token = e.target.dataset.token;
+          const value = e.target.value;
+          this.updateToken(token, value);
+          const colorInput = this.panel.querySelector(
+            `.standard-lab-color-input[data-token="${token}"]`,
+          );
+          if (colorInput && this.isColorValue(value)) {
+            colorInput.value = this.extractHexColor(value);
+          }
+        });
+      });
+
+    // Reset buttons
     this.panel
       .querySelectorAll('[data-action="reset-token"]')
       .forEach((btn) => {
@@ -784,29 +963,30 @@ class StandardLab {
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
-      .standard-lab-panel { position: fixed; font-size:16px !important; background: var(--modal-background); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--border-radius); box-shadow: var(--shadow); z-index: var(--z-toast); opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; display: flex; flex-direction: column; font-family: var(--font-interface); font-size: var(--scale); }
+      .standard-lab-panel { position: fixed; font-size: 16px !important; line-height: 1.2 !important; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; background: var(--modal-background); backdrop-filter: var(--blur); border: var(--border); border-radius: var(--border-radius); box-shadow: var(--shadow); z-index: var(--z-toast); opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; display: flex; flex-direction: column; }
+      .standard-lab-panel * { font-size: inherit !important; line-height: inherit !important; }
       .standard-lab-panel-quick { max-width: 280px; max-height: 400px; }
       .standard-lab-panel-full { max-width: 360px; max-height: 600px; }
       .standard-lab-panel-header { padding: var(--base-d4); border-bottom: var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-      .standard-lab-panel-header h2 { margin: 0; font-size: var(--scale-d2); font-weight: 600; letter-spacing: -0.02em; }
+      .standard-lab-panel-header h2 { margin: 0; font-size: 14px !important; font-weight: 600; letter-spacing: -0.02em; }
       .standard-lab-header-actions { display: flex; gap: var(--base-d4); }
       .standard-lab-section { padding: var(--base-d4); border-bottom: var(--border); }
       .standard-lab-section:last-of-type { border-bottom: none; }
-      .standard-lab-label { display: block; font-size: var(--scale-d3); font-weight: 600; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--base-d4); }
+      .standard-lab-label { display: block; font-size: 11px !important; font-weight: 600; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--base-d4); }
       .standard-lab-toggle { display: flex; align-items: center; gap: var(--base-d4); cursor: pointer; user-select: none; }
       .standard-lab-toggle input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; margin: 0; }
-      .standard-lab-toggle span { flex: 1; font-size: var(--scale-d2); }
-      .standard-lab-toggle kbd { font-size: var(--scale-d2); font-family: var(--font-monospace); color: var(--color-subtle); padding: var(--base-d8) var(--base-d4); background: var(--color-background-secondary); border-radius: 3px; }
-      .standard-lab-select { width: 100%; padding: var(--base-d4); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); font-size: var(--scale-d2); color: var(--color-foreground); cursor: pointer; }
+      .standard-lab-toggle span { flex: 1; font-size: 14px !important; }
+      .standard-lab-toggle kbd { font-size: 12px !important; font-family: var(--font-monospace); color: var(--color-subtle); padding: 2px 6px; background: var(--color-background-secondary); border-radius: 3px; }
+      .standard-lab-select { width: 100%; padding: var(--base-d4); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); font-size: 14px !important; color: var(--color-foreground); cursor: pointer; }
       .standard-lab-actions { padding: var(--base-d2); border-top: var(--border); display: flex; flex-direction: column; gap: var(--base-d4); flex-shrink: 0; }
-      .standard-lab-btn { width: 100%; padding: var(--base-d8); background: var(--color-accent); color: var(--color-background); border: none; border-radius: var(--border-radius); font-size: var(--scale-d2); font-weight: 600; cursor: pointer; transition: opacity 0.2s ease; }
+      .standard-lab-btn { width: 100%; padding: 6px 12px; background: var(--color-accent); color: var(--color-background); border: none; border-radius: var(--border-radius); font-size: 14px !important; font-weight: 600; cursor: pointer; transition: opacity 0.2s ease; }
       .standard-lab-btn:hover { opacity: 0.9; }
       .standard-lab-btn:active { opacity: 0.8; }
       .standard-lab-btn-secondary { background: var(--color-background-secondary); color: var(--color-foreground); border: var(--border); }
-      .standard-lab-btn-icon { width: 28px; height: 28px; padding: 0; background: transparent; border: none; color: var(--color-muted); font-size: var(--scale-2); line-height: 1; cursor: pointer; border-radius: var(--border-radius); transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
+      .standard-lab-btn-icon { width: 28px; height: 28px; padding: 0; background: transparent; border: none; color: var(--color-muted); font-size: 20px !important; line-height: 1 !important; cursor: pointer; border-radius: var(--border-radius); transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
       .standard-lab-btn-icon:hover { background: var(--color-background-secondary); color: var(--color-foreground); }
       .standard-lab-tabs { display: flex; border-bottom: var(--border); flex-shrink: 0; }
-      .standard-lab-tab { flex: 1; padding: var(--base-d4); background: transparent; border: none; border-bottom: 2px solid transparent; font-size: var(--scale-d2); font-weight: 500; color: var(--color-muted); cursor: pointer; transition: all 0.2s ease; }
+      .standard-lab-tab { flex: 1; padding: var(--base-d4); background: transparent; border: none; border-bottom: 2px solid transparent; font-size: 13px !important; font-weight: 500; color: var(--color-muted); cursor: pointer; transition: all 0.2s ease; }
       .standard-lab-tab:hover { color: var(--color-foreground); background: var(--color-background-secondary); }
       .standard-lab-tab[aria-selected="true"] { color: var(--color-foreground); border-bottom-color: var(--color-accent); font-weight: 600; }
       .standard-lab-filter { padding: var(--base-d4) var(--base-d2); background: var(--color-background-secondary); border-bottom: var(--border); flex-shrink: 0; }
@@ -816,24 +996,38 @@ class StandardLab {
       .standard-lab-content::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
       .standard-lab-content::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
       .standard-lab-token-list { display: flex; flex-direction: column; gap: var(--base-d8); }
-      .standard-lab-token-row { display: grid; grid-template-columns: 1fr auto; gap: var(--base-d4); align-items: center; padding: var(--base-d4); border-radius: var(--border-radius); transition: background 0.2s ease; }
-      .standard-lab-token-row.has-color { grid-template-columns: auto 1fr auto; }
+      .standard-lab-token-row { display: grid; grid-template-columns: 1fr auto; gap: var(--base-d4); align-items: start; padding: var(--base-d4); border-radius: var(--border-radius); transition: background 0.2s ease; }
       .standard-lab-token-row:hover { background: var(--color-background-secondary); }
       .standard-lab-token-row.is-modified { background: color-mix(in srgb, var(--color-accent) 5%, transparent); }
-      .standard-lab-text-input { padding: var(--base-d4); background: transparent; border: 1px solid transparent; border-radius: 3px; font-size: var(--scale-d3); font-family: var(--font-monospace); color: var(--color-foreground); min-width: 0; transition: all 0.2s ease; }
+      .standard-lab-text-input { padding: 6px 8px; background: transparent; border: 1px solid transparent; border-radius: 3px; font-size: 12px !important; font-family: var(--font-monospace); color: var(--color-foreground); min-width: 0; transition: all 0.2s ease; }
       .standard-lab-text-input:focus { outline: none; background: var(--color-background); border-color: var(--color-accent); }
-      .standard-lab-color-input { width: 32px; height: 32px; border: var(--border); border-radius: 4px; cursor: pointer; padding: 2px; background: var(--color-background); }
+      .standard-lab-color-container { width: 100%; }
+      .standard-lab-color-label { display: block; font-size: 11px !important; font-family: var(--font-monospace); color: var(--color-muted); margin-bottom: var(--base-d4); }
+      .standard-lab-color-controls { display: flex; gap: var(--base-d4); align-items: center; }
+      .standard-lab-color-input { width: 40px; height: 40px; border: var(--border); border-radius: var(--border-radius); cursor: pointer; padding: 4px; background: var(--color-background); flex-shrink: 0; }
       .standard-lab-color-input::-webkit-color-swatch-wrapper { padding: 0; }
-      .standard-lab-color-input::-webkit-color-swatch { border: none; border-radius: 2px; }
+      .standard-lab-color-input::-webkit-color-swatch { border: none; border-radius: calc(var(--border-radius) - 4px); }
+      .standard-lab-color-value { flex: 1; min-width: 0; padding: 6px 8px; font-family: var(--font-monospace); font-size: 12px !important; }
+      .standard-lab-text-container { width: 100%; }
+      .standard-lab-text-label { display: block; font-size: 11px !important; font-family: var(--font-monospace); color: var(--color-muted); margin-bottom: var(--base-d4); }
+      .standard-lab-slider-container { width: 100%; }
+      .standard-lab-slider-label { display: block; font-size: 11px !important; font-family: var(--font-monospace); color: var(--color-muted); margin-bottom: var(--base-d4); }
+      .standard-lab-slider-controls { display: flex; gap: var(--base-d4); align-items: center; }
+      .standard-lab-slider-input { flex: 1; height: 6px; -webkit-appearance: none; appearance: none; background: var(--color-background-secondary); border-radius: 3px; outline: none; cursor: pointer; }
+      .standard-lab-slider-input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: var(--color-accent); border-radius: 50%; cursor: grab; transition: transform 0.1s ease; }
+      .standard-lab-slider-input::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); }
+      .standard-lab-slider-input::-moz-range-thumb { width: 16px; height: 16px; background: var(--color-accent); border-radius: 50%; border: none; cursor: grab; transition: transform 0.1s ease; }
+      .standard-lab-slider-input::-moz-range-thumb:active { cursor: grabbing; transform: scale(1.2); }
+      .standard-lab-slider-value { width: 80px; flex-shrink: 0; text-align: center; padding: 6px 8px; font-size: 12px !important; }
       .standard-lab-btn-reset { opacity: 0; transition: opacity 0.2s ease; }
       .standard-lab-token-row:hover .standard-lab-btn-reset:not(:disabled) { opacity: 1; }
       .standard-lab-btn-reset:disabled { opacity: 0; cursor: not-allowed; }
-      .standard-lab-empty { padding: var(--base); text-align: center; color: var(--color-subtle); font-size: var(--scale-d2); }
-      .standard-lab-notification { position: fixed; top: var(--base); left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); padding: var(--base-d4) var(--base-d2); box-shadow: var(--shadow); z-index: calc(var(--z-toast) + 1); font-size: var(--scale-d2); opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; }
+      .standard-lab-empty { padding: var(--base); text-align: center; color: var(--color-subtle); font-size: 14px !important; }
+      .standard-lab-notification { position: fixed; top: var(--base); left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--color-background); border: var(--border); border-radius: var(--border-radius); padding: 8px 16px; box-shadow: var(--shadow); z-index: calc(var(--z-toast) + 1); font-size: 14px !important; opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; }
       .standard-lab-notification-success { background: var(--color-success); color: white; border-color: var(--color-success); }
       .standard-lab-notification-info { background: var(--color-info); color: white; border-color: var(--color-info); }
       @media (prefers-color-scheme: dark) { .standard-lab-panel { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); } }
-      @media (max-width: 768px) { .standard-lab-panel-quick, .standard-lab-panel-full { width: calc(100vw - var(--base) * 2); max-width: 360px; } }
+      @media (max-width: 768px) { .standard-lab-panel-quick, .standard-lab-panel-full { width: calc(100vw - 32px); max-width: 360px; } }
       @media print { .standard-lab-badge, .standard-lab-panel, .standard-lab-notification { display: none !important; } }
     `;
     document.head.appendChild(styles);

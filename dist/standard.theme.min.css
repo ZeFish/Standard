@@ -820,16 +820,6 @@
 [data-theme=book] a:hover {
   color: var(--color-foreground);
 }
-[data-theme=book] aside.note {
-  display: inline;
-  position: absolute;
-  left: calc(var(--base) + var(--line-width-s));
-  margin-top: calc(var(--line-height) * -2);
-  font-size: var(--scale-d2);
-  color: var(--color-muted);
-  line-height: var(--line-height-s);
-  max-width: 33%;
-}
 [data-theme=book] blockquote,
 [data-theme=book] pre {
   padding: calc(var(--base) * 0.5);

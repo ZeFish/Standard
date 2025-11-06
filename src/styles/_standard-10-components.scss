@@ -2042,3 +2042,19 @@ dialog.modal::backdrop {
         font-size: var(--scale-d3);
     }
 }
+
+aside.note {
+    display: inline;
+    position: relative;
+    top: calc(var(--base) * -1);
+    left: calc(var(--base) + var(--line-width));
+    margin-top: calc(var(--base) * -1);
+    margin-bottom: calc(var(--base) * -2);
+    font-size: var(--scale-d2);
+    color: var(--color-muted);
+    line-height: var(--line-height-s);
+    max-width: 33%;
+    border-left: var(--border);
+    padding-left: var(--base-d2);
+    padding-block: var(--base-d2);
+}
