@@ -5666,9 +5666,6 @@ ul.menu.horizontal li {
 .standard-debug :is(li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
   overflow: hidden;
 }
-.standard-debug hr {
-  display: none;
-}
 .standard-debug h1,
 .standard-debug h2,
 .standard-debug h3,
@@ -5810,15 +5807,67 @@ ul.menu.horizontal li {
 .standard-debug .grid-10::after,
 .standard-debug .grid-11::after,
 .standard-debug .grid-12::after {
-  content: "";
+  content: attr(class);
   position: absolute;
   inset: 0;
+  color: var(--debug-color);
+  font-size: var(--scale-d3);
+  font-family: var(--font-monospace);
   display: grid;
   grid-template-columns: repeat(var(--grid-cols), 1fr);
   column-gap: var(--grid-gap);
   pointer-events: none;
   z-index: var(--z-tooltip);
-  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--color-red) 10%, transparent) 0, color-mix(in srgb, var(--color-red) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
+  opacity: var(--debug-opacity);
+  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--debug-color) 10%, transparent) 0, color-mix(in srgb, var(--debug-color) 10%, transparent) calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--grid-gap) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
+}
+
+.standard-debug .grid::after {
+  --grid-cols: 12;
+}
+
+.standard-debug .grid-2::after {
+  --grid-cols: 2;
+}
+
+.standard-debug .grid-3::after {
+  --grid-cols: 3;
+}
+
+.standard-debug .grid-4::after {
+  --grid-cols: 4;
+}
+
+.standard-debug .grid-5::after {
+  --grid-cols: 5;
+}
+
+.standard-debug .grid-6::after {
+  --grid-cols: 6;
+}
+
+.standard-debug .grid-7::after {
+  --grid-cols: 7;
+}
+
+.standard-debug .grid-8::after {
+  --grid-cols: 8;
+}
+
+.standard-debug .grid-9::after {
+  --grid-cols: 9;
+}
+
+.standard-debug .grid-10::after {
+  --grid-cols: 10;
+}
+
+.standard-debug .grid-11::after {
+  --grid-cols: 11;
+}
+
+.standard-debug .grid-12::after {
+  --grid-cols: 12;
 }
 
 .standard-debug .grid > *,
