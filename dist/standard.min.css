@@ -551,7 +551,7 @@ html {
   --font-monospace-variation: "";
   
   --font-weight: 400;
-  --bold-weight: 600;
+  --font-weight-bold: 600;
   --font-letter-spacing: normal;
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 0.75em;
@@ -639,7 +639,7 @@ html {
 b,
 strong,
 .bold {
-  font-weight: var(--bold-weight, 600);
+  font-weight: var(--font-weight-bold, 600);
 }
 
 :is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
@@ -804,11 +804,11 @@ td {
 }
 
 th {
-  font-weight: var(--bold-weight, 600);
+  font-weight: var(--font-weight-bold, 600);
   background: var(--color-background-secondary);
 } 
 caption {
-  font-weight: var(--bold-weight, bold);
+  font-weight: var(--font-weight-bold, bold);
   text-align: left;
 }
 
@@ -903,7 +903,7 @@ button,
 a.button {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-size: var(--scale-d3);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
   padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
@@ -995,14 +995,14 @@ textarea {
 }
 
 legend {
-  font-weight: var(--bold-weight, bold);
+  font-weight: var(--font-weight-bold, bold);
 }
 
 label {
   display: inline-block;
   font-family: var(--font-interface), system-ui, sans-serif;
   cursor: pointer;
-  font-weight: var(--bold-weight, bold);
+  font-weight: var(--font-weight-bold, bold);
 }
 
 fieldset {
@@ -1052,7 +1052,7 @@ iframe {
 }
 
 .callout-title {
-  font-weight: var(--bold-weight, bold);
+  font-weight: var(--font-weight-bold, bold);
 }
 
 
@@ -1283,15 +1283,15 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) > body [id] {
   scroll-margin-top: calc(var(--base-2) + var(--body-padding)); 
 }
-:where(.rhythm) h1, :where(.rhythm) h2, :where(.rhythm) h3, :where(.rhythm) h4, :where(.rhythm) h5, :where(.rhythm) h6, :where(.rhythm) ul, :where(.rhythm) ol, :where(.rhythm) dl, :where(.rhythm) p, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) dt, :where(.rhythm) dd, :where(.rhythm) table, :where(.rhythm) figure, :where(.rhythm) form, :where(.rhythm) fieldset, :where(.rhythm) aside, :where(.rhythm) .callout {
+:where(.rhythm) #comments, :where(.rhythm) h1, :where(.rhythm) h2, :where(.rhythm) h3, :where(.rhythm) h4, :where(.rhythm) h5, :where(.rhythm) h6, :where(.rhythm) ul, :where(.rhythm) ol, :where(.rhythm) dl, :where(.rhythm) p, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) dt, :where(.rhythm) dd, :where(.rhythm) table, :where(.rhythm) figure, :where(.rhythm) form, :where(.rhythm) fieldset, :where(.rhythm) aside, :where(.rhythm) .callout {
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
 }
-:where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside, :where(.rhythm) [class^=grid-] {
+:where(.rhythm) #comments, :where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside, :where(.rhythm) [class^=grid-] {
   margin-block-start: calc(var(--base-block-gap) - var(--base-gap));
   margin-block-end: var(--base-block-gap);
 }
-:where(.rhythm) :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]):has(+ :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])) {
+:where(.rhythm) :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]):has(+ :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])) {
   margin-block-end: var(--base-gap);
 }
 :where(.rhythm) * > :where(:last-child) {
@@ -2565,7 +2565,7 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--base-block-gap) * -1 + var(--img-gap)) !important;
 }
-:where(.prose) :where(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0; 
   
 }
@@ -2813,7 +2813,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   margin-block-end: 0;
 }
 .alert strong {
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 
@@ -2863,7 +2863,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   margin-inline-start: var(--base-d2);
   color: var(--alert-border-color);
   text-decoration: underline;
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 .alert-action:hover {
   text-decoration-thickness: 0.15em;
@@ -2881,7 +2881,7 @@ a.skip-link {
   color: var(--color-background);
   padding: var(--base-d4) var(--base-d4);
   border-radius: var(--radius);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   font-size: var(--scale-d2);
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -2967,7 +2967,7 @@ a.skip-link:active {
 }
 .breadcrumb [aria-current=page] {
   color: var(--color-muted);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 
@@ -3039,7 +3039,7 @@ a.skip-link:active {
   background: var(--color-accent);
   color: var(--color-background);
   border-color: var(--color-accent);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   cursor: default;
   pointer-events: none; 
 }
@@ -3057,7 +3057,7 @@ a.skip-link:active {
 .pagination-next {
   min-width: auto;
   padding: 0 var(--base-d2);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 
@@ -3157,7 +3157,7 @@ a.skip-link:active {
   
 }
 .field label {
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   font-size: var(--scale-d2);
   color: var(--color-foreground);
 }
@@ -3189,7 +3189,7 @@ a.skip-link:active {
   gap: var(--base-d4);
   font-size: var(--scale-d3);
   color: var(--color-error);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-s);
   
 }
@@ -3219,7 +3219,7 @@ a.skip-link:active {
   gap: var(--base-d4);
   font-size: var(--scale-d3);
   color: var(--color-success);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-s);
 }
 .field-success-message::before {
@@ -3248,7 +3248,7 @@ a.skip-link:active {
   gap: var(--base-d4);
   font-size: var(--scale-d3);
   color: var(--color-warning);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height-s);
 }
 .field-warning-message::before {
@@ -3262,7 +3262,7 @@ a.skip-link:active {
 .required-indicator {
   content: " *";
   color: var(--color-error);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 
@@ -3324,7 +3324,7 @@ dialog.modal::backdrop {
 .modal-header h3 {
   margin: 0;
   font-size: var(--scale-2);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 
@@ -3446,7 +3446,7 @@ dialog.modal::backdrop {
 }
 [role=tab][aria-selected=true] {
   color: var(--color-foreground);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   border-bottom-color: var(--color-accent);
 }
 
@@ -3506,7 +3506,7 @@ dialog.modal::backdrop {
   user-select: none;
   
   font-size: var(--scale-d2);
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
   color: var(--color-foreground);
   
   list-style: none;
@@ -3572,12 +3572,30 @@ dialog.modal::backdrop {
   font-size: var(--scale-d3);
 }
 
-.comments-box {
+#comments {
   font-size: var(--scale-d2);
 }
-.comments-box #form-status {
-  font-family: var(--font-interface);
+#comments .comment-author {
+  color: var(--color-foreground);
+  font-weight: var(--font-weight-bold);
+}
+#comments .comment-date,
+#comments .comment-pending {
+  color: var(--color-subtle);
   font-size: var(--scale-d3);
+}
+#comments .comment-pending {
+  font-style: italic;
+  color: var(--color-orange);
+}
+#comments .comment-content {
+  margin-inline: var(--base-d2);
+}
+#comments .comment {
+  margin-block-end: var(--base-d2);
+}
+#comments :last-child {
+  margin-block-end: 0;
 }
 
 aside.note {
@@ -5108,7 +5126,7 @@ aside.note {
 
 
 .bold {
-  font-weight: var(--bold-weight);
+  font-weight: var(--font-weight-bold);
 }
 
 .normal {
@@ -5681,7 +5699,7 @@ ul.menu.horizontal li {
 
 .standard-debug::before,
 .standard-debug::after,
-.standard-debug :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])::before,
+.standard-debug :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])::before,
 .standard-debug :is(.container-small, .callout, blockquote, pre, figure, p:has(img))::before {
   content: "";
   color: var(--debug-color);
@@ -5709,20 +5727,20 @@ ul.menu.horizontal li {
   z-index: 10000;
 }
 
-.standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
+.standard-debug :is(#comments, h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
   outline: 1px dashed color-mix(in srgb, var(--color-cyan) calc(var(--debug-opacity) / 1.2), transparent);
   outline-offset: var(--base-gap);
 }
 
-.standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
-.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-],
+.standard-debug :is(#comments, h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
+#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-],
 .container-small, .callout, blockquote, pre, figure, p:has(img)) {
   position: relative;
   outline-offset: var(--base-block-gap);
 }
 
-.standard-debug :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
-.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-],
+.standard-debug :is(#comments, h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
+#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-],
 .container-small, .callout, blockquote, pre, figure, p:has(img))::before {
   content: attr(class);
   position: absolute;

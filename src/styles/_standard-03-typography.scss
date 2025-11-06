@@ -11,7 +11,7 @@
  * @prop {string} --font-header Font family for headings (default: InterVariable)
  * @prop {string} --font-monospace Monospace font for code (default: IBM Plex Mono)
  * @prop {number} --font-weight Body text weight (default: 400)
- * @prop {number} --bold-weight Bold text weight (default: 600)
+ * @prop {number} --font-weight-bold Bold text weight (default: 600)
  * @prop {string} --font-feature OpenType features to enable
  * @prop {string} --font-variation Variable font axis settings
  *
@@ -48,7 +48,7 @@
 
     /* Font properties */
     --font-weight: 400;
-    --bold-weight: 600;
+    --font-weight-bold: 600;
     --font-letter-spacing: normal;
     --font-header-letter-spacing: -0.065em;
     --font-header-line-height: 0.75em;

@@ -359,7 +359,7 @@
   --optical-ratio: 1.6;
   --line-height: var(--optical-ratio);
   --font-weight: 400;
-  --bold-weight: 500;
+  --font-weight-bold: 500;
   --radius: var(--base);
   --font-header-letter-spacing: -0.035em;
   --font-header-line-height: 1em;
@@ -939,16 +939,16 @@
 [data-theme=blueprint] {
   --blueprint-opacity: 20%;
 }
-[data-theme=blueprint] :is(h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
+[data-theme=blueprint] :is(#comments, h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout) {
   outline: 1px dashed color-mix(in srgb, var(--color-foreground) var(--blueprint-opacity), transparent);
   border-radius: var(--base);
   outline-offset: var(--base-gap);
 }
-[data-theme=blueprint] :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) {
+[data-theme=blueprint] :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) {
   position: relative;
   outline-offset: var(--base-block-gap);
 }
-[data-theme=blueprint] :is(.callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])::before {
+[data-theme=blueprint] :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])::before {
   content: "Block";
   position: absolute;
   opacity: var(--blueprint-opacity);
