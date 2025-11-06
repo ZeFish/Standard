@@ -313,7 +313,6 @@ a.button {
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height);
 
-    padding: var(--base-d8) var(--base-d4);
     border-radius: var(--radius);
 
     background: color-mix(
@@ -324,7 +323,7 @@ a.button {
     color: var(--color-background);
     border: var(--border);
     border-color: var(--color-border);
-
+    padding: var(--base-d4) var(--base-d4);
     box-shadow: var(--shadow);
 
     cursor: pointer;
@@ -444,6 +443,11 @@ label {
 fieldset {
     border: var(--border);
     border-radius: var(--radius);
+    background: color-mix(
+        in srgb,
+        var(--color-background-secondary) 25%,
+        var(--color-background)
+    );
 }
 
 /* Checkboxes and radios */
@@ -643,7 +647,11 @@ pre,
         background: color-mix(
             in srgb,
             var(--color-callout) 2.5%,
-            var(--color-background)
+            color-mix(
+                in srgb,
+                var(--color-background-secondary) 25%,
+                var(--color-background)
+            )
         );
 
         box-shadow: inset var(--shadow);

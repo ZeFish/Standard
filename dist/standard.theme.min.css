@@ -380,6 +380,17 @@
   color: var(--color-muted);
   opacity: 0.75;
 }
+[data-theme=forest] button,
+[data-theme=forest] a.button {
+  font-family: Forrest;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--color-background) 85%, transparent);
+}
+[data-theme=forest] fieldset input,
+[data-theme=forest] fieldset textarea {
+  box-shadow: inset var(--shadow);
+}
 [data-theme=forest] h1,
 [data-theme=forest] h2::first-letter,
 [data-theme=forest] h3::first-letter,

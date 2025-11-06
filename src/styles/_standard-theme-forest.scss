@@ -73,6 +73,19 @@
         opacity: 0.75;
     }
 
+    button,
+    a.button {
+        font-family: Forrest;
+        font-weight: 600;
+        letter-spacing: -0.05em;
+        color: color-mix(in srgb, var(--color-background) 85%, transparent);
+    }
+
+    fieldset input,
+    fieldset textarea {
+        box-shadow: inset var(--shadow);
+    }
+
     h1,
     h2::first-letter,
     h3::first-letter,

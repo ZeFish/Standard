@@ -138,6 +138,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
   flex-direction: column;
   overflow: hidden; /* Ensures children respect border-radius */
   height: 100%; /* Fill grid cell height */
+
 }
 
 /**

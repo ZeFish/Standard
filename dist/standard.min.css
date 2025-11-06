@@ -601,7 +601,7 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
-li::before, buttonlegend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -905,12 +905,12 @@ a.button {
   font-size: var(--scale-d2);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
-  padding: var(--base-d8) var(--base-d4);
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: var(--color-background);
   border: var(--border);
   border-color: var(--color-border);
+  padding: var(--base-d4) var(--base-d4);
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
@@ -1008,6 +1008,7 @@ label {
 fieldset {
   border: var(--border);
   border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background));
 }
 
 
@@ -1142,7 +1143,7 @@ pre,
 }
 .callout .callout-content {
   color: var(--color-foreground);
-  background: color-mix(in srgb, var(--color-callout) 2.5%, var(--color-background));
+  background: color-mix(in srgb, var(--color-callout) 2.5%, color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background)));
   box-shadow: inset var(--shadow);
   overflow: hidden;
   border-radius: var(--radius);
@@ -2725,6 +2726,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   box-shadow: var(--card-shadow);
   padding: var(--scale-d2);
   font-size: var(--scale-d2);
+  padding: var(--radius);
 }
 
 
@@ -5676,7 +5678,7 @@ ul.menu.horizontal li {
 .standard-debug {
   position: relative;
 }
-.standard-debug :is(li::before, buttonlegend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
+.standard-debug :is(li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
   overflow: hidden;
 }
 .standard-debug h1,
