@@ -667,7 +667,7 @@ aside.info {
 .body-p-neg-header,
 .body-p-neg-footer {
     margin-inline: calc(var(--body-padding) * -1);
-
+    padding-inline: calc(var(--body-padding) * 1);
     @media (max-width: #{$small}) {
         margin-inline: calc(var(--mobile-body-padding) * -1);
     }
@@ -690,7 +690,7 @@ aside.info {
     margin-block-start: calc(var(--body-padding) * -1);
 
     @media (max-width: #{$small}) {
-        margin-block-start: calc(var(--mobile-body-padding) * -1);
+        margin-block-end: calc(var(--mobile-body-padding) * -1);
     }
 }
 

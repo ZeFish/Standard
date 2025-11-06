@@ -44,13 +44,11 @@
 :root {
     /* Layout grid tokens */
     --gap: clamp(var(--base), 6%, var(--base-4));
-    --content: min(var(--line-width), 100% - var(--gap) * 2); /* ← FIXED */
-
+    --content: min(var(--line-width), 100% - var(--base) * 2); /* ← FIXED */
+    --content-small: calc(var(--base-block-gap) - var(--base-gap));
     --content-accent: minmax(0, var(--base-2));
     --content-feature: minmax(0, var(--base-4));
     --content-hero: minmax(0, 1fr);
-
-    --content-small: calc(var(--base-block-gap) - var(--base-gap));
 }
 
 @media (max-width: #{$small}) {
@@ -78,6 +76,11 @@
     position: relative;
     z-index: var(--z-base);
     /* Default content positioning */
+
+    > :first-child {
+        margin-top: 0 !important;
+    }
+
     > * {
         grid-column: content;
     }
@@ -107,7 +110,6 @@
             margin-inline: 0;
         }
     }
-
     /* Image gallery layout */
     &:not(.no-grid) {
         p:has(img) {
@@ -157,7 +159,6 @@
             ) !important;
         }
     }
-
     :where(#{$rhythm-block-elements}) {
         > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
             margin-block-start: 0; /* No top margin */

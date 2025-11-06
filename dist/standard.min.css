@@ -2491,11 +2491,11 @@ hr.col-row {
 :root {
   
   --gap: clamp(var(--base), 6%, var(--base-4));
-  --content: min(var(--line-width), 100% - var(--gap) * 2); 
+  --content: min(var(--line-width), 100% - var(--base) * 2); 
+  --content-small: calc(var(--base-block-gap) - var(--base-gap));
   --content-accent: minmax(0, var(--base-2));
   --content-feature: minmax(0, var(--base-4));
   --content-hero: minmax(0, 1fr);
-  --content-small: calc(var(--base-block-gap) - var(--base-gap));
 }
 
 @media (max-width: 768px) {
@@ -2512,6 +2512,9 @@ hr.col-row {
   position: relative;
   z-index: var(--z-base);
   
+}
+:where(.prose) > :first-child {
+  margin-top: 0 !important;
 }
 :where(.prose) > * {
   grid-column: content;
@@ -5456,6 +5459,7 @@ aside.info {
 .body-p-neg-header,
 .body-p-neg-footer {
   margin-inline: calc(var(--body-padding) * -1);
+  padding-inline: calc(var(--body-padding) * 1);
 }
 @media (max-width: 768px) {
   .body-p-neg,
@@ -5480,7 +5484,7 @@ aside.info {
 }
 @media (max-width: 768px) {
   .body-p-neg-header {
-    margin-block-start: calc(var(--body-padding) * -1);
+    margin-block-end: calc(var(--mobile-body-padding) * -1);
   }
 }
 
