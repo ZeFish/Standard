@@ -1931,7 +1931,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   .sm\:start-12 {
     grid-column-start: 12;
   }
-  .sm\:col-row {
+  .sm\:row {
     grid-column: 1/-1;
   }
 }
@@ -2080,7 +2080,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   .lg\:start-12 {
     grid-column-start: 12;
   }
-  .lg\:col-row {
+  .lg\:row {
     grid-column: 1/-1;
   }
 }
@@ -2095,19 +2095,6 @@ hr.col-row {
   margin-block: var(--base);
 }
 
-
-.col-half {
-  grid-column: span 6;
-} 
-.col-third {
-  grid-column: span 4;
-} 
-.col-two3 {
-  grid-column: span 8;
-} 
-.col-quarter {
-  grid-column: span 3;
-} 
 
 .grid .rhythm > * {
   margin-block-end: var(--base);
