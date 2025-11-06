@@ -135,12 +135,14 @@ export default function (eleventyConfig, site = {}) {
   // Auto-initializes if comment: true is in frontmatter
   eleventyConfig.addShortcode(
     "standard_comments",
-    function (showSubmit, showReset) {
+    function (showSubmit, showReset, showCancel) {
       // Set defaults - 11ty passes empty string when no arg provided, not undefined
       // Default to true unless explicitly set to false
       showSubmit =
         showSubmit === false || showSubmit === "false" ? false : true;
       showReset = showReset === false || showReset === "false" ? false : true;
+      showCancel =
+        showCancel === false || showCancel === "false" ? false : true;
 
       // Get frontmatter variables from this context (ctx property)
       // Use comment: true in frontmatter, page ID auto-generated from page.url
@@ -157,7 +159,7 @@ export default function (eleventyConfig, site = {}) {
       }
 
       // Build comments container and form HTML with semantic structure
-      const commentsContainer = `<div id="comments"></div>`;
+      const commentsContainer = `<article id="comments"></article>`;
 
       const writeButton = `<button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">Write a Comment</button>`;
 
@@ -209,6 +211,7 @@ export default function (eleventyConfig, site = {}) {
     <div class="form-actions">
       ${showSubmit ? '<button type="submit" class="button">Post Comment</button>' : ""}
       ${showReset ? '<button type="reset" class="button">Clear</button>' : ""}
+      ${showCancel ? '<button type="cancel" class="button">Cancel</button>' : ""}
     </div>
 
     <!-- Privacy notice -->
