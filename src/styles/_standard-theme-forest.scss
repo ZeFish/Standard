@@ -122,6 +122,7 @@
         top: calc(var(--base) * -0.4);
         opacity: 0.2;
     }
+    article.note,
     .comment {
         border: var(--border);
         box-shadow: var(--shadow);
