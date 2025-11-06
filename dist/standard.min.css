@@ -100,7 +100,7 @@
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   :root {
     --font-size: var(--mobile-font-size) !important;
     --optical-ratio: var(--mobile-optical-ratio) !important;
@@ -2478,7 +2478,7 @@ hr.col-row {
 :root {
   
   --gap: clamp(var(--base), 6%, var(--base-4));
-  --content: min(var(--line-width), 100% - var(--base) * 2); 
+  --content: min(var(--line-width), 100%); 
   --content-small: calc(var(--base-block-gap) - var(--base-gap));
   --content-accent: minmax(0, var(--base-2));
   --content-feature: minmax(0, var(--base-4));
@@ -5448,7 +5448,7 @@ aside.info {
   margin-inline: calc(var(--body-padding) * -1);
   padding-inline: calc(var(--body-padding) * 1);
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .body-p-neg,
   .body-p-neg-header,
   .body-p-neg-footer {
@@ -5460,7 +5460,7 @@ aside.info {
 .body-p-neg-footer {
   margin-block-end: calc(var(--body-padding) * -1.5);
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .body-p-neg-footer {
     margin-block-end: calc(var(--mobile-body-padding) * -1.5);
   }
@@ -5469,7 +5469,7 @@ aside.info {
 .body-p-neg-header {
   margin-block-start: calc(var(--body-padding) * -1);
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .body-p-neg-header {
     margin-block-end: calc(var(--mobile-body-padding) * -1);
   }

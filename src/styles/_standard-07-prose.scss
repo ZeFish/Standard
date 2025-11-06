@@ -44,7 +44,7 @@
 :root {
     /* Layout grid tokens */
     --gap: clamp(var(--base), 6%, var(--base-4));
-    --content: min(var(--line-width), 100% - var(--base) * 2); /* ← FIXED */
+    --content: min(var(--line-width), 100%); /* ← FIXED */
     --content-small: calc(var(--base-block-gap) - var(--base-gap));
     --content-accent: minmax(0, var(--base-2));
     --content-feature: minmax(0, var(--base-4));
