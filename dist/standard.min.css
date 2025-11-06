@@ -2505,9 +2505,6 @@ hr.col-row {
   z-index: var(--z-base);
   
 }
-:where(.prose) > :first-child {
-  margin-top: 0 !important;
-}
 :where(.prose) > * {
   grid-column: content;
 }
