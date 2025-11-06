@@ -690,7 +690,7 @@ aside.info {
     margin-block-start: calc(var(--body-padding) * -1);
 
     @media (max-width: #{$small}) {
-        margin-block-start: calc(var(--body-padding) * -1);
+        margin-block-start: calc(var(--mobile-body-padding) * -1);
     }
 }
 
