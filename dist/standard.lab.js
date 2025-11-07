@@ -357,7 +357,8 @@ class StandardLab {
 
   getThemeOptions() {
     const themes = [
-      { value: "", label: "Default" },
+      { value: "", label: "Empty" },
+      { value: "default", label: "Default" },
       { value: "paper", label: "Paper" },
       { value: "swiss", label: "Swiss" },
       { value: "kernel", label: "Kernel" },
@@ -365,6 +366,9 @@ class StandardLab {
       { value: "book", label: "Book" },
       { value: "minimal", label: "Minimal" },
       { value: "blueprint", label: "Blueprint" },
+      { value: "custom_1", label: "Custom 1" },
+      { value: "custom_2", label: "Custom 2" },
+      { value: "custom_3", label: "Custom 3" },
     ];
     const current = document.documentElement.getAttribute("data-theme") || "";
     return themes
