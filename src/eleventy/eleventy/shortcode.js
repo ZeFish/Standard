@@ -89,24 +89,17 @@ export default function (eleventyConfig, site = {}) {
     if (!text) {
       return "";
     }
-
     const wordsPerMinute = 225;
     // Count words by splitting on any whitespace
     const wordCount = text.split(/\s+/g).length;
     const minutes = Math.floor(wordCount / wordsPerMinute);
 
-    // This follows your original logic of only showing for > 1 minute
+    if (minutes === 1) {
+      return `&nbsp;- 1 minute`;
+    }
     if (minutes > 1) {
       return `&nbsp;- ${minutes} minutes`;
     }
-
-    // You could also uncomment this block to handle the 1 minute case
-    /*
-      if (minutes === 1) {
-        return `&nbsp;- 1 minute`;
-      }
-      */
-
     return "";
   });
 
@@ -159,7 +152,7 @@ export default function (eleventyConfig, site = {}) {
       }
 
       // Build comments container and form HTML with semantic structure
-      const commentsContainer = `<article id="comments"></article>`;
+      const commentsContainer = `<div id="comments"></div>`;
 
       const writeButton = `<button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">Write a Comment</button>`;
 
@@ -252,13 +245,13 @@ export default function (eleventyConfig, site = {}) {
 </script>`;
 
       return (
-        "<div class='comments-box container-small'>" +
+        "<article class='comments-system'>" +
         commentsContainer +
         "\n" +
         writeButton +
         "\n" +
         form +
-        "</div>\n" +
+        "</article>\n" +
         initScript
       );
     },
