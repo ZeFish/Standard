@@ -478,7 +478,7 @@ Perfect! Here's a complete toast notification system with rich documentation:
   background: var(--color-background);
   border: var(--border);
   border-left-width: 4px; /* Accent border */
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   /* Animation setup */
@@ -580,7 +580,7 @@ Perfect! Here's a complete toast notification system with rich documentation:
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
@@ -602,7 +602,7 @@ Perfect! Here's a complete toast notification system with rich documentation:
   height: 4px;
   background: color-mix(in srgb, var(--toast-color) 30%, transparent);
   width: 100%;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  border-radius: 0 0 var(--radius) var(--radius);
   transform-origin: left;
   transition: width 0s linear; /* Duration set via JS */
 }

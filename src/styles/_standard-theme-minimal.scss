@@ -1,18 +1,23 @@
 [data-theme="minimal"] {
     --shadow: none;
-
+    --color-light-background: white;
+    --color-light-foreground: #444;
     --color-dark-foreground: #ccc;
     --color-dark-background: #222;
 
-    --font-header: InterVariable;
+    --font-weight: 200;
+    --font-weight-bold: 400;
+    --font-feature: "";
+    --font-variation: "MODE" 1;
+    --font-header: Kalice;
     --font-header-weight: 300;
     --font-header-letter-spacing: 1;
-    --font-text: "Kalice";
-    --font-interface: Diatype;
+    --font-text: CalSans;
+    --font-interface: CalSans;
 
     --optical-ratio: 1.414;
     --line-width: var(--line-width-s);
-    --font-size: 1.2em;
+    --font-size: 1.1em;
 
     .font-interface {
         font-size: var(--scale-d4);
@@ -21,7 +26,7 @@
     --line-height: 1.5;
 
     --base-gap: var(--base);
-    --base-block-gap: var(--base-2);
+    --base-block-gap: var(--base);
 
     --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
     --color-background-secondary: color-mix(
@@ -59,6 +64,10 @@
             top: var(--base-d2);
             right: var(--base-d2);
         }
+    }
+
+    blockquote {
+        font-family: Kalice;
     }
 }
 

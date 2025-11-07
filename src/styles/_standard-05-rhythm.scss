@@ -123,36 +123,40 @@
 
     h1,
     > h1:where(:first-child) {
+        margin-block-start: calc(var(--base-gap) * 8);
+        margin-block-end: calc(var(--base-gap) * 4);
+    }
+
+    h2 {
         margin-block-start: calc(var(--base-gap) * 4);
         margin-block-end: calc(var(--base-gap) * 2);
     }
 
-    h2 {
-        margin-block-start: calc(var(--base-gap) * 2);
-        margin-block-end: calc(var(--base-gap) * 2);
-    }
-
     h3 {
-        margin-block-start: calc(var(--base-gap) * 1);
+        margin-block-start: calc(var(--base-gap) * 2);
         margin-block-end: calc(var(--base-gap) * 1);
     }
 
     h4 {
-        margin-block-start: var(--base-gap);
-        margin-block-end: var(--base-d2);
+        margin-block-start: calc(var(--base-gap) * 2);
+        margin-block-end: var(--base-gap);
     }
 
     h5 {
-        margin-block-start: var(--base-gap);
-        margin-block-end: var(--base-d2);
+        margin-block-start: calc(var(--base-gap) * 2);
+        margin-block-end: var(--base-gap);
         font-size: var(--scale-d2);
     }
 
     h6 {
-        margin-block-start: var(--base-gap);
+        margin-block-start: calc(var(--base-gap) * 2);
         margin-block-end: var(--base-d2);
         font-size: var(--scale-d2);
-        text-align: center;
+    }
+
+    pre,
+    pre code {
+        font-size: var(--scale-d2);
     }
 
     /* Medium screens (tablet): 769px-1024px */
@@ -270,13 +274,12 @@
     ol > li::before {
         content: counter(ol-counter) ".";
         position: absolute;
-        left: calc(var(--base) * -1.75);
-        text-align: right;
-        line-height: inherit;
+        left: calc(var(--base) * -1);
+        text-align: center;
         color: var(--color-subtle);
         font-variant-numeric: tabular-nums;
         overflow: hidden;
-        width: calc(var(--base) * 1.5);
+        width: calc(var(--base));
     }
 
     /* Inline lists - remove margin-bottom from list items */

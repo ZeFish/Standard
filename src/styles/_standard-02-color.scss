@@ -119,8 +119,8 @@
     --shadow: 0 0 var(--base-d4) var(--shadow-color);
 
     /* ===== DESIGN TOKENS ===== */
-    --border: 1px solid var(--color-border);
-    --border-accent: 2px solid var(--color-accent);
+    --border: var(--stroke-width) solid var(--color-border);
+    --border-accent: var(--stroke-width) solid var(--color-accent);
 
     /* Theme transition for smooth switching */
     transition:

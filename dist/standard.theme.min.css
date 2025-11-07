@@ -202,13 +202,13 @@
   --color-border: none;
   --color-muted: var(--color-foreground);
   --color-dark-foreground: #ccc;
-  --optical-ratio: 2;
-  --mobile-font-ratio: 2;
+  --optical-ratio: var(--ratio-golden);
+  --mobile-font-ratio: var(--ratio-golden);
   --body-padding: var(--base-4);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
   --line-height: 1.2;
-  --font-size: 1.5em;
+  --font-size: 1.2em;
   --body-padding: var(--base);
 }
 [data-theme=swiss] hr {
@@ -219,14 +219,21 @@
 }
 [data-theme=swiss] .callout {
   background: none;
-  border: 1px solid var(--color-foreground);
+  border: 0;
   font-size: var(--scale-d2);
+  padding-inline: var(--base);
 }
 [data-theme=swiss] .callout-title {
   color: var(--color-foreground);
   border: none;
-  margin-block-end: calc(var(--base-d2) * -1);
   margin-block-start: var(--base-d2);
+  padding: 0;
+}
+[data-theme=swiss] .callout-content {
+  padding: 0;
+}
+[data-theme=swiss] .card {
+  background: red;
 }
 [data-theme=swiss] code,
 [data-theme=swiss] .token {
@@ -361,6 +368,7 @@
   --font-weight: 400;
   --font-weight-bold: 500;
   --radius: var(--base);
+  --stroke-width: 1.3px;
   --font-header-letter-spacing: -0.035em;
   --font-header-line-height: 1em;
 }
@@ -424,7 +432,7 @@
   opacity: 0.2;
 }
 [data-theme=forest] article.note,
-[data-theme=forest] .comment {
+[data-theme=forest] #comments .comment {
   border: var(--border);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
@@ -570,7 +578,7 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --radius: var(--base-d8);
+  --radius: var(--base-d4);
   
   
   --base-block-gap: var(--base);
@@ -634,16 +642,22 @@
 }
 [data-theme=minimal] {
   --shadow: none;
+  --color-light-background: white;
+  --color-light-foreground: #444;
   --color-dark-foreground: #ccc;
   --color-dark-background: #222;
-  --font-header: InterVariable;
+  --font-weight: 200;
+  --font-weight-bold: 400;
+  --font-feature: "";
+  --font-variation: "MODE" 1;
+  --font-header: Kalice;
   --font-header-weight: 300;
   --font-header-letter-spacing: 1;
-  --font-text: "Kalice";
-  --font-interface: Diatype;
+  --font-text: CalSans;
+  --font-interface: CalSans;
   --optical-ratio: 1.414;
   --line-width: var(--line-width-s);
-  --font-size: 1.2em;
+  --font-size: 1.1em;
 }
 [data-theme=minimal] .font-interface {
   font-size: var(--scale-d4);
@@ -651,7 +665,7 @@
 [data-theme=minimal] {
   --line-height: 1.5;
   --base-gap: var(--base);
-  --base-block-gap: var(--base-2);
+  --base-block-gap: var(--base);
   --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
   --color-background-secondary: color-mix(
       in srgb,
@@ -688,6 +702,9 @@
   position: absolute;
   top: var(--base-d2);
   right: var(--base-d2);
+}
+[data-theme=minimal] blockquote {
+  font-family: Kalice;
 }
 
 @font-face {
@@ -794,7 +811,7 @@
   --font-header-variation: "opsz" 12;
   --body-padding: var(--base-4);
   --shadow: 0;
-  --border-radius: 0;
+  --radius: 0;
   --color-accent: var(--color-red);
   --color-italic: var(--color-foreground);
   --color-bold: color-mix(

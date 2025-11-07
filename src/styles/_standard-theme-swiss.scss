@@ -14,13 +14,13 @@
 
     --color-dark-foreground: #ccc;
 
-    --optical-ratio: 2;
-    --mobile-font-ratio: 2;
+    --optical-ratio: var(--ratio-golden);
+    --mobile-font-ratio: var(--ratio-golden);
     --body-padding: var(--base-4);
     --font-monospace: "Helvetica Monospaced Pro", monospace;
     --font-text: Diatype;
     --line-height: 1.2;
-    --font-size: 1.5em;
+    --font-size: 1.2em;
     --body-padding: var(--base);
 
     hr {
@@ -32,14 +32,21 @@
     }
     .callout {
         background: none;
-        border: 1px solid var(--color-foreground);
+        border: 0;
         font-size: var(--scale-d2);
+        padding-inline: var(--base);
     }
     .callout-title {
         color: var(--color-foreground);
         border: none;
-        margin-block-end: calc(var(--base-d2) * -1);
         margin-block-start: var(--base-d2);
+        padding: 0;
+    }
+    .callout-content {
+        padding: 0;
+    }
+    .card {
+        background: red;
     }
     code,
     .token {

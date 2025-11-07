@@ -118,6 +118,7 @@ tt,
     font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
     font-feature-settings: var(--font-monospace-feature);
     font-variation-settings: var(--font-monospace-variation);
+    font-weight: 400;
 }
 
 code {
@@ -254,7 +255,7 @@ a,
 a:visited {
     color: inherit;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: var(--stroke-width);
     text-underline-offset: auto;
     text-decoration-color: var(--color-subtle);
     transition:
@@ -349,7 +350,7 @@ a.button {
 
 a.button:visited,
 a.button {
-    --hr-thickness: 1px;
+    --stroke-width: 1px;
     display: inline-block;
     width: fit-content;
     user-select: none;
@@ -526,7 +527,7 @@ iframe {
 
 /* Horizontal rules */
 hr {
-    height: var(--hr-thickness, 1px);
+    height: var(--stroke-width, 1px);
     background: var(--color-border);
     border: none;
     block-size: 1px;
@@ -537,12 +538,12 @@ hr.plain {
 }
 
 hr.thick {
-    height: calc(var(--hr-thickness, 1px) * 4);
+    height: calc(var(--stroke-width, 1px) * 4);
     background: var(--color-foreground);
 }
 
 hr.accent {
-    height: calc(var(--hr-thickness, 1px) * 3);
+    height: calc(var(--stroke-width, 1px) * 3);
     background: var(--color-accent);
 }
 

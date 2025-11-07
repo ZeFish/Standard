@@ -82,7 +82,6 @@
     font-size: var(--scale-d2);
 
     padding: var(--base-d8) var(--base-d4);
-    border-radius: var(--radius);
     z-index: var(--z-toast);
     pointer-events: none;
     white-space: pre;
@@ -146,7 +145,7 @@
 }
 
 .standard-debug .grid-debug-overlay {
-    position: absolute;
+    position: absolute !important;
     inset: 0;
     display: grid;
     grid-template-columns: inherit;
@@ -236,7 +235,7 @@
 .standard-debug .grid-11::after,
 .standard-debug .grid-12::after {
     content: attr(class);
-    position: absolute;
+    position: absolute !important;
     inset: 0;
     color: var(--debug-color);
     font-size: var(--scale-d3);

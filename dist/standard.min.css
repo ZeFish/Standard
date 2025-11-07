@@ -6,21 +6,18 @@
   --ratio-halfstep: 1.272; 
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
-  
-  --optical-ratio: 1.5;
-  
-  --line-height: 1.5;
-  
-  --base-gap: var(--base);
-  --newbase: calc((1rem / var(--line-height)) / 2);
-  
-  
-  --base-block-gap: var(--base-2);
-  
-  --body-padding: var(--base-2);
+  --optical-ratio: 1.5; 
+  --line-height: 1.5; 
+  --base-gap: var(--base); 
+  --base-block-gap: var(
+      --base
+  ); 
+  --body-padding: var(
+      --base-2
+  ); 
   
   --blur: blur(7px);
-  --hr-thickness: 1px;
+  --stroke-width: 1px;
   --transition: 0.5s ease;
   --radius: var(--base-d8);
   --modal-background: color-mix(
@@ -223,8 +220,8 @@ body::before {
   --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
   --shadow: 0 0 var(--base-d4) var(--shadow-color);
   
-  --border: 1px solid var(--color-border);
-  --border-accent: 2px solid var(--color-accent);
+  --border: var(--stroke-width) solid var(--color-border);
+  --border-accent: var(--stroke-width) solid var(--color-accent);
   
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
@@ -543,18 +540,18 @@ html {
   --font-monospace:
       "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
   
-  --font-feature: "dlig", "zero";
+  --font-feature: "";
   --font-variation: "";
-  --font-header-feature: "dlig", "cv11", "cv12", "cv13";
+  --font-header-feature: "dlig";
   --font-header-variation: "";
-  --font-monospace-feature: "dlig";
+  --font-monospace-feature: "";
   --font-monospace-variation: "";
   
   --font-weight: 400;
   --font-weight-bold: 600;
   --font-letter-spacing: normal;
   --font-header-letter-spacing: -0.065em;
-  --font-header-line-height: 0.75em;
+  --font-header-line-height: 1;
   --font-header-weight: 900;
   
   --font-interface: var(--font-text);
@@ -719,6 +716,7 @@ tt,
   font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
   font-feature-settings: var(--font-monospace-feature);
   font-variation-settings: var(--font-monospace-variation);
+  font-weight: 400;
 }
 
 code {
@@ -851,7 +849,7 @@ a,
 a:visited {
   color: inherit;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: var(--stroke-width);
   text-underline-offset: auto;
   text-decoration-color: var(--color-subtle);
   transition: color var(--transition), text-decoration-color var(--transition);
@@ -933,7 +931,7 @@ a.button {
 
 a.button:visited,
 a.button {
-  --hr-thickness: 1px;
+  --stroke-width: 1px;
   display: inline-block;
   width: fit-content;
   user-select: none;
@@ -1083,7 +1081,7 @@ iframe {
 
 
 hr {
-  height: var(--hr-thickness, 1px);
+  height: var(--stroke-width, 1px);
   background: var(--color-border);
   border: none;
   block-size: 1px;
@@ -1094,12 +1092,12 @@ hr.plain {
 }
 
 hr.thick {
-  height: calc(var(--hr-thickness, 1px) * 4);
+  height: calc(var(--stroke-width, 1px) * 4);
   background: var(--color-foreground);
 }
 
 hr.accent {
-  height: calc(var(--hr-thickness, 1px) * 3);
+  height: calc(var(--stroke-width, 1px) * 3);
   background: var(--color-accent);
 }
 
@@ -1315,31 +1313,34 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(.rhythm) h1,
 :where(.rhythm) > h1:where(:first-child) {
+  margin-block-start: calc(var(--base-gap) * 8);
+  margin-block-end: calc(var(--base-gap) * 4);
+}
+:where(.rhythm) h2 {
   margin-block-start: calc(var(--base-gap) * 4);
   margin-block-end: calc(var(--base-gap) * 2);
 }
-:where(.rhythm) h2 {
-  margin-block-start: calc(var(--base-gap) * 2);
-  margin-block-end: calc(var(--base-gap) * 2);
-}
 :where(.rhythm) h3 {
-  margin-block-start: calc(var(--base-gap) * 1);
+  margin-block-start: calc(var(--base-gap) * 2);
   margin-block-end: calc(var(--base-gap) * 1);
 }
 :where(.rhythm) h4 {
-  margin-block-start: var(--base-gap);
-  margin-block-end: var(--base-d2);
+  margin-block-start: calc(var(--base-gap) * 2);
+  margin-block-end: var(--base-gap);
 }
 :where(.rhythm) h5 {
-  margin-block-start: var(--base-gap);
-  margin-block-end: var(--base-d2);
+  margin-block-start: calc(var(--base-gap) * 2);
+  margin-block-end: var(--base-gap);
   font-size: var(--scale-d2);
 }
 :where(.rhythm) h6 {
-  margin-block-start: var(--base-gap);
+  margin-block-start: calc(var(--base-gap) * 2);
   margin-block-end: var(--base-d2);
   font-size: var(--scale-d2);
-  text-align: center;
+}
+:where(.rhythm) pre,
+:where(.rhythm) pre code {
+  font-size: var(--scale-d2);
 }
 @media (max-width: 768px) {
   :where(.rhythm) h1,
@@ -1428,13 +1429,12 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
-  left: calc(var(--base) * -1.75);
-  text-align: right;
-  line-height: inherit;
+  left: calc(var(--base) * -1);
+  text-align: center;
   color: var(--color-subtle);
   font-variant-numeric: tabular-nums;
   overflow: hidden;
-  width: calc(var(--base) * 1.5);
+  width: calc(var(--base));
 }
 :where(.rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
 :where(.rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
@@ -3584,24 +3584,31 @@ dialog.modal::backdrop {
 #comments {
   font-size: var(--scale-d2);
 }
-#comments .comment-author {
+#comments .comment {
+  margin-block-end: var(--base);
+}
+#comments .comment .comment-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--base-d4);
+}
+#comments .comment .comment-header .comment-author {
   color: var(--color-foreground);
   font-weight: var(--font-weight-bold);
 }
-#comments .comment-date,
-#comments .comment-pending {
+#comments .comment .comment-header .comment-date,
+#comments .comment .comment-header .comment-pending {
   color: var(--color-subtle);
   font-size: var(--scale-d3);
 }
-#comments .comment-pending {
+#comments .comment .comment-header .comment-pending {
   font-style: italic;
   color: var(--color-orange);
 }
-#comments .comment-content {
+#comments .comment .comment-content {
   margin-inline: var(--base-d2);
-}
-#comments .comment {
-  margin-block-end: var(--base-d2);
+  margin-block-start: var(--base-d8);
+  padding-block-end: var(--base-d8);
 }
 #comments :last-child {
   margin-block-end: 0;
@@ -3749,9 +3756,9 @@ aside.note {
 
 .toast-content {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   gap: var(--base-d4);
-  padding: var(--base-d8) var(--base-d4);
+  padding: var(--base-d8) var(--base-d2) 0 var(--base-d2);
   transition: transform var(--transition);
 }
 
@@ -3761,6 +3768,7 @@ aside.note {
   font-size: var(--scale-d2);
   line-height: var(--line-height);
   font-weight: bold;
+  display: none;
 }
 
 
@@ -3804,11 +3812,13 @@ aside.note {
 
 
 .toast-progress {
+  position: relative;
+  top: 1px;
   height: 1px;
-  background: color-mix(in srgb, var(--toast-color) 100%, transparent);
-  width: 100%;
-  opacity: 0.4;
-  border-radius: 0 0 var(--radius) var(--radius);
+  background: var(--toast-color);
+  width: calc(100% - var(--radius));
+  opacity: 0.2;
+  margin-inline: calc(var(--radius) / 2);
   transform-origin: left;
   transition: width 0s linear; 
 }
@@ -5717,7 +5727,6 @@ ul.menu.horizontal li {
   font-family: var(--font-monospace);
   font-size: var(--scale-d2);
   padding: var(--base-d8) var(--base-d4);
-  border-radius: var(--radius);
   z-index: var(--z-toast);
   pointer-events: none;
   white-space: pre;
@@ -5765,7 +5774,7 @@ ul.menu.horizontal li {
 }
 
 .standard-debug .grid-debug-overlay {
-  position: absolute;
+  position: absolute !important;
   inset: 0;
   display: grid;
   grid-template-columns: inherit;
@@ -5830,7 +5839,7 @@ ul.menu.horizontal li {
 .standard-debug .grid-11::after,
 .standard-debug .grid-12::after {
   content: attr(class);
-  position: absolute;
+  position: absolute !important;
   inset: 0;
   color: var(--debug-color);
   font-size: var(--scale-d3);

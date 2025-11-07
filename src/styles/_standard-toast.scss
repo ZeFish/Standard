@@ -196,9 +196,9 @@
 
 .toast-content {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     gap: var(--base-d4);
-    padding: var(--base-d8) var(--base-d4);
+    padding: var(--base-d8) var(--base-d2) 0 var(--base-d2);
     transition: transform var(--transition);
 }
 
@@ -208,6 +208,7 @@
     font-size: var(--scale-d2);
     line-height: var(--line-height);
     font-weight: bold;
+    display: none;
 }
 
 /* Toast message */
@@ -256,11 +257,13 @@
 /* =========================== */
 
 .toast-progress {
+    position: relative;
+    top: 1px;
     height: 1px;
-    background: color-mix(in srgb, var(--toast-color) 100%, transparent);
-    width: 100%;
-    opacity: 0.4;
-    border-radius: 0 0 var(--radius) var(--radius);
+    background: var(--toast-color);
+    width: calc(100% - var(--radius));
+    opacity: 0.2;
+    margin-inline: calc(var(--radius) / 2);
     transform-origin: left;
     transition: width 0s linear; /* Duration set via JS */
 }

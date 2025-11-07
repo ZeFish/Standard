@@ -125,7 +125,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
   /* CSS variables for easy customization */
   --card-border-color: var(--color-border);
   --card-border-width: 1px;
-  --card-border-radius: var(--border-radius);
+  --card-border-radius: var(--radius);
   --card-padding: var(--rhythm);
   --card-background: var(--color-background);
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -377,7 +377,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
 .alert {
   --alert-padding: var(--rhythm-d2);
   --alert-border-width: 1px;
-  --alert-border-radius: var(--border-radius);
+  --alert-border-radius: var(--radius);
   --alert-background: var(--color-background-secondary);
   --alert-color: var(--color-foreground);
   --alert-border-color: var(--color-border);
@@ -549,7 +549,7 @@ Perfect! Continuing with the remaining 8 components...
   background: var(--color-accent);
   color: var(--color-background);
   padding: var(--rhythm-d3) var(--rhythm-d2);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   font-weight: var(--bold-weight);
   font-size: var(--scale-d2);
   text-decoration: none;
@@ -868,7 +868,7 @@ Perfect! Continuing with the remaining 8 components...
     height: 2.5em;
     padding: 0 var(--rhythm-d3);
     border: var(--border);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     text-decoration: none;
     color: var(--color-foreground);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -1278,7 +1278,7 @@ Perfect! Continuing with the remaining 8 components...
   background: var(--color-accent);
   color: var(--color-background);
   padding: var(--rhythm-d3) var(--rhythm-d2);
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   font-weight: var(--bold-weight);
   font-size: var(--scale-d2);
   text-decoration: none;
@@ -1597,7 +1597,7 @@ Perfect! Continuing with the remaining 8 components...
     height: 2.5em;
     padding: 0 var(--rhythm-d3);
     border: var(--border);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     text-decoration: none;
     color: var(--color-foreground);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;

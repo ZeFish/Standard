@@ -407,7 +407,7 @@ visibility: public
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
-<div class="container-full card inset">
+<div class="container-hero card inset">
   <h4>Full Width Area</h4>
   <p>Extends to complete container width for full-bleed backgrounds or spanning content.</p>
   <p>

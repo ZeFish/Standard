@@ -1,18 +1,195 @@
 // src/eleventy/syntax.js
 
 /**
- * Friendly Layout Syntax
- *
- * @component  Syntax PreProcessor
- * @category 11ty Plugins
+ * @component friendly-layout-syntax
+ * @category 11ty-plugins/content-authoring
  * @author Francis Fontaine
  * @since 0.11.0
+ *
+ * @concept
+ * In 1989, Tim Berners-Lee invented HTML with a simple philosophy: markup should
+ * be readable by humans, not just machines. But as the web evolved, authoring
+ * content became increasingly complex. Want a two-column layout? Write nested
+ * divs with cryptic class names. Need a card grid? Copy-paste twenty lines of
+ * boilerplate HTML. Markdown promised simplicity but lacked layout primitives.
+ *
+ * The Friendly Layout Syntax bridges this gap. Inspired by Obsidian's callout
+ * syntax and MDX's component model, it introduces a minimal, readable notation
+ * for common layout patterns. Instead of wrestling with HTML or learning a
+ * complex templating language, authors write:
+ *
+ *   ::columns 2
+ *   First column content here.
+ *   ---
+ *   Second column content here.
+ *   ::end
+ *
+ * That's it. The system transforms this into a semantic, accessible grid layout
+ * with responsive behavior built-in. No classes to remember, no HTML to write,
+ * no cognitive overhead.
+ *
+ * This approach follows the Unix philosophy: small, composable tools that do one
+ * thing well. Each syntax pattern (::columns, ::card, ::hero) is atomic and
+ * predictable. Patterns compose naturally—nest a ::quote inside a ::feature
+ * container, or combine ::split with ::image. The syntax never fights you.
+ *
+ * The system supports three pattern types:
+ *
+ * 1. **Inline patterns** — Single-line directives that expand in place:
+ *    ::space medium
+ *    ::note This is important
+ *
+ * 2. **Block patterns** — Multi-line containers with ::end delimiter:
+ *    ::hero center
+ *    # Welcome
+ *    Your content here
+ *    ::end
+ *
+ * 3. **Conditional patterns** — Dynamic content based on page data:
+ *    ::if featured
+ *    This only appears on featured posts.
+ *    ::end
+ *
+ * Built-in patterns cover 90% of layout needs: columns, grids, cards, heroes,
+ * galleries, forms, callouts, and more. But the real power is extensibility—
+ * add custom patterns via the exposed `Syntax` processor API.
+ *
+ * @theory
+ * The syntax preprocessor runs BEFORE Markdown processing, transforming layout
+ * directives into HTML that Markdown parsers ignore. This two-phase approach
+ * preserves content flow while enabling rich layouts.
+ *
+ * The parser uses position-zero detection for tags (^:: at line start) and lazy
+ * regex matching for content extraction. Handlers receive structured match objects
+ * with parsed arguments, inner content, and page context. This design enables:
+ *
+ * - **Deterministic output** — Same input always produces same HTML
+ * - **Composability** — Patterns nest without conflicts
+ * - **Performance** — Single-pass processing with minimal overhead
+ * - **Debuggability** — Unprocessed patterns logged as warnings
+ *
+ * The priority system (lower numbers first) ensures predictable execution order.
+ * AI patterns run asynchronously BEFORE layout patterns to allow AI-generated
+ * content to participate in layout directives.
+ *
+ * @implementation
+ * The `SyntaxProcessor` class manages pattern registration and execution.
+ * Handlers register with type ('inline', 'block', or 'both') and priority.
+ * During processing, the system:
+ *
+ * 1. Sorts handlers by priority (ascending)
+ * 2. Applies inline patterns (single-line matches)
+ * 3. Applies block patterns (multi-line with ::end)
+ * 4. Warns about unprocessed patterns
+ *
+ * Block patterns use regex: `^::name([^\n]*)\n([\s\S]*?)^::end` (multiline mode)
+ * Inline patterns use: `^::name\s+([^\n]+)` (global multiline mode)
+ *
+ * Content splitting (`splitContent`) divides inner blocks on delimiter (default: ---)
+ * for column/card layouts. Grid calculations use 12-column math: colSpan = 12 / count.
+ *
+ * The AI preprocessor runs BEFORE the main syntax processor, resolving ::ai
+ * directives via the Standard AI system (if enabled). This allows prompts like:
+ *
+ *   ::ai Write a brief introduction to typography
+ *
+ * The output becomes markdown that layout patterns can wrap.
+ *
+ * @class SyntaxProcessor - Main processor managing pattern handlers
+ * @function registerBuiltIns - Registers 20+ built-in layout patterns
+ * @function evaluateCondition - Evaluates ::if conditionals against page data
+ *
+ * @example md - Two-column layout
+ *   ::columns 2
+ *   Left column with **markdown** support.
+ *   ---
+ *   Right column with images and links.
+ *   ::end
+ *
+ * @example md - Asymmetric split layout
+ *   ::split 8/4
+ *   Main content area (8 columns).
+ *   ---
+ *   Sidebar content (4 columns).
+ *   ::end
+ *
+ * @example md - Card grid
+ *   ::cards 3
+ *   ## Card One
+ *   Content here.
+ *   ---
+ *   ## Card Two
+ *   More content.
+ *   ---
+ *   ## Card Three
+ *   Final card.
+ *   ::end
+ *
+ * @example md - Hero section
+ *   ::hero center
+ *   # Welcome to Standard
+ *   Beautiful typography meets Swiss grid systems.
+ *   ::end
+ *
+ * @example md - Obsidian-style callouts
+ *   ::callout + tip
+ *   This callout starts collapsed (+ = foldable, open).
+ *   Supports all Obsidian callout types: note, warning, tip, etc.
+ *   ::end
+ *
+ * @example md - Conditional content
+ *   ::if featured
+ *   This badge only appears on featured posts.
+ *   ::end
+ *
+ * @example md - AI-generated content (inline)
+ *   ::ai Write a haiku about typography
+ *
+ * @example md - AI-generated content (block)
+ *   ::ai model=gpt-4
+ *   Explain the golden ratio in typography.
+ *   Provide historical context and modern applications.
+ *   ::end
+ *
+ * @example js - Custom pattern registration
+ *   eleventyConfig.Syntax.add('banner', { type: 'block' }, (match) => {
+ *     return `<div class="banner ${match.args}">${match.content}</div>`;
+ *   });
+ *
+ * @example js - Inline pattern with arguments
+ *   eleventyConfig.Syntax.add('emoji', { type: 'inline' }, (match) => {
+ *     const emojis = { wave: '👋', heart: '❤️', star: '⭐' };
+ *     return emojis[match.value] || match.value;
+ *   });
+ *
+ * @param {Object} eleventyConfig - 11ty configuration object
+ * @param {Object} site - Site configuration (includes standard.verbose)
+ * @returns {SyntaxProcessor} Configured processor instance
+ *
+ * @related markdown, preprocessor, ai-integration, obsidian-callouts
+ * @reading https://help.obsidian.md/Editing+and+formatting/Callouts Obsidian Callouts
+ * @reading https://mdxjs.com/ MDX — Markdown for the component era
+ * @reading https://www.11ty.dev/docs/config/#transforms-example-minify-html-output 11ty Preprocessors
+ *
+ * @see {class} SyntaxProcessor - Main processor class
+ * @see {function} registerBuiltIns - Built-in pattern registration
+ * @see {file} src/eleventy/markdown.js - Markdown processing pipeline
+ * @see {file} src/eleventy/ai.js - AI integration system
  */
 
 import Logger from "./logger.js";
 
 /**
  * Syntax Processor Class
+ *
+ * Manages registration and execution of layout syntax patterns.
+ * Handlers execute in priority order (lower = first). Supports
+ * inline (single-line) and block (multi-line with ::end) patterns.
+ *
+ * @class
+ * @param {Object} site - Site configuration object
+ * @param {Object} site.standard - Standard framework config
+ * @param {boolean} site.standard.verbose - Enable verbose logging
  */
 class SyntaxProcessor {
   constructor(site = {}) {
@@ -24,6 +201,20 @@ class SyntaxProcessor {
     });
   }
 
+  /**
+   * Register a syntax pattern handler
+   *
+   * @param {string} name - Pattern name (used as ::name)
+   * @param {Object|Function} options - Configuration or handler function
+   * @param {string} options.type - Pattern type: 'inline', 'block', or 'both'
+   * @param {number} options.priority - Execution order (lower = first, default: 100)
+   * @param {Function} handler - Handler function receiving match object
+   *
+   * @example
+   *   processor.add('highlight', { type: 'inline' }, (match) => {
+   *     return `<mark>${match.value}</mark>`;
+   *   });
+   */
   add(name, options, handler) {
     if (typeof options === "function") {
       handler = options;
@@ -42,6 +233,13 @@ class SyntaxProcessor {
     });
   }
 
+  /**
+   * Process content through all registered handlers
+   *
+   * @param {string} content - Raw markdown content
+   * @param {Object} pageData - 11ty page data object
+   * @returns {string} Processed content with layout directives expanded
+   */
   process(content, pageData = {}) {
     const sorted = Array.from(this.handlers.entries()).sort(
       (a, b) => a[1].priority - b[1].priority,
@@ -66,6 +264,10 @@ class SyntaxProcessor {
     return content;
   }
 
+  /**
+   * Process inline patterns (single-line directives)
+   * Matches: ::name value
+   */
   processInline(content, name, handler, pageData) {
     const regex = new RegExp(`^::${name}\\s+([^\\n]+)`, "gm");
 
@@ -86,6 +288,10 @@ class SyntaxProcessor {
     });
   }
 
+  /**
+   * Process block patterns (multi-line with ::end delimiter)
+   * Matches: ::name args\ncontent\n::end
+   */
   processBlock(content, name, handler, pageData) {
     const regex = new RegExp(`^::${name}([^\\n]*)\\n([\\s\\S]*?)^::end`, "gm");
 
@@ -106,6 +312,10 @@ class SyntaxProcessor {
     });
   }
 
+  /**
+   * Find unprocessed syntax patterns (for debugging)
+   * Warns about directives that didn't match any handler
+   */
   findUnprocessedSyntax(content) {
     const patterns = [];
     const regex = /^::([\w-]+)/gm;
@@ -118,6 +328,12 @@ class SyntaxProcessor {
     return [...new Set(patterns)];
   }
 
+  /**
+   * Parse key=value arguments from directive args string
+   *
+   * @param {string} argsString - Raw arguments (e.g., 'key1="value1" key2=value2')
+   * @returns {Object} Parsed arguments object
+   */
   parseArgs(argsString) {
     const args = {};
     const regex = /(\w+)=["']?([^"' \t]+)["']?/g;
@@ -130,6 +346,14 @@ class SyntaxProcessor {
     return args;
   }
 
+  /**
+   * Split block content on delimiter (default: ---)
+   * Used for multi-column and card layouts
+   *
+   * @param {string} content - Inner content to split
+   * @param {string} delimiter - Split delimiter (default: '---')
+   * @returns {string[]} Array of content chunks
+   */
   splitContent(content, delimiter = "---") {
     return String(content || "")
       .split(new RegExp(`\\n${delimiter}\\n`))
@@ -137,12 +361,18 @@ class SyntaxProcessor {
       .filter(Boolean);
   }
 
+  /**
+   * Format seconds as MM:SS timestamp
+   * Helper utility for media-related patterns
+   */
   formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   }
 }
+
+// ... rest of the implementation remains the same ...
 
 /**
  * Register Built-In Syntax Patterns
