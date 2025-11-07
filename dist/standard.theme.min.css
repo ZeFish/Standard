@@ -431,7 +431,6 @@
   top: calc(var(--base) * -0.4);
   opacity: 0.2;
 }
-[data-theme=forest] article.note,
 [data-theme=forest] #comments .comment {
   border: var(--border);
   box-shadow: var(--shadow);
