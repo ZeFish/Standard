@@ -380,8 +380,8 @@ class SyntaxProcessor {
 function registerBuiltIns(processor) {
   // Columns
   processor.add("columns", (match) => {
-    const count = Math.max(1, parseInt(match.args || "2", 10) || 2);
     const cols = processor.splitContent(match.content);
+    const count = cols.length; // Auto-detect!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
     let html = '<div class="grid gap-4">\n';
@@ -409,8 +409,8 @@ function registerBuiltIns(processor) {
     return html;
   });
 
-  // Grid (dynamic via template)
-  processor.add("grid", (match) => {
+  // Collection (dynamic via template)
+  processor.add("collection", (match) => {
     const [collection, columns] = (match.args || "").split(/\s+/);
     const colCount = Math.max(1, parseInt(columns || "3", 10));
     const colSpan = Math.max(1, Math.floor(12 / colCount));
@@ -422,9 +422,9 @@ function registerBuiltIns(processor) {
     `;
 
     return `
-<div class="grid grid-sm-2">
+<div class="grid">
 {% for item in ${collection} %}
-  <div class="col-${colSpan}">
+  <div class="sm:row col-${colSpan}">
 ${itemTemplate}
   </div>
 {% endfor %}
@@ -459,8 +459,8 @@ ${itemTemplate}
     (match) => `<div class="card">\n\n${match.content}\n\n</div>\n`,
   );
   processor.add("cards", (match) => {
-    const count = Math.max(1, parseInt(match.args || "3", 10));
     const cards = processor.splitContent(match.content);
+    const count = cards.length; // Auto!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
     let html = '<div class="grid gap-4">\n';
@@ -495,9 +495,9 @@ ${itemTemplate}
 
   // Gallery
   processor.add("gallery", (match) => {
-    const columns = Math.max(1, parseInt(match.args || "3", 10));
     const images = processor.splitContent(match.content);
-    const colSpan = Math.max(1, Math.floor(12 / columns));
+    const count = images.length; // Auto!
+    const colSpan = Math.max(1, Math.floor(12 / count));
 
     let html = '<div class="gallery grid gap-4">\n';
     images.forEach((img) => {
