@@ -339,13 +339,13 @@ class StandardLab {
           ${this.getThemeOptions()}
         </select>
       </section>
-      <footer class="standard-lab-actions">
+      <div class="standard-lab-actions">
         <button class="standard-lab-btn" data-action="edit-tokens">
           ${modifiedCount > 0 ? `Edit Tokens (${modifiedCount})` : "Edit Tokens"}
         </button>
         ${modifiedCount > 0 ? `<button class="standard-lab-btn standard-lab-btn-secondary" data-action="reset">Reset</button>` : ""}
         <button class="standard-lab-btn standard-lab-btn-secondary" data-action="copy">Copy CSS</button>
-      </footer>
+      </div>
     `;
     this.attachQuickPanelListeners();
     document.body.appendChild(this.panel);
@@ -443,10 +443,10 @@ class StandardLab {
       </nav>
       ${modifiedCount > 0 ? `<div class="standard-lab-filter"><label class="standard-lab-toggle"><input type="checkbox" ${showModifiedOnly ? "checked" : ""} data-filter="modified"><span>Show modified only (${modifiedCount})</span></label></div>` : ""}
       <div class="standard-lab-content">${this.renderTokenList("typography", showModifiedOnly)}</div>
-      <footer class="standard-lab-actions">
+      <div class="standard-lab-actions">
         <button class="standard-lab-btn standard-lab-btn-secondary" data-action="reset">Reset All</button>
         <button class="standard-lab-btn" data-action="copy">Copy CSS</button>
-      </footer>
+      </div>
     `;
     this.attachFullPanelListeners();
     this.makeDraggable(this.panel.querySelector(".standard-lab-panel-header"));
