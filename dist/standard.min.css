@@ -920,7 +920,7 @@ a.button {
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
-  padding: var(--base-d4) var(--base-d4);
+  padding: var(--base-d8) var(--base-d4);
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);

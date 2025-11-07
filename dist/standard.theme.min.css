@@ -1093,23 +1093,16 @@
 }
 
 @font-face {
-  font-family: "Oktah Round Variable";
-  
-  font-weight: 100 900;
-  font-style: normal;
-  src: url("https://cdn.ffp.co/oktah_round_variable.woff2");
-}
-@font-face {
   font-family: "MonoLisa";
   
   font-weight: 100 1000;
   font-style: normal;
-  src: url("https://cdn.ffp.co/MonoLisa-Regular-Variable.woff2");
+  src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
 }
 @font-face {
   font-family: "MonoLisa";
   
   font-weight: 100 1000;
   font-style: italic;
-  src: url("https://cdn.ffp.co/MonoLisa-RegularItalic-Variable.woff2");
+  src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
