@@ -57,10 +57,22 @@
   --base-4: calc(var(--base) * 4);
   --base-8: calc(var(--base) * 8);
   
-  --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
-  --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
-  --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
-  --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
+  --scale-d5: max(
+          calc(var(--font-size) * pow(var(--optical-ratio), -3)),
+          var(--font-size)
+      )
+      --scale-d4: max(
+          calc(var(--font-size) * pow(var(--optical-ratio), -2)),
+          var(--font-size)
+      )
+      --scale-d3: max(
+          calc(var(--font-size) * pow(var(--optical-ratio), -1)),
+          var(--font-size)
+      )
+      --scale-d2: max(
+          calc(var(--font-size) * pow(var(--optical-ratio), -0.5)),
+          var(--font-size)
+      );
   --scale: var(--font-size);
   --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 0.5));
   --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 1));
@@ -552,7 +564,7 @@ html {
   --font-letter-spacing: normal;
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 1;
-  --font-header-weight: 900;
+  --font-header-weight: 600;
   
   --font-interface: var(--font-text);
   --font-interface-feature: "dlig", "zero";
@@ -5114,13 +5126,6 @@ aside.note {
 
 .nano {
   font-size: var(--scale-d5);
-}
-
-.small *,
-.smaller *,
-.micro,
-.nano {
-  font-size: inherit;
 }
 
 

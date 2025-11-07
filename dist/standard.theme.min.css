@@ -201,6 +201,7 @@
   --radius: 0;
   --color-border: none;
   --color-muted: var(--color-foreground);
+  --font-header-weight: 900;
   --color-dark-foreground: #ccc;
   --optical-ratio: var(--ratio-golden);
   --mobile-font-ratio: var(--ratio-golden);
