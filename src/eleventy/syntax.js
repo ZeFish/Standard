@@ -431,6 +431,20 @@ ${itemTemplate}
 </div>`.trim();
   });
 
+  // Grid (static content layout)
+  processor.add("grid", (match) => {
+    const items = processor.splitContent(match.content);
+    const count = items.length; // Auto-detect!
+    const colSpan = Math.max(1, Math.floor(12 / count));
+
+    let html = '<div class="grid gap-4">\n';
+    items.forEach((item) => {
+      html += `  <div class="col-12 md:col-${colSpan}">\n\n${item}\n\n  </div>\n`;
+    });
+    html += "</div>\n";
+    return html;
+  });
+
   // Containers
   processor.add(
     "small",

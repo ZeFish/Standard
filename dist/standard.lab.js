@@ -21,6 +21,8 @@ class StandardLab {
     this.modifiedTokens = new Set();
     this.position = this.loadPosition();
     this.version = document.documentElement.dataset.standardVersion;
+    // ADD THIS LINE:
+    this.customThemes = []; // Store custom themes added by users
 
     // Slider configuration for numeric tokens
     this.sliderConfig = {

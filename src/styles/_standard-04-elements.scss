@@ -74,19 +74,19 @@ h6 {
 h1 {
     font-weight: var(--font-weight-h1);
     font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
-    line-height: var(--base-4);
+    line-height: var(--font-header-line-height);
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
     font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
-    line-height: var(--base-2);
+    line-height: var(--font-header-line-height);
 }
 
 h3 {
     font-weight: var(--font-weight-h3);
     font-size: var(--scale-3);
-    line-height: var(--base-2);
+    line-height: var(--font-header-line-height);
 }
 
 h4 {

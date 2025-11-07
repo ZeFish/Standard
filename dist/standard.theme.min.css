@@ -210,6 +210,7 @@
   --font-text: Diatype;
   --line-height: 1.2;
   --font-size: 1.2em;
+  --scale-d2: 0.75em;
   --body-padding: var(--base);
 }
 [data-theme=swiss] hr {
@@ -217,6 +218,9 @@
 }
 [data-theme=swiss] .callout-content {
   background: none;
+}
+[data-theme=swiss] p {
+  text-align: justify;
 }
 [data-theme=swiss] .callout {
   background: none;
@@ -241,16 +245,13 @@
   color: var(--color-foreground) !important;
 }
 [data-theme=swiss] .prose {
-  margin-left: 0%;
-}
-[data-theme=swiss] .prose {
   display: block;
 }
 [data-theme=swiss] img {
   border: 0;
 }
 [data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
-  max-width: var(--line-width-s);
+  max-width: var(--line-width-xs);
   margin-inline: 0;
 }
 [data-theme=swiss] aside {
@@ -631,14 +632,14 @@
   
   font-weight: 100 1000;
   font-style: normal;
-  src: url("https://cdn.ffp.co/MonoLisa-Regular-Variable.woff2");
+  src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
 }
 @font-face {
   font-family: "MonoLisa";
   
   font-weight: 100 1000;
   font-style: italic;
-  src: url("https://cdn.ffp.co/MonoLisa-RegularItalic-Variable.woff2");
+  src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
 [data-theme=minimal] {
   --shadow: none;
@@ -705,6 +706,7 @@
 }
 [data-theme=minimal] blockquote {
   font-family: Kalice;
+  padding-block: var(--base-d2);
 }
 
 @font-face {

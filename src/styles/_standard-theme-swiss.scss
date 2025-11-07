@@ -23,6 +23,7 @@
     --font-text: Diatype;
     --line-height: 1.2;
     --font-size: 1.2em;
+    --scale-d2: 0.75em;
     --body-padding: var(--base);
 
     hr {
@@ -31,6 +32,9 @@
 
     .callout-content {
         background: none;
+    }
+    p {
+        text-align: justify;
     }
     .callout {
         background: none;
@@ -54,20 +58,16 @@
     .token {
         color: var(--color-foreground) !important;
     }
-
-    .prose {
-        margin-left: 0%;
-    }
-
     .prose {
         display: block;
     }
+
     img {
         border: 0;
     }
 
     .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
-        max-width: var(--line-width-s);
+        max-width: var(--line-width-xs);
         margin-inline: 0;
     }
 
