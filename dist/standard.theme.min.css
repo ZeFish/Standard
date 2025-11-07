@@ -1031,7 +1031,7 @@
   border: none;
 }
 [data-theme=blueprint] :is(h1, h2, h3, h4, h5, h6)::before {
-  content: "Title";
+  content: "";
   opacity: var(--blueprint-opacity);
   font-size: var(--scale-d2);
   color: var(--color-foreground);
@@ -1043,12 +1043,30 @@
   left: calc(var(--base) * -3);
   transform: translateX(-100%);
 }
+[data-theme=blueprint] h1::before {
+  content: "h1";
+}
+[data-theme=blueprint] h2::before {
+  content: "h2";
+}
+[data-theme=blueprint] h3::before {
+  content: "h3";
+}
+[data-theme=blueprint] h4::before {
+  content: "h4";
+}
+[data-theme=blueprint] h5::before {
+  content: "h5";
+}
+[data-theme=blueprint] h6::before {
+  content: "h6";
+}
 [data-theme=blueprint] :is(pre) {
   position: relative;
   border: none;
 }
 [data-theme=blueprint] :is(pre)::before {
-  content: "Code";
+  content: "pre";
   opacity: var(--blueprint-opacity);
   font-size: var(--scale-d2);
   color: var(--color-foreground);
@@ -1065,7 +1083,7 @@
   border: none;
 }
 [data-theme=blueprint] :is(p)::before {
-  content: "Text";
+  content: "p";
   opacity: var(--blueprint-opacity);
   font-size: var(--scale-d2);
   color: var(--color-foreground);
@@ -1080,16 +1098,54 @@
 [data-theme=blueprint] :is(p:has(img))::before {
   content: "Medias" !important;
 }
+[data-theme=blueprint] .grid-debug-overlay {
+  position: absolute !important;
+  inset: 0;
+  display: grid;
+  grid-template-columns: inherit;
+  pointer-events: none;
+  z-index: 9999;
+  grid-column: hero;
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(1) {
+  grid-column: hero-start/feature-start;
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(2) {
+  grid-column: feature-start/accent-start;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--color-foreground) 15%, transparent);
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(3) {
+  grid-column: accent-start/content-start;
+  border-inline-start: 1px dashed color-mix(in srgb, var(--color-foreground) 15%, transparent);
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(4) {
+  grid-column: content;
+  outline: 1px dashed color-mix(in srgb, var(--color-foreground) 15%, transparent);
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(5) {
+  grid-column: content-end/accent-end;
+  border-inline-end: 1px dashed color-mix(in srgb, var(--color-foreground) 15%, transparent);
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(6) {
+  grid-column: accent-end/feature-end;
+  border-inline-end: 1px dashed color-mix(in srgb, var(--color-foreground) 15%, transparent);
+}
+[data-theme=blueprint] .grid-debug-overlay span:nth-child(7) {
+  grid-column: feature-end/hero-end;
+}
 [data-theme=blueprint] body::before {
   --color-grid: var(--color-foreground);
-  --percent-grid: 8%;
+  --percent-grid: 5%;
   --grid-unit: var(--base);
+  --dot-size: 1px;
   content: "";
   position: fixed;
   inset: 0;
   mix-blend-mode: normal;
   opacity: 1;
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--grid-unit)), repeating-linear-gradient(to right, transparent 0, transparent calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--grid-unit));
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--dot-size), transparent var(--dot-size));
+  background-size: var(--grid-unit) var(--grid-unit);
+  background-position: 0 0;
   pointer-events: none;
   z-index: 10000;
 }

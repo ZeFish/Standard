@@ -27,7 +27,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "forest");
+  eleventyConfig.addGlobalData("theme", "blueprint");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 

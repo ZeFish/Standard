@@ -98,8 +98,13 @@ class StandardLab {
     this.createBadge();
     this.initKeyboardShortcuts();
 
-    // Check if debug mode is already active
-    if (document.documentElement.classList.contains("standard-debug")) {
+    // Check if debug mode is already active OR if blueprint theme is active
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const isDebugActive =
+      document.documentElement.classList.contains("standard-debug");
+    const isBlueprintActive = currentTheme === "blueprint";
+
+    if (isDebugActive || isBlueprintActive) {
       this.injectGridDebugOverlays();
     }
 
@@ -114,6 +119,27 @@ class StandardLab {
         });
     }
     this.initModificationTracking();
+  }
+
+  /**
+   * Add a custom theme to the theme selector
+   * @param {string} value - Theme attribute value (e.g., "custom_dark")
+   * @param {string} label - Display label (e.g., "Custom Dark")
+   *
+   * @example
+   * window.StandardLab.addTheme("my-theme", "My Theme");
+   */
+  addTheme(value, label) {
+    // Check if theme already exists
+    const exists = this.customThemes.some((theme) => theme.value === value);
+    if (!exists) {
+      this.customThemes.push({ value, label });
+
+      // Refresh panel if it's open
+      if (this.state === "quick") {
+        this.createQuickPanel();
+      }
+    }
   }
 
   storeDefaults() {
@@ -358,7 +384,7 @@ class StandardLab {
   }
 
   getThemeOptions() {
-    const themes = [
+    const defaultThemes = [
       { value: "", label: "Empty" },
       { value: "default", label: "Default" },
       { value: "paper", label: "Paper" },
@@ -372,8 +398,12 @@ class StandardLab {
       { value: "custom_2", label: "Custom 2" },
       { value: "custom_3", label: "Custom 3" },
     ];
+
+    // Merge default themes with custom themes
+    const allThemes = [...defaultThemes, ...this.customThemes];
+
     const current = document.documentElement.getAttribute("data-theme") || "";
-    return themes
+    return allThemes
       .map(
         (theme) =>
           `<option value="${theme.value}" ${current === theme.value ? "selected" : ""}>${theme.label}</option>`,
@@ -390,7 +420,12 @@ class StandardLab {
       ?.addEventListener("change", (e) => {
         const isEnabled = e.target.checked;
         document.documentElement.classList.toggle("standard-debug", isEnabled);
-        if (isEnabled) {
+
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const isBlueprintActive = currentTheme === "blueprint";
+
+        if (isEnabled || isBlueprintActive) {
           this.injectGridDebugOverlays();
         } else {
           this.removeGridDebugOverlays();
@@ -407,6 +442,10 @@ class StandardLab {
           document.documentElement.removeAttribute("data-theme");
         }
         localStorage.setItem("standard-theme", theme);
+
+        // Handle blueprint exception for debug mode
+        this.handleBlueprintDebugException(theme);
+
         toast.info(`Theme: ${theme || "Default"}`);
       });
     this.panel
@@ -419,7 +458,24 @@ class StandardLab {
       .querySelector('[data-action="copy"]')
       ?.addEventListener("click", () => this.copyCSS());
   }
+  /**
+   * Handle the blueprint theme exception for debug grid overlay
+   * @param {string} theme - Current theme name
+   */
+  handleBlueprintDebugException(theme) {
+    const isBlueprint = theme === "blueprint";
+    const hasDebugClass =
+      document.documentElement.classList.contains("standard-debug");
 
+    if (isBlueprint && !hasDebugClass) {
+      // Blueprint theme activated - show grid overlays
+      this.injectGridDebugOverlays();
+    } else if (!isBlueprint && !hasDebugClass) {
+      // Non-blueprint theme and debug not active - remove overlays
+      this.removeGridDebugOverlays();
+    }
+    // If debug is explicitly active, let it control the overlays
+  }
   createFullPanel() {
     if (this.panel) this.panel.remove();
     this.panel = document.createElement("div");
