@@ -159,7 +159,7 @@
         font-size: var(--scale-d2);
     }
 
-    /* Medium screens (tablet): 769px-1024px */
+    /* Medium screens (tablet): 769px-1024px
     @media (max-width: $small) {
         h1,
         h2,
@@ -171,6 +171,7 @@
             margin-block: calc(var(--base-gap) * 2);
         }
     }
+    */
 
     hr {
         margin-inline: calc(var(--base-2) * var(--base-gap));
