@@ -34,8 +34,9 @@
         background: none;
     }
     p {
-        text-align: justify;
+        text-align: left;
     }
+    strong { color: var(--color-accent); font-weight:normal; }
     .callout {
         background: none;
         border: 0;
