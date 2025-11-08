@@ -97,6 +97,8 @@ class StandardLab {
     this.storeDefaults();
     this.createBadge();
     this.initKeyboardShortcuts();
+    
+    this.restoreTheme();
 
     // Check if debug mode is already active OR if blueprint theme is active
     const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -120,8 +122,17 @@ class StandardLab {
     }
     this.initModificationTracking();
   }
-
-  /**
+  
+  restoreTheme() {
+      // Use sessionStorage instead of localStorage for tab-specific persistence
+      const savedTheme = sessionStorage.getItem("standard-theme");
+      
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    }
+  
+    /**
    * Add a custom theme to the theme selector
    * @param {string} value - Theme attribute value (e.g., "custom_dark")
    * @param {string} label - Display label (e.g., "Custom Dark")
@@ -441,7 +452,7 @@ class StandardLab {
         } else {
           document.documentElement.removeAttribute("data-theme");
         }
-        localStorage.setItem("standard-theme", theme);
+        sessionStorage.setItem("standard-theme", theme);
 
         // Handle blueprint exception for debug mode
         this.handleBlueprintDebugException(theme);
