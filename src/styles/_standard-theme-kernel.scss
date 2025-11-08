@@ -90,8 +90,8 @@
     pre:hover code {
         opacity: 1;
     }
-    pre { 
-        margin-block-end: var(--base-4);
+    h2 { 
+        margin-block-start: var(--base-4);
     }
 
     @media (prefers-color-scheme: dark) {
