@@ -88,14 +88,20 @@
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: calc(var(--base-block-gap) - var(--base-gap));
-        margin-block-end: var(--base-block-gap);
+        margin-block-start: max(
+            calc(var(--base-block-gap) - var(--base-gap)),
+            var(--base-gap)
+        );
+        margin-block-end: max(var(--base-block-gap), var(--base-gap));
     }
 
     /* The i that two specal block would bit a bit closer
     debug when  its image */
     :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
         margin-block-end: var(--base-gap);
+    }
+    :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
+        margin-block-start: var(--base);
     }
 
     * > :where(:last-child) {

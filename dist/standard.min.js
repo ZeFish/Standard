@@ -252,8 +252,7 @@ class ImageZoom {
 
   open(img) {
     if (this.overlay) return;
-
-    this.originalImage = img;
+    this.this.originalImage = img;
     this.overlay = document.createElement("div");
     this.overlay.className = "image-zoom-overlay";
 

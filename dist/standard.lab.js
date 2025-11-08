@@ -98,6 +98,8 @@ class StandardLab {
     this.createBadge();
     this.initKeyboardShortcuts();
 
+    this.restoreTheme();
+
     // Check if debug mode is already active OR if blueprint theme is active
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const isDebugActive =
@@ -119,6 +121,15 @@ class StandardLab {
         });
     }
     this.initModificationTracking();
+  }
+
+  restoreTheme() {
+    // Use sessionStorage instead of localStorage for tab-specific persistence
+    const savedTheme = sessionStorage.getItem("standard-theme");
+
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
   }
 
   /**
@@ -211,7 +222,7 @@ class StandardLab {
     this.badge.setAttribute("style", "color:var(--color-subtle);");
     this.badge.style.bottom = `${this.position.bottom}px`;
     this.badge.style.right = `${this.position.right}px`;
-    this.badge.innerHTML = `※`;
+    this.badge.innerHTML = ``;
     this.badge.addEventListener("click", () => this.openQuick());
     this.makeDraggable(this.badge);
     document.body.appendChild(this.badge);
@@ -351,9 +362,12 @@ class StandardLab {
     const modifiedCount = this.modifiedTokens.size;
     this.panel.innerHTML = `
       <header class="standard-lab-panel-header">
-        <h2>Inspector v${this.version}</h2>
-        <button class="standard-lab-btn-icon" data-action="close" title="Close (Esc)">×</button>
-      </header>
+          <div>
+            <h2>Inspector v${this.version}</h2>
+            <div class="standard-lab-viewport-info">${window.innerWidth}px</div>
+          </div>
+          <button class="standard-lab-btn-icon" data-action="close" title="Close (Esc)">×</button>
+        </header>
       <section class="standard-lab-section">
         <label class="standard-lab-toggle">
           <input type="checkbox" ${debugActive ? "checked" : ""} data-toggle="debug">
@@ -441,7 +455,7 @@ class StandardLab {
         } else {
           document.documentElement.removeAttribute("data-theme");
         }
-        localStorage.setItem("standard-theme", theme);
+        sessionStorage.setItem("standard-theme", theme);
 
         // Handle blueprint exception for debug mode
         this.handleBlueprintDebugException(theme);
@@ -1021,7 +1035,7 @@ class StandardLab {
     const styles = document.createElement("style");
     styles.id = "standard-lab-styles";
     styles.textContent = `
-      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--base); height: var(--base); border-radius: 50%; background: color-mix(in srgb, var(--color-background-secondary) 30%, transparent); border: var(--border); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
+      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--base); height: var(--base); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
@@ -1032,6 +1046,7 @@ class StandardLab {
       .standard-lab-panel-full { max-width: 360px; max-height: 600px; }
       .standard-lab-panel-header { padding: 6px; border-bottom: var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
       .standard-lab-panel-header h2 { margin: 0; font-size: 14px !important; font-weight: 600; letter-spacing: -0.02em; }
+      .standard-lab-viewport-info { font-size: 11px !important; font-weight: 400; color: var(--color-muted); margin-top: 2px; font-family: var(--font-monospace); }
       .standard-lab-header-actions { display: flex; gap: 6px; }
       .standard-lab-section { padding: 6px; border-bottom: var(--border); }
       .standard-lab-section:last-of-type { border-bottom: none; }

@@ -94,9 +94,12 @@
     border-radius: var(--card-border-radius);
     box-shadow: var(--card-shadow);
 
-    padding: var(--scale-d2);
+    padding: var(--card-padding);
     font-size: var(--scale-d2);
-    padding: var(--radius);
+}
+
+.card > :last-child {
+    margin-block-end: 0;
 }
 
 /**

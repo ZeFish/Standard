@@ -57,22 +57,10 @@
   --base-4: calc(var(--base) * 4);
   --base-8: calc(var(--base) * 8);
   
-  --scale-d5: max(
-          calc(var(--font-size) * pow(var(--optical-ratio), -3)),
-          var(--font-size)
-      )
-      --scale-d4: max(
-          calc(var(--font-size) * pow(var(--optical-ratio), -2)),
-          var(--font-size)
-      )
-      --scale-d3: max(
-          calc(var(--font-size) * pow(var(--optical-ratio), -1)),
-          var(--font-size)
-      )
-      --scale-d2: max(
-          calc(var(--font-size) * pow(var(--optical-ratio), -0.5)),
-          var(--font-size)
-      );
+  --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
+  --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
+  --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
+  --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
   --scale: var(--font-size);
   --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 0.5));
   --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 1));
@@ -225,6 +213,11 @@ body::before {
       var(--color-foreground) 3%,
       var(--color-background)
   );
+  --color-background-accent: color-mix(
+      in srgb,
+      var(--color-accent) 15%,
+      transparent
+  );
   
   --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
@@ -233,7 +226,8 @@ body::before {
   --shadow: 0 0 var(--base-d4) var(--shadow-color);
   
   --border: var(--stroke-width) solid var(--color-border);
-  --border-accent: var(--stroke-width) solid var(--color-accent);
+  --border-accent: var(--stroke-width) solid
+      color-mix(in srgb, var(--color-accent) 10%, transparent);
   
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
@@ -728,7 +722,7 @@ tt,
   font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
   font-feature-settings: var(--font-monospace-feature);
   font-variation-settings: var(--font-monospace-variation);
-  font-weight: 400;
+  font-weight: var(--font-monospace-weight, 400);
 }
 
 code {
@@ -1306,11 +1300,14 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-end: var(--base-gap);
 }
 :where(.rhythm) #comments, :where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside, :where(.rhythm) [class^=grid-] {
-  margin-block-start: calc(var(--base-block-gap) - var(--base-gap));
-  margin-block-end: var(--base-block-gap);
+  margin-block-start: max(var(--base-block-gap) - var(--base-gap), var(--base-gap));
+  margin-block-end: max(var(--base-block-gap), var(--base-gap));
 }
 :where(.rhythm) :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]):has(+ :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])) {
   margin-block-end: var(--base-gap);
+}
+:where(.rhythm) :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) + :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) {
+  margin-block-start: var(--base);
 }
 :where(.rhythm) * > :where(:last-child) {
   margin-block-end: 0;
@@ -1354,17 +1351,6 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) pre code {
   font-size: var(--scale-d2);
 }
-@media (max-width: 768px) {
-  :where(.rhythm) h1,
-  :where(.rhythm) h2,
-  :where(.rhythm) h3 {
-    margin-block-start: var(--base-gap);
-    margin-block-end: var(--base-gap);
-  }
-  :where(.rhythm) h1 {
-    margin-block: calc(var(--base-gap) * 2);
-  }
-}
 :where(.rhythm) hr {
   margin-inline: calc(var(--base-2) * var(--base-gap));
 }
@@ -1386,22 +1372,17 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   padding-inline-start: var(--base);
   padding-inline-end: var(--base);
 }
-:where(.rhythm) ol ul,
-:where(.rhythm) ol ol,
-:where(.rhythm) ul ul,
-:where(.rhythm) ul ol {
-  margin-block-start: var(--base);
-}
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
   padding-inline-start: var(--base);
+  margin-block-start: var(--base-d2);
   margin-block-end: 0;
 }
 :where(.rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--base);
+  margin-block-end: var(--base-d2);
 }
 :where(.rhythm) .compact {
   --base-gap: var(--base-d2);
@@ -1598,8 +1579,16 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   row-gap: var(--grid-row-gap);
 }
 
-.grid > * {
+@media (max-width: 600px) {
+  .grid,
+  [class^=grid-] {
+    --grid-gap: var(--base-d4);
+    --grid-row-gap: var(--base-d4);
+  }
+}
+:is(.grid, [class^=grid-]) > * {
   min-width: 0; 
+  margin-block: 0 !important;
 }
 
 
@@ -2743,9 +2732,12 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   border: var(--card-border);
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-shadow);
-  padding: var(--scale-d2);
+  padding: var(--card-padding);
   font-size: var(--scale-d2);
-  padding: var(--radius);
+}
+
+.card > :last-child {
+  margin-block-end: 0;
 }
 
 
@@ -3724,6 +3716,7 @@ aside.note {
   min-width: 100px;
   max-width: 100%;
   font-size: var(--scale);
+  font-size: 12px;
   font-family: var(--font-interface);
   
   background: var(--modal-background);
@@ -5144,6 +5137,7 @@ aside.note {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-variation-settings: var(--font-interface-variation);
   font-feature-settings: var(--font-interface-feature);
+  font-weight: var(--font-interface-weight, var(--font-weight), 400);
 }
 
 
@@ -6014,4 +6008,78 @@ ul.menu.horizontal li {
   --base-gap: 0;
   --base-block-gap: 0;
   font-size: var(--scale-d2);
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2") format("woff2");
+}
+@font-face {
+  font-family: "Graveur";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Graveur-VAR.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Graveur";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Graveur";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
+}
+@font-face {
+  font-family: "Graveur";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Marauder";
+  src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Marauder";
+  src: url("/assets/fonts/Marauder-Italic[wght].woff2") format("woff2");
+  font-style: italic;
+}
+@font-face {
+  font-family: "GnomonSimple";
+  src: url("/assets/fonts/Gnomon-Simple") format("ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "GnomonForeground";
+  src: url("/assets/fonts/Gnomon-Foreground") format("ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "NoTears";
+  src: url("/assets/fonts/NoTears.ttf") format("ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "NoTears";
+  src: url("/assets/fonts/NoTearsBold.ttf") format("ttf");
+  font-style: normal;
+  font-weight: bold;
 }
