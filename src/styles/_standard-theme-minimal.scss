@@ -23,11 +23,6 @@
         font-size: var(--scale-d4);
     }
 
-    --line-height: 1.5;
-
-    --base-gap: var(--base);
-    --base-block-gap: var(--base);
-
     --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
     --color-background-secondary: color-mix(
         in srgb,
