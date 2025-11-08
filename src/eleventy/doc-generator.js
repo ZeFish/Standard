@@ -540,8 +540,8 @@ function generateConceptMarkdown(doc, layout, urlPath, allDocs = []) {
   // SOURCE CODE (collapsible)
   if (doc.code) {
     const lang = doc.type === "scss" ? "scss" : "javascript";
-    markdown += `<details class="source-code">\n`;
-    markdown += `<summary>📄 View Source Code</summary>\n\n`;
+    markdown += `<details class="callout source-code">\n`;
+    markdown += `<summary>View Source Code</summary>\n\n`;
     markdown += `\`\`\`${lang}\n${doc.code}\n\`\`\`\n\n`;
     markdown += `</details>\n\n`;
   }
