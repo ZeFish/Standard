@@ -58,7 +58,7 @@
 .grid > * {
     min-width: 0; /* ← Force items to shrink below content size */
 }
-@media (max-width: #{$small}) {
+@media (max-width: #{$mobile}) {
     .grid, [class^='grid-'] {
         --grid-gap: var(--base-d4);
         --grid-row-gap: var(--base-d4);
