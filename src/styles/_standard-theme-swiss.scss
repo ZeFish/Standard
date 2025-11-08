@@ -37,6 +37,7 @@
         text-align: left;
     }
     strong { color: var(--color-accent); font-weight:normal; }
+    em { background-color: var(--color-accent); color: var(--color-background);
     .callout {
         background: none;
         border: 0;
