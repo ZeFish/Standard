@@ -54,8 +54,12 @@
     /* Mobile */
     --mobile-font-size: 1.1rem;
     --mobile-optical-ratio: var(--ratio-silver);
-    --mobile-line-height: 1.3;
-    --mobile-body-padding: var(--base-2);
+    --mobile-line-height: 1.5;
+    --mobile-body-padding: var(--base-4);
+    --mobile-base-gap: var(
+        --base-4
+    ); /* Space between standard block like paragraph */
+    --mobile-base-block-gap: var(--base-4);
 
     /* Content area tokens */
     --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
@@ -128,15 +132,9 @@
 /* Responsive adjustments - collapse gutters on small screens */
 @media only screen and (max-width: #{$small}) {
     :root {
-        --base-gap: var(--base-2);
-        --base-block-gap: var(--base-2);
+        --base-gap: var(--mobile-base-gap);
+        --base-block-gap: var(--mobile-base-block-gap);
         --body-padding: var(--mobile-body-padding) !important;
-    }
-}
-
-/* Responsive adjustments - collapse gutters on small screens */
-@media only screen and (max-width: #{$mobile}) {
-    :root {
         --font-size: var(--mobile-font-size) !important;
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);

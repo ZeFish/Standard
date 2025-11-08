@@ -29,7 +29,7 @@
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
   --mobile-line-height: 1.3;
-  --mobile-body-padding: var(--base);
+  --mobile-body-padding: var(--base-2);
   
   --line-width-xs: 32rem; 
   --line-width-s: 38rem; 
@@ -95,8 +95,8 @@ div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, 
 
 @media only screen and (max-width: 768px) {
   :root {
-    --base-gap: var(--base);
-    --base-block-gap: var(--base);
+    --base-gap: var(--base-4);
+    --base-block-gap: var(--base-4);
     --body-padding: var(--mobile-body-padding) !important;
   }
 }
