@@ -28,8 +28,12 @@
   
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
-  --mobile-line-height: 1.3;
+  --mobile-line-height: 1.5;
   --mobile-body-padding: var(--base-2);
+  --mobile-base-gap: var(
+      --base-4
+  ); 
+  --mobile-base-block-gap: var(--base-4);
   
   --line-width-xs: 32rem; 
   --line-width-s: 38rem; 
@@ -95,14 +99,9 @@ div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, 
 
 @media only screen and (max-width: 768px) {
   :root {
-    --base-gap: var(--base-4);
-    --base-block-gap: var(--base-4);
+    --base-gap: var(--mobile-base-gap);
+    --base-block-gap: var(--mobile-base-block-gap);
     --body-padding: var(--mobile-body-padding) !important;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  :root {
     --font-size: var(--mobile-font-size) !important;
     --optical-ratio: var(--mobile-optical-ratio) !important;
     --line-height: var(--mobile-line-height);
@@ -776,9 +775,9 @@ li::before {
 
 blockquote {
   font-style: italic;
-  border-left: calc(var(--base) / 8) solid var(--color-border);
+  border-left: var(--stroke-width) solid var(--color-border);
   color: var(--color-muted);
-  padding: var(--base);
+  padding: var(--base-2);
   font-size: var(--scale-d2);
 }
 
@@ -1312,7 +1311,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(.rhythm) h2 {
   margin-block-start: calc(var(--base) * 8);
-  margin-block-end: calc(var(--base) * 2);
+  margin-block-end: calc(var(--base) * 4);
 }
 :where(.rhythm) h3 {
   margin-block-start: calc(var(--base) * 6);
@@ -2580,10 +2579,6 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--base-block-gap) * -1 + var(--img-gap)) !important;
 }
-:where(.prose) :where(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
-  margin-block-start: 0; 
-  
-}
 :where(.prose) img,
 :where(.prose) audio,
 :where(.prose) video {
@@ -3634,20 +3629,16 @@ dialog.modal::backdrop {
   margin-block-end: 0;
 }
 
-aside.note {
-  display: inline;
-  position: relative;
-  top: calc(var(--base) * -1);
-  left: calc(var(--base) + var(--line-width));
-  margin-top: calc(var(--base) * -1);
-  margin-bottom: calc(var(--base) * -2);
+aside {
   font-size: var(--scale-d2);
   color: var(--color-muted);
   line-height: var(--line-height-s);
+  border-radius: var(--radius);
+  background: var(--color-background-secondary);
+  box-shadow: var(--shadow);
   max-width: 33%;
-  border-left: var(--border);
-  padding-left: var(--base-d2);
-  padding-block: var(--base-d2);
+  border: var(--border);
+  padding: var(--base);
 }
 
 

@@ -34,7 +34,7 @@
     --color-dark-accent: var(--color-purple);
     --color-dark-bold: var(--color-pink);
 
-    --radius: var(--base-d4);
+    --radius: var(--base);
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
@@ -56,6 +56,8 @@
     --font-header-variation: "";
     --font-header-letter-spacing: -0.065em;
     --font-header-line-height: 0.75em;
+
+    --stroke-width: 1.5px;
 
     --line-width: var(--line-width-xs);
     /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
@@ -90,7 +92,6 @@
     pre:hover code {
         opacity: 1;
     }
-    
 
     @media (prefers-color-scheme: dark) {
         pre code {

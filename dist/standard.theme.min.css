@@ -574,7 +574,7 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --radius: var(--base-d4);
+  --radius: var(--base);
   
   
   --base-block-gap: var(--base);
@@ -593,6 +593,7 @@
   --font-header-variation: "";
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 0.75em;
+  --stroke-width: 1.5px;
   --line-width: var(--line-width-xs);
   
 }
@@ -890,6 +891,21 @@
   position: relative;
   top: calc(var(--base) * -0.4);
   color: var(--color-border);
+}
+[data-theme=book] aside.note {
+  display: inline;
+  position: relative;
+  top: calc(var(--base) * -1);
+  left: calc(var(--base) + var(--line-width));
+  margin-top: calc(var(--base) * -1);
+  margin-bottom: calc(var(--base) * -2);
+  font-size: var(--scale-d2);
+  color: var(--color-muted);
+  line-height: var(--line-height-s);
+  max-width: 33%;
+  border-left: var(--border);
+  padding-left: var(--base-d2);
+  padding-block: var(--base-d2);
 }
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
