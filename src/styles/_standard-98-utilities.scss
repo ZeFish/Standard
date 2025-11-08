@@ -288,6 +288,7 @@
     font-family: var(--font-interface), system-ui, sans-serif;
     font-variation-settings: var(--font-interface-variation);
     font-feature-settings: var(--font-interface-feature);
+    font-weight: var(--font-interface-weight, var(--font-weight), 400);
 }
 
 /* =========================== */

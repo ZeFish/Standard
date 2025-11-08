@@ -118,7 +118,7 @@ tt,
     font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
     font-feature-settings: var(--font-monospace-feature);
     font-variation-settings: var(--font-monospace-variation);
-    font-weight: 400;
+    font-weight: var(--font-monospace-weight, 400);
 }
 
 code {
