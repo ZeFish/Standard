@@ -258,57 +258,57 @@ visibility: public
     <code>prefers-color-scheme</code> automatically.
   </p>
   <h3>Color Palette</h3>
-  <div class="grid">
-    <div class="col-3 sm:col-6">
+  <div class="grid-4">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-red); color: var(--color-background)"
       >Red
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-orange); color: var(--color-background)"
       >Orange
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-yellow); color: var(--color-background)"
       >Yellow
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-green); color: var(--color-background)"
       >Green
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-cyan); color: var(--color-background)"
       >Cyan
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="border-color:var(--color-blue); background: color-mix(in srgb, var(--color-blue) 90%, var(--color-background-secondary)); color: var(--color-background)"
       >Blue
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-purple); color: var(--color-background)"
       >Purple
       </div>
     </div>
-    <div class="col-3 sm:col-6">
+    <div class="sm:col-1">
       <div
         class="card"
         style="background: var(--color-pink); color: var(--color-background)"
@@ -317,22 +317,22 @@ visibility: public
     </div>
   </div>
   <h3>Semantic Colors</h3>
-  <div class="grid">
-    <div class="col-6">
+  <div class="grid-3">
+    <div>
       <div
         class="card"
         style="background: var(--color-background); color: var(--color-foreground)"
       >Background
       </div>
     </div>
-    <div class="col-6">
+    <div>
       <div
         class="card"
         style="background: var(--color-foreground); color: var(--color-background)"
       >Foreground
       </div>
     </div>
-    <div class="col-6">
+    <div>
       <div class="card" style="background: var(--color-background-secondary)">Secondary</div>
     </div>
   </div>
