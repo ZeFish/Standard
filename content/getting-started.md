@@ -116,11 +116,11 @@ Create `index.html`:
 ### That's It!
 
 You now have a beautiful, responsive, accessible website with:
-- ✅ Perfect typography
-- ✅ Dark mode support
-- ✅ Mobile-friendly layout
-- ✅ Semantic HTML
-- ✅ Professional styling
+- Perfect typography
+- Dark mode support
+- Mobile-friendly layout
+- Semantic HTML
+- Professional styling
 
 Open in browser. No build process. No configuration.
 
@@ -245,11 +245,11 @@ npx @11ty/eleventy --serve
 Visit `http://localhost:8080`
 
 Your website is live with:
-- ✅ Beautiful typography
-- ✅ Responsive layout
-- ✅ Dark mode
-- ✅ Professional styling
-- ✅ Zero configuration
+- Beautiful typography
+- Responsive layout
+- Dark mode
+- Professional styling
+- Zero configuration
 
 ---
 
@@ -312,7 +312,7 @@ eleventyNavigation:
 ---
 ```
 
-11ty automatically builds the navigation.
+::info 11ty automatically builds the navigation.
 
 ### Protect Content with Password
 
