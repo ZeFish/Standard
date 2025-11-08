@@ -147,10 +147,6 @@
   --font-header-line-height: 0.9em;
   --font-header-letter-spacing: 0em;
 }
-[data-theme=paper] blockquote,
-[data-theme=paper] pre {
-  padding: calc(var(--base) * 0.75);
-}
 [data-theme=paper] h1 {
   opacity: 85%;
 }

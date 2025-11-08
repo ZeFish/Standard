@@ -137,7 +137,7 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--radius);
-    padding: var(--base);
+    padding: var(--base-2);
     overflow-x: auto;
     overflow-y: hidden;
     box-shadow: inset var(--shadow);
@@ -645,7 +645,7 @@ card.inset {
         font-weight: var(--font-weight-bold, bold);
 
         user-select: none;
-        padding: var(--base-d4) var(--base);
+        padding: var(--base-d2) var(--base) var(--base-d4) var(--base);
         margin: 0;
     }
 

@@ -315,7 +315,7 @@
     textarea,
     select {
         padding-inline: var(--base);
-        margin-block-end: var(--base);
+        margin-block-end: var(--base-2);
     }
 
     /* Labels - spacing only */
@@ -331,7 +331,7 @@
     }
 
     div:has(input + label) {
-        margin-block-end: var(--base);
+        margin-block-end: var(--base-2);
     }
 
     fieldset div,
@@ -342,6 +342,9 @@
 
     fieldset + button {
         margin-block-start: var(--base);
+    }
+    fieldset :last-child {
+        margin-block-end: 0;
     }
 
     /* =========================== */

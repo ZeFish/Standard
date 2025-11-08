@@ -166,11 +166,6 @@
     --font-header-line-height: 0.9em;
     --font-header-letter-spacing: 0em;
 
-    blockquote,
-    pre {
-        padding: calc(var(--base) * 0.75);
-    }
-
     h1 {
         opacity: 85%;
     }
@@ -201,7 +196,7 @@
         margin-block-start: calc(var(--base) * -1);
         margin-block-end: var(--base-8);
     }
-    
+
     h2 {
         margin-block-start: var(--base-4);
         margin-block-end: var(--base-2);

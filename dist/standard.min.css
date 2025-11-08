@@ -729,7 +729,7 @@ pre {
   font-size: var(--scale-d2);
   border: var(--border);
   border-radius: var(--radius);
-  padding: var(--base);
+  padding: var(--base-2);
   overflow-x: auto;
   overflow-y: hidden;
   box-shadow: inset var(--shadow);
@@ -1138,7 +1138,7 @@ card.inset {
   display: flex;
   font-weight: var(--font-weight-bold, bold);
   user-select: none;
-  padding: var(--base-d4) var(--base);
+  padding: var(--base-d2) var(--base) var(--base-d4) var(--base);
   margin: 0;
 }
 .callout .callout-content {
@@ -1443,7 +1443,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) textarea,
 :where(.rhythm) select {
   padding-inline: var(--base);
-  margin-block-end: var(--base);
+  margin-block-end: var(--base-2);
 }
 :where(.rhythm) label {
   margin-inline: var(--base);
@@ -1454,7 +1454,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-inline-start: var(--base-d8);
 }
 :where(.rhythm) div:has(input + label) {
-  margin-block-end: var(--base);
+  margin-block-end: var(--base-2);
 }
 :where(.rhythm) fieldset div,
 :where(.rhythm) fieldset p {
@@ -1463,6 +1463,9 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(.rhythm) fieldset + button {
   margin-block-start: var(--base);
+}
+:where(.rhythm) fieldset :last-child {
+  margin-block-end: 0;
 }
 :where(.rhythm) img,
 :where(.rhythm) video,
