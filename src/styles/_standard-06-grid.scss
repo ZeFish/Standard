@@ -57,6 +57,7 @@
 }
 .grid > * {
     min-width: 0; /* ← Force items to shrink below content size */
+    margin-block-end: 0;
 }
 @media (max-width: #{$mobile}) {
     .grid, [class^='grid-'] {
