@@ -209,18 +209,11 @@
         padding-inline-end: var(--base);
     }
 
-    ol ul,
-    ol ol,
-    ul ul,
-    ul ol {
-        margin-block-start: var(--base-d2);
-    }
-
     /* Nested lists */
     li > ul,
     li > ol {
         padding-inline-start: var(--base);
-
+        margin-block-start: var(--base-d2);
         margin-block-end: 0;
     }
 
