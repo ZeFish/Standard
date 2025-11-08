@@ -16,7 +16,7 @@ visibility: public
 ::muted Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
 
 A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision inspired by centuries of print mastery.
-  
+
 ### Contents
 
 <ol>
@@ -54,14 +54,13 @@ A fine-art design framework implementing classical typography, Swiss grid system
           </div>
           <div class="comment-content">adw</div>
         </div>
-
       </div>
 <div class="card inset">
 
 # Heading Level 1
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-     
+
 ## Heading Level 2
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -118,8 +117,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
           enableSmartQuotes: true,
           enableWidowPrevention: true,
           observeDOM: true
-        });
-    </code></pre>
+        });</code></pre>
 <div class="feature">
   <h2 id="grid">Grid is the Structure</h2>
   <p>
@@ -159,15 +157,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     </div>
   </div>
   <h3>Gap Variants</h3>
-  <div class="grid compact">
-    <div class="col-4 card">compact gaps</div>
-    <div class="col-4 card">compact gaps</div>
-    <div class="col-4 card">compact gaps</div>
+  <div class="grid-3 sm:grid-1 compact">
+    <div class="card">compact gaps</div>
+    <div class="card">compact gaps</div>
+    <div class="card">compact gaps</div>
   </div>
-  <div class="grid wide">
-    <div class="col-4 card">Wide gaps</div>
-    <div class="col-4 card">Wide gaps</div>
-    <div class="col-4 card">Wide gaps</div>
+  <div class="grid-3 sm:grid-1 relaxed">
+    <div class="card">Relaxed gaps</div>
+    <div class="card">Relaxed gaps</div>
+    <div class="card">Relaxed gaps</div>
   </div>
 </div>
 <h2 id="rhythm">Rhythm is the Flow</h2>
@@ -180,26 +178,34 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   All elements automatically align to the baseline grid. Headings, paragraphs, lists,
   blockquotes, forms, and media all follow the same rhythmic system.
 </p>
-<div class="card inset tight">
+<div class="card inset">
   <h4 class="mt-d">tight Rhythm</h4>
   <p>Spacing multiplier: 0.75×</p>
-  <ul>
+  <ul class="tight">
     <li>Closer spacing</li>
     <li>More compact</li>
   </ul>
 </div>
-<div class="card inset compact">
+<div class="card inset">
   <h4 class="mt-d">compact Rhythm</h4>
   <p>Spacing multiplier: 0.75×</p>
-  <ul>
+  <ul class="compact">
     <li>Closer spacing</li>
     <li>More compact</li>
   </ul>
 </div>
-<div class="card inset relaxed">
+<div class="card inset">
+  <h4 class="mt-d">Normal Rhythm</h4>
+  <p>Spacing multiplier: 1×</p>
+  <ul>
+    <li>Normal breathing room</li>
+    <li>Commmfortable</li>
+  </ul>
+</div>
+<div class="card inset">
   <h4 class="mt-d">relaxed Rhythm</h4>
   <p>Spacing multiplier: 1.5×</p>
-  <ul>
+  <ul class="relaxed">
     <li>More breathing room</li>
     <li>Generous spacing</li>
   </ul>
@@ -243,7 +249,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <div class="demo-placeholder">[Figure Placeholder]</div>
   <figcaption>Figures and captions maintain rhythm spacing</figcaption>
 </figure>
-<div class="container-feature">
   <h2 id="color">Color is the Emotion</h2>
   <p>
     Automatic light/dark theming with analog-inspired colors. Zero configuration— respects
@@ -253,56 +258,56 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <div class="grid-4 sm:grid-3">
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-red); color: var(--color-background)"
       >Red
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-orange); color: var(--color-background)"
       >Orange
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-yellow); color: var(--color-background)"
       >Yellow
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-green); color: var(--color-background)"
       >Green
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-cyan); color: var(--color-background)"
       >Cyan
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="border-color:var(--color-blue); background: color-mix(in srgb, var(--color-blue) 90%, var(--color-background-secondary)); color: var(--color-background)"
       >Blue
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-purple); color: var(--color-background)"
       >Purple
       </div>
     </div>
     <div class="sm:col-1">
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-pink); color: var(--color-background)"
       >Pink
       </div>
@@ -312,23 +317,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <div class="grid-3 sm:grid-2">
     <div>
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-background); color: var(--color-foreground)"
       >Background
       </div>
     </div>
     <div>
       <div
-        class="card"
+        class="card center"
         style="background: var(--color-foreground); color: var(--color-background)"
       >Foreground
       </div>
     </div>
     <div class="sm:row">
-      <div class="card" style="background: var(--color-background-secondary)">Secondary</div>
+      <div class="card center" style="background: var(--color-background-secondary)">Secondary</div>
     </div>
   </div>
   <h3>Text Colors</h3>
+  <div class="compact">
   <p>Normal text color</p>
   <p class="text-muted">Muted text (60% opacity)</p>
   <p class="text-subtle">Subtle text (40% opacity)</p>
@@ -385,7 +391,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
-<div class="container-feature">
+<div class="container-feature card">
   <h4>Feature Area</h4>
   <div class="demo-placeholder">Wide Feature Content</div>
   <p class="text-muted small" style="text-align: center">

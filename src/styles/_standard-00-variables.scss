@@ -30,7 +30,7 @@ $small: 768px;
 $large: 1024px;
 $wide: 1440px;
 
-$text-elements: "li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside";
+$text-elements: "div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside";
 $rhythm-elements: "#comments, h1, h2, h3, h4, h5, h6, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout";
 
 $rhythm-block-elements: "#comments, .callout, blockquote,  pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^='grid-']";

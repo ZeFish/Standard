@@ -59,20 +59,39 @@
 @media (max-width: #{$mobile}) {
     .grid,
     [class^="grid-"] {
-        --grid-gap: var(--base-d4);
-        --grid-row-gap: var(--base-d4);
+        --grid-gap: var(--base);
+        --grid-row-gap: var(--base);
     }
 }
-:is(.grid, [class^="grid-"]) > * {
+:is(.grid, [class^="grid-"]) * {
     min-width: 0; /* ← Force items to shrink below content size */
     margin-block: 0 !important;
 }
+/* =========================== */
+/* TYPOGRAPHIC NUANCES         */
+/* =========================== */
+
+/* Exception for grid in a prose div */
+.prose > :is(.grid, [class^="grid-"]) {
+    margin-block-start: calc(
+        (var(--base) * max(var(--base-block-gap), var(--base-gap))) -
+            (var(--base) * var(--base-gap))
+    );
+    margin-block-end: calc(
+        var(--base) * max(var(--base-block-gap), var(--base-gap))
+    );
+}
+:is(.grid, [class^="grid-"]) > * {
+    min-width: 0;
+    margin-block: 0;
+}
+
 /* Gap variants aligned to rhythm */
-.grid.compact {
+:is(.grid, [class^="grid-"]).compact {
     --grid-gap: var(--base-d4);
     --grid-row-gap: var(--base-d4);
 }
-.grid.relaxed {
+:is(.grid, [class^="grid-"]).relaxed {
     --grid-gap: var(--base-4);
     --grid-row-gap: var(--base-4);
 }

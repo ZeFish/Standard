@@ -8,12 +8,12 @@
   --ratio-eighthstep: 1.062;
   --optical-ratio: 1.5; 
   --line-height: 1.5; 
-  --base-gap: var(--base); 
+  --base-gap: var(--base-4); 
   --base-block-gap: var(
-      --base
+      --base-4
   ); 
   --body-padding: var(
-      --base-2
+      --base-4
   ); 
   
   --blur: blur(7px);
@@ -47,12 +47,12 @@
   --line-height-s: max(calc(var(--line-height) / 2), 1);
   
   --font-size: 1rem;
-  --base: calc(1rem * 0.7);
+  --leading: calc((var(--line-height) - 1) * var(--font-size));
+  --base: var(--leading);
   
   --base-d8: calc(var(--base) / 8);
   --base-d4: calc(var(--base) / 4);
   --base-d2: calc(var(--base) / 2);
-  --base: calc(1rlh);
   --base-2: calc(var(--base) * 2);
   --base-4: calc(var(--base) * 4);
   --base-8: calc(var(--base) * 8);
@@ -85,15 +85,11 @@
   --z-image-zoom: 9999;
   
   --duration-superfast: 0.15s;
-  
-  --flow-space: 1.5rem;
-  
-  --flow-scale-xs: calc(var(--flow-space) * 0.5); 
-  --flow-scale-s: calc(var(--flow-space) * 0.75); 
-  --flow-scale-m: var(--flow-space); 
-  --flow-scale-l: calc(var(--flow-space) * 1.5); 
-  --flow-scale-xl: calc(var(--flow-space) * 2); 
-  --flow-scale-xxl: calc(var(--flow-space) * 3); 
+}
+
+div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 
@@ -604,11 +600,6 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
-li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
-}
-
 
 
 
@@ -738,7 +729,7 @@ pre {
   font-size: var(--scale-d2);
   border: var(--border);
   border-radius: var(--radius);
-  padding: var(--base-d2);
+  padding: var(--base);
   overflow-x: auto;
   overflow-y: hidden;
   box-shadow: inset var(--shadow);
@@ -787,7 +778,7 @@ blockquote {
   font-style: italic;
   border-left: calc(var(--base) / 8) solid var(--color-border);
   color: var(--color-muted);
-  padding: var(--base-d2);
+  padding: var(--base);
   font-size: var(--scale-d2);
 }
 
@@ -914,7 +905,7 @@ a.button {
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
-  padding: var(--base-d8) var(--base-d4);
+  padding: var(--base-d2) var(--base);
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
@@ -980,7 +971,7 @@ textarea,
 select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
-  padding: var(--base-d4);
+  padding: var(--base-d2);
   border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-background-secondary);
@@ -1002,7 +993,7 @@ textarea {
   resize: vertical;
   min-height: 6em;
   
-  min-height: calc(var(--base-2) * 3);
+  min-height: var(--base-8);
 }
 
 legend {
@@ -1025,8 +1016,8 @@ fieldset {
 
 input[type=checkbox],
 input[type=radio] {
-  width: 1.25em;
-  height: 1.25em;
+  width: 1em;
+  height: 1em;
   cursor: pointer;
   accent-color: var(--color-accent);
 }
@@ -1117,8 +1108,9 @@ iframe,
 }
 
 pre,
-.inset {
-  box-shadow: inset var(--shadow);
+.inset,
+card.inset {
+  box-shadow: inset var(--shadow) !important;
 }
 
 
@@ -1146,7 +1138,7 @@ pre,
   display: flex;
   font-weight: var(--font-weight-bold, bold);
   user-select: none;
-  padding: var(--base-d4) var(--base-d2);
+  padding: var(--base-d4) var(--base);
   margin: 0;
 }
 .callout .callout-content {
@@ -1155,7 +1147,7 @@ pre,
   box-shadow: inset var(--shadow);
   overflow: hidden;
   border-radius: var(--radius);
-  padding: var(--base-d2) var(--base-d2);
+  padding: var(--base);
   margin-left: 0;
   border: var(--border);
   text-align: left;
@@ -1169,6 +1161,7 @@ pre,
 .callout .callout-content ul,
 .callout .callout-content ol {
   padding: 0 calc(var(--base) * 0.75);
+  list-style: none;
 }
 .callout .callout-content pre {
   margin: var(--base) 0;
@@ -1279,7 +1272,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   display: flow-root;
   
 }
-:where(.rhythm) > * {
+:where(.rhythm) * {
   vertical-align: baseline;
   margin-block-start: 0;
   margin-block-end: var(--base-gap);
@@ -1297,14 +1290,14 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-end: var(--base-gap);
 }
 :where(.rhythm) #comments, :where(.rhythm) .callout, :where(.rhythm) blockquote, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .grid, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside, :where(.rhythm) [class^=grid-] {
-  margin-block-start: max(var(--base-block-gap) - var(--base-gap), var(--base-gap));
+  margin-block-start: max(var(--base-block-gap) - var(--base-gap), 0);
   margin-block-end: max(var(--base-block-gap), var(--base-gap));
 }
 :where(.rhythm) :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]):has(+ :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-])) {
   margin-block-end: var(--base-gap);
 }
 :where(.rhythm) :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) + :is(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) {
-  margin-block-start: var(--base);
+  margin-block-start: max(0, var(--base-gap));
 }
 :where(.rhythm) * > :where(:last-child) {
   margin-block-end: 0;
@@ -1312,36 +1305,31 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) .rhythm {
   --base-gap: 1; 
 }
-:where(.rhythm) .prose > [class^=grid-],
-:where(.rhythm) .prose > .grid {
-  margin-block-start: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)) - var(--base) * var(--base-gap));
-  margin-block-end: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)));
-}
 :where(.rhythm) h1,
 :where(.rhythm) > h1:where(:first-child) {
-  margin-block-start: calc(var(--base-gap) * 8);
-  margin-block-end: calc(var(--base-gap) * 4);
+  margin-block-start: calc(var(--base) * 10);
+  margin-block-end: calc(var(--base) * 4);
 }
 :where(.rhythm) h2 {
-  margin-block-start: calc(var(--base-gap) * 4);
-  margin-block-end: calc(var(--base-gap) * 2);
+  margin-block-start: calc(var(--base) * 8);
+  margin-block-end: calc(var(--base) * 2);
 }
 :where(.rhythm) h3 {
-  margin-block-start: calc(var(--base-gap) * 2);
-  margin-block-end: calc(var(--base-gap) * 1);
+  margin-block-start: calc(var(--base) * 6);
+  margin-block-end: calc(var(--base) * 2);
 }
 :where(.rhythm) h4 {
-  margin-block-start: calc(var(--base-gap) * 2);
-  margin-block-end: var(--base-gap);
+  margin-block-start: calc(var(--base) * 4);
+  margin-block-end: var(--base-2);
 }
 :where(.rhythm) h5 {
-  margin-block-start: calc(var(--base-gap) * 2);
-  margin-block-end: var(--base-gap);
+  margin-block-start: var(--base-2);
+  margin-block-end: var(--base);
   font-size: var(--scale-d2);
 }
 :where(.rhythm) h6 {
-  margin-block-start: calc(var(--base-gap) * 2);
-  margin-block-end: var(--base-d2);
+  margin-block-start: var(--base-2);
+  margin-block-end: var(--base);
   font-size: var(--scale-d2);
 }
 :where(.rhythm) pre,
@@ -1349,7 +1337,9 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   font-size: var(--scale-d2);
 }
 :where(.rhythm) hr {
-  margin-inline: calc(var(--base-2) * var(--base-gap));
+  margin-inline: calc(var(--base-4));
+  margin-block-start: max((var(--base-block-gap) - var(--base-gap)) * 2, var(--base-gap));
+  margin-block-end: max(var(--base-block-gap) * 2, var(--base-gap));
 }
 :where(.rhythm) blockquote > :first-child,
 :where(.rhythm) pre > :first-child,
@@ -1366,46 +1356,46 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) ul,
 :where(.rhythm) ol {
   list-style: none;
-  padding-inline-start: var(--base);
-  padding-inline-end: var(--base);
+  margin-block-start: 0;
+  padding-inline: var(--base-2);
 }
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
-  padding-inline-start: var(--base);
-  margin-block-start: var(--base-d2);
+  padding-inline-start: var(--base-2);
+  margin-block-start: var(--base);
   margin-block-end: 0;
 }
 :where(.rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--base-d2);
-}
-:where(.rhythm) .compact {
-  --base-gap: var(--base-d2);
-}
-:where(.rhythm) .compact li {
-  margin-block-end: var(--base-d2);
-}
-:where(.rhythm) .tight {
-  --base-gap: var(--base-d4);
-}
-:where(.rhythm) .tight li {
-  margin-block-end: var(--base-d4);
-}
-:where(.rhythm) .relaxed {
-  --base-gap: var(--base-2);
-}
-:where(.rhythm) .relaxed li {
   margin-block-end: var(--base-2);
 }
 :where(.rhythm) li:last-child {
   margin-block-end: 0;
 }
+:where(.rhythm) .compact {
+  --base-gap: var(--base);
+}
+:where(.rhythm) .compact li {
+  margin-block-end: var(--base-2);
+}
+:where(.rhythm) .tight {
+  --base-gap: var(--base-d2);
+}
+:where(.rhythm) .tight li {
+  margin-block-end: var(--base);
+}
+:where(.rhythm) .relaxed {
+  --base-gap: var(--base-2);
+}
+:where(.rhythm) .relaxed li {
+  margin-block-end: var(--base-4);
+}
 :where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
-  left: calc(var(--base) * -1);
+  left: calc(var(--base-2) * -1);
   width: var(--base);
   text-align: center;
   color: var(--color-subtle);
@@ -1419,12 +1409,14 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 :where(.rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
-  left: calc(var(--base) * -1);
-  text-align: center;
+  left: calc(var(--base-2) * -1);
+  text-align: left;
+  top: var(--base-d8);
   color: var(--color-subtle);
   font-variant-numeric: tabular-nums;
   overflow: hidden;
-  width: calc(var(--base));
+  width: calc(var(--base-4));
+  font-size: var(--scale-d2);
 }
 :where(.rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
 :where(.rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
@@ -1432,34 +1424,37 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(.rhythm) form:not(.grid *) {
   display: grid;
-  gap: calc(var(--base-d2) * var(--base-gap));
+  gap: calc(var(--base) * var(--base-gap));
 }
 :where(.rhythm) .grid form {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--base-d2) * var(--base-gap));
+  gap: calc(var(--base) * var(--base-gap));
 }
 :where(.rhythm) fieldset {
-  padding-inline: var(--base-d2);
+  padding-inline: var(--base);
   display: grid;
   gap: 0;
 }
 :where(.rhythm) legend {
-  margin-block-end: var(--base-d2);
+  margin-block-end: var(--base);
 }
 :where(.rhythm) input,
 :where(.rhythm) textarea,
 :where(.rhythm) select {
-  padding-inline: var(--base-d2);
-  margin-block-end: var(--base-d2);
+  padding-inline: var(--base);
+  margin-block-end: var(--base);
 }
 :where(.rhythm) label {
-  margin-inline: var(--base-d2);
-  margin-block-end: var(--base-d4);
+  margin-inline: var(--base);
+  margin-block-end: var(--base-d2);
 }
 :where(.rhythm) input[type=checkbox] + label,
 :where(.rhythm) input[type=radio] + label {
   margin-inline-start: var(--base-d8);
+}
+:where(.rhythm) div:has(input + label) {
+  margin-block-end: var(--base);
 }
 :where(.rhythm) fieldset div,
 :where(.rhythm) fieldset p {
@@ -1467,7 +1462,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   padding: 0;
 }
 :where(.rhythm) fieldset + button {
-  margin-block-start: var(--base-d2);
+  margin-block-start: var(--base);
 }
 :where(.rhythm) img,
 :where(.rhythm) video,
@@ -1579,22 +1574,36 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 @media (max-width: 600px) {
   .grid,
   [class^=grid-] {
-    --grid-gap: var(--base-d4);
-    --grid-row-gap: var(--base-d4);
+    --grid-gap: var(--base);
+    --grid-row-gap: var(--base);
   }
 }
-:is(.grid, [class^=grid-]) > * {
+:is(.grid, [class^=grid-]) * {
   min-width: 0; 
   margin-block: 0 !important;
 }
 
 
-.grid.compact {
+
+
+
+.prose > :is(.grid, [class^=grid-]) {
+  margin-block-start: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)) - var(--base) * var(--base-gap));
+  margin-block-end: calc(var(--base) * max(var(--base-block-gap), var(--base-gap)));
+}
+
+:is(.grid, [class^=grid-]) > * {
+  min-width: 0;
+  margin-block: 0;
+}
+
+
+:is(.grid, [class^=grid-]).compact {
   --grid-gap: var(--base-d4);
   --grid-row-gap: var(--base-d4);
 }
 
-.grid.relaxed {
+:is(.grid, [class^=grid-]).relaxed {
   --grid-gap: var(--base-4);
   --grid-row-gap: var(--base-4);
 }
@@ -2485,19 +2494,16 @@ hr.col-row {
 
 :root {
   
-  --gap: clamp(var(--base), 6%, var(--base-4));
   --content: min(var(--line-width), 100%); 
-  --content-small: calc(var(--base-block-gap) - var(--base-gap));
-  --content-accent: minmax(0, var(--base-2));
-  --content-feature: minmax(0, var(--base-4));
+  --content-small: max(
+      calc(var(--base-block-gap) - var(--base-gap)),
+      var(--base-gap)
+  );
+  --content-accent: minmax(0, var(--base-gap));
+  --content-feature: minmax(0, var(--base-block-gap));
   --content-hero: minmax(0, 1fr);
 }
 
-@media (max-width: 768px) {
-  :root {
-    --gap: 0;
-  }
-}
 
 
 :where(.prose) {
@@ -2722,7 +2728,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   
   --card-border: var(--border);
   --card-border-radius: var(--radius);
-  --card-padding: var(--base);
+  --card-padding: var(--base-2);
   --card-background: var(--color-background-secondary);
   --card-shadow: var(--shadow);
   background: var(--card-background);
@@ -3582,20 +3588,28 @@ dialog.modal::backdrop {
   font-size: var(--scale-d3);
 }
 
+#comments * {
+  margin-block-end: 0;
+}
 #comments {
   font-size: var(--scale-d2);
 }
 #comments .comment {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  background: var(--color-background-secondary);
+  padding: var(--base);
   margin-block-end: var(--base);
 }
 #comments .comment .comment-header {
   display: flex;
   align-items: baseline;
-  gap: var(--base-d4);
+  gap: var(--base-d2);
 }
 #comments .comment .comment-header .comment-author {
-  color: var(--color-foreground);
   font-weight: var(--font-weight-bold);
+  margin-block-end: var(--base);
 }
 #comments .comment .comment-header .comment-date,
 #comments .comment .comment-header .comment-pending {
@@ -3609,7 +3623,9 @@ dialog.modal::backdrop {
 #comments .comment .comment-content {
   margin-inline: var(--base-d2);
   margin-block-start: var(--base-d8);
-  padding-block-end: var(--base-d8);
+  border-left: var(--border);
+  padding: var(--base);
+  color: var(--color-muted);
 }
 #comments :last-child {
   margin-block-end: 0;
@@ -5691,7 +5707,7 @@ ul.menu.horizontal li {
 .standard-debug {
   position: relative;
 }
-.standard-debug :is(li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
+.standard-debug :is(div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside) {
   overflow: hidden;
 }
 .standard-debug h1,

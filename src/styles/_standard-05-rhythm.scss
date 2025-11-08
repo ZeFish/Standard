@@ -60,7 +60,7 @@
     display: flow-root;
 
     /* Apply rhythm spacing to all direct children */
-    > * {
+    * {
         vertical-align: baseline;
         margin-block-start: 0;
         margin-block-end: var(--base-gap);
@@ -90,7 +90,7 @@
     #{$rhythm-block-elements} {
         margin-block-start: max(
             calc(var(--base-block-gap) - var(--base-gap)),
-            var(--base-gap)
+            0
         );
         margin-block-end: max(var(--base-block-gap), var(--base-gap));
     }
@@ -101,7 +101,7 @@
         margin-block-end: var(--base-gap);
     }
     :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
-        margin-block-start: var(--base);
+        margin-block-start: max(0, var(--base-gap));
     }
 
     * > :where(:last-child) {
@@ -111,52 +111,36 @@
         --base-gap: 1; /* Reset for nested contexts */
     }
 
-    /* =========================== */
-    /* TYPOGRAPHIC NUANCES         */
-    /* =========================== */
-
-    /* Exception for grid in a prose div */
-    .prose > [class^="grid-"],
-    .prose > .grid {
-        margin-block-start: calc(
-            (var(--base) * max(var(--base-block-gap), var(--base-gap))) -
-                (var(--base) * var(--base-gap))
-        );
-        margin-block-end: calc(
-            var(--base) * max(var(--base-block-gap), var(--base-gap))
-        );
-    }
-
     h1,
     > h1:where(:first-child) {
-        margin-block-start: calc(var(--base-gap) * 8);
-        margin-block-end: calc(var(--base-gap) * 4);
+        margin-block-start: calc(var(--base) * 10);
+        margin-block-end: calc(var(--base) * 4);
     }
 
     h2 {
-        margin-block-start: calc(var(--base-gap) * 4);
-        margin-block-end: calc(var(--base-gap) * 2);
+        margin-block-start: calc(var(--base) * 8);
+        margin-block-end: calc(var(--base) * 2);
     }
 
     h3 {
-        margin-block-start: calc(var(--base-gap) * 2);
-        margin-block-end: calc(var(--base-gap) * 1);
+        margin-block-start: calc(var(--base) * 6);
+        margin-block-end: calc(var(--base) * 2);
     }
 
     h4 {
-        margin-block-start: calc(var(--base-gap) * 2);
-        margin-block-end: var(--base-gap);
+        margin-block-start: calc(var(--base) * 4);
+        margin-block-end: var(--base-2);
     }
 
     h5 {
-        margin-block-start: calc(var(--base-gap) * 2);
-        margin-block-end: var(--base-gap);
+        margin-block-start: var(--base-2);
+        margin-block-end: var(--base);
         font-size: var(--scale-d2);
     }
 
     h6 {
-        margin-block-start: calc(var(--base-gap) * 2);
-        margin-block-end: var(--base-d2);
+        margin-block-start: var(--base-2);
+        margin-block-end: var(--base);
         font-size: var(--scale-d2);
     }
 
@@ -180,7 +164,12 @@
     */
 
     hr {
-        margin-inline: calc(var(--base-2) * var(--base-gap));
+        margin-inline: calc(var(--base-4));
+        margin-block-start: max(
+            calc((var(--base-block-gap) - var(--base-gap)) * 2),
+            var(--base-gap)
+        );
+        margin-block-end: max((var(--base-block-gap) * 2), var(--base-gap));
     }
 
     /* Reset first-child spacing for special blocks */
@@ -208,18 +197,19 @@
     /* =========================== */
 
     /* Lists */
+
     ul,
     ol {
         list-style: none;
-        padding-inline-start: var(--base);
-        padding-inline-end: var(--base);
+        margin-block-start: 0;
+        padding-inline: var(--base-2);
     }
 
     /* Nested lists */
     li > ul,
     li > ol {
-        padding-inline-start: var(--base);
-        margin-block-start: var(--base-d2);
+        padding-inline-start: var(--base-2);
+        margin-block-start: var(--base);
         margin-block-end: 0;
     }
 
@@ -228,35 +218,35 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: var(--base-d2);
+        margin-block-end: var(--base-2);
+    }
+    li:last-child {
+        margin-block-end: 0;
     }
     .compact {
-        --base-gap: var(--base-d2);
+        --base-gap: var(--base);
         li {
-            margin-block-end: var(--base-d2);
+            margin-block-end: var(--base-2);
         }
     }
     .tight {
-        --base-gap: var(--base-d4);
+        --base-gap: var(--base-d2);
         li {
-            margin-block-end: var(--base-d4);
+            margin-block-end: var(--base);
         }
     }
     .relaxed {
         --base-gap: var(--base-2);
         li {
-            margin-block-end: var(--base-2);
+            margin-block-end: var(--base-4);
         }
-    }
-    li:last-child {
-        margin-block-end: 0;
     }
 
     /* Unordered list bullets */
     ul > li::before {
         content: "•";
         position: absolute;
-        left: calc(var(--base) * -1);
+        left: calc(var(--base-2) * -1);
         width: var(--base);
         text-align: center;
         color: var(--color-subtle);
@@ -274,12 +264,14 @@
     ol > li::before {
         content: counter(ol-counter) ".";
         position: absolute;
-        left: calc(var(--base) * -1);
-        text-align: center;
+        left: calc(var(--base-2) * -1);
+        text-align: left;
+        top: var(--base-d8);
         color: var(--color-subtle);
         font-variant-numeric: tabular-nums;
         overflow: hidden;
-        width: calc(var(--base));
+        width: calc(var(--base-4));
+        font-size: var(--scale-d2);
     }
 
     /* Inline lists - remove margin-bottom from list items */
@@ -297,45 +289,49 @@
     /* Form containers - avoid nested grids */
     form:not(.grid *) {
         display: grid;
-        gap: calc(var(--base-d2) * var(--base-gap));
+        gap: calc(var(--base) * var(--base-gap));
     }
 
     /* Forms inside grids use flex layout to avoid nesting issues */
     .grid form {
         display: flex;
         flex-direction: column;
-        gap: calc(var(--base-d2) * var(--base-gap));
+        gap: calc(var(--base) * var(--base-gap));
     }
 
     /* Form field groups - spacing only */
     fieldset {
-        padding-inline: var(--base-d2);
+        padding-inline: var(--base);
         display: grid;
         gap: 0;
     }
 
     legend {
-        margin-block-end: var(--base-d2);
+        margin-block-end: var(--base);
     }
 
     /* Form inputs */
     input,
     textarea,
     select {
-        padding-inline: var(--base-d2);
-        margin-block-end: var(--base-d2);
+        padding-inline: var(--base);
+        margin-block-end: var(--base);
     }
 
     /* Labels - spacing only */
     label {
-        margin-inline: var(--base-d2);
-        margin-block-end: var(--base-d4);
+        margin-inline: var(--base);
+        margin-block-end: var(--base-d2);
     }
 
     /* Checkbox/radio with labels */
     input[type="checkbox"] + label,
     input[type="radio"] + label {
         margin-inline-start: var(--base-d8);
+    }
+
+    div:has(input + label) {
+        margin-block-end: var(--base);
     }
 
     fieldset div,
@@ -345,7 +341,7 @@
     }
 
     fieldset + button {
-        margin-block-start: var(--base-d2);
+        margin-block-start: var(--base);
     }
 
     /* =========================== */

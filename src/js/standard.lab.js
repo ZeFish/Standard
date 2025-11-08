@@ -21,7 +21,6 @@ class StandardLab {
     this.modifiedTokens = new Set();
     this.position = this.loadPosition();
     this.version = document.documentElement.dataset.standardVersion;
-    // ADD THIS LINE:
     this.customThemes = []; // Store custom themes added by users
 
     // Slider configuration for numeric tokens
@@ -99,6 +98,7 @@ class StandardLab {
     this.initKeyboardShortcuts();
 
     this.restoreTheme();
+    this.restoreDebugMode(); // NEW: Restore debug mode from sessionStorage
 
     // Check if debug mode is already active OR if blueprint theme is active
     const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -130,6 +130,22 @@ class StandardLab {
     if (savedTheme) {
       document.documentElement.setAttribute("data-theme", savedTheme);
     }
+  }
+
+  // NEW: Restore debug mode from sessionStorage
+  restoreDebugMode() {
+    const savedDebugMode = sessionStorage.getItem("standard-debug-mode");
+
+    if (savedDebugMode === "true") {
+      document.documentElement.classList.add("standard-debug");
+    } else if (savedDebugMode === "false") {
+      document.documentElement.classList.remove("standard-debug");
+    }
+  }
+
+  // NEW: Save debug mode to sessionStorage
+  saveDebugMode(isEnabled) {
+    sessionStorage.setItem("standard-debug-mode", isEnabled.toString());
   }
 
   /**
@@ -434,6 +450,9 @@ class StandardLab {
       ?.addEventListener("change", (e) => {
         const isEnabled = e.target.checked;
         document.documentElement.classList.toggle("standard-debug", isEnabled);
+
+        // UPDATED: Save debug mode to sessionStorage
+        this.saveDebugMode(isEnabled);
 
         const currentTheme =
           document.documentElement.getAttribute("data-theme");
@@ -963,6 +982,9 @@ class StandardLab {
         document.documentElement.classList.toggle("standard-debug");
         const isActive =
           document.documentElement.classList.contains("standard-debug");
+
+        // UPDATED: Save debug mode to sessionStorage
+        this.saveDebugMode(isActive);
 
         if (isActive) {
           this.injectGridDebugOverlays();

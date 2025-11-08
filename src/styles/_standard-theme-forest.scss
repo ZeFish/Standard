@@ -64,11 +64,6 @@
         border-radius: var(--radius);
     }
 
-    blockquote,
-    pre {
-        padding: calc(var(--base) * 0.5);
-    }
-
     pre {
         margin-block-end: var(--base-4);
     }
@@ -131,25 +126,6 @@
         position: relative;
         top: calc(var(--base) * -0.4);
         opacity: 0.2;
-    }
-
-    #comments .comment {
-        border: var(--border);
-        box-shadow: var(--shadow);
-        border-radius: var(--radius);
-        background: var(--color-background-secondary);
-        padding: var(--base-d2) var(--base);
-    }
-    #comments {
-        .comment-author {
-            color: var(--color-muted);
-        }
-        .comment-content {
-            border-left: var(--border);
-            margin-inline: var(--base-d2);
-            padding-inline: var(--base-d2);
-            color: var(--color-muted);
-        }
     }
 }
 @font-face {

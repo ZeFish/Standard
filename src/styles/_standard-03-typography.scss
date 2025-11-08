@@ -100,8 +100,3 @@
 .inter-display {
     font-variation-settings: "opsz" 32;
 }
-
-#{$text-elements} {
-    text-box-trim: trim-both;
-    text-box-edge: cap alphabetic;
-}

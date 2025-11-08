@@ -137,7 +137,7 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--radius);
-    padding: var(--base-d2);
+    padding: var(--base);
     overflow-x: auto;
     overflow-y: hidden;
     box-shadow: inset var(--shadow);
@@ -186,7 +186,7 @@ blockquote {
     font-style: italic;
     border-left: calc(var(--base) / 8) solid var(--color-border);
     color: var(--color-muted);
-    padding: var(--base-d2);
+    padding: var(--base);
     font-size: var(--scale-d2);
 }
 
@@ -324,7 +324,7 @@ a.button {
     color: color-mix(in srgb, var(--color-background) 85%, transparent);
     border: var(--border);
     border-color: var(--color-border);
-    padding: var(--base-d8) var(--base-d4);
+    padding: var(--base-d2) var(--base);
     box-shadow: var(--shadow);
 
     cursor: pointer;
@@ -403,7 +403,7 @@ select {
     width: 100%;
     font-family: var(--font-interface), system-ui, sans-serif;
 
-    padding: var(--base-d4);
+    padding: var(--base-d2);
     border-radius: var(--radius);
 
     color: var(--color-foreground);
@@ -434,7 +434,7 @@ textarea {
     resize: vertical;
     min-height: 6em;
     /* keep rhythm-aware variant */
-    min-height: calc(var(--base-2) * 3);
+    min-height: var(--base-8);
 }
 
 legend {
@@ -461,8 +461,8 @@ fieldset {
 /* Checkboxes and radios */
 input[type="checkbox"],
 input[type="radio"] {
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
     cursor: pointer;
     accent-color: var(--color-accent);
 }
@@ -601,8 +601,9 @@ iframe,
     box-shadow: var(--shadow);
 }
 pre,
-.inset {
-    box-shadow: inset var(--shadow);
+.inset,
+card.inset {
+    box-shadow: inset var(--shadow) !important;
 }
 
 // ==========================
@@ -644,7 +645,7 @@ pre,
         font-weight: var(--font-weight-bold, bold);
 
         user-select: none;
-        padding: var(--base-d4) var(--base-d2);
+        padding: var(--base-d4) var(--base);
         margin: 0;
     }
 
@@ -663,7 +664,7 @@ pre,
         box-shadow: inset var(--shadow);
         overflow: hidden;
         border-radius: var(--radius);
-        padding: var(--base-d2) var(--base-d2);
+        padding: var(--base);
         margin-left: 0;
         border: var(--border);
         text-align: left;
@@ -678,6 +679,7 @@ pre,
         ul,
         ol {
             padding: 0 calc(var(--base) * 0.75);
+            list-style: none;
         }
 
         pre {

@@ -31,12 +31,12 @@
 
     --optical-ratio: 1.5; /* Optical Harmony ratio (font size) */
     --line-height: 1.5; /* The actual line-height of html */
-    --base-gap: var(--base); /* Space between standard block like paragraph */
+    --base-gap: var(--base-4); /* Space between standard block like paragraph */
     --base-block-gap: var(
-        --base
+        --base-4
     ); /* Space between special block like image blockquote and code block */
     --body-padding: var(
-        --base-2
+        --base-4
     ); /* Padding around the body, can be negated by .body-p-neg, .body-p-neg-header, .body-p-neg-footer */
 
     /* Ui Guide */
@@ -77,12 +77,12 @@
 
     /* Base measurements & ratios - the foundation of everything else */
     --font-size: 1rem;
-    --base: calc(1rem * 0.7);
+    --leading: calc((var(--line-height) - 1) * var(--font-size));
+    --base: var(--leading);
     /* Name use for actual spacing in the framework  */
     --base-d8: calc(var(--base) / 8);
     --base-d4: calc(var(--base) / 4);
     --base-d2: calc(var(--base) / 2);
-    --base: calc(1rlh);
     --base-2: calc(var(--base) * 2);
     --base-4: calc(var(--base) * 4);
     --base-8: calc(var(--base) * 8);
@@ -118,54 +118,11 @@
 
     /* Callout only animation, to test */
     --duration-superfast: 0.15s;
+}
 
-    /**
-     * Flow Space Unit
-     *
-     * @group tokens-spacing
-     * @author Francis Fontaine
-     * @since 0.1.0
-     *
-     * In 1455, Johannes Gutenberg printed his 42-line Bible with something
-     * remarkable: every line of text sat on an invisible grid, spaced with
-     * mathematical precision. He didn't just invent movable type—he invented
-     * the baseline grid.
-     *
-     * Fast forward to 1501, and Aldus Manutius in Venice discovered that
-     * 120% line-height made text sing. Not 100%, not 150%—exactly 120%.
-     * At 16px base font, that's 1.5rem, or 24 pixels. This single number
-     * became the foundation of readable typography for the next 500 years.
-     *
-     * This variable holds that magic number. It's the fundamental spacing unit
-     * that everything else derives from—the heartbeat of your vertical rhythm.
-     * Change it, and you change the entire breathing pattern of your design.
-     *
-     * ### Future Improvements
-     *
-     * - Make responsive (smaller on mobile)
-     * - Add clamp() for fluid scaling
-     *
-     * @see {variable} --flow-scale-* - Multipliers based on this unit
-     * @see {mixin} rhythm - Vertical rhythm system
-     * @see {class} .flow - Flow spacing utility
-     *
-     * @link https://en.wikipedia.org/wiki/Aldus_Manutius History of the Aldine Press
-     *
-     * @example scss
-     *   .card {
-     *     padding: var(--flow-space);
-     *     gap: calc(var(--flow-space) / 2);
-     *   }
-     */
-    --flow-space: 1.5rem;
-
-    /* Optional: Scale multipliers for consistent spacing */
-    --flow-scale-xs: calc(var(--flow-space) * 0.5); /* 0.75rem */
-    --flow-scale-s: calc(var(--flow-space) * 0.75); /* 1.125rem */
-    --flow-scale-m: var(--flow-space); /* 1.5rem */
-    --flow-scale-l: calc(var(--flow-space) * 1.5); /* 2.25rem */
-    --flow-scale-xl: calc(var(--flow-space) * 2); /* 3rem */
-    --flow-scale-xxl: calc(var(--flow-space) * 3); /* 4.5rem */
+#{$text-elements} {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
 }
 
 /* Responsive adjustments - collapse gutters on small screens */

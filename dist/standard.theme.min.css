@@ -394,10 +394,6 @@
   border: var(--border);
   border-radius: var(--radius);
 }
-[data-theme=forest] blockquote,
-[data-theme=forest] pre {
-  padding: calc(var(--base) * 0.5);
-}
 [data-theme=forest] pre {
   margin-block-end: var(--base-4);
 }
@@ -451,22 +447,6 @@
   position: relative;
   top: calc(var(--base) * -0.4);
   opacity: 0.2;
-}
-[data-theme=forest] #comments .comment {
-  border: var(--border);
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
-  background: var(--color-background-secondary);
-  padding: var(--base-d2) var(--base);
-}
-[data-theme=forest] #comments .comment-author {
-  color: var(--color-muted);
-}
-[data-theme=forest] #comments .comment-content {
-  border-left: var(--border);
-  margin-inline: var(--base-d2);
-  padding-inline: var(--base-d2);
-  color: var(--color-muted);
 }
 
 @font-face {
