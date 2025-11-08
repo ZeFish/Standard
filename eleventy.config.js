@@ -41,6 +41,7 @@ ai: {
       "cloudflare/**/*.js",
     ],
     outputDir: "content/docs",
+    verbose: true,
   });
 
   // ===== ADDITIONAL ASSET FOLDERS =====

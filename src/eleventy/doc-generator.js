@@ -249,7 +249,7 @@ export default function (eleventyConfig, options = {}) {
   } = options;
 
   const logger = Logger({
-    scope: "DOC",
+    scope: "Doc",
     verbose: options.verbose,
   });
 

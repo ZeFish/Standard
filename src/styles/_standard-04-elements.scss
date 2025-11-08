@@ -492,20 +492,6 @@ iframe {
 }
 
 /* =========================== */
-/* Callouts                    */
-/* =========================== */
-
-.callout {
-    background: var(--color-background-secondary);
-    border: var(--border);
-    border-radius: var(--radius);
-}
-
-.callout-title {
-    font-weight: var(--font-weight-bold, bold);
-}
-
-/* =========================== */
 /* Utilities                   */
 /* =========================== */
 
@@ -622,6 +608,17 @@ pre,
 // ==========================
 // CALLOUT
 // ==========================
+
+/* =========================== */
+/* Callouts                    */
+/* =========================== */
+
+.callout {
+    background: var(--color-background-secondary);
+    border: var(--border);
+    border-radius: var(--radius);
+}
+
 .callout {
     transition: var(--duration-superfast) ease;
     padding: var(--base-d8);
@@ -636,14 +633,15 @@ pre,
     border: var(--border);
     font-size: var(--scale-d2);
 
-    .callout-title {
+    .callout-title,
+    > summary {
         color: color-mix(
             in srgb,
             var(--color-callout) 50%,
             var(--color-foreground)
         );
         display: flex;
-        font-weight: bold;
+        font-weight: var(--font-weight-bold, bold);
 
         user-select: none;
         padding: var(--base-d4) var(--base-d2);
