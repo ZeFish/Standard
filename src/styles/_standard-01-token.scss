@@ -139,6 +139,10 @@
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
     }
+    pre, blockquote {
+        padding-inline: var(--base);
+        font-size: var(--scale-d3);
+    }
 }
 
 body::after {
