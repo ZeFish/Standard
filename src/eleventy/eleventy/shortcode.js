@@ -37,9 +37,12 @@ export default function (eleventyConfig, site = {}) {
   // Shortcode to include Standard CSS and JS from local files
   eleventyConfig.addShortcode("standard_assets", function () {
     let html = "";
+    
+    // Generate cache-busting timestamp (or use package version)
+    const cacheBuster = Date.now(); // Or use: process.env.npm_package_version
 
-    html = `\n<link rel="stylesheet" href="/${outputDir}/standard.bundle.css">
-    <script src="/${outputDir}/standard.bundle.full.js" type="module"></script>`;
+    html = `\n<link rel="stylesheet" href="/${outputDir}/standard.bundle.css?v=${cacheBuster}">
+    <script src="/${outputDir}/standard.bundle.full.js?v=${cacheBuster}" type="module"></script>`;
 
     // Add comments client library if comments are enabled
     if (site.standard?.comments?.enabled) {
