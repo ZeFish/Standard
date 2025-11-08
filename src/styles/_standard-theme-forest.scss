@@ -45,7 +45,7 @@
     --color-bold: var(--color-foreground);
     --color-italic: var(--color-foreground);
 
-    --optical-ratio: 1.6;
+    --optical-ratio: var(--ratio-golden);
     --line-height: var(--optical-ratio);
     --font-weight: 400;
     --font-weight-bold: 500;
