@@ -177,6 +177,10 @@
   margin-block-start: calc(var(--base) * -1);
   margin-block-end: var(--base-8);
 }
+[data-theme=paper] h2 {
+  margin-block-start: var(--base-4);
+  margin-block-end: var(--base-2);
+}
 [data-theme=paper] {
   background: var(--color-background-secondary);
 }
@@ -220,7 +224,15 @@
   background: none;
 }
 [data-theme=swiss] p {
-  text-align: justify;
+  text-align: left;
+}
+[data-theme=swiss] strong {
+  color: var(--color-accent);
+  font-weight: normal;
+}
+[data-theme=swiss] em {
+  background-color: var(--color-accent);
+  color: var(--color-background);
 }
 [data-theme=swiss] .callout {
   background: none;
@@ -361,6 +373,7 @@
   --font-header: "Forrest";
   --font-monospace: "Monaspace Xenon Var";
   --font-interface: "NationalPark";
+  --font-interface-weight: 600;
   --color-accent: var(--color-yellow);
   --color-code: var(--color-red);
   --color-bold: var(--color-foreground);
@@ -385,6 +398,9 @@
 [data-theme=forest] pre {
   padding: calc(var(--base) * 0.5);
 }
+[data-theme=forest] pre {
+  margin-block-end: var(--base-4);
+}
 [data-theme=forest] .operator,
 [data-theme=forest] .punctuation {
   color: var(--color-muted);
@@ -395,6 +411,9 @@
   font-family: Forrest;
   font-weight: 600;
   letter-spacing: -0.05em;
+}
+[data-theme=forest] aside {
+  padding: var(--base-d2);
 }
 [data-theme=forest] textarea {
   padding: var(--base-d2);
@@ -544,10 +563,10 @@
 
 @font-face {
   font-family: "NationalPark";
-  font-weight: 400 800;
+  font-weight: 200 800;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/NationalPark-Regular.woff2") format("woff2");
+  src: url("/assets/fonts/NationalPark-VariableVF.woff2") format("woff2");
 }
 [data-theme=kernel] {
   --color-light-background: #f7f3ee;
@@ -714,14 +733,14 @@
   font-weight: 200 1000;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff");
+  src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff2");
 }
 @font-face {
   font-family: "Diatype";
   font-weight: 200 1000;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2") format("woff");
+  src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "CalSans";
@@ -729,13 +748,6 @@
   font-style: normal;
   font-display: swap;
   src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
-}
-@font-face {
-  font-family: "Diatype";
-  font-weight: 200 1000;
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2") format("woff");
 }
 @font-face {
   font-family: "Kalice";
@@ -812,6 +824,7 @@
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
   --body-padding: var(--base-4);
+  --base-gap: var(--base-2);
   --shadow: 0;
   --radius: 0;
   --color-accent: var(--color-red);
@@ -1163,4 +1176,15 @@
   font-weight: 100 1000;
   font-style: italic;
   src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
+}
+[data-theme=custom_1] {
+  --color-foreground: green;
+}
+
+[data-theme=custom_2] {
+  --color-foreground: blue;
+}
+
+[data-theme=custom_3] {
+  --color-foreground: red;
 }

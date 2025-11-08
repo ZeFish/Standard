@@ -53,3 +53,85 @@
     --base-block-gap: 0;
     font-size: var(--scale-d2);
 }
+
+@font-face {
+    font-family: "Fraunces";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2")
+        format("woff2");
+}
+@font-face {
+    font-family: "Fraunces";
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2")
+        format("woff2");
+}
+
+@font-face {
+    font-family: "Graveur";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/Graveur-VAR.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Graveur";
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Graveur";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
+}
+@font-face {
+    font-family: "Graveur";
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Marauder";
+    src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Marauder";
+    src: url("/assets/fonts/Marauder-Italic[wght].woff2") format("woff2");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GnomonSimple";
+    src: url("/assets/fonts/Gnomon-Simple") format("ttf");
+    font-style: normal;
+}
+@font-face {
+    font-family: "GnomonForeground";
+    src: url("/assets/fonts/Gnomon-Foreground") format("ttf");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NoTears";
+    src: url("/assets/fonts/NoTears.ttf") format("ttf");
+    font-style: normal;
+}
+@font-face {
+    font-family: "NoTears";
+    src: url("/assets/fonts/NoTearsBold.ttf") format("ttf");
+    font-style: normal;
+    font-weight: bold;
+}

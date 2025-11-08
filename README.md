@@ -1,6 +1,7 @@
 # Standard Framework
 
 - [Example](/example/)
+- [Fonts](/fonts/)
 - [Mardown](/markdown/)
 - [Égalitarisme](/egalitarisme/)
 - [Componnent](/compo/)

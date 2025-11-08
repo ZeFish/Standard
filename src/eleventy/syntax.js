@@ -577,6 +577,19 @@ ${itemTemplate}
   DEFAULT_OBSIDIAN_ICONS.tldr = DEFAULT_OBSIDIAN_ICONS.abstract;
 
   // Legacy inline handlers for backward compatibility
+
+  processor.add(
+    "muted",
+    { type: "inline" },
+    (match) => `<p class="muted">${match.value}</p>`,
+  );
+
+  processor.add(
+    "subtle",
+    { type: "inline" },
+    (match) => `<p class="subtle">${match.value}</p>`,
+  );
+
   processor.add(
     "note",
     { type: "inline" },
