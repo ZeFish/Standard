@@ -140,8 +140,8 @@
         --line-height: var(--mobile-line-height);
     }
     pre, blockquote {
-        padding-inline: var(--base);
-        font-size: var(--scale-d3);
+        padding-inline: var(--base) !important;
+        font-size: var(--scale-d3) !important;
     }
 }
 
