@@ -82,6 +82,10 @@
         font-weight: 600;
         letter-spacing: -0.05em;
     }
+    
+    aside {
+        padding-block: var(--base-2);
+    }
 
     textarea {
         padding: var(--base-d2);
