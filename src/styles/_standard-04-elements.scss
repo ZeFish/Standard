@@ -74,37 +74,37 @@ h6 {
 h1 {
     font-weight: var(--font-weight-h1);
     font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
-    line-height: var(--font-header-line-height);
+    line-height: var(--font-header-line-height, var(--line-height));
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
     font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
-    line-height: var(--font-header-line-height);
+    line-height: var(--font-header-line-height, var(--line-height));
 }
 
 h3 {
     font-weight: var(--font-weight-h3);
     font-size: var(--scale-3);
-    line-height: var(--font-header-line-height);
+    line-height: var(--font-header-line-height, var(--line-height));
 }
 
 h4 {
     font-weight: var(--font-weight-h4);
     font-size: var(--scale-2);
-    line-height: var(--base);
+    line-height: var(--line-height);
 }
 
 h5 {
     font-weight: var(--font-weight-h5);
     font-size: var(--scale-2);
-    line-height: var(--base);
+    line-height: var(--line-height);
 }
 
 h6 {
     font-weight: var(--font-weight-h6);
     font-size: var(--scale-2);
-    line-height: var(--base);
+    line-height: var(--line-height);
 }
 
 /* Inline code, monospace families */
