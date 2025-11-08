@@ -38,7 +38,6 @@
 
     /* Space between special block like image blockquote and code block */
     /* Vertical different than horizontal */
-    --base-block-gap: var(--base);
 
     --font-text: "MonoLisa";
     --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
@@ -55,7 +54,7 @@
         "cv09", "cv10", "cv11", "cv12", "cv13";
     --font-header-variation: "";
     --font-header-letter-spacing: -0.065em;
-    --font-header-line-height: 0.75em;
+    --font-header-line-height: 1.5;
 
     --stroke-width: 1.5px;
 

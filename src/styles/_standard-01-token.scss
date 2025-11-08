@@ -57,9 +57,9 @@
     --mobile-line-height: 1.5;
     --mobile-body-padding: var(--base-2);
     --mobile-base-gap: var(
-        --base-4
+        --base-2
     ); /* Space between standard block like paragraph */
-    --mobile-base-block-gap: var(--base-4);
+    --mobile-base-block-gap: var(--base-2);
 
     /* Content area tokens */
     --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
@@ -138,6 +138,10 @@
         --font-size: var(--mobile-font-size) !important;
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
+    }
+    pre, blockquote {
+        padding-inline: var(--base) !important;
+        font-size: var(--scale-d3) !important;
     }
 }
 

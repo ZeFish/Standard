@@ -23,11 +23,6 @@
         font-size: var(--scale-d4);
     }
 
-    --line-height: 1.5;
-
-    --base-gap: var(--base);
-    --base-block-gap: var(--base);
-
     --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
     --color-background-secondary: color-mix(
         in srgb,
@@ -43,8 +38,6 @@
 
     blockquote,
     pre {
-        padding: var(--base-d2);
-        padding-block: 0;
         border: 0;
         border-left: 1px solid var(--color-foreground);
         background: transparent;
@@ -56,7 +49,6 @@
         }
     }
     pre {
-        padding: var(--base-d2);
         border: 0;
         background: var(--color-background-secondary);
         .copy-button {
@@ -68,7 +60,6 @@
 
     blockquote {
         font-family: Kalice;
-        padding-block: var(--base-d2);
     }
 }
 
