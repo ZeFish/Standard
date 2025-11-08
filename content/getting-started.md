@@ -6,27 +6,43 @@ permalink: /getting-started/
 comments: true
 ---
 
-# Getting Started with Standard Framework
+# Getting Started
 
-Welcome! Choose your path: use Standard CSS with any project, or use it as a complete 11ty plugin for content-heavy sites.
+Welcome! Choose your path: either use Standard Framework only with CSS CDN in any project, or use it as a complete 11ty plugin for long form sites.
 
-## Quick Navigation
-
-- **[CSS Framework Overview](/css/)** - Typography, grid, colors, spacing, and utilities
-- **[11ty Plugin Documentation](/11ty/)** - Complete integration and setup
+- **Typography, grid, colors, spacing, and utilities** - [CSS Framework Overview](/css/)
+- **[11ty Plugin Documentation](/11ty/)** 
 - **[Cheat Sheet](/cheat-sheet/)** - Quick reference for common patterns
 
 ---
 
 ## Choose Your Path
 
-### Path 1: Standalone CSS Only
+### Path 1: CSS
 
 Use Standard's CSS framework with any HTML or JavaScript framework (React, Vue, Svelte, etc.).
 
 **Perfect for**: Static HTML, web apps, or any project needing beautiful styling.
 
-### Path 2: 11ty + Standard Plugin
+```html
+<link rel=« stylesheet » href=« https://unpkg.com/@zefish/standard/css »>
+<script src=« https://unpkg.com/@zefish/standard/js » type=« module »></script>
+```
+
+### That’s It!
+
+You now have a beautiful, responsive, accessible website with:
+- Perfect typography
+- Dark mode support
+- Mobile-friendly layout
+- Semantic HTML
+- Professional styling
+
+Open in browser. No build process. No configuration.
+
+—
+
+### Path 2: 11ty
 
 Use Standard as a complete 11ty plugin for blogs, documentation, and content sites.
 
@@ -41,170 +57,15 @@ Use Standard as a complete 11ty plugin for blogs, documentation, and content sit
 
 **Perfect for**: Blogs, documentation, knowledge bases, portfolios, marketing sites.
 
----
-
-## Path 1: Standalone CSS Only
-
-### Installation
-
-#### Via npm
-
-```bash
-npm install @zefish/standard
-```
-
-#### Via CDN
-
-```html
-<link rel="stylesheet" href="https://unpkg.com/@zefish/standard@0.10.52/dist/standard.min.css">
-<script src="https://unpkg.com/@zefish/standard@0.10.52/dist/standard.min.js" type="module"></script>
-```
-
-### Basic HTML Setup
-
-Create `index.html`:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
-
-  <!-- Standard Framework CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/@zefish/standard/dist/standard.min.css">
-</head>
-<body class="bg-background text-foreground">
-  <header class="rhythm-block padding-base">
-    <h1>Welcome to Standard Framework</h1>
-    <p class="text-color-subtle">Beautiful typography. Responsive layout. Automatic dark mode.</p>
-  </header>
-
-  <main class="width-line-base center-horizontally padding-base rhythm-block">
-    <h2>Getting Started</h2>
-    <p>
-      Standard Framework provides everything you need for beautiful, accessible websites.
-      No CSS to write. No design decisions to make. Just semantic HTML.
-    </p>
-
-    <h3>What You Get</h3>
-    <ul>
-      <li>Mathematical typography system based on golden ratio</li>
-      <li>Responsive 12-column grid</li>
-      <li>Semantic color system with automatic dark mode</li>
-      <li>Vertical rhythm and spacing system</li>
-      <li>Beautiful components and utilities</li>
-      <li>100% accessible</li>
-      <li>Zero JavaScript required</li>
-    </ul>
-
-    <h3>Your First Page</h3>
-    <p>You're looking at it! This page uses nothing but semantic HTML and the Standard Framework CSS.</p>
-  </main>
-
-  <footer class="rhythm-block padding-base border-color-default" style="border-top: 1px solid;">
-    <p class="text-color-subtle">&copy; 2024. Built with Standard Framework.</p>
-  </footer>
-
-  <!-- Standard Framework JS (optional) -->
-  <script src="https://unpkg.com/@zefish/standard/dist/standard.min.js" type="module"></script>
-</body>
-</html>
-```
-
-### That's It!
-
-You now have a beautiful, responsive, accessible website with:
-- Perfect typography
-- Dark mode support
-- Mobile-friendly layout
-- Semantic HTML
-- Professional styling
-
-Open in browser. No build process. No configuration.
-
----
-
-## Path 2: 11ty + Standard (Complete Setup)
-
-Perfect for blogs, documentation, and content-heavy sites.
-
 ### Step 1: Create Project
 
 ```bash
 mkdir my-website
 cd my-website
-npm init -y
+npx @zefish/standard
 ```
 
-### Step 2: Install Dependencies
-
-```bash
-npm install --save-dev @11ty/eleventy
-npm install @zefish/standard
-```
-
-### Step 3: Create Config
-
-Create `eleventy.config.js`:
-
-```javascript
-import Standard from "@zefish/standard";
-
-export default function (eleventyConfig) {
-  // Add Standard Framework plugin
-  eleventyConfig.addPlugin(Standard, {
-    outputDir: "assets/standard",
-    copyFiles: true,
-    useCDN: false
-  });
-
-  return {
-    dir: {
-      input: "content",
-      output: "_site",
-      includes: "_includes"
-    }
-  };
-}
-```
-
-### Step 4: Create Base Layout
-
-Create `_includes/layouts/base.njk`:
-
-```nunjucks
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "My Website" }}</title>
-  {% standardAssets %}
-</head>
-<body class="bg-background text-foreground">
-  <header class="rhythm-block padding-base">
-    <h1>My Website</h1>
-    <nav class="display-flex gap-base">
-      <a href="/">Home</a>
-      <a href="/about/">About</a>
-      <a href="/blog/">Blog</a>
-    </nav>
-  </header>
-
-  <main class="width-line-base center-horizontally padding-base rhythm-block">
-    {{ content | safe }}
-  </main>
-
-  <footer class="rhythm-block padding-base border-color-default" style="border-top: 1px solid;">
-    <p class="text-color-subtle">&copy; 2024. Built with Standard Framework.</p>
-  </footer>
-</body>
-</html>
-```
-
-### Step 5: Create Content
+### Step 2: Create Content
 
 Create `content/index.md`:
 
@@ -236,7 +97,7 @@ Tell people about yourself here.
 This page automatically gets the same beautiful styling as your homepage.
 ```
 
-### Step 6: Build & Preview
+### Step 6: Build
 
 ```bash
 npx @11ty/eleventy --serve
@@ -251,9 +112,11 @@ Your website is live with:
 - Professional styling
 - Zero configuration
 
+Congrats for your first website! 
+
 ---
 
-## Common First Steps
+# Common First Steps
 
 ### Add Blog Posts
 
