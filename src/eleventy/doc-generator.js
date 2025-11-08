@@ -257,7 +257,7 @@ export default function (eleventyConfig, options = {}) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const urlPath = "/";
+  const urlPath = "/docs/";
 
   eleventyConfig.on("eleventy.before", async () => {
     const hasChanged = await sourceFilesChanged(patterns);
