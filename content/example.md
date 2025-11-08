@@ -11,15 +11,14 @@ lang: en
 visibility: public
 ---
 
-<h1>Standard Framework</h1>
-<p class="text-muted">
-  Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
-</p>
-<p>
-  A fine-art design framework implementing classical typography, Swiss grid systems, and
-  vertical rhythm with mathematical precision inspired by centuries of print mastery.
-</p>
-<h3>Contents</h3>
+# Standard Framework
+
+::muted Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
+
+A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision inspired by centuries of print mastery.
+  
+### Contents
+
 <ol>
   <li><a href="#typography">Typography System</a></li>
   <li><a href="#grid">Grid System</a></li>
@@ -61,20 +60,12 @@ visibility: public
 
 # Heading Level 1
 
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
      
-  <h2>Heading Level 2</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+## Heading Level 2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
   <h3 class="circular">Heading Level 3</h3>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -259,7 +250,7 @@ visibility: public
     <code>prefers-color-scheme</code> automatically.
   </p>
   <h3>Color Palette</h3>
-  <div class="grid-4">
+  <div class="grid-4 sm:grid-3">
     <div class="sm:col-1">
       <div
         class="card"
@@ -318,7 +309,7 @@ visibility: public
     </div>
   </div>
   <h3>Semantic Colors</h3>
-  <div class="grid-3">
+  <div class="grid-3 sm:grid-2">
     <div>
       <div
         class="card"
@@ -333,7 +324,7 @@ visibility: public
       >Foreground
       </div>
     </div>
-    <div>
+    <div class="sm:row">
       <div class="card" style="background: var(--color-background-secondary)">Secondary</div>
     </div>
   </div>
