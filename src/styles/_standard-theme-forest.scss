@@ -69,7 +69,9 @@
         padding: calc(var(--base) * 0.5);
     }
     
-    pre { margin-block-end: var(--base-3); }
+    pre {
+        margin-block-end: var(--base-4);
+    }
 
     .operator,
     .punctuation {
