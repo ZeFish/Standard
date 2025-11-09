@@ -173,9 +173,9 @@ li::before {
 /* Blockquotes (typography + color) */
 blockquote {
     font-style: italic;
-    border-left: calc(var(--base) / 8) solid var(--color-border);
+    border-left: var(--stroke-width) solid var(--color-border);
     color: var(--color-muted);
-    padding: var(--base);
+    padding: var(--base-2);
     font-size: var(--scale-d2);
 }
 

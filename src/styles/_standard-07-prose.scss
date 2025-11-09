@@ -149,11 +149,9 @@
     }
     :where(#{$rhythm-block-elements}) {
         > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
-            margin-block-start: 0; /* No top margin */
-            /* Keep the heading's natural bottom margin */
+            margin-block-start: 0;
         }
     }
-
     /* Note: Page's main title h1:first-child retains spacing via direct child selector */
     /* The > h1:first-child selector in h1 rule ensures it overrides rhythm's > * margin-reset */
 

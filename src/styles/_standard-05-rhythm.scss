@@ -115,6 +115,7 @@
         --base-gap: 1; /* Reset for nested contexts */
     }
 
+
     h1 {
         margin-block-start: calc(var(--gap) * 3);
         margin-block-end: calc(var(--gap) * 2);
@@ -146,6 +147,12 @@
         margin-block-end: var(--leading);
         font-size: var(--scale-d2);
     }
+
+    h1 + h3,
+    h2 + h3 {
+        margin-block-start: 0;
+    }
+
     
     hr {
         margin-inline: calc(var(--base-4));

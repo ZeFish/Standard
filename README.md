@@ -1,20 +1,27 @@
 # Standard Framework
 
+Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
+
 - [Example](/example/)
 - [Fonts](/fonts/)
 - [Mardown](/markdown/)
 - [Égalitarisme](/egalitarisme/)
+- [Réciprocite](/reciprocite/)
 - [Componnent](/compo/)
 - [Unified Plugin](index-unified-plugin/)
 - [CSS Framework](content/css/index.md)
+- [Conard](/conard/)
+- [Test](/test/)
 - [11ty Plugin](content/11ty/index.md)
 - [Cloudflare Fonction](content/cloudflare/index.md)
 
-Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
+::center
+Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
+::end
 
 ![npm](https://img.shields.io/npm/v/@zefish/standard)
 
-Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
+
 
 
 

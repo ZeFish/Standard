@@ -205,13 +205,12 @@
   --color-dark-foreground: #ccc;
   --optical-ratio: var(--ratio-golden);
   --mobile-font-ratio: var(--ratio-golden);
-  --body-padding: var(--base-4);
   --font-monospace: "Helvetica Monospaced Pro", monospace;
   --font-text: Diatype;
   --line-height: 1.2;
   --font-size: 1.2em;
   --scale-d2: 0.75em;
-  --body-padding: var(--base);
+  --body-padding: var(--base-2);
 }
 [data-theme=swiss] hr {
   background: var(--color-foreground);
@@ -374,7 +373,7 @@
   --color-code: var(--color-red);
   --color-bold: var(--color-foreground);
   --color-italic: var(--color-foreground);
-  --optical-ratio: 1.6;
+  --optical-ratio: var(--ratio-golden);
   --line-height: var(--optical-ratio);
   --font-weight: 400;
   --font-weight-bold: 500;
@@ -574,10 +573,9 @@
   --color-italic: var(--color-green);
   --color-dark-accent: var(--color-purple);
   --color-dark-bold: var(--color-pink);
-  --radius: var(--base-d4);
+  --radius: var(--base);
   
   
-  --base-block-gap: var(--base);
   --font-text: "MonoLisa";
   --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
   --font-variation: "MONO" 1;
@@ -592,7 +590,8 @@
       "cv09", "cv10", "cv11", "cv12", "cv13";
   --font-header-variation: "";
   --font-header-letter-spacing: -0.065em;
-  --font-header-line-height: 0.75em;
+  --font-header-line-height: 1.5;
+  --stroke-width: 1.5px;
   --line-width: var(--line-width-xs);
   
 }
@@ -659,9 +658,6 @@
   font-size: var(--scale-d4);
 }
 [data-theme=minimal] {
-  --line-height: 1.5;
-  --base-gap: var(--base);
-  --base-block-gap: var(--base);
   --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
   --color-background-secondary: color-mix(
       in srgb,
@@ -676,8 +672,6 @@
 }
 [data-theme=minimal] blockquote,
 [data-theme=minimal] pre {
-  padding: var(--base-d2);
-  padding-block: 0;
   border: 0;
   border-left: 1px solid var(--color-foreground);
   background: transparent;
@@ -690,7 +684,6 @@
   right: 0;
 }
 [data-theme=minimal] pre {
-  padding: var(--base-d2);
   border: 0;
   background: var(--color-background-secondary);
 }
@@ -701,7 +694,6 @@
 }
 [data-theme=minimal] blockquote {
   font-family: Kalice;
-  padding-block: var(--base-d2);
 }
 
 @font-face {
@@ -799,8 +791,6 @@
   --font-variation: "opsz" 8;
   --font-header-feature: "liga", "onum", "kern";
   --font-header-variation: "opsz" 12;
-  --body-padding: var(--base-4);
-  --base-gap: var(--base-2);
   --shadow: 0;
   --radius: 0;
   --color-accent: var(--color-red);
@@ -890,6 +880,21 @@
   position: relative;
   top: calc(var(--base) * -0.4);
   color: var(--color-border);
+}
+[data-theme=book] aside.note {
+  display: inline;
+  position: relative;
+  top: calc(var(--base) * -1);
+  left: calc(var(--base) + var(--line-width));
+  margin-top: calc(var(--base) * -1);
+  margin-bottom: calc(var(--base) * -2);
+  font-size: var(--scale-d2);
+  color: var(--color-muted);
+  line-height: var(--line-height-s);
+  max-width: 33%;
+  border-left: var(--border);
+  padding-left: var(--base-d2);
+  padding-block: var(--base-d2);
 }
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
@@ -1153,6 +1158,44 @@
   font-style: italic;
   src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
+[data-theme=marauder] {
+  --font-text: Marauder;
+  --color-light-background: #ebe4de;
+  --color-light-foreground: #191919;
+  --color-dark-background: #191919;
+  --color-dark-foreground: #ebe4de;
+  --color-light-accent: #2c2f50;
+  --font-size: 24px;
+  --optical-ratio: 1;
+}
+[data-theme=marauder] body {
+  background-image: url("assets/img/bg.webp");
+  background-size: 100%;
+}
+[data-theme=marauder] .container-hero-marge {
+  background-image: url("/assets/img/sky+sea.webp");
+  background-color: #ebe4de;
+  background-blend-mode: multiply;
+  margin-inline: calc(var(--body-padding) * -1);
+  margin-block-end: calc(var(--base-4) * -1) !important;
+}
+[data-theme=marauder] .container-hero-marge h1 {
+  font-size: 4em;
+  position: relative;
+  top: -30%;
+  color: color-mix(in srgb, #191919 95%, #ebe4de);
+}
+[data-theme=marauder] ass::first-letter {
+  font-size: var(--base-2);
+  float: left;
+  background-image: url("/assets/img/red.webp");
+  background-size: 100px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 [data-theme=custom_1] {
   --color-foreground: green;
 }
