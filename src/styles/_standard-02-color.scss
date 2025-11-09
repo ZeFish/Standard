@@ -185,16 +185,6 @@
     }
 }
 
-/* ===== ACCESSIBILITY SUPPORT ===== */
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    :root {
-        --color-border: var(--color-foreground);
-        --color-muted: var(--color-foreground);
-        --color-subtle: var(--color-foreground);
-    }
-}
-
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
     :root {

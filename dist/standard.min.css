@@ -8,18 +8,14 @@
   --ratio-eighthstep: 1.062;
   --optical-ratio: 1.5; 
   --line-height: 1.5; 
-  --base-gap: var(--base-4); 
-  --base-block-gap: var(
-      --base-4
-  ); 
-  --body-padding: var(
-      --base-4
-  ); 
+  --base-gap: 1rlh; 
+  --base-block-gap: 2rlh; 
+  --body-padding: 2rlh; 
   
   --blur: blur(7px);
   --stroke-width: 1px;
   --transition: 0.5s ease;
-  --radius: var(--base-d8);
+  --radius: var(--base-d4);
   --modal-background: color-mix(
       in srgb,
       var(--color-background) 60%,
@@ -31,9 +27,9 @@
   --mobile-line-height: 1.5;
   --mobile-body-padding: var(--base-2);
   --mobile-base-gap: var(
-      --base-4
+      --base-2
   ); 
-  --mobile-base-block-gap: var(--base-4);
+  --mobile-base-block-gap: var(--base-2);
   
   --line-width-xs: 32rem; 
   --line-width-s: 38rem; 
@@ -58,6 +54,7 @@
   --base-d4: calc(var(--base) / 4);
   --base-d2: calc(var(--base) / 2);
   --base-2: calc(var(--base) * 2);
+  --base-3: calc(var(--base) * 3);
   --base-4: calc(var(--base) * 4);
   --base-8: calc(var(--base) * 8);
   
@@ -105,6 +102,11 @@ div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, 
     --font-size: var(--mobile-font-size) !important;
     --optical-ratio: var(--mobile-optical-ratio) !important;
     --line-height: var(--mobile-line-height);
+  }
+  pre,
+  blockquote {
+    padding-inline: var(--base) !important;
+    font-size: var(--scale-d3) !important;
   }
 }
 body::after {
@@ -269,15 +271,6 @@ body::before {
     --shadow: 0 2px 4px var(--shadow-color);
     --shadow-l: 0 8px 16px var(--shadow-color);
     --shadow-xl: 0 12px 32px var(--shadow-color);
-  }
-}
-
-
-@media (prefers-contrast: high) {
-  :root {
-    --color-border: var(--color-foreground);
-    --color-muted: var(--color-foreground);
-    --color-subtle: var(--color-foreground);
   }
 }
 
@@ -534,7 +527,7 @@ html {
 
 :root {
   
-  --font-sans: Diatype, InterVariable, system-ui, -apple-system, sans-serif;
+  --font-sans: InterVariable, system-ui, -apple-system, sans-serif;
   --font-serif: "Source Serif 4", serif;
   --font-text: var(--font-sans);
   --font-header: var(--font-text);
@@ -551,7 +544,7 @@ html {
   --font-weight: 400;
   --font-weight-bold: 600;
   --font-letter-spacing: normal;
-  --font-header-letter-spacing: -0.065em;
+  --font-header-letter-spacing: -0.03em;
   --font-header-line-height: 1;
   --font-header-weight: 600;
   
@@ -668,37 +661,37 @@ h6 {
 h1 {
   font-weight: var(--font-weight-h1);
   font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
-  line-height: var(--font-header-line-height);
+  line-height: var(--font-header-line-height, var(--line-height));
 }
 
 h2 {
   font-weight: var(--font-weight-h2);
   font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
-  line-height: var(--font-header-line-height);
+  line-height: var(--font-header-line-height, var(--line-height));
 }
 
 h3 {
   font-weight: var(--font-weight-h3);
   font-size: var(--scale-3);
-  line-height: var(--font-header-line-height);
+  line-height: var(--font-header-line-height, var(--line-height));
 }
 
 h4 {
   font-weight: var(--font-weight-h4);
   font-size: var(--scale-2);
-  line-height: var(--base);
+  line-height: var(--line-height);
 }
 
 h5 {
   font-weight: var(--font-weight-h5);
   font-size: var(--scale-2);
-  line-height: var(--base);
+  line-height: var(--line-height);
 }
 
 h6 {
   font-weight: var(--font-weight-h6);
   font-size: var(--scale-2);
-  line-height: var(--base);
+  line-height: var(--line-height);
 }
 
 
@@ -732,6 +725,7 @@ pre {
   overflow-x: auto;
   overflow-y: hidden;
   box-shadow: inset var(--shadow);
+  line-height: 1.2;
 }
 
 pre code {
@@ -1306,16 +1300,16 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 :where(.rhythm) h1,
 :where(.rhythm) > h1:where(:first-child) {
-  margin-block-start: calc(var(--base) * 10);
+  margin-block-start: calc(var(--base) * 8);
   margin-block-end: calc(var(--base) * 4);
 }
 :where(.rhythm) h2 {
-  margin-block-start: calc(var(--base) * 8);
+  margin-block-start: calc(var(--base) * 6);
   margin-block-end: calc(var(--base) * 4);
 }
 :where(.rhythm) h3 {
   margin-block-start: calc(var(--base) * 6);
-  margin-block-end: calc(var(--base) * 2);
+  margin-block-end: calc(var(--base) * 4);
 }
 :where(.rhythm) h4 {
   margin-block-start: calc(var(--base) * 4);
@@ -1330,6 +1324,10 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   margin-block-start: var(--base-2);
   margin-block-end: var(--base);
   font-size: var(--scale-d2);
+}
+:where(.rhythm) h1 + h3,
+:where(.rhythm) h2 + h3 {
+  margin-block-start: 0;
 }
 :where(.rhythm) pre,
 :where(.rhythm) pre code {
@@ -1357,6 +1355,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   list-style: none;
   margin-block-start: 0;
   padding-inline: var(--base-2);
+  maring-block-end: var(--base);
 }
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
@@ -2579,6 +2578,9 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
   margin-block-start: calc(var(--base-block-gap) * -1 + var(--img-gap)) !important;
 }
+:where(.prose) :where(#comments, .callout, blockquote, pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^=grid-]) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+  margin-block-start: 0;
+}
 :where(.prose) img,
 :where(.prose) audio,
 :where(.prose) video {
@@ -3656,6 +3658,7 @@ aside {
   gap: var(--base-d4);
   pointer-events: none;
   max-width: 400px;
+  margin-block-end: 0;
 }
 
 
@@ -3703,14 +3706,18 @@ aside {
 
 @media (max-width: 768px) {
   .toast-container {
+    display: inline-block;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
     top: auto !important;
     transform: none !important;
     max-width: 100%;
-    padding: var(--base-d4);
+    min-width: 1%;
+    margin-inline: 25%;
+    padding: var(--base);
     flex-direction: column-reverse;
+    text-align: center;
   }
 }
 
@@ -3732,6 +3739,7 @@ aside {
   
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  margin-block-end: 0;
   
   opacity: 0;
   transition: opacity var(--transition), transform var(--transition);
@@ -3770,8 +3778,9 @@ aside {
   display: flex;
   align-items: baseline;
   gap: var(--base-d4);
-  padding: var(--base-d8) var(--base-d2) 0 var(--base-d2);
+  padding: var(--base-d2) var(--base);
   transition: transform var(--transition);
+  margin-block-end: 0;
 }
 
 
@@ -3915,18 +3924,26 @@ aside {
     display: none !important;
   }
 }
-@media print {
-  
-  @page {
-    margin-top: 1.5cm;
-    margin-right: 1cm;
-    margin-bottom: 1.5cm;
-    margin-left: 1cm;
-    
-    @bottom-right {
-      content: counter(page);
-    }
+
+
+@media (prefers-contrast: high), (prefers-contrast: more) {
+  :root {
+    --color-light-foreground: black !important;
+    --color-light-background: white !important;
+    --color-dark-foreground: white !important;
+    --color-dark-background: black !important;
+    --color-background-secondary: var(--color-background) !important;
+    --color-border: var(--color-foreground) !important;
+    --color-muted: var(--color-foreground) !important;
+    --color-subtle: var(--color-foreground) !important;
+    --shadow: 0 !important;
   }
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+@media print {
   :root {
     --color-foreground: black;
     --color-background: white;
@@ -3934,11 +3951,10 @@ aside {
     --font-size: 0.925rem !important;
     --optical-ratio: 1.125 !important;
     --line-height: 1.4 !important;
-    --base-gap: 1;
-    --base-block-gap: 0;
-    --body-padding: 0;
+    --body-padding: var(base-2);
     --line-width: var(--line-width-full);
     --gap: 0;
+    --shadow: 0;
   }
   html .no-print,
   html .no-print * {
@@ -3971,11 +3987,11 @@ aside {
   html h4,
   html h5,
   html h6 {
-    margin-block: var(--base); 
+    margin-block: var(--base-2); 
     break-after: avoid; 
   }
   html hr {
-    margin-block: var(--base-d4); 
+    margin-block: var(--base); 
   }
   html html::before,
   html html::after,
@@ -3987,6 +4003,17 @@ aside {
     border: 0 !important;
     background: transparent !important;
     max-width: 100% !important;
+  }
+  
+  @page {
+    margin-top: 1.5cm;
+    margin-right: 1cm;
+    margin-bottom: 1.5cm;
+    margin-left: 1cm;
+    
+    @bottom-right {
+      content: counter(page);
+    }
   }
 }
 

@@ -423,6 +423,7 @@ class StandardLab {
       { value: "forest", label: "Forest" },
       { value: "book", label: "Book" },
       { value: "minimal", label: "Minimal" },
+      { value: "marauder", label: "Marauder" },
       { value: "blueprint", label: "Blueprint" },
       { value: "custom_1", label: "Custom 1" },
       { value: "custom_2", label: "Custom 2" },

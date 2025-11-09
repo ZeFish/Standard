@@ -48,9 +48,9 @@ Multiple callouts can be stacked:
 - Icons are automatically assigned
 - Colors match the callout type
 
-::callout [!bug]
+
 This is a bug callout to test the icon and styling.
-::end
+
 
 [!question]
 Questions get their own icon and color scheme.
