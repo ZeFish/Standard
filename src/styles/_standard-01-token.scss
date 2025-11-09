@@ -21,6 +21,43 @@
 /* Primitive Design Tokens - Foundation layer with logical properties */
 
 :root {
+    
+    /* Base measurements & ratios - the foundation of everything else */
+    --font-size: 1rem;
+    --line-height: 1.5; /* The actual line-height of html */
+    --optical-ratio: 1.5; /* Optical Harmony ratio (font size) */
+    
+    /* Represents "one line of text without line-height spacing" */
+    --leading: calc((var(--line-height) - 1) * var(--font-size));
+    --baseline: 1rlh;
+    --font-raw: calc(1rlh / var(--line-height));
+    
+    --gap: var(--baseline);
+    --gap-block: calc(var(--baseline) * 4); /* Spacing between different type of block */
+    --gap-compact: calc(var(--baseline) / 4);
+    --gap-relaxed: calc(var(--baseline) * 4);
+    --gap-body: var(--gap-relaxed);
+    --gap-grid: var(--leading); /* Grid system tokens */
+
+    /* Design standard system */
+    --blur: blur(7px);
+    --stroke-width: 1px;
+    --transition: 0.5s ease;
+    --radius: var(--leading);
+    --modal-background: color-mix(in srgb, var(--color-background) 60%, transparent);
+
+    
+
+    
+    
+    
+
+
+
+    /* CONSTANT */
+    /* CONSTANT */
+    /* CONSTANT */ 
+
     /* Golden Ratio & Mathematical Precision */
     --ratio-golden: 1.618;
     --ratio-wholestep: 1.618;
@@ -29,37 +66,6 @@
     --ratio-quarterstep: 1.128;
     --ratio-eighthstep: 1.062;
 
-    --optical-ratio: 1.5; /* Optical Harmony ratio (font size) */
-    --line-height: 1.5; /* The actual line-height of html */
-    --base-gap: var(--base-4); /* Space between standard block like paragraph */
-    --base-block-gap: var(
-        --base-4
-    ); /* Space between special block like image blockquote and code block */
-    --body-padding: var(
-        --base-4
-    ); /* Padding around the body, can be negated by .body-p-neg, .body-p-neg-header, .body-p-neg-footer */
-
-    /* Ui Guide */
-    --blur: blur(7px);
-    --stroke-width: 1px;
-    --transition: 0.5s ease;
-    --radius: var(--base-d8);
-
-    --modal-background: color-mix(
-        in srgb,
-        var(--color-background) 60%,
-        transparent
-    );
-
-    /* Mobile */
-    --mobile-font-size: 1.1rem;
-    --mobile-optical-ratio: var(--ratio-silver);
-    --mobile-line-height: 1.5;
-    --mobile-body-padding: var(--base-2);
-    --mobile-base-gap: var(
-        --base-2
-    ); /* Space between standard block like paragraph */
-    --mobile-base-block-gap: var(--base-2);
 
     /* Content area tokens */
     --line-width-xs: 32rem; /* ~384px - narrow sidebar content */
@@ -67,21 +73,10 @@
     --line-width-m: 42rem; /* ~672px - optimal reading (60-75 chars) - DEFAULT */
     --line-width-l: 50rem; /* ~800px - wider articles */
     --line-width-xl: 60rem; /* ~960px - documentation/wide content */
-    --line-width-full: calc(
-        100vw - (var(--base) * 2)
-    ); /* responsive full width with margins */
+    --line-width-full: calc(100vw - (var(--base) * 2)); /* responsive full width with margins */
     --line-width: var(--line-width-m);
-
-    /* Grid system tokens */
-    --grid-gap: var(--base);
-    --grid-row-gap: var(--grid-gap); /* Separate control for row spacing */
-
-    /* Compact variation */
-    --line-height-s: max(calc(var(--line-height) / 2), 1);
-
-    /* Base measurements & ratios - the foundation of everything else */
-    --font-size: 1rem;
-    --leading: calc((var(--line-height) - 1) * var(--font-size));
+    
+    /* Baseline helper tokens */
     --base: var(--leading);
     /* Name use for actual spacing in the framework  */
     --base-d8: calc(var(--base) / 8);
@@ -91,7 +86,7 @@
     --base-4: calc(var(--base) * 4);
     --base-8: calc(var(--base) * 8);
 
-    /* Optical Harmony Scale */
+    /* Optical harmony scale */
     --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
     --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
     --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
@@ -106,6 +101,15 @@
     --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 6));
     --scale-9: calc(var(--font-size) * pow(var(--optical-ratio), 7));
     --scale-10: calc(var(--font-size) * pow(var(--optical-ratio), 8));
+
+    /* Mobile */
+    --mobile-font-size: 1.1rem;
+    --mobile-optical-ratio: var(--ratio-silver);
+    --mobile-line-height: 1.5;
+    --mobile-body-padding: var(--base-2);
+    --mobile-base-gap: var(--base-2); /* Space between standard block like paragraph */
+    --mobile-base-block-gap: var(--base-2);
+
 
     /* Z-index scale */
     --z-base: 1;
@@ -122,6 +126,18 @@
 
     /* Callout only animation, to test */
     --duration-superfast: 0.15s;
+    
+    
+    /* ARCHIVED */
+    /* ARCHIVED */
+    /* ARCHIVED */
+
+    /* Compact variation */
+    --line-height-s: max(calc(var(--line-height) / 2), 1);
+    /* Baseline system tokens */
+    --base-gap: var(--base-4); /* Space between standard block like paragraph */
+    --base-block-gap: var(--base-4); /* Space between special block like image blockquote and code block */
+    --body-padding: var(--base-4); /* Padding around the body, can be negated by .body-p-neg, .body-p-neg-header, .body-p-neg-footer */
 }
 
 #{$text-elements} {

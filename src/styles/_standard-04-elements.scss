@@ -121,17 +121,8 @@ tt,
     font-weight: var(--font-monospace-weight, 400);
 }
 
-code {
-    /*background: var(--color-background-secondary);
-    background-blend-mode: darken;
-    border-radius: var(--radius);
-    padding: var(--base-d8);*/
-    color: var(--color-foreground);
-    word-break: break-word;
-    box-shadow: unset;
-}
-
 pre {
+    position: relative;
     background: var(--color-background-secondary);
     color: var(--color-foreground);
     font-size: var(--scale-d2);
@@ -142,22 +133,18 @@ pre {
     overflow-y: hidden;
     box-shadow: inset var(--shadow);
     line-height: 1.2;
-}
-
-pre code {
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    opacity: 0.75;
-    transition: opacity var(--transition);
-}
-pre:hover code {
-    opacity: 1;
-}
-
-pre {
-    position: relative;
+    
+    code {
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 0;
+        opacity: 0.75;
+        transition: opacity var(--transition);
+    }
+    &:hover code {
+        opacity: 1;
+    }
     .copy-button {
         position: absolute;
         top: var(--base-d2);
@@ -176,11 +163,12 @@ pre {
     }
 }
 
-/* Lists */
+/* Lists 
 li::before {
     font-feature-settings: var(--font-list-feature);
     font-variation-settings: var(--font-list-variation);
 }
+*/
 
 /* Blockquotes (typography + color) */
 blockquote {
@@ -296,10 +284,6 @@ nav li a {
 
 nav li.is-active a {
     text-decoration: underline;
-}
-
-li {
-    overflow-y: visible;
 }
 
 /* =========================== */
@@ -490,6 +474,7 @@ audio,
 iframe {
     border-radius: var(--radius);
     border: var(--border);
+    box-shadow: var(--shadow);
 }
 
 /* =========================== */

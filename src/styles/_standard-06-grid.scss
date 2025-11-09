@@ -53,14 +53,13 @@
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     column-gap: var(--grid-gap);
-    row-gap: var(--grid-row-gap);
+    row-gap: var(--grid-row-gap, var(--grid-gap));
 }
 
 @media (max-width: #{$mobile}) {
     .grid,
     [class^="grid-"] {
         --grid-gap: var(--base);
-        --grid-row-gap: var(--base);
     }
 }
 :is(.grid, [class^="grid-"]) * {
@@ -88,12 +87,10 @@
 
 /* Gap variants aligned to rhythm */
 :is(.grid, [class^="grid-"]).compact {
-    --grid-gap: var(--base-d4);
-    --grid-row-gap: var(--base-d4);
+    --gap-grid: var(--base-d4);
 }
 :is(.grid, [class^="grid-"]).relaxed {
-    --grid-gap: var(--base-4);
-    --grid-row-gap: var(--base-4);
+    --gap-grid: var(--base-4);
 }
 
 /* Spans 1..12 */
@@ -101,8 +98,8 @@
     .grid-#{$i} {
         display: grid;
         grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
-        column-gap: var(--grid-gap);
-        row-gap: var(--grid-row-gap);
+        column-gap: var(--gap-grid);
+        row-gap: var(--gap-grid-row, var(--gap-grid));
     }
 }
 
@@ -123,8 +120,8 @@
         .sm\:grid-#{$i} {
             display: grid;
             grid-template-columns: repeat(#{$i}, 1fr);
-            column-gap: var(--grid-gap);
-            row-gap: var(--grid-row-gap);
+            column-gap: var(--gap-grid);
+            row-gap: var(--gap-grid-row, var(--gap-grid));
         }
         .sm\:col-#{$i} {
             grid-column: span #{$i};
@@ -142,8 +139,8 @@
         .lg\:grid-#{$i} {
             display: grid;
             grid-template-columns: repeat(#{$i}, 1fr);
-            column-gap: var(--grid-gap);
-            row-gap: var(--grid-row-gap);
+            column-gap: var(--gap-grid);
+            row-gap: var(--gap-grid-row, var(--gap-grid));
         }
         .lg\:col-#{$i} {
             grid-column: span #{$i};
@@ -235,45 +232,16 @@ hr.col-row {
 }
 
 /* Row gap utilities for grid system */
-.grid.no-row-gap {
+.grid.no-gap {
     row-gap: 0;
 }
 
-.grid.row-gap-xs {
-    --grid-row-gap: var(--base-d4);
+.grid.compact {
+    --grid-gap: var(--gap-compact);
 }
 
-.grid.row-gap-s {
-    --grid-row-gap: var(--base-d2);
-}
-
-.grid.row-gap-l {
-    --grid-row-gap: var(--base-2);
-}
-
-.grid.row-gap-xl {
-    --grid-row-gap: var(--base-4);
-}
-
-/* Column gap utilities for grid system */
-.grid.no-col-gap {
-    column-gap: 0;
-}
-
-.grid.col-gap-xs {
-    --grid-gap: var(--base-d4);
-}
-
-.grid.col-gap-s {
-    --grid-gap: var(--base-d2);
-}
-
-.grid.col-gap-l {
-    --grid-gap: var(--base-2);
-}
-
-.grid.col-gap-xl {
-    --grid-gap: var(--base-4);
+.grid.relaxed {
+    --grid-gap: var(--gap-relaxed);
 }
 
 /* Common layout containers inherit rhythm to cascade deeper */
@@ -297,7 +265,7 @@ hr.col-row {
 .grid > .col-full {
     > * {
         margin-block: 0;
-        margin-block-end: var(--base-gap);
+        margin-block-end: var(--gap);
     }
 
     > :last-child {

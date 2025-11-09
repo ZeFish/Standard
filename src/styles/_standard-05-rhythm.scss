@@ -63,17 +63,17 @@
     * {
         vertical-align: baseline;
         margin-block-start: 0;
-        margin-block-end: var(--base-gap);
+        margin-block-end: var(--gap);
     }
 
     /* Padding only applied to <body> when rhythm is active */
     > body {
         margin: 0;
-        padding: var(--body-padding);
-        padding-bottom: calc(var(--body-padding) * 1.5);
+        padding: var(--gap-body);
+        padding-bottom: calc(var(--gap-body) * 1.5);
         [id] {
             scroll-margin-top: calc(
-                var(--base-2) + var(--body-padding)
+                var(--gap-relaxed) + var(--gap-body)
             ); /* Adjust value as needed */
         }
     }
@@ -82,109 +82,81 @@
     /* Enhanced spacing relationships for typography */
     #{$rhythm-elements} {
         margin-block-start: 0;
-        margin-block-end: var(--base-gap);
+        margin-block-end: var(--gap);
     }
 
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
         margin-block-start: max(
-            calc(var(--base-block-gap) - var(--base-gap)),
+            calc(var(--gap-block) - var(--gap)),
             0
         );
-        margin-block-end: max(var(--base-block-gap), var(--base-gap));
+        margin-block-end: max(var(--gap-block), var(--gap));
     }
 
     /* The i that two specal block would bit a bit closer
     debug when  its image */
     :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
-        margin-block-end: var(--base-gap);
+        margin-block-end: var(--gap);
     }
     :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
-        margin-block-start: max(0, var(--base-gap));
+        margin-block-start: max(0, var(--gap));
     }
 
-    * > :where(:last-child) {
+    /* Reset first-child spacing for special blocks */
+    :is(.card, aside, blockquote, pre, figure, .callout-content) > :first-child, {
+        margin-block-start: 0;
+    }
+    * > :last-child {
         margin-block-end: 0;
     }
     .rhythm {
         --base-gap: 1; /* Reset for nested contexts */
     }
 
-    h1,
-    > h1:where(:first-child) {
-        margin-block-start: calc(var(--base) * 10);
-        margin-block-end: calc(var(--base) * 4);
+    h1 {
+        margin-block-start: calc(var(--gap) * 3);
+        margin-block-end: calc(var(--gap) * 2);
     }
 
     h2 {
-        margin-block-start: calc(var(--base) * 8);
-        margin-block-end: calc(var(--base) * 2);
+        margin-block-start: calc(var(--gap) * 3);
+        margin-block-end: calc(var(--gap) * 2);
     }
 
     h3 {
-        margin-block-start: calc(var(--base) * 6);
-        margin-block-end: calc(var(--base) * 2);
+        margin-block-start: calc(var(--gap) * 2);
+        margin-block-end: calc(var(--gap) * 2);
     }
 
     h4 {
-        margin-block-start: calc(var(--base) * 4);
-        margin-block-end: var(--base-2);
+        margin-block-start: calc(var(--gap) * 4);
+        margin-block-end: calc(var(--gap) + var(leading));
     }
 
     h5 {
-        margin-block-start: var(--base-2);
-        margin-block-end: var(--base);
+        margin-block-start: var(--gap);;
+        margin-block-end: var(--leading);
         font-size: var(--scale-d2);
     }
 
     h6 {
-        margin-block-start: var(--base-2);
-        margin-block-end: var(--base);
+        margin-block-start: var(--gap);
+        margin-block-end: var(--leading);
         font-size: var(--scale-d2);
     }
-
-    pre,
-    pre code {
-        font-size: var(--scale-d2);
-    }
-
-    /* Medium screens (tablet): 769px-1024px
-    @media (max-width: $small) {
-        h1,
-        h2,
-        h3 {
-            margin-block-start: var(--base-gap);
-            margin-block-end: var(--base-gap);
-        }
-        h1 {
-            margin-block: calc(var(--base-gap) * 2);
-        }
-    }
-    */
-
+    
     hr {
         margin-inline: calc(var(--base-4));
         margin-block-start: max(
-            calc((var(--base-block-gap) - var(--base-gap)) * 2),
-            var(--base-gap)
+            calc((var(--gap-block) - var(--gap)) * 2),
+            var(--gap)
         );
-        margin-block-end: max((var(--base-block-gap) * 2), var(--base-gap));
+        margin-block-end: max((var(--gap-block) * 2), var(--gap));
     }
 
-    /* Reset first-child spacing for special blocks */
-    blockquote > :first-child,
-    pre > :first-child,
-    figure > :first-child,
-    .callout .callout-content > :first-child {
-        margin-block-start: 0;
-    }
-    blockquote > :last-child,
-    pre > :last-child,
-    figure > :last-child,
-    .callout .callout-content > :last-child {
-        margin-block-end: 0;
-    }
+    
 
     /* =========================== */
     /* TYPOGRAPHY ELEMENTS         */
@@ -202,15 +174,15 @@
     ol {
         list-style: none;
         margin-block-start: 0;
-        padding-inline: var(--base-2);
-        maring-block-end: var(--base);
+        padding-inline: 1rlh;
+        maring-block-end: var(--gap);
     }
 
     /* Nested lists */
     li > ul,
     li > ol {
-        padding-inline-start: var(--base-2);
-        margin-block-start: var(--base);
+        padding-inline-start: 1rlh;
+        margin-block-start: var(--leading);
         margin-block-end: 0;
     }
 
@@ -219,10 +191,10 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: var(--base-2);
+        margin-block-end: var(--leading);
     }
     li:last-child {
-        margin-block-end: 0;
+        /* should be manage in the general last-chuld rule */
     }
     .compact {
         --base-gap: var(--base);

@@ -111,40 +111,29 @@
 
     /* Image gallery layout */
     &:not(.no-grid) {
-        p:has(img) {
+        p:has(img), p:has(video) {
             display: flex;
-            --img-gap: var(--base-d4);
-            gap: var(--img-gap);
+            --gap-grid-img: var(--leading);
+            gap: var(--gap-grid-img);
             border-radius: var(--radius);
-        }
-
-        p:has(img) > * {
-            flex: 1 1 auto;
-            min-width: 1%;
-            min-height: 1%;
-            object-fit: cover;
-        }
-
-        p:has(img) img {
-            flex-grow: 0; /* prevents the image from stretching to fill */
-        }
-
-        p:has(video) > * {
-            flex: 1 1 auto;
-            min-width: 1%;
-            min-height: 1%;
-            object-fit: cover;
-        }
-
-        p:has(img) img,
-        p:has(img) img:first-child,
-        p:has(img) img:last-child {
-            margin-inline: auto;
-        }
-
-        p:has(img) br {
-            display: none;
-        }
+            
+            > * {
+                flex: 1 1 auto;
+                min-width: 1%;
+                min-height: 1%;
+                object-fit: cover;
+            }
+            
+            img,
+            img:first-child,
+            img:last-child {
+                margin-inline: auto;
+                flex-grow: 0; /* prevents the image from stretching to fill */
+            }
+            br {
+                display: none;
+            }
+        } 
 
         .callout p:has(img),
         .callout p:has(img) br {
@@ -154,7 +143,7 @@
         /* Adjacent images get reduced spacing  + var(--img-gap)    */
         p:has(img) + p:has(img) {
             margin-block-start: calc(
-                (var(--base-block-gap) * -1) + var(--img-gap)
+                (var(--base-block-gap) * -1) + var(--gap-grid-img)
             ) !important;
         }
     }
@@ -175,8 +164,6 @@
         margin: 0;
         margin-inline: auto;
         max-inline-size: 100%;
-        border-radius: var(--radius);
-        border: var(--border);
     }
 
     .callout,
