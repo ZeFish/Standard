@@ -131,7 +131,7 @@ pre {
     padding: var(--gap);
     overflow-x: auto;
     box-shadow: inset var(--shadow);
-    line-height: 1.2;
+    line-height: var(--line-height-compact);
     
     code {
         background: transparent;
@@ -176,6 +176,7 @@ blockquote {
     color: var(--color-muted);
     padding: var(--leading);
     font-size: var(--scale-d2);
+    line-height: var(--line-height-compact);
 }
 
 /* Tables (typography) */

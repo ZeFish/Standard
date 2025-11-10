@@ -35,7 +35,6 @@
  * @see {class} .grid - Often used to layout multiple cards in columns
  * @see {variable} --base - Controls internal spacing rhythm
  * @see {class} .prose - Can be used inside card-body for rich content
- * @see {class} .rhythm - Applied automatically tcard children
  *
  * @link https://en.wikipedia.org/wiki/Edward_Tufte Information Design Pioneer
  * @link https://www.nngroup.com/articles/cards-component/ NN/g Cards Research
@@ -98,110 +97,6 @@
     font-size: var(--scale-d2);
 }
 
-.card > :last-child {
-    margin-block-end: 0;
-}
-
-/**
- * @name Card Header
- * @group components-layout
- * @since 0.11.0
- *
- * In traditional Swiss typography, headers weren't just bigger—they commanded
- * space through proportion and rhythm. A header isn't decoration, it's structure.
- * It tells you where you are, what you're looking at, why it matters. This
- * component ensures your card titles maintain that authority while staying
- * visually connected to the body content below.
- *
- * The bottom border acts as a horizon line—subtle, but it anchors the title
- * and separates it from the prose. Without it, cards feel untethered. With it,
- * they feel intentional.
- *
- * @see {class} .card - Parent container
- * @see {class} .card-body - Sibling content area
- */
-.card-header {
-    padding: 0;
-    border-bottom: var(--card-border-width) solid var(--card-border-color);
-
-    /* Remove default margins from first/last children */
-    > :first-child {
-        margin-block-start: 0;
-    }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-}
-
-/**
- * @name Card Body
- * @group components-layout
- * @since 0.11.0
- *
- * This is where your prose lives, where images sit, where data displays. It
- * automatically manages vertical rhythm for any content you nest inside—
- * paragraphs, lists, images, forms—keeping everything aligned to your
- * baseline grid without you thinking about it.
- *
- * The `flex: 1` property is subtle but critical. If your card has a footer,
- * this ensures the body takes up all available space, pushing the footer to
- * the bottom. It's the difference between cards that feel balanced and cards
- * that feel off.
- *
- * @see {class} .card - Parent container
- * @see {class} .prose - Use for rich editorial content inside body
- * @see {class} .rhythm - Applied automatically to children
- */
-.card-body {
-    padding: 0;
-    flex: 1; /* Grow to fill available space, pushing footer down */
-
-    /* Remove default margins from first/last children */
-    > :first-child {
-        margin-block-start: 0;
-    }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-}
-
-/**
- * @name Card Footer
- * @group components-layout
- * @since 0.11.0
- *
- * Actions, metadata, timestamps—the footer anchors your card. It's visually
- * separated but connected, giving closure to the content above. Perfect for
- * "Read more" links, publish dates, author info, or action buttons.
- *
- * The subtle background tint (3% foreground mixed into background) provides
- * just enough distinction without screaming for attention. In dark mode, it
- * gets slightly lighter. In light mode, slightly darker. It adapts.
- *
- * @see {class} .card - Parent container
- * @see {class} .card-header - Sibling header area
- */
-.card-footer {
-    padding: 0;
-    border-top: var(--card-border-width) solid var(--card-border-color);
-    background: color-mix(
-        in srgb,
-        var(--color-background) 97%,
-        var(--color-text) 3%
-    );
-
-    /* Remove default margins from first/last children */
-    > :first-child {
-        margin-block-start: 0;
-    }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-}
-
 /**
  * @name Clickable Card Variant
  * @group components-layout
@@ -235,7 +130,7 @@
  *     </div>
  *   </a>
  */
-.card-clickable {
+.card.clickable {
     text-decoration: none;
     color: inherit;
     transition:
@@ -568,8 +463,7 @@ aside, .alert {
     color: color-mix(in srgb, var(--color-msg) 10%, var(--color-foreground)) !important;
     background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary));
     border: 1px solid color-mix(in srgb, var(--color-msg) 50%, var(--color-border));
-    border-left-width: calc(var(--stroke-width) * 2);
-    border-right-width: calc(var(--stroke-width) * 2);
+    border-left-width: calc(var(--gap) / 8);
 }
 
 
