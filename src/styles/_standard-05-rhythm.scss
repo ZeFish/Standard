@@ -197,7 +197,7 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: var(--leading);
+        margin-block-end: var(--gap);
     }
     li:last-child {
         /* should be manage in the general last-chuld rule */
@@ -225,8 +225,8 @@
     ul > li::before {
         content: "•";
         position: absolute;
-        left: calc(var(--base-2) * -1);
-        width: var(--base);
+        left: calc(1rlh * -1);
+        width: 1rlh;
         text-align: center;
         color: var(--color-subtle);
     }
