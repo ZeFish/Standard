@@ -389,14 +389,14 @@ select {
     width: 100%;
     font-family: var(--font-interface), system-ui, sans-serif;
 
-    padding: var(--gap-tight) var(--gap-compact);
+    padding: var(--gap-tight) var(--gap-tight);
     border-radius: var(--radius);
 
     color: var(--color-foreground);
     background: var(--color-background-secondary);
     border: var(--border);
     
-    margin-block-end: var(--gap-compact);
+    margin-block-end: var(--gap-tight);
 
     transition:
         background-color var(--transition),
@@ -434,9 +434,8 @@ label {
     font-family: var(--font-interface), system-ui, sans-serif;
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
-    color:red;
-    margin-block-end: var(--gap-compact);
-    padding-inline: var(--gap-compact);
+    margin-block-end: var(--gap-tight);
+    padding-inline: var(--gap-tight);
 }
 
 fieldset {
