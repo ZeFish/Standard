@@ -246,9 +246,8 @@
     ol > li::before {
         content: counter(ol-counter) ".";
         position: absolute;
-        left: calc(1rlh * -1);
-        text-align: left;
-        top: var(--leading);
+        left: calc((1rlh * -1) - var(--leading));
+        text-align: right;
         color: var(--color-subtle);
         font-variant-numeric: tabular-nums;
         overflow: hidden;
