@@ -336,12 +336,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <h3>Text Colors</h3>
   <div class="compact">
   <p>Normal text color</p>
-  <p class="text-muted">Muted text (60% opacity)</p>
-  <p class="text-subtle">Subtle text (40% opacity)</p>
-  <p class="text-accent">Accent color text</p>
-  <p class="text-success">Success message</p>
-  <p class="text-warning">Warning message</p>
-  <p class="text-error">Error message</p>
+  <p class="muted">Muted text (60% opacity)</p>
+  <p class="subtle">Subtle text (40% opacity)</p>
+  <p class="accent">Accent color text</p>
+  <p class="success">Success message</p>
+  <p class="warning">Warning message</p>
+  <p class="error">Error message</p>
 </div>
 <h2 id="reading">Reading Layout System</h2>
 <p>
