@@ -758,7 +758,7 @@ p:has(img) + .callout[data-callout="caption" i] {
     ul:not([start]),
     ol:not([start]) {
         padding: 0;
-        padding-left: var(--base);
+        padding-left: var(--gap);
     }
 }
 
