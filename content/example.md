@@ -502,15 +502,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     </div>
   </form>
 </div>
-<div class="feature md">
-  <h2 id="markdown">Markdown Enhancements</h2>
-  <p>Add the <code>.md</code> class for enhanced callouts and formatting:</p>
-  <div class="callout" data-callout="note">
-    <div class="callout-title">Note</div>
-    <div class="callout-content">
-      <p>Standard callout for general information and notes.</p>
-    </div>
-  </div>
+
+
+## Markdown Enhancements
+
+Add the <code>.md</code> class for enhanced callouts and formatting:
+
+::callout note
+Standard callout for general information and notes.
+::end
+
   <div class="callout" data-callout="warning">
     <div class="callout-title">Warning</div>
     <div class="callout-content">
@@ -531,4 +532,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       <p>Click the title to expand and collapse this content.</p>
     </div>
   </details>
-</div>
+
