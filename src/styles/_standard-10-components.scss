@@ -329,96 +329,248 @@
  *     <a href="/settings/password" class="alert-action">Update now</a>
  *   </div>
  */
+ 
+ /**
+ * @component Markdown Styling
+ * @category Components
+ * @description Beautiful styling for markdown-generated HTML. Includes support for
+ * blockquotes, callouts, code blocks, tables, lists, and other common markdown elements.
+ * Designed to work seamlessly with the rhythm and reading layout systems.
+ * Automatically styles headings, paragraphs, links with proper typography.
+ *
+ * @prop {class} .md Apply markdown styling to container
+ * @prop {element} blockquote Styled blockquote with italic text
+ * @prop {class} .callout Highlighted callout/admonition blocks
+ * @prop {class} .callout-title Title for callout blocks
+ * @prop {element} pre Code block with syntax highlighting
+ * @prop {element} code Inline code styling
+ * @prop {element} table Responsive table styling
+ * @prop {element} a Link styling with underline
+ * @prop {element} h1-h6 Heading hierarchy with proper sizing
+ *
+ * @example
+ * // Apply markdown styling to content
+ * <article class="reading md">
+ *   <h1>Title</h1>
+ *   <p>Paragraph text...</p>
+ *   <blockquote>Quote</blockquote>
+ *   <pre><code>Code block</code></pre>
+ * </article>
+ *
+ * // Callout admonition block
+ * <div class="callout">
+ *   <div class="callout-title">Note</div>
+ *   <div class="callout-content">Important information</div>
+ * </div>
+ *
+ * @since 0.1.0
+ * @see standard-09-md.scss
+ */
 
-.alert {
-    --alert-padding: var(--gap);
-    --alert-border-width: 1px;
-    --alert-border-radius: var(--radius);
-    --alert-background: var(--color-background-secondary);
-    --alert-color: var(--color-foreground);
-    --alert-border-color: var(--color-border);
+// Harmonized Markdown Styles - Using logical properties
+// Works with both .prose (layout) and .rhythm (spacing) classes
 
-    padding: var(--alert-padding);
-    border: var(--alert-border-width) solid var(--alert-border-color);
-    border-radius: var(--alert-border-radius);
-    background: var(--alert-background);
-    color: var(--alert-color);
-    border-left: 4px solid var(--alert-border-color); /* Accent bar */
-    
-    
+// ==========================
+// General Element Styling
+// ==========================
+.callout,
+img,
+iframe,
+.outset {
+    background: var(--color-background-secondary);
     border-radius: var(--radius);
+    border: var(--border);
+    box-shadow: var(--shadow);
+}
+pre,
+.inset,
+card.inset {
+    box-shadow: inset var(--shadow) !important;
+}
+
+// ==========================
+// CALLOUT
+// ==========================
+
+/* =========================== */
+/* Callouts                    */
+/* =========================== */
+
+.callout {
+    background: var(--color-background-secondary);
+    border: var(--border);
+    border-radius: var(--radius);
+    transition: var(--duration-superfast) ease;
+    padding: var(--gap-tight);
+    padding-top: 0;
+    --color-callout: var(--color-background-secondary);
+    --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
+    background: color-mix(
+        in srgb,
+        var(--color-callout) 5%,
+        var(--color-background-secondary)
+    );
+    border: var(--border);
+    font-size: var(--scale-d2);
+
+    .callout-title,
+    > summary {
+        color: color-mix(
+            in srgb,
+            var(--color-callout) 50%,
+            var(--color-foreground)
+        );
+        display: flex;
+        font-weight: var(--font-weight-bold, bold);
+
+        user-select: none;
+        padding: var(--base-d2) var(--base) var(--base-d4) var(--base);
+        margin: 0;
+    }
+
+    .callout-content {
+        color: var(--color-foreground);
+        background: color-mix(
+            in srgb,
+            var(--color-callout) 2.5%,
+            color-mix(
+                in srgb,
+                var(--color-background-secondary) 25%,
+                var(--color-background)
+            )
+        );
+
+        box-shadow: inset var(--shadow);
+        border-radius: var(--radius);
+        padding: var(--gap);
+        margin-left: 0;
+        border: var(--border);
+        text-align: left;
+
+        p:first-child {
+            margin-top: 0;
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul,
+        ol {
+            padding: 0 calc(var(--leading));
+            list-style: none;
+        }
+
+        pre {
+            margin: var(--leading) 0;
+        }
+
+        > .callout {
+            margin: calc(var(--gap) * -1);
+
+            .callout-content {
+                padding: var(--gap);
+            }
+
+            .callout-title {
+                padding-left: var(--gap);
+                padding-right: var(--gap);
+            }
+        }
+    }
+
+    .callout-title-icon {
+        display: none;
+    }
+
+    img {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+// Callout Color Variants
+.callout[data-callout="warning" i] {
+    --color-callout: var(--color-red);
+}
+.callout[data-callout="important" i] {
+    --color-callout: var(--color-orange);
+}
+
+// Details/Summary specific callout styles
+details > summary {
+    list-style: none; /* removes marker in Firefox */
+}
+
+details .callout-title::before {
+    content: "▸";
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: transform var(--transition);
+    width: var(--gap);
+    margin-left: calc(var(--gap) * -1);
+    text-align: center;
+}
+
+details[open] .callout-title::before {
+    transform: rotate(90deg);
+}
+
+details .callout-title-inner {
+    display: inline;
+}
+
+// Caption Callout (after an image)
+p:has(img) + .callout[data-callout="caption" i] {
+    padding: 0;
+    background: none;
+    border: none;
+    margin: 0 var(--gap);
+    position: relative;
+    top: calc(var(--leading) * -1);
+    box-shadow: none;
+
+    .callout-title {
+        display: none;
+    }
+
+    .callout-content {
+        padding: 0;
+        background: none;
+        border: none;
+        box-shadow: none;
+        text-align: center !important;
+        text-wrap: balance !important;
+    }
+}
+
+.mermaid {
+    background: var(--color-background-secondary);
+    border-radius: var(--radius);
+    border: var(--border);
+    text-align: center;
+    margin: 0 auto var(--gap) auto;
+    padding: var(--gap);
+}
+
+
+
+aside, .alert {
+    border-radius: var(--radius);
+    background: var(--color-background-secondary);
     box-shadow: var(--shadow);
     padding: var(--leading) var(--gap);
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
 
-    /* Remove margin from first/last children */
-    > :first-child {
-        margin-block-start: 0;
+    &:is(.debug, .error, .accent, .success, .warning, .info) {
+        --color-msg: var(--color-foreground);
+        color: var(--color-msg);
+        background: color-mix(in srgb, var(--color-msg) 5%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
     }
-
-    > :last-child {
-        margin-block-end: 0;
-    }
-
-    /* Bold labels */
-    strong {
-        font-weight: var(--font-weight-bold);
-    }
+    
 }
 
-/**
- * @name Alert Variants
- * @group components-feedback
- * @since 0.11.0
- *
- * Each variant adjusts the color system to convey meaning. The background is
- * a subtle 10% mix of the semantic color, ensuring it's noticeable without
- * overwhelming. The left border is the full semantic color, providing a strong
- * visual anchor. Text remains at full contrast for readability.
- *
- * @see {class} .alert - Base component
- */
-
-/* Success - Green (complete, go, affirmative) */
-.alert-success {
-    --alert-background: color-mix(
-        in srgb,
-        var(--color-success) 10%,
-        var(--color-background)
-    );
-    --alert-border-color: var(--color-success);
-}
-
-/* Warning - Yellow/Orange (caution, attention, pending) */
-.alert-warning {
-    --alert-background: color-mix(
-        in srgb,
-        var(--color-warning) 10%,
-        var(--color-background)
-    );
-    --alert-border-color: var(--color-warning);
-}
-
-/* Error - Red (danger, stop, critical) */
-.alert-error {
-    --alert-background: color-mix(
-        in srgb,
-        var(--color-error) 10%,
-        var(--color-background)
-    );
-    --alert-border-color: var(--color-error);
-}
-
-/* Info - Blue (information, note, reference) */
-.alert-info {
-    --alert-background: color-mix(
-        in srgb,
-        var(--color-info) 10%,
-        var(--color-background)
-    );
-    --alert-border-color: var(--color-info);
-}
 
 /**
  * @name Alert Action Links
