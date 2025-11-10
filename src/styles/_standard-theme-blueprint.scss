@@ -85,7 +85,7 @@
         font-family: var(--font-monospace);
         color: var(--color-foreground);
         font-style: italic;
-        top: calc(var(--gap) * -1);
+        top: 0;
         left: calc(var(--gap) * -1);
         transform: translateX(-100%);
         z-index: 999999999;
@@ -103,7 +103,7 @@
         font-style: italic;
         font-family: var(--font-monospace);
         position: absolute;
-        top: calc(var(--gap) * -1);
+        top: 0;
         left: calc(var(--gap) * -1);
         transform: translateX(-100%);
     }
@@ -121,7 +121,7 @@
         font-weight: 400;
         font-family: var(--font-monospace);
         position: absolute;
-        top: calc(var(--gap) * -1);
+        top: 0;
         left: calc(var(--gap) * -1);
         transform: translateX(-100%);
     }
