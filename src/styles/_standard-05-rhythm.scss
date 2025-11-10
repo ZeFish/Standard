@@ -200,9 +200,9 @@
         margin-block-start: var(--gap-block);
     }
     .compact {
-        --base-gap: var(--gap-compact);
+        --base-gap: var(--leading);
         li {
-            margin-block-end: var(--gap-compact);
+            margin-block-end: var(--leading);
         }
     }
     .tight {
