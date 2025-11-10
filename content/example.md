@@ -18,7 +18,6 @@ visibility: public
 A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision inspired by centuries of print mastery.
 
 ### Contents
-
 <ol>
   <li><a href="#typography">Typography System</a></li>
   <li><a href="#grid">Grid System</a></li>

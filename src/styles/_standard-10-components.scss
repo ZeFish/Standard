@@ -2106,7 +2106,7 @@ dialog.modal::backdrop {
             .comment-author {
                 font-weight: var(--font-weight-bold);
 
-                margin-block-end: var(--gap-compact);
+                margin-block-end: var(--gap-tight);
             }
             .comment-date,
             .comment-pending {
@@ -2122,7 +2122,7 @@ dialog.modal::backdrop {
             margin-inline: var(--gap-tight);
             margin-block-start: 0;
             border-left: var(--border);
-            padding: var(--gap-compact);
+            padding: var(--gap-tight);
             color: var(--color-muted);
         }
     }
