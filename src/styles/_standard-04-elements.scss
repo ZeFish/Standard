@@ -391,7 +391,6 @@ select {
 
     padding: var(--gap-tight) var(--gap-compact);
     border-radius: var(--radius);
-    margin:0;
 
     color: var(--color-foreground);
     background: var(--color-background-secondary);
@@ -430,7 +429,7 @@ legend {
 
 label {
     display: inline-block;
-    maring: 0;
+    margin: 0;
     font-family: var(--font-interface), system-ui, sans-serif;
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
