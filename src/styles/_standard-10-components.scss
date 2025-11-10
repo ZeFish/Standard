@@ -565,7 +565,7 @@ aside, .alert {
     
     color: var(--color-foreground);
     background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary));
-    border: 1px solid color-mix(in srgb, var(--color-msg) 25%, var(--color-border);
+    border: 1px solid color-mix(in srgb, var(--color-msg) 25%, var(--color-border));
     border-left-width: var(--gap-tight);
 }
 
