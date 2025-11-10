@@ -77,8 +77,8 @@
         letter-spacing: -0.05em;
     }
 
-    aside, textarea, pre {
-        padding: var(--gap-compact) var(--gap);
+    aside, textarea, pre, blockquote {
+        padding: var(--gap-compact) calc(var(--gap-compact) + var(--leading));
     }
 
     fieldset input,
