@@ -401,7 +401,7 @@ card.inset {
     border: var(--border);
     border-radius: var(--radius);
     transition: var(--duration-superfast) ease;
-    padding: calc(var(--gap) / 4);
+    padding: calc(var(--gap) / 8);
     padding-top: 0;
     --color-callout: var(--color-background-secondary);
     --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
