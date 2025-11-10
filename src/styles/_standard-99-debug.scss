@@ -90,7 +90,7 @@
 .standard-debug::before {
     --color-grid: var(--color-cyan);
     --percent-grid: calc(var(--debug-opacity) / 2);
-    --grid-unit: var(--font-raw);
+    --grid-unit: 1rlh;
     content: "";
     position: absolute;
     inset: 0;
