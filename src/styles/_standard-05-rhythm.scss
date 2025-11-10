@@ -201,21 +201,21 @@
         margin-block-start: var(--gap-block);
     }
     .compact {
-        --base-gap: var(--leading);
+        --base-gap: var(--gap-compact);
         li {
-            margin-block-end: var(--leading);
+            margin-block-end: var(--gap-compact);
         }
     }
     .tight {
-        --base-gap: var(--base-d2);
+        --base-gap: var(--gap-tight);
         li {
-            margin-block-end: var(--base);
+            margin-block-end: var(--gap-tight);
         }
     }
     .relaxed {
-        --base-gap: var(--base-2);
+        --base-gap: var(--gap-relaxed);
         li {
-            margin-block-end: var(--base-4);
+            margin-block-end: var(--gap-relaxed);
         }
     }
 
