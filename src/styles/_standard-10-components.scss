@@ -35,7 +35,7 @@
  * @see {class} .grid - Often used to layout multiple cards in columns
  * @see {variable} --base - Controls internal spacing rhythm
  * @see {class} .prose - Can be used inside card-body for rich content
- * @see {class} .rhythm - Applied automatically to card children
+ * @see {class} .rhythm - Applied automatically tcard children
  *
  * @link https://en.wikipedia.org/wiki/Edward_Tufte Information Design Pioneer
  * @link https://www.nngroup.com/articles/cards-component/ NN/g Cards Research
@@ -439,7 +439,7 @@ card.inset {
                 var(--color-background)
             )
         );
-
+        line-height: var(--line-height-compact);
         box-shadow: inset var(--shadow);
         border-radius: var(--radius);
         padding: var(--gap-compact);
@@ -537,7 +537,7 @@ p:has(img) + .callout[data-callout="caption" i] {
         padding: 0;
         background: none;
         border: none;
-        line-height: var(--line-height-compact);
+        
         box-shadow: none;
         text-align: center !important;
         text-wrap: balance !important;
