@@ -134,10 +134,30 @@
     content: attr(class);
     position: absolute;
     top: 0;
-    left: calc(var(--gap) * -2);
+    left: calc(var(--gap) * -1);
     transform: translateX(-100%);
     z-index: 999999999;
 }
+.standard-debug {
+h1::before {
+        content: "h1";
+    }
+    h2::before {
+        content: "h2";
+    }
+    h3::before {
+        content: "h3";
+    }
+    h4::before {
+        content: "h4";
+    }
+    h5::before {
+        content: "h5";
+    }
+    h6::before {
+        content: "h6";
+    }
+    }
 
 /* Reading Layout Debug - show zones */
 .standard-debug .prose {
@@ -205,6 +225,7 @@
         grid-column: feature-end / hero-end;
     }
 }
+
 
 /* Grid item debugging */
 /* Grid Column Overlay (only for .grid inside debug) */
