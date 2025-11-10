@@ -2096,17 +2096,17 @@ dialog.modal::backdrop {
         box-shadow: var(--shadow);
         border-radius: var(--radius);
         background: var(--color-background-secondary);
-        padding: var(--base);
-        margin-block-end: var(--base);
+        padding: var(--gap);
+        margin-block-end: var(--gap);
         .comment-header {
             display: flex;
             align-items: baseline;
-            gap: var(--base-d2);
+            gap: var(--gap-compact);
 
             .comment-author {
                 font-weight: var(--font-weight-bold);
 
-                margin-block-end: var(--base);
+                margin-block-end: var(--gap);
             }
             .comment-date,
             .comment-pending {
@@ -2119,10 +2119,10 @@ dialog.modal::backdrop {
             }
         }
         .comment-content {
-            margin-inline: var(--base-d2);
-            margin-block-start: var(--base-d8);
+            margin-inline: var(--gap-compact);
+            margin-block-start: var(--gap-tight);
             border-left: var(--border);
-            padding: var(--base);
+            padding: var(--gap);
             color: var(--color-muted);
         }
     }
