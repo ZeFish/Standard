@@ -397,21 +397,20 @@
     color: var(--color-subtle) !important;
 }
 
-aside,
-aside.debug,
-aside.error,
-aside.accent,
-aside.success,
-aside.warning,
-aside.info {
-    color: var(--color-msg);
-    background: color-mix(in srgb, var(--color-msg) 5%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
+aside {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: var(--leading) var(--gap);
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
+
+    &.is(.debug, .error, .accent, .success, .warning, .info) {
+        --color-msg: var(--color-foreground);
+        color: var(--color-msg);
+        background: color-mix(in srgb, var(--color-msg) 5%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
+    }
+    
 }
 .accent {
     --color-msg: var(--color-accent);
