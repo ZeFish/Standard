@@ -485,16 +485,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       <input type="email" id="email" placeholder="john@example.com" />
       <label for="message">Message</label>
       <textarea id="message" rows="4" placeholder="Your message here..."></textarea>
-      <div>
+      
         <input type="checkbox" id="newsletter" />
         <label for="newsletter">Subscribe to newsletter</label>
-      </div>
-      <div>
+      
+      
         <input type="radio" id="option1" name="option" />
         <label for="option1">Option 1</label>
         <input type="radio" id="option2" name="option" />
         <label for="option2">Option 2</label>
-      </div>
+      
     </fieldset>
     <div class="button-group">
       <button type="submit">Send Message</button>
