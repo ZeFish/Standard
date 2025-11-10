@@ -401,7 +401,7 @@ card.inset {
     border: var(--border);
     border-radius: var(--radius);
     transition: var(--duration-superfast) ease;
-    padding: var(--gap-tight);
+    padding: calc(var(--gap) / 4);
     padding-top: 0;
     --color-callout: var(--color-background-secondary);
     --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
@@ -563,7 +563,7 @@ aside, .alert {
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
     
-    color: color-mix(in srgb, var(--color-msg) 25%, var(--color-foreground)) !important;
+    color: color-mix(in srgb, var(--color-msg) 10%, var(--color-foreground)) !important;
     background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary));
     border: 1px solid color-mix(in srgb, var(--color-msg) 50%, var(--color-border));
     border-left-width: calc(var(--stroke-width) * 2);
