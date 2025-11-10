@@ -87,7 +87,7 @@
 
 /* Gap variants aligned to rhythm */
 :is(.grid, [class^="grid-"]).compact {
-    --gap-grid: var(--gap-compact);
+    --gap-grid: var(--gap-tight);
 }
 :is(.grid, [class^="grid-"]).relaxed {
     --gap-grid: var(--gap-relaxed);
