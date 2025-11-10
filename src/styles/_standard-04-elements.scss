@@ -441,6 +441,7 @@ label {
 fieldset {
     border: var(--border);
     border-radius: var(--radius);
+    padding:0 !important;
     background: color-mix(
         in srgb,
         var(--color-background-secondary) 25%,
