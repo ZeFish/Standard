@@ -555,6 +555,7 @@ p:has(img) + .callout[data-callout="caption" i] {
 
 
 aside, .alert {
+    line-height: 1.2;
     --color-msg: var(--color-foreground);
     border-radius: var(--radius);
 
