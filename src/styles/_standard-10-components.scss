@@ -2125,6 +2125,7 @@ dialog.modal::backdrop {
             padding: var(--gap-tight);
             color: var(--color-muted);
             font-size: var(--scale-d2);
+            line-height: var(--line-height-compact);
         }
     }
     :last-child {
