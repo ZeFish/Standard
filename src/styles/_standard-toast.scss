@@ -68,7 +68,7 @@
     z-index: var(--z-toast);
     display: flex;
     flex-direction: column;
-    gap: var(--base-d4);
+    gap: var(--gap-tight);
     pointer-events: none;
     max-width: 400px;
     margin-block-end: 0;
@@ -82,8 +82,8 @@
 /* Top-right (default) */
 .toast-container-top-right {
     position: fixed;
-    top: var(--body-padding);
-    right: var(--body-padding);
+    top: var(--gap-body);
+    right: var(--gap-body);
 
     display: flex;
     flex-direction: column;
@@ -91,28 +91,28 @@
 
 /* Top-left */
 .toast-container-top-left {
-    top: var(--body-padding);
-    left: var(--body-padding);
+    top: var(--gap-body);
+    left: var(--gap-body);
     transform: translateX(100%);
 }
 
 /* Top-center */
 .toast-container-top-center {
-    top: var(--body-padding);
+    top: var(--gap-body);
     left: 50%;
     transform: translateX(-50%);
 }
 
 /* Bottom-right */
 .toast-container-bottom-right {
-    bottom: var(--body-padding);
+    bottom: var(--gap-body);
     right: var(--toast-spacing);
     flex-direction: column-reverse;
 }
 
 /* Bottom-left */
 .toast-container-bottom-left {
-    bottom: var(--body-padding);
+    bottom: var(--gap-body);
     left: var(--toast-spacing);
     flex-direction: column-reverse;
 }
@@ -129,7 +129,7 @@
         max-width: 100%;
         min-width: 1%;
         margin-inline: 25%;
-        padding: var(--base);
+        padding: var(--gap);
         flex-direction: column-reverse;
         text-align: center;
     }
@@ -146,7 +146,7 @@
     min-width: 100px;
     max-width: 100%;
 
-    font-size: var(--scale);
+    font-size: var(--scale-d2);
     font-size: 12px;
     font-family: var(--font-interface);
 
@@ -205,8 +205,8 @@
 .toast-content {
     display: flex;
     align-items: baseline;
-    gap: var(--base-d4);
-    padding: var(--base-d2) var(--base);
+    gap: var(--gap-tight);
+    padding: var(--gap-micro) var(--gap-tight);
     transition: transform var(--transition);
     margin-block-end: 0;
 }
@@ -215,7 +215,7 @@
 .toast-icon {
     flex-shrink: 0;
     font-size: var(--scale-d2);
-    line-height: var(--line-height);
+    line-height: var(--line-height-compact);
     font-weight: bold;
     display: none;
 }
@@ -224,7 +224,8 @@
 .toast-message {
     flex: 1;
     font-size: var(--scale-d2);
-    line-height: var(--line-height);
+    font-size: 12px;
+    line-height: var(--line-height-compact);
     color: var(--color-foreground);
     word-break: break-word;
 }
