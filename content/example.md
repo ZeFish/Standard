@@ -18,24 +18,22 @@ visibility: public
 A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision inspired by centuries of print mastery.
 
 ### Contents
-<ol>
-  <li><a href="#typography">Typography System</a></li>
-  <li><a href="#grid">Grid System</a></li>
-  <li><a href="#rhythm">Vertical Rhythm</a></li>
-  <li><a href="#color">Color Management</a></li>
-  <li><a href="#reading">Reading Layout</a></li>
-  <li><a href="#forms">Form Elements</a></li>
-</ol>
-<h2 id="typography">Typography is the Voice</h2>
-<div class="card">
-  Standard implements fine-art typography with smart quotes, proper punctuation, widow
-  prevention, and multi-locale support. The golden ratio governs all typographic relationships.
-</div>
-<h3>Heading Hierarchy</h3>
-<p>
-  Each heading level maintains precise mathematical relationships based on the golden ratio (φ =
-  1.618).
-</p>
+1. [Typography System](#typography)
+2. [Grid System](#grid)
+3. [Vertical Rhythm](#rhythm)
+4. [Color Management](#color)
+5. [Reading Layout](#reading)
+6. [Form Elements](#forms)
+
+## Typography is the Voice
+
+> Standard implements fine-art typography with smart quotes, proper punctuation, widow prevention, and multi-locale support. The golden ratio governs all typographic relationships.
+
+### Heading Hierarchy
+
+Each heading level maintains precise mathematical relationships based on the golden ratio (φ = 1.618).
+
+
 <div id="comments">
         <div class="comment" data-id="1762449150577-juzyfccm8" data-level="0" data-pending="true" "="">
           <div class="comment-header">
@@ -62,54 +60,40 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Heading Level 2
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.
+
+### Heading Level 3
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-  <h3 class="circular">Heading Level 3</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  <h4>Heading Level 4</h4>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  <h5>Heading Level 5</h5>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  <h6>Heading Level 6</h6>
-  <p>Body text with <strong>bold emphasis</strong> and <em>italic stress</em>.</p>
-</div>
-<h3>Smart Typography</h3>
-<p>
-  The JavaScript engine automatically enhances your text with proper typographic conventions:
-</p>
-<ul>
-  <li>"Straight quotes" become "curly quotes"</li>
-  <li>Double hyphens -- become em-dashes—like this</li>
-  <li>Three periods... become proper ellipsis…</li>
-  <li>Fractions like 1/2 become ½</li>
-  <li>No orphaned words on last lines</li>
-</ul>
-<blockquote>
-  "Typography is the craft of endowing human language with a durable visual form."
-  <cite>— Robert Bringhurst</cite>
-</blockquote>
-<h3>Code & Monospace</h3>
-<p>
-  Inline code like <code>const standard = new Standard()</code> and code blocks maintain rhythm:
-</p>
+#### Heading Level 4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+##### Heading Level 5
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+###### Heading Level 6
+
+Body text with **bold emphasis** and *italic stress*.
+
+### Smart Typography
+
+The JavaScript engine automatically enhances your text with proper typographic conventions:
+
+* "Straight quotes" become "curly quotes"
+* Double hyphens -- become em-dashes--like this
+* Three periods... become proper ellipsis…
+* Fractions like 1/2 become ½
+* No orphaned words on last lines
+
+> "Typography is the craft of endowing human language with a durable visual <cite>— Robert Bringhurst</cite>
+
+### Code & Monospace
+
+Inline code like <code>const standard = new Standard()</code> and code blocks maintain rhythm:
+
 <pre><code>// Initialize Standard
         const standard = new Standard({
           locale: 'en',
@@ -118,12 +102,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
           observeDOM: true
         });</code></pre>
 <div class="feature">
-  <h2 id="grid">Grid is the Structure</h2>
-  <p>
-    A Swiss-style 12-column responsive grid with logical properties. Inspired by Josef
-    Müller-Brockmann and the International Typographic Style.
-  </p>
-  <h3>Basic Columns</h3>
+
+## Grid is the Structure
+
+A Swiss-style 12-column responsive grid with logical properties. Inspired by Josef Müller-Brockmann and the International Typographic Style.
+
+### Basic Columns
+  
   <div class="grid-12">
     <div class="col-12 card">col-12 (Full width)</div>
     <div class="col-6 card">col-6 (Half)</div>
@@ -209,51 +194,39 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     <li>Generous spacing</li>
   </ul>
 </div>
-<h3>Lists & Hierarchy</h3>
-<p>Lists maintain rhythm with proper indentation:</p>
-<ul>
-  <li>Unordered lists use centered bullets</li>
-  <li>Proper indentation with <code>--rhythm</code></li>
-  <li>
-    Nested lists maintain rhythm
-    <ul>
-      <li>Second level nesting</li>
-      <li>
-        Consistent spacing
-        <ul>
-          <li>Third level nesting</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-<ol>
-  <li>Ordered lists use right-aligned numbers</li>
-  <li>Tabular number formatting</li>
-  <li>
-    Mathematical precision
-    <ol>
-      <li>Nested ordered lists</li>
-      <li>Maintain alignment</li>
-    </ol>
-  </li>
-</ol>
-<h3>Special Elements</h3>
-<p>Blockquotes, code blocks, and figures get generous spacing:</p>
-<blockquote>
-  Special elements receive <code>--rhythm-block-gap-special</code> (2× rhythm) to create visual
-  breathing room and emphasize their importance.
-</blockquote>
+
+### Lists & Hierarchy
+
+Lists maintain rhythm with proper indentation:
+
+* Unordered lists use centered bullets
+* Proper indentation with `--rhythm`
+* Nested lists maintain rhythm
+  * Second level nesting
+  * Consistent spacing
+    * Third level nesting
+
+1. Ordered lists use right-aligned numbers
+2. Tabular number formatting
+3. Mathematical precision
+   1. Nested ordered lists
+   2. Maintain alignment
+
+### Special Elements
+Blockquotes, code blocks, and figures get generous spacing:
+
+> Special elements receive <code>--rhythm-block-gap-special</code> (2× rhythm) to create visual breathing room and emphasize their importance.
+
 <figure>
   <div class="demo-placeholder">[Figure Placeholder]</div>
   <figcaption>Figures and captions maintain rhythm spacing</figcaption>
 </figure>
-  <h2 id="color">Color is the Emotion</h2>
-  <p>
-    Automatic light/dark theming with analog-inspired colors. Zero configuration— respects
-    <code>prefers-color-scheme</code> automatically.
-  </p>
-  <h3>Color Palette</h3>
+
+## Color is the Emotion
+Automatic light/dark theming with analog-inspired colors. Zero configuration— respects <code>prefers-color-scheme</code> automatically.
+  
+### Color Palette
+   
   <div class="grid-4 sm:grid-3">
     <div class="sm:col-1">
       <div
@@ -312,7 +285,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <h3>Semantic Colors</h3>
+  
+### Semantic Colors
+
   <div class="grid-3 sm:grid-2">
     <div>
       <div
@@ -332,28 +307,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       <div class="card center" style="background: var(--color-background-secondary)">Secondary</div>
     </div>
   </div>
-  <h3>Text Colors</h3>
-  <div class="compact">
-  <p>Normal text color</p>
+  
+### Text Colors
+
+Normal text color
   <p class="muted">Muted text (60% opacity)</p>
   <p class="subtle">Subtle text (40% opacity)</p>
   <p class="accent">Accent color text</p>
   <p class="success">Success message</p>
   <p class="warning">Warning message</p>
   <p class="error">Error message</p>
-</div>
-<h2 id="reading">Reading Layout System</h2>
-<p>
-  Editorial-quality layouts for long-form content. Inspired by centuries of book design with
-  flexible content areas.
-</p>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-  laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-  voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-  non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+
+
+## Reading Layout System<
+
+Editorial-quality layouts for long-form content. Inspired by centuries of book design with flexible content areas.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 <div class="container-small card">
   <h4>Small Area</h4>
   <p>
@@ -368,7 +339,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
-<p>Main content continues here in the default area.</p>
+
+Main content continues here in the default area.
+
 <p>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
   labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -415,9 +388,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
-<h3>Image Galleries</h3>
-<p>Multiple images in a paragraph create automatic galleries:</p>
-<p class="small">
+
+### Image Galleries
+Multiple images in a paragraph create automatic galleries:
+
+<p>
   <img src="https://picsum.photos/400/300?random=1" alt="Demo 1" />
   <img src="https://picsum.photos/400/300?random=2" alt="Demo 2" />
   <img src="https://picsum.photos/400/300?random=3" alt="Demo 3" />
@@ -425,7 +400,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <p>
   <img src="https://picsum.photos/800/400?random=4" alt="Wide demo" />
 </p>
-<div class="comments-box container-small"><div id="comments">
+
+<div class="comments-box"><div id="comments">
         <div class="comment" data-id="1762449150577-juzyfccm8" data-level="0" data-pending="true" "="">
           <div class="comment-header">
             <span class="comment-author">Francis</span>
@@ -473,10 +449,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   </fieldset>
 </form>
 </div></div>
-<div>
-  <h2 id="forms">Form Elements</h2>
-  <p>Consistent form styling that integrates with the rhythm system and color management.</p>
-  <form class="small">
+
+
+## Form Elements
+Consistent form styling that integrates with the rhythm system and color management.
+
+  <form>
     <fieldset>
       <legend>Contact Information</legend>
       <label for="name">Full Name</label>
@@ -485,23 +463,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       <input type="email" id="email" placeholder="john@example.com" />
       <label for="message">Message</label>
       <textarea id="message" rows="4" placeholder="Your message here..."></textarea>
-      
         <input type="checkbox" id="newsletter" />
         <label for="newsletter">Subscribe to newsletter</label>
-      
-      
         <input type="radio" id="option1" name="option" />
         <label for="option1">Option 1</label>
         <input type="radio" id="option2" name="option" />
         <label for="option2">Option 2</label>
-      
     </fieldset>
     <div class="button-group">
       <button type="submit">Send Message</button>
       <button type="reset">Reset Form</button>
     </div>
   </form>
-</div>
+
 
 
 ## Markdown Enhancements

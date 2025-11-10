@@ -6,4 +6,10 @@
     
     --color-background-secondary: var(--color-background);
     --color-border: var(--color-foreground);
+    --color-muted: color-mix(in srgb, var(--color-foreground) 75%, transparent);
+    --color-subtle: color-mix(
+        in srgb,
+        var(--color-foreground) 50%,
+        transparent
+    );
 }
