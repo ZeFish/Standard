@@ -183,7 +183,7 @@
     li > ul,
     li > ol {
         padding-inline-start: 1rlh;
-        margin-block-start: var(--leading);
+        margin-block-start: calc(var(--leading) * 2);
         margin-block-end: 0;
     }
 
@@ -193,8 +193,6 @@
         margin: 0;
         padding-inline-start: 0;
         margin-block-end: var(--leading);
-        line-height: var(--line-height);
-        line-height: 0.75;
     }
     li:last-child {
         /* should be manage in the general last-chuld rule */
