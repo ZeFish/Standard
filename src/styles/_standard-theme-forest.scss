@@ -64,10 +64,6 @@
         border-radius: var(--radius);
     }
 
-    pre {
-        margin-block-end: var(--base-4);
-    }
-
     .operator,
     .punctuation {
         color: var(--color-muted);
@@ -81,12 +77,8 @@
         letter-spacing: -0.05em;
     }
 
-    aside {
-        padding: var(--base-d2);
-    }
-
-    textarea {
-        padding: var(--base-d2);
+    aside, textarea, pre {
+        padding: var(--gap-compact);
     }
 
     fieldset input,
