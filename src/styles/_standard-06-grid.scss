@@ -73,11 +73,11 @@
 /* Exception for grid in a prose div */
 .prose > :is(.grid, [class^="grid-"]) {
     margin-block-start: calc(
-        (var(--base) * max(var(--base-block-gap), var(--base-gap))) -
-            (var(--base) * var(--base-gap))
+        (var(--gap) * max(var(--gap-block), var(--gap))) -
+            (var(--gap) * var(--gap))
     );
     margin-block-end: calc(
-        var(--base) * max(var(--base-block-gap), var(--base-gap))
+        var(--gap) * max(var(--gap-block), var(--gap))
     );
 }
 :is(.grid, [class^="grid-"]) > * {
@@ -87,10 +87,10 @@
 
 /* Gap variants aligned to rhythm */
 :is(.grid, [class^="grid-"]).compact {
-    --gap-grid: var(--base-d4);
+    --gap-grid: var(--gap-compact);
 }
 :is(.grid, [class^="grid-"]).relaxed {
-    --gap-grid: var(--base-4);
+    --gap-grid: var(--gap-relaxed);
 }
 
 /* Spans 1..12 */
