@@ -525,10 +525,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   </div>
   <details class="callout" data-callout="note">
     <summary>
-      <div class="callout-title">Collapsible Callout</div>
+      Collapsible Callout
     </summary>
-    <div class="callout-content">
+    
       <p>Click the title to expand and collapse this content.</p>
-    </div>
+ 
   </details>
 </div>
