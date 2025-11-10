@@ -99,7 +99,7 @@
         grid-column: hero;
     }
     .container-hero {
-        margin-inline: calc(var(--body-padding) * -1);
+        margin-inline: calc(var(--gap-body) * -1);
         > * {
             margin-inline: 0;
         }
