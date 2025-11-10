@@ -32,7 +32,7 @@
     --baseline: 1rlh;
     --font-raw: calc(1rlh / var(--line-height));
     
-    --gap: var(--baseline);
+    --gap: var(--font-raw);
     --gap-block: calc(var(--baseline) * 4); /* Spacing between different type of block */
     --gap-compact: calc(var(--baseline) / 4);
     --gap-relaxed: calc(var(--baseline) * 4);
