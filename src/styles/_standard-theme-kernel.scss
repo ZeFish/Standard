@@ -52,7 +52,7 @@
     --font-header-feature:
         "onum", "liga", "calt", "case", "cv01", "cv02", "cv03", "cv04", "cv06",
         "cv09", "cv10", "cv11", "cv12", "cv13";
-    --font-header-variation: "";
+    --font-header-variation: "SOFT" 100;
     --font-header-letter-spacing: -0.065em;
 
     --stroke-width: 1.5px;
@@ -133,7 +133,7 @@
     /* Add other properties here, as needed. For example: */
     font-weight: 100 1000;
     font-style: italic;
-    src: url("/assets/fonts/FrauncesItalic[SOFT,WONK,opsz,wght].woff2");
+    src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2");
 }
 
 
