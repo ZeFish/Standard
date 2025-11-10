@@ -309,7 +309,7 @@ a.button {
     color: color-mix(in srgb, var(--color-background) 85%, transparent);
     border: var(--border);
     border-color: var(--color-border);
-    padding: var(--base-tight) var(--base-compact);
+    padding: var(--gap-tight) var(--gap-compact);
     box-shadow: var(--shadow);
 
     cursor: pointer;
