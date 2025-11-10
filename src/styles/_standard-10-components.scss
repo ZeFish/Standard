@@ -563,7 +563,7 @@ aside, .alert {
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
     
-    color: var(--color-msg);
+    color: var(--color-foreground);
     background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary);
     border: 1px solid color-mix(in srgb, var(--color-msg) 25%, var(--color-border);
     border-left-width: var(--gap-tight);
