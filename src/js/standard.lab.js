@@ -1058,7 +1058,7 @@ class StandardLab {
     const styles = document.createElement("style");
     styles.id = "standard-lab-styles";
     styles.textContent = `
-      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--base-2); height: var(--base-2); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
+      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--base); height: var(--base); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
