@@ -344,11 +344,13 @@
     background: var(--alert-background);
     color: var(--alert-color);
     border-left: 4px solid var(--alert-border-color); /* Accent bar */
-    margin-block-end: var(--base);
-
-    /* Typography adjustments */
+    
+    
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: var(--leading) var(--gap);
     font-size: var(--scale-d2);
-    line-height: var(--line-height);
+    font-family: var(--font-interface);
 
     /* Remove margin from first/last children */
     > :first-child {
