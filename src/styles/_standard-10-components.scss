@@ -2081,7 +2081,7 @@ dialog.modal::backdrop {
  */
 .accordion-compact .accordion-trigger,
 .accordion-compact .accordion-content {
-    padding: var(--base-d4);
+    padding: var(--gap-tight);
     font-size: var(--scale-d3);
 }
 
@@ -2096,7 +2096,7 @@ dialog.modal::backdrop {
         box-shadow: var(--shadow);
         border-radius: var(--radius);
         background: var(--color-background-secondary);
-        padding: var(--gap);
+        padding: calc(var(--gap) / 8);
         margin-block-end: var(--gap);
         .comment-header {
             display: flex;
@@ -2106,7 +2106,7 @@ dialog.modal::backdrop {
             .comment-author {
                 font-weight: var(--font-weight-bold);
 
-                margin-block-end: var(--gap);
+                margin-block-end: var(--gap-compact);
             }
             .comment-date,
             .comment-pending {
@@ -2122,7 +2122,7 @@ dialog.modal::backdrop {
             margin-inline: var(--gap-compact);
             margin-block-start: var(--gap-tight);
             border-left: var(--border);
-            padding: var(--gap);
+            padding: calc(var(--gap) / 8);
             color: var(--color-muted);
         }
     }
