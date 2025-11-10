@@ -2096,7 +2096,7 @@ dialog.modal::backdrop {
         box-shadow: var(--shadow);
         border-radius: var(--radius);
         background: var(--color-background-secondary);
-        padding: calc(var(--gap) / 8);
+        padding: var(--gap-compact);
         margin-block-end: var(--gap);
         .comment-header {
             display: flex;
@@ -2122,7 +2122,7 @@ dialog.modal::backdrop {
             margin-inline: var(--gap-compact);
             margin-block-start: var(--gap-tight);
             border-left: var(--border);
-            padding: calc(var(--gap) / 8);
+            padding: var(--gap-compact);
             color: var(--color-muted);
         }
     }
