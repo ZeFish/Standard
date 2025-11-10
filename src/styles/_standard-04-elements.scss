@@ -608,7 +608,7 @@ card.inset {
 
 .callout {
     transition: var(--duration-superfast) ease;
-    padding: var(--base-d8);
+    padding: var(--gap);
     padding-top: 0;
     --color-callout: var(--color-background-secondary);
     --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
@@ -650,7 +650,7 @@ card.inset {
         box-shadow: inset var(--shadow);
         overflow: hidden;
         border-radius: var(--radius);
-        padding: var(--base);
+        padding: var(--gap);
         margin-left: 0;
         border: var(--border);
         text-align: left;
@@ -664,24 +664,24 @@ card.inset {
 
         ul,
         ol {
-            padding: 0 calc(var(--base) * 0.75);
+            padding: 0 calc(var(--leading));
             list-style: none;
         }
 
         pre {
-            margin: var(--base) 0;
+            margin: var(--leading) 0;
         }
 
         > .callout {
-            margin: calc(var(--base-d4) * -1);
+            margin: calc(var(--gap) * -1);
 
             .callout-content {
-                padding: var(--base-d2);
+                padding: var(--gap);
             }
 
             .callout-title {
-                padding-left: var(--base-d2);
-                padding-right: var(--base-d2);
+                padding-left: var(--gap);
+                padding-right: var(--gap);
             }
         }
     }
@@ -714,8 +714,8 @@ details .callout-title::before {
     display: inline-block;
     transform: rotate(0deg);
     transition: transform var(--transition);
-    width: var(--base-d2);
-    margin-left: calc(var(--base-d2) * -1);
+    width: var(--gap);
+    margin-left: calc(var(--gap) * -1);
     text-align: center;
 }
 
@@ -732,9 +732,9 @@ p:has(img) + .callout[data-callout="caption" i] {
     padding: 0;
     background: none;
     border: none;
-    margin: 0 var(--base-2);
+    margin: 0 var(--gap);
     position: relative;
-    top: calc(var(--base) * -1.75);
+    top: calc(var(--leading) * -1);
     box-shadow: none;
 
     .callout-title {
@@ -756,6 +756,6 @@ p:has(img) + .callout[data-callout="caption" i] {
     border-radius: var(--radius);
     border: var(--border);
     text-align: center;
-    margin: 0 auto var(--base) auto;
-    padding: var(--base);
+    margin: 0 auto var(--gap) auto;
+    padding: var(--gap);
 }

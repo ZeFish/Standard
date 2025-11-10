@@ -275,42 +275,42 @@
     .grid form {
         display: flex;
         flex-direction: column;
-        gap: calc(var(--base) * var(--base-gap));
+        gap: calc(var(--gap) * var(--gap-block));
     }
 
     /* Form field groups - spacing only */
     fieldset {
-        padding-inline: var(--base);
+        padding-inline: var(--gap);
         display: grid;
         gap: 0;
     }
 
     legend {
-        margin-block-end: var(--base);
+        margin-block-end: var(--gap);
     }
 
     /* Form inputs */
     input,
     textarea,
     select {
-        padding-inline: var(--base);
-        margin-block-end: var(--base-2);
+        padding-inline: var(--gap);
+        margin-block-end: var(--gap-block);
     }
 
     /* Labels - spacing only */
     label {
-        margin-inline: var(--base);
-        margin-block-end: var(--base-d2);
+        margin-inline: var(--gap);
+        margin-block-end: var(--gap-block);
     }
 
     /* Checkbox/radio with labels */
     input[type="checkbox"] + label,
     input[type="radio"] + label {
-        margin-inline-start: var(--base-d8);
+        margin-inline-start: var(--leading);
     }
 
     div:has(input + label) {
-        margin-block-end: var(--base-2);
+        margin-block-end: var(--gap-block);
     }
 
     fieldset div,
@@ -320,7 +320,7 @@
     }
 
     fieldset + button {
-        margin-block-start: var(--base);
+        margin-block-start: var(--gap);
     }
     fieldset :last-child {
         margin-block-end: 0;

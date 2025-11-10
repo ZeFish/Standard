@@ -107,8 +107,8 @@
     --mobile-font-size: 1.1rem;
     --mobile-optical-ratio: var(--ratio-silver);
     --mobile-line-height: 1.5;
-    --mobile-body-padding: var(--baseline);
-    --mobile-base-gap: var(--baseline); /* Space between standard block like paragraph */
+    --mobile-body-padding: var(--leading);
+    --mobile-base-gap: var(--leading); /* Space between standard block like paragraph */
     --mobile-base-block-gap: var(--baseline);
 
 

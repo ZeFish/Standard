@@ -397,6 +397,7 @@
     color: var(--color-subtle) !important;
 }
 
+aside,
 aside.debug,
 aside.error,
 aside.accent,
@@ -408,7 +409,7 @@ aside.info {
     border: 1px solid color-mix(in srgb, var(--color-msg) 10%, transparent);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: var(--base-d4) var(--base-d2);
+    padding: var(--leading) var(--gap);
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
 }
@@ -581,11 +582,11 @@ aside.info {
  */
 
 .rhythm-compact {
-    --base-gap: var(--base-d2);
+    --base-gap: var(--leading);
 }
 
 .rhythm-relaxed {
-    --base-gap: var(--base-2);
+    --base-gap: var(--gap-block);
 }
 
 /* =========================== */
@@ -815,40 +816,40 @@ aside.info {
 .columns,
 .columns-2 {
     columns: 2;
-    column-gap: var(--grid-gap);
+    column-gap: var(--gap-grid);
 }
 
 .columns-3 {
     columns: 3;
-    column-gap: var(--grid-gap);
+    column-gap: var(--gap-grid);
 }
 
 .columns-4 {
     columns: 4;
-    column-gap: var(--grid-gap);
+    column-gap: var(--gap-grid);
 }
 
 /* Responsive column count based on container width */
 .columns-auto {
     columns: auto;
     column-width: var(--line-width-s); /* ~32rem optimal column width */
-    column-gap: var(--grid-gap);
+    column-gap: var(--gap-grid);
 }
 
 [class|="columns"].compact {
-    column-gap: var(--base-d4);
+    column-gap: var(--leading);
 }
 
 [class|="columns"].relaxed {
-    column-gap: var(--base-4);
+    column-gap: var(--gap-block);
 }
 /* Column gap variants */
 .columns-gap-compact {
-    column-gap: var(--base-d2);
+    column-gap: var(--leading);
 }
 
 .columns-gap-wide {
-    column-gap: var(--base-2);
+    column-gap: var(--gap-block);
 }
 
 /* Prevent breaks inside elements */
@@ -908,14 +909,14 @@ ul.menu {
     li {
         list-style: none;
         padding-inline-start: 0;
-        margin-block-end: var(--base-d2);
+        margin-block-end: var(--gap);
         &::before {
             display: none;
         }
     }
 }
 .tight nav.menu ul li {
-    margin-block-end: var(--base-d4);
+    margin-block-end: var(--leading);
 }
 
 nav.menu.horizontal ul,

@@ -85,7 +85,7 @@
     /* CSS variables for easy customization */
     --card-border: var(--border);
     --card-border-radius: var(--radius);
-    --card-padding: var(--base-2);
+    --card-padding: var(--gap);
     --card-background: var(--color-background-secondary);
     --card-shadow: var(--shadow);
 
@@ -331,7 +331,7 @@
  */
 
 .alert {
-    --alert-padding: var(--base-d2);
+    --alert-padding: var(--gap);
     --alert-border-width: 1px;
     --alert-border-radius: var(--radius);
     --alert-background: var(--color-background-secondary);
