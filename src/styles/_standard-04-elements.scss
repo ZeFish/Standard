@@ -130,7 +130,6 @@ pre {
     border-radius: var(--radius);
     padding: var(--gap);
     overflow-x: auto;
-    overflow-y: hidden;
     box-shadow: inset var(--shadow);
     line-height: 1.2;
     
@@ -648,7 +647,6 @@ card.inset {
         );
 
         box-shadow: inset var(--shadow);
-        overflow: hidden;
         border-radius: var(--radius);
         padding: var(--gap);
         margin-left: 0;
