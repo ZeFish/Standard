@@ -197,10 +197,13 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: calc(var(--leading) * 2);
+        margin-block-end: calc(var(--gap) / 2);
     }
     li:last-child {
         /* should be manage in the general last-chuld rule */
+    }
+    :is(ul,ol) + p {
+        margin-block-start: var(--gap);
     }
     .compact {
         --base-gap: var(--leading);
