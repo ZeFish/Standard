@@ -429,10 +429,10 @@ legend {
 
 label {
     display: inline-block;
-    margin: 0;
     font-family: var(--font-interface), system-ui, sans-serif;
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
+    color:red;
 }
 
 fieldset {
