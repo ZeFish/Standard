@@ -61,13 +61,13 @@ Vous savez ce qui se passe quand vous ne laissez pas d'espace psychologique ? Le
 
 Maintenant, attention : créer de l'espace ne veut PAS dire devenir un paillasson. Ce n'est pas :
 
-- ❌ N'avoir aucune limite
-- ❌ Tout accepter
-- ❌ Vous effacer complètement
+- N'avoir aucune limite
+- Tout accepter
+- Vous effacer complètement
 
 C'est :
 
-✅ **"Je te donne de l'espace pour être toi, ET je prends de l'espace pour être moi."**
+**"Je te donne de l'espace pour être toi, ET je prends de l'espace pour être moi."**
 
 Si vous créez constamment de l'espace pour l'autre sans jamais en recevoir, ce n'est plus de la gentillesse. C'est de la martyre. Et personne n'aime les martyrs, même pas les martyrs.
 
@@ -79,9 +79,8 @@ Si vous créez constamment de l'espace pour l'autre sans jamais en recevoir, ce 
 
 Voici un test. La dernière fois que quelqu'un vous a raconté un problème, est-ce que vous :
 
-A) Avez écouté attentivement, posé des questions, essayé de comprendre leur perspective ?
-
-B) Avez immédiatement commencé à formuler votre réponse pendant qu'ils parlaient encore ?
+1. Avez écouté attentivement, posé des questions, essayé de comprendre leur perspective ?
+2. Avez immédiatement commencé à formuler votre réponse pendant qu'ils parlaient encore ?
 
 Si vous avez répondu B, félicitations : vous êtes comme 95% des gens. Et vous n'écoutez pas vraiment.
 
