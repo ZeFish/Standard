@@ -147,8 +147,8 @@ pre {
     }
     .copy-button {
         position: absolute;
-        top: var(--leading);
-        right: var(--leading);
+        top: var(--gap-tight);
+        right: var(--gap-tight);
         opacity: 0;
         transition: opacity 0.5s;
 
@@ -309,7 +309,7 @@ a.button {
     color: color-mix(in srgb, var(--color-background) 85%, transparent);
     border: var(--border);
     border-color: var(--color-border);
-    padding: var(--leading) var(--gap-tight);
+    padding: var(--gap-tight) var(--gap-compact);
     box-shadow: var(--shadow);
 
     cursor: pointer;
