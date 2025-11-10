@@ -86,7 +86,7 @@
         display: block;
     }
 
-    .prose :is(p, blockquote, pre, details, li) {
+    .prose :is(p, blockquote, pre, details, li, [class^="grid"]) {
         max-width: var(--line-width-s);
         margin-inline: 0;
     }
