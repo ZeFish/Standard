@@ -527,8 +527,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     <summary>
       Collapsible Callout
     </summary>
-    
+    <div class="callout-content">
       <p>Click the title to expand and collapse this content.</p>
- 
+    </div>
   </details>
 </div>
