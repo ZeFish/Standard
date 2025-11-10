@@ -537,6 +537,7 @@ p:has(img) + .callout[data-callout="caption" i] {
         padding: 0;
         background: none;
         border: none;
+        line-height: var(--line-height-compact);
         box-shadow: none;
         text-align: center !important;
         text-wrap: balance !important;
@@ -555,7 +556,7 @@ p:has(img) + .callout[data-callout="caption" i] {
 
 
 aside, .alert {
-    line-height: 1.2;
+    line-height: var(--line-height-compact);
     --color-msg: var(--color-foreground);
     border-radius: var(--radius);
 
