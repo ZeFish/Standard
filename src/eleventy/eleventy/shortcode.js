@@ -70,8 +70,10 @@ export default function (eleventyConfig, site = {}) {
 
   eleventyConfig.addShortcode("standard_lab", function (labOptions = {}) {
     const { attributes = "" } = labOptions;
+    // Generate cache-busting timestamp (or use package version)
+    const cacheBuster = Date.now(); // Or use: process.env.npm_package_version
 
-    return `<script src="/${outputDir}/standard.lab.js" ${attributes}><\/script>`;
+    return `<script src="/${outputDir}/standard.lab.js?v=${cacheBuster}" ${attributes}><\/script>`;
   });
 
   eleventyConfig.addShortcode("htmx", function () {
