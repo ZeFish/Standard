@@ -456,7 +456,7 @@ aside, .alert {
     border-radius: var(--radius);
 
     box-shadow: var(--shadow);
-    padding: var(--leading) var(--gap-compact);
+    padding: var(--leading) var(--gap-compact) !important;
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
     
