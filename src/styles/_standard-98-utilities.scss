@@ -404,7 +404,7 @@ aside {
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
 
-    &.is(.debug, .error, .accent, .success, .warning, .info) {
+    &:is(.debug, .error, .accent, .success, .warning, .info) {
         --color-msg: var(--color-foreground);
         color: var(--color-msg);
         background: color-mix(in srgb, var(--color-msg) 5%, transparent);
