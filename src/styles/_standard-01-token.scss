@@ -107,9 +107,9 @@
     --mobile-font-size: 1.1rem;
     --mobile-optical-ratio: var(--ratio-silver);
     --mobile-line-height: 1.5;
-    --mobile-body-padding: var(--leading);
-    --mobile-base-gap: var(--leading); /* Space between standard block like paragraph */
-    --mobile-base-block-gap: var(--baseline);
+    --mobile-gap-body: var(--leading);
+    --mobile-gap: var(--leading); /* Space between standard block like paragraph */
+    --mobile-gap-block: var(--baseline);
 
 
     /* Z-index scale */
@@ -128,17 +128,6 @@
     /* Callout only animation, to test */
     --duration-superfast: 0.15s;
     
-    
-    /* ARCHIVED */
-    /* ARCHIVED */
-    /* ARCHIVED */
-
-    /* Compact variation */
-    --line-height-s: max(calc(var(--line-height) / 2), 1);
-    /* Baseline system tokens */
-    --base-gap: var(--base-4); /* Space between standard block like paragraph */
-    --base-block-gap: var(--base-4); /* Space between special block like image blockquote and code block */
-    --body-padding: var(--base-4); /* Padding around the body, can be negated by .body-p-neg, .body-p-neg-header, .body-p-neg-footer */
 }
 
 #{$text-elements} {
@@ -149,9 +138,9 @@
 /* Responsive adjustments - collapse gutters on small screens */
 @media only screen and (max-width: #{$small}) {
     :root {
-        --gap: var(--mobile-base-gap);
-        --gap-block: var(--mobile-base-block-gap);
-        --gap-body: var(--mobile-body-padding) !important;
+        --gap: var(--mobile-gap);
+        --gap-block: var(--mobile-gap-block);
+        --gap-body: var(--mobile-gap-body) !important;
         --font-size: var(--mobile-font-size) !important;
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
