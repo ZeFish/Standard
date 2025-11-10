@@ -442,7 +442,7 @@ card.inset {
 
         box-shadow: inset var(--shadow);
         border-radius: var(--radius);
-        padding: var(--gap);
+        padding: var(--gap-compact);
         margin-left: 0;
         border: var(--border);
         text-align: left;
@@ -564,7 +564,7 @@ aside, .alert {
     font-family: var(--font-interface);
     
     color: var(--color-foreground);
-    background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary);
+    background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary));
     border: 1px solid color-mix(in srgb, var(--color-msg) 25%, var(--color-border);
     border-left-width: var(--gap-tight);
 }
