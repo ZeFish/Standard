@@ -123,7 +123,7 @@
 
     h2, h3 {
         margin-block-start: var(--gap-block);
-        margin-block-end: var(--gap);
+        margin-block-end: var(--gap-block);
     }
 
     h4 {
@@ -142,8 +142,7 @@
         font-size: var(--scale-d2);
     }
 
-    h1 + h3,
-    h2 + h3,
+    :is(h1, h2, h3) + :is(h1, h2, h3),
     hr + :is(h1, h2, h3) {
         margin-block-start: 0;
     }
