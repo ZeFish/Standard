@@ -48,9 +48,6 @@
 .standard-debug {
     position: relative;
 
-    :is(#{$text-elements}) {
-        overflow: hidden;
-    }
     h1,
     h2,
     h3,
