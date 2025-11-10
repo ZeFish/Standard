@@ -45,11 +45,11 @@
     /* Layout grid tokens */
     --content: min(var(--line-width), 100%); /* ← FIXED */
     --content-small: max(
-        calc(var(--base-block-gap) - var(--base-gap)),
-        var(--base-gap)
+        calc(var(--gap-block) - var(--gap)),
+        var(--gap)
     );
-    --content-accent: minmax(0, var(--base-gap));
-    --content-feature: minmax(0, var(--base-block-gap));
+    --content-accent: minmax(0, var(--gap));
+    --content-feature: minmax(0, var(--gap-block));
     --content-hero: minmax(0, 1fr);
 }
 
