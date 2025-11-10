@@ -78,7 +78,7 @@
     }
 
     aside, textarea, pre {
-        padding: var(--gap-compact);
+        padding: var(--gap-compact) var(--gap);
     }
 
     fieldset input,
