@@ -2130,15 +2130,3 @@ dialog.modal::backdrop {
         margin-block-end: 0;
     }
 }
-
-aside {
-    font-size: var(--scale-d2);
-    color: var(--color-muted);
-    line-height: var(--line-height-s);
-    border-radius: var(--radius);
-    background: var(--color-background-secondary);
-    box-shadow: var(--shadow);
-    max-width: 33%;
-    border: var(--border);
-    padding: var(--base);
-}
