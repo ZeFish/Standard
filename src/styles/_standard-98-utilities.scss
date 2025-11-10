@@ -400,24 +400,24 @@
 
 .accent {
     --color-msg: var(--color-accent);
-    color: var(--color-accent) !important;
+    color: var(--color-accent);
 }
 .success {
     --color-msg: var(--color-success);
-    color: var(--color-success) !important;
+    color: var(--color-success);
 }
 .debug,
 .warning {
     --color-msg: var(--color-warning);
-    color: var(--color-warning) !important;
+    color: var(--color-warning);
 }
 .error {
     --color-msg: var(--color-error);
-    color: var(--color-error) !important;
+    color: var(--color-error);
 }
 .info {
     --color-msg: var(--color-info);
-    color: var(--color-info) !important;
+    color: var(--color-info);
 }
 
 .red {
