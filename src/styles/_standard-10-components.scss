@@ -563,9 +563,9 @@ aside, .alert {
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
     
-    color: var(--color-foreground) !important;
+    color: color-mix(in srgb, var(--color-msg) 10%, var(--color-foreground)); !important;
     background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary));
-    border: 1px solid color-mix(in srgb, var(--color-msg) 25%, var(--color-border));
+    border: 1px solid color-mix(in srgb, var(--color-msg) 50%, var(--color-border));
     border-left-width: calc(var(--stroke-width) * 2);
 }
 
