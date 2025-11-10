@@ -149,9 +149,9 @@
 /* Responsive adjustments - collapse gutters on small screens */
 @media only screen and (max-width: #{$small}) {
     :root {
-        --base-gap: var(--mobile-base-gap);
-        --base-block-gap: var(--mobile-base-block-gap);
-        --body-padding: var(--mobile-body-padding) !important;
+        --gap: var(--mobile-base-gap);
+        --gap-block: var(--mobile-base-block-gap);
+        --gap-body: var(--mobile-body-padding) !important;
         --font-size: var(--mobile-font-size) !important;
         --optical-ratio: var(--mobile-optical-ratio) !important;
         --line-height: var(--mobile-line-height);
