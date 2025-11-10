@@ -1558,7 +1558,7 @@ dialog.modal::backdrop {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--base);
+    padding: var(--gap-tight) var(--gap-compact);
     border-bottom: var(--border);
 
     /* Title */
@@ -1588,8 +1588,8 @@ dialog.modal::backdrop {
     color: var(--color-muted);
     cursor: pointer;
     padding: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 1rlh;
+    height: 1rlh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1615,7 +1615,7 @@ dialog.modal::backdrop {
  * @since 0.11.0
  */
 .modal-body {
-    padding: var(--base);
+    padding: var(--gap-tight) var(--gap-compact);
     overflow-y: auto; /* Scroll if content too long */
     max-height: 60vh; /* Prevent modal from growing too tall */
 
@@ -1638,8 +1638,8 @@ dialog.modal::backdrop {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--base-d2);
-    padding: var(--base);
+    gap: var(--gap);
+    padding: var(--gap-tight) var(--gap-compact);
     border-top: var(--border);
     background: var(--color-background-secondary);
 }
