@@ -94,14 +94,12 @@
         box-shadow: inset var(--shadow);
     }
 
-    h1,
+    h1::first-letter,
     h2::first-letter,
     h3::first-letter,
     h4::first-letter,
     h5::first-letter,
-    h6::first-letter,
-    .footer h2,
-    .footer h2 a {
+    h6::first-letter {
         font-feature-settings:
             "swsh", "dlig", "clig", "kern", "onum" !important;
     }
