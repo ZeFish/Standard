@@ -180,7 +180,7 @@
     ol {
         list-style: none;
         margin-block-start: 0;
-        padding-inline: 2rlh;
+        padding-inline: 1rlh;
         maring-block-end: var(--gap);
     }
 
@@ -203,9 +203,9 @@
         /* should be manage in the general last-chuld rule */
     }
     .compact {
-        --base-gap: var(--base);
+        --base-gap: var(--leading);
         li {
-            margin-block-end: var(--base-2);
+            margin-block-end: var(--leading);
         }
     }
     .tight {
