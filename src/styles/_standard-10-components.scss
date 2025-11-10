@@ -2124,6 +2124,7 @@ dialog.modal::backdrop {
             border-left: var(--border);
             padding: var(--gap-tight);
             color: var(--color-muted);
+            font-size: var(--scale-d2);
         }
     }
     :last-child {
