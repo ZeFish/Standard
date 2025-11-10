@@ -182,7 +182,7 @@
     li > ul,
     li > ol {
         padding-inline-start: 1rlh;
-        margin-block-start: calc(var(--gap-compact));
+        margin-block-start: 0;
         margin-block-end: 0;
     }
 
