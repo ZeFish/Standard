@@ -78,7 +78,7 @@
     }
 
     aside, textarea, pre, blockquote {
-        padding: var(--gap-compact) calc(var(--gap-compact) + var(--leading));
+        padding: var(--gap-compact) calc(var(--gap-tight) + var(--leading));
     }
 
     fieldset input,
