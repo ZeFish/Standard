@@ -121,7 +121,7 @@
  * @see {class} .card-body - Sibling content area
  */
 .card-header {
-    padding: var(--card-padding);
+    padding: 0;
     border-bottom: var(--card-border-width) solid var(--card-border-color);
 
     /* Remove default margins from first/last children */
@@ -154,7 +154,7 @@
  * @see {class} .rhythm - Applied automatically to children
  */
 .card-body {
-    padding: var(--card-padding);
+    padding: 0;
     flex: 1; /* Grow to fill available space, pushing footer down */
 
     /* Remove default margins from first/last children */
@@ -184,7 +184,7 @@
  * @see {class} .card-header - Sibling header area
  */
 .card-footer {
-    padding: var(--card-padding);
+    padding: 0;
     border-top: var(--card-border-width) solid var(--card-border-color);
     background: color-mix(
         in srgb,
