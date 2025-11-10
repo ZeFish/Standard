@@ -1,12 +1,13 @@
 [data-theme="swiss"] {
-    --color-red: red;
-    --color-green: red;
-    --color-blue: red;
-    --color-yellow: red;
-    --color-purple: red;
-    --color-orange: red;
-    --color-pink: red;
-    --color-accent: red;
+    --color-light-red: red;
+    --color-dark-red: #db6057;
+    --color-green: var(--color-red);
+    --color-blue: var(--color-red);
+    --color-yellow: var(--color-red);
+    --color-purple: var(--color-red);
+    --color-orange: var(--color-red);
+    --color-pink: var(--color-red);
+    --color-accent: var(--color-red);
     --shadow: none;
     --radius: 0;
     --color-border: none;
@@ -23,7 +24,7 @@
     --line-height: 1.2;
     --font-size: 1.2em;
     --scale-d2: 0.75em;
-    --body-padding: var(--base-2);
+    --body-padding: var(--gap);
 
     hr {
         background: var(--color-foreground);
@@ -44,7 +45,7 @@
         background: none;
         border: 0;
         font-size: var(--scale-d2);
-        padding-inline: var(--base);
+        padding-inline: var(--gap);
     }
     .callout-title {
         color: var(--color-foreground);
@@ -92,8 +93,8 @@
 
     pre {
         padding: 0;
-        padding-block: var(--base-d2);
-        margin-block: var(--base-d2);
+        padding-block: var(--gap-compact);
+        margin-block: var(--gap-compact);
         border: 0;
         background-color: var(--color-background);
         code {
