@@ -197,7 +197,7 @@
         position: relative;
         margin: 0;
         padding-inline-start: 0;
-        margin-block-end: calc(var(--gap) / 2);
+        margin-block-end: var(--leading)
     }
     li:last-child {
         /* should be manage in the general last-chuld rule */
