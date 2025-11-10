@@ -395,6 +395,8 @@ select {
     color: var(--color-foreground);
     background: var(--color-background-secondary);
     border: var(--border);
+    
+    margin:0 !important;
 
     transition:
         background-color var(--transition),
