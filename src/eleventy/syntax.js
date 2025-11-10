@@ -533,7 +533,7 @@ ${itemTemplate}
 
   processor.add(
     "center",
-    (match) => `<div class="text-center">\n\n${match.content}\n\n</div>\n`,
+    (match) => `<div class="center">\n\n${match.content}\n\n</div>\n`,
   );
   // Obsidian-style callout system
   const DEFAULT_OBSIDIAN_ICONS = {

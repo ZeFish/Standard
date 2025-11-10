@@ -316,7 +316,7 @@
 }
 
 .lh-compact {
-    line-height: var(--line-height-s);
+    line-height: var(--line-height-conpact);
 }
 
 .lh-base {
@@ -324,7 +324,7 @@
 }
 
 .lh-relaxed {
-    line-height: 1.6;
+    line-height: var(--line-height-relaxed);
 }
 
 /* =========================== */

@@ -22,9 +22,6 @@ Typography is the voice · Grid is the structure · Rhythm is the flow · Color 
 ![npm](https://img.shields.io/npm/v/@zefish/standard)
 
 
-
-
-
 > "Typography is the craft of endowing human language with a durable visual form."
 > — Robert Bringhurst
 
