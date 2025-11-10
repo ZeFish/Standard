@@ -78,6 +78,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Body text with **bold emphasis** and *italic stress*.
 
+</div>
+
 ### Smart Typography
 
 The JavaScript engine automatically enhances your text with proper typographic conventions:
@@ -95,12 +97,12 @@ The JavaScript engine automatically enhances your text with proper typographic c
 Inline code like <code>const standard = new Standard()</code> and code blocks maintain rhythm:
 
 <pre><code>// Initialize Standard
-        const standard = new Standard({
-          locale: 'en',
-          enableSmartQuotes: true,
-          enableWidowPrevention: true,
-          observeDOM: true
-        });</code></pre>
+const standard = new Standard({
+    locale: 'en',
+    enableSmartQuotes: true,
+    enableWidowPrevention: true,
+    observeDOM: true
+});</code></pre>
 <div class="feature">
 
 ## Grid is the Structure
