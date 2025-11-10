@@ -559,14 +559,14 @@ aside, .alert {
     border-radius: var(--radius);
 
     box-shadow: var(--shadow);
-    padding: var(--leading) var(--gap);
+    padding: var(--leading) var(--gap-compact);
     font-size: var(--scale-d2);
     font-family: var(--font-interface);
     
     color: var(--color-msg);
-    background: color-mix(in srgb, var(--color-msg) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-msg) 25%, transparent);
-    border-left-width: 2px;
+    background: color-mix(in srgb, var(--color-msg) 10%, var(--color-background-secondary);
+    border: 1px solid color-mix(in srgb, var(--color-msg) 25%, var(--color-border);
+    border-left-width: var(--gap-tight);
 }
 
 
