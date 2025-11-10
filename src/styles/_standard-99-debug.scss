@@ -103,7 +103,7 @@
     pointer-events: none;
     z-index: 10000;
 }
-.standard-debug :is(#{$rhythm-elements}) {
+.standard-debug :is(#{$rhythm-elements}, hr) {
     outline: 1px dashed
         color-mix(
             in srgb,
