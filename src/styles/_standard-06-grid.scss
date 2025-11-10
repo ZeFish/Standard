@@ -90,7 +90,7 @@
     --gap-grid: var(--gap-tight);
 }
 :is(.grid, [class^="grid-"]).relaxed {
-    --gap-grid: var(--gap-relaxed);
+    --gap-grid: var(--gap);
 }
 
 /* Spans 1..12 */
