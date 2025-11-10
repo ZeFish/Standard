@@ -424,7 +424,7 @@ card.inset {
         font-weight: var(--font-weight-bold, bold);
 
         user-select: none;
-        padding: var(--base-d2) var(--base) var(--base-d4) var(--base);
+        padding: var(--leading) var(--gap-compact);
         margin: 0;
     }
 
