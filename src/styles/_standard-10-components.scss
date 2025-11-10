@@ -2120,7 +2120,7 @@ dialog.modal::backdrop {
         }
         .comment-content {
             margin-inline: var(--gap-tight);
-            margin-block-start: var(--leading);
+            margin-block-start: var(--gap-tight);
             border-left: var(--border);
             padding: var(--gap-compact);
             color: var(--color-muted);
