@@ -396,7 +396,7 @@ select {
     background: var(--color-background-secondary);
     border: var(--border);
     
-    margin:0 !important;
+    margin-block-end: var(--gap-compact);
 
     transition:
         background-color var(--transition),
@@ -422,7 +422,7 @@ textarea {
     resize: vertical;
     min-height: 6em;
     /* keep rhythm-aware variant */
-    min-height: var(--base-8);
+    min-height: var(--gap-relaxed);
 }
 
 legend {
@@ -435,14 +435,14 @@ label {
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
     color:red;
-    margin:0 !important;
-    padding: 0 !important;
+    margin-block-end: var(--gap-compact);
+    padding-inline: var(--gap-compact);
 }
 
 fieldset {
     border: var(--border);
     border-radius: var(--radius);
-    padding:0 !important;
+    padding: calc(var(--gap) / 8);
     background: color-mix(
         in srgb,
         var(--color-background-secondary) 25%,

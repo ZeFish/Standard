@@ -512,24 +512,14 @@ Add the <code>.md</code> class for enhanced callouts and formatting:
 Standard callout for general information and notes.
 ::end
 
-  <div class="callout" data-callout="warning">
-    <div class="callout-title">Warning</div>
-    <div class="callout-content">
-      <p>Warning callout for cautionary information.</p>
-    </div>
-  </div>
-  <div class="callout" data-callout="important">
-    <div class="callout-title">Important</div>
-    <div class="callout-content">
-      <p>Important callout for critical information.</p>
-    </div>
-  </div>
-  <details class="callout" data-callout="note">
-    <summary>
-      Collapsible Callout
-    </summary>
-    <div class="callout-content">
-      <p>Click the title to expand and collapse this content.</p>
-    </div>
-  </details>
+::callout warning
+Warning callout for cautionary information.
+::end
 
+::callout important
+Important callout for critical information.
+::end
+
+::callout + Custom title
+Click the title to expand and collapse this content.
+::end
