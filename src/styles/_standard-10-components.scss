@@ -714,8 +714,8 @@ a.skip-link {
     z-index: var(--z-modal);
     display: flex;
     flex-direction: column;
-    gap: var(--base-d4);
-    padding: var(--base-d4);
+    gap: var(--gap);
+    padding: var(--gap-tight);
 }
 
 /**
@@ -791,7 +791,7 @@ a.skip-link {
 
 .breadcrumb {
     /* Container styling */
-    margin-block-end: var(--base);
+    margin-block-end: var(--gap);
     font-size: var(--scale-d2);
 
     /* List styling */
@@ -801,7 +801,7 @@ a.skip-link {
         margin: 0;
         display: flex;
         flex-wrap: wrap;
-        gap: var(--base-d4);
+        gap: var(--leading);
         align-items: center;
     }
 
@@ -809,7 +809,7 @@ a.skip-link {
     li {
         display: inline-flex;
         align-items: center;
-        gap: var(--base-d4);
+        gap: var(--leading);
         margin: 0;
 
         /* Remove default list item spacing */
@@ -822,7 +822,7 @@ a.skip-link {
             content: "→"; /* or "/" or "›" */
             display: inline-block;
             color: var(--color-subtle);
-            margin-inline-end: var(--base-d4);
+            margin-inline-end: var(--leading);
         }
     }
 
@@ -863,14 +863,14 @@ a.skip-link {
     font-size: var(--scale-d3);
 
     ol {
-        gap: var(--base-d4);
+        gap: var(--gap-tight);
     }
 
     li {
-        gap: var(--base-d4);
+        gap: var(--gap-tight);
 
         &:not(:first-child)::before {
-            margin-inline-end: var(--base-d4);
+            margin-inline-end: var(--gap-tight);
         }
     }
 }
@@ -954,8 +954,8 @@ a.skip-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--base-d4);
-    margin-block: var(--base-2);
+    gap: var(--gap);
+    margin-block: var(--gap);
     font-size: var(--scale-d2);
     font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
 
@@ -967,7 +967,7 @@ a.skip-link {
         justify-content: center;
         min-width: 2.5em;
         height: 2.5em;
-        padding: 0 var(--base-d4);
+        padding: 0 var(--gap-tight);
         border: var(--border);
         border-radius: var(--radius);
         text-decoration: none;
@@ -987,7 +987,7 @@ a.skip-link {
 
     /* Link focus states */
     a:focus-visible {
-        outline: 2px solid var(--color-accent);
+        outline: var(--stroke-width) solid var(--color-accent);
         outline-offset: 2px;
     }
 
@@ -1041,7 +1041,7 @@ a.skip-link {
 .pagination-prev,
 .pagination-next {
     min-width: auto;
-    padding: 0 var(--base-d2);
+    padding: 0 var(--gap-tight);
     font-weight: var(--font-weight-bold);
 }
 
@@ -1191,7 +1191,7 @@ a.skip-link {
         z-index: 2;
         pointer-events: none;
         transition: opacity 0.05s linear;
-        width: var(--base-2);
+        width: var(--gap);
         opacity: 0;
     }
 
@@ -1336,8 +1336,7 @@ a.skip-link {
     /* Field container */
     display: flex;
     flex-direction: column;
-    gap: var(--base-d4);
-    margin-block-end: var(--base-d2);
+    gap: var(--gap);
 
     /* Label styling */
     label {
