@@ -751,17 +751,6 @@ p:has(img) + .callout[data-callout="caption" i] {
     }
 }
 
-// ==========================
-// Mobile Specific Styles
-// ==========================
-@media only screen and (max-width: #{$small}) {
-    ul:not([start]),
-    ol:not([start]) {
-        padding: 0;
-        padding-left: var(--gap);
-    }
-}
-
 .mermaid {
     background: var(--color-background-secondary);
     border-radius: var(--radius);

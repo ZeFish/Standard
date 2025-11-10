@@ -77,7 +77,7 @@
     --line-width: var(--line-width-m);
     
     /* Baseline helper tokens */
-    --base: var(--leading);
+    --base: var(--baseline);
     /* Name use for actual spacing in the framework  */
     --base-d8: calc(var(--base) / 8);
     --base-d4: calc(var(--base) / 4);
