@@ -103,11 +103,11 @@
     }
 
     .prose :is(p, blockquote, pre, details, li, .card, [class^="grid"]) {
-        max-width: var(--line-width-s);
+        max-width: var(--line-width-xs);
         margin-inline: 0;
     }
     .prose :is(.scroll, p:has(img), .callout, aside) {
-        max-width: var(--line-width);
+        max-width: var(--line-width-s);
         margin-inline: 0;
     }
     .token {
