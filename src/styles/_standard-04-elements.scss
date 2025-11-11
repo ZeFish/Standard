@@ -389,7 +389,7 @@ select {
     width: 100%;
     font-family: var(--font-interface), system-ui, sans-serif;
 
-    padding: var(--gap-tight) var(--gap-tight);
+    padding: var(--gap-tight) var(--gap-tight) !important;
     border-radius: var(--radius);
 
     color: var(--color-foreground);
@@ -427,6 +427,7 @@ textarea {
 
 legend {
     font-weight: var(--font-weight-bold, bold);
+    margin-block-end: var(--gap-micro) !important;
 }
 
 label {
