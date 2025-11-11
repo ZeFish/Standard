@@ -21,7 +21,7 @@
         var(--color-background)
     );
 
-    --optical-ratio: 1.414;
+    --optical-ratio: var(--ratio-golden);
     --line-height: 1.2;
     --gap-body: calc(var(--gap) * 3);
     
@@ -29,7 +29,7 @@
     
     
     /* Mobile */
-    --mobile-font-size: 1;
+    --mobile-font-size: 1rem;
     --mobile-optical-ratio: var(--ratio-silver);
     --mobile-line-height: 1.2;
     --mobile-gap-body: var(--gap);
@@ -41,15 +41,16 @@
     --font-text: "Graveur";
     --font-interface: Fern;
     --font-header: Fern;
+    --font-weight-bold: 450;
     --font-monospace: "Monaspace Xenon Var";
     --font-header-weight: 100;
     --font-header-letter-spacing: 0em;
     --font-header-line-height: 1;
 
-    --font-feature: "liga", "onum", "kern";
-    --font-variation: "opsz" 8;
+    --font-feature: "";
+    --font-variation: "";
     --font-header-feature: "liga", "onum", "kern";
-    --font-header-variation: "opsz" 12;
+    --font-header-variation: "";
 
     --shadow: 0;
     --radius: 0;
