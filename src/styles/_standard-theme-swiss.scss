@@ -25,6 +25,7 @@
     --font-size: 1.2em;
     --scale-d2: 0.75em;
     --body-padding: var(--gap);
+    --color-background-secondary: var(--color-background);
 
     hr {
         background: var(--color-foreground);
@@ -50,14 +51,11 @@
     .callout-title {
         color: var(--color-foreground);
         border: none;
-        margin-block-start: var(--base-d2);
+        margin-block-start: var(--gap-compact);
         padding: 0;
     }
     .callout-content {
         padding: 0;
-    }
-    .card {
-        background: red;
     }
     code,
     .token {
