@@ -396,7 +396,7 @@ select {
     background: var(--color-background-secondary);
     border: var(--border);
     
-    margin-block-end: var(--gap-tight) !important;
+    margin-block-end: var(--gap-compact) !important;
 
     transition:
         background-color var(--transition),
@@ -427,7 +427,7 @@ textarea {
 
 legend {
     font-weight: var(--font-weight-bold, bold);
-    margin-block-end: var(--gap-micro) !important;
+    margin-block-end: var(--gap-tight) !important;
 }
 
 label {
@@ -443,7 +443,7 @@ label {
 fieldset {
     border: var(--border);
     border-radius: var(--radius);
-    padding: var(--gap-micro) !important;
+    padding: var(--gap-tight) !important;
     background: color-mix(
         in srgb,
         var(--color-background-secondary) 25%,
