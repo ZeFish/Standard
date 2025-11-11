@@ -30,8 +30,8 @@ $small: 768px;
 $large: 1024px;
 $wide: 1440px;
 
-$text-elements: "callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside";
+$text-elements: "callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside";
 
 $rhythm-elements: ".alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout";
-$rhythm-block-elements: "#comments, .callout,  pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^='grid-']";
-$rhythm-block-small: ".container-small, .callout, blockquote,  pre, figure, p:has(img)";
+$rhythm-block-elements: "#comments, .callout,  pre, figure, p:has(img), section, .box, .card, .grid, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, [class^='grid']";
+$rhythm-block-small: ".container-small, .callout,  pre, figure, p:has(img)";
