@@ -20,6 +20,8 @@
         var(--color-foreground) 7%,
         var(--color-background)
     );
+    --color-muted: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+
 
     --optical-ratio: var(--ratio-silver);
     --line-height: 1.2;
@@ -120,7 +122,7 @@
 
     blockquote,
     pre {
-        padding: var(--gap-tight) var(--gap) !important;
+        padding: var(--gap-tight) var(--gap-compact) !important;
         font-size: var(--scale);
         border: 0;
         border-left: 1px solid var(--color-muted);
