@@ -90,6 +90,10 @@
     p {
         text-align: justify;
     }
+    
+    p:not(:has(img)) + p {
+        indent: var(--gap-compact);
+    }
 
     .prose {
         margin-left: 10%;
