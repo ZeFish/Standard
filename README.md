@@ -3,6 +3,7 @@
 Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
 
 - [Example](/example/)
+- [Dignity](/dignity/)
 - [Fonts](/fonts/)
 - [Mardown](/markdown/)
 - [Égalitarisme](/egalitarisme/)
