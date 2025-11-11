@@ -320,8 +320,8 @@ card.inset {
 
         user-select: none;
         padding: var(--gap-tight) var(--gap-compact);
-        margin: 0;
-    }
+        margin: 0 !important;
+    } 
     
    
 
