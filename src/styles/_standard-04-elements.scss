@@ -434,15 +434,15 @@ label {
     font-family: var(--font-interface), system-ui, sans-serif;
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
-    margin: 0;
+    margin-inline:var(--gap-tight) !important;
     margin-block-end: var(--gap-tight) !important;
-    padding-inline: var(--gap-tight) !important;
+    padding-inline: 0 !important;
 }
 
 fieldset {
     border: var(--border);
     border-radius: var(--radius);
-    padding: var(--gap-micro);
+    padding: var(--gap-micro) !important;
     background: color-mix(
         in srgb,
         var(--color-background-secondary) 25%,
