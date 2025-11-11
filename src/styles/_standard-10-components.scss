@@ -406,6 +406,7 @@ details .callout-title::before {
     width: var(--gap);
     margin-left: calc(var(--gap-compact) * -1);
     text-align: center;
+    position: absolute;
 }
 
 details[open] .callout-title::before {
