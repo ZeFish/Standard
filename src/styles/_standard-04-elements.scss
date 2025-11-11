@@ -459,6 +459,7 @@ input[type="radio"] {
     cursor: pointer;
     accent-color: var(--color-accent);
     padding:0 !important;
+    display: inline-block;
 }
 
 input[type="checkbox"]:checked,
