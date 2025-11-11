@@ -23,7 +23,7 @@
 
     --optical-ratio: 1.414;
     --line-height: 1.2;
-    --gap-body: 2rlh;
+    --gap-body: calc(var(--gap) * 3);
     --font-size: 0.8em;
     --font-text: "Graveur";
     --font-interface: Fern;
