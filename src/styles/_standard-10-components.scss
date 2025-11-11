@@ -310,6 +310,7 @@ card.inset {
 
     .callout-title,
     > summary {
+    psition: relative;
         color: color-mix(
             in srgb,
             var(--color-callout) 50%,
@@ -407,6 +408,8 @@ details .callout-title::before {
     margin-left: calc(var(--gap-compact) * -1);
     text-align: center;
     position: absolute;
+    top: calc(var(--leading) * -1);
+    left: calc(var(--leading) * -1);
 }
 
 details[open] .callout-title::before {
