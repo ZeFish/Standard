@@ -95,7 +95,8 @@
         float: inline-start;
         line-height: 1;
         font-size: calc(3 * var(--scale) * var(--line-height));
-        margin:O;
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
     }
     
     p:not(:has(img)) + p {
