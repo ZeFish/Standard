@@ -435,7 +435,7 @@ label {
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
     margin-block-end: var(--gap-tight);
-    padding-inline: var(--gap-tight);
+    padding-inline: var(--gap-tight) !important;
 }
 
 fieldset {
