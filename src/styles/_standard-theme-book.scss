@@ -120,12 +120,12 @@
 
     blockquote,
     pre {
-        padding: var(--gap-compact);
+        padding: var(--gap-tight) var(--gap-compact);
         font-size: var(--scale);
         border: 0;
         border-left: 1px solid var(--color-foreground);
         background: transparent;
-        color: var(--color-foreground);
+        color: var(--color-muted);
         .copy-button {
             position: absolute;
             top: 0;
