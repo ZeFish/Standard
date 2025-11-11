@@ -434,6 +434,7 @@ label {
     font-family: var(--font-interface), system-ui, sans-serif;
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
+    margin: 0;
     margin-block-end: var(--gap-tight);
     padding-inline: var(--gap-tight) !important;
 }
@@ -441,7 +442,7 @@ label {
 fieldset {
     border: var(--border);
     border-radius: var(--radius);
-    padding: calc(var(--gap) / 8);
+    padding: var(--gap-micro);
     background: color-mix(
         in srgb,
         var(--color-background-secondary) 25%,
