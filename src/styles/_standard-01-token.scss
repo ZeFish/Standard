@@ -111,9 +111,9 @@
     --mobile-font-size: 1.1rem;
     --mobile-optical-ratio: var(--ratio-silver);
     --mobile-line-height: 1.5;
-    --mobile-gap-body: 1rlh;
+    --mobile-gap-body: var(--gap-compact);
     --mobile-gap: 1rlh; /* Space between standard block like paragraph */
-    --mobile-gap-block: 2rlh;
+    --mobile-gap-block: var(--gap-relaxed);
 
 
     /* Z-index scale */
