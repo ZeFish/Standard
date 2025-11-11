@@ -123,15 +123,19 @@ A Swiss-style 12-column responsive grid with logical properties. Inspired by Jos
     <div class="col-3 card">col-3</div>
     <div class="col-3 card">col-3</div>
   </div>
-  <h3>Responsive Grid</h3>
-  <p>Columns adapt at breakpoints (md: #{$small}, lg: #{$large}):</p>
+  
+### Responsive Grid
+Columns adapt at breakpoints (md: #{$small}, lg: #{$large}):
+
   <div class="grid">
     <div class="sm:row col-6 lg:col-4 card">12 → 6 → 4</div>
     <div class="sm:row col-6 lg:col-4 card">12 → 6 → 4</div>
     <div class="sm:row col-12 lg:col-4 card">12 → 12 → 4</div>
   </div>
-  <h3>Free Column Positioning</h3>
-  <p>Precise control with CSS variables:</p>
+
+### Free Column Positioning
+Precise control with CSS variables:
+
   <div class="grid">
     <div class="free-col card" style="--start: 1; --span: 7">
       Main content<br />
@@ -142,7 +146,9 @@ A Swiss-style 12-column responsive grid with logical properties. Inspired by Jos
       <code>--start: 9; --span: 4</code>
     </div>
   </div>
-  <h3>Gap Variants</h3>
+  
+### Gap Variants
+
   <div class="grid-3 sm:grid-1 compact">
     <div class="card">compact gaps</div>
     <div class="card">compact gaps</div>
@@ -154,19 +160,17 @@ A Swiss-style 12-column responsive grid with logical properties. Inspired by Jos
     <div class="card">Relaxed gaps</div>
   </div>
 </div>
-<h2 id="rhythm">Rhythm is the Flow</h2>
-<p>
-  Mathematical vertical spacing based on <code>1rlh</code> (root line-height) creates visual
-  harmony and guides the eye naturally through content.
-</p>
-<h3>Consistent Spacing</h3>
-<p>
-  All elements automatically align to the baseline grid. Headings, paragraphs, lists,
-  blockquotes, forms, and media all follow the same rhythmic system.
-</p>
+
+## Rhythm is the Flow
+Mathematical vertical spacing based on <code>1rlh</code> (root line-height) creates visual harmony and guides the eye naturally through content.
+
+### Consistent Spacing
+
+All elements automatically align to the baseline grid. Headings, paragraphs, lists, blockquotes, forms, and media all follow the same rhythmic system.
+
 <div class="card inset">
-  <h4 class="mt-d">tight Rhythm</h4>
-  <p>Spacing multiplier: 0.75×</p>
+  #### tight Rhythm
+  Spacing multiplier: 0.75x
   <ul class="tight">
     <li>Closer spacing</li>
     <li>More compact</li>
