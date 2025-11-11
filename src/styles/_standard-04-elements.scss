@@ -174,7 +174,7 @@ blockquote {
     font-style: italic;
     border-left: var(--stroke-width) solid var(--color-border);
     color: var(--color-muted);
-    padding: var(--leading);
+    padding: var(--gap-tight) var(--gap-compact);
     font-size: var(--scale-d2);
     line-height: var(--line-height-compact);
 }
