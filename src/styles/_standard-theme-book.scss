@@ -201,6 +201,14 @@
             margin-bottom: calc(var(--gap) * -2);
         }
     }
+    
+    @media (max-width: 600px) {
+        p {
+            text-align:left;
+        }
+    }
+    
+    
 }
 
 @font-face {
