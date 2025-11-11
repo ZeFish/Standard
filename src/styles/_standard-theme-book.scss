@@ -85,9 +85,8 @@
     --color-dark-purple: #a58fc0; /* smoky lilac */
     --color-dark-pink: #e6a3d1; /* fading rose light */
 
-    p {
-        font-weight: var(--font-weight);
-        font-size: 1.1em;
+    strong:has(+ ul) {
+        
     }
 
     .prose {
