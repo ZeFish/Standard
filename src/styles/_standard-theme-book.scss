@@ -92,7 +92,7 @@
     }
     
     p:not(:has(img)) + p {
-        indent: var(--gap-compact);
+        text-indent: var(--gap);
     }
 
     .prose {
