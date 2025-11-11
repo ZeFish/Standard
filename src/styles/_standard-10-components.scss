@@ -403,8 +403,8 @@ details .callout-title::before {
     display: inline-block;
     transform: rotate(0deg);
     transition: transform var(--transition);
-    width: 1rlh;
-    margin-left: calc(1rlh * -1);
+    width: var(--gap);
+    margin-left: calc(var(--gap-compact) * -1);
     text-align: center;
 }
 
