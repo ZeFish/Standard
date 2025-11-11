@@ -97,7 +97,7 @@
         font-weight: 700;
         font-variant-ligatures: none;
         margin-inline-end: var(--gap-tight);
-        font-size: 3cap;   /* precise 3-line drop cap, minimal to no fudge */
+        font-size: 3rlh;   /* precise 3-line drop cap, minimal to no fudge */
     }
     
     p:not(:has(img)) + p {
