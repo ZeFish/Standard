@@ -296,7 +296,7 @@ card.inset {
     border: var(--border);
     border-radius: var(--radius);
     transition: var(--duration-superfast) ease;
-    padding: calc(var(--gap) / 8);
+    padding: var(--gap-micro);
     padding-top: 0;
     --color-callout: var(--color-background-secondary);
     --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
@@ -401,8 +401,8 @@ details .callout-title::before {
     display: inline-block;
     transform: rotate(0deg);
     transition: transform var(--transition);
-    width: var(--gap);
-    margin-left: calc(var(--gap) * -1);
+    width: 1rlh;
+    margin-left: calc(1rlh * -1);
     text-align: center;
 }
 
