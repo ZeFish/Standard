@@ -326,15 +326,15 @@
 
 /* Info - Blue */
 .toast-info {
-    --toast-color: var(--color-info);
+    --toast-color: var(--color-accent);
     /*border-left-color: var(--color-info);*/
 
     .toast-icon {
-        color: var(--color-info);
+        color: var(--color-accent);
     }
 
     .toast-progress {
-        background: var(--color-info);
+        background: var(--color-accent);
     }
 }
 
