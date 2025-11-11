@@ -24,6 +24,19 @@
     --optical-ratio: 1.414;
     --line-height: 1.2;
     --gap-body: calc(var(--gap) * 3);
+    
+    --line-width: var(--line-width-xs);
+    
+    
+    /* Mobile */
+    --mobile-font-size: 1;
+    --mobile-optical-ratio: var(--ratio-silver);
+    --mobile-line-height: 1.2;
+    --mobile-gap-body: var(--gap);
+    --mobile-gap: var(--baseline); /* Space between standard block like paragraph */
+    --mobile-gap-block: var(--baseline);
+    
+    
     --font-size: 0.8em;
     --font-text: "Graveur";
     --font-interface: Fern;
