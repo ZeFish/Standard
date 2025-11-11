@@ -645,7 +645,6 @@ ${itemTemplate}
 <summary class="callout-title">
 <div class="callout-title-icon">${icon}</div>
 <div class="callout-title-inner">${title}</div>
-<div class="callout-fold"></div>
 </summary>
 <div class="callout-content">${calloutContent}</div>
 </details>`;
