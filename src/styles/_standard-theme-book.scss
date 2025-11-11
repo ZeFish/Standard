@@ -94,7 +94,7 @@
     :is(h1, h2, h3, h4, h5, h6) + p::first-letter {
         float: inline-start;
         line-height: 1;
-        font-size: calc(3 * var(--font-size));   /* precise 3-line drop cap, minimal to no fudge */
+        font-size: 3cap;   /* precise 3-line drop cap, minimal to no fudge */
     }
     
     p:not(:has(img)) + p {
