@@ -396,7 +396,7 @@ select {
     background: var(--color-background-secondary);
     border: var(--border);
     
-    margin-block-end: var(--gap-tight);
+    margin-block-end: var(--gap-tight) !important;
 
     transition:
         background-color var(--transition),
@@ -435,7 +435,7 @@ label {
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
     margin: 0;
-    margin-block-end: var(--gap-tight);
+    margin-block-end: var(--gap-tight) !important;
     padding-inline: var(--gap-tight) !important;
 }
 
