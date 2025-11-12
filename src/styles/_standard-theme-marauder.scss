@@ -41,7 +41,7 @@
         margin: calc(var(--gap-tight) * -1) var(--gap-tight) 0 0 !important;
         font-size: calc(
             (var(--drop-cap-size) * var(--scale) * var(--line-height))
-            + (var(--leading) * max(calc(var(--drop-cap-size) - 1), 1))
+            + (var(--leading) * max(calc(var(--drop-cap-size) - 0), 1))
         );
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
