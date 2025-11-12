@@ -101,7 +101,7 @@
         text-box-edge: cap alphabetic;
     }
     
-    @media only screen and (max-width: #{$small})   {
+    @media only screen and (max-width: 600px) {
         :is(h2) + p::first-letter {
             --drop-cap-size: 2;
         }
