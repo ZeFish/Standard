@@ -156,52 +156,6 @@ See the complete [Utilities Reference](/css/utilities/) for:
 
 ---
 
-## Common Issues
-
-### CSS Not Loading (Standalone)
-
-Check the path:
-
-```html
-<!-- Correct for npm -->
-<link rel="stylesheet" href="node_modules/@zefish/standard/dist/standard.min.css">
-
-<!-- Correct for CDN -->
-<link rel="stylesheet" href="https://unpkg.com/@zefish/standard/dist/standard.min.css">
-```
-
-### Styles Not Applying (11ty)
-
-Ensure `{% standardAssets %}` is in your layout `<head>`:
-
-```nunjucks
-<head>
-  {% standardAssets %}
-</head>
-```
-
-### Build Errors
-
-```bash
-# Clear cache and rebuild
-rm -rf _site node_modules/.cache
-npm run build
-```
-
-### Changes Not Showing
-
-When using `npm start` with 11ty:
-
-```bash
-# Restart the dev server
-Ctrl+C
-npm start
-```
-
----
-
-## Get Help
-
 - **[Utilities Cheat Sheet](/cheat-sheet/)** — Quick reference card
 - **[Full API Reference](/docs/)** — Auto-generated documentation
 - **[Examples](/examples/)** — Code examples
@@ -209,26 +163,6 @@ npm start
 
 ---
 
-## You're Ready!
-
-You now have everything needed to build beautiful, professional websites.
-
-**Standalone**: Your first page is already live above.
-
-**11ty + Standard**: Run `npm start` and visit `http://localhost:8080`.
-
-**That's it. Start building.** ✨
-
----
-
-## What's Next?
-
-- Add more content
-- Customize colors and fonts
-- Add images and media
-- Create collections and filters
-- Deploy your site
-- Share your creation!
 
 Remember: **Stop configuring. Start creating.**
 
