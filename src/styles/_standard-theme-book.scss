@@ -105,7 +105,7 @@
     }
     
     @media only screen and (max-width: 600px) {
-        :is(h3) + p::first-letter {
+        :is(h2, h3) + p::first-letter {
             --drop-cap-size: 2;
         }
     }
