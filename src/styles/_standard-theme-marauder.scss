@@ -33,10 +33,19 @@
             color: color-mix(in srgb, #191919 95%, #ebe4de);
         }
     }
-
-    ass::first-letter {
-        font-size: var(--base-2);
-        float: left;
+    
+    :is(h2, h3) + p::first-letter {
+        --drop-cap-size: 3;
+        float: inline-start;
+        line-height: 1;
+        margin: calc(var(--gap-tight) * -1) var(--gap-tight) 0 0 !important;
+        font-size: calc(
+            (var(--drop-cap-size) * var(--scale) * var(--line-height))
+            + (var(--leading) * max(calc(var(--drop-cap-size) - 1), 1))
+        );
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
+        
         background-image: url("/assets/img/red.webp");
         background-size: 100px;
         background-clip: text;
@@ -44,4 +53,11 @@
         text-fill-color: transparent;
         -webkit-text-fill-color: transparent;
     }
+    
+    @media only screen and (max-width: 600px) {
+        :is(h2, h3) + p::first-letter {
+            --drop-cap-size: 2;
+        }
+    }
+
 }
