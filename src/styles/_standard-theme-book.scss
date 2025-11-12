@@ -94,7 +94,7 @@
     :is(h1, h2, h3, h4, h5, h6) + p::first-letter {
         float: inline-start;
         line-height: 1;
-        margin: calc(var(--gap-tight) * -1) var(--gap-tight);
+        margin: calc(var(--gap-tight) * -1) var(--gap-tight) !important;
         font-size: calc(3 * var(--scale) * var(--line-height));
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
