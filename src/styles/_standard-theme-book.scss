@@ -39,7 +39,7 @@
     --mobile-gap-block: 1rlh;
     
     
-    --font-size: 1em;
+    --font-size: 14px;
     --font-text: "Garamond Premiere Pro";
     --font-interface: "Fern";
     --font-header: "Fern";
@@ -142,6 +142,10 @@
 
     a:hover {
         color: var(--color-foreground);
+    }
+    
+    blockquote, .font-interface {
+        font-family: "Garamond Premiere Pro Capt";
     }
 
     blockquote,

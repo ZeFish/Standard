@@ -254,19 +254,10 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.eot');
-    src: local('Garamond Premiere Pro Bold'), local('GaramondPremrPro-Bd'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.woff2') format('woff2'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.woff') format('woff'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
 
+/* --------------------------------------------------- */
+/* --- Garamond Premiere Pro (Standard Text Face) --- */
+/* --------------------------------------------------- */
 @font-face {
     font-family: 'Garamond Premiere Pro';
     src: url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro.eot');
@@ -275,219 +266,22 @@
         url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro.woff2') format('woff2'),
         url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro.woff') format('woff'),
         url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: normal; /* 400 */
     font-style: normal;
     font-display: swap;
 }
-
 @font-face {
     font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.eot');
-    src: local('Garamond Premiere Pro Bold Caption'), local('GaramondPremrPro-BdCapt'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.woff2') format('woff2'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.woff') format('woff'),
-        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premier Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.eot');
-    src: local('Garamond Premier Pro Bold Italic'), local('GaramondPremrPro-BdIt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.eot');
-    src: local('Garamond Premiere Pro Display'), local('GaramondPremrPro-Disp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.eot');
-    src: local('Garamond Premiere Pro Bold Italic Subhead'), local('GaramondPremrPro-BdItSubh'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.eot');
-    src: local('Garamond Premiere Pro Bold Italic Display'), local('GaramondPremrPro-BdItDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.eot');
-    src: local('Garamond Premiere Pro Caption'), local('GaramondPremrPro-Capt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.eot');
-    src: local('Garamond Premiere Pro Bold Display'), local('GaramondPremrPro-BdDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.eot');
-    src: local('Garamond Premiere Pro Bold Subhead'), local('GaramondPremrPro-BdSubh'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.eot');
-    src: local('Garamond Premiere Pro Bold Italic Caption'), local('GaramondPremrPro-BdItCapt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.eot');
-    src: local('Garamond Premiere Pro Medium Caption'), local('GaramondPremrPro-MedCapt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premier Pro';
     src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-It.eot');
     src: local('Garamond Premier Pro Italic'), local('GaramondPremrPro-It'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-It.eot?#iefix') format('embedded-opentype'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-It.woff2') format('woff2'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-It.woff') format('woff'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-It.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: normal; /* 400 */
     font-style: italic;
     font-display: swap;
 }
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.eot');
-    src: local('Garamond Premiere Pro Italic Subhead'), local('GaramondPremrPro-ItSubh'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.eot');
-    src: local('Garamond Premiere Pro Italic Caption'), local('GaramondPremrPro-ItCapt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.eot');
-    src: local('Garamond Premiere Pro Italic Display'), local('GaramondPremrPro-ItDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.eot');
-    src: local('Garamond Premiere Pro Light Display'), local('GaramondPremrPro-LtDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.eot');
-    src: local('Garamond Premiere Pro Light Italic Display'), local('GaramondPremrPro-LtItDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.ttf') format('truetype');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-}
-
 @font-face {
     font-family: 'Garamond Premiere Pro';
     src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Med.eot');
@@ -500,87 +294,8 @@
     font-style: normal;
     font-display: swap;
 }
-
 @font-face {
     font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.eot');
-    src: local('Garamond Premiere Pro Medium Display'), local('GaramondPremrPro-MedDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.eot');
-    src: local('Garamond Premiere Pro Semibold Italic Subhead'), local('GaramondPremrPro-SmbdItSubh'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.eot');
-    src: local('Garamond Premiere Pro Medium Italic Display'), local('GaramondPremrPro-MedItDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.eot');
-    src: local('Garamond Premiere Pro Semibold Italic Display'), local('GaramondPremrPro-SmbdItDisp'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.eot');
-    src: local('Garamond Premiere Pro Semibold Italic Caption'), local('GaramondPremrPro-SmbdItCapt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.eot');
-    src: local('Garamond Premiere Pro Medium Subhead'), local('GaramondPremrPro-MedSubh'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Garamond Premier Pro';
     src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedIt.eot');
     src: local('Garamond Premier Pro Medium Italic'), local('GaramondPremrPro-MedIt'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedIt.eot?#iefix') format('embedded-opentype'),
@@ -591,22 +306,184 @@
     font-style: italic;
     font-display: swap;
 }
-
 @font-face {
     font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.eot');
-    src: local('Garamond Premiere Pro Medium Italic Caption'), local('GaramondPremrPro-MedItCapt'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.ttf') format('truetype');
-    font-weight: 500;
+    src: url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.eot');
+    src: local('Garamond Premiere Pro Bold'), local('GaramondPremrPro-Bd'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.woff2') format('woff2'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.woff') format('woff'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-Bd.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.eot');
+    src: local('Garamond Premier Pro Bold Italic'), local('GaramondPremrPro-BdIt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdIt.ttf') format('truetype');
+    font-weight: bold; /* 700 */
     font-style: italic;
     font-display: swap;
 }
 
+/* ------------------------------------------------ */
+/* --- Garamond Premiere Pro Display (Headlines) --- */
+/* ------------------------------------------------ */
 @font-face {
-    font-family: 'Garamond Premiere Pro';
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.eot');
+    src: local('Garamond Premiere Pro Light Display'), local('GaramondPremrPro-LtDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtDisp.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.eot');
+    src: local('Garamond Premiere Pro Light Italic Display'), local('GaramondPremrPro-LtItDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-LtItDisp.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.eot');
+    src: local('Garamond Premiere Pro Display'), local('GaramondPremrPro-Disp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Disp.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.eot');
+    src: local('Garamond Premiere Pro Italic Display'), local('GaramondPremrPro-ItDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItDisp.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.eot');
+    src: local('Garamond Premiere Pro Medium Display'), local('GaramondPremrPro-MedDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedDisp.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.eot');
+    src: local('Garamond Premiere Pro Medium Italic Display'), local('GaramondPremrPro-MedItDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItDisp.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.eot');
+    src: local('Garamond Premiere Pro Semibold Italic Display'), local('GaramondPremrPro-SmbdItDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItDisp.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.eot');
+    src: local('Garamond Premiere Pro Bold Display'), local('GaramondPremrPro-BdDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdDisp.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Disp';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.eot');
+    src: local('Garamond Premiere Pro Bold Italic Display'), local('GaramondPremrPro-BdItDisp'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItDisp.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ----------------------------------------------- */
+/* --- Garamond Premiere Pro Subhead (Subheads) --- */
+/* ----------------------------------------------- */
+@font-face {
+    font-family: 'Garamond Premiere Pro Subh';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.eot');
+    src: local('Garamond Premiere Pro Subhead'), local('GaramondPremrPro-Subh'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Subh';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.eot');
+    src: local('Garamond Premiere Pro Italic Subhead'), local('GaramondPremrPro-ItSubh'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItSubh.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Subh';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.eot');
+    src: local('Garamond Premiere Pro Medium Subhead'), local('GaramondPremrPro-MedSubh'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedSubh.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Subh';
     src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItSubh.eot');
     src: local('Garamond Premiere Pro Medium Italic Subhead'), local('GaramondPremrPro-MedItSubh'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItSubh.eot?#iefix') format('embedded-opentype'),
@@ -617,9 +494,8 @@
     font-style: italic;
     font-display: swap;
 }
-
 @font-face {
-    font-family: 'Garamond Premiere Pro';
+    font-family: 'Garamond Premiere Pro Subh';
     src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdSubh.eot');
     src: local('Garamond Premiere Pro Semibold Subhead'), local('GaramondPremrPro-SmbdSubh'),
         url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdSubh.eot?#iefix') format('embedded-opentype'),
@@ -630,17 +506,127 @@
     font-style: normal;
     font-display: swap;
 }
-
 @font-face {
-    font-family: 'Garamond Premiere Pro';
-    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.eot');
-    src: local('Garamond Premiere Pro Subhead'), local('GaramondPremrPro-Subh'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.eot?#iefix') format('embedded-opentype'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.woff2') format('woff2'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.woff') format('woff'),
-        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Subh.ttf') format('truetype');
-    font-weight: normal;
+    font-family: 'Garamond Premiere Pro Subh';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.eot');
+    src: local('Garamond Premiere Pro Semibold Italic Subhead'), local('GaramondPremrPro-SmbdItSubh'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItSubh.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Subh';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.eot');
+    src: local('Garamond Premiere Pro Bold Subhead'), local('GaramondPremrPro-BdSubh'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdSubh.ttf') format('truetype');
+    font-weight: bold; /* 700 */
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: 'Garamond Premiere Pro Subh';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.eot');
+    src: local('Garamond Premiere Pro Bold Italic Subhead'), local('GaramondPremrPro-BdItSubh'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItSubh.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: italic;
+    font-display: swap;
+}
 
+/* ---------------------------------------------- */
+/* --- Garamond Premiere Pro Capt (Small Text) --- */
+/* ---------------------------------------------- */
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.eot');
+    src: local('Garamond Premiere Pro Caption'), local('GaramondPremrPro-Capt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-Capt.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.eot');
+    src: local('Garamond Premiere Pro Italic Caption'), local('GaramondPremrPro-ItCapt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-ItCapt.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.eot');
+    src: local('Garamond Premiere Pro Medium Caption'), local('GaramondPremrPro-MedCapt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedCapt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.eot');
+    src: local('Garamond Premiere Pro Medium Italic Caption'), local('GaramondPremrPro-MedItCapt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-MedItCapt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.eot');
+    src: local('Garamond Premiere Pro Semibold Italic Caption'), local('GaramondPremrPro-SmbdItCapt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-SmbdItCapt.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.eot');
+    src: local('Garamond Premiere Pro Bold Caption'), local('GaramondPremrPro-BdCapt'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.woff2') format('woff2'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.woff') format('woff'),
+        url('/assets/fonts/premiere-garamond-pro/GaramondPremrPro-BdCapt.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Garamond Premiere Pro Capt';
+    src: url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.eot');
+    src: local('Garamond Premiere Pro Bold Italic Caption'), local('GaramondPremrPro-BdItCapt'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.woff2') format('woff2'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.woff') format('woff'),
+        url('/assets/fonts/premier-garamond-pro/GaramondPremrPro-BdItCapt.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: italic;
+    font-display: swap;
+}
