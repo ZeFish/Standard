@@ -31,7 +31,7 @@
     
     
     /* Mobile */
-    --mobile-font-size: 14px;
+    --mobile-font-size: 1.1em;
     --mobile-optical-ratio: 1.414;
     --mobile-line-height: 1.5;
     --mobile-gap-body: 1rlh;
@@ -39,7 +39,7 @@
     --mobile-gap-block: 1rlh;
     
     
-    --font-size: 1em;
+    --font-size: 1.1em;
     --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
     --font-interface: "Fern";
     --font-header: "Fern";
@@ -109,7 +109,7 @@
         float: inline-start;
         line-height: 1;
         margin-block-start: -0.04em;
-        margin-inline-end: var(--leading);
+        margin-inline-end: 0.4em;
         font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--gap-nl));
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
@@ -241,10 +241,6 @@
     }
 
     @media (max-width: 1000px) {
-        :root {
-          --line-width-xs: 100%;
-          --line-width-s: 100%;
-        }
         .prose {
             margin-left: 0;
             max-width: 100%;
