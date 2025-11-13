@@ -138,7 +138,7 @@
 
 }
 
-p:has(+ p) { margin-block-end:calc(1lh - 1em) !important; }
+p:has(+ p) { margin-block-end:calc((1lh - 1em) + (1lh - 1em) / 2) !important; }
 
 #{$text-elements} {
 	text-box-trim: trim-both;
