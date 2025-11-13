@@ -43,7 +43,7 @@
     --font-text: "Garamond Premiere Pro";
     --font-interface: "Fern";
     --font-header: "Fern";
-    --font-weight-bold: 450;
+    --font-weight-bold: 500;
     --font-monospace: "Sohne Mono";
     --font-header-weight: 400;
     --font-header-letter-spacing: 0em;
@@ -157,7 +157,7 @@
     pre {
         padding: var(--gap-tight) var(--gap-compact);
         border: 0;
-        border-left: 1px solid var(--color-muted);
+        border-left: 1px solid var(--color-subtle);
         background: transparent;
         color: var(--color-muted);
         .copy-button {
@@ -232,7 +232,8 @@
             position: relative;
             top:0;
             left:0;
-            margin-bottom: inehrit;
+            margin-block: var(--gap);
+            border: var(--border);
         }
     }
     
