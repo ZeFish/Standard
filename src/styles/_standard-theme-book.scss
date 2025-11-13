@@ -31,9 +31,9 @@
     
     
     /* Mobile */
-    --mobile-font-size: 1.2em;
-    --mobile-optical-ratio: 1.2;
-    --mobile-line-height: 1.2;
+    --mobile-font-size: 14px;
+    --mobile-optical-ratio: 1.414;
+    --mobile-line-height: 1.5;
     --mobile-gap-body: 1rlh;
     --mobile-gap: 1rlh; /* Space between standard block like paragraph */
     --mobile-gap-block: 1rlh;
@@ -228,7 +228,10 @@
             max-width: 100%;
         }
         aside.note {
-            position: inherit;
+            display:block;
+            position: relative;
+            top:0;
+            left:0;
             margin-bottom: inehrit;
         }
     }
