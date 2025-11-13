@@ -37,6 +37,11 @@
     --font-header: var(--font-text);
     --font-monospace:
         "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
+        
+    --font-sans: "Sohne", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-sans-condensed: "Sohne Schmal", "Sohne", system-ui, sans-serif;
+    --font-sans-wide: "Sohne Breit", "Sohne", system-ui, sans-serif;
+    --font-mono: "Sohne Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
     /* Font features & variations */
     --font-feature: "";
@@ -90,4 +95,161 @@
 }
 .inter-display {
     font-variation-settings: "opsz" 32;
+}
+
+
+
+
+/* Workhorse (normal width) */
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-Buch.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-Buch.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-BuchKursiv.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-BuchKursiv.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-Leicht.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-Leicht.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-LeichtKursiv.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-LeichtKursiv.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-Halbfett.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-Halbfett.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-HalbfettKursiv.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-HalbfettKursiv.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-Fett.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-Fett.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-FettKursiv.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-FettKursiv.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-Extrafett.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-Extrafett.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne";
+    src:
+        url("/assets/fonts/sohne/Söhne-ExtrafettKursiv.woff2") format("woff2"),
+        url("/assets/fonts/sohne/Söhne-ExtrafettKursiv.ttf") format("truetype");
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Condensed (Schmal) – optional */
+@font-face {
+    font-family: "Sohne Schmal";
+    src:
+        url("/assets/fonts/sohne/SöhneSchmal-Buch.woff2") format("woff2"),
+        url("/assets/fonts/sohne/SöhneSchmal-Buch.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne Schmal";
+    src:
+        url("/assets/fonts/sohne/SöhneSchmal-Halbfett.woff2") format("woff2"),
+        url("/assets/fonts/sohne/SöhneSchmal-Halbfett.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Wide (Breit) – optional */
+@font-face {
+    font-family: "Sohne Breit";
+    src:
+        url("/assets/fonts/sohne/SöhneBreit-Buch.woff2") format("woff2"),
+        url("/assets/fonts/sohne/SöhneBreit-Buch.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sohne Breit";
+    src:
+        url("/assets/fonts/sohne/SöhneBreit-Fett.woff2") format("woff2"),
+        url("/assets/fonts/sohne/SöhneBreit-Fett.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Mono – optional */
+@font-face {
+    font-family: "Sohne Mono";
+    src:
+        url("/assets/fonts/sohne/SöhneMono-Buch.woff2") format("woff2"),
+        url("/assets/fonts/sohne/SöhneMono-Buch.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
