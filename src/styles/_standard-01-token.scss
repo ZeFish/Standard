@@ -138,6 +138,8 @@
 
 }
 
+p:has(+ p) { margin-block-end:0 !important; }
+
 #{$text-elements} {
 	text-box-trim: trim-both;
 	text-box-edge: cap alphabetic;
