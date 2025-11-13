@@ -39,7 +39,7 @@
     --mobile-gap-block: 1rlh;
     
     
-    --font-size: 14px;
+    --font-size: 1em;
     --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
     --font-interface: "Fern";
     --font-header: "Fern";
@@ -166,10 +166,10 @@
     blockquote, .font-interface {
         font-family: "Garamond Premiere Pro";
         font-weight: 400;
-        font-size: 12px;
+        
     }
     
-    code, pre, pre code { font-size:12px; font-weight:400; }
+    
 
     blockquote,
     pre {
