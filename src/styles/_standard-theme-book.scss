@@ -101,7 +101,8 @@
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
         font-family: "Fern";
-        display:flex;
+        font-weight: 300;
+        
     }
     
     @media only screen and (max-width: 600px) {
@@ -114,6 +115,8 @@
     p:not(:has(img)) + p {
         text-indent: var(--gap);
     }
+    
+    p:has(+ p) { margin-block-end:0; }
 
     .prose {
         margin-left: 10%;
