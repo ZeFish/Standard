@@ -96,11 +96,12 @@
         float: inline-start;
         line-height: 1;
         margin: 0;
-        font-size: calc(var(--font-size) + var(--leading));
+        font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--leading));
         margin-top: var(--leading);
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
-        font-family: "Garamond Premiere Pro Disp";
+        font-family: "Fern";
+        display:flex;
     }
     
     @media only screen and (max-width: 600px) {
