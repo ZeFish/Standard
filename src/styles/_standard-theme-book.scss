@@ -108,9 +108,8 @@
         --drop-cap-size: 3;
         float: inline-start;
         line-height: 1;
-        margin: 0;
-        font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--leading));
-        margin-top: 0;
+        margin-inline-end: var(--gap-nl);
+        font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--gap-nl));
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
         font-family: "Fern";
