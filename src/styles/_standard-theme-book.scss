@@ -146,12 +146,12 @@
     }
     
     blockquote, .font-interface {
-        font-family: "Garamond Premiere Pro Capt";
+        font-family: "Garamond Premiere Pro";
         font-weight: 400;
-        font-size: 10px;
+        font-size: 12px;
     }
     
-    pre { font-size:10px; font-weight:400; }
+    code, pre { font-size:14px; font-weight:400; }
 
     blockquote,
     pre {
@@ -181,7 +181,7 @@
         display: block;
         font-family: "Graveur";
         position: relative;
-        top: calc(var(--base) * -0.4);
+        top: var(--gap);
         color: var(--color-border);
     }
 
