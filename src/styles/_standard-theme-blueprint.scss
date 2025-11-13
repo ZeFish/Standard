@@ -41,13 +41,6 @@
         "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
 
     --optical-ratio: 1.425;
-    --font-header-weight: 900;
-    --font-header-feature:
-        "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06",
-        "cv09", "cv10", "cv11", "cv12", "cv13";
-    --font-header-variation: "";
-    --font-header-letter-spacing: -0.065em;
-    --font-header-line-height: 0.75em;
     /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
 
     .dark {
