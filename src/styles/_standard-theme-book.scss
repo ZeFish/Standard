@@ -108,7 +108,7 @@
         --drop-cap-size: 3;
         float: inline-start;
         line-height: 1;
-        margin-block-start: -0.4em;
+        margin-block-start: -0.04em;
         margin-inline-end: var(--leading);
         font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--gap-nl));
         text-box-trim: trim-both;
