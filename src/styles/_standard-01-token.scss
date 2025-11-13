@@ -34,7 +34,7 @@
 	/* Represents "one line of text without line-height spacing" */
 	--leading: calc((var(--line-height) - 1) * var(--font-size));
 	--baseline: 1rlh;
-	--font-raw: calc(1rlh / var(--line-height));
+	--font-cap: calc(1rlh / var(--line-height));
 
 	--gap: calc(var(--baseline));
 	--gap-block: calc(var(--gap) * 2);
@@ -138,7 +138,7 @@
 
 }
 
-p:has(+ p) { margin-block-end:1rlh !important; }
+p:has(+ p) { margin-block-end:calc(1lh - 1em); !important; }
 
 #{$text-elements} {
 	text-box-trim: trim-both;
