@@ -138,7 +138,7 @@
 
 }
 
-p:has(+ p) { margin-block-end:var(--leading) !important; }
+p:has(+ p) { margin-block-end:1rlh !important; }
 
 #{$text-elements} {
 	text-box-trim: trim-both;
