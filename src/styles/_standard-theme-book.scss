@@ -126,9 +126,9 @@
     p:not(:has(img)) + p {
         text-indent: var(--gap);
     }
-    
+    /*
     p:has(+ p) { margin-block-end:var(--gap-nl); }
-
+*/
     .prose {
         margin-left: 10%;
         transition: margin-left var(--transition);
