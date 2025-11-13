@@ -5,19 +5,12 @@
     --color-dark-foreground: #ccc;
     --color-dark-background: #222;
 
-    --font-weight: 200;
-    --font-weight-bold: 400;
-    --font-feature: "";
-    --font-variation: "MODE" 1;
     --font-header: Kalice;
     --font-header-weight: 300;
     --font-header-letter-spacing: 1;
-    --font-text: CalSans;
-    --font-interface: CalSans;
 
     --optical-ratio: 1.414;
     --line-width: var(--line-width-s);
-    --font-size: 1.1em;
 
     .font-interface {
         font-size: var(--scale-d4);
