@@ -129,7 +129,7 @@
     
     
     p:not(:has(img)) + p {
-        text-indent: var(--gap-relaxed);
+        text-indent: var(--gap);
     }
     
     p:has(+ p) { margin-block-end:var(--gap-nl); }
