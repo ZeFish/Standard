@@ -89,6 +89,15 @@
 
     p {
         text-align: justify;
+  text-align-last: left; /* Don't justify the last line */
+  
+  /* Enable hyphenation */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  
+  /* Improve word spacing */
+  word-spacing: -0.05em;
     }
     
     :is(h2, h3) + p::first-letter {
@@ -241,11 +250,6 @@
         }
     }
     
-    @media (max-width: 600px) {
-        p {
-            text-align:left;
-        }
-    }
     
     
 }
