@@ -92,8 +92,8 @@
     --base-8: calc(var(--base) * 8);
 
     /* Optical harmony scale */
-    --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -2));
-    --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -1));
+    --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
+    --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
     --scale: var(--font-size);
     --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 1));
     --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 2));
