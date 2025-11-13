@@ -127,7 +127,7 @@
         text-indent: var(--gap);
     }
     
-    p:has(+ p) { margin-block-end:0; }
+    p:has(+ p) { margin-block-end:var(--gap-nl); }
 
     .prose {
         margin-left: 10%;
