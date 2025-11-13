@@ -630,3 +630,88 @@
     font-style: italic;
     font-display: swap;
 }
+
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  src: local('EB Garamond'), url('/assets/fonts/eb-garamond/EBGaramond.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  src: local('EB Garamond Regular'), url('/assets/fonts/eb-garamond/EBGaramond-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond SC';
+  font-style: normal;
+  font-weight: 400;
+  src: local('EB Garamond Regular SmallCaps'), url('/assets/fonts/eb-garamond/EBGaramondSC.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400;
+  src: local('EB Garamond Italic'), url('/assets/fonts/eb-garamond/EBGaramond-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  src: local('EB Garamond Medium'), url('/assets/fonts/eb-garamond/EBGaramond-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 500;
+  src: local('EB Garamond Medium Italic'), url('/assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 600;
+  src: local('EB Garamond SemiBold'), url('/assets/fonts/eb-garamond/EBGaramond-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 600;
+  src: local('EB Garamond SemiBold Italic'), url('/assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 700;
+  src: local('EB Garamond Bold'), url('/assets/fonts/eb-garamond/EBGaramond-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 700;
+  src: local('EB Garamond Bold Italic'), url('/assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 800;
+  src: local('EB Garamond ExtraBold'), url('/assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 800;
+  src: local('EB Garamond ExtraBold Italic'), url('/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff') format('woff');
+}
