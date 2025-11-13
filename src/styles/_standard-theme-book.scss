@@ -241,6 +241,10 @@
     }
 
     @media (max-width: 1000px) {
+        :root {
+          --line-width-xs: 100%;
+          --line-width-s: 100%;
+        }
         .prose {
             margin-left: 0;
             max-width: 100%;
