@@ -1,4 +1,9 @@
 [data-theme="custom_2"] {
     --font-header: InterVariable;
     --line-height: 1.2;
+    
+    h1 {
+        letter-spacing: -0.065em;
+        font-weight:800;
+    }
 }
