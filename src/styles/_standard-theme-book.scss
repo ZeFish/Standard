@@ -100,6 +100,7 @@
             (var(--drop-cap-size) * var(--scale) * var(--line-height))
             + (var(--leading) * max(calc(var(--drop-cap-size) - 1), 1))
         );
+        font-size: 3cap;
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
     }
@@ -150,12 +151,11 @@
         font-size: 10px;
     }
     
-    pre { font-size:12px; font-weight:400; }
+    pre { font-size:10px; font-weight:400; }
 
     blockquote,
     pre {
         padding: var(--gap-tight) var(--gap-compact);
-        font-size: var(--scale);
         border: 0;
         border-left: 1px solid var(--color-muted);
         background: transparent;
