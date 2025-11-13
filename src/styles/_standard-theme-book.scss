@@ -98,6 +98,8 @@
   
   /* Improve word spacing */
   word-spacing: -0.05em;
+  
+        text-box-edge: cap ex;
     }
     
     :is(h2, h3) + p::first-letter {
