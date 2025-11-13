@@ -64,25 +64,16 @@
     /* Heading weight scale */
     --font-weight-h1: var(--font-header-weight);
     --font-weight-h2: max(
-        calc(var(--font-header-weight) * 0.95),
-        var(--font-weight)
-    );
-    --font-weight-h3: max(
-        calc(var(--font-header-weight) * 0.9),
-        var(--font-weight)
-    );
-    --font-weight-h4: max(
         calc(var(--font-header-weight) * 0.85),
         var(--font-weight)
     );
-    --font-weight-h5: max(
-        calc(var(--font-header-weight) * 0.8),
+    --font-weight-h3: max(
+        calc(var(--font-header-weight) * 0.85),
         var(--font-weight)
     );
-    --font-weight-h6: max(
-        calc(var(--font-header-weight) * 0.75),
-        var(--font-weight)
-    );
+    --font-weight-h4: var(--font-weight);
+    --font-weight-h5: var(--font-weight);
+    --font-weight-h6: var(--font-weight);
 
     /* List styling */
     --list-indentation: var(--base);

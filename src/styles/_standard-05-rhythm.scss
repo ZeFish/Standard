@@ -117,28 +117,17 @@
 
 
     h1 {
-        margin-block-start: calc(var(--gap) * 4);
-        margin-block-end: var(--gap-block);
+        margin-block-start: calc(var(--gap) * 3);
+        margin-block-end: var(--gap);
     }
 
-    h2, h3 {
-        margin-block-start: var(--gap-block);
-        margin-block-end: var(--gap-block);
+    h2 {
+        margin-block-start: calc(var(--gap) * 2);
+        margin-block-end: var(--gap);
     }
 
-    h4 {
+    h3, h4, h5, h6 {
         margin-block: var(--gap);
-    }
-
-    h5 {
-        margin-block-start: var(--gap);;
-        margin-block-end: var(--gap-compact);
-    }
-
-    h6 {
-        margin-block-start: var(--gap);
-        margin-block-end: var(--gap-compact);
-        font-size: var(--scale-d2);
     }
 
     :is(h1, h2, h3) + :is(h1, h2, h3),

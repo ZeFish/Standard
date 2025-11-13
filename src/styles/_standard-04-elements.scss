@@ -73,38 +73,31 @@ h6 {
 
 h1 {
     font-weight: var(--font-weight-h1);
-    font-size: clamp(var(--scale-4), 10vw, var(--scale-5));
+    font-size: clamp(var(--scale-3), 10vw, var(--scale-4));
     line-height: var(--font-header-line-height, 1);
+    letter-spacing: -0.005em;
 }
 
 h2 {
     font-weight: var(--font-weight-h2);
-    font-size: clamp(var(--scale-3), 7vw, var(--scale-4));
+    font-size: clamp(var(--scale-2), 7vw, var(--scale-3));
     line-height: var(--font-header-line-height, 1);
+    letter-spacing: -0.003em;
 }
 
 h3 {
     font-weight: var(--font-weight-h3);
-    font-size: var(--scale-3);
+    font-size: var(--scale-2);
     line-height: var(--font-header-line-height, 1);
+    letter-spacing: -0.002em;
 }
 
-h4 {
-    font-weight: var(--font-weight-h4);
+h4, h5, h6 {
+    font-weight: var(--font-weight);
     font-size: var(--scale-2);
     line-height: var(--line-height);
-}
-
-h5 {
-    font-weight: var(--font-weight-h5);
-    font-size: var(--scale-2);
-    line-height: var(--line-height);
-}
-
-h6 {
-    font-weight: var(--font-weight-h6);
-    font-size: var(--scale-2);
-    line-height: var(--line-height);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 /* Inline code, monospace families */

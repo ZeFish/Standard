@@ -92,21 +92,13 @@
     --base-8: calc(var(--base) * 8);
 
     /* Optical harmony scale */
-    --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -3));
-    --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -2));
-    --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
-    --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
+    --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -2));
+    --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -1));
     --scale: var(--font-size);
-    --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 0.5));
-    --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 1));
-    --scale-4: calc(var(--font-size) * pow(var(--optical-ratio), 2));
-    --scale-5: calc(var(--font-size) * pow(var(--optical-ratio), 3));
-    --scale-6: calc(var(--font-size) * pow(var(--optical-ratio), 4));
-    --scale-7: calc(var(--font-size) * pow(var(--optical-ratio), 5));
-    --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 6));
-    --scale-9: calc(var(--font-size) * pow(var(--optical-ratio), 7));
-    --scale-10: calc(var(--font-size) * pow(var(--optical-ratio), 8));
-
+    --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 1));
+    --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 2));
+    --scale-4: calc(var(--font-size) * pow(var(--optical-ratio), 3));
+   
     /* Mobile */
     --mobile-font-size: 1.1rem;
     --mobile-optical-ratio: var(--ratio-silver);
