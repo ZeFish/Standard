@@ -228,10 +228,8 @@
             max-width: 100%;
         }
         aside.note {
-            position: relative;
-            left: 0;
-            top: calc(var(--gap) * -1);
-            margin-bottom: calc(var(--gap) * -2);
+            position: inherit;
+            margin-bottom: inehrit;
         }
     }
     
