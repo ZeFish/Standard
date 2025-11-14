@@ -43,9 +43,9 @@
     }
     
     h1 {
-        margin-block-start: calc(var(--gap) * 3);
-        margin-block-end: calc(var(--gap) * 3);
-        text-align: center;
+        margin-block-start: calc(var(--gap) * 1);
+        margin-block-end: calc(var(--gap) * 2);
+        text-align: left;
         font-family: var(--font-text);
     }
     
