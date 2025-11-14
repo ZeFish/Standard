@@ -1,0 +1,17 @@
+@use "standard-00-variables" as *;
+
+/* Miller Text - Helvetica now */
+
+[data-theme="newspaper"] {
+    --color-light-foreground: #1a1a1a;
+    --color-light-background: #fffefd;        /* newsprint hint */
+    --color-light-accent: #1f4f82;            /* headline blue */
+    --color-border: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    --shadow: none;                      /* flat, ink on paper */
+    
+    
+    --color-dark-background: #101010;     /* news-on-dark */
+    --color-dark-foreground: #e2e2e2;
+    --color-dark-accent: #8fb4ff;
+    --shadow: none;
+}

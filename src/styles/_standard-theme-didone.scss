@@ -1,0 +1,13 @@
+@use "standard-00-variables" as *;
+
+/* Parmigiano Text */
+
+[data-theme="didone"] {
+    --color-light-foreground: #0d0d0d;        /* deeper ink for high-contrast serifs */
+    --color-light-accent: #a67c00;            /* metallic gold cue */
+    --color-light-purple: #6f5a8a;
+    --color-border: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+    
+    --color-dark-foreground: #f0f0f0;     /* support high-contrast serifs */
+    --color-dark-accent: #d8b14d;
+}

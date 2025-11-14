@@ -1,0 +1,9 @@
+@use "standard-00-variables" as *;
+
+/* Adobe Caslon Pro */
+
+[data-theme="english-oldstyle"] {
+    --color-light-accent: #8a4f39;            /* warm oxblood/brown */
+    --color-blue: #2c3e63;              /* sober navy */
+    --color-dark-accent: color-mix(in srgb, var(--color-dark-foreground) 25%, #b08a4b);
+}

@@ -1,3 +1,6 @@
 [data-theme="custom_1"] {
-    --color-foreground: green;
+    --color-red: #e4002b;
+    --color-blue: #0050a4;              /* primaries-as-ink */
+    --color-yellow: #f0c300;
+    --color-accent: var(--color-red);
 }

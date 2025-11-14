@@ -1,8 +1,8 @@
 [data-theme="swiss"] {
-    --color-light-red: red;
+    --color-light-red: #e03030;
     --color-dark-red: #db6057;
     --color-green: var(--color-red);
-    --color-blue: var(--color-red);
+    --color-blue: #2b5aa0;
     --color-yellow: var(--color-red);
     --color-purple: var(--color-red);
     --color-orange: var(--color-red);
@@ -19,13 +19,25 @@
 
     --optical-ratio: var(--ratio-golden);
     --mobile-font-ratio: var(--ratio-golden);
-    --font-monospace: "Helvetica Monospaced Pro", monospace;
+    --font-monospace: "Sohne Mono", monospace;
     --font-text: Diatype;
     --line-height: 1.2;
     --font-size: 1.2em;
     --scale-d2: 0.75em;
     --body-padding: var(--gap);
     --color-background-secondary: var(--color-background);
+
+    --font-header: InterVariable;
+    --line-height: 1.2;
+    
+    h1 {
+        letter-spacing: -0.065em;
+        font-weight:900;
+        line-height:0.965
+    }
+    .font-interface{
+        font-size:12px;
+     }
 
     hr {
         background: var(--color-foreground);

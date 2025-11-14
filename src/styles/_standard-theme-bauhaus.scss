@@ -1,0 +1,13 @@
+@use "standard-00-variables" as *;
+
+[data-theme="bauhaus"] {
+    --color-light-red: #e4002b;            /* assertive red (Bauhaus poster) */
+    --color-light-blue: #0050a4;              /* primaries-as-ink */
+    --color-light-yellow: #f0c300;
+    
+    --color-dark-red: #ff5a36;    /* warmer red in dark */
+    --color-dark-blue: #7aa6ff;
+    --color-dark-yellow: #ffd369;
+    
+    --color-accent: var(--color-red);
+}

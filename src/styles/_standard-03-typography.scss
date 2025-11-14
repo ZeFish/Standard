@@ -34,6 +34,7 @@
     --font-sans: InterVariable, system-ui, -apple-system, sans-serif;
     --font-serif: "Garamond Premiere Pro", "Source Serif 4", serif;
     --font-text: var(--font-sans);
+    --font-geo: "Futura Now Var";
     --font-header: var(--font-text);
     --font-monospace:
         "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
@@ -60,7 +61,7 @@
     --font-header-weight: 700;
 
     /* Interface font tokens */
-    --font-interface: var(--font-text);
+    --font-interface: var(--font-sans);
     --font-interface-feature: "dlig", "zero";
     --font-interface-variation: "opsz" 32;
     --font-list-feature: "dlig", "tnum", "zero";

@@ -417,6 +417,16 @@ class StandardLab {
     const defaultThemes = [
       { value: "", label: "Empty" },
       { value: "default", label: "Default" },
+      
+      { value: "bauhaus", label: "Bauhaus" },
+      { value: "venetian", label: "Venetian" },
+      { value: "newspaper", label: "Newspaper" },
+      { value: "didone", label: "Didone" },
+      { value: "transitional", label: "Transitional" },
+      
+      { value: "english-oldstyle", label: "English Oldstyle" },
+      
+      
       { value: "paper", label: "Paper" },
       { value: "swiss", label: "Swiss" },
       { value: "kernel", label: "Kernel" },
