@@ -10,4 +10,24 @@
     --color-dark-yellow: #ffd369;
     
     --color-accent: var(--color-red);
+    
+    --font-header: "Futura Now Var";
+    --font-text: "Univers";
+    
+    h1 {
+        font-size: var(--scale-4);
+        letter-spacing: -0.01em;          /* geometric tightness */
+        font-variation-settings: "wght" 650; /* if variable */
+    }
+    h2 {
+        font-size: var(--scale-3);   /* e.g., var(--scale-3) */
+        font-variation-settings: "wght" 600;
+        letter-spacing: -0.008em;
+    }
+    h3 {
+        font-family: var(--font-sans);
+        font-size: var(--scale-2); /* e.g., var(--scale-2) */
+        font-weight: 600;
+        letter-spacing: -0.003em;
+    }
 }

@@ -716,3 +716,38 @@
   font-weight: 800;
   src: local('EB Garamond ExtraBold Italic'), url('/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff') format('woff');
 }
+
+
+
+@font-face {
+    font-family: "Helvetica";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/HelveticaNowVar.woff2")
+        format("woff2");
+}
+@font-face {
+    font-family: "Helvetica";
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/HelveticaNowVar-Italic.woff2")
+        format("woff2");
+}
+@font-face {
+    font-family: "Univers";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/fonts/UniversNextVariable.ttf")
+        format("ttf");
+}
+@font-face {
+    font-family: "Univers";
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/fonts/UniversNextVariable-Italic.ttf")
+        format("ttf");
+}
