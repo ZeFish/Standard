@@ -521,7 +521,8 @@ mark {
         in srgb,
         var(--color-yellow) 30%,
         var(--color-foreground)
-    );;
+    );
+    padding: var(--gap-tight); 
 }
 
 
