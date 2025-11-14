@@ -33,6 +33,9 @@
         /* Improve word spacing */
         word-spacing: -0.1em;
         text-box-edge: cap ex;
+        
+        columns: 2;
+        column-gap: var(--gap);
     }
      
     
@@ -44,8 +47,8 @@
     }
     
     h1 {
-        margin-block-start: calc(var(--gap) * 3);
-        margin-block-end: calc(var(--gap) * 3);
+        margin-block-start: calc(var(--gap) * 4);
+        margin-block-end: calc(var(--gap) * 4);
         text-align: center;
         font-family: var(--font-text);
     }
