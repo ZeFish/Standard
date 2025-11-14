@@ -381,7 +381,7 @@ function registerBuiltIns(processor) {
   // Columns
   processor.add("columns", (match) => {
     const cols = (match.args || 2);
-    const html = `  <p class="columns-${cols}">rrrrrr\n\n${match.content}\n\n</p>\n`;
+    const html = `  <div class="columns-${cols}">rrrrrr\n\n${match.content}\n\n</div>\n`;
     return html;
   });
 
