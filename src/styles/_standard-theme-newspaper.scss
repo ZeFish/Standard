@@ -16,4 +16,23 @@
     --shadow: none;
     --font-text: "miller-text";
     --font-header: "miller-display";
+    
+      p {
+        text-align: justify;
+        text-align-last: left; /* Don't justify the last line */
+        /* Enable hyphenation */
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        /* Improve word spacing */
+        word-spacing: -0.1em;
+        text-box-edge: cap ex;
+    }
+     p:not(:has(img)) + p {
+        text-indent: var(--gap);
+    }
+    
+    p:has(+ p) { margin-block-end:var(--gap-nl); }
+    
+    h1 {text-align:center;}
 }
