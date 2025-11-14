@@ -427,7 +427,7 @@ ${itemTemplate}
   // Grid (static content layout)
   processor.add("grid", (match) => {
     const items = processor.splitContent(match.content);
-    const count = items.length; // Auto-detect!
+    const count = items.length + 1; // Auto-detect!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
     let html = '<div class="grid">\n';
