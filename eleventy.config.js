@@ -27,7 +27,7 @@ ai: {
 },
 
 */
-  eleventyConfig.addGlobalData("theme", "custom_2");
+  eleventyConfig.addGlobalData("theme", "newspaper");
   eleventyConfig.addGlobalData("layout", "base");
   eleventyConfig.watchIgnores.add("_site/assets/**/*");
 
