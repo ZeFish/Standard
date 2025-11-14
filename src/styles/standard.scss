@@ -42,6 +42,18 @@
 @use "standard-98-utilities";
 @use "standard-99-debug";
 
+[data-theme="default"] {
+    --font-header: InterVariable;
+    --line-height: 1.2;
+    
+    h1 {
+        letter-spacing: -0.065em;
+        font-weight:900;
+        line-height:0.965
+    }
+    
+}
+
 /* Add to standard.css */
 
 :root {
