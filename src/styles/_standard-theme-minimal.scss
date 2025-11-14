@@ -7,7 +7,6 @@
 
     --font-header: Kalice;
     --font-header-weight: 300;
-    --font-header-letter-spacing: 1;
 
     --optical-ratio: 1.414;
     --line-width: var(--line-width-s);
@@ -24,8 +23,8 @@
     );
 
     h1 {
-        margin-block-start: calc(var(--base) * 7);
-        margin-block-end: var(--base-8);
+        margin-block-start: calc(var(--gap) * 7);
+        margin-block-end: calc(var(--gap) * 7);
         text-align: center;
     }
 

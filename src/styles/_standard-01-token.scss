@@ -22,14 +22,17 @@
 
 :root {
 
+	--optical-ratio: var(--ratio-golden);;
+
+
 	/* Base measurements & ratios - the foundation of everything else */
 	--font-size: 1rem;
-	--line-height: 1.5;
+	--line-height: var(--optical-ratio);
 	/* The actual line-height of html */
 	--line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
 	--line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
-	--optical-ratio: 1.5;
-	/* Optical Harmony ratio (font size) */
+	
+
 
 	/* Represents "one line of text without line-height spacing" */
 	--leading: calc((var(--line-height) - 1) * var(--font-size));
