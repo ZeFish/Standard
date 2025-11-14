@@ -31,11 +31,8 @@
         word-spacing: -0.1em;
         text-box-edge: cap ex;
     }
-     p:not(:has(img)) + p {
-        text-indent: var(--gap);
-    }
+     
     
-    p:has(+ p) { margin-block-end:var(--gap-nl); }
     
     header { 
         border-bottom:2px solid var(--color-foreground);
