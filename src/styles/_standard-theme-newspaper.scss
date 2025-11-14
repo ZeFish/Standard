@@ -24,6 +24,8 @@
     --mobile-line-height: 1.2;
     --gap-nl: var(--gap-compact);
     
+    --color-muted: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));
+    
       p {
         text-align: justify;
         text-align-last: left; /* Don't justify the last line */
