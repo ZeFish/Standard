@@ -57,21 +57,13 @@
     margin-block:0;
 }
 
-@media (max-width: #{$mobile}) {
-    :root {
-        --gap-grid: var(--gap-micro);
-    }
-}
-[class^="grid"] * {
-    min-width: 0; /* ← Force items to shrink below content size */
-    margin-block: 0 !important;
-}
+
 /* =========================== */
 /* TYPOGRAPHIC NUANCES         */
 /* =========================== */
 
 /* Exception for grid in a prose div */
-.prose > :is(.grid, [class^="grid-"]) {
+.prose > [class^="grid"] {
     margin-block-start: calc(
         (var(--gap) * max(var(--gap-block), var(--gap))) -
             (var(--gap) * var(--gap))
@@ -80,9 +72,19 @@
         var(--gap) * max(var(--gap-block), var(--gap))
     );
 }
-:is(.grid, [class^="grid-"]) > * {
-    min-width: 0;
+[class^="grid"] > * {
+    min-width: 0; /* ← Force items to shrink below content size */
     margin-block: 0;
+}
+
+@media (max-width: #{$mobile}) {
+    :root {
+        /*--gap-grid: var(--gap-micro);*/
+        [class^="grid"] * {
+            min-width: 0; /* ← Force items to shrink below content size */
+            margin-block: var(--gap);;
+        }
+    }
 }
 
 /* Gap variants aligned to rhythm */
