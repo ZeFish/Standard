@@ -381,7 +381,7 @@ function registerBuiltIns(processor) {
   // Columns
   processor.add("columns", (match) => {
     const cols = (match.args || 2);
-    const html = `  <p class="columns-${cols}">\n\n${match.content}\n\n</p>\n`;
+    const html = `  <p class="columns-${cols}">rrrrrr\n\n${match.content}\n\n</p>\n`;
     return html;
   });
 
@@ -396,7 +396,7 @@ function registerBuiltIns(processor) {
     let html = '<div class="grid">\n';
     cols.forEach((col, i) => {
       const span = sizes[i] || Math.max(1, Math.floor(12 / cols.length));
-      html += `  <div class="col-12 md:col-${span}">\n\n${col}\n\n  </div>\n`;
+      html += `  <div class="sm:row col-${span}">\n\n${col}\n\n  </div>\n`;
     });
     html += "</div>\n";
     return html;
