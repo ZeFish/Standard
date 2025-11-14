@@ -54,6 +54,7 @@
     grid-auto-flow: column;
     column-gap: var(--gap-grid);
     row-gap: var(--gap-grip);
+    margin-block:0;
 }
 
 @media (max-width: #{$mobile}) {
@@ -61,7 +62,7 @@
         --gap-grid: var(--gap-micro);
     }
 }
-:is(.grid, [class^="grid-"]) * {
+[class^="grid"] * {
     min-width: 0; /* ← Force items to shrink below content size */
     margin-block: 0 !important;
 }
