@@ -28,6 +28,14 @@ html {
     orphans: 2;
 }
 
+#{$elements-boxed} {
+	border-left: var(--stroke-width) solid var(--color-border);
+    padding: var(--leading) var(--gap-compact);
+    margin-inline-start: var(--gap-compact);
+    font-size: var(--scale-d2);
+    line-height: var(--line-height-compact);
+}
+
 /* =========================== */
 /* Base normalization          */
 /* =========================== */
@@ -118,10 +126,7 @@ pre {
     position: relative;
     background: var(--color-background-secondary);
     color: var(--color-foreground);
-    font-size: var(--scale-d2);
     border: var(--border);
-    border-radius: var(--radius);
-    padding: var(--leading);
     overflow-x: auto;
     box-shadow: inset var(--shadow);
     line-height: var(--line-height-compact);
@@ -165,12 +170,7 @@ li::before {
 /* Blockquotes (typography + color) */
 blockquote {
     font-style: italic;
-    border-left: var(--stroke-width) solid var(--color-border);
     color: var(--color-muted);
-    padding: var(--leading) var(--gap-compact);
-    margin-inline-start: var(--gap-compact);
-    font-size: var(--scale-d2);
-    line-height: var(--line-height-compact);
 }
 
 /* Tables (typography) */
