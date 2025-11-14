@@ -17,6 +17,7 @@
     --font-text: "miller-text";
     --font-header: "miller-display";
     --font-banner:  "miller-banner";
+    --font-interface: "miller-text";
     
       p {
         text-align: justify;
@@ -34,6 +35,8 @@
     }
     
     p:has(+ p) { margin-block-end:var(--gap-nl); }
+    
+    header { border-bottom:3px solid var(--color-foreground);}
     
     h1 {
         margin-block-start: calc(var(--gap) * 5);
