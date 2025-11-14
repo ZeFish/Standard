@@ -430,7 +430,7 @@ ${itemTemplate}
     const count = items.length; // Auto-detect!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
-    let html = '<div class="grid">\n';
+    let html = `<div class="grid-${count}">\n`;
     items.forEach((item) => {
       html += `  <div class="sm:row">\n\n${item}\n\n</div>\n`;
     });

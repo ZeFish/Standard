@@ -82,7 +82,7 @@ To these challenges, Darwall (2017) adds another problem for the Ciceronian plat
 
 ::warning do know grid are following
 
-::cards
+::grid
 To be fair, Darwall’s critique hangs on two assumptions about the concept of dignity:
 ---
 (1) that a satisfactory account of dignity will involve a connection to, if not a grounding for, rights claims; and
