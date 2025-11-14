@@ -66,7 +66,7 @@ Adding to this reversal of fortunes, Kent (2017) marshals extensive evidence fro
 
 “Dignity” derives from the Latin *dignitas*. And while most Romans used *dignitas* only in its merit sense, a few, and Cicero in particular, had a proleptic understanding of *dignitas* that anticipated today’s moral-political sense.
 
-::error This is an error
+::error This is an error and colums are following
 
 ::columns 2
 This historical view has attracted more attention lately, as evidenced by its earlier noted endorsement in McCrudden (2008) and Rosen (2012a) (see also, Englard 2000). However, it has been challenged on both philosophical and interpretive grounds. For example, Miriam Griffin (2017) carefully demonstrates that the textual support for this view is very thin. She argues that straightforward lexical analysis of Roman sources offers sparing evidence for connecting *dignitas* to our contemporary moral-political concept. Moreover, even if we branch out to other ancient Roman concepts to see if dignity might be hiding under different terminology, we run into a fundamental challenge: “Stoics and Roman moralists”, Griffin explains, “think in terms of *officia*, obligations or duties or functions that our nature, properly understood, imposes on us”. Correspondingly, “[t]he entitlements and rights of those at the receiving end of our actions is not a prominent aspect of their thinking” (2017: 49).
@@ -79,6 +79,8 @@ To these challenges, Darwall (2017) adds another problem for the Ciceronian plat
 > Human dignity for Cicero is nothing that could be established by conventional patterns of deference. It is the idea, rooted in the ancient notion of a great chain of being, that distinctive capacities for self-development “by study and reflection” give human beings a “nature” “superior” to that of “cattle and other animals”. Other species are motivated only by sensory instincts, whereas human beings can “learn that sensual pleasure is wholly unworthy of the dignity of the human race”, and be guided by this understanding.
 >
 > [Consequently] nothing in the Ciceronian notion of human dignity requires, or even leads naturally to, basic human rights. The proposition, for example, that “sensual pleasure” is “unworthy” of human dignity is less a thesis about what human beings are in a position to claim from one another by virtue of their dignity than it is an ethical standard to which we are to live up. (2017: 182–3; Cicero quotations cited in McCrudden 2008: 657, and Rosen 2012a: 12)
+
+::warning do know grid are following
 
 ::grid
 To be fair, Darwall’s critique hangs on two assumptions about the concept of dignity:
