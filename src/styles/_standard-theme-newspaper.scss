@@ -45,7 +45,7 @@
         margin-block-start: calc(var(--gap) * 5);
         margin-block-end: calc(var(--gap) * 7);
         text-align: center;
-        font-family: var(--font-banner);
+        font-family: var(--font-text);
     }
     
      :is(h2, h3) + p::first-letter {
