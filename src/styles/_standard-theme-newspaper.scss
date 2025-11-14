@@ -37,7 +37,7 @@
         }
      
     p:not(:has(img)) + p {
-        text-indent: var(--gap);
+        text-indent: 0;
     }
     
     header { 
