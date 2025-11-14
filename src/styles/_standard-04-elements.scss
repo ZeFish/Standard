@@ -121,7 +121,7 @@ pre {
     font-size: var(--scale-d2);
     border: var(--border);
     border-radius: var(--radius);
-    padding: var(--gap-nl);
+    padding: var(--leading);
     overflow-x: auto;
     box-shadow: inset var(--shadow);
     line-height: var(--line-height-compact);
@@ -167,7 +167,7 @@ blockquote {
     font-style: italic;
     border-left: var(--stroke-width) solid var(--color-border);
     color: var(--color-muted);
-    padding: var(--gap-nl) var(--gap-nl);
+    padding: var(--leading) var(--gap-nl);
     font-size: var(--scale-d2);
     line-height: var(--line-height-compact);
 }
