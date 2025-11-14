@@ -28,8 +28,7 @@
 
     blockquote,
     pre {
-        border: 0;
-        border-left: 1px solid var(--color-foreground);
+        
         background: transparent;
         color: var(--color-foreground);
         .copy-button {
@@ -49,6 +48,9 @@
     }
 
     blockquote {
+        border: 0;
+        border-left: 1px solid var(--color-muted);
+        color: var(--color-muted);
         font-family: Kalice;
         margin-inline-start: var(--gap-compact);
         padding-inline-start: var(--gap-compact);
