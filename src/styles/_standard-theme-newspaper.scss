@@ -40,27 +40,10 @@
     }
     
     h1 {
-        margin-block-start: calc(var(--gap) * 1);
+        margin-block-start: calc(var(--gap) * 2);
         margin-block-end: calc(var(--gap) * 2);
         text-align: left;
         font-family: var(--font-text);
     }
     
-     :is(h2, h3) + p::first-letter {
-        --drop-cap-size: 3;
-        float: inline-start;
-        line-height: 1;
-        margin: calc(var(--gap-tight) * -1) var(--gap-tight) 0 0 !important;
-        font-size: calc(
-            (var(--drop-cap-size) * var(--scale) * var(--line-height))
-            + (var(--leading) * max(calc(var(--drop-cap-size) - 0), 1))
-        );
-        overflow: visible;
-        text-box-trim: trim-both;
-        text-box-edge: cap alphabetic;
-        
-        display:flex;
-        align-self: flex-start;
-        
-    }
 }
