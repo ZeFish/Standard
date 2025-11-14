@@ -466,7 +466,7 @@ ${itemTemplate}
     const count = cards.length; // Auto!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
-    let html = '<div class="grid-${colSpan}">\n';
+    let html = `<div class="grid-${colSpan}">\n`;
     cards.forEach((card) => {
       html += `  <div class="sm:row card">
     \n\n${card}\n\n
