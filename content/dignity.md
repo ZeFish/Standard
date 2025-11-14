@@ -74,7 +74,9 @@ Adding to this reversal of fortunes, Kent (2017) marshals extensive evidence fro
 This is an error
 ::end
 
+::columns 2
 This historical view has attracted more attention lately, as evidenced by its earlier noted endorsement in McCrudden (2008) and Rosen (2012a) (see also, Englard 2000). However, it has been challenged on both philosophical and interpretive grounds. For example, Miriam Griffin (2017) carefully demonstrates that the textual support for this view is very thin. She argues that straightforward lexical analysis of Roman sources offers sparing evidence for connecting *dignitas* to our contemporary moral-political concept. Moreover, even if we branch out to other ancient Roman concepts to see if dignity might be hiding under different terminology, we run into a fundamental challenge: “Stoics and Roman moralists”, Griffin explains, “think in terms of *officia*, obligations or duties or functions that our nature, properly understood, imposes on us”. Correspondingly, “[t]he entitlements and rights of those at the receiving end of our actions is not a prominent aspect of their thinking” (2017: 49).
+::end
 
 Admittedly, Griffin allows that in some cases these obligations or duties entail a kind of treatment of others that accords with our contemporary notion of human dignity. Still, this result does not depend on any right that persons have in virtue of “the worth of a human being per se” (2017: 64; see also Meyer 1987; and Lebech 2009, especially p. 46 n. 22.)
 
@@ -84,7 +86,15 @@ To these challenges, Darwall (2017) adds another problem for the Ciceronian plat
 >
 > [Consequently] nothing in the Ciceronian notion of human dignity requires, or even leads naturally to, basic human rights. The proposition, for example, that “sensual pleasure” is “unworthy” of human dignity is less a thesis about what human beings are in a position to claim from one another by virtue of their dignity than it is an ethical standard to which we are to live up. (2017: 182–3; Cicero quotations cited in McCrudden 2008: 657, and Rosen 2012a: 12)
 
-To be fair, Darwall’s critique hangs on two assumptions about the concept of dignity: (1) that a satisfactory account of dignity will involve a connection to, if not a grounding for, rights claims; and (2) that dignity is in no way an achievement. Both assumptions resonate strongly with contemporary moral-political talk of dignity. Nevertheless, identifying these assumptions should remind us that we have not yet clearly formulated a concept of dignity. So, let us turn to that task.[^3]
+::grid
+To be fair, Darwall’s critique hangs on two assumptions about the concept of dignity:
+---
+(1) that a satisfactory account of dignity will involve a connection to, if not a grounding for, rights claims; and
+---
+(2) that dignity is in no way an achievement. Both assumptions resonate strongly with contemporary moral-political talk of dignity.
+---
+Nevertheless, identifying these assumptions should remind us that we have not yet clearly formulated a concept of dignity. So, let us turn to that task.[^3]
+::end
 
 ## 2. Formulating Dignity
 
