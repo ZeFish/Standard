@@ -393,7 +393,7 @@ function registerBuiltIns(processor) {
       .filter((n) => !isNaN(n) && n > 0);
     const cols = processor.splitContent(match.content);
 
-    let html = '<div class="grid gap-4">\n';
+    let html = '<div class="grid">\n';
     cols.forEach((col, i) => {
       const span = sizes[i] || Math.max(1, Math.floor(12 / cols.length));
       html += `  <div class="col-12 md:col-${span}">\n\n${col}\n\n  </div>\n`;
