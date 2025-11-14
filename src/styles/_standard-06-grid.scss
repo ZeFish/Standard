@@ -87,6 +87,10 @@
     }
 }
 
+[class^="grid"] {
+    .card { margin:0; }
+}
+
 /* Gap variants aligned to rhythm */
 :is(.grid, [class^="grid-"]).compact {
     --gap-grid: var(--gap-tight);
