@@ -52,9 +52,17 @@ Writing a century before Kant, Pufendorf argued that human beings have perfect n
 
 The ==moralized concept of dignity== does not originate in the early modern era. It was celebrated as early as the Renaissance, in Giovanni Pico della Mirandola’s 1486 *Oration on the Dignity of Man*. Moreover, Pico’s oration is drawn from the older, medieval Christian doctrine of *imago Dei* (based on Genesis 1:26 and Wisdom 2:23), which tells us that we are made in “in the image of God”, and that this likeness grounds our distinctive moral worth or status.
 
+::alert
+Alert box
+::end
+
 This story about dignity is to Christian theology what the Kantian dogma is to philosophy. However, these claims are usually misleading if not false. For example, Copenhaver (2017) flatly contradicts the claim that Pico was talking about human dignity in a sense akin to our contemporary moral-political notion. First, Copenhaver notes that the title of the work, which draws our attention, postdates Pico (who never published it). More substantively, Copenhaver argues that Pico’s speech was a public failure in large part because it was entangled with Kabbalah mysteries for how humans can escape the body to increase their status by becoming angels. Finally, [Copenhaver](/) points out that Pico uses the Latin **dignitas** only twice; and
 
 > In neither case does **dignitas** belong to humans, except aspirationally, and neither justifies “dignity” as a translation, with all the Kantian baggage of the modern English word. (2017: 134–5)
+
+::info
+info box
+::end
 
 Adding to this reversal of fortunes, Kent (2017) marshals extensive evidence from the scholastic tradition against the *imago Dei* platitude more generally. Although she confirms that both dignity and the doctrine of *imago Dei* were widely discussed by medieval Christian scholars in the Latin West, she convincingly demonstrates that these discussions did not intersect in a way that supports an inference to our contemporary moral-political notion of the “basic worth or status of humans”. This said, not all interpretations of the Christian tradition, including the doctrine of *imago Dei*, are beholden to this historical platitude. And the *imago Dei* line of inquiry on dignity has a somewhat different life in the Jewish tradition.[^2]
 
