@@ -35,10 +35,9 @@
     p:has(+ p) { margin-block-end:var(--gap-nl); }
     
     h1 {
-        margin-block-start: calc(var(--gap) * 7);
+        margin-block-start: calc(var(--gap) * 5);
         margin-block-end: calc(var(--gap) * 7);
         text-align: center;
-        letter-spacing: 0.1em;
     }
     
      :is(h2, h3) + p::first-letter {
