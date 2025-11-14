@@ -801,24 +801,24 @@
 .columns,
 .columns-2 {
     columns: 2;
-    column-gap: var(--gap-grid);
+    column-gap: var(--gap);
 }
 
 .columns-3 {
     columns: 3;
-    column-gap: var(--gap-grid);
+    column-gap: var(--gap);
 }
 
 .columns-4 {
     columns: 4;
-    column-gap: var(--gap-grid);
+    column-gap: var(--gap);
 }
 
 /* Responsive column count based on container width */
 .columns-auto {
     columns: auto;
     column-width: var(--line-width-s); /* ~32rem optimal column width */
-    column-gap: var(--gap-grid);
+    column-gap: var(--gap);
 }
 
 [class|="columns"].compact {
@@ -834,7 +834,7 @@
 }
 
 .columns-gap-wide {
-    column-gap: var(--gap-block);
+    column-gap: var(--gap-relaxed);
 }
 
 /* Prevent breaks inside elements */
