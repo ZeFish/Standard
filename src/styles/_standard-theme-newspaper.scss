@@ -16,6 +16,7 @@
     --shadow: none;
     --font-text: "miller-text";
     --font-header: "miller-display";
+    --font-banner:  "miller-banner";
     
       p {
         text-align: justify;
@@ -38,6 +39,7 @@
         margin-block-start: calc(var(--gap) * 5);
         margin-block-end: calc(var(--gap) * 7);
         text-align: center;
+        font-family: var(--font-banner);
     }
     
      :is(h2, h3) + p::first-letter {
