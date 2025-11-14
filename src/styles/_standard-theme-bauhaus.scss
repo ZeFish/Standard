@@ -12,7 +12,9 @@
     --color-accent: var(--color-red);
     
     --font-header: "Futura Now Var";
-    --font-text: "Helvetica", "Univers";
+    --font-text: "Helvetica Now Var", "Futura Now Var", "Univers";
+    
+    --line-height:1.2;
     
     h1 {
         font-size: var(--scale-4);
