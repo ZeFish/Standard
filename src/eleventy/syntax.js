@@ -381,7 +381,7 @@ function registerBuiltIns(processor) {
   // Columns
   processor.add("columns", (match) => {
     const cols = (match.args || 2);
-    const html = `  <p class="colums-${cols}">\n\n${match.content}\n\n</p>\n`;
+    const html = `  <p class="columns-${cols}">\n\n${match.content}\n\n</p>\n`;
     return html;
   });
 
@@ -460,11 +460,7 @@ ${itemTemplate}
     return `<div class="container-hero ${alignClass}">\n\n${match.content}\n\n</div>\n`;
   });
 
-  // Card + Cards
-  processor.add(
-    "card",
-    (match) => `<div class="card">\n\n${match.content}\n\n</div>\n`,
-  );
+  
   processor.add("cards", (match) => {
     const cards = processor.splitContent(match.content);
     const count = cards.length; // Auto!
@@ -479,6 +475,12 @@ ${itemTemplate}
     html += "</div>\n";
     return html;
   });
+  
+  // Card + Cards
+  processor.add(
+    "card",
+    (match) => `<div class="card">\n\n${match.content}\n\n</div>\n`,
+  );
 
   // Image
   processor.add("image", (match) => {

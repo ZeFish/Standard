@@ -219,21 +219,6 @@ html {
         color var(--transition);
 }
 
-/* ===== SEMANTIC STATE CLASSES ===== */
-/* Kept in color layer for system coherence (semantic messaging) */
-.text-success {
-    color: var(--color-success);
-}
-.text-warning {
-    color: var(--color-warning);
-}
-.text-error {
-    color: var(--color-error);
-}
-.text-info {
-    color: var(--color-info);
-}
-
 /* Note: General color utilities (.text-muted, .text-subtle, .text-accent, .bg-secondary, .border-*) */
 /* moved to standard-98-utilities.scss for better layer organization */
 
