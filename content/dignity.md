@@ -62,6 +62,10 @@ Adding to this reversal of fortunes, Kent (2017) marshals extensive evidence fro
 
 “Dignity” derives from the Latin *dignitas*. And while most Romans used *dignitas* only in its merit sense, a few, and Cicero in particular, had a proleptic understanding of *dignitas* that anticipated today’s moral-political sense.
 
+::alert error
+This is an error
+::end
+
 This historical view has attracted more attention lately, as evidenced by its earlier noted endorsement in McCrudden (2008) and Rosen (2012a) (see also, Englard 2000). However, it has been challenged on both philosophical and interpretive grounds. For example, Miriam Griffin (2017) carefully demonstrates that the textual support for this view is very thin. She argues that straightforward lexical analysis of Roman sources offers sparing evidence for connecting *dignitas* to our contemporary moral-political concept. Moreover, even if we branch out to other ancient Roman concepts to see if dignity might be hiding under different terminology, we run into a fundamental challenge: “Stoics and Roman moralists”, Griffin explains, “think in terms of *officia*, obligations or duties or functions that our nature, properly understood, imposes on us”. Correspondingly, “[t]he entitlements and rights of those at the receiving end of our actions is not a prominent aspect of their thinking” (2017: 49).
 
 Admittedly, Griffin allows that in some cases these obligations or duties entail a kind of treatment of others that accords with our contemporary notion of human dignity. Still, this result does not depend on any right that persons have in virtue of “the worth of a human being per se” (2017: 64; see also Meyer 1987; and Lebech 2009, especially p. 46 n. 22.)

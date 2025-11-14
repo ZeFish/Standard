@@ -312,6 +312,9 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
     <div class="sm:row">
       <div class="card center" style="background: var(--color-background-secondary)">Secondary</div>
     </div>
+    <div class="sm:row">
+      <div class="card center" style="background: var(--color-accent)">Accent</div>
+    </div>
   </div>
   
 ### Text Colors
