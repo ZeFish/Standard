@@ -380,15 +380,8 @@ class SyntaxProcessor {
 function registerBuiltIns(processor) {
   // Columns
   processor.add("columns", (match) => {
-    const cols = processor.splitContent(match.content);
-    const count = cols.length; // Auto-detect!
-    const colSpan = Math.max(1, Math.floor(12 / count));
-
-    let html = '';
-    cols.forEach((col) => {
-      html += `  <p class="colums-${colSpan}">\n\n${col}\n\n  </p>\n`;
-    });
-    html += "\n";
+    const cols = (match.args || 2);
+    const html = `  <p class="colums-${cols}">\n\n${match.content}\n\n</p>\n`;
     return html;
   });
 
