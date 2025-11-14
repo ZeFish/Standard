@@ -1,4 +1,4 @@
-@use "standard-00-variables" as *;
+@use "standard-00-variables" as 
 
 /* Adobe Jenson Pro 
 and futura*/
@@ -8,4 +8,6 @@ and futura*/
     --color-blue: #2f4e6e;              /* lapis-like */
     --color-yellow: #c2a94b;
     --color-dark-accent: color-mix(in srgb, var(--color-dark-foreground) 25%, #b08a4b);
+
+    --font-header: "adobe-jenson-pro";
 }
