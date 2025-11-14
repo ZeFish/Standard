@@ -153,7 +153,7 @@
 
     --optical-ratio: 1.6;
     --line-height: 1.2;
-    --mobile-line-height:1;
+    --mobile-line-height:1.2;
 
     --font-text: "Courier Prime";
     --font-feature: "";
@@ -172,36 +172,14 @@
         opacity: 85%;
     }
 
-    table {
-        grid-column: content;
-    }
-    table,
-    table th,
-    table td,
-    table td code {
-        font-size: var(--scale-d3);
-        font-family: var(--font-monospace);
-        word-break: keep-all;
-    }
-
-    blockquote {
-        border-inline-start: calc(var(--base-d4) * var(--base-gap)) solid
-            var(--color-muted);
-    }
-
     h1,
     > h1:where(:first-child) {
-        margin-block-start: var(--base-4);
-        margin-block-end: var(--base-2);
+        margin-block-start: var(--gap-huge);
+        margin-block-end: var(--base-relaxed);
     }
     h1:first-child + p {
-        margin-block-start: calc(var(--base) * -1);
-        margin-block-end: var(--base-4);
-    }
-
-    h2 {
-        margin-block-start: var(--base-4);
-        margin-block-end: var(--base-2);
+        margin-block-start: 0;
+        margin-block-end: var(--gap-relaxed);
     }
 
     background: var(--color-background-secondary);
