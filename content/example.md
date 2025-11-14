@@ -294,7 +294,7 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
   
 ### Semantic Colors
 
-  <div class="grid-3 sm:grid-2">
+  <div class="grid-4 sm:grid-2">
     <div>
       <div
         class="card center"
@@ -309,10 +309,10 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
       >Foreground
       </div>
     </div>
-    <div class="sm:row">
+    <div>
       <div class="card center" style="background: var(--color-background-secondary)">Secondary</div>
     </div>
-    <div class="sm:row">
+    <div>
       <div class="card center" style="background: var(--color-accent)">Accent</div>
     </div>
   </div>
