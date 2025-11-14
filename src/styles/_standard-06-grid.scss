@@ -58,7 +58,7 @@
 
 @media (max-width: #{$mobile}) {
     :root {
-        --grid-gap: var(--gap-micro);
+        --gap-grid: var(--gap-micro);
     }
 }
 :is(.grid, [class^="grid-"]) * {
