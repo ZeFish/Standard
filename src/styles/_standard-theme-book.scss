@@ -99,18 +99,21 @@
 
     p {
         text-align: justify;
-  text-align-last: left; /* Don't justify the last line */
-  
-  /* Enable hyphenation */
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  
-  /* Improve word spacing */
-  word-spacing: -0.05em;
-  
+        text-align-last: left; /* Don't justify the last line */
+        /* Enable hyphenation */
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        /* Improve word spacing */
+        word-spacing: -0.05em;
         text-box-edge: cap ex;
     }
+     p:not(:has(img)) + p {
+        text-indent: var(--gap);
+    }
+    
+    p:has(+ p) { margin-block-end:var(--gap-nl); }
+
     
     :is(h2, h3) + p::first-letter {
         --drop-cap-size: 3;
@@ -131,12 +134,7 @@
 
     
     
-    p:not(:has(img)) + p {
-        text-indent: var(--gap);
-    }
-    
-    p:has(+ p) { margin-block-end:var(--gap-nl); }
-
+   
     .prose {
         margin-left: 10%;
         transition: margin-left var(--transition);

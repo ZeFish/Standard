@@ -12,9 +12,27 @@
     --color-accent: var(--color-red);
     
     --font-header: "Futura Now Var";
-    --font-text: "Univers", "Futura Now Var", "Helvetica Now Var";
+    --font-text: "Univers", "Helvetica Now Var";
     
-    --line-height:1.2;
+    --line-height:1.1;
+    --font-size:0.9em;
+    
+    p {
+        text-align: justify;
+        text-align-last: left; /* Don't justify the last line */
+        /* Enable hyphenation */
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        /* Improve word spacing */
+        word-spacing: -0.05em;
+        text-box-edge: cap ex;
+    }
+     p:not(:has(img)) + p {
+        text-indent: var(--gap);
+    }
+    
+    p:has(+ p) { margin-block-end:var(--gap-nl); }
     
     h1 {
         font-size: var(--scale-4);
