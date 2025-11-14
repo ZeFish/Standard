@@ -11,10 +11,6 @@
     --optical-ratio: 1.414;
     --line-width: var(--line-width-s);
 
-    .font-interface {
-        font-size: var(--scale-d4);
-    }
-
     --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
     --color-background-secondary: color-mix(
         in srgb,
