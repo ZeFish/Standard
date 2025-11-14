@@ -42,7 +42,7 @@
 @use "standard-98-utilities";
 @use "standard-99-debug";
 
-[data-theme="default"] {
+:root {
     --font-header: InterVariable;
     --line-height: 1.2;
     
