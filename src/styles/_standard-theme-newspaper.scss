@@ -20,6 +20,8 @@
     --font-interface: "miller-text";
     --line-height: 1.2;
     
+    --mobile-body-padding:var(--gap-relaxed);
+    
       p {
         text-align: justify;
         text-align-last: left; /* Don't justify the last line */
@@ -42,7 +44,7 @@
     
     h1 {
         margin-block-start: calc(var(--gap) * 3);
-        margin-block-end: calc(var(--gap) * 2);
+        margin-block-end: calc(var(--gap) * 3);
         text-align: center;
         font-family: var(--font-text);
     }
