@@ -463,7 +463,7 @@ ${itemTemplate}
   
   processor.add("cards", (match) => {
     const cards = processor.splitContent(match.content);
-    const count = cards.length; // Auto!
+    const count = cards.length + 1; // Auto!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
     let html = `<div class="grid-${colSpan}">\n`;
