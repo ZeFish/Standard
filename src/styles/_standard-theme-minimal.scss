@@ -50,7 +50,9 @@
 
     blockquote {
         font-family: Kalice;
-        padding-inline: var(--gap);
+        margin-inline-start: var(--gap-compact);
+        padding-inline-start: var(--gap-compact);
+        padding-inline-end: var(--gap);
     }
 }
 
