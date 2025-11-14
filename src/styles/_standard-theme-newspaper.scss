@@ -34,9 +34,7 @@
         word-spacing: -0.1em;
         text-box-edge: cap ex;
         
-        columns: 2;
-        column-gap: var(--gap);
-    }
+        }
      
     p:not(:has(img)) + p {
         text-indent: var(--gap);
