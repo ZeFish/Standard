@@ -189,12 +189,12 @@
 
     h1,
     > h1:where(:first-child) {
-        margin-block-start: var(--base-8);
+        margin-block-start: var(--base-4);
         margin-block-end: var(--base-2);
     }
     h1:first-child + p {
         margin-block-start: calc(var(--base) * -1);
-        margin-block-end: var(--base-8);
+        margin-block-end: var(--base-4);
     }
 
     h2 {
