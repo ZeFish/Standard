@@ -31,7 +31,7 @@ html {
 #{$elements-boxed} {
 	border-left: var(--stroke-width) solid var(--color-border);
     padding: var(--gap-nl) var(--gap-compact);
-    margin-inline: var(--gap-compact);
+    margin-inline: var(--gap);
     font-size: var(--scale-d2);
     line-height: var(--line-height-compact);
 }
