@@ -450,13 +450,13 @@ aside, .alert {
 }
 // Callout Color Variants
 .alert.warning {
-    --color-callout: var(--color-warning);
+    --color-alert: var(--color-warning);
 }
 .alert.error {
-    --color-callout: var(--color-error);
+    --color-alert: var(--color-error);
 }
 .alert.success {
-    --color-callout: var(--color-success);
+    --color-alert: var(--color-success);
 }
 
 
