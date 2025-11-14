@@ -515,9 +515,13 @@ mark {
     background: color-mix(
         in srgb,
         var(--color-yellow) 30%,
-        var(--color-background)
+        transparent
     );
-    color: var(--color-foreground);
+    color: color-mix(
+        in srgb,
+        var(--color-yellow) 30%,
+        var(--color-foreground)
+    );;
 }
 
 
