@@ -599,25 +599,25 @@ ${itemTemplate}
   processor.add(
     "error",
     { type: "inline" },
-    (match) => `<aside class="error">${match.value}</aside>`,
+    (match) => `<div class="alert error">${match.value}</div>`,
   );
 
   processor.add(
-    "info",
+    "alert",
     { type: "inline" },
-    (match) => `<aside class="info">${match.value}</aside>`,
+    (match) => `<div class="alert">${match.value}</div>`,
   );
 
   processor.add(
     "warning",
     { type: "inline" },
-    (match) => `<aside class="warning">${match.value}</aside>`,
+    (match) => `<div class="alert warning">${match.value}</div>`,
   );
 
   processor.add(
     "success",
     { type: "inline" },
-    (match) => `<aside class="success">${match.value}</aside>`,
+    (match) => `<div class="alert success">${match.value}</div>`,
   );
 
   // Block-style callout with ::end delimiter

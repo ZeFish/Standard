@@ -70,7 +70,7 @@ Adding to this reversal of fortunes, Kent (2017) marshals extensive evidence fro
 
 “Dignity” derives from the Latin *dignitas*. And while most Romans used *dignitas* only in its merit sense, a few, and Cicero in particular, had a proleptic understanding of *dignitas* that anticipated today’s moral-political sense.
 
-::alert error
+::error
 This is an error
 ::end
 
