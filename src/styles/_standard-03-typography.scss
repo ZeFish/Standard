@@ -63,9 +63,9 @@
     /* Interface font tokens */
     --font-interface: var(--font-sans);
     --font-interface-feature: "dlig", "zero";
-    --font-interface-variation: "opsz" 32;
+    --font-interface-variation: "";
     --font-list-feature: "dlig", "tnum", "zero";
-    --font-list-variation: "opsz" 32;
+    --font-list-variation: "";
 
     /* Heading weight scale */
     --font-weight-h1: var(--font-header-weight);
