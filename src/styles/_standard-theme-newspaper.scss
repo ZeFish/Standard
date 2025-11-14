@@ -39,7 +39,7 @@
     
     header { 
         border-bottom:2px solid var(--color-foreground);
-        * { margin-block-end:var(--gap-nl); }
+        * { margin-block-end:var(--gap-compact); }
     }
     
     h1 {
