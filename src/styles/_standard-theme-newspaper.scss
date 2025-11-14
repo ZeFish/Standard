@@ -40,4 +40,21 @@
         text-align: center;
         letter-spacing: 0.1em;
     }
+    
+     :is(h2, h3) + p::first-letter {
+        --drop-cap-size: 3;
+        float: inline-start;
+        line-height: 1;
+        margin-block-start: -0.04em;
+        margin-inline-end: 0.02em;
+        font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--gap-nl));
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
+        font-family: var(--font-header);
+        font-weight: 200;
+        
+        display:flex;
+        align-self: flex-start;
+        
+    }
 }
