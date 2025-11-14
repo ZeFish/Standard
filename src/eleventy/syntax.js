@@ -384,11 +384,11 @@ function registerBuiltIns(processor) {
     const count = cols.length; // Auto-detect!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
-    let html = '<div class="grid gap-4">\n';
+    let html = '';
     cols.forEach((col) => {
-      html += `  <div class="col-12 md:col-${colSpan}">\n\n${col}\n\n  </div>\n`;
+      html += `  <p class="colums-${colSpan}">\n\n${col}\n\n  </p>\n`;
     });
-    html += "</div>\n";
+    html += "\n";
     return html;
   });
 
@@ -437,9 +437,9 @@ ${itemTemplate}
     const count = items.length; // Auto-detect!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
-    let html = '<div class="grid gap-4">\n';
+    let html = '<div class="grid">\n';
     items.forEach((item) => {
-      html += `  <div class="col-12 md:col-${colSpan}">\n\n${item}\n\n  </div>\n`;
+      html += `  <div class="sm:row">\n\n${item}\n\n  </div>\n`;
     });
     html += "</div>\n";
     return html;
@@ -477,21 +477,15 @@ ${itemTemplate}
     const count = cards.length; // Auto!
     const colSpan = Math.max(1, Math.floor(12 / count));
 
-    let html = '<div class="grid gap-4">\n';
+    let html = '<div class="grid">\n';
     cards.forEach((card) => {
-      html += `  <div class="col-12 md:col-${colSpan}">
-    <div class="card">\n\n${card}\n\n    </div>
+      html += `  <div class="sm:row card">
+    \n\n${card}\n\n
   </div>\n`;
     });
     html += "</div>\n";
     return html;
   });
-
-  // Testimonial
-  processor.add(
-    "quote",
-    (match) => `<blockquote>\n\n${match.content}\n\n</blockquote>\n`,
-  );
 
   // Image
   processor.add("image", (match) => {
