@@ -95,7 +95,7 @@ h2 {
 
 h3 {
     font-weight: var(--font-weight-h3);
-    font-size: var(--scale-2);
+    font-size: clamp(var(--scale), 5vw, var(--scale-3));
     line-height: var(--font-header-line-height, 1);
     letter-spacing: -0.002em;
 }
