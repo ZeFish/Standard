@@ -8,9 +8,11 @@
 
 Ce qui suit n'est pas une théorie abstraite née dans le silence des bibliothèques, mais une philosophie forgée dans le feu de l'expérience humaine. Elle émerge de la rencontre entre la pensée kantienne, l'éthique de la vertu aristotélicienne, et la réalité concrète des relations humaines contemporaines. C'est une tentative de répondre à une question aussi vieille que la philosophie elle-même : **comment vivre ensemble dans la dignité mutuelle ?**
 
----
+
 
 ## Introduction : Les Fondements d'une Éthique Vécue
+
+---
 
 ### I. Le Principe de Dignité Universelle
 
@@ -38,9 +40,11 @@ Notre impératif moral pourrait se formuler ainsi :
 
 > *Agis envers les autres comme tu voudrais qu'ils agissent envers toi dans cette situation concrète, en considérant les besoins réels et les conséquences, tout en maintenant la dignité et l'autonomie de chacun.*
 
----
+
 
 ## Chapitre Premier : De l'Espace comme Condition de la Rencontre
+
+---
 
 ### § 1. La Nécessité de l'Espace
 
