@@ -33,7 +33,7 @@
     --line-height: 1.2;
     --gap-body: calc(var(--gap) * 3);
     
-    --line-width: var(--line-width-xs);
+    --line-width: var(--line-width-s);
     
     
     /* Mobile */
@@ -48,7 +48,7 @@
     --font-size: 1.1em;
     --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
     --font-interface: "Fern";
-    --font-header: "Fern";
+    --font-header: "Futura Now Var", "Sohne", "Fern";
     --font-weight-bold: 500;
     --font-monospace: "Sohne Mono";
     --font-header-weight: 400;
@@ -61,6 +61,7 @@
     --font-variation: "";
     --font-header-feature: "liga", "onum", "kern";
     --font-header-variation: "";
+    font-variant-numeric: oldstyle-nums proportional-nums;
 
     --shadow: 0;
     --radius: 0;
