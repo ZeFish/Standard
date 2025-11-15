@@ -138,10 +138,10 @@
     hr {
         margin-inline: calc(var(--base-4));
         margin-block-start: max(
-            calc((var(--gap-block) - var(--gap)) * 2),
+            calc((var(--gap-block) - var(--gap)) * 1),
             var(--gap)
         );
-        margin-block-end: max((var(--gap-block) * 2), var(--gap));
+        margin-block-end: max((var(--gap-block) * 1), var(--gap));
     }
 
     
