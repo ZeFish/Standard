@@ -53,15 +53,30 @@
 
 	/* Design standard system */
 	--blur: blur(7px);
-	--stroke-width: 1px;
+	--stroke-width: max(1px, 0.06rem); /*  --rule-hairline */
 	--transition: 0.5s ease;
 	--radius: var(--leading);
 	--modal-background: color-mix(in srgb, var(--color-background) 60%, transparent);
 
+	--tracking-tight: -0.01em;
+    --tracking-slight-tight: -0.005em;
+    --tracking-neutral: 0em;
+    --tracking-slight-open: 0.004em;
+    --tracking-open: 0.01em;
 
 
+/*
+.hr { border: 0; border-top: var(--rule-hairline) solid var(--color-border); }
+.label-overline {
+    border-top: var(--rule-hairline) solid var(--color-border);
+    padding-block-start: calc(var(--baseline) / 2);
+    margin-block-start: calc(var(--baseline) * 1.5);
+}
 
 
+make h6 running as the first phrase of the paragraph
+
+*/
 
 
 
