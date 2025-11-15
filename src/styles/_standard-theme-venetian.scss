@@ -10,4 +10,12 @@
 
     --font-header: "adobe-jenson-pro";
     --font-text: "adobe-jenson-pro";
+    
+    --gap-body: var(--gap-relaxed);
+    --gap-block: var(--gap-relaxed);
+    
+    --monile-gap-body: var(--gap-relaxed);
+    --mobile-gap-block: var(--gap-relaxed);
+    
+    letter-spacing: 0.01em;
 }
