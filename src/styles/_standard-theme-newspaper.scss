@@ -40,7 +40,8 @@
         /* Improve word spacing */
         word-spacing: -0.1em;
         text-box-edge: cap ex;
-        
+        text-wrap: pretty;
+        overflow-wrap: anywhere;
         }
      
     p:not(:has(img)) + p {

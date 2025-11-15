@@ -57,6 +57,9 @@
 /* Inspired by fine-art typography and book design principles */
 
 :where(.prose) {
+
+
+
     display: grid;
     grid-template-columns:
         [hero-start] var(--content-hero)
@@ -104,6 +107,7 @@
             margin-inline: 0;
         }
     }
+    
 
     /* =========================== */
     /* TYPOGRAPHIC NUANCES         */
@@ -171,6 +175,17 @@
     p:has(img) {
         margin-inline: var(--content-small);
     }
+    
+    p {
+        text-wrap: pretty;
+        overflow-wrap: anywhere;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        text-wrap: balance;
+    }
+    
+    
     @media (max-width: #{$mobile}) {
         .container-small,
         .callout,
