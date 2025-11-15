@@ -100,7 +100,7 @@ h3 {
     letter-spacing: -0.002em;
 }
 
-h4, h5, h6 {
+h4 {
     font-weight: var(--font-weight);
     font-size: var(--scale);
     line-height: var(--line-height);
@@ -108,14 +108,26 @@ h4, h5, h6 {
     letter-spacing: 0.06em;
 }
 
-h6 {
+h5 { /* Overline */
+
+}
+
+h6 { /* run-in */
     display:inline;
     margin:0;
-    text-transform: none;
-    letter-spacing:0;
+    font-size: var(--scale);
     font-weight:600;
 }
 h6 + p {display:inline;}
+
+.overline {
+    font-variant-caps: small-caps;
+    letter-spacing: 0.04em;
+    font-size: var(--scale-d2);
+    border-top: var(--rule-hairline) solid var(--color-border);
+    padding-block-start: calc(var(--baseline) / 2);
+    margin-block-end: var(--baseline);
+}
 
 /* Inline code, monospace families */
 code,
