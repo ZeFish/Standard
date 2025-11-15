@@ -108,6 +108,9 @@ h4, h5, h6 {
     letter-spacing: 0.06em;
 }
 
+h6 {display:inline;}
+h6 + p {display:inline;}
+
 /* Inline code, monospace families */
 code,
 pre,
