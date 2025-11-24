@@ -1,13 +1,3 @@
----
-title: Content Encryption & Protection
-
-eleventyNavigation:
-  key: Encryption
-  parent: 11ty Plugin
-  title: Encryption
-permalink: /11ty/encryption/
----
-
 # Content Encryption & Protection
 
 Protect sensitive content with client-side password encryption. Perfect for private notes, premium content, or restricted information.
@@ -32,7 +22,6 @@ The encryption plugin allows you to:
 - 📊 **Proprietary data** - Protect business information
 - 🎓 **Course materials** - Lock content until payment/enrollment
 
----
 
 ## How It Works
 
@@ -56,7 +45,6 @@ The encryption plugin allows you to:
 > [!WARNING]
 > This provides **content obfuscation**, not military-grade security. It prevents casual viewing but determined attackers could potentially decrypt. For highly sensitive data, use server-side access control.
 
----
 
 ## Basic Setup
 
@@ -86,12 +74,11 @@ export default function (eleventyConfig) {
 Create a markdown file with encryption enabled:
 
 ```markdown
----
+
 title: Private Notes
 encrypted: true
 password: mypassword123
 
----
 
 # Private Notes
 
@@ -105,18 +92,16 @@ Only visible to someone with the password.
 2. Creates a password prompt
 3. Handles decryption on the client
 
----
 
 ## Usage Examples
 
 ### Simple Protected Page
 
 ```markdown
----
+
 title: Secret Article
 encrypted: true
 password: secret123
----
 
 # Secret Information
 
@@ -130,12 +115,11 @@ Visit the page → See password prompt → Enter "secret123" → View content
 For different access levels, use multiple pages with different passwords:
 
 ```markdown
----
+
 title: Premium Content
 encrypted: true
 password: premium-user-pass
 description: Exclusive member content
----
 
 # Premium Article
 
@@ -143,11 +127,10 @@ This content is for premium members only.
 ```
 
 ```markdown
----
+
 title: Executive Summary
 encrypted: true
 password: exec-password-456
----
 
 # Executive Information
 
@@ -157,15 +140,14 @@ Restricted to executives.
 ### Protected Blog Post
 
 ```markdown
----
+
 title: My Private Blog Post
-layout: blog-post
+-post
 encrypted: true
 password: blog-password
 date: 2024-10-21
----
 
-# {{ title }}
+# 
 
 This blog post is password protected.
 
@@ -185,12 +167,11 @@ More encrypted content...
 Combine with custom passwords to expire content:
 
 ```markdown
----
+
 title: Conference Materials
 encrypted: true
 password: conf2024-access  # Change after event
 description: Materials for October 2024 conference
----
 
 # Conference Materials
 
@@ -199,7 +180,6 @@ Event access ends: October 31, 2024
 [After date, change password to disable access]
 ```
 
----
 
 ## Configuration
 
@@ -262,7 +242,7 @@ eleventyConfig.addPlugin(Standard, {
 ### Options Explained
 
 | Option | Type | Default | Description |
-|--------|------|---------|-------------|
+|--||---|-|
 | `enabled` | boolean | `true` | Enable encryption feature |
 | `ui.placeholder` | string | `"Enter password..."` | Input placeholder |
 | `ui.buttonText` | string | `"Unlock"` | Button label |
@@ -272,16 +252,14 @@ eleventyConfig.addPlugin(Standard, {
 | `style.theme` | string | `"auto"` | Light/dark/auto theme |
 | `layout` | string | `"default"` | UI layout style |
 
----
 
 ## Front Matter Options
 
 Control encryption per-page:
 
 ```markdown
----
-title: Protected Article
 
+title: Protected Article
 
 # Encryption settings
 encrypted: true              # Enable encryption
@@ -294,10 +272,9 @@ encryptionUI:
   instruction: "Members only"
   buttonText: "Reveal"
   placeholder: "VIP password"
----
+
 ```
 
----
 
 ## Styling Encrypted Content
 
@@ -386,13 +363,13 @@ Override with your own CSS:
 In front matter:
 
 ```markdown
----
+
 title: Styled Protected Content
 encrypted: true
 password: mypass
 encryptionUI:
   containerClass: my-encrypted
----
+
 ```
 
 ### Tailwind CSS Styling
@@ -415,7 +392,6 @@ If using Tailwind:
 }
 ```
 
----
 
 ## Common Patterns
 
@@ -424,23 +400,23 @@ If using Tailwind:
 Encrypt individual posts with different passwords:
 
 ```markdown
----
+
 title: "Advanced Series - Part 1"
 encrypted: true
 password: advanced-series-p1
-layout: blog-post
+-post
 series: Advanced
----
+
 ```
 
 ```markdown
----
+
 title: "Advanced Series - Part 2"
 encrypted: true
 password: advanced-series-p2
-layout: blog-post
+-post
 series: Advanced
----
+
 ```
 
 ### Password Hint
@@ -448,12 +424,12 @@ series: Advanced
 Provide hints without revealing password:
 
 ```markdown
----
+
 title: Mystery Article
 encrypted: true
 password: phoenix
 passwordHint: "This mythical bird rises from ashes"
----
+
 ```
 
 The hint displays in the unlock prompt.
@@ -463,10 +439,9 @@ The hint displays in the unlock prompt.
 Create a landing page with encrypted content:
 
 ```markdown
----
+
 title: Premium Content Hub
 
----
 
 # Premium Articles
 
@@ -478,7 +453,6 @@ title: Premium Content Hub
 
 [Click to unlock premium content]
 
----
 
 *Contact [email] for premium access password*
 ```
@@ -490,16 +464,15 @@ Each article encrypted with member password.
 Protect lesson materials:
 
 ```markdown
----
+
 title: "Lesson 5: Advanced Concepts"
 encrypted: true
 password: course-2024-students
 course: Advanced Course
 lesson: 5
-layout: lesson
----
 
-# {{ title }}
+
+# 
 
 ## Learning Objectives
 
@@ -512,14 +485,13 @@ layout: lesson
 [Protected lesson material]
 ```
 
----
 
 ## Password Security Best Practices
 
 ### Strong Passwords
 
 ```markdown
----
+
 # Good passwords (reasonably unique)
 password: Phoenix2024Rising
 
@@ -527,7 +499,7 @@ password: Phoenix2024Rising
 password: 123456     # Too simple
 password: password   # Too common
 password: a          # Too short
----
+
 ```
 
 ### Password Management
@@ -552,16 +524,15 @@ password: a          # Too short
 ### Example: Rotating Passwords
 
 ```markdown
----
+
 title: Conference Materials
 encrypted: true
 password: conf-oct-2024  # Change November 1st
 expires: "2024-10-31"
 note: "Password changes after conference"
----
+
 ```
 
----
 
 ## Decryption on Client
 
@@ -588,7 +559,6 @@ note: "Password changes after conference"
 - **No cookies** - Password not stored in browser
 - **Temporary** - Password only in memory while session active
 
----
 
 ## Troubleshooting
 
@@ -631,13 +601,11 @@ note: "Password changes after conference"
 2. Check if unrelated plugins are slow
 3. Profile: `npx @11ty/eleventy --profile`
 
----
 
 ## API Reference
 
 For technical details, see [Content Encryption Plugin Documentation](/docs/content-encryption-plugin/)
 
----
 
 ## See Also
 
@@ -647,6 +615,5 @@ For technical details, see [Content Encryption Plugin Documentation](/docs/conte
 - [Advanced Features](/11ty/advanced/) - Power user techniques
 - [Content Encryption Plugin API](/docs/content-encryption-plugin/) - Technical reference
 
----
 
 Protect sensitive content with password encryption. [Explore advanced features](/11ty/advanced/)

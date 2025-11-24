@@ -1,9 +1,3 @@
----
-layout: base.njk
-title: Standard Framework - Unified Plugin
-description: One plugin, all features - typography, CSS framework, Cloudflare Functions, and GitHub Comments
----
-
 # Standard Framework - Unified Plugin
 
 **One plugin to add everything.** No more multiple imports. No more configuration scattered across files.
@@ -100,7 +94,7 @@ export default function (eleventyConfig) {
 ### Main Plugin Options
 
 | Option | Type | Default | Description |
-|--------|------|---------|-------------|
+|--||---|-|
 | `outputDir` | string | `assets/standard` | Where to copy Standard CSS/JS |
 | `copyFiles` | boolean | `true` | Copy from node_modules |
 | `useCDN` | boolean | `false` | Use unpkg CDN instead of local files |
@@ -109,7 +103,7 @@ export default function (eleventyConfig) {
 ### Cloudflare Functions Options
 
 | Option | Type | Default | Description |
-|--------|------|---------|-------------|
+|--||---|-|
 | `cloudflare.enabled` | boolean | `false` | Enable Cloudflare Functions |
 | `cloudflare.outputDir` | string | `functions` | Output directory for functions |
 | `cloudflare.environment` | string | `production` | Environment name |
@@ -117,7 +111,7 @@ export default function (eleventyConfig) {
 ### Comments System Options
 
 | Option | Type | Default | Description |
-|--------|------|---------|-------------|
+|--||---|-|
 | `comments.enabled` | boolean | `false` | Enable GitHub Comments |
 | `comments.outputDir` | string | `functions/api` | Comments handler output |
 | `comments.copyClientLibrary` | boolean | `true` | Copy browser library to assets |
@@ -128,7 +122,7 @@ export default function (eleventyConfig) {
 
 ```html
 <head>
-  {% standardAssets %}
+  
 </head>
 ```
 
@@ -138,7 +132,7 @@ Includes minified CSS and JS in your pages.
 
 ```html
 <script>
-  {% standardLab %}
+  
 </script>
 ```
 
@@ -147,9 +141,9 @@ Includes experimental features.
 ### Use Template Filters
 
 ```html
-{{ content | excerpt }}
-{{ date | dateFormat }}
-{{ images | extractFirstImage }}
+
+
+
 ```
 
 See [[Filters]] for complete list.
@@ -157,8 +151,8 @@ See [[Filters]] for complete list.
 ### Use Shortcodes
 
 ```html
-{% standardAssets %}
-{% standardLab %}
+
+
 ```
 
 ## Using Comments
@@ -216,18 +210,18 @@ In your templates, access configuration data:
 
 ```html
 <!-- Standard Framework -->
-{{ standard.layout.meta }}
+
 
 <!-- Cloudflare -->
 {% if cloudflare %}
-  Environment: {{ cloudflare.environment }}
-{% endif %}
+  Environment: 
+
 
 <!-- Comments -->
 {% if comments %}
-  API: {{ comments.apiEndpoint }}
-  Client: {{ comments.clientLibrary }}
-{% endif %}
+  API: 
+  Client: 
+
 ```
 
 ## Common Configurations
@@ -331,6 +325,5 @@ A: Copy to `functions/` directory - they'll be included automatically.
 Standard Framework **0.10.53**
 One plugin, everything included.
 
----
 
 **That's it!** One `addPlugin` call. Everything you need.

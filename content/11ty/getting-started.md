@@ -1,13 +1,3 @@
----
-title: Getting Started with 11ty Plugin
-
-eleventyNavigation:
-  key: Getting Started
-  parent: 11ty Plugin
-  title: Getting Started
-permalink: /11ty/getting-started/
----
-
 # Getting Started with 11ty Plugin
 
 Complete setup guide for using Standard Framework with Eleventy.
@@ -57,14 +47,14 @@ echo "# Hello World" > content/index.md
 
 Create `_includes/layouts/base.njk`:
 
-```nunjucks
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "My Site" }}</title>
-  {% standardAssets %}
+  <title></title>
+  
 </head>
 <body class="bg-background text-foreground">
   <header class="rhythm-block p-4">
@@ -72,7 +62,7 @@ Create `_includes/layouts/base.njk`:
   </header>
 
   <main class="rhythm-block p-4">
-    {{ content | safe }}
+    
   </main>
 
   <footer class="rhythm-block p-4">
@@ -122,10 +112,8 @@ my-site/
 Create `content/about.md`:
 
 ```markdown
----
-layout: layouts/base.njk
+
 title: About Me
----
 
 # About Me
 
@@ -144,19 +132,15 @@ The Standard Framework provides all the styling automatically.
 Control page behavior with front matter:
 
 ```yaml
----
-layout: layouts/base.njk      # Which layout to use
+
+      # Which layout to use
 title: Page Title             # Page title
 description: Meta description # SEO meta description
 tags:                         # Page tags
   - important
   - featured
-eleventyNavigation:           # Navigation menu
-  key: About
-  parent: Home
-  title: About
-  order: 1
----
+
+
 ```
 
 ## Layouts
@@ -167,25 +151,21 @@ Create multiple layouts for different content types.
 
 Create `_includes/layouts/article.njk`:
 
-```nunjucks
----
-layout: layouts/base.njk
----
-
+```html
 <article class="rhythm-block">
-  <h1>{{ title }}</h1>
-  <p class="text-lg text-foreground/80">{{ description }}</p>
+  <h1></h1>
+  <p class="text-lg text-foreground/80"></p>
 
   <div class="mb-4">
     {% if tags %}
       {% for tag in tags %}
-        <span class="badge">{{ tag }}</span>
-      {% endfor %}
-    {% endif %}
+        <span class="badge"></span>
+      
+    
   </div>
 
   <main class="prose max-w-prose">
-    {{ content | safe }}
+    
   </main>
 </article>
 ```
@@ -194,40 +174,36 @@ layout: layouts/base.njk
 
 Create `_includes/layouts/blog-post.njk`:
 
-```nunjucks
----
-layout: layouts/base.njk
----
-
+```html
 <article class="rhythm-block">
-  <h1>{{ title }}</h1>
+  <h1></h1>
 
   <div class="text-sm text-foreground/60">
-    Published: <time datetime="{{ date | dateFilter }}">
-      {{ date | dateFilter('long') }}
+    Published: <time datetime="">
+      
     </time>
   </div>
 
   <hr class="my-4">
 
   <main class="prose max-w-prose">
-    {{ content | safe }}
+    
   </main>
 
   <hr class="my-6">
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     {% if previousPost %}
-      <a href="{{ previousPost.url }}" class="btn btn-secondary">
-        ← {{ previousPost.data.title }}
+      <a href="" class="btn btn-secondary">
+        ← 
       </a>
-    {% endif %}
+    
 
     {% if nextPost %}
-      <a href="{{ nextPost.url }}" class="btn btn-secondary">
-        {{ nextPost.data.title }} →
+      <a href="" class="btn btn-secondary">
+         →
       </a>
-    {% endif %}
+    
   </div>
 </article>
 ```
@@ -250,15 +226,15 @@ eleventyConfig.addCollection("blog", function (collection) {
 
 Use in template:
 
-```nunjucks
+```html
 <h2>Recent Posts</h2>
 <ul>
   {% for post in collections.blog %}
     <li>
-      <a href="{{ post.url }}">{{ post.data.title }}</a>
-      <time>{{ post.date | dateFilter }}</time>
+      <a href=""></a>
+      <time></time>
     </li>
-  {% endfor %}
+  
 </ul>
 ```
 
@@ -282,9 +258,9 @@ eleventyConfig.addFilter("dateFilter", (date, format = "short") => {
 
 Use in templates:
 
-```nunjucks
-{{ "hello" | uppercase }}           <!-- HELLO -->
-{{ date | dateFilter('long') }}     <!-- January 21, 2025 -->
+```html
+           <!-- HELLO -->
+     <!-- January 21, 2025 -->
 ```
 
 ## Includes
@@ -293,19 +269,19 @@ Reusable template snippets.
 
 Create `_includes/card.njk`:
 
-```nunjucks
+```html
 <div class="card p-4">
-  <h3>{{ title }}</h3>
-  <p>{{ description }}</p>
+  <h3></h3>
+  <p></p>
   {% if link %}
-    <a href="{{ link }}" class="btn btn-primary btn-sm">Learn more</a>
-  {% endif %}
+    <a href="" class="btn btn-primary btn-sm">Learn more</a>
+  
 </div>
 ```
 
 Use in templates:
 
-```nunjucks
+```html
 {% include "card.njk" %}
 {% include "card.njk", title="First", description="First card" %}
 {% include "card.njk", title="Second", description="Second card" %}
@@ -325,13 +301,13 @@ eleventyConfig.addPlugin(EleventyHierarchyPlugin);
 
 Use in layout:
 
-```nunjucks
+```html
 {% for entry in navigation %}
-  <a href="{{ entry.url }}"
-     {% if entry.url == page.url %}class="active"{% endif %}>
-    {{ entry.title }}
+  <a href=""
+     {% if entry.url == page.url %}class="active">
+    
   </a>
-{% endfor %}
+
 ```
 
 ## Passthrough Copy
@@ -468,11 +444,11 @@ return {
 
 ### Styles Not Loading
 
-Ensure `{% standardAssets %}` is in your base layout:
+Ensure `` is in your base layout:
 
-```nunjucks
+```html
 <head>
-  {% standardAssets %}
+  
 </head>
 ```
 
@@ -502,6 +478,5 @@ npm start
 - [Filters](/11ty/filters/) - Transform data
 - [Backlinks](/11ty/backlinks/) - Connect pages
 
----
 
 Ready to build amazing sites? Let's create some content! [Learn Markdown](/11ty/markdown/)

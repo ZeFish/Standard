@@ -1,0 +1,36 @@
+---
+/**
+ * Htmx Component
+ * Provides HTMX enhancement attributes for progressive enhancement
+ * Direct replacement for the 11ty htmx shortcode
+ */
+
+const {
+    target = "body",
+    swap = "innerHTML scroll:window:top",
+    boost = true,
+    ext = "preload",
+    preload = "mouseover",
+} = Astro.props;
+
+// Build HTMX attributes object
+const htmxAttributes = {
+    ...(boost && { "hx-boost": "true" }),
+    ...(ext && { "hx-ext": ext }),
+    ...(preload && { preload }),
+    "hx-target": target,
+    "hx-swap": swap,
+};
+
+// Convert to string format (matches original shortcode output)
+const htmxAttributesString = Object.entries(htmxAttributes)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(" ");
+
+// Export for use in other components
+export { htmxAttributes, htmxAttributesString };
+---
+
+<!-- HTMX Enhancement Attributes -->{
+    /* This component exports attributes for use in other components */
+}

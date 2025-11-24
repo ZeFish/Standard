@@ -1,12 +1,3 @@
----
-title: Cloudflare Functions
-
-eleventyNavigation:
-  key: Cloudflare Functions
-  title: Cloudflare Functions
-permalink: /cloudflare/
----
-
 # Cloudflare Functions Plugin
 
 Integrate serverless Cloudflare Workers/Functions with your 11ty website powered by Standard Framework.
@@ -111,6 +102,5 @@ export default function (eleventyConfig) {
 Cloudflare Functions Plugin **v0.10.52**
 Part of Standard Framework
 
----
 
 Ready to add serverless to your 11ty site? [Get started now](/cloudflare/setup/)

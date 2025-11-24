@@ -1,0 +1,449 @@
+<!DOCTYPE html><html class="rhythm" lang="en" data-theme="default"> <head><meta charset="utf-8"><!-- Standard Framework | https://standard.ffp.co --><title>Standard Framework</title><meta name="description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta name="author" content="Francis Fontaine"><meta name="language" content="en"><meta name="referrer" content="strict-origin-when-cross-origin"><!-- Canonical URL --><link rel="canonical" href="https://standard.ffp.co/cloudflare/comments/COMMENTS-QUICK-START/"><!-- Feed & Sitemap --><link rel="alternate" type="application/atom+xml" title="Standard Framework" href="https://standard.ffp.co/feed.xml"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://standard.ffp.co/sitemap.xml"><!-- Robots Meta --><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><!-- Open Graph --><meta property="og:title" content="Standard Framework"><meta property="og:type" content="article"><meta property="og:locale" content="en"><meta property="og:site_name" content="Standard Framework"><meta property="og:url" content="https://standard.ffp.co/cloudflare/comments/COMMENTS-QUICK-START/"><meta property="og:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta property="og:image" content="https://standard.ffp.co/assets/img/default.png"><meta property="og:image:alt" content="Standard Framework"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Cards --><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://standard.ffp.co/assets/img/default.png"><meta name="twitter:image:alt" content="Standard Framework"><meta name="twitter:site" content="@francisfontaine"><meta name="twitter:creator" content="@francisfontaine"><meta name="twitter:title" content="Standard Framework"><meta name="twitter:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><!-- Schema.org --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Standard Framework","description":"Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.","author":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co/now/"},"publisher":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co","logo":{"@type":"ImageObject","url":"https://standard.ffp.co/francis-fontaine-avatar.png"}},"image":{"@type":"ImageObject","url":"https://standard.ffp.co/assets/img/default.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://standard.ffp.co/cloudflare/comments/COMMENTS-QUICK-START/"}}</script><!-- Favicons --><link rel="apple-touch-icon" sizes="180x180" href="https://standard.ffp.co/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://standard.ffp.co/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://standard.ffp.co/favicons/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://standard.ffp.co/favicons/safari-pinned-tab.svg" color="#000000"><link rel="shortcut icon" href="https://standard.ffp.co/favicons/favicon.ico"><!-- Mobile --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><!-- Windows Tiles --><meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-config" content="https://standard.ffp.co/favicons/browserconfig.xml"><link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css"><!-- ✅ FIX: Load scripts only on client side --><script type="module">
+            import "/assets/js/standard.js";
+            import "/assets/js/standard.lab.js";
+            import "/assets/js/standard.toast.js";
+            import "/assets/js/standard.comment.js";
+        </script><link rel="stylesheet" href="/_astro/_slug_.mJtdUnXU.css"></head> <body> <a href="#main" class="skip-link">Skip to content</a> <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;"> <p> <a href="/" style="text-decoration: none;">Standard Framework</a> </p> <nav class="menu horizontal" aria-label="Navigation"> <ul class="menu"> <li class="menu__item"> <a class="menu__link" href="/docs/"> Docs </a> </li><li class="menu__item"> <a class="menu__link" href="/getting-started/"> Getting Started </a> </li><li class="menu__item"> <a class="menu__link" href="/cheat-sheet/"> Cheat Sheet </a> </li> </ul> </nav> </header> <main id="main" class="prose">  <h1 id="github-comments-system---quick-start">GitHub Comments System - Quick Start</h1>
+<p>Deploy a fully-functional comments system in 10 minutes.</p>
+<h2 id="files-included">Files Included</h2>
+<p><strong>Source Code</strong> (<code>src/cloudflare/</code>):</p>
+<ul>
+<li><code>comments.js</code> — Server-side handler (core logic)</li>
+<li><code>standard.comment.js</code> — Client-side library (rendering)</li>
+<li><code>comments-example.js</code> — Ready-to-deploy function handler</li>
+<li><code>wrangler-comments.toml.template</code> — Cloudflare config template</li>
+<li><code>utils.js</code> — Shared utilities</li>
+</ul>
+<p><strong>Templates</strong> (<code>src/layouts/</code>):</p>
+<ul>
+<li><code>comments.njk</code> — Ready-to-use Nunjucks layout template</li>
+</ul>
+<p><strong>Documentation</strong> (<code>content/cloudflare/comments/</code>):</p>
+<ul>
+<li><code>COMMENTS-GUIDE.md</code> — Full documentation</li>
+<li><code>COMMENTS-QUICK-START.md</code> — This file</li>
+<li><code>COMMENTS-FILES.md</code> — File reference</li>
+<li><code>index.md</code> — Overview</li>
+</ul>
+<h2 id="setup-10-minutes">Setup (10 minutes)</h2>
+<h3 id="step-1-enable-cloudflare-in-standard-plugin-1-min">Step 1: Enable Cloudflare in Standard Plugin (1 min)</h3>
+<p>Update your <code>eleventy.config.js</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">"@zefish/standard"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">cloudflare</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">enabled</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This automatically:</p>
+<ul>
+<li>✅ Enables the comments system (comments require Cloudflare Functions backend)</li>
+<li>✅ Copies comments handler to <code>functions/api/comments.js</code></li>
+<li>✅ Copies client library to <code>assets/standard/standard.comment.js</code></li>
+<li>✅ Generates <code>wrangler.toml</code> from your <code>.env</code> file on build</li>
+</ul>
+<h3 id="step-2-create-env-file-1-min">Step 2: Create .env File (1 min)</h3>
+<p>Create a <code>.env</code> file in your project root:</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token comment"># .env</span>
+<span class="token assign-left variable">PROJECT_NAME</span><span class="token operator">=</span>my-site
+<span class="token assign-left variable">GITHUB_OWNER</span><span class="token operator">=</span>your-github-username
+<span class="token assign-left variable">GITHUB_REPO</span><span class="token operator">=</span>your-repository-name
+<span class="token assign-left variable">GITHUB_COMMENTS_PATH</span><span class="token operator">=</span>data/comments
+<span class="token assign-left variable">GITHUB_TOKEN</span><span class="token operator">=</span>ghp_your_token_here
+<span class="token assign-left variable">DOMAIN</span><span class="token operator">=</span>example.com
+<span class="token assign-left variable">CLOUDFLARE_ZONE_ID</span><span class="token operator">=</span>your-zone-id
+<span class="token assign-left variable">CLOUDFLARE_ACCOUNT_ID</span><span class="token operator">=</span>your-account-id
+<span class="token assign-left variable">MODERATION_EMAIL</span><span class="token operator">=</span>admin@example.com
+</code></pre>
+<p><strong>Add to .gitignore</strong> (to keep secrets safe):</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">".env"</span> <span class="token operator">>></span> .gitignore
+</code></pre>
+<p>The plugin will automatically read this file and generate <code>wrangler.toml</code> during your build!</p>
+<h3 id="step-25-github-setup-optional">Step 2.5: GitHub Setup (Optional)</h3>
+<p>If you haven’t already, create the comments directory in your repo:</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">mkdir</span> data/comments
+<span class="token function">touch</span> data/comments/.gitkeep
+<span class="token function">git</span> <span class="token function">add</span> data/comments/.gitkeep
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"Add comments directory"</span>
+<span class="token function">git</span> push
+</code></pre>
+<p>(GitHub will auto-create it on first comment if you skip this)</p>
+<h3 id="step-3-get-your-cloudflare-credentials-2-min">Step 3: Get Your Cloudflare Credentials (2 min)</h3>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token comment"># Get your Cloudflare account ID</span>
+wrangler <span class="token function">whoami</span>
+
+<span class="token comment"># Or get it from: https://dash.cloudflare.com/profile/api-tokens</span>
+<span class="token comment"># Find your Account ID in the right sidebar</span>
+</code></pre>
+<p>Update your <code>.env</code> file with:</p>
+<ul>
+<li><code>CLOUDFLARE_ACCOUNT_ID</code> - From above</li>
+<li><code>CLOUDFLARE_ZONE_ID</code> - From your domain’s DNS settings (if using custom domain)</li>
+<li><code>DOMAIN</code> - Your actual domain (e.g., example.com)</li>
+</ul>
+<h3 id="step-4-create-github-personal-access-token-1-min">Step 4: Create GitHub Personal Access Token (1 min)</h3>
+<ol>
+<li>Go to <a href="https://github.com/settings/tokens" class="external-link" target="_blank" rel="noopener noreferrer" hx-disable="">https://github.com/settings/tokens</a></li>
+<li>Click “Generate new token” → “Generate new token (classic)”</li>
+<li>Name it: <code>Standard Comments</code></li>
+<li><strong>Scopes:</strong> Check <code>repo</code> (full control of private repositories)</li>
+<li>Click “Generate token”</li>
+<li><strong>Copy the token</strong> and add to your <code>.env</code>:
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token assign-left variable">GITHUB_TOKEN</span><span class="token operator">=</span>ghp_your_token_here
+</code></pre>
+</li>
+</ol>
+<h3 id="step-5-deploy-to-cloudflare-1-min">Step 5: Deploy to Cloudflare (1 min)</h3>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token comment"># Set production secrets</span>
+wrangler secret put GITHUB_TOKEN <span class="token parameter variable">--env</span> production
+wrangler secret put MODERATION_EMAIL <span class="token parameter variable">--env</span> production
+wrangler secret put GITHUB_WEBHOOK_SECRET <span class="token parameter variable">--env</span> production
+
+<span class="token comment"># Deploy</span>
+wrangler publish <span class="token parameter variable">--env</span> production
+</code></pre>
+<p>The <code>wrangler.toml</code> is automatically generated from your <code>.env</code> file!</p>
+<h3 id="step-6-add-comments-to-your-pages-1-min">Step 6: Add Comments to Your Pages (1 min)</h3>
+<p><strong>Option 1: Use Comments Layout (Easiest)</strong></p>
+<p>In your article/blog template:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">
+.njk
+
+# Your Article Content
+</code></pre>
+<p>This automatically includes the full comments section with form and styling. The page ID is auto-generated from your file slug.</p>
+<p><strong>Option 2: Use Comments Layout with Options</strong></p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">
+.njk
+commentApiUrl: /api/comments
+showCommentForm: true
+pollInterval: 30000
+
+</code></pre>
+<p><strong>Option 3: Use standardComment Shortcode</strong></p>
+<p>Include the <code>standardComment</code> shortcode in your custom layout:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">
+.njk
+
+</code></pre>
+<p>The shortcode automatically creates the comments container and form!</p>
+<p>The <code>standardComment</code> shortcode automatically:</p>
+<ul>
+<li>✅ Renders semantic HTML with fieldset, legend, proper labels</li>
+<li>✅ Auto-initializes when “ is in frontmatter</li>
+<li>✅ Loads and displays existing comments (auto-generated page ID from file slug)</li>
+<li>✅ Handles form submission</li>
+<li>✅ Integrates with Standard design tokens</li>
+<li>✅ Includes error handling</li>
+</ul>
+<p>Customize with options:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token comment">&#x3C;!-- Hide reset button --></span>
+{% standardComment true, false %}
+
+<span class="token comment">&#x3C;!-- Hide submit button --></span>
+{% standardComment false, true %}
+</code></pre>
+<p><strong>Option 4: Include as Partial</strong></p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">{% set commentPageId = page.fileSlug %}
+{% include "comments.njk" %}
+</code></pre>
+<p><strong>Option 5: Manual Setup</strong></p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token comment">&#x3C;!-- Add form to your page --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>comments<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>form</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>comment-form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>author<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Name<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Email<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>textarea</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>content<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Comment<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>textarea</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Post<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>form</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&#x3C;!-- Include scripts --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/standard/standard.comment.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> comments <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GitHubComments</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">apiUrl</span><span class="token operator">:</span> <span class="token string">'/api/comments'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">pageId</span><span class="token operator">:</span> <span class="token string">'blog/my-post'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">container</span><span class="token operator">:</span> <span class="token string">'#comments'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">form</span><span class="token operator">:</span> <span class="token string">'#comment-form'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  comments<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> comments<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  comments<span class="token punctuation">.</span><span class="token function">attachFormHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="step-7-test--deploy-2-min">Step 7: Test &#x26; Deploy (2 min)</h3>
+<ol>
+<li>Build and run locally: <code>npm run build &#x26;&#x26; npm start</code></li>
+<li>Submit a test comment on your site</li>
+<li>Check GitHub repo: <code>data/comments/blog/my-post/</code></li>
+<li>Should see a <code>.json</code> file with your comment</li>
+<li>Comment appears on page after refresh</li>
+<li>Deploy: <code>wrangler publish --env production</code></li>
+</ol>
+<h2 id="minimal-example">Minimal Example</h2>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">
+.njk
+
+# Your Article Content Here
+</code></pre>
+<p>That’s it! Just set “ in your frontmatter and use the <code>comments.njk</code> layout. Everything works automatically:</p>
+<ul>
+<li>✅ Semantic form with fieldset, legend, labels</li>
+<li>✅ Comments container</li>
+<li>✅ Auto-initialized comments loading (page ID from file slug)</li>
+<li>✅ Form submission handling</li>
+<li>✅ Error handling</li>
+</ul>
+<p>Or if you prefer to build your own layout:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">
+.njk
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>comments<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+
+</code></pre>
+<p>Just set “ in your frontmatter and the shortcode handles the rest!</p>
+<h2 id="shortcodes-reference">Shortcodes Reference</h2>
+<p>Standard provides a powerful shortcode for comments that handles everything:</p>
+<h3 id="">“</h3>
+<p>Renders a semantic HTML comment form AND automatically initializes the comments system.</p>
+<p><strong>Usage:</strong></p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"></code></pre>
+<p>The shortcode automatically detects “ from your frontmatter and initializes comments. No separate initialization needed!</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>showSubmit</code> (boolean, default: <code>true</code>) - Show submit button</li>
+<li><code>showReset</code> (boolean, default: <code>true</code>) - Show reset button</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token comment">&#x3C;!-- Hide reset button --></span>
+{% standardComment true, false %}
+
+<span class="token comment">&#x3C;!-- Hide submit button --></span>
+{% standardComment false, true %}
+</code></pre>
+<p><strong>Auto-initialization (Frontmatter):</strong>
+The shortcode reads from your frontmatter:</p>
+<ul>
+<li>“ - Enable comments (page ID auto-generated from file slug)</li>
+<li><code>commentApiUrl</code> - API endpoint (default: <code>/api/comments</code>)</li>
+<li><code>pollInterval</code> - Auto-refresh interval in ms</li>
+</ul>
+<p><strong>Features:</strong></p>
+<ul>
+<li>✅ Semantic HTML: <code>&#x3C;fieldset></code>, <code>&#x3C;legend></code>, proper <code>&#x3C;label></code> associations</li>
+<li>✅ Accessible: ARIA labels for required fields</li>
+<li>✅ Design tokens: Uses Standard CSS variables for consistent styling</li>
+<li>✅ Auto-initializes: No separate initialization shortcode needed</li>
+<li>✅ Loads fetches from GitHub</li>
+<li>✅ Handles submission: Form submission is automatic</li>
+<li>✅ Error handling: User-friendly error messages</li>
+<li>✅ Privacy notice: Linked to your privacy and terms pages</li>
+<li>✅ Responsive: Works on mobile and desktop</li>
+</ul>
+<h3 id="-optional">“ (Optional)</h3>
+<p>For advanced use cases where you need manual initialization with custom options.</p>
+<p><strong>Usage:</strong></p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">{% initComments "blog/my-post" %}
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>pageId</code> (string, required) - Unique identifier for the page</li>
+<li><code>apiUrl</code> (string, default: <code>/api/comments</code>) - API endpoint</li>
+<li><code>container</code> (string, default: <code>#comments</code>) - Comments container selector</li>
+<li><code>form</code> (string, default: <code>#comment-form</code>) - Form element selector</li>
+<li><code>pollInterval</code> (number, default: <code>null</code>) - Auto-refresh interval in ms</li>
+</ul>
+<p><strong>Note:</strong> You only need this if you’re NOT using <code>commentForm</code>, or if you need custom container selectors.</p>
+<h2 id="environment-variables">Environment Variables</h2>
+<pre class="language-toml" data-language="toml"><code is:raw="" class="language-toml"><span class="token comment"># Required</span>
+<span class="token key property">GITHUB_TOKEN</span> <span class="token punctuation">=</span> <span class="token string">"ghp_xxxxx..."</span>           <span class="token comment"># Personal access token</span>
+<span class="token key property">GITHUB_OWNER</span> <span class="token punctuation">=</span> <span class="token string">"your-username"</span>           <span class="token comment"># GitHub username or org</span>
+<span class="token key property">GITHUB_REPO</span> <span class="token punctuation">=</span> <span class="token string">"your-repo-name"</span>           <span class="token comment"># Repo name where comments go</span>
+<span class="token key property">GITHUB_COMMENTS_PATH</span> <span class="token punctuation">=</span> <span class="token string">"data/comments"</span>   <span class="token comment"># Path in repo for comments</span>
+
+<span class="token comment"># Optional</span>
+<span class="token key property">MODERATION_EMAIL</span> <span class="token punctuation">=</span> <span class="token string">"you@example.com"</span>     <span class="token comment"># Email for moderation alerts</span>
+<span class="token key property">SPAM_CHECK_ENABLED</span> <span class="token punctuation">=</span> <span class="token string">"true"</span>              <span class="token comment"># Enable spam detection (default: true)</span>
+</code></pre>
+<h2 id="key-features">Key Features</h2>
+<p>✅ <strong>Comments as Files</strong> — Each comment = JSON file in GitHub
+✅ <strong>Spam Detection</strong> — Automatic flagging of suspicious comments
+✅ <strong>Moderation</strong> — Email alerts for flagged comments
+✅ <strong>Threading</strong> — Nested/reply comments with visual hierarchy
+✅ <strong>Markdown</strong> — Support for <strong>bold</strong>, <em>italic</em>, <code>code</code>, <a href="url" preload="" hx-boost="true">links</a>
+✅ <strong>Responsive</strong> — Works on mobile and desktop
+✅ <strong>Caching</strong> — Efficient comment storage and retrieval
+✅ <strong>CORS</strong> — Ready for cross-domain requests</p>
+<h2 id="file-structure-after-setup">File Structure After Setup</h2>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">your-repo/
+├── data/
+│   └── comments/
+│       └── blog/
+│           └── my-post/
+│               ├── 1729609945000-a7x9k2m1.json
+│               ├── 1729609967000-b4z2k9p3.json
+│               └── 1729610005000-c8m5l1q7.json
+├── functions/
+│   └── api/
+│       └── comments.js
+└── wrangler.toml
+</code></pre>
+<h2 id="comment-json-format">Comment JSON Format</h2>
+<pre class="language-json" data-language="json"><code is:raw="" class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"1729609945000-a7x9k2m1"</span><span class="token punctuation">,</span>
+  <span class="token property">"pageId"</span><span class="token operator">:</span> <span class="token string">"blog/my-post"</span><span class="token punctuation">,</span>
+  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token string">"John Doe"</span><span class="token punctuation">,</span>
+  <span class="token property">"email"</span><span class="token operator">:</span> <span class="token string">"john@example.com"</span><span class="token punctuation">,</span>
+  <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Great post!"</span><span class="token punctuation">,</span>
+  <span class="token property">"parentId"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">"createdAt"</span><span class="token operator">:</span> <span class="token string">"2024-10-22T15:32:25.000Z"</span><span class="token punctuation">,</span>
+  <span class="token property">"approved"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">"spam"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">"spamReasons"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"spamConfidence"</span><span class="token operator">:</span> <span class="token number">0.1</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="common-issues">Common Issues</h2>
+<h3 id="github-401-unauthorized">GitHub 401 Unauthorized</h3>
+<ul>
+<li>Token expired or incorrect</li>
+<li>Token doesn’t have <code>repo</code> scope</li>
+<li><strong>Fix</strong>: Generate new token with proper scope</li>
+</ul>
+<h3 id="github-404-not-found">GitHub 404 Not Found</h3>
+<ul>
+<li><code>GITHUB_OWNER</code> or <code>GITHUB_REPO</code> incorrect</li>
+<li><code>data/comments</code> directory doesn’t exist</li>
+<li><strong>Fix</strong>: Verify settings and create directory</li>
+</ul>
+<h3 id="comments-not-appearing">Comments not appearing</h3>
+<ul>
+<li>Check function logs: <code>wrangler tail --env production</code></li>
+<li>Verify CORS headers in response</li>
+<li>Check browser console for errors</li>
+<li><strong>Fix</strong>: Review logs and test API endpoint directly</li>
+</ul>
+<h3 id="spam-detection-too-aggressive">Spam detection too aggressive</h3>
+<ul>
+<li>Adjust <code>spamKeywords</code> in <code>comments.js</code></li>
+<li>Lower spam confidence threshold</li>
+<li>Disable spam check: <code>SPAM_CHECK_ENABLED = "false"</code></li>
+</ul>
+<h2 id="api-endpoints">API Endpoints</h2>
+<h3 id="post-apicomments">POST /api/comments</h3>
+<p>Submit a comment</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST https://your-domain/api/comments <span class="token punctuation">\</span>
+  <span class="token parameter variable">-H</span> <span class="token string">"Content-Type: application/json"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-d</span> <span class="token string">'{
+    "pageId": "blog/my-post",
+    "author": "John",
+    "email": "john@example.com",
+    "content": "Great post!",
+    "parentId": null
+  }'</span>
+</code></pre>
+<h3 id="get-apicommentspageid">GET /api/comments?pageId=…</h3>
+<p>Fetch comments for a page</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">curl</span> https://your-domain/api/comments?pageId<span class="token operator">=</span>blog/my-post
+</code></pre>
+<h2 id="moderation">Moderation</h2>
+<ol>
+<li><strong>Monitor</strong>: Check email for moderation alerts</li>
+<li><strong>Review</strong>: Go to GitHub repo, find comment JSON file</li>
+<li><strong>Approve</strong>:
+<ul>
+<li>Edit JSON file</li>
+<li>Change <code>"approved": false</code> to <code>"approved": true</code></li>
+<li>Save commit</li>
+</ul>
+</li>
+<li><strong>Delete</strong>:
+<ul>
+<li>Delete JSON file</li>
+<li>Commit deletion</li>
+</ul>
+</li>
+</ol>
+<h2 id="advanced-features">Advanced Features</h2>
+<h3 id="enable-real-time-updates">Enable Real-time Updates</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">const</span> comments <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GitHubComments</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">pollInterval</span><span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span> <span class="token comment">// Check every 30 seconds</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+comments<span class="token punctuation">.</span><span class="token function">startPolling</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="custom-spam-keywords">Custom Spam Keywords</h3>
+<p>Edit <code>detectSpam()</code> in <code>comments.js</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">const</span> spamKeywords <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token string">"viagra"</span><span class="token punctuation">,</span> <span class="token string">"casino"</span><span class="token punctuation">,</span> <span class="token string">"custom-word"</span><span class="token punctuation">,</span> <span class="token comment">// Add yours</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="rate-limiting">Rate Limiting</h3>
+<p>Add Cloudflare rate limiting to <code>wrangler.toml</code>:</p>
+<pre class="language-toml" data-language="toml"><code is:raw="" class="language-toml"><span class="token punctuation">[</span><span class="token table class-name">env.production</span><span class="token punctuation">]</span>
+<span class="token key property">routes</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span> <span class="token key property">pattern</span> <span class="token punctuation">=</span> <span class="token string">"example.com/api/comments"</span><span class="token punctuation">,</span> <span class="token key property">zone_name</span> <span class="token punctuation">=</span> <span class="token string">"example.com"</span><span class="token punctuation">,</span> <span class="token key property">custom_domain</span> <span class="token punctuation">=</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<h3 id="email-notifications">Email Notifications</h3>
+<p>Integrate SendGrid or Mailgun in <code>sendModerationEmail()</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">sendModerationEmail</span><span class="token punctuation">(</span><span class="token parameter">comment<span class="token punctuation">,</span> spamDetection<span class="token punctuation">,</span> env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"https://api.sendgrid.com/v3/mail/send"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ... SendGrid config</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="full-documentation">Full Documentation</h2>
+<p>For complete docs, examples, and advanced features:
+→ See <code>COMMENTS-GUIDE.md</code></p>
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li>✅ Deploy comments system</li>
+<li>✅ Test comment submission</li>
+<li>⭐ Add to multiple pages</li>
+<li>📧 Configure moderation emails</li>
+<li>🔧 Customize spam detection</li>
+<li>🎨 Style comments section</li>
+</ol>
+<h2 id="support">Support</h2>
+<ul>
+<li>GitHub Issues: Report bugs</li>
+<li>Pull Requests: Contribute improvements</li>
+<li>Discussions: Ask questions</li>
+</ul>
+<h2 id="files-reference">Files Reference</h2>
+<p>| File | Purpose |
+||—|
+| <code>comments.js</code> | Server handler, validation, GitHub API |
+| <code>standard.comment.js</code> | Browser library, rendering, form |
+| <code>comments-example.js</code> | Ready-to-deploy endpoint |
+| <code>comments-template.html</code> | HTML + CSS template |
+| <code>wrangler-comments.toml.template</code> | Cloudflare config |
+| <code>COMMENTS-GUIDE.md</code> | Complete documentation |
+| <code>COMMENTS-QUICK-START.md</code> | This file |</p>
+<p>Happy commenting! 🎉</p>  <article class="comments-system"> <div id="comments"></div> <button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">
+Write a Comment
+</button> <div id="comment-form-wrapper" style="display: none;"> <form id="comment-form" method="post" action="/api/comments" novalidate> <fieldset> <legend>Leave a Comment</legend> <label for="author">Your Name <span aria-label="required">*</span></label> <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required maxlength="100"> <label for="email">Email Address <span aria-label="required">*</span></label> <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required> <label for="content">Comment <span aria-label="required">*</span></label> <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required minlength="3" maxlength="10000" rows="6"></textarea> <!-- Hidden fields --> <input type="hidden" id="pageId" name="pageId" value="cloudflare_comments_COMMENTS-QUICK-START"> <input type="hidden" id="parentId" name="parentId" value=""> <!-- Status indicator --> <div id="form-status" role="status" aria-live="polite"></div> <!-- Submit buttons --> <div class="form-actions"> <button type="submit" class="button">Post Comment</button>   </div> </fieldset> </form> </div> </article> <script defer>(function(){const initOptions = {"apiUrl":"/api/comments","pageId":"cloudflare_comments_COMMENTS-QUICK-START","container":"#comments","form":"#comment-form","pollInterval":null};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+})();</script> </main> <hr> <footer class="smaller font-interface"> <p>
+© 2025 Francis Fontaine ·
+<a href="/">Standard Framework</a> ·
+<a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> </p> </footer> </body></html>

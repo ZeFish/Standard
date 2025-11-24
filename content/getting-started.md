@@ -1,20 +1,11 @@
----
-layout: base.njk
-title: Getting Started
-description: Quick start guide for Standard Framework - from setup to your first website
-permalink: /getting-started/
-comments: true
----
-
 # Getting Started
 
 Welcome! Choose your path: either use Standard Framework only with CSS CDN in any project, or use it as a complete 11ty plugin for long form sites.
 
 - **Typography, grid, colors, spacing, and utilities** - [CSS Framework Overview](/css/)
-- **[11ty Plugin Documentation](/11ty/)** 
+- **[11ty Plugin Documentation](/11ty/)**
 - **[Cheat Sheet](/cheat-sheet/)** - Quick reference for common patterns
 
----
 
 ## Choose Your Path
 
@@ -80,9 +71,8 @@ Your website is live with:
 - Professional styling
 - Zero configuration
 
-Congrats for your first website! 
+Congrats for your first website!
 
----
 
 ## Project Structure
 
@@ -114,7 +104,6 @@ my-website/
 └── _site/              # Built output (auto-generated)
 ```
 
----
 
 ## Utilities
 
@@ -130,7 +119,6 @@ See the complete [Utilities Reference](/css/utilities/) for:
 
 **Quick tip**: All utilities follow the pattern `[property]-[side]-[size]` making them easy to guess.
 
----
 
 ## Next Steps
 
@@ -154,14 +142,11 @@ See the complete [Utilities Reference](/css/utilities/) for:
 - **[Colors](/css/colors/)** — Semantic color system
 - **[Layout Systems](/css/grid/)** — Grid and spacing
 
----
 
 - **[Utilities Cheat Sheet](/cheat-sheet/)** — Quick reference card
 - **[Full API Reference](/docs/)** — Auto-generated documentation
 - **[Examples](/examples/)** — Code examples
 - **[GitHub Issues](https://github.com/zefish/standard)** — Report bugs
-
----
 
 
 Remember: **Stop configuring. Start creating.**

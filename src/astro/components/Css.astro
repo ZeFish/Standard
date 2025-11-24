@@ -1,0 +1,14 @@
+---
+/**
+ * Css Component
+ * Includes only Standard Framework CSS (no JavaScript)
+ */
+import config from "virtual:standard/config";
+
+const {
+  outputDir = config.standard?.outputDir || "assets/standard"
+} = Astro.props;
+---
+
+<!-- Standard Framework CSS only -->
+<link rel="stylesheet" href={`/${outputDir}/standard.min.css`}>

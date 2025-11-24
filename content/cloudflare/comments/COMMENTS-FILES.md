@@ -59,7 +59,6 @@ content/cloudflare/comments/
 **Lines**: ~400 (well-documented)
 **Dependencies**: Built-in fetch, no npm packages
 
----
 
 #### standard.comment.js (9.5 KB)
 **Purpose**: Browser library for rendering and form handling
@@ -91,7 +90,6 @@ content/cloudflare/comments/
 **Lines**: ~350
 **Dependencies**: None (vanilla JavaScript)
 
----
 
 #### comments-example.js (2.7 KB)
 **Purpose**: Ready-to-deploy Cloudflare Workers function
@@ -114,7 +112,6 @@ wrangler publish --env production
 **Lines**: ~60
 **Dependencies**: `comments.js`, `utils.js`
 
----
 
 ### Configuration
 
@@ -137,7 +134,6 @@ cp wrangler-comments.toml.template wrangler.toml
 wrangler secret put GITHUB_TOKEN --env production
 ```
 
----
 
 ### Templates & Examples
 
@@ -162,7 +158,6 @@ wrangler secret put GITHUB_TOKEN --env production
 **How to Use**:
 Copy form HTML into your article template, include CSS, and add JavaScript initialization.
 
----
 
 ### Documentation
 
@@ -182,7 +177,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 
 **Best For**: First-time setup, quick reference
 
----
 
 #### COMMENTS-GUIDE.md (12 KB)
 **Complete documentation** for the comment system.
@@ -202,7 +196,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 
 **Best For**: Deep understanding, advanced features, troubleshooting
 
----
 
 #### COMMENTS-FILES.md (this file)
 **File reference** and quick directory.
@@ -214,7 +207,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 - How to use each file
 - Which file to read first
 
----
 
 ### Supporting Files (Already Exist)
 
@@ -232,7 +224,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 
 **Used By**: comments-example.js, other endpoints
 
----
 
 #### example.js (1.5 KB)
 **Example Cloudflare function** showing utilities.
@@ -241,7 +232,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 
 **See Also**: comments-example.js for similar pattern
 
----
 
 #### README.md (5 KB)
 **General Cloudflare documentation** for Standard Framework.
@@ -253,7 +243,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 - Deployment
 - Environment setup
 
----
 
 #### USAGE.md (6 KB)
 **General usage patterns** for Cloudflare Functions.
@@ -265,7 +254,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 - Debugging
 - Performance tips
 
----
 
 #### SUMMARY.md (5 KB)
 **Overview of the Cloudflare integration** with Standard Framework.
@@ -276,7 +264,6 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 - Setup checklist
 - Next steps
 
----
 
 #### QUICK-REF.md (4.5 KB)
 **Quick reference** for common Cloudflare tasks.
@@ -287,12 +274,11 @@ Copy form HTML into your article template, include CSS, and add JavaScript initi
 - Troubleshooting
 - FAQ
 
----
 
 ## 📊 File Statistics
 
 | File | Size | Lines | Purpose |
-|------|------|-------|---------|
+|||-|---|
 | comments.js | 12 KB | 400 | Server handler |
 | standard.comment.js | 9.5 KB | 350 | Browser library |
 | comments-template.html | 9.7 KB | 400 | HTML template |
@@ -410,7 +396,6 @@ A: Yes! Used in production sites. All files are fully documented and tested.
 **Q: What's the cost?**
 A: Free tier covers most sites. Cloudflare Workers: 100K req/day free
 
----
 
 **Last Updated**: October 22, 2024
 **Version**: 0.10.53

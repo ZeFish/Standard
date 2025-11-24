@@ -1,18 +1,7 @@
----
-title: Quick Start - Build Your First Website
-
-eleventyNavigation:
-  key: Quick Start
-  parent: 11ty Plugin
-  title: Quick Start
-permalink: /11ty/quick-start/
----
-
 # Build Your First Website in 5 Minutes
 
 **Stop configuring. Start creating.** Standard Framework handles all the boring stuff so you can focus on content.
 
----
 
 ## The Problem with 11ty
 
@@ -31,7 +20,6 @@ Every time you start a new 11ty site, you spend hours on:
 
 Then you finally write content. **Not ideal.**
 
----
 
 ## The Standard Way
 
@@ -76,18 +64,18 @@ export default function (eleventyConfig) {
 
 Create `_includes/layouts/base.njk`:
 
-```nunjucks
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "My Website" }}</title>
-  {% standardAssets %}
+  <title></title>
+  
 </head>
 <body class="bg-background text-foreground">
   <header class="rhythm-block p-4">
-    <h1>{{ site.name }}</h1>
+    <h1></h1>
     <nav>
       <a href="/">Home</a>
       <a href="/about/">About</a>
@@ -96,11 +84,11 @@ Create `_includes/layouts/base.njk`:
   </header>
 
   <main class="max-w-prose mx-auto px-4 rhythm-block">
-    {{ content | safe }}
+    
   </main>
 
   <footer class="rhythm-block p-4 border-t">
-    <p>&copy; 2024 {{ site.name }}</p>
+    <p>&copy; 2024 </p>
   </footer>
 </body>
 </html>
@@ -113,10 +101,8 @@ Create `_includes/layouts/base.njk`:
 Create `content/index.md`:
 
 ```markdown
----
-layout: layouts/base.njk
+
 title: Home
----
 
 # Welcome to My Website
 
@@ -130,10 +116,8 @@ No CSS to write. No classes to memorize. Just markdown.
 Create `content/about.md`:
 
 ```markdown
----
-layout: layouts/base.njk
+
 title: About Me
----
 
 # About Me
 
@@ -152,7 +136,6 @@ Visit `http://localhost:8080`
 
 **Your website is live. With styling. With dark mode. With responsive layout. No JavaScript needed.**
 
----
 
 ## That's It
 
@@ -166,7 +149,6 @@ Seriously. You now have:
 ✅ **Fast build** - Completes in seconds
 ✅ **Zero configuration** - It just works
 
----
 
 ## Now Add Your Features
 
@@ -181,18 +163,16 @@ mkdir content/blog
 Create `content/blog/post-1.md`:
 
 ```markdown
----
-layout: layouts/base.njk
+
 title: My First Post
 date: 2024-10-21
 tags:
   - thoughts
   - web
----
 
-# {{ title }}
+# 
 
-<time>{{ date | dateFilter('long') }}</time>
+<time></time>
 
 Your blog post content here.
 ```
@@ -210,12 +190,10 @@ Automatic backlinks appear on those pages.
 ### Protect Premium Content
 
 ```markdown
----
-layout: layouts/base.njk
+
 title: Premium Article
 encrypted: true
 password: premium-access
----
 
 # Premium Content
 
@@ -238,7 +216,6 @@ And passthrough copy it in `eleventy.config.js`:
 eleventyConfig.addPassthroughCopy("src/custom.css");
 ```
 
----
 
 ## Your Project Structure
 
@@ -261,7 +238,6 @@ my-website/
 
 **That's the entire structure. Nothing else needed.**
 
----
 
 ## Common Questions
 
@@ -282,13 +258,6 @@ Override CSS variables in a custom style:
 Add `eleventyNavigation` to front matter:
 
 ```markdown
----
-layout: layouts/base.njk
-eleventyNavigation:
-  key: About
-  title: About
-  order: 2
----
 ```
 
 11ty handles the rest.
@@ -335,7 +304,6 @@ Upload the `_site` folder to:
 - **Vercel** - Connect repo, it auto-deploys
 - **Any web server** - FTP the `_site` folder
 
----
 
 ## Common Tasks
 
@@ -343,16 +311,12 @@ Upload the `_site` folder to:
 
 For blog posts, create `_includes/layouts/blog-post.njk`:
 
-```nunjucks
----
-layout: layouts/base.njk
----
-
+```html
 <article class="rhythm-block">
-  <h1>{{ title }}</h1>
-  <time class="text-sm text-foreground/60">{{ date | dateFilter('long') }}</time>
+  <h1></h1>
+  <time class="text-sm text-foreground/60"></time>
 
-  {{ content | safe }}
+  
 
   <!-- Backlinks appear here -->
   {% if backlinks %}
@@ -360,29 +324,29 @@ layout: layouts/base.njk
       <h3>Linked from</h3>
       <ul class="list-none">
         {% for link in backlinks %}
-          <li><a href="{{ link.url }}">{{ link.data.title }}</a></li>
-        {% endfor %}
+          <li><a href=""></a></li>
+        
       </ul>
     </aside>
-  {% endif %}
+  
 </article>
 ```
 
 Use it:
 
 ```markdown
----
-layout: layouts/blog-post.njk
+
+/blog-post.njk
 title: My Post
 date: 2024-10-21
----
+
 ```
 
 ### Show Recent Posts
 
 In `_includes/recent-posts.njk`:
 
-```nunjucks
+```html
 {% set posts = collections.all | reverse %}
 
 <section>
@@ -390,17 +354,17 @@ In `_includes/recent-posts.njk`:
   <ul>
     {% for post in posts | head(5) %}
       <li>
-        <a href="{{ post.url }}">{{ post.data.title }}</a>
-        <time>{{ post.date | dateFilter }}</time>
+        <a href=""></a>
+        <time></time>
       </li>
-    {% endfor %}
+    
   </ul>
 </section>
 ```
 
 Use in any template:
 
-```nunjucks
+```html
 {% include "recent-posts.njk" %}
 ```
 
@@ -423,7 +387,6 @@ def greet(name):
 
 Automatically highlighted.
 
----
 
 ## What You Get (Seriously)
 
@@ -442,7 +405,6 @@ By installing Standard, you get:
 
 All with **zero additional configuration**.
 
----
 
 ## The Philosophy
 
@@ -461,7 +423,6 @@ No more:
 
 **Just write content.**
 
----
 
 ## Next Steps
 
@@ -486,7 +447,6 @@ Create a folder. Run npm install. Copy the config and layout. Write markdown.
 
 **Your website is ready.**
 
----
 
 ## The Big Picture
 
@@ -496,7 +456,6 @@ The answer: Copy-paste config, write content, done.
 
 **Everything else is handled.**
 
----
 
 Ready? Start here:
 

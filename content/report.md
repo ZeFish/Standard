@@ -1,17 +1,12 @@
----
-permalink: "/report/"
----
-
 # SEO Analysis Report
 
 **Generated:** 10/30/2025, 5:05:50 PM
 
----
 
 ## 📊 Overall Summary
 
 | Metric | Value |
-|--------|-------|
+|--|-|
 | Files Analyzed | 141 |
 | Total Checks | 5499 |
 | ✅ Passed | 4006 |
@@ -21,7 +16,6 @@ permalink: "/report/"
 
 **Status:** ⚠️ Needs Improvement
 
----
 
 ## 📄 Detailed Results
 
@@ -111,7 +105,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 2. markdown/index.html
 
@@ -196,7 +189,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 3. example/index.html
 
@@ -275,7 +267,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 4. css/index.html
 
@@ -359,7 +350,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 5. compo/index.html
 
@@ -443,7 +433,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 6. cloudflare/index.html
 
@@ -530,7 +519,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 7. claude/index.html
 
@@ -614,7 +602,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 8. cheat-sheet/index.html
 
@@ -704,7 +691,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 9. 11ty/index.html
 
@@ -788,7 +774,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 10. index-unified-plugin/index.html
 
@@ -872,7 +857,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 11. template/simple/index.html
 
@@ -984,7 +968,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 12. getting-started/index.html
 
@@ -1068,7 +1051,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 13. docs/index.html
 
@@ -1155,7 +1137,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 14. example/zed_doc/index.html
 
@@ -1235,7 +1216,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 15. example/empty/index.html
 
@@ -1321,7 +1301,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 16. css/utilities/index.html
 
@@ -1405,7 +1384,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 17. css/typography/index.html
 
@@ -1489,7 +1467,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 18. css/spacing/index.html
 
@@ -1573,7 +1550,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 19. css/prose/index.html
 
@@ -1662,7 +1638,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 20. css/grid/index.html
 
@@ -1746,7 +1721,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 21. css/colors/index.html
 
@@ -1830,7 +1804,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 22. cloudflare/setup/index.html
 
@@ -1919,7 +1892,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 23. cloudflare/reference/index.html
 
@@ -2009,7 +1981,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 24. cloudflare/patterns/index.html
 
@@ -2093,7 +2064,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 25. cloudflare/examples/index.html
 
@@ -2177,7 +2147,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 26. cloudflare/deployment/index.html
 
@@ -2261,7 +2230,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 27. cloudflare/comments/index.html
 
@@ -2345,7 +2313,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 28. 11ty/quick-start/index.html
 
@@ -2429,7 +2396,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 29. 11ty/getting-started/index.html
 
@@ -2513,7 +2479,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 30. 11ty/encryption/index.html
 
@@ -2597,7 +2562,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 31. 11ty/backlinks/index.html
 
@@ -2681,7 +2645,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 32. 11ty/markdown/index.html
 
@@ -2765,7 +2728,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 33. 11ty/advanced/index.html
 
@@ -2849,7 +2811,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 34. 11ty/filters/index.html
 
@@ -2933,7 +2894,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 35. docs/warning-state/index.html
 
@@ -3023,7 +2983,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 36. docs/vertical-rhythm-system/index.html
 
@@ -3113,7 +3072,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 37. docs/utility-classes/index.html
 
@@ -3206,7 +3164,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 38. docs/utilities/index.html
 
@@ -3293,7 +3250,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 39. docs/typography-system/index.html
 
@@ -3383,7 +3339,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 40. docs/tabs-variant-boxed-style/index.html
 
@@ -3473,7 +3428,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 41. docs/typography/index.html
 
@@ -3563,7 +3517,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 42. docs/tabs-list/index.html
 
@@ -3653,7 +3606,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 43. docs/tabs-component/index.html
 
@@ -3743,7 +3695,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 44. docs/table-wrapper-transform/index.html
 
@@ -3833,7 +3784,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 45. docs/table-wrapper-with-sticky-header/index.html
 
@@ -3923,7 +3873,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 46. docs/table-wrapper-compact-variant/index.html
 
@@ -4013,7 +3962,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 47. docs/table-wrapper/index.html
 
@@ -4103,7 +4051,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 48. docs/syntax-pre-processor/index.html
 
@@ -4196,7 +4143,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 49. docs/tab-button/index.html
 
@@ -4286,7 +4232,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 50. docs/tab-panel/index.html
 
@@ -4376,7 +4321,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 51. docs/standard-framework-11ty-plugin/index.html
 
@@ -4466,7 +4410,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 52. docs/success-state/index.html
 
@@ -4556,7 +4499,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 53. docs/skip-link/index.html
 
@@ -4646,7 +4588,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 54. docs/simplified-contact-api-endpoint/index.html
 
@@ -4739,7 +4680,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 55. docs/simplified-comments-api-endpoint/index.html
 
@@ -4829,7 +4769,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 56. docs/rhythm-application-mixin/index.html
 
@@ -4919,7 +4858,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 57. docs/rhythm-block-mixin/index.html
 
@@ -5009,7 +4947,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 58. docs/scss-variables-mixins/index.html
 
@@ -5102,7 +5039,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 59. docs/responsive-display-utilities/index.html
 
@@ -5192,7 +5128,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 60. docs/required-field-indicator/index.html
 
@@ -5282,7 +5217,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 61. docs/prose-layout-system/index.html
 
@@ -5372,7 +5306,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 62. docs/pagination-previousnext-buttons/index.html
 
@@ -5462,7 +5395,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 63. docs/pagination-summary-text/index.html
 
@@ -5552,7 +5484,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 64. docs/pagination-ellipsis/index.html
 
@@ -5642,7 +5573,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 65. docs/pagination-component/index.html
 
@@ -5732,7 +5662,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 66. docs/pagination-current-page/index.html
 
@@ -5822,7 +5751,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 67. docs/pagination-compact-variant/index.html
 
@@ -5912,7 +5840,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 68. docs/open-router-ai-integration/index.html
 
@@ -6002,7 +5929,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 69. docs/multi-column-flow-utilities/index.html
 
@@ -6092,7 +6018,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 70. docs/modaldialog-component/index.html
 
@@ -6182,7 +6107,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 71. docs/modal-size-variants/index.html
 
@@ -6272,7 +6196,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 72. docs/modal-header/index.html
 
@@ -6362,7 +6285,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 73. docs/modal-footer/index.html
 
@@ -6452,7 +6374,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 74. docs/skip-links-container/index.html
 
@@ -6542,7 +6463,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 75. docs/navigation-menu-system/index.html
 
@@ -6632,7 +6552,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 76. docs/modal-close-button/index.html
 
@@ -6722,7 +6641,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 77. docs/modal-body/index.html
 
@@ -6812,7 +6730,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 78. docs/markdown-styling/index.html
 
@@ -6902,7 +6819,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 79. docs/modal-backdrop/index.html
 
@@ -6992,7 +6908,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 80. docs/logger-utility/index.html
 
@@ -7085,7 +7000,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 81. docs/layout/index.html
 
@@ -7180,7 +7094,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 82. docs/markdown-plugin-with-fine-art-typography/index.html
 
@@ -7272,7 +7185,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 83. docs/image-system/index.html
 
@@ -7365,7 +7277,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 84. docs/html-elements/index.html
 
@@ -7455,7 +7366,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 85. docs/image-optimization-cdn-transform/index.html
 
@@ -7545,7 +7455,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 86. docs/highlight-syntax-conversion/index.html
 
@@ -7632,7 +7541,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 87. docs/grid-system/index.html
 
@@ -7722,7 +7630,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 88. docs/form-validation-states/index.html
 
@@ -7812,7 +7719,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 89. docs/foundation/index.html
 
@@ -7902,7 +7808,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 90. docs/git-hub-comments-client/index.html
 
@@ -7992,7 +7897,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 91. docs/field-helper-text/index.html
 
@@ -8082,7 +7986,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 92. docs/error-state/index.html
 
@@ -8172,7 +8075,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 93. docs/development/index.html
 
@@ -8262,7 +8164,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 94. docs/eleventy-shortcode-plugin/index.html
 
@@ -8352,7 +8253,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 95. docs/design-tokens/index.html
 
@@ -8445,7 +8345,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 96. docs/eleventy-filter-plugin/index.html
 
@@ -8535,7 +8434,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 97. docs/debug-system/index.html
 
@@ -8625,7 +8523,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 98. docs/date-format-normalization/index.html
 
@@ -8712,7 +8609,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 99. docs/content-encryption-plugin/index.html
 
@@ -8802,7 +8698,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 100. docs/components/index.html
 
@@ -8892,7 +8787,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 101. docs/comment-removal/index.html
 
@@ -8985,7 +8879,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 102. docs/comment-callouts-removal/index.html
 
@@ -9072,7 +8965,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 103. docs/colors/index.html
 
@@ -9167,7 +9059,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 104. docs/color-system/index.html
 
@@ -9257,7 +9148,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 105. docs/code-block-escaping/index.html
 
@@ -9341,7 +9231,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 106. docs/cloudflare-functions-plugin/index.html
 
@@ -9434,7 +9323,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 107. docs/clickable-card-variant/index.html
 
@@ -9527,7 +9415,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 108. docs/cloudflare-functions/index.html
 
@@ -9617,7 +9504,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 109. docs/card-footer/index.html
 
@@ -9710,7 +9596,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 110. docs/card-header/index.html
 
@@ -9803,7 +9688,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 111. docs/card-component/index.html
 
@@ -9893,7 +9777,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 112. docs/card-body/index.html
 
@@ -9986,7 +9869,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 113. docs/breadcrumb-navigation/index.html
 
@@ -10076,7 +9958,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 114. docs/breadcrumb-variants/index.html
 
@@ -10166,7 +10047,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 115. docs/alert-variants/index.html
 
@@ -10259,7 +10139,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 116. docs/backlinks-plugin/index.html
 
@@ -10349,7 +10228,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 117. docs/alert-component/index.html
 
@@ -10439,7 +10317,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 118. docs/alert-action-links/index.html
 
@@ -10529,7 +10406,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 119. docs/ai-usage-tracker/index.html
 
@@ -10619,7 +10495,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 120. docs/ai-translate-filter/index.html
 
@@ -10709,7 +10584,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 121. docs/ai-summarize-filter/index.html
 
@@ -10799,7 +10673,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 122. docs/ai-shortcodes/index.html
 
@@ -10889,7 +10762,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 123. docs/ai-search-shortcode/index.html
 
@@ -10979,7 +10851,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 124. docs/ai-search-function/index.html
 
@@ -11069,7 +10940,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 125. docs/ai-keywords-filter/index.html
 
@@ -11159,7 +11029,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 126. docs/ai-generate-shortcode/index.html
 
@@ -11249,7 +11118,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 127. docs/ai-filters/index.html
 
@@ -11339,7 +11207,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 128. docs/ai-enhance-function/index.html
 
@@ -11429,7 +11296,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 129. docs/ai-enhance-filter/index.html
 
@@ -11519,7 +11385,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 130. docs/ai-chat-shortcode/index.html
 
@@ -11609,7 +11474,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 131. docs/accordion-trigger/index.html
 
@@ -11699,7 +11563,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 132. docs/accordion-group/index.html
 
@@ -11789,7 +11652,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 133. docs/accordion-open-state/index.html
 
@@ -11879,7 +11741,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 134. docs/accordion-component/index.html
 
@@ -11969,7 +11830,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 135. docs/accordion-content/index.html
 
@@ -12059,7 +11919,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 136. docs/accordion-compact-variant/index.html
 
@@ -12149,7 +12008,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 137. docs/11ty-plugins/index.html
 
@@ -12236,7 +12094,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 138. cloudflare/comments/COMMENTS-QUICK-START/index.html
 
@@ -12317,7 +12174,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 139. cloudflare/comments/usage-patterns/index.html
 
@@ -12401,7 +12257,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 140. cloudflare/comments/COMMENTS-FILES/index.html
 
@@ -12482,7 +12337,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ### 141. cloudflare/comments/COMMENTS-GUIDE/index.html
 
@@ -12563,7 +12417,6 @@ permalink: "/report/"
 
 </details>
 
----
 
 ## 💡 General Recommendations
 
@@ -12585,6 +12438,5 @@ permalink: "/report/"
 - Maintain a sitemap.xml and robots.txt file
 - Use HTTPS and ensure canonical URLs are set
 
----
 
 *Report generated by SEO Analyzer v1.0*

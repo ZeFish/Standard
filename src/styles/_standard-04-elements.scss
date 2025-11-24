@@ -29,11 +29,14 @@ html {
 }
 
 #{$elements-boxed} {
-	border-left: var(--stroke-width) solid var(--color-border);
+    border-left: var(--stroke-width) solid var(--color-border);
     padding: var(--gap-tight) var(--gap-compact);
     margin-inline: var(--gap);
     font-size: var(--scale-d2);
     line-height: var(--line-height-compact);
+}
+img {
+    padding: 0;
 }
 
 /* =========================== */
@@ -108,17 +111,20 @@ h4 {
     letter-spacing: 0.06em;
 }
 
-h5 { /* Overline */
-
+h5 {
+    /* Overline */
 }
 
-h6 { /* run-in */
-    display:inline;
-    margin:0;
+h6 {
+    /* run-in */
+    display: inline;
+    margin: 0;
     font-size: var(--scale);
-    font-weight:600;
+    font-weight: 600;
 }
-h6 + p {display:inline;}
+h6 + p {
+    display: inline;
+}
 
 .overline {
     font-variant-caps: small-caps;
@@ -151,7 +157,7 @@ pre {
     overflow-x: auto;
     box-shadow: inset var(--shadow);
     line-height: var(--line-height-compact);
-    
+
     code {
         background: transparent;
         border: none;
@@ -181,7 +187,7 @@ pre {
     }
 }
 
-/* Lists 
+/* Lists
 li::before {
     font-feature-settings: var(--font-list-feature);
     font-variation-settings: var(--font-list-variation);
@@ -410,7 +416,7 @@ select {
     color: var(--color-foreground);
     background: var(--color-background-secondary);
     border: var(--border);
-    
+
     margin-block-end: var(--gap-compact) !important;
 
     transition:
@@ -450,7 +456,7 @@ label {
     font-family: var(--font-interface), system-ui, sans-serif;
     cursor: pointer;
     font-weight: var(--font-weight-bold, bold);
-    margin-inline:var(--gap-tight) !important;
+    margin-inline: var(--gap-tight) !important;
     margin-block-end: var(--gap-tight) !important;
     padding-inline: 0 !important;
 }
@@ -473,7 +479,7 @@ input[type="radio"] {
     height: 1em;
     cursor: pointer;
     accent-color: var(--color-accent);
-    padding:0 !important;
+    padding: 0 !important;
     display: inline-block;
 }
 
@@ -510,7 +516,7 @@ iframe {
     font-family: var(--font-interface), system-ui, sans-serif;
     font-variation-settings: var(--font-interface-variation);
     font-feature-settings: var(--font-interface-feature);
-    font-size:12px;
+    font-size: 12px;
 }
 
 /* =========================== */
@@ -533,18 +539,8 @@ hr {
 
 /* Mark highlighting */
 mark {
-    background: color-mix(
-        in srgb,
-        var(--color-yellow) 30%,
-        transparent
-    );
-    color: color-mix(
-        in srgb,
-        var(--color-yellow) 30%,
-        var(--color-foreground)
-    );
-    padding: var(--gap-tight); 
+    background: color-mix(in srgb, var(--color-yellow) 30%, transparent);
+    color: color-mix(in srgb, var(--color-yellow) 30%, var(--color-foreground));
+    padding: var(--gap-tight);
     padding-top: 0.1em;
 }
-
-

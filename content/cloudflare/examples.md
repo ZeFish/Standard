@@ -1,13 +1,3 @@
----
-title: Real-World Examples
-
-eleventyNavigation:
-  key: Examples
-  parent: Cloudflare Functions
-  title: Examples
-permalink: /cloudflare/examples/
----
-
 # Real-World Examples
 
 Complete, working examples for common use cases.
@@ -439,6 +429,5 @@ export default {
 - [See Patterns](/cloudflare/patterns/) - More patterns explained
 - [Deploy](/cloudflare/deployment/) - Take to production
 
----
 
 Ready to deploy your own? [Check the deployment guide](/cloudflare/deployment/)

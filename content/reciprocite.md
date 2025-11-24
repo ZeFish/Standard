@@ -2,17 +2,13 @@
 
 ## Traité sur l'Égalitarisme Réciproque Pragmatique
 
----
 
 ## Avant-propos
 
 Ce qui suit n'est pas une théorie abstraite née dans le silence des bibliothèques, mais une philosophie forgée dans le feu de l'expérience humaine. Elle émerge de la rencontre entre la pensée kantienne, l'éthique de la vertu aristotélicienne, et la réalité concrète des relations humaines contemporaines. C'est une tentative de répondre à une question aussi vieille que la philosophie elle-même : **comment vivre ensemble dans la dignité mutuelle ?**
 
-
-
 ## Introduction : Les Fondements d'une Éthique Vécue
 
----
 
 ### I. Le Principe de Dignité Universelle
 
@@ -40,11 +36,8 @@ Notre impératif moral pourrait se formuler ainsi :
 
 > *Agis envers les autres comme tu voudrais qu'ils agissent envers toi dans cette situation concrète, en considérant les besoins réels et les conséquences, tout en maintenant la dignité et l'autonomie de chacun.*
 
-
-
 ## Chapitre Premier : De l'Espace comme Condition de la Rencontre
 
----
 
 ### § 1. La Nécessité de l'Espace
 
@@ -76,7 +69,6 @@ Créer de l'espace ne signifie pas n'avoir aucune limite, tout accepter, ou se s
 
 Cette réciprocité de l'espace est la première manifestation concrète de notre principe fondamental. Si je crée constamment de l'espace pour l'autre sans jamais en recevoir, ce n'est plus de la vertu — c'est du martyre.
 
----
 
 ## Chapitre II : De l'Écoute comme Acte Philosophique
 
@@ -110,7 +102,6 @@ Nous pouvons distinguer cinq niveaux d'écoute, du plus superficiel au plus prof
 
 Le jugement préalable ferme la porte à la compréhension. Le discernement ultérieur est non seulement permis, mais nécessaire. La séquence importe.
 
----
 
 ## Chapitre III : De la Compréhension des Besoins comme Herméneutique de l'Action
 
@@ -156,7 +147,6 @@ Cette compréhension permet :
 - La responsabilité (sans honte écrasante)
 - L'humanité (on voit la personne derrière le comportement)
 
----
 
 ## Chapitre IV : De l'Empathie comme Transformation Intérieure
 
@@ -209,7 +199,6 @@ L'empathie mature se formule ainsi :
 
 > "Je ressens ta douleur ET je maintiens mes limites. Ton besoin est légitime ET le mien aussi. J'ai de la compassion pour toi ET tu es responsable de tes choix."
 
----
 
 ## Chapitre V : De l'Action Réciproque comme Incarnation de la Philosophie
 
@@ -285,7 +274,6 @@ Une confusion fréquente doit être dissipée :
 
 La réciprocité n'est pas l'œil pour œil. C'est la cohérence des standards appliqués à tous, soi-même inclus.
 
----
 
 ## Chapitre VI : De la Vulnérabilité Assumée comme Catalyseur
 
@@ -346,7 +334,6 @@ Le signal que le temps est écoulé :
 
 **La question n'est pas "combien de temps ?", mais "est-ce que je vois un processus ou juste une répétition ?"**
 
----
 
 ## Chapitre VII : De l'Application Universelle
 
@@ -384,7 +371,6 @@ Ceci crée :
 - Responsabilité personnelle
 - Incitatif à maintenir des standards élevés
 
----
 
 ## Conclusion : L'Égalitarisme Réciproque Pragmatique
 
@@ -434,7 +420,6 @@ Et surtout :
 
 **La réciprocité commence avec soi.**
 
----
 
 ## Épilogue : La Vulnérabilité Assumée
 
@@ -446,7 +431,6 @@ Parfois ce pari est gagné. Parfois il est perdu. Mais même dans l'échec, il y
 
 Et c'est déjà, en soi, un acte philosophique complet.
 
----
 
 **Francis Fontaine**
 *Philosophe de la réciprocité vécue*

@@ -1,13 +1,3 @@
----
-title: Spacing & Vertical Rhythm
-
-eleventyNavigation:
-  key: Spacing
-  parent: CSS Framework
-  title: Spacing & Rhythm
-permalink: /css/spacing/
----
-
 # Spacing & Vertical Rhythm
 
 Master consistent spacing and vertical rhythm throughout your layouts using the golden ratio.
@@ -71,7 +61,7 @@ You can apply `.rhythm` to any container for local rhythm control:
 When rhythm is active on `<html>`, the `<body>` element automatically gets rhythm-based padding:
 
 | Breakpoint | Padding | Variable |
-|------------|---------|----------|
+||---|----|
 | Desktop | `calc(--rhythm × --body-padding)` | `--body-padding` |
 | Mobile | `calc(--rhythm × --body-mobile-padding-multiplier)` | `--body-mobile-padding-multiplier` |
 
@@ -92,7 +82,7 @@ All spacing is calculated in multiples of this unit using the golden ratio.
 Based on the golden ratio, creating a harmonious scale:
 
 | Multiplier | Size | CSS Variable | Usage |
-|-----------|------|--------------|-------|
+|-----||--|-|
 | 0.5x | 0.5rem | `gap-1` | compact spacing |
 | 1x | 1rem | `gap-2` | Default spacing |
 | 1.618x | 1.618rem | `gap-3` | More space |
@@ -470,6 +460,5 @@ See [Debug System](/css/debug/) for more tools.
 - **[Rhythm Application](/docs/rhythm-application-mixin/)** - Advanced rhythm techniques
 - **[Grid System](/css/grid/)** - Grid spacing (gap)
 
----
 
 Perfect spacing creates invisible order. [Learn about components](/css/buttons/)

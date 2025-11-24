@@ -1,20 +1,16 @@
----
-visibility: private
----
 # Simple Template Layout
-
 
 Base Layout
 
 ```html
 <!DOCTYPE html>
-<html lang="{{ language or metadata.language or "en" }}">
+<html lang="">
     <head>
       {% include "meta.njk" %}
     </head>
-	{% standardAssets  %}
+	
 	<body class="prose md">
-			{{ content | safe  }}
+			
 	</body>
 </html>
 ```

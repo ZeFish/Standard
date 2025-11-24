@@ -1,18 +1,9 @@
----
-layout: base.njk
-title: Cheat Sheet
-description: The essential commands you'll use every day and always forget
-permalink: /cheat-sheet/
-comments: true
----
-
 # Cheat Sheet
 
 The **20% of commands you'll use 80% of the time**. Copy-paste ready.
 
 > **Philosophy**: This isn't a complete reference—it's the stuff you'll actually use. If you need exhaustive documentation, see the [full utilities guide](/css/utilities/).
 
----
 
 ## Keyboard Shortcuts
 
@@ -24,7 +15,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Why these shortcuts matter**: Design systems live or die by iteration speed. These shortcuts let you debug layout issues and adjust design tokens without context-switching to your code editor. Use debug mode when your vertical rhythm feels off or grid columns aren't aligning.
 
----
 
 ## Spacing (The Ones You Forget)
 
@@ -52,7 +42,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Common mistake**: Adding `margin-bottom` to every element instead of using `gap` on the parent. Gap is cleaner and prevents edge issues.
 
----
 
 ## Width (Reading & Centering)
 
@@ -84,7 +73,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Pro tip**: Combine `width-line` with `margin-inline-auto` to center readable content on the page. This is the "article wrapper" pattern you'll use everywhere.
 
----
 
 ## Typography (Common Patterns)
 
@@ -119,7 +107,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Common mistake**: Using `text-size-small` instead of just `.small`. The shorter names exist for the most common sizes—use them.
 
----
 
 ## Centering (Every Single Time)
 
@@ -157,7 +144,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 - Still not working? Try flex center instead
 - Text won't center? Parent might have `text-align: left`
 
----
 
 ## Layout Patterns (Copy These)
 
@@ -188,7 +174,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 - 4 columns: `.col-3`
 - Asymmetric: `.col-8` + `.col-4` (main + sidebar)
 
----
 
 ### Hero Section (landing page header)
 
@@ -207,7 +192,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Pro tip**: Use `.compact` on large headings to reduce awkward line spacing. Default line-height (1.5) looks weird on 3rem+ text.
 
----
 
 ### Two-Column Layout (Content + Sidebar)
 
@@ -236,7 +220,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 - Dominant sidebar: `.col-4` + `.col-8`
 - Three column: `.col-4` + `.col-4` + `.col-4`
 
----
 
 ### Centered Container (classic article layout)
 
@@ -254,7 +237,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Use this for**: Blog posts, docs, about pages, terms of service, privacy policies, landing page content.
 
----
 
 ## Colors (Semantic)
 
@@ -286,7 +268,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 
 **Rule of thumb**: If you're using more than 2 levels of text color on one screen, you're probably over-designing. Keep it simple.
 
----
 
 ## Visibility (The Useful Ones)
 
@@ -321,7 +302,6 @@ ESC                     # Close Inspector (when you're done tweaking)
 Screen reader announces: "Read more, opens in new tab"
 Sighted users see: "Read more"
 
----
 
 ## Responsive (Mobile-First)
 
@@ -354,7 +334,6 @@ Sighted users see: "Read more"
 
 **Mobile-first philosophy**: Start with mobile layout (col-12), enhance for desktop (col-lg-6). This is why `.col-12` comes first.
 
----
 
 ## Common Fixes (Save These)
 
@@ -370,7 +349,6 @@ Sighted users see: "Read more"
 
 **Alternative**: Use `.no-bullet` utility if you have it defined.
 
----
 
 ### Remove Button Styling
 
@@ -382,7 +360,6 @@ Sighted users see: "Read more"
 ```
 **Why**: Native `<button>` elements have browser styling. This resets it so you can style from scratch. Common for icon buttons, text buttons, custom controls.
 
----
 
 ### Full-Width Section (edge-to-edge background)
 
@@ -393,7 +370,6 @@ Sighted users see: "Read more"
 ```
 **Why**: `width-full` breaks out of centered containers. Useful for alternating background sections on landing pages.
 
----
 
 ### compact Spacing (compact UI, dense layouts)
 
@@ -405,12 +381,11 @@ Sighted users see: "Read more"
 ```
 **Why**: Default spacing (1rem) is too generous for toolbars, inline buttons, compact cards. Use `xs` (0.5rem) for compacter layouts.
 
----
 
 ## Size Scale (Memorize These 5)
 
 | Size | Usage | Value | When to use |
-|------|-------|-------|-------------|
+||-|-|-|
 | `xs` | Tiny gaps, compact UI | ~0.5rem | Button groups, inline icons |
 | `s` | Small spacing | ~0.75rem | Form fields, card padding |
 | `base` | **Normal spacing** | ~1rem | Default gaps, standard rhythm |
@@ -423,7 +398,6 @@ Sighted users see: "Read more"
 
 **Most common mistake**: Using `padding-xl` on small cards. Start with `base`, adjust down/up as needed.
 
----
 
 ## Inspector Quick Reference
 
@@ -452,7 +426,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 
 **When to use**: Your layout feels "off" but you can't tell why. Debug mode reveals misalignments instantly.
 
----
 
 ## Pro Tips (The Non-Obvious Stuff)
 
@@ -467,7 +440,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 ```
 **Why**: Utilities are self-documenting. Six months later, `padding-base` still makes sense. `padding: 1rem` requires you to remember your spacing scale.
 
----
 
 ### Use `margin-inline-auto` to center block elements
 
@@ -478,7 +450,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 ```
 **Why**: `margin-inline: auto` is semantic (works in RTL languages), shorter than `margin-left: auto; margin-right: auto`, and self-documenting.
 
----
 
 ### Use `gap-base` instead of margin on children
 
@@ -499,7 +470,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 ```
 **Why**: Gap is cleaner, works on all children automatically, doesn't create edge spacing issues.
 
----
 
 ### Remember `.uppercase` includes letter-spacing
 
@@ -512,7 +482,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 ```
 **Why**: Uppercase text without letter-spacing is hard to read. The utility adds 0.05em automatically.
 
----
 
 ### Use reading widths for articles
 
@@ -524,7 +493,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 ```
 **Why**: Research shows optimal readability at 60-75 characters per line. `width-line` (~42rem) achieves this at default font size.
 
----
 
 ## Common Mistakes (Learn From Others' Pain)
 
@@ -545,7 +513,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 </div>
 ```
 
----
 
 ### Using `width-full` without understanding container context
 
@@ -556,7 +523,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 </div>
 ```
 
----
 
 ### Adding inline styles when utilities exist
 
@@ -568,7 +534,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 <div class="width-line margin-inline-auto">
 ```
 
----
 
 ### Forgetting `.col-sm-12` for responsive cards
 
@@ -588,7 +553,6 @@ Shows baseline grid, grid columns, rhythm spacing overlays
 </div>
 ```
 
----
 
 ## Remember
 
@@ -606,7 +570,6 @@ If you forget a class name, **the pattern tells you what it should be**.
 
 The other 1%? Check the [full utilities guide](/css/utilities/).
 
----
 
 **Bookmark this page** (Cmd+D / Ctrl+D) and keep it open while coding.
 **Print it** (Cmd+P / Ctrl+P) for a physical reference card.

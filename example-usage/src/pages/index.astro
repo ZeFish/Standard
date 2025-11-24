@@ -1,0 +1,64 @@
+---
+import Base from "@zefish/standard/layouts/Base.astro";
+---
+
+<Base
+  title="Example Site - Standard Framework"
+  description="A simple example showing how to use @zefish/standard in your Astro project"
+>
+  <div class="callout">
+    <h3>🚀 Welcome to Your Standard Site!</h3>
+    <p>This page demonstrates how easy it is to use the Standard Framework in your Astro project.</p>
+  </div>
+
+  <h1>Getting Started</h1>
+
+  <p>With just a few lines of code, you get:</p>
+
+  <ul>
+    <li>✅ <strong>Smart Typography</strong> - Automatic quotes, dashes, and fractions</li>
+    <li>✅ <strong>Swiss Grid System</strong> - Responsive 12-column layouts</li>
+    <li>✅ <strong>Vertical Rhythm</strong> - Perfect baseline alignment</li>
+    <li>✅ <strong>Color System</strong> - Automatic light/dark theming</li>
+    <li>✅ <strong>Reading Layout</strong> - Editorial-quality content styling</li>
+  </ul>
+
+  <h2>Typography in Action</h2>
+
+  <p>Notice how the Standard Framework automatically enhances your text:</p>
+
+  <blockquote>
+    "Typography is the craft of endowing human language with a durable visual form."
+    <cite>— Robert Bringhurst</cite>
+  </blockquote>
+
+  <p>It converts straight "quotes" to curly "quotes", three dots... to ellipsis…,
+  and dashes -- to proper em-dashes. It also handles fractions like 1/2, 1/4, and 3/4.</p>
+
+  <h2>Grid Layout Example</h2>
+
+  <div class="grid">
+    <div class="col-6">
+      <h3>Left Column</h3>
+      <p>This content spans 6 columns on desktop. The grid system is responsive and mobile-first.</p>
+    </div>
+    <div class="col-6">
+      <h3>Right Column</h3>
+      <p>Both columns stack on mobile and display side-by-side on larger screens.</p>
+    </div>
+  </div>
+
+  <h2>Next Steps</h2>
+
+  <ol>
+    <li>Customize the typography settings in your <code>astro.config.mjs</code></li>
+    <li>Import additional components like <code>Menu</code> or <code>Comments</code></li>
+    <li>Create more pages using the Base layout</li>
+    <li>Explore the CSS utilities like <code>.rhythm</code> and <code>.prose</code></li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>Ready to build something amazing?</strong> Check out the full documentation at
+    <a href="https://github.com/ZeFish/Standard">github.com/ZeFish/Standard</a></p>
+  </div>
+</Base>

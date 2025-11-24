@@ -1,11 +1,13 @@
 {
-  "name": "Standard Test Site",
-  "short_name": "Site",
-  "description": "A website",
+  "name": "Standard Framework",
+  "short_name": "Standard Framework",
+  "description": "Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "icons": []
+  "icons": [],
+  "author": "Francis Fontaine",
+  "author_url": "https://francisfontaine.com/now/"
 }

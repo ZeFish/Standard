@@ -1,13 +1,3 @@
----
-title: Prose System
-
-eleventyNavigation:
-  key: Prose
-  parent: CSS Framework
-  title: Prose System
-permalink: /css/prose/
----
-
 # Prose System
 
 Create beautifully styled, readable articles with automatic vertical rhythm, optimal line lengths, and professional typography.
@@ -671,6 +661,5 @@ example();
 - **[Colors](/css/colors/)** - Text and background colors
 - **[API Reference](/docs/prose-layout-system/)** - Complete technical documentation
 
----
 
 Master readable, beautiful content. [Learn spacing and rhythm](/css/spacing/)

@@ -127,11 +127,9 @@ The `wrangler.toml` is automatically generated from your `.env` file!
 
 In your article/blog template:
 
-```nunjucks
----
-layout: comments.njk
-comment: true
----
+```html
+
+.njk
 
 # Your Article Content
 ```
@@ -140,41 +138,37 @@ This automatically includes the full comments section with form and styling. The
 
 **Option 2: Use Comments Layout with Options**
 
-```nunjucks
----
-layout: comments.njk
-comment: true
+```html
+
+.njk
 commentApiUrl: /api/comments
 showCommentForm: true
 pollInterval: 30000
----
+
 ```
 
 **Option 3: Use standardComment Shortcode**
 
 Include the `standardComment` shortcode in your custom layout:
 
-```nunjucks
----
-layout: base.njk
-comment: true
----
+```html
 
-{% standardComment %}
+.njk
+
 ```
 
 The shortcode automatically creates the comments container and form!
 
 The `standardComment` shortcode automatically:
 - ✅ Renders semantic HTML with fieldset, legend, proper labels
-- ✅ Auto-initializes when `comment: true` is in frontmatter
+- ✅ Auto-initializes when `` is in frontmatter
 - ✅ Loads and displays existing comments (auto-generated page ID from file slug)
 - ✅ Handles form submission
 - ✅ Integrates with Standard design tokens
 - ✅ Includes error handling
 
 Customize with options:
-```nunjucks
+```html
 <!-- Hide reset button -->
 {% standardComment true, false %}
 
@@ -184,7 +178,7 @@ Customize with options:
 
 **Option 4: Include as Partial**
 
-```nunjucks
+```html
 {% set commentPageId = page.fileSlug %}
 {% include "comments.njk" %}
 ```
@@ -226,16 +220,14 @@ Customize with options:
 
 ## Minimal Example
 
-```nunjucks
----
-layout: comments.njk
-comment: true
----
+```html
+
+.njk
 
 # Your Article Content Here
 ```
 
-That's it! Just set `comment: true` in your frontmatter and use the `comments.njk` layout. Everything works automatically:
+That's it! Just set `` in your frontmatter and use the `comments.njk` layout. Everything works automatically:
 - ✅ Semantic form with fieldset, legend, labels
 - ✅ Comments container
 - ✅ Auto-initialized comments loading (page ID from file slug)
@@ -244,39 +236,37 @@ That's it! Just set `comment: true` in your frontmatter and use the `comments.nj
 
 Or if you prefer to build your own layout:
 
-```nunjucks
----
-layout: base.njk
-comment: true
----
+```html
+
+.njk
 
 <div id="comments"></div>
-{% standardComment %}
+
 ```
 
-Just set `comment: true` in your frontmatter and the shortcode handles the rest!
+Just set `` in your frontmatter and the shortcode handles the rest!
 
 ## Shortcodes Reference
 
 Standard provides a powerful shortcode for comments that handles everything:
 
-### `{% standardComment %}`
+### ``
 
 Renders a semantic HTML comment form AND automatically initializes the comments system.
 
 **Usage:**
-```nunjucks
-{% standardComment %}
+```html
+
 ```
 
-The shortcode automatically detects `comment: true` from your frontmatter and initializes comments. No separate initialization needed!
+The shortcode automatically detects `` from your frontmatter and initializes comments. No separate initialization needed!
 
 **Parameters:**
 - `showSubmit` (boolean, default: `true`) - Show submit button
 - `showReset` (boolean, default: `true`) - Show reset button
 
 **Example:**
-```nunjucks
+```html
 <!-- Hide reset button -->
 {% standardComment true, false %}
 
@@ -286,7 +276,7 @@ The shortcode automatically detects `comment: true` from your frontmatter and in
 
 **Auto-initialization (Frontmatter):**
 The shortcode reads from your frontmatter:
-- `comment: true` - Enable comments (page ID auto-generated from file slug)
+- `` - Enable comments (page ID auto-generated from file slug)
 - `commentApiUrl` - API endpoint (default: `/api/comments`)
 - `pollInterval` - Auto-refresh interval in ms
 
@@ -295,18 +285,18 @@ The shortcode reads from your frontmatter:
 - ✅ Accessible: ARIA labels for required fields
 - ✅ Design tokens: Uses Standard CSS variables for consistent styling
 - ✅ Auto-initializes: No separate initialization shortcode needed
-- ✅ Loads comments: Automatically fetches from GitHub
+- ✅ Loads fetches from GitHub
 - ✅ Handles submission: Form submission is automatic
 - ✅ Error handling: User-friendly error messages
 - ✅ Privacy notice: Linked to your privacy and terms pages
 - ✅ Responsive: Works on mobile and desktop
 
-### `{% initComments %}` (Optional)
+### `` (Optional)
 
 For advanced use cases where you need manual initialization with custom options.
 
 **Usage:**
-```nunjucks
+```html
 {% initComments "blog/my-post" %}
 ```
 
@@ -496,7 +486,7 @@ For complete docs, examples, and advanced features:
 ## Files Reference
 
 | File | Purpose |
-|------|---------|
+||---|
 | `comments.js` | Server handler, validation, GitHub API |
 | `standard.comment.js` | Browser library, rendering, form |
 | `comments-example.js` | Ready-to-deploy endpoint |

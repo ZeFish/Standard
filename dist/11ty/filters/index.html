@@ -1,0 +1,153 @@
+<!DOCTYPE html><html class="rhythm" lang="en" data-theme="default"> <head><meta charset="utf-8"><!-- Standard Framework | https://standard.ffp.co --><title>Standard Framework</title><meta name="description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta name="author" content="Francis Fontaine"><meta name="language" content="en"><meta name="referrer" content="strict-origin-when-cross-origin"><!-- Canonical URL --><link rel="canonical" href="https://standard.ffp.co/11ty/filters/"><!-- Feed & Sitemap --><link rel="alternate" type="application/atom+xml" title="Standard Framework" href="https://standard.ffp.co/feed.xml"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://standard.ffp.co/sitemap.xml"><!-- Robots Meta --><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><!-- Open Graph --><meta property="og:title" content="Standard Framework"><meta property="og:type" content="article"><meta property="og:locale" content="en"><meta property="og:site_name" content="Standard Framework"><meta property="og:url" content="https://standard.ffp.co/11ty/filters/"><meta property="og:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta property="og:image" content="https://standard.ffp.co/assets/img/default.png"><meta property="og:image:alt" content="Standard Framework"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Cards --><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://standard.ffp.co/assets/img/default.png"><meta name="twitter:image:alt" content="Standard Framework"><meta name="twitter:site" content="@francisfontaine"><meta name="twitter:creator" content="@francisfontaine"><meta name="twitter:title" content="Standard Framework"><meta name="twitter:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><!-- Schema.org --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Standard Framework","description":"Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.","author":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co/now/"},"publisher":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co","logo":{"@type":"ImageObject","url":"https://standard.ffp.co/francis-fontaine-avatar.png"}},"image":{"@type":"ImageObject","url":"https://standard.ffp.co/assets/img/default.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://standard.ffp.co/11ty/filters/"}}</script><!-- Favicons --><link rel="apple-touch-icon" sizes="180x180" href="https://standard.ffp.co/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://standard.ffp.co/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://standard.ffp.co/favicons/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://standard.ffp.co/favicons/safari-pinned-tab.svg" color="#000000"><link rel="shortcut icon" href="https://standard.ffp.co/favicons/favicon.ico"><!-- Mobile --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><!-- Windows Tiles --><meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-config" content="https://standard.ffp.co/favicons/browserconfig.xml"><link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css"><!-- ✅ FIX: Load scripts only on client side --><script type="module">
+            import "/assets/js/standard.js";
+            import "/assets/js/standard.lab.js";
+            import "/assets/js/standard.toast.js";
+            import "/assets/js/standard.comment.js";
+        </script><link rel="stylesheet" href="/_astro/_slug_.mJtdUnXU.css"></head> <body> <a href="#main" class="skip-link">Skip to content</a> <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;"> <p> <a href="/" style="text-decoration: none;">Standard Framework</a> </p> <nav class="menu horizontal" aria-label="Navigation"> <ul class="menu"> <li class="menu__item"> <a class="menu__link" href="/docs/"> Docs </a> </li><li class="menu__item"> <a class="menu__link" href="/getting-started/"> Getting Started </a> </li><li class="menu__item"> <a class="menu__link" href="/cheat-sheet/"> Cheat Sheet </a> </li> </ul> </nav> </header> <main id="main" class="prose">  <h1 id="template-filters--helpers">Template Filters &#x26; Helpers</h1>
+<p>Transform and manipulate data in your 11ty templates with filters.</p>
+<h2 id="built-in-filters">Built-in Filters</h2>
+<p>Standard Framework includes many useful filters.</p>
+<h3 id="string-filters">String Filters</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">        <span class="token comment">&#x3C;!-- HELLO WORLD --></span>
+        <span class="token comment">&#x3C;!-- hello world --></span>
+       <span class="token comment">&#x3C;!-- Hello world --></span>
+          <span class="token comment">&#x3C;!-- dlrow olleh --></span>
+
+       <span class="token comment">&#x3C;!-- hello world --></span>
+       <span class="token comment">&#x3C;!-- ['hello', 'world'] --></span>
+</code></pre>
+<p>See <a href="/docs/eleventy-filter-plugin/" preload="" hx-boost="true">Filter Plugin API</a> for complete reference.</p>
+<h3 id="date-filters">Date Filters</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">                <span class="token comment">&#x3C;!-- Short date --></span>
+        <span class="token comment">&#x3C;!-- Long date --></span>
+         <span class="token comment">&#x3C;!-- ISO format --></span>
+              <span class="token comment">&#x3C;!-- Human readable --></span>
+                   <span class="token comment">&#x3C;!-- W3C format --></span>
+</code></pre>
+<h3 id="url-filters">URL Filters</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">                   <span class="token comment">&#x3C;!-- Handle base URLs --></span>
+           <span class="token comment">&#x3C;!-- Add base URL --></span>
+                    <span class="token comment">&#x3C;!-- URL-safe slug --></span>
+</code></pre>
+<h3 id="array-filters">Array Filters</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">             <span class="token comment">&#x3C;!-- First 3 items --></span>
+             <span class="token comment">&#x3C;!-- Last 3 items --></span>
+             <span class="token comment">&#x3C;!-- Reverse order --></span>
+                <span class="token comment">&#x3C;!-- Sort items --></span>
+</code></pre>
+<h3 id="json-filter">JSON Filter</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">                      <span class="token comment">&#x3C;!-- Pretty JSON --></span>
+                <span class="token comment">&#x3C;!-- Strict JSON --></span>
+</code></pre>
+<h2 id="custom-filters">Custom Filters</h2>
+<p>Create your own filters in <code>eleventy.config.js</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// Simple filter</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"shout"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> value<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"!!!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Async filter</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addNunjucksAsyncFilter</span><span class="token punctuation">(</span><span class="token string">"random"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Filter with arguments</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"multiply"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">value<span class="token punctuation">,</span> factor</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> value <span class="token operator">*</span> factor<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Use in templates:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">                  <span class="token comment">&#x3C;!-- HELLO!!! --></span>
+                 <span class="token comment">&#x3C;!-- 50 --></span>
+
+</code></pre>
+<h2 id="common-patterns">Common Patterns</h2>
+<h3 id="format-date">Format Date</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"formatDate"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>date<span class="token punctuation">,</span> format <span class="token operator">=</span> <span class="token string">"short"</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLocaleDateString</span><span class="token punctuation">(</span><span class="token string">"en-US"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">year</span><span class="token operator">:</span> <span class="token string">"numeric"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">month</span><span class="token operator">:</span> format <span class="token operator">===</span> <span class="token string">"long"</span> <span class="token operator">?</span> <span class="token string">"long"</span> <span class="token operator">:</span> <span class="token string">"2-digit"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">day</span><span class="token operator">:</span> <span class="token string">"2-digit"</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span><span class="token punctuation">(</span>format <span class="token operator">===</span> <span class="token string">"long"</span> <span class="token operator">&#x26;&#x26;</span> <span class="token punctuation">{</span> <span class="token literal-property property">weekday</span><span class="token operator">:</span> <span class="token string">"long"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="excerpt-from-content">Excerpt from Content</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"excerpt"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">content<span class="token punctuation">,</span> words <span class="token operator">=</span> <span class="token number">50</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> plainText <span class="token operator">=</span> content
+    <span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&#x3C;[^>]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> words<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> plainText <span class="token operator">+</span> <span class="token string">"..."</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="read-time">Read Time</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"readTime"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> wordsPerMinute <span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> words <span class="token operator">=</span> content<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\s+</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> minutes <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>words <span class="token operator">/</span> wordsPerMinute<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>minutes<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> min read</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="category-count">Category Count</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"categoryCount"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">collection<span class="token punctuation">,</span> category</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> collection<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> item<span class="token punctuation">.</span>data<span class="token punctuation">.</span>category <span class="token operator">===</span> category<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="markdown-to-html-inline">Markdown to HTML (inline)</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> markdownIt <span class="token keyword">from</span> <span class="token string">"markdown-it"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> md <span class="token operator">=</span> <span class="token function">markdownIt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addFilter</span><span class="token punctuation">(</span><span class="token string">"markdown"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> md<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="global-filters">Global Filters</h2>
+<p>Available in all templates:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token comment">&#x3C;!-- Default 11ty filters --></span>
+
+
+
+
+</code></pre>
+<h2 id="chaining-filters">Chaining Filters</h2>
+<p>Combine multiple filters:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">
+
+
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="/docs/eleventy-filter-plugin/" preload="" hx-boost="true">Filter Plugin API</a> - Complete API</li>
+<li><a href="/11ty/markdown/" preload="" hx-boost="true">Markdown</a> - Markdown enhancements</li>
+<li><a href="/docs/eleventy-shortcode-plugin/" preload="" hx-boost="true">Shortcodes</a> - Template tags</li>
+<li><a href="https://www.11ty.dev/docs/filters/" class="external-link" target="_blank" rel="noopener noreferrer" hx-disable="">11ty Filters Docs</a> - All 11ty filters</li>
+</ul>
+<p>Master filters to transform content. <a href="/11ty/backlinks/" preload="" hx-boost="true">Learn about backlinks</a></p>  <article class="comments-system"> <div id="comments"></div> <button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">
+Write a Comment
+</button> <div id="comment-form-wrapper" style="display: none;"> <form id="comment-form" method="post" action="/api/comments" novalidate> <fieldset> <legend>Leave a Comment</legend> <label for="author">Your Name <span aria-label="required">*</span></label> <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required maxlength="100"> <label for="email">Email Address <span aria-label="required">*</span></label> <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required> <label for="content">Comment <span aria-label="required">*</span></label> <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required minlength="3" maxlength="10000" rows="6"></textarea> <!-- Hidden fields --> <input type="hidden" id="pageId" name="pageId" value="11ty_filters"> <input type="hidden" id="parentId" name="parentId" value=""> <!-- Status indicator --> <div id="form-status" role="status" aria-live="polite"></div> <!-- Submit buttons --> <div class="form-actions"> <button type="submit" class="button">Post Comment</button>   </div> </fieldset> </form> </div> </article> <script defer>(function(){const initOptions = {"apiUrl":"/api/comments","pageId":"11ty_filters","container":"#comments","form":"#comment-form","pollInterval":null};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+})();</script> </main> <hr> <footer class="smaller font-interface"> <p>
+© 2025 Francis Fontaine ·
+<a href="/">Standard Framework</a> ·
+<a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> </p> </footer> </body></html>

@@ -1,13 +1,3 @@
----
-title: Filters & Template Helpers
-
-eleventyNavigation:
-  key: Filters
-  parent: 11ty Plugin
-  title: Filters
-permalink: /11ty/filters/
----
-
 # Template Filters & Helpers
 
 Transform and manipulate data in your 11ty templates with filters.
@@ -18,50 +8,50 @@ Standard Framework includes many useful filters.
 
 ### String Filters
 
-```nunjucks
-{{ "hello world" | uppercase }}        <!-- HELLO WORLD -->
-{{ "HELLO WORLD" | lowercase }}        <!-- hello world -->
-{{ "hello world" | capitalize }}       <!-- Hello world -->
-{{ "hello world" | reverse }}          <!-- dlrow olleh -->
+```html
+        <!-- HELLO WORLD -->
+        <!-- hello world -->
+       <!-- Hello world -->
+          <!-- dlrow olleh -->
 
-{{ "hello" | concat(" world") }}       <!-- hello world -->
-{{ "hello world" | split(" ") }}       <!-- ['hello', 'world'] -->
+       <!-- hello world -->
+       <!-- ['hello', 'world'] -->
 ```
 
 See [Filter Plugin API](/docs/eleventy-filter-plugin/) for complete reference.
 
 ### Date Filters
 
-```nunjucks
-{{ date | dateFilter }}                <!-- Short date -->
-{{ date | dateFilter('long') }}        <!-- Long date -->
-{{ date | dateFilter('iso') }}         <!-- ISO format -->
-{{ date | readableDate }}              <!-- Human readable -->
-{{ date | w3cDate }}                   <!-- W3C format -->
+```html
+                <!-- Short date -->
+        <!-- Long date -->
+         <!-- ISO format -->
+              <!-- Human readable -->
+                   <!-- W3C format -->
 ```
 
 ### URL Filters
 
-```nunjucks
-{{ "/page/" | url }}                   <!-- Handle base URLs -->
-{{ page.url | htmlBaseUrl }}           <!-- Add base URL -->
-{{ url | slugify }}                    <!-- URL-safe slug -->
+```html
+                   <!-- Handle base URLs -->
+           <!-- Add base URL -->
+                    <!-- URL-safe slug -->
 ```
 
 ### Array Filters
 
-```nunjucks
-{{ collection | head(3) }}             <!-- First 3 items -->
-{{ collection | tail(3) }}             <!-- Last 3 items -->
-{{ collection | reverse }}             <!-- Reverse order -->
-{{ collection | sort }}                <!-- Sort items -->
+```html
+             <!-- First 3 items -->
+             <!-- Last 3 items -->
+             <!-- Reverse order -->
+                <!-- Sort items -->
 ```
 
 ### JSON Filter
 
-```nunjucks
-{{ data | dump }}                      <!-- Pretty JSON -->
-{{ data | dumpStrict }}                <!-- Strict JSON -->
+```html
+                      <!-- Pretty JSON -->
+                <!-- Strict JSON -->
 ```
 
 ## Custom Filters
@@ -87,10 +77,10 @@ eleventyConfig.addFilter("multiply", (value, factor) => {
 
 Use in templates:
 
-```nunjucks
-{{ "hello" | shout }}                  <!-- HELLO!!! -->
-{{ 10 | multiply(5) }}                 <!-- 50 -->
-{{ content | random }}
+```html
+                  <!-- HELLO!!! -->
+                 <!-- 50 -->
+
 ```
 
 ## Common Patterns
@@ -155,22 +145,22 @@ eleventyConfig.addFilter("markdown", (content) => {
 
 Available in all templates:
 
-```nunjucks
+```html
 <!-- Default 11ty filters -->
-{{ string | trim }}
-{{ string | striptags }}
-{{ array | first }}
-{{ array | last }}
+
+
+
+
 ```
 
 ## Chaining Filters
 
 Combine multiple filters:
 
-```nunjucks
-{{ title | lowercase | slugify }}
-{{ content | markdown | striptags | excerpt(20) }}
-{{ date | formatDate('long') | uppercase }}
+```html
+
+
+
 ```
 
 ## See Also
@@ -180,6 +170,5 @@ Combine multiple filters:
 - [Shortcodes](/docs/eleventy-shortcode-plugin/) - Template tags
 - [11ty Filters Docs](https://www.11ty.dev/docs/filters/) - All 11ty filters
 
----
 
 Master filters to transform content. [Learn about backlinks](/11ty/backlinks/)

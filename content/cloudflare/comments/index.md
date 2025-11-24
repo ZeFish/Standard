@@ -1,12 +1,3 @@
----
-layout: base.njk
-title: GitHub Comments System
-description: Serverless comments system that stores each comment as a file in GitHub
-eleventyNavigation:
-  key: Comments System
-  parent: Cloudflare
----
-
 # GitHub Comments System
 
 A production-ready, serverless comments system for Cloudflare that stores each comment as a JSON file directly in your GitHub repository.
@@ -152,7 +143,7 @@ Submit a new comment
 }
 ```
 
-**Note**: `pageId` should be normalized (e.g., `blog--my-post` not `blog/my-post`). The `{% standardComment %}` shortcode handles this automatically.
+**Note**: `pageId` should be normalized (e.g., `blog--my-post` not `blog/my-post`). The `` shortcode handles this automatically.
 
 ### GET /api/comments?pageId=blog--my-post
 Fetch all comments for a page
@@ -314,7 +305,6 @@ See [COMMENTS-GUIDE.md](./COMMENTS-GUIDE.md) for more troubleshooting.
 - [Utilities](./../../css/utilities.md) — CSS utilities for styling comments
 - [Standard Framework](./../../index.md) — Main framework documentation
 
----
 
 **Version**: 0.10.53
 **Status**: ✅ Production Ready

@@ -1,13 +1,3 @@
----
-title: Color System
-
-eleventyNavigation:
-  key: Colors
-  parent: CSS Framework
-  title: Colors
-permalink: /css/colors/
----
-
 # Color System
 
 A semantic color system with automatic light/dark theme support that respects user preferences and guarantees WCAG AA accessibility.
@@ -166,7 +156,7 @@ Info:        Light blue (#90e0ef)
 All color combinations meet **WCAG AA contrast requirements**:
 
 | Combination | Contrast Ratio | Status |
-|-------------|----------------|--------|
+|-|----|--|
 | Background + Foreground | 11.5:1 | AAA ✓ |
 | Background + Accent | 8.2:1 | AAA ✓ |
 | Accent + White text | 5.2:1 | AA ✓ |
@@ -389,6 +379,5 @@ Automatically works in:
 - **[Typography](/css/typography/)** - Text colors and contrast
 - **[Components](/css/buttons/)** - Colored components
 
----
 
 Color is semantics, not decoration. [Master the grid system](/css/grid/)

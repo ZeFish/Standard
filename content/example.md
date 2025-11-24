@@ -1,16 +1,3 @@
----
-aliases: []
-created: 2025-10-11 19:02
-modified: 2025-10-12 23:51
-cssclasses: [reflexion]
-maturity:
-publish: false
-tags: []
-type: note
-lang: en
-visibility: public
----
-
 # Standard Framework
 
 ::muted Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
@@ -32,7 +19,6 @@ A fine-art design framework implementing classical typography, Swiss grid system
 ### Heading Hierarchy
 
 Each heading level maintains precise mathematical relationships based on the golden ratio (φ = 1.618).
-
 
 <div id="comments">
         <div class="comment" data-id="1762449150577-juzyfccm8" data-level="0" data-pending="true" "="">
@@ -110,7 +96,7 @@ const standard = new Standard({
 A Swiss-style 12-column responsive grid with logical properties. Inspired by Josef Müller-Brockmann and the International Typographic Style.
 
 ### Basic Columns
-  
+
   <div class="grid-12">
     <div class="col-12 card">col-12 (Full width)</div>
     <div class="col-6 card">col-6 (Half)</div>
@@ -123,7 +109,7 @@ A Swiss-style 12-column responsive grid with logical properties. Inspired by Jos
     <div class="col-3 card">col-3</div>
     <div class="col-3 card">col-3</div>
   </div>
-  
+
 ### Responsive Grid
 Columns adapt at breakpoints (md: #{$small}, lg: #{$large}):
 
@@ -146,7 +132,7 @@ Precise control with CSS variables:
       <code>--start: 9; --span: 4</code>
     </div>
   </div>
-  
+
 ### Gap Variants
 
   <div class="grid-3 sm:grid-1 compact">
@@ -230,9 +216,9 @@ Blockquotes, code blocks, and figures get generous spacing:
 
 ## Color is the Emotion
 Automatic light/dark theming with analog-inspired colors. Zero configuration— respects <code>prefers-color-scheme</code> automatically.
-  
+
 ### Color Palette
-   
+
   <div class="grid-4 sm:grid-3">
     <div class="sm:col-1">
       <div
@@ -291,7 +277,7 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
       </div>
     </div>
   </div>
-  
+
 ### Semantic Colors
 
   <div class="grid-4 sm:grid-2">
@@ -316,7 +302,7 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
       <div class="card center" style="background: var(--color-accent)">Accent</div>
     </div>
   </div>
-  
+
 ### Text Colors
 
 Normal text color
@@ -326,7 +312,6 @@ Normal text color
   <p class="success">Success message</p>
   <p class="warning">Warning message</p>
   <p class="error">Error message</p>
-
 
 ## Reading Layout System<
 
@@ -459,7 +444,6 @@ Multiple images in a paragraph create automatic galleries:
 </form>
 </div></div>
 
-
 ## Form Elements
 Consistent form styling that integrates with the rhythm system and color management.
 
@@ -484,8 +468,6 @@ Consistent form styling that integrates with the rhythm system and color managem
       <button type="reset">Reset Form</button>
     </div>
   </form>
-
-
 
 ## Markdown Enhancements
 

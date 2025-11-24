@@ -84,11 +84,11 @@ To these challenges, Darwall (2017) adds another problem for the Ciceronian plat
 
 ::grid
 To be fair, Darwall’s critique hangs on two assumptions about the concept of dignity:
----
+
 (1) that a satisfactory account of dignity will involve a connection to, if not a grounding for, rights claims; and
----
+
 (2) that dignity is in no way an achievement. Both assumptions resonate strongly with contemporary moral-political talk of dignity.
----
+
 Nevertheless, identifying these assumptions should remind us that we have not yet clearly formulated a concept of dignity. So, let us turn to that task.[^3]
 ::end
 

@@ -1,13 +1,3 @@
----
-title: Markdown Enhancements
-
-eleventyNavigation:
-  key: Markdown
-  parent: 11ty Plugin
-  title: Markdown
-permalink: /11ty/markdown/
----
-
 # Enhanced Markdown
 
 The Standard Framework adds powerful markdown extensions for richer content.
@@ -70,8 +60,8 @@ In markdown:
 ~~~markdown
 ```liquid
 {% for item in items %}
-  Item: {{ item }}
-{% endfor %}
+  Item: 
+
 ```
 ~~~
 
@@ -161,7 +151,7 @@ function hello() {
 
 ```markdown
 | Column 1 | Column 2 | Column 3 |
-|----------|----------|----------|
+|----|----|----|
 | Cell 1   | Cell 2   | Cell 3   |
 | Cell 4   | Cell 5   | Cell 6   |
 ```
@@ -169,7 +159,7 @@ function hello() {
 ### Horizontal Rule
 
 ```markdown
----
+
 ```
 
 ## Markdown Configuration
@@ -195,14 +185,12 @@ eleventyConfig.addPlugin(Standard, {
 Control rendering with front matter:
 
 ```markdown
----
-layout: layouts/article.njk
+
 title: Article Title
 description: Short description
 tags:
   - featured
   - important
----
 
 # Article content here
 ```
@@ -212,17 +200,13 @@ tags:
 Use template syntax in markdown:
 
 ```markdown
----
-layout: layouts/base.njk
----
+# 
 
-# {{ title }}
-
-Hello {{ author }}, welcome to {{ site.name }}.
+Hello , welcome to .
 
 {% for item in items %}
-- {{ item }}
-{% endfor %}
+- 
+
 ```
 
 Disable with escapeCodeBlocks for code examples.
@@ -254,10 +238,8 @@ Disable with escapeCodeBlocks for code examples.
 ### Article with Callout
 
 ```markdown
----
-layout: layouts/article.njk
+
 title: Advanced Guide
----
 
 # Advanced Guide
 
@@ -275,10 +257,6 @@ Here's the content...
 ### Post with Footnotes
 
 ```markdown
----
-layout: layouts/article.njk
----
-
 # Research Article
 
 This finding[^1] is significant[^2].
@@ -336,6 +314,5 @@ const important = true;
 - [Filters](/11ty/filters/) - Transform markdown output
 - [Markdown Preprocessor](/docs/markdown-preprocessor-plugin/) - Advanced processing
 
----
 
 Master markdown syntax and create rich content. [Learn filters](/11ty/filters/)

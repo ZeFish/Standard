@@ -1,13 +1,3 @@
----
-title: Deployment Guide
-
-eleventyNavigation:
-  key: Deployment
-  parent: Cloudflare Functions
-  title: Deployment
-permalink: /cloudflare/deployment/
----
-
 # Deployment Guide
 
 Deploy your Cloudflare Functions to production.
@@ -106,7 +96,7 @@ jobs:
       - name: Deploy to Cloudflare
         run: npx wrangler publish
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: $
 ```
 
 ### Method 3: Wrangler Pages
@@ -252,7 +242,7 @@ wrangler tail --format json
 
 **Problem:** `wrangler publish` fails with "No functions found"
 
-**Solution:** Ensure functions are in `_site/functions/`: 
+**Solution:** Ensure functions are in `_site/functions/`:
 
 ```bash
 npm run build
@@ -350,6 +340,5 @@ wrangler rollback --version <version-id>
 - Set up [Alerting](https://developers.cloudflare.com/workers/observability/alerts/)
 - Optimize with [Performance Analytics](https://developers.cloudflare.com/workers/observability/analytics/)
 
----
 
 **Deployed successfully?** Time to scale! 🚀

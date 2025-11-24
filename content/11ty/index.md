@@ -1,12 +1,3 @@
----
-title: 11ty Plugin
-
-eleventyNavigation:
-  key: 11ty Plugin
-  title: 11ty Plugin
-permalink: /11ty/
----
-
 # Standard Framework 11ty Plugin
 
 Complete integration of the Standard Framework CSS system with Eleventy. Includes automatic asset management, enhanced markdown, template filters, backlinks, content encryption, and zero-configuration setup.
@@ -34,16 +25,16 @@ export default function (eleventyConfig) {
 
 ### 3. Use in Templates
 
-```nunjucks
+```html
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% standardAssets %}
+  
 </head>
 <body>
-  {{ content | safe }}
+  
 </body>
 </html>
 ```
@@ -103,8 +94,8 @@ See [Backlinks Guide](/11ty/backlinks/)
 See [Encryption Guide](/11ty/encryption/)
 
 ### 🎯 Shortcodes
-- `{% standardAssets %}` - Include CSS and JS
-- `{% standardLab %}` - Include experimental features
+- `` - Include CSS and JS
+- `` - Include experimental features
 - Plus more custom shortcodes
 
 See [Shortcodes Reference](/docs/)
@@ -132,7 +123,7 @@ eleventyConfig.addPlugin(Standard, {
 ### Local Files (Default)
 
 ```html
-{% standardAssets %}
+
 ```
 
 Outputs:
@@ -149,7 +140,7 @@ eleventyConfig.addPlugin(Standard, {
 });
 ```
 
-Then `{% standardAssets %}` uses unpkg CDN:
+Then `` uses unpkg CDN:
 ```html
 <link href="https://unpkg.com/@zefish/standard" rel="stylesheet">
 <script src="https://unpkg.com/@zefish/standard/js" type="module"></script>
@@ -158,7 +149,7 @@ Then `{% standardAssets %}` uses unpkg CDN:
 ### Experimental Lab
 
 ```html
-{% standardLab %}
+
 ```
 
 Includes experimental JavaScript features.
@@ -167,8 +158,8 @@ Includes experimental JavaScript features.
 
 Access framework data in templates:
 
-```nunjucks
-{{ standard.layout.meta }}
+```html
+
 ```
 
 ## Learning Path
@@ -192,27 +183,18 @@ Access framework data in templates:
 
 ### Blog with Standard Styling
 
-```nunjucks
----
+```html
 
 title: My Blog Post
----
 
-# {{ title }}
+# 
 
 Your blog post content with beautiful Standard Framework styling.
 ```
 
 ### Documentation Site
 
-```nunjucks
----
-
-eleventyNavigation:
-  key: Documentation
-  title: Documentation
----
-
+```html
 # Documentation
 
 Automatically get wiki-style backlinks and beautiful typography.
@@ -220,11 +202,7 @@ Automatically get wiki-style backlinks and beautiful typography.
 
 ### Portfolio
 
-```nunjucks
----
-
----
-
+```html
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   <!-- Your portfolio items -->
 </div>
@@ -232,11 +210,7 @@ Automatically get wiki-style backlinks and beautiful typography.
 
 ### Knowledge Base
 
-```nunjucks
----
-
----
-
+```html
 # Topic
 
 Your knowledge base entry with automatic backlinks to related pages.
@@ -304,7 +278,7 @@ my-site/
 ## Comparison with Similar Tools
 
 | Feature | Standard | Eleventy | Jekyll |
-|---------|----------|----------|--------|
+|---|----|----|--|
 | CSS Framework | ✅ Included | ❌ Not included | ❌ Minimal |
 | Markdown Enhancement | ✅ Full | ⚠️ Limited | ⚠️ Limited |
 | Backlinks | ✅ Automatic | ❌ No | ❌ No |
@@ -338,6 +312,5 @@ Ready to build? Start here:
 4. **[Filters](/11ty/filters/)** - Transform your content
 5. **[Backlinks](/11ty/backlinks/)** - Connect your pages
 
----
 
 **Version 0.10.52** | [Eleventy](https://www.11ty.dev/) | [MIT License](https://github.com/ZeFish/Standard/blob/main/LICENSE)

@@ -1,9 +1,3 @@
----
-layout: base.njk
-title: Utilities
-description: Self-documenting utility classes for spacing, sizing, typography, colors, and layout
----
-
 # Utilities
 
 Self-documenting utility classes for spacing, sizing, typography, colors, and layout following a consistent naming pattern.
@@ -32,7 +26,6 @@ Every utility follows an intuitive pattern **[property]-[side/variant]-[size]** 
 
 > ✨ **Design Principle**: You can guess the utility name by looking at other utilities on the page. Even after time away from the code, the naming is self-explanatory.
 
----
 
 ## Spacing Utilities
 
@@ -124,7 +117,6 @@ Control spacing between flex and grid items.
 </div>
 ```
 
----
 
 ## Sizing Utilities
 
@@ -185,7 +177,6 @@ Control element height.
 - `.height-*` (spacing scale)
 - `.min-height-*`, `.max-height-*` — Min/max constraints
 
----
 
 ## Typography Utilities
 
@@ -282,7 +273,6 @@ Transform and style text.
 <p class="text-no-wrap" style="width: 200px; border: 1px solid var(--color-subtle); padding: 0.5rem; border-radius: 0.5rem;">This text will not wrap (.text-no-wrap)</p>
 ```
 
----
 
 ## Color Utilities
 
@@ -320,7 +310,6 @@ Control border color.
 </div>
 ```
 
----
 
 ## Display & Visibility
 
@@ -362,7 +351,6 @@ Hide content visually but keep it available to screen readers.
 </button>
 ```
 
----
 
 ## Layout Utilities
 
@@ -400,7 +388,6 @@ Constrain content to optimal reading width.
 - `.width-line-extra-large` — Extra large (60rem)
 - `.width-line-full` — Responsive full width
 
----
 
 ## List Utilities
 
@@ -483,7 +470,6 @@ When a list uses `.display-flex` or has `display: flex` inline style, list items
 </ul>
 ```
 
----
 
 ## Body Padding Negation Utilities
 
@@ -617,7 +603,6 @@ You can customize body padding by adjusting these variables in your CSS:
 }
 ```
 
----
 
 ## Rhythm Utilities
 
@@ -643,7 +628,6 @@ Control rhythm multiplier for consistent spacing.
 </div>
 ```
 
----
 
 ## Combining Utilities
 
@@ -667,14 +651,13 @@ The real power of utilities comes from combining them:
 <p class="text-size-small text-color-muted text-transform-uppercase">Small muted uppercase text</p>
 ```
 
----
 
 ## Size Scale Reference
 
 All spacing utilities use the same size tokens defined in the design system:
 
 | Token | Value |
-|-------|-------|
+|-|-|
 | `3xs` | var(--rhythm-d5) |
 | `2xs` | var(--rhythm-d4) |
 | `xs` | var(--rhythm-d3) |
@@ -685,7 +668,6 @@ All spacing utilities use the same size tokens defined in the design system:
 | `2xl` | var(--rhythm-4) |
 | `3xl` | var(--rhythm-5) |
 
----
 
 ## Best Practices
 
@@ -698,7 +680,6 @@ All spacing utilities use the same size tokens defined in the design system:
 ❌ **Don't abuse !important** by fighting utilities
 ❌ **Don't use non-semantic utilities** for important page structure
 
----
 
 ## See Also
 

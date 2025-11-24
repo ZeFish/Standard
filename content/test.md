@@ -1,16 +1,4 @@
----
-layout: base.njk
-title: Cheat Sheet
-description: The essential commands you'll use every day and always forget
-permalink: /test/
-comments: true
----
-
-
 # Test
-
-
-
 
 **Pattern**: `margin-top-base`, `padding-left-xs`, `gap-l`
 
@@ -18,7 +6,6 @@ comments: true
 
 **Most common mistake**: Using `padding-xl` on small cards. Start with `base`, adjust down/up as needed.
 
----
 
 ## Inspector Quick Reference
 
@@ -34,13 +21,11 @@ qwdqdwd Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
 
 ::info hola
 
-
 This error callout can be collapsed and expanded. It contains multiple lines of content to test the collapsible functionality.
 
 ::callout hola
 This callout has a custom title instead of the default "Success" title.
 ::end
-
 
 Multiple callouts can be stacked:
 
@@ -48,9 +33,7 @@ Multiple callouts can be stacked:
 - Icons are automatically assigned
 - Colors match the callout type
 
-
 This is a bug callout to test the icon and styling.
-
 
 [!question]
 Questions get their own icon and color scheme.
@@ -69,7 +52,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       <img src="https://picsum.photos/400/300?random=6" alt="Demo 3" />
     </p>
 
-
 ```html
 <!-- DON'T write custom CSS -->
 <div style="padding: 1rem; margin-bottom: 2rem; text-align: center;">
@@ -80,7 +62,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 **Why**: Utilities are self-documenting. Six months later, `padding-base` still makes sense. `padding: 1rem` requires you to remember your spacing scale.
 
 | Size | Usage | Value | When to use |
-|------|-------|-------|-------------|
+||-|-|-|
 | `xs` | Tiny gaps, compact UI | ~0.5rem | Button groups, inline icons |
 | `s` | Small spacing | ~0.75rem | Form fields, card padding |
 | `base` | **Normal spacing** | ~1rem | Default gaps, standard rhythm |

@@ -397,7 +397,6 @@
     color: var(--color-subtle) !important;
 }
 
-
 .accent {
     --color-msg: var(--color-accent);
     color: var(--color-accent);
@@ -907,7 +906,7 @@ ul.menu {
 nav.menu.horizontal ul,
 ul.menu.horizontal {
     flex-direction: row;
-    gap: var(--base-d2);
+    gap: var(--gap-compact);
     li {
         padding-inline-start: 0;
         margin-block: 0;

@@ -1,0 +1,25 @@
+---
+/**
+ * Lab Component
+ * Includes Standard Framework lab/experimental features script
+ */
+import config from "virtual:standard/config";
+
+const {
+    outputDir = config.standard?.outputDir || "assets/standard",
+    attributes = "",
+    cacheBuster = Date.now(),
+} = Astro.props;
+---
+
+<!-- Standard Framework Lab Features -->
+<script
+    src={`/${outputDir}/standard.lab.js?v=${cacheBuster}`}
+    {...attributes
+        .split(" ")
+        .filter((attr) => attr)
+        .reduce((acc, attr) => {
+            const [key, value] = attr.split("=");
+            if (key) acc[key] = value?.replace(/['"]/g, "") || true;
+            return acc;
+        }, {})}></script>

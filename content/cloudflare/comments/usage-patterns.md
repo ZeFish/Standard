@@ -1,9 +1,3 @@
----
-layout: base.njk
-title: Comments System - Usage Patterns
-description: How to use the GitHub comments system with Standard Framework
----
-
 # Comments System - Usage Patterns
 
 Different ways to import and use the comments system alongside Standard Framework.
@@ -31,7 +25,6 @@ export default function (eleventyConfig) {
 - ✅ Client library copied to `assets/js/standard.comment.js`
 - ✅ Configuration template copied
 
----
 
 ## Pattern 2: Standard + Comments Together
 
@@ -65,7 +58,6 @@ export default function (eleventyConfig) {
 - ✅ Comments client in `assets/js/standard.comment.js`
 - ✅ Both plugins work independently
 
----
 
 ## Pattern 3: Standard + Comments + Custom Cloudflare Functions
 
@@ -103,7 +95,6 @@ export default function (eleventyConfig) {
 - ✅ Your custom functions in `functions/` as well
 - ✅ Full control over Cloudflare setup
 
----
 
 ## Pattern 4: Conditional Comments (Feature Flag)
 
@@ -135,7 +126,6 @@ export default function (eleventyConfig) {
 - ✅ Dev/staging builds skip comments overhead
 - ✅ Easy to toggle on/off
 
----
 
 ## Pattern 5: Comments + Multiple Cloudflare Endpoints
 
@@ -173,7 +163,6 @@ functions/
 └── webhook.js          (your custom)
 ```
 
----
 
 ## Pattern 6: Comments on Specific Pages Only
 
@@ -182,7 +171,7 @@ Use comments selectively on certain pages.
 ```html
 <!-- article.njk - only on articles -->
 <article>
-  {{ content | safe }}
+  
 
   {% if page.url.includes("/blog/") or page.url.includes("/articles/") %}
     <div id="comments"></div>
@@ -201,7 +190,7 @@ Use comments selectively on certain pages.
       comments.load().then(() => comments.render());
       comments.attachFormHandler();
     </script>
-  {% endif %}
+  
 </article>
 ```
 
@@ -212,7 +201,6 @@ Use comments selectively on certain pages.
 - ✅ Faster page loads on non-comment pages
 - ✅ Reduced JavaScript overhead
 
----
 
 ## Pattern 7: Custom Comments Endpoint Handler
 
@@ -249,7 +237,6 @@ export default function (eleventyConfig) {
 - ✅ Custom server-side logic
 - ✅ Full control over validation/spam detection
 
----
 
 ## Import Reference
 
@@ -280,7 +267,6 @@ import GitHubComments from "@zefish/standard/src/cloudflare/standard.comment.js"
 import { createResponse, parseRequest } from "@zefish/standard/src/cloudflare/utils.js";
 ```
 
----
 
 ## Recommended Patterns
 
@@ -320,7 +306,6 @@ eleventyConfig.addPlugin(CloudflarePlugin);
 eleventyConfig.addPlugin(CommentsPlugin);
 ```
 
----
 
 ## Configuration Examples
 
@@ -363,7 +348,6 @@ export default function (eleventyConfig) {
 }
 ```
 
----
 
 ## Troubleshooting
 
@@ -382,7 +366,6 @@ A: Yes! Use Pattern 4 with environment checks.
 **Q: How do I use just the client library?**
 A: Import directly: `import GitHubComments from "@zefish/standard/src/cloudflare/standard.comment.js"`
 
----
 
 ## See Also
 

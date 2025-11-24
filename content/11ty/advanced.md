@@ -1,13 +1,3 @@
----
-title: Advanced Features & Optimization
-
-eleventyNavigation:
-  key: Advanced
-  parent: 11ty Plugin
-  title: Advanced
-permalink: /11ty/advanced/
----
-
 # Advanced Features & Optimization
 
 Master advanced techniques for building sophisticated sites with 11ty and Standard Framework.
@@ -79,11 +69,11 @@ export default function (eleventyConfig) {
 
 ### Lazy Loading Images
 
-```nunjucks
+```html
 <!-- In templates -->
 <img
-  src="{{ image }}"
-  alt="{{ alt }}"
+  src=""
+  alt=""
   loading="lazy"
   decoding="async"
   width="400"
@@ -95,13 +85,13 @@ export default function (eleventyConfig) {
 
 Load critical CSS inline:
 
-```nunjucks
+```html
 <!-- In base layout -->
 <head>
   {% set criticalCSS %}
     {% include "css/critical.css" %}
-  {% endset %}
-  <style>{{ criticalCSS }}</style>
+  
+  <style></style>
 
   <!-- Load rest asynchronously -->
   <link rel="preload" href="/css/standard.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -109,7 +99,6 @@ Load critical CSS inline:
 </head>
 ```
 
----
 
 ## Custom Layouts & Templates
 
@@ -117,51 +106,43 @@ Load critical CSS inline:
 
 Create flexible layout hierarchies:
 
-```nunjucks
+```html
 <!-- _includes/layouts/base.njk -->
 <!DOCTYPE html>
 <html>
 <head>
-  {% standardAssets %}
+  
 </head>
 <body>
-  {{ content | safe }}
+  
 </body>
 </html>
 ```
 
-```nunjucks
+```html
 <!-- _includes/layouts/main.njk -->
----
-layout: layouts/base.njk
----
-
 <main class="max-w-4xl mx-auto px-4">
-  {{ content | safe }}
+  
 </main>
 ```
 
-```nunjucks
+```html
 <!-- _includes/layouts/blog-post.njk -->
----
-layout: layouts/main.njk
----
-
 <article class="rhythm-block">
   <header>
-    <h1>{{ title }}</h1>
-    <time datetime="{{ date | dateFilter }}">{{ date | dateFilter('long') }}</time>
+    <h1></h1>
+    <time datetime=""></time>
   </header>
 
-  {{ content | safe }}
+  
 
   <footer>
     {% if previousPost %}
-      <a href="{{ previousPost.url }}">← Previous</a>
-    {% endif %}
+      <a href="">← Previous</a>
+    
     {% if nextPost %}
-      <a href="{{ nextPost.url }}">Next →</a>
-    {% endif %}
+      <a href="">Next →</a>
+    
   </footer>
 </article>
 ```
@@ -169,11 +150,10 @@ layout: layouts/main.njk
 Use in markdown:
 
 ```markdown
----
-layout: layouts/blog-post.njk
+
+/blog-post.njk
 title: My Article
 date: 2024-10-21
----
 
 # Content here
 ```
@@ -189,38 +169,35 @@ eleventyConfig.addNunjucksFilter("applyLayout", (content, layoutName, data) => {
 });
 ```
 
-```nunjucks
+```html
 <!-- _includes/layouts/card.njk -->
-<div class="card {{ cardClass }}">
+<div class="card ">
   <div class="card-header">
     {% if cardIcon %}
-      <span class="icon">{{ cardIcon }}</span>
-    {% endif %}
-    <h3>{{ cardTitle }}</h3>
+      <span class="icon"></span>
+    
+    <h3></h3>
   </div>
   <div class="card-body">
-    {{ content | safe }}
+    
   </div>
   {% if cardFooter %}
-    <div class="card-footer">{{ cardFooter }}</div>
-  {% endif %}
+    <div class="card-footer"></div>
+  
 </div>
 ```
 
 Use with variables:
 
 ```markdown
----
-layout: layouts/card.njk
+
 cardTitle: "Feature Highlight"
 cardIcon: "⭐"
 cardClass: "featured"
----
 
 Content inside card.
 ```
 
----
 
 ## Global Data & Configuration
 
@@ -256,12 +233,12 @@ export default function (eleventyConfig) {
 
 Access in templates:
 
-```nunjucks
+```html
 <footer>
-  <p>&copy; {{ site.name }} - v{{ version }}</p>
-  <a href="{{ site.socialLinks.twitter }}">Twitter</a>
-  <a href="{{ site.socialLinks.github }}">GitHub</a>
-  <p>Built {{ buildTime | dateFilter('long') }}</p>
+  <p>&copy;  - v</p>
+  <a href="">Twitter</a>
+  <a href="">GitHub</a>
+  <p>Built </p>
 </footer>
 ```
 
@@ -290,14 +267,13 @@ export default function() {
 
 Use in templates:
 
-```nunjucks
+```html
 <!-- Use data from _data/posts.js -->
 {% for post in posts %}
-  <a href="{{ post.url }}">{{ post.title }}</a>
-{% endfor %}
+  <a href=""></a>
+
 ```
 
----
 
 ## Advanced Collections
 
@@ -331,22 +307,22 @@ eleventyConfig.addCollection("tagIndex", (collection) => {
 
 Use in templates:
 
-```nunjucks
+```html
 <!-- Posts organized by year -->
 {% for year, posts in postsByYear %}
-  <h2>{{ year }}</h2>
+  <h2></h2>
   <ul>
     {% for post in posts %}
-      <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
-    {% endfor %}
+      <li><a href=""></a></li>
+    
   </ul>
-{% endfor %}
+
 
 <!-- Tag index -->
 <div class="tags">
   {% for tag in tagIndex %}
-    <a href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
-  {% endfor %}
+    <a href="/tags//"></a>
+  
 </div>
 ```
 
@@ -370,7 +346,6 @@ eleventyConfig.addCollection("recent", (collection) => {
 });
 ```
 
----
 
 ## Custom Shortcodes
 
@@ -413,7 +388,7 @@ eleventyConfig.addPairedNunjucksShortcode("card", (content, title) => {
 
 Use in templates:
 
-```nunjucks
+```html
 <!-- Simple shortcode -->
 This is {% highlight "important" %}
 
@@ -426,10 +401,9 @@ This is {% highlight "important" %}
 <!-- Paired shortcode -->
 {% card "Card Title" %}
   Card content goes here
-{% endcard %}
+
 ```
 
----
 
 ## Extending with Plugins
 
@@ -485,7 +459,6 @@ export default function (eleventyConfig) {
 }
 ```
 
----
 
 ## Content Preprocessing
 
@@ -536,7 +509,6 @@ eleventyConfig.addTransform("htmlMinifier", (content, outputPath) => {
 });
 ```
 
----
 
 ## Common Patterns
 
@@ -565,18 +537,18 @@ eleventyConfig.addFilter("breadcrumbs", function(page) {
 
 Use:
 
-```nunjucks
+```html
 <nav aria-label="breadcrumb">
   <ol class="breadcrumbs">
     {% for crumb in page | breadcrumbs %}
       <li>
         {% if loop.last %}
-          <span>{{ crumb.title }}</span>
-        {% else %}
-          <a href="{{ crumb.url }}">{{ crumb.title }}</a>
-        {% endif %}
+          <span></span>
+        
+          <a href=""></a>
+        
       </li>
-    {% endfor %}
+    
   </ol>
 </nav>
 ```
@@ -606,7 +578,7 @@ eleventyConfig.addFilter("tableOfContents", (content) => {
 
 Generate TOC:
 
-```nunjucks
+```html
 <!-- In markdown with front matter -->
 {% set toc = content | tableOfContents %}
 
@@ -614,14 +586,14 @@ Generate TOC:
   <h3>Table of Contents</h3>
   <ul>
     {% for heading in toc %}
-      <li class="level-{{ heading.level }}">
-        <a href="#{{ heading.id }}">{{ heading.text }}</a>
+      <li class="level-">
+        <a href="#"></a>
       </li>
-    {% endfor %}
+    
   </ul>
 </aside>
 
-{{ content | safe }}
+
 ```
 
 ### Related Content
@@ -642,7 +614,6 @@ eleventyConfig.addFilter("relatedPosts", function(currentPage, collection, maxCo
 });
 ```
 
----
 
 ## Deployment Optimization
 
@@ -692,7 +663,6 @@ export default function (eleventyConfig) {
 }
 ```
 
----
 
 ## Troubleshooting Advanced Issues
 
@@ -719,20 +689,19 @@ eleventyConfig.addCollection("debug", (collection) => {
 
 ### Template Errors
 
-```nunjucks
+```html
 <!-- Debug variables -->
-{{ variable | dump }}
+
 
 <!-- Safe property access -->
-{{ (page.data.author or "Unknown") | upper }}
+
 
 <!-- Conditional debugging -->
 {% if debug %}
-  <pre>{{ page | dump }}</pre>
-{% endif %}
+  <pre></pre>
+
 ```
 
----
 
 ## See Also
 
@@ -743,6 +712,5 @@ eleventyConfig.addCollection("debug", (collection) => {
 - [Encryption](/11ty/encryption/) - Content protection
 - [11ty Official Docs](https://www.11ty.dev/docs/) - Complete 11ty reference
 
----
 
 Build powerful, optimized sites with advanced 11ty techniques. You've mastered the Standard Framework! 🚀

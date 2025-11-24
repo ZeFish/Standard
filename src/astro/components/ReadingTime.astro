@@ -1,0 +1,60 @@
+---
+/**
+ * ReadingTime Component
+ * Calculates and displays reading time estimate for given text
+ */
+interface Props {
+    text?: string;
+    wordsPerMinute?: number;
+    showIcon?: boolean;
+    prefix?: string;
+    suffix?: string;
+    class?: string;
+}
+
+const {
+    text = "",
+    wordsPerMinute = 225,
+    showIcon = false,
+    prefix = " - ",
+    suffix = "",
+    class: className = "",
+} = Astro.props;
+
+// Return empty string if no text provided
+if (!text || typeof text !== "string") {
+    return "";
+}
+
+// Count words by splitting on any whitespace
+const wordCount = text.split(/\s+/g).filter((word) => word.length > 0).length;
+const minutes = Math.floor(wordCount / wordsPerMinute);
+
+// Format the reading time
+let readingTime = "";
+if (minutes === 1) {
+    readingTime = `${prefix}1 minute${suffix}`;
+} else if (minutes > 1) {
+    readingTime = `${prefix}${minutes} minutes${suffix}`;
+} else {
+    readingTime = `${prefix}less than 1 minute${suffix}`;
+}
+
+// Icon SVG (optional)
+const icon = showIcon
+    ? `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: middle;">
+    <circle cx="12" cy="12" r="10"></circle>
+    <polyline points="12,6 12,12 16,14"></polyline>
+  </svg>
+`
+    : "";
+---
+
+<span
+    class:list={["reading-time", className]}
+    aria-label={`Estimated reading time: ${minutes} ${minutes === 1 ? "minute" : "minutes"}`}
+>
+    <Fragment set:html={icon} />
+    <Fragment set:html={readingTime} />
+</span>

@@ -1,12 +1,3 @@
----
-title: CSS Framework
-
-eleventyNavigation:
-  key: CSS Framework
-  title: CSS Framework
-permalink: /css/
----
-
 # Standard Framework CSS
 
 Professional typography framework with responsive layouts, semantic colors, dark mode support, and mathematical precision based on the golden ratio. Build beautiful, accessible interfaces with pre-calculated font scales, spacing systems, and components.
@@ -36,8 +27,8 @@ export default function (eleventyConfig) {
 
 Then in your templates:
 
-```nunjucks
-{% standardAssets %}
+```html
+
 ```
 
 ## What's Included
@@ -131,7 +122,7 @@ Customize the framework by overriding CSS variables.
 Mobile-first responsive design with four tiers:
 
 | Name | Width | Usage |
-|------|-------|-------|
+||-|-|
 | Mobile | 0 - 600px | Default styles |
 | Small | 768px+ | Tablets, small screens |
 | Large | 1024px+ | Desktops |
@@ -143,7 +134,6 @@ Mobile-first responsive design with four tiers:
 standard.min.css     ~12 KB gzipped
 standard.min.js      ~2 KB gzipped
 ```
-
 
 ## Examples
 

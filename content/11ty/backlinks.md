@@ -1,13 +1,3 @@
----
-title: Wiki-Style Backlinks
-
-eleventyNavigation:
-  key: Backlinks
-  parent: 11ty Plugin
-  title: Backlinks
-permalink: /11ty/backlinks/
----
-
 # Wiki-Style Backlinks
 
 Create automatic bidirectional links between pages and build knowledge graphs with wiki-style backlinks.
@@ -30,7 +20,6 @@ This enables:
 - **SEO benefits** - Build internal link structure automatically
 - **Reduced maintenance** - No manual "related posts" sections needed
 
----
 
 ## How It Works
 
@@ -51,7 +40,6 @@ If these pages exist:
 
 Then `/blog/javascript-tricks/` automatically gets backlinks from those three pages.
 
----
 
 ## Basic Usage
 
@@ -59,17 +47,13 @@ Then `/blog/javascript-tricks/` automatically gets backlinks from those three pa
 
 Add backlinks to your article layout in `_includes/layouts/article.njk`:
 
-```nunjucks
----
-layout: layouts/base.njk
----
-
+```html
 <article class="rhythm-block">
-  <h1>{{ title }}</h1>
-  <p class="text-lg text-foreground/80">{{ description }}</p>
+  <h1></h1>
+  <p class="text-lg text-foreground/80"></p>
 
   <main class="prose max-w-prose">
-    {{ content | safe }}
+    
   </main>
 
   <!-- Display backlinks section -->
@@ -79,17 +63,17 @@ layout: layouts/base.njk
       <ul class="list-none p-0">
         {% for backlink in backlinks %}
           <li class="mb-2">
-            <a href="{{ backlink.url }}" class="text-accent hover:underline">
-              {{ backlink.data.title or backlink.fileSlug }}
+            <a href="" class="text-accent hover:underline">
+              
             </a>
             {% if backlink.data.description %}
-              <p class="text-sm text-foreground/70">{{ backlink.data.description }}</p>
-            {% endif %}
+              <p class="text-sm text-foreground/70"></p>
+            
           </li>
-        {% endfor %}
+        
       </ul>
     </aside>
-  {% endif %}
+  
 </article>
 ```
 
@@ -112,7 +96,6 @@ export default function (eleventyConfig) {
 
 No additional configuration needed!
 
----
 
 ## Wiki-Style Linking
 
@@ -156,7 +139,6 @@ This builds on concepts from [[JavaScript Fundamentals]].
 See also [[Advanced TypeScript Patterns]].
 ```
 
----
 
 ## Configuration
 
@@ -202,14 +184,13 @@ export default function (eleventyConfig) {
 ### Options Explained
 
 | Option | Type | Default | Description |
-|--------|------|---------|-------------|
+|--||---|-|
 | `enabled` | boolean | `true` | Enable backlinks feature |
 | `exclude` | array | `[]` | Patterns to exclude from backlinks |
 | `minBacklinks` | number | `1` | Minimum backlinks to show section |
 | `wikiLinks.enabled` | boolean | `true` | Enable `[[Page Name]]` syntax |
 | `wikiLinks.autoCreate` | boolean | `false` | Auto-create pages for missing links |
 
----
 
 ## Advanced Patterns
 
@@ -235,9 +216,8 @@ content/
 Each guide uses `[[Topic Name]]` to link to related topics:
 
 ```markdown
----
+
 title: TypeScript Setup Guide
----
 
 # Getting Started with [[TypeScript]]
 
@@ -250,28 +230,28 @@ Related: [[Web Development]]
 
 Auto-generate related content sections:
 
-```nunjucks
+```html
 <!-- In _includes/layouts/doc.njk -->
 
 <article>
-  <h1>{{ title }}</h1>
-  {{ content | safe }}
+  <h1></h1>
+  
 
   <!-- Auto-discovered related content -->
   <aside class="related-docs">
     <h3>Referenced by</h3>
     <ul>
       {% for backlink in backlinks %}
-        <li><a href="{{ backlink.url }}">{{ backlink.data.title }}</a></li>
-      {% endfor %}
+        <li><a href=""></a></li>
+      
     </ul>
 
     <!-- Also show external references this doc mentions -->
     <h3>References</h3>
     <ul>
       {% for link in page.links %}
-        <li><a href="{{ link }}">{{ link }}</a></li>
-      {% endfor %}
+        <li><a href=""></a></li>
+      
     </ul>
   </aside>
 </article>
@@ -281,24 +261,24 @@ Auto-generate related content sections:
 
 Create topic indexes automatically:
 
-```nunjucks
+```html
 <!-- In _includes/layouts/topic.njk -->
 
-<h1>Topic: {{ title }}</h1>
+<h1>Topic: </h1>
 
-<p>{{ description }}</p>
+<p></p>
 
-<h2>Articles about {{ title }}</h2>
+<h2>Articles about </h2>
 <ul>
   {% for backlink in backlinks %}
     <li>
-      <a href="{{ backlink.url }}">{{ backlink.data.title }}</a>
-      <time>{{ backlink.date | dateFilter('short') }}</time>
+      <a href=""></a>
+      <time></time>
     </li>
-  {% endfor %}
+  
 </ul>
 
-<p>{{ backlinks.length }} article(s) about this topic</p>
+<p> article(s) about this topic</p>
 ```
 
 ### Research Paper Citation Graph
@@ -306,15 +286,14 @@ Create topic indexes automatically:
 Link research papers and show citations:
 
 ```markdown
----
+
 title: "Machine Learning: A Probabilistic Perspective"
 description: Foundational ML research
 tags:
   - research
   - machine-learning
----
 
-# {{ title }}
+# 
 
 This paper introduces key concepts in [[Probabilistic Models]].
 
@@ -324,7 +303,6 @@ Cited by:
 - [[Neural Network Theory]]
 ```
 
----
 
 ## Template Helpers
 
@@ -332,16 +310,16 @@ The Standard Framework provides these template helpers for working with backlink
 
 ### Get Backlinks for Current Page
 
-```nunjucks
+```html
 <!-- In any template -->
 {% for backlink in backlinks %}
-  {{ backlink.url }} - {{ backlink.data.title }}
-{% endfor %}
+   - 
+
 ```
 
 ### Get Backlinks for Specific Page
 
-```nunjucks
+```html
 <!-- In eleventy.config.js -->
 eleventyConfig.addFilter("getBacklinksFor", (url) => {
   // Returns backlinks for given URL
@@ -351,29 +329,28 @@ eleventyConfig.addFilter("getBacklinksFor", (url) => {
 
 Use in templates:
 
-```nunjucks
+```html
 {% set relatedBacklinks = "/blog/javascript/" | getBacklinksFor %}
 {% for link in relatedBacklinks %}
-  <a href="{{ link.url }}">{{ link.data.title }}</a>
-{% endfor %}
+  <a href=""></a>
+
 ```
 
 ### Count Backlinks
 
-```nunjucks
+```html
 <!-- Simple count -->
-<span>Referenced by {{ backlinks.length }} page(s)</span>
+<span>Referenced by  page(s)</span>
 
 <!-- With conditional display -->
 {% if backlinks.length > 0 %}
   <aside>
-    <h3>{{ backlinks.length }} References</h3>
+    <h3> References</h3>
     <!-- ... list backlinks -->
   </aside>
-{% endif %}
+
 ```
 
----
 
 ## Styling Backlinks
 
@@ -438,25 +415,24 @@ If using Tailwind CSS:
   <ul class="space-y-3">
     {% for backlink in backlinks %}
       <li>
-        <a href="{{ backlink.url }}" class="text-blue-600 hover:text-blue-700 hover:underline">
-          {{ backlink.data.title }}
+        <a href="" class="text-blue-600 hover:text-blue-700 hover:underline">
+          
         </a>
         {% if backlink.data.description %}
-          <p class="text-sm text-gray-600 mt-1">{{ backlink.data.description }}</p>
-        {% endif %}
+          <p class="text-sm text-gray-600 mt-1"></p>
+        
       </li>
-    {% endfor %}
+    
   </ul>
 </aside>
 ```
 
----
 
 ## Common Patterns
 
 ### Show Backlinks Only for Certain Pages
 
-```nunjucks
+```html
 <!-- In article layout -->
 
 {% if tags and tags.includes("featured") %}
@@ -466,12 +442,12 @@ If using Tailwind CSS:
       <h3>Read Next</h3>
       <ul>
         {% for backlink in backlinks %}
-          <li><a href="{{ backlink.url }}">{{ backlink.data.title }}</a></li>
-        {% endfor %}
+          <li><a href=""></a></li>
+        
       </ul>
     </aside>
-  {% endif %}
-{% endif %}
+  
+
 ```
 
 ### Filter Backlinks by Category
@@ -485,31 +461,30 @@ eleventyConfig.addFilter("backlinksByCategory", (backlinks, category) => {
 
 Use:
 
-```nunjucks
+```html
 {% set blogBacklinks = backlinks | backlinksByCategory("blog") %}
 {% for link in blogBacklinks %}
-  <a href="{{ link.url }}">{{ link.data.title }}</a>
-{% endfor %}
+  <a href=""></a>
+
 ```
 
 ### Create Related Posts Section
 
-```nunjucks
+```html
 <aside>
   <h3>Related Reading</h3>
   {% set relatedCount = 0 %}
   {% for backlink in backlinks %}
     {% if relatedCount < 5 %}
-      <a href="{{ backlink.url }}" class="related-link">
-        {{ backlink.data.title }}
+      <a href="" class="related-link">
+        
       </a>
       {% set relatedCount = relatedCount + 1 %}
-    {% endif %}
-  {% endfor %}
+    
+  
 </aside>
 ```
 
----
 
 ## Troubleshooting
 
@@ -542,13 +517,11 @@ Use:
 2. Reduce page count during development (use `--incremental` flag)
 3. Monitor build time: `npx @11ty/eleventy --profile`
 
----
 
 ## API Reference
 
 For complete API details, see [Backlinks Plugin Documentation](/docs/backlinks-plugin/)
 
----
 
 ## See Also
 
@@ -557,6 +530,5 @@ For complete API details, see [Backlinks Plugin Documentation](/docs/backlinks-p
 - [Advanced Features](/11ty/advanced/) - Power user tips
 - [Backlinks Plugin API](/docs/backlinks-plugin/) - Technical reference
 
----
 
 Master bidirectional linking and build knowledge graphs. [Learn about content encryption](/11ty/encryption/)

@@ -1,10 +1,3 @@
----
-title: Markdown
-description: Markdown Guide
-permalink: /markdown/
-comment: true
----
-
 # Markdown Basics
 
 **Lorem Ipsum** is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a [[Lens/metah.nomis|Internal Link]] of type and scrambled it to make a type specimen book. It has survived not only five centuries, but *also the leap into* electronic [External Link](https://www.francisfontaine.com/)
@@ -16,9 +9,6 @@ Donec ac orci scelerisque, posuere nisl nec, rutrum tortor. Ut auctor felis id u
 
 Mauris quis accumsan orci, ac iaculis augue. Pellentesque mollis erat neque, vitae pulvinar turpis rutrum at. Phasellus feugiat, justo id varius posuere, dui metus egestas lacus, eu consectetur tellus sem non ante. Suspendisse et convallis eros, quis varius leo. Donec volutpat faucibus tempus.
 
-
-
----
 
 Learn how to apply basic formatting to your Obsidian notes, using [Markdown](https://daringfireball.net/projects/markdown/). Import this as a note into your Obsidian Vault to view it and to test new themes. Certain community plugins are required for a few features.
 
@@ -40,8 +30,6 @@ Multiple adjacent blank spaces in and between paragraphs collapse to a single sp
 
 ```md
 Multiple          adjacent          spaces
-
-
 
 and multiple newlines between paragraphs.
 ```
@@ -96,7 +84,7 @@ To create a heading, add up to six `#` symbols before your heading text. The n
 ### Styling text
 
 | Style                  | Syntax                   | Example                        | Output                      |
-|------------------------|--------------------------|--------------------------------|-----------------------------|
+||--|--|-----|
 | Bold                   | `** **` or `__ __`       | `**Bold text**`                | **Bold text**               |
 | Italic                 | `* *` or `_ _`           | `*Italic text*`                | *Italic text*               |
 | Strikethrough          | `~~ ~~`                  | `~~Striked out text~~`         | ~~Striked out text~~        |
@@ -322,8 +310,7 @@ You can use three or more stars `***`, hyphens `---`, or underscore `___` on
 ***
 ****
 * * *
----
-----
+-
 - - -
 ___
 ____
@@ -354,7 +341,6 @@ You can also use inline footnotes. ^[This is an inline footnote.]
 > [!note]
  Inline footnotes only work in Reading View, not in Live Preview.
 
-
 ```
 
 ## Advanced Formatting Syntax
@@ -365,7 +351,7 @@ You can create table using vertical bars (`|`) and hyphens (`-`). Vertical bars 
 
 ```md
 | First name | Last name |
-| ---------- | --------- |
+| ---- | --- |
 | Max        | Planck    |
 | Marie      | Curie     |
 ```

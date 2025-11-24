@@ -1,13 +1,3 @@
----
-title: Common Usage Patterns
-
-eleventyNavigation:
-  key: Patterns
-  parent: Cloudflare Functions
-  title: Usage Patterns
-permalink: /cloudflare/patterns/
----
-
 # Common Usage Patterns
 
 Real-world patterns for building APIs, handlers, and utilities with Cloudflare Functions.
@@ -405,6 +395,5 @@ async function enrichData(data) {
 - [See Real Examples](/cloudflare/examples/) - Complete working code
 - [Deploy to Production](/cloudflare/deployment/) - Go live
 
----
 
 Ready to deploy? [Check the deployment guide](/cloudflare/deployment/)

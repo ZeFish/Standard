@@ -1,0 +1,269 @@
+<!DOCTYPE html><html class="rhythm" lang="en" data-theme="default"> <head><meta charset="utf-8"><!-- Standard Framework | https://standard.ffp.co --><title>Standard Framework</title><meta name="description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta name="author" content="Francis Fontaine"><meta name="language" content="en"><meta name="referrer" content="strict-origin-when-cross-origin"><!-- Canonical URL --><link rel="canonical" href="https://standard.ffp.co/11ty/markdown/"><!-- Feed & Sitemap --><link rel="alternate" type="application/atom+xml" title="Standard Framework" href="https://standard.ffp.co/feed.xml"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://standard.ffp.co/sitemap.xml"><!-- Robots Meta --><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><!-- Open Graph --><meta property="og:title" content="Standard Framework"><meta property="og:type" content="article"><meta property="og:locale" content="en"><meta property="og:site_name" content="Standard Framework"><meta property="og:url" content="https://standard.ffp.co/11ty/markdown/"><meta property="og:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta property="og:image" content="https://standard.ffp.co/assets/img/default.png"><meta property="og:image:alt" content="Standard Framework"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Cards --><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://standard.ffp.co/assets/img/default.png"><meta name="twitter:image:alt" content="Standard Framework"><meta name="twitter:site" content="@francisfontaine"><meta name="twitter:creator" content="@francisfontaine"><meta name="twitter:title" content="Standard Framework"><meta name="twitter:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><!-- Schema.org --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Standard Framework","description":"Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.","author":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co/now/"},"publisher":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co","logo":{"@type":"ImageObject","url":"https://standard.ffp.co/francis-fontaine-avatar.png"}},"image":{"@type":"ImageObject","url":"https://standard.ffp.co/assets/img/default.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://standard.ffp.co/11ty/markdown/"}}</script><!-- Favicons --><link rel="apple-touch-icon" sizes="180x180" href="https://standard.ffp.co/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://standard.ffp.co/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://standard.ffp.co/favicons/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://standard.ffp.co/favicons/safari-pinned-tab.svg" color="#000000"><link rel="shortcut icon" href="https://standard.ffp.co/favicons/favicon.ico"><!-- Mobile --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><!-- Windows Tiles --><meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-config" content="https://standard.ffp.co/favicons/browserconfig.xml"><link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css"><!-- ✅ FIX: Load scripts only on client side --><script type="module">
+            import "/assets/js/standard.js";
+            import "/assets/js/standard.lab.js";
+            import "/assets/js/standard.toast.js";
+            import "/assets/js/standard.comment.js";
+        </script><link rel="stylesheet" href="/_astro/_slug_.mJtdUnXU.css"></head> <body> <a href="#main" class="skip-link">Skip to content</a> <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;"> <p> <a href="/" style="text-decoration: none;">Standard Framework</a> </p> <nav class="menu horizontal" aria-label="Navigation"> <ul class="menu"> <li class="menu__item"> <a class="menu__link" href="/docs/"> Docs </a> </li><li class="menu__item"> <a class="menu__link" href="/getting-started/"> Getting Started </a> </li><li class="menu__item"> <a class="menu__link" href="/cheat-sheet/"> Cheat Sheet </a> </li> </ul> </nav> </header> <main id="main" class="prose">  <h1 id="enhanced-markdown">Enhanced Markdown</h1>
+<p>The Standard Framework adds powerful markdown extensions for richer content.</p>
+<h2 id="extended-syntax">Extended Syntax</h2>
+<h3 id="footnotes">Footnotes</h3>
+<p>Add footnotes to your markdown:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">This is a statement[^1] with a footnote.
+
+<span class="token url-reference url"><span class="token punctuation">[</span><span class="token variable">^1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> This</span> is the footnote content.
+</code></pre>
+<p>Renders with automatic footnote links and backlinks.</p>
+<h3 id="callouts">Callouts</h3>
+<p>Create styled callout boxes:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token blockquote punctuation">></span> [!NOTE]
+<span class="token blockquote punctuation">></span> This is an important note that stands out visually
+
+<span class="token blockquote punctuation">></span> [!WARNING]
+<span class="token blockquote punctuation">></span> This requires your attention
+
+<span class="token blockquote punctuation">></span> [!TIP]
+<span class="token blockquote punctuation">></span> Here's a helpful tip
+
+<span class="token blockquote punctuation">></span> [!DANGER]
+<span class="token blockquote punctuation">></span> This is dangerous - be careful!
+
+<span class="token blockquote punctuation">></span> [!INFO]
+<span class="token blockquote punctuation">></span> Additional information
+</code></pre>
+<p>Callout types:</p>
+<ul>
+<li><code>[!NOTE]</code> - Blue info box</li>
+<li><code>[!WARNING]</code> - Orange warning box</li>
+<li><code>[!TIP]</code> - Green tip box</li>
+<li><code>[!DANGER]</code> - Red danger box</li>
+<li><code>[!INFO]</code> - Light blue info box</li>
+</ul>
+<h3 id="code-block-escaping">Code Block Escaping</h3>
+<p>Prevent code in markdown from being processed:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// Configure in eleventy.config.js</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">escapeCodeBlocks</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'liquid'</span><span class="token punctuation">,</span> <span class="token string">'nunjucks'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>In markdown:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token code"><span class="token punctuation">```</span><span class="token code-language">liquid</span>
+<span class="token code-block language-liquid language-liquid">{% for item in items %}
+  Item: 
+</span>
+<span class="token punctuation">```</span></span>
+</code></pre>
+<p>The code block won’t be processed as a template.</p>
+<h2 id="standard-markdown-features">Standard Markdown Features</h2>
+<h3 id="headings">Headings</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> H1 Heading</span>
+<span class="token title important"><span class="token punctuation">##</span> H2 Heading</span>
+<span class="token title important"><span class="token punctuation">###</span> H3 Heading</span>
+<span class="token title important"><span class="token punctuation">####</span> H4 Heading</span>
+<span class="token title important"><span class="token punctuation">#####</span> H5 Heading</span>
+<span class="token title important"><span class="token punctuation">######</span> H6 Heading</span>
+</code></pre>
+<h3 id="emphasis">Emphasis</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token italic"><span class="token punctuation">*</span><span class="token content">italic</span><span class="token punctuation">*</span></span> or <span class="token italic"><span class="token punctuation">_</span><span class="token content">italic</span><span class="token punctuation">_</span></span>
+<span class="token bold"><span class="token punctuation">**</span><span class="token content">bold</span><span class="token punctuation">**</span></span> or <span class="token bold"><span class="token punctuation">__</span><span class="token content">bold</span><span class="token punctuation">__</span></span>
+<span class="token bold"><span class="token punctuation">**</span><span class="token content"><span class="token italic"><span class="token punctuation">*</span><span class="token content">bold italic</span><span class="token punctuation">*</span></span></span><span class="token punctuation">**</span></span>
+<span class="token strike"><span class="token punctuation">~~</span><span class="token content">strikethrough</span><span class="token punctuation">~~</span></span>
+</code></pre>
+<h3 id="lists">Lists</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> Unordered</span>
+<span class="token list punctuation">-</span> Item 1
+<span class="token list punctuation">-</span> Item 2
+  <span class="token list punctuation">-</span> Nested item
+  <span class="token list punctuation">-</span> Another nested
+
+<span class="token title important"><span class="token punctuation">#</span> Ordered</span>
+<span class="token list punctuation">1.</span> First
+<span class="token list punctuation">2.</span> Second
+<span class="token list punctuation">3.</span> Third
+
+<span class="token title important"><span class="token punctuation">#</span> Mixed</span>
+<span class="token list punctuation">-</span> Main
+  <span class="token list punctuation">1.</span> Sub-ordered
+  <span class="token list punctuation">2.</span> Another sub
+<span class="token list punctuation">-</span> Another main
+</code></pre>
+<h3 id="links">Links</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token url">[<span class="token content">Link text</span>](<span class="token url">https://example.com</span>)</span>
+<span class="token url">[<span class="token content">Link with title</span>](<span class="token url">https://example.com</span> <span class="token string">"Title"</span>)</span>
+&#x3C;https://example.com>
+</code></pre>
+<h3 id="images">Images</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token url"><span class="token operator">!</span>[<span class="token content">Alt text</span>](<span class="token url">image.jpg</span>)</span>
+<span class="token url"><span class="token operator">!</span>[<span class="token content">Alt text</span>](<span class="token url">image.jpg</span> <span class="token string">"Image title"</span>)</span>
+</code></pre>
+<h3 id="blockquotes">Blockquotes</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token blockquote punctuation">></span> This is a blockquote
+<span class="token blockquote punctuation">></span> that can span multiple lines
+<span class="token blockquote punctuation">></span>
+<span class="token blockquote punctuation">> ></span> And can be nested
+</code></pre>
+<h3 id="code">Code</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">Inline <span class="token code-snippet code keyword">`code`</span> like this
+Or a code block:
+
+```javascript
+function hello() {
+  console.log("Hello World");
+}
+</code></pre>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">
+### Tables
+
+```markdown
+| Column 1 | Column 2 | Column 3 |
+|----|----|----|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+</code></pre>
+<h3 id="horizontal-rule">Horizontal Rule</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"></code></pre>
+<h2 id="markdown-configuration">Markdown Configuration</h2>
+<h3 id="in-eleventyconfigjs">In eleventy.config.js</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">"@zefish/standard"</span><span class="token punctuation">;</span>
+
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Escape code blocks for these languages</span>
+  <span class="token literal-property property">escapeCodeBlocks</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"liquid"</span><span class="token punctuation">,</span> <span class="token string">"nunjucks"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Standard Framework automatically enables:</span>
+  <span class="token comment">// - Footnotes (via markdown-it-footnote)</span>
+  <span class="token comment">// - Obsidian callouts (via markdown-it-obsidian-callouts)</span>
+  <span class="token comment">// - Syntax highlighting (via @11ty/eleventy-plugin-syntaxhighlight)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="front-matter-in-markdown">Front Matter in Markdown</h2>
+<p>Control rendering with front matter:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+title: Article Title
+description: Short description
+tags:
+  <span class="token list punctuation">-</span> featured
+  <span class="token list punctuation">-</span> important
+
+<span class="token title important"><span class="token punctuation">#</span> Article content here</span>
+</code></pre>
+<h2 id="liquidnunjucks-in-markdown">Liquid/Nunjucks in Markdown</h2>
+<p>Use template syntax in markdown:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> </span>
+
+Hello , welcome to .
+
+{% for item in items %}
+- 
+
+</code></pre>
+<p>Disable with escapeCodeBlocks for code examples.</p>
+<h2 id="markdown-best-practices">Markdown Best Practices</h2>
+<h3 id="-do">✓ Do</h3>
+<ul>
+<li>Use headings for structure</li>
+<li>Write in short paragraphs</li>
+<li>Link to related content</li>
+<li>Use callouts for emphasis</li>
+<li>Include descriptive image alt text</li>
+<li>Use tables for data</li>
+<li>Break complex content into sections</li>
+</ul>
+<h3 id="-dont">✗ Don’t</h3>
+<ul>
+<li>Skip the H1 heading</li>
+<li>Write overly long paragraphs</li>
+<li>Nest lists too deeply</li>
+<li>Use ONLY emphasis for structure</li>
+<li>Forget alt text on images</li>
+<li>Use HTML when markdown works</li>
+<li>Mix markdown and HTML</li>
+</ul>
+<h2 id="common-patterns">Common Patterns</h2>
+<h3 id="article-with-callout">Article with Callout</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+title: Advanced Guide
+
+<span class="token title important"><span class="token punctuation">#</span> Advanced Guide</span>
+
+<span class="token blockquote punctuation">></span> [!WARNING]
+<span class="token blockquote punctuation">></span> This guide is for experienced users
+
+<span class="token title important"><span class="token punctuation">##</span> Introduction</span>
+
+Here's the content...
+
+<span class="token blockquote punctuation">></span> [!TIP]
+<span class="token blockquote punctuation">></span> Remember to backup before proceeding
+</code></pre>
+<h3 id="post-with-footnotes">Post with Footnotes</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> Research Article</span>
+
+This finding[^1] is significant[^2].
+
+<span class="token url-reference url"><span class="token punctuation">[</span><span class="token variable">^1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> First</span> reference
+<span class="token url-reference url"><span class="token punctuation">[</span><span class="token variable">^2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Second</span> reference provides more context
+</code></pre>
+<h3 id="code-examples-with-multiple-languages">Code Examples with Multiple Languages</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token code"><span class="token punctuation">```</span><span class="token code-language">javascript</span>
+<span class="token code-block language-javascript language-javascript"><span class="token comment">// JavaScript example</span>
+<span class="token keyword">const</span> greeting <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span></span>
+<span class="token punctuation">```</span></span>
+
+<span class="token code"><span class="token punctuation">```</span><span class="token code-language">python</span>
+<span class="token code-block language-python language-python"># Python example
+greeting = "Hello"</span>
+<span class="token punctuation">```</span></span>
+
+<span class="token code"><span class="token punctuation">```</span><span class="token code-language">bash</span>
+<span class="token code-block language-bash language-bash"><span class="token comment"># Bash example</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"Hello"</span></span>
+<span class="token punctuation">```</span></span>
+</code></pre>
+<h2 id="rendering-options">Rendering Options</h2>
+<h3 id="output-with-syntax-highlighting">Output with Syntax Highlighting</h3>
+<p>Code blocks automatically get syntax highlighting based on language:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">function</span> <span class="token function">greet</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="highlighted-lines">Highlighted Lines</h3>
+<p>Configure in 11ty for highlighted line numbers:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token code"><span class="token punctuation">```</span><span class="token code-language">javascript</span>
+<span class="token code-block language-javascript language-javascript"><span class="token comment">// highlight-line</span>
+<span class="token keyword">const</span> important <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
+<span class="token punctuation">```</span></span>
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="/docs/markdown-plugin/" preload="" hx-boost="true">Markdown Plugin API</a> - Complete reference</li>
+<li><a href="/docs/markdown-styling/" preload="" hx-boost="true">Markdown Styling</a> - CSS for markdown</li>
+<li><a href="/11ty/filters/" preload="" hx-boost="true">Filters</a> - Transform markdown output</li>
+<li><a href="/docs/markdown-preprocessor-plugin/" preload="" hx-boost="true">Markdown Preprocessor</a> - Advanced processing</li>
+</ul>
+<p>Master markdown syntax and create rich content. <a href="/11ty/filters/" preload="" hx-boost="true">Learn filters</a></p>  <article class="comments-system"> <div id="comments"></div> <button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">
+Write a Comment
+</button> <div id="comment-form-wrapper" style="display: none;"> <form id="comment-form" method="post" action="/api/comments" novalidate> <fieldset> <legend>Leave a Comment</legend> <label for="author">Your Name <span aria-label="required">*</span></label> <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required maxlength="100"> <label for="email">Email Address <span aria-label="required">*</span></label> <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required> <label for="content">Comment <span aria-label="required">*</span></label> <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required minlength="3" maxlength="10000" rows="6"></textarea> <!-- Hidden fields --> <input type="hidden" id="pageId" name="pageId" value="11ty_markdown"> <input type="hidden" id="parentId" name="parentId" value=""> <!-- Status indicator --> <div id="form-status" role="status" aria-live="polite"></div> <!-- Submit buttons --> <div class="form-actions"> <button type="submit" class="button">Post Comment</button>   </div> </fieldset> </form> </div> </article> <script defer>(function(){const initOptions = {"apiUrl":"/api/comments","pageId":"11ty_markdown","container":"#comments","form":"#comment-form","pollInterval":null};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+})();</script> </main> <hr> <footer class="smaller font-interface"> <p>
+© 2025 Francis Fontaine ·
+<a href="/">Standard Framework</a> ·
+<a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> </p> </footer> </body></html>

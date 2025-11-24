@@ -1,14 +1,3 @@
----
-title: Typography System
-
-eleventyNavigation:
-  key: Typography
-  parent: CSS Framework
-  title: Typography
-permalink: /css/typography/
-comment: true
----
-
 # Typography System
 
 Master font scales, sizes, weights, and line heights based on the golden ratio for perfect readability and visual harmony.
@@ -62,7 +51,7 @@ Used for:
 Sizes scale using the golden ratio, creating perfect proportions:
 
 | Size | Usage | CSS Variable | Pixels (base 16) |
-|------|-------|--------------|------------------|
+||-|--||
 | Base | Default body text | `--font-size-base` | 16px |
 | Small | Captions, fine print | `--font-size-sm` | 14px |
 | Large | Emphasis, larger text | `--font-size-lg` | 18px |
@@ -124,7 +113,7 @@ Optimal line heights for different contexts, designed for readability:
 Professional weight hierarchy for visual distinction:
 
 | Weight | Name | Usage | CSS |
-|--------|------|-------|-----|
+|--||-|-----|
 | 400 | Regular | Body text, default | `font-weight: 400` |
 | 500 | Medium | Emphasis | `font-weight: 500` |
 | 600 | Semibold | Strong emphasis | `font-weight: 600` |
@@ -374,6 +363,5 @@ Override typography defaults with CSS variables:
 - **[Spacing & Rhythm](/css/spacing/)** - Spacing around text
 - **[Responsive Design](/css/grid/)** - Typography at different sizes
 
----
 
 Perfect typography is mathematical precision. [Master the spacing system](/css/spacing/)

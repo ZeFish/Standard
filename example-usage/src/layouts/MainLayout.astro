@@ -1,0 +1,122 @@
+---
+// Example layout that uses Standard Framework
+import Base from "@zefish/standard/layouts/Base.astro";
+import Menu from "@zefish/standard/components/Menu.astro";
+import Comments from "@zefish/standard/components/Comments.astro";
+
+// Import Standard CSS framework
+import "@zefish/standard/css";
+import "@zefish/standard/theme";
+
+// Get props from the page
+const {
+  title = "My Site",
+  description = "A site built with Standard Framework",
+  image,
+  created,
+  modified,
+  tags,
+  class: className,
+} = Astro.props;
+
+// Site navigation configuration
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<!-- Use Standard Framework's Base layout -->
+<Base
+  title={title}
+  description={description}
+  image={image}
+  created={created}
+  modified={modified}
+  tags={tags}
+  class={className}
+>
+  <!-- Custom header section -->
+  <header slot="header" class="site-header">
+    <div class="container">
+      <nav class="main-nav">
+        <Menu items={navItems} />
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main class="main-content prose">
+    <div class="container">
+      <!-- Page content goes here -->
+      <slot />
+    </div>
+  </main>
+
+  <!-- Comments section (if enabled) -->
+  <section slot="comments" class="comments-section">
+    <div class="container">
+      <Comments />
+    </div>
+  </section>
+
+  <!-- Custom footer -->
+  <footer slot="footer" class="site-footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} My Site. Built with
+        <a href="https://github.com/ZeFish/Standard">Standard Framework</a>.
+      </p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  /* Custom styles that work with Standard Framework */
+  .site-header {
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--spacing-base);
+  }
+
+  .main-content {
+    min-height: 60vh;
+    padding-block: var(--spacing-xl);
+  }
+
+  .container {
+    max-width: var(--line-width);
+    margin-inline: auto;
+    padding-inline: var(--spacing-base);
+  }
+
+  .site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--spacing-l);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .site-footer p {
+    text-align: center;
+    color: var(--color-subtle);
+    margin: 0;
+  }
+
+  .site-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding-inline: var(--spacing-s);
+    }
+  }
+</style>

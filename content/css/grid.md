@@ -1,13 +1,3 @@
----
-title: Grid System
-
-eleventyNavigation:
-  key: Grid
-  parent: CSS Framework
-  title: Grid System
-permalink: /css/grid/
----
-
 # Grid System
 
 Build responsive layouts with flexible CSS Grid. Mobile-first approach with automatic responsive columns and proper spacing.
@@ -71,7 +61,7 @@ Change number of columns at different breakpoints:
 ### Breakpoint Prefixes
 
 | Prefix | Breakpoint | Screen Size |
-|--------|-----------|-------------|
+|--|-----|-|
 | (none) | Default | Mobile (< 480px) |
 | `md:` | Small | 480px+ |
 | `lg:` | Large | 1024px+ |
@@ -589,6 +579,5 @@ Create responsive grids without media queries:
 - **[Components](/css/buttons/)** - Components within grids
 - **[Typography](/css/typography/)** - Text within grid items
 
----
 
 Master layout design with grids. [Learn spacing and rhythm](/css/spacing/)

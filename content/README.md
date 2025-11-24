@@ -6,6 +6,7 @@ Standard is built on the belief that design systems should be rooted in centurie
 - [Fonts](/fonts/)
 - [Mardown](/markdown/)
 - [Égalitarisme](/egalitarisme/)
+- [Digitné](/dignity/)
 - [Réciprocite](/reciprocite/)
 - [Componnent](/compo/)
 - [Unified Plugin](index-unified-plugin/)
@@ -20,10 +21,6 @@ Typography is the voice · Grid is the structure · Rhythm is the flow · Color 
 ::end
 
 ![npm](https://img.shields.io/npm/v/@zefish/standard)
-
-
-
-
 
 > "Typography is the craft of endowing human language with a durable visual form."
 > — Robert Bringhurst
@@ -55,7 +52,6 @@ Complete 11ty plugin with Markdown enhancements, backlinks, encryption, and filt
 
 ## Getting Started
 
-
 ```bash
 npm init -y
 npm install --save-dev @11ty/eleventy
@@ -78,13 +74,13 @@ export default function (eleventyConfig) {
 
 Create `_includes/layouts/base.njk`:
 
-```nunjucks
+```html
 <!DOCTYPE html>
 <html lang="en" data-theme="default">
 <head>
-  {% standardMeta %}
-  <title>{{ title or "My Site" }}</title>
-  {% standardAssets %}
+  
+  <title></title>
+  
 </head>
 <body>
   <header>
@@ -93,11 +89,11 @@ Create `_includes/layouts/base.njk`:
   </header>
 
   <main class="prose md">
-    {{ content | safe }}
+    
   </main>
 
   <footer>
-    <p>&copy; {% year %}</p>
+    <p>&copy; </p>
   </footer>
 </body>
 </html>
@@ -106,10 +102,8 @@ Create `_includes/layouts/base.njk`:
 Create `content/index.md`:
 
 ```markdown
----
-layout: layouts/base.njk
+
 title: Home
----
 
 # Welcome
 
@@ -124,7 +118,6 @@ npx @11ty/eleventy --serve
 
 **Done.** Your website is live at `http://localhost:8080` 🚀
 
----
 
 ## What You Get
 
@@ -136,7 +129,6 @@ npx @11ty/eleventy --serve
 - **Small & Fast** — 15KB CSS, 2KB JS (gzipped)
 - **11ty Integration** — Enhanced markdown, backlinks, encryption
 
----
 
 ## Documentation
 
@@ -164,7 +156,6 @@ Comprehensive guides and API reference:
 ## API Reference
 - **[Full API Docs](content/docs/index.md)** - Auto-generated from source code
 
----
 
 ## Examples
 
@@ -198,12 +189,10 @@ Comprehensive guides and API reference:
 ## 11ty with Backlinks
 
 ```markdown
----
-layout: layouts/article.njk
-title: My Article
----
 
-# {{ title }}
+title: My Article
+
+# 
 
 Learn about [[TypeScript]] and [[Web Development]].
 
@@ -213,17 +202,14 @@ Backlinks automatically appear on those pages!
 ## Protected Content
 
 ```markdown
----
-layout: layouts/article.njk
+
 title: Premium Content
 password: members-only
----
 
 # Exclusive Article
 
 Password protected, decrypts in the browser.
 ```
----
 
 ## Customization
 
@@ -236,14 +222,12 @@ Override CSS variables:
   --line-width: 60rem; /* Optimal reading width */
 }
 ```
----
 
 Inspired by:
 - Robert Bringhurst — *The Elements of Typographic Style*
 - Josef Müller-Brockmann — Swiss grid systems
 - The web typography community
 
----
 
 ## Links
 
@@ -251,6 +235,5 @@ Inspired by:
 - **GitHub**: [github.com/ZeFish/Standard](https://github.com/ZeFish/Standard)
 - **npm**: [@zefish/standard](https://www.npmjs.com/package/@zefish/standard)
 
----
 
 **Standard Framework** — Stop configuring. Start creating. ✨

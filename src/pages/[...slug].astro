@@ -1,85 +1,43 @@
 ---
-import Base from '../astro/layouts/Base.astro';
-import Meta from '../astro/layouts/Meta.astro';
-import Encrypted from '../astro/layouts/Encrypted.astro';
+import Base from "../astro/layouts/Base.astro";
+import config from "virtual:standard/config";
 
+// This function generates all the static paths for our .md files
 export async function getStaticPaths() {
-  const pages = import.meta.glob('/content/**/*.md', { eager: true });
+    // Import all .md files from the content directory
+    const pages = import.meta.glob("/content/**/*.md", { eager: true });
 
-  return Object.keys(pages).map((path) => {
-    // Remove /content/ prefix and .md extension
-    let slug = path.replace('/content/', '').replace('.md', '');
-    
-    // Handle index files
-    if (slug === 'readme') {
-        // readme.md is handled by index.astro, but we might want it here too?
-        // Usually index.astro takes precedence.
-        // Let's skip it if we want, or map it.
-        // The user has index.astro rendering readme.md.
-        slug = undefined; // This might be tricky.
-    }
-    
-    if (slug && slug.endsWith('/index')) {
-      slug = slug.replace('/index', '');
-    }
-    
-    if (slug === 'index') {
-      slug = undefined;
-    }
+    // Convert file paths to URL slugs
+    return Object.keys(pages).map((path) => {
+        // Remove /content/ prefix and .md extension
+        const slug = path.replace("/content/", "").replace(".md", "");
 
-    return {
-      params: { slug },
-      props: { page: pages[path], path },
-    };
-  }).filter(p => p.params.slug !== 'readme'); // Filter out readme if needed
+        // Handle index files (content/index.md becomes just /)
+        const urlPath = slug.endsWith("/index")
+            ? slug.replace("/index", "")
+            : slug;
+
+        // Empty string/undefined for index file (/) - this becomes the root route
+        return {
+            params: { slug: urlPath || undefined },
+            props: {
+                page: pages[path],
+                path,
+            },
+        };
+    });
 }
 
+// Get the page data from props
 const { page, path } = Astro.props;
 const { Content, frontmatter } = page;
-
-// Map 11ty layouts to Astro layouts
-const layoutMap = {
-  'base.njk': Base,
-  'layouts/base.njk': Base,
-  'layouts/main.njk': Base,
-  'layouts/blog-post.njk': Base,
-  'layouts/article.njk': Base,
-  'layouts/card.njk': Base,
-  'minimal': Base,
-  'default': Base,
-  'blog-post': Base,
-  'lesson': Base,
-  'comments.njk': Base,
-  'layouts/meta.njk': Meta,
-  'meta.njk': Meta,
-  'layouts/encrypted.njk': Encrypted,
-  'encrypted.njk': Encrypted,
-};
-
-// Determine layout
-// Default to Base if not specified or not found
-// We check 'legacy_layout' because our remark plugin renamed 'layout' to avoid Astro resolving it.
-const layoutName = frontmatter.legacy_layout || frontmatter.layout;
-const Layout = layoutMap[layoutName] || Base;
-
-// Prepare site data (mocking 11ty global data for now, or importing it)
-// Ideally we should import the real site data
-const site = {
-  title: "Standard Framework",
-  description: "A fine-art typography framework.",
-  language: "en",
-  author: { name: "Francis Fontaine" },
-  url: "http://localhost:8083",
-  nav: {
-    header: [
-      { title: "Home", url: "/" },
-      { title: "About", url: "/about" },
-      { title: "External", url: "https://example.com", external: true }
-    ]
-  }
-};
 ---
 
-<Layout site={site} {...frontmatter}>
-  <Content />
-</Layout>
+<!-- Use Base layout and pass the markdown content through -->
+<Base
+    title={frontmatter?.title || "Standard Framework"}
+    description={frontmatter?.description || config.description}
+    class="prose"
+>
+    <Content />
+</Base>

@@ -1,13 +1,3 @@
----
-title: Getting Started with Cloudflare Functions
-
-eleventyNavigation:
-  key: Setup
-  parent: Cloudflare Functions
-  title: Getting Started
-permalink: /cloudflare/setup/
----
-
 # Getting Started with Cloudflare Functions
 
 Install and configure the Cloudflare Functions plugin for your 11ty project.
@@ -244,6 +234,5 @@ Login again:
 wrangler login
 ```
 
----
 
 Ready to build your first API? [Check out the patterns guide](/cloudflare/patterns/)

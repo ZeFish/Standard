@@ -4,7 +4,6 @@
 
 *Par un type qui a passé trop de temps avec du bois et pas assez avec des philosophes*
 
----
 
 ## Préambule : Pourquoi vous devriez écouter un menuisier parler de philosophie
 
@@ -22,7 +21,6 @@ Ce qui suit n'est pas un traité académique. C'est ce que j'aurais aimé qu'on 
 
 Servez-vous un whisky. On va causer.
 
----
 
 ## Chapitre 1 : Donnez de l'Espace, Bon Sang
 
@@ -71,7 +69,6 @@ C'est :
 
 Si vous créez constamment de l'espace pour l'autre sans jamais en recevoir, ce n'est plus de la gentillesse. C'est de la martyre. Et personne n'aime les martyrs, même pas les martyrs.
 
----
 
 ## Chapitre 2 : Fermez Votre Gueule et Écoutez
 
@@ -131,7 +128,6 @@ Voici le truc que les gens ne comprennent pas : **Vous pouvez écouter complète
 
 La plupart des gens font 3, 1, 2. Dans le désordre. Et après ils se demandent pourquoi personne ne les écoute.
 
----
 
 ## Chapitre 3 : Tout le Monde Essaie Juste de Ne Pas Souffrir
 
@@ -202,7 +198,6 @@ Quand quelqu'un confond son besoin avec UNE stratégie spécifique, il se coince
 
 **Votre job** : Reconnaître le besoin, valider qu'il est légitime, ET trouver ensemble des stratégies qui fonctionnent pour vous DEUX.
 
----
 
 ## Chapitre 4 : L'Empathie, C'est Pas de la Faiblesse
 
@@ -272,7 +267,6 @@ MOI ←———————————→ TOI
 
 Si vous pouvez tenir cette tension, vous avez maîtrisé l'empathie mature.
 
----
 
 ## Chapitre 5 : La Réciprocité, Ou Pourquoi Être Gentil Unilatéralement Est Une Mauvaise Idée
 
@@ -392,7 +386,6 @@ Pas de chiffre magique. Le temps raisonnable, c'est :
 
 **La vraie question n'est pas "combien de temps ?", c'est "est-ce que je vois un processus ou juste une répétition ?"**
 
----
 
 ## Chapitre 6 : Comment Ne Pas Être Relatif Sans Devenir Rigide
 
@@ -436,7 +429,6 @@ Si vous ne voudriez pas qu'on vous abandonne, n'abandonnez pas (sauf si vous ave
 
 **La règle d'or avec un cerveau.**
 
----
 
 ## Chapitre 7 : L'Égalitarisme, Ou Pourquoi Votre Souffrance N'Est Pas Plus Importante Que La Mienne
 
@@ -480,7 +472,6 @@ Notre philosophie dit :
 
 L'empathie sélective basée sur l'identité n'est plus de l'empathie. C'est devenu un outil politique.
 
----
 
 ## Conclusion : Comment Vivre Cette Merde
 
@@ -555,7 +546,6 @@ Maintenant allez-y. Fermez ce livre. Créez de l'espace pour quelqu'un.
 
 Et pour l'amour de Dieu, **écoutez vraiment** quand ils parlent.
 
----
 
 *Nick Offerman*
 *Menuisier, buveur de whisky, philosophe accidentel*

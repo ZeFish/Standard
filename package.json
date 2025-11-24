@@ -28,7 +28,7 @@
     "standard",
     "book-layout"
   ],
-  "main": "src/eleventy/standard.js",
+  "main": "src/astro/standard.js",
   "type": "module",
   "bin": {
     "standard-init": "./bin/init.js",
@@ -41,9 +41,15 @@
     "./theme": "./dist/standard.theme.min.css",
     "./js": "./dist/standard.min.js",
     "./lab": "./dist/standard.lab.js",
-    ".": "./src/eleventy/standard.js",
-    "./cloudflare": "./src/eleventy/cloudflare.js",
-    "./astro": "./src/astro/index.js",
+    ".": "./src/astro/standard.js",
+    "./cloudflare": "./src/cloudflare/api/comments.js",
+    "./remark/tags": "./src/astro/remark/tags.js",
+    "./remark/standard": "./src/astro/remark/standard.js",
+    "./remark/escape-code": "./src/astro/remark/escape-code.js",
+    "./remark/fix-dates": "./src/astro/remark/fix-dates.js",
+    "./remark/syntax": "./src/astro/remark/syntax.js",
+    "./rehype/standard": "./src/astro/rehype/standard.js",
+    "./rehype/typography": "./src/astro/rehype/typography.js",
     "./routes/robots.js": "./src/astro/routes/robots.js",
     "./routes/manifest.js": "./src/astro/routes/manifest.js",
     "./routes/headers.js": "./src/astro/routes/headers.js",
@@ -59,9 +65,9 @@
   "files": [
     "bin",
     "dist",
-    "src/eleventy",
-    "src/layouts",
-    "src/cloudflare"
+    "src/astro",
+    "src/cloudflare",
+    "src/lib"
   ],
   "scripts": {
     "build:css": "node bin/build-css.js",
@@ -71,7 +77,7 @@
     "check": "npm run build && node bin/analyzer.js",
     "build": "astro build",
     "watch:assets": "node bin/build-css.js --watch",
-    "dev": "astro dev",
+    "dev": "npm run clean:ports && astro dev",
     "start": "astro dev",
     "release": "export $(cat .env | xargs) && release-it --ci",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
