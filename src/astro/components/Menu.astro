@@ -1,0 +1,51 @@
+---
+/**
+ * Menu Component
+ * Ports the logic from src/eleventy/menu.js
+ */
+const { items = [], ariaLabel = "Navigation", class: className = "", limit } = Astro.props;
+
+const currentUrl = Astro.url.pathname;
+
+function normalizePath(p = "") {
+  if (!p) return "/";
+  const s = String(p).replace(/\/+$/, "");
+  return s === "" ? "/" : s;
+}
+
+function isActive(itemUrl, currentUrl, exact = false) {
+  const a = normalizePath(itemUrl);
+  const b = normalizePath(currentUrl);
+  return exact ? a === b : b.startsWith(a);
+}
+
+const itemsToRender = limit && limit > 0 ? items.slice(0, limit) : items;
+---
+
+<nav class:list={["menu__nav", className]} aria-label={ariaLabel}>
+  <ul class="menu no-bullet display-flex" style="gap: var(--rhythm-d2);">
+    {itemsToRender.map((item) => {
+      const href = item.url || "#";
+      const active = isActive(href, currentUrl, item.exact);
+      const isAbsolute = /^https?:\/\//i.test(href);
+      const siteUrl = Astro.site ? Astro.site.toString() : "";
+      const external = item.external || (isAbsolute && !href.startsWith(normalizePath(siteUrl)));
+      const rel = item.rel || (external ? "noopener noreferrer" : undefined);
+      const target = item.target || (external ? "_blank" : undefined);
+
+      return (
+        <li class:list={["menu__item", { "is-active": active }]}>
+          <a
+            class:list={["menu__link", { "external-link": external }]}
+            href={href}
+            aria-current={active ? "page" : undefined}
+            target={target}
+            rel={rel}
+          >
+            {item.title || item.label || item.text}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

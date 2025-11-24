@@ -1,0 +1,115 @@
+---
+/**
+ * Comments Component
+ * Renders the GitHub comments form.
+ */
+const { 
+  showSubmit = true, 
+  showReset = false, 
+  showCancel = false,
+  apiUrl = "/api/comments",
+  pollInterval = null
+} = Astro.props;
+
+// Get page ID from URL
+const url = Astro.url.pathname;
+const pageId = url
+  .replace(/^\//, "")
+  .replace(/\/$/, "")
+  .replace(/\//g, "_") || "index";
+
+const initOptions = {
+  apiUrl,
+  pageId,
+  container: "#comments",
+  form: "#comment-form",
+  pollInterval
+};
+---
+
+<article class="comments-system">
+  <div id="comments"></div>
+
+  <button 
+    id="show-comment-form-btn" 
+    type="button" 
+    class="button" 
+    onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';"
+  >
+    Write a Comment
+  </button>
+
+  <div id="comment-form-wrapper" style="display: none;">
+    <form id="comment-form" method="post" action={apiUrl} novalidate>
+      <fieldset>
+        <legend>Leave a Comment</legend>
+
+        <label for="author">Your Name <span aria-label="required">*</span></label>
+        <input
+          type="text"
+          id="author"
+          name="author"
+          placeholder="Your name will be displayed with your comment."
+          required
+          maxlength="100"
+        />
+
+        <label for="email">Email Address <span aria-label="required">*</span></label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your email will not be displayed publicly."
+          required
+        />
+
+        <label for="content">Comment <span aria-label="required">*</span></label>
+        <textarea
+          id="content"
+          name="content"
+          placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)"
+          required
+          minlength="3"
+          maxlength="10000"
+          rows="6"
+        ></textarea>
+
+        <!-- Hidden fields -->
+        <input type="hidden" id="pageId" name="pageId" value={pageId} />
+        <input type="hidden" id="parentId" name="parentId" value="" />
+
+        <!-- Status indicator -->
+        <div id="form-status" role="status" aria-live="polite"></div>
+
+        <!-- Submit buttons -->
+        <div class="form-actions">
+          {showSubmit && <button type="submit" class="button">Post Comment</button>}
+          {showReset && <button type="reset" class="button">Clear</button>}
+          {showCancel && <button type="cancel" class="button">Cancel</button>}
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</article>
+
+<script define:vars={{ initOptions }} defer>
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+</script>

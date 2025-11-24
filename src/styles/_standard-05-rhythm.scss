@@ -67,14 +67,14 @@
     }
 
     /* Padding only applied to <body> when rhythm is active */
-    > body {
+    >body {
         margin: 0;
         padding: var(--gap-body);
         padding-bottom: calc(var(--gap-body) * 1.5);
+
         [id] {
-            scroll-margin-top: calc(
-                var(--gap-relaxed) + var(--gap-body)
-            ); /* Adjust value as needed */
+            scroll-margin-top: calc(var(--gap-relaxed) + var(--gap-body));
+            /* Adjust value as needed */
         }
     }
 
@@ -88,10 +88,8 @@
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: max(
-            calc(var(--gap-block) - var(--gap)),
-            0
-        );
+        margin-block-start: max(calc(var(--gap-block) - var(--gap)),
+                0);
         margin-block-end: max(var(--gap-block), var(--gap));
     }
 
@@ -100,19 +98,23 @@
     :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
         margin-block-end: var(--gap);
     }
-    :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
+
+    :is(#{$rhythm-block-elements})+ :is(#{$rhythm-block-elements}) {
         margin-block-start: max(0, var(--gap));
     }
 
     /* Reset first-child spacing for special blocks */
-    :is(.card, aside, blockquote, pre, figure, .callout-content) > :first-child, {
+    :is(.card, aside, blockquote, pre, figure, .callout-content)> :first-child {
         margin-block-start: 0;
     }
-    * > :last-child {
+
+    *> :last-child {
         margin-block-end: 0;
     }
+
     .rhythm {
-        --base-gap: 1; /* Reset for nested contexts */
+        --base-gap: 1;
+        /* Reset for nested contexts */
     }
 
 
@@ -126,25 +128,26 @@
         margin-block-end: var(--gap);
     }
 
-    h3, h4, h5, h6 {
+    h3,
+    h4,
+    h5,
+    h6 {
         margin-block: var(--gap);
     }
 
-    :is(h1, h2, h3) + :is(h1, h2, h3),
-    hr + :is(h1, h2, h3) {
+    :is(h1, h2, h3)+ :is(h1, h2, h3),
+    hr+ :is(h1, h2, h3) {
         margin-block-start: 0;
     }
 
     hr {
         margin-inline: calc(var(--base-4));
-        margin-block-start: max(
-            calc((var(--gap-block) - var(--gap)) * 1),
-            var(--gap)
-        );
+        margin-block-start: max(calc((var(--gap-block) - var(--gap)) * 1),
+                var(--gap));
         margin-block-end: max((var(--gap-block) * 1), var(--gap));
     }
 
-    
+
 
     /* =========================== */
     /* TYPOGRAPHY ELEMENTS         */
@@ -163,12 +166,12 @@
         list-style: none;
         margin-block-start: 0;
         padding-inline: 1rlh;
-        maring-block-end: var(--gap-block);
+        margin-block-end: var(--gap-block);
     }
 
     /* Nested lists */
-    li > ul,
-    li > ol {
+    li>ul,
+    li>ol {
         padding-inline-start: 1rlh;
         margin-block-start: var(--gap-tight);
         margin-block-end: 0;
@@ -181,37 +184,46 @@
         padding-inline-start: 0;
         margin-block-end: var(--gap-nl);
     }
+
     li:last-child {
         /* should be manage in the general last-chuld rule */
         margin-block-end: 0;
     }
+
     p:has(+ :is(ul, ol)) {
         margin-block-end: var(--gap-nl);
     }
-    :is(ul,ol) + p {
+
+    :is(ul, ol)+p {
         margin-block-start: var(--gap-block);
     }
+
     .compact {
         --base-gap: var(--leading);
+
         li {
             margin-block-end: var(--leading);
         }
     }
+
     .tight {
         --base-gap: var(--gap-tight);
+
         li {
             margin-block-end: var(--gap-tight);
         }
     }
+
     .relaxed {
         --base-gap: var(--gap-relaxed);
+
         li {
             margin-block-end: var(--gap-relaxed);
         }
     }
 
     /* Unordered list bullets */
-    ul > li::before {
+    ul>li::before {
         content: "•";
         position: absolute;
         left: calc(1rlh * -1);
@@ -225,11 +237,11 @@
         counter-reset: ol-counter;
     }
 
-    ol > li {
+    ol>li {
         counter-increment: ol-counter;
     }
 
-    ol > li::before {
+    ol>li::before {
         content: counter(ol-counter) ".";
         position: absolute;
         left: calc((1rlh * -1) - var(--leading));
@@ -241,10 +253,8 @@
     }
 
     /* Inline lists - remove margin-bottom from list items */
-    ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
-        li,
-    ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
-        li {
+    ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
+    ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
         margin-block-end: 0;
     }
 
@@ -291,8 +301,8 @@
     }
 
     /* Checkbox/radio with labels */
-    input[type="checkbox"] + label,
-    input[type="radio"] + label {
+    input[type="checkbox"]+label,
+    input[type="radio"]+label {
         margin-inline-start: var(--leading);
     }
 
@@ -306,9 +316,10 @@
         padding: 0;
     }
 
-    fieldset + button {
+    fieldset+button {
         margin-block-start: var(--gap);
     }
+
     fieldset :last-child {
         margin-block-end: 0;
     }
@@ -332,10 +343,8 @@
         gap: calc(var(--base-d4) * var(--base-gap));
     }
 
-    figcaption {
-        /* Spacing handled by rhythm system */
-    }
-
+    /* Spacing handled by rhythm system */
+    /* figcaption {} */
     /* =========================== */
     /* TABLES                      */
     /* =========================== */
@@ -348,7 +357,8 @@
     table {
         /* You already have: border-collapse: collapse; */
         width: 100%;
-        /* font-variant-numeric: tabular-nums;*/ /* ADD: Monospace numbers */
+        /* font-variant-numeric: tabular-nums;*/
+        /* ADD: Monospace numbers */
     }
 
     td,
@@ -360,9 +370,13 @@
 
     th {
         /* You already have: text-align: left; font-weight: bold; */
-        text-transform: uppercase; /* ADD */
-        letter-spacing: 0.05em; /* ADD */
-    } /* ADD: Numeric column alignment */
+        text-transform: uppercase;
+        /* ADD */
+        letter-spacing: 0.05em;
+        /* ADD */
+    }
+
+    /* ADD: Numeric column alignment */
     .numeric {
         text-align: right;
         font-variant-numeric: tabular-nums;
@@ -413,22 +427,22 @@
 /* =========================== */
 
 /* Reduce repaints and reflows */
-.rhythm {
+/* .rhythm {
     /* Use GPU acceleration for transforms if needed */
-    /*transform: translateZ(0); */
+/*transform: translateZ(0); */
 
-    /* Optimize for animations */
-    /*will-change: auto; */
-}
+/* Optimize for animations */
+/*will-change: auto; */
+/* } */
 
 /* =========================== */
 /* ACCESSIBILITY               */
 /* =========================== */
 
 /* Ensure rhythm doesn't interfere with screen readers */
-.rhythm:focus-within {
+/* .rhythm:focus-within {
     /* Maintain focus visibility */
-}
+/* } */
 
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
@@ -446,7 +460,7 @@
     .rhythm {
         display: block;
 
-        > * {
+        >* {
             margin-block-end: var(--base-gap);
         }
 

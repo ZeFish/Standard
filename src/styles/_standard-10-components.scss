@@ -82,7 +82,7 @@
 
 .card {
     background: var(--color-background-secondary);
-    boder: var(--border); 
+    border: var(--border);
 }
 
 /**
@@ -119,16 +119,21 @@
  *   </a>
  */
 .card.clickable {
-    a {text-decoration: none};
+    a {
+        text-decoration: none
+    }
+
+    ;
     color: inherit;
-    transition:
-        transform var(--transition),
-        box-shadow var(--transition);
+    transition: transform var(--transition),
+    box-shadow var(--transition);
     cursor: pointer;
 
     &:hover {
-        transform: translateY(-2px); /* Subtle lift */
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+        transform: translateY(-2px);
+        /* Subtle lift */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        /* Enhanced shadow */
     }
 
     &:focus-visible {
@@ -137,7 +142,8 @@
     }
 
     &:active {
-        transform: translateY(0); /* Press down on click */
+        transform: translateY(0);
+        /* Press down on click */
     }
 }
 
@@ -212,8 +218,8 @@
  *     <a href="/settings/password" class="alert-action">Update now</a>
  *   </div>
  */
- 
- /**
+
+/**
  * @component Markdown Styling
  * @category Components
  * @description Beautiful styling for markdown-generated HTML. Includes support for
@@ -265,6 +271,7 @@ iframe,
     border: var(--border);
     box-shadow: var(--shadow);
 }
+
 pre,
 .inset,
 card.inset {
@@ -288,43 +295,35 @@ card.inset {
     padding-top: 0;
     --color-callout: var(--color-background-secondary);
     --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
-    background: color-mix(
-        in srgb,
-        var(--color-callout) 5%,
-        var(--color-background-secondary)
-    );
+    background: color-mix(in srgb,
+            var(--color-callout) 5%,
+            var(--color-background-secondary));
     border: var(--border);
     font-size: var(--scale-d2);
 
     .callout-title,
-    > summary {
-    psition: relative;
-        color: color-mix(
-            in srgb,
-            var(--color-callout) 50%,
-            var(--color-foreground)
-        );
+    >summary {
+        position: relative;
+        color: color-mix(in srgb,
+                var(--color-callout) 50%,
+                var(--color-foreground));
         display: flex;
         font-weight: var(--font-weight-bold, bold);
 
         user-select: none;
         padding: var(--gap-tight) var(--gap-compact);
         margin: 0 !important;
-    } 
-    
-   
+    }
+
+
 
     .callout-content {
         color: var(--color-foreground);
-        background: color-mix(
-            in srgb,
-            var(--color-callout) 2.5%,
-            color-mix(
-                in srgb,
-                var(--color-background-secondary) 25%,
-                var(--color-background)
-            )
-        );
+        background: color-mix(in srgb,
+                var(--color-callout) 2.5%,
+                color-mix(in srgb,
+                    var(--color-background-secondary) 25%,
+                    var(--color-background)));
         line-height: var(--line-height-compact);
         box-shadow: inset var(--shadow);
         border-radius: var(--radius);
@@ -336,6 +335,7 @@ card.inset {
         p:first-child {
             margin-top: 0;
         }
+
         p:last-child {
             margin-bottom: 0;
         }
@@ -350,7 +350,7 @@ card.inset {
             margin: var(--leading) 0;
         }
 
-        > .callout {
+        >.callout {
             margin: calc(var(--gap) * -1);
 
             .callout-content {
@@ -378,13 +378,15 @@ card.inset {
 .callout[data-callout="warning" i] {
     --color-callout: var(--color-red);
 }
+
 .callout[data-callout="important" i] {
     --color-callout: var(--color-orange);
 }
 
 // Details/Summary specific callout styles
-details > summary {
-    list-style: none; /* removes marker in Firefox */
+details>summary {
+    list-style: none;
+    /* removes marker in Firefox */
 }
 
 details .callout-title::before {
@@ -406,7 +408,7 @@ details .callout-title-inner {
 }
 
 // Caption Callout (after an image)
-p:has(img) + .callout[data-callout="caption" i] {
+p:has(img)+.callout[data-callout="caption" i] {
     padding: 0;
     background: none;
     border: none;
@@ -423,7 +425,7 @@ p:has(img) + .callout[data-callout="caption" i] {
         padding: 0;
         background: none;
         border: none;
-        
+
         box-shadow: none;
         text-align: center !important;
         text-wrap: balance !important;
@@ -434,27 +436,33 @@ p:has(img) + .callout[data-callout="caption" i] {
     background: var(--color-background-secondary);
     border-radius: var(--radius);
     border: var(--border);
+    position: relative;
     text-align: center;
     margin: 0 auto var(--gap) auto;
     padding: var(--gap);
 }
 
-aside, .alert {
+aside,
+.alert {
     font-family: var(--font-interface);
 }
+
 .alert {
     --color-alert: var(--color-accent);
     color: color-mix(in srgb, var(--color-alert) 10%, var(--color-foreground)) !important;
     background: color-mix(in srgb, var(--color-alert) 10%, var(--color-background-secondary));
     border-left: var(--stroke-width) solid color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
 }
+
 // Callout Color Variants
 .alert.warning {
     --color-alert: var(--color-warning);
 }
+
 .alert.error {
     --color-alert: var(--color-error);
 }
+
 .alert.success {
     --color-alert: var(--color-success);
 }
@@ -471,6 +479,7 @@ aside, .alert {
     * {
         margin-block-end: 0;
     }
+
     font-size: var(--scale-d2);
 
     .comment {
@@ -480,6 +489,7 @@ aside, .alert {
         background: var(--color-background-secondary);
         padding: var(--gap-compact);
         margin-block-end: var(--gap);
+
         .comment-header {
             display: flex;
             align-items: baseline;
@@ -490,16 +500,19 @@ aside, .alert {
 
                 margin-block-end: var(--gap-tight);
             }
+
             .comment-date,
             .comment-pending {
                 color: var(--color-subtle);
                 font-size: var(--scale-d3);
             }
+
             .comment-pending {
                 font-style: italic;
                 color: var(--color-orange);
             }
         }
+
         .comment-content {
             margin-inline: var(--gap-tight);
             margin-block-start: 0;
@@ -510,6 +523,7 @@ aside, .alert {
             line-height: var(--line-height-compact);
         }
     }
+
     :last-child {
         margin-block-end: 0;
     }
@@ -628,7 +642,8 @@ a.skip-link {
     position: absolute;
     top: var(--base-d4);
     left: var(--base-d4);
-    z-index: var(--z-modal); /* Above everything else */
+    z-index: var(--z-modal);
+    /* Above everything else */
 
     /* Styling - high contrast, unmissable */
     background: var(--color-accent);
@@ -659,11 +674,9 @@ a.skip-link {
 
     /* Hover state (if user moves mouse while focused) */
     &:hover {
-        background: color-mix(
-            in srgb,
-            var(--color-accent) 90%,
-            var(--color-background)
-        );
+        background: color-mix(in srgb,
+                var(--color-accent) 90%,
+                var(--color-background));
         color: var(--color-background);
     }
 
@@ -794,7 +807,8 @@ a.skip-link {
 
         /* Separator (not on first item) */
         &:not(:first-child)::before {
-            content: "→"; /* or "/" or "›" */
+            content: "→";
+            /* or "/" or "›" */
             display: inline-block;
             color: var(--color-subtle);
             margin-inline-end: var(--leading);
@@ -857,7 +871,8 @@ a.skip-link {
     }
 
     .breadcrumb ol li:last-child::before {
-        content: "…"; /* Ellipsis to show collapsed crumbs */
+        content: "…";
+        /* Ellipsis to show collapsed crumbs */
     }
 }
 
@@ -932,7 +947,8 @@ a.skip-link {
     gap: var(--gap);
     margin-block: var(--gap);
     font-size: var(--scale-d2);
-    font-variant-numeric: tabular-nums; /* Monospace numbers for alignment */
+    font-variant-numeric: tabular-nums;
+    /* Monospace numbers for alignment */
 
     /* Links and current page */
     a,
@@ -988,7 +1004,8 @@ a.skip-link {
     border-color: var(--color-accent);
     font-weight: var(--font-weight-bold);
     cursor: default;
-    pointer-events: none; /* Not interactive */
+    pointer-events: none;
+    /* Not interactive */
 }
 
 /**
@@ -1173,21 +1190,17 @@ a.skip-link {
 
     &::before {
         left: 0;
-        background: linear-gradient(
-            to right,
-            var(--color-red) 25%,
-            transparent 100%
-        );
+        background: linear-gradient(to right,
+                var(--color-red) 25%,
+                transparent 100%);
     }
 
     /* Define the Right Shadow (initially visible) */
     &::after {
         right: 0;
-        background: linear-gradient(
-            to left,
-            var(--color-background) 25%,
-            transparent 100%
-        );
+        background: linear-gradient(to left,
+                var(--color-background) 25%,
+                transparent 100%);
     }
 
     /* When this class is added, the left shadow fades in. */
@@ -1199,10 +1212,14 @@ a.skip-link {
     &.show-right-shadow::after {
         opacity: 1;
     }
-    & > * {
-        margin-block-end: 0; /* Remove table's own margin */
-        min-width: 100%; /* Ensure table fills wrapper */
-        width: max-content; /* Allow table to grow beyond wrapper */
+
+    &>* {
+        margin-block-end: 0;
+        /* Remove table's own margin */
+        min-width: 100%;
+        /* Ensure table fills wrapper */
+        width: max-content;
+        /* Allow table to grow beyond wrapper */
     }
 }
 
@@ -1215,7 +1232,8 @@ a.skip-link {
  * tables where users need context about what each column represents.
  */
 .table-wrapper-sticky-header {
-    max-height: 400px; /* Or any height */
+    max-height: 400px;
+    /* Or any height */
     overflow-y: auto;
 
     table thead {
@@ -1352,15 +1370,14 @@ a.skip-link {
  * message explains what went wrong. Screen readers hear the error via aria-live.
  */
 .field-error {
+
     input,
     textarea,
     select {
         border-color: var(--color-error);
-        background: color-mix(
-            in srgb,
-            var(--color-error) 5%,
-            var(--color-background)
-        );
+        background: color-mix(in srgb,
+                var(--color-error) 5%,
+                var(--color-background));
 
         &:focus {
             outline-color: var(--color-error);
@@ -1380,7 +1397,8 @@ a.skip-link {
 
     /* Icon (optional, can be added with ::before) */
     &::before {
-        content: "✕"; /* or "⚠" or custom SVG */
+        content: "✕";
+        /* or "⚠" or custom SVG */
         display: inline-block;
         flex-shrink: 0;
     }
@@ -1396,15 +1414,14 @@ a.skip-link {
  * strength, or async validation.
  */
 .field-success {
+
     input,
     textarea,
     select {
         border-color: var(--color-success);
-        background: color-mix(
-            in srgb,
-            var(--color-success) 5%,
-            var(--color-background)
-        );
+        background: color-mix(in srgb,
+                var(--color-success) 5%,
+                var(--color-background));
 
         &:focus {
             outline-color: var(--color-success);
@@ -1423,7 +1440,8 @@ a.skip-link {
     line-height: var(--line-height-s);
 
     &::before {
-        content: "✓"; /* Checkmark */
+        content: "✓";
+        /* Checkmark */
         display: inline-block;
         flex-shrink: 0;
     }
@@ -1438,15 +1456,14 @@ a.skip-link {
  * not ideal. Like a weak password that technically meets requirements.
  */
 .field-warning {
+
     input,
     textarea,
     select {
         border-color: var(--color-warning);
-        background: color-mix(
-            in srgb,
-            var(--color-warning) 5%,
-            var(--color-background)
-        );
+        background: color-mix(in srgb,
+                var(--color-warning) 5%,
+                var(--color-background));
 
         &:focus {
             outline-color: var(--color-warning);
@@ -1465,7 +1482,8 @@ a.skip-link {
     line-height: var(--line-height-s);
 
     &::before {
-        content: "⚠"; /* Warning triangle */
+        content: "⚠";
+        /* Warning triangle */
         display: inline-block;
         flex-shrink: 0;
     }
@@ -1579,7 +1597,8 @@ dialog.modal {
     padding: 0;
     max-width: 90vw;
     max-height: 90vh;
-    width: 600px; /* Default width */
+    width: 600px;
+    /* Default width */
     background: var(--color-background);
     border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -1616,7 +1635,8 @@ dialog.modal {
 .modal::backdrop,
 dialog.modal::backdrop {
     background: var(--modal-background);
-    backdrop-filter: var(--blur); /* Subtle blur effect */
+    backdrop-filter: var(--blur);
+    /* Subtle blur effect */
     animation: fadeIn var(--transition);
 }
 
@@ -1624,6 +1644,7 @@ dialog.modal::backdrop {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -1696,8 +1717,10 @@ dialog.modal::backdrop {
  */
 .modal-body {
     padding: var(--gap-tight) var(--gap-compact);
-    overflow-y: auto; /* Scroll if content too long */
-    max-height: 60vh; /* Prevent modal from growing too tall */
+    overflow-y: auto;
+    /* Scroll if content too long */
+    max-height: 60vh;
+    /* Prevent modal from growing too tall */
 
     /* Apply rhythm to content */
     > :first-child {
@@ -1747,6 +1770,7 @@ dialog.modal::backdrop {
 
 /* Mobile: always fullscreen */
 @media (max-width: 768px) {
+
     .modal,
     dialog.modal {
         width: 100vw;
@@ -1888,7 +1912,8 @@ dialog.modal::backdrop {
         color var(--transition),
         border-color var(--transition);
     position: relative;
-    top: 2px; /* Overlap with tablist border */
+    top: 2px;
+    /* Overlap with tablist border */
 
     &:hover {
         color: var(--color-foreground);
@@ -1952,7 +1977,8 @@ dialog.modal::backdrop {
     border-top: 3px solid var(--color-accent);
     border-left: 1px solid var(--color-border);
     border-right: 1px solid var(--color-border);
-    border-bottom: 3px solid var(--color-background); /* Hide tablist border */
+    border-bottom: 3px solid var(--color-background);
+    /* Hide tablist border */
     border-radius: var(--radius) var(--radius) 0 0;
 }
 
@@ -2038,7 +2064,8 @@ dialog.modal::backdrop {
     border-radius: var(--radius);
     background: var(--color-background);
     margin-block-end: var(--base-d2);
-    overflow: hidden; /* Ensure border-radius clips content */
+    overflow: hidden;
+    /* Ensure border-radius clips content */
 
     /* Remove default browser styling */
     &::-webkit-details-marker {
@@ -2086,7 +2113,8 @@ dialog.modal::backdrop {
 
     /* Arrow indicator */
     &::after {
-        content: "▸"; /* Right-pointing triangle */
+        content: "▸";
+        /* Right-pointing triangle */
         display: inline-block;
         font-size: var(--scale-2);
         color: var(--color-muted);
@@ -2107,7 +2135,8 @@ dialog.modal::backdrop {
     border-bottom: var(--border);
 
     &::after {
-        transform: rotate(90deg); /* Point down */
+        transform: rotate(90deg);
+        /* Point down */
     }
 }
 
@@ -2159,5 +2188,3 @@ dialog.modal::backdrop {
     padding: var(--gap-tight);
     font-size: var(--scale-d3);
 }
-
-

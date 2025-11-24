@@ -42,7 +42,19 @@
     "./js": "./dist/standard.min.js",
     "./lab": "./dist/standard.lab.js",
     ".": "./src/eleventy/standard.js",
-    "./cloudflare": "./src/eleventy/cloudflare.js"
+    "./cloudflare": "./src/eleventy/cloudflare.js",
+    "./astro": "./src/astro/index.js",
+    "./routes/robots.js": "./src/astro/routes/robots.js",
+    "./routes/manifest.js": "./src/astro/routes/manifest.js",
+    "./routes/headers.js": "./src/astro/routes/headers.js",
+    "./utils/content.js": "./src/astro/utils/content.js",
+    "./utils/typography.js": "./src/astro/utils/typography.js",
+    "./components/Menu.astro": "./src/astro/components/Menu.astro",
+    "./components/Fonts.astro": "./src/astro/components/Fonts.astro",
+    "./components/Comments.astro": "./src/astro/components/Comments.astro",
+    "./layouts/Base.astro": "./src/astro/layouts/Base.astro",
+    "./layouts/Meta.astro": "./src/astro/layouts/Meta.astro",
+    "./layouts/Encrypted.astro": "./src/astro/layouts/Encrypted.astro"
   },
   "files": [
     "bin",
@@ -57,10 +69,10 @@
     "watch:css": "node bin/build-css.js --watch",
     "watch:js": "node bin/build-js.js --watch",
     "check": "npm run build && node bin/analyzer.js",
-    "build": "npm run build:css && npm run build:js && eleventy",
+    "build": "astro build",
     "watch:assets": "node bin/build-css.js --watch",
-    "dev": "rm -rf _site/ && npm run clean:ports && concurrently --kill-others \"npm run watch:css\" \"npm run watch:js\" \"npm run start --quiet --port=8083\"",
-    "start": "npm run clean:ports && eleventy --serve --port=8083  --quiet",
+    "dev": "astro dev",
+    "start": "astro dev",
     "release": "export $(cat .env | xargs) && release-it --ci",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "clean:ports": "lsof -ti:8083 | xargs kill -9 2>/dev/null || true",
@@ -115,6 +127,7 @@
     "@11ty/eleventy-navigation": "^1.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "astro": "^5.16.0",
     "cheerio": "^1.1.2",
     "clean-css": "^5.3.3",
     "dotenv": "^17.2.3",
@@ -127,7 +140,8 @@
     "markdown-it-obsidian-callouts": "^0.3.2",
     "nunjucks": "^3.2.4",
     "sass": "^1.93.2",
-    "terser": "^5.44.0"
+    "terser": "^5.44.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",

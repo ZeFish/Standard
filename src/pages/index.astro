@@ -1,0 +1,24 @@
+---
+import Base from '../astro/layouts/Base.astro';
+import * as Readme from '../../content/readme.md';
+
+const site = {
+  title: "Standard Framework",
+  description: "A fine-art typography framework.",
+  language: "en",
+  author: { name: "Francis Fontaine" },
+  url: "http://localhost:8083",
+  nav: {
+    header: [
+      { title: "Home", url: "/" },
+      { title: "About", url: "/about" },
+      { title: "External", url: "https://example.com", external: true }
+    ]
+  }
+};
+---
+
+<Base site={site} title="Standard Framework">
+  <Readme.Content />
+</Base>
+

@@ -1,0 +1,84 @@
+---
+import Meta from './Meta.astro';
+import Fonts from '../components/Fonts.astro';
+import Menu from '../components/Menu.astro';
+import Comments from '../components/Comments.astro';
+
+// Import Standard CSS
+// Assuming the user has configured the alias or we import relative if inside the package
+// Since this is inside the package, we can import the CSS file directly if we know where it is.
+// The CSS is in src/styles/style.css or similar?
+// The 11ty plugin had: <link rel="stylesheet" href="/assets/css/style.css">
+// In Astro, we should import it to let Vite handle it.
+// Let's assume we want to import the main style file.
+// Looking at package.json, "exports": { "./css": "./src/dist/style.css" }
+// So we can import "../../../src/dist/style.css" relative to this file?
+// src/astro/layouts/Base.astro -> ../../dist/style.css
+// Wait, src/dist/style.css is the compiled output.
+// If we are in the source repo, we might want to import that.
+// Or we can rely on the user to import it in their app, but the Base layout should probably include it.
+// Let's try to import it.
+import '../../styles/standard.scss'; 
+
+const { 
+  frontmatter,
+  site = {}, 
+  title = frontmatter?.title, 
+  description = frontmatter?.description, 
+  image = frontmatter?.image, 
+  created = frontmatter?.created, 
+  modified = frontmatter?.modified, 
+  tags = frontmatter?.tags,
+  securityHeaders = frontmatter?.securityHeaders,
+  class: className
+} = Astro.props;
+
+const year = new Date().getFullYear();
+---
+
+<!DOCTYPE html>
+<html class="rhythm" lang={site.language || 'en'} data-standard-version={site.standard?.version} data-theme="system">
+  <head>
+    <Meta 
+      site={site} 
+      title={title} 
+      description={description} 
+      image={image} 
+      created={created} 
+      modified={modified} 
+      tags={tags} 
+      securityHeaders={securityHeaders}
+    />
+    <Fonts />
+    <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css">
+    
+    <slot name="head" />
+  </head>
+
+  <body class={className}>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;">
+      <p>
+        <a href="/" style="text-decoration: none;">{site.title}</a>
+      </p>
+      <Menu items={site.nav?.header} class="horizontal" />
+    </header>
+
+    <main id="main" class="prose">
+      <slot />
+      
+      <Comments />
+    </main>
+
+    <hr />
+    
+    <footer class="smaller font-interface">
+      <p>
+        © {year} {site.author?.name || site.author} · 
+        <a href="/">{site.title}</a> · 
+        <a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a>
+      </p>
+    </footer>
+  </body>
+</html>
