@@ -23,9 +23,10 @@ standard:
   verbose: true
   security:
     enabled: false
-  ai:
-    enabled: true
-    model: "meta-llama/llama-4-maverick:free"
+
+openrouter:
+  enabled: true
+  model: "meta-llama/llama-4-maverick:free"
 
 # ========================================
 # BUILD CONFIGURATION

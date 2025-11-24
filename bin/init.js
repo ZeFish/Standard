@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Standard Framework Init - Project Scaffolding Command
+ * Standard Framework Init - Astro Project Scaffolding Command
  *
  * @group Build Tools
  * @author Francis Fontaine
- * @since 0.14.0
+ * @since 0.15.0
  *
  * In 2012, the Ruby on Rails community introduced a concept that revolutionized
  * web development: "Convention over Configuration." Instead of spending hours
@@ -20,25 +20,25 @@
  * introduced `vue create`. The pattern was clear—great frameworks provide great
  * scaffolding. Starting a project should be delightful, not daunting.
  *
- * This script brings that philosophy to Standard Framework. Run `standard-init`,
- * answer a single question (or accept the default), and get a complete website
+ * This script brings that philosophy to Standard Framework for Astro. Run `standard-init`,
+ * answer a single question (or accept the default), and get a complete Astro website
  * structure: content directories, build configurations, sample files, layouts,
- * and a development workflow that just works. It creates 15+ files across 7
- * directories, each one carefully positioned to follow best practices learned
- * from thousands of real projects.
+ * and a development workflow that just works. It creates 15+ files across 6
+ * directories, each one carefully positioned to follow Astro and Standard Framework
+ * best practices.
  *
  * But this isn't just file creation—it's opinionated architecture. The script
  * establishes a separation of concerns: content/ for writing, src/ for code,
- * public/ for compiled assets, _site/ for output. It wires together three build
- * systems (CSS, JavaScript, 11ty) into one unified workflow. It configures watch
- * modes, pass-through copying, and live reload. Most importantly, it gets out of
+ * public/ for compiled assets, dist/ for output. It wires together the build
+ * system with Astro's unified development experience. It configures watch
+ * modes, hot reload, and live development. Most importantly, it gets out of
  * your way—every file it creates is meant to be edited, customized, or deleted.
  *
  * The genius of scaffolding isn't eliminating configuration—it's providing
  * intelligent defaults. You can still customize everything, but you start from
  * a working baseline instead of a blank canvas. This reduces decision fatigue
- * ("Where should CSS files go?"), prevents common mistakes (misconfigured build
- * scripts), and teaches best practices through example (well-structured files).
+ * ("Where should component files go?"), prevents common mistakes (misconfigured
+ * build scripts), and teaches best practices through example (well-structured files).
  *
  * ### Future Improvements
  *
@@ -51,10 +51,11 @@
  * - Create VS Code workspace settings for optimal DevX
  *
  * @see {file} site.config.yml - Main configuration file created
- * @see {file} eleventy.config.js - 11ty configuration created
- * @see {file} build-css.js - CSS build script that reads the config
- * @see {file} build-js.js - JavaScript build script that reads the config
+ * @see {file} astro.config.mjs - Astro configuration created
+ * @see {file} src/layouts/Base.astro - Base layout template
+ * @see {file} src/pages/index.astro - Homepage template
  *
+ * @link https://astro.build/ Astro (modern static site generator)
  * @link https://rubyonrails.org/ Ruby on Rails (convention over configuration)
  * @link https://yeoman.io/ Yeoman (web scaffolding tool)
  * @link https://create-react-app.dev/ Create React App (inspiration)
@@ -70,26 +71,26 @@
  *   standard-init my-site
  *   cd my-site
  *   npm install
- *   npm start
+ *   npm run dev
  *
  * @example bash - Created project structure
  *   my-site/
- *   ├── content/              # Your content (Markdown, HTML)
- *   │   └── index.md          # Sample homepage
+ *   ├── content/              # Your content (Markdown files)
+ *   │   └── index.md          # Sample homepage content
  *   ├── src/
- *   │   ├── styles/
- *   │   │   └── custom.scss   # Your custom styles
- *   │   ├── js/
- *   │   │   └── custom.js     # Your custom scripts
- *   │   └── layouts/
- *   │       └── base.njk      # Base HTML template
- *   ├── public/               # Compiled assets (generated)
- *   │   └── assets/
- *   │       ├── css/
- *   │       └── js/
- *   ├── _site/                # Built site (generated)
+ *   │   ├── pages/
+ *   │   │   ├── index.astro   # Homepage (imports content/index.md)
+ *   │   │   └── about.astro   # About page
+ *   │   ├── layouts/
+ *   │   │   └── Base.astro    # Base layout template
+ *   │   ├── components/
+ *   │   │   └── Header.astro  # Reusable components
+ *   │   └── styles/
+ *   │       └── custom.scss   # Your custom styles
+ *   ├── public/               # Static assets (images, favicon, etc.)
+ *   ├── dist/                 # Built site (generated)
  *   ├── site.config.yml       # Site & build configuration
- *   ├── eleventy.config.js    # 11ty configuration
+ *   ├── astro.config.mjs      # Astro configuration
  *   ├── package.json          # Dependencies & scripts
  *   ├── README.md             # Project documentation
  *   └── .gitignore            # Git exclusions
@@ -108,7 +109,7 @@ import { execSync } from "child_process";
  * Script Directory Resolution
  *
  * @group Utilities
- * @since 0.14.0
+ * @since 0.15.0
  *
  * In ES modules, we must manually reconstruct __dirname. import.meta.url gives
  * us the file's URL (file:///path/to/init.js), which fileURLToPath() converts
@@ -124,10 +125,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * Framework Root Directory
  *
  * @group Utilities
- * @since 0.14.0
+ * @since 0.15.0
  *
  * This points to Standard Framework's installation directory (one level up from
- * scripts/). We don't currently use this for copying template files (we generate
+ * bin/). We don't currently use this for copying template files (we generate
  * them as strings), but it's available for future enhancements—like copying
  * example content, images, or more complex starter templates.
  *
@@ -139,7 +140,7 @@ const frameworkRoot = path.join(__dirname, "..");
  * Project Configuration
  *
  * @group Configuration
- * @since 0.14.0
+ * @since 0.15.0
  *
  * The project name comes from command-line arguments (process.argv[2]) or defaults
  * to "standard-site". process.argv is an array: [0] is the node binary path, [1]
@@ -148,465 +149,415 @@ const frameworkRoot = path.join(__dirname, "..");
  *
  * projectPath is the absolute filesystem location where we'll create the project.
  * path.resolve() converts the name into an absolute path relative to the current
- * working directory. If you run `standard-init my-site` from /home/user/projects,
- * projectPath becomes /home/user/projects/my-site.
- *
- * @see {function} main - Uses these values throughout
- *
- * @example bash
- *   # Uses default name "standard-site"
- *   standard-init
- *
- *   # Creates "blog" directory
- *   standard-init blog
- *
- *   # Creates "my-awesome-site" directory
- *   standard-init my-awesome-site
+ * working directory. This ensures cross-platform compatibility.
  */
 const projectName = process.argv[2] || "standard-site";
 const projectPath = path.resolve(process.cwd(), projectName);
+
+/**
+ * Directory Structure
+ *
+ * @group File System
+ * @since 0.15.0
+ *
+ * Astro has specific expectations about directory structure. We create:
+ * - content/ for markdown content files
+ * - src/pages/ for .astro page components
+ * - src/layouts/ for layout templates
+ * - src/components/ for reusable components
+ * - src/styles/ for custom styles
+ * - public/ for static assets (images, favicon, etc.)
+ * - dist/ is generated automatically by Astro
+ *
+ * This follows Astro's conventions while maintaining Standard Framework's
+ * separation of concerns: content is separate from presentation.
+ */
+const dirs = [
+  "content",
+  "src/pages",
+  "src/layouts",
+  "src/components",
+  "src/styles",
+  "public",
+  "dist",
+];
+
+/**
+ * Recursive Directory Creation
+ *
+ * @group File System
+ * @since 0.15.0
+ *
+ * Creates a directory and all its parent directories if they don't exist.
+ * path.join() ensures cross-platform path separators. fs.mkdirSync() with
+ * recursive: true creates the entire tree in one call. We use sync operations
+ * because this is a CLI tool that runs once per project creation.
+ *
+ * @param {string} dirPath - Absolute path to directory
+ */
+function createDirectory(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+    console.log(`📁 Created directory: ${path.relative(projectPath, dirPath)}`);
+  }
+}
+
+/**
+ * Project Existence Check
+ *
+ * @group Validation
+ * @since 0.15.0
+ *
+ * Before creating anything, we check if the target directory already exists.
+ * fs.existsSync() is reliable for this. If it exists, we ask for confirmation
+ * to avoid accidentally overwriting existing work. This is especially important
+ * when developers run the command with a generic name like "my-site" that might
+ * already exist.
+ *
+ * @param {string} projectPath - Absolute path to project directory
+ * @returns {boolean} True if project should be created
+ */
+function shouldCreateProject(projectPath) {
+  if (fs.existsSync(projectPath)) {
+    const files = fs.readdirSync(projectPath);
+    if (files.length > 0) {
+      console.log(
+        `\n⚠️  Directory "${projectName}" already exists and is not empty.`,
+      );
+      const readline = require("readline").createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+
+      return new Promise((resolve) => {
+        readline.question("Do you want to continue? (y/N): ", (answer) => {
+          readline.close();
+          resolve(
+            answer.toLowerCase() === "y" || answer.toLowerCase() === "yes",
+          );
+        });
+      });
+    }
+  }
+  return true;
+}
 
 // ============================================================================
 // MAIN EXECUTION
 // ============================================================================
 
-console.log("🚀 Standard Framework - Project Initializer\n");
-
 /**
- * Directory Existence Check - Preventing Accidental Overwrites
+ * Main Project Creation Flow
  *
- * @group Safety Checks
- * @since 0.14.0
+ * @group Execution
+ * @since 0.15.0
  *
- * Before doing anything, we verify the target directory doesn't already exist.
- * This prevents accidentally overwriting an existing project—imagine running
- * `standard-init blog` when you already have a blog/ directory with months of
- * work. This check catches that before any damage occurs.
+ * This is the main entry point that orchestrates the entire project creation
+ * process. It's an async function because we might need to ask for user input
+ * if the project directory already exists. The flow is:
  *
- * If the directory exists, we print an error and exit with code 1 (failure).
- * The user can then choose a different name or manually delete the existing
- * directory if they truly want to start fresh.
+ * 1. Check if project should be created (handle existing directories)
+ * 2. Create directory structure
+ * 3. Generate configuration files
+ * 4. Create source files (layouts, pages, components)
+ * 5. Generate content files
+ * 6. Create package.json and other project files
+ * 7. Display success message with next steps
  *
- * @see {constant} projectPath - Directory being checked
- *
- * @example bash - Error scenario
- *   $ standard-init my-site
- *   ❌ Directory "my-site" already exists!
- *   # Process exits, nothing is created
+ * Each step is broken into smaller functions for maintainability. The entire
+ * process is designed to be idempotent—running it multiple times won't break
+ * anything (though it will overwrite existing files).
  */
-if (fs.existsSync(projectPath)) {
-  console.error(`❌ Directory "${projectName}" already exists!`);
-  process.exit(1);
-}
+async function main() {
+  console.log(`\n🚀 Creating Standard Framework project: "${projectName}"`);
+  console.log(`📍 Location: ${projectPath}\n`);
 
-console.log(`📁 Creating project: ${projectName}\n`);
-
-try {
-  // ==========================================================================
-  // DIRECTORY STRUCTURE CREATION
-  // ==========================================================================
-
-  /**
-   * Directory Structure - The Foundation of Organization
-   *
-   * @group Project Structure
-   * @since 0.14.0
-   *
-   * Every great building starts with a solid foundation. In web projects, that
-   * foundation is the directory structure—it defines where things live, how they
-   * relate, and how they flow through the build process. This structure follows
-   * the "separation of concerns" principle established by Unix in the 1970s:
-   * each directory has one clear purpose.
-   *
-   * **content/** - This is where writers work. Markdown files, HTML snippets,
-   * data files—anything that represents the site's content lives here. It's
-   * deliberately separate from code (src/) and compiled assets (public/). This
-   * separation means content editors never accidentally break the build system,
-   * and developers never accidentally delete content.
-   *
-   * **src/styles/** - Source SCSS files. These are human-readable, with variables,
-   * mixins, comments, and proper formatting. They compile to public/assets/css/.
-   * The "src" (source) vs "public" (compiled) distinction is crucial—source is
-   * what you edit, public is what the browser downloads.
-   *
-   * **src/js/** - Source JavaScript files. Like styles, these are readable with
-   * descriptive variable names and comments. They compile (minify/bundle) to
-   * public/assets/js/. Never edit the public/ files directly—they're generated
-   * and overwritten on every build.
-   *
-   * **src/layouts/** - Nunjucks templates that define HTML structure. These are
-   * the skeletons that content gets inserted into. Separating layouts from content
-   * means you can redesign the entire site without touching a single content file.
-   *
-   * **public/assets/** - Compiled, production-ready assets. This directory is
-   * generated by build scripts and watched by 11ty. When CSS/JS changes, only the
-   * browser reloads (fast). When content changes, 11ty rebuilds (slower but
-   * necessary). This separation optimizes the development workflow.
-   *
-   * **_site/** - The final built website. This is what you deploy to production.
-   * It contains HTML files, copied assets, and everything needed to serve the site.
-   * It's completely generated—never edit files here, always regenerate.
-   *
-   * The { recursive: true } option means parent directories are created automatically.
-   * If public/ doesn't exist when we create public/assets/css/, fs.mkdirSync() creates
-   * all three levels (public/, public/assets/, public/assets/css/). This prevents
-   * the "ENOENT: no such file or directory" errors that plague manual directory creation.
-   *
-   * ### Future Improvements
-   *
-   * - Add data/ directory for JSON/YAML data files
-   * - Create public/images/ for static images
-   * - Add tests/ directory for future testing setup
-   * - Include .vscode/ with recommended extensions
-   *
-   * @see {constant} projectPath - Base path for all directories
-   *
-   * @link https://en.wikipedia.org/wiki/Separation_of_concerns Separation of Concerns
-   *
-   * @example bash - Created structure
-   *   standard-site/
-   *   ├── content/              ✅ Created
-   *   ├── src/
-   *   │   ├── styles/           ✅ Created
-   *   │   ├── js/               ✅ Created
-   *   │   └── layouts/          ✅ Created
-   *   ├── public/
-   *   │   └── assets/
-   *   │       ├── css/          ✅ Created
-   *   │       └── js/           ✅ Created
-   *   └── _site/                ✅ Created
-   */
-  const dirs = [
-    "content",
-    "src/styles",
-    "src/js",
-    "src/layouts",
-    "public/assets/css",
-    "public/assets/js",
-    "_site",
-  ];
-
-  for (const dir of dirs) {
-    fs.mkdirSync(path.join(projectPath, dir), { recursive: true });
-    console.log(`   ✅ Created ${dir}/`);
+  // Check if we should proceed
+  const shouldProceed = await shouldCreateProject(projectPath);
+  if (!shouldProceed) {
+    console.log("❌ Project creation cancelled.");
+    process.exit(1);
   }
 
-  console.log();
+  // Create directory structure
+  console.log("📂 Creating directory structure...");
+  dirs.forEach((dir) => {
+    createDirectory(path.join(projectPath, dir));
+  });
 
-  // ==========================================================================
-  // CONFIGURATION FILE GENERATION
-  // ==========================================================================
+  // Generate configuration files
+  console.log("\n⚙️  Generating configuration files...");
+  generateSiteConfig();
+  generateAstroConfig();
+  generatePackageJson();
 
-  /**
-   * Site Configuration File - The Central Source of Truth
-   *
-   * @group Configuration
-   * @since 0.14.0
-   *
-   * site.config.yml is where everything begins. It defines site metadata (title,
-   * URL, author), social connections, and—most importantly—build configuration.
-   * Both build-css.js and build-js.js read this file to know what to compile,
-   * what to bundle, and where to put the results.
-   *
-   * We chose YAML over JSON because it's human-friendly: no trailing comma syntax
-   * errors, comments work naturally, multi-line strings are clean, and the
-   * structure is visually clear. YAML was designed for configuration files—JSON
-   * was designed for data interchange. Use the right tool for the job.
-   *
-   * **Site Metadata Section** - Basic information about the site. Used in meta
-   * tags, feeds, sitemaps, and templates. The URL should be the production URL
-   * (used for generating absolute URLs in canonical tags and RSS feeds).
-   *
-   * **Build Section** - This is the magic. It tells build scripts exactly what to
-   * compile and how. The CSS section defines which SCSS files to process and how
-   * to bundle them with Standard Framework's CSS. The JS section does the same
-   * for JavaScript. This unified configuration means you never have multiple build
-   * configs drifting out of sync.
-   *
-   * **Bundle Configuration** - Notice we bundle Standard Framework's CSS with your
-   * custom CSS into site.min.css. This creates a single HTTP request for all styles.
-   * Same with JavaScript—we bundle htmx (for interactivity), Standard Framework's
-   * typography engine, and your custom scripts into one file. This follows the
-   * "progressive enhancement" philosophy: the core bundle is small (<50KB), loads
-   * fast, and provides full functionality.
-   *
-   * **Why htmx?** - Htmx enables rich interactivity without complex JavaScript
-   * frameworks. Need to load content dynamically? Add `hx-get="/content"` to any
-   * element. No build step, no compilation, no framework lock-in. It's optional—
-   * remove it from the bundle if you don't need it.
-   *
-   * ### Future Improvements
-   *
-   * - Add navigation structure configuration
-   * - Include SEO settings (meta tags, social cards)
-   * - Add deployment configuration (Netlify, Vercel)
-   * - Support environment-specific configs (dev vs production)
-   *
-   * @see {file} build-css.js - Reads this configuration
-   * @see {file} build-js.js - Reads this configuration
-   *
-   * @link https://yaml.org/ YAML Specification
-   * @link https://htmx.org/ htmx - High Power Tools for HTML
-   *
-   * @example yaml - Example customization
-   *   title: "My Awesome Blog"
-   *   url: "https://blog.example.com"
-   *   description: "Thoughts on web development and design"
-   *   language: "en"
-   *   author:
-   *     name: "Jane Developer"
-   *     email: "jane@example.com"
-   *   social:
-   *     twitter: "@janedev"
-   *     github: "janedev"
-   */
-  const siteConfig = `title: "${projectName}"
-url: "https://example.com"
-description: "A beautiful site built with Standard Framework"
-language: "en"
+  // Generate source files
+  console.log("\n🎨 Creating source files...");
+  generateBaseLayout();
+  generateIndexPage();
+  generateAboutPage();
+  generateCustomStyles();
+
+  // Generate content files
+  console.log("\n📝 Creating content files...");
+  generateIndexContent();
+  generateAboutContent();
+
+  // Generate project files
+  console.log("\n📄 Creating project files...");
+  generateReadme();
+  generateGitignore();
+  generateEnvExample();
+
+  console.log("\n✅ Project created successfully!");
+  console.log("\n📋 Next steps:");
+  console.log(`   cd ${projectName}`);
+  console.log("   npm install");
+  console.log("   npm run dev");
+  console.log("\n🎉 Happy building with Standard Framework!\n");
+}
+
+// ============================================================================
+// CONFIGURATION FILE GENERATION
+// ============================================================================
+
+/**
+ * Site Configuration Generation
+ *
+ * @group Configuration
+ * @since 0.15.0
+ *
+ * Creates site.config.yml with Standard Framework configuration. This file
+ * contains site metadata (title, description, author) and framework settings
+ * (typography features, grid configuration, etc.). The YAML format is chosen
+ * for readability and ease of editing. Users can modify these values to
+ * customize their site without touching code.
+ *
+ * @see {file} site.config.yml - Configuration file created
+ */
+function generateSiteConfig() {
+  const siteConfig = `title: "My Standard Site"
+description: "A beautiful site built with Standard Framework and Astro"
 author:
   name: "Your Name"
   email: "your.email@example.com"
-social:
-  twitter: "@yourhandle"
+  url: "https://yoursite.com"
 
-# Build configuration (read by build-css and build-js scripts)
-# Outputs to public/assets which is watched by 11ty for browser reload
+# Language and locale settings
+language: "en"
+locale: "en-US"
+
+# Standard Framework Configuration
+standard:
+  # Typography features
+  typography:
+    enableSmartQuotes: true
+    enablePunctuation: true
+    enableWidowPrevention: true
+    enableFractions: true
+    enableArrowsAndSymbols: true
+    enableNumberFormatting: false
+    enableSpacing: false
+    locale: "en" # en, fr, de, es, it
+    observeDOM: true
+    autoProcess: true
+
+  # Grid system configuration
+  grid:
+    columns: 12
+    gap: "1rem"
+    containerMaxWidth: "1200px"
+
+  # Color system
+  colors:
+    primary: "#0066cc"
+    secondary: "#6c757d"
+    accent: "#28a745"
+
+  # Comments system (optional)
+  comments:
+    enabled: false
+    apiEndpoint: "/api/comments"
+    commentsPath: "data/comments"
+
+# Navigation configuration
+nav:
+  header:
+    - href: "/"
+      label: "Home"
+    - href: "/about"
+      label: "About"
+    - href: "/contact"
+      label: "Contact"
+
+  footer:
+    - href: "/privacy"
+      label: "Privacy"
+    - href: "/terms"
+      label: "Terms"
+
+# Build configuration
 build:
-  css:
-    outputDir: "public/assets/css"
-    files:
-      - input: "custom.scss"
-        output: "custom.min.css"
-    bundle:
-      files:
-        - "node_modules/@zefish/standard/dist/standard.min.css"
-        - "public/assets/css/custom.min.css"
-      output: "site.min.css"
+  outputDir: "dist"
+  assetsDir: "assets"
+  cssMinify: true
+  jsMinify: true
 
-  js:
-    outputDir: "public/assets/js"
-    files:
-      - input: "custom.js"
-        output: "custom.min.js"
-        minify: true
-    bundles:
-      - name: "site.bundle.js"
-        files:
-          - "node_modules/htmx.org/dist/htmx.min.js"
-          - "node_modules/@zefish/standard/dist/standard.min.js"
-          - "public/assets/js/custom.min.js"
+# Development configuration
+dev:
+  port: 3000
+  host: "localhost"
 `;
 
   fs.writeFileSync(path.join(projectPath, "site.config.yml"), siteConfig);
   console.log("✅ Created site.config.yml");
+}
 
-  // ==========================================================================
-  // 11TY CONFIGURATION
-  // ==========================================================================
+/**
+ * Astro Configuration Generation
+ *
+ * @group Configuration
+ * @since 0.15.0
+ *
+ * Creates astro.config.mjs with Standard Framework integration. This file
+ * configures Astro to use Standard Framework's plugins, components, and
+ * layouts. The configuration enables markdown processing, syntax highlighting,
+ * and integrates Standard Framework's typography and layout systems.
+ *
+ * Key features:
+ * - Standard Framework integration with sensible defaults
+ * - Markdown processing with syntax highlighting
+ * - Component hydration strategy (static by default)
+ * - Development server configuration
+ *
+ * @see {file} astro.config.mjs - Astro configuration file created
+ */
+function generateAstroConfig() {
+  const astroConfig = `import { defineConfig } from "astro/config";
+import standard from "@zefish/standard";
 
-  /**
-   * Eleventy Configuration - Static Site Generator Setup
-   *
-   * @group Configuration
-   * @since 0.14.0
-   *
-   * This file configures 11ty (Eleventy), the static site generator that powers
-   * Standard Framework sites. 11ty is like a printing press for the web—it takes
-   * content (Markdown, HTML, data) and templates (Nunjucks, Liquid) and produces
-   * static HTML files. Static sites are fast (no server processing), secure (no
-   * database attacks), and cheap to host (just files on a CDN).
-   *
-   * **Directory Configuration** - We tell 11ty where things live. Input comes from
-   * content/, templates from src/layouts/, and output goes to _site/. This matches
-   * the directory structure we created earlier. The "../src/layouts" path is
-   * relative to the input directory (content/), going up one level then into src/.
-   *
-   * **Standard Framework Plugin** - eleventyConfig.addPlugin(Standard) integrates
-   * the entire Standard Framework plugin system: enhanced Markdown, template
-   * filters, shortcodes, backlinks, and more. It's a single line that unlocks
-   * dozens of features.
-   *
-   * **Default Layout** - addGlobalData("layout", "base") means every Markdown file
-   * automatically uses base.njk layout unless it specifies otherwise. This "convention
-   * over configuration" saves you from adding `layout: base` to every file's
-   * frontmatter. Just write content, get properly formatted pages.
-   *
-   * **Pass-Through Copy** - The public/ directory is copied directly to output
-   * without processing. This is where compiled CSS/JS lives, so they appear in
-   * _site/assets/css/ and _site/assets/js/ without transformation. The `{ "public": "." }`
-   * syntax means "copy contents of public/ to root of _site/" (flattening the structure).
-   *
-   * **Watch Ignores** - Critical for performance. We tell 11ty NOT to watch src/js/
-   * and src/styles/ because those are handled by build-css.js and build-js.js. If
-   * 11ty watched them, it would trigger full rebuilds (slow) instead of just browser
-   * reloads (fast). We also ignore public/ because it's the output of build scripts—
-   * 11ty watches _site/ instead.
-   *
-   * **Template Engines** - Nunjucks (njk) is powerful and flexible. It supports
-   * includes, macros, filters, and inheritance—everything needed for complex layouts.
-   * We use it for both Markdown (via markdownTemplateEngine) and HTML files.
-   *
-   * ### Future Improvements
-   *
-   * - Add collections configuration (blog posts, pages, projects)
-   * - Configure pagination for blog archives
-   * - Set up RSS feed generation
-   * - Add sitemap generation
-   * - Configure image optimization pipeline
-   *
-   * @see {file} site.config.yml - Site metadata used in templates
-   * @see {package} @zefish/standard - Plugin being loaded
-   * @see {file} src/layouts/base.njk - Default layout template
-   *
-   * @link https://www.11ty.dev/ Eleventy Documentation
-   * @link https://mozilla.github.io/nunjucks/ Nunjucks Template Engine
-   *
-   * @example javascript - Extended configuration
-   *   eleventyConfig.addPlugin(Standard, {
-   *     // Custom Standard Framework options
-   *     markdown: {
-   *       highlight: true,
-   *       footnotes: true
-   *     }
-   *   });
-   *
-   *   // Add collections
-   *   eleventyConfig.addCollection("posts", collection => {
-   *     return collection.getFilteredByGlob("content/blog/*.md");
-   *   });
-   */
-  const eleventyConfig = `import Standard from "@zefish/standard";
+export default defineConfig({
+  integrations: [
+    standard({
+      // Typography configuration
+      typography: {
+        enableSmartQuotes: true,
+        enablePunctuation: true,
+        enableWidowPrevention: true,
+        enableFractions: true,
+        locale: "en"
+      },
 
-export default function (eleventyConfig) {
+      // Grid system
+      grid: {
+        columns: 12,
+        gap: "1rem"
+      },
 
-  // Add Standard Framework plugin
-  eleventyConfig.addPlugin(Standard, {
-  });
+      // Comments system (disable by default)
+      comments: {
+        enabled: false
+      },
 
-  // Add default layout
-  eleventyConfig.addGlobalData("layout", "base");
+      // Automatically inject useful routes
+      injectRoutes: true
+    })
+  ],
 
-  // Copy assets to output
-  eleventyConfig.addPassthroughCopy({ "public": "." });
+  // Markdown configuration
+  markdown: {
+    syntaxHighlight: "prism",
+    shikiConfig: {
+      langs: [],
+      wrap: false,
+      theme: "github-light"
+    }
+  },
 
-  // Ignore src/js and src/styles - they are watched by build scripts
-  eleventyConfig.watchIgnores.add("src/js/**");
-  eleventyConfig.watchIgnores.add("src/styles/**");
-  eleventyConfig.watchIgnores.add("public/**");
+  // Server configuration
+  server: {
+    port: 3000,
+    host: "localhost"
+  },
 
-  return {
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-    dir: {
-      input: "content",
-      includes: "../src/layouts",
-      output: "_site",
-    },
-  };
-};
+  // Build configuration
+  build: {
+    format: "directory",
+    assets: "assets"
+  },
+
+  // Output configuration (static site)
+  output: "static",
+
+  // Vite configuration
+  vite: {
+    server: {
+      fs: {
+        allow: [".."]
+      }
+    }
+  }
+});
 `;
 
-  fs.writeFileSync(
-    path.join(projectPath, "eleventy.config.js"),
-    eleventyConfig,
-  );
-  console.log("✅ Created eleventy.config.js");
+  fs.writeFileSync(path.join(projectPath, "astro.config.mjs"), astroConfig);
+  console.log("✅ Created astro.config.mjs");
+}
 
-  // ==========================================================================
-  // PACKAGE.JSON GENERATION
-  // ==========================================================================
-
-  /**
-   * Package Configuration - Dependency Management & Scripts
-   *
-   * @group Configuration
-   * @since 0.14.0
-   *
-   * package.json is the heart of every Node.js project. It defines dependencies
-   * (which libraries to install), scripts (command shortcuts), and metadata
-   * (name, version, author). NPM reads this file to manage your project.
-   *
-   * **Type: "module"** - This enables ES modules (import/export) instead of
-   * CommonJS (require). ES modules are the future—they're the JavaScript standard,
-   * they enable tree shaking (removing unused code), and they work in browsers
-   * without transpilation. All Standard Framework code uses ES modules.
-   *
-   * **Scripts Section** - These are command shortcuts. Run `npm run build:css`
-   * and NPM executes `standard-build-css`. These scripts compose beautifully:
-   * the `build` script runs three commands in sequence (&&), while `dev` runs
-   * three in parallel (concurrently).
-   *
-   * **The Development Workflow** - `npm start` (alias for `npm run dev`) does
-   * something magical. It starts three processes simultaneously:
-   *
-   * 1. **watch:css** - Monitors SCSS files, recompiles on changes, writes to public/
-   * 2. **watch:js** - Monitors JavaScript files, recompiles on changes, writes to public/
-   * 3. **eleventy --serve** - Watches content/ and public/, serves site with live reload
-   *
-   * This creates an optimized feedback loop: Change CSS → recompile (0.1s) →
-   * browser reload (instant). Change content → 11ty rebuild (0.5s) → browser reload.
-   * The key insight: CSS/JS changes don't trigger 11ty rebuilds because 11ty only
-   * watches public/, not src/. This separation makes development feel instant.
-   *
-   * **concurrently** - Runs multiple npm scripts in parallel with a unified output.
-   * The `--kill-others` flag means if one process crashes, all stop—preventing
-   * orphaned processes. Without concurrently, you'd need three terminal windows.
-   *
-   * **Dependencies** - Standard Framework is the only runtime dependency. Everything
-   * else (11ty, build tools) is pulled in as transitive dependencies. This keeps
-   * your package.json clean and ensures version compatibility.
-   *
-   * ### Future Improvements
-   *
-   * - Add `test` script for future testing setup
-   * - Include `lint` script for code quality checks
-   * - Add `preview` script for production build preview
-   * - Include `deploy` scripts for various platforms
-   *
-   * @see {file} site.config.yml - Configuration read by build scripts
-   * @see {package} concurrently - Parallel script execution
-   * @see {package} @zefish/standard - Main framework package
-   *
-   * @link https://docs.npmjs.com/cli/v10/configuring-npm/package-json Package.json Docs
-   * @link https://github.com/open-cli-tools/concurrently Concurrently
-   *
-   * @example bash - Script usage
-   *   npm run build:css    # Build CSS only
-   *   npm run build:js     # Build JavaScript only
-   *   npm run build        # Build everything
-   *   npm run watch:css    # Watch CSS files
-   *   npm run watch:js     # Watch JavaScript files
-   *   npm start            # Full development mode
-   *   npm run dev          # Same as npm start
-   */
+/**
+ * Package.json Generation
+ *
+ * @group Configuration
+ * @since 0.15.0
+ *
+ * Creates package.json with Astro and Standard Framework dependencies.
+ * The scripts section provides common development tasks:
+ * - dev: Start development server with hot reload
+ * - build: Build for production
+ * - preview: Preview production build locally
+ * - check: Run type checking (if TypeScript is added later)
+ *
+ * Dependencies are kept minimal—Astro and Standard Framework provide
+ * most functionality. Users can add more packages as needed.
+ *
+ * @see {file} package.json - NPM package configuration created
+ */
+function generatePackageJson() {
   const packageJson = {
     name: projectName,
     version: "0.1.0",
-    description: "A beautiful site built with Standard Framework",
+    description: "A beautiful site built with Standard Framework and Astro",
     type: "module",
     scripts: {
-      "build:css": "standard-build-css",
-      "build:js": "standard-build-js",
-      build: "npm run build:css && npm run build:js && eleventy",
-      check: "npm run build && standard-check",
-      "watch:css": "standard-build-css --watch",
-      "watch:js": "standard-build-js --watch",
-      dev: 'rm -rf _site/ && npm run clean:ports && concurrently --kill-others "npm run watch:css" "npm run watch:js" "eleventy --serve --port=8080"',
-      "clean:ports": "lsof -ti:8080 | xargs kill -9 2>/dev/null || true",
-      "kill-node": "killall node || taskkill /F /IM node.exe",
-      start: "npm run dev",
+      dev: "astro dev",
+      start: "astro dev",
+      build: "astro build",
+      preview: "astro preview",
+      check: "astro check",
+      "check:watch": "astro check --watch",
+      format: "prettier --write .",
     },
-    keywords: ["standard-framework", "typography", "11ty"],
+    keywords: [
+      "standard-framework",
+      "astro",
+      "typography",
+      "design-system",
+      "static-site",
+    ],
     author: "Your Name",
     license: "MIT",
     dependencies: {
       "@zefish/standard": "latest",
-      "@11ty/eleventy": "^3.1.0",
-      dotenv: "^17.0.0",
+      astro: "^5.0.0",
     },
     devDependencies: {
-      concurrently: "^8.2.2",
+      "@astro/check": "^0.8.0",
+      typescript: "^5.0.0",
+      prettier: "^3.0.0",
+      "prettier-plugin-astro": "^0.14.0",
+    },
+    engines: {
+      node: ">=18.0.0",
     },
   };
 
@@ -615,647 +566,1018 @@ export default function (eleventyConfig) {
     JSON.stringify(packageJson, null, 2),
   );
   console.log("✅ Created package.json");
+}
 
-  // ==========================================================================
-  // SOURCE FILE GENERATION
-  // ==========================================================================
+// ============================================================================
+// SOURCE FILE GENERATION
+// ============================================================================
 
-  /**
-   * Custom SCSS File - Your Style Starting Point
-   *
-   * @group Source Files
-   * @since 0.14.0
-   *
-   * This is where you add site-specific styles. Standard Framework provides the
-   * foundation (typography, grid, colors, rhythm), and this file is where you
-   * build on top of that foundation. Want different brand colors? Define them here.
-   * Need custom components? Style them here. Want to override framework defaults?
-   * This is the place.
-   *
-   * The commented-out @import line shows how to access Standard Framework variables
-   * and mixins. Uncomment it to use $flow-space, color variables, grid mixins, and
-   * more. This gives you the full power of the framework's design system while
-   * writing your custom code.
-   *
-   * We keep this file minimal intentionally—it's a blank canvas. Some scaffolding
-   * tools generate hundreds of lines of boilerplate. We give you three comments
-   * and a body selector. Your project, your styles, your choices.
-   *
-   * @see {file} site.config.yml - Compilation configuration
-   * @see {file} build-css.js - Compiles this file
-   *
-   * @example scss - Common customizations
-   *   // Import Standard Framework variables
-   *   @import "@zefish/standard/css";
-   *
-   *   // Override brand colors
-   *   :root {
-   *     --color-accent: #e63946;
-   *     --color-background: #f8f9fa;
-   *   }
-   *
-   *   // Custom component
-   *   .hero {
-   *     padding: calc(var(--flow-space) * 4);
-   *     background: var(--color-accent);
-   *     color: white;
-   *   }
-   */
-  const scssFile = `/**
- * Custom Styles for Your Site
- * This file will be compiled and bundled with Standard Framework CSS
+/**
+ * Base Layout Generation
+ *
+ * @group Layouts
+ * @since 0.15.0
+ *
+ * Creates src/layouts/Base.astro, the main layout template that all pages
+ * will use. This layout:
+ * - Imports Standard Framework's Base layout for consistency
+ * - Provides slots for header, main content, and footer customization
+ * - Includes proper SEO meta tags
+ * - Loads Standard Framework CSS and typography engine
+ * - Handles responsive design and accessibility
+ *
+ * The layout uses Astro's component syntax and slots system to provide
+ * flexibility while maintaining consistency across the site.
+ *
+ * @see {file} src/layouts/Base.astro - Main layout template created
  */
+function generateBaseLayout() {
+  const baseLayout = `---
+// Import Standard Framework's Base layout
+import Base from "@zefish/standard/layouts/Base.astro";
 
-// Import Standard Framework variables
-// @import "@zefish/standard/css";
+// Import site configuration
+import config from "virtual:standard/config";
 
-// Add your custom styles below
-body {
-  // Customize as needed
+// Import Standard Framework CSS
+import "@zefish/standard/css";
+import "@zefish/standard/theme";
+
+// Import components
+import Menu from "@zefish/standard/components/Menu.astro";
+import Comments from "@zefish/standard/components/Comments.astro";
+
+// Extract props with defaults
+const {
+  title = config.title || "My Standard Site",
+  description = config.description || "A beautiful site built with Standard Framework",
+  image,
+  created,
+  modified,
+  tags,
+  class: className,
+} = Astro.props;
+
+// Site navigation
+const navItems = config.nav?.header || [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+];
+---
+
+<!-- Use Standard Framework's Base layout -->
+<Base
+  title={title}
+  description={description}
+  image={image}
+  created={created}
+  modified={modified}
+  tags={tags}
+  class={className}
+>
+  <!-- Custom header slot -->
+  <header slot="header" class="site-header">
+    <div class="container">
+      <nav class="main-nav">
+        <Menu items={navItems} />
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content prose">
+    <div class="container">
+      <slot />
+    </div>
+  </main>
+
+  <!-- Comments section (if enabled) -->
+  {config.standard?.comments?.enabled && (
+    <section slot="comments" class="comments-section">
+      <div class="container">
+        <Comments />
+      </div>
+    </section>
+  )}
+
+  <!-- Custom footer slot -->
+  <footer slot="footer" class="site-footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} {config.author?.name || "Your Name"}.
+         Built with <a href="https://github.com/ZeFish/Standard">Standard Framework</a>.
+      </p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  /* Site-specific styles that work with Standard Framework */
+  .site-header {
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--spacing-base);
+  }
+
+  .main-content {
+    min-height: 60vh;
+    padding-block: var(--spacing-xl);
+  }
+
+  .container {
+    max-width: var(--line-width, 65rem);
+    margin-inline: auto;
+    padding-inline: var(--spacing-base);
+  }
+
+  .site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--spacing-l);
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .site-footer p {
+    text-align: center;
+    color: var(--color-subtle);
+    margin: 0;
+  }
+
+  .site-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding-inline: var(--spacing-s);
+    }
+  }
+</style>
+`;
+
+  fs.writeFileSync(
+    path.join(projectPath, "src/layouts/Base.astro"),
+    baseLayout,
+  );
+  console.log("✅ Created src/layouts/Base.astro");
+}
+
+/**
+ * Index Page Generation
+ *
+ * @group Pages
+ * @since 0.15.0
+ *
+ * Creates src/pages/index.astro, the homepage template. This page:
+ * - Imports content from content/index.md for the main content
+ * - Uses the Base layout for consistent styling
+ * - Demonstrates Standard Framework features
+ * - Provides a welcoming introduction to the site
+ *
+ * The page follows Astro's file-based routing—index.astro becomes the root
+ * route (/). The content is separated into a markdown file for easy editing.
+ *
+ * @see {file} src/pages/index.astro - Homepage template created
+ */
+function generateIndexPage() {
+  const indexPage = `---
+import Base from "../layouts/Base.astro";
+import * as IndexContent from "../../content/index.md";
+import config from "virtual:standard/config";
+---
+
+<Base
+  title={IndexContent.frontmatter?.title || config.title}
+  description={IndexContent.frontmatter?.description || config.description}
+>
+  <!-- Hero section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">{config.title}</h1>
+      <p class="hero-description">{config.description}</p>
+      <div class="hero-actions">
+        <a href="/about" class="button button-primary">Learn More</a>
+        <a href="/contact" class="button button-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content from markdown -->
+  <section class="content-section">
+    <div class="container">
+      <IndexContent.Content />
+    </div>
+  </section>
+
+  <!-- Features section -->
+  <section class="features-section">
+    <div class="container">
+      <h2>Built with Standard Framework</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <h3>🎨 Beautiful Typography</h3>
+          <p>Smart quotes, proper dashes, and perfect spacing automatically applied to your content.</p>
+        </div>
+        <div class="feature">
+          <h3>📐 Swiss Grid System</h3>
+          <p>Professional 12-column layouts inspired by Josef Müller-Brockmann's design principles.</p>
+        </div>
+        <div class="feature">
+          <h3>🎯 Vertical Rhythm</h3>
+          <p>Every element aligns to a mathematical baseline grid for perfect visual harmony.</p>
+        </div>
+        <div class="feature">
+          <h3>🌙 Automatic Theming</h3>
+          <p>Light and dark modes that respect user preferences and maintain accessibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding-block: var(--spacing-xxl);
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: var(--scale-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-base);
+    line-height: var(--line-height-tight);
+  }
+
+  .hero-description {
+    font-size: var(--scale-lg);
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.9;
+    max-width: 40rem;
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--spacing-base);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .content-section {
+    padding-block: var(--spacing-xxl);
+  }
+
+  .features-section {
+    background: var(--color-surface);
+    padding-block: var(--spacing-xxl);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
+
+  .feature {
+    padding: var(--spacing-l);
+    background: var(--color-background);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .feature h3 {
+    margin-bottom: var(--spacing-base);
+    color: var(--color-primary);
+  }
+
+  .button {
+    display: inline-block;
+    padding: var(--spacing-s) var(--spacing-l);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
+  }
+
+  .button-primary {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .button-primary:hover {
+    background: var(--color-accent);
+    transform: translateY(-1px);
+  }
+
+  .button-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .button-secondary:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: var(--scale-3xl);
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+`;
+
+  fs.writeFileSync(path.join(projectPath, "src/pages/index.astro"), indexPage);
+  console.log("✅ Created src/pages/index.astro");
+}
+
+/**
+ * About Page Generation
+ *
+ * @group Pages
+ * @since 0.15.0
+ *
+ * Creates src/pages/about.astro, a simple about page that demonstrates
+ * the layout system and provides a template for additional pages. This
+ * page shows how to create new pages that follow the established patterns.
+ *
+ * @see {file} src/pages/about.astro - About page template created
+ */
+function generateAboutPage() {
+  const aboutPage = `---
+import Base from "../layouts/Base.astro";
+import * as AboutContent from "../../content/about.md";
+import config from "virtual:standard/config";
+---
+
+<Base
+  title="About - {config.title}"
+  description="Learn more about this site and the Standard Framework"
+>
+  <div class="container">
+    <h1>About This Site</h1>
+    <AboutContent.Content />
+  </div>
+</Base>
+
+<style>
+  .container {
+    max-width: var(--line-width, 65rem);
+    margin-inline: auto;
+    padding-inline: var(--spacing-base);
+  }
+
+  h1 {
+    margin-bottom: var(--spacing-xl);
+  }
+</style>
+`;
+
+  fs.writeFileSync(path.join(projectPath, "src/pages/about.astro"), aboutPage);
+  console.log("✅ Created src/pages/about.astro");
+}
+
+/**
+ * Custom Styles Generation
+ *
+ * @group Styles
+ * @since 0.15.0
+ *
+ * Creates src/styles/custom.scss for user customizations. This file:
+ * - Imports Standard Framework's main stylesheet
+ * - Provides a place for site-specific customizations
+ * - Shows how to override design tokens
+ * - Demonstrates best practices for extending the framework
+ *
+ * Users can add their own styles here without modifying the framework
+ * files directly, making updates easier.
+ *
+ * @see {file} src/styles/custom.scss - Custom styles file created
+ */
+function generateCustomStyles() {
+  const customStyles = `// Import Standard Framework
+@import "@zefish/standard/css";
+
+// ============================================================================
+// CUSTOM STYLES
+// ============================================================================
+// Add your custom styles here. These will be processed by Astro's build system.
+
+// Example: Custom color overrides
+:root {
+  // Override design tokens
+  --color-primary: #2563eb;
+  --color-accent: #dc2626;
+  --font-family-heading: "Inter", system-ui, sans-serif;
+}
+
+// Example: Custom component styles
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #7c3aed 100%);
+}
+
+.my-custom-component {
+  padding: var(--spacing-l);
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+// Example: Custom utility classes
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Example: Responsive customizations
+@media (max-width: 768px) {
+  .hero {
+    padding-block: var(--spacing-xl);
+  }
+
+  .my-custom-component {
+    padding: var(--spacing-base);
+  }
 }
 `;
 
-  fs.writeFileSync(path.join(projectPath, "src/styles/custom.scss"), scssFile);
+  fs.writeFileSync(
+    path.join(projectPath, "src/styles/custom.scss"),
+    customStyles,
+  );
   console.log("✅ Created src/styles/custom.scss");
+}
 
-  /**
-   * Custom JavaScript File - Your Script Starting Point
-   *
-   * @group Source Files
-   * @since 0.14.0
-   *
-   * This is where you add site-specific JavaScript. Standard Framework's typography
-   * engine runs automatically (smart quotes, widow prevention, etc.), but this is
-   * where YOU control behavior. Need form validation? Add it here. Want to track
-   * analytics? Initialize it here. Building interactive components? Script them here.
-   *
-   * The single console.log demonstrates the file works and helps debugging. When
-   * you open the browser console after running `npm start`, you'll see "Standard
-   * Framework initialized!"—confirmation that JavaScript loaded and executed.
-   *
-   * Like the SCSS file, we keep this minimal. It's your project—we provide the
-   * foundation, you build the features.
-   *
-   * @see {file} site.config.yml - Compilation configuration
-   * @see {file} build-js.js - Minifies and bundles this file
-   *
-   * @example javascript - Common additions
-   *   console.log("Standard Framework initialized!");
-   *
-   *   // Form validation
-   *   document.querySelector('form').addEventListener('submit', (e) => {
-   *     e.preventDefault();
-   *     // Validation logic
-   *   });
-   *
-   *   // Analytics
-   *   if (typeof gtag !== 'undefined') {
-   *     gtag('config', 'GA_MEASUREMENT_ID');
-   *   }
-   *
-   *   // Custom Standard Framework options
-   *   if (window.standard) {
-   *     window.standard.updateOptions({
-   *       enableSmartQuotes: true,
-   *       locale: 'fr'
-   *     });
-   *   }
-   */
-  const jsFile = `/**
- * Custom JavaScript for Your Site
- * This file will be minified and bundled with Standard Framework JS
+// ============================================================================
+// CONTENT FILE GENERATION
+// ============================================================================
+
+/**
+ * Index Content Generation
+ *
+ * @group Content
+ * @since 0.15.0
+ *
+ * Creates content/index.md, the homepage content in markdown format.
+ * This demonstrates how content is separated from presentation in
+ * Standard Framework. Users can edit this file to change the homepage
+ * content without touching any code.
+ *
+ * The content showcases Standard Framework features and provides
+ * a welcoming introduction to the site.
+ *
+ * @see {file} content/index.md - Homepage content created
  */
+function generateIndexContent() {
+  const indexContent = `---
+title: "Welcome to My Standard Site"
+description: "A beautiful, fast, and accessible website built with Standard Framework and Astro"
+---
 
-console.log("Standard Framework initialized!");
+# Welcome to My Standard Site
 
-// Add your custom scripts below
-`;
+This site is built with **Standard Framework** and **Astro**, combining the best of modern static site generation with classical design principles.
 
-  fs.writeFileSync(path.join(projectPath, "src/js/custom.js"), jsFile);
-  console.log("✅ Created src/js/custom.js");
+## What Makes This Special
 
-  // ==========================================================================
-  // TEMPLATE GENERATION
-  // ==========================================================================
+Standard Framework is built on centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
 
-  /**
-   * Base Layout Template - HTML Structure Foundation
-   *
-   * @group Templates
-   * @since 0.14.0
-   *
-   * This is the HTML skeleton that wraps all content. Every page on your site
-   * (unless it specifies a different layout) uses this template. It defines the
-   * <head>, <body>, header, main, and footer structure. Content gets injected
-   * into the {{ content | safe }} section.
-   *
-   * **Nunjucks Syntax** - The {{ }} brackets are Nunjucks template tags. They
-   * output variables: {{ title }} becomes the page's title, {{ site.title }}
-   * becomes the site title from site.config.yml. The `or` keyword provides
-   * fallbacks: use page title if it exists, otherwise use site title.
-   *
-   * **The `| safe` Filter** - By default, Nunjucks escapes HTML to prevent XSS
-   * attacks. But content is HTML (generated from Markdown), so we need to output
-   * it raw. The `| safe` filter says "this is trusted HTML, don't escape it."
-   * Never use `| safe` on user input—only on content you control.
-   *
-   * **Semantic HTML** - We use <header>, <main>, and <footer> elements for
-   * semantic meaning. Screen readers use these landmarks to navigate. Search
-   * engines understand page structure better. CSS can target them easily. This
-   * is modern, accessible HTML.
-   *
-   * **Asset Loading** - CSS in <head> (render-blocking, but necessary for styled
-   * initial paint), JavaScript at end of <body> (non-blocking, runs after DOM
-   * loads). Both are bundles—one request each instead of multiple.
-   *
-   * **Copyright Year** - {{ now.getFullYear() }} uses JavaScript's Date object
-   * to show the current year. This updates automatically—no manual changes needed
-   * every January 1st.
-   *
-   * ### Future Improvements
-   *
-   * - Add navigation component
-   * - Include meta tags for social sharing (Open Graph, Twitter Cards)
-   * - Add favicon links
-   * - Include skip-to-content link for accessibility
-   * - Add dark mode toggle
-   *
-   * @see {file} content/index.md - Example content using this layout
-   * @see {file} eleventy.config.js - Sets this as default layout
-   *
-   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element HTML Elements
-   * @link https://mozilla.github.io/nunjucks/templating.html Nunjucks Templating
-   *
-   * @example njk - Extended layout
-   *   <!DOCTYPE html>
-   *   <html lang="{{ site.language or 'en' }}" class="no-js">
-   *   <head>
-   *     <meta charset="UTF-8">
-   *     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   *     <title>{{ title or site.title }}</title>
-   *     <meta name="description" content="{{ description or site.description }}">
-   *
-   *     <!-- Open Graph -->
-   *     <meta property="og:title" content="{{ title or site.title }}">
-   *     <meta property="og:description" content="{{ description or site.description }}">
-   *     <meta property="og:image" content="{{ site.url }}/og-image.jpg">
-   *
-   *     <link rel="stylesheet" href="/assets/css/site.min.css">
-   *   </head>
-   *   <body>
-   *     <a href="#main" class="skip-link">Skip to content</a>
-   *
-   *     <header>
-   *       <nav>
-   *         <a href="/">{{ site.title }}</a>
-   *         <ul>
-   *           <li><a href="/about">About</a></li>
-   *           <li><a href="/blog">Blog</a></li>
-   *         </ul>
-   *       </nav>
-   *     </header>
-   *
-   *     <main id="main">
-   *       {{ content | safe }}
-   *     </main>
-   *
-   *     <footer>
-   *       <p>&copy; {{ now.getFullYear() }} {{ site.author.name }}</p>
-   *     </footer>
-   *
-   *     <script src="/assets/js/site.bundle.js"></script>
-   *   </body>
-   *   </html>
-   */
-  const layoutDir = path.join(projectPath, "src/layouts");
-  const baseLayout = `<!DOCTYPE html>
-<html lang="{{ site.language or 'en' }}">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or site.title }}{% if title and title != site.title %} · {{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ description or site.description }}">
+### 🎨 Fine-Art Typography
+Every text element automatically gets:
+- Smart quotes ("curly quotes" instead of "straight quotes")
+- Proper dashes (— em-dashes and – en-dashes)
+- Ellipsis (…) instead of three dots
+- Fraction formatting (½, ¼, ¾)
+- Widow and orphan prevention
 
-  <!-- Site CSS (Standard Framework + Custom) -->
-  <link rel="stylesheet" href="/assets/css/site.min.css">
-</head>
-<body>
-  <header>
-    <h1>{{ site.title }}</h1>
-  </header>
+### 📐 Swiss Grid System
+Professional 12-column layouts inspired by Josef Müller-Brockmann:
+- Mobile-first responsive design
+- Asymmetric layouts supported
+- Free column positioning
+- Mathematical precision
 
-  <main>
-    {{ content | safe }}
-  </main>
+### 🎯 Vertical Rhythm
+Every element aligns to a baseline grid:
+- Consistent spacing between elements
+- Perfect vertical alignment
+- Mathematical spacing units
+- Beautiful, readable layouts
 
-  <footer>
-    <p>&copy; {{ now.getFullYear() }} {{ site.author.name }}. All rights reserved.</p>
-  </footer>
-
-  <!-- Site JS (Standard Framework + Custom) -->
-  <script src="/assets/js/site.bundle.js"></script>
-</body>
-</html>
-`;
-
-  fs.writeFileSync(path.join(layoutDir, "base.njk"), baseLayout);
-  console.log("✅ Created src/layouts/base.njk");
-
-  // ==========================================================================
-  // DOCUMENTATION GENERATION
-  // ==========================================================================
-
-  /**
-   * Project README - Documentation and Onboarding
-   *
-   * @group Documentation
-   * @since 0.14.0
-   *
-   * README.md is the first file anyone sees when they open your project. On GitHub,
-   * it's displayed automatically. In text editors, it's alphabetically first. It's
-   * your project's front door—it should welcome visitors, explain what the project
-   * is, and show them how to get started.
-   *
-   * We generate a comprehensive README that covers:
-   *
-   * **Getting Started** - The three commands every developer needs: install, start,
-   * build. No confusion, no hunting through documentation. If someone clones your
-   * repo, they can have a working dev server in 30 seconds.
-   *
-   * **Development Workflow** - Explains what `npm start` actually does. Many
-   * developers run commands without understanding them. We demystify the process:
-   * three watch modes running in parallel, smart rebuild optimization, fast browser
-   * reload. Understanding the workflow helps developers work WITH it instead of
-   * fighting it.
-   *
-   * **Project Structure** - A visual map of where things live. New team members
-   * can scan this and immediately understand the architecture. "Need to add CSS?
-   * Look in src/styles/. Need to edit content? Look in content/." Clarity prevents
-   * mistakes.
-   *
-   * **Configuration** - Points to site.config.yml as the central source of truth.
-   * Instead of hunting through five different config files, there's one place to
-   * make changes.
-   *
-   * **Learn More** - Links to Standard Framework documentation. The README shouldn't
-   * duplicate the framework docs—it should point to them. This keeps documentation
-   * maintainable and always up-to-date.
-   *
-   * ### Future Improvements
-   *
-   * - Add troubleshooting section
-   * - Include deployment instructions
-   * - Add contributing guidelines
-   * - Include license information
-   * - Add badges (build status, dependencies)
-   *
-   * @see {file} site.config.yml - Configuration file referenced
-   * @see {file} package.json - Scripts documented
-   *
-   * @link https://www.makeareadme.com/ How to Write a README
-   *
-   * @example markdown - Extended README sections
-   *   ## Deployment
-   *
-   *   ### Netlify
-   *
-   *   1. Connect your GitHub repository
-   *   2. Set build command: `npm run build`
-   *   3. Set publish directory: `_site`
-   *   4. Deploy!
-   *
-   *   ### Vercel
-   *
-   *   ```bash
-   *   vercel --prod
-   *   ```
-   *
-   *   ## Troubleshooting
-   *
-   *   **CSS not updating?**
-   *   - Check that build:css script is running
-   *   - Verify public/assets/css/ contains files
-   *   - Hard refresh browser (Cmd+Shift+R)
-   */
-  const readme = `# ${projectName}
-
-A beautiful site built with [Standard Framework](https://standard.ffp.co).
+### 🌙 Automatic Theming
+Built-in light and dark mode support:
+- Respects user's system preference
+- High contrast mode support
+- Semantic color system
+- WCAG AA accessibility
 
 ## Getting Started
 
+1. **Edit this content** - Modify \`content/index.md\` to change this page
+2. **Add new pages** - Create \`.md\` files in the \`content/\` directory
+3. **Customize styling** - Edit \`src/styles/custom.scss\` for custom styles
+4. **Configure site** - Modify \`site.config.yml\` for site settings
+
+## Next Steps
+
+- [Read the documentation](https://github.com/ZeFish/Standard)
+- [Explore the components](/about)
+- [Customize your site](#)
+- [Deploy to your favorite platform](#)
+
+---
+
+*Built with precision. Crafted with care. Designed for the long haul.*
+`;
+
+  fs.writeFileSync(path.join(projectPath, "content/index.md"), indexContent);
+  console.log("✅ Created content/index.md");
+}
+
+/**
+ * About Content Generation
+ *
+ * @group Content
+ * @since 0.15.0
+ *
+ * Creates content/about.md, sample content for the about page.
+ * This demonstrates the content structure and provides a template
+ * for additional content pages.
+ *
+ * @see {file} content/about.md - About page content created
+ */
+function generateAboutContent() {
+  const aboutContent = `---
+title: "About This Site"
+description: "Learn more about this website and the technology behind it"
+---
+
+# About This Site
+
+This website is built using modern web technologies and time-tested design principles.
+
+## Technology Stack
+
+### Astro
+A modern static site generator that delivers lightning-fast performance:
+- Zero JavaScript by default
+- Partial hydration for interactive components
+- File-based routing
+- Built-in optimization
+
+### Standard Framework
+A comprehensive design system focused on typography and layout:
+- Classical typography rules
+- Swiss grid system
+- Vertical rhythm
+- Mathematical precision
+
+### Design Principles
+
+#### Mathematical Precision
+Every measurement derives from the golden ratio (φ = 1.618):
+- Base spacing: 1.5rem (24px)
+- Scale multipliers: 1.5, 2.25, 3.375, 5.063
+- Typography: 1.618 ratio between heading levels
+
+#### Swiss International Style
+Clean, objective design with:
+- 12-column grid system
+- Mathematical grid-based layouts
+- Hierarchy through scale and weight
+- Minimal, functional aesthetics
+
+#### Classical Typography
+Rules from masters of print design:
+- Locale-aware smart quotes
+- Proper punctuation and spacing
+- Widow/orphan prevention
+- Optimal reading width
+
+## Performance
+
+This site is optimized for speed and accessibility:
+- ⚡ Lightning-fast loading
+- 📱 Mobile-first responsive design
+- ♿ WCAG AA accessibility compliance
+- 🔍 SEO-friendly structure
+- 🌙 Automatic dark mode support
+
+## Customization
+
+The site is highly customizable:
+- **Content**: Edit markdown files in \`content/\`
+- **Styling**: Modify \`src/styles/custom.scss\`
+- **Configuration**: Update \`site.config.yml\`
+- **Layout**: Customize \`src/layouts/Base.astro\`
+
+## Learn More
+
+- [Standard Framework Documentation](https://github.com/ZeFish/Standard)
+- [Astro Documentation](https://docs.astro.build/)
+- [Web Typography Resources](https://practicaltypography.com/)
+
+---
+
+*Questions? Feel free to [get in touch](/contact).*
+`;
+
+  fs.writeFileSync(path.join(projectPath, "content/about.md"), aboutContent);
+  console.log("✅ Created content/about.md");
+}
+
+// ============================================================================
+// PROJECT FILE GENERATION
+// ============================================================================
+
+/**
+ * README Generation
+ *
+ * @group Documentation
+ * @since 0.15.0
+ *
+ * Creates README.md with project documentation and getting started guide.
+ * This provides essential information for developers who work on the project
+ * and users who want to understand the setup.
+ *
+ * @see {file} README.md - Project documentation created
+ */
+function generateReadme() {
+  const readme = `# ${projectName}
+
+A beautiful, fast, and accessible website built with [Standard Framework](https://github.com/ZeFish/Standard) and [Astro](https://astro.build/).
+
+## Features
+
+- 🎨 **Fine-Art Typography** - Smart quotes, proper dashes, fractions, and widow prevention
+- 📐 **Swiss Grid System** - Professional 12-column responsive layouts
+- 🎯 **Vertical Rhythm** - Perfect baseline grid alignment
+- 🌙 **Automatic Theming** - Light/dark mode with accessibility support
+- ⚡ **Lightning Fast** - Static site generation with Astro
+- 📱 **Mobile First** - Responsive design from the ground up
+- ♿ **Accessible** - WCAG AA compliant by default
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
 ### Installation
 
-\`\`\`bash
-npm install
-\`\`\`
+1. **Clone or download this project**
+2. **Install dependencies:**
+   \`\`\`bash
+   npm install
+   \`\`\`
 
-### Development
+3. **Start development server:**
+   \`\`\`bash
+   npm run dev
+   \`\`\`
 
-\`\`\`bash
-npm start
-\`\`\`
+4. **Open your browser:**
+   Navigate to \`http://localhost:3000\`
 
-This starts an optimized development workflow:
-- Watches SCSS files and recompiles CSS on changes
-- Watches JS files and recompiles JavaScript on changes
-- Runs 11ty dev server with live reload
-- CSS/JS changes only trigger browser reload (fast)
-- Content changes trigger full 11ty rebuild (as needed)
-
-### Building
+### Building for Production
 
 \`\`\`bash
 npm run build
 \`\`\`
 
-### Building individual components
+The built site will be in the \`dist/\` directory.
+
+### Preview Production Build
 
 \`\`\`bash
-npm run build:css    # Build CSS only
-npm run build:js     # Build JavaScript only
+npm run preview
 \`\`\`
-
-## Configuration
-
-Edit \`site.config.yml\` to customize:
-- Site metadata (title, URL, author)
-- Build configuration (which files to compile/bundle)
-- Navigation structure
-- Custom settings
 
 ## Project Structure
 
 \`\`\`
 ${projectName}/
-├── content/          # Markdown/HTML content
+├── content/              # Your content (Markdown files)
+│   ├── index.md          # Homepage content
+│   └── about.md          # About page content
 ├── src/
-│   ├── styles/      # Custom SCSS files
-│   ├── js/          # Custom JavaScript files
-│   └── layouts/     # Nunjucks templates
-├── public/          # Compiled assets (generated, watched by 11ty)
-│   └── assets/
-│       ├── css/     # Compiled CSS bundles
-│       └── js/      # Compiled JS bundles
-├── _site/           # Built site (generated)
-├── site.config.yml  # Site & build configuration
-├── eleventy.config.js # 11ty configuration
-└── package.json     # Dependencies & scripts
+│   ├── pages/
+│   │   ├── index.astro   # Homepage template
+│   │   └── about.astro   # About page template
+│   ├── layouts/
+│   │   └── Base.astro    # Main layout template
+│   ├── components/       # Reusable components
+│   └── styles/
+│       └── custom.scss   # Your custom styles
+├── public/               # Static assets (images, favicon, etc.)
+├── site.config.yml       # Site configuration
+├── astro.config.mjs      # Astro configuration
+└── package.json          # Dependencies and scripts
 \`\`\`
 
-## Learn More
+## Customization
 
-- [Standard Framework Docs](https://standard.ffp.co/docs)
-- [Getting Started Guide](https://standard.ffp.co/getting-started)
-- [Cheat Sheet](https://standard.ffp.co/cheat-sheet)
+### Content
+Edit markdown files in the \`content/\` directory:
+- \`content/index.md\` - Homepage content
+- \`content/about.md\` - About page content
+
+### Styling
+Modify \`src/styles/custom.scss\` to customize the design:
+- Override design tokens
+- Add custom components
+- Create utility classes
+
+### Configuration
+Update \`site.config.yml\` to configure:
+- Site metadata (title, description, author)
+- Typography features
+- Grid system settings
+- Navigation menus
+- Color schemes
+
+### Layout
+Customize \`src/layouts/Base.astro\` for:
+- Header and footer content
+- Additional sections
+- Custom styling
+
+## Available Scripts
+
+- \`npm run dev\` - Start development server
+- \`npm run build\` - Build for production
+- \`npm run preview\` - Preview production build
+- \`npm run check\` - Run type checking
+- \`npm run format\` - Format code with Prettier
+
+## Technology
+
+- **[Astro](https://astro.build/)** - Static site generator
+- **[Standard Framework](https://github.com/ZeFish/Standard)** - Design system
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[Prettier](https://prettier.io/)** - Code formatting
+
+## Design Principles
+
+### Mathematical Precision
+Every measurement derives from the golden ratio (φ = 1.618):
+- Base spacing: 1.5rem (24px)
+- Scale multipliers: 1.5, 2.25, 3.375, 5.063
+- Typography: 1.618 ratio between heading levels
+
+### Swiss International Style
+Clean, objective design with:
+- 12-column grid system
+- Mathematical grid-based layouts
+- Hierarchy through scale and weight
+- Minimal, functional aesthetics
+
+### Classical Typography
+Rules from masters of print design:
+- Locale-aware smart quotes
+- Proper punctuation and spacing
+- Widow/orphan prevention
+- Optimal reading width
+
+## Browser Support
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- CSS Grid and Flexbox support required
+- JavaScript features are progressive enhancement
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file.
+
+## Resources
+
+- [Standard Framework Documentation](https://github.com/ZeFish/Standard)
+- [Astro Documentation](https://docs.astro.build/)
+- [Web Typography Resources](https://practicaltypography.com/)
 
 ---
 
-Built with ❤️ using Standard Framework
+Built with ❤️ using Standard Framework and Astro
 `;
 
   fs.writeFileSync(path.join(projectPath, "README.md"), readme);
   console.log("✅ Created README.md");
+}
 
-  // ==========================================================================
-  // CONTENT GENERATION
-  // ==========================================================================
+/**
+ * Gitignore Generation
+ *
+ * @group Configuration
+ * @since 0.15.0
+ *
+ * Creates .gitignore with appropriate exclusions for an Astro project.
+ * This prevents committing build artifacts, dependencies, and sensitive
+ * files that shouldn't be in version control.
+ *
+ * Key exclusions:
+ * - node_modules/ - Dependencies (restored with npm install)
+ * - dist/ - Built site (regenerated on build)
+ * - .astro/ - Astro's build cache
+ * - .env - Environment variables (may contain secrets)
+ *
+ * @see {file} .gitignore - Git exclusions created
+ */
+function generateGitignore() {
+  const gitignore = `# Dependencies
+node_modules/
 
-  /**
-   * Sample Content File - Homepage Template
-   *
-   * @group Content
-   * @since 0.14.0
-   *
-   * This creates the site's homepage (index.md → index.html). It demonstrates
-   * key Standard Framework features:
-   *
-   * **YAML Frontmatter** - The --- delimited section at the top contains metadata.
-   * `layout: base.njk` says "use base layout," `title: Home` sets the page title.
-   * 11ty reads this frontmatter and makes it available as template variables.
-   *
-   * **Markdown Content** - Everything after frontmatter is Markdown, enhanced by
-   * Standard Framework. The `{{ site.title }}` syntax works inside Markdown because
-   * we set `markdownTemplateEngine: "njk"` in eleventy.config.js. This lets you
-   * mix static content with dynamic variables.
-   *
-   * **Next Steps** - The content guides users through customization. It's not just
-   * "Hello World"—it's actionable guidance. Where to change site info, where to
-   * add content, where to customize styles, how to start the dev server.
-   *
-   * This creates a complete experience: generate project, read README, open index.md,
-   * see clear instructions, start building. No confusion, no dead ends.
-   *
-   * @see {file} src/layouts/base.njk - Layout used by this file
-   * @see {file} site.config.yml - Variables accessed via {{ site }}
-   *
-   * @example markdown - Extended homepage
-   *   ---
-   *   layout: base.njk
-   *   title: Home
-   *   description: Welcome to my site
-   *   ---
-   *
-   *   # Welcome to {{ site.title }}
-   *
-   *   This is a **beautiful** site built with Standard Framework.
-   *
-   *   ## Features
-   *
-   *   - ✅ Perfect typography with smart quotes
-   *   - ✅ Mathematical grid system
-   *   - ✅ Automatic light/dark themes
-   *   - ✅ Zero JavaScript required (progressive enhancement)
-   *
-   *   ## Latest Blog Posts
-   *
-   *   {% for post in collections.posts | reverse | limit(3) %}
-   *   - [{{ post.data.title }}]({{ post.url }})
-   *   {% endfor %}
-   */
-  const indexMd = `---
-layout: base.njk
-title: Home
----
+# Build outputs
+dist/
+.astro/
 
-# Welcome to {{ site.title }}
-
-This is your home page. Edit content/index.md to change this.
-
-## Next Steps
-
-1. Customize \`site.config.yml\` with your site information
-2. Add content in the \`content/\` directory
-3. Customize styles in \`src/styles/custom.scss\`
-4. Run \`npm start\` to see your site live
-
----
-
-Powered by [Standard Framework](https://standard.ffp.co)
-`;
-
-  fs.writeFileSync(path.join(projectPath, "content/index.md"), indexMd);
-  console.log("✅ Created content/index.md");
-
-  // ==========================================================================
-  // GIT CONFIGURATION
-  // ==========================================================================
-
-  /**
-   * Git Ignore Configuration - Excluding Generated Files
-   *
-   * @group Configuration
-   * @since 0.14.0
-   *
-   * .gitignore tells Git which files NOT to track. This is crucial for clean
-   * repositories and team collaboration. We exclude several categories:
-   *
-   * **node_modules/** - Contains thousands of files from npm packages. These are
-   * listed in package.json, so teammates can install them with `npm install`. Never
-   * commit dependencies—it bloats the repo and causes merge conflicts.
-   *
-   * **public/** - Generated by build scripts. Committing it creates conflicts when
-   * two developers rebuild simultaneously. It's reproducible (just run `npm run build`),
-   * so there's no reason to track it.
-   *
-   * **_site/** - Generated by 11ty. Same reasoning as public/—it's build output,
-   * not source code. Deploy systems regenerate it from source.
-   *
-   * **.trigger-reload** - Some watch systems create trigger files. They're temporary
-   * signals, not permanent files.
-   *
-   * **.DS_Store** - macOS creates these hidden files in every directory. They're
-   * useless outside macOS and clutter the repo.
-   *
-   * **.env and .env.local** - Contains secrets (API keys, passwords). NEVER commit
-   * these. They're listed in .gitignore by default to prevent accidental leaks.
-   * Use .env.example (committed) to show which variables are needed.
-   *
-   * **\*.log** - Debug and error logs. They're machine-specific and become stale
-   * quickly. Don't commit them.
-   *
-   * This .gitignore follows industry best practices. It keeps repos clean, prevents
-   * secrets from leaking, and avoids merge conflicts on generated files.
-   *
-   * ### Future Improvements
-   *
-   * - Add IDE-specific exclusions (.vscode, .idea)
-   * - Exclude OS-specific files (.Spotlight-V100, Thumbs.db)
-   * - Add coverage reports if testing is added
-   *
-   * @link https://git-scm.com/docs/gitignore Git Ignore Documentation
-   * @link https://github.com/github/gitignore Community .gitignore Templates
-   *
-   * @example gitignore - Extended patterns
-   *   # Dependencies
-   *   node_modules/
-   *   package-lock.json
-   *
-   *   # Build output
-   *   public/
-   *   _site/
-   *   dist/
-   *
-   *   # Secrets
-   *   .env
-   *   .env.local
-   *   .env.*.local
-   *
-   *   # IDE
-   *   .vscode/
-   *   .idea/
-   *   *.swp
-   *   *.swo
-   *
-   *   # OS
-   *   .DS_Store
-   *   Thumbs.db
-   *   desktop.ini
-   *
-   *   # Logs
-   *   *.log
-   *   npm-debug.log*
-   *
-   *   # Testing
-   *   coverage/
-   *   .nyc_output/
-   */
-  const gitignore = `node_modules/
-public/
-_site/
-.trigger-reload
-.DS_Store
+# Environment variables
 .env
 .env.local
-*.log
+.env.production
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 `;
 
   fs.writeFileSync(path.join(projectPath, ".gitignore"), gitignore);
   console.log("✅ Created .gitignore");
-
-  // ==========================================================================
-  // SUCCESS MESSAGE
-  // ==========================================================================
-
-  /**
-   * Completion Output - Guiding the Next Steps
-   *
-   * @group User Experience
-   * @since 0.14.0
-   *
-   * This final output isn't just confirmation—it's onboarding. We tell users exactly
-   * what to do next: three commands, in order, with clear purpose. No ambiguity,
-   * no confusion.
-   *
-   * The emoji usage (✅ 📂 🎉) isn't frivolous—it creates visual anchors. Your eye
-   * instantly spots the success checkmarks, the folder icon, the celebration. This
-   * makes the output scannable, memorable, and friendly.
-   *
-   * We use `\n` for blank lines strategically. Whitespace groups related information
-   * and prevents walls of text. Each section has breathing room.
-   *
-   * The sequence matters: confirmation → next steps → celebration. It's storytelling:
-   * "You succeeded. Here's what to do next. You're ready to build something great."
-   *
-   * @example bash - Full initialization output
-   *   🚀 Standard Framework - Project Initializer
-   *
-   *   📁 Creating project: my-awesome-site
-   *
-   *      ✅ Created content/
-   *      ✅ Created src/styles/
-   *      ✅ Created src/js/
-   *      ✅ Created src/layouts/
-   *      ✅ Created public/assets/css/
-   *      ✅ Created public/assets/js/
-   *      ✅ Created _site/
-   *
-   *   ✅ Created site.config.yml
-   *   ✅ Created eleventy.config.js
-   *   ✅ Created package.json
-   *   ✅ Created src/styles/custom.scss
-   *   ✅ Created src/js/custom.js
-   *   ✅ Created src/layouts/base.njk
-   *   ✅ Created README.md
-   *   ✅ Created content/index.md
-   *   ✅ Created .gitignore
-   *
-   *   ✅ Project created successfully!
-   *
-   *   📂 Next steps:
-   *
-   *      cd my-awesome-site
-   *      npm install
-   *      npm start
-   *
-   *   🎉 Your Standard Framework site is ready to go!
-   */
-  console.log("\n✅ Project created successfully!\n");
-  console.log(`📂 Next steps:\n`);
-  console.log(`   cd ${projectName}`);
-  console.log(`   npm install`);
-  console.log(`   npm start\n`);
-  console.log("🎉 Your Standard Framework site is ready to go!\n");
-} catch (error) {
-  console.error("❌ Error creating project:", error.message);
-  process.exit(1);
 }
+
+/**
+ * Environment Example Generation
+ *
+ * @group Configuration
+ * @since 0.15.0
+ *
+ * Creates .env.example to show users what environment variables they can
+ * configure. This file serves as documentation and a template for creating
+ * the actual .env file. Environment variables are useful for:
+ * - API keys and secrets
+ * - Configuration that varies by environment
+ * - Third-party service credentials
+ *
+ * @see {file} .env.example - Environment template created
+ */
+function generateEnvExample() {
+  const envExample = `# Environment Configuration
+# Copy this file to .env and fill in your actual values
+
+# Site Configuration
+SITE_URL=https://yoursite.com
+SITE_TITLE="Your Site Title"
+SITE_DESCRIPTION="Your site description"
+
+# Author Information
+AUTHOR_NAME="Your Name"
+AUTHOR_EMAIL="your.email@example.com"
+AUTHOR_URL="https://yoursite.com"
+
+# Social Media (optional)
+TWITTER_HANDLE="@yourhandle"
+GITHUB_USERNAME="yourusername"
+LINKEDIN_URL="https://linkedin.com/in/yourprofile"
+
+# Analytics (optional)
+GOOGLE_ANALYTICS_ID="GA-XXXXXXXXX"
+
+# Comments System (optional - requires setup)
+# GITHUB_TOKEN="ghp_your_token_here"
+# GITHUB_OWNER="your-github-username"
+# GITHUB_REPO="your-repository-name"
+# GITHUB_COMMENTS_PATH="data/comments"
+# MODERATION_EMAIL="admin@example.com"
+
+# Contact Form (optional)
+# CONTACT_EMAIL="contact@yoursite.com"
+# SMTP_HOST="smtp.gmail.com"
+# SMTP_PORT="587"
+# SMTP_USER="your-email@gmail.com"
+# SMTP_PASS="your-app-password"
+
+# Development
+NODE_ENV="development"
+`;
+
+  fs.writeFileSync(path.join(projectPath, ".env.example"), envExample);
+  console.log("✅ Created .env.example");
+}
+
+// ============================================================================
+// SCRIPT EXECUTION
+// ============================================================================
+
+// Run the main function
+main().catch((error) => {
+  console.error("❌ Error creating project:", error);
+  process.exit(1);
+});

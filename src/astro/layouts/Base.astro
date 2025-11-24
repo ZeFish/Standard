@@ -3,10 +3,12 @@ import Meta from "./Meta.astro";
 import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
 import Comments from "../components/Comments.astro";
+import Lab from "../components/Lab.astro";
+import Assets from "../components/Assets.astro";
 
-// Import Standard CSS
-import "../../styles/standard.scss";
-import "../../styles/standard.theme.scss";
+// Import local compiled CSS files (Production-ready)
+import "/dist/standard.min.css";
+import "/dist/standard.theme.min.css";
 
 // Import site configuration from virtual module
 import config from "virtual:standard/config";
@@ -26,6 +28,14 @@ const {
 } = Astro.props;
 
 const year = new Date().getFullYear();
+
+// HTMX attributes for progressive enhancement
+const htmxAttributes = {
+    "hx-boost": "true",
+    "hx-ext": "preload",
+    "hx-target": "body",
+    "hx-swap": "innerHTML scroll:window:top",
+};
 ---
 
 <!doctype html>
@@ -47,20 +57,24 @@ const year = new Date().getFullYear();
             securityHeaders={securityHeaders}
         />
         <Fonts />
-        <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
+        <Assets />
+        <Lab />
 
-        <slot name="head" />
+        <!-- Load HTMX library -->
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+        <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
 
         <!-- ✅ FIX: Load scripts only on client side -->
         <script type="module">
             import "/assets/js/standard.js";
-            import "/assets/js/standard.lab.js";
+            // import "/assets/js/standard.lab.js"; // Removed - Lab component handles this
             import "/assets/js/standard.toast.js";
             import "/assets/js/standard.comment.js";
         </script>
     </head>
 
-    <body class={className}>
+    <body {...htmxAttributes} class={className}>
         <a href="#main" class="skip-link">Skip to content</a>
 
         <header

@@ -1,38 +1,27 @@
 import { defineConfig } from "astro/config";
 import standard from "./src/astro/standard.js";
-import cloudflareIntegration from "./src/astro/integrations/cloudflare.js";
-import openrouterIntegration from "./src/astro/integrations/openrouter.js";
-
-import { ignoreLayout } from "./src/astro/remark/ignore-layout.js";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    standard(),
-    cloudflareIntegration({
-      functions: {
-        enabled: true,
-        outputDir: "functions/api",
-        environment: "production",
+    standard({
+      // Load configuration from YAML file (recommended approach)
+      configPath: "site.config.yml",
+
+      // Optional: Override YAML settings or add environment-specific config
+      verbose: process.env.NODE_ENV === "development",
+
+      // Optional: Environment-specific overrides
+      cloudflare: {
+        images: {
+          quality: process.env.NODE_ENV === "production" ? 90 : 75,
+        },
       },
-      // Use Cloudflare's built-in image optimization
-      images: {
-        enabled: true,
-        skipClass: "no-cdn",
-        skipExternal: true,
+
+      // Optional: Environment variables
+      openrouter: {
+        apiKey: process.env.OPENROUTER_KEY,
       },
-      comments: {
-        enabled: true,
-        apiEndpoint: "/api/comments",
-        commentsPath: "data/comments",
-      },
-      verbose: true,
-    }),
-    openrouterIntegration({
-      enabled: true,
-      model: "anthropic/claude-3.5-sonnet",
-      copyFunctions: true,
-      verbose: true,
     }),
   ],
   markdown: {

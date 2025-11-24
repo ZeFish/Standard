@@ -77,7 +77,7 @@
     "check": "npm run build && node bin/analyzer.js",
     "build": "astro build",
     "watch:assets": "node bin/build-css.js --watch",
-    "dev": "npm run clean:ports && astro dev",
+    "dev": "npm run watch:css & npm run watch:js & npm run clean:ports && astro dev",
     "start": "astro dev",
     "release": "export $(cat .env | xargs) && release-it --ci",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",

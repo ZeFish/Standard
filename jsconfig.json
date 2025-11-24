@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "isolatedModules": true,
+    "preserveValueImports": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "virtual:standard/config": ["./.astro/types.d.ts"]
+    },
+    "types": ["astro/client"]
+  },
+  "include": [
+    "src/**/*",
+    ".astro/types.d.ts",
+    "astro.config.mjs",
+    "site.config.yml"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "_site",
+    "functions",
+    "public"
+  ]
+}

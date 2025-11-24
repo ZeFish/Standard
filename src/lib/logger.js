@@ -133,7 +133,7 @@ colors.reset = ANSI16.reset;
 export default function createLogger(options = {}) {
   const { verbose = false, scope = null } = options;
 
-  const prefix = `${colors.reset}stdn::gd${colors.reset}`;
+  const prefix = `${colors.reset}STDN::GD${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
   const scopeText = scope ? `${colors.cyan.fg}[${scope}]${colors.reset}` : "";
 

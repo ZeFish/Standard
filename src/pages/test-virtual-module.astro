@@ -1,0 +1,230 @@
+---
+// Test page for virtual:standard/config module
+import config from "virtual:standard/config";
+
+const {
+  site = config.site || {},
+  standard = config.standard || {},
+  typography = config.typography || {},
+  cloudflare = config.cloudflare || {},
+} = config;
+
+// Type check the config import
+const siteTitle: string = site.title || "Default Site Title";
+const standardLocale: string = standard.locale || "en";
+
+// Test navigation access
+const headerNav = site.nav?.header || [];
+const footerNav = site.nav?.footer || [];
+
+// Test social links
+const socialLinks = site.social || {};
+
+// Test typography config
+const webFonts = typography.webFonts || [];
+const fallbackFonts = typography.fallbackFonts || [];
+
+// Test Cloudflare config
+const cfEnabled = cloudflare.enabled || false;
+const cfFunctions = cloudflare.functions || {};
+
+// Test manifest config
+const manifest = site.manifest || {};
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Virtual Module Test - {siteTitle}</title>
+    <meta name="description" content={site.description || "Test page for virtual module"}>
+</head>
+<body>
+    <main>
+        <h1>Virtual Module Test Page</h1>
+
+        <section>
+            <h2>Configuration Access Test</h2>
+            <p><strong>Site Title:</strong> {siteTitle}</p>
+            <p><strong>Standard Locale:</strong> {standardLocale}</p>
+            <p><strong>Cloudflare Enabled:</strong> {cfEnabled}</p>
+        </section>
+
+        <section>
+            <h2>Navigation Test</h2>
+            <h3>Header Navigation</h3>
+            {headerNav.length > 0 ? (
+                <ul>
+                    {headerNav.map((item) => (
+                        <li>
+                            <a href={item.href} {...(item.external && { target: "_blank" })}>
+                                {item.icon && <span class="icon">{item.icon}</span>}
+                                {item.text}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No header navigation configured</p>
+            )}
+
+            <h3>Footer Navigation</h3>
+            {footerNav.length > 0 ? (
+                <ul>
+                    {footerNav.map((item) => (
+                        <li>
+                            <a href={item.href} {...(item.external && { target: "_blank" })}>
+                                {item.text}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No footer navigation configured</p>
+            )}
+        </section>
+
+        <section>
+            <h2>Social Links Test</h2>
+            {Object.keys(socialLinks).length > 0 ? (
+                <ul>
+                    {Object.entries(socialLinks).map(([platform, url]) => (
+                        url && (
+                            <li>
+                                <a href={url} target="_blank" rel="noopener noreferrer">
+                                    {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                                </a>
+                            </li>
+                        )
+                    ))}
+                </ul>
+            ) : (
+                <p>No social links configured</p>
+            )}
+        </section>
+
+        <section>
+            <h2>Typography Configuration</h2>
+            <p><strong>Web Fonts:</strong> {webFonts.length}</p>
+            <p><strong>Fallback Fonts:</strong> {fallbackFonts.length}</p>
+            {webFonts.length > 0 && (
+                <ul>
+                    {webFonts.map((font) => (
+                        <li>
+                            <strong>{font.family}</strong>
+                            {font.weights && ` (weights: ${font.weights.join(", ")})`}
+                            {font.style && ` (style: ${font.style})`}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </section>
+
+        <section>
+            <h2>Cloudflare Configuration</h2>
+            <p><strong>Functions Enabled:</strong> {cfFunctions.enabled || false}</p>
+            <p><strong>Output Directory:</strong> {cfFunctions.outputDir || "functions"}</p>
+            <p><strong>Environment:</strong> {cfFunctions.environment || "production"}</p>
+        </section>
+
+        <section>
+            <h2>Manifest Configuration</h2>
+            <p><strong>Manifest Name:</strong> {manifest.name || "Not configured"}</p>
+            <p><strong>Short Name:</strong> {manifest.short_name || "Not configured"}</p>
+            <p><strong>Theme Color:</strong> {manifest.theme_color || "Not configured"}</p>
+            <p><strong>Display Mode:</strong> {manifest.display || "Not configured"}</p>
+        </section>
+
+        <section>
+            <h2>Raw Configuration Output</h2>
+            <pre><code>{JSON.stringify(config, null, 2)}</code></pre>
+        </section>
+
+        <section>
+            <h2>TypeScript Type Checking</h2>
+            <p>This page demonstrates that TypeScript can properly type-check the virtual module:</p>
+            <ul>
+                <li><code>config</code> has type <code>StandardFrameworkConfig</code></li>
+                <li><code>config.site</code> has type <code>SiteConfig</code></li>
+                <li><code>config.standard</code> has type <code>StandardConfig</code></li>
+                <li><code>config.typography</code> has type <code>TypographyConfig</code></li>
+                <li><code>config.cloudflare</code> has type <code>CloudflareConfig</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Error Handling Test</h2>
+            <p>The configuration should gracefully handle missing values:</p>
+            <ul>
+                <li>Site title fallback: <code>"{siteTitle}"</code></li>
+                <li>Navigation array fallback: <code>{Array.isArray(headerNav) ? "Array" : "Not Array"}</code></li>
+                <li>Social object fallback: <code>{typeof socialLinks === "object" ? "Object" : "Not Object"}</code></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
+
+<style>
+    main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+        color: #333;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 0.5rem;
+    }
+
+    section {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+    }
+
+    ul {
+        padding-left: 1.5rem;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    code {
+        background-color: #f5f5f5;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 0.9em;
+    }
+
+    pre {
+        background-color: #f5f5f5;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-size: 0.8rem;
+    }
+
+    .icon {
+        margin-right: 0.5rem;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
