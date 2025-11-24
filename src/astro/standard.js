@@ -1,5 +1,10 @@
 /**
  * @zefish/standard Astro Integration
+ *
+ * A comprehensive wrapper that orchestrates:
+ * - OpenRouter AI integration
+ * - Cloudflare integration
+ * - Standard framework features
  */
 import remarkTags from "./remark/tags.js";
 import remarkStandard from "./remark/standard.js";
@@ -13,6 +18,8 @@ import path from "path";
 import fs from "fs";
 import yaml from "js-yaml";
 import createLogger from "../lib/logger.js";
+import openrouterIntegration from "./integrations/openrouter.js";
+import cloudflareIntegration from "./integrations/cloudflare.js";
 
 export default function standard(options = {}) {
   const logger = createLogger({
@@ -65,8 +72,21 @@ export default function standard(options = {}) {
     ...(options.openrouter || {}),
   };
 
+  // Get package version for banner
+  let packageVersion = "0.0.0";
+  try {
+    const packagePath = path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../../package.json",
+    );
+    const packageData = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+    packageVersion = packageData.version || "0.0.0";
+  } catch (error) {
+    // Fallback to default version if package.json can't be read
+  }
+
   // Banner to indicate successful initialization
-  logger.banner();
+  logger.banner(packageVersion);
 
   return {
     name: "@zefish/standard",
@@ -133,14 +153,41 @@ export default function standard(options = {}) {
           });
         }
 
-        // 4. Setup Cloudflare Features
+        // 4. Setup Cloudflare Features (delegate to complete integration)
         if (cloudflareConfig.enabled !== false) {
-          setupCloudflareFeatures(config, cloudflareConfig, logger);
+          const cloudflare = cloudflareIntegration({
+            ...cloudflareConfig,
+            verbose: mergedConfig.verbose,
+          });
+
+          // Initialize the Cloudflare integration
+          cloudflare.hooks["astro:config:setup"]({
+            config,
+            updateConfig,
+            injectScript,
+            injectRoute,
+          });
+
+          logger.success("Cloudflare integration enabled");
         }
 
-        // 5. Setup OpenRouter AI Features
-        if (openrouterConfig.enabled !== false && openrouterConfig.apiKey) {
-          setupOpenRouterFeatures(config, openrouterConfig, logger);
+        // 5. Setup OpenRouter AI Features (delegate to complete integration)
+        if (openrouterConfig.enabled !== false) {
+          const openrouter = openrouterIntegration({
+            ...openrouterConfig,
+            verbose: mergedConfig.verbose,
+            siteUrl: mergedConfig.site?.url || mergedConfig.url,
+          });
+
+          // Initialize the OpenRouter integration
+          openrouter.hooks["astro:config:setup"]({
+            config,
+            updateConfig,
+            injectScript,
+            injectRoute,
+          });
+
+          logger.success("OpenRouter AI integration enabled");
         }
 
         // 6. Add Global Styles (if needed)
@@ -148,110 +195,13 @@ export default function standard(options = {}) {
       },
 
       "astro:build:done": ({ dir }) => {
-        // Copy Cloudflare functions if enabled
-        if (
-          cloudflareConfig.enabled !== false &&
-          cloudflareConfig.functions?.enabled
-        ) {
-          copyCloudflareFunctions(dir, cloudflareConfig, logger);
-        }
+        // Build completed - integrations handled their own cleanup
+        logger.debug(
+          "Build completed - integrations handled their own cleanup",
+        );
       },
     },
   };
-}
-
-// Helper function for Cloudflare setup
-function setupCloudflareFeatures(config, cloudflareConfig, logger) {
-  const functionsConfig = {
-    enabled: cloudflareConfig.functions?.enabled ?? false,
-    outputDir: cloudflareConfig.functions?.outputDir ?? "functions/api",
-    environment: cloudflareConfig.functions?.environment ?? "production",
-    env: cloudflareConfig.functions?.env ?? {},
-  };
-
-  const commentsConfig = {
-    enabled: cloudflareConfig.comments?.enabled ?? false,
-    apiEndpoint: cloudflareConfig.comments?.apiEndpoint ?? "/api/comments",
-    commentsPath: cloudflareConfig.comments?.commentsPath ?? "data/comments",
-  };
-
-  if (functionsConfig.enabled) {
-    commentsConfig.enabled = true; // Enable comments if functions are enabled
-    config._cloudflare = { functionsConfig, commentsConfig };
-    logger.success("Cloudflare features initialized");
-  }
-}
-
-// Helper function for OpenRouter setup
-function setupOpenRouterFeatures(config, openrouterConfig, logger) {
-  const aiConfig = {
-    enabled: true,
-    apiKey: openrouterConfig.apiKey || process.env.OPENROUTER_KEY,
-    model: openrouterConfig.model || "anthropic/claude-3.5-sonnet",
-    siteUrl: openrouterConfig.siteUrl,
-  };
-
-  if (!aiConfig.apiKey) {
-    logger.warn("OPENROUTER_KEY not set. AI features will not work.");
-    return;
-  }
-
-  config._ai = aiConfig;
-  logger.success(`OpenRouter AI initialized with ${aiConfig.model}`);
-}
-
-// Helper function to copy Cloudflare functions
-function copyCloudflareFunctions(dir, cloudflareConfig, logger) {
-  const cloudflareDir = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    "../../cloudflare/api",
-  );
-  const functionsOutputPath = path.join(
-    dir.toString(),
-    cloudflareConfig.functions.outputDir,
-  );
-
-  if (!fs.existsSync(cloudflareDir)) {
-    logger.warn(`Functions directory not found: ${cloudflareDir}`);
-    return;
-  }
-
-  try {
-    fs.mkdirSync(functionsOutputPath, { recursive: true });
-
-    const copyRecursive = (src, dest) => {
-      if (!fs.existsSync(dest)) {
-        fs.mkdirSync(dest, { recursive: true });
-      }
-
-      const entries = fs.readdirSync(src);
-
-      entries.forEach((name) => {
-        const srcPath = path.join(src, name);
-        const destPath = path.join(dest, name);
-        const stat = fs.statSync(srcPath);
-
-        if (stat.isDirectory()) {
-          copyRecursive(srcPath, destPath);
-        } else {
-          try {
-            const fileName = path.basename(srcPath);
-            fs.copyFileSync(srcPath, destPath);
-            logger.debug(`Copied: ${fileName}`);
-          } catch (e) {
-            logger.error(`Copy failed ${srcPath} -> ${destPath}: ${e.message}`);
-          }
-        }
-      });
-    };
-
-    copyRecursive(cloudflareDir, functionsOutputPath);
-    logger.success(
-      `Functions copied to /${cloudflareConfig.functions.outputDir}/`,
-    );
-  } catch (e) {
-    logger.error(`Failed to copy functions: ${e.message}`);
-  }
 }
 
 // Export utility functions for use in components
