@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.20.0",
+  "version": "0.18.0",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -45,7 +45,7 @@
     "./cloudflare": "./src/cloudflare/api/comments.js",
     "./remark/tags": "./src/astro/remark/tags.js",
     "./remark/standard": "./src/astro/remark/standard.js",
-    "./remark/escape-code": "./src/astro/remark/escape-code.js",
+    "./remark/escape-code": "./src/anpmstro/remark/escape-code.js",
     "./remark/fix-dates": "./src/astro/remark/fix-dates.js",
     "./remark/syntax": "./src/astro/remark/syntax.js",
     "./rehype/standard": "./src/astro/rehype/standard.js",
