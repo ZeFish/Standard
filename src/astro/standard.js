@@ -22,6 +22,7 @@ import yaml from "js-yaml";
 import createLogger from "../lib/logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
+import remarkObsidianLinks from "./remark/obsidian-links.js";
 
 export default function standard(options = {}) {
   const logger = createLogger({
@@ -103,12 +104,25 @@ export default function standard(options = {}) {
         if (backlinksEnabled) {
           resetBacklinkGraph();
         }
-
+        let noteMap = new Map();
         const remarkPlugins = [
           [remarkTags, mergedConfig.tags || {}],
           [remarkStandard, mergedConfig.standard || {}],
           [remarkEscapeCode, mergedConfig.escapeCode || {}],
           [remarkFixDates, mergedConfig.dateFields || {}],
+          [
+            remarkObsidianLinks,
+            {
+              noteMap,
+              slugify: (str) =>
+                str
+                  .toLowerCase()
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/[^a-z0-9]+/g, "-")
+                  .replace(/(^-|-$)+/g, ""),
+            },
+          ],
         ];
         if (backlinksEnabled) {
           remarkPlugins.push([remarkBacklinks, mergedConfig.backlinks || {}]);
