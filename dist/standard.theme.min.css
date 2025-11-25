@@ -1,111 +1,111 @@
 @font-face {
   font-family: "Futura Now Var";
-  src: url("/assets/fonts/FuturaNowVar-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/FuturaNowVar-Italic.woff2") format("woff2");
   font-weight: 100 1000;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Futura Now Var";
-  src: url("/assets/fonts/FuturaNowVar-Roman.woff2") format("woff2");
+  src: url("@standard-fonts/FuturaNowVar-Roman.woff2") format("woff2");
   font-weight: 100 1000;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime";
-  src: url("/assets/fonts/CourierPrime-BoldItalic.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrime-BoldItalic.woff2") format("woff2");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime";
-  src: url("/assets/fonts/CourierPrime-Bold.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrime-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime Code";
-  src: url("/assets/fonts/CourierPrimeCode-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrimeCode-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime Sans";
-  src: url("/assets/fonts/CourierPrimeSans-BoldItalic.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrimeSans-BoldItalic.woff2") format("woff2");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime Code";
-  src: url("/assets/fonts/CourierPrimeCode-Regular.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrimeCode-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime";
-  src: url("/assets/fonts/CourierPrime-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrime-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime";
-  src: url("/assets/fonts/CourierPrime-SemiBold.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrime-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime Sans";
-  src: url("/assets/fonts/CourierPrimeSans-Regular.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrimeSans-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime";
-  src: url("/assets/fonts/CourierPrime.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrime.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime Sans";
-  src: url("/assets/fonts/CourierPrimeSans-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrimeSans-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime Sans";
-  src: url("/assets/fonts/CourierPrimeSans-Bold.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrimeSans-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Courier Prime";
-  src: url("/assets/fonts/CourierPrime-Medium.woff2") format("woff2");
+  src: url("@standard-fonts/CourierPrime-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Monosten Pro Var";
-  src: url("/assets/fonts/MonostenProVar.woff2") format("woff2");
+  src: url("@standard-fonts/MonostenProVar.woff2") format("woff2");
   font-weight: 300 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("/assets/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+  src: url("@standard-fonts/IBMPlexMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -137,7 +137,7 @@
   --color-dark-accent: var(--color-light-yellow) !important;
   --optical-ratio: 1.6;
   --line-height: 1.2;
-  --mobile-line-height:1.2;
+  --mobile-line-height: 1.2;
   --font-text: "Courier Prime";
   --font-feature: "";
   --font-variation: "wght" 300;
@@ -300,28 +300,28 @@
 
 @font-face {
   font-family: "Helvetica Monospaced Pro";
-  src: url("/assets/fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
+  src: url("@standard-fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Helvetica Monospaced Pro";
-  src: url("/assets/fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
+  src: url("@standard-fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Helvetica Monospaced Pro";
-  src: url("/assets/fonts/HelveticaMonospacedPro-BdIt.woff2") format("woff2");
+  src: url("@standard-fonts/HelveticaMonospacedPro-BdIt.woff2") format("woff2");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Helvetica Monospaced Pro";
-  src: url("/assets/fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
+  src: url("@standard-fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -393,7 +393,10 @@
   font-weight: 600;
   letter-spacing: -0.05em;
 }
-[data-theme=forest] aside, [data-theme=forest] textarea, [data-theme=forest] pre, [data-theme=forest] blockquote {
+[data-theme=forest] aside,
+[data-theme=forest] textarea,
+[data-theme=forest] pre,
+[data-theme=forest] blockquote {
   padding: var(--gap-compact) calc(var(--gap-tight) + var(--leading));
 }
 [data-theme=forest] fieldset input,
@@ -408,7 +411,8 @@
 [data-theme=forest] h6::first-letter {
   font-feature-settings: "swsh", "dlig", "clig", "kern", "onum" !important;
 }
-[data-theme=forest] h1, [data-theme=forest] h2 {
+[data-theme=forest] h1,
+[data-theme=forest] h2 {
   opacity: 0.85;
 }
 [data-theme=forest] hr,
@@ -434,91 +438,91 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-Regular.woff2") format("woff22");
+  src: url("@standard-fonts/Forrest-Regular.woff2") format("woff22");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 400;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-RegularItalic.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-RegularItalic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 300;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-Light.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-Light.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 300;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-LightItalic.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-LightItalic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-Medium.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 500;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-MediumItalic.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-MediumItalic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-Bold.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-Bold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 700;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-BoldItalic.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-BoldItalic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 800;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-Extrabold.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-Extrabold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 800;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-ExtraboldItalic.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-ExtraboldItalic.woff2") format("woff2");
 }
 @font-face {
   font-family: " Forrest";
   font-weight: 900;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-Heavy.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-Heavy.woff2") format("woff2");
 }
 @font-face {
   font-family: "Forrest";
   font-weight: 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Forrest-HeavyItalic.woff2") format("woff2");
+  src: url("@standard-fonts/Forrest-HeavyItalic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Monaspace Xenon Var";
   
   font-weight: 100 900;
   font-style: normal;
-  src: url("/assets/fonts/MonaspaceXenonVarVF%5Bwght%2Cwdth%2Cslnt%5D.woff2") format("woff2");
+  src: url("@standard-fonts/MonaspaceXenonVarVF%5Bwght%2Cwdth%2Cslnt%5D.woff2") format("woff2");
 }
 
 @font-face {
@@ -526,7 +530,7 @@
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/NationalPark-VariableVF.woff2") format("woff2");
+  src: url("@standard-fonts/NationalPark-VariableVF.woff2") format("woff2");
 }
 [data-theme=kernel] {
   --color-light-background: #f7f3ee;
@@ -608,28 +612,28 @@
   
   font-weight: 100 1000;
   font-style: normal;
-  src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
+  src: url("@standard-fonts/MonoLisa-Regular-Variable.woff2");
 }
 @font-face {
   font-family: "MonoLisa";
   
   font-weight: 100 1000;
   font-style: italic;
-  src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
+  src: url("@standard-fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
 @font-face {
   font-family: "Fraunces";
   
   font-weight: 100 1000;
   font-style: normal;
-  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2");
+  src: url("@standard-fonts/Fraunces[SOFT,WONK,opsz,wght].woff2");
 }
 @font-face {
   font-family: "Fraunces";
   
   font-weight: 100 1000;
   font-style: italic;
-  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2");
+  src: url("@standard-fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2");
 }
 [data-theme=minimal] {
   --shadow: none;
@@ -691,60 +695,60 @@
   font-weight: 200 1000;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff2");
+  src: url("@standard-fonts/Cargo-DiatypePlusVariable.woff2") format("woff2");
 }
 @font-face {
   font-family: "Diatype";
   font-weight: 200 1000;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/Cargo-DiatypePlusVariable-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "CalSans";
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
+  src: url("@standard-fonts/CalSansUI[MODE,wght].woff2") format("woff");
 }
 @font-face {
   font-family: "Kalice";
-  src: url("/assets/fonts/Kalice-Black.woff2") format("woff2");
+  src: url("@standard-fonts/Kalice-Black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Kalice";
-  src: url("/assets/fonts/Kalice-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/Kalice-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Kalice";
-  src: url("/assets/fonts/Kalice-ExtraBold.woff2") format("woff2");
+  src: url("@standard-fonts/Kalice-ExtraBold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Kalice";
-  src: url("/assets/fonts/Kalice-Medium.woff2") format("woff2");
+  src: url("@standard-fonts/Kalice-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Kalice";
-  src: url("/assets/fonts/Kalice-Bold.woff2") format("woff2");
+  src: url("@standard-fonts/Kalice-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Kalice";
-  src: url("/assets/fonts/Kalice-Regular.woff2") format("woff2");
+  src: url("@standard-fonts/Kalice-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -981,7 +985,7 @@
   font-weight: 400 800;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
+  src: url("@standard-fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }
 
 [data-theme=blueprint] {
@@ -990,12 +994,17 @@
   --color-dark-foreground: var(--color-light-foreground);
   --color-dark-background: var(--color-light-background);
   
-  --color-light-red: rgba(255,28,0,0.493); 
-  --color-light-orange: rgba(188,82,21,0.574); 
-  --color-light-yellow: rgba(173,131,1,0.794); 
-  --color-light-green: rgba(102,128,11,0.576); 
-  --color-light-cyan: rgba(36,131,123,0.641); 
-  --color-light-blue: rgba(32,94,166,0.614); 
+  --color-light-red: rgba(255, 28, 0, 0.493); 
+  --color-light-orange: rgba(188, 82, 21, 0.574); 
+  --color-light-yellow: rgba(
+      173,
+      131,
+      1,
+      0.794
+  ); 
+  --color-light-green: rgba(102, 128, 11, 0.576); 
+  --color-light-cyan: rgba(36, 131, 123, 0.641); 
+  --color-light-blue: rgba(32, 94, 166, 0.614); 
   --color-light-purple: #5e409d; 
   --color-light-pink: #a02f6f; 
   
@@ -1186,14 +1195,14 @@
   
   font-weight: 100 1000;
   font-style: normal;
-  src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
+  src: url("@standard-fonts/MonoLisa-Regular-Variable.woff2");
 }
 @font-face {
   font-family: "MonoLisa";
   
   font-weight: 100 1000;
   font-style: italic;
-  src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
+  src: url("@standard-fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
 [data-theme=marauder] {
   --font-text: Marauder;

@@ -59,13 +59,6 @@ const htmxAttributes = {
 
         <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
 
-        <!-- ✅ FIX: Load scripts only on client side -->
-        <script type="module">
-            import "/assets/js/standard.js";
-            // import "/assets/js/standard.lab.js"; // Removed - Lab component handles this
-            import "/assets/js/standard.toast.js";
-            import "/assets/js/standard.comment.js";
-        </script>
     </head>
 
     <body {...htmxAttributes} class={className}>

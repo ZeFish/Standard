@@ -558,70 +558,70 @@ html {
 
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-Buch.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-Buch.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-BuchKursiv.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-BuchKursiv.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-Leicht.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-Leicht.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-LeichtKursiv.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-LeichtKursiv.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-Halbfett.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-Halbfett.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-HalbfettKursiv.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-HalbfettKursiv.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-Fett.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-Fett.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-FettKursiv.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-FettKursiv.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-Extrafett.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-Extrafett.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne";
-  src: url("/assets/fonts/sohne/Söhne-ExtrafettKursiv.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/Söhne-ExtrafettKursiv.ttf") format("truetype");
   font-weight: 800;
   font-style: italic;
   font-display: swap;
@@ -629,14 +629,14 @@ html {
 
 @font-face {
   font-family: "Sohne Schmal";
-  src: url("/assets/fonts/sohne/SöhneSchmal-Buch.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/SöhneSchmal-Buch.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne Schmal";
-  src: url("/assets/fonts/sohne/SöhneSchmal-Halbfett.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/SöhneSchmal-Halbfett.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -644,14 +644,14 @@ html {
 
 @font-face {
   font-family: "Sohne Breit";
-  src: url("/assets/fonts/sohne/SöhneBreit-Buch.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/SöhneBreit-Buch.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sohne Breit";
-  src: url("/assets/fonts/sohne/SöhneBreit-Fett.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/SöhneBreit-Fett.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -659,7 +659,7 @@ html {
 
 @font-face {
   font-family: "Sohne Mono";
-  src: url("/assets/fonts/sohne/SöhneMono-Buch.ttf") format("truetype");
+  src: url("@standard-fonts/sohne/SöhneMono-Buch.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -741,28 +741,28 @@ html {
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/HelveticaNowVar.woff2") format("woff2");
+  src: url("@standard-fonts/HelveticaNowVar.woff2") format("woff2");
 }
 @font-face {
   font-family: "Helvetica Now Var";
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/HelveticaNowVar-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/HelveticaNowVar-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Univers";
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/UniversNextVariable.ttf");
+  src: url("@standard-fonts/UniversNextVariable.ttf");
 }
 @font-face {
   font-family: "Univers";
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/UniversNextVariable-Italic.ttf");
+  src: url("@standard-fonts/UniversNextVariable-Italic.ttf");
 }
 
 
@@ -6102,101 +6102,101 @@ ul.menu.horizontal li {
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/InstrumentSans[wdth,wght].woff2") format("woff2");
+  src: url("@standard-fonts/InstrumentSans[wdth,wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Instrument Sans";
   font-weight: 400 700;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/InstrumentSans-Italic[wdth,wght].woff2") format("woff2");
+  src: url("@standard-fonts/InstrumentSans-Italic[wdth,wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Instrument Serif";
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+  src: url("@standard-fonts/InstrumentSerif-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Instrument Serif";
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/InstrumentSerif-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Newsreader";
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Newsreader[opsz,wght].ttf") format("ttf");
+  src: url("@standard-fonts/Newsreader[opsz,wght].ttf") format("ttf");
 }
 @font-face {
   font-family: "Newsreader";
   font-weight: 200 800;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Newsreader-Italic[opsz,wght].ttf") format("ttf");
+  src: url("@standard-fonts/Newsreader-Italic[opsz,wght].ttf") format("ttf");
 }
 @font-face {
   font-family: "Fraunces";
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2");
+  src: url("@standard-fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Fraunces";
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2") format("woff2");
+  src: url("@standard-fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Graveur";
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Graveur-VAR.woff2") format("woff2");
+  src: url("@standard-fonts/Graveur-VAR.woff2") format("woff2");
 }
 @font-face {
   font-family: "Graveur";
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/Graveur-VAR-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Graveur";
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
+  src: url("@standard-fonts/Marauder[wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Graveur";
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
+  src: url("@standard-fonts/Graveur-VAR-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Marauder";
-  src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
+  src: url("@standard-fonts/Marauder[wght].woff2") format("woff2");
   font-style: normal;
 }
 @font-face {
   font-family: "Marauder";
-  src: url("/assets/fonts/Marauder-Italic[wght].woff2") format("woff2");
+  src: url("@standard-fonts/Marauder-Italic[wght].woff2") format("woff2");
   font-style: italic;
 }
 @font-face {
   font-family: "NoTears";
-  src: url("/assets/fonts/NoTears.ttf") format("ttf");
+  src: url("@standard-fonts/NoTears.ttf") format("ttf");
   font-style: normal;
 }
 @font-face {
   font-family: "NoTears";
-  src: url("/assets/fonts/NoTearsBold.ttf") format("ttf");
+  src: url("@standard-fonts/NoTearsBold.ttf") format("ttf");
   font-style: normal;
   font-weight: bold;
 }
