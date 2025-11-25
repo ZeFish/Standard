@@ -1,6 +1,12 @@
 import { visit } from "unist-util-visit";
+import createLogger from "../../lib/logger.js";
 
 export default function remarkObsidianLinks(options = {}) {
+  const logger = createLogger({
+    verbose: options.verbose ?? false,
+    scope: "Obsidian Links",
+  });
+
   return (tree, file) => {
     let noteMap = options.noteMap || new Map();
 
