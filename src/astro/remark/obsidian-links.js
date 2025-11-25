@@ -1,29 +1,27 @@
 import { visit } from "unist-util-visit";
 
-/**
- * Remark plugin to convert Obsidian-style links [[Note Name]] to proper URLs
- *
- * Converts: [[My Note]] → [My Note](/n/my-note)
- * Converts: [[My Note|Display Text]] → [Display Text](/n/my-note)
- */
 export default function remarkObsidianLinks(options = {}) {
   return (tree, file) => {
-    // Build a map of notes for quick lookup
-    const noteMap = options.noteMap || new Map();
+    let noteMap = options.noteMap || new Map();
 
+    // If noteMap is still empty, try to build from current file's data
+    // (This is a fallback; ideally we'd populate it from all entries)
+    if (noteMap.size === 0 && file.data) {
+      logger.debug("Note map is empty, will use slugify fallback");
+    }
+
+    // Process [[wiki links]]
     visit(tree, "text", (node, index, parent) => {
       if (!node.value.includes("[[")) {
         return;
       }
 
-      // Pattern: [[Note Name]] or [[Note Name|Display Text]]
       const pattern = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
       const parts = [];
       let lastIndex = 0;
       let match;
 
       while ((match = pattern.exec(node.value)) !== null) {
-        // Add text before the link
         if (match.index > lastIndex) {
           parts.push({
             type: "text",
@@ -34,25 +32,18 @@ export default function remarkObsidianLinks(options = {}) {
         const noteName = match[1].trim();
         const displayText = match[2] ? match[2].trim() : noteName;
 
-        // Look up the note to find its URL
+        // Try noteMap first, fallback to slugify
         const noteUrl = noteMap.get(noteName) || `/n/${slugify(noteName)}`;
 
-        // Create link node
         parts.push({
           type: "link",
           url: noteUrl,
-          children: [
-            {
-              type: "text",
-              value: displayText,
-            },
-          ],
+          children: [{ type: "text", value: displayText }],
         });
 
         lastIndex = match.index + match[0].length;
       }
 
-      // Add remaining text
       if (lastIndex < node.value.length) {
         parts.push({
           type: "text",
@@ -60,7 +51,6 @@ export default function remarkObsidianLinks(options = {}) {
         });
       }
 
-      // Replace node if we found links
       if (
         parts.length > 1 ||
         (parts.length === 1 && parts[0].type === "link")
@@ -68,10 +58,31 @@ export default function remarkObsidianLinks(options = {}) {
         parent.children.splice(index, 1, ...parts);
       }
     });
+
+    // Process [text](./file.md) links
+    visit(tree, "link", (node) => {
+      const url = node.url;
+
+      if (
+        url &&
+        (url.startsWith("./") || url.startsWith("../")) &&
+        url.endsWith(".md")
+      ) {
+        let filePath = url.replace(/^\.\/|^\.\.\//, "");
+        filePath = filePath.replace(/\.md$/, "");
+
+        const slug = filePath.split("/").map(slugify).join("/");
+
+        const fileName = filePath.split("/").pop();
+        const fileUrl =
+          noteMap.get(fileName) || noteMap.get(filePath) || `/n/${slug}`;
+
+        node.url = fileUrl;
+      }
+    });
   };
 }
 
-// Slugify helper (same as your existing one)
 function slugify(str) {
   return str
     .toLowerCase()

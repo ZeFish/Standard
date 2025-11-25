@@ -104,25 +104,13 @@ export default function standard(options = {}) {
         if (backlinksEnabled) {
           resetBacklinkGraph();
         }
-        let noteMap = new Map();
+
         const remarkPlugins = [
           [remarkTags, mergedConfig.tags || {}],
           [remarkStandard, mergedConfig.standard || {}],
           [remarkEscapeCode, mergedConfig.escapeCode || {}],
           [remarkFixDates, mergedConfig.dateFields || {}],
-          [
-            remarkObsidianLinks,
-            {
-              noteMap,
-              slugify: (str) =>
-                str
-                  .toLowerCase()
-                  .normalize("NFD")
-                  .replace(/[\u0300-\u036f]/g, "")
-                  .replace(/[^a-z0-9]+/g, "-")
-                  .replace(/(^-|-$)+/g, ""),
-            },
-          ],
+          [remarkObsidianLinks, {}],
         ];
         if (backlinksEnabled) {
           remarkPlugins.push([remarkBacklinks, mergedConfig.backlinks || {}]);
