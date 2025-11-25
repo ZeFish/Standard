@@ -1,3 +1,4 @@
+export { defineStandardCollection } from "./utils/collections.js";
 /**
  * @zefish/standard Astro Integration
  *
@@ -11,6 +12,8 @@ import remarkStandard from "./remark/standard.js";
 import remarkEscapeCode from "./remark/escape-code.js";
 import remarkFixDates from "./remark/fix-dates.js";
 import remarkSyntax from "./remark/syntax.js";
+import remarkBacklinks from "./remark/backlinks.js";
+import { getBacklinkGraph, resetBacklinkGraph } from "./utils/backlinks.js";
 import rehypeStandard from "./rehype/standard.js";
 import rehypeTypography from "./rehype/typography.js";
 import { fileURLToPath } from "url";
@@ -97,48 +100,74 @@ export default function standard(options = {}) {
         injectScript,
         injectRoute,
       }) => {
+        const backlinksEnabled = mergedConfig.backlinks !== false;
+        if (backlinksEnabled) {
+          resetBacklinkGraph();
+        }
+
+        const remarkPlugins = [
+          [remarkTags, mergedConfig.tags || {}],
+          [remarkStandard, mergedConfig.standard || {}],
+          [remarkEscapeCode, mergedConfig.escapeCode || {}],
+          [remarkFixDates, mergedConfig.dateFields || {}],
+        ];
+        if (backlinksEnabled) {
+          remarkPlugins.push([remarkBacklinks, mergedConfig.backlinks || {}]);
+        }
+        remarkPlugins.push([remarkSyntax, mergedConfig.syntax || {}]);
+
+        const rehypePlugins = [
+          [rehypeTypography, mergedConfig.typography || {}],
+          [rehypeStandard, mergedConfig.html || {}],
+        ];
+
         // 1. Configure Remark/Rehype Plugins
         updateConfig({
           markdown: {
-            remarkPlugins: [
-              [remarkTags, mergedConfig.tags || {}],
-              [remarkStandard, mergedConfig.standard || {}],
-              [remarkEscapeCode, mergedConfig.escapeCode || {}],
-              [remarkFixDates, mergedConfig.dateFields || {}],
-              [remarkSyntax, mergedConfig.syntax || {}],
-            ],
-            rehypePlugins: [
-              [rehypeTypography, mergedConfig.typography || {}],
-              [rehypeStandard, mergedConfig.html || {}],
-            ],
+            remarkPlugins,
+            rehypePlugins,
           },
         });
 
-        // 2. Virtual Module for Config
+        // 2. Virtual Modules (config + backlinks)
+        const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+        const currentDir = path.resolve(moduleDir);
+        const backlinksModulePath = path
+          .join(currentDir, "utils", "backlinks.js")
+          .split(path.sep)
+          .join("/");
+
+        const virtualModulesPlugin = {
+          name: "vite-plugin-standard-virtual",
+          resolveId(id) {
+            if (id === "virtual:standard/config") {
+              return "\0standard-virtual-config";
+            }
+            if (id === "virtual:standard/backlinks") {
+              return "\0standard-virtual-backlinks";
+            }
+          },
+          load(id) {
+            if (id === "\0standard-virtual-config") {
+              return `export default ${JSON.stringify(mergedConfig)}`;
+            }
+            if (id === "\0standard-virtual-backlinks") {
+              if (!backlinksEnabled) {
+                return "export const backlinks = {};\nexport default backlinks;";
+              }
+              return `import { getBacklinkGraph } from "${backlinksModulePath}";\nconst graph = getBacklinkGraph();\nexport const backlinks = graph;\nexport default graph;`;
+            }
+          },
+        };
+
         updateConfig({
           vite: {
-            plugins: [
-              {
-                name: "vite-plugin-standard-config",
-                resolveId(id) {
-                  if (id === "virtual:standard/config") {
-                    return "\0virtual:standard/config";
-                  }
-                },
-                load(id) {
-                  if (id === "\0virtual:standard/config") {
-                    return `export default ${JSON.stringify(mergedConfig)}`;
-                  }
-                },
-              },
-            ],
+            plugins: [virtualModulesPlugin],
           },
         });
 
         // 3. Inject Routes (optional)
         if (mergedConfig.injectRoutes !== false) {
-          const currentDir = path.dirname(fileURLToPath(import.meta.url));
-
           injectRoute({
             pattern: "/robots.txt",
             entrypoint: path.join(currentDir, "routes/robots.js"),
@@ -153,7 +182,43 @@ export default function standard(options = {}) {
           });
         }
 
-        // 4. Setup Cloudflare Features (delegate to complete integration)
+        // 4. Configure Vite aliases to expose Standard assets
+        const moduleDirAliases = path.dirname(fileURLToPath(import.meta.url));
+        const packageSrcDir = path.resolve(moduleDirAliases, "../");
+
+        const aliasEntries = {};
+        const stylesDir = path.resolve(packageSrcDir, "styles");
+        if (fs.existsSync(stylesDir)) {
+          aliasEntries["@standard-styles"] = stylesDir;
+        }
+
+        const scriptsDir = path.resolve(packageSrcDir, "js");
+        if (fs.existsSync(scriptsDir)) {
+          aliasEntries["@standard-js"] = scriptsDir;
+        }
+
+        const fontsDir = path.resolve(
+          packageSrcDir,
+          "../",
+          "public",
+          "assets",
+          "fonts",
+        );
+        if (fs.existsSync(fontsDir)) {
+          aliasEntries["@standard-fonts"] = fontsDir;
+        }
+
+        if (Object.keys(aliasEntries).length > 0) {
+          updateConfig({
+            vite: {
+              resolve: {
+                alias: aliasEntries,
+              },
+            },
+          });
+        }
+
+        // 5. Setup Cloudflare Features (delegate to complete integration)
         if (cloudflareConfig.enabled !== false) {
           const cloudflare = cloudflareIntegration({
             ...cloudflareConfig,
@@ -190,8 +255,19 @@ export default function standard(options = {}) {
           logger.success("OpenRouter AI integration enabled");
         }
 
-        // 6. Add Global Styles (if needed)
-        // injectScript('page', `import '@zefish/standard/css';`);
+        // 6. Add Global Assets (CSS/JS)
+        const assetsConfig = mergedConfig.assets || {};
+
+        const cssEntry =
+          assetsConfig.css ?? "@zefish/standard/styles/standard.scss";
+        if (cssEntry) {
+          injectScript("page-ssr", `import "${cssEntry}";`);
+        }
+
+        const jsEntry = assetsConfig.js ?? "@zefish/standard/js/standard.js";
+        if (jsEntry) {
+          injectScript("page", `import "${jsEntry}";`);
+        }
       },
 
       "astro:build:done": ({ dir }) => {
