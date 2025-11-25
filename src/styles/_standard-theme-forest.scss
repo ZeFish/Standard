@@ -127,7 +127,7 @@
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-Regular.woff2") format("woff22");
+    src: url("/assets/fonts/Forrest-Regular.woff2") format("woff22");
 }
 
 @font-face {
@@ -135,7 +135,7 @@
     font-weight: 400;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-RegularItalic.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-RegularItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -143,7 +143,7 @@
     font-weight: 300;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-Light.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-Light.woff2") format("woff2");
 }
 
 @font-face {
@@ -151,7 +151,7 @@
     font-weight: 300;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-LightItalic.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-LightItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -159,28 +159,28 @@
     font-weight: 500;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-Medium.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-Medium.woff2") format("woff2");
 }
 @font-face {
     font-family: "Forrest";
     font-weight: 500;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-MediumItalic.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-MediumItalic.woff2") format("woff2");
 }
 @font-face {
     font-family: "Forrest";
     font-weight: 700;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-Bold.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-Bold.woff2") format("woff2");
 }
 @font-face {
     font-family: "Forrest";
     font-weight: 700;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-BoldItalic.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-BoldItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -188,28 +188,28 @@
     font-weight: 800;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-Extrabold.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-Extrabold.woff2") format("woff2");
 }
 @font-face {
     font-family: "Forrest";
     font-weight: 800;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-ExtraboldItalic.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-ExtraboldItalic.woff2") format("woff2");
 }
 @font-face {
     font-family: " Forrest";
     font-weight: 900;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-Heavy.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-Heavy.woff2") format("woff2");
 }
 @font-face {
     font-family: "Forrest";
     font-weight: 900;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Forrest-HeavyItalic.woff2") format("woff2");
+    src: url("/assets/fonts/Forrest-HeavyItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -217,7 +217,7 @@
     /* Add other properties here, as needed. For example: */
     font-weight: 100 900;
     font-style: normal;
-    src: url("@standard-fonts/MonaspaceXenonVarVF%5Bwght%2Cwdth%2Cslnt%5D.woff2")
+    src: url("/assets/fonts/MonaspaceXenonVarVF%5Bwght%2Cwdth%2Cslnt%5D.woff2")
         format("woff2");
 }
 /* END VARIABLES FONT */
@@ -227,5 +227,5 @@
     font-weight: 200 800;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/NationalPark-VariableVF.woff2") format("woff2");
+    src: url("/assets/fonts/NationalPark-VariableVF.woff2") format("woff2");
 }

@@ -73,14 +73,14 @@
     font-weight: 400 700;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/InstrumentSans[wdth,wght].woff2") format("woff2");
+    src: url("/assets/fonts/InstrumentSans[wdth,wght].woff2") format("woff2");
 }
 @font-face {
     font-family: "Instrument Sans";
     font-weight: 400 700;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/InstrumentSans-Italic[wdth,wght].woff2")
+    src: url("/assets/fonts/InstrumentSans-Italic[wdth,wght].woff2")
         format("woff2");
 }
 
@@ -88,13 +88,13 @@
     font-family: "Instrument Serif";
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/InstrumentSerif-Regular.woff2") format("woff2");
+    src: url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
 }
 @font-face {
     font-family: "Instrument Serif";
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/InstrumentSerif-Italic.woff2") format("woff2");
+    src: url("/assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -102,14 +102,14 @@
     font-weight: 200 800;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Newsreader[opsz,wght].ttf") format("ttf");
+    src: url("/assets/fonts/Newsreader[opsz,wght].ttf") format("ttf");
 }
 @font-face {
     font-family: "Newsreader";
     font-weight: 200 800;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Newsreader-Italic[opsz,wght].ttf") format("ttf");
+    src: url("/assets/fonts/Newsreader-Italic[opsz,wght].ttf") format("ttf");
 }
 
 @font-face {
@@ -117,7 +117,7 @@
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Fraunces[SOFT,WONK,opsz,wght].woff2")
+    src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2")
         format("woff2");
 }
 @font-face {
@@ -125,7 +125,7 @@
     font-weight: 100 900;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2")
+    src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2")
         format("woff2");
 }
 
@@ -134,14 +134,14 @@
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Graveur-VAR.woff2") format("woff2");
+    src: url("/assets/fonts/Graveur-VAR.woff2") format("woff2");
 }
 @font-face {
     font-family: "Graveur";
     font-weight: 100 900;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Graveur-VAR-Italic.woff2") format("woff2");
+    src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -149,36 +149,36 @@
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
-    src: url("@standard-fonts/Marauder[wght].woff2") format("woff2");
+    src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
 }
 @font-face {
     font-family: "Graveur";
     font-weight: 100 900;
     font-style: italic;
     font-display: swap;
-    src: url("@standard-fonts/Graveur-VAR-Italic.woff2") format("woff2");
+    src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "Marauder";
-    src: url("@standard-fonts/Marauder[wght].woff2") format("woff2");
+    src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
     font-style: normal;
 }
 
 @font-face {
     font-family: "Marauder";
-    src: url("@standard-fonts/Marauder-Italic[wght].woff2") format("woff2");
+    src: url("/assets/fonts/Marauder-Italic[wght].woff2") format("woff2");
     font-style: italic;
 }
 
 @font-face {
     font-family: "NoTears";
-    src: url("@standard-fonts/NoTears.ttf") format("ttf");
+    src: url("/assets/fonts/NoTears.ttf") format("ttf");
     font-style: normal;
 }
 @font-face {
     font-family: "NoTears";
-    src: url("@standard-fonts/NoTearsBold.ttf") format("ttf");
+    src: url("/assets/fonts/NoTearsBold.ttf") format("ttf");
     font-style: normal;
     font-weight: bold;
 }

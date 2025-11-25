@@ -207,6 +207,44 @@ export default function standard(options = {}) {
           aliasEntries["@standard-fonts"] = fontsDir;
         }
 
+        // ✨ Copy fonts from package to public directory
+        const packageFontsDir = path.resolve(
+          packageSrcDir,
+          "../public/assets/fonts",
+        );
+        const clientPublicDir = path.resolve(
+          fileURLToPath(config.root), // ← Convert URL to string
+          "public/assets/fonts",
+        );
+
+        // Create the directory if it doesn't exist
+        if (!fs.existsSync(clientPublicDir)) {
+          fs.mkdirSync(clientPublicDir, { recursive: true });
+        }
+
+        // Copy all font files
+        if (fs.existsSync(packageFontsDir)) {
+          const files = fs.readdirSync(packageFontsDir, { recursive: true });
+          files.forEach((file) => {
+            const src = path.join(packageFontsDir, file);
+            const dest = path.join(clientPublicDir, file);
+
+            // Create subdirectories
+            const destDir = path.dirname(dest);
+            if (!fs.existsSync(destDir)) {
+              fs.mkdirSync(destDir, { recursive: true });
+            }
+
+            // Copy file
+            if (fs.statSync(src).isFile()) {
+              fs.copyFileSync(src, dest);
+              logger.debug(`Copied font: ${file}`);
+            }
+          });
+
+          logger.success("Fonts copied to public directory");
+        }
+
         if (Object.keys(aliasEntries).length > 0) {
           updateConfig({
             vite: {

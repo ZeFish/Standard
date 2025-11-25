@@ -145,7 +145,7 @@
 
 @font-face {
     font-family: "Helvetica Monospaced Pro";
-    src: url("@standard-fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
+    src: url("/assets/fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -153,7 +153,7 @@
 
 @font-face {
     font-family: "Helvetica Monospaced Pro";
-    src: url("@standard-fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
+    src: url("/assets/fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -161,8 +161,7 @@
 
 @font-face {
     font-family: "Helvetica Monospaced Pro";
-    src: url("@standard-fonts/HelveticaMonospacedPro-BdIt.woff2")
-        format("woff2");
+    src: url("/assets/fonts/HelveticaMonospacedPro-BdIt.woff2") format("woff2");
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -170,7 +169,7 @@
 
 @font-face {
     font-family: "Helvetica Monospaced Pro";
-    src: url("@standard-fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
+    src: url("/assets/fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
     font-weight: normal;
     font-style: italic;
     font-display: swap;
