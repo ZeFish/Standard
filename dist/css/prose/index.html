@@ -1,0 +1,578 @@
+<!DOCTYPE html><!-- Use Base layout and pass the markdown content through --><html class="rhythm" lang="en" data-theme="default"> <head><meta charset="utf-8"><!-- Standard Framework | https://standard.ffp.co --><title>Standard Framework</title><meta name="description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta name="author" content="Francis Fontaine"><meta name="language" content="en"><meta name="referrer" content="strict-origin-when-cross-origin"><!-- Canonical URL --><link rel="canonical" href="https://standard.ffp.co/css/prose/"><!-- Feed & Sitemap --><link rel="alternate" type="application/atom+xml" title="Standard Framework" href="https://standard.ffp.co/feed.xml"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://standard.ffp.co/sitemap.xml"><!-- Robots Meta --><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><!-- Open Graph --><meta property="og:title" content="Standard Framework"><meta property="og:type" content="article"><meta property="og:locale" content="en"><meta property="og:site_name" content="Standard Framework"><meta property="og:url" content="https://standard.ffp.co/css/prose/"><meta property="og:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta property="og:image" content="https://standard.ffp.co/assets/img/default.png"><meta property="og:image:alt" content="Standard Framework"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Cards --><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://standard.ffp.co/assets/img/default.png"><meta name="twitter:image:alt" content="Standard Framework"><meta name="twitter:site" content="@francisfontaine"><meta name="twitter:creator" content="@francisfontaine"><meta name="twitter:title" content="Standard Framework"><meta name="twitter:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><!-- Schema.org --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Standard Framework","description":"Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.","author":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co/now/"},"publisher":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co","logo":{"@type":"ImageObject","url":"https://standard.ffp.co/francis-fontaine-avatar.png"}},"image":{"@type":"ImageObject","url":"https://standard.ffp.co/assets/img/default.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://standard.ffp.co/css/prose/"}}</script><!-- Favicons --><link rel="apple-touch-icon" sizes="180x180" href="https://standard.ffp.co/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://standard.ffp.co/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://standard.ffp.co/favicons/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://standard.ffp.co/favicons/safari-pinned-tab.svg" color="#000000"><link rel="shortcut icon" href="https://standard.ffp.co/favicons/favicon.ico"><!-- Mobile --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><!-- Windows Tiles --><meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-config" content="https://standard.ffp.co/favicons/browserconfig.xml"><link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet"><!-- Standard Framework Lab Features --><script src="/assets/standard/standard.lab.js?v=1764047976416"></script><!-- Load HTMX library --><script type="module" src="/_astro/Base.astro_astro_type_script_index_0_lang.C1onTupY.js"></script><link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css"><!-- ✅ FIX: Load scripts only on client side --><script type="module">
+            import "/assets/js/standard.js";
+            // import "/assets/js/standard.lab.js"; // Removed - Lab component handles this
+            import "/assets/js/standard.toast.js";
+            import "/assets/js/standard.comment.js";
+        </script><link rel="stylesheet" href="/_astro/_slug_.dcmf1oDl.css"><script type="module" src="/_astro/page.DXhROYzO.js"></script></head> <body hx-boost="true" hx-ext="preload" hx-target="body" hx-swap="innerHTML scroll:window:top" class="prose"> <a href="#main" class="skip-link">Skip to content</a> <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;"> <p> <a href="/" style="text-decoration: none;">Standard Framework</a> </p> <nav class="menu horizontal" aria-label="Navigation"> <ul class="menu"> <li class="menu__item"> <a class="menu__link" href="/docs/"> Docs </a> </li><li class="menu__item"> <a class="menu__link" href="/getting-started/"> Getting Started </a> </li><li class="menu__item"> <a class="menu__link" href="/cheat-sheet/"> Cheat Sheet </a> </li> </ul> </nav> </header> <main id="main" class="prose">  <h1 id="prose-system">Prose System</h1>
+<p>Create beautifully styled, readable articles with automatic vertical rhythm, optimal line lengths, and professional typography.</p>
+<h2 id="quick-navigation">Quick Navigation</h2>
+<ul>
+<li><strong><a href="/css/typography/" preload="" hx-boost="true">Typography System</a></strong> – Font sizes, weights, and families</li>
+<li><strong><a href="/css/spacing/" preload="" hx-boost="true">Spacing &#x26; Rhythm</a></strong> – Vertical rhythm and spacing utilities</li>
+<li><strong><a href="/css/grid/" preload="" hx-boost="true">Grid System</a></strong> – Layout options including prose + sidebar</li>
+<li><strong><a href="/css/colors/" preload="" hx-boost="true">Colors</a></strong> – Text and background colors</li>
+<li><strong><a href="/css/utilities/" preload="" hx-boost="true">Utilities</a></strong> – Helper classes for common patterns</li>
+</ul>
+<h2 id="basic-prose-layout">Basic Prose Layout</h2>
+<p>The <code>.prose</code> class transforms any container into a beautifully styled, readable article or content area:</p>
+<p><strong>Default prose container:</strong></p>
+  <h1>Article Title</h1>
+  <p>This is how prose content looks when styled with the prose system. All typography, spacing, and layout are automatically applied. The prose container ensures your content is readable with optimal line length and professional appearance.</p>
+  <p>Paragraphs have consistent spacing based on the vertical rhythm system. Each paragraph is separated by proper spacing that creates visual breathing room without appearing disconnected.</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Article Title<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Your content here stays within optimal reading width with perfect spacing...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Multiple paragraphs maintain consistent rhythm throughout the document.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="heading-hierarchy">Heading Hierarchy</h2>
+<p>The prose system includes six levels of heading hierarchy, each with carefully calculated sizing and spacing:</p>
+<p><strong>All heading levels:</strong></p>
+  <h1>H1 - Main Article Heading</h1>
+  <p>This is your primary page heading, largest and most prominent.</p>
+  <p>
+      <img src="https://picsum.photos/400/300?random=1" alt="Demo 1">
+      <img src="https://picsum.photos/400/300?random=2" alt="Demo 2">
+      <img src="https://picsum.photos/400/300?random=3" alt="Demo 3">
+    </p>
+    <p>
+      <img src="https://picsum.photos/400/300?random=1" alt="Demo 1">
+      <img src="https://picsum.photos/400/300?random=2" alt="Demo 2">
+      <img src="https://picsum.photos/400/300?random=3" alt="Demo 3">
+    </p>
+  <h2>H2 - Section Heading</h2>
+  <p>Divides content into major sections within the article.</p>
+  <h3>H3 - Subsection Heading</h3>
+  <p style="font-size: 0.875rem; color: #666;">Creates a third level of organization for detailed content.</p>
+  <h4>H4 - Minor Heading</h4>
+  <p style="font-size: 0.875rem; color: #666;">Breaks up content within subsections.</p>
+  <h5>H5 - Sub-minor Heading</h5>
+  <p style="font-size: 0.875rem; color: #666;">Rarely used but available for deep nesting.</p>
+  <h6>H6 - Small Heading</h6>
+  <p style="font-size: 0.875rem; color: #666;">The smallest heading level, typically used for special sections.</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Main Article Heading<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Introduction paragraph...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>First Major Section<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Content for this section...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Subsection within first section<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>More detailed content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Second Major Section<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>More content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="paragraph-styling">Paragraph Styling</h2>
+<p>Paragraphs automatically receive optimal line height, spacing, and typography:</p>
+<p><strong>Paragraphs with rhythm spacing:</strong></p>
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>This paragraph has proper line-height (1.618 for body text) for comfortable reading. The golden ratio ensures each line has optimal spacing. Longer paragraphs are easier to read when line-height is generous but not excessive.</p>
+  <p>Each paragraph is automatically separated from the next by the rhythm spacing. This creates visual breathing room and helps readers process content in digestible chunks. The spacing is based on your typography's line-height multiplier.</p>
+  <p>The prose system applies these styles automatically. You don't need to add classes to individual paragraphs—just write semantic HTML and the system handles the rest.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>First paragraph with automatic spacing and styling.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Second paragraph appears below with proper vertical rhythm.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Each paragraph receives consistent treatment throughout the article.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="lists">Lists</h2>
+<p>Lists are automatically styled with proper indentation and spacing within prose containers:</p>
+<p><strong>Unordered list example:</strong></p>
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Benefits of the Prose System</h3>
+  <ul>
+    <li>Automatic vertical rhythm keeps content visually harmonious</li>
+    <li>Optimal line length ensures comfortable reading</li>
+    <li>Professional heading hierarchy guides readers</li>
+    <li>Consistent spacing creates visual polish</li>
+    <li>Works with semantic HTML without extra markup</li>
+  </ul>
+</div>
+<p><strong>Ordered list example:</strong></p>
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Steps to Create a Prose Container</h3>
+  <ol>
+    <li>Add the <code>.prose</code> class to your container element</li>
+    <li>Write semantic HTML with proper heading hierarchy</li>
+    <li>Add paragraphs, lists, and other content elements</li>
+    <li>All styling is applied automatically</li>
+    <li>Customize with CSS variables if needed</li>
+  </ol>
+</div>
+<p><strong>Description list example:</strong></p>
+<div class="prose mb" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Typography Terms</h3>
+  <dl>
+    <dt>Line Height</dt>
+    <dd>The vertical distance between lines of text. The prose system uses 1.618 (golden ratio) for comfortable reading.</dd>
+    <dt>Vertical Rhythm</dt>
+    <dd>Consistent spacing throughout a layout. All elements align to a baseline grid for visual harmony.</dd>
+    <dt>Reading Width</dt>
+    <dd>The ideal line length (60-75 characters) for comfortable reading. The prose system keeps content within this range.</dd>
+  </dl>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token comment">&#x3C;!– Unordered list –></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>First item<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>Second item with more details<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>Third item concluding the list<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ul</span><span class="token punctuation">></span></span>
+
+  <span class="token comment">&#x3C;!– Ordered list –></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ol</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>First step in a process<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>Second step continues the process<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>Final step completes the process<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ol</span><span class="token punctuation">></span></span>
+
+  <span class="token comment">&#x3C;!– Description list –></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>dl</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>dt</span><span class="token punctuation">></span></span>Term<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>dd</span><span class="token punctuation">></span></span>Definition of the term goes here with complete explanation.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>dd</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>dl</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="blockquotes">Blockquotes</h2>
+<p>Blockquotes are styled to stand out while maintaining visual harmony with the rest of your prose:</p>
+<p><strong>Blockquote styling:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>Here's a powerful thought from a famous author:</p>
+  <blockquote>
+    <p>The beautiful thing about learning is that no one can take it away from you. Every investment you make in yourself comes back with dividends throughout your life. It's not about money, it's about growth.</p>
+  </blockquote>
+  <p>This blockquote is styled to emphasize the quoted content while maintaining visual rhythm with surrounding paragraphs.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Here's a meaningful quote:<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>blockquote</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Your blockquoted text appears here in italics with a left border accent, creating visual emphasis.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>blockquote</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Continue your prose after the blockquote with normal styling.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="code-blocks">Code Blocks</h2>
+<p>Code examples within prose are styled with syntax highlighting support:</p>
+<p><strong>Inline code:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>Use the <code>.prose</code> class on any container to enable prose styling. You can also use the <code>class="prose"</code> attribute directly in your HTML.</p>
+</div>
+<p><strong>Code block:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>JavaScript Example</h3>
+  <pre><code class="language-javascript">// Apply prose styling to content
+const article = document.querySelector('article');
+article.classList.add('prose');
+</code><p><code class="language-javascript">// Now all typography and spacing is automatically applied console.log(‘Prose styling activated!’);</code></p></pre><p></p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Inline code example: use <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>code</span><span class="token punctuation">></span></span>variable_name<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>code</span><span class="token punctuation">></span></span> in your code.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>code</span><span class="token punctuation">></span></span>
+// Code block with multiple lines
+function exampleFunction() {
+  return "This code appears in a styled block";
+}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>code</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>pre</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="tables">Tables</h2>
+<p>Tables within prose are responsive and automatically styled:</p>
+<p><strong>Table example:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Feature Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Description</th>
+        <th>Availability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vertical Rhythm</td>
+        <td>Automatic spacing based on line-height</td>
+        <td>All elements</td>
+      </tr>
+      <tr>
+        <td>Reading Width</td>
+        <td>Optimal line length for readability</td>
+        <td>Prose containers</td>
+      </tr>
+      <tr>
+        <td>Heading Hierarchy</td>
+        <td>Six levels with scaled sizing</td>
+        <td>H1 through H6</td>
+      </tr>
+      <tr>
+        <td>Typography System</td>
+        <td>Golden ratio based proportions</td>
+        <td>All text elements</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>table</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>thead</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>tr</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>th</span><span class="token punctuation">></span></span>Header 1<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>th</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>th</span><span class="token punctuation">></span></span>Header 2<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>th</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>th</span><span class="token punctuation">></span></span>Header 3<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>th</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>tr</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>thead</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>tbody</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>tr</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>td</span><span class="token punctuation">></span></span>Data 1<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>td</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>td</span><span class="token punctuation">></span></span>Data 2<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>td</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>td</span><span class="token punctuation">></span></span>Data 3<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>td</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>tr</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>tbody</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="text-emphasis">Text Emphasis</h2>
+<p>Within prose, emphasis elements are styled appropriately:</p>
+<p><strong>Text emphasis examples:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>Use <strong>strong tags for bold text</strong> to emphasize important points. The <em>em tag creates italic text</em> for gentle emphasis. You can also use <b>b tags for bold</b> and <i>i tags for italic</i>.</p>
+  <p>For marked or highlighted text, use <mark>the mark element</mark>. Deleted or removed text looks like <del>this deleted text</del>. New or inserted text appears as <ins>this inserted text</ins>.</p>
+  <p>Special formatting: Subscript like H<sub>2</sub>O or superscript like E=mc<sup>2</sup> are automatically styled.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>This is <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>strong</span><span class="token punctuation">></span></span>bold text<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>strong</span><span class="token punctuation">></span></span> and <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>em</span><span class="token punctuation">></span></span>italic text<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>em</span><span class="token punctuation">></span></span>.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>mark</span><span class="token punctuation">></span></span>Highlighted text<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>mark</span><span class="token punctuation">></span></span>, <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>del</span><span class="token punctuation">></span></span>deleted text<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>del</span><span class="token punctuation">></span></span>, <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ins</span><span class="token punctuation">></span></span>inserted text<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ins</span><span class="token punctuation">></span></span>.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>H<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>sub</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>sub</span><span class="token punctuation">></span></span>O and E=mc<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>sup</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>sup</span><span class="token punctuation">></span></span> subscript and superscript.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="links">Links</h2>
+<p>Links within prose maintain visual hierarchy while remaining accessible:</p>
+<p><strong>Link styling:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>This paragraph contains a <a href="/example">standard link to another page</a>. The link is styled distinctly so readers can identify it. <a href="/visited">Visited links</a> appear in a different color to show where you've already been.</p>
+  <p>Links are underlined and color-coded for accessibility. Hover over a link to see the hover state. Active links show their current state with different styling.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Read more in the <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/docs/typography/<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>typography documentation<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span>.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Visit the <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/css/grid/<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>grid system guide<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span> for layout examples.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="prose-withsidebars">Prose with Sidebars</h2>
+<p>Combine prose with sidebar layouts for more complex article structures:</p>
+<p><strong>Main content with sidebar:</strong></p>
+<div class="display-grid gap-base margin-bottom-base" style="grid-template-columns: 1fr 250px;">
+  <div class="prose" style="padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+    <h1>Article with Sidebar</h1>
+    <p>This is the main article content using the prose system for optimal readability. The prose class ensures all typography and spacing is perfectly proportioned.</p>
+    <h2>Main Content Section</h2>
+    <p>Articles often benefit from having a sidebar for supplementary information, advertisements, or related links. The prose system maintains perfect spacing even with adjacent sidebars.</p>
+  </div>
+  <div style="padding: 2rem; background-color: #e8e8e8; border-radius: 0.5rem;">
+    <h3 style="margin-top: 0;">Sidebar</h3>
+    <ul style="font-size: 0.875rem; line-height: 1.5;">
+      <li><a href="#">Related Article 1</a></li>
+      <li><a href="#">Related Article 2</a></li>
+      <li><a href="#">Related Article 3</a></li>
+    </ul>
+  </div>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>display-grid gap-base<span class="token punctuation">“</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token value css language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 1fr 250px<span class="token punctuation">;</span></span><span class="token punctuation">“</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Article Title<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Main article content with optimal reading width...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>aside</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Related Content<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>#<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>Link 1<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>#<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>Link 2<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ul</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>aside</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="heading-spacing">Heading Spacing</h2>
+<p>The prose system carefully manages spacing before and after headings for visual hierarchy:</p>
+<p><strong>Heading spacing in context:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>This paragraph comes before a heading. Notice the spacing below it.</p>
+  <h2>This is an H2 Heading</h2>
+  <p>The paragraph after a heading has consistent spacing. H2 headings have larger top margin (spacing above) than bottom margin (spacing below) to maintain rhythm.</p>
+  <h3>This is an H3 Heading</h3>
+  <p>Smaller headings like H3 have proportionally smaller spacing. The rhythm system maintains perfect alignment throughout the entire document.</p>
+  <p>Multiple paragraphs between headings maintain the same consistent spacing.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Main Heading<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Paragraph after main heading...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Section Heading<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Content under this section...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Another paragraph...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Subsection Heading<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>More detailed content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="callouts-andhighlighted-sections">Callouts and Highlighted Sections</h2>
+<p>Special content can be highlighted using callout styling:</p>
+<p><strong>Callout block:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>Here's some regular prose content.</p>
+  <div class="callout" style="padding: 1.5rem; background-color: #e3f2fd; border-left: 4px solid #1976d2; border-radius: 0.25rem;">
+    <div style="font-weight: 700; margin-bottom: 0.5rem;">Pro Tip</div>
+    <p style="margin: 0; font-size: 0.95rem;">This is a highlighted callout section. Use it for important notes, warnings, or tips. The callout styling draws attention while maintaining visual harmony with surrounding prose.</p>
+  </div>
+  <p>Content continues after the callout.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Regular prose content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>callout<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>callout-title<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>Important Note<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Content inside the callout gets highlighted styling.<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>More prose continues below...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="images-andfigures">Images and Figures</h2>
+<p>Images within prose maintain visual harmony:</p>
+<p><strong>Image with caption:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>Here's an image embedded in prose:</p>
+  <figure style="margin-bottom: 2rem;">
+    <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+      [Placeholder Image]
+    </div>
+    <figcaption style="font-size: 0.875rem; color: #666; margin-top: 0.75rem; font-style: italic;">A sample figure with caption text. Captions provide context for images in your article.</figcaption>
+  </figure>
+  <p>The image maintains proper spacing before and after in the prose flow.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Introduction before the image...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>figure</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/images/example.jpg<span class="token punctuation">“</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>Description of image<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>figcaption</span><span class="token punctuation">></span></span>Caption text appears below the image<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>figcaption</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>figure</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Content continues after the image...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="reading-width-variants">Reading Width Variants</h2>
+<p>The prose system supports different reading widths for different content types:</p>
+<p><strong>Standard prose (default width):</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 672px; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Medium Width (Default)</h3>
+  <p>This is the default prose width - optimal for most article content. At approximately 42rem (672px), this width provides excellent readability with approximately 60-75 characters per line depending on font size and spacing.</p>
+</div>
+<p><strong>Narrow prose (for sidebars):</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 512px; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Small Width</h3>
+  <p>Narrower prose width for sidebar content or supplementary information. Still maintains perfect readability at a reduced width.</p>
+</div>
+<p><strong>Wide prose (for special content):</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 800px; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h3>Large Width</h3>
+  <p>Wider prose width for feature articles or special content that benefits from more horizontal space while maintaining readability principles.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token comment">&#x3C;!– Standard prose width (42rem / 672px) –></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Article Title<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Content here uses optimal reading width...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&#x3C;!– Narrow prose for sidebars –></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>aside</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 32rem<span class="token punctuation">;</span></span><span class="token punctuation">“</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Sidebar Content<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Narrower content area...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>aside</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&#x3C;!– Wide prose for feature content –></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 50rem<span class="token punctuation">;</span></span><span class="token punctuation">“</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Featured Article<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Wider layout for special content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="full-width-content-within-prose">Full-Width Content Within Prose</h2>
+<p>Sometimes you need full-width elements inside prose containers:</p>
+<p><strong>Full-width element inside prose:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <p>Here's regular prose content at the optimal reading width.</p>
+  <div style="width: 100%; height: 150px; background: linear-gradient(to right, #667eea 0%, #764ba2 100%); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 2rem;">
+    Full-Width Section (breakout element)
+  </div>
+  <p>Content returns to normal prose width after the full-width section. This allows for impactful visuals while maintaining reading flow.</p>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Regular prose content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>full<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token comment">&#x3C;!– Full-width element breaks out of prose constraints –></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>section</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token value css language-css"><span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>–color-accent<span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token punctuation">“</span></span></span><span class="token punctuation">></span></span>
+      Full-width impactful content
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>section</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Prose continues at normal width after the full-width section...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="nested-prose">Nested Prose</h2>
+<p>You can nest prose containers for different contexts:</p>
+<p><strong>Nested prose example:</strong></p>
+<div class="prose margin-bottom-base" style="max-width: 100%; padding: 2rem; background-color: #f5f5f5; border-radius: 0.5rem;">
+  <h2>Main Article Section</h2>
+  <p>This is the main prose content. You can have different prose containers for different sections of content.</p>
+  <div style="margin-top: 2rem; padding: 1.5rem; background-color: #fff9e6; border-radius: 0.5rem;">
+    <h3>Nested Prose Container</h3>
+    <p>This nested section has its own prose styling applied. It might represent a sidebar, special section, or supplementary content with different styling context.</p>
+  </div>
+</div>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Main Article<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Main content...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>section</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Special Section<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>This section has its own prose styling context...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>section</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="customization-withcss-variables">Customization with CSS Variables</h2>
+<p>Override prose defaults with CSS variables:</p>
+<pre class="language-css" data-language="css"><code is:raw="" class="language-css"><span class="token selector">:root</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* Heading spacing multiplier */</span>
+  <span class="token property">–rhythm-gap</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+
+  <span class="token comment">/* Line height for body text */</span>
+  <span class="token property">–lh-lrh-base</span><span class="token punctuation">:</span> 1.618<span class="token punctuation">;</span>
+
+  <span class="token comment">/* Line height for headings */</span>
+  <span class="token property">–lh-lrh-headings</span><span class="token punctuation">:</span> 1.2<span class="token punctuation">;</span>
+
+  <span class="token comment">/* Font sizes (automatically scaled) */</span>
+  <span class="token property">–font-size-base</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+
+  <span class="token comment">/* Reading width (prose container max-width) */</span>
+  <span class="token property">–line-width</span><span class="token punctuation">:</span> 42rem<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="-do">✓ Do</h3>
+<ul>
+<li>Use semantic HTML tags (<code>&#x3C;h1></code>, <code>&#x3C;p></code>, <code>&#x3C;article></code>)</li>
+<li>Start with <code>&#x3C;h1></code> on each page</li>
+<li>Follow heading hierarchy without skipping levels</li>
+<li>Use <code>.prose</code> class on article or main content containers</li>
+<li>Let the prose system handle spacing—don’t add custom margins</li>
+<li>Use proper list elements (<code>&#x3C;ul></code>, <code>&#x3C;ol></code>, <code>&#x3C;dl></code>) for organized content</li>
+<li>Include figure captions for all images</li>
+<li>Use blockquotes for quoted material</li>
+<li>Apply emphasis with <code>&#x3C;strong></code> and <code>&#x3C;em></code> tags</li>
+</ul>
+<h3 id="-dont">✗ Don’t</h3>
+<ul>
+<li>Skip heading levels (don’t jump from <code>&#x3C;h1></code> to <code>&#x3C;h3></code>)</li>
+<li>Use headings for styling (use classes instead)</li>
+<li>Add multiple <code>&#x3C;h1></code> tags per page</li>
+<li>Disable the prose class styling to save space</li>
+<li>Use non-semantic elements for content structure</li>
+<li>Add extra margins to individual elements</li>
+<li>Ignore heading hierarchy for visual design</li>
+</ul>
+<h2 id="advanced-patterns">Advanced Patterns</h2>
+<h3 id="blog-post-withmultiple-sections">Blog Post with Multiple Sections</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>Complete Guide to Prose Styling<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Introduction paragraph setting up the article topic...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Getting Started<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Section content here...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>First Concept<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Details about the first concept...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Second Concept<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Details about the second concept...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Advanced Topics<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Moving into more complex territory...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Deep Dive<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>In-depth exploration of advanced topics...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="long-form-article-withsidebars">Long-Form Article with Sidebars</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>display-grid gap-base<span class="token punctuation">“</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token value css language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 1fr 300px<span class="token punctuation">;</span></span><span class="token punctuation">“</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>In-Depth Article<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Long-form content with perfect readability...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>aside</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span></span><span class="token punctuation">“</span></span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Quick Reference<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>Key point 1<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>Key point 2<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ul</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>aside</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="documentation-withcode-examples">Documentation with Code Examples</h3>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>prose<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span>API Documentation<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Installation<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>code</span><span class="token punctuation">></span></span>npm install @example/package<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>code</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>pre</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Basic Usage<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>Here's how to use the package:<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>pre</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>code</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>language-javascript<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+import { example } from '@example/package';
+example();
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>code</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>pre</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Advanced Configuration<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>For advanced use cases...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><strong><a href="/css/typography/" preload="" hx-boost="true">Typography System</a></strong> – Font sizes, weights, and families</li>
+<li><strong><a href="/css/spacing/" preload="" hx-boost="true">Spacing &#x26; Rhythm</a></strong> – Vertical rhythm and spacing utilities</li>
+<li><strong><a href="/css/grid/" preload="" hx-boost="true">Grid System</a></strong> – Layout options including prose + sidebar</li>
+<li><strong><a href="/css/colors/" preload="" hx-boost="true">Colors</a></strong> – Text and background colors</li>
+<li><strong><a href="/docs/prose-layout-system/" preload="" hx-boost="true">API Reference</a></strong> – Complete technical documentation</li>
+</ul>
+<p>Master readable, beautiful content. <a href="/css/spacing/" preload="" hx-boost="true">Learn spacing and rhythm</a></p>  <article class="comments-system"> <div id="comments"></div> <button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">
+Write a Comment
+</button> <div id="comment-form-wrapper" style="display: none;"> <form id="comment-form" method="post" action="/api/comments" novalidate> <fieldset> <legend>Leave a Comment</legend> <label for="author">Your Name <span aria-label="required">*</span></label> <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required maxlength="100"> <label for="email">Email Address <span aria-label="required">*</span></label> <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required> <label for="content">Comment <span aria-label="required">*</span></label> <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required minlength="3" maxlength="10000" rows="6"></textarea> <!-- Hidden fields --> <input type="hidden" id="pageId" name="pageId" value="css_prose"> <input type="hidden" id="parentId" name="parentId" value=""> <!-- Status indicator --> <div id="form-status" role="status" aria-live="polite"></div> <!-- Submit buttons --> <div class="form-actions"> <button type="submit" class="button">Post Comment</button>   </div> </fieldset> </form> </div> </article> <script defer>(function(){const initOptions = {"apiUrl":"/api/comments","pageId":"css_prose","container":"#comments","form":"#comment-form","pollInterval":null};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+})();</script> </main> <hr> <footer class="smaller font-interface"> <p>
+© 2025 Francis Fontaine ·
+<a href="/">Standard Framework</a> ·
+<a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> </p> </footer> </body></html>

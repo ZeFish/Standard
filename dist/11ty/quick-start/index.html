@@ -1,0 +1,356 @@
+<!DOCTYPE html><!-- Use Base layout and pass the markdown content through --><html class="rhythm" lang="en" data-theme="default"> <head><meta charset="utf-8"><!-- Standard Framework | https://standard.ffp.co --><title>Standard Framework</title><meta name="description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta name="author" content="Francis Fontaine"><meta name="language" content="en"><meta name="referrer" content="strict-origin-when-cross-origin"><!-- Canonical URL --><link rel="canonical" href="https://standard.ffp.co/11ty/quick-start/"><!-- Feed & Sitemap --><link rel="alternate" type="application/atom+xml" title="Standard Framework" href="https://standard.ffp.co/feed.xml"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://standard.ffp.co/sitemap.xml"><!-- Robots Meta --><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><!-- Open Graph --><meta property="og:title" content="Standard Framework"><meta property="og:type" content="article"><meta property="og:locale" content="en"><meta property="og:site_name" content="Standard Framework"><meta property="og:url" content="https://standard.ffp.co/11ty/quick-start/"><meta property="og:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta property="og:image" content="https://standard.ffp.co/assets/img/default.png"><meta property="og:image:alt" content="Standard Framework"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Cards --><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://standard.ffp.co/assets/img/default.png"><meta name="twitter:image:alt" content="Standard Framework"><meta name="twitter:site" content="@francisfontaine"><meta name="twitter:creator" content="@francisfontaine"><meta name="twitter:title" content="Standard Framework"><meta name="twitter:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><!-- Schema.org --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Standard Framework","description":"Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.","author":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co/now/"},"publisher":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co","logo":{"@type":"ImageObject","url":"https://standard.ffp.co/francis-fontaine-avatar.png"}},"image":{"@type":"ImageObject","url":"https://standard.ffp.co/assets/img/default.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://standard.ffp.co/11ty/quick-start/"}}</script><!-- Favicons --><link rel="apple-touch-icon" sizes="180x180" href="https://standard.ffp.co/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://standard.ffp.co/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://standard.ffp.co/favicons/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://standard.ffp.co/favicons/safari-pinned-tab.svg" color="#000000"><link rel="shortcut icon" href="https://standard.ffp.co/favicons/favicon.ico"><!-- Mobile --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><!-- Windows Tiles --><meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-config" content="https://standard.ffp.co/favicons/browserconfig.xml"><link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet"><!-- Standard Framework Lab Features --><script src="/assets/standard/standard.lab.js?v=1764047976394"></script><!-- Load HTMX library --><script type="module" src="/_astro/Base.astro_astro_type_script_index_0_lang.C1onTupY.js"></script><link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css"><!-- ✅ FIX: Load scripts only on client side --><script type="module">
+            import "/assets/js/standard.js";
+            // import "/assets/js/standard.lab.js"; // Removed - Lab component handles this
+            import "/assets/js/standard.toast.js";
+            import "/assets/js/standard.comment.js";
+        </script><link rel="stylesheet" href="/_astro/_slug_.dcmf1oDl.css"><script type="module" src="/_astro/page.DXhROYzO.js"></script></head> <body hx-boost="true" hx-ext="preload" hx-target="body" hx-swap="innerHTML scroll:window:top" class="prose"> <a href="#main" class="skip-link">Skip to content</a> <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;"> <p> <a href="/" style="text-decoration: none;">Standard Framework</a> </p> <nav class="menu horizontal" aria-label="Navigation"> <ul class="menu"> <li class="menu__item"> <a class="menu__link" href="/docs/"> Docs </a> </li><li class="menu__item"> <a class="menu__link" href="/getting-started/"> Getting Started </a> </li><li class="menu__item"> <a class="menu__link" href="/cheat-sheet/"> Cheat Sheet </a> </li> </ul> </nav> </header> <main id="main" class="prose">  <h1 id="build-your-first-website-in5-minutes">Build Your First Website in 5 Minutes</h1>
+<p><strong>Stop configuring. Start creating.</strong> Standard Framework handles all the boring stuff so you can focus on content.</p>
+<h2 id="theproblem-with11ty">The Problem with 11ty</h2>
+<p>Every time you start a new 11ty site, you spend hours on:</p>
+<ul>
+<li>Setting up CSS (or choosing a framework)</li>
+<li>Creating base layouts</li>
+<li>Configuring markdown processing</li>
+<li>Building collections and filters</li>
+<li>Styling forms, buttons, typography</li>
+<li>Setting up responsive grids</li>
+<li>Choosing colors and themes</li>
+<li>Adding dark mode support</li>
+<li>Dealing with vertical rhythm</li>
+<li>Configuring everything from scratch</li>
+</ul>
+<p>Then you finally write content. <strong>Not ideal.</strong></p>
+<h2 id="thestandard-way">The Standard Way</h2>
+<p><strong>5 steps. That’s it.</strong></p>
+<h3 id="step-1-create-project-folder">Step 1: Create Project Folder</h3>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">mkdir</span> my-website
+<span class="token builtin class-name">cd</span> my-website
+</code></pre>
+<h3 id="step-2-initialize--install">Step 2: Initialize &#x26; Install</h3>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">npm</span> init <span class="token parameter variable">-y</span>
+<span class="token function">npm</span> <span class="token function">install</span> --save-dev @11ty/eleventy
+<span class="token function">npm</span> <span class="token function">install</span> @zefish/standard
+</code></pre>
+<p><strong>That’s 6 packages.</strong> One installs 11ty. One brings Standard. Done.</p>
+<h3 id="step-3-create-one-config-file">Step 3: Create One Config File</h3>
+<p>Create <code>eleventy.config.js</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">dir</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">input</span><span class="token operator">:</span> <span class="token string">“content”</span><span class="token punctuation">,</span> <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token string">“_site”</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Literally copy-paste this. It works.</strong></p>
+<h3 id="step-4-create-one-layout">Step 4: Create One Layout</h3>
+<p>Create <code>_includes/layouts/base.njk</code>:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token doctype"><span class="token punctuation">&#x3C;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>en<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>UTF-8<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>viewport<span class="token punctuation">“</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>width=device-width, initial-scale=1.0<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>title</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>title</span><span class="token punctuation">></span></span>
+  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>body</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>bg-background text-foreground<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>header</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>rhythm-block p-4<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>nav</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>Home<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/about/<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>About<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/blog/<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>Blog<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>nav</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>header</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>main</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>max-w-prose mx-auto px-4 rhythm-block<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>main</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>footer</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>rhythm-block p-4 border-t<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="©">&#x26;copy;</span> 2024 <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>footer</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>html</span><span class="token punctuation">></span></span>
+</code></pre>
+<p><strong>Copy this too. Customize the nav if you want.</strong></p>
+<h3 id="step-5-write-content">Step 5: Write Content</h3>
+<p>Create <code>content/index.md</code>:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+title: Home
+
+<span class="token title important"><span class="token punctuation">#</span> Welcome to My Website</span>
+
+This is my website. It has beautiful typography, responsive design, and dark mode.
+
+<span class="token bold"><span class="token punctuation">**</span><span class="token content">All automatically.</span><span class="token punctuation">**</span></span>
+
+No CSS to write. No classes to memorize. Just markdown.
+</code></pre>
+<p>Create <code>content/about.md</code>:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+title: About Me
+
+<span class="token title important"><span class="token punctuation">#</span> About Me</span>
+
+I'm a person who builds websites with Standard Framework instead of spending hours on setup.
+
+This frees me to focus on content.
+</code></pre>
+<h3 id="step-6-build--view">Step 6: Build &#x26; View</h3>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash">npx @11ty/eleventy <span class="token parameter variable">–serve</span>
+</code></pre>
+<p>Visit <code>§§URL§§19§§</code></p>
+<p><strong>Your website is live. With styling. With dark mode. With responsive layout. No JavaScript needed.</strong></p>
+<h2 id="thats-it">That’s It</h2>
+<p>Seriously. You now have:</p>
+<p>✅ <strong>Beautiful typography</strong> – Perfect fonts and spacing ✅ <strong>Responsive grid</strong> – Works on phone, tablet, desktop ✅ <strong>Dark mode</strong> – Automatic theme switching ✅ <strong>Semantic HTML</strong> – Clean, accessible code ✅ <strong>Professional styling</strong> – Golden ratio proportions ✅ <strong>Fast build</strong> – Completes in seconds ✅ <strong>Zero configuration</strong> – It just works</p>
+<h2 id="nowadd-your-features">Now Add Your Features</h2>
+<p>Once your site is running, add features as needed:</p>
+<h3 id="add-ablog">Add a Blog</h3>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">mkdir</span> content/blog
+</code></pre>
+<p>Create <code>content/blog/post-1.md</code>:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+title: My First Post
+date: 2024-10-21
+tags:
+  <span class="token list punctuation">-</span> thoughts
+  <span class="token list punctuation">-</span> web
+
+<span class="token title important"><span class="token punctuation">#</span> </span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>time</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>time</span><span class="token punctuation">></span></span>
+
+Your blog post content here.
+</code></pre>
+<h3 id="add-wiki-style-links">Add Wiki-Style Links</h3>
+<p>Just use <code>[[Page Name]]</code> in markdown:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">Learn about [[Web Development]] and [[CSS]].
+</code></pre>
+<p>Automatic backlinks appear on those pages.</p>
+<h3 id="protect-premium-content">Protect Premium Content</h3>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+title: Premium Article
+encrypted: true
+password: premium-access
+
+<span class="token title important"><span class="token punctuation">#</span> Premium Content</span>
+
+Members only.
+</code></pre>
+<h3 id="add-custom-styles">Add Custom Styles</h3>
+<p>Create <code>src/custom.css</code>:</p>
+<pre class="language-css" data-language="css"><code is:raw="" class="language-css"><span class="token selector">:root</span> <span class="token punctuation">{</span>
+  <span class="token property">–color-accent</span><span class="token punctuation">:</span> #0066cc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>And passthrough copy it in <code>eleventy.config.js</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token string">“src/custom.css”</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="your-project-structure">Your Project Structure</h2>
+<p>That’s all you need:</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">my-website/
+├── eleventy.config.js       (Copy-paste from above)
+├── package.json
+├── content/
+│   ├── index.md            (Your homepage)
+│   ├── about.md            (Your about page)
+│   └── blog/
+│       └── post-1.md       (Your first post)
+├── _includes/
+│   └── layouts/
+│       └── base.njk        (Copy-paste from above)
+└── _site/                  (Auto-generated, ignore)
+</code></pre>
+<p><strong>That’s the entire structure. Nothing else needed.</strong></p>
+<h2 id="common-questions">Common Questions</h2>
+<h3 id="q-howdoi-customize-thecolors">Q: How do I customize the colors?</h3>
+<p>Override CSS variables in a custom style:</p>
+<pre class="language-css" data-language="css"><code is:raw="" class="language-css"><span class="token selector">:root</span> <span class="token punctuation">{</span>
+  <span class="token property">–color-background</span><span class="token punctuation">:</span> #f5f5f5<span class="token punctuation">;</span>
+  <span class="token property">–color-foreground</span><span class="token punctuation">:</span> #1a1a1a<span class="token punctuation">;</span>
+  <span class="token property">–color-accent</span><span class="token punctuation">:</span> #ff6600<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="q-howdoi-add-navigation-menus">Q: How do I add navigation menus?</h3>
+<p>Add <code>eleventyNavigation</code> to front matter:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"></code></pre>
+<p>11ty handles the rest.</p>
+<h3 id="q-howdoi-change-fonts">Q: How do I change fonts?</h3>
+<p>Override in CSS:</p>
+<pre class="language-css" data-language="css"><code is:raw="" class="language-css"><span class="token selector">:root</span> <span class="token punctuation">{</span>
+  <span class="token property">–font-family-serif</span><span class="token punctuation">:</span> <span class="token string">“Georgia”</span><span class="token punctuation">,</span> serif<span class="token punctuation">;</span>
+  <span class="token property">–font-family-sans</span><span class="token punctuation">:</span> <span class="token string">“Segoe UI”</span><span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="q-howdoi-add-images">Q: How do I add images?</h3>
+<p>Just use markdown:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token url"><span class="token operator">!</span>[<span class="token content">My photo</span>](<span class="token url">/images/photo.jpg</span>)</span>
+
+Or HTML:
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/images/photo.jpg<span class="token punctuation">“</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>My photo<span class="token punctuation">“</span></span> <span class="token attr-name">loading</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>lazy<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<p>Then add to <code>eleventy.config.js</code>:</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token string">“src/images/”</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="q-howdoi-deploy">Q: How do I deploy?</h3>
+<p>Build for production:</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">npm</span> run build
+</code></pre>
+<p>Upload the <code>_site</code> folder to:</p>
+<ul>
+<li><strong>Netlify</strong> – Drop folder, it’s live</li>
+<li><strong>Vercel</strong> – Connect repo, it auto-deploys</li>
+<li><strong>Any web server</strong> – FTP the <code>_site</code> folder</li>
+</ul>
+<h2 id="common-tasks">Common Tasks</h2>
+<h3 id="create-asecond-layout">Create a Second Layout</h3>
+<p>For blog posts, create <code>_includes/layouts/blog-post.njk</code>:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>rhythm-block<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>time</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>text-sm text-foreground/60<span class="token punctuation">“</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>time</span><span class="token punctuation">></span></span>
+
+  
+
+  <span class="token comment">&#x3C;!– Backlinks appear here –></span>
+  {% if backlinks %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>aside</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>mt-8 p-4 bg-accent/10 border-l-4 border-accent<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span>Linked from<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>list-none<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+        {% for link in backlinks %}
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token punctuation">“</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+        
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>aside</span><span class="token punctuation">></span></span>
+  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>Use it:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown">
+/blog-post.njk
+title: My Post
+date: 2024-10-21
+
+</code></pre>
+<h3 id="show-recent-posts">Show Recent Posts</h3>
+<p>In <code>_includes/recent-posts.njk</code>:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">{% set posts = collections.all | reverse %}
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>section</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h2</span><span class="token punctuation">></span></span>Recent Posts<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h2</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ul</span><span class="token punctuation">></span></span>
+    {% for post in posts | head(5) %}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span><span class="token punctuation">“</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>time</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>time</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+    
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>section</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>Use in any template:</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html">{% include "recent-posts.njk" %}
+</code></pre>
+<h3 id="add-code-highlighting">Add Code Highlighting</h3>
+<p>Standard includes syntax highlighting automatically. Just use code blocks:</p>
+<pre class="language-markdown" data-language="markdown"><code is:raw="" class="language-markdown"><span class="token code"><span class="token punctuation">```</span><span class="token code-language">javascript</span>
+<span class="token code-block language-javascript language-javascript"><span class="token keyword">function</span> <span class="token function">greet</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></span>
+<span class="token punctuation">```</span></span>
+
+<span class="token code"><span class="token punctuation">```</span><span class="token code-language">python</span>
+<span class="token code-block language-python language-python">def greet(name): print(f“Hello, {name}!”)</span>
+<span class="token punctuation">```</span></span>
+</code></pre>
+<p>Automatically highlighted.</p>
+<h2 id="whatyou-get-seriously">What You Get (Seriously)</h2>
+<p>By installing Standard, you get:</p>
+<ul>
+<li>🎨 Complete CSS framework (15KB min)</li>
+<li>📝 Enhanced markdown processing</li>
+<li>🔗 Wiki-style backlinks</li>
+<li>🔐 Content encryption</li>
+<li>📊 Responsive grid system</li>
+<li>🌓 Automatic dark mode</li>
+<li>📐 Perfect typography</li>
+<li>⚡ Fast builds</li>
+<li>♿ Accessibility built-in</li>
+<li>🎯 SEO-friendly structure</li>
+</ul>
+<p>All with <strong>zero additional configuration</strong>.</p>
+<h2 id="thephilosophy">The Philosophy</h2>
+<p>Standard Framework does one thing: <strong>removes the boring.</strong></p>
+<p>No more:</p>
+<ul>
+<li>Choosing CSS frameworks</li>
+<li>Writing boilerplate HTML</li>
+<li>Configuring markdown processing</li>
+<li>Setting up collections</li>
+<li>Building responsive grids</li>
+<li>Creating color systems</li>
+<li>Worrying about typography</li>
+<li>Adding dark mode</li>
+</ul>
+<p><strong>Just write content.</strong></p>
+<h2 id="next-steps">Next Steps</h2>
+<h3 id="ifyoure-comfortable">If You’re Comfortable</h3>
+<p>Start building and learn as you go. Pick up features from:</p>
+<ul>
+<li><a href="/11ty/markdown/" preload="" hx-boost="true">Markdown Guide</a> – Enhanced markdown</li>
+<li><a href="/11ty/filters/" preload="" hx-boost="true">Filters</a> – Transform data</li>
+<li><a href="/11ty/backlinks/" preload="" hx-boost="true">Backlinks</a> – Connect pages</li>
+<li><a href="/11ty/encryption/" preload="" hx-boost="true">Encryption</a> – Protect content</li>
+</ul>
+<h3 id="ifyou-want-adeeper-dive">If You Want a Deeper Dive</h3>
+<p>Work through the complete guides:</p>
+<ol>
+<li><a href="/11ty/getting-started/" preload="" hx-boost="true">Getting Started</a> – Full setup guide</li>
+<li><a href="/css/" preload="" hx-boost="true">CSS Framework</a> – Understand the styling</li>
+<li><a href="/11ty/advanced/" preload="" hx-boost="true">Advanced Features</a> – Power user techniques</li>
+</ol>
+<h3 id="juststart">Just Start</h3>
+<p>Create a folder. Run npm install. Copy the config and layout. Write markdown.</p>
+<p><strong>Your website is ready.</strong></p>
+<h2 id="thebig-picture">The Big Picture</h2>
+<p>This is what Standard is for. Not “how do I configure 11ty?” but “how do I just make a website?”</p>
+<p>The answer: Copy-paste config, write content, done.</p>
+<p><strong>Everything else is handled.</strong></p>
+<p>Ready? Start here:</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">mkdir</span> my-site
+<span class="token builtin class-name">cd</span> my-site
+<span class="token function">npm</span> init <span class="token parameter variable">-y</span>
+<span class="token function">npm</span> <span class="token function">install</span> --save-dev @11ty/eleventy
+<span class="token function">npm</span> <span class="token function">install</span> @zefish/standard
+</code></pre>
+<p>Then follow the 5 steps above.</p>
+<p><strong>Your website launches in 5 minutes.</strong> ✨</p>  <article class="comments-system"> <div id="comments"></div> <button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">
+Write a Comment
+</button> <div id="comment-form-wrapper" style="display: none;"> <form id="comment-form" method="post" action="/api/comments" novalidate> <fieldset> <legend>Leave a Comment</legend> <label for="author">Your Name <span aria-label="required">*</span></label> <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required maxlength="100"> <label for="email">Email Address <span aria-label="required">*</span></label> <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required> <label for="content">Comment <span aria-label="required">*</span></label> <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required minlength="3" maxlength="10000" rows="6"></textarea> <!-- Hidden fields --> <input type="hidden" id="pageId" name="pageId" value="11ty_quick-start"> <input type="hidden" id="parentId" name="parentId" value=""> <!-- Status indicator --> <div id="form-status" role="status" aria-live="polite"></div> <!-- Submit buttons --> <div class="form-actions"> <button type="submit" class="button">Post Comment</button>   </div> </fieldset> </form> </div> </article> <script defer>(function(){const initOptions = {"apiUrl":"/api/comments","pageId":"11ty_quick-start","container":"#comments","form":"#comment-form","pollInterval":null};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+})();</script> </main> <hr> <footer class="smaller font-interface"> <p>
+© 2025 Francis Fontaine ·
+<a href="/">Standard Framework</a> ·
+<a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> </p> </footer> </body></html>

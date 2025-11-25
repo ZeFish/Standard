@@ -4,11 +4,6 @@ import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
 import Comments from "../components/Comments.astro";
 import Lab from "../components/Lab.astro";
-import Assets from "../components/Assets.astro";
-
-// Import local compiled CSS files (Production-ready)
-import "/dist/standard.min.css";
-import "/dist/standard.theme.min.css";
 
 // Import site configuration from virtual module
 import config from "virtual:standard/config";
@@ -57,7 +52,6 @@ const htmxAttributes = {
             securityHeaders={securityHeaders}
         />
         <Fonts />
-        <Assets />
         <Lab />
 
         <!-- Load HTMX library -->

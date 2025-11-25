@@ -1,4 +1,3 @@
-export { defineStandardCollection } from "./utils/collections.js";
 /**
  * @zefish/standard Astro Integration
  *
@@ -264,7 +263,13 @@ export default function standard(options = {}) {
           injectScript("page-ssr", `import "${cssEntry}";`);
         }
 
-        const jsEntry = assetsConfig.js ?? "@zefish/standard/js/standard.js";
+        const themeEntry =
+          assetsConfig.css ?? "@zefish/standard/styles/standard.theme.scss";
+        if (themeEntry) {
+          injectScript("page-ssr", `import "${themeEntry}";`);
+        }
+
+        const jsEntry = assetsConfig.js ?? "@standard-js/standard.js";
         if (jsEntry) {
           injectScript("page", `import "${jsEntry}";`);
         }

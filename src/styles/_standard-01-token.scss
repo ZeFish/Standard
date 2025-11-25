@@ -166,7 +166,7 @@ make h6 running as the first phrase of the paragraph
         --line-height: var(--mobile-line-height) !important;
     }
 }
-
+/*
 body::after {
     content: "";
     position: fixed;
@@ -196,6 +196,6 @@ body::before {
     background-size: 256px;
     background-repeat: repeat;
     mix-blend-mode: multiply;
-    /* noise */
     background-image: url("/assets/img/noise.png");
 }
+*/

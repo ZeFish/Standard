@@ -1,0 +1,326 @@
+<!DOCTYPE html><!-- Use Base layout and pass the markdown content through --><html class="rhythm" lang="en" data-theme="default"> <head><meta charset="utf-8"><!-- Standard Framework | https://standard.ffp.co --><title>Standard Framework</title><meta name="description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta name="author" content="Francis Fontaine"><meta name="language" content="en"><meta name="referrer" content="strict-origin-when-cross-origin"><!-- Canonical URL --><link rel="canonical" href="https://standard.ffp.co/cloudflare/comments/usage-patterns/"><!-- Feed & Sitemap --><link rel="alternate" type="application/atom+xml" title="Standard Framework" href="https://standard.ffp.co/feed.xml"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://standard.ffp.co/sitemap.xml"><!-- Robots Meta --><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><!-- Open Graph --><meta property="og:title" content="Standard Framework"><meta property="og:type" content="article"><meta property="og:locale" content="en"><meta property="og:site_name" content="Standard Framework"><meta property="og:url" content="https://standard.ffp.co/cloudflare/comments/usage-patterns/"><meta property="og:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><meta property="og:image" content="https://standard.ffp.co/assets/img/default.png"><meta property="og:image:alt" content="Standard Framework"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- Twitter Cards --><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://standard.ffp.co/assets/img/default.png"><meta name="twitter:image:alt" content="Standard Framework"><meta name="twitter:site" content="@francisfontaine"><meta name="twitter:creator" content="@francisfontaine"><meta name="twitter:title" content="Standard Framework"><meta name="twitter:description" content="Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."><!-- Schema.org --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Standard Framework","description":"Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.","author":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co/now/"},"publisher":{"@type":"Person","name":"Francis Fontaine","url":"https://standard.ffp.co","logo":{"@type":"ImageObject","url":"https://standard.ffp.co/francis-fontaine-avatar.png"}},"image":{"@type":"ImageObject","url":"https://standard.ffp.co/assets/img/default.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://standard.ffp.co/cloudflare/comments/usage-patterns/"}}</script><!-- Favicons --><link rel="apple-touch-icon" sizes="180x180" href="https://standard.ffp.co/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://standard.ffp.co/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://standard.ffp.co/favicons/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="https://standard.ffp.co/favicons/safari-pinned-tab.svg" color="#000000"><link rel="shortcut icon" href="https://standard.ffp.co/favicons/favicon.ico"><!-- Mobile --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><!-- Windows Tiles --><meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-config" content="https://standard.ffp.co/favicons/browserconfig.xml"><link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet"><!-- Standard Framework Lab Features --><script src="/assets/standard/standard.lab.js?v=1764047976405"></script><!-- Load HTMX library --><script type="module" src="/_astro/Base.astro_astro_type_script_index_0_lang.C1onTupY.js"></script><link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css"><!-- ✅ FIX: Load scripts only on client side --><script type="module">
+            import "/assets/js/standard.js";
+            // import "/assets/js/standard.lab.js"; // Removed - Lab component handles this
+            import "/assets/js/standard.toast.js";
+            import "/assets/js/standard.comment.js";
+        </script><link rel="stylesheet" href="/_astro/_slug_.dcmf1oDl.css"><script type="module" src="/_astro/page.DXhROYzO.js"></script></head> <body hx-boost="true" hx-ext="preload" hx-target="body" hx-swap="innerHTML scroll:window:top" class="prose"> <a href="#main" class="skip-link">Skip to content</a> <header class="flex font-interface" style="justify-content: space-between; max-width: 100%;"> <p> <a href="/" style="text-decoration: none;">Standard Framework</a> </p> <nav class="menu horizontal" aria-label="Navigation"> <ul class="menu"> <li class="menu__item"> <a class="menu__link" href="/docs/"> Docs </a> </li><li class="menu__item"> <a class="menu__link" href="/getting-started/"> Getting Started </a> </li><li class="menu__item"> <a class="menu__link" href="/cheat-sheet/"> Cheat Sheet </a> </li> </ul> </nav> </header> <main id="main" class="prose">  <h1 id="comments-system--usage-patterns">Comments System – Usage Patterns</h1>
+<p>Different ways to import and use the comments system alongside Standard Framework.</p>
+<h2 id="pattern-1-comments-onlystandalone">Pattern 1: Comments Only (Standalone)</h2>
+<p>Use just the comments system without other Standard Framework features.</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// eleventy.config.js</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyClientLibrary</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Use Case</strong>: You want comments but don’t need typography, grid, or other Standard features.</p>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>✅ Comments handler copied to <code>functions/api/comments.js</code></li>
+<li>✅ Client library copied to <code>assets/js/standard.comment.js</code></li>
+<li>✅ Configuration template copied</li>
+</ul>
+<h2 id="pattern-2-standard--comments-together">Pattern 2: Standard + Comments Together</h2>
+<p>Use both the main Standard Framework and comments system.</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// eleventy.config.js</span>
+<span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Main framework (typography, grid, CSS, JS)</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“assets/standard”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyFiles</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Comments system (separate endpoint)</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyClientLibrary</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Use Case</strong>: You want typography + comments. Perfect for blogs.</p>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>✅ Standard CSS/JS in <code>assets/standard/</code></li>
+<li>✅ Comments handler in <code>functions/api/comments.js</code></li>
+<li>✅ Comments client in <code>assets/js/standard.comment.js</code></li>
+<li>✅ Both plugins work independently</li>
+</ul>
+<h2 id="pattern-3-standard--comments--custom-cloudflare-functions">Pattern 3: Standard + Comments + Custom Cloudflare Functions</h2>
+<p>Use Standard Framework, comments, plus your own custom functions.</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// eleventy.config.js</span>
+<span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CloudflarePlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/eleventy/cloudflare.js”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Main framework</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// All Cloudflare functions (copies entire src/cloudflare/ directory)</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CloudflarePlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">environment</span><span class="token operator">:</span> <span class="token string">“production”</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Comments as separate plugin for finer control</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyClientLibrary</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Use Case</strong>: You need comments + your own serverless functions.</p>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>✅ All functions in <code>functions/</code></li>
+<li>✅ Comments handler in <code>functions/api/comments.js</code></li>
+<li>✅ Your custom functions in <code>functions/</code> as well</li>
+<li>✅ Full control over Cloudflare setup</li>
+</ul>
+<h2 id="pattern-4-conditional-comments-feature-flag">Pattern 4: Conditional Comments (Feature Flag)</h2>
+<p>Enable/disable comments based on environment.</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// eleventy.config.js</span>
+<span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Only add comments in production</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">ELEVENTY_ENV</span> <span class="token operator">===</span> <span class="token string">“production”</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">“[Comments] Disabled in development”</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Use Case</strong>: Comments only on production, not on dev/staging.</p>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>✅ Comments only deployed to production</li>
+<li>✅ Dev/staging builds skip comments overhead</li>
+<li>✅ Easy to toggle on/off</li>
+</ul>
+<h2 id="pattern-5-comments--multiple-cloudflare-endpoints">Pattern 5: Comments + Multiple Cloudflare Endpoints</h2>
+<p>Use comments with other custom Cloudflare functions.</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// eleventy.config.js</span>
+<span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Comments system</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyClientLibrary</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Your custom functions in separate directory</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string-property property">“src/functions/**/*.js”</span><span class="token operator">:</span> <span class="token string">“functions/”</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>File Structure</strong>:</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">functions/
+├── api/
+│   ├── comments.js     (from CommentsPlugin)
+│   └── utils.js        (from CommentsPlugin)
+├── auth.js             (your custom)
+├── analytics.js        (your custom)
+└── webhook.js          (your custom)
+</code></pre>
+<h2 id="pattern-6-comments-onspecific-pages-only">Pattern 6: Comments on Specific Pages Only</h2>
+<p>Use comments selectively on certain pages.</p>
+<pre class="language-html" data-language="html"><code is:raw="" class="language-html"><span class="token comment">&#x3C;!– article.njk – only on articles –></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>article</span><span class="token punctuation">></span></span>
+  
+
+  {% if page.url.includes("/blog/") or page.url.includes("/articles/") %}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>comments<span class="token punctuation">“</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>form</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>comment-form<span class="token punctuation">“</span></span><span class="token punctuation">></span></span>
+      <span class="token comment">&#x3C;!– form here –></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>form</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">“</span>/assets/js/standard.comment.js<span class="token punctuation">“</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+      <span class="token keyword">const</span> comments <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GitHubComments</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">apiUrl</span><span class="token operator">:</span> <span class="token string">'/api/comments’</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">pageId</span><span class="token operator">:</span> page<span class="token punctuation">.</span>fileSlug<span class="token punctuation">,</span>
+        <span class="token literal-property property">container</span><span class="token operator">:</span> <span class="token string">'#comments’</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">form</span><span class="token operator">:</span> <span class="token string">'#comment-form'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> comments<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> comments<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> comments<span class="token punctuation">.</span><span class="token function">attachFormHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>article</span><span class="token punctuation">></span></span>
+</code></pre>
+<p><strong>Use Case</strong>: Comments on blog posts, but not on homepage or documentation.</p>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>✅ Comments loaded dynamically only where needed</li>
+<li>✅ Faster page loads on non-comment pages</li>
+<li>✅ Reduced JavaScript overhead</li>
+</ul>
+<h2 id="pattern-7-custom-comments-endpoint-handler">Pattern 7: Custom Comments Endpoint Handler</h2>
+<p>Create your own comments handler while reusing the client library.</p>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// eleventy.config.js</span>
+<span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Only copy client library, not the handler</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyClientLibrary</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment">// These would require exposing as options:</span>
+    <span class="token comment">// copyHandler: false,</span>
+    <span class="token comment">// copyConfig: false,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Use your own handler</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string-property property">“src/my-comments-handler.js”</span><span class="token operator">:</span> <span class="token string">“functions/api/comments.js”</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Use Case</strong>: You want to customize the comments handler behavior.</p>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>✅ Use standard client library</li>
+<li>✅ Custom server-side logic</li>
+<li>✅ Full control over validation/spam detection</li>
+</ul>
+<h2 id="import-reference">Import Reference</h2>
+<h3 id="main-framework">Main Framework</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="cloudflare-plugin-allfunctions">Cloudflare Plugin (all functions)</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> CloudflarePlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/eleventy/cloudflare.js”</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="comments-plugin-comments-only">Comments Plugin (comments only)</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="direct-imports-forcustom-setup">Direct Imports (for custom setup)</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token comment">// Server-side handler</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> handleComments <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments.js”</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Browser library</span>
+<span class="token keyword">import</span> GitHubComments <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/standard.comment.js”</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Utilities</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createResponse<span class="token punctuation">,</span> parseRequest <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/utils.js”</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="recommended-patterns">Recommended Patterns</h2>
+<h3 id="-forblogsdocumentation">🎯 For Blogs/Documentation</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="-forminimal-sites">🎯 For Minimal Sites</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="-forapi-heavy-sites">🎯 For API-Heavy Sites</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CloudflarePlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/eleventy/cloudflare.js”</span><span class="token punctuation">;</span>
+
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CloudflarePlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="-foreverything">🎯 For Everything</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">import</span> Standard <span class="token keyword">from</span> <span class="token string">“@zefish/standard”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CloudflarePlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/eleventy/cloudflare.js”</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CommentsPlugin <span class="token keyword">from</span> <span class="token string">“@zefish/standard/src/cloudflare/comments-plugin.js”</span><span class="token punctuation">;</span>
+
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CloudflarePlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="configuration-examples">Configuration Examples</h2>
+<h3 id="production-setup">Production Setup</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">“functions/api”</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyClientLibrary</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">copyTemplate</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// Don’t need template in production</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="development-setup">Development Setup</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">ELEVENTY_ENV</span> <span class="token operator">===</span> <span class="token string">“production”</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="monorepo-setup-multiple-sites">Monorepo Setup (multiple sites)</h3>
+<pre class="language-javascript" data-language="javascript"><code is:raw="" class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> siteType <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">SITE_TYPE</span> <span class="token operator">||</span> <span class="token string">“blog”</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Always include base framework</span>
+  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>Standard<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Conditionally add comments</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>siteType <span class="token operator">===</span> <span class="token string">“blog”</span> <span class="token operator">||</span> siteType <span class="token operator">===</span> <span class="token string">“full”</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>CommentsPlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p><strong>Q: Can I use Standard and Comments together?</strong> A: Yes! Use Pattern 2. They’re designed to work together.</p>
+<p><strong>Q: Do I need Standard for comments?</strong> A: No! Use Pattern 1. Comments work standalone.</p>
+<p><strong>Q: How do I add custom functions?</strong> A: Use Pattern 5. Copy your functions to a separate directory.</p>
+<p><strong>Q: Can I disable comments in development?</strong> A: Yes! Use Pattern 4 with environment checks.</p>
+<p><strong>Q: How do I use just the client library?</strong> A: Import directly: <code>import GitHubComments from “@zefish/standard/src/cloudflare/standard.comment.js”</code></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="./COMMENTS-QUICK-START.md" preload="" hx-boost="true">Comments Quick Start</a></li>
+<li><a href="./COMMENTS-GUIDE.md" preload="" hx-boost="true">Comments Guide</a></li>
+<li><a href="../../index.md" preload="" hx-boost="true">Standard Framework</a></li>
+<li><a href="../index.md" preload="" hx-boost="true">Cloudflare Integration</a></li>
+</ul>  <article class="comments-system"> <div id="comments"></div> <button id="show-comment-form-btn" type="button" class="button" onclick="document.getElementById('comment-form-wrapper').style.display='block'; this.style.display='none';">
+Write a Comment
+</button> <div id="comment-form-wrapper" style="display: none;"> <form id="comment-form" method="post" action="/api/comments" novalidate> <fieldset> <legend>Leave a Comment</legend> <label for="author">Your Name <span aria-label="required">*</span></label> <input type="text" id="author" name="author" placeholder="Your name will be displayed with your comment." required maxlength="100"> <label for="email">Email Address <span aria-label="required">*</span></label> <input type="email" id="email" name="email" placeholder="Your email will not be displayed publicly." required> <label for="content">Comment <span aria-label="required">*</span></label> <textarea id="content" name="content" placeholder="Share your thoughts... Supports **bold**, *italic*, `code`, and [links](url)" required minlength="3" maxlength="10000" rows="6"></textarea> <!-- Hidden fields --> <input type="hidden" id="pageId" name="pageId" value="cloudflare_comments_usage-patterns"> <input type="hidden" id="parentId" name="parentId" value=""> <!-- Status indicator --> <div id="form-status" role="status" aria-live="polite"></div> <!-- Submit buttons --> <div class="form-actions"> <button type="submit" class="button">Post Comment</button>   </div> </fieldset> </form> </div> </article> <script defer>(function(){const initOptions = {"apiUrl":"/api/comments","pageId":"cloudflare_comments_usage-patterns","container":"#comments","form":"#comment-form","pollInterval":null};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Assuming GitHubComments is loaded globally or imported. 
+    // Since the original used a global script, we might need to import it here or assume it's available.
+    // For now, we'll assume the user includes the standard.comment.js script separately or we should import it.
+    // But standard.comment.js is in dist/.
+    
+    if (typeof GitHubComments !== 'undefined') {
+      const comments = new GitHubComments(initOptions);
+      try {
+        await comments.load();
+        comments.render();
+      } catch (error) {
+        console.error("Error loading comments:", error);
+        const container = document.querySelector("#comments");
+        if (container) container.innerHTML = '<p class="error">Failed to load comments. Please try again later.</p>';
+      }
+      comments.attachFormHandler();
+    }
+  });
+})();</script> </main> <hr> <footer class="smaller font-interface"> <p>
+© 2025 Francis Fontaine ·
+<a href="/">Standard Framework</a> ·
+<a href="https://github.com/ZeFish/Standard/blob/main/LICENSE" class="external-link">MIT License</a> </p> </footer> </body></html>

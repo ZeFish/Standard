@@ -37,6 +37,8 @@
     "standard-check": "bin/analyzer.js"
   },
   "exports": {
+    "./styles/standard.scss": "./src/styles/standard.scss",
+    "./styles/standard.theme.scss": "./src/styles/standard.theme.scss",
     "./css": "./dist/standard.min.css",
     "./theme": "./dist/standard.theme.min.css",
     "./js": "./dist/standard.min.js",
@@ -54,6 +56,7 @@
     "./routes/manifest": "./src/astro/routes/manifest.js",
     "./routes/headers": "./src/astro/routes/headers.js",
     "./utils/content": "./src/astro/utils/content.js",
+    "./utils/collections": "./src/astro/utils/collections.js",
     "./utils/typography": "./src/astro/utils/typography.js",
     "./components/Menu": "./src/astro/components/Menu.astro",
     "./components/Fonts": "./src/astro/components/Fonts.astro",
@@ -71,7 +74,8 @@
     "dist",
     "src/astro",
     "src/cloudflare",
-    "src/lib"
+    "src/lib",
+    "src/styles"
   ],
   "scripts": {
     "build:css": "node bin/build-css.js",
