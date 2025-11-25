@@ -103,7 +103,7 @@
   --duration-superfast: 0.15s;
 }
 
-mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
