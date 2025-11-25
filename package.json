@@ -75,7 +75,8 @@
     "src/astro",
     "src/cloudflare",
     "src/lib",
-    "src/styles"
+    "src/styles",
+    "public/assets"
   ],
   "scripts": {
     "build:css": "node bin/build-css.js",
