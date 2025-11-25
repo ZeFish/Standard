@@ -269,7 +269,7 @@ export default function standard(options = {}) {
           injectScript("page-ssr", `import "${themeEntry}";`);
         }
 
-        const jsEntry = assetsConfig.js ?? "@standard-js/standard.js";
+        const jsEntry = assetsConfig.js ?? "@zefish/standard/js";
         if (jsEntry) {
           injectScript("page", `import "${jsEntry}";`);
         }
