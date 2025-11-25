@@ -1,4 +1,5 @@
 import { visit } from "unist-util-visit";
+
 import createLogger from "../../lib/logger.js";
 
 export default function remarkObsidianLinks(options = {}) {
@@ -8,13 +9,7 @@ export default function remarkObsidianLinks(options = {}) {
   });
 
   return (tree, file) => {
-    let noteMap = options.noteMap || new Map();
-
-    // If noteMap is still empty, try to build from current file's data
-    // (This is a fallback; ideally we'd populate it from all entries)
-    if (noteMap.size === 0 && file.data) {
-      logger.debug("Note map is empty, will use slugify fallback");
-    }
+    const noteMap = options.noteMap || new Map();
 
     // Process [[wiki links]]
     visit(tree, "text", (node, index, parent) => {
@@ -23,11 +18,20 @@ export default function remarkObsidianLinks(options = {}) {
       }
 
       const pattern = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
+
+      if (!pattern.test(node.value)) {
+        return;
+      }
+
+      const pattern2 = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
       const parts = [];
       let lastIndex = 0;
       let match;
+      let foundMatch = false;
 
-      while ((match = pattern.exec(node.value)) !== null) {
+      while ((match = pattern2.exec(node.value)) !== null) {
+        foundMatch = true;
+
         if (match.index > lastIndex) {
           parts.push({
             type: "text",
@@ -37,9 +41,11 @@ export default function remarkObsidianLinks(options = {}) {
 
         const noteName = match[1].trim();
         const displayText = match[2] ? match[2].trim() : noteName;
-
-        // Try noteMap first, fallback to slugify
-        const noteUrl = noteMap.get(noteName) || `/n/${slugify(noteName)}`;
+        // ✅ Don't add /n/ if it already has a path
+        const defaultUrl = slugify(noteName);
+        const noteUrl =
+          noteMap.get(noteName) ||
+          (defaultUrl.startsWith("/") ? defaultUrl : `/n/${defaultUrl}`);
 
         parts.push({
           type: "link",
@@ -50,30 +56,30 @@ export default function remarkObsidianLinks(options = {}) {
         lastIndex = match.index + match[0].length;
       }
 
-      if (lastIndex < node.value.length) {
-        parts.push({
-          type: "text",
-          value: node.value.slice(lastIndex),
-        });
-      }
+      if (foundMatch) {
+        if (lastIndex < node.value.length) {
+          parts.push({
+            type: "text",
+            value: node.value.slice(lastIndex),
+          });
+        }
 
-      if (
-        parts.length > 1 ||
-        (parts.length === 1 && parts[0].type === "link")
-      ) {
         parent.children.splice(index, 1, ...parts);
       }
     });
 
     // Process [text](./file.md) links
     visit(tree, "link", (node) => {
-      const url = node.url;
+      let url = node.url;
 
       if (
         url &&
         (url.startsWith("./") || url.startsWith("../")) &&
         url.endsWith(".md")
       ) {
+        // ✅ DECODE URL-ENCODED characters
+        url = decodeURIComponent(url);
+
         let filePath = url.replace(/^\.\/|^\.\.\//, "");
         filePath = filePath.replace(/\.md$/, "");
 
@@ -92,8 +98,11 @@ export default function remarkObsidianLinks(options = {}) {
 function slugify(str) {
   return str
     .toLowerCase()
+    .trim()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
+    .replace(/[\u0300-\u036f]/g, "") // Remove accents
+    .replace(/\s+/g, "-") // Spaces to hyphens
+    .replace(/[^a-z0-9-/]/g, "") // Keep only alphanumeric and hyphens
+    .replace(/^-+|-+$/g, "") // Trim hyphens
+    .replace(/-+/g, "-"); // Collapse multiple hyphens
 }
