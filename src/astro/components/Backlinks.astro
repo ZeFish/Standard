@@ -1,0 +1,35 @@
+---
+const {
+    backlinks = [],
+    heading = "Mentionné dans",
+    ariaLabel = "Backlinks small",
+} = Astro.props;
+
+const publicBacklinks = backlinks.filter(
+    (entry) => entry?.data?.visibility !== "private",
+);
+---
+
+{
+    publicBacklinks.length > 0 && (
+        <>
+            <hr />
+            <article class="backlinks prose small tight">
+                <div class="flow-3" style="orphans:10; widows:3;">
+                    <p class="muted mb-d4 flow-row">{heading}</p>
+                    <nav aria-label={ariaLabel}>
+                        <ul class="menu">
+                            {publicBacklinks.map((item) => (
+                                <li>
+                                    <a href={item.url}>
+                                        {item.data.title ?? item.url}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                </div>
+            </article>
+        </>
+    )
+}

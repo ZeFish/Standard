@@ -9,6 +9,7 @@
   
   --leading: calc((var(--line-height) - 1) * var(--font-size));
   --gap-nl: calc((1lh - 1em) + (1lh - 1em) / 2);
+  --gap-nl: 0.5lh;
   --baseline: 1rlh;
   --font-cap: calc(1rlh / var(--line-height));
   --gap: calc(var(--baseline));
@@ -19,7 +20,7 @@
   --gap-micro: calc(var(--gap) / 8);
   --gap-relaxed: calc(var(--gap) * 2);
   --gap-body: var(--gap-relaxed);
-  --gap-grid: var(--leading);
+  --gap-grid: 0.25lh;
   
   
   --blur: blur(7px);
@@ -555,6 +556,22 @@ html {
   font-variation-settings: "opsz" 32;
 }
 
+.monospace {
+  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+  font-feature-settings: var(--font-monospace-feature);
+  font-variation-settings: var(--font-monospace-variation);
+  font-size: var(--scale-d2);
+}
+
+.menu,
+.ui,
+.interface {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
+  font-weight: var(--font-interface-weight, var(--font-weight), 400);
+}
+
 
 @font-face {
   font-family: "Sohne";
@@ -792,7 +809,7 @@ html {
 
 blockquote, pre, .alert, aside, .card, .callout, img, iframe, .outset {
   border-left: var(--stroke-width) solid var(--color-border);
-  padding: var(--gap-tight) var(--gap-compact);
+  padding: var(--gap-compact) var(--gap-compact);
   margin-inline: var(--gap);
   font-size: var(--scale-d2);
   line-height: var(--line-height-compact);
@@ -1293,7 +1310,7 @@ mark {
   margin-block-end: var(--gap);
 }
 :where(.rhythm) #comments, :where(.rhythm) .callout, :where(.rhythm) pre, :where(.rhythm) figure, :where(.rhythm) p:has(img), :where(.rhythm) section, :where(.rhythm) .box, :where(.rhythm) .card, :where(.rhythm) .container-small, :where(.rhythm) .container-accent, :where(.rhythm) .containe-feature, :where(.rhythm) .container-hero, :where(.rhythm) .scroll, :where(.rhythm) hr, :where(.rhythm) aside {
-  margin-block-start: max(var(--gap-block) - var(--gap), 0);
+  margin-block-start: max(var(--gap-block) - var(--gap), var(--gap));
   margin-block-end: max(var(--gap-block), var(--gap));
 }
 :where(.rhythm) :is(#comments, .callout, pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside):has(+ :is(#comments, .callout, pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)) {
@@ -1316,11 +1333,14 @@ mark {
   margin-block-start: calc(var(--gap) * 3);
   margin-block-end: var(--gap);
 }
-:where(.rhythm) h2 {
+:where(.rhythm) h1:first-of-type {
+  margin-block-end: calc(var(--gap) * 4);
+}
+:where(.rhythm) h2,
+:where(.rhythm) h3 {
   margin-block-start: calc(var(--gap) * 2);
   margin-block-end: var(--gap);
 }
-:where(.rhythm) h3,
 :where(.rhythm) h4,
 :where(.rhythm) h5,
 :where(.rhythm) h6 {
@@ -1385,6 +1405,7 @@ mark {
 :where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
+  top: 0;
   left: -1rlh;
   width: 1rlh;
   text-align: center;
@@ -1477,7 +1498,7 @@ mark {
 }
 :where(.rhythm) td,
 :where(.rhythm) th {
-  padding: var(--gap-leading);
+  padding: var(--gap-compact);
   font-size: var(--scale-d2);
   min-height: var(--line-height);
 }
@@ -1597,7 +1618,7 @@ mark {
 @media (max-width: 600px) {
   :root [class^=grid] * {
     min-width: 0; 
-    margin-block: var(--gap);
+    
   }
 }
 [class^=grid] .card {
@@ -2472,10 +2493,7 @@ hr.col-row {
 :root {
   
   --content: min(var(--line-width), 100%); 
-  --content-small: max(
-      calc(var(--gap-block) - var(--gap)),
-      var(--gap)
-  );
+  --content-small: max(calc(var(--gap-block) - var(--gap)), var(--gap));
   --content-accent: minmax(0, var(--gap));
   --content-feature: minmax(0, var(--gap-block));
   --content-hero: minmax(0, 1fr);
@@ -2518,13 +2536,14 @@ hr.col-row {
 :where(.prose) .container-hero > * {
   margin-inline: 0;
 }
-:where(.prose):not(.no-grid) p:has(img), :where(.prose):not(.no-grid) p:has(video) {
+:where(.prose):not(.no-grid) p:has(img),
+:where(.prose):not(.no-grid) p:has(video) {
   display: flex;
-  --gap-grid-img: var(--leading);
-  gap: var(--gap-grid-img);
+  gap: var(--gap-grid-img, 0.5rlh);
   border-radius: var(--radius);
 }
-:where(.prose):not(.no-grid) p:has(img) > *, :where(.prose):not(.no-grid) p:has(video) > * {
+:where(.prose):not(.no-grid) p:has(img) > *,
+:where(.prose):not(.no-grid) p:has(video) > * {
   flex: 1 1 auto;
   min-width: 1%;
   min-height: 1%;
@@ -2532,13 +2551,15 @@ hr.col-row {
 }
 :where(.prose):not(.no-grid) p:has(img) img,
 :where(.prose):not(.no-grid) p:has(img) img:first-child,
-:where(.prose):not(.no-grid) p:has(img) img:last-child, :where(.prose):not(.no-grid) p:has(video) img,
+:where(.prose):not(.no-grid) p:has(img) img:last-child,
+:where(.prose):not(.no-grid) p:has(video) img,
 :where(.prose):not(.no-grid) p:has(video) img:first-child,
 :where(.prose):not(.no-grid) p:has(video) img:last-child {
   margin-inline: auto;
   flex-grow: 0; 
 }
-:where(.prose):not(.no-grid) p:has(img) br, :where(.prose):not(.no-grid) p:has(video) br {
+:where(.prose):not(.no-grid) p:has(img) br,
+:where(.prose):not(.no-grid) p:has(video) br {
   display: none;
 }
 :where(.prose):not(.no-grid) .callout p:has(img),
@@ -2569,7 +2590,12 @@ hr.col-row {
   text-wrap: pretty;
   overflow-wrap: anywhere;
 }
-:where(.prose) h1, :where(.prose) h2, :where(.prose) h3, :where(.prose) h4, :where(.prose) h5, :where(.prose) h6 {
+:where(.prose) h1,
+:where(.prose) h2,
+:where(.prose) h3,
+:where(.prose) h4,
+:where(.prose) h5,
+:where(.prose) h6 {
   text-wrap: balance;
 }
 @media (max-width: 600px) {
@@ -5714,7 +5740,7 @@ nav.menu ul li,
 ul.menu li {
   list-style: none;
   padding-inline-start: 0;
-  margin-block-end: var(--gap);
+  margin-block-end: var(--gap-nl);
 }
 nav.menu ul li::before,
 ul.menu li::before {

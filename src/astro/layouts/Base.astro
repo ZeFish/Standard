@@ -2,6 +2,7 @@
 import Meta from "./Meta.astro";
 import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
+import Backlinks from "../components/Backlinks.astro";
 import Comments from "../components/Comments.astro";
 import Lab from "../components/Lab.astro";
 
@@ -58,7 +59,6 @@ const htmxAttributes = {
         <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
         <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
-
     </head>
 
     <body {...htmxAttributes} class={className}>
@@ -82,6 +82,7 @@ const htmxAttributes = {
         <main id="main" class="prose">
             <slot />
 
+            <Backlinks />
             <Comments />
         </main>
 

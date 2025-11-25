@@ -765,7 +765,7 @@
   --color-dark-foreground: oklch(85.66% 0.0359 74.51);
   --color-blue: #3d5875;
   --color-light-accent: #7a5a2e;
-  --color-header: color-mix(in srgb, var(--color-foreground) 85%, #000 15%);
+  --color-header: color-mix(in srgb, var(--color-foreground) 100%, #000 15%);
   --color-dark-accent: color-mix(
       in srgb,
       var(--color-dark-foreground) 25%,
@@ -781,7 +781,7 @@
       var(--color-foreground) 7%,
       var(--color-background)
   );
-  --color-muted: color-mix(in srgb, var(--color-foreground) 80%, transparent);
+  --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --optical-ratio: var(--ratio-silver);
   --line-height: 1.5;
   --gap-body: calc(var(--gap) * 3);
@@ -796,13 +796,13 @@
   --font-size: 1.2em;
   --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
   --font-interface: "Fern";
-  --font-header: "Futura Now Var", "Sohne", "Fern";
+  --font-header: "Fern", "Futura Now Var", "Sohne", "Fern";
   --font-weight-bold: 500;
   --font-monospace: "Sohne Mono";
   --font-header-weight: 400;
   --font-header-letter-spacing: 0em;
   --font-header-line-height: 1;
-  --gap-nl: var(--gap-compact);
+  --gap-nl: 0.5lh;
   --font-feature: "";
   --font-variation: "";
   --font-header-feature: "liga", "onum", "kern";
@@ -856,11 +856,11 @@
   margin-block-end: var(--gap-nl);
 }
 [data-theme=book] :is(h2, h3) + p::first-letter {
-  --drop-cap-size: 3;
+  --drop-cap-size: 3.25;
   float: inline-start;
   line-height: 1;
-  margin-block-start: -0.04em;
-  margin-inline-end: 0.02em;
+  margin-block-start: 0.05lh;
+  margin-inline-end: 0.05lh;
   font-size: calc(var(--font-size) * var(--drop-cap-size) + var(--gap-nl));
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
@@ -870,7 +870,7 @@
   align-self: flex-start;
 }
 [data-theme=book] .prose {
-  margin-left: 10%;
+  margin-left: 5vw;
   transition: margin-left var(--transition);
 }
 [data-theme=book] header {
@@ -893,10 +893,11 @@
 [data-theme=book] a:hover {
   color: var(--color-foreground);
 }
-[data-theme=book] blockquote,
-[data-theme=book] .font-interface {
-  font-family: "Garamond Premiere Pro";
-  font-weight: 400;
+[data-theme=book] blockquote {
+  font-family: "Fern";
+  font-weight: 450;
+  letter-spacing: -0.01em;
+  color: var(--color-muted);
 }
 [data-theme=book] blockquote,
 [data-theme=book] pre {
@@ -959,7 +960,7 @@
 }
 @media (min-width: 1200px) {
   [data-theme=book] .prose {
-    margin-left: 20%;
+    margin-left: 7.5vw;
   }
 }
 @media (max-width: 1000px) {
@@ -1373,6 +1374,7 @@
       transparent
   );
   --shadow: none; 
+  --optical-ratio: 1.414;
   --color-dark-background: #101010; 
   --color-dark-foreground: #e2e2e2;
   --color-dark-accent: #8fb4ff;

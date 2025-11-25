@@ -124,13 +124,16 @@
         margin-block-start: calc(var(--gap) * 3);
         margin-block-end: var(--gap);
     }
+    h1:first-of-type {
+        margin-block-end: calc(var(--gap) * 4);
+    }
 
-    h2 {
+    h2,
+    h3 {
         margin-block-start: calc(var(--gap) * 2);
         margin-block-end: var(--gap);
     }
 
-    h3,
     h4,
     h5,
     h6 {
@@ -368,7 +371,7 @@
 
     td,
     th {
-        padding: var(--gap-leading);
+        padding: var(--gap-compact);
         font-size: var(--scale-d2);
         min-height: var(--line-height);
     }
