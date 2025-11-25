@@ -78,7 +78,7 @@
         /*--gap-grid: var(--gap-micro);*/
         [class^="grid"] * {
             min-width: 0; /* ← Force items to shrink below content size */
-            margin-block: var(--gap);
+            /*margin-block: var(--gap);*/
         }
     }
 }

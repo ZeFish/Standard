@@ -67,7 +67,7 @@
     }
 
     /* Padding only applied to <body> when rhythm is active */
-    >body {
+    > body {
         margin: 0;
         padding: var(--gap-body);
         padding-bottom: calc(var(--gap-body) * 1.5);
@@ -88,8 +88,10 @@
     /* Special blocks get generous spacing (2× rhythm) */
     /* Layout containers get double spacing for emphasis */
     #{$rhythm-block-elements} {
-        margin-block-start: max(calc(var(--gap-block) - var(--gap)),
-                0);
+        margin-block-start: max(
+            calc(var(--gap-block) - var(--gap)),
+            var(--gap)
+        );
         margin-block-end: max(var(--gap-block), var(--gap));
     }
 
@@ -99,16 +101,17 @@
         margin-block-end: var(--gap);
     }
 
-    :is(#{$rhythm-block-elements})+ :is(#{$rhythm-block-elements}) {
+    :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
         margin-block-start: max(0, var(--gap));
     }
 
     /* Reset first-child spacing for special blocks */
-    :is(.card, aside, blockquote, pre, figure, .callout-content)> :first-child {
+    :is(.card, aside, blockquote, pre, figure, .callout-content)
+        > :first-child {
         margin-block-start: 0;
     }
 
-    *> :last-child {
+    * > :last-child {
         margin-block-end: 0;
     }
 
@@ -116,7 +119,6 @@
         --base-gap: 1;
         /* Reset for nested contexts */
     }
-
 
     h1 {
         margin-block-start: calc(var(--gap) * 3);
@@ -135,19 +137,19 @@
         margin-block: var(--gap);
     }
 
-    :is(h1, h2, h3)+ :is(h1, h2, h3),
-    hr+ :is(h1, h2, h3) {
+    :is(h1, h2, h3) + :is(h1, h2, h3),
+    hr + :is(h1, h2, h3) {
         margin-block-start: 0;
     }
 
     hr {
         margin-inline: calc(var(--base-4));
-        margin-block-start: max(calc((var(--gap-block) - var(--gap)) * 1),
-                var(--gap));
+        margin-block-start: max(
+            calc((var(--gap-block) - var(--gap)) * 1),
+            var(--gap)
+        );
         margin-block-end: max((var(--gap-block) * 1), var(--gap));
     }
-
-
 
     /* =========================== */
     /* TYPOGRAPHY ELEMENTS         */
@@ -170,8 +172,8 @@
     }
 
     /* Nested lists */
-    li>ul,
-    li>ol {
+    li > ul,
+    li > ol {
         padding-inline-start: 1rlh;
         margin-block-start: var(--gap-tight);
         margin-block-end: 0;
@@ -194,7 +196,7 @@
         margin-block-end: var(--gap-nl);
     }
 
-    :is(ul, ol)+p {
+    :is(ul, ol) + p {
         margin-block-start: var(--gap-block);
     }
 
@@ -223,9 +225,10 @@
     }
 
     /* Unordered list bullets */
-    ul>li::before {
+    ul > li::before {
         content: "•";
         position: absolute;
+        top: 0;
         left: calc(1rlh * -1);
         width: 1rlh;
         text-align: center;
@@ -237,11 +240,11 @@
         counter-reset: ol-counter;
     }
 
-    ol>li {
+    ol > li {
         counter-increment: ol-counter;
     }
 
-    ol>li::before {
+    ol > li::before {
         content: counter(ol-counter) ".";
         position: absolute;
         left: calc((1rlh * -1) - var(--leading));
@@ -253,8 +256,10 @@
     }
 
     /* Inline lists - remove margin-bottom from list items */
-    ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
-    ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
+    ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
+        li,
+    ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
+        li {
         margin-block-end: 0;
     }
 
@@ -301,8 +306,8 @@
     }
 
     /* Checkbox/radio with labels */
-    input[type="checkbox"]+label,
-    input[type="radio"]+label {
+    input[type="checkbox"] + label,
+    input[type="radio"] + label {
         margin-inline-start: var(--leading);
     }
 
@@ -316,7 +321,7 @@
         padding: 0;
     }
 
-    fieldset+button {
+    fieldset + button {
         margin-block-start: var(--gap);
     }
 
@@ -460,7 +465,7 @@
     .rhythm {
         display: block;
 
-        >* {
+        > * {
             margin-block-end: var(--base-gap);
         }
 

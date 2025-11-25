@@ -893,7 +893,7 @@ ul.menu {
     li {
         list-style: none;
         padding-inline-start: 0;
-        margin-block-end: var(--gap);
+        margin-block-end: var(--gap-nl);
         &::before {
             display: none;
         }

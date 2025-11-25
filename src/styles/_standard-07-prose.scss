@@ -44,10 +44,7 @@
 :root {
     /* Layout grid tokens */
     --content: min(var(--line-width), 100%); /* ← FIXED */
-    --content-small: max(
-        calc(var(--gap-block) - var(--gap)),
-        var(--gap)
-    );
+    --content-small: max(calc(var(--gap-block) - var(--gap)), var(--gap));
     --content-accent: minmax(0, var(--gap));
     --content-feature: minmax(0, var(--gap-block));
     --content-hero: minmax(0, 1fr);
@@ -57,9 +54,6 @@
 /* Inspired by fine-art typography and book design principles */
 
 :where(.prose) {
-
-
-
     display: grid;
     grid-template-columns:
         [hero-start] var(--content-hero)
@@ -107,7 +101,6 @@
             margin-inline: 0;
         }
     }
-    
 
     /* =========================== */
     /* TYPOGRAPHIC NUANCES         */
@@ -115,19 +108,19 @@
 
     /* Image gallery layout */
     &:not(.no-grid) {
-        p:has(img), p:has(video) {
+        p:has(img),
+        p:has(video) {
             display: flex;
-            --gap-grid-img: var(--leading);
-            gap: var(--gap-grid-img);
+            gap: var(--gap-grid-img, 0.5rlh);
             border-radius: var(--radius);
-            
+
             > * {
                 flex: 1 1 auto;
                 min-width: 1%;
                 min-height: 1%;
                 object-fit: cover;
             }
-            
+
             img,
             img:first-child,
             img:last-child {
@@ -137,7 +130,7 @@
             br {
                 display: none;
             }
-        } 
+        }
 
         .callout p:has(img),
         .callout p:has(img) br {
@@ -175,17 +168,21 @@
     p:has(img) {
         margin-inline: var(--content-small);
     }
-    
+
     p {
         text-wrap: pretty;
         overflow-wrap: anywhere;
     }
-    
-    h1, h2, h3, h4, h5, h6 {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         text-wrap: balance;
     }
-    
-    
+
     @media (max-width: #{$mobile}) {
         .container-small,
         .callout,

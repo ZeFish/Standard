@@ -33,6 +33,7 @@
     /* Represents "one line of text without line-height spacing" */
     --leading: calc((var(--line-height) - 1) * var(--font-size));
     --gap-nl: calc((1lh - 1em) + (1lh - 1em) / 2);
+    --gap-nl: 0.5lh;
     --baseline: 1rlh;
     --font-cap: calc(1rlh / var(--line-height));
 
@@ -44,7 +45,7 @@
     --gap-micro: calc(var(--gap) / 8);
     --gap-relaxed: calc(var(--gap) * 2);
     --gap-body: var(--gap-relaxed);
-    --gap-grid: var(--leading);
+    --gap-grid: 0.25lh;
     /* Grid system tokens */
 
     /* Design standard system */
