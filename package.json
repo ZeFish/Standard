@@ -47,7 +47,7 @@
     "./cloudflare": "./src/cloudflare/api/comments.js",
     "./remark/tags": "./src/astro/remark/tags.js",
     "./remark/standard": "./src/astro/remark/standard.js",
-    "./remark/escape-code": "./src/anpmstro/remark/escape-code.js",
+    "./remark/escape-code": "./src/astro/remark/escape-code.js",
     "./remark/fix-dates": "./src/astro/remark/fix-dates.js",
     "./remark/syntax": "./src/astro/remark/syntax.js",
     "./rehype/standard": "./src/astro/rehype/standard.js",
@@ -67,7 +67,8 @@
     "./components/Css": "./src/astro/components/Css.astro",
     "./layouts/Base": "./src/astro/layouts/Base.astro",
     "./layouts/Meta": "./src/astro/layouts/Meta.astro",
-    "./layouts/Encrypted": "./src/astro/layouts/Encrypted.astro"
+    "./layouts/Encrypted": "./src/astro/layouts/Encrypted.astro",
+    "./remark/backlinks": "./src/astro/remark/backlinks.js"
   },
   "files": [
     "bin",

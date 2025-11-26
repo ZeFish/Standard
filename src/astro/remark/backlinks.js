@@ -1,4 +1,7 @@
 import { visit } from "unist-util-visit";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 const backlinkStore = new Map();
 
@@ -15,12 +18,20 @@ export function normalizeKey(str) {
   if (!str) return null;
   let value = String(str).trim();
   if (!value) return null;
+
+  // ✨ NEW: Decode URL encoding first
+  try {
+    value = decodeURIComponent(value);
+  } catch (e) {
+    // If decoding fails, continue with original value
+  }
+
   value = value.replace(/\\/g, "/");
   value = value.replace(/\.mdx?$/i, "");
   value = value.replace(/\.html?$/i, "");
-  value = value.replace(/^\.\/+/, "");
-  value = value.replace(/^\/+/, "");
-  value = value.replace(/\/+$/, "");
+  value = value.replace(/^\.\//, "");
+  value = value.replace(/^\//, "");
+  value = value.replace(/\/$/, "");
   if (!value) return null;
   const segments = value.split("/").map((segment) => slugifySegment(segment));
   return segments.filter(Boolean).join("/");
@@ -69,18 +80,175 @@ function serializeBacklinks() {
 }
 
 export function getBacklinkGraph() {
-  return serializeBacklinks();
+  const serialized = serializeBacklinks();
+  console.log("🔗 BACKLINK GRAPH REQUESTED:", {
+    storeSize: backlinkStore.size,
+    graphKeys: Object.keys(serialized).slice(0, 10),
+    totalKeys: Object.keys(serialized).length,
+    sample: Object.entries(serialized).slice(0, 2),
+    allKeys: Array.from(backlinkStore.keys()).slice(0, 20),
+  });
+  return serialized;
 }
 
 export function resetBacklinkGraph() {
   resetBacklinks();
 }
 
+/**
+ * ✨ NEW: Manually populate backlinks from content directory
+ * This is a fallback for when remark plugins don't run automatically
+ */
+export async function populateBacklinksFromContent() {
+  console.log("🔗 POPULATE BACKLINKS FROM CONTENT - Starting scan");
+
+  const contentDirs = [{ dir: "./content", prefix: "" }];
+
+  let processedFiles = 0;
+  let skippedFiles = 0;
+
+  for (const { dir, prefix } of contentDirs) {
+    if (!fs.existsSync(dir)) {
+      console.log(`⚠️  Directory not found: ${dir}`);
+      continue;
+    }
+
+    try {
+      const files = fs.readdirSync(dir, { recursive: true });
+      console.log(`🔗 Scanning ${dir} - found ${files.length} items`);
+
+      for (const file of files) {
+        if (!file.endsWith(".md")) {
+          skippedFiles++;
+          continue;
+        }
+
+        const filePath = path.join(dir, file);
+        try {
+          const content = fs.readFileSync(filePath, "utf-8");
+          const { data: frontmatter, content: body } = matter(content);
+
+          // Extract just the filename without directory
+          const relativePath = file.replace(/\.md$/, "");
+          const slugPath = normalizeKey(relativePath);
+
+          // ✨ CHANGED: Store WITHOUT directory prefix - just the normalized slug
+          const entryKey = slugPath;
+
+          console.log(`🔗 Processing ${file} -> key: ${entryKey}`);
+          processedFiles++;
+
+          const entryMeta = {
+            title: frontmatter.title || null,
+            // ✨ CHANGED: Build slug based on which directory
+            slug: dir.includes("/n") ? `n/${slugPath}` : `${slugPath}`,
+            id: normalizeKey(frontmatter.id) || entryKey,
+            type: frontmatter.type || null,
+          };
+
+          ensureEntry(entryKey, entryMeta);
+
+          // Extract links from markdown
+          // Handle [text](url)
+          const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+          let match;
+          while ((match = linkRegex.exec(body)) !== null) {
+            const [, text, url] = match;
+            if (!url.match(/^(https?:|mailto:|#)/)) {
+              const targetKey = normalizeKey(url);
+              if (targetKey && targetKey !== entryKey) {
+                const entry = backlinkStore.get(entryKey);
+                if (entry) {
+                  entry.outbound.add(targetKey);
+                  const targetEntry = ensureEntry(targetKey);
+                  targetEntry.inbound.add(entryKey);
+                }
+              }
+            }
+          }
+
+          // Handle [[wikilinks]]
+          const wikiRegex = /\[\[([^\]]+)\]\]/g;
+          while ((match = wikiRegex.exec(body)) !== null) {
+            const [, link] = match;
+            const [target] = link.split("|");
+            const targetKey = normalizeKey(target.trim());
+            if (targetKey && targetKey !== entryKey) {
+              const entry = backlinkStore.get(entryKey);
+              if (entry) {
+                entry.outbound.add(targetKey);
+                const targetEntry = ensureEntry(targetKey);
+                targetEntry.inbound.add(entryKey);
+              }
+            }
+          }
+        } catch (error) {
+          console.error(`❌ Error processing ${file}:`, error.message);
+          skippedFiles++;
+        }
+      }
+    } catch (error) {
+      console.error(`❌ Error reading directory ${dir}:`, error.message);
+    }
+  }
+
+  console.log(`✅ POPULATE BACKLINKS DONE:`, {
+    processed: processedFiles,
+    skipped: skippedFiles,
+    storeSize: backlinkStore.size,
+  });
+}
+
 export default function remarkBacklinks(options = {}) {
-  const { baseUrl = "" } = options;
+  const { baseUrl = "", verbose = false } = options;
+
+  console.log("🔗 BACKLINKS PLUGIN INITIALIZED with options:", {
+    verbose,
+    baseUrl,
+  });
+
+  let transformerCallCount = 0;
 
   return function transformer(tree, file) {
+    transformerCallCount++;
+    console.log(
+      `🔗 BACKLINKS TRANSFORMER CALLED (${transformerCallCount}) for file:`,
+      file.path || file.stem,
+    );
+
+    // Get frontmatter from Astro's file.data.astro
     const frontmatter = file.data?.astro?.frontmatter ?? {};
+
+    // Also check file properties directly
+    const fileData = {
+      ...frontmatter,
+      stem: file.stem,
+      path: file.path,
+      history: file.history?.[0],
+    };
+
+    console.log("🔗 FILE DATA:", {
+      file: file.path || file.stem,
+      hasFrontmatter: !!file.data?.astro?.frontmatter,
+      frontmatterKeys: Object.keys(frontmatter),
+      stem: file.stem,
+      data_keys: Object.keys(file.data || {}),
+    });
+
+    if (verbose) {
+      console.log("📝 Backlinks processing:", {
+        file: file.path || file.stem,
+        frontmatter: {
+          title: frontmatter.title,
+          slug: frontmatter.slug,
+          id: frontmatter.id,
+          permalink: frontmatter.permalink,
+        },
+        stem: file.stem,
+      });
+    }
+
+    // Generate entry key - prioritize explicit identifiers
     const entryKey =
       normalizeKey(frontmatter.slug) ||
       normalizeKey(frontmatter.id) ||
@@ -90,7 +258,24 @@ export default function remarkBacklinks(options = {}) {
       normalizeKey(file.path);
 
     if (!entryKey) {
+      console.log("⚠️  Could not generate entry key for:", file.path);
       return;
+    }
+
+    console.log(`✅ Entry registered: "${entryKey}" from file: ${file.path}`);
+    console.log(`   Store size after registration: ${backlinkStore.size}`);
+
+    // ← NEW: Log what was used to create the key
+    if (verbose) {
+      console.log(`   Attempted keys (in order):`, {
+        slug: frontmatter.slug,
+        id: frontmatter.id,
+        permalink: frontmatter.permalink,
+        title: frontmatter.title,
+        stem: file.stem,
+        path: file.path,
+        usedFor: entryKey,
+      });
     }
 
     const entryMeta = {
@@ -112,13 +297,19 @@ export default function remarkBacklinks(options = {}) {
       entry.outbound.add(normalized);
       const targetEntry = ensureEntry(normalized);
       targetEntry.inbound.add(entryKey);
+
+      if (verbose) {
+        console.log(`   🔗 "${entryKey}" → links to → "${normalized}"`);
+      }
     };
 
     visit(tree, (node) => {
+      // Handle markdown links: [text](url)
       if (node.type === "link" && typeof node.url === "string") {
         registerTarget(node.url);
       }
 
+      // Handle wiki links: [[page name]]
       if (node.type === "text" && typeof node.value === "string") {
         const wikiRegex = /\[\[([^\]]+)\]\]/g;
         let match;
@@ -130,5 +321,9 @@ export default function remarkBacklinks(options = {}) {
         }
       }
     });
+
+    console.log(
+      `🔗 TRANSFORMER DONE for ${file.path} - Store now has ${backlinkStore.size} entries`,
+    );
   };
 }

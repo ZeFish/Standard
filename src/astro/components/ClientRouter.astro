@@ -1,0 +1,45 @@
+---
+/**
+ * ClientRouter Component
+ *
+ * Enables Astro View Transitions API for smooth SPA-like navigation
+ * between pages without requiring a full page reload.
+ *
+ * This is the current recommended component for client-side routing.
+ * It provides client-side routing with smooth page transitions using
+ * the native View Transitions browser API.
+ *
+ * Features:
+ * - Automatic SPA-mode client-side routing
+ * - Smooth page transitions with CSS animations
+ * - Browser history management (back/forward)
+ * - Automatic re-initialization of Standard Framework modules
+ * - Theme persistence across transitions
+ * - Fallback support for browsers without View Transitions API
+ *
+ * @see https://docs.astro.build/en/guides/view-transitions/
+ *
+ * @example
+ *   ---
+ *   import { ClientRouter } from 'astro:transitions';
+ *   ---
+ *   <head>
+ *     <ClientRouter />
+ *   </head>
+ *
+ * @example With custom fallback
+ *   <ClientRouter fallback="swap" />
+ */
+
+import { ClientRouter } from 'astro:transitions';
+---
+
+<!-- Enable Astro client-side routing with View Transitions -->
+<ClientRouter />
+
+<!-- 
+  Fallback options:
+  - "animate" (default): Simulate view transitions using custom attributes
+  - "swap": No animations, immediate DOM swap
+  - "none": Full page reload on non-supporting browsers
+-->

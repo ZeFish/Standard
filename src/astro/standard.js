@@ -8,7 +8,7 @@
  */
 import { getRemarkPlugins } from "./standard-remark.js";
 import { getRehypePlugins } from "./standard-rehype.js";
-import { getBacklinkGraph, resetBacklinkGraph } from "./remark/backlinks.js";
+import { getBacklinkGraph, resetBacklinkGraph, populateBacklinksFromContent } from "./remark/backlinks.js";
 
 import { fileURLToPath } from "url";
 import path from "path";
@@ -127,10 +127,9 @@ export default function standard(options = {}) {
         injectRoute,
       }) => {
         const backlinksEnabled = mergedConfig.backlinks !== false;
-        if (backlinksEnabled) {
-          resetBacklinkGraph();
-        }
-
+        
+        console.log("🔗 BACKLINKS SETUP - Enabled:", backlinksEnabled);
+        
         // Use centralized plugin managers
         const remarkPlugins = getRemarkPlugins(mergedConfig);
         const rehypePlugins = getRehypePlugins(mergedConfig);
@@ -155,6 +154,25 @@ export default function standard(options = {}) {
           .split(path.sep)
           .join("/");
 
+        // ✨ NEW: Create a Vite plugin that populates backlinks on first access
+        const backlinkPopulationPlugin = {
+          name: "vite-plugin-backlink-population",
+          apply: "serve", // Only in dev/server mode
+          async configResolved() {
+            // Populate backlinks as soon as Vite starts
+            console.log("⏱️  Vite server starting - will populate backlinks on first request");
+          },
+          async transform(code, id) {
+            // On first page request, populate backlinks
+            if (id.includes("NoteLayout.astro") && !global.__backlinksPopulated) {
+              global.__backlinksPopulated = true;
+              console.log("🔗 First page request detected - populating backlinks now");
+              await populateBacklinksFromContent();
+            }
+            return code;
+          },
+        };
+
         const virtualModulesPlugin = {
           name: "vite-plugin-standard-virtual",
           resolveId(id) {
@@ -173,19 +191,53 @@ export default function standard(options = {}) {
               if (!backlinksEnabled) {
                 return `export const backlinks = {}; export const normalizeKey = (s) => s; export default backlinks;`;
               }
-              return `import { getBacklinkGraph, normalizeKey } from "${backlinksModulePath}"; const graph = getBacklinkGraph(); export { normalizeKey }; export const backlinks = graph; export default graph;`;
+              // ✨ FIX: Call getBacklinkGraph() at runtime, not at module load time
+              return `
+import { getBacklinkGraph as _getGraph, normalizeKey as _normalizeKey } from "${backlinksModulePath}";
+
+export const normalizeKey = _normalizeKey;
+
+// Create a getter that returns the graph when accessed
+let _cachedGraph = null;
+export const backlinks = new Proxy({}, {
+  get(target, prop) {
+    if (!_cachedGraph) {
+      _cachedGraph = _getGraph();
+    }
+    return _cachedGraph[prop];
+  },
+  ownKeys(target) {
+    if (!_cachedGraph) {
+      _cachedGraph = _getGraph();
+    }
+    return Reflect.ownKeys(_cachedGraph);
+  },
+  getOwnPropertyDescriptor(target, prop) {
+    if (!_cachedGraph) {
+      _cachedGraph = _getGraph();
+    }
+    return Reflect.getOwnPropertyDescriptor(_cachedGraph, prop);
+  }
+});
+
+export default backlinks;
+`;
             }
           },
         };
 
         updateConfig({
           vite: {
-            plugins: [virtualModulesPlugin],
+            plugins: [backlinkPopulationPlugin, virtualModulesPlugin],
             resolve: {
               alias: {
                 // Use source in dev for fast HMR
                 "@zefish/standard/styles": path.resolve(__dirname, "../styles"),
                 "@zefish/standard/js": path.resolve(__dirname, "../js/standard.js"),
+                "@zefish/standard/utils/content": path.resolve(__dirname, "utils/content.js"),
+                "@zefish/standard/utils/collections": path.resolve(__dirname, "utils/collections.js"),
+                "@zefish/standard/utils/typography": path.resolve(__dirname, "utils/typography.js"),
+                "@zefish/standard/components/Backlinks": path.resolve(__dirname, "components/Backlinks.astro"),
                 "@zefish/standard": path.resolve(__dirname, "./standard.js"),
               },
             },
@@ -265,7 +317,6 @@ export default function standard(options = {}) {
             // Copy file
             if (fs.statSync(src).isFile()) {
               fs.copyFileSync(src, dest);
-              //logger.debug(`Copied font: ${file}`);
             }
           });
 
@@ -335,11 +386,32 @@ export default function standard(options = {}) {
         }
       },
 
+      "astro:build:start": async () => {
+        // ✨ For production builds, populate backlinks
+        console.log("🔗 ASTRO BUILD START - Production build detected");
+        const backlinksEnabled = mergedConfig.backlinks !== false;
+        
+        if (backlinksEnabled) {
+          try {
+            await populateBacklinksFromContent();
+            const graph = getBacklinkGraph();
+            console.log("✅ BACKLINKS POPULATED FROM CONTENT:", {
+              totalEntries: Object.keys(graph).length,
+            });
+          } catch (error) {
+            console.error("❌ Error populating backlinks:", error.message);
+          }
+        }
+      },
+
       "astro:build:done": ({ dir }) => {
-        // Build completed - integrations handled their own cleanup
-        logger.debug(
-          "Build completed - integrations handled their own cleanup"
-        );
+        // Build completed - log final backlink graph state
+        console.log("✅ ASTRO BUILD DONE - Backlink graph finalized");
+        const finalGraph = getBacklinkGraph();
+        console.log("📊 FINAL BACKLINK GRAPH:", {
+          size: Object.keys(finalGraph).length,
+          keys: Object.keys(finalGraph).slice(0, 10),
+        });
       },
     },
   };

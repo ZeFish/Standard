@@ -5,7 +5,17 @@ const {
     ariaLabel = "Backlinks small",
 } = Astro.props;
 
-const publicBacklinks = backlinks.filter(
+// ✨ NEW: Deduplicate backlinks by URL
+const seenUrls = new Set();
+const deduplicatedBacklinks = backlinks.filter((entry) => {
+    if (seenUrls.has(entry.url)) {
+        return false; // Skip duplicates
+    }
+    seenUrls.add(entry.url);
+    return true;
+});
+
+const publicBacklinks = deduplicatedBacklinks.filter(
     (entry) => entry?.data?.visibility !== "private",
 );
 ---
