@@ -65,6 +65,7 @@
     "./components/Htmx": "./src/astro/components/Htmx.astro",
     "./components/Lab": "./src/astro/components/Lab.astro",
     "./components/Css": "./src/astro/components/Css.astro",
+    "./components/Backlinks": "./src/astro/components/Backlinks.astro",
     "./layouts/Base": "./src/astro/layouts/Base.astro",
     "./layouts/Meta": "./src/astro/layouts/Meta.astro",
     "./layouts/Encrypted": "./src/astro/layouts/Encrypted.astro",
