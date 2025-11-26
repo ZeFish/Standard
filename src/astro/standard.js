@@ -27,7 +27,7 @@ import remarkObsidianLinks from "./remark/obsidian-links.js";
 export default function standard(options = {}) {
   const logger = createLogger({
     verbose: options.verbose ?? false,
-    scope: "Standard",
+    scope: "Core",
   });
 
   // Load site config if specified in options
@@ -240,7 +240,7 @@ export default function standard(options = {}) {
             // Copy file
             if (fs.statSync(src).isFile()) {
               fs.copyFileSync(src, dest);
-              logger.debug(`Copied font: ${file}`);
+              //logger.debug(`Copied font: ${file}`);
             }
           });
 

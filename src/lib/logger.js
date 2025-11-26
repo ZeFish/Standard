@@ -133,9 +133,9 @@ colors.reset = ANSI16.reset;
 export default function createLogger(options = {}) {
   const { verbose = false, scope = null } = options;
 
-  const prefix = `${colors.reset}STDN::GD${colors.reset}`;
+  const prefix = `${colors.reset}Stdn${colors.orange.fg}::${colors.reset}GD${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
-  const scopeText = scope ? `${colors.cyan.fg}[${scope}]${colors.reset}` : "";
+  const scopeText = scope ? `${colors.blue.fg}[${scope}]${colors.reset}` : "";
 
   function format(level, ...args) {
     const parts = [prefix];
@@ -146,25 +146,25 @@ export default function createLogger(options = {}) {
 
   return {
     info(...args) {
-      console.log(...format(`${colors.blue.fg}ℹ`, ...args));
+      console.log(...format(`${colors.blue.fg}ℹ${colors.reset}`, ...args));
     },
     success(...args) {
-      console.log(...format(`${colors.green.fg}✓`, ...args));
+      console.log(...format(`${colors.green.fg}✓${colors.reset}`, ...args));
     },
     warn(...args) {
-      console.warn(...format(`${colors.yellow.fg}⚠`, ...args));
+      console.warn(...format(`${colors.yellow.fg}⚠${colors.reset}`, ...args));
     },
     error(...args) {
-      console.error(...format(`${colors.red.fg}✖`, ...args));
+      console.error(...format(`${colors.red.fg}✖${colors.reset}`, ...args));
     },
     debug(...args) {
       if (verbose) {
-        console.log(...format(`${colors.magenta.fg}⊙`, ...args));
+        console.log(...format(`${colors.magenta.fg}⊙${colors.reset}`, ...args));
       }
     },
     banner(version, url = "https://standard.ffp.co") {
       console.log(
-        `${prefix} v${version}${colors.grey.fg} :: ${colors.green.fg}${url}${colors.reset}`,
+        `${prefix} ${colors.blue.fg}[Core] ${colors.blue.fg}ℹ ${colors.green.fg}v${version}${colors.reset} :: ${colors.yellow.fg}${url}${colors.reset}`,
       );
     },
   };

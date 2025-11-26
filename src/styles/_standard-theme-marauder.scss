@@ -9,16 +9,16 @@
 
     --font-size: 1.5em;
     --optical-ratio: 1;
-    
+
     --line-height: 1.5;
-    
+
     --mobile-font-size: 1.5em;
     --mobile-line-height: 1.5;
 
-    body {
+    /*body {
         background-image: url("/assets/img/paper.webp");
         background-size: 100%;
-    }
+    }*/
 
     .container-hero-marge {
         background-image: url("/assets/img/sky+sea.webp");
@@ -33,20 +33,20 @@
             color: color-mix(in srgb, #191919 95%, #ebe4de);
         }
     }
-    
+
     :is(h2, h3) + p::first-letter {
         --drop-cap-size: 3;
         float: inline-start;
         line-height: 1;
         margin: calc(var(--gap-tight) * -1) var(--gap-tight) 0 0 !important;
         font-size: calc(
-            (var(--drop-cap-size) * var(--scale) * var(--line-height))
-            + (var(--leading) * max(calc(var(--drop-cap-size) - 0), 1))
+            (var(--drop-cap-size) * var(--scale) * var(--line-height)) +
+                (var(--leading) * max(calc(var(--drop-cap-size) - 0), 1))
         );
         overflow: visible;
         text-box-trim: trim-both;
         text-box-edge: cap alphabetic;
-        
+
         background-image: url("/assets/img/red.webp");
         background-size: 100px;
         background-clip: text;
@@ -54,11 +54,10 @@
         text-fill-color: transparent;
         -webkit-text-fill-color: transparent;
     }
-    
+
     @media only screen and (max-width: 600px) {
         :is(h2, h3) + p::first-letter {
             --drop-cap-size: 2;
         }
     }
-
 }

@@ -14,6 +14,8 @@ A fine-art design framework implementing classical typography, Swiss grid system
 
 ## Typography is the Voice
 
+- [Mardown](/markdown/)
+
 > Standard implements fine-art typography with smart quotes, proper punctuation, widow prevention, and multi-locale support. The golden ratio governs all typographic relationships.
 
 ### Heading Hierarchy

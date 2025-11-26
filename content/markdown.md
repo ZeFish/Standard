@@ -10,6 +10,7 @@ Donec ac orci scelerisque, posuere nisl nec, rutrum tortor. Ut auctor felis id u
 Mauris quis accumsan orci, ac iaculis augue. Pellentesque mollis erat neque, vitae pulvinar turpis rutrum at. Phasellus feugiat, justo id varius posuere, dui metus egestas lacus, eu consectetur tellus sem non ante. Suspendisse et convallis eros, quis varius leo. Donec volutpat faucibus tempus.
 
 [Index](index.md)
+[Example](example.md)
 
 Learn how to apply basic formatting to your Obsidian notes, using [Markdown](https://daringfireball.net/projects/markdown/). Import this as a note into your Obsidian Vault to view it and to test new themes. Certain community plugins are required for a few features.
 

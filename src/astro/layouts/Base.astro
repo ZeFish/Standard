@@ -24,14 +24,6 @@ const {
 } = Astro.props;
 
 const year = new Date().getFullYear();
-
-// HTMX attributes for progressive enhancement
-const htmxAttributes = {
-    "hx-boost": "true",
-    "hx-ext": "preload",
-    "hx-target": "body",
-    "hx-swap": "innerHTML scroll:window:top",
-};
 ---
 
 <!doctype html>
@@ -42,6 +34,7 @@ const htmxAttributes = {
     data-theme="default"
 >
     <head>
+        <meta name="astro-view-transitions-enabled" content="true" />
         <Meta
             site={site}
             title={title}
@@ -55,13 +48,10 @@ const htmxAttributes = {
         <Fonts />
         <Lab />
 
-        <!-- Load HTMX library -->
-        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-
         <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
     </head>
 
-    <body {...htmxAttributes} class={className}>
+    <body class={className}>
         <a href="#main" class="skip-link">Skip to content</a>
 
         <header

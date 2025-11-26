@@ -39,8 +39,7 @@ build:
   css:
     srcDir: "src/styles" # SCSS source directory
     outputDir:
-      - "_site/assets/standard"
-      - "dist"
+      - "lib"
     # Individual SCSS files to compile
     files:
       - input: "standard.scss"
@@ -62,8 +61,7 @@ build:
   js:
     srcDir: "src/js" # SCSS source directory
     outputDir:
-      - "_site/assets/standard"
-      - "dist"
+      - "lib"
     # Individual JS files to minify
     files:
       - input: "standard.js"
@@ -78,6 +76,21 @@ build:
       - input: "standard.lab.js"
         output: "standard.lab.js"
         minify: false
+      - input: "standard-copy-buttons.js"
+        output: "standard-copy-buttons.js"
+        minify: false
+      - input: "standard-image-zoom.js"
+        output: "standard-image-zoom.js"
+        minify: false
+      - input: "standard-scroll-wrappers.js"
+        output: "standard-scroll-wrappers.js"
+        minify: false
+      - input: "standard-htmx.js"
+        output: "standard-htmx.js"
+        minify: false
+      - input: "standard-astro.js"
+        output: "standard-astro.js"
+        minify: false
 
     # JS bundles to create
     bundles:
@@ -85,12 +98,12 @@ build:
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
           - "node_modules/htmx-ext-preload/dist/preload.min.js"
-          - "dist/standard.min.js"
-          - "dist/standard.toast.js"
+          - "lib/standard.min.js"
+          - "lib/standard.toast.js"
       - name: "standard.bundle.full.js"
         files:
           - "node_modules/htmx.org/dist/htmx.min.js"
           - "node_modules/htmx-ext-preload/dist/preload.min.js"
-          - "dist/standard.min.js"
-          - "dist/standard.toast.js"
-          - "dist/standard.comment.js"
+          - "lib/standard.min.js"
+          - "lib/standard.toast.js"
+          - "lib/standard.comment.js"
