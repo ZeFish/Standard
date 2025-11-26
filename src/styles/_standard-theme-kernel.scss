@@ -1,135 +1,136 @@
 [data-theme="kernel"] {
-    --color-light-background: #f7f3ee;
-    --color-light-foreground: #4a341c;
+  --color-light-background: #f7f3ee;
+  --color-light-foreground: #4a341c;
 
-    /* Accent system */
-    --color-light-red: #df453a; /* warning, highlight */
-    --color-light-orange: #e08e1f; /* attention blocks */
-    --color-light-yellow: #d69a00; /* vintage punchcard yellow */
-    --color-light-green: #4ca06b; /* success, approval */
-    --color-light-cyan: #2aa198; /* teal-y terminal feel */
-    --color-light-blue: #2882c3; /* link, info */
-    --color-light-purple: #d16d92; /* utility, label tags */
-    --color-light-pink: #ea76cb; /* softer technical touch */
+  /* Accent system */
+  --color-light-red: #df453a; /* warning, highlight */
+  --color-light-orange: #e08e1f; /* attention blocks */
+  --color-light-yellow: #d69a00; /* vintage punchcard yellow */
+  --color-light-green: #4ca06b; /* success, approval */
+  --color-light-cyan: #2aa198; /* teal-y terminal feel */
+  --color-light-blue: #2882c3; /* link, info */
+  --color-light-purple: #d16d92; /* utility, label tags */
+  --color-light-pink: #ea76cb; /* softer technical touch */
 
-    --color-dark-background: #231e1a;
-    --color-dark-foreground: #e6cfb3;
+  --color-dark-background: #231e1a;
+  --color-dark-foreground: #e6cfb3;
 
-    /* Accent system */
-    --color-dark-red: #d0483e;
-    --color-dark-orange: #da702c;
-    --color-dark-yellow: #d69a00;
-    --color-dark-green: #27a06c;
-    --color-dark-cyan: #81c8be;
-    --color-dark-blue: #8caaee;
-    --color-dark-purple: #8b7ec8;
-    --color-dark-pink: #f4b8e4;
+  /* Accent system */
+  --color-dark-red: #d0483e;
+  --color-dark-orange: #da702c;
+  --color-dark-yellow: #d69a00;
+  --color-dark-green: #27a06c;
+  --color-dark-cyan: #81c8be;
+  --color-dark-blue: #8caaee;
+  --color-dark-purple: #8b7ec8;
+  --color-dark-pink: #f4b8e4;
 
-    /* Code and UI extras */
-    --color-accent: var(--color-green);
-    --color-code: var(--color-foreground);
-    --color-bold: var(--color-red);
-    --color-italic: var(--color-green);
+  /* Code and UI extras */
+  --color-accent: var(--color-green);
+  --color-code: var(--color-foreground);
+  --color-bold: var(--color-red);
+  --color-italic: var(--color-green);
 
-    --color-dark-accent: var(--color-purple);
-    --color-dark-bold: var(--color-pink);
+  --color-dark-accent: var(--color-purple);
+  --color-dark-bold: var(--color-pink);
 
-    --radius: var(--leading);
+  --radius: var(--leading);
 
-    /* Space between special block like image blockquote and code block */
-    /* Vertical different than horizontal */
+  /* Space between special block like image blockquote and code block */
+  /* Vertical different than horizontal */
 
-    --font-text: "MonoLisa";
-    --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
-    --font-variation: "";
-    --font-header: "Fraunces";
-    --font-monospace: "MonoLisa";
-    --font-monospace-feature:
-        "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
-    --font-interface: "Monolisa";
+  --font-text: "MonoLisa";
+  --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
+  --font-variation: "";
+  --font-header: "Fraunces";
+  --font-monospace: "MonoLisa";
+  --font-monospace-feature:
+    "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
+  --font-interface: "Monolisa";
 
-    --font-header-weight: 400;
-    --font-header-feature: "";
-    --font-header-variation: "SOFT" 100, "WONK" 1;
-    --font-header-letter-spacing: -0.065em;
+  --font-header-weight: 400;
+  --font-header-feature: "";
+  --font-header-variation: "SOFT" 100, "WONK" 1;
+  --font-header-letter-spacing: -0.065em;
 
-    --stroke-width: 1.5px;
+  --stroke-width: 1.5px;
+  --line-height: 1.3;
 
-    --line-width: var(--line-width-xs);
-    /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
+  --line-width: var(--line-width-s);
+  /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
 
-    h1,
-    h2,
-    h3 {
-        opacity: 0.85;
-    }
+  h1,
+  h2,
+  h3 {
+    opacity: 0.85;
+  }
 
-    .font-interface {
-        opacity: 0.5;
-    }
+  .font-interface {
+    opacity: 0.5;
+  }
 
+  pre code {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    opacity: 0.75;
+    transition: opacity var(--transition);
+    text-shadow:
+      -0.25px -0.25px 0.25px
+        color-mix(in srgb, var(--color-foreground) 5%, transparent),
+      0.25px -0.25px 0.25px
+        color-mix(in srgb, var(--color-foreground) 5%, transparent),
+      -0.25px 0.25px 0.25px
+        color-mix(in srgb, var(--color-foreground) 5%, transparent),
+      0.25px 0.25px 0.25px
+        color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  }
+  pre:hover code {
+    opacity: 1;
+  }
+
+  @media (prefers-color-scheme: dark) {
     pre code {
-        background: transparent;
-        border: none;
-        outline: none;
-        padding: 0;
-        opacity: 0.75;
-        transition: opacity var(--transition);
-        text-shadow:
-            -0.25px -0.25px 0.25px
-                color-mix(in srgb, var(--color-foreground) 5%, transparent),
-            0.25px -0.25px 0.25px
-                color-mix(in srgb, var(--color-foreground) 5%, transparent),
-            -0.25px 0.25px 0.25px
-                color-mix(in srgb, var(--color-foreground) 5%, transparent),
-            0.25px 0.25px 0.25px
-                color-mix(in srgb, var(--color-foreground) 5%, transparent);
+      text-shadow:
+        -0.25px -0.25px 0.25px
+          color-mix(in srgb, var(--color-background) 5%, transparent),
+        0.25px -0.25px 0.25px
+          color-mix(in srgb, var(--color-background) 5%, transparent),
+        -0.25px 0.25px 0.25px
+          color-mix(in srgb, var(--color-background) 5%, transparent),
+        0.25px 0.25px 0.25px
+          color-mix(in srgb, var(--color-background) 5%, transparent);
     }
-    pre:hover code {
-        opacity: 1;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        pre code {
-            text-shadow:
-                -0.25px -0.25px 0.25px
-                    color-mix(in srgb, var(--color-background) 5%, transparent),
-                0.25px -0.25px 0.25px
-                    color-mix(in srgb, var(--color-background) 5%, transparent),
-                -0.25px 0.25px 0.25px
-                    color-mix(in srgb, var(--color-background) 5%, transparent),
-                0.25px 0.25px 0.25px
-                    color-mix(in srgb, var(--color-background) 5%, transparent);
-        }
-    }
+  }
 }
 
 @font-face {
-    font-family: "MonoLisa";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 1000;
-    font-style: normal;
-    src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
+  font-family: "MonoLisa";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 1000;
+  font-style: normal;
+  src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
 }
 @font-face {
-    font-family: "MonoLisa";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 1000;
-    font-style: italic;
-    src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
+  font-family: "MonoLisa";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 1000;
+  font-style: italic;
+  src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
 
 @font-face {
-    font-family: "Fraunces";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 1000;
-    font-style: normal;
-    src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2");
+  font-family: "Fraunces";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 1000;
+  font-style: normal;
+  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2");
 }
 @font-face {
-    font-family: "Fraunces";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 1000;
-    font-style: italic;
-    src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2");
+  font-family: "Fraunces";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 1000;
+  font-style: italic;
+  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2");
 }

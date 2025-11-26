@@ -6,7 +6,7 @@ import config from "virtual:standard/config";
 
 const {
     frontmatter,
-    site = config, // Use config as default, allow override via props
+    site = config.site || config, // Use config.site if available, fallback to config
     page = {},
     title = frontmatter?.title || config.title,
     description = frontmatter?.description || config.description,
@@ -20,10 +20,13 @@ const {
 const pageTitle = title || site.title;
 const fullTitle =
     title && title !== site.title ? `${title} · ${site.title}` : site.title;
-const pageUrl = new URL(Astro.url.pathname, site.url || Astro.site);
+
+// Ensure we have a valid base URL
+const baseUrl = site.url || config.url || Astro.site || 'http://localhost:4321';
+const pageUrl = new URL(Astro.url.pathname, baseUrl);
 const canonicalUrl = new URL(
     Astro.url.pathname.replace(/index\.html$/, ""),
-    site.url || Astro.site,
+    baseUrl,
 );
 
 // Description logic

@@ -11,7 +11,7 @@ function slugifySegment(str) {
     .replace(/(^-|-$)+/g, "");
 }
 
-function normalizeKey(str) {
+export function normalizeKey(str) {
   if (!str) return null;
   let value = String(str).trim();
   if (!value) return null;
@@ -52,6 +52,28 @@ export function resetBacklinks() {
 
 export function getCollectedBacklinks() {
   return backlinkStore;
+}
+
+function serializeBacklinks() {
+  const graph = getCollectedBacklinks();
+  const result = {};
+  for (const [key, entry] of graph.entries()) {
+    result[key] = {
+      key,
+      meta: entry.meta || {},
+      inbound: Array.from(entry.inbound || []),
+      outbound: Array.from(entry.outbound || []),
+    };
+  }
+  return result;
+}
+
+export function getBacklinkGraph() {
+  return serializeBacklinks();
+}
+
+export function resetBacklinkGraph() {
+  resetBacklinks();
 }
 
 export default function remarkBacklinks(options = {}) {

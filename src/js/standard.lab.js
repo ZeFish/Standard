@@ -10,7 +10,7 @@
  * @version @VERSION_PLACEHOLDER@
  */
 
-class StandardLab {
+export class StandardLab {
   constructor() {
     this.state = "dormant"; // dormant, quick, full
     this.badge = null;
@@ -241,7 +241,10 @@ class StandardLab {
     this.badge.innerHTML = ``;
     this.badge.addEventListener("click", () => this.openQuick());
     this.makeDraggable(this.badge);
+    
+    // Append to body
     document.body.appendChild(this.badge);
+    
     this.updateBadge();
     this.injectStyles();
   }
@@ -474,7 +477,7 @@ class StandardLab {
         } else {
           this.removeGridDebugOverlays();
         }
-        toast.info(`Debug mode ${e.target.checked ? "enabled" : "disabled"}`);
+        window.toast?.info(`Debug mode ${e.target.checked ? "enabled" : "disabled"}`);
       });
     this.panel
       .querySelector('[data-action="theme"]')
@@ -490,7 +493,7 @@ class StandardLab {
         // Handle blueprint exception for debug mode
         this.handleBlueprintDebugException(theme);
 
-        toast.info(`Theme: ${theme || "Default"}`);
+        window.toast?.info(`Theme: ${theme || "Default"}`);
       });
     this.panel
       .querySelector('[data-action="edit-tokens"]')
@@ -843,7 +846,7 @@ class StandardLab {
       if (input) input.value = defaultValue;
       this.updateBadge();
       this.refreshTokenList();
-      toast.info(`Reset ${token}`);
+      window.toast?.info(`Reset ${token}`);
     }
   }
 
@@ -856,7 +859,7 @@ class StandardLab {
     if (this.state === "full") {
       this.refreshTokenList();
     }
-    toast.info("All tokens reset");
+    window.toast?.info("All tokens reset");
   }
 
   copyCSS() {
@@ -869,7 +872,7 @@ class StandardLab {
     const css = `:root {\n${allTokens.map((token) => `  ${token}: ${this.getPropertyValue(token)};`).join("\n")}\n}`;
     navigator.clipboard
       .writeText(css)
-      .then(() => toast.success("CSS copied to clipboard!"))
+      .then(() => window.toast?.success("CSS copied to clipboard!"))
       .catch(() => {
         const textarea = document.createElement("textarea");
         textarea.value = css;
@@ -879,7 +882,7 @@ class StandardLab {
         textarea.select();
         document.execCommand("copy");
         document.body.removeChild(textarea);
-        toast.success("CSS copied to clipboard!");
+        window.toast?.success("CSS copied to clipboard!");
       });
   }
 
@@ -1003,7 +1006,7 @@ class StandardLab {
           this.removeGridDebugOverlays();
         }
 
-        toast.info(`Debug mode ${isActive ? "enabled" : "disabled"}`);
+        window.toast?.info(`Debug mode ${isActive ? "enabled" : "disabled"}`);
       }
       if (e.key === "Escape" && this.state !== "dormant") {
         this.close();
@@ -1146,34 +1149,57 @@ class StandardLab {
 }
 
 // ================================================================
-// AUTO-INITIALIZATION AND HTMX INTEGRATION
+// AUTO-INITIALIZATION AND ASTRO CLIENTROUTER INTEGRATION
 // ================================================================
 
 if (typeof window !== "undefined") {
   const setupStandardLab = () => {
-    // 1. Create the StandardLab instance if it doesn't exist.
     if (!window.StandardLab) {
       window.StandardLab = new StandardLab();
+      console.log("[StandardLab] ✓ Initialized");
     }
-
-    // 2. Add the HTMX integration listener.
-    document.body.addEventListener("htmx:afterSettle", function (event) {
-      console.log("HTMX loaded, refreshing StandardLab...");
-      if (window.StandardLab) {
-        window.StandardLab.refresh();
-      }
-    });
   };
 
-  // Check if the DOM is already loaded or wait for it.
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", setupStandardLab);
   } else {
     setupStandardLab();
   }
+  
+  // Handle Astro ClientRouter page swaps - MUST check root container
+  document.addEventListener("astro:after-swap", () => {
+    console.log("[StandardLab] 🔄 Page swap detected");
+    
+    if (!window.StandardLab) {
+      console.log("[StandardLab] ⚠️  Instance not found, reinitializing");
+      window.StandardLab = new StandardLab();
+      return;
+    }
+    
+    const root = document.getElementById("standard-lab-root");
+    const badge = document.getElementById("standard-lab-badge-container");
+    
+    console.log("[StandardLab] Root:", root ? "✓" : "✗");
+    console.log("[StandardLab] Badge:", badge ? "✓" : "✗");
+    
+    // If root is gone, the entire persistent container was removed - very bad
+    if (!root) {
+      console.error("[StandardLab] 🚨 Root container missing! Astro may be replacing entire body");
+      return;
+    }
+    
+    // If badge is gone but root exists, recreate badge
+    if (!badge) {
+      console.log("[StandardLab] 🔨 Recreating badge in persistent root");
+      window.StandardLab.badge = null;
+      window.StandardLab.createBadge();
+    }
+    
+    // Always restore state from storage
+    window.StandardLab.restoreTheme();
+    window.StandardLab.restoreDebugMode();
+  });
 }
 
-// Export for module systems
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = { StandardLab };
-}
+// Export as ES module
+export default StandardLab;

@@ -3,78 +3,73 @@
 /* Miller Text - Helvetica now */
 
 [data-theme="newspaper"] {
-    --color-light-foreground: #1a1a1a;
-    --color-light-background: #fffefd; /* newsprint hint */
-    --color-light-accent: #1f4f82; /* headline blue */
-    --color-border: color-mix(
-        in srgb,
-        var(--color-foreground) 12%,
-        transparent
-    );
-    --shadow: none; /* flat, ink on paper */
-    --optical-ratio: 1.414;
+  --color-light-foreground: #1a1a1a;
+  --color-light-background: #fffefd; /* newsprint hint */
+  --color-light-accent: #1f4f82; /* headline blue */
+  --color-border: color-mix(in srgb, var(--color-foreground) 12%, transparent);
+  --shadow: none; /* flat, ink on paper */
+  --optical-ratio: 1.414;
 
-    --color-dark-background: #101010; /* news-on-dark */
-    --color-dark-foreground: #e2e2e2;
-    --color-dark-accent: #8fb4ff;
-    --shadow: none;
-    --font-text: "miller-text";
-    --font-header: "miller-text";
-    --font-display: "miller-display";
-    --font-banner: "miller-banner";
-    --font-interface: "miller-text";
-    --line-height: 1.2;
+  --color-dark-background: #101010; /* news-on-dark */
+  --color-dark-foreground: #e2e2e2;
+  --color-dark-accent: #8fb4ff;
+  --shadow: none;
+  --font-text: "miller-text";
+  --font-header: "miller-text";
+  --font-display: "miller-display";
+  --font-banner: "miller-banner";
+  --font-interface: "miller-text";
+  --font-size: 1.1em;
+  --line-height: 1.5;
 
-    --mobile-gap-body: var(--gap);
-    --mobile-line-height: 1.2;
-    --gap-nl: var(--gap-compact);
+  --mobile-gap-body: var(--gap);
+  --mobile-line-height: 1.2;
+  --gap-nl: var(--gap-compact);
 
-    --line-width: var(--line-width-l);
+  --color-muted: color-mix(
+    in srgb,
+    var(--color-foreground) 75%,
+    var(--color-background)
+  );
 
-    --color-muted: color-mix(
-        in srgb,
-        var(--color-foreground) 75%,
-        var(--color-background)
-    );
+  p {
+    text-align: justify;
+    text-align-last: left; /* Don't justify the last line */
+    /* Enable hyphenation */
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    /* Improve word spacing */
+    word-spacing: -0.1em;
+    text-box-edge: cap ex;
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
 
-    p {
-        text-align: justify;
-        text-align-last: left; /* Don't justify the last line */
-        /* Enable hyphenation */
-        text-justify: inter-word;
-        hyphens: auto;
-        -webkit-hyphens: auto;
-        -ms-hyphens: auto;
-        /* Improve word spacing */
-        word-spacing: -0.1em;
-        text-box-edge: cap ex;
-        text-wrap: pretty;
-        overflow-wrap: anywhere;
+  p:not(:has(img)) + p {
+    text-indent: 0;
+  }
+
+  header {
+    grid-column: feature;
+    border-bottom: 1px solid var(--color-foreground);
+    padding-block-end: var(--gap-tight);
+    * {
+      margin-block-end: 0;
     }
+  }
 
-    p:not(:has(img)) + p {
-        text-indent: 0;
-    }
+  h1 {
+    margin-block-start: calc(var(--gap) * 5);
+    margin-block-end: calc(var(--gap) * 6);
+    text-align: center;
+    font-family: var(--font-display);
+  }
 
-    header {
-        grid-column: feature;
-        border-bottom: 1px solid var(--color-foreground);
-        padding-block-end: var(--gap-tight);
-        * {
-            margin-block-end: 0;
-        }
-    }
-
-    h1 {
-        margin-block-start: calc(var(--gap) * 4);
-        margin-block-end: calc(var(--gap) * 4);
-        text-align: center;
-        font-family: var(--font-display);
-    }
-
-    h4,
-    h5,
-    h6 {
-        margin-block-end: var(--gap-compact);
-    }
+  h4,
+  h5,
+  h6 {
+    margin-block-end: var(--gap-compact);
+  }
 }

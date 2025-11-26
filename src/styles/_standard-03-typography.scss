@@ -30,360 +30,348 @@
 
 /* Typography Design Tokens - Using logical properties */
 :root {
-    /* Font stacks */
-    --font-sans: InterVariable, system-ui, -apple-system, sans-serif;
-    --font-serif:
-        "Newsreader", "Garamond Premiere Pro", "Source Serif 4", serif;
-    --font-text: var(--font-sans);
-    --font-geo: "Futura Now Var";
-    --font-header: var(--font-text);
+  /* Font stacks */
+  --font-sans:
+    "Instrument Sans", InterVariable, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-serif:
+    "Newsreader", "Instrument Serif", "Garamond Premiere Pro", "Source Serif 4",
+    serif;
+  --font-monospace:
+    "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
 
-    --serif-display: "Instrument Serif";
+  --font-text: var(--font-sans);
+  --font-header: InterVariable;
+  --font-interface: var(--font-sans);
 
-    --font-monospace:
-        "IBM Plex Mono", ui-monospace, "SF Mono", "Courier New", monospace;
+  /* Font features & variations */
+  --font-feature: "ss01", "ss02", "ss05";
+  --font-variation: "wdth" 95;
+  --font-header-feature: "dlig";
+  --font-header-variation: "";
+  --font-monospace-feature: "";
+  --font-monospace-variation: "";
 
-    --font-sans:
-        "Instrument Sans", "Sohne", system-ui, -apple-system, "Segoe UI",
-        Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    --font-sans-condensed: "Sohne Schmal", "Sohne", system-ui, sans-serif;
-    --font-sans-wide: "Sohne Breit", "Sohne", system-ui, sans-serif;
-    --font-mono:
-        "Sohne Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
-        "Liberation Mono", monospace;
+  /* Font properties */
+  --font-weight: 450;
+  --font-weight-bold: 600;
+  --font-letter-spacing: normal;
+  --font-header-letter-spacing: -0.065em;
+  --font-header-line-height: 1;
+  --font-header-weight: 700;
 
-    /* Font features & variations */
-    --font-feature: "ss01", "ss02", "ss05";
-    --font-variation: "wdth" 95;
-    --font-header-feature: "dlig";
-    --font-header-variation: "";
-    --font-monospace-feature: "";
-    --font-monospace-variation: "";
+  /* Interface font tokens */
+  --font-interface-feature: "dlig", "zero";
+  --font-interface-variation: "";
+  --font-list-feature: "dlig", "tnum", "zero";
+  --font-list-variation: "";
 
-    /* Font properties */
-    --font-weight: 450;
-    --font-weight-bold: 600;
-    --font-letter-spacing: normal;
-    --font-header-letter-spacing: -0.03em;
-    --font-header-line-height: 1;
-    --font-header-weight: 700;
+  /* Heading weight scale */
+  --font-weight-h1: var(--font-header-weight);
+  --font-weight-h2: max(
+    calc(var(--font-header-weight) * 0.85),
+    var(--font-weight)
+  );
+  --font-weight-h3: max(
+    calc(var(--font-header-weight) * 0.85),
+    var(--font-weight)
+  );
+  --font-weight-h4: var(--font-weight);
+  --font-weight-h5: var(--font-weight);
+  --font-weight-h6: var(--font-weight);
 
-    /* Interface font tokens */
-    --font-interface: var(--font-sans);
-    --font-interface-feature: "dlig", "zero";
-    --font-interface-variation: "";
-    --font-list-feature: "dlig", "tnum", "zero";
-    --font-list-variation: "";
-
-    /* Heading weight scale */
-    --font-weight-h1: var(--font-header-weight);
-    --font-weight-h2: max(
-        calc(var(--font-header-weight) * 0.85),
-        var(--font-weight)
-    );
-    --font-weight-h3: max(
-        calc(var(--font-header-weight) * 0.85),
-        var(--font-weight)
-    );
-    --font-weight-h4: var(--font-weight);
-    --font-weight-h5: var(--font-weight);
-    --font-weight-h6: var(--font-weight);
-
-    /* List styling */
-    --list-indentation: var(--base);
+  /* List styling */
+  --list-indentation: var(--base);
 }
 
 // ========== Typography ==========
 
 /* Note: Typography-only feature toggles (kept in typography layer) */
 .circular {
-    font-feature-settings: "ss05" on;
+  font-feature-settings: "ss05" on;
 }
 .squared {
-    font-feature-settings: "ss06" on;
+  font-feature-settings: "ss06" on;
 }
 .inter-display {
-    font-variation-settings: "opsz" 32;
+  font-variation-settings: "opsz" 32;
 }
 
 .monospace {
-    font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
-    font-feature-settings: var(--font-monospace-feature);
-    font-variation-settings: var(--font-monospace-variation);
-    font-size: var(--scale-d2);
+  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+  font-feature-settings: var(--font-monospace-feature);
+  font-variation-settings: var(--font-monospace-variation);
+  font-size: var(--scale-d2);
 }
 
 .menu,
 .ui,
 .interface {
-    font-family: var(--font-interface), system-ui, sans-serif;
-    font-variation-settings: var(--font-interface-variation);
-    font-feature-settings: var(--font-interface-feature);
-    font-weight: var(--font-interface-weight, var(--font-weight), 400);
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
+  font-weight: var(--font-interface-weight, var(--font-weight), 400);
 }
 
 /* Workhorse (normal width) */
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-Buch.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-Buch.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-BuchKursiv.ttf") format("truetype");
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-BuchKursiv.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-Leicht.ttf") format("truetype");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-Leicht.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-LeichtKursiv.ttf") format("truetype");
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-LeichtKursiv.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-Halbfett.ttf") format("truetype");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-Halbfett.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-HalbfettKursiv.ttf") format("truetype");
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-HalbfettKursiv.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-Fett.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-Fett.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-FettKursiv.ttf") format("truetype");
-    font-weight: 700;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-FettKursiv.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-Extrafett.ttf") format("truetype");
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-Extrafett.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne";
-    src: url("/assets/fonts/sohne/Söhne-ExtrafettKursiv.ttf") format("truetype");
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Sohne";
+  src: url("/assets/fonts/sohne/Söhne-ExtrafettKursiv.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
 }
 
 /* Condensed (Schmal) – optional */
 @font-face {
-    font-family: "Sohne Schmal";
-    src: url("/assets/fonts/sohne/SöhneSchmal-Buch.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne Schmal";
+  src: url("/assets/fonts/sohne/SöhneSchmal-Buch.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne Schmal";
-    src: url("/assets/fonts/sohne/SöhneSchmal-Halbfett.ttf") format("truetype");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne Schmal";
+  src: url("/assets/fonts/sohne/SöhneSchmal-Halbfett.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Wide (Breit) – optional */
 @font-face {
-    font-family: "Sohne Breit";
-    src: url("/assets/fonts/sohne/SöhneBreit-Buch.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne Breit";
+  src: url("/assets/fonts/sohne/SöhneBreit-Buch.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Sohne Breit";
-    src: url("/assets/fonts/sohne/SöhneBreit-Fett.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne Breit";
+  src: url("/assets/fonts/sohne/SöhneBreit-Fett.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Mono – optional */
 @font-face {
-    font-family: "Sohne Mono";
-    src: url("/assets/fonts/sohne/SöhneMono-Buch.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Sohne Mono";
+  src: url("/assets/fonts/sohne/SöhneMono-Buch.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 400;
-    src:
-        local("EB Garamond"),
-        url("/assets/fonts/eb-garamond/EBGaramond.woff") format("woff");
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("EB Garamond"),
+    url("/assets/fonts/eb-garamond/EBGaramond.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 400;
-    src:
-        local("EB Garamond Regular"),
-        url("/assets/fonts/eb-garamond/EBGaramond-Regular.woff") format("woff");
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("EB Garamond Regular"),
+    url("/assets/fonts/eb-garamond/EBGaramond-Regular.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond SC";
-    font-style: normal;
-    font-weight: 400;
-    src:
-        local("EB Garamond Regular SmallCaps"),
-        url("/assets/fonts/eb-garamond/EBGaramondSC.woff") format("woff");
+  font-family: "EB Garamond SC";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("EB Garamond Regular SmallCaps"),
+    url("/assets/fonts/eb-garamond/EBGaramondSC.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: italic;
-    font-weight: 400;
-    src:
-        local("EB Garamond Italic"),
-        url("/assets/fonts/eb-garamond/EBGaramond-Italic.woff") format("woff");
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 400;
+  src:
+    local("EB Garamond Italic"),
+    url("/assets/fonts/eb-garamond/EBGaramond-Italic.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 500;
-    src:
-        local("EB Garamond Medium"),
-        url("/assets/fonts/eb-garamond/EBGaramond-Medium.woff") format("woff");
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local("EB Garamond Medium"),
+    url("/assets/fonts/eb-garamond/EBGaramond-Medium.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: italic;
-    font-weight: 500;
-    src:
-        local("EB Garamond Medium Italic"),
-        url("/assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff")
-            format("woff");
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 500;
+  src:
+    local("EB Garamond Medium Italic"),
+    url("/assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 600;
-    src:
-        local("EB Garamond SemiBold"),
-        url("/assets/fonts/eb-garamond/EBGaramond-SemiBold.woff") format("woff");
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 600;
+  src:
+    local("EB Garamond SemiBold"),
+    url("/assets/fonts/eb-garamond/EBGaramond-SemiBold.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: italic;
-    font-weight: 600;
-    src:
-        local("EB Garamond SemiBold Italic"),
-        url("/assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff")
-            format("woff");
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 600;
+  src:
+    local("EB Garamond SemiBold Italic"),
+    url("/assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff")
+      format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 700;
-    src:
-        local("EB Garamond Bold"),
-        url("/assets/fonts/eb-garamond/EBGaramond-Bold.woff") format("woff");
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local("EB Garamond Bold"),
+    url("/assets/fonts/eb-garamond/EBGaramond-Bold.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: italic;
-    font-weight: 700;
-    src:
-        local("EB Garamond Bold Italic"),
-        url("/assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff")
-            format("woff");
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 700;
+  src:
+    local("EB Garamond Bold Italic"),
+    url("/assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 800;
-    src:
-        local("EB Garamond ExtraBold"),
-        url("/assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff")
-            format("woff");
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 800;
+  src:
+    local("EB Garamond ExtraBold"),
+    url("/assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff") format("woff");
 }
 
 @font-face {
-    font-family: "EB Garamond";
-    font-style: italic;
-    font-weight: 800;
-    src:
-        local("EB Garamond ExtraBold Italic"),
-        url("/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff")
-            format("woff");
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 800;
+  src:
+    local("EB Garamond ExtraBold Italic"),
+    url("/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff")
+      format("woff");
 }
 
 @font-face {
-    font-family: "Helvetica Now Var";
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/HelveticaNowVar.woff2") format("woff2");
+  font-family: "Helvetica Now Var";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/HelveticaNowVar.woff2") format("woff2");
 }
 @font-face {
-    font-family: "Helvetica Now Var";
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/HelveticaNowVar-Italic.woff2") format("woff2");
+  font-family: "Helvetica Now Var";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/HelveticaNowVar-Italic.woff2") format("woff2");
 }
 @font-face {
-    font-family: "Univers";
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/UniversNextVariable.ttf");
+  font-family: "Univers";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/UniversNextVariable.ttf");
 }
 @font-face {
-    font-family: "Univers";
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/UniversNextVariable-Italic.ttf");
+  font-family: "Univers";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/UniversNextVariable-Italic.ttf");
 }

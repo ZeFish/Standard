@@ -1,11 +1,14 @@
 /**
- * Standard Framework Cloudflare Plugin for Astro
+ * Standard Framework Cloudflare Integration for Astro
  *
  * @component Cloudflare Integration
  * @category Astro Integrations
  * @author Francis Fontaine
  *
- * Uses Cloudflare's built-in image optimization and Pages Functions
+ * Self-contained module with:
+ * - Integration hooks (setup, build)
+ * - Image optimization utilities
+ * - Cloudflare Pages Functions deployment
  */
 
 import fs from "fs";
@@ -14,6 +17,10 @@ import { fileURLToPath } from "url";
 import createLogger from "../../lib/logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// ========================================
+// INTEGRATION HOOKS
+// ========================================
 
 export default function cloudflareIntegration(options = {}) {
   const logger = createLogger({
@@ -163,7 +170,28 @@ export default function cloudflareIntegration(options = {}) {
   };
 }
 
-// Cloudflare Image Resizing utilities
+// ========================================
+// IMAGE OPTIMIZATION UTILITIES
+// ========================================
+
+/**
+ * Build a Cloudflare Image Resizing URL with optimization parameters
+ *
+ * @param {string} src - Source image URL
+ * @param {Object} options - Image optimization options
+ * @param {number} options.width - Target width in pixels
+ * @param {number} options.height - Target height in pixels
+ * @param {number} options.quality - Image quality (1-100, default: 85)
+ * @param {string} options.format - Image format (auto, webp, avif, default: auto)
+ * @param {string} options.fit - How image fits (cover, contain, fill, default: cover)
+ * @param {string} options.position - Image position (center, top, bottom, default: center)
+ * @param {string} options.background - Background color for transparent images
+ * @param {number} options.sharpen - Sharpen amount (0-10)
+ * @param {number} options.blur - Blur amount (0-20)
+ * @param {string} options.dpr - Device pixel ratio (auto, 1, 2, default: auto)
+ * @param {string} options.metadata - Image metadata (all, none, default: none)
+ * @returns {string} Optimized image URL
+ */
 export function buildCloudflareImageUrl(src, options = {}) {
   // Build Cloudflare Image Resizing URL
   const params = new URLSearchParams();
@@ -189,6 +217,14 @@ export function buildCloudflareImageUrl(src, options = {}) {
   return `${src}${separator}${paramsString}`;
 }
 
+/**
+ * Generate a responsive srcset string for multiple image sizes
+ *
+ * @param {string} src - Source image URL
+ * @param {number[]} sizes - Array of width sizes in pixels
+ * @param {Object} options - Image optimization options (see buildCloudflareImageUrl)
+ * @returns {string} Responsive srcset string
+ */
 export function generateImageSrcset(
   src,
   sizes = [640, 960, 1280, 1920],
@@ -202,6 +238,16 @@ export function generateImageSrcset(
     .join(", ");
 }
 
+/**
+ * Determine if an image should use Cloudflare optimization
+ *
+ * @param {string} src - Source image URL
+ * @param {Object} options - Configuration options
+ * @param {boolean} options.skip - Skip optimization entirely
+ * @param {boolean} options.allowExternal - Allow external URLs
+ * @param {string} options.skipClass - CSS class to skip optimization
+ * @returns {boolean} Whether to use Cloudflare optimization
+ */
 export function shouldUseCloudflareImage(src, options = {}) {
   // Skip if explicitly disabled
   if (options.skip === true) return false;
@@ -226,7 +272,23 @@ export function shouldUseCloudflareImage(src, options = {}) {
   return true;
 }
 
-// Astro component for optimized images
+/**
+ * Astro component for optimized images using Cloudflare
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.src - Source image URL
+ * @param {string} props.alt - Alt text for accessibility
+ * @param {number} props.width - Target width
+ * @param {number} props.height - Target height
+ * @param {string} props.sizes - Responsive sizes attribute
+ * @param {number} props.quality - Image quality (1-100)
+ * @param {string} props.format - Image format (auto, webp, avif)
+ * @param {string} props.fit - How image fits (cover, contain, fill)
+ * @param {string} props.class - CSS class names
+ * @param {string} props.loading - Loading attribute (lazy, eager)
+ * @param {Object} props - Additional HTML attributes
+ * @returns {string} Optimized img HTML
+ */
 export function CloudflareImage({
   src,
   alt = "",
@@ -258,5 +320,146 @@ export function CloudflareImage({
     class="${className}"
     loading="${loading}"
     ${props}
+  />`;
+}
+
+/**
+ * Create a picture element with multiple formats and responsive srcset
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.src - Source image URL
+ * @param {string} props.alt - Alt text for accessibility
+ * @param {number} props.width - Target width
+ * @param {number} props.height - Target height
+ * @param {string} props.sizes - Responsive sizes attribute
+ * @param {number} props.quality - Image quality (1-100)
+ * @param {string[]} props.formats - Image formats to generate (['webp', 'avif', 'auto'])
+ * @param {string} props.fit - How image fits (cover, contain, fill)
+ * @param {string} props.class - CSS class names
+ * @param {string} props.loading - Loading attribute (lazy, eager)
+ * @param {Object} props - Additional HTML attributes
+ * @returns {string} Picture element HTML
+ */
+export function CloudflarePicture({
+  src,
+  alt = "",
+  width,
+  height,
+  sizes = "(max-width: 768px) 100vw, 768px",
+  quality = 85,
+  formats = ["webp", "avif", "auto"],
+  fit = "cover",
+  class: className = "",
+  loading = "lazy",
+  ...props
+}) {
+  if (!shouldUseCloudflareImage(src)) {
+    // Fallback to regular img tag
+    return `<img src="${src}" alt="${alt}" class="${className}" loading="${loading}" ${props} />`;
+  }
+
+  const baseOptions = { width, height, quality, fit };
+  const optimizedSrc = buildCloudflareImageUrl(src, { ...baseOptions, format: "auto" });
+  const srcset = generateImageSrcset(src, [640, 960, 1280, 1920], baseOptions);
+
+  let sources = "";
+
+  // Generate source elements for different formats
+  formats.forEach(format => {
+    if (format === "auto") return; // Skip 'auto' for source elements
+
+    const formatSrcset = generateImageSrcset(src, [640, 960, 1280, 1920], { ...baseOptions, format });
+    sources += `<source srcset="${formatSrcset}" sizes="${sizes}" type="image/${format}">`;
+  });
+
+  return `<picture>
+    ${sources}
+    <img
+      src="${optimizedSrc}"
+      srcset="${srcset}"
+      sizes="${sizes}"
+      alt="${alt}"
+      class="${className}"
+      loading="${loading}"
+      ${props}
+    />
+  </picture>`;
+}
+
+/**
+ * Generate blur placeholder for progressive image loading
+ *
+ * @param {string} src - Source image URL
+ * @param {number} width - Blur width (default: 20px)
+ * @param {number} quality - Blur quality (default: 10)
+ * @returns {string} Blur placeholder URL
+ */
+export function generateBlurPlaceholder(src, width = 20, quality = 10) {
+  return buildCloudflareImageUrl(src, {
+    width,
+    quality,
+    format: "auto",
+    fit: "cover",
+  });
+}
+
+/**
+ * Create a complete responsive image component with blur placeholder
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.src - Source image URL
+ * @param {string} props.alt - Alt text for accessibility
+ * @param {number} props.width - Target width
+ * @param {number} props.height - Target height
+ * @param {string} props.sizes - Responsive sizes attribute
+ * @param {number} props.quality - Image quality (1-100)
+ * @param {string} props.format - Image format (auto, webp, avif)
+ * @param {string} props.fit - How image fits (cover, contain, fill)
+ * @param {string} props.class - CSS class names
+ * @param {string} props.loading - Loading attribute (lazy, eager)
+ * @param {boolean} props.blurPlaceholder - Whether to include blur placeholder
+ * @param {Object} props - Additional HTML attributes
+ * @returns {string} Complete responsive image HTML
+ */
+export function ResponsiveImage({
+  src,
+  alt = "",
+  width,
+  height,
+  sizes = "(max-width: 768px) 100vw, 768px",
+  quality = 85,
+  format = "auto",
+  fit = "cover",
+  class: className = "",
+  loading = "lazy",
+  blurPlaceholder = true,
+  ...props
+}) {
+  if (!shouldUseCloudflareImage(src)) {
+    return `<img src="${src}" alt="${alt}" class="${className}" loading="${loading}" ${props} />`;
+  }
+
+  const imageOptions = { width, height, quality, format, fit };
+  const optimizedSrc = buildCloudflareImageUrl(src, imageOptions);
+  const srcset = generateImageSrcset(src, [640, 960, 1280, 1920], imageOptions);
+
+  let blurDataURL = "";
+  if (blurPlaceholder) {
+    blurDataURL = generateBlurPlaceholder(src);
+  }
+
+  const imgAttributes = [
+    `src="${optimizedSrc}"`,
+    `srcset="${srcset}"`,
+    `sizes="${sizes}"`,
+    `alt="${alt}"`,
+    `class="${className}"`,
+    `loading="${loading}"`,
+    blurDataURL ? `style="background-image: url('${blurDataURL}'); background-size: cover; background-position: center;"` : "",
+    props
+  ].filter(Boolean).join("\n    ");
+
+  return `<img
+    ${imgAttributes}
   />`;
 }

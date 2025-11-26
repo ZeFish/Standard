@@ -6,15 +6,10 @@
  * - Cloudflare integration
  * - Standard framework features
  */
-import remarkTags from "./remark/tags.js";
-import remarkStandard from "./remark/standard.js";
-import remarkEscapeCode from "./remark/escape-code.js";
-import remarkFixDates from "./remark/fix-dates.js";
-import remarkSyntax from "./remark/syntax.js";
-import remarkBacklinks from "./remark/backlinks.js";
-import { getBacklinkGraph, resetBacklinkGraph } from "./utils/backlinks.js";
-import rehypeStandard from "./rehype/standard.js";
-import rehypeTypography from "./rehype/typography.js";
+import { getRemarkPlugins } from "./standard-remark.js";
+import { getRehypePlugins } from "./standard-rehype.js";
+import { getBacklinkGraph, resetBacklinkGraph } from "./remark/backlinks.js";
+
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
@@ -22,7 +17,61 @@ import yaml from "js-yaml";
 import createLogger from "../lib/logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
-import remarkObsidianLinks from "./remark/obsidian-links.js";
+
+// ES module compatibility
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
+
+/**
+ * Deep merge two objects recursively
+ * Options take precedence over defaults
+ *
+ * @param {Object} target - Base object (defaults)
+ * @param {Object} source - Object to merge (overrides)
+ * @returns {Object} Merged object with all nested properties
+ *
+ * @example
+ * deepMerge(
+ *   { db: { host: 'localhost', port: 5432 } },
+ *   { db: { port: 3306 } }
+ * )
+ * // Returns: { db: { host: 'localhost', port: 3306 } }
+ */
+export function deepMerge(target = {}, source = {}) {
+  const result = { ...target };
+
+  for (const key in source) {
+    const sourceValue = source[key];
+    const targetValue = result[key];
+
+    // Recursively merge objects (but not arrays or null)
+    if (
+      sourceValue &&
+      typeof sourceValue === "object" &&
+      !Array.isArray(sourceValue) &&
+      sourceValue !== null &&
+      targetValue &&
+      typeof targetValue === "object" &&
+      !Array.isArray(targetValue) &&
+      targetValue !== null
+    ) {
+      result[key] = deepMerge(targetValue, sourceValue);
+    } else {
+      // Otherwise, source takes precedence
+      result[key] = sourceValue;
+    }
+  }
+
+  return result;
+}
+
+// ========================================
+// MAIN INTEGRATION
+// ========================================
 
 export default function standard(options = {}) {
   const logger = createLogger({
@@ -38,49 +87,26 @@ export default function standard(options = {}) {
     try {
       const configFile = fs.readFileSync(configPath, "utf8");
       siteConfig = yaml.load(configFile) || {};
+      logger.debug(`Loaded config from: ${configPath}`);
     } catch (error) {
       logger.warn(
-        `Warning: Could not parse config file (${configPath}): ${error.message}`,
+        `Warning: Could not parse config file (${configPath}): ${error.message}`
       );
     }
   } else if (configPath) {
-    logger.info(`Config file not found: ${configPath}`);
+    logger.debug(`Config file not found: ${configPath}`);
   }
 
-  // Merge site config with options (options take precedence)
-  const mergedConfig = {
-    ...siteConfig,
-    ...options,
-    // Deep merge for nested objects
-    ...(options.site && { site: { ...siteConfig.site, ...options.site } }),
-    ...(options.standard && {
-      standard: { ...siteConfig.standard, ...options.standard },
-    }),
-    ...(options.build && { build: { ...siteConfig.build, ...options.build } }),
-    ...(options.cloudflare && {
-      cloudflare: { ...siteConfig.cloudflare, ...options.cloudflare },
-    }),
-    ...(options.openrouter && {
-      openrouter: { ...siteConfig.openrouter, ...options.openrouter },
-    }),
-  };
-
-  // Extract cloudflare and openrouter configs from both options and siteConfig
-  const cloudflareConfig = {
-    ...(siteConfig.cloudflare || {}),
-    ...(options.cloudflare || {}),
-  };
-  const openrouterConfig = {
-    ...(siteConfig.openrouter || {}),
-    ...(options.openrouter || {}),
-  };
+  // Merge site config with options using deep merge
+  // Options take precedence over config file
+  const mergedConfig = deepMerge(siteConfig, options);
 
   // Get package version for banner
   let packageVersion = "0.0.0";
   try {
     const packagePath = path.join(
       path.dirname(fileURLToPath(import.meta.url)),
-      "../../package.json",
+      "../../package.json"
     );
     const packageData = JSON.parse(fs.readFileSync(packagePath, "utf8"));
     packageVersion = packageData.version || "0.0.0";
@@ -105,28 +131,19 @@ export default function standard(options = {}) {
           resetBacklinkGraph();
         }
 
-        const remarkPlugins = [
-          [remarkTags, mergedConfig.tags || {}],
-          [remarkStandard, mergedConfig.standard || {}],
-          [remarkEscapeCode, mergedConfig.escapeCode || {}],
-          [remarkFixDates, mergedConfig.dateFields || {}],
-          [remarkObsidianLinks, {}],
-        ];
-        if (backlinksEnabled) {
-          remarkPlugins.push([remarkBacklinks, mergedConfig.backlinks || {}]);
-        }
-        remarkPlugins.push([remarkSyntax, mergedConfig.syntax || {}]);
-
-        const rehypePlugins = [
-          [rehypeTypography, mergedConfig.typography || {}],
-          [rehypeStandard, mergedConfig.html || {}],
-        ];
+        // Use centralized plugin managers
+        const remarkPlugins = getRemarkPlugins(mergedConfig);
+        const rehypePlugins = getRehypePlugins(mergedConfig);
 
         // 1. Configure Remark/Rehype Plugins
         updateConfig({
           markdown: {
             remarkPlugins,
             rehypePlugins,
+            syntaxHighlight: "prism",
+            shikiConfig: {
+              wrap: false,
+            },
           },
         });
 
@@ -134,7 +151,7 @@ export default function standard(options = {}) {
         const moduleDir = path.dirname(fileURLToPath(import.meta.url));
         const currentDir = path.resolve(moduleDir);
         const backlinksModulePath = path
-          .join(currentDir, "utils", "backlinks.js")
+          .join(currentDir, "remark", "backlinks.js")
           .split(path.sep)
           .join("/");
 
@@ -154,9 +171,9 @@ export default function standard(options = {}) {
             }
             if (id === "\0standard-virtual-backlinks") {
               if (!backlinksEnabled) {
-                return "export const backlinks = {};\nexport default backlinks;";
+                return `export const backlinks = {}; export const normalizeKey = (s) => s; export default backlinks;`;
               }
-              return `import { getBacklinkGraph } from "${backlinksModulePath}";\nconst graph = getBacklinkGraph();\nexport const backlinks = graph;\nexport default graph;`;
+              return `import { getBacklinkGraph, normalizeKey } from "${backlinksModulePath}"; const graph = getBacklinkGraph(); export { normalizeKey }; export const backlinks = graph; export default graph;`;
             }
           },
         };
@@ -164,6 +181,14 @@ export default function standard(options = {}) {
         updateConfig({
           vite: {
             plugins: [virtualModulesPlugin],
+            resolve: {
+              alias: {
+                // Use source in dev for fast HMR
+                "@zefish/standard/styles": path.resolve(__dirname, "../styles"),
+                "@zefish/standard/js": path.resolve(__dirname, "../js/standard.js"),
+                "@zefish/standard": path.resolve(__dirname, "./standard.js"),
+              },
+            },
           },
         });
 
@@ -203,7 +228,7 @@ export default function standard(options = {}) {
           "../",
           "public",
           "assets",
-          "fonts",
+          "fonts"
         );
         if (fs.existsSync(fontsDir)) {
           aliasEntries["@standard-fonts"] = fontsDir;
@@ -212,11 +237,11 @@ export default function standard(options = {}) {
         // ✨ Copy fonts from package to public directory
         const packageFontsDir = path.resolve(
           packageSrcDir,
-          "../public/assets/fonts",
+          "../public/assets/fonts"
         );
         const clientPublicDir = path.resolve(
           fileURLToPath(config.root), // ← Convert URL to string
-          "public/assets/fonts",
+          "public/assets/fonts"
         );
 
         // Create the directory if it doesn't exist
@@ -257,41 +282,36 @@ export default function standard(options = {}) {
           });
         }
 
-        // 5. Setup Cloudflare Features (delegate to complete integration)
-        if (cloudflareConfig.enabled !== false) {
-          const cloudflare = cloudflareIntegration({
-            ...cloudflareConfig,
-            verbose: mergedConfig.verbose,
-          });
+        // 5. Register sub-integrations as Astro plugins
+        // Note: Astro will handle calling their hooks automatically
+        const integrations = [];
 
-          // Initialize the Cloudflare integration
-          cloudflare.hooks["astro:config:setup"]({
-            config,
-            updateConfig,
-            injectScript,
-            injectRoute,
-          });
-
+        if (mergedConfig.cloudflare?.enabled !== false) {
+          integrations.push(
+            cloudflareIntegration({
+              ...mergedConfig.cloudflare,
+              verbose: mergedConfig.verbose,
+            })
+          );
           logger.success("Cloudflare integration enabled");
         }
 
-        // 5. Setup OpenRouter AI Features (delegate to complete integration)
-        if (openrouterConfig.enabled !== false) {
-          const openrouter = openrouterIntegration({
-            ...openrouterConfig,
-            verbose: mergedConfig.verbose,
-            siteUrl: mergedConfig.site?.url || mergedConfig.url,
-          });
-
-          // Initialize the OpenRouter integration
-          openrouter.hooks["astro:config:setup"]({
-            config,
-            updateConfig,
-            injectScript,
-            injectRoute,
-          });
-
+        if (mergedConfig.openrouter?.enabled !== false) {
+          integrations.push(
+            openrouterIntegration({
+              ...mergedConfig.openrouter,
+              verbose: mergedConfig.verbose,
+              siteUrl: mergedConfig.site?.url || mergedConfig.url,
+            })
+          );
           logger.success("OpenRouter AI integration enabled");
+        }
+
+        // Update config with registered integrations
+        if (integrations.length > 0) {
+          updateConfig({
+            integrations,
+          });
         }
 
         // 6. Add Global Assets (CSS/JS)
@@ -318,19 +338,9 @@ export default function standard(options = {}) {
       "astro:build:done": ({ dir }) => {
         // Build completed - integrations handled their own cleanup
         logger.debug(
-          "Build completed - integrations handled their own cleanup",
+          "Build completed - integrations handled their own cleanup"
         );
       },
     },
   };
 }
-
-// Export utility functions for use in components
-export {
-  buildCloudflareImageUrl,
-  generateImageSrcset,
-  shouldUseCloudflareImage,
-  CloudflareImage,
-  CloudflarePicture,
-  ResponsiveImage,
-} from "./utils/cloudflare.js";

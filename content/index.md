@@ -3,18 +3,12 @@
 Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style.
 
 - [Example](/example/)
-- [Fonts](/fonts/)
 - [Mardown](/markdown/)
 - [Égalitarisme](/egalitarisme/)
 - [Digitné](/dignity/)
 - [Réciprocite](/reciprocite/)
-- [Componnent](/compo/)
-- [Unified Plugin](index-unified-plugin/)
-- [CSS Framework](content/css/index.md)
+- [CSS Framework](content/css/)
 - [Conard](/conard/)
-- [Test](/test/)
-- [11ty Plugin](content/11ty/index.md)
-- [Cloudflare Fonction](content/cloudflare/index.md)
 
 ::center
 Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion

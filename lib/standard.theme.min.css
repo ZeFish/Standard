@@ -571,14 +571,15 @@
   --font-header: "Fraunces";
   --font-monospace: "MonoLisa";
   --font-monospace-feature:
-      "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
+    "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
   --font-interface: "Monolisa";
   --font-header-weight: 400;
   --font-header-feature: "";
   --font-header-variation: "SOFT" 100, "WONK" 1;
   --font-header-letter-spacing: -0.065em;
   --stroke-width: 1.5px;
-  --line-width: var(--line-width-xs);
+  --line-height: 1.3;
+  --line-width: var(--line-width-s);
   
 }
 [data-theme=kernel] h1,
@@ -1365,11 +1366,7 @@
   --color-light-foreground: #1a1a1a;
   --color-light-background: #fffefd; 
   --color-light-accent: #1f4f82; 
-  --color-border: color-mix(
-      in srgb,
-      var(--color-foreground) 12%,
-      transparent
-  );
+  --color-border: color-mix(in srgb, var(--color-foreground) 12%, transparent);
   --shadow: none; 
   --optical-ratio: 1.414;
   --color-dark-background: #101010; 
@@ -1381,15 +1378,15 @@
   --font-display: "miller-display";
   --font-banner: "miller-banner";
   --font-interface: "miller-text";
-  --line-height: 1.2;
+  --font-size: 1.1em;
+  --line-height: 1.5;
   --mobile-gap-body: var(--gap);
   --mobile-line-height: 1.2;
   --gap-nl: var(--gap-compact);
-  --line-width: var(--line-width-l);
   --color-muted: color-mix(
-      in srgb,
-      var(--color-foreground) 75%,
-      var(--color-background)
+    in srgb,
+    var(--color-foreground) 75%,
+    var(--color-background)
   );
 }
 [data-theme=newspaper] p {
@@ -1418,8 +1415,8 @@
   margin-block-end: 0;
 }
 [data-theme=newspaper] h1 {
-  margin-block-start: calc(var(--gap) * 4);
-  margin-block-end: calc(var(--gap) * 4);
+  margin-block-start: calc(var(--gap) * 5);
+  margin-block-end: calc(var(--gap) * 6);
   text-align: center;
   font-family: var(--font-display);
 }

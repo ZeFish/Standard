@@ -4,7 +4,7 @@ import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
 import Backlinks from "../components/Backlinks.astro";
 import Comments from "../components/Comments.astro";
-import Lab from "../components/Lab.astro";
+import { ClientRouter } from 'astro:transitions';
 
 // Import site configuration from virtual module
 import config from "virtual:standard/config";
@@ -45,13 +45,28 @@ const year = new Date().getFullYear();
             tags={tags}
             securityHeaders={securityHeaders}
         />
+        <style>
+          /* Disable view transition animations - instant page swaps */
+          ::view-transition {
+            animation-duration: 0s !important;
+          }
+          ::view-transition-old(*),
+          ::view-transition-new(*) {
+            animation: none !important;
+          }
+        </style>
+        <ClientRouter />
         <Fonts />
-        <Lab />
+        <script is:inline src="/assets/standard/standard.lab.js" transition:persist></script>
+
 
         <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
     </head>
 
-    <body class={className}>
+    <body>
+        <!-- Persistent container for StandardLab UI that survives DOM swaps -->
+        <div id="standard-lab-root" transition:persist></div>
+
         <a href="#main" class="skip-link">Skip to content</a>
 
         <header
