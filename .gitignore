@@ -19,3 +19,4 @@ content/claude.md
 .doc-generator-hash
 .trigger-reload
 /dist
+/.astro
