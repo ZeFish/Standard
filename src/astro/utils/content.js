@@ -3,6 +3,33 @@
  * Ported from src/eleventy/eleventy/filter.js
  */
 
+import { getCollection } from "astro:content";
+
+// ✅ NEW: Build permalink map from collections
+export async function buildPermalinkMap() {
+  try {
+    const docs = await getCollection("docs");
+    const permalinkMap = new Map();
+
+    docs.forEach(doc => {
+      // Map by title
+      if (doc.data.title) {
+        permalinkMap.set(doc.data.title, `/${doc.data.permalink || doc.id}`);
+      }
+      // Map by file ID (last segment)
+      const fileName = doc.id.split("/").pop().replace(/\.md$/, "");
+      permalinkMap.set(fileName, `/${doc.data.permalink || doc.id}`);
+      // Map by full ID
+      permalinkMap.set(doc.id, `/${doc.data.permalink || doc.id}`);
+    });
+
+    return permalinkMap;
+  } catch (error) {
+    console.warn("⚠️ Could not build permalink map:", error.message);
+    return new Map();
+  }
+}
+
 // Reading time estimation
 export function getReadingTime(text) {
   if (!text) return "";
@@ -210,7 +237,7 @@ export function removeTags(content, tags = "p") {
     if (tag === "img") {
       regex = new RegExp(`<${tag}[^>]*>`, "gs");
     } else {
-      regex = new RegExp(`<${tag}[^>]*>.*?<\/${tag}>`, "gs");
+      regex = new RegExp(`<${tag}[^>]*>.*?<\\/${tag}>`, "gs");
     }
     result = result.replace(regex, "");
   });
@@ -238,7 +265,7 @@ export function filterTags(content, tags = "p") {
     if (tag === "img") {
       regex = new RegExp(`<${tag}[^>]*>`, "gs");
     } else {
-      regex = new RegExp(`<${tag}[^>]*>.*?<\/${tag}>`, "gs");
+      regex = new RegExp(`<${tag}[^>]*>.*?<\\/${tag}>`, "gs");
     }
     const found = source.match(regex);
     if (found) {
@@ -254,7 +281,7 @@ export function removeEmptyTags(content) {
   if (!content) return "";
   let result = String(content);
   // This regex finds tags that are empty or contain only whitespace.
-  return result.replace(/<(\w+)[^>]*>\s*<\/(\1)>/g, "");
+  return result.replace(/<(\w+)[^>]*>\s*<\/\1>/g, "");
 }
 
 // Strip HTML tags, return only the tags

@@ -9,7 +9,8 @@ export default function remarkObsidianLinks(options = {}) {
   });
 
   return (tree, file) => {
-    const noteMap = options.noteMap || new Map();
+    // ✅ NEW: Use the permalink map from options
+    const permalinkMap = options.permalinkMap || new Map();
 
     // Process [[wiki links]]
     visit(tree, "text", (node, index, parent) => {
@@ -41,11 +42,21 @@ export default function remarkObsidianLinks(options = {}) {
 
         const noteName = match[1].trim();
         const displayText = match[2] ? match[2].trim() : noteName;
-        // ✅ Don't add /n/ if it already has a path
-        const defaultUrl = slugify(noteName);
-        const noteUrl =
-          noteMap.get(noteName) ||
-          (defaultUrl.startsWith("/") ? defaultUrl : `/n/${defaultUrl}`);
+        
+        // ✅ NEW: Look up in permalink map first
+        let noteUrl = permalinkMap.get(noteName);
+        
+        // Fallback: try slugified version
+        if (!noteUrl) {
+          const slugified = slugify(noteName);
+          noteUrl = permalinkMap.get(slugified);
+        }
+        
+        // Final fallback: generate a default URL
+        if (!noteUrl) {
+          const defaultUrl = slugify(noteName);
+          noteUrl = defaultUrl.startsWith("/") ? defaultUrl : `/n/${defaultUrl}`;
+        }
 
         parts.push({
           type: "link",
@@ -84,10 +95,12 @@ export default function remarkObsidianLinks(options = {}) {
         filePath = filePath.replace(/\.md$/, "");
 
         const slug = filePath.split("/").map(slugify).join("/");
-
         const fileName = filePath.split("/").pop();
-        const fileUrl =
-          noteMap.get(fileName) || noteMap.get(filePath) || `/n/${slug}`;
+
+        // ✅ NEW: Look up in permalink map
+        let fileUrl = permalinkMap.get(fileName) || 
+                      permalinkMap.get(filePath) ||
+                      `/n/${slug}`;
 
         node.url = fileUrl;
       }
@@ -102,7 +115,7 @@ function slugify(str) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "") // Remove accents
     .replace(/\s+/g, "-") // Spaces to hyphens
-    .replace(/[^a-z0-9-/]/g, "") // Keep only alphanumeric and hyphens
+    .replace(/[^a-z0-9-\/]/g, "") // Keep only alphanumeric and hyphens
     .replace(/^-+|-+$/g, "") // Trim hyphens
     .replace(/-+/g, "-"); // Collapse multiple hyphens
 }

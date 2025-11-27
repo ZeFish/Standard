@@ -3,10 +3,6 @@
  * 
  * @component Remark Plugin Manager
  * @category Markdown Processing
- * @author Francis Fontaine
- * 
- * Centralized configuration for all remark (markdown) plugins.
- * Orchestrates plugins from /remark/ directory.
  */
 
 import remarkTags from "./remark/tags.js";
@@ -22,12 +18,6 @@ import remarkSyntax from "./remark/syntax.js";
  * 
  * @param {Object} config - Merged configuration object
  * @returns {Array} Array of [plugin, options] tuples for Astro
- * 
- * @example
- * const plugins = getRemarkPlugins({ 
- *   tags: { taxonomy: true },
- *   backlinks: false 
- * });
  */
 export function getRemarkPlugins(config = {}) {
   console.log("📦 REMARK PLUGINS SETUP with config:", {
@@ -44,19 +34,18 @@ export function getRemarkPlugins(config = {}) {
   ];
 
   // ✨ CRITICAL: Backlinks must run BEFORE ObsidianLinks
-  // so that wiki-style [[links]] are captured before conversion
   if (config.backlinks !== false) {
     console.log("✅ Adding BACKLINKS plugin with options:", {
       verbose: config.verbose,
       ...config.backlinks,
     });
-    plugins.push([remarkBacklinks, { verbose: config.verbose, ...config.backlinks }]);
+    plugins.push([remarkBacklinks, { verbose: config.verbose, permalinkMap: config.permalinkMap, ...config.backlinks }]);
   } else {
     console.log("⏭️  BACKLINKS plugin DISABLED");
   }
 
-  // Then convert wiki-style links to standard markdown links
-  plugins.push([remarkObsidianLinks, {}]);
+  // ✅ Now pass permalink map to ObsidianLinks
+  plugins.push([remarkObsidianLinks, { permalinkMap: config.permalinkMap || new Map() }]);
 
   // Syntax highlighting always last (must run after content transformations)
   plugins.push([remarkSyntax, config.syntax || {}]);
@@ -72,41 +61,41 @@ export function getRemarkPlugins(config = {}) {
  */
 export function getAvailableRemarkPlugins() {
   return [
-    { 
-      name: "remarkTags", 
+    {
+      name: "remarkTags",
       description: "Extract and process frontmatter tags",
-      optional: false 
+      optional: false
     },
-    { 
-      name: "remarkStandard", 
+    {
+      name: "remarkStandard",
       description: "Standard markdown enhancements (containers, callouts)",
-      optional: false 
+      optional: false
     },
-    { 
-      name: "remarkEscapeCode", 
+    {
+      name: "remarkEscapeCode",
       description: "Escape code blocks to prevent double-processing",
-      optional: false 
+      optional: false
     },
-    { 
-      name: "remarkFixDates", 
+    {
+      name: "remarkFixDates",
       description: "Normalize date fields across different formats",
-      optional: false 
+      optional: false
     },
-    { 
-      name: "remarkObsidianLinks", 
+    {
+      name: "remarkObsidianLinks",
       description: "Convert Obsidian-style [[wikilinks]] to standard links",
-      optional: false 
+      optional: false
     },
-    { 
-      name: "remarkBacklinks", 
+    {
+      name: "remarkBacklinks",
       description: "Generate automatic bidirectional backlinks",
       optional: true,
-      default: true 
+      default: true
     },
-    { 
-      name: "remarkSyntax", 
+    {
+      name: "remarkSyntax",
       description: "Syntax highlighting for code blocks (must run last)",
-      optional: false 
+      optional: false
     },
   ];
 }

@@ -8,7 +8,11 @@
  */
 import { getRemarkPlugins } from "./standard-remark.js";
 import { getRehypePlugins } from "./standard-rehype.js";
-import { getBacklinkGraph, resetBacklinkGraph, populateBacklinksFromContent } from "./remark/backlinks.js";
+import {
+  getBacklinkGraph,
+  resetBacklinkGraph,
+  populateBacklinksFromContent,
+} from "./remark/backlinks.js";
 
 import { fileURLToPath } from "url";
 import path from "path";
@@ -98,7 +102,6 @@ export default function standard(options = {}) {
   }
 
   // Merge site config with options using deep merge
-  // Options take precedence over config file
   const mergedConfig = deepMerge(siteConfig, options);
 
   // Get package version for banner
@@ -120,18 +123,27 @@ export default function standard(options = {}) {
   return {
     name: "@zefish/standard",
     hooks: {
-      "astro:config:setup": ({
+      "astro:config:setup": async ({
         config,
         updateConfig,
         injectScript,
         injectRoute,
       }) => {
         const backlinksEnabled = mergedConfig.backlinks !== false;
-        
         console.log("🔗 BACKLINKS SETUP - Enabled:", backlinksEnabled);
-        
+
+        // ✅ NEW: Build permalink map and pass to plugins
+        let permalinkMap = new Map();
+        try {
+          const { buildPermalinkMap } = await import("./utils/content.js");
+          permalinkMap = await buildPermalinkMap();
+          logger.info(`Built permalink map with ${permalinkMap.size} entries`);
+        } catch (error) {
+          logger.warn("Could not build permalink map:", error.message);
+        }
+
         // Use centralized plugin managers
-        const remarkPlugins = getRemarkPlugins(mergedConfig);
+        const remarkPlugins = getRemarkPlugins({ ...mergedConfig, permalinkMap });
         const rehypePlugins = getRehypePlugins(mergedConfig);
 
         // 1. Configure Remark/Rehype Plugins
@@ -160,14 +172,21 @@ export default function standard(options = {}) {
           apply: "serve", // Only in dev/server mode
           async configResolved() {
             // Populate backlinks as soon as Vite starts
-            console.log("⏱️  Vite server starting - will populate backlinks on first request");
+            logger.info(
+              "⏱️  Vite server starting - will populate backlinks on first request"
+            );
           },
           async transform(code, id) {
             // On first page request, populate backlinks
-            if (id.includes("NoteLayout.astro") && !global.__backlinksPopulated) {
+            if (
+              id.includes("NoteLayout.astro") &&
+              !global.__backlinksPopulated
+            ) {
               global.__backlinksPopulated = true;
-              console.log("🔗 First page request detected - populating backlinks now");
-              await populateBacklinksFromContent();
+              logger.info(
+                "🔗 First page request detected - populating backlinks now"
+              );
+              await populateBacklinksFromContent(permalinkMap);
             }
             return code;
           },
@@ -233,11 +252,26 @@ export default backlinks;
               alias: {
                 // Use source in dev for fast HMR
                 "@zefish/standard/styles": path.resolve(__dirname, "../styles"),
-                "@zefish/standard/js": path.resolve(__dirname, "../js/standard.js"),
-                "@zefish/standard/utils/content": path.resolve(__dirname, "utils/content.js"),
-                "@zefish/standard/utils/collections": path.resolve(__dirname, "utils/collections.js"),
-                "@zefish/standard/utils/typography": path.resolve(__dirname, "utils/typography.js"),
-                "@zefish/standard/components/Backlinks": path.resolve(__dirname, "components/Backlinks.astro"),
+                "@zefish/standard/js": path.resolve(
+                  __dirname,
+                  "../js/standard.js"
+                ),
+                "@zefish/standard/utils/content": path.resolve(
+                  __dirname,
+                  "utils/content.js"
+                ),
+                "@zefish/standard/utils/collections": path.resolve(
+                  __dirname,
+                  "utils/collections.js"
+                ),
+                "@zefish/standard/utils/typography": path.resolve(
+                  __dirname,
+                  "utils/typography.js"
+                ),
+                "@zefish/standard/components/Backlinks": path.resolve(
+                  __dirname,
+                  "components/Backlinks.astro"
+                ),
                 "@zefish/standard": path.resolve(__dirname, "./standard.js"),
               },
             },
@@ -390,10 +424,10 @@ export default backlinks;
         // ✨ For production builds, populate backlinks
         console.log("🔗 ASTRO BUILD START - Production build detected");
         const backlinksEnabled = mergedConfig.backlinks !== false;
-        
+
         if (backlinksEnabled) {
           try {
-            await populateBacklinksFromContent();
+            await populateBacklinksFromContent(permalinkMap);
             const graph = getBacklinkGraph();
             console.log("✅ BACKLINKS POPULATED FROM CONTENT:", {
               totalEntries: Object.keys(graph).length,
@@ -406,9 +440,9 @@ export default backlinks;
 
       "astro:build:done": ({ dir }) => {
         // Build completed - log final backlink graph state
-        console.log("✅ ASTRO BUILD DONE - Backlink graph finalized");
+        logger.info("✅ ASTRO BUILD DONE - Backlink graph finalized");
         const finalGraph = getBacklinkGraph();
-        console.log("📊 FINAL BACKLINK GRAPH:", {
+        logger.info("📊 FINAL BACKLINK GRAPH:", {
           size: Object.keys(finalGraph).length,
           keys: Object.keys(finalGraph).slice(0, 10),
         });

@@ -99,7 +99,11 @@ export function resetBacklinkGraph() {
  * ✨ NEW: Manually populate backlinks from content directory
  * This is a fallback for when remark plugins don't run automatically
  */
-export async function populateBacklinksFromContent() {
+/**
+ * ✨ NEW: Manually populate backlinks from content directory
+ * This is a fallback for when remark plugins don't run automatically
+ */
+export async function populateBacklinksFromContent(permalinkMap = new Map()) {
   console.log("🔗 POPULATE BACKLINKS FROM CONTENT - Starting scan");
 
   const contentDirs = [{ dir: "./content", prefix: "" }];
@@ -138,10 +142,20 @@ export async function populateBacklinksFromContent() {
           console.log(`🔗 Processing ${file} -> key: ${entryKey}`);
           processedFiles++;
 
+          // ✨ CHANGED: Use permalink from map if available
+          let finalSlug = slugPath;
+          if (permalinkMap && (permalinkMap.has(frontmatter.title) || permalinkMap.has(relativePath) || permalinkMap.has(file))) {
+            // Try to find the permalink using various keys
+            const permalink = permalinkMap.get(frontmatter.title) || permalinkMap.get(relativePath) || permalinkMap.get(file);
+            if (permalink) {
+              finalSlug = permalink.replace(/^\//, ""); // Remove leading slash
+            }
+          }
+
           const entryMeta = {
             title: frontmatter.title || null,
             // ✨ CHANGED: Build slug based on which directory
-            slug: dir.includes("/n") ? `n/${slugPath}` : `${slugPath}`,
+            slug: finalSlug,
             id: normalizeKey(frontmatter.id) || entryKey,
             type: frontmatter.type || null,
           };
@@ -200,7 +214,7 @@ export async function populateBacklinksFromContent() {
 }
 
 export default function remarkBacklinks(options = {}) {
-  const { baseUrl = "", verbose = false } = options;
+  const { baseUrl = "", verbose = false, permalinkMap = new Map() } = options;
 
   console.log("🔗 BACKLINKS PLUGIN INITIALIZED with options:", {
     verbose,
@@ -249,13 +263,26 @@ export default function remarkBacklinks(options = {}) {
     }
 
     // Generate entry key - prioritize explicit identifiers
-    const entryKey =
+    let entryKey =
       normalizeKey(frontmatter.slug) ||
       normalizeKey(frontmatter.id) ||
       normalizeKey(frontmatter.permalink) ||
       normalizeKey(frontmatter.title) ||
       normalizeKey(file.stem) ||
       normalizeKey(file.path);
+
+    // ✨ NEW: Check permalink map
+    if (permalinkMap) {
+      // Try to find by file path or title
+      const fileId = file.stem; // e.g. "markdown"
+      const title = frontmatter.title;
+
+      const mappedPermalink = permalinkMap.get(title) || permalinkMap.get(fileId);
+      if (mappedPermalink) {
+        entryKey = normalizeKey(mappedPermalink);
+        if (verbose) console.log(`   🎯 Found in permalink map: ${mappedPermalink} -> ${entryKey}`);
+      }
+    }
 
     if (!entryKey) {
       console.log("⚠️  Could not generate entry key for:", file.path);
