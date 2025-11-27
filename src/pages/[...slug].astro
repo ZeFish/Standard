@@ -1,8 +1,6 @@
 ---
 import Base from "../astro/layouts/Base.astro";
-import Backlinks from "../astro/components/Backlinks.astro";
 import config from "virtual:standard/config";
-import { backlinks, normalizeKey } from "virtual:standard/backlinks";
 
 // This function generates all the static paths for our .md files
 export async function getStaticPaths() {
@@ -34,29 +32,19 @@ export async function getStaticPaths() {
 const { page, path } = Astro.props;
 const { Content, frontmatter } = page;
 
-// Backlinks processing
-const currentSlug = normalizeKey(path.replace("/content/", ""));
-const backlinkEntry = backlinks[currentSlug];
-const pageBacklinks = backlinkEntry?.inbound
-    ? Array.from(backlinkEntry.inbound).map((key) => {
-          const entry = backlinks[key];
-          return {
-              url: entry?.meta?.url || `/${key}`,
-              data: {
-                  title: entry?.meta?.title || key,
-                  ...entry?.meta,
-              },
-          };
-      })
-    : [];
+// ✨ NEW: Merge backlinks from file.data into frontmatter for Base layout
+const frontmatterWithBacklinks = {
+    ...frontmatter,
+    backlinks: frontmatter?.backlinks || {},
+};
 ---
 
 <!-- Use Base layout and pass the markdown content through -->
 <Base
+    frontmatter={frontmatterWithBacklinks}
     title={frontmatter?.title || "Standard Framework"}
     description={frontmatter?.description || config.description}
     class="prose"
 >
     <Content />
-    <Backlinks backlinks={pageBacklinks} />
 </Base>

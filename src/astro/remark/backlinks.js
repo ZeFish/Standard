@@ -1,9 +1,7 @@
 import { visit } from "unist-util-visit";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import logger from "../logger.js";
 
-const backlinkStore = new Map();
+const log = logger({ scope: "Backlinks" });
 
 function slugifySegment(str) {
   return str
@@ -19,7 +17,7 @@ export function normalizeKey(str) {
   let value = String(str).trim();
   if (!value) return null;
 
-  // ✨ NEW: Decode URL encoding first
+  // ✨ Decode URL encoding first
   try {
     value = decodeURIComponent(value);
   } catch (e) {
@@ -29,13 +27,17 @@ export function normalizeKey(str) {
   value = value.replace(/\\/g, "/");
   value = value.replace(/\.mdx?$/i, "");
   value = value.replace(/\.html?$/i, "");
-  value = value.replace(/^\.\//, "");
-  value = value.replace(/^\//, "");
+  value = value.replace(/^\.\//i, "");
+  value = value.replace(/^\//i, "");
   value = value.replace(/\/$/, "");
   if (!value) return null;
   const segments = value.split("/").map((segment) => slugifySegment(segment));
   return segments.filter(Boolean).join("/");
 }
+
+const backlinkStore = new Map();
+const fileBacklinksMap = new Map();
+const ignoredPages = new Set();
 
 function ensureEntry(key, meta = {}) {
   if (!key) return null;
@@ -59,10 +61,16 @@ function ensureEntry(key, meta = {}) {
 
 export function resetBacklinks() {
   backlinkStore.clear();
+  fileBacklinksMap.clear();
+  ignoredPages.clear();
 }
 
 export function getCollectedBacklinks() {
   return backlinkStore;
+}
+
+export function getFileBacklinksMap() {
+  return fileBacklinksMap;
 }
 
 function serializeBacklinks() {
@@ -81,13 +89,6 @@ function serializeBacklinks() {
 
 export function getBacklinkGraph() {
   const serialized = serializeBacklinks();
-  console.log("🔗 BACKLINK GRAPH REQUESTED:", {
-    storeSize: backlinkStore.size,
-    graphKeys: Object.keys(serialized).slice(0, 10),
-    totalKeys: Object.keys(serialized).length,
-    sample: Object.entries(serialized).slice(0, 2),
-    allKeys: Array.from(backlinkStore.keys()).slice(0, 20),
-  });
   return serialized;
 }
 
@@ -96,171 +97,30 @@ export function resetBacklinkGraph() {
 }
 
 /**
- * ✨ NEW: Manually populate backlinks from content directory
- * This is a fallback for when remark plugins don't run automatically
+ * Check if a key represents an index/root page
+ * @param {string} key - The normalized key to check
+ * @returns {boolean}
  */
-/**
- * ✨ NEW: Manually populate backlinks from content directory
- * This is a fallback for when remark plugins don't run automatically
- */
-export async function populateBacklinksFromContent(permalinkMap = new Map()) {
-  console.log("🔗 POPULATE BACKLINKS FROM CONTENT - Starting scan");
-
-  const contentDirs = [{ dir: "./content", prefix: "" }];
-
-  let processedFiles = 0;
-  let skippedFiles = 0;
-
-  for (const { dir, prefix } of contentDirs) {
-    if (!fs.existsSync(dir)) {
-      console.log(`⚠️  Directory not found: ${dir}`);
-      continue;
-    }
-
-    try {
-      const files = fs.readdirSync(dir, { recursive: true });
-      console.log(`🔗 Scanning ${dir} - found ${files.length} items`);
-
-      for (const file of files) {
-        if (!file.endsWith(".md")) {
-          skippedFiles++;
-          continue;
-        }
-
-        const filePath = path.join(dir, file);
-        try {
-          const content = fs.readFileSync(filePath, "utf-8");
-          const { data: frontmatter, content: body } = matter(content);
-
-          // Extract just the filename without directory
-          const relativePath = file.replace(/\.md$/, "");
-          const slugPath = normalizeKey(relativePath);
-
-          // ✨ CHANGED: Store WITHOUT directory prefix - just the normalized slug
-          const entryKey = slugPath;
-
-          console.log(`🔗 Processing ${file} -> key: ${entryKey}`);
-          processedFiles++;
-
-          // ✨ CHANGED: Use permalink from map if available
-          let finalSlug = slugPath;
-          if (permalinkMap && (permalinkMap.has(frontmatter.title) || permalinkMap.has(relativePath) || permalinkMap.has(file))) {
-            // Try to find the permalink using various keys
-            const permalink = permalinkMap.get(frontmatter.title) || permalinkMap.get(relativePath) || permalinkMap.get(file);
-            if (permalink) {
-              finalSlug = permalink.replace(/^\//, ""); // Remove leading slash
-            }
-          }
-
-          const entryMeta = {
-            title: frontmatter.title || null,
-            // ✨ CHANGED: Build slug based on which directory
-            slug: finalSlug,
-            id: normalizeKey(frontmatter.id) || entryKey,
-            type: frontmatter.type || null,
-          };
-
-          ensureEntry(entryKey, entryMeta);
-
-          // Extract links from markdown
-          // Handle [text](url)
-          const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-          let match;
-          while ((match = linkRegex.exec(body)) !== null) {
-            const [, text, url] = match;
-            if (!url.match(/^(https?:|mailto:|#)/)) {
-              const targetKey = normalizeKey(url);
-              if (targetKey && targetKey !== entryKey) {
-                const entry = backlinkStore.get(entryKey);
-                if (entry) {
-                  entry.outbound.add(targetKey);
-                  const targetEntry = ensureEntry(targetKey);
-                  targetEntry.inbound.add(entryKey);
-                }
-              }
-            }
-          }
-
-          // Handle [[wikilinks]]
-          const wikiRegex = /\[\[([^\]]+)\]\]/g;
-          while ((match = wikiRegex.exec(body)) !== null) {
-            const [, link] = match;
-            const [target] = link.split("|");
-            const targetKey = normalizeKey(target.trim());
-            if (targetKey && targetKey !== entryKey) {
-              const entry = backlinkStore.get(entryKey);
-              if (entry) {
-                entry.outbound.add(targetKey);
-                const targetEntry = ensureEntry(targetKey);
-                targetEntry.inbound.add(entryKey);
-              }
-            }
-          }
-        } catch (error) {
-          console.error(`❌ Error processing ${file}:`, error.message);
-          skippedFiles++;
-        }
-      }
-    } catch (error) {
-      console.error(`❌ Error reading directory ${dir}:`, error.message);
-    }
-  }
-
-  console.log(`✅ POPULATE BACKLINKS DONE:`, {
-    processed: processedFiles,
-    skipped: skippedFiles,
-    storeSize: backlinkStore.size,
-  });
+function isIndexPage(key) {
+  if (!key) return false;
+  
+  // Check if it's a root index (empty string or just "index")
+  if (key === "" || key === "index") return true;
+  
+  // Check if it ends with /index (like "blog/index")
+  if (key.endsWith("/index")) return true;
+  
+  return false;
 }
 
 export default function remarkBacklinks(options = {}) {
-  const { baseUrl = "", verbose = false, permalinkMap = new Map() } = options;
+  const { verbose = false, autoIgnoreIndex = true } = options;
 
-  console.log("🔗 BACKLINKS PLUGIN INITIALIZED with options:", {
-    verbose,
-    baseUrl,
-  });
-
-  let transformerCallCount = 0;
+  log.debug("Plugin initialized");
 
   return function transformer(tree, file) {
-    transformerCallCount++;
-    console.log(
-      `🔗 BACKLINKS TRANSFORMER CALLED (${transformerCallCount}) for file:`,
-      file.path || file.stem,
-    );
-
     // Get frontmatter from Astro's file.data.astro
     const frontmatter = file.data?.astro?.frontmatter ?? {};
-
-    // Also check file properties directly
-    const fileData = {
-      ...frontmatter,
-      stem: file.stem,
-      path: file.path,
-      history: file.history?.[0],
-    };
-
-    console.log("🔗 FILE DATA:", {
-      file: file.path || file.stem,
-      hasFrontmatter: !!file.data?.astro?.frontmatter,
-      frontmatterKeys: Object.keys(frontmatter),
-      stem: file.stem,
-      data_keys: Object.keys(file.data || {}),
-    });
-
-    if (verbose) {
-      console.log("📝 Backlinks processing:", {
-        file: file.path || file.stem,
-        frontmatter: {
-          title: frontmatter.title,
-          slug: frontmatter.slug,
-          id: frontmatter.id,
-          permalink: frontmatter.permalink,
-        },
-        stem: file.stem,
-      });
-    }
 
     // Generate entry key - prioritize explicit identifiers
     let entryKey =
@@ -271,38 +131,29 @@ export default function remarkBacklinks(options = {}) {
       normalizeKey(file.stem) ||
       normalizeKey(file.path);
 
-    // ✨ NEW: Check permalink map
-    if (permalinkMap) {
-      // Try to find by file path or title
-      const fileId = file.stem; // e.g. "markdown"
-      const title = frontmatter.title;
-
-      const mappedPermalink = permalinkMap.get(title) || permalinkMap.get(fileId);
-      if (mappedPermalink) {
-        entryKey = normalizeKey(mappedPermalink);
-        if (verbose) console.log(`   🎯 Found in permalink map: ${mappedPermalink} -> ${entryKey}`);
-      }
-    }
-
     if (!entryKey) {
-      console.log("⚠️  Could not generate entry key for:", file.path);
+      log.warn(`Could not generate entry key for: ${file.path}`);
       return;
     }
 
-    console.log(`✅ Entry registered: "${entryKey}" from file: ${file.path}`);
-    console.log(`   Store size after registration: ${backlinkStore.size}`);
+    // Check if this page should be ignored in backlinks
+    // 1. Explicit frontmatter flag
+    // 2. Automatic index page detection (if enabled)
+    const explicitIgnore = frontmatter.backlinksIgnore === true;
+    const autoIgnore = autoIgnoreIndex && isIndexPage(entryKey);
+    const shouldIgnore = explicitIgnore || autoIgnore;
 
-    // ← NEW: Log what was used to create the key
+    // Track ignored pages
+    if (shouldIgnore) {
+      ignoredPages.add(entryKey);
+      if (verbose) {
+        const reason = explicitIgnore ? "explicit" : "auto (index page)";
+        log.debug(`Ignoring page in backlinks (${reason}): ${entryKey}`);
+      }
+    }
+
     if (verbose) {
-      console.log(`   Attempted keys (in order):`, {
-        slug: frontmatter.slug,
-        id: frontmatter.id,
-        permalink: frontmatter.permalink,
-        title: frontmatter.title,
-        stem: file.stem,
-        path: file.path,
-        usedFor: entryKey,
-      });
+      log.debug(`Processing: ${entryKey}`);
     }
 
     const entryMeta = {
@@ -315,18 +166,29 @@ export default function remarkBacklinks(options = {}) {
 
     const entry = ensureEntry(entryKey, entryMeta);
 
+    let linkCount = 0;
+
     const registerTarget = (rawTarget) => {
       if (!rawTarget) return;
       if (/^(https?:|mailto:|tel:|#)/i.test(rawTarget)) return;
       const normalized = normalizeKey(rawTarget);
       if (!normalized || normalized === entryKey) return;
 
+      // Skip if current page is ignored
+      if (shouldIgnore) return;
+
       entry.outbound.add(normalized);
       const targetEntry = ensureEntry(normalized);
-      targetEntry.inbound.add(entryKey);
+      
+      // Only add inbound link if the source page is not ignored
+      if (!ignoredPages.has(entryKey)) {
+        targetEntry.inbound.add(entryKey);
+      }
+      
+      linkCount++;
 
       if (verbose) {
-        console.log(`   🔗 "${entryKey}" → links to → "${normalized}"`);
+        log.debug(`Link: ${entryKey} → ${normalized}`);
       }
     };
 
@@ -349,8 +211,30 @@ export default function remarkBacklinks(options = {}) {
       }
     });
 
-    console.log(
-      `🔗 TRANSFORMER DONE for ${file.path} - Store now has ${backlinkStore.size} entries`,
-    );
+    // Log summary
+    log.success(`Registered: ${entryKey} (${linkCount} links, ${entry.inbound.size} inbound)${shouldIgnore ? ' [ignored]' : ''}`);
+
+    // Inject backlinks into frontmatter so Astro can access it
+    if (!file.data.astro) file.data.astro = {};
+    if (!file.data.astro.frontmatter) file.data.astro.frontmatter = {};
+    
+    const pageBacklinks = backlinkStore.get(entryKey);
+    if (pageBacklinks) {
+      const backlinksData = {
+        inbound: Array.from(pageBacklinks.inbound || []).filter(key => !ignoredPages.has(key)),
+        outbound: Array.from(pageBacklinks.outbound || []),
+        meta: pageBacklinks.meta || {},
+      };
+      file.data.astro.frontmatter.backlinks = backlinksData;
+      fileBacklinksMap.set(file.stem || entryKey, backlinksData);
+    } else {
+      const emptyBacklinks = {
+        inbound: [],
+        outbound: [],
+        meta: {},
+      };
+      file.data.astro.frontmatter.backlinks = emptyBacklinks;
+      fileBacklinksMap.set(file.stem || entryKey, emptyBacklinks);
+    }
   };
 }

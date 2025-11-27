@@ -1,4 +1,7 @@
 import { visit } from 'unist-util-visit';
+import logger from "../logger.js";
+
+const log = logger({ scope: "Fix Dates" });
 
 /**
  * Remark plugin for Date Format Normalization - Temporal Metadata Standardization
@@ -39,7 +42,6 @@ export default function remarkFixDates(options = {}) {
     }
 
     const frontmatter = file.data.astro.frontmatter;
-    let hasChanges = false;
 
     // Helper function to fix date strings
     const fixDateString = (value) => {
@@ -52,12 +54,11 @@ export default function remarkFixDates(options = {}) {
           const date = new Date(value.replace(" ", "T"));
           // If the date is invalid, return the original value to prevent errors
           if (!isNaN(date.getTime())) {
-            hasChanges = true;
             return date;
           }
         } catch (error) {
           // If parsing fails, return original value
-          console.warn(`[standard] Failed to parse date: ${value}`, error);
+          log.warn(`Failed to parse date: ${value}`);
         }
       }
       return value;

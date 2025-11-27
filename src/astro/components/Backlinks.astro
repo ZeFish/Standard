@@ -32,7 +32,7 @@ const publicBacklinks = deduplicatedBacklinks.filter(
                             {publicBacklinks.map((item) => (
                                 <li>
                                     <a href={item.url}>
-                                        {item.data.title ?? item.url}
+                                        {item.title ?? item.url}
                                     </a>
                                 </li>
                             ))}

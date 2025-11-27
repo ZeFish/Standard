@@ -1,0 +1,166 @@
+---
+import Base from "../astro/layouts/Base.astro";
+import { getCollection } from "astro:content";
+import config from "virtual:standard/config";
+
+// Get some random pages to suggest
+const allDocs = await getCollection("docs");
+const rootDocs = allDocs.filter(doc => !doc.id.includes("/"));
+const suggestedPages = rootDocs
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 5);
+---
+
+<Base
+    title="Page Not Found"
+    description="The page you're looking for doesn't exist"
+    class="prose"
+>
+    <div class="not-found">
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
+        <p>Sorry, the page you're looking for doesn't exist or has been moved.</p>
+
+        <div class="actions">
+            <a href="/" class="button button-primary">Back to Home</a>
+            <a href="/sitemap.xml" class="button button-secondary">View Sitemap</a>
+        </div>
+
+        {suggestedPages.length > 0 && (
+            <section class="suggested-pages">
+                <h3>You might be looking for:</h3>
+                <ul>
+                    {suggestedPages.map((doc) => (
+                        <li>
+                            <a href={doc.data.permalink || `/${doc.id}/`}>
+                                {doc.data.title || doc.id}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        )}
+    </div>
+</Base>
+
+<style>
+    .not-found {
+        text-align: center;
+        padding: 3rem 0;
+    }
+
+    .not-found h1 {
+        font-size: 6rem;
+        margin: 0;
+        color: #0066cc;
+        line-height: 1;
+    }
+
+    .not-found h2 {
+        font-size: 2rem;
+        margin: 1rem 0;
+        color: #333;
+    }
+
+    .not-found p {
+        font-size: 1.1rem;
+        color: #666;
+        margin: 1rem 0 2rem 0;
+    }
+
+    .actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s;
+        display: inline-block;
+    }
+
+    .button-primary {
+        background: #0066cc;
+        color: white;
+    }
+
+    .button-primary:hover {
+        background: #0052a3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+    }
+
+    .button-secondary {
+        background: #f0f0f0;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .button-secondary:hover {
+        background: #e8e8e8;
+        transform: translateY(-2px);
+    }
+
+    .suggested-pages {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e0e0e0;
+        text-align: left;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .suggested-pages h3 {
+        color: #0066cc;
+        margin-bottom: 1rem;
+    }
+
+    .suggested-pages ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .suggested-pages li {
+        padding: 0.5rem 0;
+    }
+
+    .suggested-pages a {
+        color: #0066cc;
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+
+    .suggested-pages a:hover {
+        background: #f0f7ff;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+        .not-found h1 {
+            font-size: 4rem;
+        }
+
+        .not-found h2 {
+            font-size: 1.5rem;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+        .button {
+            width: 100%;
+        }
+    }
+</style>

@@ -1,17 +1,7 @@
 import { visit } from "unist-util-visit";
 
-import createLogger from "../../lib/logger.js";
-
 export default function remarkObsidianLinks(options = {}) {
-  const logger = createLogger({
-    verbose: options.verbose ?? false,
-    scope: "Obsidian Links",
-  });
-
   return (tree, file) => {
-    // ✅ NEW: Use the permalink map from options
-    const permalinkMap = options.permalinkMap || new Map();
-
     // Process [[wiki links]]
     visit(tree, "text", (node, index, parent) => {
       if (!node.value.includes("[[")) {
@@ -43,24 +33,12 @@ export default function remarkObsidianLinks(options = {}) {
         const noteName = match[1].trim();
         const displayText = match[2] ? match[2].trim() : noteName;
         
-        // ✅ NEW: Look up in permalink map first
-        let noteUrl = permalinkMap.get(noteName);
-        
-        // Fallback: try slugified version
-        if (!noteUrl) {
-          const slugified = slugify(noteName);
-          noteUrl = permalinkMap.get(slugified);
-        }
-        
-        // Final fallback: generate a default URL
-        if (!noteUrl) {
-          const defaultUrl = slugify(noteName);
-          noteUrl = defaultUrl.startsWith("/") ? defaultUrl : `/n/${defaultUrl}`;
-        }
+        // Generate URL from wikilink name
+        const noteUrl = slugify(noteName);
 
         parts.push({
           type: "link",
-          url: noteUrl,
+          url: noteUrl.startsWith("/") ? noteUrl : `/${noteUrl}/`,
           children: [{ type: "text", value: displayText }],
         });
 
@@ -79,7 +57,7 @@ export default function remarkObsidianLinks(options = {}) {
       }
     });
 
-    // Process [text](./file.md) links
+    // Process [text](.\/file.md) links
     visit(tree, "link", (node) => {
       let url = node.url;
 
@@ -88,21 +66,14 @@ export default function remarkObsidianLinks(options = {}) {
         (url.startsWith("./") || url.startsWith("../")) &&
         url.endsWith(".md")
       ) {
-        // ✅ DECODE URL-ENCODED characters
+        // DECODE URL-ENCODED characters
         url = decodeURIComponent(url);
 
         let filePath = url.replace(/^\.\/|^\.\.\//, "");
         filePath = filePath.replace(/\.md$/, "");
 
         const slug = filePath.split("/").map(slugify).join("/");
-        const fileName = filePath.split("/").pop();
-
-        // ✅ NEW: Look up in permalink map
-        let fileUrl = permalinkMap.get(fileName) || 
-                      permalinkMap.get(filePath) ||
-                      `/n/${slug}`;
-
-        node.url = fileUrl;
+        node.url = slug.startsWith("/") ? slug : `/${slug}/`;
       }
     });
   };

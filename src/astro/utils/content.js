@@ -3,32 +3,7 @@
  * Ported from src/eleventy/eleventy/filter.js
  */
 
-import { getCollection } from "astro:content";
 
-// ✅ NEW: Build permalink map from collections
-export async function buildPermalinkMap() {
-  try {
-    const docs = await getCollection("docs");
-    const permalinkMap = new Map();
-
-    docs.forEach(doc => {
-      // Map by title
-      if (doc.data.title) {
-        permalinkMap.set(doc.data.title, `/${doc.data.permalink || doc.id}`);
-      }
-      // Map by file ID (last segment)
-      const fileName = doc.id.split("/").pop().replace(/\.md$/, "");
-      permalinkMap.set(fileName, `/${doc.data.permalink || doc.id}`);
-      // Map by full ID
-      permalinkMap.set(doc.id, `/${doc.data.permalink || doc.id}`);
-    });
-
-    return permalinkMap;
-  } catch (error) {
-    console.warn("⚠️ Could not build permalink map:", error.message);
-    return new Map();
-  }
-}
 
 // Reading time estimation
 export function getReadingTime(text) {

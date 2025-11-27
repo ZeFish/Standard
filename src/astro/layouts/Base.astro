@@ -2,9 +2,12 @@
 import Meta from "./Meta.astro";
 import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
-import Backlinks from "../components/Backlinks.astro";
 import Comments from "../components/Comments.astro";
 import { ClientRouter } from 'astro:transitions';
+import logger from "../logger.js";
+
+// Create logger for this layout
+const log = logger({ scope: "Base Layout" });
 
 // Import site configuration from virtual module
 import config from "virtual:standard/config";
@@ -22,6 +25,15 @@ const {
     securityHeaders = frontmatter?.securityHeaders,
     class: className,
 } = Astro.props;
+
+// ✨ Get backlinks from the page's frontmatter/data
+const backlinks = frontmatter?.backlinks || {};
+const { inbound = [], outbound = [], meta = {} } = backlinks;
+
+// Log backlinks info if present
+if (inbound.length > 0 || outbound.length > 0) {
+    log.debug(`Backlinks found: ${inbound.length} inbound, ${outbound.length} outbound`);
+}
 
 const year = new Date().getFullYear();
 ---
@@ -87,7 +99,42 @@ const year = new Date().getFullYear();
         <main id="main" class="prose">
             <slot />
 
-            <Backlinks />
+            <!-- ✨ Backlinks display -->
+            {(inbound.length > 0 || outbound.length > 0) && (
+                <>
+                    <hr />
+                    <article class="backlinks prose small tight">
+                        <div class="flow-3" style="orphans:10; widows:3;">
+                            {inbound.length > 0 && (
+                                <section>
+                                    <h3>Pages linking to this ({inbound.length})</h3>
+                                    <ul class="menu">
+                                        {inbound.map((link) => (
+                                            <li>
+                                                <code>{link}</code>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            )}
+
+                            {outbound.length > 0 && (
+                                <section>
+                                    <h3>Pages this links to ({outbound.length})</h3>
+                                    <ul class="menu">
+                                        {outbound.map((link) => (
+                                            <li>
+                                                <code>{link}</code>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            )}
+                        </div>
+                    </article>
+                </>
+            )}
+
             <Comments />
         </main>
 

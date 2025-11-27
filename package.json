@@ -49,6 +49,7 @@
     "./remark/standard": "./src/astro/remark/standard.js",
     "./remark/escape-code": "./src/astro/remark/escape-code.js",
     "./remark/fix-dates": "./src/astro/remark/fix-dates.js",
+    "./remark/frontmatter-defaults": "./src/astro/remark/frontmatter-defaults.js",
     "./remark/syntax": "./src/astro/remark/syntax.js",
     "./rehype/standard": "./src/astro/rehype/standard.js",
     "./rehype/typography": "./src/astro/rehype/typography.js",
@@ -69,7 +70,8 @@
     "./layouts/Base": "./src/astro/layouts/Base.astro",
     "./layouts/Meta": "./src/astro/layouts/Meta.astro",
     "./layouts/Encrypted": "./src/astro/layouts/Encrypted.astro",
-    "./remark/backlinks": "./src/astro/remark/backlinks.js"
+    "./remark/backlinks": "./src/astro/remark/backlinks.js",
+    "./remark/frontmatter-defaults": "./src/astro/remark/frontmatter-defaults.js"
   },
   "files": [
     "bin",

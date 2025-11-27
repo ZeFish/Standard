@@ -9,6 +9,7 @@ import remarkTags from "./remark/tags.js";
 import remarkStandard from "./remark/standard.js";
 import remarkEscapeCode from "./remark/escape-code.js";
 import remarkFixDates from "./remark/fix-dates.js";
+import remarkFrontmatterDefaults from "./remark/frontmatter-defaults.js";
 import remarkObsidianLinks from "./remark/obsidian-links.js";
 import remarkBacklinks from "./remark/backlinks.js";
 import remarkSyntax from "./remark/syntax.js";
@@ -31,6 +32,7 @@ export function getRemarkPlugins(config = {}) {
     [remarkStandard, config.standard || {}],
     [remarkEscapeCode, config.escapeCode || {}],
     [remarkFixDates, config.dateFields || {}],
+    [remarkFrontmatterDefaults, { defaults: config.frontmatterDefaults || {}, verbose: config.verbose }],
   ];
 
   // ✨ CRITICAL: Backlinks must run BEFORE ObsidianLinks
@@ -39,13 +41,13 @@ export function getRemarkPlugins(config = {}) {
       verbose: config.verbose,
       ...config.backlinks,
     });
-    plugins.push([remarkBacklinks, { verbose: config.verbose, permalinkMap: config.permalinkMap, ...config.backlinks }]);
+    plugins.push([remarkBacklinks, { verbose: config.verbose, ...config.backlinks }]);
   } else {
     console.log("⏭️  BACKLINKS plugin DISABLED");
   }
 
-  // ✅ Now pass permalink map to ObsidianLinks
-  plugins.push([remarkObsidianLinks, { permalinkMap: config.permalinkMap || new Map() }]);
+  // ObsidianLinks plugin
+  plugins.push([remarkObsidianLinks, {}]);
 
   // Syntax highlighting always last (must run after content transformations)
   plugins.push([remarkSyntax, config.syntax || {}]);
@@ -96,6 +98,12 @@ export function getAvailableRemarkPlugins() {
       name: "remarkSyntax",
       description: "Syntax highlighting for code blocks (must run last)",
       optional: false
+    },
+    {
+      name: "remarkFrontmatterDefaults",
+      description: "Apply default values to missing frontmatter fields",
+      optional: true,
+      default: false
     },
   ];
 }

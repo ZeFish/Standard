@@ -8,17 +8,12 @@
  */
 import { getRemarkPlugins } from "./standard-remark.js";
 import { getRehypePlugins } from "./standard-rehype.js";
-import {
-  getBacklinkGraph,
-  resetBacklinkGraph,
-  populateBacklinksFromContent,
-} from "./remark/backlinks.js";
 
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
 import yaml from "js-yaml";
-import createLogger from "../lib/logger.js";
+import logger from "./logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
 
@@ -78,7 +73,7 @@ export function deepMerge(target = {}, source = {}) {
 // ========================================
 
 export default function standard(options = {}) {
-  const logger = createLogger({
+  const log = logger({
     verbose: options.verbose ?? false,
     scope: "Core",
   });
@@ -91,14 +86,14 @@ export default function standard(options = {}) {
     try {
       const configFile = fs.readFileSync(configPath, "utf8");
       siteConfig = yaml.load(configFile) || {};
-      logger.debug(`Loaded config from: ${configPath}`);
+      log.debug(`Loaded config from: ${configPath}`);
     } catch (error) {
-      logger.warn(
+      log.warn(
         `Warning: Could not parse config file (${configPath}): ${error.message}`
       );
     }
   } else if (configPath) {
-    logger.debug(`Config file not found: ${configPath}`);
+    log.debug(`Config file not found: ${configPath}`);
   }
 
   // Merge site config with options using deep merge
@@ -118,7 +113,7 @@ export default function standard(options = {}) {
   }
 
   // Banner to indicate successful initialization
-  logger.banner(packageVersion);
+  log.banner(packageVersion);
 
   return {
     name: "@zefish/standard",
@@ -129,21 +124,12 @@ export default function standard(options = {}) {
         injectScript,
         injectRoute,
       }) => {
-        const backlinksEnabled = mergedConfig.backlinks !== false;
-        console.log("🔗 BACKLINKS SETUP - Enabled:", backlinksEnabled);
-
-        // ✅ NEW: Build permalink map and pass to plugins
-        let permalinkMap = new Map();
-        try {
-          const { buildPermalinkMap } = await import("./utils/content.js");
-          permalinkMap = await buildPermalinkMap();
-          logger.info(`Built permalink map with ${permalinkMap.size} entries`);
-        } catch (error) {
-          logger.warn("Could not build permalink map:", error.message);
-        }
-
         // Use centralized plugin managers
-        const remarkPlugins = getRemarkPlugins({ ...mergedConfig, permalinkMap });
+        // ✨ ENABLE backlinks plugin for testing
+        const remarkPlugins = getRemarkPlugins({
+          ...mergedConfig,
+          backlinks: true // Enable remark backlinks
+        });
         const rehypePlugins = getRehypePlugins(mergedConfig);
 
         // 1. Configure Remark/Rehype Plugins
@@ -158,96 +144,24 @@ export default function standard(options = {}) {
           },
         });
 
-        // 2. Virtual Modules (config + backlinks)
-        const moduleDir = path.dirname(fileURLToPath(import.meta.url));
-        const currentDir = path.resolve(moduleDir);
-        const backlinksModulePath = path
-          .join(currentDir, "remark", "backlinks.js")
-          .split(path.sep)
-          .join("/");
-
-        // ✨ NEW: Create a Vite plugin that populates backlinks on first access
-        const backlinkPopulationPlugin = {
-          name: "vite-plugin-backlink-population",
-          apply: "serve", // Only in dev/server mode
-          async configResolved() {
-            // Populate backlinks as soon as Vite starts
-            logger.info(
-              "⏱️  Vite server starting - will populate backlinks on first request"
-            );
-          },
-          async transform(code, id) {
-            // On first page request, populate backlinks
-            if (
-              id.includes("NoteLayout.astro") &&
-              !global.__backlinksPopulated
-            ) {
-              global.__backlinksPopulated = true;
-              logger.info(
-                "🔗 First page request detected - populating backlinks now"
-              );
-              await populateBacklinksFromContent(permalinkMap);
-            }
-            return code;
-          },
-        };
-
+        // 2. Virtual Modules (config only)
         const virtualModulesPlugin = {
           name: "vite-plugin-standard-virtual",
           resolveId(id) {
             if (id === "virtual:standard/config") {
               return "\0standard-virtual-config";
             }
-            if (id === "virtual:standard/backlinks") {
-              return "\0standard-virtual-backlinks";
-            }
           },
           load(id) {
             if (id === "\0standard-virtual-config") {
               return `export default ${JSON.stringify(mergedConfig)}`;
-            }
-            if (id === "\0standard-virtual-backlinks") {
-              if (!backlinksEnabled) {
-                return `export const backlinks = {}; export const normalizeKey = (s) => s; export default backlinks;`;
-              }
-              // ✨ FIX: Call getBacklinkGraph() at runtime, not at module load time
-              return `
-import { getBacklinkGraph as _getGraph, normalizeKey as _normalizeKey } from "${backlinksModulePath}";
-
-export const normalizeKey = _normalizeKey;
-
-// Create a getter that returns the graph when accessed
-let _cachedGraph = null;
-export const backlinks = new Proxy({}, {
-  get(target, prop) {
-    if (!_cachedGraph) {
-      _cachedGraph = _getGraph();
-    }
-    return _cachedGraph[prop];
-  },
-  ownKeys(target) {
-    if (!_cachedGraph) {
-      _cachedGraph = _getGraph();
-    }
-    return Reflect.ownKeys(_cachedGraph);
-  },
-  getOwnPropertyDescriptor(target, prop) {
-    if (!_cachedGraph) {
-      _cachedGraph = _getGraph();
-    }
-    return Reflect.getOwnPropertyDescriptor(_cachedGraph, prop);
-  }
-});
-
-export default backlinks;
-`;
             }
           },
         };
 
         updateConfig({
           vite: {
-            plugins: [backlinkPopulationPlugin, virtualModulesPlugin],
+            plugins: [virtualModulesPlugin],
             resolve: {
               alias: {
                 // Use source in dev for fast HMR
@@ -256,9 +170,17 @@ export default backlinks;
                   __dirname,
                   "../js/standard.js"
                 ),
+                "@zefish/standard/logger": path.resolve(
+                  __dirname,
+                  "logger.js"
+                ),
                 "@zefish/standard/utils/content": path.resolve(
                   __dirname,
                   "utils/content.js"
+                ),
+                "@zefish/standard/utils/content-transform": path.resolve(
+                  __dirname,
+                  "utils/content-transform.js"
                 ),
                 "@zefish/standard/utils/collections": path.resolve(
                   __dirname,
@@ -267,6 +189,11 @@ export default backlinks;
                 "@zefish/standard/utils/typography": path.resolve(
                   __dirname,
                   "utils/typography.js"
+                ),
+                // New utility alias
+                "@zefish/standard/utils/backlinks": path.resolve(
+                  __dirname,
+                  "utils/backlinks.js"
                 ),
                 "@zefish/standard/components/Backlinks": path.resolve(
                   __dirname,
@@ -282,15 +209,15 @@ export default backlinks;
         if (mergedConfig.injectRoutes !== false) {
           injectRoute({
             pattern: "/robots.txt",
-            entrypoint: path.join(currentDir, "routes/robots.js"),
+            entrypoint: path.join(__dirname, "routes/robots.js"),
           });
           injectRoute({
             pattern: "/site.webmanifest",
-            entrypoint: path.join(currentDir, "routes/manifest.js"),
+            entrypoint: path.join(__dirname, "routes/manifest.js"),
           });
           injectRoute({
             pattern: "/_headers",
-            entrypoint: path.join(currentDir, "routes/headers.js"),
+            entrypoint: path.join(__dirname, "routes/headers.js"),
           });
         }
 
@@ -320,7 +247,7 @@ export default backlinks;
           aliasEntries["@standard-fonts"] = fontsDir;
         }
 
-        // ✨ Copy fonts from package to public directory
+        // Copy fonts from package to public directory
         const packageFontsDir = path.resolve(
           packageSrcDir,
           "../public/assets/fonts"
@@ -354,7 +281,7 @@ export default backlinks;
             }
           });
 
-          logger.success("Fonts copied to public directory");
+          log.success("Fonts copied to public directory");
         }
 
         if (Object.keys(aliasEntries).length > 0) {
@@ -378,7 +305,7 @@ export default backlinks;
               verbose: mergedConfig.verbose,
             })
           );
-          logger.success("Cloudflare integration enabled");
+          log.success("Cloudflare integration enabled");
         }
 
         if (mergedConfig.openrouter?.enabled !== false) {
@@ -389,7 +316,7 @@ export default backlinks;
               siteUrl: mergedConfig.site?.url || mergedConfig.url,
             })
           );
-          logger.success("OpenRouter AI integration enabled");
+          log.success("OpenRouter AI integration enabled");
         }
 
         // Update config with registered integrations
@@ -418,34 +345,6 @@ export default backlinks;
         if (jsEntry) {
           injectScript("page", `import "${jsEntry}";`);
         }
-      },
-
-      "astro:build:start": async () => {
-        // ✨ For production builds, populate backlinks
-        console.log("🔗 ASTRO BUILD START - Production build detected");
-        const backlinksEnabled = mergedConfig.backlinks !== false;
-
-        if (backlinksEnabled) {
-          try {
-            await populateBacklinksFromContent(permalinkMap);
-            const graph = getBacklinkGraph();
-            console.log("✅ BACKLINKS POPULATED FROM CONTENT:", {
-              totalEntries: Object.keys(graph).length,
-            });
-          } catch (error) {
-            console.error("❌ Error populating backlinks:", error.message);
-          }
-        }
-      },
-
-      "astro:build:done": ({ dir }) => {
-        // Build completed - log final backlink graph state
-        logger.info("✅ ASTRO BUILD DONE - Backlink graph finalized");
-        const finalGraph = getBacklinkGraph();
-        logger.info("📊 FINAL BACKLINK GRAPH:", {
-          size: Object.keys(finalGraph).length,
-          keys: Object.keys(finalGraph).slice(0, 10),
-        });
       },
     },
   };
