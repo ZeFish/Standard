@@ -2,10 +2,7 @@ import { visit } from "unist-util-visit";
 import Logger from "../logger.js";
 
 export default function remarkObsidianLinks(options = {}) {
-  const logger = Logger({
-    verbose: options.verbose ?? false,
-    scope: "wikilinks",
-  });
+  const logger = Logger({ scope: "wikilinks" });
   logger.info("init");
 
   return (tree, file) => {

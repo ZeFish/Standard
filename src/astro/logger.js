@@ -8,7 +8,7 @@
  * throughout the plugin with debug-level filtering.
  *
  * @param {object} options Configuration options
- * @param {boolean} options.verbose Enable verbose logging (default: false)
+ * @param {boolean} options.verbose Enable verbose logging (default: reads from global config)
  * @param {string} options.scope Optional namespace for log messages
  *
  * @returns {object} Logger instance with methods: info, success, warn, error, debug, banner
@@ -16,12 +16,12 @@
  * @example
  * import logger from '@zefish/standard/logger';
  *
- * const log = logger({ verbose: true, scope: 'Markdown' });
+ * const log = logger({ scope: 'Markdown' });
  * log.info('Processing markdown files...');
  * log.success('Compiled 42 files');
  * log.warn('Missing frontmatter in post.md');
  * log.error('Failed to parse YAML', error);
- * log.debug('Raw block data:', blockData); // Only shows if verbose: true
+ * log.debug('Raw block data:', blockData); // Only shows if verbose: true in config
  * log.banner('0.18.0', 'https://standard.ffp.co');
  *
  * @since 0.11.0
@@ -130,29 +130,19 @@ colors.reset = ANSI16.reset;
  * Create a logger instance
  *
  * @param {Object} options - Configuration options
- * @param {boolean} options.verbose - Enable verbose/debug logging (default: reads from config)
+ * @param {boolean} options.verbose - Enable verbose/debug logging (default: reads from global config)
  * @param {string} options.scope - Optional namespace/scope for log messages
  * @returns {Object} Logger instance
  */
 function logger(options = {}) {
-  let { verbose, scope = null } = options;
-  
-  // If verbose is not explicitly set, try to read from virtual config
-  if (verbose === undefined) {
-    try {
-      // Attempt to import the virtual config at runtime
-      // This works in routes and components but not during the config:setup hook
-      import('virtual:standard/config').then((configModule) => {
-        verbose = configModule.default?.verbose ?? false;
-      }).catch(() => {
-        // Fallback if virtual module not available (e.g., during setup hook)
-        verbose = false;
-      });
-    } catch (e) {
-      // Fallback to false
-      verbose = false;
-    }
-  }
+  const { verbose: explicitVerbose, scope = null } = options;
+
+  // Get verbose setting lazily - reads from global config when actually used
+  const getVerbose = () => {
+    if (explicitVerbose !== undefined) return explicitVerbose;
+    // Check global config that was set by the integration during astro:config:setup
+    return globalThis.__STANDARD_CONFIG__?.verbose ?? false;
+  };
 
   const prefix = `${colors.reset}stdn${colors.orange.fg}::${colors.reset}gd${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
@@ -171,7 +161,6 @@ function logger(options = {}) {
      * @param {...any} args - Arguments to log
      */
     info(...args) {
-      //console.log(...format(`${colors.blue.fg}ℹ${colors.reset}`, ...args));
       console.log(...format(``, ...args));
     },
 
@@ -212,9 +201,11 @@ function logger(options = {}) {
      * @param {...any} args - Arguments to log
      */
     debug(...args) {
-      if (verbose) {
+      if (getVerbose()) {
         console.log(
-          ...format(`${colors.magenta.fg}⊙`, ...args, `${colors.reset}`),
+          `${prefix} ${colors.magenta.fg}[${scope}]`,
+          ...args,
+          `${colors.reset}`,
         );
       }
     },

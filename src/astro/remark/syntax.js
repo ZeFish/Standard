@@ -85,10 +85,7 @@ function parseCalloutArgs(args) {
 import Logger from "../logger.js";
 
 export default function remarkSyntax(options = {}) {
-  const logger = Logger({
-    verbose: options.verbose ?? false,
-    scope: "syntax",
-  });
+  const logger = Logger({ scope: "syntax" });
   logger.info("init");
 
   return (tree) => {

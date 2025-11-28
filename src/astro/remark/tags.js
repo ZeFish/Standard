@@ -9,10 +9,7 @@ import Logger from "../logger.js";
 export default function remarkTags(options = {}) {
   const tagRegex = /#([a-zA-Z][a-zA-Z0-9_-]*(?:\/[a-zA-Z][a-zA-Z0-9_-]*)*)/g;
 
-  const logger = Logger({
-    verbose: options.verbose ?? false,
-    scope: "tags",
-  });
+  const logger = Logger({ scope: "tags" });
   logger.info("init");
 
   return (tree) => {

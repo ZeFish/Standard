@@ -6,9 +6,6 @@
  * - Cloudflare integration
  * - Standard framework features
  */
-import { getRemarkPlugins } from "./standard-remark.js";
-import { getRehypePlugins } from "./standard-rehype.js";
-
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
@@ -16,19 +13,159 @@ import logger from "./logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
 import { deepMerge } from "./utils/utils.js";
+
+// Remark & Rehype Plugins
+import remarkTags from "./remark/tags.js";
+import remarkStandard from "./remark/standard.js";
+import remarkEscapeCode from "./remark/escape-code.js";
+import remarkFixDates from "./remark/fix-dates.js";
+import remarkObsidianLinks from "./remark/obsidian-links.js";
+import remarkBacklinks from "./remark/backlinks.js";
+import remarkSyntax from "./remark/syntax.js";
+
+import rehypeTypography from "./rehype/typography.js";
+import rehypeStandard from "./rehype/standard.js";
+
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// ========================================
+// PLUGIN MANAGERS
+// ========================================
+
+/**
+ * Get configured remark plugins array
+ *
+ * @param {Object} config - Merged configuration object
+ * @returns {Array} Array of [plugin, options] tuples for Astro
+ */
+function getRemarkPlugins(config = {}) {
+  const plugins = [
+    // Frontmatter defaults now handled by Vite plugin (runs earlier)
+    [remarkTags, config.tags || {}],
+    [remarkStandard, config.standard || {}],
+    [remarkEscapeCode, config || {}],
+    [remarkFixDates, config.dateFields || {}],
+  ];
+
+  // ✨ CRITICAL: Backlinks must run BEFORE ObsidianLinks
+  if (config.backlinks !== false) {
+    plugins.push([
+      remarkBacklinks,
+      { verbose: config.verbose, ...config.backlinks },
+    ]);
+  }
+
+  // ObsidianLinks plugin
+  plugins.push([remarkObsidianLinks, {}]);
+
+  // Syntax highlighting always last (must run after content transformations)
+  plugins.push([remarkSyntax, config.syntax || {}]);
+
+  return plugins;
+}
+
+/**
+ * Get list of all available remark plugins
+ *
+ * @returns {Array} Array of plugin metadata objects
+ */
+function getAvailableRemarkPlugins() {
+  return [
+    {
+      name: "remarkTags",
+      description: "Extract and process frontmatter tags",
+      optional: false,
+    },
+    {
+      name: "remarkStandard",
+      description: "Standard markdown enhancements (containers, callouts)",
+      optional: false,
+    },
+    {
+      name: "remarkEscapeCode",
+      description: "Escape code blocks to prevent double-processing",
+      optional: false,
+    },
+    {
+      name: "remarkFixDates",
+      description: "Normalize date fields across different formats",
+      optional: false,
+    },
+    {
+      name: "remarkObsidianLinks",
+      description: "Convert Obsidian-style [[wikilinks]] to standard links",
+      optional: false,
+    },
+    {
+      name: "remarkBacklinks",
+      description: "Generate automatic bidirectional backlinks",
+      optional: true,
+      default: true,
+    },
+    {
+      name: "remarkSyntax",
+      description: "Syntax highlighting for code blocks (must run last)",
+      optional: false,
+    },
+    {
+      name: "remarkFrontmatterDefaults",
+      description:
+        "Apply default values to missing frontmatter fields (deprecated - now handled by Vite plugin)",
+      optional: true,
+      default: false,
+      deprecated: true,
+    },
+  ];
+}
+
+/**
+ * Get configured rehype plugins array
+ *
+ * @param {Object} config - Merged configuration object
+ * @returns {Array} Array of [plugin, options] tuples for Astro
+ *
+ * @example
+ * const plugins = getRehypePlugins({
+ *   typography: { smartQuotes: true },
+ *   html: { lazyLoad: true }
+ * });
+ */
+function getRehypePlugins(config = {}) {
+  return [
+    [rehypeTypography, config.typography || {}],
+    [rehypeStandard, config.html || {}],
+  ];
+}
+
+/**
+ * Get list of all available rehype plugins
+ *
+ * @returns {Array} Array of plugin metadata objects
+ */
+function getAvailableRehypePlugins() {
+  return [
+    {
+      name: "rehypeTypography",
+      description: "Typography enhancements (smart quotes, fractions, etc.)",
+      optional: false,
+    },
+    {
+      name: "rehypeStandard",
+      description:
+        "Standard HTML processing (classes, attributes, optimization)",
+      optional: false,
+    },
+  ];
+}
 
 // ========================================
 // MAIN INTEGRATION
 // ========================================
 
 export default function standard(options = {}) {
-  const log = logger({
-    verbose: options.verbose ?? false,
-    scope: "Core",
-  });
+  const log = logger({ scope: "Core" });
 
   // Get package version for banner
   let packageVersion = "0.0.0";
@@ -39,6 +176,7 @@ export default function standard(options = {}) {
     );
     const packageData = JSON.parse(fs.readFileSync(packagePath, "utf8"));
     packageVersion = packageData.version || "0.0.0";
+    options.version = packageVersion;
   } catch (error) {
     // Fallback to default version if package.json can't be read
   }
@@ -62,6 +200,11 @@ export default function standard(options = {}) {
         // Merge full Astro config with Standard options
         // This allows all site config to live at the root level of astro.config.js
         const finalConfig = deepMerge(config, mergedConfig);
+
+        // Store config globally so it can be accessed from anywhere
+        // This is the official Astro pattern for sharing config across the build
+        globalThis.__STANDARD_CONFIG__ = finalConfig;
+
         // Use centralized plugin managers
         // ✨ ENABLE backlinks plugin for testing
         const remarkPlugins = getRemarkPlugins({
@@ -109,10 +252,7 @@ export default function standard(options = {}) {
                   "../js/standard.js",
                 ),
                 "@zefish/standard/logger": path.resolve(__dirname, "logger.js"),
-                "@zefish/standard/utils": path.resolve(
-                  __dirname,
-                  "utils/utils.js",
-                ),
+
                 "@zefish/standard/utils/content-transform": path.resolve(
                   __dirname,
                   "utils/content-transform.js",
@@ -134,7 +274,6 @@ export default function standard(options = {}) {
                   __dirname,
                   "components/Backlinks.astro",
                 ),
-                "@zefish/standard": path.resolve(__dirname, "./standard.js"),
               },
             },
           },
@@ -143,10 +282,10 @@ export default function standard(options = {}) {
         // 3. Inject Routes (optional)
         if (finalConfig.injectRoutes !== false) {
           // Inject dynamic content route for markdown files
-          injectRoute({
-            pattern: "/[...slug]",
-            entrypoint: path.join(__dirname, "routes/content.astro"),
-          });
+          //injectRoute({
+          //  pattern: "/[...slug]",
+          //  entrypoint: path.join(__dirname, "routes/content.astro"),
+          //});
 
           injectRoute({
             pattern: "/robots.txt",
@@ -288,3 +427,10 @@ export default function standard(options = {}) {
     },
   };
 }
+
+// ========================================
+// EXPORT HELPERS
+// ========================================
+
+export { getRemarkPlugins, getAvailableRemarkPlugins };
+export { getRehypePlugins, getAvailableRehypePlugins };

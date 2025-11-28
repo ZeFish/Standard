@@ -9,10 +9,7 @@
 import createLogger from "../logger.js";
 
 export default function openrouterIntegration(options = {}) {
-  const logger = createLogger({
-    verbose: options.verbose ?? false,
-    scope: "openrouter",
-  });
+  const logger = createLogger({ scope: "openrouter" });
 
   // Store config in closure for access in hooks
   let aiConfig = null;

@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 import logger from "../logger.js";
 
-const log = logger({ scope: "backlinks", verbose: true });
+const log = logger({ scope: "backlinks" });
 
 function slugifySegment(str) {
   return str
@@ -184,10 +184,6 @@ export default function remarkBacklinks(options = {}) {
       }
 
       linkCount++;
-
-      if (verbose) {
-        //log.debug(`Link: ${entryKey} → ${normalized}`);
-      }
     };
 
     visit(tree, (node) => {
@@ -210,7 +206,7 @@ export default function remarkBacklinks(options = {}) {
     });
 
     // Log summary
-    log.success(
+    log.debug(
       `${entryKey} (${linkCount} links, ${entry.inbound.size} inbound)${shouldIgnore ? " [ignored]" : ""}`,
     );
 

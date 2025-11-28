@@ -24,15 +24,14 @@ import { visit } from "unist-util-visit";
 import Logger from "../logger.js";
 
 export default function remarkEscapeCode(options = {}) {
-  const logger = Logger({
-    verbose: options.verbose ?? false,
-    scope: "escape code",
-  });
+  const logger = Logger({ scope: "escape code" });
   logger.info("init");
 
   const globalEscapeCodeBlocks = Array.isArray(options.escapeCodeBlocks)
     ? options.escapeCodeBlocks
     : [];
+
+  logger.debug(globalEscapeCodeBlocks);
 
   return (tree, file) => {
     // Get escape languages from front matter or global options

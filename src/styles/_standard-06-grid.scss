@@ -49,204 +49,202 @@
 
 /* Grid container */
 [class^="grid"] {
-    display: grid;
-    grid-auto-columns: 1fr;
-    column-gap: var(--gap-grid);
-    row-gap: var(--gap-grip);
-    margin-block: 0;
+  display: grid;
+  grid-auto-columns: 1fr;
+  column-gap: var(--gap-grid);
+  row-gap: var(--gap-grip);
+  margin-block: 0;
 }
-
 /* =========================== */
 /* TYPOGRAPHIC NUANCES         */
 /* =========================== */
 
 /* Exception for grid in a prose div */
 .prose > [class^="grid"] {
-    margin-block-start: calc(
-        (var(--gap) * max(var(--gap-block), var(--gap))) -
-            (var(--gap) * var(--gap))
-    );
-    margin-block-end: calc(var(--gap) * max(var(--gap-block), var(--gap)));
+  margin-block-start: calc(
+    (var(--gap) * max(var(--gap-block), var(--gap))) - (var(--gap) * var(--gap))
+  );
+  margin-block-end: calc(var(--gap) * max(var(--gap-block), var(--gap)));
 }
 [class^="grid"] > * {
-    min-width: 0; /* ← Force items to shrink below content size */
-    margin-block: 0;
+  min-width: 0; /* ← Force items to shrink below content size */
+  margin-block: 0;
 }
 
 @media (max-width: #{$mobile}) {
-    :root {
-        /*--gap-grid: var(--gap-micro);*/
-        [class^="grid"] * {
-            min-width: 0; /* ← Force items to shrink below content size */
-            /*margin-block: var(--gap);*/
-        }
+  :root {
+    /*--gap-grid: var(--gap-micro);*/
+    [class^="grid"] * {
+      min-width: 0; /* ← Force items to shrink below content size */
+      /*margin-block: var(--gap);*/
     }
+  }
 }
 
 [class^="grid"] {
-    .card {
-        margin: 0;
-    }
+  .card {
+    margin: 0;
+  }
 }
 
 /* Gap variants aligned to rhythm */
 :is(.grid, [class^="grid-"]).compact {
-    --gap-grid: var(--gap-tight);
+  --gap-grid: var(--gap-tight);
 }
 :is(.grid, [class^="grid-"]).relaxed {
-    --gap-grid: var(--gap);
+  --gap-grid: var(--gap);
 }
 
 /* Spans 1..12 */
 @for $i from 1 through 12 {
-    .grid-#{$i} {
-        display: grid;
-        grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
-        column-gap: var(--gap-grid);
-        row-gap: var(--gap-grid-row, var(--gap-grid));
-    }
+  .grid-#{$i} {
+    display: grid;
+    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+    column-gap: var(--gap-grid);
+    row-gap: var(--gap-grid-row, var(--gap-grid));
+  }
 }
 
 /* Spans 1..12 */
 @for $i from 1 through 12 {
-    .col-#{$i} {
-        grid-column: span #{$i};
-        margin-block-end: 0;
-    }
-    .start-#{$i} {
-        grid-column-start: #{$i};
-    }
+  .col-#{$i} {
+    grid-column: span #{$i};
+    margin-block-end: 0;
+  }
+  .start-#{$i} {
+    grid-column-start: #{$i};
+  }
 }
 
 /* Responsive spans/starts: md ≥ #{$small}, lg ≥ #{$large} */
 @media (max-width: #{$small}) {
-    @for $i from 1 through 12 {
-        .sm\:grid-#{$i} {
-            display: grid;
-            grid-template-columns: repeat(#{$i}, 1fr);
-            column-gap: var(--gap-grid);
-            row-gap: var(--gap-grid-row, var(--gap-grid));
-        }
-        .sm\:col-#{$i} {
-            grid-column: span #{$i};
-        }
-        .sm\:start-#{$i} {
-            grid-column-start: #{$i};
-        }
+  @for $i from 1 through 12 {
+    .sm\:grid-#{$i} {
+      display: grid;
+      grid-template-columns: repeat(#{$i}, 1fr);
+      column-gap: var(--gap-grid);
+      row-gap: var(--gap-grid-row, var(--gap-grid));
     }
-    .sm\:row {
-        grid-column: 1 / -1;
+    .sm\:col-#{$i} {
+      grid-column: span #{$i};
     }
+    .sm\:start-#{$i} {
+      grid-column-start: #{$i};
+    }
+  }
+  .sm\:row {
+    grid-column: 1 / -1;
+  }
 }
 @media (min-width: #{$large}) {
-    @for $i from 1 through 12 {
-        .lg\:grid-#{$i} {
-            display: grid;
-            grid-template-columns: repeat(#{$i}, 1fr);
-            column-gap: var(--gap-grid);
-            row-gap: var(--gap-grid-row, var(--gap-grid));
-        }
-        .lg\:col-#{$i} {
-            grid-column: span #{$i};
-        }
-        .lg\:start-#{$i} {
-            grid-column-start: #{$i};
-        }
+  @for $i from 1 through 12 {
+    .lg\:grid-#{$i} {
+      display: grid;
+      grid-template-columns: repeat(#{$i}, 1fr);
+      column-gap: var(--gap-grid);
+      row-gap: var(--gap-grid-row, var(--gap-grid));
     }
-    .lg\:row {
-        grid-column: 1 / -1;
+    .lg\:col-#{$i} {
+      grid-column: span #{$i};
     }
+    .lg\:start-#{$i} {
+      grid-column-start: #{$i};
+    }
+  }
+  .lg\:row {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Full-span helper (replaces old .h-col-full) */
 .row,
 .col-row,
 .col-full {
-    grid-column: 1 / -1;
-    margin-block-end: 0;
+  grid-column: 1 / -1;
+  margin-block-end: 0;
 }
 
 hr.col-row {
-    margin-block: var(--base);
+  margin-block: var(--base);
 }
 
 /* Rhythm inside grid items: apply to a cell containing prose */
 .grid .rhythm > * {
-    margin-block-end: var(--base);
+  margin-block-end: var(--base);
 }
 
 /* Free columns: place anywhere with CSS vars or utility shorthands */
 .free-col {
-    /* Defaults; authors override via CSS vars or utilities */
-    --start: auto; /* 1..12 or auto */
-    --span: 3; /* 1..12 */
+  /* Defaults; authors override via CSS vars or utilities */
+  --start: auto; /* 1..12 or auto */
+  --span: 3; /* 1..12 */
 
-    grid-column: var(--start) / span var(--span);
+  grid-column: var(--start) / span var(--span);
 
-    /* If the free column contains prose, opt-in to rhythm */
-    &.rhythm > * {
-        margin-block-end: var(--base);
-    }
+  /* If the free column contains prose, opt-in to rhythm */
+  &.rhythm > * {
+    margin-block-end: var(--base);
+  }
 }
 
 /* Utility-class interface to set the CSS vars (ergonomic authoring) */
 @for $i from 1 through 12 {
-    .span-#{$i} {
-        --span: #{$i};
-    }
-    .startv-#{$i} {
-        --start: #{$i};
-    } /* 'startv' to avoid clash with .start- utilities */
+  .span-#{$i} {
+    --span: #{$i};
+  }
+  .startv-#{$i} {
+    --start: #{$i};
+  } /* 'startv' to avoid clash with .start- utilities */
 }
 
 /* Responsive overrides for the var-based API */
 @media (max-width: #{$small}) {
-    @for $i from 1 through 12 {
-        .sm\:span-#{$i} {
-            --span: #{$i};
-        }
-        .sm\:startv-#{$i} {
-            --start: #{$i};
-        }
+  @for $i from 1 through 12 {
+    .sm\:span-#{$i} {
+      --span: #{$i};
     }
+    .sm\:startv-#{$i} {
+      --start: #{$i};
+    }
+  }
 }
 @media (min-width: #{$large}) {
-    @for $i from 1 through 12 {
-        .lg\:span-#{$i} {
-            --span: #{$i};
-        }
-        .lg\:startv-#{$i} {
-            --start: #{$i};
-        }
+  @for $i from 1 through 12 {
+    .lg\:span-#{$i} {
+      --span: #{$i};
     }
+    .lg\:startv-#{$i} {
+      --start: #{$i};
+    }
+  }
 }
 
 /* Mobile fallback: stack free columns full-width */
 @media (max-width: #{$small}) {
-    .free-col {
-        grid-column: 1 / -1;
-    }
+  .free-col {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Optional: sticky marginalia variant for editorial layouts */
 .free-col.sticky {
-    position: sticky;
-    inset-block-start: var(--base);
-    align-self: start;
-    z-index: 1;
+  position: sticky;
+  inset-block-start: var(--base);
+  align-self: start;
+  z-index: 1;
 }
 
 /* Row gap utilities for grid system */
 .grid.no-gap {
-    row-gap: 0;
+  row-gap: 0;
 }
 
 .grid.compact {
-    --grid-gap: var(--gap-compact);
+  --grid-gap: var(--gap-compact);
 }
 
 .grid.relaxed {
-    --grid-gap: var(--gap-relaxed);
+  --grid-gap: var(--gap-relaxed);
 }
 
 /* Common layout containers inherit rhythm to cascade deeper */
@@ -268,20 +266,20 @@ hr.col-row {
 .grid > .col-two3,
 .grid > .col-quarter,
 .grid > .col-full {
-    > * {
-        margin-block: 0;
-        margin-block-end: var(--gap);
-    }
+  > * {
+    margin-block: 0;
+    margin-block-end: var(--gap);
+  }
 
-    > :last-child {
-        margin-block-end: 0;
-    }
+  > :last-child {
+    margin-block-end: 0;
+  }
 
-    > :first-child {
-        margin-block-start: 0;
-    }
+  > :first-child {
+    margin-block-start: 0;
+  }
 }
 
 [class|="grid"] .container-hero {
-    margin-inline: 0;
+  margin-inline: 0;
 }
