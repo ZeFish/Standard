@@ -12,7 +12,6 @@ import { getRehypePlugins } from "./standard-rehype.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
-import yaml from "js-yaml";
 import logger from "./logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
@@ -47,24 +46,9 @@ export default function standard(options = {}) {
   // Banner to indicate successful initialization
   log.banner(packageVersion);
 
-  // Load site config if specified in options
-  let siteConfig = {};
-  const configPath = options.configPath || "site.config.yml";
-
-  if (configPath && fs.existsSync(configPath)) {
-    try {
-      const configFile = fs.readFileSync(configPath, "utf8");
-      siteConfig = yaml.load(configFile) || {};
-      log.info(`Found ${configPath}`);
-    } catch (error) {
-      log.warn(`Could not parse config file (${configPath}): ${error.message}`);
-    }
-  } else if (configPath) {
-    log.warn(`Config file not found: ${configPath}`);
-  }
-
-  // Merge site config with options using deep merge
-  const mergedConfig = deepMerge(siteConfig, options);
+  // All configuration comes from astro.config.js root level
+  // Options are merged as overrides if needed
+  let mergedConfig = options;
 
   return {
     name: "@zefish/standard",
@@ -75,13 +59,16 @@ export default function standard(options = {}) {
         injectScript,
         injectRoute,
       }) => {
+        // Merge full Astro config with Standard options
+        // This allows all site config to live at the root level of astro.config.js
+        const finalConfig = deepMerge(config, mergedConfig);
         // Use centralized plugin managers
         // ✨ ENABLE backlinks plugin for testing
         const remarkPlugins = getRemarkPlugins({
-          ...mergedConfig,
+          ...finalConfig,
           backlinks: true, // Enable remark backlinks
         });
-        const rehypePlugins = getRehypePlugins(mergedConfig);
+        const rehypePlugins = getRehypePlugins(finalConfig);
 
         // 1. Configure Remark/Rehype Plugins
         updateConfig({
@@ -105,7 +92,7 @@ export default function standard(options = {}) {
           },
           load(id) {
             if (id === "\0standard-virtual-config") {
-              return `export default ${JSON.stringify(mergedConfig)}`;
+              return `export default ${JSON.stringify(finalConfig)}`;
             }
           },
         };
@@ -154,7 +141,7 @@ export default function standard(options = {}) {
         });
 
         // 3. Inject Routes (optional)
-        if (mergedConfig.injectRoutes !== false) {
+        if (finalConfig.injectRoutes !== false) {
           // Inject dynamic content route for markdown files
           injectRoute({
             pattern: "/[...slug]",
@@ -252,21 +239,21 @@ export default function standard(options = {}) {
         // Note: Astro will handle calling their hooks automatically
         const integrations = [];
 
-        if (mergedConfig.cloudflare?.enabled !== false) {
+        if (finalConfig.cloudflare?.enabled !== false) {
           integrations.push(
             cloudflareIntegration({
-              ...mergedConfig.cloudflare,
-              verbose: mergedConfig.verbose,
+              ...finalConfig.cloudflare,
+              verbose: finalConfig.verbose,
             }),
           );
         }
 
-        if (mergedConfig.openrouter?.enabled !== false) {
+        if (finalConfig.openrouter?.enabled !== false) {
           integrations.push(
             openrouterIntegration({
-              ...mergedConfig.openrouter,
-              verbose: mergedConfig.verbose,
-              siteUrl: mergedConfig.site?.url || mergedConfig.url,
+              ...finalConfig.openrouter,
+              verbose: finalConfig.verbose,
+              siteUrl: finalConfig.site?.url || finalConfig.url,
             }),
           );
         }
@@ -279,7 +266,7 @@ export default function standard(options = {}) {
         }
 
         // 6. Add Global Assets (CSS/JS)
-        const assetsConfig = mergedConfig.assets || {};
+        const assetsConfig = finalConfig.assets || {};
 
         const cssEntry =
           assetsConfig.css ?? "@zefish/standard/styles/standard.scss";

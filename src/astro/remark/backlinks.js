@@ -116,7 +116,7 @@ function isIndexPage(key) {
 export default function remarkBacklinks(options = {}) {
   const { verbose = true, autoIgnoreIndex = true } = options;
 
-  log.info("Init");
+  log.info("init");
 
   return function transformer(tree, file) {
     // Get frontmatter from Astro's file.data.astro

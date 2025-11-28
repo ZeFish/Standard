@@ -14,7 +14,7 @@ import { generatePermalink } from "../utils/permalink.js";
 export async function getStaticPaths() {
     const content = await getCollection("content");
 
-    return content.map((entry) => {
+    return content.map((entry: any) => {
         // Get permalink from frontmatter OR generate it using shared utility
         // (Remark plugins run too late for getStaticPaths, so we must ensure it exists here)
         const permalink = entry.data.permalink || generatePermalink(entry.id);

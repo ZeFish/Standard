@@ -47,8 +47,8 @@ export function standardManualCollection(options = {}) {
     // Note: If using standard/config virtual module, you might be able to grab it here,
     // but passing it explicitly is safer for avoiding circular deps.
     throw new Error(
-      "[Standard] createDocsCollection requires a `contentDir`. \n" +
-        'Usage: createDocsCollection({ contentDir: "src/content/blog" })',
+      "[Standard] createDocsCollection requires a `base`. \n" +
+        'Usage: createDocsCollection({ base: "src/content/blog" })',
     );
   }
 

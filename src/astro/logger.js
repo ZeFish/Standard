@@ -130,12 +130,29 @@ colors.reset = ANSI16.reset;
  * Create a logger instance
  *
  * @param {Object} options - Configuration options
- * @param {boolean} options.verbose - Enable verbose/debug logging (default: false)
+ * @param {boolean} options.verbose - Enable verbose/debug logging (default: reads from config)
  * @param {string} options.scope - Optional namespace/scope for log messages
  * @returns {Object} Logger instance
  */
 function logger(options = {}) {
-  const { verbose = false, scope = null } = options;
+  let { verbose, scope = null } = options;
+  
+  // If verbose is not explicitly set, try to read from virtual config
+  if (verbose === undefined) {
+    try {
+      // Attempt to import the virtual config at runtime
+      // This works in routes and components but not during the config:setup hook
+      import('virtual:standard/config').then((configModule) => {
+        verbose = configModule.default?.verbose ?? false;
+      }).catch(() => {
+        // Fallback if virtual module not available (e.g., during setup hook)
+        verbose = false;
+      });
+    } catch (e) {
+      // Fallback to false
+      verbose = false;
+    }
+  }
 
   const prefix = `${colors.reset}stdn${colors.orange.fg}::${colors.reset}gd${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed

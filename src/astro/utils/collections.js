@@ -12,7 +12,7 @@ import { glob } from "astro/loaders";
  */
 export function defineStandardCollection(options = {}) {
   const {
-    base = "./src/content/notes",
+    base = "./content",
     pattern = "**/*.{md,mdx}",
     schema,
     loader: loaderOptions = {},
