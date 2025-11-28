@@ -1,9 +1,13 @@
 import { defineConfig } from "astro/config";
+import { loadEnv } from "vite";
 import standard from "./src/astro/standard.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Load environment variables
+const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 
 export default defineConfig({
   site: "https://standard.ffp.co",
@@ -38,7 +42,7 @@ export default defineConfig({
       openrouter: {
         enabled: true,
         model: "meta-llama/llama-4-maverick:free",
-        apiKey: process.env.OPENROUTER_KEY,
+        apiKey: env.OPENROUTER_KEY,
       },
       build: {
         css: {
