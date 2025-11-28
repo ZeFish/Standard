@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 import logger from "../logger.js";
 
-const log = logger({ scope: "Backlinks", verbose: true });
+const log = logger({ scope: "backlinks", verbose: true });
 
 function slugifySegment(str) {
   return str
@@ -116,7 +116,7 @@ function isIndexPage(key) {
 export default function remarkBacklinks(options = {}) {
   const { verbose = true, autoIgnoreIndex = true } = options;
 
-  log.info("");
+  log.info("Init");
 
   return function transformer(tree, file) {
     // Get frontmatter from Astro's file.data.astro
@@ -148,12 +148,11 @@ export default function remarkBacklinks(options = {}) {
       ignoredPages.add(entryKey);
       if (verbose) {
         const reason = explicitIgnore ? "explicit" : "auto (index page)";
-        log.debug(`Ignoring page in backlinks (${reason}): ${entryKey}`);
+        log.info(`Ignoring page in backlinks (${reason}): ${entryKey}`);
       }
     }
 
-    log.debug(`Processing: ${entryKey}`);
-    log.warn(`Processing: ${entryKey}`);
+    //log.debug(`Processing: ${entryKey}`);
 
     const entryMeta = {
       title: frontmatter.title ?? null,
@@ -187,7 +186,7 @@ export default function remarkBacklinks(options = {}) {
       linkCount++;
 
       if (verbose) {
-        log.debug(`Link: ${entryKey} → ${normalized}`);
+        //log.debug(`Link: ${entryKey} → ${normalized}`);
       }
     };
 
@@ -211,7 +210,9 @@ export default function remarkBacklinks(options = {}) {
     });
 
     // Log summary
-    //log.success(`Registered: ${entryKey} (${linkCount} links, ${entry.inbound.size} inbound)${shouldIgnore ? ' [ignored]' : ''}`);
+    log.success(
+      `${entryKey} (${linkCount} links, ${entry.inbound.size} inbound)${shouldIgnore ? " [ignored]" : ""}`,
+    );
 
     // Inject backlinks into frontmatter so Astro can access it
     if (!file.data.astro) file.data.astro = {};
@@ -237,7 +238,5 @@ export default function remarkBacklinks(options = {}) {
       file.data.astro.frontmatter.backlinks = emptyBacklinks;
       fileBacklinksMap.set(file.stem || entryKey, emptyBacklinks);
     }
-
-    log.success("");
   };
 }

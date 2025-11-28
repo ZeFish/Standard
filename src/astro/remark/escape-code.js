@@ -26,9 +26,9 @@ import Logger from "../logger.js";
 export default function remarkEscapeCode(options = {}) {
   const logger = Logger({
     verbose: options.verbose ?? false,
-    scope: "Escape Code",
+    scope: "escape code",
   });
-  logger.info();
+  logger.info("init");
 
   const globalEscapeCodeBlocks = Array.isArray(options.escapeCodeBlocks)
     ? options.escapeCodeBlocks

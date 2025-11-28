@@ -154,7 +154,8 @@ function logger(options = {}) {
      * @param {...any} args - Arguments to log
      */
     info(...args) {
-      console.log(...format(`${colors.blue.fg}ℹ${colors.reset}`, ...args));
+      //console.log(...format(`${colors.blue.fg}ℹ${colors.reset}`, ...args));
+      console.log(...format(``, ...args));
     },
 
     /**
@@ -208,7 +209,7 @@ function logger(options = {}) {
      */
     banner(version, url = "https://standard.ffp.co") {
       console.log(
-        `${prefix} ${colors.blue.fg}[Core] ${colors.blue.fg}ℹ ${colors.green.fg}v${version}${colors.reset} :: ${colors.yellow.fg}${url}${colors.reset}`,
+        `${prefix} ${colors.reset}:: ${colors.green.fg}v${version}${colors.reset} :: ${colors.yellow.fg}${url}${colors.reset}`,
       );
     },
   };

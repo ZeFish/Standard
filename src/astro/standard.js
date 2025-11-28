@@ -55,7 +55,7 @@ export default function standard(options = {}) {
     try {
       const configFile = fs.readFileSync(configPath, "utf8");
       siteConfig = yaml.load(configFile) || {};
-      log.info(`Loaded: ${configPath}`);
+      log.info(`Found ${configPath}`);
     } catch (error) {
       log.warn(`Could not parse config file (${configPath}): ${error.message}`);
     }

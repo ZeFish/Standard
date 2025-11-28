@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 import logger from "../logger.js";
 
-const log = logger({ scope: "Fix Dates" });
+const log = logger({ scope: "fix dates" });
 
 /**
  * Remark plugin for Date Format Normalization - Temporal Metadata Standardization
@@ -31,7 +31,7 @@ const log = logger({ scope: "Fix Dates" });
  */
 export default function remarkFixDates(options = {}) {
   const knownFields = options.fields || ["created", "modified"];
-  log.info();
+  log.info("init");
 
   return (tree, file) => {
     // Access and modify front matter

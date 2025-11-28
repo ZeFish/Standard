@@ -58,7 +58,6 @@
     "./routes/headers": "./src/astro/routes/headers.js",
     "./utils": "./src/astro/utils/utils.js",
     "./utils/collections": "./src/astro/utils/collections.js",
-    "./utils/typography": "./src/astro/utils/typography.js",
     "./utils/permalink": "./src/astro/utils/permalink.js",
     "./components/Menu": "./src/astro/components/Menu.astro",
     "./components/Fonts": "./src/astro/components/Fonts.astro",

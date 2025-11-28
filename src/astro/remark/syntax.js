@@ -87,9 +87,9 @@ import Logger from "../logger.js";
 export default function remarkSyntax(options = {}) {
   const logger = Logger({
     verbose: options.verbose ?? false,
-    scope: "Syntax",
+    scope: "syntax",
   });
-  logger.info();
+  logger.info("init");
 
   return (tree) => {
     visit(tree, "paragraph", (node, index, parent) => {

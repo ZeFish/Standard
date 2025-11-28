@@ -5,7 +5,8 @@ import { generatePermalink } from "../utils/permalink.js";
 export default function remarkFrontmatterDefaults(options = {}) {
   const defaults = options.defaults || {};
   const verbose = options.verbose || false;
-  const log = logger({ scope: "Frontmatter" });
+  const log = logger({ scope: "frontmatter" });
+  log.info("init");
   return (tree, file) => {
     if (!file.data.astro) {
       file.data.astro = {};

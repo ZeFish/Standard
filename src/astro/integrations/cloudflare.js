@@ -25,9 +25,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default function cloudflareIntegration(options = {}) {
   const logger = createLogger({
     verbose: options.verbose ?? false,
-    scope: "Cloudflare",
+    scope: "cloudflare",
   });
-  logger.info();
+  logger.info("init");
   // Store config in closure for access in hooks
   let cloudflareConfig = null;
 

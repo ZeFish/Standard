@@ -4,9 +4,9 @@ import Logger from "../logger.js";
 export default function remarkObsidianLinks(options = {}) {
   const logger = Logger({
     verbose: options.verbose ?? false,
-    scope: "WikiLinks",
+    scope: "wikilinks",
   });
-  logger.info();
+  logger.info("init");
 
   return (tree, file) => {
     // Process [[wiki links]]

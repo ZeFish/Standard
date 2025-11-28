@@ -11,9 +11,9 @@ export default function remarkTags(options = {}) {
 
   const logger = Logger({
     verbose: options.verbose ?? false,
-    scope: "Tags",
+    scope: "tags",
   });
-  logger.info();
+  logger.info("init");
 
   return (tree) => {
     visit(tree, "text", (node, index, parent) => {
