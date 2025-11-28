@@ -89,7 +89,7 @@
     "watch:css": "node bin/build-css.js --watch",
     "watch:js": "node bin/build-js.js --watch",
     "check": "npm run build && node bin/analyzer.js",
-    "build": "npm run build:css & npm run build:js",
+    "build": "astro build",
     "watch:assets": "node bin/build-css.js --watch",
     "dev": "npm run watch:css & npm run watch:js & npm run clean:ports && astro dev",
     "start": "astro dev",
