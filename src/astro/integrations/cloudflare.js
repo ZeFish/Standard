@@ -14,7 +14,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import createLogger from "../../lib/logger.js";
+import createLogger from "../logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -27,7 +27,7 @@ export default function cloudflareIntegration(options = {}) {
     verbose: options.verbose ?? false,
     scope: "Cloudflare",
   });
-
+  logger.info();
   // Store config in closure for access in hooks
   let cloudflareConfig = null;
 
@@ -98,7 +98,7 @@ export default function cloudflareIntegration(options = {}) {
         // Also store in config for potential future use
         config._cloudflare = cloudflareConfig;
 
-        logger.success("Cloudflare integration initialized");
+        logger.success();
       },
 
       "astro:build:done": ({ dir }) => {
@@ -359,16 +359,22 @@ export function CloudflarePicture({
   }
 
   const baseOptions = { width, height, quality, fit };
-  const optimizedSrc = buildCloudflareImageUrl(src, { ...baseOptions, format: "auto" });
+  const optimizedSrc = buildCloudflareImageUrl(src, {
+    ...baseOptions,
+    format: "auto",
+  });
   const srcset = generateImageSrcset(src, [640, 960, 1280, 1920], baseOptions);
 
   let sources = "";
 
   // Generate source elements for different formats
-  formats.forEach(format => {
+  formats.forEach((format) => {
     if (format === "auto") return; // Skip 'auto' for source elements
 
-    const formatSrcset = generateImageSrcset(src, [640, 960, 1280, 1920], { ...baseOptions, format });
+    const formatSrcset = generateImageSrcset(src, [640, 960, 1280, 1920], {
+      ...baseOptions,
+      format,
+    });
     sources += `<source srcset="${formatSrcset}" sizes="${sizes}" type="image/${format}">`;
   });
 
@@ -455,9 +461,13 @@ export function ResponsiveImage({
     `alt="${alt}"`,
     `class="${className}"`,
     `loading="${loading}"`,
-    blurDataURL ? `style="background-image: url('${blurDataURL}'); background-size: cover; background-position: center;"` : "",
-    props
-  ].filter(Boolean).join("\n    ");
+    blurDataURL
+      ? `style="background-image: url('${blurDataURL}'); background-size: cover; background-position: center;"`
+      : "",
+    props,
+  ]
+    .filter(Boolean)
+    .join("\n    ");
 
   return `<img
     ${imgAttributes}

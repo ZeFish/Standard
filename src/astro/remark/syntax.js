@@ -82,7 +82,15 @@ function parseCalloutArgs(args) {
   return { type, title, isCollapsible, isOpen };
 }
 
+import Logger from "../logger.js";
+
 export default function remarkSyntax(options = {}) {
+  const logger = Logger({
+    verbose: options.verbose ?? false,
+    scope: "Syntax",
+  });
+  logger.info();
+
   return (tree) => {
     visit(tree, "paragraph", (node, index, parent) => {
       // Check if this paragraph contains :: syntax

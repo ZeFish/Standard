@@ -16,57 +16,10 @@ import yaml from "js-yaml";
 import logger from "./logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
-
+import { deepMerge } from "./utils/utils.js";
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// ========================================
-// UTILITY FUNCTIONS
-// ========================================
-
-/**
- * Deep merge two objects recursively
- * Options take precedence over defaults
- *
- * @param {Object} target - Base object (defaults)
- * @param {Object} source - Object to merge (overrides)
- * @returns {Object} Merged object with all nested properties
- *
- * @example
- * deepMerge(
- *   { db: { host: 'localhost', port: 5432 } },
- *   { db: { port: 3306 } }
- * )
- * // Returns: { db: { host: 'localhost', port: 3306 } }
- */
-export function deepMerge(target = {}, source = {}) {
-  const result = { ...target };
-
-  for (const key in source) {
-    const sourceValue = source[key];
-    const targetValue = result[key];
-
-    // Recursively merge objects (but not arrays or null)
-    if (
-      sourceValue &&
-      typeof sourceValue === "object" &&
-      !Array.isArray(sourceValue) &&
-      sourceValue !== null &&
-      targetValue &&
-      typeof targetValue === "object" &&
-      !Array.isArray(targetValue) &&
-      targetValue !== null
-    ) {
-      result[key] = deepMerge(targetValue, sourceValue);
-    } else {
-      // Otherwise, source takes precedence
-      result[key] = sourceValue;
-    }
-  }
-
-  return result;
-}
 
 // ========================================
 // MAIN INTEGRATION
@@ -78,33 +31,12 @@ export default function standard(options = {}) {
     scope: "Core",
   });
 
-  // Load site config if specified in options
-  let siteConfig = {};
-  const configPath = options.configPath || "site.config.yml";
-
-  if (configPath && fs.existsSync(configPath)) {
-    try {
-      const configFile = fs.readFileSync(configPath, "utf8");
-      siteConfig = yaml.load(configFile) || {};
-      log.debug(`Loaded config from: ${configPath}`);
-    } catch (error) {
-      log.warn(
-        `Warning: Could not parse config file (${configPath}): ${error.message}`
-      );
-    }
-  } else if (configPath) {
-    log.debug(`Config file not found: ${configPath}`);
-  }
-
-  // Merge site config with options using deep merge
-  const mergedConfig = deepMerge(siteConfig, options);
-
   // Get package version for banner
   let packageVersion = "0.0.0";
   try {
     const packagePath = path.join(
       path.dirname(fileURLToPath(import.meta.url)),
-      "../../package.json"
+      "../../package.json",
     );
     const packageData = JSON.parse(fs.readFileSync(packagePath, "utf8"));
     packageVersion = packageData.version || "0.0.0";
@@ -114,6 +46,25 @@ export default function standard(options = {}) {
 
   // Banner to indicate successful initialization
   log.banner(packageVersion);
+
+  // Load site config if specified in options
+  let siteConfig = {};
+  const configPath = options.configPath || "site.config.yml";
+
+  if (configPath && fs.existsSync(configPath)) {
+    try {
+      const configFile = fs.readFileSync(configPath, "utf8");
+      siteConfig = yaml.load(configFile) || {};
+      log.info(`Loaded: ${configPath}`);
+    } catch (error) {
+      log.warn(`Could not parse config file (${configPath}): ${error.message}`);
+    }
+  } else if (configPath) {
+    log.warn(`Config file not found: ${configPath}`);
+  }
+
+  // Merge site config with options using deep merge
+  const mergedConfig = deepMerge(siteConfig, options);
 
   return {
     name: "@zefish/standard",
@@ -128,7 +79,7 @@ export default function standard(options = {}) {
         // ✨ ENABLE backlinks plugin for testing
         const remarkPlugins = getRemarkPlugins({
           ...mergedConfig,
-          backlinks: true // Enable remark backlinks
+          backlinks: true, // Enable remark backlinks
         });
         const rehypePlugins = getRehypePlugins(mergedConfig);
 
@@ -168,36 +119,33 @@ export default function standard(options = {}) {
                 "@zefish/standard/styles": path.resolve(__dirname, "../styles"),
                 "@zefish/standard/js": path.resolve(
                   __dirname,
-                  "../js/standard.js"
+                  "../js/standard.js",
                 ),
-                "@zefish/standard/logger": path.resolve(
+                "@zefish/standard/logger": path.resolve(__dirname, "logger.js"),
+                "@zefish/standard/utils": path.resolve(
                   __dirname,
-                  "logger.js"
-                ),
-                "@zefish/standard/utils/content": path.resolve(
-                  __dirname,
-                  "utils/content.js"
+                  "utils/utils.js",
                 ),
                 "@zefish/standard/utils/content-transform": path.resolve(
                   __dirname,
-                  "utils/content-transform.js"
+                  "utils/content-transform.js",
                 ),
                 "@zefish/standard/utils/collections": path.resolve(
                   __dirname,
-                  "utils/collections.js"
+                  "utils/collections.js",
                 ),
                 "@zefish/standard/utils/typography": path.resolve(
                   __dirname,
-                  "utils/typography.js"
+                  "utils/typography.js",
                 ),
                 // New utility alias
                 "@zefish/standard/utils/backlinks": path.resolve(
                   __dirname,
-                  "utils/backlinks.js"
+                  "utils/backlinks.js",
                 ),
                 "@zefish/standard/components/Backlinks": path.resolve(
                   __dirname,
-                  "components/Backlinks.astro"
+                  "components/Backlinks.astro",
                 ),
                 "@zefish/standard": path.resolve(__dirname, "./standard.js"),
               },
@@ -207,6 +155,12 @@ export default function standard(options = {}) {
 
         // 3. Inject Routes (optional)
         if (mergedConfig.injectRoutes !== false) {
+          // Inject dynamic content route for markdown files
+          injectRoute({
+            pattern: "/[...slug]",
+            entrypoint: path.join(__dirname, "routes/content.astro"),
+          });
+
           injectRoute({
             pattern: "/robots.txt",
             entrypoint: path.join(__dirname, "routes/robots.js"),
@@ -241,7 +195,7 @@ export default function standard(options = {}) {
           "../",
           "public",
           "assets",
-          "fonts"
+          "fonts",
         );
         if (fs.existsSync(fontsDir)) {
           aliasEntries["@standard-fonts"] = fontsDir;
@@ -250,11 +204,11 @@ export default function standard(options = {}) {
         // Copy fonts from package to public directory
         const packageFontsDir = path.resolve(
           packageSrcDir,
-          "../public/assets/fonts"
+          "../public/assets/fonts",
         );
         const clientPublicDir = path.resolve(
           fileURLToPath(config.root), // ← Convert URL to string
-          "public/assets/fonts"
+          "public/assets/fonts",
         );
 
         // Create the directory if it doesn't exist
@@ -281,7 +235,7 @@ export default function standard(options = {}) {
             }
           });
 
-          log.success("Fonts copied to public directory");
+          log.info("Fonts copied to public directory");
         }
 
         if (Object.keys(aliasEntries).length > 0) {
@@ -303,9 +257,8 @@ export default function standard(options = {}) {
             cloudflareIntegration({
               ...mergedConfig.cloudflare,
               verbose: mergedConfig.verbose,
-            })
+            }),
           );
-          log.success("Cloudflare integration enabled");
         }
 
         if (mergedConfig.openrouter?.enabled !== false) {
@@ -314,9 +267,8 @@ export default function standard(options = {}) {
               ...mergedConfig.openrouter,
               verbose: mergedConfig.verbose,
               siteUrl: mergedConfig.site?.url || mergedConfig.url,
-            })
+            }),
           );
-          log.success("OpenRouter AI integration enabled");
         }
 
         // Update config with registered integrations

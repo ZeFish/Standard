@@ -1,4 +1,4 @@
-import { visit } from 'unist-util-visit';
+import { visit } from "unist-util-visit";
 import logger from "../logger.js";
 
 const log = logger({ scope: "Fix Dates" });
@@ -30,7 +30,8 @@ const log = logger({ scope: "Fix Dates" });
  * The above dates will be converted from strings to JavaScript Date objects.
  */
 export default function remarkFixDates(options = {}) {
-  const knownFields = options.fields || ['created', 'modified'];
+  const knownFields = options.fields || ["created", "modified"];
+  log.info();
 
   return (tree, file) => {
     // Access and modify front matter

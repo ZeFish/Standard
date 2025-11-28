@@ -1,14 +1,14 @@
 /**
  * Standard Framework Content Configuration
- * 
+ *
  * @module @zefish/standard/content-config
  * @category Astro Integration
  * @description Simple helper to set up content collections with permalink-based URLs
  * and backlinks support.
- * 
+ *
  * @example
  * import { createDocsCollection } from "@zefish/standard/content-config";
- * 
+ *
  * export const collections = {
  *   docs: createDocsCollection(),
  * };
@@ -20,70 +20,62 @@ import { glob } from "astro/loaders";
 /**
  * Base schema for content validation
  */
-const baseSchema = z.object({
+export const baseSchema = z.object({
   title: z.string().optional().nullable(),
   description: z.string().optional().nullable(),
   author: z.string().optional().nullable(),
-  date: z.coerce.date().optional().nullable(),
-  updated: z.coerce.date().optional().nullable(),
+  created: z.coerce.date().optional().nullable(),
+  modified: z.coerce.date().optional().nullable(),
   tags: z.array(z.string()).optional().nullable(),
   visibility: z.enum(["public", "unlisted", "private"]).optional(),
   permalink: z.string().optional(),
   layout: z.string().optional().nullable(),
-  draft: z.boolean().optional(),
 });
 
 /**
  * Create a docs collection with permalink-based URLs and backlinks support
- * 
- * @param {Object} options - Configuration options
- * @param {string} options.contentDir - Content directory (required)
- * @param {string} options.pattern - File pattern (default: "**\/*.md")
- * @param {Object} options.schema - Custom schema (default: baseSchema)
- * @returns {Object} Collection definition
- * 
- * @example
- * import { createDocsCollection } from "@zefish/standard/content-config";
- * import config from "virtual:standard/config";
- * 
- * export const collections = {
- *   docs: createDocsCollection({ 
- *     contentDir: config.content?.dir 
- *   }),
- * };
  */
-export function createDocsCollection(options = {}) {
+export function standardManualCollection(options = {}) {
   const {
-    contentDir,
-    pattern = "**/*.md",
+    base,
+    pattern = "**/*.{md,mdx}", // Updated to include MDX
     schema = baseSchema,
   } = options;
 
-  if (!contentDir) {
+  if (!base) {
+    // Fallback or Error.
+    // Note: If using standard/config virtual module, you might be able to grab it here,
+    // but passing it explicitly is safer for avoiding circular deps.
     throw new Error(
-      'createDocsCollection() requires contentDir option. ' +
-      'Pass it from Standard config: ' +
-      'createDocsCollection({ contentDir: config.content?.dir })'
+      "[Standard] createDocsCollection requires a `contentDir`. \n" +
+        'Usage: createDocsCollection({ contentDir: "src/content/blog" })',
     );
   }
 
   return defineCollection({
-    loader: glob({ pattern, base: contentDir }),
+    loader: glob({ pattern, base: base }),
     schema,
     transform: (entry) => {
-      // Use permalink as URL, or generate from file path
-      const url = entry.data.permalink || `/${entry.id.replace(/\.mdx?$/, '')}/`;
+      // If permalink exists, use it. Otherwise, generate from ID.
+      let url = entry.data.permalink;
+
+      if (!url) {
+        // Clean the ID: remove extension and handle 'index'
+        const slug = entry.id
+          .replace(/\.mdx?$/, "")
+          .replace(/(^|\/)index$/, "");
+
+        url = slug ? `/${slug}/` : "/";
+      }
 
       return {
         ...entry,
-        url,
+        url, // Available as post.url
         data: {
           ...entry.data,
-          permalink: url,
+          permalink: url, // Sync data.permalink to match
         },
       };
     },
   });
 }
-
-export { baseSchema };

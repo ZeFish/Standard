@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 import logger from "../logger.js";
 
-const log = logger({ scope: "Backlinks" });
+const log = logger({ scope: "Backlinks", verbose: true });
 
 function slugifySegment(str) {
   return str
@@ -103,20 +103,20 @@ export function resetBacklinkGraph() {
  */
 function isIndexPage(key) {
   if (!key) return false;
-  
+
   // Check if it's a root index (empty string or just "index")
   if (key === "" || key === "index") return true;
-  
+
   // Check if it ends with /index (like "blog/index")
   if (key.endsWith("/index")) return true;
-  
+
   return false;
 }
 
 export default function remarkBacklinks(options = {}) {
-  const { verbose = false, autoIgnoreIndex = true } = options;
+  const { verbose = true, autoIgnoreIndex = true } = options;
 
-  log.debug("Plugin initialized");
+  log.info("");
 
   return function transformer(tree, file) {
     // Get frontmatter from Astro's file.data.astro
@@ -152,9 +152,8 @@ export default function remarkBacklinks(options = {}) {
       }
     }
 
-    if (verbose) {
-      log.debug(`Processing: ${entryKey}`);
-    }
+    log.debug(`Processing: ${entryKey}`);
+    log.warn(`Processing: ${entryKey}`);
 
     const entryMeta = {
       title: frontmatter.title ?? null,
@@ -179,12 +178,12 @@ export default function remarkBacklinks(options = {}) {
 
       entry.outbound.add(normalized);
       const targetEntry = ensureEntry(normalized);
-      
+
       // Only add inbound link if the source page is not ignored
       if (!ignoredPages.has(entryKey)) {
         targetEntry.inbound.add(entryKey);
       }
-      
+
       linkCount++;
 
       if (verbose) {
@@ -212,16 +211,18 @@ export default function remarkBacklinks(options = {}) {
     });
 
     // Log summary
-    log.success(`Registered: ${entryKey} (${linkCount} links, ${entry.inbound.size} inbound)${shouldIgnore ? ' [ignored]' : ''}`);
+    //log.success(`Registered: ${entryKey} (${linkCount} links, ${entry.inbound.size} inbound)${shouldIgnore ? ' [ignored]' : ''}`);
 
     // Inject backlinks into frontmatter so Astro can access it
     if (!file.data.astro) file.data.astro = {};
     if (!file.data.astro.frontmatter) file.data.astro.frontmatter = {};
-    
+
     const pageBacklinks = backlinkStore.get(entryKey);
     if (pageBacklinks) {
       const backlinksData = {
-        inbound: Array.from(pageBacklinks.inbound || []).filter(key => !ignoredPages.has(key)),
+        inbound: Array.from(pageBacklinks.inbound || []).filter(
+          (key) => !ignoredPages.has(key),
+        ),
         outbound: Array.from(pageBacklinks.outbound || []),
         meta: pageBacklinks.meta || {},
       };
@@ -236,5 +237,7 @@ export default function remarkBacklinks(options = {}) {
       file.data.astro.frontmatter.backlinks = emptyBacklinks;
       fileBacklinksMap.set(file.stem || entryKey, emptyBacklinks);
     }
+
+    log.success("");
   };
 }

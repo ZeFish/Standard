@@ -6,12 +6,12 @@
  * @author Francis Fontaine
  */
 
-import createLogger from "../../lib/logger.js";
+import createLogger from "../logger.js";
 
 export default function openrouterIntegration(options = {}) {
   const logger = createLogger({
     verbose: options.verbose ?? false,
-    scope: "AI",
+    scope: "ai",
   });
 
   // Store config in closure for access in hooks
@@ -37,17 +37,17 @@ export default function openrouterIntegration(options = {}) {
         config._ai = aiConfig;
 
         if (!aiConfig.enabled) {
-          logger.warn("AI integration disabled");
+          logger.debug("disabled");
           return;
         }
 
         if (!aiConfig.apiKey) {
-          logger.warn("OPENROUTER_KEY not set. AI features will not work.");
+          logger.warn("OPENROUTER_KEY not set. disable");
           return;
         }
 
-        logger.debug(`Initializing with model: ${aiConfig.model}`);
         logger.success(`Initialized [${aiConfig.model}]`);
+        logger.debug(`Model: ${aiConfig.model}`);
       },
 
       "astro:server:setup": ({ server }) => {

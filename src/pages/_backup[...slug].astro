@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../astro/layouts/Base.astro";
+import config from "virtual:standard/config";
+import { generatePermalink } from "../astro/utils/permalink.js";
+
+// This function generates all the static paths for our .md files
+export async function getStaticPaths() {
+    // Load the 'docs' collection defined in src/content/config.ts
+    const docs = await getCollection("docs");
+
+    return docs.map((entry) => {
+        // Get permalink from frontmatter OR generate it using shared utility
+        // (Remark plugins run too late for getStaticPaths, so we must ensure it exists here)
+        const permalink = entry.data.permalink || generatePermalink(entry.id);
+
+        // Convert permalink to a valid Astro slug (remove leading/trailing slashes)
+        const slug = permalink.replace(/^\/|\/$/g, "");
+
+        // Empty string/undefined for index file (/) - this becomes the root route
+        return {
+            params: { slug: slug || undefined },
+            props: { entry },
+        };
+    });
+}
+
+// Get the entry from props
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+
+// Merge schema data with data injected by remark plugins (like backlinks)
+const frontmatter = {
+    ...entry.data,
+    ...remarkPluginFrontmatter,
+};
+
+// ✨ NEW: Ensure backlinks are present
+const frontmatterWithBacklinks = {
+    ...frontmatter,
+    backlinks: frontmatter?.backlinks || {},
+};
+---
+
+<!-- Use Base layout and pass the markdown content through -->
+<Base
+    frontmatter={frontmatterWithBacklinks}
+    title={frontmatter?.title || "Standard Framework"}
+    description={frontmatter?.description || config.description}
+    class="prose"
+>
+    <Content />
+</Base>

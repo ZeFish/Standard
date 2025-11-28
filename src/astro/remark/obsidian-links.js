@@ -1,6 +1,13 @@
 import { visit } from "unist-util-visit";
+import Logger from "../logger.js";
 
 export default function remarkObsidianLinks(options = {}) {
+  const logger = Logger({
+    verbose: options.verbose ?? false,
+    scope: "WikiLinks",
+  });
+  logger.info();
+
   return (tree, file) => {
     // Process [[wiki links]]
     visit(tree, "text", (node, index, parent) => {
@@ -32,7 +39,7 @@ export default function remarkObsidianLinks(options = {}) {
 
         const noteName = match[1].trim();
         const displayText = match[2] ? match[2].trim() : noteName;
-        
+
         // Generate URL from wikilink name
         const noteUrl = slugify(noteName);
 

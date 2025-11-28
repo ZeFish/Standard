@@ -1,0 +1,57 @@
+---
+/**
+ * Dynamic content route for markdown files
+ * This route is automatically injected by the Standard plugin
+ *
+ * It handles all markdown content from the 'docs' collection
+ * and generates pages based on their permalink
+ */
+
+import { getCollection, render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import { generatePermalink } from "../utils/permalink.js";
+
+export async function getStaticPaths() {
+    const content = await getCollection("content");
+
+    return content.map((entry) => {
+        // Get permalink from frontmatter OR generate it using shared utility
+        // (Remark plugins run too late for getStaticPaths, so we must ensure it exists here)
+        const permalink = entry.data.permalink || generatePermalink(entry.id);
+
+        // Convert permalink to a valid Astro slug (remove leading/trailing slashes)
+        const slug = permalink.replace(/^\/|\/$/g, "");
+
+        // Empty string/undefined for index file (/) - this becomes the root route
+        return {
+            params: { slug: slug || undefined },
+            props: { entry },
+        };
+    });
+}
+
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+
+// Merge schema data with data injected by remark plugins (like backlinks)
+const frontmatter = {
+    ...entry.data,
+    ...remarkPluginFrontmatter,
+};
+
+// Ensure backlinks are present
+const frontmatterWithBacklinks = {
+    ...frontmatter,
+    backlinks: frontmatter?.backlinks || {},
+};
+---
+
+<!-- Use Base layout and pass the markdown content through -->
+<Base
+    frontmatter={frontmatterWithBacklinks}
+    title={frontmatter?.title || "Standard Framework"}
+    description={frontmatter?.description || ""}
+    class="prose"
+>
+    <Content />
+</Base>

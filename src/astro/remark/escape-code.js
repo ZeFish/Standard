@@ -20,7 +20,16 @@ import { visit } from "unist-util-visit";
  * <div class="example">This won't be processed as markdown</div>
  * ```
  */
+
+import Logger from "../logger.js";
+
 export default function remarkEscapeCode(options = {}) {
+  const logger = Logger({
+    verbose: options.verbose ?? false,
+    scope: "Escape Code",
+  });
+  logger.info();
+
   const globalEscapeCodeBlocks = Array.isArray(options.escapeCodeBlocks)
     ? options.escapeCodeBlocks
     : [];

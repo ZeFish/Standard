@@ -30,10 +30,7 @@ const {
 const backlinks = frontmatter?.backlinks || {};
 const { inbound = [], outbound = [], meta = {} } = backlinks;
 
-// Log backlinks info if present
-if (inbound.length > 0 || outbound.length > 0) {
-    log.debug(`Backlinks found: ${inbound.length} inbound, ${outbound.length} outbound`);
-}
+
 
 const year = new Date().getFullYear();
 ---

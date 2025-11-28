@@ -3,33 +3,32 @@ import standard from "./src/astro/standard.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [standard({
-    // Load configuration from YAML file (recommended approach)
-    configPath: "site.config.yml",
+  integrations: [
+    standard({
+      // Load configuration from YAML file (recommended approach)
+      configPath: "site.config.yml",
+      base: "./content",
 
-    // Optional: Override YAML settings or add environment-specific config
-    verbose: process.env.NODE_ENV === "development",
+      // Optional: Override YAML settings or add environment-specific config
+      verbose: true,
 
-    // Optional: Environment-specific overrides
-    cloudflare: {
-      images: {
-        quality: process.env.NODE_ENV === "production" ? 90 : 75,
+      // Optional: Environment-specific overrides
+      cloudflare: {
+        images: {
+          quality: process.env.NODE_ENV === "production" ? 90 : 75,
+        },
       },
-    },
 
-    // Optional: Environment variables
-    openrouter: {
-      apiKey: process.env.OPENROUTER_KEY,
-    },
-  })],
-
-
-
+      // Optional: Environment variables
+      openrouter: {
+        apiKey: process.env.OPENROUTER_KEY,
+      },
+    }),
+  ],
 
   server: {
     port: 8083,

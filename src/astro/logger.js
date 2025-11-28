@@ -1,6 +1,6 @@
 /**
  * Standard Framework Logger
- * 
+ *
  * @module @zefish/standard/logger
  * @category Astro Integration
  * @description Centralized logging system for Standard Framework with color
@@ -15,7 +15,7 @@
  *
  * @example
  * import logger from '@zefish/standard/logger';
- * 
+ *
  * const log = logger({ verbose: true, scope: 'Markdown' });
  * log.info('Processing markdown files...');
  * log.success('Compiled 42 files');
@@ -128,7 +128,7 @@ colors.reset = ANSI16.reset;
 
 /**
  * Create a logger instance
- * 
+ *
  * @param {Object} options - Configuration options
  * @param {boolean} options.verbose - Enable verbose/debug logging (default: false)
  * @param {string} options.scope - Optional namespace/scope for log messages
@@ -137,7 +137,7 @@ colors.reset = ANSI16.reset;
 function logger(options = {}) {
   const { verbose = false, scope = null } = options;
 
-  const prefix = `${colors.reset}Stdn${colors.orange.fg}::${colors.reset}GD${colors.reset}`;
+  const prefix = `${colors.reset}stdn${colors.orange.fg}::${colors.reset}gd${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
   const scopeText = scope ? `${colors.blue.fg}[${scope}]${colors.reset}` : "";
 
@@ -162,7 +162,7 @@ function logger(options = {}) {
      * @param {...any} args - Arguments to log
      */
     success(...args) {
-      console.log(...format(`${colors.green.fg}✓${colors.reset}`, ...args));
+      console.log(...format(`${colors.green.fg}✓`, ...args, `${colors.reset}`));
     },
 
     /**
@@ -170,7 +170,11 @@ function logger(options = {}) {
      * @param {...any} args - Arguments to log
      */
     warn(...args) {
-      console.warn(...format(`${colors.yellow.fg}⚠${colors.reset}`, ...args));
+      console.warn(
+        `${prefix} ${colors.orange.fg}[${scope}] ⚠`,
+        ...args,
+        `${colors.reset}`,
+      );
     },
 
     /**
@@ -178,7 +182,11 @@ function logger(options = {}) {
      * @param {...any} args - Arguments to log
      */
     error(...args) {
-      console.error(...format(`${colors.red.fg}✖${colors.reset}`, ...args));
+      console.error(
+        `${prefix} ${colors.red.fg}[${scope}] ${colors.red.bg}⚠${colors.reset}${colors.red.fg}`,
+        ...args,
+        `${colors.reset}`,
+      );
     },
 
     /**
@@ -187,7 +195,9 @@ function logger(options = {}) {
      */
     debug(...args) {
       if (verbose) {
-        console.log(...format(`${colors.magenta.fg}⊙${colors.reset}`, ...args));
+        console.log(
+          ...format(`${colors.magenta.fg}⊙`, ...args, `${colors.reset}`),
+        );
       }
     },
 
