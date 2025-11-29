@@ -1,5 +1,5 @@
-import Standard from "./src/eleventy/standard.js";
-import DocGenerator from "./src/eleventy/doc-generator.js";
+import Standard from "./11ty/standard.js";
+import DocGenerator from "./11ty/doc-generator.js";
 
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -33,7 +33,7 @@ ai: {
 
   // ===== AUTO-DOCUMENTATION GENERATOR =====
   eleventyConfig.addPlugin(DocGenerator, {
-    sourceDir: "src",
+    sourceDir: "11ty",
     patterns: [
       "styles/**/*.scss",
       "js/**/*.js",
@@ -92,7 +92,7 @@ ai: {
     htmlTemplateEngine: "njk",
     dir: {
       input: "content",
-      includes: "../src/layouts",
+      includes: "../11ty/layouts",
       output: "_site",
     },
   };

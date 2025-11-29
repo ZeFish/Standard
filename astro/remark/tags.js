@@ -5,7 +5,7 @@ import { visit } from "unist-util-visit";
  * Matches #tag and wraps in <span class="tag" data-tag="tag">#tag</span>
  */
 
-import Logger from "../logger.js";
+import Logger from "../../core/logger.js";
 export default function remarkTags(options = {}) {
   const tagRegex = /#([a-zA-Z][a-zA-Z0-9_-]*(?:\/[a-zA-Z][a-zA-Z0-9_-]*)*)/g;
 

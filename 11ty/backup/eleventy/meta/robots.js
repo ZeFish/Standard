@@ -7,7 +7,7 @@
  * @category 11ty Plugins
  */
 
-import Logger from "../logger.js";
+import Logger from "../core/logger.js";
 
 export default function Robots(eleventyConfig, site = {}) {
   const user = site.standard?.robots || {};

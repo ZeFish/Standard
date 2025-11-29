@@ -92,7 +92,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { minify } from "terser";
 import yaml from "js-yaml";
-import Logger from "../src/astro/logger.js";
+import Logger from "../core/logger.js";
 const logger = Logger({
   scope: "JS ",
 });

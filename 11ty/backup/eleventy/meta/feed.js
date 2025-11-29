@@ -7,7 +7,7 @@
  * @category 11ty Plugins
  */
 
-import Logger from "../logger.js";
+import Logger from "../core/logger.js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import path from "path";
 import { fileURLToPath } from "url";

@@ -147,7 +147,7 @@
  * @param {number} options.limit Maximum number of items to show (default: unlimited)
  */
 
-import Logger from "./logger.js";
+import Logger from "../core/logger.js";
 
 function escapeHtml(str = "") {
   return String(str)

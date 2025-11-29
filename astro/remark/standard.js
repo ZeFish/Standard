@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-import logger from "../logger.js";
+import logger from "../../core/logger.js";
 
 const log = logger({ scope: "markdown" });
 

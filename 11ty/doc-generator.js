@@ -4,7 +4,7 @@ import fs from "fs";
 import { glob } from "glob";
 import { fileURLToPath } from "url";
 import crypto from "crypto";
-import Logger from "./logger.js";
+import Logger from "../core/logger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "../../");

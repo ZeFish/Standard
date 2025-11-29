@@ -1,5 +1,5 @@
 import fs from "fs";
-import Logger from "./logger.js";
+import Logger from "../core/logger.js";
 
 /**
  * @component Backlinks Plugin

@@ -7,7 +7,7 @@
  * @category 11ty Plugins
  */
 
-import Logger from "../logger.js";
+import Logger from "../../core/logger.js";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -68,7 +68,10 @@ export default function Feed(eleventyConfig, site = {}) {
   // Copy XSL if used
   if (stylesheet) {
     eleventyConfig.addPassthroughCopy({
-      [path.join(__dirname, "../layouts/pretty-atom-feed.xsl")]: "assets/",
+      [path.join(__dirname, "../layouts/pretty-atom-feed.xsl")]: path.join(
+        site.standard.outputDir,
+        "assets/",
+      ),
     });
   }
 

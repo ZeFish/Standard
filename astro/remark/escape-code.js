@@ -21,7 +21,7 @@ import { visit } from "unist-util-visit";
  * ```
  */
 
-import Logger from "../logger.js";
+import Logger from "../../core/logger.js";
 
 export default function remarkEscapeCode(options = {}) {
   const logger = Logger({ scope: "escape code" });

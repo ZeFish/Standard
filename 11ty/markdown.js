@@ -4,7 +4,7 @@ import markdownIt from "markdown-it";
 import markdown_it_obsidian_callouts from "markdown-it-obsidian-callouts";
 import markdownItFootnote from "markdown-it-footnote";
 import { JSDOM } from "jsdom";
-import Logger from "./logger.js";
+import Logger from "../core/logger.js";
 
 /**
  * Tag Wrapper Plugin for markdown-it

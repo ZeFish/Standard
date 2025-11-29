@@ -1,5 +1,5 @@
 ---
-import Base from "../astro/layouts/Base.astro";
+import Base from "../layouts/Base.astro";
 import * as IndexContent from "../../content/index.md";
 import { getCollection } from "astro:content";
 import config from "virtual:standard/config";
@@ -9,7 +9,7 @@ const allDocs = await getCollection("docs");
 const rootDocs = allDocs.filter(doc => !doc.id.includes("/"));
 
 // Sort by title
-const sortedDocs = rootDocs.sort((a, b) => 
+const sortedDocs = rootDocs.sort((a, b) =>
   (a.data.title || a.id).localeCompare(b.data.title || b.id)
 );
 ---

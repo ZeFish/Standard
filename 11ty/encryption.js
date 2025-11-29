@@ -3,7 +3,7 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 import nunjucks from "nunjucks";
 import { readFile } from "fs/promises";
-import Logger from "./logger.js";
+import Logger from "../core/logger.js";
 
 /**
  * @component Content Encryption Plugin

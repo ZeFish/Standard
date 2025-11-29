@@ -1,6 +1,6 @@
 // src/eleventy/security.js
 
-import Logger from "../logger.js";
+import Logger from "../core/logger.js";
 
 export default function (eleventyConfig, site = {}) {
   // Read user config

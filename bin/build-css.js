@@ -89,7 +89,7 @@ import { fileURLToPath } from "url";
 import { compile } from "sass";
 import CleanCSS from "clean-css";
 import yaml from "js-yaml";
-import Logger from "../src/astro/logger.js";
+import Logger from "../core/logger.js";
 const logger = Logger({
   scope: "CSS",
 });

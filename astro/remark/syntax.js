@@ -82,7 +82,7 @@ function parseCalloutArgs(args) {
   return { type, title, isCollapsible, isOpen };
 }
 
-import Logger from "../logger.js";
+import Logger from "../../core/logger.js";
 
 export default function remarkSyntax(options = {}) {
   const logger = Logger({ scope: "syntax" });

@@ -6,7 +6,7 @@
  * @author Francis Fontaine
  */
 
-import createLogger from "../logger.js";
+import createLogger from "../../core/logger.js";
 
 export default function openrouterIntegration(options = {}) {
   const logger = createLogger({ scope: "openrouter" });

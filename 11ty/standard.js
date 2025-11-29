@@ -15,7 +15,7 @@ import OpenRouter from "./openrouter.js";
 import CloudflarePages from "./cloudflare.js";
 import MenuPlugin from "./menu.js";
 import Syntax from "./syntax.js";
-import Logger from "./logger.js";
+import Logger from "../core/logger.js";
 import Encryption from "./encryption.js";
 import Sitemap from "./meta/sitemap.js";
 import Feed from "./meta/feed.js";
@@ -25,7 +25,7 @@ import Security from "./meta/security.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(
-  readFileSync(path.join(__dirname, "../../package.json"), "utf-8"),
+  readFileSync(path.join(__dirname, "../package.json"), "utf-8"),
 );
 
 // Helpers
@@ -54,7 +54,7 @@ const defaults = {
   verbose: false,
   dirs: {
     input: "content",
-    includes: "src/layouts",
+    includes: "11ty/layouts",
     output: "_site",
   },
   sitemap: { enabled: true },
@@ -76,11 +76,11 @@ export default function (eleventyConfig, options = {}) {
   standard.version = pkg.version;
 
   standard.layouts = {
-    base: path.join(__dirname, "../layouts/base.njk"),
-    meta: path.join(__dirname, "../layouts/meta.njk"),
-    encrypted: path.join(__dirname, "../layouts/encrypted.njk"),
-    pageError: path.join(__dirname, "../layouts/404.njk"),
-    atomFeed: path.join(__dirname, "../layouts/atomfeed.xsl"),
+    base: path.join(__dirname, "./layouts/base.njk"),
+    meta: path.join(__dirname, "./layouts/meta.njk"),
+    encrypted: path.join(__dirname, "./layouts/encrypted.njk"),
+    pageError: path.join(__dirname, "./layouts/404.njk"),
+    atomFeed: path.join(__dirname, "./layouts/atomfeed.xsl"),
   };
 
   const ENV = process.env.ENV || "PROD";
@@ -92,7 +92,7 @@ export default function (eleventyConfig, options = {}) {
     env: ENV,
     standard,
   };
-  let logger = Logger({ verbose: site.standard.verbose });
+  let logger = Logger({ verbose: site.standard.verbose, scope: "Core" });
   // 3) Merge site.config.yml over it (highest priority)
   const userConfigPath = path.join(process.cwd(), "site.config.yml");
   if (existsSync(userConfigPath)) {
@@ -122,16 +122,15 @@ export default function (eleventyConfig, options = {}) {
   }
 
   // 6) Passthrough copy (dist -> outputDir)
-  eleventyConfig.addPassthroughCopy({
-    [path.join(__dirname, "../../dist")]: site.standard.outputDir,
-  });
-  logger.debug(`Standard assets: dist/ → ${site.standard.outputDir}/`);
+  logger.debug(`Standard assets: lib/ → ${site.standard.outputDir}/`);
+  //eleventyConfig.addPassthroughCopy({
+  //  [path.join(__dirname, "../lib")]: site.standard.outputDir,
+  //});
 
   // 7) Watch targets
-  const srcPath = path.join(process.cwd(), "src");
+  const srcPath = path.join(process.cwd(), "lib");
   if (existsSync(srcPath)) {
-    eleventyConfig.addWatchTarget("src/scss/");
-    eleventyConfig.addWatchTarget("src/js/");
+    eleventyConfig.addWatchTarget("../lib/");
   }
 
   // 8) Plugins

@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-import logger from "../logger.js";
+import logger from "../../core/logger.js";
 import { generatePermalink } from "../utils/permalink.js";
 
 export default function remarkFrontmatterDefaults(options = {}) {

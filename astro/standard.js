@@ -9,7 +9,7 @@
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
-import logger from "./logger.js";
+import logger from "../core/logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
 import { deepMerge } from "./utils/utils.js";
@@ -172,7 +172,7 @@ export default function standard(options = {}) {
   try {
     const packagePath = path.join(
       path.dirname(fileURLToPath(import.meta.url)),
-      "../../package.json",
+      "../package.json",
     );
     const packageData = JSON.parse(fs.readFileSync(packagePath, "utf8"));
     packageVersion = packageData.version || "0.0.0";
@@ -246,31 +246,27 @@ export default function standard(options = {}) {
             resolve: {
               alias: {
                 // Use source in dev for fast HMR
-                "@zefish/standard/styles": path.resolve(__dirname, "../styles"),
+                "@zefish/standard/styles": path.resolve(
+                  __dirname,
+                  "../design_system/styles",
+                ),
                 "@zefish/standard/js": path.resolve(
                   __dirname,
-                  "../js/standard.js",
+                  "../design_system/js/standard.js",
                 ),
-                "@zefish/standard/logger": path.resolve(__dirname, "logger.js"),
-
-                "@zefish/standard/utils/content-transform": path.resolve(
+                "@zefish/standard/logger": path.resolve(
                   __dirname,
-                  "utils/content-transform.js",
+                  "../core/logger.js",
                 ),
-                "@zefish/standard/utils/collections": path.resolve(
+                "@zefish/standard/astro/utils": path.resolve(
+                  __dirname,
+                  "utils/utils.js",
+                ),
+                "@zefish/standard/astro/utils/collections": path.resolve(
                   __dirname,
                   "utils/collections.js",
                 ),
-                "@zefish/standard/utils/typography": path.resolve(
-                  __dirname,
-                  "utils/typography.js",
-                ),
-                // New utility alias
-                "@zefish/standard/utils/backlinks": path.resolve(
-                  __dirname,
-                  "utils/backlinks.js",
-                ),
-                "@zefish/standard/components/Backlinks": path.resolve(
+                "@zefish/standard/astro/components/Backlinks": path.resolve(
                   __dirname,
                   "components/Backlinks.astro",
                 ),
