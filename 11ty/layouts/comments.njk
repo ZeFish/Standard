@@ -1,0 +1,322 @@
+---
+layout: base
+---
+
+{#
+  GitHub Comments System - Nunjucks Layout Template
+
+  Use this layout to add comments to any page.
+
+  Usage in markdown front matter:
+  ---
+  layout: comments.njk
+  comment: true
+  ---
+
+  Or include as partial:
+  {% include "comments.njk" %}
+
+  Configuration:
+  - comment: Set to true to enable comments (page ID auto-generated from file slug)
+  - commentApiUrl: API endpoint (default: /api/comments)
+  - showCommentForm: Show form to submit new comments (default: true)
+  - pollInterval: Auto-refresh interval in ms (default: null - disabled)
+#}
+
+{% set showForm = showCommentForm !== false %}
+
+<section class="comments-section negate-body-padding-full" id="comments-section">
+  <!-- Comments header -->
+  <div class="comments-header padding-base">
+    <h2>Comments</h2>
+    <p class="comments-intro">
+      Join the discussion! Share your thoughts on this post.
+    </p>
+  </div>
+
+  <!-- Comment form using Standard shortcode (auto-initializes) -->
+  {% if showForm %}
+  <div class="padding-base">
+    {% standardComment true, true %}
+  </div>
+  {% endif %}
+</section>
+
+<style>
+  /* Section */
+  .comments-section {
+    max-width: 100%;
+    margin: 2rem 0;
+    border-top: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-border);
+    background: var(--color-background);
+  }
+
+  .comments-header h2 {
+    margin-top: 0;
+  }
+
+  .comments-intro {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  /* Comments list */
+  .comments-list {
+    margin: 2rem 0;
+  }
+
+  .comment {
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--color-background-secondary);
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .comment-header strong {
+    font-size: 1rem;
+  }
+
+  .comment-date {
+    color: var(--color-subtle);
+  }
+
+  .comment-content {
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+
+  .comment-content code {
+    background: var(--color-background);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+
+  .comment-content pre {
+    background: var(--color-background);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .comment-actions {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .comment-reply {
+    background: none;
+    border: none;
+    color: var(--color-accent);
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+
+  .comment-reply:hover {
+    color: var(--color-accent);
+    opacity: 0.8;
+  }
+
+  /* Nested replies */
+  .comment-replies {
+    margin-left: 2rem;
+    margin-top: 1.5rem;
+    border-left: 2px solid var(--color-border);
+    padding-left: 1.5rem;
+  }
+
+  /* Moderation indicators */
+  .comment[data-pending] {
+    opacity: 0.7;
+    border-color: #ffc107;
+  }
+
+  .comment[data-spam] {
+    border-color: #dc3545;
+    background: #fff5f5;
+  }
+
+  .comment-flag {
+    background: #ffe5e5;
+    color: #dc3545;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .comment-pending {
+    background: #fff3cd;
+    color: #856404;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  /* Form */
+  .comment-form {
+    background: var(--color-background-secondary);
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .comment-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .comment-form legend {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding: 0;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  .form-group small {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--color-subtle);
+    font-size: 0.85rem;
+  }
+
+  #form-status {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: none;
+  }
+
+  #form-status:not(:empty) {
+    display: block;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    background: var(--color-background-secondary);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-background);
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .form-privacy {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-subtle);
+  }
+
+  .form-privacy a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .form-privacy a:hover {
+    text-decoration: underline;
+  }
+
+  .comments-empty {
+    text-align: center;
+    color: var(--color-subtle);
+    font-style: italic;
+    padding: 2rem;
+    background: var(--color-background-secondary);
+    border-radius: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .comment-replies {
+      margin-left: 1rem;
+      padding-left: 1rem;
+    }
+
+    .form-actions {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>

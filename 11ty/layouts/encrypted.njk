@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}" class="rhythm" data-theme="{{ theme }}">
+    <head>
+    </head>
+    <link rel="stylesheet" href="/assets/standard/standard.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <body>
+     	<main class="prose md">
+
+
+<div class="encrypted-container">
+    <h2>Cette page est protégée par un mot de passe</h2>
+
+    <form id="decrypt-form">
+        <div class="form-group">
+            <input
+                type="password"
+                id="password"
+                placeholder="Mot de passe"
+                required
+                autocomplete="current-password"
+            >
+        </div>
+        <button type="submit" id="unlock-btn">
+            <span class="btn-text">Déverrouiller</span>
+            <span class="btn-loading" style="display: none;">Déverrouillage...</span>
+        </button>
+    </form>
+
+    <div id="error" class="error">Mot de passe incorrect. Veuillez réessayer.</div>
+    <div id="loading" class="loading">Déchiffrement du contenu...</div>
+</div>
+
+<div id="encrypted-content" style="display: none;">{{ encryptedData }}</div>
+
+<script>
+    const encryptedData = document.getElementById('encrypted-content').textContent;
+    const maxAttempts = 5;
+    let attempts = 0;
+
+    const form = document.getElementById('decrypt-form');
+    const passwordInput = document.getElementById('password');
+    const unlockBtn = document.getElementById('unlock-btn');
+    const errorDiv = document.getElementById('error');
+    const loadingDiv = document.getElementById('loading');
+    const btnText = unlockBtn.querySelector('.btn-text');
+    const btnLoading = unlockBtn.querySelector('.btn-loading');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const password = passwordInput.value;
+        if (!password) return;
+        await attemptDecryption(password);
+    });
+
+    function setLoading(loading) {
+        unlockBtn.disabled = loading;
+        btnText.style.display = loading ? 'none' : 'inline';
+        btnLoading.style.display = loading ? 'inline' : 'none';
+        loadingDiv.style.display = loading ? 'block' : 'none';
+    }
+
+    function showError(message) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        errorDiv.style.animation = 'shake 0.5s ease-in-out';
+        setTimeout(() => {
+            errorDiv.style.animation = '';
+        }, 500);
+    }
+
+    function hideError() {
+        errorDiv.style.display = 'none';
+    }
+
+    async function decrypt(encryptedData, password) {
+        try {
+            const encrypted = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+            const encoder = new TextEncoder();
+            const passwordBytes = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', passwordBytes);
+            const key = new Uint8Array(hashBuffer);
+
+            const decrypted = new Uint8Array(encrypted.length);
+            for (let i = 0; i < encrypted.length; i++) {
+                decrypted[i] = encrypted[i] ^ key[i % key.length];
+            }
+
+            const result = new TextDecoder().decode(decrypted);
+            return result;
+        } catch (error) {
+            throw new Error('Decryption failed');
+        }
+    }
+
+    function isValidHTML(str) {
+        // Check if decrypted content looks like valid HTML
+        // Should contain common HTML tags and not be random garbage
+        const hasHTMLTags = /<[a-z][\s\S]*>/i.test(str);
+        const hasDoctype = /<!DOCTYPE/i.test(str);
+        const hasHtmlTag = /<html/i.test(str);
+
+        // Check for excessive non-printable characters (sign of bad decryption)
+        const nonPrintable = str.match(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F-\x9F]/g);
+        const nonPrintableRatio = nonPrintable ? nonPrintable.length / str.length : 0;
+
+        // Valid if it has HTML structure and low garbage ratio
+        return (hasHTMLTags || hasDoctype || hasHtmlTag) && nonPrintableRatio < 0.1;
+    }
+
+    async function attemptDecryption(password) {
+        if (attempts >= maxAttempts) {
+            showError('Trop de tentatives. Veuillez rafraîchir la page.');
+            return;
+        }
+
+        setLoading(true);
+        hideError();
+
+        try {
+            const decrypted = await decrypt(encryptedData, password);
+
+            // CRITICAL: Validate decrypted content before replacing
+            if (!isValidHTML(decrypted)) {
+                throw new Error('Invalid decryption result');
+            }
+
+            // Only replace if validation passed
+            const container = document.querySelector('.encrypted-container');
+            container.outerHTML = decrypted;
+
+        } catch (error) {
+            attempts++;
+            const remaining = maxAttempts - attempts;
+
+            if (remaining > 0) {
+                showError(`Mot de passe incorrect. Veuillez réessayer. (${remaining} tentatives restantes)`);
+            } else {
+                showError('Trop de tentatives. Veuillez rafraîchir la page.');
+                unlockBtn.disabled = true;
+            }
+
+            passwordInput.value = '';
+            passwordInput.focus();
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    // Check for password in URL hash
+    const hash = window.location.hash;
+    if (hash && hash.length > 1) {
+        const passwordFromHash = hash.substring(1);
+        if (passwordFromHash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+            attemptDecryption(passwordFromHash);
+        }
+    } else {
+        passwordInput.focus();
+    }
+</script>
+	</body>
+</html>

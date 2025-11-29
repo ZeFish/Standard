@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}" class="rhythm">
+    <head>
+      {% include site.standard.layouts.meta %}
+    </head>
+    {% standard_fonts %}
+    {% standard_assets %}
+    {% standard_lab %}
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <body {% htmx %}>
+        {{ content | safe }}
+	</body>
+</html>
