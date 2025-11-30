@@ -48,16 +48,7 @@ export default function addEncryptionTransform(eleventyConfig, site) {
     try {
       fileContent = await readFile(this.page.inputPath, "utf8");
     } catch (error) {
-      this.logger.error(
-        "❌ Failed to read file:",
-        this.page.inputPath,
-        error.message,
-      );
-      console.error(
-        "❌ Failed to read file:",
-        this.page.inputPath,
-        error.message,
-      );
+      logger.error("Failed to read file:", this.page.inputPath, error.message);
       return content;
     }
 
@@ -79,13 +70,13 @@ export default function addEncryptionTransform(eleventyConfig, site) {
 
     // Safety checks before encryption
     if (!content || typeof content !== "string") {
-      console.log("⚠️ Invalid content type, skipping encryption");
+      logger.warn("Invalid content type, skipping encryption");
       return content;
     }
 
     if (content.length > 1000000) {
       // 1MB limit
-      console.log("⚠️ Content too large, skipping encryption");
+      logger.warn("Content too large, skipping encryption");
       return content;
     }
 
@@ -95,8 +86,8 @@ export default function addEncryptionTransform(eleventyConfig, site) {
       logger.info("Successfully encrypted:", this.page.inputPath);
       return encryptedHtml;
     } catch (error) {
-      console.error(
-        "❌ Encryption failed for:",
+      logger.error(
+        "Encryption failed for:",
         this.page.inputPath,
         error.message,
       );
@@ -111,9 +102,6 @@ export async function customEncryptHTML(html, password) {
   const key = createHash("sha256").update(password).digest();
   const htmlBuffer = Buffer.from(html, "utf8");
   const encrypted = Buffer.alloc(htmlBuffer.length);
-  const logger = Logger({
-    scope: "Encryption",
-  });
 
   for (let i = 0; i < htmlBuffer.length; i++) {
     encrypted[i] = htmlBuffer[i] ^ key[i % key.length];

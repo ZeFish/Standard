@@ -144,7 +144,7 @@ function logger(options = {}) {
     return globalThis.__STANDARD_CONFIG__?.verbose ?? false;
   };
 
-  const prefix = `${colors.reset}stdn${colors.orange.fg}::${colors.reset}gd${colors.reset}`;
+  const prefix = `${colors.reset}stdn${colors.yellow.fg}::${colors.reset}gd${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
   const scopeText = scope ? `${colors.blue.fg}[${scope}]${colors.reset}` : "";
 
@@ -178,7 +178,7 @@ function logger(options = {}) {
      */
     warn(...args) {
       console.warn(
-        `${prefix} ${colors.orange.fg}[${scope}] ⚠`,
+        `${prefix} ${colors.yellow.fg}[${scope}] ⚠`,
         ...args,
         `${colors.reset}`,
       );
@@ -190,7 +190,7 @@ function logger(options = {}) {
      */
     error(...args) {
       console.error(
-        `${prefix} ${colors.red.fg}[${scope}] ${colors.red.bg}⚠${colors.reset}${colors.red.fg}`,
+        `${prefix} ${colors.red.fg}[${scope}]${colors.reset} ${colors.red.bg}⚠${colors.reset}${colors.red.fg}`,
         ...args,
         `${colors.reset}`,
       );

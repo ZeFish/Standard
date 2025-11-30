@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 import config from "virtual:standard/config";
 
 // Get all docs from root level (not nested in subdirectories)
-const allDocs = await getCollection("docs");
+const allDocs = await getCollection("content");
 const rootDocs = allDocs.filter(doc => !doc.id.includes("/"));
 
 // Sort by title

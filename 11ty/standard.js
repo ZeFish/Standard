@@ -123,9 +123,9 @@ export default function (eleventyConfig, options = {}) {
 
   // 6) Passthrough copy (dist -> outputDir)
   logger.debug(`Standard assets: lib/ → ${site.standard.outputDir}/`);
-  //eleventyConfig.addPassthroughCopy({
-  //  [path.join(__dirname, "../lib")]: site.standard.outputDir,
-  //});
+  eleventyConfig.addPassthroughCopy({
+    [path.join(__dirname, "../lib")]: site.standard.outputDir,
+  });
 
   // 7) Watch targets
   const srcPath = path.join(process.cwd(), "lib");

@@ -43,7 +43,7 @@
     "./theme": "./lib/standard.theme.min.css",
     "./js": "./lib/standard.min.js",
     "./lab": "./lib/standard.lab.js",
-    "./eleventy": "./eleventy/standard.js",
+    "./eleventy": "./11ty/standard.js",
     "./astro": "./src/astro/standard.js",
     "./cloudflare": "./src/cloudflare/api/comments.js",
     "./astro/remark/tags": "./src/astro/remark/tags.js",

@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import config from "virtual:standard/config";
 
 // Get some random pages to suggest
-const allDocs = await getCollection("docs");
+const allDocs = await getCollection("content");
 const rootDocs = allDocs.filter(doc => !doc.id.includes("/"));
 const suggestedPages = rootDocs
   .sort(() => Math.random() - 0.5)

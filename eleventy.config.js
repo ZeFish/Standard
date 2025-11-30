@@ -46,7 +46,7 @@ ai: {
 
   // ===== ADDITIONAL ASSET FOLDERS =====
   // Standard copies public/ automatically, but if you also have content/assets:
-  eleventyConfig.addPassthroughCopy({ public: "." });
+  //eleventyConfig.addPassthroughCopy({ public: "." });
 
   // ===== WATCH IGNORES =====
   // Standard watches src/eleventy/ automatically, but ignore compiled files
