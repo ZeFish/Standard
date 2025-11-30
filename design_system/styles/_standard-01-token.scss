@@ -36,6 +36,14 @@
     --gap-nl: 0.5lh;
     --baseline: 1rlh;
     --font-cap: calc(1rlh / var(--line-height));
+    
+    --trim: #{($line-height - 1) / 2}em;
+    --leading: #{($line-height - 1)}em;
+    @for $i from 1 through 12 {
+      --base-#{$i}: #{($line-height * $i) - 1}em;
+    }
+    --base: var(--base-1);
+    
 
     --gap: calc(var(--baseline));
     --gap-block: calc(var(--gap) * 2);
@@ -47,6 +55,18 @@
     --gap-body: var(--gap-relaxed);
     --gap-grid: 0.25lh;
     /* Grid system tokens */
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Design standard system */
     --blur: blur(7px);

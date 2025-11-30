@@ -137,10 +137,12 @@ design:
       info:    "var(--palette-cyan)"
 
     space: 
-      base:  "1lh"
-      large: "2lh"
-      compact: "0.5lh"
-      thight: "0.25lh"
+      grid:  calc((var(--line-height) * 2) - 1em)﻿
+      two-line: calc((var(--line-height) * 3) - 1em)﻿
+      leading: calc((var(--line-height) * 1) - 1em)﻿
+      half-leading: calc((var(--space-compact) / 2))
+      continuity-compact: calc((var(--lh-raw) - 1) * 1em);
+      continuity-tight: calc(var(--space-compact) / 2);
       
     measure:
       narrow:  "45ch"
