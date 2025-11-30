@@ -29,14 +29,15 @@ export function generatePermalink(fileIdOrStem) {
  * @returns {string} The slugified string
  */
 export function slugify(str) {
-  return str
-    .toLowerCase()
+  if (!str) return ''; // Safety check
+
+  return String(str)   // Cast numbers to string
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // Aggressive replace
+    .replace(/(^-|-$)+/g, "");   // Trim dashes
 }
-
 // Reading time estimation
 export function getReadingTime(text) {
   if (!text) return "";
