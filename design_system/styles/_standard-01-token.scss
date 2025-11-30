@@ -35,7 +35,7 @@
   --baseline: 1rlh;
 
   --trim: calc(var(--leading) / 2);
-  --leading: calc((var(--line-height) - 1) * 1em);
+  --leading: calc((var(--line-height) - 1) * var(--font-size));
 
   @for $i from 1 through 12 {
     --base-#{$i}: calc((var(--line-height) * $i) - 1em);
