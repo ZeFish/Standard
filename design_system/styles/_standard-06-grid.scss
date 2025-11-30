@@ -62,9 +62,10 @@
 /* Exception for grid in a prose div */
 .prose > [class^="grid"] {
   margin-block-start: calc(
-    (var(--gap) * max(var(--gap-block), var(--gap))) - (var(--gap) * var(--gap))
+    (var(--base) * max(var(--base-2), var(--base))) -
+      (var(--base) * var(--base))
   );
-  margin-block-end: calc(var(--gap) * max(var(--gap-block), var(--gap)));
+  margin-block-end: calc(var(--base) * max(var(--base-2), var(--base)));
 }
 [class^="grid"] > * {
   min-width: 0; /* ← Force items to shrink below content size */
@@ -73,10 +74,10 @@
 
 @media (max-width: #{$mobile}) {
   :root {
-    /*--gap-grid: var(--gap-micro);*/
+    /*--gap-grid: var(--trim);*/
     [class^="grid"] * {
       min-width: 0; /* ← Force items to shrink below content size */
-      /*margin-block: var(--gap);*/
+      /*margin-block: var(--base);*/
     }
   }
 }
@@ -89,10 +90,10 @@
 
 /* Gap variants aligned to rhythm */
 :is(.grid, [class^="grid-"]).compact {
-  --gap-grid: var(--gap-tight);
+  --gap-grid: var(--trim);
 }
 :is(.grid, [class^="grid-"]).relaxed {
-  --gap-grid: var(--gap);
+  --gap-grid: var(--base);
 }
 
 /* Spans 1..12 */
@@ -240,11 +241,11 @@ hr.col-row {
 }
 
 .grid.compact {
-  --grid-gap: var(--gap-compact);
+  --grid-gap: var(--leading);
 }
 
 .grid.relaxed {
-  --grid-gap: var(--gap-relaxed);
+  --grid-gap: var(--base-2);
 }
 
 /* Common layout containers inherit rhythm to cascade deeper */
@@ -268,7 +269,7 @@ hr.col-row {
 .grid > .col-full {
   > * {
     margin-block: 0;
-    margin-block-end: var(--gap);
+    margin-block-end: var(--base);
   }
 
   > :last-child {

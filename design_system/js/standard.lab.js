@@ -241,10 +241,10 @@ export class StandardLab {
     this.badge.innerHTML = ``;
     this.badge.addEventListener("click", () => this.openQuick());
     this.makeDraggable(this.badge);
-    
+
     // Append to body
     document.body.appendChild(this.badge);
-    
+
     this.updateBadge();
     this.injectStyles();
   }
@@ -420,16 +420,15 @@ export class StandardLab {
     const defaultThemes = [
       { value: "", label: "Empty" },
       { value: "default", label: "Default" },
-      
+
       { value: "bauhaus", label: "Bauhaus" },
       { value: "venetian", label: "Venetian" },
       { value: "newspaper", label: "Newspaper" },
       { value: "didone", label: "Didone" },
       { value: "transitional", label: "Transitional" },
-      
+
       { value: "english-oldstyle", label: "English Oldstyle" },
-      
-      
+
       { value: "paper", label: "Paper" },
       { value: "swiss", label: "Swiss" },
       { value: "kernel", label: "Kernel" },
@@ -477,7 +476,9 @@ export class StandardLab {
         } else {
           this.removeGridDebugOverlays();
         }
-        window.toast?.info(`Debug mode ${e.target.checked ? "enabled" : "disabled"}`);
+        window.toast?.info(
+          `Debug mode ${e.target.checked ? "enabled" : "disabled"}`,
+        );
       });
     this.panel
       .querySelector('[data-action="theme"]')
@@ -1071,7 +1072,7 @@ export class StandardLab {
     const styles = document.createElement("style");
     styles.id = "standard-lab-styles";
     styles.textContent = `
-      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--gap); height: var(--gap); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
+      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--base); height: var(--base); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
@@ -1165,36 +1166,38 @@ if (typeof window !== "undefined") {
   } else {
     setupStandardLab();
   }
-  
+
   // Handle Astro ClientRouter page swaps - MUST check root container
   document.addEventListener("astro:after-swap", () => {
     console.log("[StandardLab] 🔄 Page swap detected");
-    
+
     if (!window.StandardLab) {
       console.log("[StandardLab] ⚠️  Instance not found, reinitializing");
       window.StandardLab = new StandardLab();
       return;
     }
-    
+
     const root = document.getElementById("standard-lab-root");
     const badge = document.getElementById("standard-lab-badge-container");
-    
+
     console.log("[StandardLab] Root:", root ? "✓" : "✗");
     console.log("[StandardLab] Badge:", badge ? "✓" : "✗");
-    
+
     // If root is gone, the entire persistent container was removed - very bad
     if (!root) {
-      console.error("[StandardLab] 🚨 Root container missing! Astro may be replacing entire body");
+      console.error(
+        "[StandardLab] 🚨 Root container missing! Astro may be replacing entire body",
+      );
       return;
     }
-    
+
     // If badge is gone but root exists, recreate badge
     if (!badge) {
       console.log("[StandardLab] 🔨 Recreating badge in persistent root");
       window.StandardLab.badge = null;
       window.StandardLab.createBadge();
     }
-    
+
     // Always restore state from storage
     window.StandardLab.restoreTheme();
     window.StandardLab.restoreDebugMode();

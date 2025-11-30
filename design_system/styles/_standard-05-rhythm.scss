@@ -63,7 +63,7 @@
   * {
     vertical-align: baseline;
     margin-block-start: 0;
-    margin-block-end: var(--gap);
+    margin-block-end: var(--base);
   }
 
   /* Padding only applied to <body> when rhythm is active */
@@ -73,7 +73,7 @@
     padding-bottom: calc(var(--gap-body) * 1.5);
 
     [id] {
-      scroll-margin-top: calc(var(--gap-relaxed) + var(--gap-body));
+      scroll-margin-top: calc(var(--base-2) + var(--gap-body));
       /* Adjust value as needed */
     }
   }
@@ -82,24 +82,24 @@
   /* Enhanced spacing relationships for typography */
   #{$rhythm-elements} {
     margin-block-start: 0;
-    margin-block-end: var(--gap);
+    margin-block-end: var(--base);
   }
 
   /* Special blocks get generous spacing (2× rhythm) */
   /* Layout containers get double spacing for emphasis */
   #{$rhythm-block-elements} {
-    margin-block-start: max(calc(var(--gap-block) - var(--gap)), var(--gap));
-    margin-block-end: max(var(--gap-block), var(--gap));
+    margin-block-start: max(calc(var(--base-2) - var(--base)), var(--base));
+    margin-block-end: max(var(--base-2), var(--base));
   }
 
   /* The i that two specal block would bit a bit closer
     debug when  its image */
   :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
-    margin-block-end: var(--gap);
+    margin-block-end: var(--base);
   }
 
   :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
-    margin-block-start: max(0, var(--gap));
+    margin-block-start: max(0, var(--base));
   }
 
   /* Reset first-child spacing for special blocks */
@@ -117,24 +117,24 @@
   }
 
   h1 {
-    margin-block-start: calc(var(--gap) * 3);
-    margin-block-end: var(--gap);
+    margin-block-start: calc(var(--base) * 3);
+    margin-block-end: var(--base);
   }
   h1:first-of-type {
-    margin-block-start: calc(var(--gap) * 5);
-    margin-block-end: calc(var(--gap) * 6);
+    margin-block-start: calc(var(--base) * 5);
+    margin-block-end: calc(var(--base) * 6);
   }
 
   h2,
   h3 {
-    margin-block-start: calc(var(--gap) * 2);
-    margin-block-end: var(--gap);
+    margin-block-start: calc(var(--base) * 2);
+    margin-block-end: var(--base);
   }
 
   h4,
   h5,
   h6 {
-    margin-block: var(--gap);
+    margin-block: calc(var(--leading) * 2);
   }
 
   :is(h1, h2, h3) + :is(h1, h2, h3),
@@ -145,10 +145,10 @@
   hr {
     margin-inline: calc(var(--base-4));
     margin-block-start: max(
-      calc((var(--gap-block) - var(--gap)) * 1),
-      var(--gap)
+      calc((var(--base-2) - var(--base)) * 1),
+      var(--base)
     );
-    margin-block-end: max((var(--gap-block) * 1), var(--gap));
+    margin-block-end: max((var(--base-2) * 1), var(--base));
   }
 
   /* =========================== */
@@ -168,14 +168,14 @@
     list-style: none;
     margin-block-start: 0;
     padding-inline: 1rlh;
-    margin-block-end: var(--gap);
+    margin-block-end: var(--base);
   }
 
   /* Nested lists */
   li > ul,
   li > ol {
     padding-inline-start: 1rlh;
-    margin-block-start: var(--gap-tight);
+    margin-block-start: var(--trim);
     margin-block-end: 0;
   }
 
@@ -184,7 +184,7 @@
     position: relative;
     margin: 0;
     padding-inline-start: 0;
-    margin-block-end: var(--gap-nl);
+    margin-block-end: calc((1lh - 1em) * 3);
   }
 
   li:last-child {
@@ -193,7 +193,7 @@
   }
 
   p:has(+ :is(ul, ol)) {
-    margin-block-end: var(--gap-nl);
+    margin-block-end: calc((1lh - 1em) * 3);
   }
 
   .compact {
@@ -205,18 +205,18 @@
   }
 
   .tight {
-    --base-gap: var(--gap-tight);
+    --base-gap: var(--trim);
 
     li {
-      margin-block-end: var(--gap-tight);
+      margin-block-end: var(--trim);
     }
   }
 
   .relaxed {
-    --base-gap: var(--gap-relaxed);
+    --base-gap: var(--base-2);
 
     li {
-      margin-block-end: var(--gap-relaxed);
+      margin-block-end: var(--base-2);
     }
   }
 
@@ -272,32 +272,32 @@
   .grid form {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--gap) * var(--gap-block));
+    gap: calc(var(--base) * var(--base-2));
   }
 
   /* Form field groups - spacing only */
   fieldset {
-    padding-inline: var(--gap);
+    padding-inline: var(--base);
     display: grid;
     gap: 0;
   }
 
   legend {
-    margin-block-end: var(--gap);
+    margin-block-end: var(--base);
   }
 
   /* Form inputs */
   input,
   textarea,
   select {
-    padding-inline: var(--gap);
-    margin-block-end: var(--gap-block);
+    padding-inline: var(--base);
+    margin-block-end: var(--base-2);
   }
 
   /* Labels - spacing only */
   label {
-    margin-inline: var(--gap);
-    margin-block-end: var(--gap-block);
+    margin-inline: var(--base);
+    margin-block-end: var(--base-2);
   }
 
   /* Checkbox/radio with labels */
@@ -307,7 +307,7 @@
   }
 
   div:has(input + label) {
-    margin-block-end: var(--gap-block);
+    margin-block-end: var(--base-2);
   }
 
   fieldset div,
@@ -317,7 +317,7 @@
   }
 
   fieldset + button {
-    margin-block-start: var(--gap);
+    margin-block-start: var(--base);
   }
 
   fieldset :last-child {
@@ -363,7 +363,7 @@
 
   td,
   th {
-    padding: var(--gap-compact);
+    padding: var(--leading);
     font-size: var(--scale-d2);
     min-height: var(--line-height);
   }

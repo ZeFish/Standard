@@ -1,269 +1,267 @@
 [data-theme="book"] {
-    --color-light-background: #fdfcf3;
-    --color-light-background: #f9f6ef; /* Seashell - Soft warmth, still feels like sunlight on paper. */
-    --color-light-background: #fdfdfc; /* Snow Drift - Near-white with the tiniest touch of warmth. */
-    --color-light-background: #fdf5e6; /* Old Lace - A classic — slightly more yellow but elegant. */
-    --color-light-background: #fefdf9; /* Ivory - Very subtle warmth, almost white — keeps it clean. */
-    --color-light-foreground: black;
+  --color-light-background: #fdfcf3;
+  --color-light-background: #f9f6ef; /* Seashell - Soft warmth, still feels like sunlight on paper. */
+  --color-light-background: #fdfdfc; /* Snow Drift - Near-white with the tiniest touch of warmth. */
+  --color-light-background: #fdf5e6; /* Old Lace - A classic — slightly more yellow but elegant. */
+  --color-light-background: #fefdf9; /* Ivory - Very subtle warmth, almost white — keeps it clean. */
+  --color-light-foreground: black;
 
-    --color-dark-background: #231e16;
-    --color-dark-background: oklch(19.28% 0.0101 70.89);
-    --color-dark-foreground: oklch(85.66% 0.0359 74.51);
+  --color-dark-background: #231e16;
+  --color-dark-background: oklch(19.28% 0.0101 70.89);
+  --color-dark-foreground: oklch(85.66% 0.0359 74.51);
 
-    --color-blue: #3d5875;
-    --color-light-accent: #7a5a2e;
-    --color-header: color-mix(in srgb, var(--color-foreground) 100%, #000 15%);
+  --color-blue: #3d5875;
+  --color-light-accent: #7a5a2e;
+  --color-header: color-mix(in srgb, var(--color-foreground) 100%, #000 15%);
 
-    --color-dark-accent: color-mix(
-        in srgb,
-        var(--color-dark-foreground) 25%,
-        #b08a4b
-    );
+  --color-dark-accent: color-mix(
+    in srgb,
+    var(--color-dark-foreground) 25%,
+    #b08a4b
+  );
 
-    --color-background-secondary: color-mix(
-        in srgb,
-        var(--color-foreground) 2%,
-        var(--color-background)
-    );
-    --color-border: color-mix(
-        in srgb,
-        var(--color-foreground) 7%,
-        var(--color-background)
-    );
-    --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+  --color-background-secondary: color-mix(
+    in srgb,
+    var(--color-foreground) 2%,
+    var(--color-background)
+  );
+  --color-border: color-mix(
+    in srgb,
+    var(--color-foreground) 7%,
+    var(--color-background)
+  );
+  --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 
-    --optical-ratio: var(--ratio-silver);
-    --line-height: 1.5;
-    --gap-body: calc(var(--gap) * 3);
+  --optical-ratio: var(--ratio-silver);
+  --line-height: 1.5;
+  --gap-body: calc(var(--base) * 3);
 
-    --line-width: var(--line-width-s);
+  --line-width: var(--line-width-s);
 
-    /* Mobile */
-    --mobile-font-size: 1.2em;
-    --mobile-optical-ratio: 1.414;
-    --mobile-line-height: 1.5;
-    --mobile-gap-body: 1rlh;
-    --mobile-gap: 1rlh; /* Space between standard block like paragraph */
-    --mobile-gap-block: 1rlh;
+  /* Mobile */
+  --mobile-font-size: 1.2em;
+  --mobile-optical-ratio: 1.414;
+  --mobile-line-height: 1.5;
+  --mobile-gap-body: 1rlh;
+  --mobile-gap: 1rlh; /* Space between standard block like paragraph */
+  --mobile-gap-block: 1rlh;
 
-    --font-size: 1.2em;
-    --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
-    --font-interface: "Fern";
-    --font-header: "Fern", "Futura Now Var", "Sohne", "Fern";
-    --font-weight-bold: 500;
-    --font-monospace: "Sohne Mono";
-    --font-header-weight: 400;
-    --font-header-letter-spacing: 0em;
-    --font-header-line-height: 1;
+  --font-size: 1.2em;
+  --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
+  --font-interface: "Fern";
+  --font-header: "Fern", "Futura Now Var", "Sohne", "Fern";
+  --font-weight-bold: 500;
+  --font-monospace: "Sohne Mono";
+  --font-header-weight: 400;
+  --font-header-letter-spacing: 0em;
+  --font-header-line-height: 1;
 
-    --gap-nl: 0.5lh;
+  --gap-nl: 0.5lh;
 
-    --font-feature: "";
-    --font-variation: "";
-    --font-header-feature: "liga", "onum", "kern";
-    --font-header-variation: "";
-    font-variant-numeric: oldstyle-nums proportional-nums;
+  --font-feature: "";
+  --font-variation: "";
+  --font-header-feature: "liga", "onum", "kern";
+  --font-header-variation: "";
+  font-variant-numeric: oldstyle-nums proportional-nums;
 
-    --shadow: 0;
-    --radius: 0;
+  --shadow: 0;
+  --radius: 0;
 
-    --color-accent: var(--color-red);
-    --color-italic: var(--color-foreground);
-    --color-bold: color-mix(
-        in srgb,
-        var(--color-foreground) 85%,
-        var(--color-background)
-    );
+  --color-accent: var(--color-red);
+  --color-italic: var(--color-foreground);
+  --color-bold: color-mix(
+    in srgb,
+    var(--color-foreground) 85%,
+    var(--color-background)
+  );
 
-    /*--font-weight-bold: 300;*/
+  /*--font-weight-bold: 300;*/
 
-    --color-light-red: #b5483c; /* like aged brick or red clay */
-    --color-light-red: #a12314;
-    --color-light-orange: #c86a3d; /* terra cotta */
-    --color-light-yellow: #c2a84a; /* mustard parchment */
-    --color-light-green: #5e9d80; /* sage green */
-    --color-light-cyan: #6ba4b6; /* antique blue-grey */
-    --color-light-blue: #4f81a4; /* faded denim */
-    --color-light-purple: #7a6c91; /* dusk lavender */
-    --color-light-pink: #b97aa0; /* soft mauve rose */
+  --color-light-red: #b5483c; /* like aged brick or red clay */
+  --color-light-red: #a12314;
+  --color-light-orange: #c86a3d; /* terra cotta */
+  --color-light-yellow: #c2a84a; /* mustard parchment */
+  --color-light-green: #5e9d80; /* sage green */
+  --color-light-cyan: #6ba4b6; /* antique blue-grey */
+  --color-light-blue: #4f81a4; /* faded denim */
+  --color-light-purple: #7a6c91; /* dusk lavender */
+  --color-light-pink: #b97aa0; /* soft mauve rose */
 
-    /* Dark Mode Accent Colors */
-    --color-dark-red: #e57368; /* warm ember glow */
-    --color-dark-orange: #e88e5a; /* baked clay at dusk */
-    --color-dark-yellow: #e0c168; /* candlelight gold */
-    --color-dark-green: #7eb79c; /* moonlit sage */
-    --color-dark-cyan: #84c3d6; /* cool teal mist */
-    --color-dark-blue: #6da2c7; /* twilight lake */
-    --color-dark-purple: #a58fc0; /* smoky lilac */
-    --color-dark-pink: #e6a3d1; /* fading rose light */
+  /* Dark Mode Accent Colors */
+  --color-dark-red: #e57368; /* warm ember glow */
+  --color-dark-orange: #e88e5a; /* baked clay at dusk */
+  --color-dark-yellow: #e0c168; /* candlelight gold */
+  --color-dark-green: #7eb79c; /* moonlit sage */
+  --color-dark-cyan: #84c3d6; /* cool teal mist */
+  --color-dark-blue: #6da2c7; /* twilight lake */
+  --color-dark-purple: #a58fc0; /* smoky lilac */
+  --color-dark-pink: #e6a3d1; /* fading rose light */
 
-    --gap: 1.25rlh;
+  --gap: 1.25rlh;
 
-    p {
-        text-align: justify;
-        text-align-last: left; /* Don't justify the last line */
-        /* Enable hyphenation */
-        hyphens: auto;
-        -webkit-hyphens: auto;
-        -ms-hyphens: auto;
-        /* Improve word spacing */
-        word-spacing: -0.05em;
-        text-box-edge: cap ex;
+  p {
+    text-align: justify;
+    text-align-last: left; /* Don't justify the last line */
+    /* Enable hyphenation */
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    /* Improve word spacing */
+    word-spacing: -0.05em;
+    text-box-edge: cap ex;
+  }
+  p:not(:has(img)) + p {
+    text-indent: var(--base);
+  }
+
+  p:has(+ p) {
+    margin-block-end: var(--leading);
+  }
+
+  :is(h2, h3) + p::first-letter {
+    --drop-cap-size: 3.25;
+    float: inline-start;
+    line-height: 1;
+    margin-block-start: 0.05lh;
+    margin-inline-end: 0.05lh;
+    font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--leading));
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+    font-family: "Fern";
+    font-weight: 200;
+
+    display: flex;
+    align-self: flex-start;
+  }
+
+  .prose {
+    margin-left: 5vw;
+    transition: margin-left var(--transition);
+  }
+
+  header {
+    display: block;
+  }
+
+  .prose {
+    display: block;
+  }
+
+  .prose :is(p, blockquote, pre, details, li, .card, [class^="grid"]) {
+    max-width: var(--line-width-xs);
+    margin-inline: 0;
+  }
+  .prose :is(.scroll, p:has(img), .callout, aside) {
+    max-width: var(--line-width-s);
+    margin-inline: 0;
+  }
+  .token {
+    color: var(--color-subtle) !important;
+  }
+
+  a:hover {
+    color: var(--color-foreground);
+  }
+
+  blockquote {
+    font-family: "Fern";
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    color: var(--color-muted);
+  }
+
+  blockquote,
+  pre {
+    padding: var(--trim) var(--leading);
+    border: 0;
+    border-left: 1px solid var(--color-subtle);
+    background: transparent;
+    color: var(--color-muted);
+    .copy-button {
+      position: absolute;
+      top: 0;
+      right: 0;
     }
-    p:not(:has(img)) + p {
-        text-indent: var(--gap);
-    }
+  }
 
-    p:has(+ p) {
-        margin-block-end: var(--gap-nl);
-    }
+  hr,
+  hr:not(:first-child) {
+    font-size: var(--scale);
+    line-height: var(--base);
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  hr::after {
+    content: "\2619 \2015 \2767";
+    text-align: center;
+    display: block;
+    font-family: "Graveur";
+    position: relative;
+    top: var(--base);
+    color: var(--color-border);
+  }
 
-    :is(h2, h3) + p::first-letter {
-        --drop-cap-size: 3.25;
-        float: inline-start;
-        line-height: 1;
-        margin-block-start: 0.05lh;
-        margin-inline-end: 0.05lh;
-        font-size: calc(
-            (var(--font-size) * var(--drop-cap-size)) + var(--gap-nl)
-        );
-        text-box-trim: trim-both;
-        text-box-edge: cap alphabetic;
-        font-family: "Fern";
-        font-weight: 200;
+  aside.note {
+    display: inline;
+    position: relative;
+    top: calc(var(--base) * -1);
+    left: calc(var(--base) + var(--line-width));
+    margin-top: calc(var(--base) * -1);
+    margin-bottom: calc(var(--base) * -2);
+    font-size: var(--scale-d2);
+    color: var(--color-muted);
+    line-height: var(--line-height-s);
+    max-width: 33%;
+    border-left: var(--border);
+    padding-left: var(--leading);
+    padding-block: var(--leading);
+  }
 
-        display: flex;
-        align-self: flex-start;
-    }
+  .prose > h1:first-child {
+    text-align: left;
+    grid-column: feature;
+    margin-block-start: calc(var(--base) * 6);
+    margin-block-end: calc(var(--base) * 6);
+    font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
+  }
 
+  h1 {
+    text-align: left;
+    letter-spacing: 0.15em;
+    /* /*text-transform: uppercase;* */
+    font-feature-settings: "liga", "onum", "kern", "smcp";
+  }
+
+  @media (min-width: 1200px) {
     .prose {
-        margin-left: 5vw;
-        transition: margin-left var(--transition);
+      margin-left: 7.5vw;
     }
+  }
 
-    header {
-        display: block;
-    }
-
+  @media (max-width: 1000px) {
     .prose {
-        display: block;
+      margin-left: 0;
+      max-width: 100%;
+      display: grid;
     }
-
-    .prose :is(p, blockquote, pre, details, li, .card, [class^="grid"]) {
-        max-width: var(--line-width-xs);
-        margin-inline: 0;
-    }
-    .prose :is(.scroll, p:has(img), .callout, aside) {
-        max-width: var(--line-width-s);
-        margin-inline: 0;
-    }
-    .token {
-        color: var(--color-subtle) !important;
-    }
-
-    a:hover {
-        color: var(--color-foreground);
-    }
-
-    blockquote {
-        font-family: "Fern";
-        font-weight: 450;
-        letter-spacing: -0.01em;
-        color: var(--color-muted);
-    }
-
-    blockquote,
-    pre {
-        padding: var(--gap-tight) var(--gap-compact);
-        border: 0;
-        border-left: 1px solid var(--color-subtle);
-        background: transparent;
-        color: var(--color-muted);
-        .copy-button {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-    }
-
-    hr,
-    hr:not(:first-child) {
-        font-size: var(--scale);
-        line-height: var(--gap);
-        padding: 0;
-        border: 0;
-        background: transparent;
-    }
-    hr::after {
-        content: "\2619 \2015 \2767";
-        text-align: center;
-        display: block;
-        font-family: "Graveur";
-        position: relative;
-        top: var(--gap);
-        color: var(--color-border);
-    }
-
     aside.note {
-        display: inline;
-        position: relative;
-        top: calc(var(--gap) * -1);
-        left: calc(var(--gap) + var(--line-width));
-        margin-top: calc(var(--gap) * -1);
-        margin-bottom: calc(var(--gap) * -2);
-        font-size: var(--scale-d2);
-        color: var(--color-muted);
-        line-height: var(--line-height-s);
-        max-width: 33%;
-        border-left: var(--border);
-        padding-left: var(--gap-compact);
-        padding-block: var(--gap-compact);
+      display: block;
+      position: relative;
+      top: 0;
+      left: 0;
+      margin-block: var(--base);
+      border: 0;
+      background: transparent;
+      border-left: 1px solid var(--color-subtle);
     }
-
-    .prose > h1:first-child {
-        text-align: left;
-        grid-column: feature;
-        margin-block-start: calc(var(--gap) * 6);
-        margin-block-end: calc(var(--gap) * 6);
-        font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
-    }
-
-    h1 {
-        text-align: left;
-        letter-spacing: 0.15em;
-        /* /*text-transform: uppercase;* */
-        font-feature-settings: "liga", "onum", "kern", "smcp";
-    }
-
-    @media (min-width: 1200px) {
-        .prose {
-            margin-left: 7.5vw;
-        }
-    }
-
-    @media (max-width: 1000px) {
-        .prose {
-            margin-left: 0;
-            max-width: 100%;
-            display: grid;
-        }
-        aside.note {
-            display: block;
-            position: relative;
-            top: 0;
-            left: 0;
-            margin-block: var(--gap);
-            border: 0;
-            background: transparent;
-            border-left: 1px solid var(--color-subtle);
-        }
-    }
+  }
 }
 
 @font-face {
-    font-family: "Fern";
-    font-weight: 400 800;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
+  font-family: "Fern";
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
 }

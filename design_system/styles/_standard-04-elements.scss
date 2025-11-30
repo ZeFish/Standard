@@ -30,8 +30,8 @@ html {
 
 #{$elements-boxed} {
   border-left: var(--stroke-width) solid var(--color-border);
-  padding: var(--gap-compact) var(--gap-compact);
-  margin-inline: var(--gap);
+  padding: var(--leading) var(--leading);
+  margin-inline: var(--base);
   font-size: var(--scale-d2);
   line-height: var(--line-height-compact);
 }
@@ -168,8 +168,8 @@ pre {
   }
   .copy-button {
     position: absolute;
-    top: var(--gap-tight);
-    right: var(--gap-tight);
+    top: var(--trim);
+    right: var(--trim);
     opacity: 0;
     transition: opacity 0.5s;
 
@@ -328,7 +328,7 @@ a.button {
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
-  padding: var(--gap-tight) var(--leading);
+  padding: var(--trim) var(--leading);
   box-shadow: var(--shadow);
 
   cursor: pointer;
@@ -407,14 +407,14 @@ select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
 
-  padding: var(--gap-tight) var(--gap-tight) !important;
+  padding: var(--trim) var(--trim) !important;
   border-radius: var(--radius);
 
   color: var(--color-foreground);
   background: var(--color-background-secondary);
   border: var(--border);
 
-  margin-block-end: var(--gap-compact) !important;
+  margin-block-end: var(--leading) !important;
 
   transition:
     background-color var(--transition),
@@ -440,12 +440,12 @@ textarea {
   resize: vertical;
   min-height: 6em;
   /* keep rhythm-aware variant */
-  min-height: var(--gap-relaxed);
+  min-height: var(--base-2);
 }
 
 legend {
   font-weight: var(--font-weight-bold, bold);
-  margin-block-end: var(--gap-tight) !important;
+  margin-block-end: var(--trim) !important;
 }
 
 label {
@@ -453,15 +453,15 @@ label {
   font-family: var(--font-interface), system-ui, sans-serif;
   cursor: pointer;
   font-weight: var(--font-weight-bold, bold);
-  margin-inline: var(--gap-tight) !important;
-  margin-block-end: var(--gap-tight) !important;
+  margin-inline: var(--trim) !important;
+  margin-block-end: var(--trim) !important;
   padding-inline: 0 !important;
 }
 
 fieldset {
   border: var(--border);
   border-radius: var(--radius);
-  padding: var(--gap-tight) !important;
+  padding: var(--trim) !important;
   background: color-mix(
     in srgb,
     var(--color-background-secondary) 25%,
@@ -538,6 +538,6 @@ hr {
 mark {
   background: color-mix(in srgb, var(--color-yellow) 30%, transparent);
   color: color-mix(in srgb, var(--color-yellow) 30%, var(--color-foreground));
-  padding: var(--gap-tight);
+  padding: var(--trim);
   padding-top: 0.1em;
 }

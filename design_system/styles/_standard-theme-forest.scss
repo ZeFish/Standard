@@ -1,231 +1,230 @@
 [data-theme="forest"] {
-    --color-light-background: hsl(35, 36%, 95%);
-    --color-light-foreground: hsl(31, 45%, 20%);
-    --color-light-accent: var(--color-light-yellow);
-    --color-light-header: var(--color-light-foreground);
+  --color-light-background: hsl(35, 36%, 95%);
+  --color-light-foreground: hsl(31, 45%, 20%);
+  --color-light-accent: var(--color-light-yellow);
+  --color-light-header: var(--color-light-foreground);
 
-    --color-light-red: hsl(4, 72%, 55%);
-    --color-light-orange: hsl(21, 82%, 55%);
-    --color-light-yellow: hsl(43, 100%, 42%);
-    --color-light-green: hsl(154, 47%, 49%);
-    --color-light-cyan: hsl(205, 66%, 46%);
-    --color-light-blue: hsl(205, 66%, 46%);
-    --color-light-purple: hsl(266, 31%, 57%);
-    --color-light-pink: hsl(266, 31%, 57%);
+  --color-light-red: hsl(4, 72%, 55%);
+  --color-light-orange: hsl(21, 82%, 55%);
+  --color-light-yellow: hsl(43, 100%, 42%);
+  --color-light-green: hsl(154, 47%, 49%);
+  --color-light-cyan: hsl(205, 66%, 46%);
+  --color-light-blue: hsl(205, 66%, 46%);
+  --color-light-purple: hsl(266, 31%, 57%);
+  --color-light-pink: hsl(266, 31%, 57%);
 
-    --color-dark-background: hsla(30, 19%, 14%, 1);
-    --color-dark-foreground: hsl(34, 50%, 80%);
-    --color-dark-accent: var(--color-dark-yellow);
-    --color-dark-header: var(--color-dark-foreground);
+  --color-dark-background: hsla(30, 19%, 14%, 1);
+  --color-dark-foreground: hsl(34, 50%, 80%);
+  --color-dark-accent: var(--color-dark-yellow);
+  --color-dark-header: var(--color-dark-foreground);
 
-    --color-dark-red: hsl(4, 65%, 60%);
-    --color-dark-orange: hsl(22, 92%, 57%);
-    --color-dark-yellow: hsl(43, 100%, 42%);
-    --color-dark-green: hsl(154, 52%, 46%);
-    --color-dark-cyan: hsl(198, 62%, 57%);
-    --color-dark-blue: hsl(198, 62%, 57%);
-    --color-dark-purple: hsl(263, 60%, 67%);
-    --color-dark-pink: hsl(263, 60%, 67%);
+  --color-dark-red: hsl(4, 65%, 60%);
+  --color-dark-orange: hsl(22, 92%, 57%);
+  --color-dark-yellow: hsl(43, 100%, 42%);
+  --color-dark-green: hsl(154, 52%, 46%);
+  --color-dark-cyan: hsl(198, 62%, 57%);
+  --color-dark-blue: hsl(198, 62%, 57%);
+  --color-dark-purple: hsl(263, 60%, 67%);
+  --color-dark-pink: hsl(263, 60%, 67%);
 
-    --font-weight-h1: 900;
-    --font-weight-h2: 850;
-    --font-weight-h3: 850;
-    --font-weight-h4: 800;
-    --font-weight-h5: 700;
-    --font-weight-h6: 600;
+  --font-weight-h1: 900;
+  --font-weight-h2: 850;
+  --font-weight-h3: 850;
+  --font-weight-h4: 800;
+  --font-weight-h5: 700;
+  --font-weight-h6: 600;
 
-    --font-text: "Forrest";
-    --font-header: "Forrest";
-    --font-monospace: "Monaspace Xenon Var";
-    --font-interface: "NationalPark";
-    --font-interface-weight: 600;
+  --font-text: "Forrest";
+  --font-header: "Forrest";
+  --font-monospace: "Monaspace Xenon Var";
+  --font-interface: "NationalPark";
+  --font-interface-weight: 600;
 
-    --color-accent: var(--color-yellow);
-    --color-code: var(--color-red);
-    --color-bold: var(--color-foreground);
-    --color-italic: var(--color-foreground);
+  --color-accent: var(--color-yellow);
+  --color-code: var(--color-red);
+  --color-bold: var(--color-foreground);
+  --color-italic: var(--color-foreground);
 
-    --optical-ratio: var(--ratio-golden);
-    --line-height: var(--optical-ratio);
-    --font-weight: 400;
-    --font-weight-bold: 500;
+  --optical-ratio: var(--ratio-golden);
+  --line-height: var(--optical-ratio);
+  --font-weight: 400;
+  --font-weight-bold: 500;
 
-    --radius: var(--base);
-    --stroke-width: 1.5px;
+  --radius: var(--base);
+  --stroke-width: 1.5px;
 
-    --font-header-letter-spacing: -0.035em;
-    --font-header-line-height: 1em;
+  --font-header-letter-spacing: -0.035em;
+  --font-header-line-height: 1em;
 
-    blockquote,
-    pre {
-        box-shadow: inset var(--shadow);
-        background: var(--color-background-secondary);
-        border: var(--border);
-        border-radius: var(--radius);
-    }
+  blockquote,
+  pre {
+    box-shadow: inset var(--shadow);
+    background: var(--color-background-secondary);
+    border: var(--border);
+    border-radius: var(--radius);
+  }
 
-    .operator,
-    .punctuation {
-        color: var(--color-muted);
-        opacity: 0.75;
-    }
+  .operator,
+  .punctuation {
+    color: var(--color-muted);
+    opacity: 0.75;
+  }
 
-    button,
-    a.button {
-        font-family: Forrest;
-        font-weight: 600;
-        letter-spacing: -0.05em;
-    }
+  button,
+  a.button {
+    font-family: Forrest;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+  }
 
-    aside,
-    textarea,
-    pre,
-    blockquote {
-        padding: var(--gap-compact) calc(var(--gap-tight) + var(--leading));
-    }
+  aside,
+  textarea,
+  pre,
+  blockquote {
+    padding: var(--leading) calc(var(--trim) + var(--leading));
+  }
 
-    fieldset input,
-    fieldset textarea {
-        box-shadow: inset var(--shadow);
-    }
+  fieldset input,
+  fieldset textarea {
+    box-shadow: inset var(--shadow);
+  }
 
-    h1::first-letter,
-    h2::first-letter,
-    h3::first-letter,
-    h4::first-letter,
-    h5::first-letter,
-    h6::first-letter {
-        font-feature-settings:
-            "swsh", "dlig", "clig", "kern", "onum" !important;
-    }
+  h1::first-letter,
+  h2::first-letter,
+  h3::first-letter,
+  h4::first-letter,
+  h5::first-letter,
+  h6::first-letter {
+    font-feature-settings: "swsh", "dlig", "clig", "kern", "onum" !important;
+  }
 
-    h1,
-    h2 {
-        opacity: 0.85;
-    }
+  h1,
+  h2 {
+    opacity: 0.85;
+  }
 
-    hr,
-    hr:not(:first-child) {
-        font-size: var(--h1-size);
-        line-height: var(--base);
-        padding: 0;
-        border: 0;
-        background: transparent;
-    }
-    hr::after {
-        content: "R";
-        text-align: center;
-        display: block;
-        font-family: "Type Embellishments One";
-        position: relative;
-        top: calc(var(--base) * -0.4);
-        opacity: 0.2;
-    }
+  hr,
+  hr:not(:first-child) {
+    font-size: var(--h1-size);
+    line-height: var(--base);
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  hr::after {
+    content: "R";
+    text-align: center;
+    display: block;
+    font-family: "Type Embellishments One";
+    position: relative;
+    top: calc(var(--base) * -0.4);
+    opacity: 0.2;
+  }
 }
 @font-face {
-    font-family: "Forrest";
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-Regular.woff2") format("woff22");
-}
-
-@font-face {
-    font-family: "Forrest";
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-RegularItalic.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-Regular.woff2") format("woff22");
 }
 
 @font-face {
-    font-family: "Forrest";
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-Light.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-RegularItalic.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Forrest";
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-LightItalic.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-Light.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Forrest";
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-Medium.woff2") format("woff2");
-}
-@font-face {
-    font-family: "Forrest";
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-MediumItalic.woff2") format("woff2");
-}
-@font-face {
-    font-family: "Forrest";
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-Bold.woff2") format("woff2");
-}
-@font-face {
-    font-family: "Forrest";
-    font-weight: 700;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-BoldItalic.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-LightItalic.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Forrest";
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-Extrabold.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-Medium.woff2") format("woff2");
 }
 @font-face {
-    font-family: "Forrest";
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-ExtraboldItalic.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-MediumItalic.woff2") format("woff2");
 }
 @font-face {
-    font-family: " Forrest";
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-Heavy.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-Bold.woff2") format("woff2");
 }
 @font-face {
-    font-family: "Forrest";
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Forrest-HeavyItalic.woff2") format("woff2");
+  font-family: "Forrest";
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-BoldItalic.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Monaspace Xenon Var";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 900;
-    font-style: normal;
-    src: url("/assets/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].woff2")
-        format("woff2");
+  font-family: "Forrest";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-Extrabold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Forrest";
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-ExtraboldItalic.woff2") format("woff2");
+}
+@font-face {
+  font-family: " Forrest";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-Heavy.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Forrest";
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Forrest-HeavyItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Monaspace Xenon Var";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 900;
+  font-style: normal;
+  src: url("/assets/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].woff2")
+    format("woff2");
 }
 /* END VARIABLES FONT */
 
 @font-face {
-    font-family: "NationalPark";
-    font-weight: 200 800;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/NationalPark-VariableVF.woff2") format("woff2");
+  font-family: "NationalPark";
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/NationalPark-VariableVF.woff2") format("woff2");
 }

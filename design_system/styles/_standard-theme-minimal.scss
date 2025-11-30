@@ -1,132 +1,132 @@
 [data-theme="minimal"] {
-    --shadow: none;
-    --color-light-background: white;
-    --color-light-foreground: #444;
-    --color-dark-foreground: #ccc;
-    --color-dark-background: #222;
+  --shadow: none;
+  --color-light-background: white;
+  --color-light-foreground: #444;
+  --color-dark-foreground: #ccc;
+  --color-dark-background: #222;
 
-    --font-header: Kalice;
-    --font-header-weight: 300;
-    --font-header-letter-spacing: 0.03em;
+  --font-header: Kalice;
+  --font-header-weight: 300;
+  --font-header-letter-spacing: 0.03em;
 
-    --optical-ratio: 1.414;
-    --line-width: var(--line-width-s);
+  --optical-ratio: 1.414;
+  --line-width: var(--line-width-s);
 
-    --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
-    --color-background-secondary: color-mix(
-        in srgb,
-        var(--color-foreground) 2%,
-        var(--color-background)
-    );
+  --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
+  --color-background-secondary: color-mix(
+    in srgb,
+    var(--color-foreground) 2%,
+    var(--color-background)
+  );
 
-    h1 {
-        margin-block-start: calc(var(--gap) * 7);
-        margin-block-end: calc(var(--gap) * 7);
-        text-align: center;
-        letter-spacing: 0.1em;
+  h1 {
+    margin-block-start: calc(var(--base) * 7);
+    margin-block-end: calc(var(--base) * 7);
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+
+  blockquote,
+  pre {
+    background: transparent;
+    color: var(--color-foreground);
+    .copy-button {
+      position: absolute;
+      top: 0;
+      right: 0;
     }
-
-    blockquote,
-    pre {
-        background: transparent;
-        color: var(--color-foreground);
-        .copy-button {
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
+  }
+  pre {
+    border: 0;
+    background: var(--color-background-secondary);
+    .copy-button {
+      position: absolute;
+      top: var(--base-d2);
+      right: var(--base-d2);
     }
-    pre {
-        border: 0;
-        background: var(--color-background-secondary);
-        .copy-button {
-            position: absolute;
-            top: var(--base-d2);
-            right: var(--base-d2);
-        }
-    }
+  }
 
-    blockquote {
-        border: 0;
-        border-left: 1px solid var(--color-muted);
-        color: var(--color-muted);
-        font-family: Kalice;
-        margin-inline-start: var(--gap-compact);
-        padding-inline-start: var(--gap-compact);
-        padding-inline-end: var(--gap);
-        line-height: var(--line-height);
-    }
+  blockquote {
+    border: 0;
+    border-left: 1px solid var(--color-muted);
+    color: var(--color-muted);
+    font-family: Kalice;
+    margin-inline-start: var(--leading);
+    padding-inline-start: var(--leading);
+    padding-inline-end: var(--base);
+    line-height: var(--line-height);
+  }
 }
 
 @font-face {
-    font-family: "Diatype";
-    font-weight: 200 1000;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff2");
+  font-family: "Diatype";
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/Cargo-DiatypePlusVariable.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: "Diatype";
-    font-weight: 200 1000;
-    font-style: italic;
-    font-display: swap;
-    src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2")
-        format("woff2");
+  font-family: "Diatype";
+  font-weight: 200 1000;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2")
+    format("woff2");
 }
 
 @font-face {
-    font-family: "CalSans";
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-    src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
+  font-family: "CalSans";
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
 }
 
 @font-face {
-    font-family: "Kalice";
-    src: url("/assets/fonts/Kalice-Black.woff2") format("woff2");
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Kalice";
+  src: url("/assets/fonts/Kalice-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Kalice";
-    src: url("/assets/fonts/Kalice-Italic.woff2") format("woff2");
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Kalice";
+  src: url("/assets/fonts/Kalice-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Kalice";
-    src: url("/assets/fonts/Kalice-ExtraBold.woff2") format("woff2");
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Kalice";
+  src: url("/assets/fonts/Kalice-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Kalice";
-    src: url("/assets/fonts/Kalice-Medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Kalice";
+  src: url("/assets/fonts/Kalice-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Kalice";
-    src: url("/assets/fonts/Kalice-Bold.woff2") format("woff2");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Kalice";
+  src: url("/assets/fonts/Kalice-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Kalice";
-    src: url("/assets/fonts/Kalice-Regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Kalice";
+  src: url("/assets/fonts/Kalice-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }

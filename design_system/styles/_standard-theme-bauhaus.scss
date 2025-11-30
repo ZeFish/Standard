@@ -1,55 +1,57 @@
 @use "standard-00-variables" as *;
 
 [data-theme="bauhaus"] {
-    --color-light-red: #e4002b;            /* assertive red (Bauhaus poster) */
-    --color-light-blue: #0050a4;              /* primaries-as-ink */
-    --color-light-yellow: #f0c300;
-    
-    --color-dark-red: #ff5a36;    /* warmer red in dark */
-    --color-dark-blue: #7aa6ff;
-    --color-dark-yellow: #ffd369;
-    
-    --color-accent: var(--color-red);
-    
-    --font-header: "Futura Now Var";
-    --font-text: "Univers", "Helvetica Now Var";
-    
-    --line-height:1.1;
-    --font-size:0.9em;
-    --line-width: var(--line-width-s);
-    --gap-nl: var(--gap);
-    
-    p {
-        text-align: justify;
-        text-align-last: left; /* Don't justify the last line */
-        /* Enable hyphenation */
-        hyphens: auto;
-        -webkit-hyphens: auto;
-        -ms-hyphens: auto;
-        /* Improve word spacing */
-        word-spacing: -0.1em;
-        text-box-edge: cap ex;
-    }
-     p:not(:has(img)) + p {
-        text-indent: var(--gap);
-    }
-    
-    p:has(+ p) { margin-block-end:var(--gap-nl); }
-    
-    h1 {
-        font-size: var(--scale-4);
-        letter-spacing: -0.01em;          /* geometric tightness */
-        font-variation-settings: "wght" 650; /* if variable */
-    }
-    h2 {
-        font-size: var(--scale-3);   /* e.g., var(--scale-3) */
-        font-variation-settings: "wght" 600;
-        letter-spacing: -0.008em;
-    }
-    h3 {
-        font-family: var(--font-sans);
-        font-size: var(--scale-2); /* e.g., var(--scale-2) */
-        font-weight: 600;
-        letter-spacing: -0.003em;
-    }
+  --color-light-red: #e4002b; /* assertive red (Bauhaus poster) */
+  --color-light-blue: #0050a4; /* primaries-as-ink */
+  --color-light-yellow: #f0c300;
+
+  --color-dark-red: #ff5a36; /* warmer red in dark */
+  --color-dark-blue: #7aa6ff;
+  --color-dark-yellow: #ffd369;
+
+  --color-accent: var(--color-red);
+
+  --font-header: "Futura Now Var";
+  --font-text: "Univers", "Helvetica Now Var";
+
+  --line-height: 1.1;
+  --font-size: 0.9em;
+  --line-width: var(--line-width-s);
+  --gap-nl: var(--base);
+
+  p {
+    text-align: justify;
+    text-align-last: left; /* Don't justify the last line */
+    /* Enable hyphenation */
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    /* Improve word spacing */
+    word-spacing: -0.1em;
+    text-box-edge: cap ex;
+  }
+  p:not(:has(img)) + p {
+    text-indent: var(--base);
+  }
+
+  p:has(+ p) {
+    margin-block-end: var(--leading);
+  }
+
+  h1 {
+    font-size: var(--scale-4);
+    letter-spacing: -0.01em; /* geometric tightness */
+    font-variation-settings: "wght" 650; /* if variable */
+  }
+  h2 {
+    font-size: var(--scale-3); /* e.g., var(--scale-3) */
+    font-variation-settings: "wght" 600;
+    letter-spacing: -0.008em;
+  }
+  h3 {
+    font-family: var(--font-sans);
+    font-size: var(--scale-2); /* e.g., var(--scale-2) */
+    font-weight: 600;
+    letter-spacing: -0.003em;
+  }
 }

@@ -1,176 +1,176 @@
 [data-theme="swiss"] {
-    --color-light-red: #e03030;
-    --color-dark-red: #db6057;
-    --color-green: var(--color-red);
-    --color-blue: #2b5aa0;
-    --color-yellow: var(--color-red);
-    --color-purple: var(--color-red);
-    --color-orange: var(--color-red);
-    --color-pink: var(--color-red);
-    --color-accent: var(--color-red);
-    --shadow: none;
-    --radius: 0;
-    --color-border: none;
-    --color-muted: var(--color-foreground);
+  --color-light-red: #e03030;
+  --color-dark-red: #db6057;
+  --color-green: var(--color-red);
+  --color-blue: #2b5aa0;
+  --color-yellow: var(--color-red);
+  --color-purple: var(--color-red);
+  --color-orange: var(--color-red);
+  --color-pink: var(--color-red);
+  --color-accent: var(--color-red);
+  --shadow: none;
+  --radius: 0;
+  --color-border: none;
+  --color-muted: var(--color-foreground);
 
-    --font-header-weight: 900;
+  --font-header-weight: 900;
 
-    --color-dark-foreground: #ccc;
+  --color-dark-foreground: #ccc;
 
-    --optical-ratio: var(--ratio-golden);
-    --mobile-font-ratio: var(--ratio-golden);
-    --font-monospace: "Sohne Mono", monospace;
-    --font-text: Diatype;
-    --line-height: 1.2;
-    --font-size: 1.2em;
-    --scale-d2: 0.75em;
-    --body-padding: var(--gap);
-    --color-background-secondary: var(--color-background);
+  --optical-ratio: var(--ratio-golden);
+  --mobile-font-ratio: var(--ratio-golden);
+  --font-monospace: "Sohne Mono", monospace;
+  --font-text: Diatype;
+  --line-height: 1.2;
+  --font-size: 1.2em;
+  --scale-d2: 0.75em;
+  --body-padding: var(--base);
+  --color-background-secondary: var(--color-background);
 
-    --font-header: InterVariable;
-    --line-height: 1.2;
+  --font-header: InterVariable;
+  --line-height: 1.2;
 
-    h1 {
-        letter-spacing: -0.065em;
-        font-weight: 900;
-        line-height: 0.965;
-    }
-    .font-interface {
-        font-size: 12px;
-    }
+  h1 {
+    letter-spacing: -0.065em;
+    font-weight: 900;
+    line-height: 0.965;
+  }
+  .font-interface {
+    font-size: 12px;
+  }
 
-    hr {
-        background: var(--color-foreground);
-    }
+  hr {
+    background: var(--color-foreground);
+  }
 
-    .callout-content {
-        background: none;
-    }
-    p {
-        text-align: left;
-    }
-    strong {
-        color: var(--color-accent);
-        font-weight: normal;
-    }
-
-    em {
-        background-color: var(--color-accent);
-        color: var(--color-background);
-    }
-
-    .callout {
-        background: none;
-        border: 0;
-        font-size: var(--scale-d2);
-        padding-inline: var(--gap);
-    }
-    .callout-title {
-        color: var(--color-foreground);
-        border: none;
-        margin-block-start: var(--gap-compact);
-        padding: 0;
-    }
-    .callout-content {
-        padding: 0;
-    }
-    code,
-    .token {
-        color: var(--color-foreground) !important;
-    }
-    .prose {
-        display: block;
-    }
-
-    img {
-        border: 0;
-    }
-
-    .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
-        max-width: var(--line-width-xs);
-        margin-inline: 0;
-    }
-
-    aside {
-        background: none;
-        border: 0;
-    }
-
-    body {
-        background-color: var(--color-background);
-        color: var(--color-foreground);
-        max-width: 1400px;
-    }
-
-    header {
-        display: block;
-    }
-
-    pre {
-        padding: 0;
-        padding-block: var(--gap-compact);
-        margin-block: var(--gap-compact);
-        border: 0;
-        background-color: var(--color-background);
-        code {
-            opacity: 1;
-        }
-    }
-
-    footer hr {
-        display: none;
-    }
-
-    .comment {
-        opacity: 0.2;
-    }
-
-    blockquote {
-        border: 0;
-        border-inline-start: 1px solid var(--color-foreground);
-    }
-
-    table {
-        grid-column: content;
-    }
-    table,
-    table th,
-    table td,
-    table td code {
-        font-size: var(--scale-d3);
-        font-family: var(--font-monospace);
-        word-break: keep-all;
-    }
-}
-
-@font-face {
-    font-family: "Helvetica Monospaced Pro";
-    src: url("/assets/fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
+  .callout-content {
+    background: none;
+  }
+  p {
+    text-align: left;
+  }
+  strong {
+    color: var(--color-accent);
     font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  }
+
+  em {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  .callout {
+    background: none;
+    border: 0;
+    font-size: var(--scale-d2);
+    padding-inline: var(--base);
+  }
+  .callout-title {
+    color: var(--color-foreground);
+    border: none;
+    margin-block-start: var(--leading);
+    padding: 0;
+  }
+  .callout-content {
+    padding: 0;
+  }
+  code,
+  .token {
+    color: var(--color-foreground) !important;
+  }
+  .prose {
+    display: block;
+  }
+
+  img {
+    border: 0;
+  }
+
+  .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
+    max-width: var(--line-width-xs);
+    margin-inline: 0;
+  }
+
+  aside {
+    background: none;
+    border: 0;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    max-width: 1400px;
+  }
+
+  header {
+    display: block;
+  }
+
+  pre {
+    padding: 0;
+    padding-block: var(--leading);
+    margin-block: var(--leading);
+    border: 0;
+    background-color: var(--color-background);
+    code {
+      opacity: 1;
+    }
+  }
+
+  footer hr {
+    display: none;
+  }
+
+  .comment {
+    opacity: 0.2;
+  }
+
+  blockquote {
+    border: 0;
+    border-inline-start: 1px solid var(--color-foreground);
+  }
+
+  table {
+    grid-column: content;
+  }
+  table,
+  table th,
+  table td,
+  table td code {
+    font-size: var(--scale-d3);
+    font-family: var(--font-monospace);
+    word-break: keep-all;
+  }
 }
 
 @font-face {
-    font-family: "Helvetica Monospaced Pro";
-    src: url("/assets/fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Helvetica Monospaced Pro";
+  src: url("/assets/fonts/HelveticaMonospacedPro-Rg.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Helvetica Monospaced Pro";
-    src: url("/assets/fonts/HelveticaMonospacedPro-BdIt.woff2") format("woff2");
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Helvetica Monospaced Pro";
+  src: url("/assets/fonts/HelveticaMonospacedPro-Bd.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Helvetica Monospaced Pro";
-    src: url("/assets/fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Helvetica Monospaced Pro";
+  src: url("/assets/fonts/HelveticaMonospacedPro-BdIt.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Monospaced Pro";
+  src: url("/assets/fonts/HelveticaMonospacedPro-It.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
 }

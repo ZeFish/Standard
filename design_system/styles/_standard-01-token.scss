@@ -31,28 +31,25 @@
   --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
 
   /* Represents "one line of text without line-height spacing" */
-  --leading: calc((var(--line-height) - 1) * var(--font-size));
-  --gap-nl: calc((1lh - 1em) + (1lh - 1em) / 2);
-  --gap-nl: 0.5lh;
-  --baseline: 1rlh;
-  --font-cap: calc(1rlh / var(--line-height));
 
-  --trim: calc(var(--line-height) - 1) / 2em;
-  --leading: calc(var(--line-height) - 1);
+  --baseline: 1rlh;
+
+  --trim: calc(var(--leading) / 2);
+  --leading: calc((var(--line-height) - 1) * 1em);
 
   @for $i from 1 through 12 {
     --base-#{$i}: calc((var(--line-height) * $i) - 1em);
   }
   --base: var(--base-1);
 
-  --gap: calc(var(--baseline));
-  --gap-block: calc(var(--gap) * 2);
+  //--gap: calc(var(--baseline));
+  //--gap-block: calc(var(--base) * 2);
   /* Spacing between different type of block */
-  --gap-compact: calc(var(--gap) / 2);
-  --gap-tight: calc(var(--gap) / 4);
-  --gap-micro: calc(var(--gap) / 8);
-  --gap-relaxed: calc(var(--gap) * 2);
-  --gap-body: var(--gap-relaxed);
+  //--gap-compact: calc(var(--base) / 2);
+  //--gap-tight: calc(var(--base) / 4);
+  //--gap-micro: calc(var(--base) / 8);
+  //--gap-relaxed: calc(var(--base) * 2);
+  --gap-body: var(--base-2);
   --gap-grid: 0.25lh;
   /* Grid system tokens */
 
@@ -137,10 +134,10 @@ make h6 running as the first phrase of the paragraph
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
   --mobile-line-height: 1.5;
-  --mobile-gap-body: var(--gap-compact);
+  --mobile-gap-body: var(--leading);
   --mobile-gap: 1rlh;
   /* Space between standard block like paragraph */
-  --mobile-gap-block: var(--gap-relaxed);
+  --mobile-gap-block: var(--base-2);
 
   /* Z-index scale */
   --z-base: 1;
