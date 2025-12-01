@@ -48,9 +48,9 @@
   --instrument-feature: "figa", "ss01", "ss02", "ss05";
 
   /* Font features & variations */
-  --font-feature: var(--instrument-feature);
+  --font-feature: "";
   --font-variation: "wdth" 95;
-  --font-header-feature: var(--inter-feature);
+  --font-header-feature: "";
   --font-header-variation: "";
   --font-monospace-feature: "";
   --font-monospace-variation: "";

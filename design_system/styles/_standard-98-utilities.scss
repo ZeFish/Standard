@@ -613,10 +613,10 @@
 .body-p-neg,
 .body-p-neg-header,
 .body-p-neg-footer {
-  margin-inline: calc(var(--body-padding) * -1);
-  padding-inline: calc(var(--body-padding) * 1);
+  margin-inline: calc(var(--gap-body) * -1);
+  padding-inline: calc(var(--gap-body) * 1);
   @media (max-width: #{$small}) {
-    margin-inline: calc(var(--mobile-body-padding) * -1);
+    margin-inline: calc(var(--mobile-gap-body) * -1);
   }
 }
 
@@ -626,18 +626,18 @@
  * Useful when you want footer to sit flush at bottom
  */
 .body-p-neg-footer {
-  margin-block-end: calc(var(--body-padding) * -1.5);
+  margin-block-end: calc(var(--gap-body) * -1.5);
 
   @media (max-width: #{$small}) {
-    margin-block-end: calc(var(--mobile-body-padding) * -1.5);
+    margin-block-end: calc(var(--mobile-gap-body) * -1.5);
   }
 }
 
 .body-p-neg-header {
-  margin-block-start: calc(var(--body-padding) * -1);
+  margin-block-start: calc(var(--gap-body) * -1);
 
   @media (max-width: #{$small}) {
-    margin-block-end: calc(var(--mobile-body-padding) * -1);
+    margin-block-end: calc(var(--mobile-gap-body) * -1);
   }
 }
 

@@ -258,10 +258,6 @@ export default function standard(options = {}) {
                   __dirname,
                   "../core/logger.js",
                 ),
-                "@zefish/standard/astro/utils": path.resolve(
-                  __dirname,
-                  "utils/utils.js",
-                ),
                 "@zefish/standard/astro/utils/collections": path.resolve(
                   __dirname,
                   "utils/collections.js",
