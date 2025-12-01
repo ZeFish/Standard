@@ -1,6 +1,6 @@
 {
   "name": "@zefish/standard",
-  "version": "0.18.22",
+  "version": "0.18.23",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -40,6 +40,7 @@
     "./styles/standard.scss": "./src/styles/standard.scss",
     "./styles/standard.theme.scss": "./src/styles/standard.theme.scss",
     "./css": "./lib/standard.min.css",
+    "./logger": "./core/logger.js",
     "./theme": "./lib/standard.theme.min.css",
     "./js": "./lib/standard.min.js",
     "./lab": "./lib/standard.lab.js",
