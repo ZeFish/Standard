@@ -22,7 +22,7 @@
   --font-size: 1.1em;
   --line-height: 1.5;
 
-  --mobile-gap-body: var(--base);
+  --mobile-gap-body: var(--space);
   --mobile-line-height: 1.2;
   --gap-nl: var(--leading);
 
@@ -61,8 +61,8 @@
   }
 
   h1 {
-    margin-block-start: calc(var(--base) * 5);
-    margin-block-end: calc(var(--base) * 6);
+    margin-block-start: var(--space-5);
+    margin-block-end: var(--space-6);
     text-align: center;
     font-family: var(--font-display);
   }

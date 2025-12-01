@@ -40,13 +40,24 @@
  * @see https://www.rsub.com/blog/how-long-should-a-line-of-text-be/
  */
 
+/*
+
+ .callout,
+ blockquote,
+ pre,
+ figure,
+ p:has(img) {
+   margin-inline: var(--content-small);
+ }
+
+ */
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
   /* Layout grid tokens */
   --content: min(var(--line-width), 100%); /* ← FIXED */
-  --content-small: max(calc(var(--base-2) - var(--base)), var(--base));
-  --content-accent: minmax(0, var(--base));
-  --content-feature: minmax(0, var(--base-2));
+  --content-small: max(calc(var(--space-2) - var(--space)), var(--space));
+  --content-accent: minmax(0, var(--space));
+  --content-feature: minmax(0, var(--space-2));
   --content-hero: minmax(0, 1fr);
 }
 
@@ -140,7 +151,7 @@
     /* Adjacent images get reduced spacing  + var(--img-gap)    */
     p:has(img) + p:has(img) {
       margin-block-start: calc(
-        (var(--base-2) * -1) + var(--gap-grid-img)
+        (var(--space-2) -1) + var(--gap-grid-img)
       ) !important;
     }
   }
@@ -159,14 +170,6 @@
     margin: 0;
     margin-inline: auto;
     max-inline-size: 100%;
-  }
-
-  .callout,
-  blockquote,
-  pre,
-  figure,
-  p:has(img) {
-    margin-inline: var(--content-small);
   }
 
   p {
@@ -196,9 +199,9 @@
 
   /* Mermaid diagrams */
   .mermaid {
-    margin-block-end: var(--base);
+    margin-block-end: var(--space);
     margin-inline: auto;
-    padding: var(--base);
+    padding: var(--space);
   }
 
   p img {

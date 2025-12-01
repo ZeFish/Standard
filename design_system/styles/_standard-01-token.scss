@@ -21,41 +21,32 @@
 /* Primitive Design Tokens - Foundation layer with logical properties */
 
 :root {
-  --optical-ratio: var(--ratio-golden);
-
   /* Base measurements & ratios - the foundation of everything else */
   --font-size: 1rem;
+  --optical-ratio: var(--ratio-silver);
   --line-height: var(--optical-ratio);
+
   /* The actual line-height of html */
-  --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
-  --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
 
-  /* Represents "one line of text without line-height spacing" */
-
+  /* Le base line officiel, V0.1.0 */
+  /* Le text cole sur la ligne du haut */
   --baseline: 1rlh;
 
-  --trim: calc(var(--leading) / 2);
+  /* Si en bas, pousse avec ca */
   --leading: calc((var(--line-height) - 1) * var(--font-size));
 
-  @for $i from 1 through 12 {
-    --base-#{$i}: calc((var(--line-height) * $i) - 1em);
-  }
-  --base: var(--base-1);
+  /* Test et essaie supplementaire */
+  --nl: calc(var(--leading) * var(--line-height));
+  --trim: calc(var(--leading) / 2);
 
-  //--gap: calc(var(--baseline));
-  //--gap-block: calc(var(--base) * 2);
-  /* Spacing between different type of block */
-  //--gap-compact: calc(var(--base) / 2);
-  //--gap-tight: calc(var(--base) / 4);
-  //--gap-micro: calc(var(--base) / 8);
-  //--gap-relaxed: calc(var(--base) * 2);
-  --gap-body: var(--base-2);
+  --gap-body: var(--space-3);
   --gap-grid: 0.25lh;
   /* Grid system tokens */
 
   /* Design standard system */
   --blur: blur(7px);
-  --stroke-width: max(1px, 0.06rem); /*  --rule-hairline */
+  --stroke-width: max(1px, 0.06rem);
+  /*  --rule-hairline */
   --transition: 0.5s ease;
   --radius: var(--leading);
   --modal-background: color-mix(
@@ -64,18 +55,12 @@
     transparent
   );
 
-  --tracking-tight: -0.01em;
-  --tracking-slight-tight: -0.005em;
-  --tracking-neutral: 0em;
-  --tracking-slight-open: 0.004em;
-  --tracking-open: 0.01em;
-
   /*
 .hr { border: 0; border-top: var(--rule-hairline) solid var(--color-border); }
 .label-overline {
     border-top: var(--rule-hairline) solid var(--color-border);
-    padding-block-start: calc(var(--baseline) / 2);
-    margin-block-start: calc(var(--baseline) * 1.5);
+    padding-block-start: calc(var(--space) / 2);
+    margin-block-start: calc(var(--space) * 1.5);
 }
 
 
@@ -98,29 +83,28 @@ make h6 running as the first phrase of the paragraph
 
   /* Content area tokens */
   --line-width-xs: 32rem;
-  /* ~384px - narrow sidebar content */
   --line-width-s: 38rem;
-  /* ~512px - short form content */
   --line-width-m: 42rem;
-  /* ~672px - optimal reading (60-75 chars) - DEFAULT */
   --line-width-l: 50rem;
-  /* ~800px - wider articles */
   --line-width-xl: 60rem;
-  /* ~960px - documentation/wide content */
-  --line-width-full: calc(100vw - (var(--base) * 2));
-  /* responsive full width with margins */
+  --line-width-full: calc(100vw - (var(--space) * 2));
   --line-width: var(--line-width-m);
 
-  /* Baseline helper tokens */
-  --base: var(--baseline);
-  /* Name use for actual spacing in the framework  */
-  --base-d8: calc(var(--base) / 8);
-  --base-d4: calc(var(--base) / 4);
-  --base-d2: calc(var(--base) / 2);
-  --base-2: calc(var(--base) * 2);
-  --base-3: calc(var(--base) * 3);
-  --base-4: calc(var(--base) * 4);
-  --base-8: calc(var(--base) * 8);
+  --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
+  --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
+
+  --tracking-tight: -0.01em;
+  --tracking-slight-tight: -0.005em;
+  --tracking-neutral: 0em;
+  --tracking-slight-open: 0.004em;
+  --tracking-open: 0.01em;
+
+  @for $i from 1 through 12 {
+    --space-#{$i}: calc(var(--baseline) * #{$i});
+  }
+  --space: var(--baseline);
+  --space-half: calc(var(--baseline) / 2);
+  --space-half-negative: calc(var(--baseline) * -0.5);
 
   /* Optical harmony scale */
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
@@ -133,11 +117,11 @@ make h6 running as the first phrase of the paragraph
   /* Mobile */
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
-  --mobile-line-height: 1.5;
+  --mobile-line-height: var(--ratio-silver);
   --mobile-gap-body: var(--leading);
   --mobile-gap: 1rlh;
   /* Space between standard block like paragraph */
-  --mobile-gap-block: var(--base-2);
+  --mobile-gap-block: var(--space-2);
 
   /* Z-index scale */
   --z-base: 1;
@@ -172,6 +156,7 @@ make h6 running as the first phrase of the paragraph
     --line-height: var(--mobile-line-height) !important;
   }
 }
+
 /*
 body::after {
     content: "";

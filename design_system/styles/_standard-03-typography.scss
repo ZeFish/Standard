@@ -32,8 +32,8 @@
 :root {
   /* Font stacks */
   --font-sans:
-    "Instrument Sans", InterVariable, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   --font-serif:
     "Newsreader", "Instrument Serif", "Garamond Premiere Pro", "Source Serif 4",
     serif;
@@ -44,10 +44,13 @@
   --font-header: InterVariable;
   --font-interface: var(--font-sans);
 
+  --inter-feature: "calt", "cv05", "cv11", "ss03";
+  --instrument-feature: "figa", "ss01", "ss02", "ss05";
+
   /* Font features & variations */
-  --font-feature: "ss01", "ss02", "ss05";
+  --font-feature: var(--instrument-feature);
   --font-variation: "wdth" 95;
-  --font-header-feature: "dlig";
+  --font-header-feature: var(--inter-feature);
   --font-header-variation: "";
   --font-monospace-feature: "";
   --font-monospace-variation: "";
@@ -81,7 +84,7 @@
   --font-weight-h6: var(--font-weight);
 
   /* List styling */
-  --list-indentation: var(--base);
+  --list-indentation: var(--space);
 }
 
 // ========== Typography ==========

@@ -39,7 +39,7 @@ const year = new Date().getFullYear();
 <html
     class="rhythm"
     lang={site.language || "en"}
-    data-standard-version={site.standard?.version}
+    data-standard-version={site.version}
     data-theme="default"
 >
     <head>
@@ -74,9 +74,9 @@ const year = new Date().getFullYear();
 
     <body>
         <!-- Persistent container for StandardLab UI that survives DOM swaps -->
-        <div id="standard-lab-root" transition:persist></div>
+        <!--div id="standard-lab-root" transition:persist></div>
 
-        <a href="#main" class="skip-link">Skip to content</a>
+        <a href="#main" class="skip-link">Skip to content</a-->
 
         <header
             class="flex font-interface"

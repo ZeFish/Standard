@@ -57,13 +57,13 @@
         var(--color-foreground) var(--blueprint-opacity),
         transparent
       );
-    border-radius: var(--base);
-    outline-offset: var(--base);
+    border-radius: var(--space);
+    outline-offset: var(--space);
   }
 
   :is(#{$rhythm-block-elements}) {
     position: relative;
-    outline-offset: var(--base-2);
+    outline-offset: var(--space-2);
   }
   :is(#{$rhythm-block-elements})::before {
     content: "Block";
@@ -74,7 +74,7 @@
     color: var(--color-foreground);
     font-style: italic;
     top: 0;
-    left: calc(var(--base) * -1);
+    left: calc(var(--space) * -1);
     transform: translateX(-100%);
     z-index: 999999999;
   }
@@ -92,7 +92,7 @@
     font-family: var(--font-monospace);
     position: absolute;
     top: 0;
-    left: calc(var(--base) * -1);
+    left: calc(var(--space) * -1);
     transform: translateX(-100%);
   }
 
@@ -110,7 +110,7 @@
     font-family: var(--font-monospace);
     position: absolute;
     top: 0;
-    left: calc(var(--base) * -1);
+    left: calc(var(--space) * -1);
     transform: translateX(-100%);
   }
   h1::before {
@@ -145,8 +145,8 @@
     font-weight: 400;
     font-family: var(--font-monospace);
     position: absolute;
-    top: calc(var(--base) * -1);
-    left: calc(var(--base) * -3);
+    top: calc(var(--space) * -1);
+    left: calc(var(--space) * -3);
     transform: translateX(-100%);
   }
 
@@ -163,8 +163,8 @@
     font-weight: 400;
     font-family: var(--font-monospace);
     position: absolute;
-    top: calc(var(--base) * -1);
-    left: calc(var(--base) * -3);
+    top: calc(var(--space) * -1);
+    left: calc(var(--space) * -3);
     transform: translateX(-100%);
   }
 
@@ -217,7 +217,7 @@
   body::before {
     --color-grid: var(--color-foreground);
     --percent-grid: 5%;
-    --grid-unit: var(--base);
+    --grid-unit: var(--space);
     --dot-size: 1px;
     content: "";
     position: fixed;

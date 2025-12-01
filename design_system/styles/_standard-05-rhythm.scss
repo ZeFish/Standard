@@ -59,12 +59,27 @@
   /* Modern margin collapse prevention */
   display: flow-root;
 
-  /* Apply rhythm spacing to all direct children */
   * {
+    margin: 0;
     vertical-align: baseline;
     margin-block-start: 0;
-    margin-block-end: var(--base);
+    margin-block-end: calc(var(--space) + var(--space-half));
   }
+
+  p:has(+ p) {
+    margin-block-end: calc(var(--space) + var(--space-half));
+  }
+  p:has(+ :is(h1, h2, h3, h4, h5, h6)) {
+    margin-block-end: 0;
+  }
+  /*
+
+  Le leading pouse le text qui touchais la ligne du dessus, a la ligne du .compact
+  p + p {
+    margin-block-start: var(--space-half-negative);
+  }
+
+  */
 
   /* Padding only applied to <body> when rhythm is active */
   > body {
@@ -73,34 +88,34 @@
     padding-bottom: calc(var(--gap-body) * 1.5);
 
     [id] {
-      scroll-margin-top: calc(var(--base-2) + var(--gap-body));
+      scroll-margin-top: calc(var(--space-2) + var(--gap-body));
       /* Adjust value as needed */
     }
   }
 
   /* Elements within rhythm containers */
-  /* Enhanced spacing relationships for typography */
+  /* Enhanced spacing relationships for typography
   #{$rhythm-elements} {
     margin-block-start: 0;
-    margin-block-end: var(--base);
-  }
+    margin-block-end: var(--space);
+  }*/
 
   /* Special blocks get generous spacing (2× rhythm) */
-  /* Layout containers get double spacing for emphasis */
+  /* Layout containers get double spacing for emphasis
   #{$rhythm-block-elements} {
-    margin-block-start: max(calc(var(--base-2) - var(--base)), var(--base));
-    margin-block-end: max(var(--base-2), var(--base));
-  }
+    margin-block-start: max(calc(var(--space-2); - var(--space)), var(--space));
+    margin-block-end: max(var(--space-2) var(--space));
+  }*/
 
   /* The i that two specal block would bit a bit closer
-    debug when  its image */
+    debug when  its image
   :is(#{$rhythm-block-elements}):has(+ :is(#{$rhythm-block-elements})) {
-    margin-block-end: var(--base);
+    margin-block-end: var(--space);
   }
 
   :is(#{$rhythm-block-elements}) + :is(#{$rhythm-block-elements}) {
-    margin-block-start: max(0, var(--base));
-  }
+    margin-block-start: max(0, var(--space));
+  }*/
 
   /* Reset first-child spacing for special blocks */
   :is(.card, aside, blockquote, pre, figure, .callout-content) > :first-child {
@@ -117,24 +132,25 @@
   }
 
   h1 {
-    margin-block-start: calc(var(--base) * 3);
-    margin-block-end: var(--base);
+    margin-block-start: var(--space-4);
+    margin-block-end: calc(var(--space-2) + var(--space-half));
   }
   h1:first-of-type {
-    margin-block-start: calc(var(--base) * 5);
-    margin-block-end: calc(var(--base) * 6);
+    margin-block-start: var(--space-4);
+    margin-block-end: calc(var(--space-6) + var(--space-half));
   }
 
   h2,
   h3 {
-    margin-block-start: calc(var(--base) * 2);
-    margin-block-end: var(--base);
+    margin-block-start: var(--space-3);
+    margin-block-end: calc(var(--space) + var(--space-half));
   }
 
   h4,
   h5,
   h6 {
-    margin-block: calc(var(--leading) * 2);
+    margin-block-start: calc(var(--space-2) + var(--space-half));
+    margin-block-end: var(--space-half);
   }
 
   :is(h1, h2, h3) + :is(h1, h2, h3),
@@ -143,12 +159,12 @@
   }
 
   hr {
-    margin-inline: calc(var(--base-4));
+    margin-inline: calc(var(--space-4));
     margin-block-start: max(
-      calc((var(--base-2) - var(--base)) * 1),
-      var(--base)
+      calc((var(--space-2) - var(--space)) * 1),
+      var(--space)
     );
-    margin-block-end: max((var(--base-2) * 1), var(--base));
+    margin-block-end: max((var(--space-2) * 1), var(--space));
   }
 
   /* =========================== */
@@ -168,14 +184,14 @@
     list-style: none;
     margin-block-start: 0;
     padding-inline: 1rlh;
-    margin-block-end: var(--base);
+    margin-block-end: var(--space);
   }
 
   /* Nested lists */
   li > ul,
   li > ol {
     padding-inline-start: 1rlh;
-    margin-block-start: var(--trim);
+    margin-block-start: var(--space);
     margin-block-end: 0;
   }
 
@@ -184,7 +200,7 @@
     position: relative;
     margin: 0;
     padding-inline-start: 0;
-    margin-block-end: calc((1lh - 1em) * 3);
+    margin-block-end: var(--space-half);
   }
 
   li:last-child {
@@ -193,14 +209,14 @@
   }
 
   p:has(+ :is(ul, ol)) {
-    margin-block-end: calc((1lh - 1em) * 3);
+    margin-block-end: var(--space-half);
   }
 
   .compact {
-    --base-gap: var(--leading);
+    --base-gap: var(--space-half);
 
     li {
-      margin-block-end: var(--leading);
+      margin-block-end: var(--space-half);
     }
   }
 
@@ -213,10 +229,10 @@
   }
 
   .relaxed {
-    --base-gap: var(--base-2);
+    --base-gap: var(--space-2);
 
     li {
-      margin-block-end: var(--base-2);
+      margin-block-end: var(--space-2);
     }
   }
 
@@ -265,39 +281,39 @@
   /* Form containers - avoid nested grids */
   form:not(.grid *) {
     display: grid;
-    gap: calc(var(--base) * var(--base-gap));
+    gap: calc(var(--space) * var(--space-gap));
   }
 
   /* Forms inside grids use flex layout to avoid nesting issues */
   .grid form {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--base) * var(--base-2));
+    gap: calc(var(--space) * var(--space-2));
   }
 
   /* Form field groups - spacing only */
   fieldset {
-    padding-inline: var(--base);
+    padding-inline: var(--space);
     display: grid;
     gap: 0;
   }
 
   legend {
-    margin-block-end: var(--base);
+    margin-block-end: var(--space);
   }
 
   /* Form inputs */
   input,
   textarea,
   select {
-    padding-inline: var(--base);
-    margin-block-end: var(--base-2);
+    padding-inline: var(--space);
+    margin-block-end: var(--space-2);
   }
 
   /* Labels - spacing only */
   label {
-    margin-inline: var(--base);
-    margin-block-end: var(--base-2);
+    margin-inline: var(--space);
+    margin-block-end: var(--space-2);
   }
 
   /* Checkbox/radio with labels */
@@ -307,7 +323,7 @@
   }
 
   div:has(input + label) {
-    margin-block-end: var(--base-2);
+    margin-block-end: var(--space-2);
   }
 
   fieldset div,
@@ -317,7 +333,7 @@
   }
 
   fieldset + button {
-    margin-block-start: var(--base);
+    margin-block-start: var(--space);
   }
 
   fieldset :last-child {
@@ -340,7 +356,7 @@
   /* Figures */
   figure {
     display: grid;
-    gap: calc(var(--base-d4) * var(--base-gap));
+    gap: calc(var(--space-d4) * var(--space-gap));
   }
 
   /* Spacing handled by rhythm system */
@@ -350,7 +366,7 @@
   /* =========================== */
 
   caption {
-    margin-block-end: calc(var(--base-d4) * var(--base-gap));
+    margin-block-end: calc(var(--space-d4) * var(--space-gap));
   }
 
   /* Swiss-style data tables */
@@ -419,7 +435,7 @@
 }
 
 .stick-next {
-  margin-block-end: calc(var(--base-d4) * var(--base-gap)) !important;
+  margin-block-end: calc(var(--space-d4) * var(--space-gap)) !important;
 }
 
 /* =========================== */
@@ -461,7 +477,7 @@
     display: block;
 
     > * {
-      margin-block-end: var(--base-gap);
+      margin-block-end: var(--space-gap);
     }
 
     > :last-child {

@@ -20,8 +20,8 @@
   );
 
   h1 {
-    margin-block-start: calc(var(--base) * 7);
-    margin-block-end: calc(var(--base) * 7);
+    margin-block-start: var(--space-7);
+    margin-block-end: var(--space-7);
     text-align: center;
     letter-spacing: 0.1em;
   }
@@ -41,8 +41,8 @@
     background: var(--color-background-secondary);
     .copy-button {
       position: absolute;
-      top: var(--base-d2);
-      right: var(--base-d2);
+      top: var(--space-d2);
+      right: var(--space-d2);
     }
   }
 
@@ -53,7 +53,7 @@
     font-family: Kalice;
     margin-inline-start: var(--leading);
     padding-inline-start: var(--leading);
-    padding-inline-end: var(--base);
+    padding-inline-end: var(--space);
     line-height: var(--line-height);
   }
 }

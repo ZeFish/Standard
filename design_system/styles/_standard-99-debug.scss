@@ -78,7 +78,7 @@
   font-family: var(--font-monospace);
   font-size: var(--scale-d2);
 
-  padding: var(--base);
+  padding: var(--space);
   z-index: var(--z-toast);
   pointer-events: none;
   white-space: pre;
@@ -110,14 +110,14 @@
       var(--color-cyan) calc(var(--debug-opacity) / 1.2),
       transparent
     );
-  outline-offset: var(--base);
+  outline-offset: var(--space);
   border-radius: var(--radius);
 }
 
 .standard-debug
   :is(#{$rhythm-elements}, #{$rhythm-block-elements}, #{$rhythm-block-small}) {
   position: relative;
-  outline-offset: var(--base);
+  outline-offset: var(--space);
 }
 .standard-debug
   :is(
@@ -128,7 +128,7 @@
   content: attr(class);
   position: absolute;
   top: 0;
-  left: calc(var(--base) * -1);
+  left: calc(var(--space) * -1);
   transform: translateX(-100%);
   z-index: 999999999;
 }
@@ -352,8 +352,8 @@
 .standard-debug .grid-12 > *::before {
   content: attr(class);
   position: absolute;
-  top: calc(var(--base) * -1);
-  left: var(--base);
+  top: calc(var(--space) * -1);
+  left: var(--space);
   color: var(--debug-color);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
@@ -370,13 +370,13 @@
 .standard-debug .free-col::after {
   content: "start: " var(--start) " / span: " var(--span);
   position: absolute;
-  bottom: var(--base);
-  left: var(--base);
+  bottom: var(--space);
+  left: var(--space);
   color: var(--debug-color);
   opacity: var(--debug-opacity);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--base) var(--base);
+  padding: var(--space) var(--space);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: var(--debug-opacity);
@@ -388,8 +388,8 @@
 .standard-debug::after {
   content: "Debug : " attr(data-standard-version);
   position: fixed;
-  top: var(--base);
-  left: var(--base);
+  top: var(--space);
+  left: var(--space);
   color: var(--debug-color);
   opacity: var(--debug-opacity);
 }

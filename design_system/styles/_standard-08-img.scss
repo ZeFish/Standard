@@ -20,37 +20,37 @@
  * these base styles inside a `.rhythm` or `<html>` context.
  */
 :where(html:not(.no-rhythm), .rhythm) {
-    /* Basic image reset */
-    * + img,
-    img,
-    img:first-child,
-    img:last-child {
-        margin: 0;
-        max-inline-size: 100%;
-        block-size: auto;
-    }
+  /* Basic image reset */
+  * + img,
+  img,
+  img:first-child,
+  img:last-child {
+    margin: 0;
+    max-inline-size: 100%;
+    block-size: auto;
+  }
 
-    /* Default styles for a zoomable image */
-    img {
-        max-width: 100%;
-        cursor: zoom-in;
-        /* Optional: a subtle transition for other effects you might have */
-        transition:
-            mix-blend-mode 0.2s,
-            opacity 0.2s,
-            filter 0.2s;
-    }
+  /* Default styles for a zoomable image */
+  img {
+    max-width: 100%;
+    cursor: zoom-in;
+    /* Optional: a subtle transition for other effects you might have */
+    transition:
+      mix-blend-mode 0.2s,
+      opacity 0.2s,
+      filter 0.2s;
+  }
 
-    /* Your cosmetic classes for adding/removing borders are preserved */
-    img.fx {
-        border-radius: var(--radius);
-        border: var(--border);
-    }
-    img.nofx {
-        border-radius: unset;
-        border: unset;
-        box-shadow: unset;
-    }
+  /* Your cosmetic classes for adding/removing borders are preserved */
+  img.fx {
+    border-radius: var(--radius);
+    border: var(--border);
+  }
+  img.nofx {
+    border-radius: unset;
+    border: unset;
+    box-shadow: unset;
+  }
 }
 
 /* ================================================================ */
@@ -61,27 +61,27 @@
 
 /* When JS is off, holding click on an image will trigger this zoom effect. */
 html:not(.js-image-zoom-enabled) img:active {
-    cursor: zoom-out;
-    display: block;
-    position: fixed;
-    z-index: var(--z-image-zoom);
-    max-height: calc(100vh - (var(--base) * 2));
-    max-width: calc(100vw - (var(--base) * 2));
-    object-fit: contain;
-    margin: 0 auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    user-select: none;
+  cursor: zoom-out;
+  display: block;
+  position: fixed;
+  z-index: var(--z-image-zoom);
+  max-height: calc(100vh - (var(--space) * 2));
+  max-width: calc(100vw - (var(--space) * 2));
+  object-fit: contain;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
 }
 
 /* Creates a backdrop for the :active zoom. */
 html:not(.js-image-zoom-enabled):has(img:active)::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: var(--color-background);
-    z-index: calc(var(--z-image-zoom) - 1);
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--color-background);
+  z-index: calc(var(--z-image-zoom) - 1);
 }
 
 /* ================================================================ */
@@ -97,31 +97,31 @@ html.image-zoomed-active {
 */
 /* The overlay container created by the JS */
 .image-zoom-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: var(--z-image-zoom);
-    background: var(--modal-background);
-    backdrop-filter: var(--blur);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--base);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    cursor: zoom-out;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-image-zoom);
+  background: var(--modal-background);
+  backdrop-filter: var(--blur);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: zoom-out;
 }
 
 /* The class added by JS to fade the overlay in */
 .image-zoom-overlay.is-visible {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* The image element inside the JS overlay */
 .image-zoom-overlay img {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    user-select: none;
-    cursor: default; /* The overlay already has the zoom-out cursor */
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  cursor: default; /* The overlay already has the zoom-out cursor */
 }

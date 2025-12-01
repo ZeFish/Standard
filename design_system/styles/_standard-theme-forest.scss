@@ -50,7 +50,7 @@
   --font-weight: 400;
   --font-weight-bold: 500;
 
-  --radius: var(--base);
+  --radius: var(--space);
   --stroke-width: 1.5px;
 
   --font-header-letter-spacing: -0.035em;
@@ -106,7 +106,7 @@
   hr,
   hr:not(:first-child) {
     font-size: var(--h1-size);
-    line-height: var(--base);
+    line-height: var(--space);
     padding: 0;
     border: 0;
     background: transparent;
@@ -117,7 +117,7 @@
     display: block;
     font-family: "Type Embellishments One";
     position: relative;
-    top: calc(var(--base) * -0.4);
+    top: calc(var(--space) * -0.4);
     opacity: 0.2;
   }
 }

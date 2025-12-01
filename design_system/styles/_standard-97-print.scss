@@ -1,92 +1,92 @@
 @media print {
-    :root {
-        --color-foreground: black;
-        --color-background: white;
-        --color-background-secondary: white;
-        --font-size: 0.925rem !important;
-        --optical-ratio: 1.125 !important;
-        --line-height: 1.4 !important;
+  :root {
+    --color-foreground: black;
+    --color-background: white;
+    --color-background-secondary: white;
+    --font-size: 0.925rem !important;
+    --optical-ratio: 1.125 !important;
+    --line-height: 1.4 !important;
 
-        --body-padding: var(base-2);
-        --line-width: var(--line-width-full);
-        --gap: 0;
-        --shadow: 0;
+    --body-padding: var(base-2);
+    --line-width: var(--line-width-full);
+    --gap: 0;
+    --shadow: 0;
+  }
+
+  html {
+    .no-print,
+    .no-print * {
+      /* Also hide children */
+      display: none !important;
     }
 
-    html {
-        .no-print,
-        .no-print * {
-            /* Also hide children */
-            display: none !important;
-        }
-
-        header,
-        footer,
-        nav,
-        aside {
-            display: none !important;
-        }
-
-        /* Reset decorative styles */
-        * {
-            box-shadow: none !important;
-            text-shadow: none !important;
-        }
-
-        /* Show link URLs */
-        a[href^="http"]::after {
-            content: " (" attr(href) ")";
-            font-size: 0.8em;
-            color: #666;
-        }
-
-        pre,
-        blockquote,
-        img {
-            break-inside: avoid;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin-block: var(--base-2); /* Remove !important */
-            break-after: avoid; /* Keep with following content */
-        }
-        hr {
-            margin-block: var(--base); /* Remove !important */
-        }
-
-        html::before,
-        html::after,
-        body::before,
-        body::after {
-            display: none;
-        }
-
-        body {
-            border: 0 !important;
-            background: transparent !important;
-            max-width: 100% !important;
-        }
+    header,
+    footer,
+    nav,
+    aside {
+      display: none !important;
     }
 
-    /* Optimize for paper */
-    @page {
-        margin-top: 1.5cm;
-        margin-right: 1cm;
-        margin-bottom: 1.5cm;
-        margin-left: 1cm;
-        /*
+    /* Reset decorative styles */
+    * {
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    /* Show link URLs */
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: #666;
+    }
+
+    pre,
+    blockquote,
+    img {
+      break-inside: avoid;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-block: var(--space-2); /* Remove !important */
+      break-after: avoid; /* Keep with following content */
+    }
+    hr {
+      margin-block: var(--space); /* Remove !important */
+    }
+
+    html::before,
+    html::after,
+    body::before,
+    body::after {
+      display: none;
+    }
+
+    body {
+      border: 0 !important;
+      background: transparent !important;
+      max-width: 100% !important;
+    }
+  }
+
+  /* Optimize for paper */
+  @page {
+    margin-top: 1.5cm;
+    margin-right: 1cm;
+    margin-bottom: 1.5cm;
+    margin-left: 1cm;
+    /*
         @top-center {
             content: "Document Title";
         }
         */
 
-        @bottom-right {
-            content: counter(page);
-        }
+    @bottom-right {
+      content: counter(page);
     }
+  }
 }

@@ -30,10 +30,7 @@ html {
 
 #{$elements-boxed} {
   border-left: var(--stroke-width) solid var(--color-border);
-  padding: var(--leading) var(--leading);
-  margin-inline: var(--base);
-  font-size: var(--scale-d2);
-  line-height: var(--line-height-compact);
+  padding: var(--space-half);
 }
 img {
   padding: 0;
@@ -128,8 +125,8 @@ h6 + p {
   letter-spacing: 0.04em;
   font-size: var(--scale-d2);
   border-top: var(--rule-hairline) solid var(--color-border);
-  padding-block-start: calc(var(--baseline) / 2);
-  margin-block-end: var(--baseline);
+  padding-block-start: calc(var(--space) / 2);
+  margin-block-end: var(--space);
 }
 
 /* Inline code, monospace families */
@@ -440,7 +437,7 @@ textarea {
   resize: vertical;
   min-height: 6em;
   /* keep rhythm-aware variant */
-  min-height: var(--base-2);
+  min-height: var(--space-2);
 }
 
 legend {

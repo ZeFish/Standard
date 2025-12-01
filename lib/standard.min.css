@@ -12,14 +12,14 @@
   --gap-nl: 0.5lh;
   --baseline: 1rlh;
   --font-cap: calc(1rlh / var(--line-height));
-  --gap: calc(var(--baseline));
-  --gap-block: calc(var(--base) * 2);
+  --gap: calc(var(--space));
+  --gap-block: var(--space-2);
 
-  --gap-compact: calc(var(--base) / 2);
-  --gap-tight: calc(var(--base) / 4);
-  --gap-micro: calc(var(--base) / 8);
-  --gap-relaxed: calc(var(--base) * 2);
-  --gap-body: var(--base-2);
+  --gap-compact: calc(var(--space) / 2);
+  --gap-tight: calc(var(--space) / 4);
+  --gap-micro: calc(var(--space) / 8);
+  --gap-relaxed: var(--space-2);
+  --gap-body: var(--space-2);
   --gap-grid: 0.25lh;
 
   --blur: blur(7px);
@@ -55,19 +55,19 @@
 
   --line-width-xl: 60rem;
 
-  --line-width-full: calc(100vw - (var(--base) * 2));
+  --line-width-full: calc(100vw - (var(--space) * 2));
 
   --line-width: var(--line-width-m);
 
-  --base: var(--baseline);
+  --base: var(--space);
 
-  --base-d8: calc(var(--base) / 8);
-  --base-d4: calc(var(--base) / 4);
-  --base-d2: calc(var(--base) / 2);
-  --base-2: calc(var(--base) * 2);
-  --base-3: calc(var(--base) * 3);
-  --base-4: calc(var(--base) * 4);
-  --base-8: calc(var(--base) * 8);
+  --base-d8: calc(var(--space) / 8);
+  --base-d4: calc(var(--space) / 4);
+  --base-d2: calc(var(--space) / 2);
+  --base-2: var(--space-2);
+  --base-3: var(--space-3);
+  --base-4: var(--space-4);
+  --base-8: var(--space-8);
 
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
   --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
@@ -82,7 +82,7 @@
   --mobile-gap-body: var(--leading);
   --mobile-gap: 1rlh;
 
-  --mobile-gap-block: var(--base-2);
+  --mobile-gap-block: var(--space-2);
 
   --z-base: 1;
   --z-dropdown: 1000;
@@ -204,7 +204,7 @@ aside {
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
 
   --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
-  --shadow: 0 0 var(--base-d4) var(--shadow-color);
+  --shadow: 0 0 var(--space-d4) var(--shadow-color);
 
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
@@ -511,7 +511,7 @@ html {
   --font-weight-h5: var(--font-weight);
   --font-weight-h6: var(--font-weight);
 
-  --list-indentation: var(--base);
+  --list-indentation: var(--space);
 }
 
 .circular {
@@ -810,7 +810,7 @@ iframe,
 .outset {
   border-left: var(--stroke-width) solid var(--color-border);
   padding: var(--leading) var(--leading);
-  margin-inline: var(--base);
+  margin-inline: var(--space);
   font-size: var(--scale-d2);
   line-height: var(--line-height-compact);
 }
@@ -893,8 +893,8 @@ h6 + p {
   letter-spacing: 0.04em;
   font-size: var(--scale-d2);
   border-top: var(--rule-hairline) solid var(--color-border);
-  padding-block-start: calc(var(--baseline) / 2);
-  margin-block-end: var(--baseline);
+  padding-block-start: calc(var(--space) / 2);
+  margin-block-end: var(--space);
 }
 
 code,
@@ -1168,7 +1168,7 @@ textarea {
   resize: vertical;
   min-height: 6em;
 
-  min-height: var(--base-2);
+  min-height: var(--space-2);
 }
 
 legend {
@@ -1267,7 +1267,7 @@ mark {
 :where(.rhythm) * {
   vertical-align: baseline;
   margin-block-start: 0;
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) > body {
   margin: 0;
@@ -1275,7 +1275,7 @@ mark {
   padding-bottom: calc(var(--gap-body) * 1.5);
 }
 :where(.rhythm) > body [id] {
-  scroll-margin-top: calc(var(--base-2) + var(--gap-body));
+  scroll-margin-top: calc(var(--space-2) + var(--gap-body));
 }
 :where(.rhythm) .alert,
 :where(.rhythm) #comments,
@@ -1301,7 +1301,7 @@ mark {
 :where(.rhythm) aside,
 :where(.rhythm) .callout {
   margin-block-start: 0;
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) #comments,
 :where(.rhythm) .callout,
@@ -1318,8 +1318,8 @@ mark {
 :where(.rhythm) .scroll,
 :where(.rhythm) hr,
 :where(.rhythm) aside {
-  margin-block-start: max(var(--base-2) - var(--base), var(--base));
-  margin-block-end: max(var(--base-2), var(--base));
+  margin-block-start: max(var(--space-2) - var(--space), var(--space));
+  margin-block-end: max(var(--space-2) var(--space));
 }
 :where(.rhythm)
   :is(
@@ -1357,7 +1357,7 @@ mark {
       aside
     )
   ) {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 :where(.rhythm)
   :is(
@@ -1394,7 +1394,7 @@ mark {
     hr,
     aside
   ) {
-  margin-block-start: max(0, var(--base));
+  margin-block-start: max(0, var(--space));
 }
 :where(.rhythm)
   :is(.card, aside, blockquote, pre, figure, .callout-content)
@@ -1408,38 +1408,38 @@ mark {
   --base-gap: 1;
 }
 :where(.rhythm) h1 {
-  margin-block-start: calc(var(--base) * 3);
-  margin-block-end: var(--base);
+  margin-block-start: var(--space-3);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) h1:first-of-type {
-  margin-block-start: calc(var(--base) * 5);
-  margin-block-end: calc(var(--base) * 6);
+  margin-block-start: var(--space-5);
+  margin-block-end: var(--space-6);
 }
 :where(.rhythm) h2,
 :where(.rhythm) h3 {
-  margin-block-start: calc(var(--base) * 2);
-  margin-block-end: var(--base);
+  margin-block-start: var(--space-2);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) h4,
 :where(.rhythm) h5,
 :where(.rhythm) h6 {
-  margin-block: var(--base);
+  margin-block: var(--space);
 }
 :where(.rhythm) :is(h1, h2, h3) + :is(h1, h2, h3),
 :where(.rhythm) hr + :is(h1, h2, h3) {
   margin-block-start: 0;
 }
 :where(.rhythm) hr {
-  margin-inline: calc(var(--base-4));
-  margin-block-start: max((var(--base-2) - var(--base)) * 1, var(--base));
-  margin-block-end: max(var(--base-2) * 1, var(--base));
+  margin-inline: calc(var(--space-4));
+  margin-block-start: max((var(--space-2) - var(--space)) * 1, var(--space));
+  margin-block-end: max(var(--space-2) 1, var(--space));
 }
 :where(.rhythm) ul,
 :where(.rhythm) ol {
   list-style: none;
   margin-block-start: 0;
   padding-inline: 1rlh;
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
@@ -1472,10 +1472,10 @@ mark {
   margin-block-end: var(--trim);
 }
 :where(.rhythm) .relaxed {
-  --base-gap: var(--base-2);
+  --base-gap: var(--space-2);
 }
 :where(.rhythm) .relaxed li {
-  margin-block-end: var(--base-2);
+  margin-block-end: var(--space-2);
 }
 :where(.rhythm) ul > li::before {
   content: "•";
@@ -1512,37 +1512,37 @@ mark {
 }
 :where(.rhythm) form:not(.grid *) {
   display: grid;
-  gap: calc(var(--base) * var(--base-gap));
+  gap: calc(var(--space) * var(--space-gap));
 }
 :where(.rhythm) .grid form {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--base) * var(--base-2));
+  gap: calc(var(--space) * var(--space-2));
 }
 :where(.rhythm) fieldset {
-  padding-inline: var(--base);
+  padding-inline: var(--space);
   display: grid;
   gap: 0;
 }
 :where(.rhythm) legend {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) input,
 :where(.rhythm) textarea,
 :where(.rhythm) select {
-  padding-inline: var(--base);
-  margin-block-end: var(--base-2);
+  padding-inline: var(--space);
+  margin-block-end: var(--space-2);
 }
 :where(.rhythm) label {
-  margin-inline: var(--base);
-  margin-block-end: var(--base-2);
+  margin-inline: var(--space);
+  margin-block-end: var(--space-2);
 }
 :where(.rhythm) input[type="checkbox"] + label,
 :where(.rhythm) input[type="radio"] + label {
   margin-inline-start: var(--leading);
 }
 :where(.rhythm) div:has(input + label) {
-  margin-block-end: var(--base-2);
+  margin-block-end: var(--space-2);
 }
 :where(.rhythm) fieldset div,
 :where(.rhythm) fieldset p {
@@ -1550,7 +1550,7 @@ mark {
   padding: 0;
 }
 :where(.rhythm) fieldset + button {
-  margin-block-start: var(--base);
+  margin-block-start: var(--space);
 }
 :where(.rhythm) fieldset :last-child {
   margin-block-end: 0;
@@ -1564,10 +1564,10 @@ mark {
 }
 :where(.rhythm) figure {
   display: grid;
-  gap: calc(var(--base-d4) * var(--base-gap));
+  gap: calc(var(--space-d4) * var(--space-gap));
 }
 :where(.rhythm) caption {
-  margin-block-end: calc(var(--base-d4) * var(--base-gap));
+  margin-block-end: calc(var(--space-d4) * var(--space-gap));
 }
 :where(.rhythm) table {
   width: 100%;
@@ -1616,7 +1616,7 @@ mark {
 }
 
 .stick-next {
-  margin-block-end: calc(var(--base-d4) * var(--base-gap)) !important;
+  margin-block-end: calc(var(--space-d4) * var(--space-gap)) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1630,7 +1630,7 @@ mark {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: var(--base-gap);
+    margin-block-end: var(--space-gap);
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -1647,9 +1647,10 @@ mark {
 
 .prose > [class^="grid"] {
   margin-block-start: calc(
-    var(--base) * max(var(--base-2), var(--base)) - var(--base) * var(--base)
+    var(--space) * max(var(--space-2) var(--space)) - var(--space) *
+      var(--space)
   );
-  margin-block-end: calc(var(--base) * max(var(--base-2), var(--base)));
+  margin-block-end: calc(var(--space) * max(var(--space-2) var(--space)));
 }
 
 [class^="grid"] > * {
@@ -1671,7 +1672,7 @@ mark {
 }
 
 :is(.grid, [class^="grid-"]).relaxed {
-  --gap-grid: var(--base);
+  --gap-grid: var(--space);
 }
 
 .grid-1 {
@@ -2173,11 +2174,11 @@ mark {
 }
 
 hr.col-row {
-  margin-block: var(--base);
+  margin-block: var(--space);
 }
 
 .grid .rhythm > * {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 
 .free-col {
@@ -2186,7 +2187,7 @@ hr.col-row {
   grid-column: var(--start) / span var(--span);
 }
 .free-col.rhythm > * {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 
 .span-1 {
@@ -2431,7 +2432,7 @@ hr.col-row {
 
 .free-col.sticky {
   position: sticky;
-  inset-block-start: var(--base);
+  inset-block-start: var(--space);
   align-self: start;
   z-index: 1;
 }
@@ -2445,7 +2446,7 @@ hr.col-row {
 }
 
 .grid.relaxed {
-  --grid-gap: var(--base-2);
+  --grid-gap: var(--space-2);
 }
 
 .box > *,
@@ -2467,7 +2468,7 @@ hr.col-row {
 .grid > .col-quarter > *,
 .grid > .col-full > * {
   margin-block: 0;
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 .box > :last-child,
 .grid > .col-1 > :last-child,
@@ -2516,9 +2517,9 @@ hr.col-row {
 
 :root {
   --content: min(var(--line-width), 100%);
-  --content-small: max(calc(var(--base-2) - var(--base)), var(--base));
-  --content-accent: minmax(0, var(--base));
-  --content-feature: minmax(0, var(--base-2));
+  --content-small: max(calc(var(--space-2) - var(--space)), var(--space));
+  --content-accent: minmax(0, var(--space));
+  --content-feature: minmax(0, var(--space-2));
   --content-hero: minmax(0, 1fr);
 }
 
@@ -2591,7 +2592,7 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--base-2) * -1 + var(--gap-grid-img)) !important;
+  margin-block-start: calc(var(--space-2) -1 + var(--gap-grid-img)) !important;
 }
 :where(.prose)
   :where(
@@ -2651,9 +2652,9 @@ hr.col-row {
   }
 }
 :where(.prose) .mermaid {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
   margin-inline: auto;
-  padding: var(--base);
+  padding: var(--space);
 }
 :where(.prose) p img {
   max-inline-size: 100%;
@@ -2706,8 +2707,8 @@ html:not(.js-image-zoom-enabled) img:active {
   display: block;
   position: fixed;
   z-index: var(--z-image-zoom);
-  max-height: calc(100vh - var(--base) * 2);
-  max-width: calc(100vw - var(--base) * 2);
+  max-height: calc(100vh - var(--space) * 2);
+  max-width: calc(100vw - var(--space) * 2);
   object-fit: contain;
   margin: 0 auto;
   top: 50%;
@@ -2733,7 +2734,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--base);
+  padding: var(--space);
   opacity: 0;
   transition: opacity 0.3s ease;
   cursor: zoom-out;
@@ -2857,14 +2858,14 @@ card.inset {
   margin: var(--leading) 0;
 }
 .callout .callout-content > .callout {
-  margin: calc(var(--base) * -1);
+  margin: calc(var(--space) * -1);
 }
 .callout .callout-content > .callout .callout-content {
-  padding: var(--base);
+  padding: var(--space);
 }
 .callout .callout-content > .callout .callout-title {
-  padding-left: var(--base);
-  padding-right: var(--base);
+  padding-left: var(--space);
+  padding-right: var(--space);
 }
 .callout .callout-title-icon {
   display: none;
@@ -2891,8 +2892,8 @@ details .callout-title::before {
   display: inline-block;
   transform: rotate(0deg);
   transition: transform var(--transition);
-  width: var(--base);
-  margin-left: calc(var(--base) * -1);
+  width: var(--space);
+  margin-left: calc(var(--space) * -1);
   text-align: center;
 }
 
@@ -2908,7 +2909,7 @@ p:has(img) + .callout[data-callout="caption" i] {
   padding: 0;
   background: none;
   border: none;
-  margin: 0 var(--base);
+  margin: 0 var(--space);
   position: relative;
   top: calc(var(--leading) * -1);
   box-shadow: none;
@@ -2931,8 +2932,8 @@ p:has(img) + .callout[data-callout="caption" i] .callout-content {
   border: var(--border);
   position: relative;
   text-align: center;
-  margin: 0 auto var(--base) auto;
-  padding: var(--base);
+  margin: 0 auto var(--space) auto;
+  padding: var(--space);
 }
 
 aside,
@@ -2980,7 +2981,7 @@ aside,
   border-radius: var(--radius);
   background: var(--color-background-secondary);
   padding: var(--leading);
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 #comments .comment .comment-header {
   display: flex;
@@ -3015,7 +3016,7 @@ aside,
 
 .alert-action {
   display: inline-block;
-  margin-inline-start: var(--base-d2);
+  margin-inline-start: var(--space-d2);
   color: var(--alert-border-color);
   text-decoration: underline;
   font-weight: var(--font-weight-bold);
@@ -3026,13 +3027,13 @@ aside,
 
 a.skip-link {
   position: absolute;
-  top: var(--base-d4);
-  left: var(--base-d4);
+  top: var(--space-d4);
+  left: var(--space-d4);
   z-index: var(--z-modal);
 
   background: var(--color-accent);
   color: var(--color-background);
-  padding: var(--base-d4) var(--base-d4);
+  padding: var(--space-d4) var(--space-d4);
   border-radius: var(--radius);
   font-weight: var(--font-weight-bold);
   font-size: var(--scale-d2);
@@ -3071,12 +3072,12 @@ a.skip-link:active {
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--base);
+  gap: var(--space);
   padding: var(--trim);
 }
 
 .breadcrumb {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
   font-size: var(--scale-d2);
 }
 .breadcrumb ol {
@@ -3150,8 +3151,8 @@ a.skip-link:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--base);
-  margin-block: var(--base);
+  gap: var(--space);
+  margin-block: var(--space);
   font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums;
 }
@@ -3256,7 +3257,7 @@ a.skip-link:active {
   z-index: 2;
   pointer-events: none;
   transition: opacity 0.05s linear;
-  width: var(--base);
+  width: var(--space);
   opacity: 0;
 }
 .scroll::before {
@@ -3301,7 +3302,7 @@ a.skip-link:active {
 .field {
   display: flex;
   flex-direction: column;
-  gap: var(--base);
+  gap: var(--space);
 }
 .field label {
   font-weight: var(--font-weight-bold);
@@ -3335,7 +3336,7 @@ a.skip-link:active {
 .field-error-message {
   display: flex;
   align-items: flex-start;
-  gap: var(--base-d4);
+  gap: var(--space-d4);
   font-size: var(--scale-d3);
   color: var(--color-error);
   font-weight: var(--font-weight-bold);
@@ -3368,7 +3369,7 @@ a.skip-link:active {
 .field-success-message {
   display: flex;
   align-items: flex-start;
-  gap: var(--base-d4);
+  gap: var(--space-d4);
   font-size: var(--scale-d3);
   color: var(--color-success);
   font-weight: var(--font-weight-bold);
@@ -3401,7 +3402,7 @@ a.skip-link:active {
 .field-warning-message {
   display: flex;
   align-items: flex-start;
-  gap: var(--base-d4);
+  gap: var(--space-d4);
   font-size: var(--scale-d3);
   color: var(--color-warning);
   font-weight: var(--font-weight-bold);
@@ -3527,7 +3528,7 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--base);
+  gap: var(--space);
   padding: var(--trim) var(--leading);
   border-top: var(--border);
   background: var(--color-background-secondary);
@@ -3561,14 +3562,14 @@ dialog.modal::backdrop {
 }
 
 .tabs {
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 
 .tabs-list {
   display: flex;
-  gap: var(--base-d4);
+  gap: var(--space-d4);
   border-bottom: 2px solid var(--color-border);
-  margin-block-end: var(--base);
+  margin-block-end: var(--space);
 }
 
 [role="tab"] {
@@ -3576,7 +3577,7 @@ dialog.modal::backdrop {
   background: transparent;
   border: none;
   border-bottom: 3px solid transparent;
-  padding: var(--base-d4) var(--base-d2);
+  padding: var(--space-d4) var(--space-d2);
   font-size: var(--scale-d2);
   font-weight: var(--font-weight);
   color: var(--color-muted);
@@ -3602,7 +3603,7 @@ dialog.modal::backdrop {
 }
 
 [role="tabpanel"] {
-  padding: var(--base);
+  padding: var(--space);
 }
 [role="tabpanel"] > :first-child {
   margin-block-start: 0;
@@ -3633,7 +3634,7 @@ dialog.modal::backdrop {
   border: var(--border);
   border-radius: var(--radius);
   background: var(--color-background);
-  margin-block-end: var(--base-d2);
+  margin-block-end: var(--space-d2);
   overflow: hidden;
 }
 .accordion::-webkit-details-marker {
@@ -3644,8 +3645,8 @@ dialog.modal::backdrop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--base-d2);
-  padding: var(--base-d2);
+  gap: var(--space-d2);
+  padding: var(--space-d2);
   cursor: pointer;
   user-select: none;
 
@@ -3682,7 +3683,7 @@ dialog.modal::backdrop {
 }
 
 .accordion-content {
-  padding: var(--base);
+  padding: var(--space);
 }
 .accordion-content > :first-child {
   margin-block-start: 0;
@@ -3772,7 +3773,7 @@ dialog.modal::backdrop {
     max-width: 100%;
     min-width: 1%;
     margin-inline: 25%;
-    padding: var(--base);
+    padding: var(--space);
     flex-direction: column-reverse;
     text-align: center;
   }
@@ -4020,11 +4021,11 @@ dialog.modal::backdrop {
   html h4,
   html h5,
   html h6 {
-    margin-block: var(--base-2);
+    margin-block: var(--space-2);
     break-after: avoid;
   }
   html hr {
-    margin-block: var(--base);
+    margin-block: var(--space);
   }
   html html::before,
   html html::after,
@@ -4060,39 +4061,39 @@ dialog.modal::backdrop {
 }
 
 .mt-d5 {
-  margin-top: var(--base-d8) !important;
+  margin-top: var(--space-d8) !important;
 }
 
 .mt-d4 {
-  margin-top: var(--base-d4) !important;
+  margin-top: var(--space-d4) !important;
 }
 
 .mt-d3 {
-  margin-top: var(--base-d4) !important;
+  margin-top: var(--space-d4) !important;
 }
 
 .mt-d2 {
-  margin-top: var(--base-d2) !important;
+  margin-top: var(--space-d2) !important;
 }
 
 .mt {
-  margin-top: var(--base) !important;
+  margin-top: var(--space) !important;
 }
 
 .mt-2 {
-  margin-top: var(--base-2) !important;
+  margin-top: var(--space-2) !important;
 }
 
 .mt-3 {
-  margin-top: var(--base-4) !important;
+  margin-top: var(--space-4) !important;
 }
 
 .mt-4 {
-  margin-top: var(--base-4) !important;
+  margin-top: var(--space-4) !important;
 }
 
 .mt-5 {
-  margin-top: var(--base-8) !important;
+  margin-top: var(--space-8) !important;
 }
 
 .mr-0,
@@ -4105,39 +4106,39 @@ dialog.modal::backdrop {
 }
 
 .mr-d5 {
-  margin-right: var(--base-d8) !important;
+  margin-right: var(--space-d8) !important;
 }
 
 .mr-d4 {
-  margin-right: var(--base-d4) !important;
+  margin-right: var(--space-d4) !important;
 }
 
 .mr-d3 {
-  margin-right: var(--base-d4) !important;
+  margin-right: var(--space-d4) !important;
 }
 
 .mr-d2 {
-  margin-right: var(--base-d2) !important;
+  margin-right: var(--space-d2) !important;
 }
 
 .mr {
-  margin-right: var(--base) !important;
+  margin-right: var(--space) !important;
 }
 
 .mr-2 {
-  margin-right: var(--base-2) !important;
+  margin-right: var(--space-2) !important;
 }
 
 .mr-3 {
-  margin-right: var(--base-4) !important;
+  margin-right: var(--space-4) !important;
 }
 
 .mr-4 {
-  margin-right: var(--base-4) !important;
+  margin-right: var(--space-4) !important;
 }
 
 .mr-5 {
-  margin-right: var(--base-8) !important;
+  margin-right: var(--space-8) !important;
 }
 
 .mb-0,
@@ -4150,39 +4151,39 @@ dialog.modal::backdrop {
 }
 
 .mb-d5 {
-  margin-bottom: var(--base-d8) !important;
+  margin-bottom: var(--space-d8) !important;
 }
 
 .mb-d4 {
-  margin-bottom: var(--base-d4) !important;
+  margin-bottom: var(--space-d4) !important;
 }
 
 .mb-d3 {
-  margin-bottom: var(--base-d4) !important;
+  margin-bottom: var(--space-d4) !important;
 }
 
 .mb-d2 {
-  margin-bottom: var(--base-d2) !important;
+  margin-bottom: var(--space-d2) !important;
 }
 
 .mb {
-  margin-bottom: var(--base) !important;
+  margin-bottom: var(--space) !important;
 }
 
 .mb-2 {
-  margin-bottom: var(--base-2) !important;
+  margin-bottom: var(--space-2) !important;
 }
 
 .mb-3 {
-  margin-bottom: var(--base-4) !important;
+  margin-bottom: var(--space-4) !important;
 }
 
 .mb-4 {
-  margin-bottom: var(--base-4) !important;
+  margin-bottom: var(--space-4) !important;
 }
 
 .mb-5 {
-  margin-bottom: var(--base-8) !important;
+  margin-bottom: var(--space-8) !important;
 }
 
 .ml-0,
@@ -4195,39 +4196,39 @@ dialog.modal::backdrop {
 }
 
 .ml-d5 {
-  margin-left: var(--base-d8) !important;
+  margin-left: var(--space-d8) !important;
 }
 
 .ml-d4 {
-  margin-left: var(--base-d4) !important;
+  margin-left: var(--space-d4) !important;
 }
 
 .ml-d3 {
-  margin-left: var(--base-d4) !important;
+  margin-left: var(--space-d4) !important;
 }
 
 .ml-d2 {
-  margin-left: var(--base-d2) !important;
+  margin-left: var(--space-d2) !important;
 }
 
 .ml {
-  margin-left: var(--base) !important;
+  margin-left: var(--space) !important;
 }
 
 .ml-2 {
-  margin-left: var(--base-2) !important;
+  margin-left: var(--space-2) !important;
 }
 
 .ml-3 {
-  margin-left: var(--base-4) !important;
+  margin-left: var(--space-4) !important;
 }
 
 .ml-4 {
-  margin-left: var(--base-4) !important;
+  margin-left: var(--space-4) !important;
 }
 
 .ml-5 {
-  margin-left: var(--base-8) !important;
+  margin-left: var(--space-8) !important;
 }
 
 .mv-0,
@@ -4240,39 +4241,39 @@ dialog.modal::backdrop {
 }
 
 .mv-d5 {
-  margin-block: var(--base-d8) !important;
+  margin-block: var(--space-d8) !important;
 }
 
 .mv-d4 {
-  margin-block: var(--base-d4) !important;
+  margin-block: var(--space-d4) !important;
 }
 
 .mv-d3 {
-  margin-block: var(--base-d4) !important;
+  margin-block: var(--space-d4) !important;
 }
 
 .mv-d2 {
-  margin-block: var(--base-d2) !important;
+  margin-block: var(--space-d2) !important;
 }
 
 .mv {
-  margin-block: var(--base) !important;
+  margin-block: var(--space) !important;
 }
 
 .mv-2 {
-  margin-block: var(--base-2) !important;
+  margin-block: var(--space-2) !important;
 }
 
 .mv-3 {
-  margin-block: var(--base-4) !important;
+  margin-block: var(--space-4) !important;
 }
 
 .mv-4 {
-  margin-block: var(--base-4) !important;
+  margin-block: var(--space-4) !important;
 }
 
 .mv-5 {
-  margin-block: var(--base-8) !important;
+  margin-block: var(--space-8) !important;
 }
 
 .mh-0,
@@ -4285,39 +4286,39 @@ dialog.modal::backdrop {
 }
 
 .mh-d5 {
-  margin-inline: var(--base-d8) !important;
+  margin-inline: var(--space-d8) !important;
 }
 
 .mh-d4 {
-  margin-inline: var(--base-d4) !important;
+  margin-inline: var(--space-d4) !important;
 }
 
 .mh-d3 {
-  margin-inline: var(--base-d4) !important;
+  margin-inline: var(--space-d4) !important;
 }
 
 .mh-d2 {
-  margin-inline: var(--base-d2) !important;
+  margin-inline: var(--space-d2) !important;
 }
 
 .mh {
-  margin-inline: var(--base) !important;
+  margin-inline: var(--space) !important;
 }
 
 .mh-2 {
-  margin-inline: var(--base-2) !important;
+  margin-inline: var(--space-2) !important;
 }
 
 .mh-3 {
-  margin-inline: var(--base-4) !important;
+  margin-inline: var(--space-4) !important;
 }
 
 .mh-4 {
-  margin-inline: var(--base-4) !important;
+  margin-inline: var(--space-4) !important;
 }
 
 .mh-5 {
-  margin-inline: var(--base-8) !important;
+  margin-inline: var(--space-8) !important;
 }
 
 .m-0,
@@ -4330,39 +4331,39 @@ dialog.modal::backdrop {
 }
 
 .m-d5 {
-  margin: var(--base-d8) !important;
+  margin: var(--space-d8) !important;
 }
 
 .m-d4 {
-  margin: var(--base-d4) !important;
+  margin: var(--space-d4) !important;
 }
 
 .m-d3 {
-  margin: var(--base-d4) !important;
+  margin: var(--space-d4) !important;
 }
 
 .m-d2 {
-  margin: var(--base-d2) !important;
+  margin: var(--space-d2) !important;
 }
 
 .m {
-  margin: var(--base) !important;
+  margin: var(--space) !important;
 }
 
 .m-2 {
-  margin: var(--base-2) !important;
+  margin: var(--space-2) !important;
 }
 
 .m-3 {
-  margin: var(--base-4) !important;
+  margin: var(--space-4) !important;
 }
 
 .m-4 {
-  margin: var(--base-4) !important;
+  margin: var(--space-4) !important;
 }
 
 .m-5 {
-  margin: var(--base-8) !important;
+  margin: var(--space-8) !important;
 }
 
 .pt-0,
@@ -4375,39 +4376,39 @@ dialog.modal::backdrop {
 }
 
 .pt-d5 {
-  padding-top: var(--base-d8) !important;
+  padding-top: var(--space-d8) !important;
 }
 
 .pt-d4 {
-  padding-top: var(--base-d4) !important;
+  padding-top: var(--space-d4) !important;
 }
 
 .pt-d3 {
-  padding-top: var(--base-d4) !important;
+  padding-top: var(--space-d4) !important;
 }
 
 .pt-d2 {
-  padding-top: var(--base-d2) !important;
+  padding-top: var(--space-d2) !important;
 }
 
 .pt {
-  padding-top: var(--base) !important;
+  padding-top: var(--space) !important;
 }
 
 .pt-2 {
-  padding-top: var(--base-2) !important;
+  padding-top: var(--space-2) !important;
 }
 
 .pt-3 {
-  padding-top: var(--base-4) !important;
+  padding-top: var(--space-4) !important;
 }
 
 .pt-4 {
-  padding-top: var(--base-4) !important;
+  padding-top: var(--space-4) !important;
 }
 
 .pt-5 {
-  padding-top: var(--base-8) !important;
+  padding-top: var(--space-8) !important;
 }
 
 .pr-0,
@@ -4420,39 +4421,39 @@ dialog.modal::backdrop {
 }
 
 .pr-d5 {
-  padding-right: var(--base-d8) !important;
+  padding-right: var(--space-d8) !important;
 }
 
 .pr-d4 {
-  padding-right: var(--base-d4) !important;
+  padding-right: var(--space-d4) !important;
 }
 
 .pr-d3 {
-  padding-right: var(--base-d4) !important;
+  padding-right: var(--space-d4) !important;
 }
 
 .pr-d2 {
-  padding-right: var(--base-d2) !important;
+  padding-right: var(--space-d2) !important;
 }
 
 .pr {
-  padding-right: var(--base) !important;
+  padding-right: var(--space) !important;
 }
 
 .pr-2 {
-  padding-right: var(--base-2) !important;
+  padding-right: var(--space-2) !important;
 }
 
 .pr-3 {
-  padding-right: var(--base-4) !important;
+  padding-right: var(--space-4) !important;
 }
 
 .pr-4 {
-  padding-right: var(--base-4) !important;
+  padding-right: var(--space-4) !important;
 }
 
 .pr-5 {
-  padding-right: var(--base-8) !important;
+  padding-right: var(--space-8) !important;
 }
 
 .pb-0,
@@ -4465,39 +4466,39 @@ dialog.modal::backdrop {
 }
 
 .pb-d5 {
-  padding-bottom: var(--base-d8) !important;
+  padding-bottom: var(--space-d8) !important;
 }
 
 .pb-d4 {
-  padding-bottom: var(--base-d4) !important;
+  padding-bottom: var(--space-d4) !important;
 }
 
 .pb-d3 {
-  padding-bottom: var(--base-d4) !important;
+  padding-bottom: var(--space-d4) !important;
 }
 
 .pb-d2 {
-  padding-bottom: var(--base-d2) !important;
+  padding-bottom: var(--space-d2) !important;
 }
 
 .pb {
-  padding-bottom: var(--base) !important;
+  padding-bottom: var(--space) !important;
 }
 
 .pb-2 {
-  padding-bottom: var(--base-2) !important;
+  padding-bottom: var(--space-2) !important;
 }
 
 .pb-3 {
-  padding-bottom: var(--base-4) !important;
+  padding-bottom: var(--space-4) !important;
 }
 
 .pb-4 {
-  padding-bottom: var(--base-4) !important;
+  padding-bottom: var(--space-4) !important;
 }
 
 .pb-5 {
-  padding-bottom: var(--base-8) !important;
+  padding-bottom: var(--space-8) !important;
 }
 
 .pl-0,
@@ -4510,39 +4511,39 @@ dialog.modal::backdrop {
 }
 
 .pl-d5 {
-  padding-left: var(--base-d8) !important;
+  padding-left: var(--space-d8) !important;
 }
 
 .pl-d4 {
-  padding-left: var(--base-d4) !important;
+  padding-left: var(--space-d4) !important;
 }
 
 .pl-d3 {
-  padding-left: var(--base-d4) !important;
+  padding-left: var(--space-d4) !important;
 }
 
 .pl-d2 {
-  padding-left: var(--base-d2) !important;
+  padding-left: var(--space-d2) !important;
 }
 
 .pl {
-  padding-left: var(--base) !important;
+  padding-left: var(--space) !important;
 }
 
 .pl-2 {
-  padding-left: var(--base-2) !important;
+  padding-left: var(--space-2) !important;
 }
 
 .pl-3 {
-  padding-left: var(--base-4) !important;
+  padding-left: var(--space-4) !important;
 }
 
 .pl-4 {
-  padding-left: var(--base-4) !important;
+  padding-left: var(--space-4) !important;
 }
 
 .pl-5 {
-  padding-left: var(--base-8) !important;
+  padding-left: var(--space-8) !important;
 }
 
 .pv-0,
@@ -4555,39 +4556,39 @@ dialog.modal::backdrop {
 }
 
 .pv-d5 {
-  padding-block: var(--base-d8) !important;
+  padding-block: var(--space-d8) !important;
 }
 
 .pv-d4 {
-  padding-block: var(--base-d4) !important;
+  padding-block: var(--space-d4) !important;
 }
 
 .pv-d3 {
-  padding-block: var(--base-d4) !important;
+  padding-block: var(--space-d4) !important;
 }
 
 .pv-d2 {
-  padding-block: var(--base-d2) !important;
+  padding-block: var(--space-d2) !important;
 }
 
 .pv {
-  padding-block: var(--base) !important;
+  padding-block: var(--space) !important;
 }
 
 .pv-2 {
-  padding-block: var(--base-2) !important;
+  padding-block: var(--space-2) !important;
 }
 
 .pv-3 {
-  padding-block: var(--base-4) !important;
+  padding-block: var(--space-4) !important;
 }
 
 .pv-4 {
-  padding-block: var(--base-4) !important;
+  padding-block: var(--space-4) !important;
 }
 
 .pv-5 {
-  padding-block: var(--base-8) !important;
+  padding-block: var(--space-8) !important;
 }
 
 .ph-0,
@@ -4600,39 +4601,39 @@ dialog.modal::backdrop {
 }
 
 .ph-d5 {
-  padding-inline: var(--base-d8) !important;
+  padding-inline: var(--space-d8) !important;
 }
 
 .ph-d4 {
-  padding-inline: var(--base-d4) !important;
+  padding-inline: var(--space-d4) !important;
 }
 
 .ph-d3 {
-  padding-inline: var(--base-d4) !important;
+  padding-inline: var(--space-d4) !important;
 }
 
 .ph-d2 {
-  padding-inline: var(--base-d2) !important;
+  padding-inline: var(--space-d2) !important;
 }
 
 .ph {
-  padding-inline: var(--base) !important;
+  padding-inline: var(--space) !important;
 }
 
 .ph-2 {
-  padding-inline: var(--base-2) !important;
+  padding-inline: var(--space-2) !important;
 }
 
 .ph-3 {
-  padding-inline: var(--base-4) !important;
+  padding-inline: var(--space-4) !important;
 }
 
 .ph-4 {
-  padding-inline: var(--base-4) !important;
+  padding-inline: var(--space-4) !important;
 }
 
 .ph-5 {
-  padding-inline: var(--base-8) !important;
+  padding-inline: var(--space-8) !important;
 }
 
 .p-0,
@@ -4645,39 +4646,39 @@ dialog.modal::backdrop {
 }
 
 .p-d5 {
-  padding: var(--base-d8) !important;
+  padding: var(--space-d8) !important;
 }
 
 .p-d4 {
-  padding: var(--base-d4) !important;
+  padding: var(--space-d4) !important;
 }
 
 .p-d3 {
-  padding: var(--base-d4) !important;
+  padding: var(--space-d4) !important;
 }
 
 .p-d2 {
-  padding: var(--base-d2) !important;
+  padding: var(--space-d2) !important;
 }
 
 .p {
-  padding: var(--base) !important;
+  padding: var(--space) !important;
 }
 
 .p-2 {
-  padding: var(--base-2) !important;
+  padding: var(--space-2) !important;
 }
 
 .p-3 {
-  padding: var(--base-4) !important;
+  padding: var(--space-4) !important;
 }
 
 .p-4 {
-  padding: var(--base-4) !important;
+  padding: var(--space-4) !important;
 }
 
 .p-5 {
-  padding: var(--base-8) !important;
+  padding: var(--space-8) !important;
 }
 
 .gap-0,
@@ -4690,39 +4691,39 @@ dialog.modal::backdrop {
 }
 
 .gap-d5 {
-  gap: var(--base-d8) !important;
+  gap: var(--space-d8) !important;
 }
 
 .gap-d4 {
-  gap: var(--base-d4) !important;
+  gap: var(--space-d4) !important;
 }
 
 .gap-d3 {
-  gap: var(--base-d4) !important;
+  gap: var(--space-d4) !important;
 }
 
 .gap-d2 {
-  gap: var(--base-d2) !important;
+  gap: var(--space-d2) !important;
 }
 
 .gap {
-  gap: var(--base) !important;
+  gap: var(--space) !important;
 }
 
 .gap-2 {
-  gap: var(--base-2) !important;
+  gap: var(--space-2) !important;
 }
 
 .gap-3 {
-  gap: var(--base-4) !important;
+  gap: var(--space-4) !important;
 }
 
 .gap-4 {
-  gap: var(--base-4) !important;
+  gap: var(--space-4) !important;
 }
 
 .gap-5 {
-  gap: var(--base-8) !important;
+  gap: var(--space-8) !important;
 }
 
 .column-gap-0,
@@ -4735,39 +4736,39 @@ dialog.modal::backdrop {
 }
 
 .column-gap-d5 {
-  column-gap: var(--base-d8) !important;
+  column-gap: var(--space-d8) !important;
 }
 
 .column-gap-d4 {
-  column-gap: var(--base-d4) !important;
+  column-gap: var(--space-d4) !important;
 }
 
 .column-gap-d3 {
-  column-gap: var(--base-d4) !important;
+  column-gap: var(--space-d4) !important;
 }
 
 .column-gap-d2 {
-  column-gap: var(--base-d2) !important;
+  column-gap: var(--space-d2) !important;
 }
 
 .column-gap {
-  column-gap: var(--base) !important;
+  column-gap: var(--space) !important;
 }
 
 .column-gap-2 {
-  column-gap: var(--base-2) !important;
+  column-gap: var(--space-2) !important;
 }
 
 .column-gap-3 {
-  column-gap: var(--base-4) !important;
+  column-gap: var(--space-4) !important;
 }
 
 .column-gap-4 {
-  column-gap: var(--base-4) !important;
+  column-gap: var(--space-4) !important;
 }
 
 .column-gap-5 {
-  column-gap: var(--base-8) !important;
+  column-gap: var(--space-8) !important;
 }
 
 .width-0,
@@ -4780,39 +4781,39 @@ dialog.modal::backdrop {
 }
 
 .width-d5 {
-  width: var(--base-d8) !important;
+  width: var(--space-d8) !important;
 }
 
 .width-d4 {
-  width: var(--base-d4) !important;
+  width: var(--space-d4) !important;
 }
 
 .width-d3 {
-  width: var(--base-d4) !important;
+  width: var(--space-d4) !important;
 }
 
 .width-d2 {
-  width: var(--base-d2) !important;
+  width: var(--space-d2) !important;
 }
 
 .width {
-  width: var(--base) !important;
+  width: var(--space) !important;
 }
 
 .width-2 {
-  width: var(--base-2) !important;
+  width: var(--space-2) !important;
 }
 
 .width-3 {
-  width: var(--base-4) !important;
+  width: var(--space-4) !important;
 }
 
 .width-4 {
-  width: var(--base-4) !important;
+  width: var(--space-4) !important;
 }
 
 .width-5 {
-  width: var(--base-8) !important;
+  width: var(--space-8) !important;
 }
 
 .width-auto {
@@ -4849,39 +4850,39 @@ dialog.modal::backdrop {
 }
 
 .min-width-d5 {
-  min-width: var(--base-d8) !important;
+  min-width: var(--space-d8) !important;
 }
 
 .min-width-d4 {
-  min-width: var(--base-d4) !important;
+  min-width: var(--space-d4) !important;
 }
 
 .min-width-d3 {
-  min-width: var(--base-d4) !important;
+  min-width: var(--space-d4) !important;
 }
 
 .min-width-d2 {
-  min-width: var(--base-d2) !important;
+  min-width: var(--space-d2) !important;
 }
 
 .min-width {
-  min-width: var(--base) !important;
+  min-width: var(--space) !important;
 }
 
 .min-width-2 {
-  min-width: var(--base-2) !important;
+  min-width: var(--space-2) !important;
 }
 
 .min-width-3 {
-  min-width: var(--base-4) !important;
+  min-width: var(--space-4) !important;
 }
 
 .min-width-4 {
-  min-width: var(--base-4) !important;
+  min-width: var(--space-4) !important;
 }
 
 .min-width-5 {
-  min-width: var(--base-8) !important;
+  min-width: var(--space-8) !important;
 }
 
 .min-width-d {
@@ -4906,39 +4907,39 @@ dialog.modal::backdrop {
 }
 
 .max-width-d5 {
-  max-width: var(--base-d8) !important;
+  max-width: var(--space-d8) !important;
 }
 
 .max-width-d4 {
-  max-width: var(--base-d4) !important;
+  max-width: var(--space-d4) !important;
 }
 
 .max-width-d3 {
-  max-width: var(--base-d4) !important;
+  max-width: var(--space-d4) !important;
 }
 
 .max-width-d2 {
-  max-width: var(--base-d2) !important;
+  max-width: var(--space-d2) !important;
 }
 
 .max-width {
-  max-width: var(--base) !important;
+  max-width: var(--space) !important;
 }
 
 .max-width-2 {
-  max-width: var(--base-2) !important;
+  max-width: var(--space-2) !important;
 }
 
 .max-width-3 {
-  max-width: var(--base-4) !important;
+  max-width: var(--space-4) !important;
 }
 
 .max-width-4 {
-  max-width: var(--base-4) !important;
+  max-width: var(--space-4) !important;
 }
 
 .max-width-5 {
-  max-width: var(--base-8) !important;
+  max-width: var(--space-8) !important;
 }
 
 .max-width-none {
@@ -4963,39 +4964,39 @@ dialog.modal::backdrop {
 }
 
 .height-d5 {
-  height: var(--base-d8) !important;
+  height: var(--space-d8) !important;
 }
 
 .height-d4 {
-  height: var(--base-d4) !important;
+  height: var(--space-d4) !important;
 }
 
 .height-d3 {
-  height: var(--base-d4) !important;
+  height: var(--space-d4) !important;
 }
 
 .height-d2 {
-  height: var(--base-d2) !important;
+  height: var(--space-d2) !important;
 }
 
 .height {
-  height: var(--base) !important;
+  height: var(--space) !important;
 }
 
 .height-2 {
-  height: var(--base-2) !important;
+  height: var(--space-2) !important;
 }
 
 .height-3 {
-  height: var(--base-4) !important;
+  height: var(--space-4) !important;
 }
 
 .height-4 {
-  height: var(--base-4) !important;
+  height: var(--space-4) !important;
 }
 
 .height-5 {
-  height: var(--base-8) !important;
+  height: var(--space-8) !important;
 }
 
 .height-d {
@@ -5036,39 +5037,39 @@ dialog.modal::backdrop {
 }
 
 .min-height-d5 {
-  min-height: var(--base-d8) !important;
+  min-height: var(--space-d8) !important;
 }
 
 .min-height-d4 {
-  min-height: var(--base-d4) !important;
+  min-height: var(--space-d4) !important;
 }
 
 .min-height-d3 {
-  min-height: var(--base-d4) !important;
+  min-height: var(--space-d4) !important;
 }
 
 .min-height-d2 {
-  min-height: var(--base-d2) !important;
+  min-height: var(--space-d2) !important;
 }
 
 .min-height {
-  min-height: var(--base) !important;
+  min-height: var(--space) !important;
 }
 
 .min-height-2 {
-  min-height: var(--base-2) !important;
+  min-height: var(--space-2) !important;
 }
 
 .min-height-3 {
-  min-height: var(--base-4) !important;
+  min-height: var(--space-4) !important;
 }
 
 .min-height-4 {
-  min-height: var(--base-4) !important;
+  min-height: var(--space-4) !important;
 }
 
 .min-height-5 {
-  min-height: var(--base-8) !important;
+  min-height: var(--space-8) !important;
 }
 
 .min-height-d {
@@ -5093,39 +5094,39 @@ dialog.modal::backdrop {
 }
 
 .max-height-d5 {
-  max-height: var(--base-d8) !important;
+  max-height: var(--space-d8) !important;
 }
 
 .max-height-d4 {
-  max-height: var(--base-d4) !important;
+  max-height: var(--space-d4) !important;
 }
 
 .max-height-d3 {
-  max-height: var(--base-d4) !important;
+  max-height: var(--space-d4) !important;
 }
 
 .max-height-d2 {
-  max-height: var(--base-d2) !important;
+  max-height: var(--space-d2) !important;
 }
 
 .max-height {
-  max-height: var(--base) !important;
+  max-height: var(--space) !important;
 }
 
 .max-height-2 {
-  max-height: var(--base-2) !important;
+  max-height: var(--space-2) !important;
 }
 
 .max-height-3 {
-  max-height: var(--base-4) !important;
+  max-height: var(--space-4) !important;
 }
 
 .max-height-4 {
-  max-height: var(--base-4) !important;
+  max-height: var(--space-4) !important;
 }
 
 .max-height-5 {
-  max-height: var(--base-8) !important;
+  max-height: var(--space-8) !important;
 }
 
 .max-height-none {
@@ -5390,7 +5391,7 @@ dialog.modal::backdrop {
 }
 
 .rhythm-relaxed {
-  --base-gap: var(--base-2);
+  --base-gap: var(--space-2);
 }
 
 @supports not (display: grid) {
@@ -5398,7 +5399,7 @@ dialog.modal::backdrop {
     display: block;
   }
   .rhythm > * {
-    margin-block-end: calc(var(--base-block-gap) * var(--base-gap));
+    margin-block-end: calc(var(--space-block-gap) * var(--space-gap));
   }
   .rhythm > :last-child {
     margin-block-end: 0;
@@ -5509,23 +5510,23 @@ dialog.modal::backdrop {
 .columns,
 .columns-2 {
   columns: 2;
-  column-gap: var(--base);
+  column-gap: var(--space);
 }
 
 .columns-3 {
   columns: 3;
-  column-gap: var(--base);
+  column-gap: var(--space);
 }
 
 .columns-4 {
   columns: 4;
-  column-gap: var(--base);
+  column-gap: var(--space);
 }
 
 .columns-auto {
   columns: auto;
   column-width: var(--line-width-s);
-  column-gap: var(--base);
+  column-gap: var(--space);
 }
 
 [class|="columns"].compact {
@@ -5533,7 +5534,7 @@ dialog.modal::backdrop {
 }
 
 [class|="columns"].relaxed {
-  column-gap: var(--base-2);
+  column-gap: var(--space-2);
 }
 
 .columns-gap-compact {
@@ -5541,7 +5542,7 @@ dialog.modal::backdrop {
 }
 
 .columns-gap-wide {
-  column-gap: var(--base-2);
+  column-gap: var(--space-2);
 }
 
 .columns-keep {
@@ -5667,7 +5668,7 @@ ul.menu.horizontal li {
   border-radius: var(--radius);
   font-family: var(--font-monospace);
   font-size: var(--scale-d2);
-  padding: var(--base);
+  padding: var(--space);
   z-index: var(--z-toast);
   pointer-events: none;
   white-space: pre;
@@ -5726,7 +5727,7 @@ ul.menu.horizontal li {
       var(--color-cyan) calc(var(--debug-opacity) / 1.2),
       transparent
     );
-  outline-offset: var(--base);
+  outline-offset: var(--space);
   border-radius: var(--radius);
 }
 
@@ -5777,7 +5778,7 @@ ul.menu.horizontal li {
     p:has(img)
   ) {
   position: relative;
-  outline-offset: var(--base);
+  outline-offset: var(--space);
 }
 
 .standard-debug
@@ -5829,7 +5830,7 @@ ul.menu.horizontal li {
   content: attr(class);
   position: absolute;
   top: 0;
-  left: calc(var(--base) * -1);
+  left: calc(var(--space) * -1);
   transform: translateX(-100%);
   z-index: 999999999;
 }
@@ -6056,8 +6057,8 @@ ul.menu.horizontal li {
 .standard-debug .grid-12 > *::before {
   content: attr(class);
   position: absolute;
-  top: calc(var(--base) * -1);
-  left: var(--base);
+  top: calc(var(--space) * -1);
+  left: var(--space);
   color: var(--debug-color);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
@@ -6073,13 +6074,13 @@ ul.menu.horizontal li {
 .standard-debug .free-col::after {
   content: "start: " var(--start) " / span: " var(--span);
   position: absolute;
-  bottom: var(--base);
-  left: var(--base);
+  bottom: var(--space);
+  left: var(--space);
   color: var(--debug-color);
   opacity: var(--debug-opacity);
   font-size: var(--scale-d3);
   font-family: var(--font-monospace);
-  padding: var(--base) var(--base);
+  padding: var(--space) var(--space);
   border-radius: var(--radius);
   pointer-events: none;
   opacity: var(--debug-opacity);
@@ -6090,8 +6091,8 @@ ul.menu.horizontal li {
 .standard-debug::after {
   content: "Debug : " attr(data-standard-version);
   position: fixed;
-  top: var(--base);
-  left: var(--base);
+  top: var(--space);
+  left: var(--space);
   color: var(--debug-color);
   opacity: var(--debug-opacity);
 }

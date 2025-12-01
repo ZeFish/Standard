@@ -34,9 +34,7 @@
 
   --optical-ratio: var(--ratio-silver);
   --line-height: 1.5;
-  --gap-body: calc(var(--base) * 3);
-
-  --line-width: var(--line-width-s);
+  --gap-body: var(--space-3);
 
   /* Mobile */
   --mobile-font-size: 1.2em;
@@ -46,7 +44,7 @@
   --mobile-gap: 1rlh; /* Space between standard block like paragraph */
   --mobile-gap-block: 1rlh;
 
-  --font-size: 1.2em;
+  --font-size: 1em;
   --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
   --font-interface: "Fern";
   --font-header: "Fern", "Futura Now Var", "Sohne", "Fern";
@@ -111,11 +109,11 @@
     text-box-edge: cap ex;
   }
   p:not(:has(img)) + p {
-    text-indent: var(--base);
+    text-indent: var(--space);
   }
 
   p:has(+ p) {
-    margin-block-end: var(--leading);
+    margin-block-end: var(--space-half);
   }
 
   :is(h2, h3) + p::first-letter {
@@ -135,7 +133,7 @@
   }
 
   .prose {
-    margin-left: 5vw;
+    margin-left: 10vw;
     transition: margin-left var(--transition);
   }
 
@@ -147,12 +145,8 @@
     display: block;
   }
 
-  .prose :is(p, blockquote, pre, details, li, .card, [class^="grid"]) {
-    max-width: var(--line-width-xs);
-    margin-inline: 0;
-  }
-  .prose :is(.scroll, p:has(img), .callout, aside) {
-    max-width: var(--line-width-s);
+  .prose > * {
+    max-width: var(--line-width);
     margin-inline: 0;
   }
   .token {
@@ -187,7 +181,7 @@
   hr,
   hr:not(:first-child) {
     font-size: var(--scale);
-    line-height: var(--base);
+    line-height: var(--space);
     padding: 0;
     border: 0;
     background: transparent;
@@ -198,17 +192,17 @@
     display: block;
     font-family: "Graveur";
     position: relative;
-    top: var(--base);
+    top: var(--space);
     color: var(--color-border);
   }
 
   aside.note {
     display: inline;
     position: relative;
-    top: calc(var(--base) * -1);
-    left: calc(var(--base) + var(--line-width));
-    margin-top: calc(var(--base) * -1);
-    margin-bottom: calc(var(--base) * -2);
+    top: calc(var(--space) * -1);
+    left: calc(var(--space) + var(--line-width));
+    margin-top: calc(var(--space) * -1);
+    margin-bottom: calc(var(--space) * -2);
     font-size: var(--scale-d2);
     color: var(--color-muted);
     line-height: var(--line-height-s);
@@ -221,8 +215,8 @@
   .prose > h1:first-child {
     text-align: left;
     grid-column: feature;
-    margin-block-start: calc(var(--base) * 6);
-    margin-block-end: calc(var(--base) * 6);
+    margin-block-start: var(--space-6);
+    margin-block-end: var(--space-6);
     font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
   }
 
@@ -235,7 +229,7 @@
 
   @media (min-width: 1200px) {
     .prose {
-      margin-left: 7.5vw;
+      margin-left: 15vw;
     }
   }
 
@@ -250,7 +244,7 @@
       position: relative;
       top: 0;
       left: 0;
-      margin-block: var(--base);
+      margin-block: var(--space);
       border: 0;
       background: transparent;
       border-left: 1px solid var(--color-subtle);

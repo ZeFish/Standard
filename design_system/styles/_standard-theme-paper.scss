@@ -175,11 +175,11 @@
   h1,
   > h1:where(:first-child) {
     margin-block-start: var(--gap-huge);
-    margin-block-end: var(--base-relaxed);
+    margin-block-end: var(--space-relaxed);
   }
   h1:first-child + p {
     margin-block-start: 0;
-    margin-block-end: var(--base-2);
+    margin-block-end: var(--space-2);
   }
 
   background: var(--color-background-secondary);

@@ -17,7 +17,7 @@
   --line-height: 1.1;
   --font-size: 0.9em;
   --line-width: var(--line-width-s);
-  --gap-nl: var(--base);
+  --gap-nl: var(--space);
 
   p {
     text-align: justify;
@@ -31,11 +31,10 @@
     text-box-edge: cap ex;
   }
   p:not(:has(img)) + p {
-    text-indent: var(--base);
+    text-indent: var(--space);
   }
-
   p:has(+ p) {
-    margin-block-end: var(--leading);
+    margin-block-end: var(--space-half);
   }
 
   h1 {

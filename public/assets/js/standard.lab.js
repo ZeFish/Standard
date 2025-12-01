@@ -371,7 +371,7 @@ class StandardLab {
     this.panel = document.createElement("div");
     this.panel.id = "standard-lab-panel-container";
     this.panel.className = "standard-lab-panel standard-lab-panel-quick";
-    this.panel.style.bottom = `calc(${this.position.bottom}px + var(--base-2))`;
+    this.panel.style.bottom = `calc(${this.position.bottom}px + var(--space-2);)`;
     this.panel.style.right = `${this.position.right}px`;
     const debugActive =
       document.documentElement.classList.contains("standard-debug");
@@ -524,7 +524,7 @@ class StandardLab {
     this.panel = document.createElement("div");
     this.panel.id = "standard-lab-panel-container";
     this.panel.className = "standard-lab-panel standard-lab-panel-full";
-    this.panel.style.bottom = `calc(${this.position.bottom}px + var(--base-2))`;
+    this.panel.style.bottom = `calc(${this.position.bottom}px + var(--space-2);)`;
     this.panel.style.right = `${this.position.right}px`;
     const modifiedCount = this.modifiedTokens.size;
     const showModifiedOnly = modifiedCount > 0;
@@ -1067,7 +1067,7 @@ class StandardLab {
     const styles = document.createElement("style");
     styles.id = "standard-lab-styles";
     styles.textContent = `
-      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--base); height: var(--base); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
+      .standard-lab-badge { font-family: var(--font-interface); position: fixed; width: var(--space); height: var(--space); border-radius: 50%; background: var(--color-background-accent); border: var(--border-accent); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; }
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: 2px solid var(--color-background); }
@@ -1099,7 +1099,7 @@ class StandardLab {
       .standard-lab-tab { flex: 1; padding: 6px; background: transparent; border: none; border-bottom: 2px solid transparent; font-size: 16px !important; font-weight: 500; color: var(--color-muted); cursor: pointer; transition: all 0.2s ease; }
       .standard-lab-tab:hover { color: var(--color-foreground); background: var(--color-background-secondary); }
       .standard-lab-tab[aria-selected="true"] { color: var(--color-foreground); border-bottom-color: var(--color-accent); font-weight: 600; }
-      .standard-lab-filter { padding: 6px var(--base-d2); background: var(--color-background-secondary); border-bottom: var(--border); flex-shrink: 0; }
+      .standard-lab-filter { padding: 6px var(--space-d2); background: var(--color-background-secondary); border-bottom: var(--border); flex-shrink: 0; }
       .standard-lab-content { flex: 1; overflow-y: auto; padding: 6px; }
       .standard-lab-content::-webkit-scrollbar { width: 6px; }
       .standard-lab-content::-webkit-scrollbar-track { background: transparent; }
@@ -1132,8 +1132,8 @@ class StandardLab {
       .standard-lab-btn-reset { opacity: 0; transition: opacity 0.2s ease; }
       .standard-lab-token-row:hover .standard-lab-btn-reset:not(:disabled) { opacity: 1; }
       .standard-lab-btn-reset:disabled { opacity: 0; cursor: not-allowed; }
-      .standard-lab-empty { padding: var(--base); text-align: center; color: var(--color-subtle); font-size: 14px !important; }
-      .standard-lab-notification { position: fixed; top: var(--base); left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--color-background); border: var(--border); border-radius: 6px; padding: 8px 16px; box-shadow: var(--shadow); z-index: calc(var(--z-toast) + 1); font-size: 14px !important; opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; }
+      .standard-lab-empty { padding: var(--space); text-align: center; color: var(--color-subtle); font-size: 14px !important; }
+      .standard-lab-notification { position: fixed; top: var(--space); left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--color-background); border: var(--border); border-radius: 6px; padding: 8px 16px; box-shadow: var(--shadow); z-index: calc(var(--z-toast) + 1); font-size: 14px !important; opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none; }
       .standard-lab-notification-success { background: var(--color-success); color: white; border-color: var(--color-success); }
       .standard-lab-notification-info { background: var(--color-info); color: white; border-color: var(--color-info); }
       @media (prefers-color-scheme: dark) { .standard-lab-panel { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); } }
