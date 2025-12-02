@@ -123,19 +123,20 @@ const colors = Object.fromEntries(
   }),
 );
 
-// Add reset
+// Add reset (keep as string for template literal usage)
 colors.reset = ANSI16.reset;
 
 /**
  * Create a logger instance
  *
- * @param {Object} options - Configuration options
- * @param {boolean} options.verbose - Enable verbose/debug logging (default: reads from global config)
- * @param {string} options.scope - Optional namespace/scope for log messages
+ * @param {Object} [options={}] - Configuration options
+ * @param {boolean} [options.verbose] - Enable verbose/debug logging (default: reads from global config)
+ * @param {string} [options.scope] - Optional namespace/scope for log messages
  * @returns {Object} Logger instance
  */
+
 function logger(options = {}) {
-  const { verbose: explicitVerbose, scope = null } = options;
+  const { verbose: explicitVerbose = false, scope: scopeVar = null } = options;
 
   // Get verbose setting lazily - reads from global config when actually used
   const getVerbose = () => {
@@ -146,7 +147,7 @@ function logger(options = {}) {
 
   const prefix = `${colors.reset}stdn${colors.yellow.fg}::${colors.reset}gd${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
-  const scopeText = scope ? `${colors.blue.fg}[${scope}]${colors.reset}` : "";
+  const scopeText = scopeVar ? `${colors.blue.fg}[${scopeVar}]${colors.reset}` : "";
 
   function format(level, ...args) {
     const parts = [prefix];
@@ -178,7 +179,7 @@ function logger(options = {}) {
      */
     warn(...args) {
       console.warn(
-        `${prefix} ${colors.yellow.fg}[${scope}] ⚠`,
+        `${prefix} ${colors.yellow.fg}[${scopeVar}] ⚠`,
         ...args,
         `${colors.reset}`,
       );
@@ -190,7 +191,7 @@ function logger(options = {}) {
      */
     error(...args) {
       console.error(
-        `${prefix} ${colors.red.fg}[${scope}]${colors.reset} ${colors.red.bg}⚠${colors.reset}${colors.red.fg}`,
+        `${prefix} ${colors.red.fg}[${scopeVar}]${colors.reset} ${colors.red.bg}⚠${colors.reset}${colors.red.fg}`,
         ...args,
         `${colors.reset}`,
       );
@@ -203,7 +204,7 @@ function logger(options = {}) {
     debug(...args) {
       if (getVerbose()) {
         console.log(
-          `${prefix} ${colors.magenta.fg}[${scope}]`,
+          `${prefix} ${colors.magenta.fg}[${scopeVar}]`,
           ...args,
           `${colors.reset}`,
         );

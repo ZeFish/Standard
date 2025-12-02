@@ -45,6 +45,7 @@
     "./js": "./lib/standard.min.js",
     "./lab": "./lib/standard.lab.js",
     "./eleventy": "./11ty/standard.js",
+    "./11ty/layouts/meta": "./11ty/layouts/meta.njk",
     "./astro": "./astro/standard.js",
     "./cloudflare": "./src/cloudflare/api/comments.js",
     "./astro/remark/tags": "./astro/remark/tags.js",
@@ -102,7 +103,10 @@
     "clean:ports": "lsof -ti:8083 | xargs kill -9 2>/dev/null || true",
     "kill-node": "killall node || taskkill /F /IM node.exe",
     "commit": "git add . && npx opencommit",
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "vitest",
+    "test:lib": "vitest run tests/lib-integrity.test.js",
+    "test:e2e": "playwright test tests/astro-e2e.test.ts",
+    "test:all": "npm run test:lib && npm run test:e2e"
   },
   "browserslist": [
     "> 1%",
@@ -175,6 +179,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "@playwright/test": "^1.57.0",
     "@release-it/conventional-changelog": "^10.0.1",
     "auto-changelog": "^2.5.0",
     "concurrently": "^8.2.2",
@@ -184,6 +189,8 @@
     "opencommit": "^3.2.10",
     "release-it": "^19.0.5",
     "rimraf": "^5.0.5",
-    "sanitize.css": "^13.0.0"
-  }
+    "sanitize.css": "^13.0.0",
+    "vitest": "^4.0.14"
+  },
+  "types": "./astro/types/standard.d.ts"
 }

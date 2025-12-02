@@ -854,20 +854,20 @@ ul.menu {
   li {
     list-style: none;
     padding-inline-start: 0;
-    margin-block-end: var(--leading);
+    margin-block-end: var(--space-half);
     &::before {
       display: none;
     }
   }
 }
 .tight nav.menu ul li {
-  margin-block-end: var(--leading);
+  margin-block-end: 0;
 }
 
 nav.menu.horizontal ul,
 ul.menu.horizontal {
   flex-direction: row;
-  gap: var(--leading);
+  gap: var(--space);
   li {
     padding-inline-start: 0;
     margin-block: 0;

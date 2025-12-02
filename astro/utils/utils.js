@@ -92,7 +92,7 @@ export function getExcerpt(content, options = {}) {
 // Date formatting utilities
 export function formatDate(date, format = "iso") {
   const d = date instanceof Date ? date : new Date(date);
-  if (isNaN(d)) return "";
+  if (isNaN(d.getTime())) return "";
 
   if (format === "iso") return d.toISOString();
   if (format === "html") return d.toISOString().split("T")[0];
@@ -375,7 +375,7 @@ export function isExternal(url) {
 // Extract year from date
 export function getYear(date) {
   const d = date ? new Date(date) : new Date();
-  if (isNaN(d)) return "";
+  if (isNaN(d.getTime())) return "";
   return String(d.getFullYear());
 }
 

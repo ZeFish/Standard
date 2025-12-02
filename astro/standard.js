@@ -7,8 +7,8 @@
  * - Standard framework features
  */
 import { fileURLToPath } from "url";
-import path from "path";
-import fs from "fs";
+import * as path from "path";
+import * as fs from "fs";
 import logger from "../core/logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
@@ -165,7 +165,7 @@ function getAvailableRehypePlugins() {
 // ========================================
 
 export default function standard(options = {}) {
-  const log = logger({ scope: "Core" });
+  const log = logger({ verbose: false, scope: "Core" });
 
   // Get package version for banner
   let packageVersion = "0.0.0";

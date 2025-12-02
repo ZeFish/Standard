@@ -5,21 +5,92 @@
 
 /// <reference types="astro/client" />
 
-// Re-export types from the main types file
-export type {
-  SiteConfig,
-  StandardConfig,
-  StandardFrameworkConfig,
-  BuildConfig,
-  TagsConfig,
-  EscapeCodeConfig,
-  DateFieldsConfig,
-  SyntaxConfig,
-  TypographyConfig,
-  HtmlConfig,
-  CloudflareConfig,
-  OpenrouterConfig
-} from "../../.astro/types";
+// ========================================
+// CORE CONFIGURATION TYPES
+// ========================================
+
+export interface SiteConfig {
+  title?: string;
+  description?: string;
+  url?: string;
+  language?: string;
+  author?: {
+    name?: string;
+    email?: string;
+  };
+}
+
+export interface TagsConfig {
+  enabled?: boolean;
+  delimiter?: string;
+}
+
+export interface EscapeCodeConfig {
+  languages?: string[];
+}
+
+export interface DateFieldsConfig {
+  fields?: string[];
+  format?: string;
+}
+
+export interface SyntaxConfig {
+  theme?: string;
+  highlightLines?: boolean;
+}
+
+export interface TypographyConfig {
+  smartQuotes?: boolean;
+  fractions?: boolean;
+  widowPrevention?: boolean;
+}
+
+export interface HtmlConfig {
+  lazyLoad?: boolean;
+  externalLinks?: boolean;
+}
+
+export interface CloudflareConfig {
+  enabled?: boolean;
+  accountId?: string;
+  apiToken?: string;
+}
+
+export interface OpenrouterConfig {
+  enabled?: boolean;
+  apiKey?: string;
+  model?: string;
+  siteUrl?: string;
+}
+
+export interface BuildConfig {
+  outputDir?: string;
+  assetsDir?: string;
+}
+
+export interface StandardConfig {
+  site?: SiteConfig;
+  tags?: TagsConfig;
+  escapeCode?: EscapeCodeConfig;
+  dateFields?: DateFieldsConfig;
+  syntax?: SyntaxConfig;
+  typography?: TypographyConfig;
+  html?: HtmlConfig;
+  cloudflare?: CloudflareConfig;
+  openrouter?: OpenrouterConfig;
+  build?: BuildConfig;
+}
+
+export interface StandardFrameworkConfig extends StandardConfig {
+  version?: string;
+  verbose?: boolean;
+  backlinks?: boolean | object;
+  injectRoutes?: boolean;
+  assets?: {
+    css?: string;
+    js?: string;
+  };
+}
 
 // Re-export with more descriptive names for easier importing
 export type SiteConfigType = SiteConfig;
@@ -30,13 +101,15 @@ export type TypographyConfigType = TypographyConfig;
 export type CloudflareConfigType = CloudflareConfig;
 export type OpenrouterConfigType = OpenrouterConfig;
 
-// Helper type for component props
+// ========================================
+// HELPER TYPES
+// ========================================
+
 export interface StandardComponentProps {
   class?: string;
   [key: string]: any;
 }
 
-// Helper type for navigation items
 export interface NavigationItem {
   text: string;
   href: string;
@@ -45,7 +118,6 @@ export interface NavigationItem {
   children?: NavigationItem[];
 }
 
-// Helper type for social links
 export interface SocialLinks {
   twitter?: string;
   github?: string;
@@ -54,7 +126,6 @@ export interface SocialLinks {
   [key: string]: string | undefined;
 }
 
-// Helper type for manifest icons
 export interface ManifestIcon {
   src: string;
   sizes: string;
@@ -62,14 +133,16 @@ export interface ManifestIcon {
   purpose?: string;
 }
 
-// Helper type for web fonts
 export interface WebFont {
   family: string;
   weights: number[];
   style?: string;
 }
 
-// Global window interface extension
+// ========================================
+// GLOBAL WINDOW INTERFACE
+// ========================================
+
 declare global {
   interface Window {
     Standard?: {
@@ -85,4 +158,17 @@ declare global {
       enableSpacing: (enabled: boolean) => void;
     };
   }
+}
+
+// ========================================
+// VIRTUAL MODULES
+// ========================================
+
+/**
+ * Virtual module for accessing Standard Framework configuration
+ * This module is generated at build time by the Vite plugin
+ */
+declare module 'virtual:standard/config' {
+  const config: StandardFrameworkConfig;
+  export default config;
 }

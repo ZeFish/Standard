@@ -1,11 +1,21 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "lib": [
+      "ES2020"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-    "types": ["astro/client", "./.astro/types.d.ts"],
+    "types": [
+      "astro/client",
+      "./.astro/types.d.ts"
+    ],
     "skipLibCheck": true,
     "allowJs": true,
     "checkJs": false,
@@ -26,7 +36,14 @@
     "src/**/*",
     ".astro/types.d.ts",
     "astro.config.mjs",
-    "site.config.yml"
+    "site.config.yml",
+    "astro/**/*"
   ],
-  "exclude": ["node_modules", "dist", "_site", "functions", "public"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "_site",
+    "functions",
+    "public"
+  ]
 }

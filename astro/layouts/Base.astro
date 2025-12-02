@@ -11,6 +11,37 @@ const log = logger({ scope: "Base Layout" });
 
 // Import site configuration from virtual module
 import config from "virtual:standard/config";
+import type { StandardFrameworkConfig } from "../types/standard";
+
+// ========================================
+// PROPS INTERFACE
+// ========================================
+
+interface Props {
+    frontmatter?: {
+        title?: string;
+        description?: string;
+        image?: string;
+        created?: string;
+        modified?: string;
+        tags?: string[];
+        securityHeaders?: boolean;
+        backlinks?: {
+            inbound?: string[];
+            outbound?: string[];
+            meta?: Record<string, any>;
+        };
+    };
+    site?: StandardFrameworkConfig;
+    title?: string;
+    description?: string;
+    image?: string;
+    created?: string;
+    modified?: string;
+    tags?: string[];
+    securityHeaders?: boolean;
+    class?: string;
+}
 
 // Use config from virtual module, with fallback to props for backward compatibility
 const {
@@ -24,13 +55,11 @@ const {
     tags = frontmatter?.tags,
     securityHeaders = frontmatter?.securityHeaders,
     class: className,
-} = Astro.props;
+} = Astro.props as Props;
 
 // ✨ Get backlinks from the page's frontmatter/data
 const backlinks = frontmatter?.backlinks || {};
 const { inbound = [], outbound = [], meta = {} } = backlinks;
-
-
 
 const year = new Date().getFullYear();
 ---

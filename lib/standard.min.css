@@ -1,29 +1,24 @@
 :root {
-  --optical-ratio: var(--ratio-golden);
-
+  
   --font-size: 1rem;
+  --optical-ratio: var(--ratio-silver);
   --line-height: var(--optical-ratio);
-
-  --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
-  --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
-
-  --leading: calc((var(--line-height) - 1) * var(--font-size));
-  --gap-nl: calc((1lh - 1em) + (1lh - 1em) / 2);
-  --gap-nl: 0.5lh;
+  
+  
+  
   --baseline: 1rlh;
-  --font-cap: calc(1rlh / var(--line-height));
-  --gap: calc(var(--space));
-  --gap-block: var(--space-2);
-
-  --gap-compact: calc(var(--space) / 2);
-  --gap-tight: calc(var(--space) / 4);
-  --gap-micro: calc(var(--space) / 8);
-  --gap-relaxed: var(--space-2);
-  --gap-body: var(--space-2);
+  
+  --leading: calc((var(--line-height) - 1) * var(--font-size));
+  
+  --nl: calc(var(--leading) * var(--line-height));
+  --trim: calc(var(--leading) / 2);
+  --gap-body: var(--space-3);
   --gap-grid: 0.25lh;
-
+  
+  
   --blur: blur(7px);
   --stroke-width: max(1px, 0.06rem);
+  
   --transition: 0.5s ease;
   --radius: var(--leading);
   --modal-background: color-mix(
@@ -31,59 +26,64 @@
     var(--color-background) 60%,
     transparent
   );
+  
+  
+  
+  
+  
+  --ratio-golden: 1.618;
+  --ratio-wholestep: 1.618;
+  --ratio-silver: 1.414;
+  --ratio-halfstep: 1.272;
+  
+  --ratio-quarterstep: 1.128;
+  --ratio-eighthstep: 1.062;
+  
+  --line-width-xs: 32rem;
+  --line-width-s: 38rem;
+  --line-width-m: 42rem;
+  --line-width-l: 50rem;
+  --line-width-xl: 60rem;
+  --line-width-full: calc(100vw - (var(--space) * 2));
+  --line-width: var(--line-width-m);
+  --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
+  --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
   --tracking-tight: -0.01em;
   --tracking-slight-tight: -0.005em;
   --tracking-neutral: 0em;
   --tracking-slight-open: 0.004em;
   --tracking-open: 0.01em;
-
-  --ratio-golden: 1.618;
-  --ratio-wholestep: 1.618;
-  --ratio-silver: 1.414;
-  --ratio-halfstep: 1.272;
-
-  --ratio-quarterstep: 1.128;
-  --ratio-eighthstep: 1.062;
-
-  --line-width-xs: 32rem;
-
-  --line-width-s: 38rem;
-
-  --line-width-m: 42rem;
-
-  --line-width-l: 50rem;
-
-  --line-width-xl: 60rem;
-
-  --line-width-full: calc(100vw - (var(--space) * 2));
-
-  --line-width: var(--line-width-m);
-
-  --base: var(--space);
-
-  --base-d8: calc(var(--space) / 8);
-  --base-d4: calc(var(--space) / 4);
-  --base-d2: calc(var(--space) / 2);
-  --base-2: var(--space-2);
-  --base-3: var(--space-3);
-  --base-4: var(--space-4);
-  --base-8: var(--space-8);
-
+  --space-1: calc(var(--baseline) * 1);
+  --space-2: calc(var(--baseline) * 2);
+  --space-3: calc(var(--baseline) * 3);
+  --space-4: calc(var(--baseline) * 4);
+  --space-5: calc(var(--baseline) * 5);
+  --space-6: calc(var(--baseline) * 6);
+  --space-7: calc(var(--baseline) * 7);
+  --space-8: calc(var(--baseline) * 8);
+  --space-9: calc(var(--baseline) * 9);
+  --space-10: calc(var(--baseline) * 10);
+  --space-11: calc(var(--baseline) * 11);
+  --space-12: calc(var(--baseline) * 12);
+  --space: var(--baseline);
+  --space-half: calc(var(--baseline) / 2);
+  --space-half-negative: calc(var(--baseline) * -0.5);
+  
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
   --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
   --scale: var(--font-size);
   --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 1));
   --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 2));
   --scale-4: calc(var(--font-size) * pow(var(--optical-ratio), 3));
-
+  
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
-  --mobile-line-height: 1.5;
-  --mobile-gap-body: var(--leading);
+  --mobile-line-height: var(--ratio-silver);
+  --mobile-gap-body: var(--space);
   --mobile-gap: 1rlh;
-
+  
   --mobile-gap-block: var(--space-2);
-
+  
   --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -95,41 +95,15 @@
   --z-tooltip: 1080;
   --z-toast: 1090;
   --z-image-zoom: 9999;
-
+  
   --duration-superfast: 0.15s;
 }
 
-mark,
-callout-title::before,
-div,
-span,
-li::before,
-button,
-legend,
-fieldset,
-label,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p:not(:has(img)),
-figcaption,
-dt,
-dd,
-label,
-td,
-th,
-.callout,
-pre,
-code,
-.lined,
-aside {
+mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
+
 
 @media only screen and (max-width: 768px) {
   :root {
@@ -142,33 +116,42 @@ aside {
   }
 }
 
-:root {
-  color-scheme: light dark;
 
+
+
+
+
+
+:root {
+  
+  color-scheme: light dark;
+  
+  
   --color-light-background: white;
   --color-light-foreground: #262626;
   --color-light-accent: var(--color-blue);
-  --color-light-red: #b14c42;
-  --color-light-orange: #d78a5a;
-  --color-light-yellow: #c8a840;
-  --color-light-green: #5e9d80;
-  --color-light-cyan: #6ba4b6;
-  --color-light-blue: #4f81a4;
-  --color-light-purple: #7a6c91;
-  --color-light-pink: #b97aa0;
-
-  --color-dark-background: #0f0f0f;
-  --color-dark-foreground: #dbdbdb;
+  --color-light-red: #b14c42; 
+  --color-light-orange: #d78a5a; 
+  --color-light-yellow: #c8a840; 
+  --color-light-green: #5e9d80; 
+  --color-light-cyan: #6ba4b6; 
+  --color-light-blue: #4f81a4; 
+  --color-light-purple: #7a6c91; 
+  --color-light-pink: #b97aa0; 
+  
+  
+  --color-dark-background: #0f0f0f; 
+  --color-dark-foreground: #dbdbdb; 
   --color-dark-accent: var(--color-yellow);
-  --color-dark-red: #db6057;
-  --color-dark-orange: #e58f5c;
-  --color-dark-yellow: #dcb757;
-  --color-dark-green: #74ba98;
-  --color-dark-cyan: #7db9c8;
-  --color-dark-blue: #6d96b8;
-  --color-dark-purple: #a18db6;
-  --color-dark-pink: #d49ab8;
-
+  --color-dark-red: #db6057; 
+  --color-dark-orange: #e58f5c; 
+  --color-dark-yellow: #dcb757; 
+  --color-dark-green: #74ba98; 
+  --color-dark-cyan: #7db9c8; 
+  --color-dark-blue: #6d96b8; 
+  --color-dark-purple: #a18db6; 
+  --color-dark-pink: #d49ab8; 
+  
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
   --color-accent: var(--color-light-accent);
@@ -185,7 +168,7 @@ aside {
   --color-warning: var(--color-yellow);
   --color-error: var(--color-red);
   --color-info: var(--color-blue);
-
+  
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
   --color-border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
@@ -199,25 +182,24 @@ aside {
     var(--color-accent) 15%,
     transparent
   );
-
+  
   --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
-
+  
   --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
   --shadow: 0 0 var(--space-d4) var(--shadow-color);
-
+  
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
     color-mix(in srgb, var(--color-accent) 10%, transparent);
-
-  transition:
-    background-color var(--transition),
-    color var(--transition),
-    border-color var(--transition);
+  
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
+    
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
     --color-accent: var(--color-dark-accent);
@@ -230,7 +212,7 @@ aside {
     --color-blue: var(--color-dark-blue);
     --color-purple: var(--color-dark-purple);
     --color-pink: var(--color-dark-pink);
-
+    
     --color-muted: color-mix(in srgb, var(--color-foreground) 65%, transparent);
     --color-subtle: color-mix(
       in srgb,
@@ -247,7 +229,7 @@ aside {
       var(--color-foreground) 5%,
       var(--color-background)
     );
-
+    
     --shadow-color: color-mix(in srgb, #000 20%, transparent);
     --shadow: 0 2px 4px var(--shadow-color);
     --shadow-l: 0 8px 16px var(--shadow-color);
@@ -278,11 +260,13 @@ aside {
 html {
   color: var(--color-foreground);
   background: var(--color-background);
-
-  transition:
-    background-color var(--transition),
-    color var(--transition);
+  
+  transition: background-color var(--transition), color var(--transition);
 }
+
+
+
+
 
 .token.keyword,
 .token.module,
@@ -290,15 +274,18 @@ html {
   color: var(--color-red);
 }
 
+
 .token.string,
 .token.attr-value {
   color: var(--color-green);
 }
 
+
 .token.number,
 .token.boolean {
   color: var(--color-cyan);
 }
+
 
 .token.function,
 .token.tag,
@@ -306,21 +293,25 @@ html {
   color: var(--color-yellow);
 }
 
+
 .token.property,
 .token.attr-name,
 .token.selector {
   color: var(--color-orange);
 }
 
+
 .token.punctuation,
 .token.operator {
   color: var(--color-muted);
 }
 
+
 .token.comment {
   color: var(--color-subtle);
   font-style: italic;
 }
+
 
 .token.tag > .token.punctuation {
   color: var(--color-muted);
@@ -330,14 +321,17 @@ html {
   color: var(--color-orange);
 }
 
+
 .token.doctype,
 .token.namespace {
   color: var(--color-purple);
 }
 
+
 .token.generics {
   color: var(--color-blue);
 }
+
 
 .language-yaml .token.key {
   color: var(--color-orange);
@@ -346,6 +340,7 @@ html {
 .language-yaml .token.literal {
   color: var(--color-cyan);
 }
+
 
 .language-markdown .token.italic,
 .language-md .token.italic,
@@ -396,6 +391,7 @@ html {
   color: var(--color-blue);
 }
 
+
 .language-bash .token.function {
   color: var(--color-yellow);
 }
@@ -431,6 +427,7 @@ html {
   color: var(--color-red);
 }
 
+
 .language-nunjucks .token.tag,
 .language-njk .token.tag {
   color: var(--color-yellow);
@@ -451,6 +448,7 @@ html {
   color: var(--color-green);
 }
 
+
 .language-nunjucks .token.variable,
 .language-njk .token.variable {
   color: var(--color-cyan);
@@ -466,10 +464,17 @@ html {
   color: var(--color-orange);
 }
 
+
+
+
+
+
+
 :root {
+  
   --font-sans:
-    "Instrument Sans", InterVariable, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   --font-serif:
     "Newsreader", "Instrument Serif", "Garamond Premiere Pro", "Source Serif 4",
     serif;
@@ -478,26 +483,28 @@ html {
   --font-text: var(--font-sans);
   --font-header: InterVariable;
   --font-interface: var(--font-sans);
-
-  --font-feature: "ss01", "ss02", "ss05";
+  --inter-feature: "calt", "cv05", "cv11", "ss03";
+  --instrument-feature: "figa", "ss01", "ss02", "ss05";
+  
+  --font-feature: "";
   --font-variation: "wdth" 95;
-  --font-header-feature: "dlig";
+  --font-header-feature: "";
   --font-header-variation: "";
   --font-monospace-feature: "";
   --font-monospace-variation: "";
-
+  
   --font-weight: 450;
   --font-weight-bold: 600;
   --font-letter-spacing: normal;
   --font-header-letter-spacing: -0.065em;
   --font-header-line-height: 1;
   --font-header-weight: 700;
-
+  
   --font-interface-feature: "dlig", "zero";
   --font-interface-variation: "";
   --font-list-feature: "dlig", "tnum", "zero";
   --font-list-variation: "";
-
+  
   --font-weight-h1: var(--font-header-weight);
   --font-weight-h2: max(
     calc(var(--font-header-weight) * 0.85),
@@ -510,9 +517,10 @@ html {
   --font-weight-h4: var(--font-weight);
   --font-weight-h5: var(--font-weight);
   --font-weight-h6: var(--font-weight);
-
+  
   --list-indentation: var(--space);
 }
+
 
 .circular {
   font-feature-settings: "ss05" on;
@@ -541,6 +549,7 @@ html {
   font-feature-settings: var(--font-interface-feature);
   font-weight: var(--font-interface-weight, var(--font-weight), 400);
 }
+
 
 @font-face {
   font-family: "Sohne";
@@ -654,99 +663,73 @@ html {
   font-family: "EB Garamond";
   font-style: normal;
   font-weight: 400;
-  src:
-    local("EB Garamond"),
-    url("/assets/fonts/eb-garamond/EBGaramond.woff") format("woff");
+  src: local("EB Garamond"), url("/assets/fonts/eb-garamond/EBGaramond.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: normal;
   font-weight: 400;
-  src:
-    local("EB Garamond Regular"),
-    url("/assets/fonts/eb-garamond/EBGaramond-Regular.woff") format("woff");
+  src: local("EB Garamond Regular"), url("/assets/fonts/eb-garamond/EBGaramond-Regular.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond SC";
   font-style: normal;
   font-weight: 400;
-  src:
-    local("EB Garamond Regular SmallCaps"),
-    url("/assets/fonts/eb-garamond/EBGaramondSC.woff") format("woff");
+  src: local("EB Garamond Regular SmallCaps"), url("/assets/fonts/eb-garamond/EBGaramondSC.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: italic;
   font-weight: 400;
-  src:
-    local("EB Garamond Italic"),
-    url("/assets/fonts/eb-garamond/EBGaramond-Italic.woff") format("woff");
+  src: local("EB Garamond Italic"), url("/assets/fonts/eb-garamond/EBGaramond-Italic.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: normal;
   font-weight: 500;
-  src:
-    local("EB Garamond Medium"),
-    url("/assets/fonts/eb-garamond/EBGaramond-Medium.woff") format("woff");
+  src: local("EB Garamond Medium"), url("/assets/fonts/eb-garamond/EBGaramond-Medium.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: italic;
   font-weight: 500;
-  src:
-    local("EB Garamond Medium Italic"),
-    url("/assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff") format("woff");
+  src: local("EB Garamond Medium Italic"), url("/assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: normal;
   font-weight: 600;
-  src:
-    local("EB Garamond SemiBold"),
-    url("/assets/fonts/eb-garamond/EBGaramond-SemiBold.woff") format("woff");
+  src: local("EB Garamond SemiBold"), url("/assets/fonts/eb-garamond/EBGaramond-SemiBold.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: italic;
   font-weight: 600;
-  src:
-    local("EB Garamond SemiBold Italic"),
-    url("/assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff")
-      format("woff");
+  src: local("EB Garamond SemiBold Italic"), url("/assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: normal;
   font-weight: 700;
-  src:
-    local("EB Garamond Bold"),
-    url("/assets/fonts/eb-garamond/EBGaramond-Bold.woff") format("woff");
+  src: local("EB Garamond Bold"), url("/assets/fonts/eb-garamond/EBGaramond-Bold.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: italic;
   font-weight: 700;
-  src:
-    local("EB Garamond Bold Italic"),
-    url("/assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff") format("woff");
+  src: local("EB Garamond Bold Italic"), url("/assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: normal;
   font-weight: 800;
-  src:
-    local("EB Garamond ExtraBold"),
-    url("/assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff") format("woff");
+  src: local("EB Garamond ExtraBold"), url("/assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff") format("woff");
 }
 @font-face {
   font-family: "EB Garamond";
   font-style: italic;
   font-weight: 800;
-  src:
-    local("EB Garamond ExtraBold Italic"),
-    url("/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff")
-      format("woff");
+  src: local("EB Garamond ExtraBold Italic"), url("/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff") format("woff");
 }
 @font-face {
   font-family: "Helvetica Now Var";
@@ -777,6 +760,9 @@ html {
   src: url("/assets/fonts/UniversNextVariable-Italic.ttf");
 }
 
+
+
+
 html {
   background: var(--color-background);
   color: var(--color-foreground);
@@ -787,7 +773,7 @@ html {
   font-weight: var(--font-weight);
   letter-spacing: var(--font-letter-spacing);
   line-height: var(--line-height);
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-optical-sizing: auto;
@@ -799,25 +785,18 @@ html {
   orphans: 2;
 }
 
-blockquote,
-pre,
-.alert,
-aside,
-.card,
-.callout,
-img,
-iframe,
-.outset {
+blockquote, pre, .alert, aside, .card, .callout, img, iframe, .outset {
   border-left: var(--stroke-width) solid var(--color-border);
-  padding: var(--leading) var(--leading);
-  margin-inline: var(--space);
-  font-size: var(--scale-d2);
-  line-height: var(--line-height-compact);
+  padding: var(--space-half);
 }
 
 img {
   padding: 0;
 }
+
+
+
+
 
 b,
 strong,
@@ -828,6 +807,10 @@ strong,
 :is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
   font-weight: inherit;
 }
+
+
+
+
 
 h1,
 h2,
@@ -878,6 +861,7 @@ h4 {
 }
 
 h6 {
+  
   display: inline;
   margin: 0;
   font-size: var(--scale);
@@ -896,6 +880,7 @@ h6 + p {
   padding-block-start: calc(var(--space) / 2);
   margin-block-end: var(--space);
 }
+
 
 code,
 pre,
@@ -946,10 +931,13 @@ pre .copy-button:hover {
   opacity: 1;
 }
 
+
+
 blockquote {
   font-style: italic;
   color: var(--color-muted);
 }
+
 
 table {
   border-collapse: collapse;
@@ -970,17 +958,19 @@ td {
 th {
   font-weight: var(--font-weight-bold, 600);
   background: var(--color-background-secondary);
-}
+} 
 caption {
   font-weight: var(--font-weight-bold, bold);
   text-align: left;
 }
+
 
 figcaption {
   font-size: var(--scale-d2);
   font-style: italic;
   text-align: center;
 }
+
 
 small {
   font-size: var(--scale-d2);
@@ -1000,10 +990,14 @@ sup {
   vertical-align: super;
 }
 
+
 em {
   color: var(--color-italic);
   font-style: italic;
 }
+
+
+
 
 a,
 a:visited {
@@ -1012,9 +1006,7 @@ a:visited {
   text-decoration-thickness: var(--stroke-width);
   text-underline-offset: auto;
   text-decoration-color: var(--color-subtle);
-  transition:
-    color var(--transition),
-    text-decoration-color var(--transition);
+  transition: color var(--transition), text-decoration-color var(--transition);
 }
 
 a:visited:hover,
@@ -1037,9 +1029,11 @@ a.external-link::after {
   color: var(--color-subtle);
 }
 
+
 :is(h1, h2, h3, h4, h5, h6) a {
   text-decoration: none;
 }
+
 
 nav li a {
   text-decoration: none;
@@ -1049,6 +1043,10 @@ nav li.is-active a {
   text-decoration: underline;
 }
 
+
+
+
+
 button,
 a.button {
   font-family: var(--font-interface), system-ui, sans-serif;
@@ -1056,21 +1054,14 @@ a.button {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
   border-radius: var(--radius);
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 65%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
   padding: var(--trim) var(--leading);
   box-shadow: var(--shadow);
   cursor: pointer;
-  transition:
-    background-color var(--transition),
-    border-color var(--transition),
-    opacity var(--transition);
+  transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1101,21 +1092,13 @@ a.button {
 
 button:hover,
 a.button:hover {
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 80%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
   color: var(--color-background);
 }
 
 button:active,
 a.button:active {
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 50%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-background-secondary));
 }
 
 button:focus-visible,
@@ -1133,6 +1116,9 @@ a.button:disabled {
   color: var(--color-background);
 }
 
+
+
+
 input,
 textarea,
 select {
@@ -1144,10 +1130,7 @@ select {
   background: var(--color-background-secondary);
   border: var(--border);
   margin-block-end: var(--leading) !important;
-  transition:
-    background-color var(--transition),
-    border-color var(--transition),
-    outline-color var(--transition);
+  transition: background-color var(--transition), border-color var(--transition), outline-color var(--transition);
 }
 
 input:focus,
@@ -1156,18 +1139,14 @@ select:focus {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 0px;
   border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  background-color: color-mix(
-    in srgb,
-    var(--color-accent) 5%,
-    var(--color-background)
-  );
+  background-color: color-mix(in srgb, var(--color-accent) 5%, var(--color-background));
 }
 
 textarea {
   font-family: var(--font-interface), system-ui, sans-serif;
   resize: vertical;
   min-height: 6em;
-
+  
   min-height: var(--space-2);
 }
 
@@ -1190,15 +1169,12 @@ fieldset {
   border: var(--border);
   border-radius: var(--radius);
   padding: var(--trim) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-background-secondary) 25%,
-    var(--color-background)
-  );
+  background: color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background));
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+
+input[type=checkbox],
+input[type=radio] {
   width: 1em;
   height: 1em;
   cursor: pointer;
@@ -1207,17 +1183,20 @@ input[type="radio"] {
   display: inline-block;
 }
 
-input[type="checkbox"]:checked,
-input[type="radio"]:checked {
+input[type=checkbox]:checked,
+input[type=radio]:checked {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
 }
 
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
+input[type=checkbox]:focus,
+input[type=radio]:focus {
   outline: 2px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 2px;
 }
+
+
+
 
 img,
 video,
@@ -1228,6 +1207,9 @@ iframe {
   box-shadow: var(--shadow);
 }
 
+
+
+
 .font-interface {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-variation-settings: var(--font-interface-variation);
@@ -1235,10 +1217,15 @@ iframe {
   font-size: 12px;
 }
 
+
+
+
+
 ::selection {
   background: color-mix(in srgb, var(--color-yellow) 25%, transparent);
   color: var(--color-foreground);
 }
+
 
 hr {
   height: var(--stroke-width, 1px);
@@ -1247,6 +1234,7 @@ hr {
   block-size: var(--stroke-width, 1px);
 }
 
+
 mark {
   background: color-mix(in srgb, var(--color-yellow) 30%, transparent);
   color: color-mix(in srgb, var(--color-yellow) 30%, var(--color-foreground));
@@ -1254,20 +1242,37 @@ mark {
   padding-top: 0.1em;
 }
 
+
+
+
+
+
+
+
 :where(*, *::before, *::after) {
   box-sizing: border-box;
 }
 
+
+
 :where(.rhythm) {
+  
   display: inline-flex;
   align-items: baseline;
-
+  
   display: flow-root;
 }
 :where(.rhythm) * {
+  margin: 0;
   vertical-align: baseline;
   margin-block-start: 0;
-  margin-block-end: var(--space);
+  margin-block-end: calc(var(--space) + var(--space-half));
+}
+:where(.rhythm) p:has(+ p) {
+  margin-block-end: calc(var(--space) + var(--space-half));
+}
+:where(.rhythm) p:has(+ :is(h1, h2, h3, h4, h5, h6)) {
+  margin-block-end: 0;
 }
 :where(.rhythm) > body {
   margin: 0;
@@ -1276,129 +1281,9 @@ mark {
 }
 :where(.rhythm) > body [id] {
   scroll-margin-top: calc(var(--space-2) + var(--gap-body));
+  
 }
-:where(.rhythm) .alert,
-:where(.rhythm) #comments,
-:where(.rhythm) h1,
-:where(.rhythm) h2,
-:where(.rhythm) h3,
-:where(.rhythm) h4,
-:where(.rhythm) h5,
-:where(.rhythm) h6,
-:where(.rhythm) blockquote,
-:where(.rhythm) ul,
-:where(.rhythm) ol,
-:where(.rhythm) dl,
-:where(.rhythm) p,
-:where(.rhythm) blockquote,
-:where(.rhythm) pre,
-:where(.rhythm) dt,
-:where(.rhythm) dd,
-:where(.rhythm) table,
-:where(.rhythm) figure,
-:where(.rhythm) form,
-:where(.rhythm) fieldset,
-:where(.rhythm) aside,
-:where(.rhythm) .callout {
-  margin-block-start: 0;
-  margin-block-end: var(--space);
-}
-:where(.rhythm) #comments,
-:where(.rhythm) .callout,
-:where(.rhythm) pre,
-:where(.rhythm) figure,
-:where(.rhythm) p:has(img),
-:where(.rhythm) section,
-:where(.rhythm) .box,
-:where(.rhythm) .card,
-:where(.rhythm) .container-small,
-:where(.rhythm) .container-accent,
-:where(.rhythm) .containe-feature,
-:where(.rhythm) .container-hero,
-:where(.rhythm) .scroll,
-:where(.rhythm) hr,
-:where(.rhythm) aside {
-  margin-block-start: max(var(--space-2) - var(--space), var(--space));
-  margin-block-end: max(var(--space-2) var(--space));
-}
-:where(.rhythm)
-  :is(
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside
-  ):has(
-    + :is(
-      #comments,
-      .callout,
-      pre,
-      figure,
-      p:has(img),
-      section,
-      .box,
-      .card,
-      .container-small,
-      .container-accent,
-      .containe-feature,
-      .container-hero,
-      .scroll,
-      hr,
-      aside
-    )
-  ) {
-  margin-block-end: var(--space);
-}
-:where(.rhythm)
-  :is(
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside
-  )
-  + :is(
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside
-  ) {
-  margin-block-start: max(0, var(--space));
-}
-:where(.rhythm)
-  :is(.card, aside, blockquote, pre, figure, .callout-content)
-  > :first-child {
+:where(.rhythm) :is(.card, aside, blockquote, pre, figure, .callout-content) > :first-child {
   margin-block-start: 0;
 }
 :where(.rhythm) * > :last-child {
@@ -1406,24 +1291,26 @@ mark {
 }
 :where(.rhythm) .rhythm {
   --base-gap: 1;
+  
 }
 :where(.rhythm) h1 {
-  margin-block-start: var(--space-3);
-  margin-block-end: var(--space);
+  margin-block-start: var(--space-4);
+  margin-block-end: calc(var(--space-2) + var(--space-half));
 }
 :where(.rhythm) h1:first-of-type {
-  margin-block-start: var(--space-5);
-  margin-block-end: var(--space-6);
+  margin-block-start: var(--space-4);
+  margin-block-end: calc(var(--space-6) + var(--space-half));
 }
 :where(.rhythm) h2,
 :where(.rhythm) h3 {
-  margin-block-start: var(--space-2);
-  margin-block-end: var(--space);
+  margin-block-start: var(--space-3);
+  margin-block-end: calc(var(--space) + var(--space-half));
 }
 :where(.rhythm) h4,
 :where(.rhythm) h5,
 :where(.rhythm) h6 {
-  margin-block: var(--space);
+  margin-block-start: calc(var(--space-2) + var(--space-half));
+  margin-block-end: var(--space-half);
 }
 :where(.rhythm) :is(h1, h2, h3) + :is(h1, h2, h3),
 :where(.rhythm) hr + :is(h1, h2, h3) {
@@ -1432,7 +1319,7 @@ mark {
 :where(.rhythm) hr {
   margin-inline: calc(var(--space-4));
   margin-block-start: max((var(--space-2) - var(--space)) * 1, var(--space));
-  margin-block-end: max(var(--space-2) 1, var(--space));
+  margin-block-end: max(var(--space-2) * 1, var(--space));
 }
 :where(.rhythm) ul,
 :where(.rhythm) ol {
@@ -1444,26 +1331,27 @@ mark {
 :where(.rhythm) li > ul,
 :where(.rhythm) li > ol {
   padding-inline-start: 1rlh;
-  margin-block-start: var(--trim);
+  margin-block-start: var(--space);
   margin-block-end: 0;
 }
 :where(.rhythm) li {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
-  margin-block-end: var(--leading);
+  margin-block-end: var(--space-half);
 }
 :where(.rhythm) li:last-child {
+  
   margin-block-end: 0;
 }
 :where(.rhythm) p:has(+ :is(ul, ol)) {
-  margin-block-end: var(--leading);
+  margin-block-end: var(--space-half);
 }
 :where(.rhythm) .compact {
-  --base-gap: var(--leading);
+  --base-gap: var(--space-half);
 }
 :where(.rhythm) .compact li {
-  margin-block-end: var(--leading);
+  margin-block-end: var(--space-half);
 }
 :where(.rhythm) .tight {
   --base-gap: var(--trim);
@@ -1502,12 +1390,8 @@ mark {
   width: 1rlh;
   font-size: var(--scale-d2);
 }
-:where(.rhythm)
-  ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
-  li,
-:where(.rhythm)
-  ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
-  li {
+:where(.rhythm) ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
+:where(.rhythm) ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
   margin-block-end: 0;
 }
 :where(.rhythm) form:not(.grid *) {
@@ -1537,8 +1421,8 @@ mark {
   margin-inline: var(--space);
   margin-block-end: var(--space-2);
 }
-:where(.rhythm) input[type="checkbox"] + label,
-:where(.rhythm) input[type="radio"] + label {
+:where(.rhythm) input[type=checkbox] + label,
+:where(.rhythm) input[type=radio] + label {
   margin-inline-start: var(--leading);
 }
 :where(.rhythm) div:has(input + label) {
@@ -1570,7 +1454,10 @@ mark {
   margin-block-end: calc(var(--space-d4) * var(--space-gap));
 }
 :where(.rhythm) table {
+  
   width: 100%;
+  
+  
 }
 :where(.rhythm) td,
 :where(.rhythm) th {
@@ -1579,9 +1466,11 @@ mark {
   min-height: var(--line-height);
 }
 :where(.rhythm) th {
+  
   text-transform: uppercase;
-
+  
   letter-spacing: 0.05em;
+  
 }
 :where(.rhythm) .numeric {
   text-align: right;
@@ -1590,6 +1479,10 @@ mark {
 :where(.rhythm) .striped tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
 }
+
+
+
+
 
 .rhythm-compact {
   --base-gap: 0.5;
@@ -1602,6 +1495,7 @@ mark {
 .rhythm-xl {
   --base-gap: 2;
 }
+
 
 .no-rhythm {
   margin: 0 !important;
@@ -1619,11 +1513,30 @@ mark {
   margin-block-end: calc(var(--space-d4) * var(--space-gap)) !important;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (prefers-reduced-motion: reduce) {
   .rhythm {
     transition: none;
   }
 }
+
+
+
 
 @supports not (display: grid) {
   .rhythm {
@@ -1637,7 +1550,13 @@ mark {
   }
 }
 
-[class^="grid"] {
+
+
+
+
+
+
+[class^=grid] {
   display: grid;
   grid-auto-columns: 1fr;
   column-gap: var(--gap-grid);
@@ -1645,35 +1564,39 @@ mark {
   margin-block: 0;
 }
 
-.prose > [class^="grid"] {
-  margin-block-start: calc(
-    var(--space) * max(var(--space-2) var(--space)) - var(--space) *
-      var(--space)
-  );
+
+
+
+
+.prose > [class^=grid] {
+  margin-block-start: calc(var(--space) * max(var(--space-2) var(--space)) - var(--space) * var(--space));
   margin-block-end: calc(var(--space) * max(var(--space-2) var(--space)));
 }
 
-[class^="grid"] > * {
-  min-width: 0;
+[class^=grid] > * {
+  min-width: 0; 
   margin-block: 0;
 }
 
 @media (max-width: 600px) {
-  :root [class^="grid"] * {
-    min-width: 0;
+  :root [class^=grid] * {
+    min-width: 0; 
+    
   }
 }
-[class^="grid"] .card {
+[class^=grid] .card {
   margin: 0;
 }
 
-:is(.grid, [class^="grid-"]).compact {
+
+:is(.grid, [class^=grid-]).compact {
   --gap-grid: var(--trim);
 }
 
-:is(.grid, [class^="grid-"]).relaxed {
+:is(.grid, [class^=grid-]).relaxed {
   --gap-grid: var(--space);
 }
+
 
 .grid-1 {
   display: grid;
@@ -1758,6 +1681,7 @@ mark {
   column-gap: var(--gap-grid);
   row-gap: var(--gap-grid-row, var(--gap-grid));
 }
+
 
 .col-1 {
   grid-column: span 1;
@@ -1866,6 +1790,7 @@ mark {
 .start-12 {
   grid-column-start: 12;
 }
+
 
 @media (max-width: 768px) {
   .sm\:grid-1 {
@@ -2177,18 +2102,23 @@ hr.col-row {
   margin-block: var(--space);
 }
 
+
 .grid .rhythm > * {
   margin-block-end: var(--space);
 }
 
+
 .free-col {
-  --start: auto;
-  --span: 3;
-  grid-column: var(--start) / span var(--span);
+  
+  --start: auto; 
+  --span: 3; 
+  grid-column: var(--start)/span var(--span);
+  
 }
 .free-col.rhythm > * {
   margin-block-end: var(--space);
 }
+
 
 .span-1 {
   --span: 1;
@@ -2196,84 +2126,84 @@ hr.col-row {
 
 .startv-1 {
   --start: 1;
-}
+} 
 .span-2 {
   --span: 2;
 }
 
 .startv-2 {
   --start: 2;
-}
+} 
 .span-3 {
   --span: 3;
 }
 
 .startv-3 {
   --start: 3;
-}
+} 
 .span-4 {
   --span: 4;
 }
 
 .startv-4 {
   --start: 4;
-}
+} 
 .span-5 {
   --span: 5;
 }
 
 .startv-5 {
   --start: 5;
-}
+} 
 .span-6 {
   --span: 6;
 }
 
 .startv-6 {
   --start: 6;
-}
+} 
 .span-7 {
   --span: 7;
 }
 
 .startv-7 {
   --start: 7;
-}
+} 
 .span-8 {
   --span: 8;
 }
 
 .startv-8 {
   --start: 8;
-}
+} 
 .span-9 {
   --span: 9;
 }
 
 .startv-9 {
   --start: 9;
-}
+} 
 .span-10 {
   --span: 10;
 }
 
 .startv-10 {
   --start: 10;
-}
+} 
 .span-11 {
   --span: 11;
 }
 
 .startv-11 {
   --start: 11;
-}
+} 
 .span-12 {
   --span: 12;
 }
 
 .startv-12 {
   --start: 12;
-}
+} 
 
 @media (max-width: 768px) {
   .sm\:span-1 {
@@ -2437,6 +2367,7 @@ hr.col-row {
   z-index: 1;
 }
 
+
 .grid.no-gap {
   row-gap: 0;
 }
@@ -2448,6 +2379,7 @@ hr.col-row {
 .grid.relaxed {
   --grid-gap: var(--space-2);
 }
+
 
 .box > *,
 .grid > .col-1 > *,
@@ -2511,28 +2443,35 @@ hr.col-row {
   margin-block-start: 0;
 }
 
-[class|="grid"] .container-hero {
+[class|=grid] .container-hero {
   margin-inline: 0;
 }
 
+
+
+
+
+
+
+
 :root {
-  --content: min(var(--line-width), 100%);
+  
+  --content: min(var(--line-width), 100%); 
   --content-small: max(calc(var(--space-2) - var(--space)), var(--space));
   --content-accent: minmax(0, var(--space));
   --content-feature: minmax(0, var(--space-2));
   --content-hero: minmax(0, 1fr);
 }
 
+
+
 :where(.prose) {
   display: grid;
-  grid-template-columns:
-    [hero-start] var(--content-hero) [feature-start] var(--content-feature)
-    [accent-start] var(--content-accent) [content-start] var(--content)
-    [content-end] var(--content-accent) [accent-end] var(--content-feature)
-    [feature-end] var(--content-hero) [hero-end];
+  grid-template-columns: [hero-start] var(--content-hero) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-hero) [hero-end];
   transition: grid-template-columns var(--transition);
   position: relative;
   z-index: var(--z-base);
+  
 }
 :where(.prose) > * {
   grid-column: content;
@@ -2581,7 +2520,7 @@ hr.col-row {
 :where(.prose):not(.no-grid) p:has(video) img:first-child,
 :where(.prose):not(.no-grid) p:has(video) img:last-child {
   margin-inline: auto;
-  flex-grow: 0;
+  flex-grow: 0; 
 }
 :where(.prose):not(.no-grid) p:has(img) br,
 :where(.prose):not(.no-grid) p:has(video) br {
@@ -2592,27 +2531,9 @@ hr.col-row {
   display: block;
 }
 :where(.prose):not(.no-grid) p:has(img) + p:has(img) {
-  margin-block-start: calc(var(--space-2) -1 + var(--gap-grid-img)) !important;
+  margin-block-start: calc((var(--space-2) -1) + var(--gap-grid-img)) !important;
 }
-:where(.prose)
-  :where(
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside
-  )
-  > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
+:where(.prose) :where(#comments, .callout, pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside) > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
   margin-block-start: 0;
 }
 :where(.prose) img,
@@ -2621,13 +2542,6 @@ hr.col-row {
   margin: 0;
   margin-inline: auto;
   max-inline-size: 100%;
-}
-:where(.prose) .callout,
-:where(.prose) blockquote,
-:where(.prose) pre,
-:where(.prose) figure,
-:where(.prose) p:has(img) {
-  margin-inline: var(--content-small);
 }
 :where(.prose) p {
   text-wrap: pretty;
@@ -2665,6 +2579,7 @@ hr.col-row {
   text-overflow: ellipsis;
 }
 
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -2686,11 +2601,8 @@ hr.col-row {
 :where(html:not(.no-rhythm), .rhythm) img {
   max-width: 100%;
   cursor: zoom-in;
-
-  transition:
-    mix-blend-mode 0.2s,
-    opacity 0.2s,
-    filter 0.2s;
+  
+  transition: mix-blend-mode 0.2s, opacity 0.2s, filter 0.2s;
 }
 :where(html:not(.no-rhythm), .rhythm) img.fx {
   border-radius: var(--radius);
@@ -2701,6 +2613,12 @@ hr.col-row {
   border: unset;
   box-shadow: unset;
 }
+
+
+
+
+
+
 
 html:not(.js-image-zoom-enabled) img:active {
   cursor: zoom-out;
@@ -2717,6 +2635,7 @@ html:not(.js-image-zoom-enabled) img:active {
   user-select: none;
 }
 
+
 html:not(.js-image-zoom-enabled):has(img:active)::before {
   content: "";
   position: fixed;
@@ -2724,6 +2643,13 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   background: var(--color-background);
   z-index: calc(var(--z-image-zoom) - 1);
 }
+
+
+
+
+
+
+
 
 .image-zoom-overlay {
   position: fixed;
@@ -2740,9 +2666,11 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   cursor: zoom-out;
 }
 
+
 .image-zoom-overlay.is-visible {
   opacity: 1;
 }
+
 
 .image-zoom-overlay img {
   display: block;
@@ -2750,28 +2678,29 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
   max-height: 100%;
   object-fit: contain;
   user-select: none;
-  cursor: default;
+  cursor: default; 
 }
+
 
 .card {
   background: var(--color-background-secondary);
   border: var(--border);
 }
 
+
 .card.clickable a {
   text-decoration: none;
 }
 .card.clickable {
   color: inherit;
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
   cursor: pointer;
 }
 .card.clickable:hover {
   transform: translateY(-2px);
-
+  
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
 }
 .card.clickable:focus-visible {
   outline: 3px solid var(--color-accent);
@@ -2779,7 +2708,10 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
 }
 .card.clickable:active {
   transform: translateY(0);
+  
 }
+
+
 
 .callout,
 img,
@@ -2797,6 +2729,9 @@ card.inset {
   box-shadow: inset var(--shadow) !important;
 }
 
+
+
+
 .callout {
   background: var(--color-background-secondary);
   border: var(--border);
@@ -2806,11 +2741,7 @@ card.inset {
   padding-top: 0;
   --color-callout: var(--color-background-secondary);
   --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
-  background: color-mix(
-    in srgb,
-    var(--color-callout) 5%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb, var(--color-callout) 5%, var(--color-background-secondary));
   border: var(--border);
   font-size: var(--scale-d2);
 }
@@ -2826,15 +2757,7 @@ card.inset {
 }
 .callout .callout-content {
   color: var(--color-foreground);
-  background: color-mix(
-    in srgb,
-    var(--color-callout) 2.5%,
-    color-mix(
-      in srgb,
-      var(--color-background-secondary) 25%,
-      var(--color-background)
-    )
-  );
+  background: color-mix(in srgb, var(--color-callout) 2.5%, color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background)));
   line-height: var(--line-height-compact);
   box-shadow: inset var(--shadow);
   border-radius: var(--radius);
@@ -2875,16 +2798,17 @@ card.inset {
   margin-right: 0;
 }
 
-.callout[data-callout="warning" i] {
+.callout[data-callout=warning i] {
   --color-callout: var(--color-red);
 }
 
-.callout[data-callout="important" i] {
+.callout[data-callout=important i] {
   --color-callout: var(--color-orange);
 }
 
 details > summary {
   list-style: none;
+  
 }
 
 details .callout-title::before {
@@ -2905,7 +2829,7 @@ details .callout-title-inner {
   display: inline;
 }
 
-p:has(img) + .callout[data-callout="caption" i] {
+p:has(img) + .callout[data-callout=caption i] {
   padding: 0;
   background: none;
   border: none;
@@ -2914,10 +2838,10 @@ p:has(img) + .callout[data-callout="caption" i] {
   top: calc(var(--leading) * -1);
   box-shadow: none;
 }
-p:has(img) + .callout[data-callout="caption" i] .callout-title {
+p:has(img) + .callout[data-callout=caption i] .callout-title {
   display: none;
 }
-p:has(img) + .callout[data-callout="caption" i] .callout-content {
+p:has(img) + .callout[data-callout=caption i] .callout-content {
   padding: 0;
   background: none;
   border: none;
@@ -2943,18 +2867,9 @@ aside,
 
 .alert {
   --color-alert: var(--color-accent);
-  color: color-mix(
-    in srgb,
-    var(--color-alert) 10%,
-    var(--color-foreground)
-  ) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-alert) 10%,
-    var(--color-background-secondary)
-  );
-  border-left: var(--stroke-width) solid
-    color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
+  color: color-mix(in srgb, var(--color-alert) 10%, var(--color-foreground)) !important;
+  background: color-mix(in srgb, var(--color-alert) 10%, var(--color-background-secondary));
+  border-left: var(--stroke-width) solid color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
 }
 
 .alert.warning {
@@ -2968,6 +2883,7 @@ aside,
 .alert.success {
   --color-alert: var(--color-success);
 }
+
 
 #comments * {
   margin-block-end: 0;
@@ -3014,6 +2930,7 @@ aside,
   margin-block-end: 0;
 }
 
+
 .alert-action {
   display: inline-block;
   margin-inline-start: var(--space-d2);
@@ -3025,12 +2942,15 @@ aside,
   text-decoration-thickness: 0.15em;
 }
 
+
 a.skip-link {
+  
   position: absolute;
   top: var(--space-d4);
   left: var(--space-d4);
   z-index: var(--z-modal);
-
+  
+  
   background: var(--color-accent);
   color: var(--color-background);
   padding: var(--space-d4) var(--space-d4);
@@ -3039,13 +2959,12 @@ a.skip-link {
   font-size: var(--scale-d2);
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-  transition:
-    transform var(--transition),
-    opacity var(--transition);
-
+  
+  transition: transform var(--transition), opacity var(--transition);
+  
   transform: translateY(-120%);
   opacity: 0;
+  
 }
 a.skip-link:focus {
   transform: translateY(0);
@@ -3054,16 +2973,13 @@ a.skip-link:focus {
   outline-offset: 2px;
 }
 a.skip-link:hover {
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 90%,
-    var(--color-background)
-  );
+  background: color-mix(in srgb, var(--color-accent) 90%, var(--color-background));
   color: var(--color-background);
 }
 a.skip-link:active {
   transform: translateY(0) scale(0.98);
 }
+
 
 .skip-links {
   position: absolute;
@@ -3076,9 +2992,12 @@ a.skip-link:active {
   padding: var(--trim);
 }
 
+
 .breadcrumb {
+  
   margin-block-end: var(--space);
   font-size: var(--scale-d2);
+  
 }
 .breadcrumb ol {
   list-style: none;
@@ -3094,13 +3013,14 @@ a.skip-link:active {
   align-items: center;
   gap: var(--leading);
   margin: 0;
+  
 }
 .breadcrumb li::before {
   display: none;
 }
 .breadcrumb li:not(:first-child)::before {
   content: "→";
-
+  
   display: inline-block;
   color: var(--color-subtle);
   margin-inline-end: var(--leading);
@@ -3120,10 +3040,12 @@ a.skip-link:active {
   outline-offset: 2px;
   border-radius: 2px;
 }
-.breadcrumb [aria-current="page"] {
+.breadcrumb [aria-current=page] {
   color: var(--color-muted);
   font-weight: var(--font-weight-bold);
 }
+
+
 
 .breadcrumb-compact {
   font-size: var(--scale-d3);
@@ -3138,16 +3060,19 @@ a.skip-link:active {
   margin-inline-end: var(--trim);
 }
 
+
 @media (max-width: 768px) {
   .breadcrumb ol li:not(:first-child):not(:last-child) {
     display: none;
   }
   .breadcrumb ol li:last-child::before {
     content: "…";
+    
   }
 }
 
 .pagination {
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3155,6 +3080,8 @@ a.skip-link:active {
   margin-block: var(--space);
   font-size: var(--scale-d2);
   font-variant-numeric: tabular-nums;
+  
+  
 }
 .pagination a,
 .pagination span {
@@ -3169,10 +3096,7 @@ a.skip-link:active {
   text-decoration: none;
   color: var(--color-foreground);
   margin-block-end: 0;
-  transition:
-    background-color var(--transition),
-    border-color var(--transition),
-    color var(--transition);
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
 }
 .pagination a:hover {
   background: var(--color-background-secondary);
@@ -3187,15 +3111,18 @@ a.skip-link:active {
   transform: scale(0.95);
 }
 
+
 .pagination-current,
-.pagination [aria-current="page"] {
+.pagination [aria-current=page] {
   background: var(--color-accent);
   color: var(--color-background);
   border-color: var(--color-accent);
   font-weight: var(--font-weight-bold);
   cursor: default;
   pointer-events: none;
+  
 }
+
 
 .pagination-ellipsis {
   border: none;
@@ -3204,6 +3131,7 @@ a.skip-link:active {
   color: var(--color-subtle);
 }
 
+
 .pagination-prev,
 .pagination-next {
   min-width: auto;
@@ -3211,16 +3139,19 @@ a.skip-link:active {
   font-weight: var(--font-weight-bold);
 }
 
-.pagination-prev[aria-disabled="true"],
-.pagination-next[aria-disabled="true"] {
+
+.pagination-prev[aria-disabled=true],
+.pagination-next[aria-disabled=true] {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
 
+
 @media (max-width: 768px) {
   .pagination {
     font-size: var(--scale-d3);
+    
   }
   .pagination a:not(.pagination-prev):not(.pagination-next),
   .pagination span:not(.pagination-current):not(.pagination-summary) {
@@ -3242,14 +3173,16 @@ a.skip-link:active {
   min-width: auto;
 }
 
+
 .scroll {
+  
   position: relative;
   width: 100%;
   overflow-x: auto;
   overflow-y: auto;
+  
 }
-.scroll::before,
-.scroll::after {
+.scroll::before, .scroll::after {
   content: "";
   position: absolute;
   top: 0;
@@ -3266,11 +3199,7 @@ a.skip-link:active {
 }
 .scroll::after {
   right: 0;
-  background: linear-gradient(
-    to left,
-    var(--color-background) 25%,
-    transparent 100%
-  );
+  background: linear-gradient(to left, var(--color-background) 25%, transparent 100%);
 }
 .scroll.show-left-shadow::before {
   opacity: 1;
@@ -3280,15 +3209,17 @@ a.skip-link:active {
 }
 .scroll > * {
   margin-block-end: 0;
-
+  
   min-width: 100%;
-
+  
   width: max-content;
+  
 }
+
 
 .table-wrapper-sticky-header {
   max-height: 400px;
-
+  
   overflow-y: auto;
 }
 .table-wrapper-sticky-header table thead {
@@ -3299,10 +3230,13 @@ a.skip-link:active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 .field {
+  
   display: flex;
   flex-direction: column;
   gap: var(--space);
+  
 }
 .field label {
   font-weight: var(--font-weight-bold);
@@ -3310,21 +3244,19 @@ a.skip-link:active {
   color: var(--color-foreground);
 }
 
+
 .field-helper {
   font-size: var(--scale-d3);
   color: var(--color-muted);
   line-height: var(--line-height-s);
 }
 
+
 .field-error input,
 .field-error textarea,
 .field-error select {
   border-color: var(--color-error);
-  background: color-mix(
-    in srgb,
-    var(--color-error) 5%,
-    var(--color-background)
-  );
+  background: color-mix(in srgb, var(--color-error) 5%, var(--color-background));
 }
 .field-error input:focus,
 .field-error textarea:focus,
@@ -3341,23 +3273,21 @@ a.skip-link:active {
   color: var(--color-error);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-s);
+  
 }
 .field-error-message::before {
   content: "✕";
-
+  
   display: inline-block;
   flex-shrink: 0;
 }
+
 
 .field-success input,
 .field-success textarea,
 .field-success select {
   border-color: var(--color-success);
-  background: color-mix(
-    in srgb,
-    var(--color-success) 5%,
-    var(--color-background)
-  );
+  background: color-mix(in srgb, var(--color-success) 5%, var(--color-background));
 }
 .field-success input:focus,
 .field-success textarea:focus,
@@ -3377,20 +3307,17 @@ a.skip-link:active {
 }
 .field-success-message::before {
   content: "✓";
-
+  
   display: inline-block;
   flex-shrink: 0;
 }
+
 
 .field-warning input,
 .field-warning textarea,
 .field-warning select {
   border-color: var(--color-warning);
-  background: color-mix(
-    in srgb,
-    var(--color-warning) 5%,
-    var(--color-background)
-  );
+  background: color-mix(in srgb, var(--color-warning) 5%, var(--color-background));
 }
 .field-warning input:focus,
 .field-warning textarea:focus,
@@ -3410,10 +3337,11 @@ a.skip-link:active {
 }
 .field-warning-message::before {
   content: "⚠";
-
+  
   display: inline-block;
   flex-shrink: 0;
 }
+
 
 .field-required label::after,
 .required-indicator {
@@ -3422,40 +3350,42 @@ a.skip-link:active {
   font-weight: var(--font-weight-bold);
 }
 
+
 .modal,
 dialog.modal {
+  
   border: none;
   padding: 0;
   max-width: 90vw;
   max-height: 90vh;
   width: 600px;
-
+  
   background: var(--color-background);
   border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   color: var(--color-foreground);
-
+  
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: var(--z-modal);
-
+  
   opacity: 0;
-  transition:
-    opacity var(--transition),
-    transform var(--transition);
+  transition: opacity var(--transition), transform var(--transition);
+  
 }
 .modal[open],
 dialog.modal[open] {
   opacity: 1;
 }
 
+
 .modal::backdrop,
 dialog.modal::backdrop {
   background: var(--modal-background);
   backdrop-filter: var(--blur);
-
+  
   animation: fadeIn var(--transition);
 }
 
@@ -3474,6 +3404,7 @@ dialog.modal::backdrop {
   justify-content: space-between;
   padding: var(--trim) var(--leading);
   border-bottom: var(--border);
+  
 }
 .modal-header h1,
 .modal-header h2,
@@ -3482,6 +3413,7 @@ dialog.modal::backdrop {
   font-size: var(--scale-2);
   font-weight: var(--font-weight-bold);
 }
+
 
 .modal-close {
   appearance: none;
@@ -3498,9 +3430,7 @@ dialog.modal::backdrop {
   align-items: center;
   justify-content: center;
   border-radius: var(--radius);
-  transition:
-    background-color var(--transition),
-    color var(--transition);
+  transition: background-color var(--transition), color var(--transition);
 }
 .modal-close:hover {
   background: var(--color-background-secondary);
@@ -3511,11 +3441,14 @@ dialog.modal::backdrop {
   outline-offset: 2px;
 }
 
+
 .modal-body {
   padding: var(--trim) var(--leading);
   overflow-y: auto;
-
+  
   max-height: 60vh;
+  
+  
 }
 .modal-body > :first-child {
   margin-block-start: 0;
@@ -3523,6 +3456,7 @@ dialog.modal::backdrop {
 .modal-body > :last-child {
   margin-block-end: 0;
 }
+
 
 .modal-footer {
   display: flex;
@@ -3533,6 +3467,7 @@ dialog.modal::backdrop {
   border-top: var(--border);
   background: var(--color-background-secondary);
 }
+
 
 .modal-small {
   width: 400px;
@@ -3550,6 +3485,7 @@ dialog.modal::backdrop {
   border-radius: 0;
 }
 
+
 @media (max-width: 768px) {
   .modal,
   dialog.modal {
@@ -3562,8 +3498,10 @@ dialog.modal::backdrop {
 }
 
 .tabs {
+  
   margin-block-end: var(--space);
 }
+
 
 .tabs-list {
   display: flex;
@@ -3572,7 +3510,8 @@ dialog.modal::backdrop {
   margin-block-end: var(--space);
 }
 
-[role="tab"] {
+
+[role=tab] {
   appearance: none;
   background: transparent;
   border: none;
@@ -3582,66 +3521,74 @@ dialog.modal::backdrop {
   font-weight: var(--font-weight);
   color: var(--color-muted);
   cursor: pointer;
-  transition:
-    color var(--transition),
-    border-color var(--transition);
+  transition: color var(--transition), border-color var(--transition);
   position: relative;
   top: 2px;
+  
 }
-[role="tab"]:hover {
+[role=tab]:hover {
   color: var(--color-foreground);
 }
-[role="tab"]:focus-visible {
+[role=tab]:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: var(--radius);
 }
-[role="tab"][aria-selected="true"] {
+[role=tab][aria-selected=true] {
   color: var(--color-foreground);
   font-weight: var(--font-weight-bold);
   border-bottom-color: var(--color-accent);
 }
 
-[role="tabpanel"] {
+
+[role=tabpanel] {
   padding: var(--space);
+  
 }
-[role="tabpanel"] > :first-child {
+[role=tabpanel] > :first-child {
   margin-block-start: 0;
 }
-[role="tabpanel"] > :last-child {
+[role=tabpanel] > :last-child {
   margin-block-end: 0;
 }
-[role="tabpanel"][hidden] {
+[role=tabpanel][hidden] {
   display: none;
 }
 
-.tabs-boxed [role="tabpanel"] {
+
+.tabs-boxed [role=tabpanel] {
   border: var(--border);
   border-radius: var(--radius);
 }
 
-.tabs-boxed [role="tab"][aria-selected="true"] {
+.tabs-boxed [role=tab][aria-selected=true] {
   background: var(--color-background);
   border-top: 3px solid var(--color-accent);
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
   border-bottom: 3px solid var(--color-background);
-
+  
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
+
 .accordion {
+  
   border: var(--border);
   border-radius: var(--radius);
   background: var(--color-background);
   margin-block-end: var(--space-d2);
   overflow: hidden;
+  
+  
 }
 .accordion::-webkit-details-marker {
   display: none;
 }
 
+
 .accordion-trigger {
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3649,13 +3596,13 @@ dialog.modal::backdrop {
   padding: var(--space-d2);
   cursor: pointer;
   user-select: none;
-
+  
   font-size: var(--scale-d2);
   font-weight: var(--font-weight-bold);
   color: var(--color-foreground);
-
+  
   list-style: none;
-
+  
   transition: background-color var(--transition);
 }
 .accordion-trigger:hover {
@@ -3667,7 +3614,7 @@ dialog.modal::backdrop {
 }
 .accordion-trigger::after {
   content: "▸";
-
+  
   display: inline-block;
   font-size: var(--scale-2);
   color: var(--color-muted);
@@ -3675,15 +3622,19 @@ dialog.modal::backdrop {
   flex-shrink: 0;
 }
 
+
 .accordion[open] .accordion-trigger {
   border-bottom: var(--border);
 }
 .accordion[open] .accordion-trigger::after {
   transform: rotate(90deg);
+  
 }
+
 
 .accordion-content {
   padding: var(--space);
+  
 }
 .accordion-content > :first-child {
   margin-block-start: 0;
@@ -3691,6 +3642,7 @@ dialog.modal::backdrop {
 .accordion-content > :last-child {
   margin-block-end: 0;
 }
+
 
 .accordion-group {
   border: var(--border);
@@ -3713,9 +3665,14 @@ dialog.modal::backdrop {
   font-size: var(--scale-d3);
 }
 
-.toast-container {
-  --toast-spacing: var(--body-padding);
 
+
+
+
+.toast-container {
+  
+  --toast-spacing: var(--body-padding);
+  
   position: fixed;
   z-index: var(--z-toast);
   display: flex;
@@ -3726,9 +3683,11 @@ dialog.modal::backdrop {
   margin-block-end: 0;
 }
 
+
 .toast {
   pointer-events: auto;
 }
+
 
 .toast-container-top-right {
   position: fixed;
@@ -3738,11 +3697,13 @@ dialog.modal::backdrop {
   flex-direction: column;
 }
 
+
 .toast-container-top-left {
   top: var(--gap-body);
   left: var(--gap-body);
   transform: translateX(100%);
 }
+
 
 .toast-container-top-center {
   top: var(--gap-body);
@@ -3750,17 +3711,20 @@ dialog.modal::backdrop {
   transform: translateX(-50%);
 }
 
+
 .toast-container-bottom-right {
   bottom: var(--gap-body);
   right: var(--toast-spacing);
   flex-direction: column-reverse;
 }
 
+
 .toast-container-bottom-left {
   bottom: var(--gap-body);
   left: var(--toast-spacing);
   flex-direction: column-reverse;
 }
+
 
 @media (max-width: 768px) {
   .toast-container {
@@ -3779,7 +3743,10 @@ dialog.modal::backdrop {
   }
 }
 
+
+
 .toast {
+  
   display: flex;
   flex-direction: column;
   min-width: 100px;
@@ -3787,35 +3754,34 @@ dialog.modal::backdrop {
   font-size: var(--scale-d2);
   font-size: 12px;
   font-family: var(--font-interface);
-
+  
   background: var(--modal-background);
   backdrop-filter: var(--blur);
   border: var(--border);
-
+  
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   margin-block-end: 0;
-
+  
   opacity: 0;
-  transition:
-    opacity var(--transition),
-    transform var(--transition);
-
+  transition: opacity var(--transition), transform var(--transition);
+  
   cursor: default;
 }
+
 
 .toast-visible {
   opacity: 1;
   transform: translate(0, 0);
 }
 
+
 .toast-dismissing {
   opacity: 0;
   transform: scale(0.95);
-  transition:
-    opacity var(--transition),
-    transform var(--transition);
+  transition: opacity var(--transition), transform var(--transition);
 }
+
 
 @media (max-width: 768px) {
   .toast {
@@ -3828,6 +3794,8 @@ dialog.modal::backdrop {
   }
 }
 
+
+
 .toast-content {
   display: flex;
   align-items: baseline;
@@ -3837,6 +3805,7 @@ dialog.modal::backdrop {
   margin-block-end: 0;
 }
 
+
 .toast-icon {
   flex-shrink: 0;
   font-size: var(--scale-d2);
@@ -3844,6 +3813,7 @@ dialog.modal::backdrop {
   font-weight: bold;
   display: none;
 }
+
 
 .toast-message {
   flex: 1;
@@ -3853,6 +3823,7 @@ dialog.modal::backdrop {
   color: var(--color-foreground);
   word-break: break-word;
 }
+
 
 .toast-close {
   flex-shrink: 0;
@@ -3870,9 +3841,7 @@ dialog.modal::backdrop {
   align-items: center;
   justify-content: center;
   border-radius: var(--radius);
-  transition:
-    background-color var(--transition),
-    color var(--transition);
+  transition: background-color var(--transition), color var(--transition);
 }
 .toast-close:hover {
   background: var(--color-background-secondary);
@@ -3883,6 +3852,9 @@ dialog.modal::backdrop {
   outline-offset: 2px;
 }
 
+
+
+
 .toast-progress {
   position: relative;
   top: 1px;
@@ -3892,8 +3864,12 @@ dialog.modal::backdrop {
   opacity: 0.2;
   margin-inline: calc(var(--radius) / 2);
   transform-origin: left;
-  transition: width 0s linear;
+  transition: width 0s linear; 
 }
+
+
+
+
 
 .toast-success {
   --toast-color: var(--color-success);
@@ -3906,6 +3882,7 @@ dialog.modal::backdrop {
   background: var(--color-success);
 }
 
+
 .toast-error {
   --toast-color: var(--color-error);
   border-left-color: var(--color-error);
@@ -3916,6 +3893,7 @@ dialog.modal::backdrop {
 .toast-error .toast-progress {
   background: var(--color-error);
 }
+
 
 .toast-warning {
   --toast-color: var(--color-warning);
@@ -3928,8 +3906,10 @@ dialog.modal::backdrop {
   background: var(--color-warning);
 }
 
+
 .toast-info {
   --toast-color: var(--color-accent);
+  
 }
 .toast-info .toast-icon {
   color: var(--color-accent);
@@ -3938,11 +3918,16 @@ dialog.modal::backdrop {
   background: var(--color-accent);
 }
 
+
+
+
 @media (prefers-color-scheme: dark) {
   .toast {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 }
+
+
 
 @media (prefers-reduced-motion: reduce) {
   .toast {
@@ -3954,12 +3939,15 @@ dialog.modal::backdrop {
   }
 }
 
+
+
 @media print {
   .toast-container,
   .toast {
     display: none !important;
   }
 }
+
 
 @media (prefers-contrast: high), (prefers-contrast: more) {
   :root {
@@ -3993,6 +3981,7 @@ dialog.modal::backdrop {
   }
   html .no-print,
   html .no-print * {
+    
     display: none !important;
   }
   html header,
@@ -4005,7 +3994,7 @@ dialog.modal::backdrop {
     box-shadow: none !important;
     text-shadow: none !important;
   }
-  html a[href^="http"]::after {
+  html a[href^=http]::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: #666;
@@ -4021,11 +4010,11 @@ dialog.modal::backdrop {
   html h4,
   html h5,
   html h6 {
-    margin-block: var(--space-2);
-    break-after: avoid;
+    margin-block: var(--space-2); 
+    break-after: avoid; 
   }
   html hr {
-    margin-block: var(--space);
+    margin-block: var(--space); 
   }
   html html::before,
   html html::after,
@@ -4038,18 +4027,30 @@ dialog.modal::backdrop {
     background: transparent !important;
     max-width: 100% !important;
   }
-
+  
   @page {
     margin-top: 1.5cm;
     margin-right: 1cm;
     margin-bottom: 1.5cm;
     margin-left: 1cm;
-
+    
     @bottom-right {
       content: counter(page);
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 .mt-0,
 .mt-d {
@@ -4366,6 +4367,9 @@ dialog.modal::backdrop {
   margin: var(--space-8) !important;
 }
 
+
+
+
 .pt-0,
 .pt-d {
   padding-top: 0 !important;
@@ -4681,6 +4685,9 @@ dialog.modal::backdrop {
   padding: var(--space-8) !important;
 }
 
+
+
+
 .gap-0,
 .gap-d {
   gap: 0 !important;
@@ -4771,6 +4778,9 @@ dialog.modal::backdrop {
   column-gap: var(--space-8) !important;
 }
 
+
+
+
 .width-0,
 .width-d {
   width: 0 !important;
@@ -4840,6 +4850,7 @@ dialog.modal::backdrop {
   width: fit-content !important;
 }
 
+
 .min-width-0,
 .min-width-d {
   min-width: 0 !important;
@@ -4897,6 +4908,7 @@ dialog.modal::backdrop {
   min-width: 100vw !important;
 }
 
+
 .max-width-0,
 .max-width-d {
   max-width: 0 !important;
@@ -4953,6 +4965,9 @@ dialog.modal::backdrop {
 .max-width-screen {
   max-width: 100vw !important;
 }
+
+
+
 
 .height-0,
 .height-d {
@@ -5027,6 +5042,7 @@ dialog.modal::backdrop {
   height: fit-content !important;
 }
 
+
 .min-height-0,
 .min-height-d {
   min-height: 0 !important;
@@ -5083,6 +5099,7 @@ dialog.modal::backdrop {
 .min-height-screen {
   min-height: 100vh !important;
 }
+
 
 .max-height-0,
 .max-height-d {
@@ -5141,6 +5158,10 @@ dialog.modal::backdrop {
   max-height: 100vh !important;
 }
 
+
+
+
+
 .small {
   font-size: var(--scale-d2);
 }
@@ -5157,6 +5178,13 @@ dialog.modal::backdrop {
   font-size: var(--scale-d5);
 }
 
+
+
+
+
+
+
+
 .bold {
   font-weight: var(--font-weight-bold);
 }
@@ -5165,21 +5193,8 @@ dialog.modal::backdrop {
   font-weight: var(--font-weight);
 }
 
-.lh-none {
-  line-height: 1;
-}
 
-.lh-compact {
-  line-height: var(--line-height-conpact);
-}
 
-.lh-base {
-  line-height: var(--line-height);
-}
-
-.lh-relaxed {
-  line-height: var(--line-height-relaxed);
-}
 
 .left {
   text-align: left !important;
@@ -5196,6 +5211,9 @@ dialog.modal::backdrop {
 .justify {
   text-align: justify !important;
 }
+
+
+
 
 .uppercase {
   text-transform: uppercase;
@@ -5225,6 +5243,10 @@ dialog.modal::backdrop {
   white-space: nowrap;
   max-width: 100%;
 }
+
+
+
+
 
 .muted {
   color: var(--color-muted) !important;
@@ -5324,9 +5346,15 @@ dialog.modal::backdrop {
   background-color: var(--color-pink) !important;
 }
 
+
+
+
 .bg-secondary {
   background: var(--color-background-secondary) !important;
 }
+
+
+
 
 .border {
   border: var(--border) !important;
@@ -5335,6 +5363,10 @@ dialog.modal::backdrop {
 .border-accent {
   border: var(--border-accent) !important;
 }
+
+
+
+
 
 .hidden {
   display: none;
@@ -5357,6 +5389,7 @@ dialog.modal::backdrop {
   align-items: baseline;
 }
 
+
 .visibility-screen-reader-only,
 .visually-hidden {
   position: absolute;
@@ -5369,6 +5402,10 @@ dialog.modal::backdrop {
   white-space: nowrap;
   border-width: 0;
 }
+
+
+
+
 
 .center-content {
   display: flex;
@@ -5386,6 +5423,10 @@ dialog.modal::backdrop {
   align-items: center;
 }
 
+
+
+
+
 .rhythm-compact {
   --base-gap: var(--leading);
 }
@@ -5393,6 +5434,10 @@ dialog.modal::backdrop {
 .rhythm-relaxed {
   --base-gap: var(--space-2);
 }
+
+
+
+
 
 @supports not (display: grid) {
   .rhythm {
@@ -5405,6 +5450,9 @@ dialog.modal::backdrop {
     margin-block-end: 0;
   }
 }
+
+
+
 
 .line-xs {
   max-width: var(--line-width-xs);
@@ -5430,37 +5478,48 @@ dialog.modal::backdrop {
   max-width: var(--line-width-full);
 }
 
+
+
+
+
+
 .body-p-neg,
 .body-p-neg-header,
 .body-p-neg-footer {
-  margin-inline: calc(var(--body-padding) * -1);
-  padding-inline: calc(var(--body-padding) * 1);
+  margin-inline: calc(var(--gap-body) * -1);
+  padding-inline: calc(var(--gap-body) * 1);
 }
 @media (max-width: 768px) {
   .body-p-neg,
   .body-p-neg-header,
   .body-p-neg-footer {
-    margin-inline: calc(var(--mobile-body-padding) * -1);
+    margin-inline: calc(var(--mobile-gap-body) * -1);
   }
 }
 
+
 .body-p-neg-footer {
-  margin-block-end: calc(var(--body-padding) * -1.5);
+  margin-block-end: calc(var(--gap-body) * -1.5);
 }
 @media (max-width: 768px) {
   .body-p-neg-footer {
-    margin-block-end: calc(var(--mobile-body-padding) * -1.5);
+    margin-block-end: calc(var(--mobile-gap-body) * -1.5);
   }
 }
 
 .body-p-neg-header {
-  margin-block-start: calc(var(--body-padding) * -1);
+  margin-block-start: calc(var(--gap-body) * -1);
 }
 @media (max-width: 768px) {
   .body-p-neg-header {
-    margin-block-end: calc(var(--mobile-body-padding) * -1);
+    margin-block-end: calc(var(--mobile-gap-body) * -1);
   }
 }
+
+
+
+
+
 
 @media (max-width: 768px) {
   .sm\:hidden {
@@ -5507,6 +5566,10 @@ dialog.modal::backdrop {
   }
 }
 
+
+
+
+
 .columns,
 .columns-2 {
   columns: 2;
@@ -5523,19 +5586,21 @@ dialog.modal::backdrop {
   column-gap: var(--space);
 }
 
+
 .columns-auto {
   columns: auto;
-  column-width: var(--line-width-s);
+  column-width: var(--line-width-s); 
   column-gap: var(--space);
 }
 
-[class|="columns"].compact {
+[class|=columns].compact {
   column-gap: var(--leading);
 }
 
-[class|="columns"].relaxed {
+[class|=columns].relaxed {
   column-gap: var(--space-2);
 }
+
 
 .columns-gap-compact {
   column-gap: var(--leading);
@@ -5545,10 +5610,12 @@ dialog.modal::backdrop {
   column-gap: var(--space-2);
 }
 
+
 .columns-keep {
   break-inside: avoid;
-  page-break-inside: avoid;
+  page-break-inside: avoid; 
 }
+
 
 .columns-rule {
   column-rule: var(--border);
@@ -5558,17 +5625,18 @@ dialog.modal::backdrop {
   column-rule: 1px solid var(--color-accent);
 }
 
+
 @media (max-width: 768px) {
   .columns-2,
   .columns-3,
   .columns-4 {
-    columns: 1;
+    columns: 1; 
   }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .columns-3,
   .columns-4 {
-    columns: 2;
+    columns: 2; 
   }
 }
 
@@ -5582,6 +5650,7 @@ ol.no-bullet li::before {
   display: none;
 }
 
+
 nav.menu ul,
 ul.menu {
   display: flex;
@@ -5593,7 +5662,7 @@ nav.menu ul li,
 ul.menu li {
   list-style: none;
   padding-inline-start: 0;
-  margin-block-end: var(--leading);
+  margin-block-end: var(--space-half);
 }
 nav.menu ul li::before,
 ul.menu li::before {
@@ -5601,19 +5670,28 @@ ul.menu li::before {
 }
 
 .tight nav.menu ul li {
-  margin-block-end: var(--leading);
+  margin-block-end: 0;
 }
 
 nav.menu.horizontal ul,
 ul.menu.horizontal {
   flex-direction: row;
-  gap: var(--leading);
+  gap: var(--space);
 }
 nav.menu.horizontal ul li,
 ul.menu.horizontal li {
   padding-inline-start: 0;
   margin-block: 0;
 }
+
+
+
+
+
+
+
+
+
 
 .debug {
   display: none;
@@ -5642,26 +5720,8 @@ ul.menu.horizontal li {
 
 .standard-debug::before,
 .standard-debug::after,
-.standard-debug
-  :is(
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside
-  )::before,
-.standard-debug
-  :is(.container-small, .callout, pre, figure, p:has(img))::before {
+.standard-debug :is(#comments, .callout, pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside)::before,
+.standard-debug :is(.container-small, .callout, pre, figure, p:has(img))::before {
   content: "";
   color: var(--debug-color);
   opacity: var(--debug-opacity);
@@ -5674,6 +5734,7 @@ ul.menu.horizontal li {
   white-space: pre;
 }
 
+
 .standard-debug::before {
   --color-grid: var(--color-cyan);
   --percent-grid: calc(var(--debug-opacity) / 2);
@@ -5681,152 +5742,25 @@ ul.menu.horizontal li {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent calc(var(--grid-unit) - 1px),
-    color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-      calc(var(--grid-unit) - 1px),
-    color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
-      var(--grid-unit)
-  );
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) calc(var(--grid-unit) - 1px), color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent) var(--grid-unit));
   pointer-events: none;
   z-index: 10000;
 }
 
-.standard-debug
-  :is(
-    .alert,
-    #comments,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    blockquote,
-    ul,
-    ol,
-    dl,
-    p,
-    blockquote,
-    pre,
-    dt,
-    dd,
-    table,
-    figure,
-    form,
-    fieldset,
-    aside,
-    .callout,
-    hr
-  ) {
-  outline: 1px dashed
-    color-mix(
-      in srgb,
-      var(--color-cyan) calc(var(--debug-opacity) / 1.2),
-      transparent
-    );
+.standard-debug :is(.alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout, hr) {
+  outline: 1px dashed color-mix(in srgb, var(--color-cyan) calc(var(--debug-opacity) / 1.2), transparent);
   outline-offset: var(--space);
   border-radius: var(--radius);
 }
 
-.standard-debug
-  :is(
-    .alert,
-    #comments,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    blockquote,
-    ul,
-    ol,
-    dl,
-    p,
-    blockquote,
-    pre,
-    dt,
-    dd,
-    table,
-    figure,
-    form,
-    fieldset,
-    aside,
-    .callout,
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside,
-    .container-small,
-    .callout,
-    pre,
-    figure,
-    p:has(img)
-  ) {
+.standard-debug :is(.alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout, #comments, .callout, pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside, .container-small, .callout, pre, figure, p:has(img)) {
   position: relative;
   outline-offset: var(--space);
 }
 
-.standard-debug
-  :is(
-    .alert,
-    #comments,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    blockquote,
-    ul,
-    ol,
-    dl,
-    p,
-    blockquote,
-    pre,
-    dt,
-    dd,
-    table,
-    figure,
-    form,
-    fieldset,
-    aside,
-    .callout,
-    #comments,
-    .callout,
-    pre,
-    figure,
-    p:has(img),
-    section,
-    .box,
-    .card,
-    .container-small,
-    .container-accent,
-    .containe-feature,
-    .container-hero,
-    .scroll,
-    hr,
-    aside,
-    .container-small,
-    .callout,
-    pre,
-    figure,
-    p:has(img)
-  )::before {
+.standard-debug :is(.alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout,
+#comments, .callout, pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside,
+.container-small, .callout, pre, figure, p:has(img))::before {
   content: attr(class);
   position: absolute;
   top: 0;
@@ -5854,6 +5788,7 @@ ul.menu.horizontal li {
   content: "h6";
 }
 
+
 .standard-debug .prose {
   position: relative;
 }
@@ -5872,52 +5807,29 @@ ul.menu.horizontal li {
 }
 .standard-debug .grid-debug-overlay span:nth-child(2) {
   grid-column: feature-start/accent-start;
-  border-inline-start: 1px dotted
-    color-mix(
-      in srgb,
-      var(--debug-color) calc(var(--debug-opacity) / 2),
-      transparent
-    );
+  border-inline-start: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(3) {
   grid-column: accent-start/content-start;
-  border-inline-start: 1px dotted
-    color-mix(
-      in srgb,
-      var(--debug-color) calc(var(--debug-opacity) / 2),
-      transparent
-    );
+  border-inline-start: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(4) {
   grid-column: content;
-  outline: 1px dotted
-    color-mix(
-      in srgb,
-      var(--debug-color) calc(var(--debug-opacity) / 2),
-      transparent
-    );
+  outline: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(5) {
   grid-column: content-end/accent-end;
-  border-inline-end: 1px dotted
-    color-mix(
-      in srgb,
-      var(--debug-color) calc(var(--debug-opacity) / 2),
-      transparent
-    );
+  border-inline-end: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(6) {
   grid-column: accent-end/feature-end;
-  border-inline-end: 1px dotted
-    color-mix(
-      in srgb,
-      var(--debug-color) calc(var(--debug-opacity) / 2),
-      transparent
-    );
+  border-inline-end: 1px dotted color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 2), transparent);
 }
 .standard-debug .grid-debug-overlay span:nth-child(7) {
   grid-column: feature-end/hero-end;
 }
+
+
 
 .standard-debug .grid,
 .standard-debug .grid-2,
@@ -5958,19 +5870,7 @@ ul.menu.horizontal li {
   pointer-events: none;
   z-index: var(--z-tooltip);
   opacity: var(--debug-opacity);
-  background-image: repeating-linear-gradient(
-    to right,
-    color-mix(in srgb, var(--debug-color) 10%, transparent) 0,
-    color-mix(in srgb, var(--debug-color) 10%, transparent)
-      calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)),
-    transparent
-      calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)),
-    transparent
-      calc(
-        (100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols) +
-          var(--grid-gap)
-      )
-  );
+  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--debug-color) 10%, transparent) 0, color-mix(in srgb, var(--debug-color) 10%, transparent) calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
 }
 
 .standard-debug .grid::after {
@@ -6033,12 +5933,7 @@ ul.menu.horizontal li {
 .standard-debug .grid-10 > *,
 .standard-debug .grid-11 > *,
 .standard-debug .grid-12 > * {
-  outline: 1px dashed
-    color-mix(
-      in srgb,
-      var(--debug-color) calc(var(--debug-opacity) / 1.2),
-      transparent
-    );
+  outline: 1px dashed color-mix(in srgb, var(--debug-color) calc(var(--debug-opacity) / 1.2), transparent);
   outline-offset: -1px;
   position: relative;
 }
@@ -6071,6 +5966,7 @@ ul.menu.horizontal li {
   text-overflow: ellipsis;
 }
 
+
 .standard-debug .free-col::after {
   content: "start: " var(--start) " / span: " var(--span);
   position: absolute;
@@ -6087,6 +5983,7 @@ ul.menu.horizontal li {
   z-index: var(--z-tooltip);
   white-space: nowrap;
 }
+
 
 .standard-debug::after {
   content: "Debug : " attr(data-standard-version);
@@ -6122,20 +6019,21 @@ ul.menu.horizontal li {
     display: none !important;
   }
 }
-[data-theme="default"] {
+
+[data-theme=default] {
   --font-header: InterVariable;
-  --line-height: 1.2;
 }
-[data-theme="default"] h1,
-[data-theme="default"] h2,
-[data-theme="default"] h3 {
+[data-theme=default] h1,
+[data-theme=default] h2,
+[data-theme=default] h3 {
   letter-spacing: -0.065em;
   font-weight: 900;
   line-height: 0.965;
 }
 
+
 :root {
-  --baseline-trim-support: 0;
+  --baseline-trim-support: 0; 
 }
 
 .standard-lab-panel {
@@ -6157,8 +6055,7 @@ ul.menu.horizontal li {
   font-weight: 400 700;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/InstrumentSans-Italic[wdth,wght].woff2")
-    format("woff2");
+  src: url("/assets/fonts/InstrumentSans-Italic[wdth,wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Instrument Serif";
@@ -6198,8 +6095,7 @@ ul.menu.horizontal li {
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2")
-    format("woff2");
+  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2") format("woff2");
 }
 @font-face {
   font-family: "Graveur";
