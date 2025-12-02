@@ -20,3 +20,4 @@ content/claude.md
 .trigger-reload
 /dist
 /.astro
+zed_config
