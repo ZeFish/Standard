@@ -786,11 +786,6 @@ html {
   orphans: 2;
 }
 
-blockquote, pre, .alert, aside, .card, .callout, img, iframe, .outset {
-  border-left: var(--stroke-width) solid var(--color-border);
-  padding: var(--space-half);
-}
-
 img {
   padding: 0;
 }
@@ -1341,6 +1336,7 @@ mark {
   position: relative;
   margin: 0;
   padding-inline-start: 0;
+  line-height: 1rlh;
   margin-block-end: var(--space-half);
 }
 :where(.rhythm) li:last-child {
@@ -1348,7 +1344,7 @@ mark {
   margin-block-end: 0;
 }
 :where(.rhythm) p:has(+ :is(ul, ol)) {
-  margin-block-end: var(--space-half);
+  margin-block-end: var(--space);
 }
 :where(.rhythm) .compact {
   --base-gap: var(--space-half);
@@ -1371,9 +1367,8 @@ mark {
 :where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
-  top: 0;
   left: -1rlh;
-  width: 1rlh;
+  width: var(--space);
   text-align: center;
   color: var(--color-subtle);
 }
@@ -1386,6 +1381,7 @@ mark {
 :where(.rhythm) ol > li::before {
   content: counter(ol-counter) ".";
   position: absolute;
+  top: var(--trim);
   left: calc(-1rlh - var(--leading));
   text-align: right;
   color: var(--color-subtle);
