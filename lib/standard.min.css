@@ -99,7 +99,7 @@
   --duration-superfast: 0.15s;
 }
 
-mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+a, mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -773,7 +773,8 @@ html {
   font-weight: var(--font-weight);
   letter-spacing: var(--font-letter-spacing);
   line-height: var(--line-height);
-  text-rendering: optimizeLegibility; 
+  text-rendering: optimizeLegibility;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-optical-sizing: auto;
@@ -917,8 +918,8 @@ pre:hover code {
 }
 pre .copy-button {
   position: absolute;
-  top: var(--trim);
-  right: var(--trim);
+  top: var(--space-half);
+  right: var(--space-half);
   opacity: 0;
   transition: opacity 0.5s;
   font-family: var(--font-interface);
@@ -958,7 +959,9 @@ td {
 th {
   font-weight: var(--font-weight-bold, 600);
   background: var(--color-background-secondary);
-} 
+}
+
+
 caption {
   font-weight: var(--font-weight-bold, bold);
   text-align: left;
@@ -1058,7 +1061,7 @@ a.button {
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
-  padding: var(--trim) var(--leading);
+  padding: var(--leading) var(--space-half);
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
@@ -1124,12 +1127,12 @@ textarea,
 select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
-  padding: var(--trim) var(--trim) !important;
+  padding: var(--leading) var(--space-half) !important;
   border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-background-secondary);
   border: var(--border);
-  margin-block-end: var(--leading) !important;
+  margin-block-end: var(--space-half) !important;
   transition: background-color var(--transition), border-color var(--transition), outline-color var(--transition);
 }
 
@@ -2752,7 +2755,7 @@ card.inset {
   display: flex;
   font-weight: var(--font-weight-bold, bold);
   user-select: none;
-  padding: var(--trim) var(--leading);
+  padding: var(--space-half);
   margin: 0 !important;
 }
 .callout .callout-content {
@@ -2761,7 +2764,7 @@ card.inset {
   line-height: var(--line-height-compact);
   box-shadow: inset var(--shadow);
   border-radius: var(--radius);
-  padding: var(--leading);
+  padding: var(--space-half);
   margin-left: 0;
   border: var(--border);
   text-align: left;
@@ -3195,17 +3198,17 @@ a.skip-link:active {
 }
 .scroll::before {
   left: 0;
-  background: linear-gradient(to right, var(--color-red) 25%, transparent 100%);
+  background: linear-gradient(to right, var(--color-background) 25%, transparent 100%);
 }
 .scroll::after {
   right: 0;
   background: linear-gradient(to left, var(--color-background) 25%, transparent 100%);
 }
 .scroll.show-left-shadow::before {
-  opacity: 1;
+  opacity: 0;
 }
 .scroll.show-right-shadow::after {
-  opacity: 1;
+  opacity: 0;
 }
 .scroll > * {
   margin-block-end: 0;
