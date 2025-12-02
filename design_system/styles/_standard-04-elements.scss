@@ -14,7 +14,8 @@ html {
 
   line-height: var(--line-height);
 
-  text-rendering: optimizeLegibility; /* kerning & ligatures */
+  text-rendering: optimizeLegibility;
+  /* kerning & ligatures */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -28,10 +29,8 @@ html {
   orphans: 2;
 }
 
-#{$elements-boxed} {
-  border-left: var(--stroke-width) solid var(--color-border);
-  padding: var(--space-half);
-}
+
+
 img {
   padding: 0;
 }
@@ -116,7 +115,8 @@ h6 {
   font-size: var(--scale);
   font-weight: 600;
 }
-h6 + p {
+
+h6+p {
   display: inline;
 }
 
@@ -160,22 +160,26 @@ pre {
     opacity: 0.75;
     transition: opacity var(--transition);
   }
+
   &:hover code {
     opacity: 1;
   }
+
   .copy-button {
     position: absolute;
-    top: var(--trim);
-    right: var(--trim);
+    top: var(--space-half);
+    right: var(--space-half);
     opacity: 0;
     transition: opacity 0.5s;
 
     font-family: var(--font-interface);
   }
+
   &:hover .copy-button {
     opacity: 0.5;
     transition: opacity 0.5s;
   }
+
   .copy-button:hover {
     opacity: 1;
   }
@@ -214,7 +218,9 @@ td {
 th {
   font-weight: var(--font-weight-bold, 600);
   background: var(--color-background-secondary);
-} /* Captions */
+}
+
+/* Captions */
 caption {
   font-weight: var(--font-weight-bold, bold);
   text-align: left;
@@ -317,15 +323,13 @@ a.button {
 
   border-radius: var(--radius);
 
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 65%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb,
+      var(--color-accent) 65%,
+      var(--color-background-secondary));
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
-  padding: var(--trim) var(--leading);
+  padding: var(--leading) var(--space-half);
   box-shadow: var(--shadow);
 
   cursor: pointer;
@@ -334,7 +338,9 @@ a.button {
     border-color var(--transition),
     opacity var(--transition);
 }
+
 @media (prefers-color-scheme: dark) {
+
   button,
   a.button,
   a.button:visited {
@@ -345,6 +351,7 @@ a.button {
 .tag {
   color: var(--color-muted);
 }
+
 .tag:hover {
   color: var(--color-accent);
 }
@@ -362,21 +369,17 @@ a.button {
 
 button:hover,
 a.button:hover {
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 80%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb,
+      var(--color-accent) 80%,
+      var(--color-background-secondary));
   color: var(--color-background);
 }
 
 button:active,
 a.button:active {
-  background: color-mix(
-    in srgb,
-    var(--color-accent) 50%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb,
+      var(--color-accent) 50%,
+      var(--color-background-secondary));
 }
 
 button:focus-visible,
@@ -404,14 +407,14 @@ select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
 
-  padding: var(--trim) var(--trim) !important;
+  padding: var(--leading) var(--space-half) !important;
   border-radius: var(--radius);
 
   color: var(--color-foreground);
   background: var(--color-background-secondary);
   border: var(--border);
 
-  margin-block-end: var(--leading) !important;
+  margin-block-end: var(--space-half) !important;
 
   transition:
     background-color var(--transition),
@@ -425,11 +428,9 @@ select:focus {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 0px;
   border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  background-color: color-mix(
-    in srgb,
-    var(--color-accent) 5%,
-    var(--color-background)
-  );
+  background-color: color-mix(in srgb,
+      var(--color-accent) 5%,
+      var(--color-background));
 }
 
 textarea {
@@ -459,11 +460,9 @@ fieldset {
   border: var(--border);
   border-radius: var(--radius);
   padding: var(--trim) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-background-secondary) 25%,
-    var(--color-background)
-  );
+  background: color-mix(in srgb,
+      var(--color-background-secondary) 25%,
+      var(--color-background));
 }
 
 /* Checkboxes and radios */

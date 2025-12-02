@@ -382,6 +382,20 @@ export default function remarkSyntax(options = {}) {
       case "subtle":
         return [createHTMLNode(`<p class="subtle">${value}</p>`)];
 
+      case "video": {
+        const videoId = String(value || "").trim();
+        const src = `https://iframe.videodelivery.net/${videoId}`;
+        const html = `<div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.5rem; background-color: #f0f0f0;">
+  <iframe
+    src="${src}"
+    style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+    allowfullscreen="true"
+  ></iframe>
+</div>`;
+        return [createHTMLNode(html)];
+      }
+
       default:
         return null;
     }

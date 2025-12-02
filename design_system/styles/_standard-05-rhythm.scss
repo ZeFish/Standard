@@ -200,6 +200,7 @@
     position: relative;
     margin: 0;
     padding-inline-start: 0;
+    line-height: 1rlh;
     margin-block-end: var(--space-half);
   }
 
@@ -209,7 +210,7 @@
   }
 
   p:has(+ :is(ul, ol)) {
-    margin-block-end: var(--space-half);
+    margin-block-end: var(--space);
   }
 
   .compact {
@@ -240,9 +241,8 @@
   ul > li::before {
     content: "•";
     position: absolute;
-    top: 0;
     left: calc(1rlh * -1);
-    width: 1rlh;
+    width: var(--space);
     text-align: center;
     color: var(--color-subtle);
   }
@@ -259,6 +259,7 @@
   ol > li::before {
     content: counter(ol-counter) ".";
     position: absolute;
+    top: var(--trim);
     left: calc((1rlh * -1) - var(--leading));
     text-align: right;
     color: var(--color-subtle);

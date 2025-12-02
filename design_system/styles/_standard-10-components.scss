@@ -122,10 +122,10 @@
   a {
     text-decoration: none;
   }
+
   color: inherit;
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition);
+  transition: transform var(--transition),
+  box-shadow var(--transition);
   cursor: pointer;
 
   &:hover {
@@ -294,45 +294,37 @@ card.inset {
   padding-top: 0;
   --color-callout: var(--color-background-secondary);
   --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
-  background: color-mix(
-    in srgb,
-    var(--color-callout) 5%,
-    var(--color-background-secondary)
-  );
+  background: color-mix(in srgb,
+      var(--color-callout) 5%,
+      var(--color-background-secondary));
   border: var(--border);
   font-size: var(--scale-d2);
 
   .callout-title,
-  > summary {
+  >summary {
     position: relative;
-    color: color-mix(
-      in srgb,
-      var(--color-callout) 50%,
-      var(--color-foreground)
-    );
+    color: color-mix(in srgb,
+        var(--color-callout) 50%,
+        var(--color-foreground));
     display: flex;
     font-weight: var(--font-weight-bold, bold);
 
     user-select: none;
-    padding: var(--trim) var(--leading);
+    padding: var(--space-half);
     margin: 0 !important;
   }
 
   .callout-content {
     color: var(--color-foreground);
-    background: color-mix(
-      in srgb,
-      var(--color-callout) 2.5%,
-      color-mix(
-        in srgb,
-        var(--color-background-secondary) 25%,
-        var(--color-background)
-      )
-    );
+    background: color-mix(in srgb,
+        var(--color-callout) 2.5%,
+        color-mix(in srgb,
+          var(--color-background-secondary) 25%,
+          var(--color-background)));
     line-height: var(--line-height-compact);
     box-shadow: inset var(--shadow);
     border-radius: var(--radius);
-    padding: var(--leading);
+    padding: var(--space-half);
     margin-left: 0;
     border: var(--border);
     text-align: left;
@@ -355,7 +347,7 @@ card.inset {
       margin: var(--leading) 0;
     }
 
-    > .callout {
+    >.callout {
       margin: calc(var(--space) * -1);
 
       .callout-content {
@@ -389,7 +381,7 @@ card.inset {
 }
 
 // Details/Summary specific callout styles
-details > summary {
+details>summary {
   list-style: none;
   /* removes marker in Firefox */
 }
@@ -413,7 +405,7 @@ details .callout-title-inner {
 }
 
 // Caption Callout (after an image)
-p:has(img) + .callout[data-callout="caption" i] {
+p:has(img)+.callout[data-callout="caption" i] {
   padding: 0;
   background: none;
   border: none;
@@ -454,18 +446,13 @@ aside,
 
 .alert {
   --color-alert: var(--color-accent);
-  color: color-mix(
-    in srgb,
-    var(--color-alert) 10%,
-    var(--color-foreground)
-  ) !important;
-  background: color-mix(
-    in srgb,
-    var(--color-alert) 10%,
-    var(--color-background-secondary)
-  );
-  border-left: var(--stroke-width) solid
-    color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
+  color: color-mix(in srgb,
+      var(--color-alert) 10%,
+      var(--color-foreground)) !important;
+  background: color-mix(in srgb,
+      var(--color-alert) 10%,
+      var(--color-background-secondary));
+  border-left: var(--stroke-width) solid color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
 }
 
 // Callout Color Variants
@@ -655,11 +642,9 @@ a.skip-link {
 
   /* Hover state (if user moves mouse while focused) */
   &:hover {
-    background: color-mix(
-      in srgb,
-      var(--color-accent) 90%,
-      var(--color-background)
-    );
+    background: color-mix(in srgb,
+        var(--color-accent) 90%,
+        var(--color-background));
     color: var(--color-background);
   }
 
@@ -1173,34 +1158,30 @@ a.skip-link {
 
   &::before {
     left: 0;
-    background: linear-gradient(
-      to right,
-      var(--color-red) 25%,
-      transparent 100%
-    );
+    background: linear-gradient(to right,
+        var(--color-background) 25%,
+        transparent 100%);
   }
 
   /* Define the Right Shadow (initially visible) */
   &::after {
     right: 0;
-    background: linear-gradient(
-      to left,
-      var(--color-background) 25%,
-      transparent 100%
-    );
+    background: linear-gradient(to left,
+        var(--color-background) 25%,
+        transparent 100%);
   }
 
   /* When this class is added, the left shadow fades in. */
   &.show-left-shadow::before {
-    opacity: 1;
+    opacity: 0;
   }
 
   /* When this class is added, the right shadow fades out. */
   &.show-right-shadow::after {
-    opacity: 1;
+    opacity: 0;
   }
 
-  & > * {
+  &>* {
     margin-block-end: 0;
     /* Remove table's own margin */
     min-width: 100%;
@@ -1357,15 +1338,14 @@ a.skip-link {
  * message explains what went wrong. Screen readers hear the error via aria-live.
  */
 .field-error {
+
   input,
   textarea,
   select {
     border-color: var(--color-error);
-    background: color-mix(
-      in srgb,
-      var(--color-error) 5%,
-      var(--color-background)
-    );
+    background: color-mix(in srgb,
+        var(--color-error) 5%,
+        var(--color-background));
 
     &:focus {
       outline-color: var(--color-error);
@@ -1402,15 +1382,14 @@ a.skip-link {
  * strength, or async validation.
  */
 .field-success {
+
   input,
   textarea,
   select {
     border-color: var(--color-success);
-    background: color-mix(
-      in srgb,
-      var(--color-success) 5%,
-      var(--color-background)
-    );
+    background: color-mix(in srgb,
+        var(--color-success) 5%,
+        var(--color-background));
 
     &:focus {
       outline-color: var(--color-success);
@@ -1445,15 +1424,14 @@ a.skip-link {
  * not ideal. Like a weak password that technically meets requirements.
  */
 .field-warning {
+
   input,
   textarea,
   select {
     border-color: var(--color-warning);
-    background: color-mix(
-      in srgb,
-      var(--color-warning) 5%,
-      var(--color-background)
-    );
+    background: color-mix(in srgb,
+        var(--color-warning) 5%,
+        var(--color-background));
 
     &:focus {
       outline-color: var(--color-warning);
@@ -1760,6 +1738,7 @@ dialog.modal::backdrop {
 
 /* Mobile: always fullscreen */
 @media (max-width: 768px) {
+
   .modal,
   dialog.modal {
     width: 100vw;
