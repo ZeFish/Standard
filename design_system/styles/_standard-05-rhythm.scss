@@ -249,6 +249,7 @@
   ul > li::before {
     content: "•";
     position: absolute;
+    top: 0;
     left: calc(1rlh * -1);
     width: var(--space);
     text-align: center;

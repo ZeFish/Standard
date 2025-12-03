@@ -33,7 +33,7 @@
 /**
  * Toast Configuration Defaults
  */
-const DEFAULTS = {
+const TOAST_DEFAULTS = {
   duration: 4000, // Auto-dismiss after 4 seconds
   position: "top-center", // top-right, top-left, top-center, bottom-right, bottom-left, bottom-center
   pauseOnHover: true, // Pause auto-dismiss when hovering
@@ -47,20 +47,20 @@ const DEFAULTS = {
 /**
  * Toast Container Management
  */
-const containers = {};
+const toastContainers = {};
 
 /**
  * Active toasts queue
  */
-let toastQueue = [];
-let activeToasts = 0;
+let toastNotificationQueue = [];
+let activeToastCount = 0;
 
 /**
  * Get or create toast container for a position
  */
 function getContainer(position) {
-  if (containers[position]) {
-    return containers[position];
+  if (toastContainers[position]) {
+    return toastContainers[position];
   }
 
   const container = document.createElement("div");
@@ -69,7 +69,7 @@ function getContainer(position) {
   container.setAttribute("aria-atomic", "false");
   document.body.appendChild(container);
 
-  containers[position] = container;
+  toastContainers[position] = container;
   return container;
 }
 
@@ -141,11 +141,11 @@ function getIcon(type) {
  * Show a toast notification
  */
 function showToast(message, type = "info", userOptions = {}) {
-  const options = { ...DEFAULTS, ...userOptions };
+  const options = { ...TOAST_DEFAULTS, ...userOptions };
 
   // If max toasts reached, queue this one
-  if (activeToasts >= options.maxToasts) {
-    toastQueue.push({ message, type, options });
+  if (activeToastCount >= options.maxToasts) {
+    toastNotificationQueue.push({ message, type, options });
     return;
   }
 
@@ -154,7 +154,7 @@ function showToast(message, type = "info", userOptions = {}) {
 
   // Add to DOM
   container.appendChild(toast);
-  activeToasts++;
+  activeToastCount++;
 
   // Trigger reflow for animation
   toast.offsetHeight;
@@ -238,11 +238,11 @@ function dismissToast(toast) {
       document.removeEventListener("keydown", toast._escapeHandler);
     }
 
-    activeToasts--;
+    activeToastCount--;
 
     // Show next queued toast
-    if (toastQueue.length > 0) {
-      const next = toastQueue.shift();
+    if (toastNotificationQueue.length > 0) {
+      const next = toastNotificationQueue.shift();
       showToast(next.message, next.type, next.options);
     }
   }, 300); // Match CSS animation duration
@@ -291,18 +291,18 @@ const toast = {
    * Dismiss all toasts
    */
   dismissAll() {
-    Object.values(containers).forEach((container) => {
+    Object.values(toastContainers).forEach((container) => {
       const toasts = container.querySelectorAll(".toast");
       toasts.forEach(dismissToast);
     });
-    toastQueue = [];
+    toastNotificationQueue = [];
   },
 
   /**
    * Configure default options
    */
   configure(options) {
-    Object.assign(DEFAULTS, options);
+    Object.assign(TOAST_DEFAULTS, options);
   },
 };
 

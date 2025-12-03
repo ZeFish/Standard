@@ -265,6 +265,7 @@ export default function rehypeTypography(options = {}) {
       "quoi",
       "dont",
       "où",
+      "on",
       "quand",
       "comment",
       "pour",
@@ -779,7 +780,7 @@ export default function rehypeTypography(options = {}) {
       .join("|");
 
     const nbspPattern = `(${wordPattern})\\s`;
-    const nbspRegex = new RegExp(nbspPattern, "gi");
+    const nbspRegex = new RegExp(nbspPattern, "giu");
 
     let result = text.replace(nbspRegex, `$1${rules.nonBreakingSpace}`);
 
@@ -793,7 +794,7 @@ export default function rehypeTypography(options = {}) {
 
     const titles = titleMap[locale] || titleMap.en;
     const titlePattern = `\\b(${titles.join("|")})\\.\\s`;
-    const titleRegex = new RegExp(titlePattern, "gi");
+    const titleRegex = new RegExp(titlePattern, "giu");
     result = result.replace(titleRegex, `$1.${rules.nonBreakingSpace}`);
 
     result = result.replace(
@@ -863,7 +864,6 @@ export default function rehypeTypography(options = {}) {
     }
 
     text = restoreContent(text);
-
     textNode.value = text;
   }
 
@@ -914,6 +914,8 @@ export default function rehypeTypography(options = {}) {
    */
   return (tree) => {
     const locale = getLocale(tree);
+
+    console.log(locale);
     const rules = typographyRules[locale] || typographyRules.en;
 
     // Process all text nodes

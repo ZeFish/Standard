@@ -69,6 +69,10 @@
   --space-12: calc(var(--space) * 12);
   --space-half: calc(var(--space) / 2);
   --space-half-negative: calc(var(--space) * -0.5);
+  --space-d2: calc(var(--space) / 2);
+  --space-d3: calc(var(--space) / 3);
+  --space-d4: calc(var(--space) / 4);
+  --space-d5: calc(var(--space) / 5);
   
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
   --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
@@ -187,8 +191,8 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
   
-  --shadow-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
-  --shadow: 0 0 var(--space-d4) var(--shadow-color);
+  --color-shadow: color-mix(in srgb, var(--color-foreground) 7%, transparent);
+  --shadow: 0 0 var(--space-d4) var(--color-shadow);
   
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
@@ -231,10 +235,10 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
       var(--color-background)
     );
     
-    --shadow-color: color-mix(in srgb, #000 20%, transparent);
-    --shadow: 0 2px 4px var(--shadow-color);
-    --shadow-l: 0 8px 16px var(--shadow-color);
-    --shadow-xl: 0 12px 32px var(--shadow-color);
+    --color-shadow: color-mix(in srgb, #000 20%, transparent);
+    --shadow: 0 2px 4px var(--color-shadow);
+    --shadow-l: 0 8px 16px var(--color-shadow);
+    --shadow-xl: 0 12px 32px var(--color-shadow);
   }
 }
 
@@ -1368,6 +1372,7 @@ mark {
 :where(.rhythm) ul > li::before {
   content: "•";
   position: absolute;
+  top: 0;
   left: -1rlh;
   width: var(--space);
   text-align: center;
