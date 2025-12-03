@@ -16,6 +16,7 @@
   --gap-grid: 0.25lh;
   
   
+  
   --blur: blur(7px);
   --stroke-width: max(1px, 0.06rem);
   
@@ -53,21 +54,21 @@
   --tracking-neutral: 0em;
   --tracking-slight-open: 0.004em;
   --tracking-open: 0.01em;
-  --space-1: calc(var(--baseline) * 1);
-  --space-2: calc(var(--baseline) * 2);
-  --space-3: calc(var(--baseline) * 3);
-  --space-4: calc(var(--baseline) * 4);
-  --space-5: calc(var(--baseline) * 5);
-  --space-6: calc(var(--baseline) * 6);
-  --space-7: calc(var(--baseline) * 7);
-  --space-8: calc(var(--baseline) * 8);
-  --space-9: calc(var(--baseline) * 9);
-  --space-10: calc(var(--baseline) * 10);
-  --space-11: calc(var(--baseline) * 11);
-  --space-12: calc(var(--baseline) * 12);
   --space: var(--baseline);
-  --space-half: calc(var(--baseline) / 2);
-  --space-half-negative: calc(var(--baseline) * -0.5);
+  --space-1: calc(var(--space) * 1);
+  --space-2: calc(var(--space) * 2);
+  --space-3: calc(var(--space) * 3);
+  --space-4: calc(var(--space) * 4);
+  --space-5: calc(var(--space) * 5);
+  --space-6: calc(var(--space) * 6);
+  --space-7: calc(var(--space) * 7);
+  --space-8: calc(var(--space) * 8);
+  --space-9: calc(var(--space) * 9);
+  --space-10: calc(var(--space) * 10);
+  --space-11: calc(var(--space) * 11);
+  --space-12: calc(var(--space) * 12);
+  --space-half: calc(var(--space) / 2);
+  --space-half-negative: calc(var(--space) * -0.5);
   
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
   --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
@@ -99,7 +100,7 @@
   --duration-superfast: 0.15s;
 }
 
-a, mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
+span, a, mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -1264,10 +1265,10 @@ mark {
   margin: 0;
   vertical-align: baseline;
   margin-block-start: 0;
-  margin-block-end: calc(var(--space) + var(--space-half));
+  margin-block-end: var(--rhythm-gap, calc(var(--space) + var(--space-half)));
 }
 :where(.rhythm) p:has(+ p) {
-  margin-block-end: calc(var(--space) + var(--space-half));
+  margin-block-end: var(--rhythm-gap-p, var(--rhythm-gap, calc(var(--space) + var(--space-half))));
 }
 :where(.rhythm) p:has(+ :is(h1, h2, h3, h4, h5, h6)) {
   margin-block-end: 0;
@@ -1382,7 +1383,7 @@ mark {
   content: counter(ol-counter) ".";
   position: absolute;
   top: var(--trim);
-  left: calc(-1rlh - var(--leading));
+  left: calc(-1rlh - var(--space-half));
   text-align: right;
   color: var(--color-subtle);
   font-variant-numeric: tabular-nums;
@@ -1395,7 +1396,7 @@ mark {
 }
 :where(.rhythm) form:not(.grid *) {
   display: grid;
-  gap: calc(var(--space) * var(--space-gap));
+  gap: calc(var(--space) * var(--space-2));
 }
 :where(.rhythm) .grid form {
   display: flex;
@@ -4051,7 +4052,10 @@ dialog.modal::backdrop {
 
 
 
-.mt-0,
+.mt-0 {
+  margin-top: 0 !important;
+}
+
 .mt-d {
   margin-top: 0 !important;
 }
@@ -4061,7 +4065,7 @@ dialog.modal::backdrop {
 }
 
 .mt-d5 {
-  margin-top: var(--space-d8) !important;
+  margin-top: var(--space-d5) !important;
 }
 
 .mt-d4 {
@@ -4069,7 +4073,7 @@ dialog.modal::backdrop {
 }
 
 .mt-d3 {
-  margin-top: var(--space-d4) !important;
+  margin-top: var(--space-d3) !important;
 }
 
 .mt-d2 {
@@ -4085,7 +4089,7 @@ dialog.modal::backdrop {
 }
 
 .mt-3 {
-  margin-top: var(--space-4) !important;
+  margin-top: var(--space-3) !important;
 }
 
 .mt-4 {
@@ -4093,10 +4097,41 @@ dialog.modal::backdrop {
 }
 
 .mt-5 {
+  margin-top: var(--space-5) !important;
+}
+
+.mt-6 {
+  margin-top: var(--space-6) !important;
+}
+
+.mt-7 {
+  margin-top: var(--space-7) !important;
+}
+
+.mt-8 {
   margin-top: var(--space-8) !important;
 }
 
-.mr-0,
+.mt-9 {
+  margin-top: var(--space-9) !important;
+}
+
+.mt-10 {
+  margin-top: var(--space-10) !important;
+}
+
+.mt-11 {
+  margin-top: var(--space-11) !important;
+}
+
+.mt-12 {
+  margin-top: var(--space-12) !important;
+}
+
+.mr-0 {
+  margin-right: 0 !important;
+}
+
 .mr-d {
   margin-right: 0 !important;
 }
@@ -4106,7 +4141,7 @@ dialog.modal::backdrop {
 }
 
 .mr-d5 {
-  margin-right: var(--space-d8) !important;
+  margin-right: var(--space-d5) !important;
 }
 
 .mr-d4 {
@@ -4114,7 +4149,7 @@ dialog.modal::backdrop {
 }
 
 .mr-d3 {
-  margin-right: var(--space-d4) !important;
+  margin-right: var(--space-d3) !important;
 }
 
 .mr-d2 {
@@ -4130,7 +4165,7 @@ dialog.modal::backdrop {
 }
 
 .mr-3 {
-  margin-right: var(--space-4) !important;
+  margin-right: var(--space-3) !important;
 }
 
 .mr-4 {
@@ -4138,10 +4173,41 @@ dialog.modal::backdrop {
 }
 
 .mr-5 {
+  margin-right: var(--space-5) !important;
+}
+
+.mr-6 {
+  margin-right: var(--space-6) !important;
+}
+
+.mr-7 {
+  margin-right: var(--space-7) !important;
+}
+
+.mr-8 {
   margin-right: var(--space-8) !important;
 }
 
-.mb-0,
+.mr-9 {
+  margin-right: var(--space-9) !important;
+}
+
+.mr-10 {
+  margin-right: var(--space-10) !important;
+}
+
+.mr-11 {
+  margin-right: var(--space-11) !important;
+}
+
+.mr-12 {
+  margin-right: var(--space-12) !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
 .mb-d {
   margin-bottom: 0 !important;
 }
@@ -4151,7 +4217,7 @@ dialog.modal::backdrop {
 }
 
 .mb-d5 {
-  margin-bottom: var(--space-d8) !important;
+  margin-bottom: var(--space-d5) !important;
 }
 
 .mb-d4 {
@@ -4159,7 +4225,7 @@ dialog.modal::backdrop {
 }
 
 .mb-d3 {
-  margin-bottom: var(--space-d4) !important;
+  margin-bottom: var(--space-d3) !important;
 }
 
 .mb-d2 {
@@ -4175,7 +4241,7 @@ dialog.modal::backdrop {
 }
 
 .mb-3 {
-  margin-bottom: var(--space-4) !important;
+  margin-bottom: var(--space-3) !important;
 }
 
 .mb-4 {
@@ -4183,10 +4249,41 @@ dialog.modal::backdrop {
 }
 
 .mb-5 {
+  margin-bottom: var(--space-5) !important;
+}
+
+.mb-6 {
+  margin-bottom: var(--space-6) !important;
+}
+
+.mb-7 {
+  margin-bottom: var(--space-7) !important;
+}
+
+.mb-8 {
   margin-bottom: var(--space-8) !important;
 }
 
-.ml-0,
+.mb-9 {
+  margin-bottom: var(--space-9) !important;
+}
+
+.mb-10 {
+  margin-bottom: var(--space-10) !important;
+}
+
+.mb-11 {
+  margin-bottom: var(--space-11) !important;
+}
+
+.mb-12 {
+  margin-bottom: var(--space-12) !important;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
+}
+
 .ml-d {
   margin-left: 0 !important;
 }
@@ -4196,7 +4293,7 @@ dialog.modal::backdrop {
 }
 
 .ml-d5 {
-  margin-left: var(--space-d8) !important;
+  margin-left: var(--space-d5) !important;
 }
 
 .ml-d4 {
@@ -4204,7 +4301,7 @@ dialog.modal::backdrop {
 }
 
 .ml-d3 {
-  margin-left: var(--space-d4) !important;
+  margin-left: var(--space-d3) !important;
 }
 
 .ml-d2 {
@@ -4220,7 +4317,7 @@ dialog.modal::backdrop {
 }
 
 .ml-3 {
-  margin-left: var(--space-4) !important;
+  margin-left: var(--space-3) !important;
 }
 
 .ml-4 {
@@ -4228,10 +4325,41 @@ dialog.modal::backdrop {
 }
 
 .ml-5 {
+  margin-left: var(--space-5) !important;
+}
+
+.ml-6 {
+  margin-left: var(--space-6) !important;
+}
+
+.ml-7 {
+  margin-left: var(--space-7) !important;
+}
+
+.ml-8 {
   margin-left: var(--space-8) !important;
 }
 
-.mv-0,
+.ml-9 {
+  margin-left: var(--space-9) !important;
+}
+
+.ml-10 {
+  margin-left: var(--space-10) !important;
+}
+
+.ml-11 {
+  margin-left: var(--space-11) !important;
+}
+
+.ml-12 {
+  margin-left: var(--space-12) !important;
+}
+
+.mv-0 {
+  margin-block: 0 !important;
+}
+
 .mv-d {
   margin-block: 0 !important;
 }
@@ -4241,7 +4369,7 @@ dialog.modal::backdrop {
 }
 
 .mv-d5 {
-  margin-block: var(--space-d8) !important;
+  margin-block: var(--space-d5) !important;
 }
 
 .mv-d4 {
@@ -4249,7 +4377,7 @@ dialog.modal::backdrop {
 }
 
 .mv-d3 {
-  margin-block: var(--space-d4) !important;
+  margin-block: var(--space-d3) !important;
 }
 
 .mv-d2 {
@@ -4265,7 +4393,7 @@ dialog.modal::backdrop {
 }
 
 .mv-3 {
-  margin-block: var(--space-4) !important;
+  margin-block: var(--space-3) !important;
 }
 
 .mv-4 {
@@ -4273,10 +4401,41 @@ dialog.modal::backdrop {
 }
 
 .mv-5 {
+  margin-block: var(--space-5) !important;
+}
+
+.mv-6 {
+  margin-block: var(--space-6) !important;
+}
+
+.mv-7 {
+  margin-block: var(--space-7) !important;
+}
+
+.mv-8 {
   margin-block: var(--space-8) !important;
 }
 
-.mh-0,
+.mv-9 {
+  margin-block: var(--space-9) !important;
+}
+
+.mv-10 {
+  margin-block: var(--space-10) !important;
+}
+
+.mv-11 {
+  margin-block: var(--space-11) !important;
+}
+
+.mv-12 {
+  margin-block: var(--space-12) !important;
+}
+
+.mh-0 {
+  margin-inline: 0 !important;
+}
+
 .mh-d {
   margin-inline: 0 !important;
 }
@@ -4286,7 +4445,7 @@ dialog.modal::backdrop {
 }
 
 .mh-d5 {
-  margin-inline: var(--space-d8) !important;
+  margin-inline: var(--space-d5) !important;
 }
 
 .mh-d4 {
@@ -4294,7 +4453,7 @@ dialog.modal::backdrop {
 }
 
 .mh-d3 {
-  margin-inline: var(--space-d4) !important;
+  margin-inline: var(--space-d3) !important;
 }
 
 .mh-d2 {
@@ -4310,7 +4469,7 @@ dialog.modal::backdrop {
 }
 
 .mh-3 {
-  margin-inline: var(--space-4) !important;
+  margin-inline: var(--space-3) !important;
 }
 
 .mh-4 {
@@ -4318,10 +4477,41 @@ dialog.modal::backdrop {
 }
 
 .mh-5 {
+  margin-inline: var(--space-5) !important;
+}
+
+.mh-6 {
+  margin-inline: var(--space-6) !important;
+}
+
+.mh-7 {
+  margin-inline: var(--space-7) !important;
+}
+
+.mh-8 {
   margin-inline: var(--space-8) !important;
 }
 
-.m-0,
+.mh-9 {
+  margin-inline: var(--space-9) !important;
+}
+
+.mh-10 {
+  margin-inline: var(--space-10) !important;
+}
+
+.mh-11 {
+  margin-inline: var(--space-11) !important;
+}
+
+.mh-12 {
+  margin-inline: var(--space-12) !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
 .m-d {
   margin: 0 !important;
 }
@@ -4331,7 +4521,7 @@ dialog.modal::backdrop {
 }
 
 .m-d5 {
-  margin: var(--space-d8) !important;
+  margin: var(--space-d5) !important;
 }
 
 .m-d4 {
@@ -4339,7 +4529,7 @@ dialog.modal::backdrop {
 }
 
 .m-d3 {
-  margin: var(--space-d4) !important;
+  margin: var(--space-d3) !important;
 }
 
 .m-d2 {
@@ -4355,7 +4545,7 @@ dialog.modal::backdrop {
 }
 
 .m-3 {
-  margin: var(--space-4) !important;
+  margin: var(--space-3) !important;
 }
 
 .m-4 {
@@ -4363,13 +4553,44 @@ dialog.modal::backdrop {
 }
 
 .m-5 {
+  margin: var(--space-5) !important;
+}
+
+.m-6 {
+  margin: var(--space-6) !important;
+}
+
+.m-7 {
+  margin: var(--space-7) !important;
+}
+
+.m-8 {
   margin: var(--space-8) !important;
+}
+
+.m-9 {
+  margin: var(--space-9) !important;
+}
+
+.m-10 {
+  margin: var(--space-10) !important;
+}
+
+.m-11 {
+  margin: var(--space-11) !important;
+}
+
+.m-12 {
+  margin: var(--space-12) !important;
 }
 
 
 
 
-.pt-0,
+.pt-0 {
+  padding-top: 0 !important;
+}
+
 .pt-d {
   padding-top: 0 !important;
 }
@@ -4379,7 +4600,7 @@ dialog.modal::backdrop {
 }
 
 .pt-d5 {
-  padding-top: var(--space-d8) !important;
+  padding-top: var(--space-d5) !important;
 }
 
 .pt-d4 {
@@ -4387,7 +4608,7 @@ dialog.modal::backdrop {
 }
 
 .pt-d3 {
-  padding-top: var(--space-d4) !important;
+  padding-top: var(--space-d3) !important;
 }
 
 .pt-d2 {
@@ -4403,7 +4624,7 @@ dialog.modal::backdrop {
 }
 
 .pt-3 {
-  padding-top: var(--space-4) !important;
+  padding-top: var(--space-3) !important;
 }
 
 .pt-4 {
@@ -4411,10 +4632,41 @@ dialog.modal::backdrop {
 }
 
 .pt-5 {
+  padding-top: var(--space-5) !important;
+}
+
+.pt-6 {
+  padding-top: var(--space-6) !important;
+}
+
+.pt-7 {
+  padding-top: var(--space-7) !important;
+}
+
+.pt-8 {
   padding-top: var(--space-8) !important;
 }
 
-.pr-0,
+.pt-9 {
+  padding-top: var(--space-9) !important;
+}
+
+.pt-10 {
+  padding-top: var(--space-10) !important;
+}
+
+.pt-11 {
+  padding-top: var(--space-11) !important;
+}
+
+.pt-12 {
+  padding-top: var(--space-12) !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
 .pr-d {
   padding-right: 0 !important;
 }
@@ -4424,7 +4676,7 @@ dialog.modal::backdrop {
 }
 
 .pr-d5 {
-  padding-right: var(--space-d8) !important;
+  padding-right: var(--space-d5) !important;
 }
 
 .pr-d4 {
@@ -4432,7 +4684,7 @@ dialog.modal::backdrop {
 }
 
 .pr-d3 {
-  padding-right: var(--space-d4) !important;
+  padding-right: var(--space-d3) !important;
 }
 
 .pr-d2 {
@@ -4448,7 +4700,7 @@ dialog.modal::backdrop {
 }
 
 .pr-3 {
-  padding-right: var(--space-4) !important;
+  padding-right: var(--space-3) !important;
 }
 
 .pr-4 {
@@ -4456,10 +4708,41 @@ dialog.modal::backdrop {
 }
 
 .pr-5 {
+  padding-right: var(--space-5) !important;
+}
+
+.pr-6 {
+  padding-right: var(--space-6) !important;
+}
+
+.pr-7 {
+  padding-right: var(--space-7) !important;
+}
+
+.pr-8 {
   padding-right: var(--space-8) !important;
 }
 
-.pb-0,
+.pr-9 {
+  padding-right: var(--space-9) !important;
+}
+
+.pr-10 {
+  padding-right: var(--space-10) !important;
+}
+
+.pr-11 {
+  padding-right: var(--space-11) !important;
+}
+
+.pr-12 {
+  padding-right: var(--space-12) !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
 .pb-d {
   padding-bottom: 0 !important;
 }
@@ -4469,7 +4752,7 @@ dialog.modal::backdrop {
 }
 
 .pb-d5 {
-  padding-bottom: var(--space-d8) !important;
+  padding-bottom: var(--space-d5) !important;
 }
 
 .pb-d4 {
@@ -4477,7 +4760,7 @@ dialog.modal::backdrop {
 }
 
 .pb-d3 {
-  padding-bottom: var(--space-d4) !important;
+  padding-bottom: var(--space-d3) !important;
 }
 
 .pb-d2 {
@@ -4493,7 +4776,7 @@ dialog.modal::backdrop {
 }
 
 .pb-3 {
-  padding-bottom: var(--space-4) !important;
+  padding-bottom: var(--space-3) !important;
 }
 
 .pb-4 {
@@ -4501,10 +4784,41 @@ dialog.modal::backdrop {
 }
 
 .pb-5 {
+  padding-bottom: var(--space-5) !important;
+}
+
+.pb-6 {
+  padding-bottom: var(--space-6) !important;
+}
+
+.pb-7 {
+  padding-bottom: var(--space-7) !important;
+}
+
+.pb-8 {
   padding-bottom: var(--space-8) !important;
 }
 
-.pl-0,
+.pb-9 {
+  padding-bottom: var(--space-9) !important;
+}
+
+.pb-10 {
+  padding-bottom: var(--space-10) !important;
+}
+
+.pb-11 {
+  padding-bottom: var(--space-11) !important;
+}
+
+.pb-12 {
+  padding-bottom: var(--space-12) !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
 .pl-d {
   padding-left: 0 !important;
 }
@@ -4514,7 +4828,7 @@ dialog.modal::backdrop {
 }
 
 .pl-d5 {
-  padding-left: var(--space-d8) !important;
+  padding-left: var(--space-d5) !important;
 }
 
 .pl-d4 {
@@ -4522,7 +4836,7 @@ dialog.modal::backdrop {
 }
 
 .pl-d3 {
-  padding-left: var(--space-d4) !important;
+  padding-left: var(--space-d3) !important;
 }
 
 .pl-d2 {
@@ -4538,7 +4852,7 @@ dialog.modal::backdrop {
 }
 
 .pl-3 {
-  padding-left: var(--space-4) !important;
+  padding-left: var(--space-3) !important;
 }
 
 .pl-4 {
@@ -4546,10 +4860,41 @@ dialog.modal::backdrop {
 }
 
 .pl-5 {
+  padding-left: var(--space-5) !important;
+}
+
+.pl-6 {
+  padding-left: var(--space-6) !important;
+}
+
+.pl-7 {
+  padding-left: var(--space-7) !important;
+}
+
+.pl-8 {
   padding-left: var(--space-8) !important;
 }
 
-.pv-0,
+.pl-9 {
+  padding-left: var(--space-9) !important;
+}
+
+.pl-10 {
+  padding-left: var(--space-10) !important;
+}
+
+.pl-11 {
+  padding-left: var(--space-11) !important;
+}
+
+.pl-12 {
+  padding-left: var(--space-12) !important;
+}
+
+.pv-0 {
+  padding-block: 0 !important;
+}
+
 .pv-d {
   padding-block: 0 !important;
 }
@@ -4559,7 +4904,7 @@ dialog.modal::backdrop {
 }
 
 .pv-d5 {
-  padding-block: var(--space-d8) !important;
+  padding-block: var(--space-d5) !important;
 }
 
 .pv-d4 {
@@ -4567,7 +4912,7 @@ dialog.modal::backdrop {
 }
 
 .pv-d3 {
-  padding-block: var(--space-d4) !important;
+  padding-block: var(--space-d3) !important;
 }
 
 .pv-d2 {
@@ -4583,7 +4928,7 @@ dialog.modal::backdrop {
 }
 
 .pv-3 {
-  padding-block: var(--space-4) !important;
+  padding-block: var(--space-3) !important;
 }
 
 .pv-4 {
@@ -4591,10 +4936,41 @@ dialog.modal::backdrop {
 }
 
 .pv-5 {
+  padding-block: var(--space-5) !important;
+}
+
+.pv-6 {
+  padding-block: var(--space-6) !important;
+}
+
+.pv-7 {
+  padding-block: var(--space-7) !important;
+}
+
+.pv-8 {
   padding-block: var(--space-8) !important;
 }
 
-.ph-0,
+.pv-9 {
+  padding-block: var(--space-9) !important;
+}
+
+.pv-10 {
+  padding-block: var(--space-10) !important;
+}
+
+.pv-11 {
+  padding-block: var(--space-11) !important;
+}
+
+.pv-12 {
+  padding-block: var(--space-12) !important;
+}
+
+.ph-0 {
+  padding-inline: 0 !important;
+}
+
 .ph-d {
   padding-inline: 0 !important;
 }
@@ -4604,7 +4980,7 @@ dialog.modal::backdrop {
 }
 
 .ph-d5 {
-  padding-inline: var(--space-d8) !important;
+  padding-inline: var(--space-d5) !important;
 }
 
 .ph-d4 {
@@ -4612,7 +4988,7 @@ dialog.modal::backdrop {
 }
 
 .ph-d3 {
-  padding-inline: var(--space-d4) !important;
+  padding-inline: var(--space-d3) !important;
 }
 
 .ph-d2 {
@@ -4628,7 +5004,7 @@ dialog.modal::backdrop {
 }
 
 .ph-3 {
-  padding-inline: var(--space-4) !important;
+  padding-inline: var(--space-3) !important;
 }
 
 .ph-4 {
@@ -4636,10 +5012,41 @@ dialog.modal::backdrop {
 }
 
 .ph-5 {
+  padding-inline: var(--space-5) !important;
+}
+
+.ph-6 {
+  padding-inline: var(--space-6) !important;
+}
+
+.ph-7 {
+  padding-inline: var(--space-7) !important;
+}
+
+.ph-8 {
   padding-inline: var(--space-8) !important;
 }
 
-.p-0,
+.ph-9 {
+  padding-inline: var(--space-9) !important;
+}
+
+.ph-10 {
+  padding-inline: var(--space-10) !important;
+}
+
+.ph-11 {
+  padding-inline: var(--space-11) !important;
+}
+
+.ph-12 {
+  padding-inline: var(--space-12) !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
 .p-d {
   padding: 0 !important;
 }
@@ -4649,7 +5056,7 @@ dialog.modal::backdrop {
 }
 
 .p-d5 {
-  padding: var(--space-d8) !important;
+  padding: var(--space-d5) !important;
 }
 
 .p-d4 {
@@ -4657,7 +5064,7 @@ dialog.modal::backdrop {
 }
 
 .p-d3 {
-  padding: var(--space-d4) !important;
+  padding: var(--space-d3) !important;
 }
 
 .p-d2 {
@@ -4673,7 +5080,7 @@ dialog.modal::backdrop {
 }
 
 .p-3 {
-  padding: var(--space-4) !important;
+  padding: var(--space-3) !important;
 }
 
 .p-4 {
@@ -4681,13 +5088,44 @@ dialog.modal::backdrop {
 }
 
 .p-5 {
+  padding: var(--space-5) !important;
+}
+
+.p-6 {
+  padding: var(--space-6) !important;
+}
+
+.p-7 {
+  padding: var(--space-7) !important;
+}
+
+.p-8 {
   padding: var(--space-8) !important;
+}
+
+.p-9 {
+  padding: var(--space-9) !important;
+}
+
+.p-10 {
+  padding: var(--space-10) !important;
+}
+
+.p-11 {
+  padding: var(--space-11) !important;
+}
+
+.p-12 {
+  padding: var(--space-12) !important;
 }
 
 
 
 
-.gap-0,
+.gap-0 {
+  gap: 0 !important;
+}
+
 .gap-d {
   gap: 0 !important;
 }
@@ -4697,7 +5135,7 @@ dialog.modal::backdrop {
 }
 
 .gap-d5 {
-  gap: var(--space-d8) !important;
+  gap: var(--space-d5) !important;
 }
 
 .gap-d4 {
@@ -4705,7 +5143,7 @@ dialog.modal::backdrop {
 }
 
 .gap-d3 {
-  gap: var(--space-d4) !important;
+  gap: var(--space-d3) !important;
 }
 
 .gap-d2 {
@@ -4721,7 +5159,7 @@ dialog.modal::backdrop {
 }
 
 .gap-3 {
-  gap: var(--space-4) !important;
+  gap: var(--space-3) !important;
 }
 
 .gap-4 {
@@ -4729,10 +5167,41 @@ dialog.modal::backdrop {
 }
 
 .gap-5 {
+  gap: var(--space-5) !important;
+}
+
+.gap-6 {
+  gap: var(--space-6) !important;
+}
+
+.gap-7 {
+  gap: var(--space-7) !important;
+}
+
+.gap-8 {
   gap: var(--space-8) !important;
 }
 
-.column-gap-0,
+.gap-9 {
+  gap: var(--space-9) !important;
+}
+
+.gap-10 {
+  gap: var(--space-10) !important;
+}
+
+.gap-11 {
+  gap: var(--space-11) !important;
+}
+
+.gap-12 {
+  gap: var(--space-12) !important;
+}
+
+.column-gap-0 {
+  column-gap: 0 !important;
+}
+
 .column-gap-d {
   column-gap: 0 !important;
 }
@@ -4742,7 +5211,7 @@ dialog.modal::backdrop {
 }
 
 .column-gap-d5 {
-  column-gap: var(--space-d8) !important;
+  column-gap: var(--space-d5) !important;
 }
 
 .column-gap-d4 {
@@ -4750,7 +5219,7 @@ dialog.modal::backdrop {
 }
 
 .column-gap-d3 {
-  column-gap: var(--space-d4) !important;
+  column-gap: var(--space-d3) !important;
 }
 
 .column-gap-d2 {
@@ -4766,7 +5235,7 @@ dialog.modal::backdrop {
 }
 
 .column-gap-3 {
-  column-gap: var(--space-4) !important;
+  column-gap: var(--space-3) !important;
 }
 
 .column-gap-4 {
@@ -4774,13 +5243,44 @@ dialog.modal::backdrop {
 }
 
 .column-gap-5 {
+  column-gap: var(--space-5) !important;
+}
+
+.column-gap-6 {
+  column-gap: var(--space-6) !important;
+}
+
+.column-gap-7 {
+  column-gap: var(--space-7) !important;
+}
+
+.column-gap-8 {
   column-gap: var(--space-8) !important;
+}
+
+.column-gap-9 {
+  column-gap: var(--space-9) !important;
+}
+
+.column-gap-10 {
+  column-gap: var(--space-10) !important;
+}
+
+.column-gap-11 {
+  column-gap: var(--space-11) !important;
+}
+
+.column-gap-12 {
+  column-gap: var(--space-12) !important;
 }
 
 
 
 
-.width-0,
+.width-0 {
+  width: 0 !important;
+}
+
 .width-d {
   width: 0 !important;
 }
@@ -4790,7 +5290,7 @@ dialog.modal::backdrop {
 }
 
 .width-d5 {
-  width: var(--space-d8) !important;
+  width: var(--space-d5) !important;
 }
 
 .width-d4 {
@@ -4798,7 +5298,7 @@ dialog.modal::backdrop {
 }
 
 .width-d3 {
-  width: var(--space-d4) !important;
+  width: var(--space-d3) !important;
 }
 
 .width-d2 {
@@ -4814,7 +5314,7 @@ dialog.modal::backdrop {
 }
 
 .width-3 {
-  width: var(--space-4) !important;
+  width: var(--space-3) !important;
 }
 
 .width-4 {
@@ -4822,7 +5322,35 @@ dialog.modal::backdrop {
 }
 
 .width-5 {
+  width: var(--space-5) !important;
+}
+
+.width-6 {
+  width: var(--space-6) !important;
+}
+
+.width-7 {
+  width: var(--space-7) !important;
+}
+
+.width-8 {
   width: var(--space-8) !important;
+}
+
+.width-9 {
+  width: var(--space-9) !important;
+}
+
+.width-10 {
+  width: var(--space-10) !important;
+}
+
+.width-11 {
+  width: var(--space-11) !important;
+}
+
+.width-12 {
+  width: var(--space-12) !important;
 }
 
 .width-auto {
@@ -4850,7 +5378,10 @@ dialog.modal::backdrop {
 }
 
 
-.min-width-0,
+.min-width-0 {
+  min-width: 0 !important;
+}
+
 .min-width-d {
   min-width: 0 !important;
 }
@@ -4860,7 +5391,7 @@ dialog.modal::backdrop {
 }
 
 .min-width-d5 {
-  min-width: var(--space-d8) !important;
+  min-width: var(--space-d5) !important;
 }
 
 .min-width-d4 {
@@ -4868,7 +5399,7 @@ dialog.modal::backdrop {
 }
 
 .min-width-d3 {
-  min-width: var(--space-d4) !important;
+  min-width: var(--space-d3) !important;
 }
 
 .min-width-d2 {
@@ -4884,7 +5415,7 @@ dialog.modal::backdrop {
 }
 
 .min-width-3 {
-  min-width: var(--space-4) !important;
+  min-width: var(--space-3) !important;
 }
 
 .min-width-4 {
@@ -4892,7 +5423,35 @@ dialog.modal::backdrop {
 }
 
 .min-width-5 {
+  min-width: var(--space-5) !important;
+}
+
+.min-width-6 {
+  min-width: var(--space-6) !important;
+}
+
+.min-width-7 {
+  min-width: var(--space-7) !important;
+}
+
+.min-width-8 {
   min-width: var(--space-8) !important;
+}
+
+.min-width-9 {
+  min-width: var(--space-9) !important;
+}
+
+.min-width-10 {
+  min-width: var(--space-10) !important;
+}
+
+.min-width-11 {
+  min-width: var(--space-11) !important;
+}
+
+.min-width-12 {
+  min-width: var(--space-12) !important;
 }
 
 .min-width-d {
@@ -4908,7 +5467,10 @@ dialog.modal::backdrop {
 }
 
 
-.max-width-0,
+.max-width-0 {
+  max-width: 0 !important;
+}
+
 .max-width-d {
   max-width: 0 !important;
 }
@@ -4918,7 +5480,7 @@ dialog.modal::backdrop {
 }
 
 .max-width-d5 {
-  max-width: var(--space-d8) !important;
+  max-width: var(--space-d5) !important;
 }
 
 .max-width-d4 {
@@ -4926,7 +5488,7 @@ dialog.modal::backdrop {
 }
 
 .max-width-d3 {
-  max-width: var(--space-d4) !important;
+  max-width: var(--space-d3) !important;
 }
 
 .max-width-d2 {
@@ -4942,7 +5504,7 @@ dialog.modal::backdrop {
 }
 
 .max-width-3 {
-  max-width: var(--space-4) !important;
+  max-width: var(--space-3) !important;
 }
 
 .max-width-4 {
@@ -4950,7 +5512,35 @@ dialog.modal::backdrop {
 }
 
 .max-width-5 {
+  max-width: var(--space-5) !important;
+}
+
+.max-width-6 {
+  max-width: var(--space-6) !important;
+}
+
+.max-width-7 {
+  max-width: var(--space-7) !important;
+}
+
+.max-width-8 {
   max-width: var(--space-8) !important;
+}
+
+.max-width-9 {
+  max-width: var(--space-9) !important;
+}
+
+.max-width-10 {
+  max-width: var(--space-10) !important;
+}
+
+.max-width-11 {
+  max-width: var(--space-11) !important;
+}
+
+.max-width-12 {
+  max-width: var(--space-12) !important;
 }
 
 .max-width-none {
@@ -4968,7 +5558,10 @@ dialog.modal::backdrop {
 
 
 
-.height-0,
+.height-0 {
+  height: 0 !important;
+}
+
 .height-d {
   height: 0 !important;
 }
@@ -4978,7 +5571,7 @@ dialog.modal::backdrop {
 }
 
 .height-d5 {
-  height: var(--space-d8) !important;
+  height: var(--space-d5) !important;
 }
 
 .height-d4 {
@@ -4986,7 +5579,7 @@ dialog.modal::backdrop {
 }
 
 .height-d3 {
-  height: var(--space-d4) !important;
+  height: var(--space-d3) !important;
 }
 
 .height-d2 {
@@ -5002,7 +5595,7 @@ dialog.modal::backdrop {
 }
 
 .height-3 {
-  height: var(--space-4) !important;
+  height: var(--space-3) !important;
 }
 
 .height-4 {
@@ -5010,7 +5603,35 @@ dialog.modal::backdrop {
 }
 
 .height-5 {
+  height: var(--space-5) !important;
+}
+
+.height-6 {
+  height: var(--space-6) !important;
+}
+
+.height-7 {
+  height: var(--space-7) !important;
+}
+
+.height-8 {
   height: var(--space-8) !important;
+}
+
+.height-9 {
+  height: var(--space-9) !important;
+}
+
+.height-10 {
+  height: var(--space-10) !important;
+}
+
+.height-11 {
+  height: var(--space-11) !important;
+}
+
+.height-12 {
+  height: var(--space-12) !important;
 }
 
 .height-d {
@@ -5042,7 +5663,10 @@ dialog.modal::backdrop {
 }
 
 
-.min-height-0,
+.min-height-0 {
+  min-height: 0 !important;
+}
+
 .min-height-d {
   min-height: 0 !important;
 }
@@ -5052,7 +5676,7 @@ dialog.modal::backdrop {
 }
 
 .min-height-d5 {
-  min-height: var(--space-d8) !important;
+  min-height: var(--space-d5) !important;
 }
 
 .min-height-d4 {
@@ -5060,7 +5684,7 @@ dialog.modal::backdrop {
 }
 
 .min-height-d3 {
-  min-height: var(--space-d4) !important;
+  min-height: var(--space-d3) !important;
 }
 
 .min-height-d2 {
@@ -5076,7 +5700,7 @@ dialog.modal::backdrop {
 }
 
 .min-height-3 {
-  min-height: var(--space-4) !important;
+  min-height: var(--space-3) !important;
 }
 
 .min-height-4 {
@@ -5084,7 +5708,35 @@ dialog.modal::backdrop {
 }
 
 .min-height-5 {
+  min-height: var(--space-5) !important;
+}
+
+.min-height-6 {
+  min-height: var(--space-6) !important;
+}
+
+.min-height-7 {
+  min-height: var(--space-7) !important;
+}
+
+.min-height-8 {
   min-height: var(--space-8) !important;
+}
+
+.min-height-9 {
+  min-height: var(--space-9) !important;
+}
+
+.min-height-10 {
+  min-height: var(--space-10) !important;
+}
+
+.min-height-11 {
+  min-height: var(--space-11) !important;
+}
+
+.min-height-12 {
+  min-height: var(--space-12) !important;
 }
 
 .min-height-d {
@@ -5100,7 +5752,10 @@ dialog.modal::backdrop {
 }
 
 
-.max-height-0,
+.max-height-0 {
+  max-height: 0 !important;
+}
+
 .max-height-d {
   max-height: 0 !important;
 }
@@ -5110,7 +5765,7 @@ dialog.modal::backdrop {
 }
 
 .max-height-d5 {
-  max-height: var(--space-d8) !important;
+  max-height: var(--space-d5) !important;
 }
 
 .max-height-d4 {
@@ -5118,7 +5773,7 @@ dialog.modal::backdrop {
 }
 
 .max-height-d3 {
-  max-height: var(--space-d4) !important;
+  max-height: var(--space-d3) !important;
 }
 
 .max-height-d2 {
@@ -5134,7 +5789,7 @@ dialog.modal::backdrop {
 }
 
 .max-height-3 {
-  max-height: var(--space-4) !important;
+  max-height: var(--space-3) !important;
 }
 
 .max-height-4 {
@@ -5142,7 +5797,35 @@ dialog.modal::backdrop {
 }
 
 .max-height-5 {
+  max-height: var(--space-5) !important;
+}
+
+.max-height-6 {
+  max-height: var(--space-6) !important;
+}
+
+.max-height-7 {
+  max-height: var(--space-7) !important;
+}
+
+.max-height-8 {
   max-height: var(--space-8) !important;
+}
+
+.max-height-9 {
+  max-height: var(--space-9) !important;
+}
+
+.max-height-10 {
+  max-height: var(--space-10) !important;
+}
+
+.max-height-11 {
+  max-height: var(--space-11) !important;
+}
+
+.max-height-12 {
+  max-height: var(--space-12) !important;
 }
 
 .max-height-none {
@@ -5869,7 +6552,7 @@ ul.menu.horizontal li {
   pointer-events: none;
   z-index: var(--z-tooltip);
   opacity: var(--debug-opacity);
-  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--debug-color) 10%, transparent) 0, color-mix(in srgb, var(--debug-color) 10%, transparent) calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--grid-gap)));
+  background-image: repeating-linear-gradient(to right, color-mix(in srgb, var(--debug-color) 10%, transparent) 0, color-mix(in srgb, var(--debug-color) 10%, transparent) calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols)), transparent calc((100% - var(--gap-grid) * (var(--grid-cols) - 1)) / var(--grid-cols) + var(--gap-grid)));
 }
 
 .standard-debug .grid::after {

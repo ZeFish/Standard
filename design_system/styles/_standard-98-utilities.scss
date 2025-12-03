@@ -58,39 +58,40 @@
  * Creates: .margin-top-3xs, .margin-top-2xs, .margin-top-xs, .margin-top-s, .margin-top-base, etc.
  */
 @mixin generate-scale($prefix, $property) {
-  .#{$prefix}-0,
-  .#{$prefix}-d {
-    #{$property}: 0 !important;
-  }
-  .#{$prefix}-auto {
-    #{$property}: auto !important;
-  }
-  .#{$prefix}-d5 {
-    #{$property}: var(--space-d8) !important;
-  }
-  .#{$prefix}-d4 {
-    #{$property}: var(--space-d4) !important;
-  }
-  .#{$prefix}-d3 {
-    #{$property}: var(--space-d4) !important;
-  }
-  .#{$prefix}-d2 {
-    #{$property}: var(--space-d2) !important;
-  }
-  .#{$prefix} {
-    #{$property}: var(--space) !important;
-  }
-  .#{$prefix}-2 {
-    #{$property}: var(--space-2) !important;
-  }
-  .#{$prefix}-3 {
-    #{$property}: var(--space-4) !important;
-  }
-  .#{$prefix}-4 {
-    #{$property}: var(--space-4) !important;
-  }
-  .#{$prefix}-5 {
-    #{$property}: var(--space-8) !important;
+  // Define the scale map
+  $scales: (
+    "0": 0,
+    "d": 0,
+    "auto": auto,
+    "d5": var(--space-d5),
+    "d4": var(--space-d4),
+    "d3": var(--space-d3),
+    "d2": var(--space-d2),
+    "": var(--space),
+    "2": var(--space-2),
+    "3": var(--space-3),
+    "4": var(--space-4),
+    "5": var(--space-5),
+    "6": var(--space-6),
+    "7": var(--space-7),
+    "8": var(--space-8),
+    "9": var(--space-9),
+    "10": var(--space-10),
+    "11": var(--space-11),
+    "12": var(--space-12),
+  );
+
+  // Loop through and generate classes
+  @each $suffix, $value in $scales {
+    @if $suffix == "" {
+      .#{$prefix} {
+        #{$property}: $value !important;
+      }
+    } @else {
+      .#{$prefix}-#{$suffix} {
+        #{$property}: $value !important;
+      }
+    }
   }
 }
 

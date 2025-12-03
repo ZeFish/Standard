@@ -26,13 +26,6 @@ export { ImageZoom, default as imageZoom } from "./standard-image-zoom.js";
 export { initCopyButtons } from "./standard-copy-buttons.js";
 export { initializeScrollWrappers } from "./standard-scroll-wrappers.js";
 export { initAstro, astroHelpers } from "./standard-astro.js";
-
-/**
- * @deprecated Use initAstro() instead
- * HTMX support is maintained for legacy projects but is no longer recommended.
- * Migrate to Astro View Transitions API for better performance and DX.
- * @see https://docs.astro.build/en/guides/view-transitions/
- */
 export { initHTMX } from "./standard-htmx.js";
 
 /**
@@ -54,7 +47,7 @@ const standard = {
         return window.imageZoom || null;
       default:
         console.warn(
-          `Unknown module: ${moduleName}. Available: toast, comments, StandardLab, imageZoom`
+          `Unknown module: ${moduleName}. Available: toast, comments, StandardLab, imageZoom`,
         );
         return null;
     }
@@ -62,7 +55,12 @@ const standard = {
 
   getInstances() {
     if (typeof window === "undefined") {
-      return { toast: null, comments: null, StandardLab: null, imageZoom: null };
+      return {
+        toast: null,
+        comments: null,
+        StandardLab: null,
+        imageZoom: null,
+      };
     }
     return {
       toast: window.toast || null,
@@ -98,7 +96,7 @@ const standard = {
     ]);
     console.log("\n📚 Learn more:");
     console.log(
-      "  Astro View Transitions: https://docs.astro.build/en/guides/view-transitions/"
+      "  Astro View Transitions: https://docs.astro.build/en/guides/view-transitions/",
     );
   },
 };
@@ -109,6 +107,6 @@ export default standard;
 if (typeof window !== "undefined") {
   window.standard = standard;
   console.log(
-    "Standard Framework loaded. Type window.standard.info() for help."
+    "Standard Framework loaded. Type window.standard.info() for help.",
   );
 }

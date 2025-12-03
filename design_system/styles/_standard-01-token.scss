@@ -41,6 +41,9 @@
 
   --gap-body: var(--space-3);
   --gap-grid: 0.25lh;
+
+  /* --rhythm-gap: calc(var(--space) + var(--space-half));*/
+
   /* Grid system tokens */
 
   /* Design standard system */
@@ -99,12 +102,12 @@ make h6 running as the first phrase of the paragraph
   --tracking-slight-open: 0.004em;
   --tracking-open: 0.01em;
 
-  @for $i from 1 through 12 {
-    --space-#{$i}: calc(var(--baseline) * #{$i});
-  }
   --space: var(--baseline);
-  --space-half: calc(var(--baseline) / 2);
-  --space-half-negative: calc(var(--baseline) * -0.5);
+  @for $i from 1 through 12 {
+    --space-#{$i}: calc(var(--space) * #{$i});
+  }
+  --space-half: calc(var(--space) / 2);
+  --space-half-negative: calc(var(--space) * -0.5);
 
   /* Optical harmony scale */
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));

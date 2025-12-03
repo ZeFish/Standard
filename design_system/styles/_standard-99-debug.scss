@@ -274,7 +274,7 @@
     transparent
       calc(
         (100% - (var(--gap-grid) * (var(--grid-cols) - 1))) / var(--grid-cols) +
-          var(--grid-gap)
+          var(--gap-grid)
       )
   );
 }

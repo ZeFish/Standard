@@ -160,6 +160,35 @@ function getAvailableRehypePlugins() {
   ];
 }
 
+/**
+ * Sanitize config to remove circular references and functions
+ * @param {Object} obj - Object to sanitize
+ * @param {WeakSet} seen - Track visited objects
+ * @returns {Object} Sanitized object safe for JSON.stringify
+ */
+function sanitizeConfig(obj, seen = new WeakSet()) {
+  if (obj === null || typeof obj !== "object") return obj;
+  if (seen.has(obj)) return undefined;
+  seen.add(obj);
+
+  if (Array.isArray(obj)) {
+    return obj.map((item) => sanitizeConfig(item, seen)).filter(Boolean);
+  }
+
+  const sanitized = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const value = obj[key];
+      // Skip functions and problematic keys
+      if (typeof value === "function" || key.startsWith("_")) {
+        continue;
+      }
+      sanitized[key] = sanitizeConfig(value, seen);
+    }
+  }
+  return sanitized;
+}
+
 // ========================================
 // MAIN INTEGRATION
 // ========================================
@@ -172,7 +201,7 @@ export default function standard(options = {}) {
   try {
     const packagePath = path.join(
       path.dirname(fileURLToPath(import.meta.url)),
-      "../package.json",
+      "../package.json"
     );
     const packageData = JSON.parse(fs.readFileSync(packagePath, "utf8"));
     packageVersion = packageData.version || "0.0.0";
@@ -235,7 +264,9 @@ export default function standard(options = {}) {
           },
           load(id) {
             if (id === "\0standard-virtual-config") {
-              return `export default ${JSON.stringify(finalConfig)}`;
+              // Sanitize config to remove circular references
+              const cleanConfig = sanitizeConfig(finalConfig);
+              return `export default ${JSON.stringify(cleanConfig)}`;
             }
           },
         };
@@ -248,23 +279,23 @@ export default function standard(options = {}) {
                 // Use source in dev for fast HMR
                 "@zefish/standard/styles": path.resolve(
                   __dirname,
-                  "../design_system/styles",
+                  "../design_system/styles"
                 ),
                 "@zefish/standard/js": path.resolve(
                   __dirname,
-                  "../design_system/js/standard.js",
+                  "../design_system/js/standard.js"
                 ),
                 "@zefish/standard/logger": path.resolve(
                   __dirname,
-                  "../core/logger.js",
+                  "../core/logger.js"
                 ),
                 "@zefish/standard/astro/utils/collections": path.resolve(
                   __dirname,
-                  "utils/collections.js",
+                  "utils/collections.js"
                 ),
                 "@zefish/standard/astro/components/Backlinks": path.resolve(
                   __dirname,
-                  "components/Backlinks.astro",
+                  "components/Backlinks.astro"
                 ),
               },
             },
@@ -313,7 +344,7 @@ export default function standard(options = {}) {
           "../",
           "public",
           "assets",
-          "fonts",
+          "fonts"
         );
         if (fs.existsSync(fontsDir)) {
           aliasEntries["@standard-fonts"] = fontsDir;
@@ -322,11 +353,11 @@ export default function standard(options = {}) {
         // Copy fonts from package to public directory
         const packageFontsDir = path.resolve(
           packageSrcDir,
-          "../public/assets/fonts",
+          "../public/assets/fonts"
         );
         const clientPublicDir = path.resolve(
           fileURLToPath(config.root), // ← Convert URL to string
-          "public/assets/fonts",
+          "public/assets/fonts"
         );
 
         // Create the directory if it doesn't exist
@@ -375,7 +406,7 @@ export default function standard(options = {}) {
             cloudflareIntegration({
               ...finalConfig.cloudflare,
               verbose: finalConfig.verbose,
-            }),
+            })
           );
         }
 
@@ -385,7 +416,7 @@ export default function standard(options = {}) {
               ...finalConfig.openrouter,
               verbose: finalConfig.verbose,
               siteUrl: finalConfig.site?.url || finalConfig.url,
-            }),
+            })
           );
         }
 
