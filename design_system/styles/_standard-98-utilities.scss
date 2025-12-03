@@ -862,7 +862,7 @@ ul.menu {
   }
 }
 .tight nav.menu ul li {
-  margin-block-end: 0;
+  margin-block-end: var(--trim);
 }
 
 nav.menu.horizontal ul,
