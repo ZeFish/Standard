@@ -915,7 +915,6 @@ export default function rehypeTypography(options = {}) {
   return (tree) => {
     const locale = getLocale(tree);
 
-    console.log(locale);
     const rules = typographyRules[locale] || typographyRules.en;
 
     // Process all text nodes
