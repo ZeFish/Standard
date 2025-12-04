@@ -307,6 +307,30 @@ export default function standard(options = {}) {
                   __dirname,
                   "components/Backlinks.astro",
                 ),
+                "@fontsource-variable/inter": path.resolve(
+                  __dirname,
+                  "../node_modules/@fontsource-variable/inter/index.css",
+                ),
+                "@fontsource-variable/instrument-sans": path.resolve(
+                  __dirname,
+                  "../node_modules/@fontsource-variable/instrument-sans/index.css",
+                ),
+                "@fontsource/instrument-serif": path.resolve(
+                  __dirname,
+                  "../node_modules/@fontsource/instrument-serif/index.css",
+                ),
+                "@fontsource-variable/fraunces": path.resolve(
+                  __dirname,
+                  "../node_modules/@fontsource-variable/fraunces/index.css",
+                ),
+                "@fontsource/ibm-plex-mono": path.resolve(
+                  __dirname,
+                  "../node_modules/@fontsource/ibm-plex-mono/index.css",
+                ),
+                "@fontsource-variable/newsreader": path.resolve(
+                  __dirname,
+                  "../node_modules/@fontsource-variable/newsreader/index.css",
+                ),
               },
             },
           },
@@ -445,12 +469,9 @@ export default function standard(options = {}) {
         injectScript("page-ssr", `import "@fontsource-variable/inter";`);
         injectScript(
           "page-ssr",
-          `import "@fontsource-variable/instrument-sans/wdth-italic.css";`,
+          `import "@fontsource-variable/instrument-sans/";`,
         );
-        injectScript(
-          "page-ssr",
-          `import "@fontsource/instrument-serif/400-italic.css";`,
-        );
+        injectScript("page-ssr", `import "@fontsource/instrument-serif";`);
         injectScript("page-ssr", `import "@fontsource-variable/fraunces";`);
         injectScript("page-ssr", `import "@fontsource/ibm-plex-mono";`);
         injectScript("page-ssr", `import "@fontsource-variable/newsreader";`);
