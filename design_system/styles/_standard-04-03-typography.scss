@@ -1,0 +1,219 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* TYPOGRAPHY                  */
+/* =========================== */
+
+/* Bold normalization */
+b,
+strong,
+.bold {
+  font-weight: var(--font-weight-bold, 600);
+}
+
+:is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
+  font-weight: inherit;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header), system-ui, sans-serif;
+  color: var(--color-header);
+  text-wrap: balance;
+  font-variant-ligatures: normal;
+  font-feature-settings: var(--font-header-feature);
+  font-variation-settings: var(--font-header-variation);
+  font-style: var(--font-header-style, normal);
+  letter-spacing: var(--font-header-letter-spacing);
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-weight: var(--font-weight-h1);
+  font-size: clamp(var(--scale-3), 10vw, var(--scale-4));
+  line-height: var(--font-header-line-height, 1);
+}
+
+h2 {
+  font-weight: var(--font-weight-h2);
+  font-size: clamp(var(--scale-2), 7vw, var(--scale-3));
+  line-height: var(--font-header-line-height, 1);
+}
+
+h3 {
+  font-weight: var(--font-weight-h3);
+  font-size: clamp(var(--scale), 7vw, var(--scale-3));
+  line-height: var(--font-header-line-height, 1);
+}
+
+h4 {
+  font-weight: var(--font-weight);
+  font-size: var(--scale);
+  line-height: var(--line-height);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+h5 {
+  /* Overline */
+}
+
+h6 {
+  /* run-in */
+  display: inline;
+  margin: 0;
+  font-size: var(--scale);
+  font-weight: 600;
+}
+
+h6 + p {
+  display: inline;
+}
+
+.overline {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+  font-size: var(--scale-d2);
+  border-top: var(--rule-hairline) solid var(--color-border);
+  padding-block-start: calc(var(--space) / 2);
+  margin-block-end: var(--space);
+}
+
+/* Links */
+a,
+a:visited {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: var(--stroke-width);
+  text-underline-offset: auto;
+  text-decoration-color: var(--color-subtle);
+  transition:
+    color var(--transition),
+    text-decoration-color var(--transition);
+}
+
+a:visited:hover,
+a:hover,
+a:focus {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+
+a:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
+  border-radius: 2px;
+}
+
+a.external-link::after {
+  content: "↗";
+  text-decoration: none;
+  font-size: var(--scale-d3);
+  color: var(--color-subtle);
+}
+
+:is(h1, h2, h3, h4, h5, h6) a {
+  text-decoration: none;
+}
+
+/* Code */
+code,
+pre,
+tt,
+.code,
+.mono,
+.monospace,
+.font-mono {
+  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
+  font-feature-settings: var(--font-monospace-feature);
+  font-variation-settings: var(--font-monospace-variation);
+  font-weight: var(--font-monospace-weight, 400);
+}
+
+pre {
+  position: relative;
+  background: var(--color-background-secondary);
+  color: var(--color-foreground);
+  border: var(--border);
+  overflow-x: auto;
+  box-shadow: inset var(--shadow);
+  line-height: var(--line-height-compact);
+  padding: var(--space-half);
+
+  code {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    opacity: 0.75;
+    transition: opacity var(--transition);
+  }
+
+  &:hover code {
+    opacity: 1;
+  }
+
+  .copy-button {
+    position: absolute;
+    top: var(--space-half);
+    right: var(--space-half);
+    opacity: 0;
+    transition: opacity 0.5s;
+    font-family: var(--font-interface);
+  }
+
+  &:hover .copy-button {
+    opacity: 0.5;
+    transition: opacity 0.5s;
+  }
+
+  .copy-button:hover {
+    opacity: 1;
+  }
+}
+
+/* Blockquotes */
+blockquote {
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+/* Utilities */
+small {
+  font-size: var(--scale-d2);
+}
+
+sub,
+sup {
+  font-size: var(--scale-d3);
+  line-height: 0;
+}
+
+sub {
+  vertical-align: sub;
+}
+
+sup {
+  vertical-align: super;
+}
+
+em {
+  color: var(--color-italic);
+  font-style: italic;
+}
+
+.font-interface {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
+  font-size: 12px;
+}

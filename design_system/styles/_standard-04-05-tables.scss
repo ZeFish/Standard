@@ -1,0 +1,49 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* TABLES                      */
+/* =========================== */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  padding: 0;
+  margin: 0;
+}
+
+th,
+td {
+  text-align: left;
+  border: var(--border);
+  line-height: var(--line-height-compact);
+  padding: var(--space-half);
+  font-size: var(--scale-d2);
+  min-height: var(--line-height);
+}
+
+th {
+  font-weight: var(--font-weight-bold, 600);
+  background: var(--color-background-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+caption {
+  font-weight: var(--font-weight-bold, bold);
+  text-align: left;
+  margin-block-end: calc(var(--space-d4) * var(--space));
+}
+
+/* Numeric alignment */
+.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zebra striping */
+.striped tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+}

@@ -307,30 +307,6 @@ export default function standard(options = {}) {
                   __dirname,
                   "components/Backlinks.astro",
                 ),
-                "@fontsource-variable/inter": path.resolve(
-                  __dirname,
-                  "../node_modules/@fontsource-variable/inter/index.css",
-                ),
-                "@fontsource-variable/instrument-sans": path.resolve(
-                  __dirname,
-                  "../node_modules/@fontsource-variable/instrument-sans/index.css",
-                ),
-                "@fontsource/instrument-serif": path.resolve(
-                  __dirname,
-                  "../node_modules/@fontsource/instrument-serif/index.css",
-                ),
-                "@fontsource-variable/fraunces": path.resolve(
-                  __dirname,
-                  "../node_modules/@fontsource-variable/fraunces/index.css",
-                ),
-                "@fontsource/ibm-plex-mono": path.resolve(
-                  __dirname,
-                  "../node_modules/@fontsource/ibm-plex-mono/index.css",
-                ),
-                "@fontsource-variable/newsreader": path.resolve(
-                  __dirname,
-                  "../node_modules/@fontsource-variable/newsreader/index.css",
-                ),
               },
             },
           },
@@ -465,17 +441,35 @@ export default function standard(options = {}) {
 
         // 6. Add Global Assets (CSS/JS)
         const assetsConfig = finalConfig.assets || {};
-        //import '@fontsource-variable/inter';
-        injectScript("page-ssr", `import "@fontsource-variable/inter";`);
-        injectScript(
-          "page-ssr",
-          `import "@fontsource-variable/instrument-sans";`,
-        );
-        injectScript("page-ssr", `import "@fontsource/instrument-serif";`);
-        injectScript("page-ssr", `import "@fontsource-variable/fraunces";`);
-        injectScript("page-ssr", `import "@fontsource/ibm-plex-mono";`);
-        injectScript("page-ssr", `import "@fontsource-variable/newsreader";`);
+        
+        // Inject fonts (make sure these are in your package.json dependencies)
+        const fonts = finalConfig.fonts || {
+          inter: true,
+          instrumentSans: true,
+          instrumentSerif: true,
+          fraunces: true,
+          ibmPlexMono: true,
+          newsreader: true,
+        };
 
+        if (fonts.inter !== false) {
+          injectScript("page-ssr", `import "@fontsource-variable/inter";`);
+        }
+        if (fonts.instrumentSans !== false) {
+          injectScript("page-ssr", `import "@fontsource-variable/instrument-sans";`);
+        }
+        if (fonts.instrumentSerif !== false) {
+          injectScript("page-ssr", `import "@fontsource/instrument-serif";`);
+        }
+        if (fonts.fraunces !== false) {
+          injectScript("page-ssr", `import "@fontsource-variable/fraunces";`);
+        }
+        if (fonts.ibmPlexMono !== false) {
+          injectScript("page-ssr", `import "@fontsource/ibm-plex-mono";`);
+        }
+        if (fonts.newsreader !== false) {
+          injectScript("page-ssr", `import "@fontsource-variable/newsreader";`);
+        }
         const cssEntry =
           assetsConfig.css ?? "@zefish/standard/styles/standard.scss";
         if (cssEntry) {

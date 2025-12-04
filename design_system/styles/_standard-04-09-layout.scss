@@ -1,0 +1,21 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* LAYOUT                      */
+/* =========================== */
+
+section {
+  margin-block-end: var(--space-6);
+}
+
+section.container-hero {
+  padding-block: var(--space-2);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  box-shadow: var(--shadow);
+
+  p {
+    max-width: var(--line-width);
+    margin-inline: auto !important;
+  }
+}

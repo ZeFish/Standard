@@ -1,0 +1,136 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* BUTTONS                     */
+/* =========================== */
+
+button,
+a.button {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--scale-d2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height);
+  border-radius: var(--radius);
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 65%,
+    var(--color-background-secondary)
+  );
+  color: color-mix(in srgb, var(--color-background) 85%, transparent);
+  border: var(--border);
+  border-color: var(--color-border);
+  padding: var(--leading) var(--space-half);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    opacity var(--transition);
+}
+
+a.button:visited,
+a.button {
+  --stroke-width: 1px;
+  display: inline-block;
+  width: fit-content;
+  user-select: none;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+}
+
+button:hover,
+a.button:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 80%,
+    var(--color-background-secondary)
+  );
+  color: var(--color-background);
+}
+
+button:active,
+a.button:active {
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 50%,
+    var(--color-background-secondary)
+  );
+}
+
+button:focus-visible,
+a.button:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
+  outline-offset: 2px;
+  color: var(--color-background);
+}
+
+button:disabled,
+a.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--color-background);
+}
+
+@media (prefers-color-scheme: dark) {
+  button,
+  a.button,
+  a.button:visited {
+    color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
+  }
+}
+
+.tag {
+  color: var(--color-muted);
+}
+
+.tag:hover {
+  color: var(--color-accent);
+}
+
+/* =========================== */
+/* NAVIGATION                  */
+/* =========================== */
+
+nav li a {
+  text-decoration: none;
+}
+
+nav li.is-active a {
+  text-decoration: underline;
+}
+
+/* Vertical menu navigation */
+nav.menu ul,
+ul.menu {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0;
+  gap: 0;
+
+  li {
+    list-style: none;
+    padding-inline-start: 0;
+    margin-block-end: var(--space-half);
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.tight nav.menu ul li {
+  margin-block-end: var(--trim);
+}
+
+/* Horizontal menu navigation */
+nav.menu.horizontal ul,
+ul.menu.horizontal {
+  flex-direction: row;
+  gap: var(--space);
+
+  li {
+    padding-inline-start: 0;
+    margin-block: 0;
+  }
+}
