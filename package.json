@@ -37,8 +37,8 @@
     "standard-check": "bin/analyzer.js"
   },
   "exports": {
-    "./styles/standard.scss": "./src/styles/standard.scss",
-    "./styles/standard.theme.scss": "./src/styles/standard.theme.scss",
+    "./styles/standard.scss": "./lib/styles/standard.scss",
+    "./styles/standard.theme.scss": "./lib/styles/standard.theme.scss",
     "./css": "./lib/standard.min.css",
     "./logger": "./core/logger.js",
     "./theme": "./lib/standard.theme.min.css",
@@ -47,10 +47,10 @@
     "./eleventy": "./11ty/standard.js",
     "./11ty/layouts/meta": "./11ty/layouts/meta.njk",
     "./astro": {
-      "types": "./src/astro/type/standard.d.ts",
-      "default": "./src/astro/standard.js"
+      "types": "./astro/type/standard.d.ts",
+      "default": "./astro/standard.js"
     },
-    "./cloudflare": "./src/cloudflare/api/comments.js",
+    "./cloudflare": "./cloudflare/api/comments.js",
     "./astro/remark/tags": "./astro/remark/tags.js",
     "./astro/remark/standard": "./astro/remark/standard.js",
     "./astro/remark/escape-code": "./astro/remark/escape-code.js",
