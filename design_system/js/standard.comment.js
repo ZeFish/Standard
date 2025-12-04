@@ -1,3 +1,4 @@
+(function() {
 /**
  * GitHub Comments - ES Module Version
  *
@@ -10,7 +11,7 @@
 /**
  * GitHubComments Class - Core comment management
  */
-export class GitHubComments {
+class GitHubComments {
   constructor(options = {}) {
     this.apiUrl = options.apiUrl || "/api/comments";
     this.pageId = options.pageId;
@@ -558,7 +559,7 @@ if (typeof document !== "undefined") {
 /**
  * Export as ES module
  */
-export default comments;
+
 
 /**
  * Optional: Expose to global scope for backwards compatibility
@@ -567,3 +568,4 @@ if (typeof window !== "undefined") {
   window.comments = comments;
   window.GitHubComments = GitHubComments;
 }
+})();

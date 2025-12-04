@@ -1,3 +1,4 @@
+(function() {
 /**
  * Toast Notification System
  *
@@ -307,4 +308,5 @@ const toast = {
 };
 
 // Export as ES module
-export default toast;
+
+})();

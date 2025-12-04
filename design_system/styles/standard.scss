@@ -36,6 +36,14 @@
 @use "standard-07-prose";
 @use "standard-08-img";
 @use "standard-10-components";
+
+/* Optional Extended Components  
+ * Uncomment to enable advanced UI components (card, pagination, tabs, accordion, etc.)
+ * These will eventually be replaced by an external component library.
+ * Keep commented for minimal framework footprint.
+ */
+// @use "standard-90-extended-components";
+
 @use "standard-toast";
 @use "standard-96-contrast";
 @use "standard-97-print";
@@ -56,10 +64,12 @@
     line-height: 0.965;
   }
 }
+
 /* Add to standard.css */
 
 :root {
-  --baseline-trim-support: 0; /* Will be 1 when supported */
+  --baseline-trim-support: 0;
+  /* Will be 1 when supported */
 }
 
 .standard-lab-panel {
@@ -67,118 +77,4 @@
   --base-gap: 0;
   --base-block-gap: 0;
   font-size: var(--scale-d2);
-}
-
-@font-face {
-  font-family: "Instrument Sans";
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-  src: url("/assets/fonts/InstrumentSans[wdth,wght].woff2") format("woff2");
-}
-@font-face {
-  font-family: "Instrument Sans";
-  font-weight: 400 700;
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/InstrumentSans-Italic[wdth,wght].woff2")
-    format("woff2");
-}
-
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: normal;
-  font-display: swap;
-  src: url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Newsreader";
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  src: url("/assets/fonts/Newsreader[opsz,wght].ttf") format("ttf");
-}
-@font-face {
-  font-family: "Newsreader";
-  font-weight: 200 800;
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/Newsreader-Italic[opsz,wght].ttf") format("ttf");
-}
-
-@font-face {
-  font-family: "Fraunces";
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2");
-}
-@font-face {
-  font-family: "Fraunces";
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2")
-    format("woff2");
-}
-
-@font-face {
-  font-family: "Graveur";
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  src: url("/assets/fonts/Graveur-VAR.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Graveur";
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Graveur";
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
-}
-@font-face {
-  font-family: "Graveur";
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-  src: url("/assets/fonts/Graveur-VAR-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Marauder";
-  src: url("/assets/fonts/Marauder[wght].woff2") format("woff2");
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Marauder";
-  src: url("/assets/fonts/Marauder-Italic[wght].woff2") format("woff2");
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "NoTears";
-  src: url("/assets/fonts/NoTears.ttf") format("ttf");
-  font-style: normal;
-}
-@font-face {
-  font-family: "NoTears";
-  src: url("/assets/fonts/NoTearsBold.ttf") format("ttf");
-  font-style: normal;
-  font-weight: bold;
 }

@@ -56,30 +56,26 @@
   row-gap: var(--gap-grid);
   margin-block: 0;
 }
+
 /* =========================== */
 /* TYPOGRAPHIC NUANCES         */
 /* =========================== */
 
 /* Exception for grid in a prose div */
-.prose > [class^="grid"] {
-  margin-block-start: calc(
-    (var(--space) * max(var(--space-2) var(--space))) -
-      (var(--space) * var(--space))
-  );
+.prose>[class^="grid"] {
+  margin-block-start: calc((var(--space) * max(var(--space-2) var(--space))) - (var(--space) * var(--space)));
   margin-block-end: calc(var(--space) * max(var(--space-2) var(--space)));
 }
-[class^="grid"] > * {
-  min-width: 0; /* ← Force items to shrink below content size */
+
+[class^="grid"]>* {
+  min-width: 0;
+  /* ← Force items to shrink below content size */
   margin-block: 0;
 }
 
 @media (max-width: #{$mobile}) {
-  :root {
-    /*--gap-grid: var(--trim);*/
-    [class^="grid"] * {
-      min-width: 0; /* ← Force items to shrink below content size */
-      /*margin-block: var(--space);*/
-    }
+  [class^="grid"] * {
+    min-width: 0;
   }
 }
 
@@ -93,6 +89,7 @@
 :is(.grid, [class^="grid-"]).compact {
   --gap-grid: var(--trim);
 }
+
 :is(.grid, [class^="grid-"]).relaxed {
   --gap-grid: var(--space);
 }
@@ -113,6 +110,7 @@
     grid-column: span #{$i};
     margin-block-end: 0;
   }
+
   .start-#{$i} {
     grid-column-start: #{$i};
   }
@@ -127,17 +125,21 @@
       column-gap: var(--gap-grid);
       row-gap: var(--gap-grid-row, var(--gap-grid));
     }
+
     .sm\:col-#{$i} {
       grid-column: span #{$i};
     }
+
     .sm\:start-#{$i} {
       grid-column-start: #{$i};
     }
   }
+
   .sm\:row {
     grid-column: 1 / -1;
   }
 }
+
 @media (min-width: #{$large}) {
   @for $i from 1 through 12 {
     .lg\:grid-#{$i} {
@@ -146,13 +148,16 @@
       column-gap: var(--gap-grid);
       row-gap: var(--gap-grid-row, var(--gap-grid));
     }
+
     .lg\:col-#{$i} {
       grid-column: span #{$i};
     }
+
     .lg\:start-#{$i} {
       grid-column-start: #{$i};
     }
   }
+
   .lg\:row {
     grid-column: 1 / -1;
   }
@@ -171,20 +176,22 @@ hr.col-row {
 }
 
 /* Rhythm inside grid items: apply to a cell containing prose */
-.grid .rhythm > * {
+.grid .rhythm>* {
   margin-block-end: var(--space);
 }
 
 /* Free columns: place anywhere with CSS vars or utility shorthands */
 .free-col {
   /* Defaults; authors override via CSS vars or utilities */
-  --start: auto; /* 1..12 or auto */
-  --span: 3; /* 1..12 */
+  --start: auto;
+  /* 1..12 or auto */
+  --span: 3;
+  /* 1..12 */
 
   grid-column: var(--start) / span var(--span);
 
   /* If the free column contains prose, opt-in to rhythm */
-  &.rhythm > * {
+  &.rhythm>* {
     margin-block-end: var(--space);
   }
 }
@@ -194,9 +201,12 @@ hr.col-row {
   .span-#{$i} {
     --span: #{$i};
   }
+
   .startv-#{$i} {
     --start: #{$i};
-  } /* 'startv' to avoid clash with .start- utilities */
+  }
+
+  /* 'startv' to avoid clash with .start- utilities */
 }
 
 /* Responsive overrides for the var-based API */
@@ -205,16 +215,19 @@ hr.col-row {
     .sm\:span-#{$i} {
       --span: #{$i};
     }
+
     .sm\:startv-#{$i} {
       --start: #{$i};
     }
   }
 }
+
 @media (min-width: #{$large}) {
   @for $i from 1 through 12 {
     .lg\:span-#{$i} {
       --span: #{$i};
     }
+
     .lg\:startv-#{$i} {
       --start: #{$i};
     }
@@ -251,24 +264,24 @@ hr.col-row {
 
 /* Common layout containers inherit rhythm to cascade deeper */
 .box,
-.grid > .col-1,
-.grid > .col-2,
-.grid > .col-3,
-.grid > .col-4,
-.grid > .col-5,
-.grid > .col-6,
-.grid > .col-7,
-.grid > .col-8,
-.grid > .col-9,
-.grid > .col-10,
-.grid > .col-11,
-.grid > .col-12,
-.grid > .col-half,
-.grid > .col-third,
-.grid > .col-two3,
-.grid > .col-quarter,
-.grid > .col-full {
-  > * {
+.grid>.col-1,
+.grid>.col-2,
+.grid>.col-3,
+.grid>.col-4,
+.grid>.col-5,
+.grid>.col-6,
+.grid>.col-7,
+.grid>.col-8,
+.grid>.col-9,
+.grid>.col-10,
+.grid>.col-11,
+.grid>.col-12,
+.grid>.col-half,
+.grid>.col-third,
+.grid>.col-two3,
+.grid>.col-quarter,
+.grid>.col-full {
+  >* {
     margin-block: 0;
     margin-block-end: var(--space);
   }

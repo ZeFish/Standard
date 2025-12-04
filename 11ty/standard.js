@@ -49,6 +49,7 @@ function deepMerge(target, source) {
 // Defaults (unchanged)
 const defaults = {
   outputDir: "assets/standard",
+  assetsDir: "assets",
   publicDir: "../public",
   escapeCodeBlocks: [],
   verbose: false,
@@ -121,10 +122,37 @@ export default function (eleventyConfig, options = {}) {
     );
   }
 
-  // 6) Passthrough copy (dist -> outputDir)
+  // 6) Passthrough copy (lib -> outputDir)
   logger.debug(`Standard assets: lib/ → ${site.standard.outputDir}/`);
   eleventyConfig.addPassthroughCopy({
     [path.join(__dirname, "../lib")]: site.standard.outputDir,
+  });
+
+  eleventyConfig.addPassthroughCopy({
+    [path.join(__dirname, "../node_modules/@fontsource/ibm-plex-mono")]:
+      path.join(site.standard.assetsDir, "fonts", "ibm-plex-mono"),
+  });
+  eleventyConfig.addPassthroughCopy({
+    [path.join(__dirname, "../node_modules/@fontsource/instrument-serif")]:
+      path.join(site.standard.assetsDir, "fonts", "instrument-serif"),
+  });
+  eleventyConfig.addPassthroughCopy({
+    [path.join(__dirname, "../node_modules/@fontsource-variable/inter")]:
+      path.join(site.standard.assetsDir, "fonts", "inter"),
+  });
+  eleventyConfig.addPassthroughCopy({
+    [path.join(__dirname, "../node_modules/@fontsource-variable/fraunces")]:
+      path.join(site.standard.assetsDir, "fonts", "fraunces"),
+  });
+  eleventyConfig.addPassthroughCopy({
+    [path.join(
+      __dirname,
+      "../node_modules/@fontsource-variable/instrument-sans",
+    )]: path.join(site.standard.assetsDir, "fonts", "instrument-sans"),
+  });
+  eleventyConfig.addPassthroughCopy({
+    [path.join(__dirname, "../node_modules/@fontsource-variable/newsreader")]:
+      path.join(site.standard.assetsDir, "fonts", "newsreader"),
   });
 
   // 7) Watch targets

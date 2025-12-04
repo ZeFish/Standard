@@ -37,7 +37,7 @@ export default function (eleventyConfig, site = {}) {
   // Shortcode to include Standard CSS and JS from local files
   eleventyConfig.addShortcode("standard_assets", function () {
     let html = "";
-    
+
     // Generate cache-busting timestamp (or use package version)
     const cacheBuster = Date.now(); // Or use: process.env.npm_package_version
 
@@ -82,11 +82,12 @@ export default function (eleventyConfig, site = {}) {
 
   // Shortcode to include Standard CSS and JS from local files
   eleventyConfig.addShortcode("standard_fonts", function () {
-    return `<link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">`;
+    return `<link rel="stylesheet" href="/assets/fonts/inter/index.css">
+    <link rel="stylesheet" href="/assets/fonts/instrument-sans/index.css">
+    <link rel="stylesheet" href="/assets/fonts/instrument-serif/index.css">
+    <link rel="stylesheet" href="/assets/fonts/fraunces/index.css">
+    <link rel="stylesheet" href="/assets/fonts/ibm-plex-mono/index.css">
+    <link rel="stylesheet" href="/assets/fonts/newsreader/index.css">`;
   });
 
   eleventyConfig.addShortcode("readingTime", function (text) {

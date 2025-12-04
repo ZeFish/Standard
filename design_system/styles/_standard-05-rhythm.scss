@@ -47,21 +47,12 @@
  --rhythm-gap -> little xtra control here
  */
 
-/* Enhanced Bulletproof Rhythm System - Margin Collapse Safe */
-
-/* ===== Harmony Base (containers and resets) ===== */
-:where(*, *::before, *::after) {
-  box-sizing: border-box;
-}
-
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 /* Applied to <html> root for global cascade (best practice for frameworks) */
 :where(.rhythm) {
   /* Rhythm control - can be overridden per instance */
   display: inline-flex;
   align-items: baseline;
-
-  /* Modern margin collapse prevention */
   display: flow-root;
 
   * {
@@ -77,9 +68,11 @@
       var(--rhythm-gap, calc(var(--space) + var(--space-half)))
     );
   }
+
   p:has(+ :is(h1, h2, h3, h4, h5, h6)) {
     margin-block-end: 0;
   }
+
   /*
 
   Le leading pouse le text qui touchais la ligne du dessus, a la ligne du .compact
@@ -143,6 +136,7 @@
     margin-block-start: var(--space-4);
     margin-block-end: calc(var(--space-2) + var(--space-half));
   }
+
   h1:first-of-type {
     margin-block-start: var(--space-4);
     margin-block-end: calc(var(--space-6) + var(--space-half));
@@ -174,324 +168,9 @@
     );
     margin-block-end: max((var(--space-2) * 1), var(--space));
   }
-
-  /* =========================== */
-  /* TYPOGRAPHY ELEMENTS         */
-  /* =========================== */
-
-  /* Typography-specific spacing adjustments */
-
-  /* =========================== */
-  /* CONTENT ELEMENTS            */
-  /* =========================== */
-
-  /* Lists */
-
-  ul,
-  ol {
-    list-style: none;
-    margin-block-start: 0;
-    padding-inline: 1rlh;
-    margin-block-end: var(--space);
-  }
-
-  /* Nested lists */
-  li > ul,
-  li > ol {
-    padding-inline-start: 1rlh;
-    margin-block-start: var(--space);
-    margin-block-end: 0;
-  }
-
-  /* List items */
-  li {
-    position: relative;
-    margin: 0;
-    padding-inline-start: 0;
-    line-height: 1rlh;
-    margin-block-end: var(--space-half);
-  }
-
-  li:last-child {
-    /* should be manage in the general last-chuld rule */
-    margin-block-end: 0;
-  }
-
-  p:has(+ :is(ul, ol)) {
-    margin-block-end: var(--space);
-  }
-
-  .compact {
-    --base-gap: var(--space-half);
-
-    li {
-      margin-block-end: var(--space-half);
-    }
-  }
-
-  .tight {
-    --base-gap: var(--trim);
-
-    li {
-      margin-block-end: var(--trim);
-    }
-  }
-
-  .relaxed {
-    --base-gap: var(--space-2);
-
-    li {
-      margin-block-end: var(--space-2);
-    }
-  }
-
-  /* Unordered list bullets */
-  ul > li::before {
-    content: "•";
-    position: absolute;
-    top: 0;
-    left: calc(1rlh * -1);
-    width: var(--space);
-    text-align: center;
-    color: var(--color-subtle);
-  }
-
-  /* Ordered list numbers */
-  ol {
-    counter-reset: ol-counter;
-  }
-
-  ol > li {
-    counter-increment: ol-counter;
-  }
-
-  ol > li::before {
-    content: counter(ol-counter) ".";
-    position: absolute;
-    top: var(--trim);
-    left: calc((1rlh * -1) - var(--space-half));
-    text-align: right;
-    color: var(--color-subtle);
-    font-variant-numeric: tabular-nums;
-    width: 1rlh;
-    font-size: var(--scale-d2);
-  }
-
-  /* Inline lists - remove margin-bottom from list items */
-  ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
-  ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"])
-    li {
-    margin-block-end: 0;
-  }
-
-  /* =========================== */
-  /* FORMS AND INTERACTIVE       */
-  /* =========================== */
-
-  /* Form containers - avoid nested grids */
-  form:not(.grid *) {
-    display: grid;
-    gap: calc(var(--space) * var(--space-2));
-  }
-
-  /* Forms inside grids use flex layout to avoid nesting issues */
-  .grid form {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--space) * var(--space-2));
-  }
-
-  /* Form field groups - spacing only */
-  fieldset {
-    padding-inline: var(--space);
-    display: grid;
-    gap: 0;
-  }
-
-  legend {
-    margin-block-end: var(--space);
-  }
-
-  /* Form inputs */
-  input,
-  textarea,
-  select {
-    padding-inline: var(--space);
-    margin-block-end: var(--space-2);
-  }
-
-  /* Labels - spacing only */
-  label {
-    margin-inline: var(--space);
-    margin-block-end: var(--space-2);
-  }
-
-  /* Checkbox/radio with labels */
-  input[type="checkbox"] + label,
-  input[type="radio"] + label {
-    margin-inline-start: var(--leading);
-  }
-
-  div:has(input + label) {
-    margin-block-end: var(--space-2);
-  }
-
-  fieldset div,
-  fieldset p {
-    margin: 0;
-    padding: 0;
-  }
-
-  fieldset + button {
-    margin-block-start: var(--space);
-  }
-
-  fieldset :last-child {
-    margin-block-end: 0;
-  }
-
-  /* =========================== */
-  /* MEDIA ELEMENTS              */
-  /* =========================== */
-
-  /* Images, videos, etc. */
-  img,
-  video,
-  audio,
-  iframe {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Figures */
-  figure {
-    display: grid;
-    gap: calc(var(--space-d4) * var(--space-gap));
-  }
-
-  /* Spacing handled by rhythm system */
-  /* figcaption {} */
-  /* =========================== */
-  /* TABLES                      */
-  /* =========================== */
-
-  caption {
-    margin-block-end: calc(var(--space-d4) * var(--space-gap));
-  }
-
-  /* Swiss-style data tables */
-  table {
-    /* You already have: border-collapse: collapse; */
-    width: 100%;
-    /* font-variant-numeric: tabular-nums;*/
-    /* ADD: Monospace numbers */
-  }
-
-  td,
-  th {
-    padding: var(--leading);
-    font-size: var(--scale-d2);
-    min-height: var(--line-height);
-  }
-
-  th {
-    /* You already have: text-align: left; font-weight: bold; */
-    text-transform: uppercase;
-    /* ADD */
-    letter-spacing: 0.05em;
-    /* ADD */
-  }
-
-  /* ADD: Numeric column alignment */
-  .numeric {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ADD: Zebra striping (functional, not decorative) */
-  .striped tbody tr:nth-child(even) {
-    background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
-  }
-}
-
-/* =========================== */
-/* UTILITY CLASSES            */
-/* =========================== */
-
-/* Spacing override utilities */
-.rhythm-compact {
-  --base-gap: 0.5;
-}
-
-.rhythm-relaxed {
-  --base-gap: 1.5;
-}
-
-.rhythm-xl {
-  --base-gap: 2;
 }
 
 /* Individual element overrides */
 .no-rhythm {
   margin: 0 !important;
-}
-
-.no-block-start {
-  margin-block-start: 0 !important;
-}
-
-.no-block-end {
-  margin-block-end: 0 !important;
-}
-
-.stick-next {
-  margin-block-end: calc(var(--space-d4) * var(--space-gap)) !important;
-}
-
-/* =========================== */
-/* PERFORMANCE OPTIMIZATIONS  */
-/* =========================== */
-
-/* Reduce repaints and reflows */
-/* .rhythm {
-    /* Use GPU acceleration for transforms if needed */
-/*transform: translateZ(0); */
-
-/* Optimize for animations */
-/*will-change: auto; */
-/* } */
-
-/* =========================== */
-/* ACCESSIBILITY               */
-/* =========================== */
-
-/* Ensure rhythm doesn't interfere with screen readers */
-/* .rhythm:focus-within {
-    /* Maintain focus visibility */
-/* } */
-
-/* Respect user motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .rhythm {
-    transition: none;
-  }
-}
-
-/* =========================== */
-/* LEGACY SUPPORT             */
-/* =========================== */
-
-/* Fallback for browsers without CSS Grid support */
-@supports not (display: grid) {
-  .rhythm {
-    display: block;
-
-    > * {
-      margin-block-end: var(--space-gap);
-    }
-
-    > :last-child {
-      margin-block-end: 0;
-    }
-  }
 }

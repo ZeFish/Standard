@@ -1,3 +1,4 @@
+(function() {
 /**
  * Scroll Wrappers - Manage horizontal scroll shadow indicators
  *
@@ -20,7 +21,7 @@
  * @param {Element} [root=document] - The element to search within.
  *   Defaults to entire document. Scoping makes it efficient for HTMX swaps.
  */
-export function initScrollWrappers(root = document) {
+function initScrollWrappers(root = document) {
   // Find all .scroll elements that DO NOT have our initialized marker
   const newWrappers = root.querySelectorAll(
     ".scroll:not([data-scroll-initialized])",
@@ -71,3 +72,4 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") {
   window.initializeScrollWrappers = initScrollWrappers;
 }
+})();

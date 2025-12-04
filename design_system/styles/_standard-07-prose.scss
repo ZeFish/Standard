@@ -40,24 +40,14 @@
  * @see https://www.rsub.com/blog/how-long-should-a-line-of-text-be/
  */
 
-/*
-
- .callout,
- blockquote,
- pre,
- figure,
- p:has(img) {
-   margin-inline: var(--content-small);
- }
-
- */
 /* Prose Layout Design Tokens - Using logical properties */
 :root {
   /* Layout grid tokens */
-  --content: min(var(--line-width), 100%); /* ← FIXED */
+  --content: min(var(--line-width), 100%);
+  /* ← FIXED */
   --content-small: max(calc(var(--space-2) - var(--space)), var(--space));
-  --content-accent: minmax(0, var(--space));
-  --content-feature: minmax(0, var(--space-2));
+  --content-accent: minmax(0, var(--space-2));
+  --content-feature: minmax(0, var(--space-4));
   --content-hero: minmax(0, 1fr);
 }
 
@@ -67,13 +57,10 @@
 :where(.prose) {
   display: grid;
   grid-template-columns:
-    [hero-start] var(--content-hero)
-    [feature-start] var(--content-feature)
-    [accent-start] var(--content-accent)
-    [content-start] var(--content) [content-end]
-    var(--content-accent) [accent-end]
-    var(--content-feature) [feature-end]
-    var(--content-hero) [hero-end];
+    [hero-start] var(--content-hero) [feature-start] var(--content-feature)
+    [accent-start] var(--content-accent) [content-start] var(--content)
+    [content-end] var(--content-accent) [accent-end] var(--content-feature)
+    [feature-end] var(--content-hero) [hero-end];
 
   transition: grid-template-columns var(--transition);
 
@@ -106,8 +93,10 @@
   .container-hero {
     grid-column: hero;
   }
+
   .container-hero {
     margin-inline: calc(var(--gap-body) * -1);
+
     > * {
       margin-inline: 0;
     }
@@ -136,8 +125,10 @@
       img:first-child,
       img:last-child {
         margin-inline: auto;
-        flex-grow: 0; /* prevents the image from stretching to fill */
+        flex-grow: 0;
+        /* prevents the image from stretching to fill */
       }
+
       br {
         display: none;
       }
@@ -150,16 +141,16 @@
 
     /* Adjacent images get reduced spacing  + var(--img-gap)    */
     p:has(img) + p:has(img) {
-      margin-block-start: calc(
-        (var(--space-2) -1) + var(--gap-grid-img)
-      ) !important;
+      margin-block-start: calc((var(--space) * -1)) !important;
     }
   }
+
   :where(#{$rhythm-block-elements}) {
     > :is(h1, h2, h3, h4, h5, h6):where(:first-child) {
       margin-block-start: 0;
     }
   }
+
   /* Note: Page's main title h1:first-child retains spacing via direct child selector */
   /* The > h1:first-child selector in h1 rule ensures it overrides rhythm's > * margin-reset */
 
@@ -209,9 +200,7 @@
   }
 
   a {
-    word-break: break-all;
-    ellipsis: 1;
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
   }
 }
 
@@ -221,6 +210,7 @@
     opacity: 0;
     transform: translateY(0.5rem);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

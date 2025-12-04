@@ -1,0 +1,1134 @@
+/**
+ * Standard Framework - Extended Components (Optional)
+ *
+ * Advanced UI components extracted from the core framework.
+ * These are optional and can be replaced by external component libraries.
+ *
+ * Components included:
+ * - Card (.card, .card.clickable)
+ * - Alert (.alert + variants)
+ * - Skip Link (.skip-link)
+ * - Breadcrumb (.breadcrumb + variants)
+ * - Pagination (.pagination + variants)
+ * - Table Wrapper (.scroll)
+ * - Tabs (.tabs + tab system)
+ * - Accordion (.accordion + variants)
+ * - Menu Helpers (ul.menu, nav.menu)
+ *
+ * @version 0.12.0
+ * @license MIT
+ */
+
+/* This file will be populated with extracted components from _standard-10-components.scss */
+/* Placeholder for now - components will be added in next steps */
+
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* CARD COMPONENT              */
+/* =========================== */
+
+/**
+ * @name Card Component
+ * @group components-layout
+ */
+
+.card {
+  background: var(--color-background-secondary);
+  border: var(--border);
+}
+
+.card.clickable {
+  a {
+    text-decoration: none;
+  }
+
+  color: inherit;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* =========================== */
+/* MENU HELPERS                */
+/* =========================== */
+
+/**
+ * @name Menu Helpers
+ * @group components-navigation
+ * @since 0.15.0
+ */
+
+/* =========================== */
+/* ALERT COMPONENT             */
+/* =========================== */
+
+/**
+ * @name Alert Component
+ * @group components-feedback
+ * @since 0.11.0
+ */
+
+aside,
+.alert {
+  font-family: var(--font-interface);
+}
+
+.alert {
+  --color-alert: var(--color-accent);
+  color: color-mix(
+    in srgb,
+    var(--color-alert) 10%,
+    var(--color-foreground)
+  ) !important;
+  background: color-mix(
+    in srgb,
+    var(--color-alert) 10%,
+    var(--color-background-secondary)
+  );
+  border-left: var(--stroke-width) solid
+    color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
+}
+
+/* Alert variants */
+.alert.warning {
+  --color-alert: var(--color-warning);
+}
+
+.alert.error {
+  --color-alert: var(--color-error);
+}
+
+.alert.success {
+  --color-alert: var(--color-success);
+}
+
+.alert-action {
+  display: inline-block;
+  margin-inline-start: var(--space-d2);
+  color: var(--alert-border-color);
+  text-decoration: underline;
+  font-weight: var(--font-weight-bold);
+
+  &:hover {
+    text-decoration-thickness: 0.15em;
+  }
+}
+
+/* =========================== */
+/* TODO: Add more components   */
+/* =========================== */
+
+/*
+ * Components to add from _standard-10-components.scss:
+ * - Skip Link (.skip-link) - lines 608-675
+ * - Breadcrumb (.breadcrumb) - lines 748-845
+ * - Pagination (.pagination) - lines 910-1067
+ * - Scroll Wrapper (.scroll) - lines 1137-1192
+ * - Tabs (.tabs) - lines 1843-1951
+ * - Accordion (.accordion) - lines 2029-2158
+ *
+ * These can be migrated progressively as needed.
+ */
+
+.breadcrumb {
+  /* Container styling */
+  margin-block-end: var(--space);
+  font-size: var(--scale-d2);
+
+  /* List styling */
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--leading);
+    align-items: center;
+  }
+
+  /* List items */
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--leading);
+    margin: 0;
+
+    /* Remove default list item spacing */
+    &::before {
+      display: none;
+    }
+
+    /* Separator (not on first item) */
+    &:not(:first-child)::before {
+      content: "→";
+      /* or "/" or "›" */
+      display: inline-block;
+      color: var(--color-subtle);
+      margin-inline-end: var(--leading);
+    }
+  }
+
+  /* Links */
+  a {
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-decoration-color: var(--color-subtle);
+    text-underline-offset: 0.15em;
+
+    &:hover {
+      color: var(--color-accent);
+      text-decoration-color: var(--color-accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  /* Current page (not a link) */
+  [aria-current="page"] {
+    color: var(--color-muted);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+/**
+ * @name Breadcrumb Variants
+ * @group components-navigation
+ * @since 0.11.0
+ */
+
+/* compact variant - smaller text, compacter spacing */
+.breadcrumb-compact {
+  font-size: var(--scale-d3);
+
+  ol {
+    gap: var(--trim);
+  }
+
+  li {
+    gap: var(--trim);
+
+    &:not(:first-child)::before {
+      margin-inline-end: var(--trim);
+    }
+  }
+}
+
+/* Mobile: collapse to first and last with ellipsis */
+@media (max-width: 768px) {
+  .breadcrumb ol li:not(:first-child):not(:last-child) {
+    display: none;
+  }
+
+  .breadcrumb ol li:last-child::before {
+    content: "…";
+    /* Ellipsis to show collapsed crumbs */
+  }
+}
+
+/**
+ * @name Pagination Component
+ * @group components-navigation
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1998, Google launched with a simple idea: ten results per page, numbered
+ * links at the bottom. Click "2" for the next ten, "3" for the next ten after
+ * that. It wasn't revolutionary—pagination had existed in print for centuries—
+ * but Google made it feel inevitable. Fast, clear, predictable.
+ *
+ * Pagination solves a fundamental problem: how do you present large datasets
+ * without overwhelming users? A thousand blog posts can't fit on one page. So
+ * you chunk them—ten at a time, twenty at a time, whatever makes sense. Users
+ * get a sense of scale ("page 3 of 47"), can jump forward or back, and never
+ * feel lost in an endless scroll.
+ *
+ * This implementation follows WCAG 2.1 guidelines: semantic <nav> with
+ * aria-label, proper focus indicators, current page marked with aria-current.
+ * Numbers use tabular figures for consistent width. Previous/Next buttons
+ * provide quick jumps. Ellipsis (…) indicates skipped page ranges without
+ * cluttering the interface.
+ *
+ * The key insight: pagination isn't about showing every page number. It's
+ * about showing the right page numbers—current, adjacent, first, last—and
+ * collapsing everything else. Users rarely need page 47 directly. They need
+ * "next few" or "jump to end."
+ *
+ * ### Future Improvements
+ *
+ * - Page size selector (10, 25, 50, 100 items per page)
+ * - Jump to page input field for large datasets
+ * - Infinite scroll variant (load more on scroll)
+ * - Keyboard shortcuts (arrow keys to navigate pages)
+ * - Summary text ("Showing 21-30 of 487 items")
+ *
+ * @see {element} nav - Semantic navigation landmark
+ * @see {attribute} aria-label="Pagination" - Screen reader label
+ * @see {attribute} aria-current="page" - Current page indicator
+ *
+ * @link https://www.nngroup.com/articles/item-list-view-all/ NN/g Pagination Guidelines
+ * @link https://inclusive-components.design/pagination/ Inclusive Pagination
+ *
+ * @example html - Basic pagination
+ *   <nav aria-label="Pagination" class="pagination">
+ *     <a href="?page=1" class="pagination-prev" aria-label="Previous page">← Previous</a>
+ *     <a href="?page=1">1</a>
+ *     <span aria-current="page" class="pagination-current">2</span>
+ *     <a href="?page=3">3</a>
+ *     <a href="?page=4">4</a>
+ *     <span class="pagination-ellipsis">…</span>
+ *     <a href="?page=20">20</a>
+ *     <a href="?page=3" class="pagination-next" aria-label="Next page">Next →</a>
+ *   </nav>
+ *
+ * @example html - compact mobile-friendly variant
+ *   <nav aria-label="Pagination" class="pagination pagination-compact">
+ *     <a href="?page=1">← Prev</a>
+ *     <span>Page 2 of 20</span>
+ *     <a href="?page=3">Next →</a>
+ *   </nav>
+ */
+
+.pagination {
+  /* Container styling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space);
+  margin-block: var(--space);
+  font-size: var(--scale-d2);
+  font-variant-numeric: tabular-nums;
+  /* Monospace numbers for alignment */
+
+  /* Links and current page */
+  a,
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5em;
+    height: 2.5em;
+    padding: 0 var(--trim);
+    border: var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-foreground);
+    margin-block-end: 0;
+    transition:
+      background-color var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  /* Link hover states */
+  a:hover {
+    background: var(--color-background-secondary);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* Link focus states */
+  a:focus-visible {
+    outline: var(--stroke-width) solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Active link (click) */
+  a:active {
+    transform: scale(0.95);
+  }
+}
+
+/**
+ * @name Pagination Current Page
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * The current page is not a link (you're already here). It's visually distinct
+ * with background color, bold text, and aria-current for screen readers.
+ */
+.pagination-current,
+.pagination [aria-current="page"] {
+  background: var(--color-accent);
+  color: var(--color-background);
+  border-color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+  cursor: default;
+  pointer-events: none;
+  /* Not interactive */
+}
+
+/**
+ * @name Pagination Ellipsis
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * The ellipsis (…) indicates skipped pages. It's not a link, just a visual
+ * indicator. Screen readers ignore it (no semantic meaning).
+ */
+.pagination-ellipsis {
+  border: none;
+  background: transparent;
+  pointer-events: none;
+  color: var(--color-subtle);
+}
+
+/**
+ * @name Pagination Previous/Next Buttons
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Previous/Next provide quick navigation without numbers. They're wider to
+ * accommodate text ("Previous" vs just "2").
+ */
+.pagination-prev,
+.pagination-next {
+  min-width: auto;
+  padding: 0 var(--trim);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Disabled state (first/last page) */
+.pagination-prev[aria-disabled="true"],
+.pagination-next[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/**
+ * @name Pagination compact Variant
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * On mobile, showing 10 page numbers is overwhelming. The compact variant
+ * shows only Prev/Next and a page counter ("Page 3 of 20").
+ */
+@media (max-width: 768px) {
+  .pagination {
+    font-size: var(--scale-d3);
+
+    /* Hide page numbers on mobile */
+    a:not(.pagination-prev):not(.pagination-next),
+    span:not(.pagination-current):not(.pagination-summary) {
+      display: none;
+    }
+
+    /* Show summary text */
+    .pagination-summary {
+      display: inline-flex;
+      border: none;
+      background: transparent;
+      font-weight: var(--font-weight);
+    }
+  }
+}
+
+/**
+ * @name Pagination Summary Text
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Summary text provides context ("Showing 21-30 of 487 items"). Useful for
+ * large datasets where page numbers alone aren't enough.
+ *
+ * @example html
+ *   <nav aria-label="Pagination" class="pagination">
+ *     <span class="pagination-summary">Showing 21-30 of 487 items</span>
+ *     <a href="?page=2" class="pagination-prev">← Previous</a>
+ *     <span aria-current="page">3</span>
+ *     <a href="?page=4" class="pagination-next">Next →</a>
+ *   </nav>
+ */
+.pagination-summary {
+  font-size: var(--scale-d3);
+  color: var(--color-muted);
+  border: none;
+  background: transparent;
+  min-width: auto;
+}
+
+/**
+ * @name Table Wrapper
+ * @group components-data
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * Tables are beautiful on desktop. Clear columns, aligned data, easy scanning.
+ * But on mobile? Disaster. A six-column table on a 375px screen becomes an
+ * illegible mess of squished text and broken layouts. You can't just make the
+ * font smaller—at some point, readability collapses.
+ *
+ * The table wrapper solves this with horizontal scrolling. It's not glamorous,
+ * but it works: wrap the table in a scrollable container, add visual indicators
+ * (shadows) at the edges, and users can swipe to see more data. The table
+ * maintains its structure, columns keep their width, and nothing breaks.
+ *
+ * The shadow indicators are subtle but critical. Without them, users don't know
+ * there's more content to the right. They assume the table ends. With shadows,
+ * they see the fade—"oh, I can scroll"—and interaction becomes intuitive.
+ * This is affordance: making interaction possibilities visible.
+ *
+ * This implementation uses CSS scroll shadows (gradient technique) and smooth
+ * scrolling with momentum. Works on touch devices, trackpads, and keyboard
+ * (arrow keys when focused). The table retains full functionality while gaining
+ * mobile responsiveness.
+ *
+ * ### Future Improvements
+ *
+ * - Sticky first column (row headers remain visible while scrolling)
+ * - Sticky header row (column headers stay at top)
+ * - Scroll position indicator (progress bar showing how far scrolled)
+ * - Responsive table transformations (stack columns on mobile)
+ * - CSV/Excel export button integration
+ *
+ * @see {element} table - Wrapped table element
+ * @see {class} .rhythm - Tables respect rhythm spacing
+ *
+ * @link https://adrianroselli.com/2020/11/under-engineered-responsive-tables.html Responsive Table Patterns
+ * @link https://css-tricks.com/fixing-tables-long-strings/ CSS Tricks Table Handling
+ *
+ * @example html - Basic responsive table
+ *   <div class="table-wrapper">
+ *     <table>
+ *       <thead>
+ *         <tr>
+ *           <th>Name</th>
+ *           <th>Email</th>
+ *           <th>Role</th>
+ *           <th>Status</th>
+ *         </tr>
+ *       </thead>
+ *       <tbody>
+ *         <tr>
+ *           <td>John Doe</td>
+ *           <td>john@example.com</td>
+ *           <td>Admin</td>
+ *           <td>Active</td>
+ *         </tr>
+ *       </tbody>
+ *     </table>
+ *   </div>
+ *
+ * @example html - With sticky header
+ *   <div class="table-wrapper table-wrapper-sticky-header">
+ *     <table>...</table>
+ *   </div>
+ */
+
+.modal,
+dialog.modal {
+  /* Reset browser default dialog styles */
+  border: none;
+  padding: 0;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 600px;
+  /* Default width */
+  background: var(--color-background);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: var(--color-foreground);
+
+  /* Positioning */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-modal);
+
+  /* Animation (fade in) */
+  opacity: 0;
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+
+  /* Open state */
+  &[open] {
+    opacity: 1;
+  }
+}
+
+/**
+ * @name Modal Backdrop
+ * @group components-overlay
+ * @since 0.11.0
+ *
+ * The ::backdrop pseudo-element is automatically created by the browser for
+ * <dialog> elements. It covers the entire viewport, prevents interaction with
+ * the page beneath, and provides visual context that you're in a modal.
+ */
+.modal::backdrop,
+dialog.modal::backdrop {
+  background: var(--modal-background);
+  backdrop-filter: var(--blur);
+  /* Subtle blur effect */
+  animation: fadeIn var(--transition);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/**
+ * @name Modal Header
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--trim) var(--leading);
+  border-bottom: var(--border);
+
+  /* Title */
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-size: var(--scale-2);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+/**
+ * @name Modal Close Button
+ * @group components-overlay
+ * @since 0.11.0
+ *
+ * The close button is typically an X in the top-right corner. Must have
+ * aria-label for screen readers ("Close dialog").
+ */
+.modal-close {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-size: var(--scale-3);
+  line-height: 1;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0;
+  width: 1rlh;
+  height: 1rlh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+
+  &:hover {
+    background: var(--color-background-secondary);
+    color: var(--color-foreground);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/**
+ * @name Modal Body
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-body {
+  padding: var(--trim) var(--leading);
+  overflow-y: auto;
+  /* Scroll if content too long */
+  max-height: 60vh;
+  /* Prevent modal from growing too tall */
+
+  /* Apply rhythm to content */
+  > :first-child {
+    margin-block-start: 0;
+  }
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+}
+
+/**
+ * @name Modal Footer
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space);
+  padding: var(--trim) var(--leading);
+  border-top: var(--border);
+  background: var(--color-background-secondary);
+}
+
+/**
+ * @name Modal Size Variants
+ * @group components-overlay
+ * @since 0.11.0
+ */
+.modal-small {
+  width: 400px;
+}
+
+.modal-large {
+  width: 800px;
+}
+
+.modal-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+/* Mobile: always fullscreen */
+@media (max-width: 768px) {
+  .modal,
+  dialog.modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/**
+ * @name Tabs Component
+ * @group components-navigation
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1973, Xerox PARC invented the tabbed interface for their Alto computer.
+ * The metaphor was brilliant: file folder tabs. Click a tab, see that folder's
+ * contents. Switch tabs, switch contexts. It mapped physical organization to
+ * digital space so intuitively that every operating system copied it.
+ *
+ * Tabs solve a fundamental UI problem: how do you present multiple related
+ * sections without overwhelming users? Put everything on one page and it's
+ * chaos. Put each on a separate page and navigation becomes tedious. Tabs
+ * let you switch contexts instantly—same page, different view. No page load,
+ * no lost scroll position, no cognitive reset.
+ *
+ * But tabs are complex to build accessibly. ARIA requires specific roles
+ * (tablist, tab, tabpanel), keyboard navigation (arrow keys to switch tabs,
+ * Tab key to move into panel), focus management (active tab is focusable,
+ * others aren't), and proper hiding (inactive panels are aria-hidden). Get
+ * any of this wrong and screen reader users are lost.
+ *
+ * This implementation follows the ARIA Authoring Practices Guide for tabs:
+ * semantic HTML, proper ARIA roles, keyboard navigation, focus management.
+ * It's CSS-only for styling—you'll need JavaScript for the switching logic
+ * (we provide the structure, you provide the behavior).
+ *
+ * ### Future Improvements
+ *
+ * - Vertical tabs variant (tabs on left side)
+ * - Pill-style tabs (rounded, filled background)
+ * - Scrollable tabs for many options (overflow with arrows)
+ * - Lazy loading panels (load content on first click)
+ * - URL hash integration (bookmark specific tab)
+ * - Animation between tab switches
+ *
+ * @see {attribute} role="tablist" - Container for tabs
+ * @see {attribute} role="tab" - Individual tab button
+ * @see {attribute} role="tabpanel" - Content panel for each tab
+ * @see {attribute} aria-selected="true" - Marks active tab
+ * @see {attribute} aria-controls - Links tab to its panel
+ *
+ * @link https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ ARIA Tabs Pattern
+ * @link https://inclusive-components.design/tabbed-interfaces/ Inclusive Tabs
+ *
+ * @example html - Basic tabs structure
+ *   <div class="tabs">
+ *     <div class="tabs-list" role="tablist">
+ *       <button role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">
+ *         Tab One
+ *       </button>
+ *       <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">
+ *         Tab Two
+ *       </button>
+ *       <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">
+ *         Tab Three
+ *       </button>
+ *     </div>
+ *
+ *     <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+ *       <p>Content for tab one...</p>
+ *     </div>
+ *
+ *     <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+ *       <p>Content for tab two...</p>
+ *     </div>
+ *
+ *     <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
+ *       <p>Content for tab three...</p>
+ *     </div>
+ *   </div>
+ *
+ * @example javascript - Basic tab switching
+ *   const tabs = document.querySelectorAll('[role="tab"]');
+ *   const panels = document.querySelectorAll('[role="tabpanel"]');
+ *
+ *   tabs.forEach(tab => {
+ *     tab.addEventListener('click', () => {
+ *       // Deactivate all tabs
+ *       tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+ *       panels.forEach(p => p.hidden = true);
+ *
+ *       // Activate clicked tab
+ *       tab.setAttribute('aria-selected', 'true');
+ *       const panel = document.getElementById(tab.getAttribute('aria-controls'));
+ *       panel.hidden = false;
+ *     });
+ *   });
+ */
+
+.tabs {
+  /* Container */
+  margin-block-end: var(--space);
+}
+
+/**
+ * @name Tabs List
+ * @group components-navigation
+ * @since 0.11.0
+ */
+.tabs-list {
+  display: flex;
+  gap: var(--space-d4);
+  border-bottom: 2px solid var(--color-border);
+  margin-block-end: var(--space);
+}
+
+/**
+ * @name Tab Button
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Each tab is a button (not a link—tabs don't navigate, they switch views).
+ * The active tab has a bottom border that extends over the tablist border,
+ * creating the visual "this tab is open" effect.
+ */
+[role="tab"] {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-d4) var(--space-d2);
+  font-size: var(--scale-d2);
+  font-weight: var(--font-weight);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    border-color var(--transition);
+  position: relative;
+  top: 2px;
+  /* Overlap with tablist border */
+
+  &:hover {
+    color: var(--color-foreground);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  /* Active tab */
+  &[aria-selected="true"] {
+    color: var(--color-foreground);
+    font-weight: var(--font-weight-bold);
+    border-bottom-color: var(--color-accent);
+  }
+}
+
+/**
+ * @name Tab Panel
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Each panel contains the content for its tab. Only the active panel is visible;
+ * others are hidden with the `hidden` attribute (not display: none in CSS, so
+ * screen readers respect it).
+ */
+[role="tabpanel"] {
+  padding: var(--space);
+
+  /* Remove margin from first/last children */
+  > :first-child {
+    margin-block-start: 0;
+  }
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+
+  /* Hidden panels */
+  &[hidden] {
+    display: none;
+  }
+}
+
+/**
+ * @name Tabs Variant - Boxed Style
+ * @group components-navigation
+ * @since 0.11.0
+ *
+ * Panels have a border around them, tabs "attach" to the top border.
+ */
+.tabs-boxed [role="tabpanel"] {
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+.tabs-boxed [role="tab"][aria-selected="true"] {
+  background: var(--color-background);
+  border-top: 3px solid var(--color-accent);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 3px solid var(--color-background);
+  /* Hide tablist border */
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/**
+ * @name Accordion Component
+ * @group components-disclosure
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * The accordion pattern dates back to FAQs in the 1990s. You have a list of
+ * questions. Click one, see the answer. Click another, that one expands. It's
+ * a space-saving pattern—show 20 question titles on screen, hide 20 answers
+ * until needed. Progressive disclosure reveal complexity gradually.
+ *
+ * Accordions shine when you have structured content users need to scan quickly.
+ * FAQ sections, settings panels, table-of-contents navigation. They let users
+ * get an overview (all titles visible) then drill down (expand the relevant one).
+ * The key is making the interaction obvious: titles look clickable, open panels
+ * have a visual indicator, closed panels feel collapsed.
+ *
+ * This implementation uses native HTML <details> and <summary> elements—the
+ * browser handles all the expand/collapse logic, keyboard navigation (Enter/Space
+ * to toggle), and accessibility (screen readers announce "collapsed/expanded").
+ * No JavaScript required for basic functionality. Add JavaScript for "only one
+ * open at a time" behavior or animations.
+ *
+ * The visual indicator (▸ arrow) rotates when expanded, giving immediate feedback.
+ * The panel slides open smoothly (if supported). Hover states make interaction
+ * discoverable. Focus states ensure keyboard accessibility. It's a complete
+ * pattern, ready to use.
+ *
+ * ### Future Improvements
+ *
+ * - Smooth expand/collapse animation (height: 0 to auto)
+ * - "Expand all" / "Collapse all" buttons
+ * - Deep linking (open specific accordion via URL hash)
+ * - Nested accordions support
+ * - Icon customization (arrow, plus/minus, chevron)
+ * - Animated slide + fade transitions
+ *
+ * @see {element} details - Native disclosure widget
+ * @see {element} summary - Clickable trigger for details
+ * @see {attribute} open - Marks details as expanded
+ *
+ * @link https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ ARIA Accordion Pattern
+ * @link https://inclusive-components.design/collapsible-sections/ Inclusive Collapsible Sections
+ *
+ * @example html - Basic accordion
+ *   <details class="accordion">
+ *     <summary class="accordion-trigger">
+ *       What is Standard Framework?
+ *     </summary>
+ *     <div class="accordion-content">
+ *       <p>Standard Framework is a typography-focused design system...</p>
+ *     </div>
+ *   </details>
+ *
+ *   <details class="accordion">
+ *     <summary class="accordion-trigger">
+ *       How do I install it?
+ *     </summary>
+ *     <div class="accordion-content">
+ *       <p>Install via npm: <code>npm install @zefish/standard</code></p>
+ *     </div>
+ *   </details>
+ *
+ * @example html - Accordion group (multiple items)
+ *   <div class="accordion-group">
+ *     <details class="accordion">
+ *       <summary class="accordion-trigger">Question 1</summary>
+ *       <div class="accordion-content">Answer 1</div>
+ *     </details>
+ *     <details class="accordion">
+ *       <summary class="accordion-trigger">Question 2</summary>
+ *       <div class="accordion-content">Answer 2</div>
+ *     </details>
+ *   </div>
+ */
+
+.accordion {
+  /* Container styling */
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-background);
+  margin-block-end: var(--space-d2);
+  overflow: hidden;
+  /* Ensure border-radius clips content */
+
+  /* Remove default browser styling */
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/**
+ * @name Accordion Trigger
+ * @group components-disclosure
+ * @since 0.11.0
+ *
+ * The summary acts as a button—it's clickable, shows hover/focus states, and
+ * includes a visual indicator (arrow) that rotates when expanded.
+ */
+.accordion-trigger {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-d2);
+  padding: var(--space-d2);
+  cursor: pointer;
+  user-select: none;
+
+  /* Typography */
+  font-size: var(--scale-d2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-foreground);
+
+  /* Remove default list marker */
+  list-style: none;
+
+  /* Interaction states */
+  transition: background-color var(--transition);
+
+  &:hover {
+    background: var(--color-background-secondary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+
+  /* Arrow indicator */
+  &::after {
+    content: "▸";
+    /* Right-pointing triangle */
+    display: inline-block;
+    font-size: var(--scale-2);
+    color: var(--color-muted);
+    transition: transform var(--transition);
+    flex-shrink: 0;
+  }
+}
+
+/**
+ * @name Accordion Open State
+ * @group components-disclosure
+ * @since 0.11.0
+ *
+ * When the accordion is open, the arrow rotates 90° and the content panel
+ * becomes visible. The trigger gets a bottom border to separate it from content.
+ */
+.accordion[open] .accordion-trigger {
+  border-bottom: var(--border);
+
+  &::after {
+    transform: rotate(90deg);
+    /* Point down */
+  }
+}
+
+/**
+ * @name Accordion Content
+ * @group components-disclosure
+ * @since 0.11.0
+ */
+.accordion-content {
+  padding: var(--space);
+
+  /* Remove margin from first/last children */
+  > :first-child {
+    margin-block-start: 0;
+  }
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+}
+
+/**
+ * @name Accordion Group
+ * @group components-disclosure
+ * @since 0.11.0
+ *
+ * When you have multiple accordions in sequence, the group removes redundant
+ * spacing and borders for a cohesive appearance.
+ */
+.accordion-group {
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  .accordion {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    border-bottom: var(--border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.accordion-compact .accordion-trigger,
+.accordion-compact .accordion-content {
+  padding: var(--trim);
+  font-size: var(--scale-d3);
+}

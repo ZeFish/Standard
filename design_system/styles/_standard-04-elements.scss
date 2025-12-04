@@ -1,5 +1,92 @@
 @use "standard-00-variables" as *;
 
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border: 0 solid;
+}
+ol,
+ul,
+menu {
+  list-style: none;
+}
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none !important;
+}
+
+/* Remove default list bullets */
+ul.no-bullet,
+ol.no-bullet {
+  list-style: none;
+  padding-inline-start: 0;
+
+  li::before {
+    display: none;
+  }
+}
+
+/* Vertical menu navigation */
+nav.menu ul,
+ul.menu {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0;
+  gap: 0;
+
+  li {
+    list-style: none;
+    padding-inline-start: 0;
+    margin-block-end: var(--space-half);
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.tight nav.menu ul li {
+  margin-block-end: var(--trim);
+}
+
+/* Horizontal menu navigation */
+nav.menu.horizontal ul,
+ul.menu.horizontal {
+  flex-direction: row;
+  gap: var(--space);
+
+  li {
+    padding-inline-start: 0;
+    margin-block: 0;
+  }
+}
+
 html {
   background: var(--color-background);
   color: var(--color-foreground);
@@ -29,10 +116,227 @@ html {
   orphans: 2;
 }
 
+/* Unordered list bullets */
+ul > li::before {
+  content: "•";
+  position: absolute;
+  top: 0;
+  left: calc(1rlh * -1);
+  width: var(--space);
+  text-align: center;
+  color: var(--color-subtle);
+}
 
+/* Ordered list numbers */
+ol {
+  counter-reset: ol-counter;
+}
+
+ol > li {
+  counter-increment: ol-counter;
+}
+
+ol > li::before {
+  content: counter(ol-counter) ".";
+  position: absolute;
+  top: var(--trim);
+  left: calc((1rlh * -1) - var(--space-half));
+  text-align: right;
+  color: var(--color-subtle);
+  font-variant-numeric: tabular-nums;
+  width: 1rlh;
+  font-size: var(--scale-d2);
+}
+
+/* =========================== */
+/* FORMS AND INTERACTIVE       */
+/* =========================== */
+
+/* Form containers - avoid nested grids */
+form:not(.grid *) {
+  display: grid;
+  gap: calc(var(--space) * var(--space-2));
+}
+
+/* Forms inside grids use flex layout to avoid nesting issues */
+.grid form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space) * var(--space-2));
+}
+
+/* Form field groups - spacing only */
+fieldset {
+  padding-inline: var(--space);
+  display: grid;
+  gap: 0;
+}
+
+legend {
+  margin-block-end: var(--space);
+}
+
+/* Form inputs */
+input,
+textarea,
+select {
+  padding-inline: var(--space);
+  margin-block-end: var(--space-2);
+}
+
+/* Labels - spacing only */
+label {
+  margin-inline: var(--space);
+  margin-block-end: var(--space-2);
+}
+
+/* Checkbox/radio with labels */
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  margin-inline-start: var(--space-half);
+}
+
+div:has(input + label) {
+  margin-block-end: var(--space-2);
+}
+
+fieldset div,
+fieldset p {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset + button {
+  margin-block-start: var(--space);
+}
+
+fieldset :last-child {
+  margin-block-end: 0;
+}
+
+/* =========================== */
+/* MEDIA ELEMENTS              */
+/* =========================== */
+
+/* Images, videos, etc. */
+img,
+video,
+audio,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Figures */
+figure {
+  display: grid;
+  gap: calc(var(--space-d4) * var(--space-2));
+}
+
+/* Spacing handled by rhythm system */
+/* figcaption {} */
+/* =========================== */
+/* TABLES                      */
+/* =========================== */
+
+caption {
+  margin-block-end: calc(var(--space-d4) * var(--space));
+}
+
+/* Swiss-style data tables */
+table {
+  /* You already have: border-collapse: collapse; */
+  width: 100%;
+  /* font-variant-numeric: tabular-nums;*/
+  /* ADD: Monospace numbers */
+}
+
+td,
+th {
+  padding: var(--space-half);
+  font-size: var(--scale-d2);
+  min-height: var(--line-height);
+}
+
+th {
+  /* You already have: text-align: left; font-weight: bold; */
+  text-transform: uppercase;
+  /* ADD */
+  letter-spacing: 0.05em;
+  /* ADD */
+}
+
+/* ADD: Numeric column alignment */
+.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ADD: Zebra striping (functional, not decorative) */
+.striped tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+}
 
 img {
   padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin-block-start: 0;
+  padding-inline: 1rlh;
+  margin-block-end: var(--space);
+}
+
+/* Nested lists */
+li > ul,
+li > ol {
+  padding-inline-start: 1rlh;
+  margin-block-start: var(--space);
+  margin-block-end: 0;
+}
+
+/* List items */
+li {
+  position: relative;
+  margin: 0;
+  padding-inline-start: 0;
+  line-height: 1rlh;
+  margin-block-end: var(--space-half);
+}
+
+li:last-child {
+  /* should be manage in the general last-chuld rule */
+  margin-block-end: 0;
+}
+
+p:has(+ :is(ul, ol)) {
+  margin-block-end: var(--space);
+}
+
+.compact {
+  --base-gap: var(--space-half);
+
+  li {
+    margin-block-end: var(--space-half);
+  }
+}
+
+.tight {
+  --base-gap: var(--trim);
+
+  li {
+    margin-block-end: var(--trim);
+  }
+}
+
+.relaxed {
+  --base-gap: var(--space-2);
+
+  li {
+    margin-block-end: var(--space-2);
+  }
 }
 
 /* =========================== */
@@ -78,6 +382,12 @@ h6 {
   box-sizing: border-box;
 }
 
+/* Inline lists - remove margin-bottom from list items */
+ul:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li,
+ol:where(.display-flex, [style*="display: flex"], [style*="display:flex"]) li {
+  margin-block-end: 0;
+}
+
 h1 {
   font-weight: var(--font-weight-h1);
   font-size: clamp(var(--scale-3), 10vw, var(--scale-4));
@@ -116,7 +426,7 @@ h6 {
   font-weight: 600;
 }
 
-h6+p {
+h6 + p {
   display: inline;
 }
 
@@ -151,6 +461,7 @@ pre {
   overflow-x: auto;
   box-shadow: inset var(--shadow);
   line-height: var(--line-height-compact);
+  padding: var(--space-half);
 
   code {
     background: transparent;
@@ -323,9 +634,11 @@ a.button {
 
   border-radius: var(--radius);
 
-  background: color-mix(in srgb,
-      var(--color-accent) 65%,
-      var(--color-background-secondary));
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 65%,
+    var(--color-background-secondary)
+  );
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
@@ -340,7 +653,6 @@ a.button {
 }
 
 @media (prefers-color-scheme: dark) {
-
   button,
   a.button,
   a.button:visited {
@@ -369,17 +681,21 @@ a.button {
 
 button:hover,
 a.button:hover {
-  background: color-mix(in srgb,
-      var(--color-accent) 80%,
-      var(--color-background-secondary));
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 80%,
+    var(--color-background-secondary)
+  );
   color: var(--color-background);
 }
 
 button:active,
 a.button:active {
-  background: color-mix(in srgb,
-      var(--color-accent) 50%,
-      var(--color-background-secondary));
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 50%,
+    var(--color-background-secondary)
+  );
 }
 
 button:focus-visible,
@@ -428,9 +744,11 @@ select:focus {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 0px;
   border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  background-color: color-mix(in srgb,
-      var(--color-accent) 5%,
-      var(--color-background));
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 5%,
+    var(--color-background)
+  );
 }
 
 textarea {
@@ -460,9 +778,11 @@ fieldset {
   border: var(--border);
   border-radius: var(--radius);
   padding: var(--trim) !important;
-  background: color-mix(in srgb,
-      var(--color-background-secondary) 25%,
-      var(--color-background));
+  background: color-mix(
+    in srgb,
+    var(--color-background-secondary) 25%,
+    var(--color-background)
+  );
 }
 
 /* Checkboxes and radios */

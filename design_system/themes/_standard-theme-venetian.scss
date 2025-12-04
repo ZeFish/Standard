@@ -1,0 +1,25 @@
+/* Adobe Jenson Pro and futura*/
+
+[data-theme="venetian"] {
+    --color-light-accent: #7b3f00; /* burnt umber */
+    --color-blue: #2f4e6e; /* lapis-like */
+    --color-yellow: #c2a94b;
+    --color-dark-accent: color-mix(
+        in srgb,
+        var(--color-dark-foreground) 25%,
+        #b08a4b
+    );
+
+    --font-header: "adobe-jenson-pro";
+    --font-text: "adobe-jenson-pro";
+
+    --gap-body: var(--space-2);
+    --gap-block: var(--space-2);
+
+    --monile-gap-body: var(--space-2);
+    --mobile-gap-block: var(--space-2);
+
+    letter-spacing: 0.004em;
+    --line-height: 1.55;
+    --line-width: var(--line-width-s);
+}

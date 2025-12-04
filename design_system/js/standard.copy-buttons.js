@@ -1,3 +1,4 @@
+(function() {
 /**
  * Copy Buttons - Add copy-to-clipboard functionality to code blocks
  *
@@ -14,7 +15,7 @@
 /**
  * Initialize copy buttons on all code blocks
  */
-export function initCopyButtons() {
+function initCopyButtons() {
   // Defensive check: does clipboard API exist?
   if (!navigator.clipboard) {
     console.warn("Clipboard API not available (requires HTTPS)");
@@ -70,3 +71,4 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") {
   window.initCopyButtons = initCopyButtons;
 }
+})();

@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-@use "standard-00-variables" as *;
+@use "../styles/standard-00-variables" as *;
 @use "standard-theme-paper";
 @use "standard-theme-swiss";
 @use "standard-theme-forest";
@@ -25,7 +25,6 @@
 @use "standard-theme-transitional";
 @use "standard-theme-newspaper";
 @use "standard-theme-venetian";
-
 
 @use "standard-theme-custom1";
 @use "standard-theme-custom2";

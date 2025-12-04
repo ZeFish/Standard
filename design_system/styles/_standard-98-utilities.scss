@@ -81,18 +81,20 @@
     "12": var(--space-12),
   );
 
-  // Loop through and generate classes
-  @each $suffix, $value in $scales {
-    @if $suffix == "" {
-      .#{$prefix} {
-        #{$property}: $value !important;
-      }
-    } @else {
-      .#{$prefix}-#{$suffix} {
-        #{$property}: $value !important;
-      }
+// Loop through and generate classes
+@each $suffix, $value in $scales {
+  @if $suffix =="" {
+    .#{$prefix} {
+      #{$property}: $value !important;
     }
   }
+
+  @else {
+    .#{$prefix}-#{$suffix} {
+      #{$property}: $value !important;
+    }
+  }
+}
 }
 
 /**
@@ -144,42 +146,53 @@
 .width-auto {
   width: auto !important;
 }
+
 .width-full {
   width: 100% !important;
 }
+
 .width-screen {
   width: 100vw !important;
 }
+
 .width-min {
   width: min-content !important;
 }
+
 .width-max {
   width: max-content !important;
 }
+
 .width-fit {
   width: fit-content !important;
 }
 
 /* Min Width */
 @include generate-scale(min-width, min-width);
+
 .min-width-d {
   min-width: d !important;
 }
+
 .min-width-full {
   min-width: 100% !important;
 }
+
 .min-width-screen {
   min-width: 100vw !important;
 }
 
 /* Max Width */
 @include generate-scale(max-width, max-width);
+
 .max-width-none {
   max-width: none !important;
 }
+
 .max-width-full {
   max-width: 100% !important;
 }
+
 .max-width-screen {
   max-width: 100vw !important;
 }
@@ -193,45 +206,57 @@
 .height-d {
   height: d !important;
 }
+
 .height-auto {
   height: auto !important;
 }
+
 .height-full {
   height: 100% !important;
 }
+
 .height-screen {
   height: 100vh !important;
 }
+
 .height-min {
   height: min-content !important;
 }
+
 .height-max {
   height: max-content !important;
 }
+
 .height-fit {
   height: fit-content !important;
 }
 
 /* Min Height */
 @include generate-scale(min-height, min-height);
+
 .min-height-d {
   min-height: d !important;
 }
+
 .min-height-full {
   min-height: 100% !important;
 }
+
 .min-height-screen {
   min-height: 100vh !important;
 }
 
 /* Max Height */
 @include generate-scale(max-height, max-height);
+
 .max-height-none {
   max-height: none !important;
 }
+
 .max-height-full {
   max-height: 100% !important;
 }
+
 .max-height-screen {
   max-height: 100vh !important;
 }
@@ -260,14 +285,7 @@
 .nano {
   font-size: var(--scale-d5);
 }
-/*
-.small *,
-.smaller *,
-.micro,
-.nano {
-    font-size: inherit;
-}
-*/
+
 /* ===========================
 /* FONT FAMILY UTILITIES       */
 /* =========================== */
@@ -363,19 +381,23 @@
   --color-msg: var(--color-accent);
   color: var(--color-accent);
 }
+
 .success {
   --color-msg: var(--color-success);
   color: var(--color-success);
 }
+
 .debug,
 .warning {
   --color-msg: var(--color-warning);
   color: var(--color-warning);
 }
+
 .error {
   --color-msg: var(--color-error);
   color: var(--color-error);
 }
+
 .info {
   --color-msg: var(--color-info);
   color: var(--color-info);
@@ -384,48 +406,63 @@
 .red {
   color: var(--color-red) !important;
 }
+
 .orange {
   color: var(--color-orange) !important;
 }
+
 .yellow {
   color: var(--color-yellow) !important;
 }
+
 .green {
   color: var(--color-green) !important;
 }
+
 .cyan {
   color: var(--color-cyan) !important;
 }
+
 .blue {
   color: var(--color-blue) !important;
 }
+
 .purple {
   color: var(--color-purple) !important;
 }
+
 .pink {
   color: var(--color-pink) !important;
 }
+
 .bg-red {
   background-color: var(--color-red) !important;
 }
+
 .bg-orange {
-  background-: var(--color-orange) !important;
+  background-color: var(--color-orange) !important;
 }
+
 .bg-yellow {
   background-color: var(--color-yellow) !important;
 }
+
 .bg-green {
   background-color: var(--color-green) !important;
 }
+
 .bg-cyan {
   background-color: var(--color-cyan) !important;
 }
+
 .bg-blue {
   background-color: var(--color-blue) !important;
 }
+
 .bg-purple {
   background-color: var(--color-purple) !important;
 }
+
 .bg-pink {
   background-color: var(--color-pink) !important;
 }
@@ -547,7 +584,7 @@
   .rhythm {
     display: block;
 
-    > * {
+    >* {
       margin-block-end: calc(var(--space-block-gap) * var(--space-gap));
     }
 
@@ -569,7 +606,7 @@
   max-width: var(--line-width-xs);
 }
 
-.ine-s {
+.line-s {
   max-width: var(--line-width-s);
 }
 
@@ -616,6 +653,7 @@
 .body-p-neg-footer {
   margin-inline: calc(var(--gap-body) * -1);
   padding-inline: calc(var(--gap-body) * 1);
+
   @media (max-width: #{$small}) {
     margin-inline: calc(var(--mobile-gap-body) * -1);
   }
@@ -678,12 +716,15 @@
   .sm\:hidden {
     display: none !important;
   }
+
   .sm\:only {
     display: inherit !important;
   }
+
   .md\:only {
     display: none !important;
   }
+
   .lg\:only {
     display: none !important;
   }
@@ -694,12 +735,15 @@
   .md\:hidden {
     display: none !important;
   }
+
   .sm\:only {
     display: none !important;
   }
+
   .md\:only {
     display: inherit !important;
   }
+
   .lg\:only {
     display: none !important;
   }
@@ -710,12 +754,15 @@
   .lg\:hidden {
     display: none !important;
   }
+
   .sm\:only {
     display: none !important;
   }
+
   .md\:only {
     display: none !important;
   }
+
   .lg\:only {
     display: inherit !important;
   }
@@ -778,7 +825,8 @@
 /* Responsive column count based on container width */
 .columns-auto {
   columns: auto;
-  column-width: var(--line-width-s); /* ~32rem optimal column width */
+  column-width: var(--line-width-s);
+  /* ~32rem optimal column width */
   column-gap: var(--space);
 }
 
@@ -789,6 +837,7 @@
 [class|="columns"].relaxed {
   column-gap: var(--space-2);
 }
+
 /* Column gap variants */
 .columns-gap-compact {
   column-gap: var(--leading);
@@ -801,7 +850,8 @@
 /* Prevent breaks inside elements */
 .columns-keep {
   break-inside: avoid;
-  page-break-inside: avoid; /* Legacy support */
+  page-break-inside: avoid;
+  /* Legacy support */
 }
 
 /* Column rules (vertical lines between columns) */
@@ -815,62 +865,20 @@
 
 /* Responsive breakpoints */
 @media (max-width: $small) {
+
   .columns-2,
   .columns-3,
   .columns-4 {
-    columns: 1; /* Stack on mobile */
+    columns: 1;
+    /* Stack on mobile */
   }
 }
 
 @media (min-width: calc($small + 1px)) and (max-width: $large) {
+
   .columns-3,
   .columns-4 {
-    columns: 2; /* Reduce columns on tablets */
-  }
-}
-
-/* UL Menu Helper */
-
-ul.no-bullet,
-ol.no-bullet {
-  list-style: none;
-  padding-inline-start: 0;
-
-  li::before {
-    display: none;
-  }
-}
-
-/**
- * @name Menu Helper
- * @group components-disclosure
- * @since 0.15.0
- */
-nav.menu ul,
-ul.menu {
-  display: flex;
-  flex-direction: column;
-  padding-inline: 0;
-  gap: 0;
-  li {
-    list-style: none;
-    padding-inline-start: 0;
-    margin-block-end: var(--space-half);
-    &::before {
-      display: none;
-    }
-  }
-}
-.tight nav.menu ul li {
-  margin-block-end: var(--trim);
-}
-
-nav.menu.horizontal ul,
-ul.menu.horizontal {
-  flex-direction: row;
-  gap: var(--space);
-  li {
-    padding-inline-start: 0;
-    margin-block: 0;
+    columns: 2;
+    /* Reduce columns on tablets */
   }
 }

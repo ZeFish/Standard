@@ -287,6 +287,10 @@ export default function standard(options = {}) {
                   __dirname,
                   "../design_system/styles",
                 ),
+                "@zefish/standard/themes": path.resolve(
+                  __dirname,
+                  "../design_system/themes",
+                ),
                 "@zefish/standard/js": path.resolve(
                   __dirname,
                   "../design_system/js/standard.js",
@@ -458,14 +462,14 @@ export default function standard(options = {}) {
         }
 
         const themeEntry =
-          assetsConfig.css ?? "@zefish/standard/styles/standard.theme.scss";
+          assetsConfig.css ?? "@zefish/standard/themes/standard.theme.scss";
         if (themeEntry) {
           injectScript("page-ssr", `import "${themeEntry}";`);
         }
 
         const jsEntry = assetsConfig.js ?? "@zefish/standard/js";
         if (jsEntry) {
-          injectScript("page", `import "${jsEntry}";`);
+          //injectScript("page", `import "${jsEntry}";`);
         }
       },
     },

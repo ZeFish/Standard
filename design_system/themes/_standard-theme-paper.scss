@@ -116,13 +116,7 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("/assets/fonts/IBMPlexMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+
 [data-theme="paper"] {
   --color-light-foreground: #262320;
   --color-light-foreground: #241b10;

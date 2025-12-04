@@ -3,7 +3,7 @@ import Meta from "./Meta.astro";
 import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
 import Comments from "../components/Comments.astro";
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 import logger from "../../core/logger.js";
 
 // Create logger for this layout
@@ -18,21 +18,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
 // ========================================
 
 interface Props {
-    frontmatter?: {
-        title?: string;
-        description?: string;
-        image?: string;
-        created?: string;
-        modified?: string;
-        tags?: string[];
-        securityHeaders?: boolean;
-        backlinks?: {
-            inbound?: string[];
-            outbound?: string[];
-            meta?: Record<string, any>;
-        };
-    };
-    site?: StandardFrameworkConfig;
+  frontmatter?: {
     title?: string;
     description?: string;
     image?: string;
@@ -40,21 +26,35 @@ interface Props {
     modified?: string;
     tags?: string[];
     securityHeaders?: boolean;
-    class?: string;
+    backlinks?: {
+      inbound?: string[];
+      outbound?: string[];
+      meta?: Record<string, any>;
+    };
+  };
+  site?: StandardFrameworkConfig;
+  title?: string;
+  description?: string;
+  image?: string;
+  created?: string;
+  modified?: string;
+  tags?: string[];
+  securityHeaders?: boolean;
+  class?: string;
 }
 
 // Use config from virtual module, with fallback to props for backward compatibility
 const {
-    frontmatter,
-    site = config, // Use config as default, allow override via props
-    title = frontmatter?.title || config.title,
-    description = frontmatter?.description || config.description,
-    image = frontmatter?.image,
-    created = frontmatter?.created,
-    modified = frontmatter?.modified,
-    tags = frontmatter?.tags,
-    securityHeaders = frontmatter?.securityHeaders,
-    class: className,
+  frontmatter,
+  site = config, // Use config as default, allow override via props
+  title = frontmatter?.title || config.title,
+  description = frontmatter?.description || config.description,
+  image = frontmatter?.image,
+  created = frontmatter?.created,
+  modified = frontmatter?.modified,
+  tags = frontmatter?.tags,
+  securityHeaders = frontmatter?.securityHeaders,
+  class: className,
 } = Astro.props as Props;
 
 // ✨ Get backlinks from the page's frontmatter/data
@@ -66,116 +66,117 @@ const year = new Date().getFullYear();
 
 <!doctype html>
 <html
-    class="rhythm"
-    lang={site.language || "en"}
-    data-standard-version={site.version}
-    data-theme="default"
+  class="rhythm"
+  lang={site.language || "en"}
+  data-standard-version={site.version}
+  data-theme="default"
 >
-    <head>
-        <meta name="astro-view-transitions-enabled" content="true" />
-        <Meta
-            site={site}
-            title={title}
-            description={description}
-            image={image}
-            created={created}
-            modified={modified}
-            tags={tags}
-            securityHeaders={securityHeaders}
-        />
-        <style>
-          /* Disable view transition animations - instant page swaps */
-          ::view-transition {
-            animation-duration: 0s !important;
-          }
-          ::view-transition-old(*),
-          ::view-transition-new(*) {
-            animation: none !important;
-          }
-        </style>
-        <ClientRouter />
-        <Fonts />
-        <script is:inline src="/assets/standard/standard.lab.js" transition:persist></script>
+  <head>
+    <meta name="astro-view-transitions-enabled" content="true" />
+    <Meta
+      site={site}
+      title={title}
+      description={description}
+      image={image}
+      created={created}
+      modified={modified}
+      tags={tags}
+      securityHeaders={securityHeaders}
+    />
+    <style>
+      /* Disable view transition animations - instant page swaps */
+      ::view-transition {
+        animation-duration: 0s !important;
+      }
+      ::view-transition-old(*),
+      ::view-transition-new(*) {
+        animation: none !important;
+      }
+    </style>
+    <ClientRouter />
+    <Fonts />
+    <script
+      is:inline
+      src="/assets/standard/standard.bundle.full.js"
+      transition:persist></script>
+    <script is:inline src="/assets/standard/standard.lab.js" transition:persist
+    ></script>
+  </head>
 
-
-        <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
-    </head>
-
-    <body>
-        <!-- Persistent container for StandardLab UI that survives DOM swaps -->
-        <!--div id="standard-lab-root" transition:persist></div>
+  <body>
+    <!-- Persistent container for StandardLab UI that survives DOM swaps -->
+    <!--div id="standard-lab-root" transition:persist></div>
 
         <a href="#main" class="skip-link">Skip to content</a-->
 
-        <header
-            class="flex font-interface"
-            style="justify-content: space-between; max-width: 100%;"
+    <header
+      class="flex font-interface"
+      style="justify-content: space-between; max-width: 100%;"
+    >
+      <p>
+        <a href="/" style="text-decoration: none;"
+          >{site.title || config.title}</a
         >
-            <p>
-                <a href="/" style="text-decoration: none;"
-                    >{site.title || config.title}</a
-                >
-            </p>
-            <Menu
-                items={site.nav?.header || config.nav?.header}
-                class="horizontal"
-            />
-        </header>
+      </p>
+      <Menu items={site.nav?.header || config.nav?.header} class="horizontal" />
+    </header>
 
-        <main id="main" class="prose">
-            <slot />
+    <main id="main" class="prose">
+      <slot />
 
-            <!-- ✨ Backlinks display -->
-            {(inbound.length > 0 || outbound.length > 0) && (
-                <>
-                    <hr />
-                    <article class="backlinks prose small tight">
-                        <div class="flow-3" style="orphans:10; widows:3;">
-                            {inbound.length > 0 && (
-                                <section>
-                                    <h3>Pages linking to this ({inbound.length})</h3>
-                                    <ul class="menu">
-                                        {inbound.map((link) => (
-                                            <li>
-                                                <code>{link}</code>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </section>
-                            )}
+      <!-- ✨ Backlinks display -->
+      {
+        (inbound.length > 0 || outbound.length > 0) && (
+          <>
+            <hr />
+            <article class="backlinks prose small tight">
+              <div class="flow-3" style="orphans:10; widows:3;">
+                {inbound.length > 0 && (
+                  <section>
+                    <h3>Pages linking to this ({inbound.length})</h3>
+                    <ul class="menu">
+                      {inbound.map((link) => (
+                        <li>
+                          <code>{link}</code>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
 
-                            {outbound.length > 0 && (
-                                <section>
-                                    <h3>Pages this links to ({outbound.length})</h3>
-                                    <ul class="menu">
-                                        {outbound.map((link) => (
-                                            <li>
-                                                <code>{link}</code>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </section>
-                            )}
-                        </div>
-                    </article>
-                </>
-            )}
+                {outbound.length > 0 && (
+                  <section>
+                    <h3>Pages this links to ({outbound.length})</h3>
+                    <ul class="menu">
+                      {outbound.map((link) => (
+                        <li>
+                          <code>{link}</code>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+              </div>
+            </article>
+          </>
+        )
+      }
 
-            <Comments />
-        </main>
+      <Comments />
+    </main>
 
-        <hr />
+    <hr />
 
-        <footer class="smaller font-interface">
-            <p>
-                © {year}
-                {site.author?.name || site.author || config.author?.name} ·
-                <a href="/">{site.title || config.title}</a> ·
-                <a
-                    href="https://github.com/ZeFish/Standard/blob/main/LICENSE"
-                    class="external-link">MIT License</a
-                >
-            </p>
-        </footer>
-    </body>
+    <footer class="smaller font-interface">
+      <p>
+        © {year}
+        {site.author?.name || site.author || config.author?.name} ·
+        <a href="/">{site.title || config.title}</a> ·
+        <a
+          href="https://github.com/ZeFish/Standard/blob/main/LICENSE"
+          class="external-link">MIT License</a
+        >
+      </p>
+    </footer>
+  </body>
 </html>

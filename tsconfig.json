@@ -14,7 +14,8 @@
     },
     "types": [
       "astro/client",
-      "./.astro/types.d.ts"
+      "./.astro/types.d.ts",
+      "./astro/types/standard.d.ts"
     ],
     "skipLibCheck": true,
     "allowJs": true,

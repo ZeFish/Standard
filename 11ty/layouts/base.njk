@@ -3,15 +3,12 @@
 
 
   <head>
-      {% include site.standard.layouts.meta %}
+      {# include site.standard.layouts.meta #}
       <title>{{ title or site.title }}{% if title and title != site.title %} · {{ site.title }}{% endif %}</title>
     </head>
-
-	<link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css">
     {% standard_fonts %}
     {% standard_assets %}
     {% standard_lab %}
-    <link rel="stylesheet" href="/assets/css/style.css">
 
 
     <body {% htmx %}>
