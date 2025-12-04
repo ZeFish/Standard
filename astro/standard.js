@@ -134,10 +134,13 @@ function getAvailableRemarkPlugins() {
  */
 function getRehypePlugins(config = {}) {
   return [
-    [rehypeTypography, {
-      defaultLocale: config.language || 'en',
-      ...config.typography
-    }],
+    [
+      rehypeTypography,
+      {
+        defaultLocale: config.language || "en",
+        ...config.typography,
+      },
+    ],
     [rehypeStandard, config.html || {}],
   ];
 }
@@ -434,6 +437,19 @@ export default function standard(options = {}) {
 
         // 6. Add Global Assets (CSS/JS)
         const assetsConfig = finalConfig.assets || {};
+        //import '@fontsource-variable/inter';
+        injectScript("page-ssr", `import "@fontsource-variable/inter";`);
+        injectScript(
+          "page-ssr",
+          `import "@fontsource-variable/instrument-sans/wdth-italic.css";`,
+        );
+        injectScript(
+          "page-ssr",
+          `import "@fontsource/instrument-serif/400-italic.css";`,
+        );
+        injectScript("page-ssr", `import "@fontsource-variable/fraunces";`);
+        injectScript("page-ssr", `import "@fontsource/ibm-plex-mono";`);
+        injectScript("page-ssr", `import "@fontsource-variable/newsreader";`);
 
         const cssEntry =
           assetsConfig.css ?? "@zefish/standard/styles/standard.scss";
