@@ -73,6 +73,20 @@
     margin-block-end: 0;
   }
 
+  section {
+    margin-block-end: var(--space-6);
+  }
+  section.container-hero {
+    padding-block: var(--space-2);
+    border-top: var(--border);
+    border-bottom: var(--border);
+    box-shadow: var(--shadow);
+    p {
+      max-width: var(--line-width);
+      margin-inline: auto !important;
+    }
+  }
+
   /*
 
   Le leading pouse le text qui touchais la ligne du dessus, a la ligne du .compact

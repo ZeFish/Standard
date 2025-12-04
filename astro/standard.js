@@ -469,7 +469,7 @@ export default function standard(options = {}) {
         injectScript("page-ssr", `import "@fontsource-variable/inter";`);
         injectScript(
           "page-ssr",
-          `import "@fontsource-variable/instrument-sans/";`,
+          `import "@fontsource-variable/instrument-sans";`,
         );
         injectScript("page-ssr", `import "@fontsource/instrument-serif";`);
         injectScript("page-ssr", `import "@fontsource-variable/fraunces";`);

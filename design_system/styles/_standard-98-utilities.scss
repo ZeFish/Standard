@@ -63,6 +63,9 @@
     "0": 0,
     "d": 0,
     "auto": auto,
+    "trim": var(--trim),
+    "leading": var(--leading),
+    "half": var(--space-half),
     "d5": var(--space-d5),
     "d4": var(--space-d4),
     "d3": var(--space-d3),
@@ -81,20 +84,25 @@
     "12": var(--space-12),
   );
 
-// Loop through and generate classes
-@each $suffix, $value in $scales {
-  @if $suffix =="" {
-    .#{$prefix} {
-      #{$property}: $value !important;
-    }
+  .bg {
+    background-color: var(--color-background);
+  }
+  .bg-secondary {
+    background-color: var(--color-background-secondary);
   }
 
-  @else {
-    .#{$prefix}-#{$suffix} {
-      #{$property}: $value !important;
+  // Loop through and generate classes
+  @each $suffix, $value in $scales {
+    @if $suffix == "" {
+      .#{$prefix} {
+        #{$property}: $value !important;
+      }
+    } @else {
+      .#{$prefix}-#{$suffix} {
+        #{$property}: $value !important;
+      }
     }
   }
-}
 }
 
 /**
@@ -584,7 +592,7 @@
   .rhythm {
     display: block;
 
-    >* {
+    > * {
       margin-block-end: calc(var(--space-block-gap) * var(--space-gap));
     }
 
@@ -865,7 +873,6 @@
 
 /* Responsive breakpoints */
 @media (max-width: $small) {
-
   .columns-2,
   .columns-3,
   .columns-4 {
@@ -875,7 +882,6 @@
 }
 
 @media (min-width: calc($small + 1px)) and (max-width: $large) {
-
   .columns-3,
   .columns-4 {
     columns: 2;
