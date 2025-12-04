@@ -51,8 +51,9 @@
 [class^="grid"] {
   display: grid;
   grid-auto-columns: 1fr;
+  grid-auto-flow: column;
   column-gap: var(--gap-grid);
-  row-gap: var(--gap-grip);
+  row-gap: var(--gap-grid);
   margin-block: 0;
 }
 /* =========================== */

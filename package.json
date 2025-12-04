@@ -46,7 +46,10 @@
     "./lab": "./lib/standard.lab.js",
     "./eleventy": "./11ty/standard.js",
     "./11ty/layouts/meta": "./11ty/layouts/meta.njk",
-    "./astro": "./astro/standard.js",
+    "./astro": {
+      "types": "./src/astro/type/standard.d.ts",
+      "default": "./src/astro/standard.js"
+    },
     "./cloudflare": "./src/cloudflare/api/comments.js",
     "./astro/remark/tags": "./astro/remark/tags.js",
     "./astro/remark/standard": "./astro/remark/standard.js",
@@ -103,10 +106,11 @@
     "clean:ports": "lsof -ti:8083 | xargs kill -9 2>/dev/null || true",
     "kill-node": "killall node || taskkill /F /IM node.exe",
     "commit": "git add . && npx opencommit",
-    "test": "vitest",
+    "test": "npm run test:lib && npm run test:e2e",
     "test:lib": "vitest run tests/lib-integrity.test.js",
     "test:e2e": "playwright test tests/astro-e2e.test.ts",
-    "test:all": "npm run test:lib && npm run test:e2e"
+    "knip": "knip",
+    "knip:fix": "knip --fix --include dependencies,devDependencies"
   },
   "browserslist": [
     "> 1%",
@@ -119,35 +123,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "release-it": {
-    "git": {
-      "tagName": "v${version}",
-      "commitMessage": "chore: release v${version}",
-      "requireCleanWorkingDir": false,
-      "requireUpstream": false,
-      "push": true
-    },
-    "npm": {
-      "publish": false
-    },
-    "github": {
-      "release": true,
-      "web": false,
-      "autoGenerate": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": {
-          "name": "conventionalcommits"
-        },
-        "infile": "CHANGELOG.md",
-        "header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n"
-      }
-    },
-    "hooks": {
-      "after:bump": "npm run changelog && npm run build"
-    }
-  },
   "directories": {
     "example": "example"
   },
@@ -155,16 +130,12 @@
     "@11ty/eleventy-navigation": "^1.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@astrojs/cloudflare": "^12.6.11",
-    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/svelte": "^7.2.2",
     "astro": "^5.16.0",
-    "astro-seo": "^0.8.4",
     "cheerio": "^1.1.2",
     "clean-css": "^5.3.3",
     "dotenv": "^17.2.3",
     "glob": "^10.4.5",
-    "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
     "jsdom": "^27.0.1",
     "markdown-it": "^14.1.0",
@@ -174,22 +145,17 @@
     "sass": "^1.93.2",
     "svelte": "^5.44.1",
     "terser": "^5.44.0",
-    "typescript": "^5.9.3",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@playwright/test": "^1.57.0",
-    "@release-it/conventional-changelog": "^10.0.1",
+    "@types/node": "^24.10.1",
     "auto-changelog": "^2.5.0",
-    "concurrently": "^8.2.2",
-    "htmx-ext-preload": "^2.1.2",
-    "htmx.org": "^2.0.8",
-    "nodemon": "^3.1.10",
+    "knip": "^5.71.0",
     "opencommit": "^3.2.10",
     "release-it": "^19.0.5",
-    "rimraf": "^5.0.5",
-    "sanitize.css": "^13.0.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.14"
   },
   "types": "./astro/types/standard.d.ts"
