@@ -180,3 +180,58 @@
 20:13:07 [WARN] [vite] 
 /assets/fonts/UniversNextVariable-Italic.ttf referenced in /assets/fonts/UniversNextVariable-Italic.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
 20:13:07 [WARN] [vite] "matchHostname", "matchPathname", "matchPort" and "matchProtocol" are imported from external module "@astrojs/internal-helpers/remote" but never used in "node_modules/astro/dist/assets/utils/remotePattern.js".
+20:13:07 [vite] ✓ built in 1.60s
+20:13:07 [build] ✓ Completed in 1.64s.
+
+ building client (vite) 
+20:13:07 [vite] transforming...
+20:13:08 [vite] ✓ 13 modules transformed.
+20:13:08 [vite] rendering chunks...
+20:13:08 [vite] computing gzip size...
+20:13:08 [vite] dist/_astro/ClientRouter.astro_astro_type_script_index_0_lang.QW52Ox2j.js  15.33 kB │ gzip: 5.30 kB
+20:13:08 [vite] ✓ built in 49ms
+
+ generating static routes 
+20:13:08 λ astro/routes/headers.js
+20:13:08   └─ /_headers (+2ms) (file not created, response body was empty)
+20:13:08 ▶ astro/pages/404.astro
+20:13:08   └─ /404.html (+55ms) 
+20:13:08 λ astro/routes/robots.js
+20:13:08   └─ /robots.txt (+2ms) 
+20:13:08 λ astro/routes/manifest.js
+20:13:08   └─ /site.webmanifest (+3ms) 
+20:13:08 ▶ astro/pages/index.astro
+20:13:08   └─ /index.html (+5ms) 
+20:13:08 ▶ astro/pages/[...slug].astro
+20:13:08 [WARN] [build] Could not render `` from route `/[...slug]` as it conflicts with higher priority route `/`.
+20:13:08   ├─ /content_config_guide/index.html (+4ms) 
+20:13:08   ├─ /backlinks_usage_guide/index.html (+25ms) 
+20:13:08   ├─ /content_transform_guide/index.html (+5ms) 
+20:13:08   ├─ /cheat-sheet/index.html (+8ms) 
+20:13:08   ├─ /logger_guide/index.html (+3ms) 
+20:13:08   ├─ /conard/index.html (+5ms) 
+20:13:08   ├─ /readme/index.html (+7ms) 
+20:13:08   ├─ /frontmatter_defaults/index.html (+4ms) 
+20:13:08   ├─ /egalitarisme/index.html (+3ms) 
+20:13:08   ├─ /dignity/index.html (+3ms) 
+20:13:08   ├─ /example/index.html (+4ms) 
+20:13:08   ├─ /markdown/index.html (+3ms) 
+20:13:08   ├─ /getting-started/index.html (+4ms) 
+20:13:08   ├─ /reciprocite/index.html (+5ms) 
+20:13:08   ├─ /astro/config/index.html (+13ms) 
+20:13:08   ├─ /css/colors/index.html (+3ms) 
+20:13:08   ├─ /astro/config-example/index.html (+3ms) 
+20:13:08   ├─ /report/index.html (+9ms) 
+20:13:08   ├─ /css/grid/index.html (+3ms) 
+20:13:08   ├─ /css/index.html (+5ms) 
+20:13:08   ├─ /css/prose/index.html (+8ms) 
+20:13:08   ├─ /css/typography/index.html (+2ms) 
+20:13:08   ├─ /css/spacing/index.html (+1ms) 
+20:13:08   ├─ /css/utilities/index.html (+6ms) 
+20:13:08   ├─ /old/componenet/index.html (+8ms) 
+20:13:08   ├─ /old/toast/index.html (+4ms) 
+20:13:08   └─ /old/fonts/index.html (+2ms) 
+20:13:08 ✓ Completed in 238ms.
+
+20:13:08 [build] 29 page(s) built in 2.57s
+20:13:08 [build] Complete!
