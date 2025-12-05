@@ -1,45 +1,41 @@
 ---
 const {
-    backlinks = [],
-    heading = "Mentionné dans",
-    ariaLabel = "Backlinks small",
+  backlinks = [],
+  heading = "Mentionné dans",
+  ariaLabel = "Backlinks small",
 } = Astro.props;
 
 // ✨ NEW: Deduplicate backlinks by URL
 const seenUrls = new Set();
 const deduplicatedBacklinks = backlinks.filter((entry) => {
-    if (seenUrls.has(entry.url)) {
-        return false; // Skip duplicates
-    }
-    seenUrls.add(entry.url);
-    return true;
+  if (seenUrls.has(entry.url)) {
+    return false; // Skip duplicates
+  }
+  seenUrls.add(entry.url);
+  return true;
 });
 
 const publicBacklinks = deduplicatedBacklinks.filter(
-    (entry) => entry?.data?.visibility !== "private",
+  (entry) => entry?.data?.visibility !== "private",
 );
 ---
 
 {
-    publicBacklinks.length > 0 && (
-        <>
-            <hr />
-            <article class="backlinks prose small tight">
-                <div class="flow-3" style="orphans:10; widows:3;">
-                    <p class="muted mb-d4 flow-row">{heading}</p>
-                    <nav aria-label={ariaLabel}>
-                        <ul class="menu">
-                            {publicBacklinks.map((item) => (
-                                <li>
-                                    <a href={item.url}>
-                                        {item.title ?? item.url}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-                </div>
-            </article>
-        </>
-    )
+  publicBacklinks.length > 0 && (
+    <>
+      <hr />
+      <article class="backlinks prose small tight">
+        <p class="muted mb-d4 flow-row">{heading}</p>
+        <nav aria-label={ariaLabel}>
+          <ul>
+            {publicBacklinks.map((item) => (
+              <li>
+                <a href={item.url}>{item.title ?? item.url}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </article>
+    </>
+  )
 }

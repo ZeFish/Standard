@@ -149,46 +149,6 @@ Precise control with CSS variables:
   </div>
 </div>
 
-## Rhythm is the Flow
-Mathematical vertical spacing based on <code>1rlh</code> (root line-height) creates visual harmony and guides the eye naturally through content.
-
-### Consistent Spacing
-
-All elements automatically align to the baseline grid. Headings, paragraphs, lists, blockquotes, forms, and media all follow the same rhythmic system.
-
-<div class="card inset">
-  #### tight Rhythm
-  Spacing multiplier: 0.75x
-  <ul class="tight">
-    <li>Closer spacing</li>
-    <li>More compact</li>
-  </ul>
-</div>
-<div class="card inset">
-  <h4 class="mt-d">compact Rhythm</h4>
-  <p>Spacing multiplier: 0.75×</p>
-  <ul class="compact">
-    <li>Closer spacing</li>
-    <li>More compact</li>
-  </ul>
-</div>
-<div class="card inset">
-  <h4 class="mt-d">Normal Rhythm</h4>
-  <p>Spacing multiplier: 1×</p>
-  <ul>
-    <li>Normal breathing room</li>
-    <li>Commmfortable</li>
-  </ul>
-</div>
-<div class="card inset">
-  <h4 class="mt-d">relaxed Rhythm</h4>
-  <p>Spacing multiplier: 1.5×</p>
-  <ul class="relaxed">
-    <li>More breathing room</li>
-    <li>Generous spacing</li>
-  </ul>
-</div>
-
 ### Lists & Hierarchy
 
 Lists maintain rhythm with proper indentation:
@@ -458,17 +418,24 @@ Consistent form styling that integrates with the rhythm system and color managem
       <input type="email" id="email" placeholder="john@example.com" />
       <label for="message">Message</label>
       <textarea id="message" rows="4" placeholder="Your message here..."></textarea>
-        <input type="checkbox" id="newsletter" />
-        <label for="newsletter">Subscribe to newsletter</label>
-        <input type="radio" id="option1" name="option" />
-        <label for="option1">Option 1</label>
-        <input type="radio" id="option2" name="option" />
-        <label for="option2">Option 2</label>
+      <select id="country" name="country">
+              <option value="" disabled selected>Choose a country</option>
+              <option value="ca">Canada</option>
+              <option value="us">United States</option>
+              <option value="uk">United Kingdom</option>
+              <option value="fr">France</option>
+              <option value="de">Germany</option>
+              <option value="jp">Japan</option>
+            </select>
+      <label for="newsletter"><input type="checkbox" id="newsletter" /> Subscribe to newsletter</label>
+      <label for="option1"><input type="radio" id="option1" name="option" /> Option 1</label>
+      <label for="option2"><input type="radio" id="option2" name="option" /> Option 2</label>
+      <div class="button-group">
+        <button type="submit">Send Message</button>
+        <button type="reset">Reset Form</button>
+      </div>
     </fieldset>
-    <div class="button-group">
-      <button type="submit">Send Message</button>
-      <button type="reset">Reset Form</button>
-    </div>
+    
   </form>
 
 ## Markdown Enhancements

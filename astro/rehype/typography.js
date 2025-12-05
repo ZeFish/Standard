@@ -185,7 +185,6 @@ export default function rehypeTypography(options = {}) {
       "from",
       "with",
       "this",
-      "that",
       "these",
       "those",
       "their",

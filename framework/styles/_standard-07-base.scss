@@ -33,6 +33,17 @@ html {
   orphans: 2;
 }
 
+body {
+  margin: 0;
+  padding: var(--gap-body);
+  padding-bottom: calc(var(--gap-body) * 1.5);
+
+  [id] {
+    scroll-margin-top: calc(var(--space-2) + var(--gap-body));
+    /* Adjust value as needed */
+  }
+}
+
 /* Selection highlight */
 ::selection {
   background: color-mix(in srgb, var(--color-yellow) 25%, transparent);
@@ -45,6 +56,7 @@ hr {
   background: var(--color-border);
   border: none;
   block-size: var(--stroke-width, 1px);
+  margin-block: var(--space-4);
 }
 
 /* Mark highlighting */
@@ -53,4 +65,24 @@ mark {
   color: color-mix(in srgb, var(--color-yellow) 30%, var(--color-foreground));
   padding: var(--trim);
   padding-top: 0.1em;
+}
+
+/* =========================== */
+/* LAYOUT                      */
+/* =========================== */
+
+section {
+  margin-block-end: var(--space-6);
+}
+
+section.container-hero {
+  padding-block: var(--space-2);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  box-shadow: var(--shadow);
+
+  p {
+    max-width: var(--line-width);
+    margin-inline: auto !important;
+  }
 }

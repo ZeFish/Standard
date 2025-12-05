@@ -6,83 +6,18 @@ import config from "virtual:standard/config";
 
 // Get all docs from root level (not nested in subdirectories)
 const allDocs = await getCollection("content");
-const rootDocs = allDocs.filter(doc => !doc.id.includes("/"));
+const rootDocs = allDocs.filter((doc) => !doc.id.includes("/"));
 
 // Sort by title
 const sortedDocs = rootDocs.sort((a, b) =>
-  (a.data.title || a.id).localeCompare(b.data.title || b.id)
+  (a.data.title || a.id).localeCompare(b.data.title || b.id),
 );
 ---
 
 <Base
-    title={IndexContent.frontmatter?.title || "Standard Framework"}
-    description={IndexContent.frontmatter?.description || config.description}
-    class="prose"
+  title={IndexContent.frontmatter?.title || "Standard Framework"}
+  description={IndexContent.frontmatter?.description || config.description}
+  class="prose"
 >
-    <IndexContent.Content />
-
-    {sortedDocs.length > 0 && (
-        <nav class="pages-navigation">
-            <h2>Pages</h2>
-            <ul>
-                {sortedDocs.map((doc) => (
-                    <li>
-                        <a href={doc.data.permalink || `/${doc.id}/`}>
-                            {doc.data.title || doc.id}
-                        </a>
-                        {doc.data.description && (
-                            <p class="description">{doc.data.description}</p>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </nav>
-    )}
+  <IndexContent.Content />
 </Base>
-
-<style>
-    .pages-navigation {
-        margin: 3rem 0;
-        padding: 2rem;
-        background: #f9f9f9;
-        border-radius: 8px;
-        border-left: 4px solid #0066cc;
-    }
-
-    .pages-navigation h2 {
-        margin-top: 0;
-        color: #0066cc;
-    }
-
-    .pages-navigation ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .pages-navigation li {
-        margin: 1rem 0;
-        padding: 0.75rem;
-        background: white;
-        border-radius: 4px;
-        border: 1px solid #e0e0e0;
-    }
-
-    .pages-navigation a {
-        color: #0066cc;
-        text-decoration: none;
-        font-weight: 500;
-        display: block;
-    }
-
-    .pages-navigation a:hover {
-        text-decoration: underline;
-    }
-
-    .pages-navigation .description {
-        margin: 0.5rem 0 0 0;
-        font-size: 0.9rem;
-        color: #666;
-        line-height: 1.4;
-    }
-</style>

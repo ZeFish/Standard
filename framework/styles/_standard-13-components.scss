@@ -1,3 +1,131 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* BUTTONS                     */
+/* =========================== */
+
+button,
+a.button {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-size: var(--scale-d2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height);
+  border-radius: var(--radius);
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 65%,
+    var(--color-background-secondary)
+  );
+  color: var(--color-light);
+  border: var(--border);
+  border-color: var(--color-border);
+  padding: calc(var(--leading) + var(--trim)) var(--space-half);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    opacity var(--transition);
+}
+
+a.button:visited,
+a.button {
+  --stroke-width: 1px;
+  display: inline-block;
+  width: fit-content;
+  user-select: none;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+}
+
+button:hover,
+a.button:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 80%,
+    var(--color-background-secondary)
+  );
+}
+
+button:active,
+a.button:active {
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 50%,
+    var(--color-background-secondary)
+  );
+}
+
+button:focus-visible,
+a.button:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
+  outline-offset: 2px;
+  color: var(--color-background);
+}
+
+button:disabled,
+a.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--color-background);
+}
+
+.tag {
+  color: var(--color-muted);
+}
+
+.tag:hover {
+  color: var(--color-accent);
+}
+
+/* =========================== */
+/* NAVIGATION                  */
+/* =========================== */
+
+nav li a {
+  text-decoration: none;
+}
+
+nav li.is-active a {
+  text-decoration: underline;
+}
+
+/* Vertical menu navigation */
+nav.menu ul,
+ul.menu {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0;
+  gap: 0;
+
+  li {
+    list-style: none;
+    padding-inline-start: 0;
+    margin-block-end: var(--space-half);
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.tight nav.menu ul li {
+  margin-block-end: var(--trim);
+}
+
+/* Horizontal menu navigation */
+nav.menu.horizontal ul,
+ul.menu.horizontal {
+  flex-direction: row;
+  gap: var(--space-half);
+
+  li {
+    padding-inline-start: 0;
+    margin-block: 0;
+  }
+}
+
 /**
  * @name Card Component
  * @group components-layout
@@ -80,8 +208,6 @@
  *   }
  */
 
-
-
 /**
  * @name Clickable Card Variant
  * @group components-layout
@@ -115,14 +241,21 @@
  *     </div>
  *   </a>
  */
+.card {
+  padding: var(--space-half);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+}
 .card.clickable {
   a {
     text-decoration: none;
   }
 
   color: inherit;
-  transition: transform var(--transition),
-  box-shadow var(--transition);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
   cursor: pointer;
 
   &:hover {
@@ -143,27 +276,14 @@
   }
 }
 
-
-
-.callout,
-img,
-iframe,
-.outset {
-  background: var(--color-background-secondary);
-  border-radius: var(--radius);
-  border: var(--border);
-  box-shadow: var(--shadow);
-}
-
 pre,
 .inset,
 card.inset {
   box-shadow: inset var(--shadow) !important;
 }
 
-
-
 .callout {
+  box-shadow: var(--shadow);
   background: var(--color-background-secondary);
   border: var(--border);
   border-radius: var(--radius);
@@ -172,37 +292,48 @@ card.inset {
   padding-top: 0;
   --color-callout: var(--color-background-secondary);
   --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
-  background: color-mix(in srgb,
-      var(--color-callout) 5%,
-      var(--color-background-secondary));
-  border: var(--border);
+  background: color-mix(
+    in srgb,
+    var(--color-callout) 5%,
+    var(--color-background-secondary)
+  );
   font-size: var(--scale-d2);
 
   .callout-title,
-  >summary {
+  > summary {
     position: relative;
-    color: color-mix(in srgb,
-        var(--color-callout) 50%,
-        var(--color-foreground));
+    color: color-mix(
+      in srgb,
+      var(--color-callout) 50%,
+      var(--color-foreground)
+    );
     display: flex;
     font-weight: var(--font-weight-bold, bold);
 
     user-select: none;
     padding: var(--space-half);
     margin: 0 !important;
+    .callout-title-inner {
+      margin: 0;
+    }
   }
 
   .callout-content {
     color: var(--color-foreground);
-    background: color-mix(in srgb,
-        var(--color-callout) 2.5%,
-        color-mix(in srgb,
-          var(--color-background-secondary) 25%,
-          var(--color-background)));
+    background: color-mix(
+      in srgb,
+      var(--color-callout) 2.5%,
+      color-mix(
+        in srgb,
+        var(--color-background-secondary) 25%,
+        var(--color-background)
+      )
+    );
     line-height: var(--line-height-compact);
     box-shadow: inset var(--shadow);
     border-radius: var(--radius);
     padding: var(--space-half);
+    margin-top: 0;
     margin-left: 0;
     border: var(--border);
     text-align: left;
@@ -225,7 +356,7 @@ card.inset {
       margin: var(--leading) 0;
     }
 
-    >.callout {
+    > .callout {
       margin: calc(var(--space) * -1);
 
       .callout-content {
@@ -259,7 +390,7 @@ card.inset {
 }
 
 // Details/Summary specific callout styles
-details>summary {
+details > summary {
   list-style: none;
   /* removes marker in Firefox */
 }
@@ -269,9 +400,11 @@ details .callout-title::before {
   display: inline-block;
   transform: rotate(0deg);
   transition: transform var(--transition);
-  width: var(--space);
-  margin-left: calc(var(--space) * -1);
+  margin-right: var(--leading);
   text-align: center;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  transform-origin: center;
 }
 
 details[open] .callout-title::before {
@@ -283,7 +416,7 @@ details .callout-title-inner {
 }
 
 // Caption Callout (after an image)
-p:has(img)+.callout[data-callout="caption" i] {
+p:has(img) + .callout[data-callout="caption" i] {
   padding: 0;
   background: none;
   border: none;
@@ -317,20 +450,22 @@ p:has(img)+.callout[data-callout="caption" i] {
   padding: var(--space);
 }
 
-aside,
 .alert {
   font-family: var(--font-interface);
-}
-
-.alert {
   --color-alert: var(--color-accent);
-  color: color-mix(in srgb,
-      var(--color-alert) 10%,
-      var(--color-foreground)) !important;
-  background: color-mix(in srgb,
-      var(--color-alert) 10%,
-      var(--color-background-secondary));
-  border-left: var(--stroke-width) solid color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
+  padding: var(--space-half);
+  color: color-mix(
+    in srgb,
+    var(--color-alert) 10%,
+    var(--color-foreground)
+  ) !important;
+  background: color-mix(
+    in srgb,
+    var(--color-alert) 10%,
+    var(--color-background-secondary)
+  );
+  border-left: var(--stroke-width) solid
+    color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
 }
 
 // Callout Color Variants
@@ -364,7 +499,7 @@ aside,
     box-shadow: var(--shadow);
     border-radius: var(--radius);
     background: var(--color-background-secondary);
-    padding: var(--leading);
+    padding: calc(var(--space-half) + var(--leading)) var(--space-half);
     margin-block-end: var(--space);
 
     .comment-header {
@@ -374,8 +509,6 @@ aside,
 
       .comment-author {
         font-weight: var(--font-weight-bold);
-
-        margin-block-end: var(--trim);
       }
 
       .comment-date,
@@ -391,10 +524,10 @@ aside,
     }
 
     .comment-content {
-      margin-inline: var(--trim);
-      margin-block-start: 0;
+      margin-inline: var(--space-half);
+      margin-block-start: var(--leading);
       border-left: var(--border);
-      padding: var(--trim);
+      padding: var(--space-half);
       color: var(--color-muted);
       font-size: var(--scale-d2);
       line-height: var(--line-height-compact);
@@ -425,8 +558,6 @@ aside,
     text-decoration-thickness: 0.15em;
   }
 }
-
-
 
 a.skip-link {
   /* Positioning - absolute to top-left corner */
@@ -465,9 +596,11 @@ a.skip-link {
 
   /* Hover state (if user moves mouse while focused) */
   &:hover {
-    background: color-mix(in srgb,
-        var(--color-accent) 90%,
-        var(--color-background));
+    background: color-mix(
+      in srgb,
+      var(--color-accent) 90%,
+      var(--color-background)
+    );
     color: var(--color-background);
   }
 
@@ -487,8 +620,6 @@ a.skip-link {
   gap: var(--space);
   padding: var(--trim);
 }
-
-
 
 .scroll {
   /* Container styling */
@@ -514,17 +645,21 @@ a.skip-link {
 
   &::before {
     left: 0;
-    background: linear-gradient(to right,
-        var(--color-background) 25%,
-        transparent 100%);
+    background: linear-gradient(
+      to right,
+      var(--color-background) 25%,
+      transparent 100%
+    );
   }
 
   /* Define the Right Shadow (initially visible) */
   &::after {
     right: 0;
-    background: linear-gradient(to left,
-        var(--color-background) 25%,
-        transparent 100%);
+    background: linear-gradient(
+      to left,
+      var(--color-background) 25%,
+      transparent 100%
+    );
   }
 
   /* When this class is added, the left shadow fades in. */
@@ -537,7 +672,7 @@ a.skip-link {
     opacity: 0;
   }
 
-  &>* {
+  & > * {
     margin-block-end: 0;
     /* Remove table's own margin */
     min-width: 100%;
@@ -546,8 +681,6 @@ a.skip-link {
     /* Allow table to grow beyond wrapper */
   }
 }
-
-
 
 .field {
   /* Field container */
@@ -561,5 +694,4 @@ a.skip-link {
     font-size: var(--scale-d2);
     color: var(--color-foreground);
   }
-
 }

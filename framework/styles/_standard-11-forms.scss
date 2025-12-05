@@ -1,0 +1,148 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* FORMS                       */
+/* =========================== */
+
+/* Layout containers */
+
+fieldset {
+  display: grid;
+  gap: 0;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--space) !important;
+  background: color-mix(
+    in srgb,
+    var(--color-background-secondary) 25%,
+    var(--color-background)
+  );
+}
+
+fieldset div,
+fieldset p {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset + button {
+  margin-block-start: var(--space);
+}
+
+fieldset :last-child {
+  margin-block-end: 0;
+}
+
+legend {
+  font-weight: var(--font-weight-bold, bold);
+  margin-inline-start: calc(var(--leading) * -1);
+  padding-inline: var(--leading);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  width: 100%;
+  font-family: var(--font-interface), system-ui, sans-serif;
+  padding: var(--leading) var(--space-half) !important;
+  border-radius: var(--radius);
+  color: var(--color-foreground);
+  background: var(--color-background-secondary);
+  border: var(--border);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    outline-color var(--transition);
+}
+
+textarea {
+  resize: vertical;
+  min-height: var(--space-2);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: var(--stroke-width) solid var(--color-accent);
+  outline-offset: 0px;
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 5%,
+    var(--color-background)
+  );
+}
+
+label + :is(input, textarea, select) {
+  margin-block-start: var(--leading);
+}
+
+fieldset *:not(legend) + :is(label, select, button, .button-group) {
+  margin-block-start: var(--space);
+}
+fieldset *:not(legend) + .button-group {
+  margin-block-start: var(--space-2);
+}
+
+fieldset label:has(input[type="checkbox"], input[type="radio"]) {
+  margin-block-start: var(--space);
+}
+/* Checkbox/Radio */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0px;
+  height: calc(1em + var(--space-half));
+  top: 50%;
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-background-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: inset var(--shadow);
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+  /* Checked state */
+  &:checked {
+    background-color: color-mix(
+      in srgb,
+      var(--color-accent) 70%,
+      var(--color-background-secondary)
+    );
+    box-shadow: var(--shadow);
+    border: var(--stroke-width) solid var(--color-accent);
+  }
+  /* Checkmark using pseudo-element */
+  &:checked::after {
+    content: "";
+    position: absolute;
+    left: 0.57em;
+    top: 0.35em;
+    width: 0.4em;
+    height: 0.7em;
+    border: var(--stroke-width) solid var(--color-background-secondary);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+/* Hover state */
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  width: 100px;
+  margin-block-start: 0;
+}

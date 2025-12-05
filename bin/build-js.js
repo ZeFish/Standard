@@ -133,45 +133,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = process.cwd();
 
 /**
- * Source Directory Path
- *
- * @group Configuration
- * @since 0.14.0
- *
- * Default location for JavaScript source files. Overridable via build.js.srcDir
- * in site.config.yml. The src/js convention matches most modern project structures,
- * but you can use any directory (lib/, scripts/, client/, etc.).
- *
- * @see {constant} destDirs - Where compiled JavaScript goes
- */
-let srcDir = path.join(projectRoot, "src/js");
-
-/**
- * Destination Directory Path(s)
- *
- * @group Configuration
- * @since 0.14.0
- *
- * Where minified/bundled JavaScript files are written. Can be a single string or
- * an array of strings. Can be overridden via build.js.outputDir in site.config.yml.
- * The default (public/assets/js) works for most static site generators and CDN
- * deployments. When an array is provided, JavaScript is written to all specified
- * directories simultaneously—useful for parallel builds or multi-target deployments
- * (e.g., both _site/assets/standard and dist/).
- *
- * @see {constant} srcDir - Where JavaScript source files live
- * @example
- *   # Single destination
- *   outputDir: "public/assets/js"
- *
- *   # Multiple destinations
- *   outputDir:
- *     - "_site/assets/standard"
- *     - "dist"
- */
-let destDirs = [path.join(projectRoot, "public/assets/js")];
-
-/**
  * Command-Line Flags
  *
  * @group Configuration
@@ -188,6 +149,8 @@ let destDirs = [path.join(projectRoot, "public/assets/js")];
  */
 const isWatch = process.argv.includes("--watch");
 const isDev = process.argv.includes("--dev") || isWatch;
+const shouldInjectVersion =
+  process.argv.includes("--inject-version") || process.env.INJECT_VERSION;
 
 // ============================================================================
 // CONFIGURATION LOADING
@@ -215,7 +178,7 @@ const isDev = process.argv.includes("--dev") || isWatch;
  *           output: "main.min.js"
  *           minify: true
  */
-const configPath = path.join(projectRoot, "site.config.yml");
+const configPath = path.join(projectRoot, "standard.config.yml");
 
 /**
  * Configuration Loading - Graceful Degradation
@@ -270,37 +233,38 @@ const configPath = path.join(projectRoot, "site.config.yml");
  *             - "src/js/app.js"
  */
 if (!fs.existsSync(configPath)) {
-  logger.info(`No site.config.yml found. Skipping JS build.`);
+  logger.info(`No standard.config.yml found. Skipping JS build.`);
   process.exit(0);
 }
 
 let config = {};
+let version = "0.0.0";
 
 try {
   const configContent = fs.readFileSync(configPath, "utf-8");
   const fullConfig = yaml.load(configContent);
   config = fullConfig.build?.js || {};
 
+  // Get version from package.json if injection is needed
+  if (shouldInjectVersion || config.injectVersion) {
+    try {
+      const pkgPath = path.join(projectRoot, "package.json");
+      if (fs.existsSync(pkgPath)) {
+        const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+        version = pkg.version;
+      }
+    } catch (e) {
+      logger.warn(`Could not read package.json version: ${e.message}`);
+    }
+  }
+
   // Exit early if no JS config section exists
   if (!config || Object.keys(config).length === 0) {
     logger.info(`No build.js configuration found. Skipping JS build.`);
     process.exit(0);
   }
-
-  // Override directories if specified in config
-  if (config.srcDir) {
-    srcDir = path.join(projectRoot, config.srcDir);
-  }
-  if (config.outputDir) {
-    // Support both single string and array of strings
-    if (Array.isArray(config.outputDir)) {
-      destDirs = config.outputDir.map((dir) => path.join(projectRoot, dir));
-    } else {
-      destDirs = [path.join(projectRoot, config.outputDir)];
-    }
-  }
 } catch (error) {
-  logger.error(`Failed to parse site.config.yml: ${error.message}`);
+  logger.error(`Failed to parse standard.config.yml: ${error.message}`);
   process.exit(0);
 }
 
@@ -429,6 +393,13 @@ const colors = {
 // BUILD FUNCTION
 // ============================================================================
 
+function injectVersion(code) {
+  if (!shouldInjectVersion && !config.injectVersion) return code;
+  const versionString = `/*! Standard::Framework v${version} */`;
+  // Prepend the version banner
+  return `${versionString}\n${code}`;
+}
+
 /**
  * Build JavaScript - The Main Processing Pipeline
  *
@@ -514,19 +485,12 @@ const colors = {
  * @returns {Promise<void>} Resolves when build completes
  */
 async function buildJS() {
-  // Ensure all dest directories exist
-  for (const destDir of destDirs) {
-    if (!fs.existsSync(destDir)) {
-      fs.mkdirSync(destDir, { recursive: true });
-    }
-  }
-
   try {
     // ========================================================================
     // PHASE 1: INDIVIDUAL FILE PROCESSING
     // ========================================================================
     for (const file of JS_FILES) {
-      const inputPath = path.join(srcDir, file.input);
+      const inputPath = path.join(projectRoot, file.input);
 
       // Check if source file exists
       if (!fs.existsSync(inputPath)) {
@@ -534,7 +498,11 @@ async function buildJS() {
         continue;
       }
 
-      const source = fs.readFileSync(inputPath, "utf8");
+      let source = fs.readFileSync(inputPath, "utf8");
+      source = injectVersion(source);
+
+      // Determine output paths (normalize to array)
+      const outputs = Array.isArray(file.output) ? file.output : [file.output];
 
       if (file.minify) {
         /**
@@ -575,13 +543,18 @@ async function buildJS() {
           continue;
         }
 
-        // Write to all destination directories
-        for (const destDir of destDirs) {
-          fs.writeFileSync(path.join(destDir, file.output), result.code);
+        // Write to all destination paths
+        for (const output of outputs) {
+          const destPath = path.join(projectRoot, output);
+          const destDir = path.dirname(destPath);
+          if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir, { recursive: true });
+          }
+          fs.writeFileSync(destPath, result.code);
         }
 
         logger.success(
-          `${file.output} ${colors.grey}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+          `${file.input} ${colors.grey}(${(Buffer.byteLength(result.code) / 1024).toFixed(2)} KB)${outputs.length > 1 ? ` → ${outputs.length} dests` : ""}`,
         );
       } else {
         /**
@@ -601,13 +574,18 @@ async function buildJS() {
          *
          * @see {function} buildJS - Caller
          */
-        // Write to all destination directories
-        for (const destDir of destDirs) {
-          fs.writeFileSync(path.join(destDir, file.output), source);
+        // Write to all destination paths
+        for (const output of outputs) {
+          const destPath = path.join(projectRoot, output);
+          const destDir = path.dirname(destPath);
+          if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir, { recursive: true });
+          }
+          fs.writeFileSync(destPath, source);
         }
 
         logger.success(
-          `${file.output} ${colors.grey}(copied)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+          `${file.input} ${colors.grey}(copied)${outputs.length > 1 ? ` → ${outputs.length} dests` : ""}`,
         );
       }
     }
@@ -655,8 +633,15 @@ async function buildJS() {
             continue;
           }
 
-          logger.warn(`Bundling ${fullPath}`);
-          contents.push(fs.readFileSync(fullPath, "utf8"));
+          let content = fs.readFileSync(fullPath, "utf8");
+          // Version injection happens at bundling too if not already processed?
+          // Ideally we bundle from originals, so yes.
+          // But wait, if we are bundling files that were just built, we might double inject?
+          // No, bundle.files are source paths in `standard.config.yml`.
+          // Wait, in `standard.config.yml` (Step 63), bundles/files point to "design_system/js/standard.js" etc.
+          // These ARE source files. So we inject version here too.
+          content = injectVersion(content);
+          contents.push(content);
         }
 
         if (contents.length === 0) {
@@ -699,13 +684,21 @@ async function buildJS() {
           continue;
         }
 
-        // Write bundle to all destination directories
-        for (const destDir of destDirs) {
-          fs.writeFileSync(path.join(destDir, bundle.name), minified.code);
+        const outputs = Array.isArray(bundle.output)
+          ? bundle.output
+          : [bundle.output];
+
+        for (const output of outputs) {
+          const destPath = path.join(projectRoot, output);
+          const destDir = path.dirname(destPath);
+          if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir, { recursive: true });
+          }
+          fs.writeFileSync(destPath, minified.code);
         }
 
         logger.success(
-          `${bundle.name} ${colors.grey}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)${destDirs.length > 1 ? ` → ${destDirs.length} destinations` : ""}`,
+          `${bundle.name} ${colors.grey}(${(Buffer.byteLength(minified.code) / 1024).toFixed(2)} KB)${outputs.length > 1 ? ` → ${outputs.length} dests` : ""}`,
         );
       }
     }
@@ -787,11 +780,28 @@ await buildJS();
  */
 if (isWatch) {
   logger.info(`Watching...`);
+  // Watch all .js files in project (excluding node_modules/dist/lib)
+  // or just what's in config? Simpler to watch known src dirs if possible,
+  // but config is explicit files now.
+  // We can collect all input directories from config.
 
-  fs.watch(srcDir, { recursive: true }, async (eventType, filename) => {
-    if (filename && filename.endsWith(".js")) {
-      logger.info(`Changed: ${filename}`);
-      await buildJS();
+  const distinctDirs = new Set();
+  JS_FILES.forEach(f => distinctDirs.add(path.dirname(path.join(projectRoot, f.input))));
+  // Also bundles
+  if (shouldBundle) {
+    BUNDLES.forEach(b => b.files.forEach(f => distinctDirs.add(path.dirname(path.join(projectRoot, f)))));
+  }
+
+  for (const dir of distinctDirs) {
+    if (fs.existsSync(dir)) {
+      fs.watch(dir, { recursive: false }, async (eventType, filename) => {
+        if (filename && filename.endsWith(".js")) {
+          // Debounce or just run?
+          // Simple run for now matching original behavior
+          logger.info(`Changed: ${filename}`);
+          await buildJS();
+        }
+      });
     }
-  });
+  }
 }

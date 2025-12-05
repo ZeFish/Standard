@@ -49,6 +49,7 @@
   /* Design standard system */
   --blur: blur(7px);
   --stroke-width: max(1px, 0.06rem);
+  --stroke-width-l: calc(var(--stroke-width) * 3);
   /*  --rule-hairline */
   --transition: 0.5s ease;
   --radius: var(--leading);

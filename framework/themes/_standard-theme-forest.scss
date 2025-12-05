@@ -81,7 +81,7 @@
   textarea,
   pre,
   blockquote {
-    padding: var(--leading) calc(var(--trim) + var(--leading));
+    padding: calc(var(--leading) + var(--space-half)) var(--space);
   }
 
   fieldset input,

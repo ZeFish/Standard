@@ -1,5 +1,37 @@
 @use "standard-00-variables" as *;
 
+/* =========================== */
+/* MEDIA                       */
+/* =========================== */
+
+img,
+video,
+audio,
+iframe {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--color-background-secondary);
+}
+
+/* Reset padding for images specifically */
+img {
+  padding: 0;
+}
+
+figure {
+  display: grid;
+  gap: calc(var(--space-d4) * var(--space-2));
+}
+
+figcaption {
+  font-size: var(--scale-d2);
+  font-style: italic;
+  text-align: center;
+}
+
 /**
  * @component Image System
  * @description Responsive image handling with interactive zoom functionality.

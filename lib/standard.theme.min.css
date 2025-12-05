@@ -390,7 +390,7 @@
 [data-theme=forest] textarea,
 [data-theme=forest] pre,
 [data-theme=forest] blockquote {
-  padding: var(--leading) calc(var(--trim) + var(--leading));
+  padding: calc(var(--leading) + var(--space-half)) var(--space);
 }
 [data-theme=forest] fieldset input,
 [data-theme=forest] fieldset textarea {
@@ -782,12 +782,12 @@
   
   --mobile-font-size: 1.2em;
   --mobile-optical-ratio: 1.414;
-  --mobile-line-height: 1.5;
+  --mobile-line-height: 1.8;
   --mobile-gap-body: 1rlh;
   --mobile-gap: 1rlh; 
   --mobile-gap-block: 1rlh;
   --font-size: 1em;
-  --font-text: "Garamond Premiere Pro", "Source Serif 4", "EB Garamond";
+  --font-text: "Source Serif 4", "EB Garamond", "newsreader";
   --font-interface: "Fern";
   --font-header: "Fern", "Futura Now Var", "Sohne", "Fern";
   --font-weight-bold: 500;
@@ -845,8 +845,8 @@
 [data-theme=book] p:not(:has(img)) + p {
   text-indent: var(--space);
 }
-[data-theme=book] p:has(+ p) {
-  margin-block-end: var(--space-half);
+[data-theme=book] p + p {
+  margin-block-start: var(--space-half);
 }
 [data-theme=book] :is(h2, h3) + p::first-letter {
   --drop-cap-size: 3.25;
@@ -868,6 +868,9 @@
 }
 [data-theme=book] header {
   display: block;
+}
+[data-theme=book] header nav {
+  margin-block-start: var(--space-half);
 }
 [data-theme=book] .prose {
   display: block;
@@ -937,7 +940,6 @@
 [data-theme=book] .prose > h1:first-child {
   text-align: left;
   grid-column: feature;
-  margin-block-start: var(--space-6);
   margin-block-end: var(--space-6);
   font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
 }
@@ -946,6 +948,11 @@
   letter-spacing: 0.15em;
   
   font-feature-settings: "liga", "onum", "kern", "smcp";
+}
+@media (max-width: 768px) {
+  [data-theme=book] p {
+    text-align: left;
+  }
 }
 @media (min-width: 1200px) {
   [data-theme=book] .prose {
@@ -976,6 +983,20 @@
   font-style: normal;
   font-display: swap;
   src: url("/assets/fonts/FernVariable-Roman-VF.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("/assets/fonts/SourceSerif4Variable-Roman.ttf.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("/assets/fonts/SourceSerif4Variable-Italic.ttf.woff2") format("woff2");
 }
 
 [data-theme=blueprint] {

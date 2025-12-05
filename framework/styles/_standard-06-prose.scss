@@ -141,7 +141,7 @@
 
     /* Adjacent images get reduced spacing  + var(--img-gap)    */
     p:has(img) + p:has(img) {
-      margin-block-start: calc((var(--space) * -1)) !important;
+      margin-block-start: var(--gap-grid-img, 0.5rlh) !important;
     }
   }
 

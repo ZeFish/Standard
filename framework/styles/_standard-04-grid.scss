@@ -54,20 +54,13 @@
   grid-auto-flow: column;
   column-gap: var(--gap-grid);
   row-gap: var(--gap-grid);
-  margin-block: 0;
 }
 
 /* =========================== */
 /* TYPOGRAPHIC NUANCES         */
 /* =========================== */
 
-/* Exception for grid in a prose div */
-.prose>[class^="grid"] {
-  margin-block-start: calc((var(--space) * max(var(--space-2) var(--space))) - (var(--space) * var(--space)));
-  margin-block-end: calc(var(--space) * max(var(--space-2) var(--space)));
-}
-
-[class^="grid"]>* {
+[class^="grid"] > * {
   min-width: 0;
   /* ← Force items to shrink below content size */
   margin-block: 0;
@@ -98,6 +91,8 @@
 @for $i from 1 through 12 {
   .grid-#{$i} {
     display: grid;
+    grid-auto-columns: unset;
+    grid-auto-flow: unset;
     grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
     column-gap: var(--gap-grid);
     row-gap: var(--gap-grid-row, var(--gap-grid));
@@ -176,7 +171,7 @@ hr.col-row {
 }
 
 /* Rhythm inside grid items: apply to a cell containing prose */
-.grid .rhythm>* {
+.grid .rhythm > * {
   margin-block-end: var(--space);
 }
 
@@ -191,7 +186,7 @@ hr.col-row {
   grid-column: var(--start) / span var(--span);
 
   /* If the free column contains prose, opt-in to rhythm */
-  &.rhythm>* {
+  &.rhythm > * {
     margin-block-end: var(--space);
   }
 }
@@ -264,24 +259,24 @@ hr.col-row {
 
 /* Common layout containers inherit rhythm to cascade deeper */
 .box,
-.grid>.col-1,
-.grid>.col-2,
-.grid>.col-3,
-.grid>.col-4,
-.grid>.col-5,
-.grid>.col-6,
-.grid>.col-7,
-.grid>.col-8,
-.grid>.col-9,
-.grid>.col-10,
-.grid>.col-11,
-.grid>.col-12,
-.grid>.col-half,
-.grid>.col-third,
-.grid>.col-two3,
-.grid>.col-quarter,
-.grid>.col-full {
-  >* {
+.grid > .col-1,
+.grid > .col-2,
+.grid > .col-3,
+.grid > .col-4,
+.grid > .col-5,
+.grid > .col-6,
+.grid > .col-7,
+.grid > .col-8,
+.grid > .col-9,
+.grid > .col-10,
+.grid > .col-11,
+.grid > .col-12,
+.grid > .col-half,
+.grid > .col-third,
+.grid > .col-two3,
+.grid > .col-quarter,
+.grid > .col-full {
+  > * {
     margin-block: 0;
     margin-block-end: var(--space);
   }

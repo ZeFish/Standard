@@ -1,0 +1,139 @@
+title: "Standard Framework"
+url: "https://standard.ffp.co"
+language: "en"
+description: "Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."
+author:
+  name: "Francis Fontaine"
+  email: "francisfontaine@gmail.com"
+  url: "https://francisfontaine.com/now/"
+  twitter: "francisfontaine"
+social:
+  twitter: "@francisfontaine"
+  instagram: "@francisfontaine"
+nav:
+  header:
+    - title: "Docs"
+      url: "/docs/"
+    - title: "Getting Started"
+      url: "/getting-started/"
+    - title: "Cheat Sheet"
+      url: "/cheat-sheet/"
+
+standard:
+  verbose: true
+  security:
+    enabled: false
+
+openrouter:
+  enabled: true
+  model: "meta-llama/llama-4-maverick:free"
+
+# ========================================
+# BUILD CONFIGURATION
+# ========================================
+# These arrays define which files to compile, bundle, and minify
+# during build processes (build:css and build:js)
+
+build:
+  # CSS/SCSS Build Configuration
+  css:
+    # Individual SCSS files to compile
+    files:
+      - input: "framework/styles/standard.scss"
+        output:
+          - "lib/standard.min.css"
+          - "_site/assets/standard/standard.min.css"
+      - input: "framework/themes/standard.theme.scss"
+        output:
+          - "lib/standard.theme.min.css"
+          - "_site/assets/standard/standard.theme.min.css"
+      - input: "node_modules/modern-normalize/modern-normalize.css"
+        output:
+          - "lib/modern-normalize.min.css"
+          - "_site/assets/standard/modern-normalize.min.css"
+
+    # Files to bundle together (in order)
+    bundle:
+      files:
+        - "lib/modern-normalize.min.css"
+        - "lib/standard.min.css"
+        - "lib/standard.theme.min.css"
+      output:
+        - "lib/standard.bundle.css"
+        - "_site/assets/standard/standard.bundle.css"
+
+  # JavaScript Build Configuration
+  js:
+    # Individual JS files to minify
+    files:
+      - input: "framework/js/standard.js"
+        output:
+          - "lib/standard.js"
+          - "_site/assets/standard/standard.js"
+          - "public/assets/standard/standard.js"
+        minify: false
+      - input: "framework/js/standard.toast.js"
+        output:
+          - "lib/standard.toast.js"
+          - "_site/assets/standard/standard.toast.js"
+          - "public/assets/standard/standard.toast.js"
+        minify: false
+      - input: "framework/js/standard.comment.js"
+        output:
+          - "lib/standard.comment.js"
+          - "_site/assets/standard/standard.comment.js"
+          - "public/assets/standard/standard.comment.js"
+        minify: false
+      - input: "framework/js/standard.lab.js"
+        output:
+          - "lib/standard.lab.js"
+          - "_site/assets/standard/standard.lab.js"
+          - "public/assets/standard/standard.lab.js"
+        minify: false
+      - input: "framework/js/standard.copy-buttons.js"
+        output:
+          - "lib/standard.copy-buttons.js"
+          - "_site/assets/standard/standard.copy-buttons.js"
+          - "public/assets/standard/standard.copy-buttons.js"
+        minify: false
+      - input: "framework/js/standard.image-zoom.js"
+        output:
+          - "lib/standard.image-zoom.js"
+          - "_site/assets/standard/standard.image-zoom.js"
+          - "public/assets/standard/standard.image-zoom.js"
+        minify: false
+      - input: "framework/js/standard.scroll-wrappers.js"
+        output:
+          - "lib/standard.scroll-wrappers.js"
+          - "_site/assets/standard/standard.scroll-wrappers.js"
+          - "public/assets/standard/standard.scroll-wrappers.js"
+        minify: false
+      - input: "framework/js/standard.htmx.js"
+        output:
+          - "lib/standard.htmx.js"
+          - "_site/assets/standard/standard.htmx.js"
+          - "public/assets/standard/standard.htmx.js"
+        minify: false
+      - input: "framework/js/standard.astro.js"
+        output:
+          - "lib/standard.astro.js"
+          - "_site/assets/standard/standard.astro.js"
+          - "public/assets/standard/standard.astro.js"
+        minify: false
+
+    # JS bundles to create
+    bundles:
+      - name: "standard.bundle.full.js"
+        files:
+          - "framework/js/standard.js"
+          - "framework/js/standard.toast.js"
+          - "framework/js/standard.comment.js"
+          - "framework/js/standard.copy-buttons.js"
+          - "framework/js/standard.image-zoom.js"
+          - "framework/js/standard.scroll-wrappers.js"
+          - "framework/js/standard.htmx.js"
+          - "framework/js/standard.astro.js"
+        output:
+          - "lib/standard.bundle.full.js"
+          - "_site/assets/standard/standard.bundle.full.js"
+          - "public/assets/standard/standard.bundle.full.js"

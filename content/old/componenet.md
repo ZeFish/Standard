@@ -375,20 +375,17 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
  */
 
 .alert {
-  --alert-padding: var(--rhythm-d2);
   --alert-border-width: 1px;
-  --alert-border-radius: var(--radius);
   --alert-background: var(--color-background-secondary);
   --alert-color: var(--color-foreground);
   --alert-border-color: var(--color-border);
 
-  padding: var(--alert-padding);
-  border: var(--alert-border-width) solid var(--alert-border-color);
-  border-radius: var(--alert-border-radius);
+  padding: var(--space-half);
+  border: var(--border);
+  border-radius: var(--radius);
   background: var(--alert-background);
   color: var(--alert-color);
-  border-left: 4px solid var(--alert-border-color); /* Accent bar */
-  margin-block-end: var(--rhythm);
+  border-left: 4px solid var(--color-border); /* Accent bar */
 
   /* Typography adjustments */
   font-size: var(--scale-d2);

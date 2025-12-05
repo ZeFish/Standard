@@ -10,11 +10,6 @@ Standard is built on the belief that design systems should be rooted in centurie
 - [CSS Framework](content/css/)
 - [Conard](/conard/)
 
-::center
-Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
-::end
-
-![npm](https://img.shields.io/npm/v/@zefish/standard)
 
 > "Typography is the craft of endowing human language with a durable visual form."
 > — Robert Bringhurst

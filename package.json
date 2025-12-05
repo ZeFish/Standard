@@ -37,8 +37,8 @@
     "standard-check": "bin/analyzer.js"
   },
   "exports": {
-    "./styles/standard.scss": "./design_system/styles/standard.scss",
-    "./styles/standard.theme.scss": "./design_system/themes/standard.theme.scss",
+    "./styles/standard.scss": "./framework/styles/standard.scss",
+    "./styles/standard.theme.scss": "./framework/themes/standard.theme.scss",
     "./css": "./lib/standard.min.css",
     "./logger": "./core/logger.js",
     "./theme": "./lib/standard.theme.min.css",
@@ -85,13 +85,14 @@
     "astro",
     "cloudflare",
     "core",
-    "design_system",
+    "framework",
     "public/assets",
     "11ty"
   ],
   "scripts": {
     "build:css": "node bin/build-css.js",
     "build:js": "node bin/build-js.js",
+    "verify:version": "grep -r \"Standard::Framework v\" lib/",
     "watch:css": "node bin/build-css.js --watch",
     "watch:js": "node bin/build-js.js --watch",
     "check": "npm run build && node bin/analyzer.js",

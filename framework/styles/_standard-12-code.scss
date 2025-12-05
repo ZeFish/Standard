@@ -1,0 +1,202 @@
+@use "standard-00-variables" as *;
+/* Note: General color utilities (.text-muted, .text-subtle, .text-accent, .bg-secondary, .border-*) */
+/* moved to standard-98-utilities.scss for better layer organization */
+
+/* PrismJS syntax highlighting - Language agnostic tokens */
+
+/* Keywords, control flow */
+.token.keyword,
+.token.module,
+.token.class-name {
+  color: var(--color-red);
+}
+
+/* Strings and attributes */
+.token.string,
+.token.attr-value {
+  color: var(--color-green);
+}
+
+/* Numbers and booleans */
+.token.number,
+.token.boolean {
+  color: var(--color-cyan);
+}
+
+/* Functions, methods, tags */
+.token.function,
+.token.tag,
+.token.builtin {
+  color: var(--color-yellow);
+}
+
+/* Properties, attributes, selectors */
+.token.property,
+.token.attr-name,
+.token.selector {
+  color: var(--color-orange);
+}
+
+/* Punctuation, operators, delimiters */
+.token.punctuation,
+.token.operator {
+  color: var(--color-muted);
+}
+
+/* Comments */
+.token.comment {
+  color: var(--color-subtle);
+  font-style: italic;
+}
+
+/* HTML-specific */
+.token.tag > .token.punctuation {
+  color: var(--color-muted);
+}
+
+.token.attr-name {
+  color: var(--color-orange);
+}
+
+/* Namespace and doctype */
+.token.doctype,
+.token.namespace {
+  color: var(--color-purple);
+}
+
+/* Generics */
+.token.generics {
+  color: var(--color-blue);
+}
+
+/* YAML-specific */
+.language-yaml .token.key {
+  color: var(--color-orange);
+}
+
+.language-yaml .token.literal {
+  color: var(--color-cyan);
+}
+
+/* Markdown-specific */
+.language-markdown .token.italic,
+.language-md .token.italic,
+.language-markdown .token.emphasis,
+.language-md .token.emphasis {
+  color: var(--color-italic);
+  font-style: italic;
+}
+
+.language-markdown .token.bold,
+.language-md .token.bold,
+.language-markdown .token.strong,
+.language-md .token.strong {
+  color: var(--color-bold);
+  font-weight: bold;
+}
+
+.language-markdown .token.link,
+.language-md .token.link {
+  color: var(--color-blue);
+}
+
+.language-markdown .token.url,
+.language-md .token.url {
+  color: var(--color-cyan);
+}
+
+.language-markdown .token.heading,
+.language-md .token.heading {
+  color: var(--color-header);
+  font-weight: bold;
+}
+
+.language-markdown .token.code,
+.language-md .token.code,
+.language-markdown .token.codespan,
+.language-md .token.codespan {
+  color: var(--color-green);
+}
+
+.language-markdown .token.list,
+.language-md .token.list {
+  color: var(--color-orange);
+}
+
+.language-markdown .token.table,
+.language-md .token.table {
+  color: var(--color-blue);
+}
+
+/* Bash/Shell-specific */
+.language-bash .token.function {
+  color: var(--color-yellow);
+}
+
+.language-bash .token.variable {
+  color: var(--color-cyan);
+}
+
+.language-bash .token.builtin {
+  color: var(--color-red);
+}
+
+.language-bash .token.string {
+  color: var(--color-green);
+}
+
+.language-bash .token.parameter {
+  color: var(--color-orange);
+}
+
+.language-sh .token.function,
+.language-shell .token.function {
+  color: var(--color-yellow);
+}
+
+.language-sh .token.variable,
+.language-shell .token.variable {
+  color: var(--color-cyan);
+}
+
+.language-sh .token.builtin,
+.language-shell .token.builtin {
+  color: var(--color-red);
+}
+
+/* Nunjucks/Jinja-specific - inherits HTML color syntax */
+.language-nunjucks .token.tag,
+.language-njk .token.tag {
+  color: var(--color-yellow);
+}
+
+.language-nunjucks .token.tag > .token.punctuation,
+.language-njk .token.tag > .token.punctuation {
+  color: var(--color-muted);
+}
+
+.language-nunjucks .token.attr-name,
+.language-njk .token.attr-name {
+  color: var(--color-orange);
+}
+
+.language-nunjucks .token.attr-value,
+.language-njk .token.attr-value {
+  color: var(--color-green);
+}
+
+/* Nunjucks template variables and expressions */
+.language-nunjucks .token.variable,
+.language-njk .token.variable {
+  color: var(--color-cyan);
+}
+
+.language-nunjucks .token.expression,
+.language-njk .token.expression {
+  color: var(--color-cyan);
+}
+
+.language-nunjucks .token.filter,
+.language-njk .token.filter {
+  color: var(--color-orange);
+}

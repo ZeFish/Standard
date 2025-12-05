@@ -9,6 +9,7 @@
 import { fileURLToPath } from "url";
 import * as path from "path";
 import * as fs from "fs";
+import yaml from "js-yaml";
 import logger from "../core/logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
@@ -79,7 +80,20 @@ export default function standard(options = {}) {
 
   // All configuration comes from astro.config.js root level
   // Options are merged as overrides if needed
-  let mergedConfig = options;
+
+  // Load standard.config.yml if it exists
+  const configPath = path.join(process.cwd(), "standard.config.yml");
+  let fileConfig = {};
+  if (fs.existsSync(configPath)) {
+    try {
+      fileConfig = yaml.load(fs.readFileSync(configPath, "utf8")) || {};
+    } catch (e) {
+      logger.error(`Failed to load standard.config.yml: ${e.message}`);
+    }
+  }
+
+  // fileConfig is the base, options (from astro.config.mjs) override it
+  let mergedConfig = deepMerge(fileConfig, options);
 
   return {
     name: "@zefish/standard",
@@ -183,15 +197,15 @@ export default function standard(options = {}) {
                 // Use source in dev for fast HMR
                 "@zefish/standard/styles": path.resolve(
                   __dirname,
-                  "../design_system/styles",
+                  "../framework/styles",
                 ),
                 "@zefish/standard/themes": path.resolve(
                   __dirname,
-                  "../design_system/themes",
+                  "../framework/themes",
                 ),
                 "@zefish/standard/js": path.resolve(
                   __dirname,
-                  "../design_system/js/standard.js",
+                  "../framework/js/standard.js",
                 ),
                 "@zefish/standard/logger": path.resolve(
                   __dirname,
@@ -281,8 +295,6 @@ export default function standard(options = {}) {
         if (themeEntry) {
           injectScript("page-ssr", `import "${themeEntry}";`);
         }
-
-
       },
     },
   };

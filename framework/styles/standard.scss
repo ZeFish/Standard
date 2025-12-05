@@ -25,29 +25,35 @@
 /* Standard - Fine-Art Typography Framework */
 /* A framework implementing classical design principles, mathematical precision with the golden ratio, */
 /* and micro-typography rules inspired by the masters of print design. */
-
+@use "standard-00-reset";
 @use "standard-00-variables" as *;
 @use "standard-01-token";
 @use "standard-02-color";
 @use "standard-03-typography";
-@use "standard-04-elements";
+@use "standard-04-grid";
 @use "standard-05-rhythm";
-@use "standard-06-grid";
-@use "standard-07-prose";
-@use "standard-08-img";
-@use "standard-10-components";
+@use "standard-06-prose";
+@use "standard-07-base";
+@use "standard-08-media";
+@use "standard-09-lists";
+@use "standard-10-tables";
+@use "standard-11-forms";
+@use "standard-12-code";
+@use "standard-13-components";
 
-/* Optional Extended Components  
+/* Optional Extended Components
  * Uncomment to enable advanced UI components (card, pagination, tabs, accordion, etc.)
  * These will eventually be replaced by an external component library.
  * Keep commented for minimal framework footprint.
  */
-// @use "standard-90-extended-components";
+// @use "standard-
+@use "standard-30-contrast";
+@use "standard-31-print";
 
-@use "standard-toast";
-@use "standard-96-contrast";
-@use "standard-97-print";
-@use "standard-98-utilities";
+@use "standard-40-toast";
+
+@use "standard-50-utilities";
+
 @use "standard-99-debug";
 
 /*

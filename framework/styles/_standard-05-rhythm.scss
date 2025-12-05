@@ -1,0 +1,53 @@
+@use "standard-00-variables" as *;
+
+$content-tags: "h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset";
+$wrapper-tags: "div, section, article, header, footer";
+$rhythm-participants: $content-tags + ", " + $wrapper-tags;
+/* ===== BULLETPROOF RHYTHM SYSTEM ===== */
+/* Applied to <html> root for global cascade (best practice for frameworks) */
+:where(.rhythm) {
+  --rhythm-gap-new-line: var(--space-half);
+  --rhythm-gap: calc(var(--space) + var(--space-half));
+  --rhythm-gap-2: calc((var(--space) * 2) + var(--space-half));
+  --rhythm-gap-3: calc((var(--space) * 3) + var(--space-half));
+
+  /* Rhythm control - can be overridden per instance */
+  display: inline-flex;
+  align-items: baseline;
+  display: flow-root;
+
+  > * + *,
+  :where(:is(#{$rhythm-participants}) + :is(#{$rhythm-participants})) {
+    margin-block-start: var(--rhythm-gap);
+  }
+
+  // EXCEPTIONS
+  * + :is(h1, h2, h3) {
+    margin-block-start: var(--rhythm-gap-3);
+  }
+
+  * + :is(h4, h5, h6) {
+    margin-block-start: var(--rhythm-gap-2);
+  }
+
+  :is(h1, h2, h3, h4) + :is(h2, h3, h4, h5, h6) {
+    margin-block-start: var(--rhythm-gap);
+  }
+
+  :is(h4, h5, h6) + * {
+    margin-block-start: var(--rhythm-gap-new-line);
+  }
+
+  hr + * {
+    margin-block-start: var(--rhythm-gap);
+  }
+
+  .no-rhythm * {
+    margin: revert;
+  }
+}
+
+/* Individual element overrides */
+.no-rhythm {
+  margin: 0 !important;
+}
