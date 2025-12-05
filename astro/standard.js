@@ -7,7 +7,6 @@
  * - Standard framework features
  */
 import { fileURLToPath } from "url";
-import { createRequire } from "module";
 import * as path from "path";
 import * as fs from "fs";
 import logger from "../core/logger.js";
@@ -31,7 +30,6 @@ import rehypeStandard from "./rehype/standard.js";
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const require = createRequire(import.meta.url);
 
 // ========================================
 // HELPERS
@@ -94,7 +92,26 @@ export default function standard(options = {}) {
       }) => {
         // Merge full Astro config with Standard options
         // This allows all site config to live at the root level of astro.config.js
-        const finalConfig = deepMerge(config, mergedConfig);
+        // We filter out complex objects that might cause serialization issues
+        const safeConfig = {};
+        const unsafeKeys = [
+          "vite",
+          "integrations",
+          "server",
+          "adapter",
+          "markdown",
+          "build",
+          "_ai",
+          "_cloudflare",
+        ];
+
+        for (const key in config) {
+          if (!unsafeKeys.includes(key)) {
+            safeConfig[key] = config[key];
+          }
+        }
+
+        const finalConfig = deepMerge(safeConfig, mergedConfig);
 
         // Store config globally so it can be accessed from anywhere
         // This is the official Astro pattern for sharing config across the build
@@ -242,7 +259,7 @@ export default function standard(options = {}) {
             : DEFAULT_FONT_FLAGS,
           (specifier) => {
             try {
-              return require.resolve(specifier);
+              return fileURLToPath(import.meta.resolve(specifier));
             } catch (e) {
               return specifier;
             }
