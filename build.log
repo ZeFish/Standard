@@ -1,0 +1,194 @@
+
+> @zefish/standard@0.18.35 build
+> astro build
+
+[0mstdn[33m::[0mgd[0m [0m:: [32mv0.18.35[0m :: [33mhttps://standard.ffp.co[0m
+[0mstdn[33m::[0mgd[0m [34m[cloudflare][0m init
+DEBUG: createFontImports called
+[0mstdn[33m::[0mgd[0m [34m[cloudflare][0m [32m✓ [0m
+[0mstdn[33m::[0mgd[0m [34m[openrouter][0m [32m✓ Initialized [meta-llama/llama-4-maverick:free] [0m
+20:04:10 [content] Syncing content
+20:04:10 [content] Synced content
+20:04:10 [types] Generated 431ms
+20:04:10 [build] output: "static"
+20:04:10 [build] mode: "static"
+20:04:10 [build] directory: /Users/francisfontaine/Documents/GitHub/Standard/dist/
+20:04:10 [build] Collecting build info...
+20:04:11 [build] ✓ Completed in 453ms.
+20:04:11 [build] Building static entrypoints...
+[0mstdn[33m::[0mgd[0m [34m[tags][0m init
+[0mstdn[33m::[0mgd[0m [34m[markdown][0m init
+[0mstdn[33m::[0mgd[0m [34m[escape code][0m init
+[0mstdn[33m::[0mgd[0m [34m[fix dates][0m init
+[0mstdn[33m::[0mgd[0m [34m[backlinks][0m init
+[0mstdn[33m::[0mgd[0m [34m[wikilinks][0m init
+[0mstdn[33m::[0mgd[0m [34m[syntax][0m init
+[0mstdn[33m::[0mgd[0m [34m[backlinks][0m Ignoring page in backlinks (auto (index page)): index
+20:04:11 [WARN] [vite] 
+/assets/fonts/FuturaNowVar-Italic.woff2 referenced in /assets/fonts/FuturaNowVar-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/FuturaNowVar-Roman.woff2 referenced in /assets/fonts/FuturaNowVar-Roman.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrime-BoldItalic.woff2 referenced in /assets/fonts/CourierPrime-BoldItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrime-Bold.woff2 referenced in /assets/fonts/CourierPrime-Bold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrimeCode-Italic.woff2 referenced in /assets/fonts/CourierPrimeCode-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrimeSans-BoldItalic.woff2 referenced in /assets/fonts/CourierPrimeSans-BoldItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrimeCode-Regular.woff2 referenced in /assets/fonts/CourierPrimeCode-Regular.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrime-Italic.woff2 referenced in /assets/fonts/CourierPrime-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrime-SemiBold.woff2 referenced in /assets/fonts/CourierPrime-SemiBold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrimeSans-Regular.woff2 referenced in /assets/fonts/CourierPrimeSans-Regular.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrime.woff2 referenced in /assets/fonts/CourierPrime.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrimeSans-Italic.woff2 referenced in /assets/fonts/CourierPrimeSans-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrimeSans-Bold.woff2 referenced in /assets/fonts/CourierPrimeSans-Bold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CourierPrime-Medium.woff2 referenced in /assets/fonts/CourierPrime-Medium.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/MonostenProVar.woff2 referenced in /assets/fonts/MonostenProVar.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/HelveticaMonospacedPro-Rg.woff2 referenced in /assets/fonts/HelveticaMonospacedPro-Rg.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/HelveticaMonospacedPro-Bd.woff2 referenced in /assets/fonts/HelveticaMonospacedPro-Bd.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/HelveticaMonospacedPro-BdIt.woff2 referenced in /assets/fonts/HelveticaMonospacedPro-BdIt.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/HelveticaMonospacedPro-It.woff2 referenced in /assets/fonts/HelveticaMonospacedPro-It.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-Regular.woff2 referenced in /assets/fonts/Forrest-Regular.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-RegularItalic.woff2 referenced in /assets/fonts/Forrest-RegularItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-Light.woff2 referenced in /assets/fonts/Forrest-Light.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-LightItalic.woff2 referenced in /assets/fonts/Forrest-LightItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-Medium.woff2 referenced in /assets/fonts/Forrest-Medium.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-MediumItalic.woff2 referenced in /assets/fonts/Forrest-MediumItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-Bold.woff2 referenced in /assets/fonts/Forrest-Bold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-BoldItalic.woff2 referenced in /assets/fonts/Forrest-BoldItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-Extrabold.woff2 referenced in /assets/fonts/Forrest-Extrabold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-ExtraboldItalic.woff2 referenced in /assets/fonts/Forrest-ExtraboldItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-Heavy.woff2 referenced in /assets/fonts/Forrest-Heavy.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Forrest-HeavyItalic.woff2 referenced in /assets/fonts/Forrest-HeavyItalic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].woff2 referenced in /assets/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/NationalPark-VariableVF.woff2 referenced in /assets/fonts/NationalPark-VariableVF.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/MonoLisa-Regular-Variable.woff2 referenced in /assets/fonts/MonoLisa-Regular-Variable.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/MonoLisa-RegularItalic-Variable.woff2 referenced in /assets/fonts/MonoLisa-RegularItalic-Variable.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2 referenced in /assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2 referenced in /assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Cargo-DiatypePlusVariable.woff2 referenced in /assets/fonts/Cargo-DiatypePlusVariable.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2 referenced in /assets/fonts/Cargo-DiatypePlusVariable-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/CalSansUI[MODE,wght].woff2 referenced in /assets/fonts/CalSansUI[MODE,wght].woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Kalice-Black.woff2 referenced in /assets/fonts/Kalice-Black.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Kalice-Italic.woff2 referenced in /assets/fonts/Kalice-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Kalice-ExtraBold.woff2 referenced in /assets/fonts/Kalice-ExtraBold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Kalice-Medium.woff2 referenced in /assets/fonts/Kalice-Medium.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Kalice-Bold.woff2 referenced in /assets/fonts/Kalice-Bold.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/Kalice-Regular.woff2 referenced in /assets/fonts/Kalice-Regular.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/FernVariable-Roman-VF.woff2 referenced in /assets/fonts/FernVariable-Roman-VF.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-Buch.ttf referenced in /assets/fonts/sohne/Söhne-Buch.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-BuchKursiv.ttf referenced in /assets/fonts/sohne/Söhne-BuchKursiv.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-Leicht.ttf referenced in /assets/fonts/sohne/Söhne-Leicht.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-LeichtKursiv.ttf referenced in /assets/fonts/sohne/Söhne-LeichtKursiv.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-Halbfett.ttf referenced in /assets/fonts/sohne/Söhne-Halbfett.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-HalbfettKursiv.ttf referenced in /assets/fonts/sohne/Söhne-HalbfettKursiv.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-Fett.ttf referenced in /assets/fonts/sohne/Söhne-Fett.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-FettKursiv.ttf referenced in /assets/fonts/sohne/Söhne-FettKursiv.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-Extrafett.ttf referenced in /assets/fonts/sohne/Söhne-Extrafett.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/Söhne-ExtrafettKursiv.ttf referenced in /assets/fonts/sohne/Söhne-ExtrafettKursiv.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/SöhneSchmal-Buch.ttf referenced in /assets/fonts/sohne/SöhneSchmal-Buch.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/SöhneSchmal-Halbfett.ttf referenced in /assets/fonts/sohne/SöhneSchmal-Halbfett.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/SöhneBreit-Buch.ttf referenced in /assets/fonts/sohne/SöhneBreit-Buch.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/SöhneBreit-Fett.ttf referenced in /assets/fonts/sohne/SöhneBreit-Fett.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/sohne/SöhneMono-Buch.ttf referenced in /assets/fonts/sohne/SöhneMono-Buch.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond.woff referenced in /assets/fonts/eb-garamond/EBGaramond.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-Regular.woff referenced in /assets/fonts/eb-garamond/EBGaramond-Regular.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramondSC.woff referenced in /assets/fonts/eb-garamond/EBGaramondSC.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-Italic.woff referenced in /assets/fonts/eb-garamond/EBGaramond-Italic.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-Medium.woff referenced in /assets/fonts/eb-garamond/EBGaramond-Medium.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff referenced in /assets/fonts/eb-garamond/EBGaramond-MediumItalic.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-SemiBold.woff referenced in /assets/fonts/eb-garamond/EBGaramond-SemiBold.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff referenced in /assets/fonts/eb-garamond/EBGaramond-SemiBoldItalic.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-Bold.woff referenced in /assets/fonts/eb-garamond/EBGaramond-Bold.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff referenced in /assets/fonts/eb-garamond/EBGaramond-BoldItalic.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff referenced in /assets/fonts/eb-garamond/EBGaramond-ExtraBold.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff referenced in /assets/fonts/eb-garamond/EBGaramond-ExtraBoldItalic.woff didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/HelveticaNowVar.woff2 referenced in /assets/fonts/HelveticaNowVar.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/HelveticaNowVar-Italic.woff2 referenced in /assets/fonts/HelveticaNowVar-Italic.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/UniversNextVariable.ttf referenced in /assets/fonts/UniversNextVariable.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [WARN] [vite] 
+/assets/fonts/UniversNextVariable-Italic.ttf referenced in /assets/fonts/UniversNextVariable-Italic.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+20:04:11 [ERROR] [vite] ✗ Build failed in 948ms
+[vite]: Rollup failed to resolve import "@fontsource/instrument-serif/latin-500.css" from "astro:scripts/page-ssr.js".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`
+  Location:
+    /Users/francisfontaine/Documents/GitHub/Standard/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46374:15
+  Stack trace:
+    at viteLog (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46374:15)
+    at onLog (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46072:7)
+    at Object.logger [as onLog] (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/rollup/dist/es/shared/node-entry.js:22848:9)
+    at file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/rollup/dist/es/shared/node-entry.js:21550:26

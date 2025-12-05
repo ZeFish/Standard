@@ -1,0 +1,16 @@
+
+> @zefish/standard@0.18.35 build
+> astro build
+
+[0mstdn[33m::[0mgd[0m [0m:: [32mv0.18.35[0m :: [33mhttps://standard.ffp.co[0m
+[0mstdn[33m::[0mgd[0m [34m[cloudflare][0m init
+20:12:36 [ERROR] [@zefish/standard] An unhandled error occurred while running the "astro:config:setup" hook
+jsEntry is not defined
+  Location:
+    /Users/francisfontaine/Documents/GitHub/Standard/node_modules/astro/dist/integrations/hooks.js:54:21
+  Stack trace:
+    at astro:config:setup (file:///Users/francisfontaine/Documents/GitHub/Standard/astro/standard.js:268:9)
+    at withTakingALongTimeMsg (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/astro/dist/integrations/hooks.js:32:18)
+    at runHookConfigSetup (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/astro/dist/integrations/hooks.js:141:41)
+    at async AstroBuilder.run (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/astro/dist/core/build/index.js:186:23)
+    at async build (file:///Users/francisfontaine/Documents/GitHub/Standard/node_modules/astro/dist/cli/build/index.js:29:3)

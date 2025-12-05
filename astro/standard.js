@@ -7,12 +7,14 @@
  * - Standard framework features
  */
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 import * as path from "path";
 import * as fs from "fs";
 import logger from "../core/logger.js";
 import openrouterIntegration from "./integrations/openrouter.js";
 import cloudflareIntegration from "./integrations/cloudflare.js";
 import { deepMerge } from "./utils/utils.js";
+import { createFontImports, DEFAULT_FONT_FLAGS } from "./utils/fonts.js";
 
 // Remark & Rehype Plugins
 import remarkTags from "./remark/tags.js";
@@ -29,170 +31,28 @@ import rehypeStandard from "./rehype/standard.js";
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
 
 // ========================================
-// PLUGIN MANAGERS
+// HELPERS
 // ========================================
 
-/**
- * Get configured remark plugins array
- *
- * @param {Object} config - Merged configuration object
- * @returns {Array} Array of [plugin, options] tuples for Astro
- */
-function getRemarkPlugins(config = {}) {
-  const plugins = [
-    // Frontmatter defaults now handled by Vite plugin (runs earlier)
-    [remarkTags, config.tags || {}],
-    [remarkStandard, config.standard || {}],
-    [remarkEscapeCode, config || {}],
-    [remarkFixDates, config.dateFields || {}],
-  ];
-
-  // ✨ CRITICAL: Backlinks must run BEFORE ObsidianLinks
-  if (config.backlinks !== false) {
-    plugins.push([
-      remarkBacklinks,
-      { verbose: config.verbose, ...config.backlinks },
-    ]);
-  }
-
-  // ObsidianLinks plugin
-  plugins.push([remarkObsidianLinks, {}]);
-
-  // Syntax highlighting always last (must run after content transformations)
-  plugins.push([remarkSyntax, config.syntax || {}]);
-
-  return plugins;
-}
-
-/**
- * Get list of all available remark plugins
- *
- * @returns {Array} Array of plugin metadata objects
- */
-function getAvailableRemarkPlugins() {
-  return [
-    {
-      name: "remarkTags",
-      description: "Extract and process frontmatter tags",
-      optional: false,
-    },
-    {
-      name: "remarkStandard",
-      description: "Standard markdown enhancements (containers, callouts)",
-      optional: false,
-    },
-    {
-      name: "remarkEscapeCode",
-      description: "Escape code blocks to prevent double-processing",
-      optional: false,
-    },
-    {
-      name: "remarkFixDates",
-      description: "Normalize date fields across different formats",
-      optional: false,
-    },
-    {
-      name: "remarkObsidianLinks",
-      description: "Convert Obsidian-style [[wikilinks]] to standard links",
-      optional: false,
-    },
-    {
-      name: "remarkBacklinks",
-      description: "Generate automatic bidirectional backlinks",
-      optional: true,
-      default: true,
-    },
-    {
-      name: "remarkSyntax",
-      description: "Syntax highlighting for code blocks (must run last)",
-      optional: false,
-    },
-    {
-      name: "remarkFrontmatterDefaults",
-      description:
-        "Apply default values to missing frontmatter fields (deprecated - now handled by Vite plugin)",
-      optional: true,
-      default: false,
-      deprecated: true,
-    },
-  ];
-}
-
-/**
- * Get configured rehype plugins array
- *
- * @param {Object} config - Merged configuration object
- * @returns {Array} Array of [plugin, options] tuples for Astro
- *
- * @example
- * const plugins = getRehypePlugins({
- *   typography: { smartQuotes: true },
- *   html: { lazyLoad: true }
- * });
- */
-function getRehypePlugins(config = {}) {
-  return [
-    [
-      rehypeTypography,
-      {
-        defaultLocale: config.language || "en",
-        ...config.typography,
-      },
-    ],
-    [rehypeStandard, config.html || {}],
-  ];
-}
-
-/**
- * Get list of all available rehype plugins
- *
- * @returns {Array} Array of plugin metadata objects
- */
-function getAvailableRehypePlugins() {
-  return [
-    {
-      name: "rehypeTypography",
-      description: "Typography enhancements (smart quotes, fractions, etc.)",
-      optional: false,
-    },
-    {
-      name: "rehypeStandard",
-      description:
-        "Standard HTML processing (classes, attributes, optimization)",
-      optional: false,
-    },
-  ];
-}
-
-/**
- * Sanitize config to remove circular references and functions
- * @param {Object} obj - Object to sanitize
- * @param {WeakSet} seen - Track visited objects
- * @returns {Object} Sanitized object safe for JSON.stringify
- */
-function sanitizeConfig(obj, seen = new WeakSet()) {
-  if (obj === null || typeof obj !== "object") return obj;
-  if (seen.has(obj)) return undefined;
-  seen.add(obj);
-
-  if (Array.isArray(obj)) {
-    return obj.map((item) => sanitizeConfig(item, seen)).filter(Boolean);
-  }
-
-  const sanitized = {};
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const value = obj[key];
-      // Skip functions and problematic keys
-      if (typeof value === "function" || key.startsWith("_")) {
-        continue;
+function sanitizeConfig(config) {
+  const seen = new WeakSet();
+  return JSON.parse(
+    JSON.stringify(config, (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
       }
-      sanitized[key] = sanitizeConfig(value, seen);
-    }
-  }
-  return sanitized;
+      if (typeof value === "function") {
+        return undefined;
+      }
+      return value;
+    }),
+  );
 }
 
 // ========================================
@@ -240,15 +100,36 @@ export default function standard(options = {}) {
         // This is the official Astro pattern for sharing config across the build
         globalThis.__STANDARD_CONFIG__ = finalConfig;
 
-        // Use centralized plugin managers
-        // ✨ ENABLE backlinks plugin for testing
-        const remarkPlugins = getRemarkPlugins({
-          ...finalConfig,
-          backlinks: true, // Enable remark backlinks
-        });
-        const rehypePlugins = getRehypePlugins(finalConfig);
-
         // 1. Configure Remark/Rehype Plugins
+        const remarkPlugins = [
+          [remarkTags, finalConfig.tags || {}],
+          [remarkStandard, finalConfig.standard || {}],
+          [remarkEscapeCode, finalConfig || {}],
+          [remarkFixDates, finalConfig.dateFields || {}],
+        ];
+
+        // ✨ CRITICAL: Backlinks must run BEFORE ObsidianLinks
+        if (finalConfig.backlinks !== false) {
+          remarkPlugins.push([
+            remarkBacklinks,
+            { verbose: finalConfig.verbose, ...finalConfig.backlinks },
+          ]);
+        }
+
+        remarkPlugins.push([remarkObsidianLinks, {}]);
+        remarkPlugins.push([remarkSyntax, finalConfig.syntax || {}]);
+
+        const rehypePlugins = [
+          [
+            rehypeTypography,
+            {
+              defaultLocale: finalConfig.language || "en",
+              ...finalConfig.typography,
+            },
+          ],
+          [rehypeStandard, finalConfig.html || {}],
+        ];
+
         updateConfig({
           markdown: {
             remarkPlugins,
@@ -299,14 +180,6 @@ export default function standard(options = {}) {
                   __dirname,
                   "../core/logger.js",
                 ),
-                "@zefish/standard/astro/utils/collections": path.resolve(
-                  __dirname,
-                  "utils/collections.js",
-                ),
-                "@zefish/standard/astro/components/Backlinks": path.resolve(
-                  __dirname,
-                  "components/Backlinks.astro",
-                ),
               },
             },
           },
@@ -315,10 +188,6 @@ export default function standard(options = {}) {
         // 3. Inject Routes (optional)
         if (finalConfig.injectRoutes !== false) {
           // Inject dynamic content route for markdown files
-          //injectRoute({
-          //  pattern: "/[...slug]",
-          //  entrypoint: path.join(__dirname, "routes/content.astro"),
-          //});
 
           injectRoute({
             pattern: "/robots.txt",
@@ -331,81 +200,6 @@ export default function standard(options = {}) {
           injectRoute({
             pattern: "/_headers",
             entrypoint: path.join(__dirname, "routes/headers.js"),
-          });
-        }
-
-        // 4. Configure Vite aliases to expose Standard assets
-        const moduleDirAliases = path.dirname(fileURLToPath(import.meta.url));
-        const packageSrcDir = path.resolve(moduleDirAliases, "../");
-
-        const aliasEntries = {};
-        /*
-        const stylesDir = path.resolve(packageSrcDir, "styles");
-        if (fs.existsSync(stylesDir)) {
-          aliasEntries["@standard-styles"] = stylesDir;
-        }
-
-        const scriptsDir = path.resolve(packageSrcDir, "js");
-        if (fs.existsSync(scriptsDir)) {
-          aliasEntries["@standard-js"] = scriptsDir;
-        }
-*/
-
-        const fontsDir = path.resolve(
-          packageSrcDir,
-          "../",
-          "public",
-          "assets",
-          "fonts",
-        );
-        if (fs.existsSync(fontsDir)) {
-          aliasEntries["@standard-fonts"] = fontsDir;
-        }
-
-        // Copy fonts from package to public directory
-        const packageFontsDir = path.resolve(
-          packageSrcDir,
-          "../public/assets/fonts",
-        );
-        const clientPublicDir = path.resolve(
-          fileURLToPath(config.root), // ← Convert URL to string
-          "public/assets/fonts",
-        );
-
-        // Create the directory if it doesn't exist
-        if (!fs.existsSync(clientPublicDir)) {
-          fs.mkdirSync(clientPublicDir, { recursive: true });
-        }
-
-        // Copy all font files
-        if (fs.existsSync(packageFontsDir)) {
-          const files = fs.readdirSync(packageFontsDir, { recursive: true });
-          files.forEach((file) => {
-            const src = path.join(packageFontsDir, file);
-            const dest = path.join(clientPublicDir, file);
-
-            // Create subdirectories
-            const destDir = path.dirname(dest);
-            if (!fs.existsSync(destDir)) {
-              fs.mkdirSync(destDir, { recursive: true });
-            }
-
-            // Copy file
-            if (fs.statSync(src).isFile()) {
-              fs.copyFileSync(src, dest);
-            }
-          });
-
-          log.info("Fonts copied to public directory");
-        }
-
-        if (Object.keys(aliasEntries).length > 0) {
-          updateConfig({
-            vite: {
-              resolve: {
-                alias: aliasEntries,
-              },
-            },
           });
         }
 
@@ -441,35 +235,24 @@ export default function standard(options = {}) {
 
         // 6. Add Global Assets (CSS/JS)
         const assetsConfig = finalConfig.assets || {};
-        
-        // Inject fonts (make sure these are in your package.json dependencies)
-        const fonts = finalConfig.fonts || {
-          inter: true,
-          instrumentSans: true,
-          instrumentSerif: true,
-          fraunces: true,
-          ibmPlexMono: true,
-          newsreader: true,
-        };
 
-        if (fonts.inter !== false) {
-          injectScript("page-ssr", `import "@fontsource-variable/inter";`);
+        const fontImports = createFontImports(
+          finalConfig.fonts && Object.keys(finalConfig.fonts).length > 0
+            ? finalConfig.fonts
+            : DEFAULT_FONT_FLAGS,
+          (specifier) => {
+            try {
+              return require.resolve(specifier);
+            } catch (e) {
+              return specifier;
+            }
+          },
+        );
+
+        if (fontImports.length > 0) {
+          injectScript("page-ssr", fontImports.join("\n"));
         }
-        if (fonts.instrumentSans !== false) {
-          injectScript("page-ssr", `import "@fontsource-variable/instrument-sans";`);
-        }
-        if (fonts.instrumentSerif !== false) {
-          injectScript("page-ssr", `import "@fontsource/instrument-serif";`);
-        }
-        if (fonts.fraunces !== false) {
-          injectScript("page-ssr", `import "@fontsource-variable/fraunces";`);
-        }
-        if (fonts.ibmPlexMono !== false) {
-          injectScript("page-ssr", `import "@fontsource/ibm-plex-mono";`);
-        }
-        if (fonts.newsreader !== false) {
-          injectScript("page-ssr", `import "@fontsource-variable/newsreader";`);
-        }
+
         const cssEntry =
           assetsConfig.css ?? "@zefish/standard/styles/standard.scss";
         if (cssEntry) {
@@ -477,23 +260,13 @@ export default function standard(options = {}) {
         }
 
         const themeEntry =
-          assetsConfig.css ?? "@zefish/standard/themes/standard.theme.scss";
+          assetsConfig.theme ?? "@zefish/standard/themes/standard.theme.scss";
         if (themeEntry) {
           injectScript("page-ssr", `import "${themeEntry}";`);
         }
 
-        const jsEntry = assetsConfig.js ?? "@zefish/standard/js";
-        if (jsEntry) {
-          //injectScript("page", `import "${jsEntry}";`);
-        }
+
       },
     },
   };
 }
-
-// ========================================
-// EXPORT HELPERS
-// ========================================
-
-export { getRemarkPlugins, getAvailableRemarkPlugins };
-export { getRehypePlugins, getAvailableRehypePlugins };
