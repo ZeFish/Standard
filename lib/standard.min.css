@@ -1566,7 +1566,7 @@ hr.col-row {
   display: flow-root;
 }
 :where(.rhythm) > * + *,
-:where(.rhythm) :where(:is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, div, section, article, header, footer) + :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, div, section, article, header, footer)) {
+:where(.rhythm) :where(:is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .button, div, section, article, header, footer) + :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .button, div, section, article, header, footer)) {
   margin-block-start: var(--rhythm-gap);
 }
 :where(.rhythm) * + :is(h1, h2, h3) {
