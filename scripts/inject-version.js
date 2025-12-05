@@ -14,16 +14,16 @@ const pkg = JSON.parse(
 const version = pkg.version;
 
 // Version string to inject
-const versionString = `Standard Framework v${version}`;
+const versionString = `Standard::Framework v${version}`;
 
 // Placeholder to replace
 const placeholder = "@VERSION_PLACEHOLDER@";
 
 // Get all files in dist/ directory
-const distDir = path.join(projectRoot, "dist");
+const distDir = path.join(projectRoot, "lib");
 
 if (!fs.existsSync(distDir)) {
-  console.error(`✗ dist/ directory not found at ${distDir}`);
+  console.error(`✗ lib/ directory not found at ${distDir}`);
   process.exit(1);
 }
 
@@ -33,7 +33,7 @@ const files = fs.readdirSync(distDir).filter((file) => {
 });
 
 if (files.length === 0) {
-  console.warn("⚠ No files found in dist/ directory");
+  console.warn("⚠ No files found in lib/ directory");
   process.exit(0);
 }
 
