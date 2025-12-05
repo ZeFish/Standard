@@ -21,6 +21,10 @@ $rhythm-participants: $content-tags + ", " + $wrapper-tags;
     margin-block-start: var(--rhythm-gap);
   }
 
+  > * + :is(#{$wrapper-tags}) {
+    margin-block-start: calc(var(--rhythm-gap) * 4);
+  }
+
   // EXCEPTIONS
   * + :is(h1, h2, h3) {
     margin-block-start: var(--rhythm-gap-3);

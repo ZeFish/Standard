@@ -85,6 +85,10 @@ fieldset *:not(legend) + .button-group {
   margin-block-start: var(--space-2);
 }
 
+input + :is(button, .button-group) {
+  margin-block-start: var(--space-half);
+}
+
 fieldset label:has(input[type="checkbox"], input[type="radio"]) {
   margin-block-start: var(--space);
 }

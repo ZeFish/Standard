@@ -205,7 +205,11 @@ export default function standard(options = {}) {
                 ),
                 "@zefish/standard/js": path.resolve(
                   __dirname,
-                  "../framework/js/standard.js",
+                  "../lib/standard.bundle.full.js",
+                ),
+                "@zefish/standard/lab": path.resolve(
+                  __dirname,
+                  "../lib/standard.lab.js",
                 ),
                 "@zefish/standard/logger": path.resolve(
                   __dirname,
@@ -295,6 +299,9 @@ export default function standard(options = {}) {
         if (themeEntry) {
           injectScript("page-ssr", `import "${themeEntry}";`);
         }
+
+        injectScript("page", 'import "@zefish/standard/js";');
+        injectScript("page", 'import "@zefish/standard/lab";');
       },
     },
   };

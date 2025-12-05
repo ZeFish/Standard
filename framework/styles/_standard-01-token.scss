@@ -122,6 +122,10 @@ make h6 running as the first phrase of the paragraph
   --scale-2: calc(var(--font-size) * pow(var(--optical-ratio), 1));
   --scale-3: calc(var(--font-size) * pow(var(--optical-ratio), 2));
   --scale-4: calc(var(--font-size) * pow(var(--optical-ratio), 3));
+  --scale-5: calc(var(--font-size) * pow(var(--optical-ratio), 4));
+  --scale-6: calc(var(--font-size) * pow(var(--optical-ratio), 5));
+  --scale-7: calc(var(--font-size) * pow(var(--optical-ratio), 6));
+  --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 7));
 
   /* Mobile */
   --mobile-font-size: 1.1rem;

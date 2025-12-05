@@ -61,7 +61,6 @@
   // Define the scale map
   $scales: (
     "0": 0,
-    "d": 0,
     "auto": auto,
     "trim": var(--trim),
     "leading": var(--leading),
@@ -124,8 +123,8 @@
 @include generate-scale(mr, margin-right);
 @include generate-scale(mb, margin-bottom);
 @include generate-scale(ml, margin-left);
-@include generate-scale(mv, margin-block);
-@include generate-scale(mh, margin-inline);
+@include generate-scale(my, margin-block);
+@include generate-scale(mx, margin-inline);
 @include generate-scale(m, margin);
 
 /* =========================== */
@@ -135,8 +134,8 @@
 @include generate-scale(pr, padding-right);
 @include generate-scale(pb, padding-bottom);
 @include generate-scale(pl, padding-left);
-@include generate-scale(pv, padding-block);
-@include generate-scale(ph, padding-inline);
+@include generate-scale(py, padding-block);
+@include generate-scale(px, padding-inline);
 @include generate-scale(p, padding);
 
 /* =========================== */
@@ -278,20 +277,49 @@
  * Moved from standard-03-typography.scss for better layer organization
  */
 
-.small {
+.small,
+.scale-d2 {
   font-size: var(--scale-d2);
 }
 
-.smaller {
+.smaller,
+.scale-d3 {
   font-size: var(--scale-d3);
 }
 
-.micro {
+.micro,
+.scale-d4 {
   font-size: var(--scale-d4);
 }
 
-.nano {
+.nano,
+.scale-d5 {
   font-size: var(--scale-d5);
+}
+
+.scale-2,
+.medium {
+  font-size: var(--scale-2);
+}
+.scale-3,
+.big {
+  font-size: var(--scale-3);
+}
+.scale-4,
+.display {
+  font-size: var(--scale-4);
+}
+.scale-5 {
+  font-size: var(--scale-5);
+}
+.scale-6 {
+  font-size: var(--scale-6);
+}
+.scale-7 {
+  font-size: var(--scale-7);
+}
+.scale-8 {
+  font-size: var(--scale-8);
 }
 
 /* ===========================
@@ -302,6 +330,12 @@
  * Font family utility classes
  * Moved from standard-03-typography.scss
  */
+.compact {
+  line-height: var(--line-height-compact);
+}
+.relaxed {
+  line-height: var(--line-height-relaxed);
+}
 
 /* =========================== */
 /* FONT WEIGHT UTILITIES       */
@@ -554,7 +588,8 @@
   justify-content: center;
 }
 
-.center-horizontally {
+.center-horizontally,
+.mh-auto {
   margin-left: auto;
   margin-right: auto;
 }
@@ -611,27 +646,27 @@
  */
 
 .line-xs {
-  max-width: var(--line-width-xs);
+  max-width: var(--line-width-xs) !important;
 }
 
 .line-s {
-  max-width: var(--line-width-s);
+  max-width: var(--line-width-s) !important;
 }
 
 .line {
-  max-width: var(--line-width);
+  max-width: var(--line-width) !important;
 }
 
 .line-l {
-  max-width: var(--line-width-l);
+  max-width: var(--line-width-l) !important;
 }
 
 .line-xl {
-  max-width: var(--line-width-xl);
+  max-width: var(--line-width-xl) !important;
 }
 
 .line-full {
-  max-width: var(--line-width-full);
+  max-width: var(--line-width-full) !important;
 }
 
 /* =========================== */
@@ -735,6 +770,11 @@
 
   .lg\:only {
     display: none !important;
+  }
+
+  .sm\:center {
+    text-align: center !important;
+    margin-inline: auto !important;
   }
 }
 

@@ -34,7 +34,7 @@ a.button {
   display: inline-block;
   width: fit-content;
   user-select: none;
-  margin: 0 auto;
+  margin-inline: auto;
   text-decoration: none;
   text-align: center;
 }
@@ -246,6 +246,7 @@ ul.menu.horizontal {
   border: var(--border);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
+  background-color: var(--color-background-secondary);
 }
 .card.clickable {
   a {
