@@ -5740,27 +5740,27 @@ a.skip-link:active {
 
 
 .line-xs {
-  max-width: var(--line-width-xs);
+  max-width: var(--line-width-xs) !important;
 }
 
 .line-s {
-  max-width: var(--line-width-s);
+  max-width: var(--line-width-s) !important;
 }
 
 .line {
-  max-width: var(--line-width);
+  max-width: var(--line-width) !important;
 }
 
 .line-l {
-  max-width: var(--line-width-l);
+  max-width: var(--line-width-l) !important;
 }
 
 .line-xl {
-  max-width: var(--line-width-xl);
+  max-width: var(--line-width-xl) !important;
 }
 
 .line-full {
-  max-width: var(--line-width-full);
+  max-width: var(--line-width-full) !important;
 }
 
 
