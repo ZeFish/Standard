@@ -1,6 +1,5 @@
 ---
 import Meta from "./Meta.astro";
-import Fonts from "../components/Fonts.astro";
 import Menu from "../components/Menu.astro";
 import Comments from "../components/Comments.astro";
 import { ClientRouter } from "astro:transitions";
@@ -94,7 +93,6 @@ const year = new Date().getFullYear();
       }
     </style>
     <ClientRouter />
-    <Fonts />
     <script
       is:inline
       src="/assets/standard/standard.bundle.full.js"
