@@ -381,7 +381,7 @@
   opacity: 0.75;
 }
 [data-theme=forest] button,
-[data-theme=forest] a.button {
+[data-theme=forest] a.btn {
   font-family: Forrest;
   font-weight: 600;
   letter-spacing: -0.05em;

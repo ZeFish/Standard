@@ -138,6 +138,7 @@
     "@fontsource-variable/newsreader": "^5.2.10",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/instrument-serif": "^5.2.8",
+    "@lucide/astro": "^0.556.0",
     "astro": "^5.16.0",
     "cheerio": "^1.1.2",
     "clean-css": "^5.3.3",

@@ -627,7 +627,7 @@ figcaption {
 /* =========================== */
 
 button,
-a.button {
+a.btn {
   font-family: var(--font-interface), system-ui, sans-serif;
   font-size: var(--scale-d2);
   font-weight: var(--font-weight-bold);
@@ -643,8 +643,8 @@ a.button {
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
 }
 
-a.button:visited,
-a.button {
+a.btn:visited,
+a.btn {
   --stroke-width: 1px;
   display: inline-block;
   width: fit-content;
@@ -655,32 +655,32 @@ a.button {
 }
 
 button:hover,
-a.button:hover {
+a.btn:hover {
   background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
   color: var(--color-background);
 }
 
 button:active,
-a.button:active {
+a.btn:active {
   background: color-mix(in srgb, var(--color-accent) 50%, var(--color-background-secondary));
 }
 
 button:focus-visible,
-a.button:focus-visible {
+a.btn:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 2px;
   color: var(--color-background);
 }
 
 button:disabled,
-a.button:disabled {
+a.btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   color: var(--color-background);
 }
 
 @media (prefers-color-scheme: dark) {
-  button, a.button, a.button:visited {
+  button, a.btn, a.btn:visited {
     color: color-mix(in srgb, var(--color-foreground) 85%, transparent);
   }
 }

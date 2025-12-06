@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import * as IndexContent from "../../content/index.md";
 import { getCollection } from "astro:content";
 import config from "virtual:standard/config";
+import Shad from "../components/Shad.astro";
 
 // Get all docs from root level (not nested in subdirectories)
 const allDocs = await getCollection("content");
@@ -20,4 +21,6 @@ const sortedDocs = rootDocs.sort((a, b) =>
   class="prose"
 >
   <IndexContent.Content />
+  <hr />
+  <Shad />
 </Base>

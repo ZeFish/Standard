@@ -45,7 +45,7 @@
   /* Natural, paper-like, analog-inspired colors */
   --color-light-background: white;
   --color-light-foreground: #262626;
-  --color-light-accent: var(--color-blue);
+  --color-light-accent: var(--color-light-foreground);
 
   --color-light-red: #b14c42;
   /* dusty red clay */
@@ -75,7 +75,7 @@
   /* #111 */
   --color-dark-foreground: #dbdbdb;
   /* #aaa */
-  --color-dark-accent: var(--color-yellow);
+  --color-dark-accent: var(--color-red);
 
   --color-dark-red: #db6057;
   /* ember red */
@@ -132,7 +132,7 @@
   --color-background-secondary: color-mix(
     in srgb,
     var(--color-foreground) 3%,
-    var(--color-background)
+    transparent
   );
   --color-background-accent: color-mix(
     in srgb,
@@ -191,12 +191,16 @@
       var(--color-foreground) 45%,
       transparent
     );
-    --color-border: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+    --color-border: color-mix(
+      in srgb,
+      var(--color-foreground) 10%,
+      transparent
+    );
 
     --color-background-secondary: color-mix(
       in srgb,
       var(--color-foreground) 5%,
-      var(--color-background)
+      transparent
     );
 
     /* Dark mode shadows */

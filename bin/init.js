@@ -858,7 +858,7 @@ import config from "virtual:standard/config";
     color: var(--color-primary);
   }
 
-  .button {
+  .btn {
     display: inline-block;
     padding: var(--spacing-s) var(--spacing-l);
     border-radius: var(--border-radius-md);
@@ -867,23 +867,23 @@ import config from "virtual:standard/config";
     transition: all 0.2s ease;
   }
 
-  .button-primary {
+  .btn-primary {
     background: var(--color-accent);
     color: white;
   }
 
-  .button-primary:hover {
+  .btn-primary:hover {
     background: var(--color-accent);
     transform: translateY(-1px);
   }
 
-  .button-secondary {
+  .btn-secondary {
     background: transparent;
     color: white;
     border: 2px solid white;
   }
 
-  .button-secondary:hover {
+  .btn-secondary:hover {
     background: white;
     color: var(--color-primary);
   }

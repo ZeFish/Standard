@@ -60,6 +60,7 @@
 @mixin generate-scale($prefix, $property) {
   // Define the scale map
   $scales: (
+    "full": 100%,
     "0": 0,
     "auto": auto,
     "trim": var(--trim),
@@ -70,6 +71,7 @@
     "d3": var(--space-d3),
     "d2": var(--space-d2),
     "": var(--space),
+    "whole": calc(var(--space) + var(--leading)),
     "2": var(--space-2),
     "3": var(--space-3),
     "4": var(--space-4),
@@ -148,29 +150,29 @@
 /* WIDTH UTILITIES             */
 /* =========================== */
 
-@include generate-scale(width, width);
+@include generate-scale(w, width);
 
-.width-auto {
+.w-auto {
   width: auto !important;
 }
 
-.width-full {
+.w-full {
   width: 100% !important;
 }
 
-.width-screen {
+.w-screen {
   width: 100vw !important;
 }
 
-.width-min {
+.w-min {
   width: min-content !important;
 }
 
-.width-max {
+.w-max {
   width: max-content !important;
 }
 
-.width-fit {
+.w-fit {
   width: fit-content !important;
 }
 
@@ -208,33 +210,20 @@
 /* HEIGHT UTILITIES            */
 /* =========================== */
 
-@include generate-scale(height, height);
-
-.height-d {
-  height: d !important;
-}
-
-.height-auto {
-  height: auto !important;
-}
-
-.height-full {
-  height: 100% !important;
-}
-
-.height-screen {
+@include generate-scale(h, height);
+.h-screen {
   height: 100vh !important;
 }
 
-.height-min {
+.h-min {
   height: min-content !important;
 }
 
-.height-max {
+.h-max {
   height: max-content !important;
 }
 
-.height-fit {
+.h-fit {
   height: fit-content !important;
 }
 
@@ -367,6 +356,14 @@
 
 .justify {
   text-align: justify !important;
+}
+
+.relative {
+  position: relative !important;
+}
+
+.absolute {
+  position: absolute !important;
 }
 
 /* =========================== */
@@ -516,6 +513,38 @@
 .bg-secondary {
   background: var(--color-background-secondary) !important;
 }
+.bg-alternate {
+  background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+.bg-foreground {
+  background: var(--color-foreground);
+}
+.bg-background {
+  background: var(--color-background);
+}
+.invert {
+  color: var(--color-background) !important;
+  background: var(--color-foreground) !important;
+}
+@media (prefers-color-scheme: dark) {
+  .invert {
+    color: var(--color-foreground) !important;
+    background: color-mix(
+      in srgb,
+      var(--color-foreground) 15%,
+      transparent
+    ) !important;
+  }
+}
+.shadow {
+  box-shadow: var(--shadow);
+}
+.shadow-inset {
+  box-shadow: inset var(--shadow);
+}
+.border {
+  border: var(--border);
+}
 
 /* =========================== */
 /* BORDER COLOR UTILITIES      */
@@ -538,24 +567,50 @@
  */
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .block {
-  display: block;
+  display: block !important;
 }
 
 .inline {
-  display: inline;
+  display: inline !important;
 }
 
 .inline-block {
-  display: inline-block;
+  display: inline-block !important;
+}
+
+.radius {
+  border-radius: var(--radius) !important;
 }
 
 .flex {
   display: flex;
   align-items: baseline;
+  gap: var(--space);
+}
+
+.flex-1 {
+  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-center {
+  justify-content: center;
 }
 
 /**
@@ -927,4 +982,8 @@
     columns: 2;
     /* Reduce columns on tablets */
   }
+}
+
+.rounded {
+  border-radius: 50%;
 }

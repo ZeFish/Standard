@@ -1409,7 +1409,7 @@ Standard Framework Documentation
 - **Rationale**: Follow ITCSS best practice - layer 4 for generic elements, move before layer 5 (objects/rhythm)
 - **Files Created**:
   - `src/styles/standard-04-elements.scss` — New comprehensive element styling layer
-    - Contains: h1-h6, p, a, button, button.button (link-styled buttons), form inputs, labels, checkboxes, radios, code, pre
+    - Contains: h1-h6, p, a, button, button.btn (link-styled buttons), form inputs, labels, checkboxes, radios, code, pre
     - 300+ lines of organized element styling with full JSDoc documentation
 - **Files Renamed/Renumbered**:
   - `standard-04-rhythm.scss` → `standard-05-rhythm.scss`

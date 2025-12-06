@@ -50,6 +50,7 @@ select {
   color: var(--color-foreground);
   background: var(--color-background-secondary);
   border: var(--border);
+  box-shadow: var(--shadow);
   transition:
     background-color var(--transition),
     border-color var(--transition),
@@ -64,9 +65,10 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: var(--stroke-width) solid var(--color-accent);
+  outline: var(--trim) solid
+    color-mix(in srgb, var(--color-accent) 25%, transparent);
   outline-offset: 0px;
-  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  border-color: color-mix(in srgb, var(--color-accent) 100%, transparent);
   background-color: color-mix(
     in srgb,
     var(--color-accent) 5%,
@@ -78,14 +80,14 @@ label + :is(input, textarea, select) {
   margin-block-start: var(--leading);
 }
 
-fieldset *:not(legend) + :is(label, select, button, .button-group) {
+fieldset *:not(legend) + :is(label, select, button, .btn-group) {
   margin-block-start: var(--space);
 }
-fieldset *:not(legend) + .button-group {
+fieldset *:not(legend) + .btn-group {
   margin-block-start: var(--space-2);
 }
 
-input + :is(button, .button-group) {
+input + :is(button, .btn-group) {
   margin-block-start: var(--space-half);
 }
 
@@ -107,6 +109,7 @@ input[type="radio"] {
   position: relative;
   transition: all 0.2s ease;
   box-shadow: inset var(--shadow);
+  outline: 0;
 
   &:hover {
     border-color: var(--color-accent);
@@ -145,8 +148,95 @@ input[type="radio"] {
 
 /* Hover state */
 
-input[type="checkbox"] + label,
-input[type="radio"] + label {
-  width: 100px;
-  margin-block-start: 0;
+:is(.form, .field) input[type="checkbox"][role="switch"],
+input[type="checkbox"][role="switch"] {
+  /* --- 1. DEFINE DIMENSIONS --- */
+  --switch-height: calc(var(--space) - var(--trim));
+  --switch-width: calc(
+    var(--switch-height) * 1.8
+  ); /* Try changing 1.5 to 3, it works! */
+  --switch-padding: 2px;
+
+  /* Thumb is height minus top/bottom padding */
+  --switch-thumb-size: calc(var(--switch-height) - (var(--switch-padding) * 2));
+
+  /*
+     CALCULATE TRAVEL DISTANCE AUTOMATICALLY:
+     Total Width - Thumb Width - (Left Padding + Right Padding)
+  */
+  --switch-travel: calc(
+    (var(--switch-width) / 1.5) - var(--switch-thumb-size) -
+      (var(--switch-padding) * 1)
+  );
+
+  /* --- 2. CONTAINER SETUP --- */
+  appearance: none;
+  display: inline-flex;
+  align-items: center; /* Center vertical */
+  justify-content: flex-start; /* Force thumb to start at left */
+
+  box-sizing: border-box; /* Crucial: Includes padding in width calculation */
+  padding: var(--switch-padding);
+
+  height: var(--switch-height);
+  width: var(--switch-width);
+
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  border: var(--border);
+  cursor: pointer;
+
+  /* Colors & Transition */
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  box-shadow: inset var(--shadow);
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
+
+  &:focus-visible {
+    outline: 0px solid var(--color-accent);
+    outline-offset: 0px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* --- 3. THE THUMB --- */
+  &::before {
+    content: "";
+    display: block;
+
+    /* Fix the squeeze: Prevent thumb from shrinking or growing */
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    width: var(--switch-thumb-size);
+    height: var(--switch-thumb-size);
+
+    border-radius: 50%;
+    background-color: var(--color-light);
+    box-shadow:
+      0 1px 3px 0 rgb(0 0 0 / 0.1),
+      0 1px 2px -1px rgb(0 0 0 / 0.1);
+
+    /* Start at 0 (relative to the padding we set on parent) */
+    transform: translateX(calc(-50% - (var(--switch-padding) * 0.5)));
+    transition: transform 0.2s ease-in-out;
+
+    /* Ensure pointer events don't interfere */
+    pointer-events: none;
+  }
+
+  /* --- 4. CHECKED STATE --- */
+  &:checked {
+    background-color: var(--color-accent);
+    border-color: transparent;
+  }
+
+  &:checked::before {
+    /* Move exactly the calculated empty space distance */
+    transform: translateX(var(--switch-travel));
+  }
 }
