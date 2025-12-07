@@ -28,12 +28,12 @@ import type { StandardFrameworkConfig } from "../types/standard";
   }
   .card {padding:0;}
   header {
-     margin: calc(var(--space) * -2));
-     padding var(--space) var(--space-2);
+     padding var(--space);
      border-bottom: var(--border);
      box-shadow: var(--shadow);
      background-color: var(--color-background-secondary);
     }
+    .card > * + * { margin-block-start: var(--space-whole); }
 </style>
 
 <section class="grid sm:grid-1 mt-4 no-rhythm">
