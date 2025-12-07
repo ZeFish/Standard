@@ -47,7 +47,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             />
             <div class="flex flex-col gap-leading mr-auto">
               <h3 class="small">Sofia Davis</h3>
-              <p class="small muted">m@example.com</p>
+              <p class="smaller muted">m@example.com</p>
             </div>
 
             select box
@@ -60,7 +60,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             />
             <div class="flex flex-col gap-leading mr-auto">
               <h3 class="small">Jackson Lee</h3>
-              <p class="small muted">p@example.com</p>
+              <p class="smaller muted">p@example.com</p>
             </div>
 
             select box
@@ -73,7 +73,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             />
             <div class="flex flex-col gap-leading mr-auto">
               <h3 class="small">Isabella Nguyen</h3>
-              <p class="small muted">i@example.com</p>
+              <p class="smaller muted">i@example.com</p>
             </div>
 
             select box
@@ -119,7 +119,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
         </label>
       </section>
       <footer class="mt-2">
-        <button type="button" class="outline w-full"> Save preferences </button>
+        <button type="button" class="outline small w-full"> Save preferences </button>
       </footer>
     </div>
 
@@ -142,7 +142,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               />
               <label
                 for="payment-method-type-apple"
-                class="small flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-muted peer-checked:border-primary [&>svg]:mb-3 [&>svg]:size-6"
+                class="smaller flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-muted peer-checked:border-primary [&>svg]:mb-3 [&>svg]:size-6"
               >
                 icon credit card Card
               </label>
@@ -156,7 +156,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               />
               <label
                 for="payment-method-type-card"
-                class="text-sm font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-muted peer-checked:border-primary [&>svg]:mb-3 [&>svg]:size-6"
+                class="smaller font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-muted peer-checked:border-primary [&>svg]:mb-3 [&>svg]:size-6"
               >
                 <svg
                   role="img"
@@ -181,7 +181,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               />
               <label
                 for="payment-method-type-paypal"
-                class="text-sm font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-muted peer-checked:border-primary [&>svg]:mb-3 [&>svg]:size-6"
+                class="smaller font-medium leading-none flex flex-col items-center justify-between rounded-md border-2 border-muted p-4 hover:bg-muted peer-checked:border-primary [&>svg]:mb-3 [&>svg]:size-6"
               >
                 <svg
                   role="img"
@@ -198,8 +198,8 @@ import type { StandardFrameworkConfig } from "../types/standard";
               </label>
             </li>
           </ul>
-          <div class="grid-row gap-leading">
-            <label for="payment-method-name">Name</label>
+          <div class="grid-row">
+            <label class="small" for="payment-method-name">Name</label>
             <input
               style="display:block;"
               type="text"
@@ -216,7 +216,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             />
           </div>
           <div class="grid-row gap-leading">
-            <label for="payment-method-card-number">Card Number</label>
+            <label class="smaller" for="payment-method-card-number">Card Number</label>
             <input
               type="text"
               id="payment-method-card-number"
@@ -258,7 +258,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               </select>
             </div>
             <div class="grid-row flex-1 gap-leading">
-              <label for="payment-method-cvv">CVV</label>
+              <label class="smaller" for="payment-method-cvv">CVV</label>
               <input
                 type="text"
                 id="payment-method-cvv"
@@ -268,7 +268,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               />
             </div>
           </div>
-          <button type="button" class="w-full mt">Continue</button>
+          <button type="button" class="w-full small mt">Continue</button>
         </form>
       </section>
     </div>
@@ -285,7 +285,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
           />
           <div class="flex flex-col gap-leading mr-auto">
             <h3 class="small">Sofia Davis</h3>
-            <p class="small muted">m@example.com</p>
+            <p class="smaller muted">m@example.com</p>
           </div>
           <button
             type="
@@ -388,7 +388,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             <hr />
           </div>
           <div class="relative flex justify-center w-full">
-            <span class="bg-background px-leading smaller muted uppercase"
+            <span class="bg-background px-leading small muted uppercase"
               >Or continue with</span
             >
           </div>
@@ -417,12 +417,12 @@ import type { StandardFrameworkConfig } from "../types/standard";
     <div class="card w-full">
       <header>
         <h2>Report an issue</h2>
-        <p class="mt-leading mb">What area are you having problems with?</p>
+        <p class="small mt-leading mb">What area are you having problems with?</p>
       </header>
       <section>
         <form class="form grid-row">
           <div class="flex">
-            <div class="grid-row gap-leading flex-1">
+            <div class="grid-row smaller flex-1">
               <label for="report-issue-area">Area</label>
               <select id="report-issue-area" class="w-full">
                 <option value="team">Team</option>
