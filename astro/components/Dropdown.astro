@@ -1,0 +1,232 @@
+---
+// You can pass props here if you want to customize classes, but slots work best
+const { class: className } = Astro.props;
+---
+
+<div class="dropdown-menu basecoat-dropdown" class:list={[className]}>
+  <!-- Slot for the trigger button -->
+  <slot name="trigger" />
+
+  <!-- The Popover Container -->
+  <div data-popover aria-hidden="true" class="popover-content">
+    <div role="menu">
+      <!-- Slot for the menu items -->
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Basic Structural CSS to support the JS logic */
+  .basecoat-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .popover-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    min-width: 200px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* This connects the CSS to the JS toggling aria-hidden */
+    display: block;
+  }
+
+  /* When JS sets aria-hidden="true", hide it */
+  .popover-content[aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Optional: Styles for active items (managed by arrow keys in your JS) */
+  :global(.dropdown-menu [role="menuitem"].active) {
+    background-color: #f0f0f0;
+    outline: 2px solid blue;
+  }
+</style>
+
+<script>
+  // 1. We wrap the logic in a function, exactly like your original code
+  const initDropdownMenu = (dropdownMenuComponent) => {
+    // Note: The logic below is EXACTLY what you pasted,
+    // just without the window.basecoat wrapper.
+
+    const trigger = dropdownMenuComponent.querySelector(":scope > button");
+    const popover = dropdownMenuComponent.querySelector(
+      ":scope > [data-popover]",
+    );
+    const menu = popover?.querySelector('[role="menu"]');
+
+    if (!trigger || !menu || !popover) {
+      console.error("Dropdown missing elements", dropdownMenuComponent);
+      return;
+    }
+
+    let menuItems = [];
+    let activeIndex = -1;
+
+    const closePopover = (focusOnTrigger = true) => {
+      if (trigger.getAttribute("aria-expanded") === "false") return;
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.removeAttribute("aria-activedescendant");
+      popover.setAttribute("aria-hidden", "true");
+
+      if (focusOnTrigger) trigger.focus();
+      setActiveItem(-1);
+    };
+
+    const openPopover = (initialSelection = false) => {
+      // This custom event still works! It allows multiple separate Astro components
+      // to talk to each other (e.g., closing one when another opens).
+      document.dispatchEvent(
+        new CustomEvent("basecoat:popover", {
+          detail: { source: dropdownMenuComponent },
+        }),
+      );
+
+      trigger.setAttribute("aria-expanded", "true");
+      popover.setAttribute("aria-hidden", "false");
+      menuItems = Array.from(
+        menu.querySelectorAll('[role^="menuitem"]'),
+      ).filter(
+        (item) =>
+          !item.hasAttribute("disabled") &&
+          item.getAttribute("aria-disabled") !== "true",
+      );
+
+      if (menuItems.length > 0 && initialSelection) {
+        if (initialSelection === "first") setActiveItem(0);
+        else if (initialSelection === "last")
+          setActiveItem(menuItems.length - 1);
+      }
+    };
+
+    const setActiveItem = (index) => {
+      if (activeIndex > -1 && menuItems[activeIndex]) {
+        menuItems[activeIndex].classList.remove("active");
+      }
+      activeIndex = index;
+      if (activeIndex > -1 && menuItems[activeIndex]) {
+        const activeItem = menuItems[activeIndex];
+        activeItem.classList.add("active");
+        trigger.setAttribute("aria-activedescendant", activeItem.id);
+      } else {
+        trigger.removeAttribute("aria-activedescendant");
+      }
+    };
+
+    trigger.addEventListener("click", () => {
+      const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+      isExpanded ? closePopover() : openPopover(false);
+    });
+
+    dropdownMenuComponent.addEventListener("keydown", (event) => {
+      const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+
+      if (event.key === "Escape") {
+        if (isExpanded) closePopover();
+        return;
+      }
+
+      if (!isExpanded) {
+        if (["Enter", " "].includes(event.key)) {
+          event.preventDefault();
+          openPopover(false);
+        } else if (event.key === "ArrowDown") {
+          event.preventDefault();
+          openPopover("first");
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          openPopover("last");
+        }
+        return;
+      }
+
+      if (menuItems.length === 0) return;
+      let nextIndex = activeIndex;
+
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          nextIndex =
+            activeIndex === -1
+              ? 0
+              : Math.min(activeIndex + 1, menuItems.length - 1);
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          nextIndex =
+            activeIndex === -1
+              ? menuItems.length - 1
+              : Math.max(activeIndex - 1, 0);
+          break;
+        case "Home":
+          event.preventDefault();
+          nextIndex = 0;
+          break;
+        case "End":
+          event.preventDefault();
+          nextIndex = menuItems.length - 1;
+          break;
+        case "Enter":
+        case " ":
+          event.preventDefault();
+          menuItems[activeIndex]?.click();
+          closePopover();
+          return;
+      }
+      if (nextIndex !== activeIndex) setActiveItem(nextIndex);
+    });
+
+    // Cleanup mouse events and global clicks
+    menu.addEventListener("mousemove", (event) => {
+      const menuItem = event.target.closest('[role^="menuitem"]');
+      if (menuItem && menuItems.includes(menuItem)) {
+        const index = menuItems.indexOf(menuItem);
+        if (index !== activeIndex) setActiveItem(index);
+      }
+    });
+
+    menu.addEventListener("mouseleave", () => setActiveItem(-1));
+
+    menu.addEventListener("click", (event) => {
+      if (event.target.closest('[role^="menuitem"]')) closePopover();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!dropdownMenuComponent.contains(event.target)) closePopover();
+    });
+
+    document.addEventListener("basecoat:popover", (event) => {
+      if (event.detail.source !== dropdownMenuComponent) closePopover(false);
+    });
+
+    // Mark as initialized to prevent double-binding
+    dropdownMenuComponent.dataset.dropdownMenuInitialized = "true";
+  };
+
+  // 2. THE ASTRO WAY:
+  // Instead of a global register function, we just find all instances
+  // of this specific component on the page and initialize them.
+
+  // This runs once when the JavaScript bundle loads on the client.
+  document.querySelectorAll(".basecoat-dropdown").forEach((el) => {
+    // Check if we already initialized (useful for View Transitions)
+    if (!el.dataset.dropdownMenuInitialized) {
+      initDropdownMenu(el);
+    }
+  });
+
+  // OPTIONAL: If you use Astro View Transitions, you need to re-run this on navigation
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll(".basecoat-dropdown").forEach((el) => {
+      if (!el.dataset.dropdownMenuInitialized) {
+        initDropdownMenu(el);
+      }
+    });
+  });
+</script>
