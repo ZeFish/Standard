@@ -542,9 +542,6 @@
 .shadow-inset {
   box-shadow: inset var(--shadow);
 }
-.border {
-  border: var(--border);
-}
 
 /* =========================== */
 /* BORDER COLOR UTILITIES      */
@@ -556,6 +553,19 @@
 
 .border-accent {
   border: var(--border-accent) !important;
+}
+
+.border-t {
+  border-top: var(--border) !important;
+}
+.border-b {
+  border-bottom: var(--border) !important;
+}
+.border-l {
+  border-left: var(--border) !important;
+}
+.border-r {
+  border-right: var(--border) !important;
 }
 
 /* =========================== */

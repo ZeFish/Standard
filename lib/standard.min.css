@@ -2132,8 +2132,8 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: var(--trim) solid color-mix(in srgb, var(--color-accent) 25%, transparent);
-  outline-offset: 0px;
+  outline: var(--stroke-width) solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  outline-offset: var(--stroke-width);
   border-color: color-mix(in srgb, var(--color-accent) 100%, transparent);
   background-color: color-mix(in srgb, var(--color-accent) 5%, var(--color-background));
 }
@@ -5956,10 +5956,6 @@ a.skip-link:active {
   box-shadow: inset var(--shadow);
 }
 
-.border {
-  border: var(--border);
-}
-
 
 
 
@@ -5969,6 +5965,22 @@ a.skip-link:active {
 
 .border-accent {
   border: var(--border-accent) !important;
+}
+
+.border-t {
+  border-top: var(--border) !important;
+}
+
+.border-b {
+  border-bottom: var(--border) !important;
+}
+
+.border-l {
+  border-left: var(--border) !important;
+}
+
+.border-r {
+  border-right: var(--border) !important;
 }
 
 
