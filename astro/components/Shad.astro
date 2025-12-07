@@ -26,6 +26,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
       background: color-mix(in srgb, black 5%, transparent);
     }
   }
+  .card {padding:0;}
   header {
      margin: calc(var(--space) * -2));
      padding var(--space) var(--space-2);
@@ -353,13 +354,13 @@ import type { StandardFrameworkConfig } from "../types/standard";
     </div>
 
     <div class="card w-full">
-      <header class="mb-2" >
+      <header class="mb-whole" >
         <h2>Create an account</h2>
-        <p class="small muted mt-half">
+        <p class="small compact muted mt-half">
           Enter your email below to create your account
         </p>
       </header>
-      <section class="grid-row gap-leading">
+      <section class="grid-row">
         <div class="flex">
           <button type="button" class="outline h-whole flex-1 gap-leading">
             <svg
@@ -395,7 +396,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             <hr />
           </div>
           <div class="relative flex justify-center w-full">
-            <span class="bg-background px-leading small muted uppercase"
+            <span class="bg-background px-leading muted uppercase"
               >Or continue with</span
             >
           </div>
@@ -416,7 +417,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             </div>
             <input type="password" id="demo-card-form-password" />
           </div>
-          <button type="button" class="mt-2 small btn w-full">Create an account</button>
+          <button type="button" class="mt-whole small btn w-full">Create an account</button>
         </form>
       </section>
     </div>
