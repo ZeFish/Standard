@@ -30,6 +30,8 @@ import type { StandardFrameworkConfig } from "../types/standard";
   .card > * {
     padding: var(--space);
   }
+  .card *:first-child {padding-block-start:var(--space);}
+  .card *:last-child {padding-block-end:var(--space);}
   header {
      padding var(--space);
      border-bottom: var(--border);
