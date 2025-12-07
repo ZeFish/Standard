@@ -65,9 +65,9 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: var(--trim) solid
+  outline: var(--stroke-width) solid
     color-mix(in srgb, var(--color-accent) 25%, transparent);
-  outline-offset: 0px;
+  outline-offset: var(--stroke-width);
   border-color: color-mix(in srgb, var(--color-accent) 100%, transparent);
   background-color: color-mix(
     in srgb,
