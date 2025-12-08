@@ -12,6 +12,10 @@ const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 export default defineConfig({
   srcDir: "./astro",
   site: "https://standard.ffp.co",
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport'
+  },
   integrations: [
     standard({
       openrouter: {
@@ -19,6 +23,13 @@ export default defineConfig({
       },
     }),
   ],
+  experimental: {
+        fonts: [{
+            provider: fontProviders.google(),
+            name: "Roboto",
+            cssVariable: "--font-roboto"
+        }]
+    },
   server: {
     port: 8083,
   },
