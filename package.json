@@ -105,7 +105,7 @@
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "clean:ports": "lsof -ti:8083 | xargs kill -9 2>/dev/null || true",
     "kill-node": "killall node || taskkill /F /IM node.exe",
-    "commit": "git add . && orc commit",
+    "commit": "git add . && orc commit --yes --push",
     "test": "npm run test:lib && npm run test:build && npm run test:e2e",
     "test:lib": "vitest run tests/lib-integrity.test.js",
     "test:build": "playwright test tests/build-verification.test.ts",
