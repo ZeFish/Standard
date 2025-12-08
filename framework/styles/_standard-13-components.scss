@@ -294,11 +294,8 @@ ul.menu.horizontal {
  *   </a>
  */
 .card {
+  @extend %surface;
   padding: var(--space);
-  border: var(--border);
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
-  background-color: var(--color-background-secondary);
   box-shadow:
     0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)),
     0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));

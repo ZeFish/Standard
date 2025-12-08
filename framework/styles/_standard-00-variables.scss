@@ -37,3 +37,10 @@ $rhythm-block-elements: "#comments, .callout,  pre, figure, p:has(img), section,
 $rhythm-block-small: ".container-small, .callout,  pre, figure, p:has(img)";
 
 $elements-boxed: "blockquote, pre, .alert, aside, .card, .callout, img, iframe, .outset";
+
+%surface {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--color-background-sexondary);
+  border-radius: var(--radius);
+}
