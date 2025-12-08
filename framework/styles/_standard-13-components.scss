@@ -115,6 +115,13 @@ a.btn {
   color: var(--color-accent);
 }
 
+
+.badge {
+  background-color: var(--color-accent);
+  border-radius: var(--space-half);
+  color: var(--color-bacground);
+  font-size: var(--scale-d2);
+}
 /* =========================== */
 /* NAVIGATION                  */
 /* =========================== */
