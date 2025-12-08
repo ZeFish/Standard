@@ -302,6 +302,25 @@ ul.menu.horizontal {
     font-weight: 700 !important;
   }
 }
+
+.card {padding:0;}
+  .card > * {
+    padding: var(--space-half) var(--space);
+  }
+  .card > header:first-child {
+     padding:var(--space);
+     border-bottom: var(--border);
+     box-shadow: var(--shadow);
+     background-color: var(--color-background-secondary);
+     
+     }
+  .card > footer:last-child {
+     padding:var(--space);
+ }
+
+
+
+
 .card.clickable {
   a {
     text-decoration: none;
