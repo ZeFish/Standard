@@ -40,6 +40,26 @@
 /* STANDARD DEBUG SYSTEM       */
 /* =========================== */
 
+:root {
+  --standard-lab-bg: color-mix(
+    in srgb,
+    var(--color-dark-background) 90%,
+    var(--color-dark-foreground)
+  );
+  --standard-lab-text: color-mix(
+    in srgb,
+    var(--color-dark-background) 10%,
+    var(--color-dark-foreground)
+  );
+  --standard-lab-text-size: 12px;
+  --standard-lab-opacity: 1;
+  --standard-lab-accent: var(--color-accent);
+  --standard-lab-border: var(--border);
+  --standard-lab-shadow: var(--shadow);
+  --standard-lab-blur: var(--blur);
+  --standard-lab-font-family: var(--font-monospace);
+}
+
 /* Single class to enable all debug features */
 .debug {
   display: none;

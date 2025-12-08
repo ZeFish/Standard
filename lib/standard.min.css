@@ -2237,6 +2237,7 @@ input[type=radio] {
 
 
 input[type=checkbox][role=switch] {
+  top: 0;
   
   --switch-height: calc(var(--space) - var(--trim));
   --switch-width: calc(
@@ -2283,7 +2284,7 @@ input[type=checkbox][role=switch]::before {
   height: var(--switch-thumb-size);
   border-radius: 50%;
   background-color: var(--color-light);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   
   transform: translateX(calc(-50% - var(--switch-padding) * 0.5));
   transition: transform 0.2s ease-in-out;
@@ -2292,6 +2293,7 @@ input[type=checkbox][role=switch]::before {
 }
 input[type=checkbox][role=switch]:checked {
   background-color: var(--color-accent);
+  box-shadow: inset var(--shadow);
   border-color: transparent;
 }
 input[type=checkbox][role=switch]:checked::before {
@@ -6657,6 +6659,26 @@ a.skip-link:active {
 
 
 
+
+:root {
+  --standard-lab-bg: color-mix(
+    in srgb,
+    var(--color-dark-background) 90%,
+    var(--color-dark-foreground)
+  );
+  --standard-lab-text: color-mix(
+    in srgb,
+    var(--color-dark-background) 10%,
+    var(--color-dark-foreground)
+  );
+  --standard-lab-text-size: 12px;
+  --standard-lab-opacity: 1;
+  --standard-lab-accent: var(--color-accent);
+  --standard-lab-border: var(--border);
+  --standard-lab-shadow: var(--shadow);
+  --standard-lab-blur: var(--blur);
+  --standard-lab-font-family: var(--font-monospace);
+}
 
 
 .debug {

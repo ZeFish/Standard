@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import { loadEnv } from "vite";
 import standard from "./astro/standard.js";
 import path from "path";
@@ -14,7 +14,7 @@ export default defineConfig({
   site: "https://standard.ffp.co",
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport'
+    defaultStrategy: "viewport",
   },
   integrations: [
     standard({
@@ -24,12 +24,14 @@ export default defineConfig({
     }),
   ],
   experimental: {
-        fonts: [{
-            provider: fontProviders.google(),
-            name: "Roboto",
-            cssVariable: "--font-roboto"
-        }]
-    },
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: "Roboto",
+        cssVariable: "--font-roboto",
+      },
+    ],
+  },
   server: {
     port: 8083,
   },

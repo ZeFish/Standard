@@ -1,22 +1,5 @@
-# Standard Framework
+# Example
 
-::muted Typography is the voice · Grid is the structure · Rhythm is the flow · Color is the emotion
-
-A fine-art design framework implementing classical typography, Swiss grid systems, and vertical rhythm with mathematical precision inspired by centuries of print mastery.
-
-### Contents
-1. [Typography System](#typography)
-2. [Grid System](#grid)
-3. [Vertical Rhythm](#rhythm)
-4. [Color Management](#color)
-5. [Reading Layout](#reading)
-6. [Form Elements](#forms)
-
-## Typography is the Voice
-
-- [Mardown](/markdown/)
-
-> Standard implements fine-art typography with smart quotes, proper punctuation, widow prevention, and multi-locale support. The golden ratio governs all typographic relationships.
 
 ### Heading Hierarchy
 
