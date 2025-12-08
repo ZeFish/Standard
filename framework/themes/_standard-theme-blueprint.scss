@@ -1,27 +1,22 @@
 @use "../styles/standard-00-variables" as *;
 
 [data-theme="blueprint"] {
-    --color-light-background: #1a4d7a;
-    --color-light-foreground: #f0f4f8;
-    --color-dark-foreground: var(--color-light-foreground);
-    --color-dark-background: var(--color-light-background);
+  --color-light-background: #1a4d7a;
+  --color-light-foreground: #f0f4f8;
+  --color-dark-foreground: var(--color-light-foreground);
+  --color-dark-background: var(--color-light-background);
 
-    /* Accent system */
-    --color-light-red: rgba(255, 28, 0, 0.493); /* warning, highlight */
-    --color-light-orange: rgba(188, 82, 21, 0.574); /* attention blocks */
-    --color-light-yellow: rgba(
-        173,
-        131,
-        1,
-        0.794
-    ); /* vintage punchcard yellow */
-    --color-light-green: rgba(102, 128, 11, 0.576); /* success, approval */
-    --color-light-cyan: rgba(36, 131, 123, 0.641); /* teal-y terminal feel */
-    --color-light-blue: rgba(32, 94, 166, 0.614); /* link, info */
-    --color-light-purple: #5e409d; /* utility, label tags */
-    --color-light-pink: #a02f6f; /* softer technical touch */
+  /* Accent system */
+  --color-light-red: rgba(255, 28, 0, 0.493); /* warning, highlight */
+  --color-light-orange: rgba(188, 82, 21, 0.574); /* attention blocks */
+  --color-light-yellow: rgba(173, 131, 1, 0.794); /* vintage punchcard yellow */
+  --color-light-green: rgba(102, 128, 11, 0.576); /* success, approval */
+  --color-light-cyan: rgba(36, 131, 123, 0.641); /* teal-y terminal feel */
+  --color-light-blue: rgba(32, 94, 166, 0.614); /* link, info */
+  --color-light-purple: #5e409d; /* utility, label tags */
+  --color-light-pink: #a02f6f; /* softer technical touch */
 
-    /* Accent system
+  /* Accent system
     --color-dark-red: #d14d41;
     --color-dark-orange: #da702c;
     --color-dark-yellow: #ad8301;
@@ -32,231 +27,227 @@
     --color-dark-pink: #ce5d97;
     */
 
-    /* Code and UI extras */
-    --color-accent: var(--color-orange);
-    --color-code: var(--color-foreground);
-    --color-bold: var(--color-red);
-    --color-italic: var(--color-green);
+  /* Code and UI extras */
+  --color-accent: var(--color-orange);
+  --color-code: var(--color-foreground);
+  --color-bold: var(--color-red);
+  --color-italic: var(--color-green);
 
-    --color-dark-accent: var(--color-purple);
-    --color-dark-bold: var(--color-pink);
+  --color-dark-accent: var(--color-magenta);
+  --color-dark-bold: var(--color-magenta);
 
-    --font-monospace: "MonoLisa";
-    --font-monospace-feature:
-        "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
+  --font-monospace: "MonoLisa";
+  --font-monospace-feature:
+    "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
 
-    --optical-ratio: 1.425;
-    /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
+  --optical-ratio: 1.425;
+  /*--color-header: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));*/
 
-    .dark {
-        --color-accent: var(--color-purple);
-        --color-bold: var(--color-pink);
-    }
+  .dark {
+    --color-accent: var(--color-magenta);
+    --color-bold: var(--color-magenta);
+  }
 
-    --blueprint-opacity: 20%;
+  --blueprint-opacity: 20%;
 
-    :is(#{$rhythm-elements}) {
-        outline: 1px dashed
-            color-mix(
-                in srgb,
-                var(--color-foreground) var(--blueprint-opacity),
-                transparent
-            );
-        border-radius: var(--space);
-        outline-offset: var(--space);
-    }
+  :is(#{$rhythm-elements}) {
+    outline: 1px dashed
+      color-mix(
+        in srgb,
+        var(--color-foreground) var(--blueprint-opacity),
+        transparent
+      );
+    border-radius: var(--space);
+    outline-offset: var(--space);
+  }
 
-    :is(#{$rhythm-block-elements}) {
-        position: relative;
-        outline-offset: var(--space-2);
-    }
-    :is(#{$rhythm-block-elements})::before {
-        content: "Block";
-        position: absolute;
-        opacity: var(--blueprint-opacity);
-        font-size: var(--scale-d2);
-        font-family: var(--font-monospace);
-        color: var(--color-foreground);
-        font-style: italic;
-        top: 0;
-        left: calc(var(--space) * -1);
-        transform: translateX(-100%);
-        z-index: 999999999;
-    }
-
-    :is(#{$rhythm-block-small}) {
-        position: relative;
-        border: none;
-    }
-    :is(#{$rhythm-block-small})::before {
-        content: "Small";
-        opacity: var(--blueprint-opacity);
-        font-size: var(--scale-d2);
-        color: var(--color-foreground);
-        font-style: italic;
-        font-family: var(--font-monospace);
-        position: absolute;
-        top: 0;
-        left: calc(var(--space) * -1);
-        transform: translateX(-100%);
-    }
-
-    :is(h1, h2, h3, h4, h5, h6) {
-        position: relative;
-        border: none;
-    }
-    :is(h1, h2, h3, h4, h5, h6)::before {
-        content: "";
-        opacity: var(--blueprint-opacity);
-        font-size: var(--scale-d2);
-        color: var(--color-foreground);
-        font-style: italic;
-        font-weight: 400;
-        font-family: var(--font-monospace);
-        position: absolute;
-        top: 0;
-        left: calc(var(--space) * -1);
-        transform: translateX(-100%);
-    }
-    h1::before {
-        content: "h1";
-    }
-    h2::before {
-        content: "h2";
-    }
-    h3::before {
-        content: "h3";
-    }
-    h4::before {
-        content: "h4";
-    }
-    h5::before {
-        content: "h5";
-    }
-    h6::before {
-        content: "h6";
-    }
-
-    :is(pre) {
-        position: relative;
-        border: none;
-    }
-    :is(pre)::before {
-        content: "pre";
-        opacity: var(--blueprint-opacity);
-        font-size: var(--scale-d2);
-        color: var(--color-foreground);
-        font-style: italic;
-        font-weight: 400;
-        font-family: var(--font-monospace);
-        position: absolute;
-        top: calc(var(--space) * -1);
-        left: calc(var(--space) * -3);
-        transform: translateX(-100%);
-    }
-
-    :is(p) {
-        position: relative;
-        border: none;
-    }
-    :is(p)::before {
-        content: "p";
-        opacity: var(--blueprint-opacity);
-        font-size: var(--scale-d2);
-        color: var(--color-foreground);
-        font-style: italic;
-        font-weight: 400;
-        font-family: var(--font-monospace);
-        position: absolute;
-        top: calc(var(--space) * -1);
-        left: calc(var(--space) * -3);
-        transform: translateX(-100%);
-    }
-
-    :is(p:has(img))::before {
-        content: "Medias" !important;
-    }
-
-    .grid-debug-overlay {
-        position: absolute !important;
-        inset: 0;
-        display: grid;
-        grid-template-columns: inherit;
-        pointer-events: none;
-        z-index: 9999;
-        grid-column: hero;
-
-        span:nth-child(1) {
-            grid-column: hero-start / feature-start;
-        }
-        span:nth-child(2) {
-            grid-column: feature-start / accent-start;
-            border-inline-start: 1px dashed
-                color-mix(in srgb, var(--color-foreground) 15%, transparent);
-        }
-        span:nth-child(3) {
-            grid-column: accent-start / content-start;
-            border-inline-start: 1px dashed
-                color-mix(in srgb, var(--color-foreground) 15%, transparent);
-        }
-        span:nth-child(4) {
-            grid-column: content;
-            outline: 1px dashed
-                color-mix(in srgb, var(--color-foreground) 15%, transparent);
-        }
-        span:nth-child(5) {
-            grid-column: content-end / accent-end;
-            border-inline-end: 1px dashed
-                color-mix(in srgb, var(--color-foreground) 15%, transparent);
-        }
-        span:nth-child(6) {
-            grid-column: accent-end / feature-end;
-            border-inline-end: 1px dashed
-                color-mix(in srgb, var(--color-foreground) 15%, transparent);
-        }
-        span:nth-child(7) {
-            grid-column: feature-end / hero-end;
-        }
-    }
-
-    body::before {
-        --color-grid: var(--color-foreground);
-        --percent-grid: 5%;
-        --grid-unit: var(--space);
-        --dot-size: 1px;
-        content: "";
-        position: fixed;
-        inset: 0;
-        mix-blend-mode: normal;
-        opacity: 1;
-        background-image: radial-gradient(
-            circle,
-            color-mix(
-                    in srgb,
-                    var(--color-grid) var(--percent-grid),
-                    transparent
-                )
-                var(--dot-size),
-            transparent var(--dot-size)
-        );
-        background-size: var(--grid-unit) var(--grid-unit);
-        background-position: 0 0;
-        pointer-events: none;
-        z-index: 10000;
-    }
-}
-
-@font-face {
-    font-family: "MonoLisa";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 1000;
-    font-style: normal;
-    src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
-}
-@font-face {
-    font-family: "MonoLisa";
-    /* Add other properties here, as needed. For example: */
-    font-weight: 100 1000;
+  :is(#{$rhythm-block-elements}) {
+    position: relative;
+    outline-offset: var(--space-2);
+  }
+  :is(#{$rhythm-block-elements})::before {
+    content: "Block";
+    position: absolute;
+    opacity: var(--blueprint-opacity);
+    font-size: var(--scale-d2);
+    font-family: var(--font-monospace);
+    color: var(--color-foreground);
     font-style: italic;
-    src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
+    top: 0;
+    left: calc(var(--space) * -1);
+    transform: translateX(-100%);
+    z-index: 999999999;
+  }
+
+  :is(#{$rhythm-block-small}) {
+    position: relative;
+    border: none;
+  }
+  :is(#{$rhythm-block-small})::before {
+    content: "Small";
+    opacity: var(--blueprint-opacity);
+    font-size: var(--scale-d2);
+    color: var(--color-foreground);
+    font-style: italic;
+    font-family: var(--font-monospace);
+    position: absolute;
+    top: 0;
+    left: calc(var(--space) * -1);
+    transform: translateX(-100%);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    position: relative;
+    border: none;
+  }
+  :is(h1, h2, h3, h4, h5, h6)::before {
+    content: "";
+    opacity: var(--blueprint-opacity);
+    font-size: var(--scale-d2);
+    color: var(--color-foreground);
+    font-style: italic;
+    font-weight: 400;
+    font-family: var(--font-monospace);
+    position: absolute;
+    top: 0;
+    left: calc(var(--space) * -1);
+    transform: translateX(-100%);
+  }
+  h1::before {
+    content: "h1";
+  }
+  h2::before {
+    content: "h2";
+  }
+  h3::before {
+    content: "h3";
+  }
+  h4::before {
+    content: "h4";
+  }
+  h5::before {
+    content: "h5";
+  }
+  h6::before {
+    content: "h6";
+  }
+
+  :is(pre) {
+    position: relative;
+    border: none;
+  }
+  :is(pre)::before {
+    content: "pre";
+    opacity: var(--blueprint-opacity);
+    font-size: var(--scale-d2);
+    color: var(--color-foreground);
+    font-style: italic;
+    font-weight: 400;
+    font-family: var(--font-monospace);
+    position: absolute;
+    top: calc(var(--space) * -1);
+    left: calc(var(--space) * -3);
+    transform: translateX(-100%);
+  }
+
+  :is(p) {
+    position: relative;
+    border: none;
+  }
+  :is(p)::before {
+    content: "p";
+    opacity: var(--blueprint-opacity);
+    font-size: var(--scale-d2);
+    color: var(--color-foreground);
+    font-style: italic;
+    font-weight: 400;
+    font-family: var(--font-monospace);
+    position: absolute;
+    top: calc(var(--space) * -1);
+    left: calc(var(--space) * -3);
+    transform: translateX(-100%);
+  }
+
+  :is(p:has(img))::before {
+    content: "Medias" !important;
+  }
+
+  .grid-debug-overlay {
+    position: absolute !important;
+    inset: 0;
+    display: grid;
+    grid-template-columns: inherit;
+    pointer-events: none;
+    z-index: 9999;
+    grid-column: hero;
+
+    span:nth-child(1) {
+      grid-column: hero-start / feature-start;
+    }
+    span:nth-child(2) {
+      grid-column: feature-start / accent-start;
+      border-inline-start: 1px dashed
+        color-mix(in srgb, var(--color-foreground) 15%, transparent);
+    }
+    span:nth-child(3) {
+      grid-column: accent-start / content-start;
+      border-inline-start: 1px dashed
+        color-mix(in srgb, var(--color-foreground) 15%, transparent);
+    }
+    span:nth-child(4) {
+      grid-column: content;
+      outline: 1px dashed
+        color-mix(in srgb, var(--color-foreground) 15%, transparent);
+    }
+    span:nth-child(5) {
+      grid-column: content-end / accent-end;
+      border-inline-end: 1px dashed
+        color-mix(in srgb, var(--color-foreground) 15%, transparent);
+    }
+    span:nth-child(6) {
+      grid-column: accent-end / feature-end;
+      border-inline-end: 1px dashed
+        color-mix(in srgb, var(--color-foreground) 15%, transparent);
+    }
+    span:nth-child(7) {
+      grid-column: feature-end / hero-end;
+    }
+  }
+
+  body::before {
+    --color-grid: var(--color-foreground);
+    --percent-grid: 5%;
+    --grid-unit: var(--space);
+    --dot-size: 1px;
+    content: "";
+    position: fixed;
+    inset: 0;
+    mix-blend-mode: normal;
+    opacity: 1;
+    background-image: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+        var(--dot-size),
+      transparent var(--dot-size)
+    );
+    background-size: var(--grid-unit) var(--grid-unit);
+    background-position: 0 0;
+    pointer-events: none;
+    z-index: 10000;
+  }
+}
+
+@font-face {
+  font-family: "MonoLisa";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 1000;
+  font-style: normal;
+  src: url("/assets/fonts/MonoLisa-Regular-Variable.woff2");
+}
+@font-face {
+  font-family: "MonoLisa";
+  /* Add other properties here, as needed. For example: */
+  font-weight: 100 1000;
+  font-style: italic;
+  src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
 }

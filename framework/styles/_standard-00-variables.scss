@@ -46,5 +46,5 @@ $elements-boxed: "blockquote, pre, .alert, aside, .card, .callout, img, iframe, 
 }
 
 %padding-text {
-  padding: var(--trim) var(--space-d2);
+  padding: var(--leading) var(--space-d2);
 }

@@ -220,21 +220,21 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
     <div class="sm:col-1">
       <div
         class="card center"
-        style="border-color:var(--color-blue); background: color-mix(in srgb, var(--color-blue) 90%, var(--color-background-secondary)); color: var(--color-background)"
+        style="border-color:var(--color-blue); background: color-mix(in srgb, var(--color-blue) 90%, var(--color-surface)); color: var(--color-background)"
       >Blue
       </div>
     </div>
     <div class="sm:col-1">
       <div
         class="card center"
-        style="background: var(--color-purple); color: var(--color-background)"
+        style="background: var(--color-magenta); color: var(--color-background)"
       >Purple
       </div>
     </div>
     <div class="sm:col-1">
       <div
         class="card center"
-        style="background: var(--color-pink); color: var(--color-background)"
+        style="background: var(--color-magenta); color: var(--color-background)"
       >Pink
       </div>
     </div>
@@ -258,7 +258,7 @@ Automatic light/dark theming with analog-inspired colors. Zero configuration— 
       </div>
     </div>
     <div>
-      <div class="card center" style="background: var(--color-background-secondary)">Secondary</div>
+      <div class="card center" style="background: var(--color-surface)">Secondary</div>
     </div>
     <div>
       <div class="card center" style="background: var(--color-accent)">Accent</div>

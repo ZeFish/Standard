@@ -57,8 +57,14 @@ a.btn-secondary, button-secondary,
 a.btn-outline, button-outline,
 a.btn-destructive, button-destructive,
 a.btn-ghost, button-ghost,
-a.btn-icon, button-icon, .badge, .badge-secondary, .badge-outline, .badge-destructive, .badge-ghost, .badge-icon {
-  padding: var(--trim) var(--space-d2);
+a.btn-icon, button-icon, .badge,
+a.badge, .badge-secondary,
+a.badge-secondary, .badge-outline,
+a.badge-outline, .badge-destructive,
+a.badge-destructive, .badge-ghost,
+a.badge-ghost, .badge-icon,
+a.badge-icon {
+  padding: var(--leading) var(--space-d2);
 }
 
 
@@ -218,11 +224,7 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   
   --color-light-blue: #4f81a4;
   
-  --color-light-purple: #7a6c91;
-  
-  --color-light-pink: #b97aa0;
-  
-  --color-light-brand: #4f81a4;
+  --color-light-magenta: #7a6c91;
   
   --color-light-link: #4f81a4;
   
@@ -245,11 +247,7 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   
   --color-dark-blue: #6d96b8;
   
-  --color-dark-purple: #a18db6;
-  
-  --color-dark-pink: #d49ab8;
-  
-  --color-dark-brand: #6d96b8;
+  --color-dark-magenta: #a18db6;
   
   --color-dark-link: #6d96b8;
   
@@ -268,13 +266,11 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   --color-green: var(--color-light-green);
   --color-cyan: var(--color-light-cyan);
   --color-blue: var(--color-light-blue);
-  --color-purple: var(--color-light-purple);
-  --color-pink: var(--color-light-pink);
+  --color-magenta: var(--color-light-magenta);
   --color-success: var(--color-green);
   --color-warning: var(--color-yellow);
   --color-error: var(--color-red);
   --color-info: var(--color-blue);
-  --color-brand: var(--color-light-brand);
   --color-link: var(--color-light-link);
   --color-on-accent: var(--color-background);
   
@@ -282,10 +278,11 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
   --color-border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-  --color-background-secondary: color-mix(
+  --color-surface: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+  --color-secondary: color-mix(
     in srgb,
     var(--color-foreground) 3%,
-    transparent
+    var(--color-background)
   );
   --color-background-accent: color-mix(
     in srgb,
@@ -296,8 +293,8 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
   
-  --color-shadow: color-mix(in srgb, var(--color-foreground) 7%, transparent);
-  --shadow: 0 0 var(--space-d4) var(--color-shadow);
+  --color-shadow: color-mix(in srgb, var(--color-dark) 5%, transparent);
+  --shadow: 0 1px 2px var(--color-shadow);
   
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
@@ -322,9 +319,7 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
     --color-green: var(--color-dark-green);
     --color-cyan: var(--color-dark-cyan);
     --color-blue: var(--color-dark-blue);
-    --color-purple: var(--color-dark-purple);
-    --color-pink: var(--color-dark-pink);
-    --color-brand: var(--color-dark-brand);
+    --color-magenta: var(--color-dark-magenta);
     --color-link: var(--color-dark-link);
     
     --color-muted: color-mix(in srgb, var(--color-foreground) 65%, transparent);
@@ -338,16 +333,11 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
       var(--color-foreground) 10%,
       transparent
     );
-    --color-background-secondary: color-mix(
+    --color-surface: color-mix(
       in srgb,
       var(--color-foreground) 5%,
       transparent
     );
-    
-    --color-shadow: color-mix(in srgb, #000 20%, transparent);
-    --shadow: 0 2px 4px var(--color-shadow);
-    --shadow-l: 0 8px 16px var(--color-shadow);
-    --shadow-xl: 0 12px 32px var(--color-shadow);
   }
 }
 
@@ -581,7 +571,7 @@ tt,
 
 pre {
   position: relative;
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   color: var(--color-foreground);
   border: var(--border);
   overflow-x: auto;
@@ -1605,6 +1595,9 @@ hr.col-row {
 :where(.rhythm) > * + :is(section, article, header, footer) {
   margin-block-start: calc(var(--rhythm-gap) * 4);
 }
+:where(.rhythm) > .flex > * {
+  margin-top: 0;
+}
 :where(.rhythm) * + :is(h1, h2, h3) {
   margin-block-start: var(--rhythm-gap-3);
 }
@@ -1625,8 +1618,8 @@ hr.col-row {
 }
 
 
-.no-rhythm {
-  margin: 0 !important;
+.no-rhythm * {
+  margin: 0;
 }
 
 
@@ -1852,7 +1845,7 @@ iframe {
   border-radius: var(--radius);
   border: var(--border);
   box-shadow: var(--shadow);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
 }
 
 
@@ -2083,7 +2076,7 @@ td {
 
 th {
   font-weight: var(--font-weight-bold, 600);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -2115,7 +2108,7 @@ fieldset {
   border: var(--border);
   border-radius: var(--radius);
   padding: var(--space) !important;
-  background: color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background));
+  background: color-mix(in srgb, var(--color-surface) 25%, var(--color-background));
 }
 
 fieldset div,
@@ -2147,7 +2140,7 @@ select {
   padding: var(--leading) var(--space-half) !important;
   border-radius: var(--radius);
   color: var(--color-foreground);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border: var(--border);
   box-shadow: var(--shadow);
   transition: background-color var(--transition), border-color var(--transition), outline-color var(--transition);
@@ -2169,6 +2162,12 @@ select:focus {
 
 label + :is(input, textarea, select) {
   margin-block-start: var(--leading);
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
 }
 
 fieldset *:not(legend) + :is(label, select, button, .btn-group) {
@@ -2197,7 +2196,7 @@ input[type=radio] {
   top: 50%;
   border: var(--border);
   border-radius: var(--radius);
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease;
@@ -2215,7 +2214,7 @@ input[type=radio]:focus-visible {
 }
 input[type=checkbox]:checked,
 input[type=radio]:checked {
-  background-color: color-mix(in srgb, var(--color-accent) 70%, var(--color-background-secondary));
+  background-color: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
   box-shadow: var(--shadow);
   border: var(--stroke-width) solid var(--color-accent);
 }
@@ -2227,7 +2226,7 @@ input[type=radio]:checked::after {
   top: 0.35em;
   width: 0.4em;
   height: 0.7em;
-  border: var(--stroke-width) solid var(--color-background-secondary);
+  border: var(--stroke-width) solid var(--color-surface);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -2237,7 +2236,6 @@ input[type=radio] {
 }
 
 
-:is(.form, .field) input[type=checkbox][role=switch],
 input[type=checkbox][role=switch] {
   
   --switch-height: calc(var(--space) - var(--trim));
@@ -2248,10 +2246,7 @@ input[type=checkbox][role=switch] {
   
   --switch-thumb-size: calc(var(--switch-height) - (var(--switch-padding) * 2));
   
-  --switch-travel: calc(
-    (var(--switch-width) / 1.5) - var(--switch-thumb-size) -
-      (var(--switch-padding) * 1)
-  );
+  --switch-travel: calc(var(--switch-width) - (var(--switch-thumb-size) * 2));
   
   appearance: none;
   display: inline-flex;
@@ -2266,21 +2261,18 @@ input[type=checkbox][role=switch] {
   border: var(--border);
   cursor: pointer;
   
-  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  background-color: var(--color-surface);
   box-shadow: inset var(--shadow);
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
-:is(.form, .field) input[type=checkbox][role=switch]:focus-visible,
 input[type=checkbox][role=switch]:focus-visible {
   outline: 0px solid var(--color-accent);
   outline-offset: 0px;
 }
-:is(.form, .field) input[type=checkbox][role=switch]:disabled,
 input[type=checkbox][role=switch]:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
-:is(.form, .field) input[type=checkbox][role=switch]::before,
 input[type=checkbox][role=switch]::before {
   content: "";
   display: block;
@@ -2298,15 +2290,51 @@ input[type=checkbox][role=switch]::before {
   
   pointer-events: none;
 }
-:is(.form, .field) input[type=checkbox][role=switch]:checked,
 input[type=checkbox][role=switch]:checked {
   background-color: var(--color-accent);
   border-color: transparent;
 }
-:is(.form, .field) input[type=checkbox][role=switch]:checked::before,
 input[type=checkbox][role=switch]:checked::before {
   
   transform: translateX(var(--switch-travel));
+}
+
+input[type=range].input {
+  -webkit-appearance: none; 
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  
+  height: 0.25em; 
+  border-radius: 9999px;
+  border: var(--border);
+  outline: 0;
+  padding: 0;
+  box-shadow: inset var(--shadow);
+  padding: 0; 
+  border: none; 
+  background-origin: border-box;
+  
+  background: linear-gradient(to right, var(--color-primary, var(--color-accent)) 0%, var(--color-primary, var(--color-accent)) var(--slider-value), var(--color-track, var(--color-surface)) var(--slider-value), var(--color-track, var(--color-surface)) 100%);
+}
+
+input[type=range].input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 50%;
+  border: var(--border);
+  background: var(--color-background);
+  box-shadow: var(--shadow);
+  
+  margin-top: 0;
+  transition: transform 0.1s ease;
+}
+
+input[type=range].input:hover::-webkit-slider-thumb {
+  background: var(--color-secondary);
+  border-color: var(--color-subtle);
 }
 
 
@@ -2369,7 +2397,7 @@ input[type=checkbox][role=switch]:checked::before {
 
 .token.doctype,
 .token.namespace {
-  color: var(--color-purple);
+  color: var(--color-magenta);
 }
 
 
@@ -2522,15 +2550,14 @@ a.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-interface), system-ui, sans-serif;
-  font-size: var(--scale-d2);
+  font-family: var(--font-interface);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
   background: var(--color-accent);
-  color: var(--color-light);
+  color: var(--color-on-accent);
   cursor: pointer;
-  gap: var(--leading);
-  transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
+  gap: var(--trim);
+  transition: all var(--transition);
 }
 button svg, button-icon svg,
 a.btn-icon svg, button-ghost svg,
@@ -2539,8 +2566,17 @@ a.btn-destructive svg, button-outline svg,
 a.btn-outline svg, button-secondary svg,
 a.btn-secondary svg,
 a.btn svg {
-  margin-inline: calc(var(--trim) * -2);
+  margin-inline: calc(var(--leading) * -2);
   max-height: var(--scale-d4);
+}
+button:hover, button-icon:hover,
+a.btn-icon:hover, button-ghost:hover,
+a.btn-ghost:hover, button-destructive:hover,
+a.btn-destructive:hover, button-outline:hover,
+a.btn-outline:hover, button-secondary:hover,
+a.btn-secondary:hover,
+a.btn:hover {
+  background: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
 }
 button.small, button-secondary.small,
 a.small.btn-secondary, button-outline.small,
@@ -2549,7 +2585,7 @@ a.small.btn-destructive, button-ghost.small,
 a.small.btn-ghost, button-icon.small,
 a.small.btn-icon,
 a.btn.small {
-  font-size: var(--scale-d4);
+  padding: var(--space-d8) var(--space-d3);
 }
 
 a.btn:visited,
@@ -2569,16 +2605,6 @@ a.btn-icon {
   box-sizing: border-box;
 }
 
-button:hover, button-secondary:hover,
-a.btn-secondary:hover, button-outline:hover,
-a.btn-outline:hover, button-destructive:hover,
-a.btn-destructive:hover, button-ghost:hover,
-a.btn-ghost:hover, button-icon:hover,
-a.btn-icon:hover,
-a.btn:hover {
-  background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
-}
-
 button:active, button-secondary:active,
 a.btn-secondary:active, button-outline:active,
 a.btn-outline:active, button-destructive:active,
@@ -2586,7 +2612,7 @@ a.btn-destructive:active, button-ghost:active,
 a.btn-ghost:active, button-icon:active,
 a.btn-icon:active,
 a.btn:active {
-  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-surface));
 }
 
 button:focus-visible, button-secondary:focus-visible,
@@ -2607,8 +2633,18 @@ a.destructive.btn-outline, button-destructive.destructive, button-ghost.destruct
 a.destructive.btn-ghost, button-icon.destructive,
 a.destructive.btn-icon,
 a.btn-destructive {
+  background-color: var(--color-surface);
+  border-color: color-mix(in srgb, var(--color-error) 10%, var(--color-border));
   color: var(--color-error);
-  background: var(--color-background-secondary);
+}
+button.destructive:hover, button-secondary.destructive:hover,
+a.destructive.btn-secondary:hover, button-outline.destructive:hover,
+a.destructive.btn-outline:hover, button-destructive.destructive:hover, button-ghost.destructive:hover,
+a.destructive.btn-ghost:hover, button-icon.destructive:hover,
+a.destructive.btn-icon:hover,
+a.btn-destructive:hover {
+  background: var(--color-error);
+  color: var(--color-on-accent);
 }
 
 button:disabled, button-secondary:disabled,
@@ -2620,6 +2656,7 @@ a.btn-icon:disabled,
 a.btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 button.secondary, button-secondary.secondary,
@@ -2629,8 +2666,17 @@ a.secondary.btn-destructive, button-ghost.secondary,
 a.secondary.btn-ghost, button-icon.secondary,
 a.secondary.btn-icon,
 a.btn.secondary {
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   color: var(--color-foreground);
+}
+button.secondary:hover, button-secondary.secondary:hover,
+a.secondary.btn-secondary:hover, button-outline.secondary:hover,
+a.secondary.btn-outline:hover, button-destructive.secondary:hover,
+a.secondary.btn-destructive:hover, button-ghost.secondary:hover,
+a.secondary.btn-ghost:hover, button-icon.secondary:hover,
+a.secondary.btn-icon:hover,
+a.btn.secondary:hover {
+  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
 
 button.link, button-secondary.link,
@@ -2640,8 +2686,17 @@ a.link.btn-destructive, button-ghost.link,
 a.link.btn-ghost, button-icon.link,
 a.link.btn-icon,
 a.btn.link {
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   color: var(--color-link);
+}
+button.link:hover, button-secondary.link:hover,
+a.link.btn-secondary:hover, button-outline.link:hover,
+a.link.btn-outline:hover, button-destructive.link:hover,
+a.link.btn-destructive:hover, button-ghost.link:hover,
+a.link.btn-ghost:hover, button-icon.link:hover,
+a.link.btn-icon:hover,
+a.btn.link:hover {
+  background: color-mix(in srgb, currentColor 10%, var(--color-surface));
 }
 
 button.outline, button-secondary.outline,
@@ -2651,8 +2706,18 @@ a.outline.btn-destructive, button-ghost.outline,
 a.outline.btn-ghost, button-icon.outline,
 a.outline.btn-icon,
 a.btn.outline {
-  background: var(--color-background-secondary);
+  background: transparent;
   color: var(--color-subtle);
+}
+button.outline:hover, button-secondary.outline:hover,
+a.outline.btn-secondary:hover, button-outline.outline:hover,
+a.outline.btn-outline:hover, button-destructive.outline:hover,
+a.outline.btn-destructive:hover, button-ghost.outline:hover,
+a.outline.btn-ghost:hover, button-icon.outline:hover,
+a.outline.btn-icon:hover,
+a.btn.outline:hover {
+  color: var(--color-foreground);
+  background-color: var(--color-surface);
 }
 
 button.outline:hover, button-secondary.outline:hover,
@@ -2662,7 +2727,7 @@ a.outline.btn-destructive:hover, button-ghost.outline:hover,
 a.outline.btn-ghost:hover, button-icon.outline:hover,
 a.outline.btn-icon:hover,
 a.btn.outline:hover {
-  background: color-mix(in srgb, white 10%, transparent);
+  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
 
 button.icon, button-secondary.icon,
@@ -2693,14 +2758,15 @@ a.btn.ghost {
   box-shadow: none;
   color: var(--color-muted);
 }
-
-a.btn,
-a.btn-secondary,
-a.btn-outline,
-a.btn-destructive,
-a.btn-ghost,
-a.btn-icon {
-  padding: calc(var(--space-d4) + var(--trim)) var(--space-d2);
+button.ghost:hover, button-secondary.ghost:hover,
+a.ghost.btn-secondary:hover, button-outline.ghost:hover,
+a.ghost.btn-outline:hover, button-destructive.ghost:hover,
+a.ghost.btn-destructive:hover, button-ghost.ghost:hover,
+a.ghost.btn-ghost:hover, button-icon.ghost:hover,
+a.ghost.btn-icon:hover,
+a.btn.ghost:hover {
+  color: var(--color-foreground);
+  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
 
 
@@ -2712,43 +2778,114 @@ a.btn-icon {
   color: var(--color-accent);
 }
 
-.badge, .badge-icon, .badge-ghost, .badge-destructive, .badge-outline, .badge-secondary {
-  background-color: var(--color-background-secondary);
-  color: var(--color-foreground);
-  color: var(--color-accent);
+.badge, .badge-icon,
+a.badge-icon, .badge-ghost,
+a.badge-ghost, .badge-destructive,
+a.badge-destructive, .badge-outline,
+a.badge-outline, .badge-secondary,
+a.badge-secondary,
+a.badge {
+  padding: var(--space-d8) var(--space-d3);
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
   border-radius: var(--space-half);
   border: var(--border);
   font-size: var(--scale-d3);
   display: flex;
   align-items: center;
-  gap: var(--leading);
+  gap: var(--trim);
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
   text-decoration: none;
-  font-weight: 900 !important;
+  font-weight: 600;
+  font-family: var(--font-interface);
   user-select: none;
+  transition: all var(--transition);
   font-variation-settings: "wdth" 900;
 }
-.badge svg, .badge-icon svg, .badge-ghost svg, .badge-destructive svg, .badge-outline svg, .badge-secondary svg {
-  margin-inline: calc(var(--trim) * -1);
+.badge svg, .badge-icon svg, .badge-ghost svg, .badge-destructive svg, .badge-outline svg, .badge-secondary svg,
+a.badge svg {
+  max-height: var(--scale-d3);
+  margin-inline: calc(var(--trim) * -2);
 }
-.badge ::selection, .badge-icon ::selection, .badge-ghost ::selection, .badge-destructive ::selection, .badge-outline ::selection, .badge-secondary ::selection {
+.badge ::selection, .badge-icon ::selection, .badge-ghost ::selection, .badge-destructive ::selection, .badge-outline ::selection, .badge-secondary ::selection,
+a.badge ::selection {
   background: transparent;
   color: currentColor;
 }
-.badge-secondary {
-  background-color: var(--color-background-secondary);
+a.badge:hover, a.badge-secondary:hover, a.badge-outline:hover, a.badge-destructive:hover, a.badge-ghost:hover, a.badge-icon:hover {
+  color: var(--color-on-accent);
+  background: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
+}
+
+.badge-secondary,
+a.badge-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
+}
+.badge-secondary svg,
+a.badge-secondary svg {
+  max-height: var(--scale-d3);
+  margin-inline: calc(var(--trim) * -2);
+}
+
+a.badge-secondary:hover {
+  color: var(--color-foreground);
+  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
+}
+
+.badge-outline,
+a.badge-outline {
+  background-color: transparent;
+  color: var(--color-foreground);
+}
+.badge-outline svg,
+a.badge-outline svg {
+  max-height: var(--scale-d3);
+  margin-inline: calc(var(--trim) * -2);
+}
+
+a.badge-outline:hover {
+  color: var(--color-foreground);
+  background: var(--color-surface);
+}
+
+.badge-destructive,
+a.badge-destructive {
+  background-color: var(--color-surface);
+  border-color: color-mix(in srgb, var(--color-error) 10%, var(--color-border));
+  color: var(--color-error);
+}
+.badge-destructive svg,
+a.badge-destructive svg {
+  max-height: var(--scale-d3);
+  margin-inline: calc(var(--trim) * -2);
+}
+
+a.badge-destructive:hover {
+  background-color: var(--color-error);
+  color: var(--color-on-accent);
+}
+
+.breadcrumbs {
+  font-family: var(--font-interface);
   color: var(--color-muted);
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: var(--scale-d3);
 }
-
-.badge-outline {
-  background-color: var(--color-background-secondary);
-  color: var(--color-subtle);
+.breadcrumbs * {
+  margin-block: 0;
 }
-
-.badge-destructive {
-  background-color: var(--color-red);
-  color: var(--color-background);
+.breadcrumbs a {
+  text-decoration: none;
+  cursor: pointer;
+}
+.breadcrumbs li::before {
+  display: none;
 }
 
 
@@ -2801,7 +2938,7 @@ ul.menu.horizontal li {
 
 .card {
   padding: var(--space);
-  box-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgba(0, 0, 0, 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgba(0, 0, 0, 0.1));
+  box-shadow: var(--shadow);
 }
 .card :is(h1, h2, h3, h4, h5, h6) {
   font-size: var(--scale);
@@ -2812,25 +2949,43 @@ ul.menu.horizontal li {
 }
 
 .card {
-  padding: 0;
+  padding: var(--space);
+  overflow: hidden;
+}
+.card img {
+  border-radius: 0px;
+  border: 0;
+  box-shadow: 0;
 }
 
-.card > * {
-  padding: var(--space-half) var(--space);
+.card > * + * {
+  padding-block-start: var(--space);
 }
 
 .card > header:first-child {
   padding: var(--space);
+  margin: calc(var(--space) * -1);
+}
+.card > header:first-child.surface {
+  margin-bottom: 0;
   border-bottom: var(--border);
   box-shadow: var(--shadow);
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
+}
+.card > header:first-child p {
+  margin-top: var(--space-half);
+  color: var(--color-muted);
+  font-size: var(--scale-d2);
+}
+
+.card.icon > header:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .card > footer:last-child {
-  padding: var(--space);
+  margin-top: var(--space-half);
 }
 
 .card.clickable a {
@@ -2864,15 +3019,15 @@ card.inset {
 
 .callout {
   box-shadow: var(--shadow);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border: var(--border);
   border-radius: var(--radius);
   transition: var(--duration-superfast) ease;
   padding: var(--trim);
   padding-top: 0;
-  --color-callout: var(--color-background-secondary);
+  --color-callout: var(--color-surface);
   --color-border: color-mix(in srgb, var(--color-callout) 15%, transparent);
-  background: color-mix(in srgb, var(--color-callout) 5%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-callout) 5%, var(--color-surface));
   font-size: var(--scale-d2);
 }
 .callout .callout-title,
@@ -2891,7 +3046,7 @@ card.inset {
 }
 .callout .callout-content {
   color: var(--color-foreground);
-  background: color-mix(in srgb, var(--color-callout) 2.5%, color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background)));
+  background: color-mix(in srgb, var(--color-callout) 2.5%, color-mix(in srgb, var(--color-surface) 25%, var(--color-background)));
   line-height: var(--line-height-compact);
   box-shadow: inset var(--shadow);
   border-radius: var(--radius);
@@ -2988,7 +3143,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
 }
 
 .mermaid {
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border-radius: var(--radius);
   border: var(--border);
   position: relative;
@@ -3002,7 +3157,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   --color-alert: var(--color-accent);
   padding: var(--space-half);
   color: color-mix(in srgb, var(--color-alert) 10%, var(--color-foreground)) !important;
-  background: color-mix(in srgb, var(--color-alert) 10%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-alert) 10%, var(--color-surface));
   border-left: var(--stroke-width) solid color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
 }
 
@@ -3029,7 +3184,7 @@ p:has(img) + .callout[data-callout=caption i] .callout-content {
   border: var(--border);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   padding: calc(var(--space-half) + var(--leading)) var(--space-half);
   margin-block-end: var(--space);
 }
@@ -3187,7 +3342,7 @@ a.skip-link:active {
     --color-light-background: white !important;
     --color-dark-foreground: white !important;
     --color-dark-background: black !important;
-    --color-background-secondary: var(--color-background) !important;
+    --color-surface: var(--color-background) !important;
     --color-border: var(--color-foreground) !important;
     --color-muted: var(--color-foreground) !important;
     --color-subtle: var(--color-foreground) !important;
@@ -3202,7 +3357,7 @@ a.skip-link:active {
   :root {
     --color-foreground: black;
     --color-background: white;
-    --color-background-secondary: white;
+    --color-surface: white;
     --font-size: 0.925rem !important;
     --optical-ratio: 1.125 !important;
     --line-height: 1.4 !important;
@@ -3450,7 +3605,7 @@ a.skip-link:active {
   transition: background-color var(--transition), color var(--transition);
 }
 .toast-close:hover {
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   color: var(--color-foreground);
 }
 .toast-close:focus-visible {
@@ -3567,7 +3722,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .mt-full {
@@ -3667,7 +3822,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .mr-full {
@@ -3767,7 +3922,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .mb-full {
@@ -3867,7 +4022,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .ml-full {
@@ -3967,7 +4122,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .my-full {
@@ -4067,7 +4222,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .mx-full {
@@ -4167,7 +4322,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .m-full {
@@ -4270,7 +4425,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .pt-full {
@@ -4370,7 +4525,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .pr-full {
@@ -4470,7 +4625,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .pb-full {
@@ -4570,7 +4725,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .pl-full {
@@ -4670,7 +4825,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .py-full {
@@ -4770,7 +4925,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .px-full {
@@ -4870,7 +5025,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .p-full {
@@ -4973,7 +5128,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .gap-full {
@@ -5073,7 +5228,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .column-gap-full {
@@ -5176,7 +5331,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .w-full {
@@ -5301,7 +5456,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .min-width-full {
@@ -5414,7 +5569,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .max-width-full {
@@ -5529,7 +5684,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .h-full {
@@ -5646,7 +5801,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .min-height-full {
@@ -5759,7 +5914,7 @@ a.skip-link:active {
 }
 
 .bg-secondary {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
 }
 
 .max-height-full {
@@ -6065,11 +6220,11 @@ a.skip-link:active {
 }
 
 .purple {
-  color: var(--color-purple) !important;
+  color: var(--color-magenta) !important;
 }
 
 .pink {
-  color: var(--color-pink) !important;
+  color: var(--color-magenta) !important;
 }
 
 .bg-red {
@@ -6097,22 +6252,22 @@ a.skip-link:active {
 }
 
 .bg-purple {
-  background-color: var(--color-purple) !important;
+  background-color: var(--color-magenta) !important;
 }
 
 .bg-pink {
-  background-color: var(--color-pink) !important;
+  background-color: var(--color-magenta) !important;
 }
 
 
 
 
 .bg-secondary {
-  background: var(--color-background-secondary) !important;
+  background: var(--color-secondary) !important;
 }
 
-.bg-alternate {
-  background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+.bg-surface {
+  background: var(--color-surface) !important;
 }
 
 .bg-foreground {
@@ -6490,7 +6645,12 @@ a.skip-link:active {
     
   }
 }
-.rounded {
+.round {
+  border-radius: var(--radius);
+}
+
+.rounded,
+.rounded img {
   border-radius: 50%;
 }
 

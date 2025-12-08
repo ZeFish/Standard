@@ -376,7 +376,7 @@ Perfect! Now I can see your actual architecture. You need **Layer 10** for compo
 
 .alert {
   --alert-border-width: 1px;
-  --alert-background: var(--color-background-secondary);
+  --alert-background: var(--color-surface);
   --alert-color: var(--color-foreground);
   --alert-border-color: var(--color-border);
 
@@ -873,7 +873,7 @@ Perfect! Continuing with the remaining 8 components...
 
   /* Link hover states */
   a:hover {
-    background: var(--color-background-secondary);
+    background: var(--color-surface);
     border-color: var(--color-accent);
     color: var(--color-accent);
   }
@@ -1602,7 +1602,7 @@ Perfect! Continuing with the remaining 8 components...
 
   /* Link hover states */
   a:hover {
-    background: var(--color-background-secondary);
+    background: var(--color-surface);
     border-color: var(--color-accent);
     color: var(--color-accent);
   }
@@ -2482,7 +2482,7 @@ description: Live examples of all Standard Framework components
     <!-- ========================================
          FOOTER
     ========================================= -->
-    <footer class="negate-body-padding-full smaller" style="background: var(--color-background-secondary); padding: var(--rhythm-2) var(--rhythm); text-align: center; margin-top: var(--rhythm-3);">
+    <footer class="negate-body-padding-full smaller" style="background: var(--color-surface); padding: var(--rhythm-2) var(--rhythm); text-align: center; margin-top: var(--rhythm-3);">
       <p style="margin: 0;">
         <strong>Standard Framework</strong> v0.11.0 ·
         <a href="#">Documentation</a> ·

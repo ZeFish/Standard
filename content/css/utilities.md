@@ -71,15 +71,15 @@ Control spacing outside elements using margin utilities.
 Control spacing inside elements using padding utilities.
 
 ```html
-<div class="padding-base border-color-default" style="border: 1px solid; background: var(--color-background-secondary); border-radius: 0.5rem;">
+<div class="padding-base border-color-default" style="border: 1px solid; background: var(--color-surface); border-radius: 0.5rem;">
   <p class="margin-0">Padding base (.padding-base)</p>
 </div>
 
-<div class="padding-l border-color-default" style="border: 1px solid; background: var(--color-background-secondary); border-radius: 0.5rem;">
+<div class="padding-l border-color-default" style="border: 1px solid; background: var(--color-surface); border-radius: 0.5rem;">
   <p class="margin-0">Padding large (.padding-l)</p>
 </div>
 
-<div class="padding-xl border-color-default" style="border: 1px solid; background: var(--color-background-secondary); border-radius: 0.5rem;">
+<div class="padding-xl border-color-default" style="border: 1px solid; background: var(--color-surface); border-radius: 0.5rem;">
   <p class="margin-0">Padding extra large (.padding-xl)</p>
 </div>
 ```
@@ -126,25 +126,25 @@ Control element width and constrain content.
 
 ```html
 <div class="margin-bottom-base">
-  <div class="width-full padding-s border-color-default" style="border: 1px solid; background: var(--color-background-secondary);">
+  <div class="width-full padding-s border-color-default" style="border: 1px solid; background: var(--color-surface);">
     .width-full (100%)
   </div>
 </div>
 
 <div class="margin-bottom-base">
-  <div class="width-max padding-s border-color-default" style="border: 1px solid; background: var(--color-background-secondary);">
+  <div class="width-max padding-s border-color-default" style="border: 1px solid; background: var(--color-surface);">
     .width-max (max-content)
   </div>
 </div>
 
 <div class="margin-bottom-base">
-  <div class="width-min padding-s border-color-default" style="border: 1px solid; background: var(--color-background-secondary);">
+  <div class="width-min padding-s border-color-default" style="border: 1px solid; background: var(--color-surface);">
     .width-min (min-content)
   </div>
 </div>
 
 <div class="margin-bottom-base">
-  <div class="width-auto padding-s border-color-default" style="border: 1px solid; background: var(--color-background-secondary);">
+  <div class="width-auto padding-s border-color-default" style="border: 1px solid; background: var(--color-surface);">
     .width-auto
   </div>
 </div>
@@ -161,7 +161,7 @@ Control element width and constrain content.
 Control element height.
 
 ```html
-<div class="display-flex gap-base" style="border: 1px solid var(--color-subtle); border-radius: 0.5rem; padding: var(--rhythm); background: var(--color-background-secondary);">
+<div class="display-flex gap-base" style="border: 1px solid var(--color-subtle); border-radius: 0.5rem; padding: var(--rhythm); background: var(--color-surface);">
   <div class="height-full padding-s" style="border: 1px solid var(--color-accent); border-radius: 0.25rem;">
     .height-full
   </div>
@@ -359,7 +359,7 @@ Hide content visually but keep it available to screen readers.
 Center content horizontally and/or vertically.
 
 ```html
-<div class="center-content" style="height: 200px; border: 1px solid var(--color-subtle); border-radius: 0.5rem; background: var(--color-background-secondary);">
+<div class="center-content" style="height: 200px; border: 1px solid var(--color-subtle); border-radius: 0.5rem; background: var(--color-surface);">
   <p class="margin-0">Centered content (.center-content)</p>
 </div>
 

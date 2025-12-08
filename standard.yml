@@ -62,7 +62,7 @@ design:
         leading: 1
         features: '"cv11" 1, "tnum" 1'
         var: '"wdth" 100'
-         
+
   # LAYOUT
   layout:
     ratio: 1.414
@@ -75,24 +75,24 @@ design:
     palette:
       key:     "#1a1a1a"
       paper:   "#ffffff"
-      magenta: "#e6005c"
       red:     "#ef4444"
       orange:  "#f97316"
       yellow:  "#eab308"
       green:   "#22c55e"
       cyan:    "#06b6d4"
       blue:    "#3b82f6"
-      
+      magenta: "#e6005c"
+
     dark:
       key:     "#1a1a1a"
       paper:   "#ffffff"
-      magenta: "#e6005c"
       red:     "#ef4444"
       orange:  "#f97316"
       yellow:  "#eab308"
       green:   "#22c55e"
       cyan:    "#06b6d4"
       blue:    "#3b82f6"
+      magenta: "#e6005c"
 
 
 
@@ -103,7 +103,7 @@ design:
     stroke:
       thin:  "1px"
       thick: "2px"
-      
+
  # The Ratios (Available as --ratio-*)
     harmonics:
       golden:       1.618  # φ (Layout, Type)
@@ -136,14 +136,14 @@ design:
       error:   "var(--palette-red)"
       info:    "var(--palette-cyan)"
 
-    space: 
+    space:
       grid:  calc((var(--line-height) * 2) - 1em)﻿
       two-line: calc((var(--line-height) * 3) - 1em)﻿
       leading: calc((var(--line-height) * 1) - 1em)﻿
       half-leading: calc((var(--space-compact) / 2))
       continuity-compact: calc((var(--lh-raw) - 1) * 1em);
       continuity-tight: calc(var(--space-compact) / 2);
-      
+
     measure:
       narrow:  "45ch"
       reading: "65ch"
@@ -157,4 +157,3 @@ design:
     medium:    "calc(var(--math-unit) * var(--math-harmonics-golden))" # ~26px
     large:    "calc(var(--size-1) * var(--math-harmonics-golden))" # ~42px
     display:    "calc(var(--size-2) * var(--math-harmonics-golden))" # ~68px
-    

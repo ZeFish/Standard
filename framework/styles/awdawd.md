@@ -263,7 +263,7 @@ tt,
 
 pre {
   position: relative;
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   color: var(--color-foreground);
   border: var(--border);
   overflow-x: auto;
@@ -452,7 +452,7 @@ th, td {
 
 th {
   font-weight: var(--font-weight-bold, 600);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -504,7 +504,7 @@ fieldset {
   border: var(--border);
   border-radius: var(--radius);
   padding: var(--trim) !important;
-  background: color-mix(in srgb, var(--color-background-secondary) 25%, var(--color-background));
+  background: color-mix(in srgb, var(--color-surface) 25%, var(--color-background));
 }
 
 fieldset div, fieldset p { margin: 0; padding: 0; }
@@ -527,7 +527,7 @@ select {
   padding: var(--leading) var(--space-half) !important;
   border-radius: var(--radius);
   color: var(--color-foreground);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border: var(--border);
   transition: background-color var(--transition), border-color var(--transition), outline-color var(--transition);
 }
@@ -633,7 +633,7 @@ a.btn {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--color-accent) 65%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-accent) 65%, var(--color-surface));
   color: color-mix(in srgb, var(--color-background) 85%, transparent);
   border: var(--border);
   border-color: var(--color-border);
@@ -656,13 +656,13 @@ a.btn {
 
 button:hover,
 a.btn:hover {
-  background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-accent) 80%, var(--color-surface));
   color: var(--color-background);
 }
 
 button:active,
 a.btn:active {
-  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-background-secondary));
+  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-surface));
 }
 
 button:focus-visible,

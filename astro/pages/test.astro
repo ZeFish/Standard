@@ -10,6 +10,9 @@ import Accordion from "../components/ui/Accordion.astro";
 import Badge from "../components/ui/Badge.astro";
 import Button from "../components/ui/Button.astro";
 import Breadrcumbs from "../components/ui/Breadcrumbs.astro";
+import Slider from "../components/ui/Slider.astro";
+import Switch from "../components/ui/Switch.astro";
+import Card from "../components/ui/Card.astro";
 
 // Get all docs from root level (not nested in subdirectories)
 const allDocs = await getCollection("content");
@@ -28,7 +31,10 @@ const sortedDocs = rootDocs.sort((a, b) =>
 >
   <h2>An idea of what's possible</h2>
   <p>Work in progres...</p>
-  <section class="feature">
+  <section class="feature flex flex-wrap">
+    <Card />
+    <Slider />
+    <Switch />
     <Breadrcumbs />
     <Button />
     <Badge />

@@ -25,6 +25,10 @@ $rhythm-participants: $content-tags + ", " + $wrapper-tags;
     margin-block-start: calc(var(--rhythm-gap) * 4);
   }
 
+  > .flex > * {
+    margin-top: 0;
+  }
+
   // EXCEPTIONS
   * + :is(h1, h2, h3) {
     margin-block-start: var(--rhythm-gap-3);
@@ -52,6 +56,6 @@ $rhythm-participants: $content-tags + ", " + $wrapper-tags;
 }
 
 /* Individual element overrides */
-.no-rhythm {
-  margin: 0 !important;
+.no-rhythm * {
+  margin: 0;
 }

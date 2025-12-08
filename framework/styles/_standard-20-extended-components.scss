@@ -34,7 +34,7 @@
  */
 
 .card {
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border: var(--border);
 }
 
@@ -99,7 +99,7 @@ aside,
   background: color-mix(
     in srgb,
     var(--color-alert) 10%,
-    var(--color-background-secondary)
+    var(--color-surface)
   );
   border-left: var(--stroke-width) solid
     color-mix(in srgb, var(--color-alert) 50%, var(--color-border));
@@ -341,7 +341,7 @@ aside,
 
   /* Link hover states */
   a:hover {
-    background: var(--color-background-secondary);
+    background: var(--color-surface);
     border-color: var(--color-accent);
     color: var(--color-accent);
   }
@@ -645,7 +645,7 @@ dialog.modal::backdrop {
     color var(--transition);
 
   &:hover {
-    background: var(--color-background-secondary);
+    background: var(--color-surface);
     color: var(--color-foreground);
   }
 
@@ -689,7 +689,7 @@ dialog.modal::backdrop {
   gap: var(--space);
   padding: var(--trim) var(--leading);
   border-top: var(--border);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
 }
 
 /**
@@ -1047,7 +1047,7 @@ dialog.modal::backdrop {
   transition: background-color var(--transition);
 
   &:hover {
-    background: var(--color-background-secondary);
+    background: var(--color-surface);
   }
 
   &:focus-visible {

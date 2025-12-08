@@ -89,7 +89,7 @@
     background-color: var(--color-background);
   }
   .bg-secondary {
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-surface);
   }
 
   // Loop through and generate classes
@@ -467,11 +467,11 @@
 }
 
 .purple {
-  color: var(--color-purple) !important;
+  color: var(--color-magenta) !important;
 }
 
 .pink {
-  color: var(--color-pink) !important;
+  color: var(--color-magenta) !important;
 }
 
 .bg-red {
@@ -499,11 +499,11 @@
 }
 
 .bg-purple {
-  background-color: var(--color-purple) !important;
+  background-color: var(--color-magenta) !important;
 }
 
 .bg-pink {
-  background-color: var(--color-pink) !important;
+  background-color: var(--color-magenta) !important;
 }
 
 /* =========================== */
@@ -511,10 +511,10 @@
 /* =========================== */
 
 .bg-secondary {
-  background: var(--color-background-secondary) !important;
+  background: var(--color-secondary) !important;
 }
-.bg-alternate {
-  background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+.bg-surface {
+  background: var(--color-surface) !important;
 }
 .bg-foreground {
   background: var(--color-foreground);
@@ -1003,6 +1003,10 @@
   }
 }
 
-.rounded {
+.round {
+  border-radius: var(--radius);
+}
+.rounded,
+.rounded img {
   border-radius: 50%;
 }

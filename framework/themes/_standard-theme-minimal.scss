@@ -13,7 +13,7 @@
   --line-width: var(--line-width-s);
 
   --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
-  --color-background-secondary: color-mix(
+  --color-surface: color-mix(
     in srgb,
     var(--color-foreground) 2%,
     var(--color-background)
@@ -38,7 +38,7 @@
   }
   pre {
     border: 0;
-    background: var(--color-background-secondary);
+    background: var(--color-surface);
     .copy-button {
       position: absolute;
       top: var(--space-d2);

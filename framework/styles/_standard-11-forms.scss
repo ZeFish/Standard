@@ -14,7 +14,7 @@ fieldset {
   padding: var(--space) !important;
   background: color-mix(
     in srgb,
-    var(--color-background-secondary) 25%,
+    var(--color-surface) 25%,
     var(--color-background)
   );
 }
@@ -48,7 +48,7 @@ select {
   padding: var(--leading) var(--space-half) !important;
   border-radius: var(--radius);
   color: var(--color-foreground);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border: var(--border);
   box-shadow: var(--shadow);
   transition:
@@ -80,6 +80,12 @@ label + :is(input, textarea, select) {
   margin-block-start: var(--leading);
 }
 
+label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+}
+
 fieldset *:not(legend) + :is(label, select, button, .btn-group) {
   margin-block-start: var(--space);
 }
@@ -104,7 +110,7 @@ input[type="radio"] {
   top: 50%;
   border: var(--border);
   border-radius: var(--radius);
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-surface);
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease;
@@ -123,7 +129,7 @@ input[type="radio"] {
     background-color: color-mix(
       in srgb,
       var(--color-accent) 70%,
-      var(--color-background-secondary)
+      var(--color-surface)
     );
     box-shadow: var(--shadow);
     border: var(--stroke-width) solid var(--color-accent);
@@ -136,7 +142,7 @@ input[type="radio"] {
     top: 0.35em;
     width: 0.4em;
     height: 0.7em;
-    border: var(--stroke-width) solid var(--color-background-secondary);
+    border: var(--stroke-width) solid var(--color-surface);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
@@ -148,7 +154,6 @@ input[type="radio"] {
 
 /* Hover state */
 
-:is(.form, .field) input[type="checkbox"][role="switch"],
 input[type="checkbox"][role="switch"] {
   /* --- 1. DEFINE DIMENSIONS --- */
   --switch-height: calc(var(--space) - var(--trim));
@@ -164,10 +169,7 @@ input[type="checkbox"][role="switch"] {
      CALCULATE TRAVEL DISTANCE AUTOMATICALLY:
      Total Width - Thumb Width - (Left Padding + Right Padding)
   */
-  --switch-travel: calc(
-    (var(--switch-width) / 1.5) - var(--switch-thumb-size) -
-      (var(--switch-padding) * 1)
-  );
+  --switch-travel: calc(var(--switch-width) - (var(--switch-thumb-size) * 2));
 
   /* --- 2. CONTAINER SETUP --- */
   appearance: none;
@@ -187,7 +189,7 @@ input[type="checkbox"][role="switch"] {
   cursor: pointer;
 
   /* Colors & Transition */
-  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  background-color: var(--color-surface);
   box-shadow: inset var(--shadow);
   transition:
     background-color 0.2s ease-in-out,
@@ -239,4 +241,53 @@ input[type="checkbox"][role="switch"] {
     /* Move exactly the calculated empty space distance */
     transform: translateX(var(--switch-travel));
   }
+}
+
+input[type="range"].input {
+  -webkit-appearance: none; /* Webkit/Blink */
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  /* Dimensions */
+  height: 0.25em; /* Adjust track height */
+  border-radius: 9999px;
+  border: var(--border);
+  outline: 0;
+  padding: 0;
+  box-shadow: inset var(--shadow);
+
+  padding: 0; /* Crucial: allows thumb to touch edges */
+  border: none; /* Crucial: removes text-input borders */
+  background-origin: border-box;
+  /*
+   * THE FILL MAGIC
+   * uses the --slider-value variable passed in the style attribute
+   */
+  background: linear-gradient(
+    to right,
+    var(--color-primary, var(--color-accent)) 0%,
+    var(--color-primary, var(--color-accent)) var(--slider-value),
+    var(--color-track, var(--color-surface)) var(--slider-value),
+    var(--color-track, var(--color-surface)) 100%
+  );
+}
+input[type="range"].input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 50%;
+  border: var(--border);
+  background: var(--color-background);
+  box-shadow: var(--shadow);
+
+  /* Vertical alignment logic for Webkit:
+     (Thumb Height / 2) - (Track Height / 2) * -1
+  */
+  margin-top: 0;
+  transition: transform 0.1s ease;
+}
+input[type="range"].input:hover::-webkit-slider-thumb {
+  background: var(--color-secondary);
+  border-color: var(--color-subtle);
 }

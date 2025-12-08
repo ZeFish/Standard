@@ -16,24 +16,6 @@ import config from "virtual:standard/config";
 import type { StandardFrameworkConfig } from "../types/standard";
 ---
 
-<style>
-  @media (prefers-color-scheme: light) {
-    :root {
-      --color-background-secondary: transparent;
-    }
-    button.outline:hover,
-    a.btn.outline:hover {
-      background: color-mix(in srgb, black 5%, transparent);
-    }
-  }
-  
-  
-     
-    
-
-    .card > * + * {  margin-block-start: var(--space-whole); }
-</style>
-
 <section class="grid sm:grid-1 mt-4 no-rhythm">
   <div class="flex flex-col gap">
     <div class="card flow flow-col w-full">
@@ -56,7 +38,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               <p class="smaller muted">m@example.com</p>
             </div>
 
-             box
+            box
           </li>
           <li class="flex items-center gap-half w-full">
             <img
@@ -69,7 +51,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               <p class="smaller ellipsis muted">p@example.com</p>
             </div>
 
-             box
+            box
           </li>
           <li class="flex items-center gap-half w-full">
             <img
@@ -82,7 +64,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               <p class="smaller muted">i@example.com</p>
             </div>
 
-             box
+            box
           </li>
         </ul>
       </section>
@@ -91,7 +73,9 @@ import type { StandardFrameworkConfig } from "../types/standard";
     <div class="card">
       <header class="">
         <h2>Cookie Settings</h2>
-        <p class="mt-half compact muted small">Manage your cookie settings here.</p>
+        <p class="mt-half compact muted small">
+          Manage your cookie settings here.
+        </p>
       </header>
       <section class="grid-row">
         <label class="flex justify-between gap-2">
@@ -125,12 +109,12 @@ import type { StandardFrameworkConfig } from "../types/standard";
         </label>
       </section>
       <footer class="">
-        <button type="button" class="outline small w-full"> Save preferences </button>
+        <button type="button" class="outline w-full"> Save preferences </button>
       </footer>
     </div>
 
-    <div class="card w-full">
-      <header class="">
+    <div class="card w-full pb-half">
+      <header class="pb">
         <h2>Payment Method</h2>
         <p class="mt-half muted compact small">
           Add a new payment method to your account.
@@ -222,7 +206,9 @@ import type { StandardFrameworkConfig } from "../types/standard";
             />
           </div>
           <div class="grid-row gap-leading">
-            <label class="smaller" for="payment-method-card-number">Card Number</label>
+            <label class="smaller" for="payment-method-card-number"
+              >Card Number</label
+            >
             <input
               type="text"
               id="payment-method-card-number"
@@ -231,7 +217,9 @@ import type { StandardFrameworkConfig } from "../types/standard";
           </div>
           <div class="flex gap-leading">
             <div class="grid-row flex-1 gap-leading">
-              <label class="smaller"for="payment-method-expiration-month">Expires</label>
+              <label class="smaller" for="payment-method-expiration-month"
+                >Expires</label
+              >
               <select id="payment-method-expiration-month" class="w-full">
                 <option value="01">January</option>
                 <option value="02">February</option>
@@ -248,7 +236,9 @@ import type { StandardFrameworkConfig } from "../types/standard";
               </select>
             </div>
             <div class="grid-row flex-1 gap-leading">
-              <label class="smaller" for="payment-method-expiration-year">Year</label>
+              <label class="smaller" for="payment-method-expiration-year"
+                >Year</label
+              >
               <select id="payment-method-expiration-year" class="w-full">
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -274,7 +264,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
               />
             </div>
           </div>
-          <button type="button" class="w-full small">Continue</button>
+          <button type="button" class="w-full mt">Continue</button>
         </form>
       </section>
     </div>
@@ -282,57 +272,95 @@ import type { StandardFrameworkConfig } from "../types/standard";
 
   <div class="flex flex-col no-rhythm">
     <div class="card w-full">
-        <header class="flex  items-center gap-half">
-          <img
-            src="/assets/img/avatar-1.png"
-            alt="Sofia Davis"
-            class="w-2 h-2 rounded"
-          />
-          <div class="flex flex-col gap-leading mr-auto">
-            <h3 class="small">Sofia Davis</h3>
-            <p class="smaller muted">m@example.com</p>
-          </div>
-          <button
-            type="
+      <header class="flex items-center gap-half">
+        <img
+          src="/assets/img/avatar-1.png"
+          alt="Sofia Davis"
+          class="w-2 h-2 rounded"
+        />
+        <div class="flex flex-col gap-leading mr-auto">
+          <h3 class="small">Sofia Davis</h3>
+          <p class="smaller muted">m@example.com</p>
+        </div>
+        <button
+          type="
                   button"
-            class="icon outline rounded"
-            data-tooltip="New message"
-          >
-            <Plus size="16" />
-          </button>
-        </header>
-        <section class="w-full grid-row">
-          <div
-            style="max-width:75%;"
-            class="w-fit flex p-half flex-col mr-auto radius small bg-alternate"
-          >
-            Hi, how can I help you today?
-          </div>
-          <div
-            style="max-width:75%;"
-            class="w-fit muted p-half flex flex-col ml-auto radius small invert"
-          >
-            Hey, I'm having trouble with my account.
-          </div>
-          <div
-            style="max-width:75%;"
-            class="w-fit flex p-half flex-col mr-auto radius small bg-alternate"
-          >
-            What seems to be the problem?
-          </div>
-          <div
-            style="max-width:75%;"
-            class="w-fit muted flex p-half flex-col ml-auto radius small invert"
-          >
-            I can't log in.
-          </div>
-        </section>
-        <footer class="flex gap-half items-center">
-          <input
-            type="text"
-            class="input w-full"
-            placeholder="Type your message here..."
-            oninput="
+          class="icon outline rounded"
+          data-tooltip="New message"
+        >
+          <Plus size="16" />
+        </button>
+      </header>
+      <section class="w-full grid-row">
+        <div
+          style="max-width:75%;"
+          class="received w-fit flex p-half flex-col mr-auto radius small invert"
+        >
+          Hi, how can I help you today?
+        </div>
+        <div
+          style="max-width:75%;"
+          class="send w-fit muted p-half flex flex-col ml-auto radius small bg-secondary"
+        >
+          Hey, I'm having trouble with my account.
+        </div>
+        <div
+          style="max-width:75%;position:relative;"
+          class="received w-fit flex p-half flex-col mr-auto radius small invert"
+        >
+          What seems to be the problem?
+        </div>
+        <div
+          style="max-width:75%;"
+          class="send w-fit muted flex p-half flex-col ml-auto radius small bg-secondary"
+        >
+          I can't log in.
+        </div>
+
+        <style>
+          .received::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-bottom-left-radius: 0px;
+
+            /* Position the tail */
+            left: -5px; /* Pushes it out to the left */
+            bottom: 0;
+
+            /* THE TRIANGLE MAGIC */
+            border-right: 10px solid var(--color-foreground); /* The color of the bubble */
+            border-left: 0 solid transparent;
+            border-top: 10px solid transparent;
+            border-bottom: 0 solid transparent;
+          }
+
+          .send::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-bottom-right-radius: 0px;
+
+            /* Position the tail */
+            right: -5px; /* Pushes it out to the left */
+            bottom: 0;
+
+            /* THE TRIANGLE MAGIC */
+            border-right: 10px solid var(--color-secondary); /* The color of the bubble */
+            border-right: 0 solid transparent;
+            border-top: 10px solid transparent;
+            border-bottom: 0 solid transparent;
+          }
+        </style>
+      </section>
+      <footer class="flex gap-half items-center">
+        <input
+          type="text"
+          class="input w-full"
+          placeholder="Type your message here..."
+          oninput="
                 if (this.value) {
                   this.parentElement
                     .querySelector('button')
@@ -343,14 +371,13 @@ import type { StandardFrameworkConfig } from "../types/standard";
                     .setAttribute('disabled', 'true');
                 }
               "
-          />
-          <button type="button" class="icon" disabled><Send size="16" /></button
-          >
-        </footer>
+        />
+        <button type="button" class="icon" disabled><Send size="16" /></button>
+      </footer>
     </div>
 
     <div class="card w-full">
-      <header class="" >
+      <header class="">
         <h2>Create an account</h2>
         <p class="small compact muted mt-half">
           Enter your email below to create your account
@@ -358,7 +385,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
       </header>
       <section class="grid-row">
         <div class="flex">
-          <button type="button" class="outline h-whole flex-1 gap-leading">
+          <button type="button" class="outline flex-1 gap-leading">
             <svg
               role="img"
               fill="currentColor"
@@ -372,7 +399,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
             </svg>
             GitHub
           </button>
-          <button type="button" class="outline h-whole flex-1 gap-leading">
+          <button type="button" class="outline flex-1 gap-leading">
             <svg
               role="img"
               fill="currentColor"
@@ -392,28 +419,28 @@ import type { StandardFrameworkConfig } from "../types/standard";
             <hr />
           </div>
           <div class="relative flex justify-center w-full">
-            <span class="bg-background px-leading muted uppercase"
+            <span
+              class="small font-interface bg-background px-leading muted uppercase"
               >Or continue with</span
             >
           </div>
         </div>
-        <form class="form grid-row">
+        <form class="form grid-row gap">
           <div class="grid-row gap-leading">
             <label class="small" for="demo-card-form-email">Email</label>
             <input type="email" id="demo-card-form-email" />
           </div>
           <div class="grid-row gap-leading">
             <div class="flex items-center gap-2">
-              <label class="small" for="demo-card-form-password">Password</label>
-              <a
-                href="#"
-                class="ml-auto inline-block smaller"
+              <label class="small" for="demo-card-form-password">Password</label
+              >
+              <a href="#" class="ml-auto inline-block smaller"
                 >Forgot your password?</a
               >
             </div>
             <input type="password" id="demo-card-form-password" />
           </div>
-          <button type="button" class=" small btn w-full">Create an account</button>
+          <button type="button" class="w-full">Create an account</button>
         </form>
       </section>
     </div>
@@ -421,12 +448,14 @@ import type { StandardFrameworkConfig } from "../types/standard";
     <div class="card w-full">
       <header class="">
         <h2>Report an issue</h2>
-        <p class="small mt-leading mb">What area are you having problems with?</p>
+        <p class="small mt-leading mb">
+          What area are you having problems with?
+        </p>
       </header>
       <section>
         <form class="form grid-row">
           <div class="flex">
-            <div class="grid-row small flex-1">
+            <div class="grid-row gap-leading flex-1">
               <label for="report-issue-area">Area</label>
               <select id="report-issue-area" class="w-full">
                 <option value="team">Team</option>
@@ -437,7 +466,9 @@ import type { StandardFrameworkConfig } from "../types/standard";
               </select>
             </div>
             <div class="grid-row gap-leading flex-1">
-              <label class="small" for="report-issue-security-level">Security Level</label>
+              <label class="small" for="report-issue-security-level"
+                >Security Level</label
+              >
               <select id="report-issue-security-level" class="w-full">
                 <option value="1">Severity 1 (Highest)</option>
                 <option value="2">Severity 2</option>
@@ -456,15 +487,17 @@ import type { StandardFrameworkConfig } from "../types/standard";
             />
           </div>
           <div class="grid-row gap-leading">
-            <label class="small" for="report-issue-description">Description</label>
+            <label class="small" for="report-issue-description"
+              >Description</label
+            >
             <textarea
               id="report-issue-description"
               placeholder="Please include all information relevant to your issue."
               class="w-full"></textarea>
           </div>
           <footer class="flex items-center justify-between">
-            <button type="button" class="ghost smaller">Cancel</button>
-            <button type="button" class="smaller">Continue</button>
+            <button type="button" class="ghost">Cancel</button>
+            <button type="button" class="">Continue</button>
           </footer>
         </form>
       </section>

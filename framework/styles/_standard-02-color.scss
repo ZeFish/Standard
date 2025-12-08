@@ -59,13 +59,9 @@
   /* glacier teal */
   --color-light-blue: #4f81a4;
   /* faded blueprint */
-  --color-light-purple: #7a6c91;
+  --color-light-magenta: #7a6c91;
   /* dusk lavender */
-  --color-light-pink: #b97aa0;
-  /* vintage mauve rose */
 
-  --color-light-brand: #4f81a4;
-  /* blueprint - customizable brand color */
   --color-light-link: #4f81a4;
   /* blueprint - separated from accent for links */
 
@@ -89,13 +85,9 @@
   /* creek frost */
   --color-dark-blue: #6d96b8;
   /* twilight blueprint */
-  --color-dark-purple: #a18db6;
+  --color-dark-magenta: #a18db6;
   /* smoky violet dusk */
-  --color-dark-pink: #d49ab8;
-  /* faded polaroid blush */
 
-  --color-dark-brand: #6d96b8;
-  /* twilight blueprint - customizable brand color */
   --color-dark-link: #6d96b8;
   /* twilight blueprint - separated from accent for links */
   --color-dark-on-accent: var(--color-dark-background);
@@ -116,15 +108,13 @@
   --color-green: var(--color-light-green);
   --color-cyan: var(--color-light-cyan);
   --color-blue: var(--color-light-blue);
-  --color-purple: var(--color-light-purple);
-  --color-pink: var(--color-light-pink);
+  --color-magenta: var(--color-light-magenta);
 
   --color-success: var(--color-green);
   --color-warning: var(--color-yellow);
   --color-error: var(--color-red);
   --color-info: var(--color-blue);
 
-  --color-brand: var(--color-light-brand);
   --color-link: var(--color-light-link);
   --color-on-accent: var(--color-background);
   /* blueprint - separated from accent for links */
@@ -133,10 +123,11 @@
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
   --color-border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-  --color-background-secondary: color-mix(
+  --color-surface: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+  --color-secondary: color-mix(
     in srgb,
     var(--color-foreground) 3%,
-    transparent
+    var(--color-background)
   );
   --color-background-accent: color-mix(
     in srgb,
@@ -149,8 +140,8 @@
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
 
   /* ===== SHADOWS AND EFFECTS ===== */
-  --color-shadow: color-mix(in srgb, var(--color-foreground) 7%, transparent);
-  --shadow: 0 0 var(--space-d4) var(--color-shadow);
+  --color-shadow: color-mix(in srgb, var(--color-dark) 5%, transparent);
+  --shadow: 0 1px 2px var(--color-shadow);
 
   /* ===== DESIGN TOKENS ===== */
   --border: var(--stroke-width) solid var(--color-border);
@@ -182,10 +173,8 @@
     --color-green: var(--color-dark-green);
     --color-cyan: var(--color-dark-cyan);
     --color-blue: var(--color-dark-blue);
-    --color-purple: var(--color-dark-purple);
-    --color-pink: var(--color-dark-pink);
+    --color-magenta: var(--color-dark-magenta);
 
-    --color-brand: var(--color-dark-brand);
     --color-link: var(--color-dark-link);
 
     /* Adjusted computed colors for dark mode */
@@ -201,17 +190,11 @@
       transparent
     );
 
-    --color-background-secondary: color-mix(
+    --color-surface: color-mix(
       in srgb,
       var(--color-foreground) 5%,
       transparent
     );
-
-    /* Dark mode shadows */
-    --color-shadow: color-mix(in srgb, #000 20%, transparent);
-    --shadow: 0 2px 4px var(--color-shadow);
-    --shadow-l: 0 8px 16px var(--color-shadow);
-    --shadow-xl: 0 12px 32px var(--color-shadow);
   }
 }
 

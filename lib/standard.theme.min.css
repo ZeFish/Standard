@@ -155,7 +155,7 @@
   margin-block-end: var(--space-2);
 }
 [data-theme=paper] {
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
 }
 [data-theme=paper] body {
   max-width: 768px;
@@ -171,9 +171,9 @@
   --color-green: var(--color-red);
   --color-blue: #2b5aa0;
   --color-yellow: var(--color-red);
-  --color-purple: var(--color-red);
+  --color-magenta: var(--color-red);
   --color-orange: var(--color-red);
-  --color-pink: var(--color-red);
+  --color-magenta: var(--color-red);
   --color-accent: var(--color-red);
   --shadow: none;
   --radius: 0;
@@ -189,7 +189,7 @@
   --font-size: 1.2em;
   --scale-d2: 0.75em;
   --body-padding: var(--space);
-  --color-background-secondary: var(--color-background);
+  --color-surface: var(--color-background);
   --font-header: InterVariable;
   --line-height: 1.2;
 }
@@ -371,7 +371,7 @@
 [data-theme=forest] blockquote,
 [data-theme=forest] pre {
   box-shadow: inset var(--shadow);
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
   border: var(--border);
   border-radius: var(--radius);
 }
@@ -553,8 +553,8 @@
   --color-code: var(--color-foreground);
   --color-bold: var(--color-red);
   --color-italic: var(--color-green);
-  --color-dark-accent: var(--color-purple);
-  --color-dark-bold: var(--color-pink);
+  --color-dark-accent: var(--color-magenta);
+  --color-dark-bold: var(--color-magenta);
   --radius: var(--leading);
   
   
@@ -641,7 +641,7 @@
   --optical-ratio: 1.414;
   --line-width: var(--line-width-s);
   --color-border: color-mix(in srgb, var(--color-foreground) 0%, transparent);
-  --color-background-secondary: color-mix(
+  --color-surface: color-mix(
     in srgb,
     var(--color-foreground) 2%,
     var(--color-background)
@@ -666,7 +666,7 @@
 }
 [data-theme=minimal] pre {
   border: 0;
-  background: var(--color-background-secondary);
+  background: var(--color-surface);
 }
 [data-theme=minimal] pre .copy-button {
   position: absolute;
@@ -765,7 +765,7 @@
     var(--color-dark-foreground) 25%,
     #b08a4b
   );
-  --color-background-secondary: color-mix(
+  --color-surface: color-mix(
     in srgb,
     var(--color-foreground) 2%,
     var(--color-background)
@@ -1007,12 +1007,7 @@
   
   --color-light-red: rgba(255, 28, 0, 0.493); 
   --color-light-orange: rgba(188, 82, 21, 0.574); 
-  --color-light-yellow: rgba(
-      173,
-      131,
-      1,
-      0.794
-  ); 
+  --color-light-yellow: rgba(173, 131, 1, 0.794); 
   --color-light-green: rgba(102, 128, 11, 0.576); 
   --color-light-cyan: rgba(36, 131, 123, 0.641); 
   --color-light-blue: rgba(32, 94, 166, 0.614); 
@@ -1024,17 +1019,17 @@
   --color-code: var(--color-foreground);
   --color-bold: var(--color-red);
   --color-italic: var(--color-green);
-  --color-dark-accent: var(--color-purple);
-  --color-dark-bold: var(--color-pink);
+  --color-dark-accent: var(--color-magenta);
+  --color-dark-bold: var(--color-magenta);
   --font-monospace: "MonoLisa";
   --font-monospace-feature:
-      "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
+    "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
   --optical-ratio: 1.425;
   
 }
 [data-theme=blueprint] .dark {
-  --color-accent: var(--color-purple);
-  --color-bold: var(--color-pink);
+  --color-accent: var(--color-magenta);
+  --color-bold: var(--color-magenta);
 }
 [data-theme=blueprint] {
   --blueprint-opacity: 20%;
@@ -1488,7 +1483,7 @@
   --color-dark-foreground: white;
   --color-dark-background: black;
   --color-accent: grey;
-  --color-background-secondary: var(--color-background);
+  --color-surface: var(--color-background);
   --color-border: grey;
   --color-muted: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));
   --color-subtle: grey ;

@@ -1,5 +1,5 @@
-<section id="card" class="w-full rounded-lg border scroll-mt-14">
-  <header class="border-b px-4 py-3 flex items-center justify-between">
+<section id="card" class="card icon no-rhythm">
+  <header class="surface">
     <h2 class="text-sm font-medium">Card</h2>
     <a
       href="/components/card"
@@ -24,199 +24,189 @@
       >
     </a>
   </header>
-  <div class="p">
-    <div class="flex flex-col items-start">
-      <div class="card w-full max-w-sm">
-        <header>
-          <h2>Login to your account</h2>
-          <p>Enter your details below to login to your account</p>
-        </header>
-        <section>
-          <form class="form grid gap-6">
-            <div class="grid gap-2">
-              <label for="demo-card-form-email">Email</label>
-              <input type="email" id="demo-card-form-email" />
-            </div>
-            <div class="grid gap-2">
-              <div class="flex items-center gap-2">
-                <label for="demo-card-form-password">Password</label>
-                <a
-                  href="#"
-                  class="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >Forgot your password?</a
-                >
-              </div>
-              <input type="password" id="demo-card-form-password" />
-            </div>
-          </form>
-        </section>
-        <footer class="flex flex-col items-center gap-2">
-          <button type="button" class="btn w-full">Login</button>
-          <button type="button" class="btn-outline w-full"
-            >Login with Google</button
-          >
-          <p class="mt-4 text-center text-sm">
-            Don't have an account? <a
-              href="#"
-              class="underline-offset-4 hover:underline">Sign up</a
-            >
-          </p>
-        </footer>
-      </div>
-
-      <div class="card">
-        <header>
-          <h2>Meeting Notes</h2>
-          <p>Transcript from the meeting with the client.</p>
-        </header>
-        <section class="text-sm">
-          <p>
-            Client requested dashboard redesign with focus on mobile
-            responsiveness.
-          </p>
-          <ol class="mt-4 flex list-decimal flex-col gap-2 pl-6">
-            <li>New analytics widgets for daily/weekly metrics</li>
-            <li>Simplified navigation menu</li>
-            <li>Dark mode support</li>
-            <li>Timeline: 6 weeks</li>
-            <li>Follow-up meeting scheduled for next Tuesday</li>
-          </ol>
-        </section>
-        <footer class="flex items-center">
-          <div
-            class="flex -space-x-2 [&_img]:ring-background [&_img]:ring-2 [&_img]:grayscale [&_img]:size-8 [&_img]:shrink-0 [&_img]:object-cover [&_img]:rounded-full"
-          >
-            <img alt="@hunvreus" src="https://github.com/hunvreus.png" />
-            <img alt="@shadcn" src="https://github.com/shadcn.png" />
-            <img alt="@adamwathan" src="https://github.com/adamwathan.png" />
+  <div class="flex flex-col items-start">
+    <div class="card bg-background">
+      <header class="sxurface">
+        <h2>Login to your account</h2>
+        <p>Enter your details below to login to your account</p>
+      </header>
+      <section>
+        <form class="form grid-row">
+          <div class="flex-row">
+            <label class="small" for="demo-card-form-email">Email</label>
+            <input type="email" id="demo-card-form-email" />
           </div>
-        </footer>
-      </div>
+          <div class="flex-row gap-0">
+            <div class="flex items-center">
+              <label class="small" for="demo-card-form-password">Password</label
+              >
+              <a href="#" class="ml-auto smaller muted inline-block"
+                >Forgot your password?</a
+              >
+            </div>
+            <input type="password" id="demo-card-form-password" />
+          </div>
+        </form>
+      </section>
+      <footer class="flex flex-col items-center gap-half">
+        <button type="button" class="btn w-full">Login</button>
+        <button type="button" class="btn-outline w-full"
+          >Login with Google</button
+        >
+        <p class="small muted center">
+          Don't have an account? <a
+            href="#"
+            class="underline-offset-4 hover:underline">Sign up</a
+          >
+        </p>
+      </footer>
+    </div>
 
-      <div class="card">
-        <header>
-          <h2>Is this an image?</h2>
-          <p>This is a card with an image.</p>
-        </header>
-        <section class="px-0">
-          <img
-            alt="Photo by Drew Beamer"
-            loading="lazy"
-            width="500"
-            height="500"
-            class="aspect-video object-cover"
-            style="color:transparent"
-            srcset="
+    <div class="card">
+      <header>
+        <h2>Meeting Notes</h2>
+        <p>Transcript from the meeting with the client.</p>
+      </header>
+      <section class="rhythm">
+        <p>
+          Client requested dashboard redesign with focus on mobile
+          responsiveness.
+        </p>
+        <ol>
+          <li>New analytics widgets for daily/weekly metrics</li>
+          <li>Simplified navigation menu</li>
+          <li>Dark mode support</li>
+          <li>Timeline: 6 weeks</li>
+          <li>Follow-up meeting scheduled for next Tuesday</li>
+        </ol>
+      </section>
+      <footer class="flex items-center">
+        <div class="h-2 w-2 rounded gap-0 avatar-group">
+          <img alt="@hunvreus" src="https://github.com/hunvreus.png" />
+          <img alt="@shadcn" src="https://github.com/shadcn.png" />
+          <img alt="@adamwathan" src="https://github.com/adamwathan.png" />
+        </div>
+      </footer>
+    </div>
+
+    <style>
+      .avatar-group {
+        position: relative;
+        display: flex;
+        gap: -100px;
+        img {
+          position: relative;
+          border: var(--border);
+          border-width: 2px;
+        }
+        img:not(:first-child) {
+          left: calc(var(--space-half) * -1);
+        }
+      }
+    </style>
+
+    <div class="card">
+      <header class="surface">
+        <h2>Is this an image?</h2>
+        <p>This is a card with an image.</p>
+      </header>
+      <section class="px-0">
+        <img
+          alt="Photo by Drew Beamer"
+          loading="lazy"
+          width="500"
+          height="500"
+          class="aspect-video object-cover"
+          style="color:transparent"
+          srcset="
         https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80&w=640&q=75 1x,
         https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80&w=1080&q=75 2x
       "
-            src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80&w=1080&q=75"
-          />
-        </section>
-        <footer class="flex items-center gap-2">
-          <span class="badge-outline">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"
-              ></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg
-            >
-            1
-          </span>
-          <span class="badge-outline">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="M10 4 8 6"></path><path d="M17 19v2"></path><path
-                d="M2 12h20"></path><path d="M7 19v2"></path><path
-                d="M9 5 7.621 3.621A2.121 2.121 0 0 0 4 5v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"
-              ></path></svg
-            >
-            2
-          </span>
-          <span class="badge-outline">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="m12 8 6-3-6-3v10"></path><path
-                d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12"
-              ></path><path d="m6.49 12.85 11.02 6.3"></path><path
-                d="M17.51 12.85 6.5 19.15"></path></svg
-            >
-            350m²
-          </span>
-          <span class="ml-auto font-medium tabular-nums"> $135,000 </span>
-        </footer>
+          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80&w=1080&q=75"
+        />
+      </section>
+      <footer class="flex items-center gap-half">
+        <span class="badge-outline">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"
+            ></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg
+          >
+          1
+        </span>
+        <span class="badge-outline">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M10 4 8 6"></path><path d="M17 19v2"></path><path
+              d="M2 12h20"></path><path d="M7 19v2"></path><path
+              d="M9 5 7.621 3.621A2.121 2.121 0 0 0 4 5v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"
+            ></path></svg
+          >
+          2
+        </span>
+        <span class="badge-outline">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="m12 8 6-3-6-3v10"></path><path
+              d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12"
+            ></path><path d="m6.49 12.85 11.02 6.3"></path><path
+              d="M17.51 12.85 6.5 19.15"></path></svg
+          >
+          350m²
+        </span>
+        <span class="ml-auto font-medium tabular-nums"> $135,000 </span>
+      </footer>
+    </div>
+
+    <div class="flex flex-wrap items-start">
+      <div class="card">
+        <section>Content Only</section>
       </div>
 
-      <div
-        class="flex w-full flex-wrap items-start gap-8 md:*:[.card]:basis-1/4"
-      >
-        <div class="card">
-          <section>Content Only</section>
-        </div>
+      <div class="card">
+        <section>Content</section>
+        <footer>Footer</footer>
+      </div>
 
-        <div class="card">
-          <header>
-            <h2>Header Only</h2>
-            <p>This is a card with a header and a description.</p>
-          </header>
-        </div>
+      <div class="card">
+        <header>
+          <h2>Header and Content</h2>
+          <p>This is a card with a header and a content.</p>
+        </header>
+        <section>Content only.</section>
+      </div>
 
-        <div class="card">
-          <header>
-            <h2>Header and Content</h2>
-            <p>This is a card with a header and a content.</p>
-          </header>
-          <section>Content only.</section>
-        </div>
-
-        <div class="card">
-          <footer>Footer Only</footer>
-        </div>
-
-        <div class="card">
-          <header>
-            <h2>Header + Footer</h2>
-            <p>This is a card with a header and a footer.</p>
-          </header>
-          <footer>Footer</footer>
-        </div>
-
-        <div class="card">
-          <section>Content</section>
-          <footer>Footer</footer>
-        </div>
-
-        <div class="card">
-          <header>
-            <h2>Header + Content + Footer</h2>
-            <p>This is a card with a header, content and footer.</p>
-          </header>
-          <section>Content</section>
-          <footer>Footer</footer>
-        </div>
+      <div class="card">
+        <header>
+          <h2>Header + Content + Footer</h2>
+          <p>This is a card with a header, content and footer.</p>
+        </header>
+        <section>Content</section>
+        <footer>Footer</footer>
       </div>
     </div>
   </div>

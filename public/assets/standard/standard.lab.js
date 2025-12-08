@@ -1158,7 +1158,7 @@
       const styles = document.createElement("style");
       styles.id = "standard-lab-styles";
       styles.textContent = `
-      .standard-lab-badge { font-family: var(--standard-lab-font-family); position: fixed; width: var(--space-half); height: var(--space-half); border-radius: 50%; background: var(--color-background-secondary); border: var(--border); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; margin:0; }
+      .standard-lab-badge { font-family: var(--standard-lab-font-family); position: fixed; width: var(--space-half); height: var(--space-half); border-radius: 50%; background: var(--color-surface); border: var(--border); box-shadow: var(--shadow); backdrop-filter: var(--blur); cursor: pointer; z-index: var(--z-toast); line-height:1.5; display: flex; align-items: baseline; justify-content: center; color: var(--color-foreground); transition: all 0.2s ease; padding: 0; margin:0; }
       .standard-lab-badge:hover { box-shadow: var(--shadow); transform: scale(1.05); color: var(--color-dark-accent); }
       .standard-lab-badge:active { transform: scale(0.95); }
       .standard-lab-badge[data-modified]::after { content: attr(data-modified); position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-accent); color: var(--color-background); font-size: var(--scale-d3); display: flex; align-items: center; justify-content: center; font-weight: 600; border: var(--border); box-shadow:var(--shadow); }

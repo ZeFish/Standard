@@ -1,6 +1,6 @@
-<section id="switch" class="w-full rounded-lg border scroll-mt-14">
-  <header class="border-b px-4 py-3 flex items-center justify-between">
-    <h2 class="text-sm font-medium">Switch</h2>
+<section id="switch" class="card icon">
+  <header class="surface">
+    <h2>Switch</h2>
     <a
       href="/components/switch"
       class="text-muted-foreground hover:text-foreground"
@@ -24,39 +24,34 @@
       >
     </a>
   </header>
-  <div class="p">
-    <div class="inline-flex flex-col gap-y-6">
-      <label class="label">
-        <input type="checkbox" name="switch" role="switch" class="input" />
-        Airplane Mode
-      </label>
-      <label class="label">
-        <input
-          type="checkbox"
-          name="switch"
-          role="switch"
-          class="input checked:bg-blue-500 dark:checked:bg-blue-600"
-          checked
-        />
-        Bluetooth
-      </label>
-      <label
-        class="label gap-6 leading-none border rounded-lg p-4 has-[input[type='checkbox']:checked]:border-blue-600"
-      >
-        <div class="grid gap-1">
-          <h2 class="font-medium text-sm">Share across devices</h2>
-          <p class="text-muted-foreground text-sm">
-            Focus is shared across devices, and turns off when you leave the
-            app.
-          </p>
-        </div>
-        <input
-          type="checkbox"
-          name="switch"
-          role="switch"
-          class="input checked:bg-blue-500 dark:checked:bg-blue-600"
-        />
-      </label>
-    </div>
+  <div class="grid-row">
+    <label class="label">
+      <input type="checkbox" name="switch" role="switch" class="input" />
+      Airplane Mode
+    </label>
+    <label class="label">
+      <input
+        type="checkbox"
+        name="switch"
+        role="switch"
+        class="input checked:bg-blue-500 dark:checked:bg-blue-600"
+        checked
+      />
+      Bluetooth
+    </label>
+    <label class="label border bg-surface round flex p">
+      <div class="">
+        <h2>Share across devices</h2>
+        <p class="muted small compact mt-half">
+          Focus is shared across devices, and turns off when you leave the app.
+        </p>
+      </div>
+      <input
+        type="checkbox"
+        name="switch"
+        role="switch"
+        class="input checked:bg-blue-500 dark:checked:bg-blue-600"
+      />
+    </label>
   </div>
 </section>
