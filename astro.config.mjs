@@ -12,6 +12,9 @@ const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 export default defineConfig({
   srcDir: "./astro",
   site: "https://standard.ffp.co",
+  prefetch: {
+    defaultStrategy: 'viewport'
+  },
   integrations: [
     standard({
       openrouter: {
