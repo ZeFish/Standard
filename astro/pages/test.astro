@@ -687,12 +687,12 @@ const sortedDocs = rootDocs.sort((a, b) =>
           </div>
         </section>
 
-        <section id="badge" class="w-full rounded-lg border scroll-mt-14">
-          <header class="border-b px-4 py-3 flex items-center justify-between">
-            <h2 class="text-sm font-medium">Badge</h2>
+        <section id="badge" class="card p-0">
+          <header class="border-b p flex items-center justify-between">
+            <h2 class="small">Badge</h2>
             <a
               href="/components/badge"
-              class="text-muted-foreground hover:text-foreground"
+              class="muted"
               data-tooltip="See documentation"
               data-side="left"
             >
@@ -713,8 +713,8 @@ const sortedDocs = rootDocs.sort((a, b) =>
               >
             </a>
           </header>
-          <div class="p">
-            <div class="flex flex-col gap-2">
+          <div class="px">
+            <div class="flex">
               <div class="flex flex-wrap items-center gap-2 md:flex-row">
                 <span class="badge">Primary</span>
                 <span class="badge-secondary">Secondary</span>
