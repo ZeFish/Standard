@@ -69,14 +69,14 @@ const sortedDocs = rootDocs.sort((a, b) =>
             </a>
           </header>
           <div class="p">
-            <div class="group grid-row w-full max-w-xl">
+            <div class="group grid-row w-full">
               <section class="accordion">
-                <details class="group border-b last:border-b-0">
+                <details class="group border-b">
                   <summary
-                    class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md"
+                    class="w-full"
                   >
                     <h2
-                      class="flex flex-1 items-start justify-between text-left text-sm font-medium hover:underline"
+                      class="flex flex-1 justify-between"
                     >
                       Is it accessible?
                       <svg
@@ -94,8 +94,8 @@ const sortedDocs = rootDocs.sort((a, b) =>
                       >
                     </h2>
                   </summary>
-                  <section class="pb-4">
-                    <p class="text-sm">
+                  <section class="pb">
+                    <p class="small">
                       Yes. It adheres to the WAI-ARIA design pattern.
                     </p>
                   </section>
@@ -130,12 +130,12 @@ const sortedDocs = rootDocs.sort((a, b) =>
                     </p>
                   </section>
                 </details>
-                <details class="group border-b last:border-b-0">
+                <details class="group border-b">
                   <summary
-                    class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md"
+                    class="w-full"
                   >
                     <h2
-                      class="flex flex-1 items-start justify-between py text-left text-sm font-medium hover:underline"
+                      class="flex flex-1 items-start justify-between py small"
                     >
                       Is it animated?
                       <svg
@@ -162,10 +162,10 @@ const sortedDocs = rootDocs.sort((a, b) =>
                 </details>
               </section>
               <section class="accordion">
-                <details class="group border-b last:border-b-0">
-                  <header>
+                <details class="group border-b">
+                  <summary>
                     <h2
-                      class="flex flex-1 items-start justify-between py text-left text-sm font-medium hover:underline"
+                      class="flex flex-1 justify-between py small"
                     >
                       What are the key considerations when implementing a
                       comprehensive enterprise-level authentication system?
@@ -183,9 +183,9 @@ const sortedDocs = rootDocs.sort((a, b) =>
                         ><path d="m6 9 6 6 6-6"></path></svg
                       >
                     </h2>
-                  </header>
-                  <section class="pb-4">
-                    <p class="text-sm">
+                  </summary>
+                  <section class="pb">
+                    <p class="small">
                       Implementing a robust enterprise authentication system
                       requires careful consideration of multiple factors. This
                       includes secure password hashing and storage, multi-factor
@@ -200,11 +200,9 @@ const sortedDocs = rootDocs.sort((a, b) =>
                   </section>
                 </details>
                 <details class="group">
-                  <summary
-                    class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md"
-                  >
+                  <summary>
                     <h2
-                      class="flex flex-1 items-start justify-between py text-left text-sm font-medium hover:underline"
+                      class="flex flex-1 justify-between py small"
                     >
                       How does modern distributed system architecture handle
                       eventual consistency and data synchronization across
@@ -225,7 +223,7 @@ const sortedDocs = rootDocs.sort((a, b) =>
                     </h2>
                   </summary>
                   <section>
-                    <p class="text-sm">
+                    <p class="small">
                       Modern distributed systems employ various strategies to
                       maintain data consistency across regions. This often
                       involves using techniques like CRDT (Conflict-Free
