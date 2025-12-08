@@ -2942,14 +2942,9 @@ ul.menu.horizontal li {
   padding: var(--space);
   box-shadow: var(--shadow);
 }
-.card :is(h1, h2, h3, h4, h5, h6) {
-  font-size: var(--scale);
-  font-weight: 700 !important;
-}
 .card svg {
   max-height: var(--scale);
 }
-
 .card {
   padding: var(--space);
   overflow: hidden;
