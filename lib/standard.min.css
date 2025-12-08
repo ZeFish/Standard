@@ -38,6 +38,29 @@ video {
 }
 
 
+button,
+a.btn,
+a.btn-secondary, button-secondary,
+a.btn-outline, button-outline,
+a.btn-destructive, button-destructive,
+a.btn-ghost, button-ghost,
+a.btn-icon, button-icon, .card {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--color-background-sexondary);
+  border-radius: var(--radius);
+}
+
+button,
+a.btn,
+a.btn-secondary, button-secondary,
+a.btn-outline, button-outline,
+a.btn-destructive, button-destructive,
+a.btn-ghost, button-ghost,
+a.btn-icon, button-icon, .badge, .badge-secondary, .badge-outline, .badge-destructive, .badge-ghost, .badge-icon {
+  padding: var(--trim) var(--space-d2);
+}
+
 
 
 :root {
@@ -120,6 +143,8 @@ video {
   --space-d7: calc(var(--space) / 7);
   --space-d8: calc(var(--space) / 8);
   
+  --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -2));
+  --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -1.5));
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
   --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
   --scale: var(--font-size);
@@ -228,6 +253,8 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   
   --color-dark-link: #6d96b8;
   
+  --color-dark-on-accent: var(--color-dark-background);
+  
   
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
@@ -249,6 +276,8 @@ span, a, mark, callout-title::before, div, span, li::before, button, legend, fie
   --color-info: var(--color-blue);
   --color-brand: var(--color-light-brand);
   --color-link: var(--color-light-link);
+  --color-on-accent: var(--color-background);
+  
   
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
@@ -1570,10 +1599,10 @@ hr.col-row {
   display: flow-root;
 }
 :where(.rhythm) > * + *,
-:where(.rhythm) :where(:is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .btn, div, section, article, header, footer) + :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .btn, div, section, article, header, footer)) {
+:where(.rhythm) :where(:is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .btn, section, article, header, footer) + :is(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .btn, section, article, header, footer)) {
   margin-block-start: var(--rhythm-gap);
 }
-:where(.rhythm) > * + :is(div, section, article, header, footer) {
+:where(.rhythm) > * + :is(section, article, header, footer) {
   margin-block-start: calc(var(--rhythm-gap) * 4);
 }
 :where(.rhythm) * + :is(h1, h2, h3) {
@@ -1607,7 +1636,7 @@ hr.col-row {
   --content: min(var(--line-width), 100%);
   
   --content-small: max(calc(var(--space-2) - var(--space)), var(--space));
-  --content-accent: minmax(0, var(--space-2));
+  --content-editorial: minmax(0, var(--space-2));
   --content-feature: minmax(0, var(--space-4));
   --content-hero: minmax(0, 1fr);
 }
@@ -1616,7 +1645,7 @@ hr.col-row {
 
 :where(.prose) {
   display: grid;
-  grid-template-columns: [hero-start] var(--content-hero) [feature-start] var(--content-feature) [accent-start] var(--content-accent) [content-start] var(--content) [content-end] var(--content-accent) [accent-end] var(--content-feature) [feature-end] var(--content-hero) [hero-end];
+  grid-template-columns: [hero-start] var(--content-hero) [feature-start] var(--content-feature) [editorial-start] var(--content-editorial) [content-start] var(--content) [content-end] var(--content-editorial) [editorial-end] var(--content-feature) [feature-end] var(--content-hero) [hero-end];
   transition: grid-template-columns var(--transition);
   position: relative;
   z-index: var(--z-base);
@@ -1631,22 +1660,22 @@ hr.col-row {
 }
 :where(.prose) table,
 :where(.prose) .scroll:has(table),
-:where(.prose) .container-accent {
-  grid-column: accent;
+:where(.prose) .editorial {
+  grid-column: editorial;
   margin-inline: 0;
 }
-:where(.prose) .container-feature {
+:where(.prose) .feature {
   grid-column: feature;
   margin-inline: 0;
 }
-:where(.prose) .container-hero-marge,
-:where(.prose) .container-hero {
+:where(.prose) .full,
+:where(.prose) .hero {
   grid-column: hero;
 }
-:where(.prose) .container-hero {
+:where(.prose) .hero {
   margin-inline: calc(var(--gap-body) * -1);
 }
-:where(.prose) .container-hero > * {
+:where(.prose) .hero > * {
   margin-inline: 0;
 }
 :where(.prose):not(.no-grid) p:has(img),
@@ -2483,7 +2512,12 @@ input[type=checkbox][role=switch]:checked::before {
 
 
 
-button,
+button, button-icon,
+a.btn-icon, button-ghost,
+a.btn-ghost, button-destructive,
+a.btn-destructive, button-outline,
+a.btn-outline, button-secondary,
+a.btn-secondary,
 a.btn {
   display: inline-flex;
   align-items: center;
@@ -2492,19 +2526,39 @@ a.btn {
   font-size: var(--scale-d2);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
-  border-radius: var(--radius);
   background: var(--color-accent);
   color: var(--color-light);
-  border: var(--border);
-  border-color: var(--color-border);
-  padding: var(--space-d4) var(--space-d2);
-  box-shadow: var(--shadow);
   cursor: pointer;
+  gap: var(--leading);
   transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
+}
+button svg, button-icon svg,
+a.btn-icon svg, button-ghost svg,
+a.btn-ghost svg, button-destructive svg,
+a.btn-destructive svg, button-outline svg,
+a.btn-outline svg, button-secondary svg,
+a.btn-secondary svg,
+a.btn svg {
+  margin-inline: calc(var(--trim) * -2);
+  max-height: var(--scale-d4);
+}
+button.small, button-secondary.small,
+a.small.btn-secondary, button-outline.small,
+a.small.btn-outline, button-destructive.small,
+a.small.btn-destructive, button-ghost.small,
+a.small.btn-ghost, button-icon.small,
+a.small.btn-icon,
+a.btn.small {
+  font-size: var(--scale-d4);
 }
 
 a.btn:visited,
-a.btn {
+a.btn,
+a.btn-secondary,
+a.btn-outline,
+a.btn-destructive,
+a.btn-ghost,
+a.btn-icon {
   --stroke-width: 1px;
   display: inline-block;
   width: fit-content;
@@ -2515,68 +2569,140 @@ a.btn {
   box-sizing: border-box;
 }
 
-button:hover,
+button:hover, button-secondary:hover,
+a.btn-secondary:hover, button-outline:hover,
+a.btn-outline:hover, button-destructive:hover,
+a.btn-destructive:hover, button-ghost:hover,
+a.btn-ghost:hover, button-icon:hover,
+a.btn-icon:hover,
 a.btn:hover {
   background: color-mix(in srgb, var(--color-accent) 80%, var(--color-background-secondary));
 }
 
-button:active,
+button:active, button-secondary:active,
+a.btn-secondary:active, button-outline:active,
+a.btn-outline:active, button-destructive:active,
+a.btn-destructive:active, button-ghost:active,
+a.btn-ghost:active, button-icon:active,
+a.btn-icon:active,
 a.btn:active {
   background: color-mix(in srgb, var(--color-accent) 50%, var(--color-background-secondary));
 }
 
-button:focus-visible,
+button:focus-visible, button-secondary:focus-visible,
+a.btn-secondary:focus-visible, button-outline:focus-visible,
+a.btn-outline:focus-visible, button-destructive:focus-visible,
+a.btn-destructive:focus-visible, button-ghost:focus-visible,
+a.btn-ghost:focus-visible, button-icon:focus-visible,
+a.btn-icon:focus-visible,
 a.btn:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 2px;
   color: var(--color-background);
 }
 
-button:disabled,
+button.destructive, button-secondary.destructive,
+a.destructive.btn-secondary, button-outline.destructive,
+a.destructive.btn-outline, button-destructive.destructive, button-ghost.destructive,
+a.destructive.btn-ghost, button-icon.destructive,
+a.destructive.btn-icon,
+a.btn-destructive {
+  color: var(--color-error);
+  background: var(--color-background-secondary);
+}
+
+button:disabled, button-secondary:disabled,
+a.btn-secondary:disabled, button-outline:disabled,
+a.btn-outline:disabled, button-destructive:disabled,
+a.btn-destructive:disabled, button-ghost:disabled,
+a.btn-ghost:disabled, button-icon:disabled,
+a.btn-icon:disabled,
 a.btn:disabled {
-  opacity: 0.25;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-button.outline,
-a.btn.outline {
+button.secondary, button-secondary.secondary,
+a.secondary.btn-secondary, button-outline.secondary,
+a.secondary.btn-outline, button-destructive.secondary,
+a.secondary.btn-destructive, button-ghost.secondary,
+a.secondary.btn-ghost, button-icon.secondary,
+a.secondary.btn-icon,
+a.btn.secondary {
   background: var(--color-background-secondary);
   color: var(--color-foreground);
 }
 
-button.outline:hover,
+button.link, button-secondary.link,
+a.link.btn-secondary, button-outline.link,
+a.link.btn-outline, button-destructive.link,
+a.link.btn-destructive, button-ghost.link,
+a.link.btn-ghost, button-icon.link,
+a.link.btn-icon,
+a.btn.link {
+  background: var(--color-background-secondary);
+  color: var(--color-link);
+}
+
+button.outline, button-secondary.outline,
+a.outline.btn-secondary, button-outline.outline,
+a.outline.btn-outline, button-destructive.outline,
+a.outline.btn-destructive, button-ghost.outline,
+a.outline.btn-ghost, button-icon.outline,
+a.outline.btn-icon,
+a.btn.outline {
+  background: var(--color-background-secondary);
+  color: var(--color-subtle);
+}
+
+button.outline:hover, button-secondary.outline:hover,
+a.outline.btn-secondary:hover, button-outline.outline:hover,
+a.outline.btn-outline:hover, button-destructive.outline:hover,
+a.outline.btn-destructive:hover, button-ghost.outline:hover,
+a.outline.btn-ghost:hover, button-icon.outline:hover,
+a.outline.btn-icon:hover,
 a.btn.outline:hover {
   background: color-mix(in srgb, white 10%, transparent);
 }
 
-button.icon,
+button.icon, button-secondary.icon,
+a.icon.btn-secondary, button-outline.icon,
+a.icon.btn-outline, button-destructive.icon,
+a.icon.btn-destructive, button-ghost.icon,
+a.icon.btn-ghost, button-icon.icon,
+a.icon.btn-icon,
 a.btn.icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--leading);
+  padding: 0;
   margin: 0;
-  width: calc(var(--space) + var(--leading));
-  height: calc(var(--space) + var(--leading));
+  width: calc(var(--space) + var(--trim));
+  height: calc(var(--space) + var(--trim));
 }
 
-button.ghost,
+button.ghost, button-secondary.ghost,
+a.ghost.btn-secondary, button-outline.ghost,
+a.ghost.btn-outline, button-destructive.ghost,
+a.ghost.btn-destructive, button-ghost.ghost,
+a.ghost.btn-ghost, button-icon.ghost,
+a.ghost.btn-icon,
 a.btn.ghost {
   background: none;
   border: none;
   box-shadow: none;
-  color: var(--color-foreground);
+  color: var(--color-muted);
 }
 
-a.btn {
+a.btn,
+a.btn-secondary,
+a.btn-outline,
+a.btn-destructive,
+a.btn-ghost,
+a.btn-icon {
   padding: calc(var(--space-d4) + var(--trim)) var(--space-d2);
 }
 
-:is(button, .btn) svg {
-  height: 100%;
-  width: auto;
-  fill: currentColor;
-}
 
 .tag {
   color: var(--color-muted);
@@ -2584,6 +2710,45 @@ a.btn {
 
 .tag:hover {
   color: var(--color-accent);
+}
+
+.badge, .badge-icon, .badge-ghost, .badge-destructive, .badge-outline, .badge-secondary {
+  background-color: var(--color-background-secondary);
+  color: var(--color-foreground);
+  color: var(--color-accent);
+  border-radius: var(--space-half);
+  border: var(--border);
+  font-size: var(--scale-d3);
+  display: flex;
+  align-items: center;
+  gap: var(--leading);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  text-decoration: none;
+  font-weight: 900 !important;
+  user-select: none;
+  font-variation-settings: "wdth" 900;
+}
+.badge svg, .badge-icon svg, .badge-ghost svg, .badge-destructive svg, .badge-outline svg, .badge-secondary svg {
+  margin-inline: calc(var(--trim) * -1);
+}
+.badge ::selection, .badge-icon ::selection, .badge-ghost ::selection, .badge-destructive ::selection, .badge-outline ::selection, .badge-secondary ::selection {
+  background: transparent;
+  color: currentColor;
+}
+.badge-secondary {
+  background-color: var(--color-background-secondary);
+  color: var(--color-muted);
+}
+
+.badge-outline {
+  background-color: var(--color-background-secondary);
+  color: var(--color-subtle);
+}
+
+.badge-destructive {
+  background-color: var(--color-red);
+  color: var(--color-background);
 }
 
 
@@ -2636,15 +2801,36 @@ ul.menu.horizontal li {
 
 .card {
   padding: var(--space);
-  border: var(--border);
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
-  background-color: var(--color-background-secondary);
   box-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgba(0, 0, 0, 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgba(0, 0, 0, 0.1));
 }
 .card :is(h1, h2, h3, h4, h5, h6) {
   font-size: var(--scale);
   font-weight: 700 !important;
+}
+.card svg {
+  max-height: var(--scale);
+}
+
+.card {
+  padding: 0;
+}
+
+.card > * {
+  padding: var(--space-half) var(--space);
+}
+
+.card > header:first-child {
+  padding: var(--space);
+  border-bottom: var(--border);
+  box-shadow: var(--shadow);
+  background-color: var(--color-background-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card > footer:last-child {
+  padding: var(--space);
 }
 
 .card.clickable a {
@@ -6024,6 +6210,15 @@ a.skip-link:active {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .medum.flex-row {
+    flex-direction: column;
+  }
+}
 .items-center {
   align-items: center;
 }

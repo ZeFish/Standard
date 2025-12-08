@@ -1,0 +1,65 @@
+<section id="label" class="w-full rounded-lg border scroll-mt-14">
+  <header class="border-b px-4 py-3 flex items-center justify-between">
+    <h2 class="text-sm font-medium">Label</h2>
+    <a
+      href="/components/label"
+      class="text-muted-foreground hover:text-foreground"
+      data-tooltip="See documentation"
+      data-side="left"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4"
+        ><path d="M12 7v14"></path><path
+          d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+        ></path></svg
+      >
+    </a>
+  </header>
+  <div class="p">
+    <div class="flex flex-col gap-y-4">
+      <div class="grid w-full max-w-sm gap-6">
+        <div class="flex items-center gap-3">
+          <input type="checkbox" id="label-demo-terms" class="input" />
+          <label for="label-demo-terms" class="label"
+            >Accept terms and conditions</label
+          >
+        </div>
+        <div class="grid gap-3">
+          <label for="label-demo-text" class="label">Username</label>
+          <input
+            type="text"
+            id="label-demo-text"
+            class="input"
+            placeholder="Username"
+          />
+        </div>
+        <div class="grid gap-3">
+          <label for="label-demo-disabled" class="label">Disabled</label>
+          <input
+            type="text"
+            id="label-demo-disabled"
+            class="peer input"
+            placeholder="Disabled"
+            disabled
+          />
+        </div>
+        <div class="grid gap-3">
+          <label for="label-demo-textarea" class="label">Message</label>
+          <textarea
+            id="label-demo-textarea"
+            class="textarea"
+            placeholder="Message"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

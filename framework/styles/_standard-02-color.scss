@@ -98,6 +98,8 @@
   /* twilight blueprint - customizable brand color */
   --color-dark-link: #6d96b8;
   /* twilight blueprint - separated from accent for links */
+  --color-dark-on-accent: var(--color-dark-background);
+  /* blueprint - separated from accent for links */
 
   /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
   --color-background: var(--color-light-background);
@@ -124,6 +126,8 @@
 
   --color-brand: var(--color-light-brand);
   --color-link: var(--color-light-link);
+  --color-on-accent: var(--color-background);
+  /* blueprint - separated from accent for links */
 
   /* ===== COMPUTED SEMANTIC COLORS ===== */
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);

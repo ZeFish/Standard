@@ -612,6 +612,15 @@
 .flex-col {
   flex-direction: column;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@media (max-width: $small) {
+  .medum.flex-row {
+    flex-direction: column;
+  }
+}
 
 .items-center {
   align-items: center;

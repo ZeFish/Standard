@@ -119,6 +119,8 @@ make h6 running as the first phrase of the paragraph
   --space-d8: calc(var(--space) / 8);
 
   /* Optical harmony scale */
+  --scale-d5: calc(var(--font-size) * pow(var(--optical-ratio), -2));
+  --scale-d4: calc(var(--font-size) * pow(var(--optical-ratio), -1.5));
   --scale-d3: calc(var(--font-size) * pow(var(--optical-ratio), -1));
   --scale-d2: calc(var(--font-size) * pow(var(--optical-ratio), -0.5));
   --scale: var(--font-size);

@@ -1,7 +1,7 @@
 @use "standard-00-variables" as *;
 
 $content-tags: "h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, blockquote, pre, figure, table, hr, .callout, .card, .box, form, fieldset, button, .btn";
-$wrapper-tags: "div, section, article, header, footer";
+$wrapper-tags: "section, article, header, footer";
 $rhythm-participants: $content-tags + ", " + $wrapper-tags;
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 /* Applied to <html> root for global cascade (best practice for frameworks) */

@@ -1,0 +1,93 @@
+<section id="popover" class="w-full rounded-lg border scroll-mt-14">
+  <header class="border-b px-4 py-3 flex items-center justify-between">
+    <h2 class="text-sm font-medium">Popover</h2>
+    <a
+      href="/components/popover"
+      class="text-muted-foreground hover:text-foreground"
+      data-tooltip="See documentation"
+      data-side="left"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4"
+        ><path d="M12 7v14"></path><path
+          d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+        ></path></svg
+      >
+    </a>
+  </header>
+  <div class="p">
+    <div id="demo-popover" class="popover">
+      <button
+        id="demo-popover-trigger"
+        type="button"
+        aria-expanded="false"
+        aria-controls="demo-popover-popover"
+        class="btn-outline"
+      >
+        Open popover
+      </button>
+      <div
+        id="demo-popover-popover"
+        data-popover
+        aria-hidden="true"
+        class="w-80"
+      >
+        <div class="grid">
+          <header class="grid gap-1.5">
+            <h4 class="leading-none font-medium">Dimensions</h4>
+            <p class="text-muted-foreground text-sm">
+              Set the dimensions for the layer.
+            </p>
+          </header>
+          <form class="form grid gap-2">
+            <div class="grid grid-cols-3 items-center">
+              <label for="demo-popover-width">Width</label>
+              <input
+                type="text"
+                id="demo-popover-width"
+                value="100%"
+                class="col-span-2 h-8"
+              />
+            </div>
+            <div class="grid grid-cols-3 items-center">
+              <label for="demo-popover-max-width">Max. width</label>
+              <input
+                type="text"
+                id="demo-popover-max-width"
+                value="300px"
+                class="col-span-2 h-8"
+              />
+            </div>
+            <div class="grid grid-cols-3 items-center">
+              <label for="demo-popover-height">Height</label>
+              <input
+                type="text"
+                id="demo-popover-height"
+                value="25px"
+                class="col-span-2 h-8"
+              />
+            </div>
+            <div class="grid grid-cols-3 items-center">
+              <label for="demo-popover-max-height">Max. height</label>
+              <input
+                type="text"
+                id="demo-popover-max-height"
+                value="none"
+                class="col-span-2 h-8"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

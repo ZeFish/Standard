@@ -1,0 +1,66 @@
+<section id="alert-dialog" class="card">
+  <header class="border-b p flex shadow items-center justify-between">
+    <h2 class="text-sm font-medium">Alert Dialog</h2>
+    <a
+      href="/components/alert-dialog"
+      class="text-muted-foreground hover:text-foreground"
+      data-tooltip="See documentation"
+      data-side="left"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4"
+        ><path d="M12 7v14"></path><path
+          d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+        ></path></svg
+      >
+    </a>
+  </header>
+  <div class="p">
+    <button
+      type="button"
+      onclick="document.getElementById('alert-dialog-demo').showModal()"
+      class="btn-outline"
+    >
+      Open dialog
+    </button>
+
+    <dialog
+      id="alert-dialog-demo"
+      class="dialog"
+      aria-labelledby="alert-dialog-demo-title"
+      aria-describedby="alert-dialog-demo-description"
+    >
+      <div>
+        <header>
+          <h2 id="alert-dialog-demo-title">Are you absolutely sure?</h2>
+          <p id="alert-dialog-demo-description">
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </p>
+        </header>
+
+        <footer>
+          <button
+            class="btn-outline"
+            onclick="document.getElementById('alert-dialog-demo').close()"
+            >Cancel</button
+          >
+          <button
+            class="btn-primary"
+            onclick="document.getElementById('alert-dialog-demo').close()"
+            >Continue</button
+          >
+        </footer>
+      </div>
+    </dialog>
+  </div>
+</section>

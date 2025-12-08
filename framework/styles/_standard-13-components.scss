@@ -3,10 +3,12 @@
 /* =========================== */
 /* BUTTONS                     */
 /* =========================== */
+$types: "secondary", "outline", "destructive", "ghost", "icon";
 
 button,
 a.btn {
   @extend %surface;
+  @extend %padding-text;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16,14 +18,29 @@ a.btn {
   line-height: var(--line-height);
   background: var(--color-accent);
   color: var(--color-light);
-  padding: var(--space-d4) var(--space-d2);
   cursor: pointer;
+  gap: var(--leading);
   transition:
     background-color var(--transition),
     border-color var(--transition),
     opacity var(--transition);
+  svg {
+    margin-inline: calc(var(--trim) * -2);
+    max-height: var(--scale-d4);
+  }
+  /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
+  @each $type in $types {
+    &-#{$type} {
+      @extend .btn;
+      @extend button;
+    }
+  }
 }
 
+button.small,
+a.btn.small {
+  font-size: var(--scale-d4);
+}
 a.btn:visited,
 a.btn {
   --stroke-width: 1px;
@@ -61,16 +78,34 @@ a.btn:focus-visible {
   color: var(--color-background);
 }
 
+button.destructive,
+a.btn-destructive {
+  color: var(--color-error);
+  background: var(--color-background-secondary);
+}
+
 button:disabled,
 a.btn:disabled {
-  opacity: 0.25;
+  opacity: 0.5;
   cursor: not-allowed;
+}
+
+button.secondary,
+a.btn.secondary {
+  background: var(--color-background-secondary);
+  color: var(--color-foreground);
+}
+
+button.link,
+a.btn.link {
+  background: var(--color-background-secondary);
+  color: var(--color-link);
 }
 
 button.outline,
 a.btn.outline {
   background: var(--color-background-secondary);
-  color: var(--color-foreground);
+  color: var(--color-subtle);
 }
 button.outline:hover,
 a.btn.outline:hover {
@@ -81,28 +116,30 @@ a.btn.icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--leading);
+  padding: 0;
   margin: 0;
-  width: calc(var(--space) + var(--leading));
-  height: calc(var(--space) + var(--leading));
+  width: calc(var(--space) + var(--trim));
+  height: calc(var(--space) + var(--trim));
 }
 button.ghost,
 a.btn.ghost {
   background: none;
   border: none;
   box-shadow: none;
-  color: var(--color-foreground);
+  color: var(--color-muted);
 }
 
 a.btn {
   padding: calc(var(--space-d4) + var(--trim)) var(--space-d2);
 }
 
+/*
 :is(button, .btn) svg {
   height: 100%;
   width: auto;
   fill: currentColor;
 }
+*/
 
 .tag {
   color: var(--color-muted);
@@ -112,21 +149,53 @@ a.btn {
   color: var(--color-accent);
 }
 
-
-$types: 'outline', 'ghost', 'soft';
 .badge {
+  @extend %padding-text;
   background-color: var(--color-background-secondary);
+  color: var(--color-foreground);
+  color: var(--color-accent);
   border-radius: var(--space-half);
-  color: var(--color-background);
   border: var(--border);
-  font-size: var(--scale-d2);
-  
+  font-size: var(--scale-d3);
+  display: flex;
+  align-items: center;
+  gap: var(--leading);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  text-decoration: none;
+  font-weight: 900 !important;
+
+  user-select: none;
+
+  font-variation-settings: "wdth" 900;
+
+  svg {
+    margin-inline: calc(var(--trim) * -1);
+  }
+
+  ::selection {
+    background: transparent;
+    color: currentColor;
+  }
+
   /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
   @each $type in $types {
     &-#{$type} {
       @extend .badge;
     }
   }
+}
+.badge-secondary {
+  background-color: var(--color-background-secondary);
+  color: var(--color-muted);
+}
+.badge-outline {
+  background-color: var(--color-background-secondary);
+  color: var(--color-subtle);
+}
+.badge-destructive {
+  background-color: var(--color-red);
+  color: var(--color-background);
 }
 /* =========================== */
 /* NAVIGATION                  */
@@ -301,25 +370,29 @@ ul.menu.horizontal {
     font-size: var(--scale);
     font-weight: 700 !important;
   }
+  svg {
+    max-height: var(--scale);
+  }
 }
 
-.card {padding:0;}
-  .card > * {
-    padding: var(--space-half) var(--space);
-  }
-  .card > header:first-child {
-     padding:var(--space);
-     border-bottom: var(--border);
-     box-shadow: var(--shadow);
-     background-color: var(--color-background-secondary);
-     
-     }
-  .card > footer:last-child {
-     padding:var(--space);
- }
-
-
-
+.card {
+  padding: 0;
+}
+.card > * {
+  padding: var(--space-half) var(--space);
+}
+.card > header:first-child {
+  padding: var(--space);
+  border-bottom: var(--border);
+  box-shadow: var(--shadow);
+  background-color: var(--color-background-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card > footer:last-child {
+  padding: var(--space);
+}
 
 .card.clickable {
   a {

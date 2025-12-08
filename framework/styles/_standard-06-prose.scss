@@ -46,7 +46,7 @@
   --content: min(var(--line-width), 100%);
   /* ← FIXED */
   --content-small: max(calc(var(--space-2) - var(--space)), var(--space));
-  --content-accent: minmax(0, var(--space-2));
+  --content-editorial: minmax(0, var(--space-2));
   --content-feature: minmax(0, var(--space-4));
   --content-hero: minmax(0, 1fr);
 }
@@ -58,8 +58,10 @@
   display: grid;
   grid-template-columns:
     [hero-start] var(--content-hero) [feature-start] var(--content-feature)
-    [accent-start] var(--content-accent) [content-start] var(--content)
-    [content-end] var(--content-accent) [accent-end] var(--content-feature)
+    [editorial-start] var(--content-editorial) [content-start] var(--content)
+    [content-end] var(--content-editorial) [editorial-end] var(
+      --content-feature
+    )
     [feature-end] var(--content-hero) [hero-end];
 
   transition: grid-template-columns var(--transition);
@@ -79,22 +81,21 @@
 
   table,
   .scroll:has(table),
-  .container-accent {
-    grid-column: accent;
+  .editorial {
+    grid-column: editorial;
     margin-inline: 0;
   }
 
-  .container-feature {
+  .feature {
     grid-column: feature;
     margin-inline: 0;
   }
-
-  .container-hero-marge,
-  .container-hero {
+  .full,
+  .hero {
     grid-column: hero;
   }
 
-  .container-hero {
+  .hero {
     margin-inline: calc(var(--gap-body) * -1);
 
     > * {

@@ -1,0 +1,138 @@
+<section id="breadcrumb" class="card">
+  <header class="border-b px-4 py-3 flex items-center justify-between">
+    <h2 class="text-sm font-medium">Breadcrumb</h2>
+    <a
+      href="/components/breadcrumb"
+      class="text-muted-foreground hover:text-foreground"
+      data-tooltip="See documentation"
+      data-side="left"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4"
+        ><path d="M12 7v14"></path><path
+          d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+        ></path></svg
+      >
+    </a>
+  </header>
+  <div class="p">
+    <ol
+      class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5"
+    >
+      <li class="inline-flex items-center gap-1.5">
+        <a href="#" class="hover:text-foreground transition-colors">Home</a>
+      </li>
+      <li>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-3.5"><path d="m9 18 6-6-6-6"></path></svg
+        >
+      </li>
+      <li class="inline-flex items-center gap-1.5">
+        <div id="demo-breadcrumb-menu" class="dropdown-menu">
+          <button
+            type="button"
+            id="demo-breadcrumb-menu-trigger"
+            aria-haspopup="menu"
+            aria-controls="demo-breadcrumb-menu-menu"
+            aria-expanded="false"
+            class="flex size-9 items-center justify-center h-4 w-4 hover:text-foreground cursor-pointer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><circle cx="12" cy="12" r="1"></circle><circle
+                cx="19"
+                cy="12"
+                r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg
+            >
+          </button>
+          <div
+            id="demo-breadcrumb-menu-popover"
+            data-popover
+            aria-hidden="true"
+            class="p-1"
+          >
+            <div
+              role="menu"
+              id="demo-breadcrumb-menu-menu"
+              aria-labelledby="demo-breadcrumb-menu-trigger"
+            >
+              <div id="demo-breadcrumb-menu-items-1" role="menuitem">
+                Documentation
+              </div>
+
+              <div id="demo-breadcrumb-menu-items-2" role="menuitem">
+                Themes
+              </div>
+
+              <div id="demo-breadcrumb-menu-items-3" role="menuitem">
+                GitHub
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-3.5"><path d="m9 18 6-6-6-6"></path></svg
+        >
+      </li>
+      <li class="inline-flex items-center gap-1.5">
+        <a href="#" class="hover:text-foreground transition-colors"
+          >Components</a
+        >
+      </li>
+      <li>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-3.5"><path d="m9 18 6-6-6-6"></path></svg
+        >
+      </li>
+      <li class="inline-flex items-center gap-1.5">
+        <span class="text-foreground font-normal">Breadcrumb</span>
+      </li>
+    </ol>
+  </div>
+</section>
