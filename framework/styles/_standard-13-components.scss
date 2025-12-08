@@ -116,11 +116,19 @@ a.btn {
 }
 
 
+$types: 'outline', 'ghost', 'soft';
 .badge {
   background-color: var(--color-accent);
   border-radius: var(--space-half);
   color: var(--color-bacground);
   font-size: var(--scale-d2);
+  
+  /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
+  @each $type in $types {
+    &-#{$type} {
+      @extend .badge;
+    }
+  }
 }
 /* =========================== */
 /* NAVIGATION                  */
