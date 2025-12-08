@@ -101,12 +101,8 @@ const sortedDocs = rootDocs.sort((a, b) =>
                   </section>
                 </details>
                 <details class="group border-b last:border-b-0">
-                  <summary
-                    class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md"
-                  >
-                    <h2
-                      class="flex flex-1 items-start justify-between py py text-left text-sm font-medium hover:underline"
-                    >
+                  <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md" >
+                    <h2 class="flex flex-1 items-start justify-between py py text-left text-sm font-medium hover:underline">
                       Is it styled?
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -131,12 +127,8 @@ const sortedDocs = rootDocs.sort((a, b) =>
                   </section>
                 </details>
                 <details class="group border-b">
-                  <summary
-                    class="w-full"
-                  >
-                    <h2
-                      class="flex flex-1 items-start justify-between py small"
-                    >
+                  <summary class="w-full">
+                    <h2 class="flex flex-1 items-start justify-between py small">
                       Is it animated?
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -164,9 +156,7 @@ const sortedDocs = rootDocs.sort((a, b) =>
               <section class="accordion">
                 <details class="group border-b">
                   <summary>
-                    <h2
-                      class="flex flex-1 justify-between py small"
-                    >
+                    <h2 class="flex flex-1 justify-between py small">
                       What are the key considerations when implementing a
                       comprehensive enterprise-level authentication system?
                       <svg
@@ -263,9 +253,9 @@ const sortedDocs = rootDocs.sort((a, b) =>
           </div>
         </section>
 
-        <section id="alert" class="w-full rounded-lg border scroll-mt-14">
-          <header class="border-b px-4 py-3 flex items-center justify-between">
-            <h2 class="text-sm font-medium">Alert</h2>
+        <section id="alert" class="card">
+          <header class="border-b flex items-center justify-between">
+            <h2 class="small">Alert</h2>
             <a
               href="/components/alert"
               class="text-muted-foreground hover:text-foreground"
@@ -290,8 +280,8 @@ const sortedDocs = rootDocs.sort((a, b) =>
             </a>
           </header>
           <div class="p">
-            <div class="grid-row max-w-xl items-start">
-              <div class="alert">
+            <div class="grid-row">
+              <div class="alert flow">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -306,7 +296,7 @@ const sortedDocs = rootDocs.sort((a, b) =>
                     d="m9 12 2 2 4-4"></path></svg
                 >
                 <h2>Success! Your changes have been saved</h2>
-                <section>
+                <section class="flow-1">
                   This is an alert with icon, title and description.
                 </section>
               </div>
