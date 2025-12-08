@@ -13,6 +13,7 @@ export default defineConfig({
   srcDir: "./astro",
   site: "https://standard.ffp.co",
   prefetch: {
+    prefetchAll: true,
     defaultStrategy: 'viewport'
   },
   integrations: [
