@@ -120,7 +120,7 @@ $types: 'outline', 'ghost', 'soft';
 .badge {
   background-color: var(--color-accent);
   border-radius: var(--space-half);
-  color: var(--color-bacground);
+  color: var(--color-background);
   font-size: var(--scale-d2);
   
   /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
