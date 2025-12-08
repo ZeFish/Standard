@@ -44,3 +44,7 @@ $elements-boxed: "blockquote, pre, .alert, aside, .card, .callout, img, iframe, 
   background: var(--color-background-sexondary);
   border-radius: var(--radius);
 }
+
+%padding-text {
+padding: var(--space-d4) var(--space-d2);   
+}

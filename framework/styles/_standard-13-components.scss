@@ -6,6 +6,7 @@
 
 button,
 a.btn {
+  @extend %surface;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,13 +14,9 @@ a.btn {
   font-size: var(--scale-d2);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
-  border-radius: var(--radius);
   background: var(--color-accent);
   color: var(--color-light);
-  border: var(--border);
-  border-color: var(--color-border);
   padding: var(--space-d4) var(--space-d2);
-  box-shadow: var(--shadow);
   cursor: pointer;
   transition:
     background-color var(--transition),
