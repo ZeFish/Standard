@@ -1,24 +1,23 @@
-<div>
-  <script>
-    (() => {
-      const sliders = document.querySelectorAll('input[type="range"].input');
-      if (!sliders) return;
+<script>
+  (() => {
+    const sliders = document.querySelectorAll('input[type="range"]');
+    if (!sliders) return;
 
-      const updateSlider = (el) => {
-        const min = parseFloat(el.min || 0);
-        const max = parseFloat(el.max || 100);
-        const value = parseFloat(el.value);
-        const percent = max === min ? 0 : ((value - min) / (max - min)) * 100;
-        el.style.setProperty("--slider-value", `${percent}%`);
-      };
+    const updateSlider = (el) => {
+      const min = parseFloat(el.min || 0);
+      const max = parseFloat(el.max || 100);
+      const value = parseFloat(el.value);
+      const percent = max === min ? 0 : ((value - min) / (max - min)) * 100;
+      el.style.setProperty("--slider-value", `${percent}%`);
+    };
 
-      sliders.forEach((slider) => {
-        updateSlider(slider);
-        slider.addEventListener("input", (event) => updateSlider(event.target));
-      });
-    })();
-  </script>
-</div>
+    sliders.forEach((slider) => {
+      updateSlider(slider);
+      slider.addEventListener("input", (event) => updateSlider(event.target));
+    });
+  })();
+</script>
+
 <section id="slider" class="card icon">
   <header>
     <h2>Slider</h2>
@@ -45,5 +44,5 @@
       >
     </a>
   </header>
-  <input type="range" class="input mt w-full" min="0" max="27" value="12" />
+  <input type="range" min="0" max="27" value="12" />
 </section>

@@ -5,6 +5,7 @@ import Comments from "../components/Comments.astro";
 import { ClientRouter } from "astro:transitions";
 import logger from "../../core/logger.js";
 import { Image } from "astro:assets";
+import { Font } from "astro:assets";
 
 // Create logger for this layout
 const log = logger({ scope: "Base Layout" });
@@ -93,6 +94,7 @@ const year = new Date().getFullYear();
         animation: none !important;
       }
     </style>
+    <Font cssVariable="--font-miller-text" />
     <ClientRouter />
     <script
       is:inline
@@ -101,6 +103,7 @@ const year = new Date().getFullYear();
       transition:persist></script>
     <script is:inline src="/assets/standard/standard.lab.js" transition:persist
     ></script>
+    <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
   </head>
 
   <body>

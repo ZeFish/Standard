@@ -26,9 +26,9 @@ export default defineConfig({
   experimental: {
     fonts: [
       {
-        provider: fontProviders.google(),
-        name: "Roboto",
-        cssVariable: "--font-roboto",
+        provider: fontProviders.adobe({ id: "epz8pgr" }),
+        name: "miller-text",
+        cssVariable: "--font-miller-text",
       },
     ],
   },
@@ -37,3 +37,13 @@ export default defineConfig({
   },
   vite: {},
 });
+
+/*
+
+fonts: [
+  {
+    provider: fontProviders.google(),
+    name: "Roboto",
+    cssVariable: "--font-roboto",
+  },
+],*/

@@ -2301,26 +2301,28 @@ input[type=checkbox][role=switch]:checked::before {
   transform: translateX(var(--switch-travel));
 }
 
-input[type=range].input {
+input[type=range] {
   -webkit-appearance: none; 
   appearance: none;
   background: transparent;
   cursor: pointer;
   
   height: 0.25em; 
+  width: 100%;
   border-radius: 9999px;
   border: var(--border);
-  outline: 0;
+  outline: none;
   padding: 0;
   box-shadow: inset var(--shadow);
   padding: 0; 
   border: none; 
   background-origin: border-box;
+  transition: opacity 0.2s;
   
   background: linear-gradient(to right, var(--color-primary, var(--color-accent)) 0%, var(--color-primary, var(--color-accent)) var(--slider-value), var(--color-track, var(--color-surface)) var(--slider-value), var(--color-track, var(--color-surface)) 100%);
 }
 
-input[type=range].input::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   height: 1.25rem;
@@ -2334,7 +2336,7 @@ input[type=range].input::-webkit-slider-thumb {
   transition: transform 0.1s ease;
 }
 
-input[type=range].input:hover::-webkit-slider-thumb {
+input[type=range]:hover::-webkit-slider-thumb {
   background: var(--color-secondary);
   border-color: var(--color-subtle);
 }

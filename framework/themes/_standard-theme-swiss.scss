@@ -35,6 +35,17 @@
     font-weight: 900;
     line-height: 0.965;
   }
+  h2,
+  h3 {
+    font-size: var(--scale-4);
+    margin-block-start: var(--space-8);
+    margin-block-end: var(--space-4);
+  }
+  h4,
+  h5,
+  h6 {
+    margin-block-end: var(--space);
+  }
   .font-interface {
     font-size: 12px;
   }

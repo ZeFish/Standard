@@ -198,6 +198,17 @@
   font-weight: 900;
   line-height: 0.965;
 }
+[data-theme=swiss] h2,
+[data-theme=swiss] h3 {
+  font-size: var(--scale-4);
+  margin-block-start: var(--space-8);
+  margin-block-end: var(--space-4);
+}
+[data-theme=swiss] h4,
+[data-theme=swiss] h5,
+[data-theme=swiss] h6 {
+  margin-block-end: var(--space);
+}
 [data-theme=swiss] .font-interface {
   font-size: 12px;
 }
@@ -1374,11 +1385,7 @@
   --color-light-foreground: #1a1a1a;
   --color-light-background: #fffefd; 
   --color-light-accent: #1f4f82; 
-  --color-border: color-mix(
-      in srgb,
-      var(--color-foreground) 12%,
-      transparent
-  );
+  --color-border: color-mix(in srgb, var(--color-foreground) 12%, transparent);
   --shadow: none; 
   --optical-ratio: 1.414;
   --color-dark-background: #101010; 
@@ -1387,6 +1394,8 @@
   --shadow: none;
   --font-text: "miller-text";
   --font-header: "miller-text";
+  --font-header-weight: "400";
+  --font-header-letter-spacing: "0";
   --font-display: "miller-display";
   --font-banner: "miller-banner";
   --font-interface: "miller-text";
@@ -1396,9 +1405,9 @@
   --mobile-line-height: 1.2;
   --gap-nl: var(--leading);
   --color-muted: color-mix(
-      in srgb,
-      var(--color-foreground) 75%,
-      var(--color-background)
+    in srgb,
+    var(--color-foreground) 75%,
+    var(--color-background)
   );
 }
 [data-theme=newspaper] p {
@@ -1424,17 +1433,24 @@
   padding-block-end: var(--trim);
 }
 [data-theme=newspaper] header * {
-  margin-block-end: 0;
+  margin-block-end: var(--leading);
 }
 [data-theme=newspaper] h1 {
-  margin-block-start: var(--space-5);
-  margin-block-end: var(--space-6);
+  margin-block-start: calc(var(--space) * -4);
+  position: relative;
+  top: calc(var(--space) * 1.5);
+  margin-block-end: var(--space-4);
   text-align: center;
   font-family: var(--font-display);
+}
+[data-theme=newspaper] h2,
+[data-theme=newspaper] h3 {
+  margin-block-start: var(--space-10);
 }
 [data-theme=newspaper] h4,
 [data-theme=newspaper] h5,
 [data-theme=newspaper] h6 {
+  margin-block-start: var(--space-4);
   margin-block-end: var(--leading);
 }
 
