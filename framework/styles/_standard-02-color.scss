@@ -134,6 +134,11 @@
     var(--color-foreground) 3%,
     var(--color-background)
   );
+
+  --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
+  --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
+  --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
+
   --color-background-accent: color-mix(
     in srgb,
     var(--color-accent) 7%,
@@ -156,7 +161,7 @@
   /* ===== DESIGN TOKENS ===== */
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
-    color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color-mix(in srgb, var(--color-accent) 7%, transparent);
 
   /* Theme transition for smooth switching */
   transition:

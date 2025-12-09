@@ -1020,3 +1020,8 @@
 .rounded img {
   border-radius: 50%;
 }
+
+.no-mouse {
+  pointer-events: none;
+  user-select: none;
+}
