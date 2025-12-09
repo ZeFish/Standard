@@ -1245,7 +1245,7 @@
   
 }
 [data-theme=marauder] .container-hero-marge {
-  background-image: url("/assets/img/sky+sea.webp");
+  background-image: url("/assets/img/sky-sea.webp");
   background-color: #ebe4de;
   background-blend-mode: multiply;
   margin-inline: calc(var(--body-padding) * -1);

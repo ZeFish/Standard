@@ -381,6 +381,9 @@ div, span, a, mark, callout-title::before, span, li::before, button, legend, fie
     var(--color-foreground) 3%,
     var(--color-background)
   );
+  --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
+  --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
+  --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
   --color-background-accent: color-mix(
     in srgb,
     var(--color-accent) 7%,
@@ -400,7 +403,7 @@ div, span, a, mark, callout-title::before, span, li::before, button, legend, fie
   
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
-    color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color-mix(in srgb, var(--color-accent) 7%, transparent);
   
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
@@ -667,9 +670,11 @@ tt,
 pre {
   position: relative;
   background: var(--color-surface);
+  border-radius: var(--radius);
   color: var(--color-foreground);
   border: var(--border);
   overflow-x: auto;
+  overflow-y: hidden;
   box-shadow: inset var(--shadow);
   line-height: var(--line-height-compact);
   padding: var(--space-half);
@@ -687,18 +692,22 @@ pre:hover code {
 }
 pre .copy-button {
   position: absolute;
-  top: var(--space-half);
-  right: var(--space-half);
+  top: calc(var(--trim) * 1.5);
+  right: calc(var(--trim) * 1.5);
+  background-color: var(--color-surface);
+  color: var(--color-muted);
+  padding: var(--trim) var(--leading);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: all var(--transition);
   font-family: var(--font-interface);
 }
 pre:hover .copy-button {
   opacity: 0.5;
-  transition: opacity 0.5s;
+  transition: all var(--transition);
 }
 pre .copy-button:hover {
   opacity: 1;
+  color: var(--color-on-accent);
 }
 
 
@@ -707,6 +716,11 @@ blockquote {
   color: var(--color-muted);
   padding: var(--space);
   border-left: var(--stroke-width-l) solid var(--color-border);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--space);
+  font-size: var(--scale-d2);
 }
 
 
@@ -6920,6 +6934,11 @@ a.skip-link:active {
 .rounded,
 .rounded img {
   border-radius: 50%;
+}
+
+.no-mouse {
+  pointer-events: none;
+  user-select: none;
 }
 
 
