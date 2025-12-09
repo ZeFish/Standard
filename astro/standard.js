@@ -284,9 +284,9 @@ export default function standard(options = {}) {
           },
         );
 
-        if (fontImports.length > 0) {
-          injectScript("page-ssr", fontImports.join("\n"));
-        }
+        // if (fontImports.length > 0) {
+        //   injectScript("page-ssr", fontImports.join("\n"));
+        // }
 
         const cssEntry =
           assetsConfig.css ?? "@zefish/standard/styles/standard.scss";
