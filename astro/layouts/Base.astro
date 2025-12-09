@@ -1,6 +1,7 @@
 ---
 import Meta from "./Meta.astro";
 import Menu from "../components/Menu.astro";
+import Logo from "../components/Logo.astro";
 import Comments from "../components/Comments.astro";
 import { ClientRouter } from "astro:transitions";
 import logger from "../../core/logger.js";
@@ -70,7 +71,7 @@ const year = new Date().getFullYear();
   class="rhythm"
   lang={site.language || "en"}
   data-standard-version={site.version}
-  data-theme="default"
+  data-theme="system"
 >
   <head>
     <meta name="astro-view-transitions-enabled" content="true" />
@@ -84,16 +85,6 @@ const year = new Date().getFullYear();
       tags={tags}
       securityHeaders={securityHeaders}
     />
-    <style>
-      /* Disable view transition animations - instant page swaps */
-      ::view-transition {
-        animation-duration: 0s !important;
-      }
-      ::view-transition-old(*),
-      ::view-transition-new(*) {
-        animation: none !important;
-      }
-    </style>
     <Font cssVariable="--font-miller-text" />
     <ClientRouter />
     <script
@@ -117,9 +108,7 @@ const year = new Date().getFullYear();
       style="justify-content: space-between; max-width: 100%;"
     >
       <p>
-        <a href="/" style="text-decoration: none;"
-          >{site.title || config.title}</a
-        >
+        <a href="/" class="no-underline"><Logo /></a>
       </p>
       <Menu items={site.nav?.header || config.nav?.header} class="horizontal" />
     </header>

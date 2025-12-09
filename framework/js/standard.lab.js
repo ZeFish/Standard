@@ -501,6 +501,7 @@
         { value: "default", label: "Default" },
 
         { value: "system", label: "System" },
+        { value: "claude", label: "Claude" },
         { value: "bauhaus", label: "Bauhaus" },
         { value: "venetian", label: "Venetian" },
         { value: "newspaper", label: "Newspaper" },

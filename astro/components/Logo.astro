@@ -1,0 +1,26 @@
+---
+// Navigation.astro - Minimalist header with Command Palette trigger
+import LogoIcon from "../components/LogoIcon.astro";
+---
+
+<span class="logo_standard">Standard</span><LogoIcon /><span class="logo_garden"
+  >Garden</span
+>
+
+<style>
+  .logo_standard,
+  .logo_icon,
+  .logo_garden {
+    font-size: var(--scale-2);
+  }
+
+  .logo_standard {
+    font-family: "InterVariable";
+    font-weight: 900;
+    letter-spacing: -0.065em;
+  }
+
+  .logo_garden {
+    font-family: "Kalice";
+  }
+</style>

@@ -1284,6 +1284,9 @@
   --color-light-background: #f9f7f2;
   --color-light-foreground: #1a1a1a;
   --color-light-accent: #d65d0e;
+  --color-dark-foreground: #f9f7f2;
+  --color-dark-background: #1a1a1a;
+  --color-dark-accent: #d65d0e;
   --color-link: var(--color-accent);
   --font-text: "Instrument Sans";
   --font-header: Kalice;
