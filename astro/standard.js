@@ -154,7 +154,7 @@ export default function standard(options = {}) {
           [
             rehypeTypography,
             {
-              defaultLocale: finalConfig.language || "en",
+              defaultLocale: finalConfig.locale?.language || finalConfig.language || "en",
               ...finalConfig.typography,
             },
           ],

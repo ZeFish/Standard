@@ -15,6 +15,8 @@ import { compile } from "sass";
 import CleanCSS from "clean-css";
 import yaml from "js-yaml";
 import Logger from "../core/logger.js";
+import { generateTokens } from "./generate-tokens.js";
+
 const logger = Logger({
   scope: "CSS",
 });
@@ -125,6 +127,11 @@ function injectVersion(css) {
 
 async function buildCSS() {
   try {
+    // ========================================================================
+    // PHASE 0: GENERATE DESIGN TOKENS
+    // ========================================================================
+    await generateTokens();
+
     // ========================================================================
     // PHASE 1: SCSS COMPILATION
     // ========================================================================

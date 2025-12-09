@@ -288,7 +288,7 @@ Main content continues here in the default area.
   voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
   non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
-<div class="container-accent card">
+<div class="accent card">
   <h4>Accent Area</h4>
   <p>
     Ideal for pullquotes, highlighted content, or important information that deserves extra
@@ -302,7 +302,7 @@ Main content continues here in the default area.
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
-<div class="container-feature card">
+<div class="feature card">
   <h4>Feature Area</h4>
   <div class="demo-placeholder">Wide Feature Content</div>
   <p class="text-muted small" style="text-align: center">
@@ -316,7 +316,7 @@ Main content continues here in the default area.
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
-<div class="container-hero card inset">
+<div class="hero card inset">
   <h4>Full Width Area</h4>
   <p>Extends to complete container width for full-bleed backgrounds or spanning content.</p>
   <p>

@@ -908,3 +908,79 @@ a.skip-link {
     color: var(--color-foreground);
   }
 }
+
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+/* The tooltip bubble */
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.95);
+
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s var(--tooltip-ease);
+}
+
+/* The arrow */
+[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  border: 5px solid transparent;
+  border-top-color: var(--tooltip-bg);
+  margin-bottom: -10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s var(--tooltip-ease);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Hover state */
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-8px) scale(1);
+}
+
+/* Bottom position variant */
+[data-tooltip-pos="bottom"]::after {
+  bottom: auto;
+  top: 100%;
+  transform: translateX(-50%) translateY(-10px) scale(0.95);
+}
+
+[data-tooltip-pos="bottom"]::before {
+  bottom: auto;
+  top: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--tooltip-bg);
+  margin-bottom: 0;
+  margin-top: -10px;
+}
+
+[data-tooltip-pos="bottom"]:hover::after,
+[data-tooltip-pos="bottom"]:hover::before {
+  transform: translateX(-50%) translateY(8px) scale(1);
+}

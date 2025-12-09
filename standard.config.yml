@@ -1,15 +1,29 @@
-title: "Standard Framework"
-url: "https://standard.ffp.co"
-language: "en"
-description: "Standard is built on the belief that design systems should be rooted in centuries of typographic tradition, mathematical precision, and the timeless principles of Swiss International Style."
+# ==========================================
+# SITE IDENTITY & METADATA
+# ==========================================
+title: "Standard"
+short_name: "Std"
+description: "A classical design framework for the digital age."
+url: "https://framework.standard.garden/"
+url_short: "https://stdn.gd"
+keywords: ["css", "framework", "typography", "swiss style"]
+
 author:
   name: "Francis Fontaine"
   email: "francisfontaine@gmail.com"
   url: "https://francisfontaine.com/now/"
   twitter: "francisfontaine"
+
 social:
   twitter: "@francisfontaine"
   instagram: "@francisfontaine"
+
+locale:
+  language: "en"
+  region: "CA"
+  timezone: "America/Toronto"
+  dir: "ltr"
+
 nav:
   header:
     - title: "Docs"
@@ -19,6 +33,9 @@ nav:
     - title: "Cheat Sheet"
       url: "/cheat-sheet/"
 
+# ==========================================
+# FRAMEWORK CONFIGURATION
+# ==========================================
 standard:
   verbose: true
   security:
@@ -137,3 +154,129 @@ build:
           - "lib/standard.bundle.full.js"
           - "_site/assets/standard/standard.bundle.full.js"
           - "public/assets/standard/standard.bundle.full.js"
+
+# ==========================================
+# DESIGN TOKENS
+# ==========================================
+design:
+
+  # TYPOGRAPHY
+  typography:
+      body:
+        font: '"Instrument Sans", "Inter", sans-serif'
+        weight: 400
+        tracking: "0em"
+        leading: 1.5
+        features: '"kern" 1, "liga" 1, "pnum" 1'
+        var: '"wdth" 100'
+      heading:
+        font: '"Inter Display", "Inter", sans-serif'
+        weight: 800
+        tracking: "-0.03em"
+        leading: 1.1
+        features: '"dlig" 1, "cv08" 1'
+        var: '"wdth" 100'
+      code:
+        font: '"IBM Plex Mono", monospace'
+        weight: 450
+        tracking: "0em"
+        leading: 1.4
+        features: '"zero" 1, "ss02" 1'
+        var: 'normal'
+      interface:
+        font: '"Inter", sans-serif'
+        weight: 500
+        tracking: "0.01em"
+        leading: 1
+        features: '"cv11" 1, "tnum" 1'
+        var: '"wdth" 100'
+
+  # LAYOUT
+  layout:
+    ratio: 1.414
+    unit: "1rem"
+    measure: "45ch"
+    space: "1lh"
+
+  # PRIMITIVES
+  primitives:
+    palette:
+      key:     "#1a1a1a"
+      paper:   "#ffffff"
+      red:     "#ef4444"
+      orange:  "#f97316"
+      yellow:  "#eab308"
+      green:   "#22c55e"
+      cyan:    "#06b6d4"
+      blue:    "#3b82f6"
+      magenta: "#e6005c"
+
+    dark:
+      key:     "#1a1a1a"
+      paper:   "#ffffff"
+      red:     "#ef4444"
+      orange:  "#f97316"
+      yellow:  "#eab308"
+      green:   "#22c55e"
+      cyan:    "#06b6d4"
+      blue:    "#3b82f6"
+      magenta: "#e6005c"
+
+
+
+  # GEOMETRY
+  geometry:
+    radius: 0.25lh
+    shadow: 0.25lh
+    stroke:
+      thin:  "1px"
+      thick: "2px"
+
+ # The Ratios (Available as --ratio-*)
+    harmonics:
+      golden:       1.618  # φ (Layout, Type)
+      silver:       1.414  # √2 (Paper sizes)
+      perfect_5th:  1.500
+      perfect_4th:  1.333
+      major_3rd:    1.250  # Mobile Scale
+      minor_3rd:    1.200
+      major_2nd:    1.125
+
+  # SEMANTICS
+  semantics:
+    surface:
+      base: "var(--palette-paper)"
+      card: "var(--palette-ash)"
+      wash: "color-mix(in srgb, var(--palette-magenta) 5%, transparent)"
+    ink:
+      base: "var(--palette-key)"
+      muted: "color-mix(in srgb, var(--palette-key) 60%, transparent)"
+    border:
+      subtle: "color-mix(in srgb, var(--palette-key) 10%, transparent)"
+    status:
+      brand:   "var(--palette-magenta)"
+      link:    "var(--palette-cyan)"
+      success: "var(--palette-green)"
+      warning: "var(--palette-orange)"
+      error:   "var(--palette-red)"
+      info:    "var(--palette-cyan)"
+    space:
+      grid:  "calc((var(--line-height) * 2) - 1em)"
+      two-line: "calc((var(--line-height) * 3) - 1em)"
+      leading: "calc((var(--line-height) * 1) - 1em)"
+      half-leading: "calc((var(--space-compact) / 2))"
+      continuity-compact: "calc((var(--lh-raw) - 1) * 1em)"
+      continuity-tight: "calc(var(--space-compact) / 2)"
+    measure:
+      narrow:  "45ch"
+      reading: "65ch"
+      wide:    "80ch"
+
+  # The Scale Engine (Base 1rem x Golden Ratio)
+  scale:
+    tiny:   "calc(var(--math-unit) / var(--math-harmonics-golden) / var(--math-harmonics-golden))" # ~6px
+    caption:   "calc(var(--math-unit) / var(--math-harmonics-golden))" # ~10px
+    body: "var(--math-unit)" # 16px
+    medium:    "calc(var(--math-unit) * var(--math-harmonics-golden))" # ~26px
+    large:    "calc(var(--size-1) * var(--math-harmonics-golden))" # ~42px
+    display:    "calc(var(--size-2) * var(--math-harmonics-golden))" # ~68px

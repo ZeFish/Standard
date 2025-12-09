@@ -87,24 +87,6 @@
   --list-indentation: var(--space);
 }
 
-// ========== Typography ==========
-
-.monospace {
-  font-family: var(--font-monospace), Inconsolata, Menlo, monospace;
-  font-feature-settings: var(--font-monospace-feature);
-  font-variation-settings: var(--font-monospace-variation);
-  font-size: var(--scale-d2);
-}
-
-.menu,
-.ui,
-.interface {
-  font-family: var(--font-interface), system-ui, sans-serif;
-  font-variation-settings: var(--font-interface-variation);
-  font-feature-settings: var(--font-interface-feature);
-  font-weight: var(--font-interface-weight, var(--font-weight), 400);
-}
-
 /* =========================== */
 /* TYPOGRAPHY                  */
 /* =========================== */
@@ -228,6 +210,17 @@ a.external-link::after {
 
 :is(h1, h2, h3, h4, h5, h6) a {
   text-decoration: none;
+}
+
+// ========== Typography ==========
+
+.menu,
+.ui,
+.interface {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
+  font-weight: var(--font-interface-weight, var(--font-weight), 400);
 }
 
 /* Code */

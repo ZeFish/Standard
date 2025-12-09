@@ -16,7 +16,11 @@
  *
  * @since 0.1.0
  * @see standard-00-variables.scss
+ * @see standard-01-token-generated.scss (auto-generated from standard.config.yml)
  */
+
+/* Import auto-generated design tokens from YAML configuration */
+@use "standard-01-token-generated" as *;
 
 /* Primitive Design Tokens - Foundation layer with logical properties */
 
@@ -49,15 +53,10 @@
   /* Design standard system */
   --blur: blur(7px);
   --stroke-width: max(1px, 0.06rem);
-  --stroke-width-l: calc(var(--stroke-width) * 3);
+  --stroke-width-l: calc(var(--stroke-width) * 2);
   /*  --rule-hairline */
   --transition: 0.5s ease;
   --radius: var(--leading);
-  --modal-background: color-mix(
-    in srgb,
-    var(--color-background) 60%,
-    transparent
-  );
 
   /*
 .hr { border: 0; border-top: var(--rule-hairline) solid var(--color-border); }

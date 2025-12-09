@@ -30,7 +30,7 @@ $small: 768px;
 $large: 1024px;
 $wide: 1440px;
 
-$text-elements: "span, a, mark, callout-title::before, div, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside";
+$text-elements: "div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside, input";
 
 $rhythm-elements: ".alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, dl, p, blockquote, pre, dt, dd, table, figure, form, fieldset, aside, .callout";
 $rhythm-block-elements: "#comments, .callout,  pre, figure, p:has(img), section, .box, .card, .container-small, .container-accent, .containe-feature, .container-hero, .scroll, hr, aside";

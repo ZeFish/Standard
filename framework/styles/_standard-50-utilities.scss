@@ -85,6 +85,10 @@
     "12": var(--space-12),
   );
 
+  .no-underline {
+    text-decoration: none !important;
+  }
+
   .bg {
     background-color: var(--color-background);
   }
@@ -620,6 +624,12 @@
   .medum.flex-row {
     flex-direction: column;
   }
+}
+
+.flex-far {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .items-center {

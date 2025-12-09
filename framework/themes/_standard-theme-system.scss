@@ -1,0 +1,33 @@
+@use "../styles/standard-00-variables" as *;
+
+[data-theme="system"] {
+  --color-light-background: #f9f7f2;
+  --color-light-foreground: #1a1a1a;
+  --color-light-accent: #d65d0e;
+
+  --color-link: var(--color-accent);
+
+  --font-text: "Instrument Sans";
+  --font-header: Kalice;
+  --font-interface: "IBM Plex Mono", monospace;
+  --font-monospace: "IBM Plex Mono", monospace;
+
+  --border: 2px solid var(--color-foreground);
+  --border: 1px solid
+    color-mix(in srgb, var(--color-foreground) 15%, var(--color-background));
+  --shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+  --radius: 0;
+
+  --shadow: 4px 4px 0 color-mix(in srgb, var(--color-dark) 25%, transparent);
+
+  pre {
+    box-shadow: none !important;
+    background: var(--color-dark-background);
+    color: var(--color-dark-foreground);
+  }
+
+  h2 {
+    color: var(--color-accent);
+    font-family: var(--font-interface);
+  }
+}
