@@ -192,6 +192,7 @@
   --color-surface: var(--color-background);
   --font-header: InterVariable;
   --line-height: 1.2;
+  --line-width: var(--line-width-xs);
 }
 [data-theme=swiss] h1 {
   letter-spacing: -0.065em;
@@ -211,6 +212,14 @@
 }
 [data-theme=swiss] .font-interface {
   font-size: 12px;
+}
+[data-theme=swiss] .prose {
+  margin-left: 10%;
+}
+[data-theme=swiss] h1,
+[data-theme=swiss] h2,
+[data-theme=swiss] h3 {
+  margin-left: -10%;
 }
 [data-theme=swiss] hr {
   background: var(--color-foreground);
@@ -255,7 +264,7 @@
   border: 0;
 }
 [data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
-  max-width: var(--line-width-xs);
+  max-width: 22rem;
   margin-inline: 0;
 }
 [data-theme=swiss] aside {
