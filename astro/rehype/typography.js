@@ -1,5 +1,7 @@
 import { visit } from "unist-util-visit";
+import logger from "../../core/logger.js";
 
+const log = logger({ scope: "Typography" });
 /**
  * Typography Rehype Plugin for Standard Framework
  *
@@ -913,6 +915,8 @@ export default function rehypeTypography(options = {}) {
    */
   return (tree) => {
     const locale = getLocale(tree);
+
+    log.info("init");
 
     const rules = typographyRules[locale] || typographyRules.en;
 

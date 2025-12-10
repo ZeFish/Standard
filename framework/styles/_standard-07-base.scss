@@ -82,3 +82,57 @@ section.container-hero {
     margin-inline: auto !important;
   }
 }
+
+/* =========================== */
+/* BODY PADDING NEGATION       */
+/* =========================== */
+
+/**
+ * Utilities to negate body padding for full-width elements
+ * Useful for footers, headers, or other elements that should extend to viewport edges
+ *
+ * .negate-body-padding — Negates horizontal body padding only
+ * .negate-body-padding-full — Negates all body padding (horizontal + bottom)
+ * .negate-body-padding-bottom — Negates extra bottom body padding (1.5× multiplier)
+ *
+ * Usage:
+ * <footer class="negate-body-padding-full">
+ *   Full-width footer content
+ * </footer>
+ */
+
+/**
+ * Negate horizontal body padding (left/right)
+ * Allows full-width backgrounds while keeping vertical padding
+ */
+
+body > footer:last-of-type,
+body > header:first-of-type {
+  margin-inline: calc(var(--gap-body) * -1);
+  padding-inline: calc(var(--gap-body) * 1);
+
+  @media (max-width: #{$small}) {
+    margin-inline: calc(var(--mobile-gap-body) * -1);
+  }
+}
+
+/**
+ * Negate bottom body padding (extra 1.5× multiplier)
+ * Removes the generous bottom padding applied to body elements
+ * Useful when you want footer to sit flush at bottom
+ */
+body > footer:last-of-type {
+  margin-block-end: calc(var(--gap-body) * -1.5);
+
+  @media (max-width: #{$small}) {
+    margin-block-end: calc(var(--mobile-gap-body) * -1.5);
+  }
+}
+
+body > header:first-of-type {
+  margin-block-start: calc(var(--gap-body) * -1);
+
+  @media (max-width: #{$small}) {
+    margin-block-end: calc(var(--mobile-gap-body) * -1);
+  }
+}

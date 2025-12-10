@@ -88,7 +88,7 @@ export default function standard(options = {}) {
     try {
       fileConfig = yaml.load(fs.readFileSync(configPath, "utf8")) || {};
     } catch (e) {
-      logger.error(`Failed to load standard.config.yml: ${e.message}`);
+      log.error(`Failed to load standard.config.yml: ${e.message}`);
     }
   }
 
@@ -154,7 +154,8 @@ export default function standard(options = {}) {
           [
             rehypeTypography,
             {
-              defaultLocale: finalConfig.locale?.language || finalConfig.language || "en",
+              defaultLocale:
+                finalConfig.locale?.language || finalConfig.language || "en",
               ...finalConfig.typography,
             },
           ],
@@ -301,7 +302,8 @@ export default function standard(options = {}) {
         }
 
         injectScript("page", 'import "@zefish/standard/js";');
-        injectScript("page", 'import "@zefish/standard/lab";');
+        if (finalConfig.lab !== false)
+          injectScript("page", 'import "@zefish/standard/lab";');
       },
     },
   };
