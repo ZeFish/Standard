@@ -386,6 +386,8 @@ div, span, a, mark, callout-title::before, span, li::before, button, legend, fie
   
   --color-shadow: color-mix(in srgb, var(--color-dark) 5%, transparent);
   --shadow: 0 1px 2px var(--color-shadow);
+  --shadow-l:
+    0 4px 6px -1px var(--color-darker), 0 2px 4px -2px var(--color-darker);
   
   --border: var(--stroke-width) solid var(--color-border);
   --border-accent: var(--stroke-width) solid
