@@ -155,7 +155,7 @@
   margin-block-end: var(--space-2);
 }
 [data-theme=paper] {
-  background: var(--color-surface);
+  background: var(--color-secondary);
 }
 [data-theme=paper] body {
   max-width: 768px;
@@ -214,22 +214,11 @@
 [data-theme=swiss] .font-interface {
   font-size: 12px;
 }
-[data-theme=swiss] .prose {
-  margin-left: 10%;
-}
-[data-theme=swiss] h1,
-[data-theme=swiss] h2,
-[data-theme=swiss] h3 {
-  margin-left: -10%;
-}
 [data-theme=swiss] hr {
   background: var(--color-foreground);
 }
 [data-theme=swiss] .callout-content {
   background: none;
-}
-[data-theme=swiss] p {
-  text-align: left;
 }
 [data-theme=swiss] strong {
   color: var(--color-accent);
@@ -535,7 +524,7 @@
   
   font-weight: 100 900;
   font-style: normal;
-  src: url("/assets/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].woff2") format("woff2");
+  src: url("/assets/fonts/MonaspaceXenonVarVF-wght-wdth-slnt.woff2") format("woff2");
 }
 
 @font-face {
@@ -579,7 +568,7 @@
   
   
   --font-text: "MonoLisa";
-  --font-feature: "onum", "liga", "clig", "calt", "zero", "ss05";
+  --font-feature: "onum", "liga", "clig", "calt", "zero";
   --font-variation: "";
   --font-header: "Fraunces";
   --font-monospace: "MonoLisa";
@@ -640,14 +629,14 @@
   
   font-weight: 100 1000;
   font-style: normal;
-  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2");
+  src: url("/assets/fonts/Fraunces-SOFT-WONK-opsz-wght.woff2");
 }
 @font-face {
   font-family: "Fraunces";
   
   font-weight: 100 1000;
   font-style: italic;
-  src: url("/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2");
+  src: url("/assets/fonts/Fraunces-Italic-SOFT-WONK-opsz-wght.woff2");
 }
 [data-theme=minimal] {
   --shadow: none;
@@ -723,7 +712,7 @@
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
-  src: url("/assets/fonts/CalSansUI[MODE,wght].woff2") format("woff");
+  src: url("/assets/fonts/CalSansUI-MODE-wght.woff2") format("woff");
 }
 @font-face {
   font-family: "Kalice";

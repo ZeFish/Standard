@@ -21,12 +21,16 @@ a.btn {
   gap: var(--trim);
   transition: all var(--transition);
 
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+
   svg {
     margin-inline: calc(var(--leading) * -2);
     max-height: var(--scale-d4);
   }
 
   &:hover {
+    color: var(--color-on-accent);
     background: color-mix(
       in srgb,
       var(--color-accent) 70%,
@@ -35,7 +39,7 @@ a.btn {
   }
   /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
   @each $type in $types {
-    &-#{$type} {
+    &.#{$type} {
       @extend .btn;
       @extend button;
     }
@@ -44,7 +48,7 @@ a.btn {
 
 button.small,
 a.btn.small {
-  padding: var(--space-d8) var(--space-d3);
+  padding: var(--space-d6) var(--space-d4);
 }
 a.btn:visited,
 a.btn {
@@ -157,8 +161,7 @@ a.btn.ghost {
   color: var(--color-accent);
 }
 
-.badge,
-a.badge {
+.badge {
   @extend %padding-text;
   padding: var(--space-d8) var(--space-d3);
   background-color: var(--color-accent);
@@ -166,9 +169,9 @@ a.badge {
   border-radius: var(--space-half);
   border: var(--border);
   font-size: var(--scale-d3);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--trim);
+  gap: calc(var(--leading) + var(--trim));
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
   text-decoration: none;
@@ -192,7 +195,7 @@ a.badge {
 
   /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
   @each $type in $types {
-    &-#{$type} {
+    &.#{$type} {
       @extend .badge;
     }
   }
@@ -202,8 +205,8 @@ a.badge:hover {
   color: var(--color-on-accent);
   background: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
 }
-.badge-secondary,
-a.badge-secondary {
+.badge.secondary,
+a.badge.secondary {
   background-color: var(--color-surface);
   color: var(--color-foreground);
   svg {
@@ -211,26 +214,38 @@ a.badge-secondary {
     margin-inline: calc(var(--trim) * -2);
   }
 }
-a.badge-secondary:hover {
+a.badge.secondary:hover {
   color: var(--color-foreground);
   background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
-.badge-outline,
-a.badge-outline {
+.badge.outline {
   background-color: transparent;
-  color: var(--color-foreground);
+  color: var(--color-muted);
   svg {
     max-height: var(--scale-d3);
     margin-inline: calc(var(--trim) * -2);
   }
-}
-a.badge-outline:hover {
-  color: var(--color-foreground);
-  background: var(--color-surface);
+  &:hover {
+    color: var(--color-foreground);
+    background: var(--color-surface);
+  }
 }
 
-.badge-destructive,
-a.badge-destructive {
+.badge.ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-muted);
+  svg {
+    max-height: var(--scale-d3);
+    margin-inline: calc(var(--trim) * -2);
+  }
+  &:hover {
+    color: var(--color-foreground);
+    background: var(--color-surface);
+  }
+}
+
+.badge.destructive {
   background-color: var(--color-surface);
   border-color: color-mix(in srgb, var(--color-error) 10%, var(--color-border));
   color: var(--color-error);
@@ -238,11 +253,12 @@ a.badge-destructive {
     max-height: var(--scale-d3);
     margin-inline: calc(var(--trim) * -2);
   }
+  &:hover {
+    background-color: var(--color-error);
+    color: var(--color-on-accent);
+  }
 }
-a.badge-destructive:hover {
-  background-color: var(--color-error);
-  color: var(--color-on-accent);
-}
+
 .breadcrumbs {
   font-family: var(--font-interface);
   color: var(--color-muted);

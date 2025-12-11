@@ -48,12 +48,7 @@ video {
 
 
 button,
-a.btn,
-a.btn-secondary, button-secondary,
-a.btn-outline, button-outline,
-a.btn-destructive, button-destructive,
-a.btn-ghost, button-ghost,
-a.btn-icon, button-icon, .card {
+a.btn, button.secondary, button.outline, button.destructive, button.ghost, button.icon, .card {
   border: var(--border);
   box-shadow: var(--shadow);
   background: var(--color-background-sexondary);
@@ -61,18 +56,9 @@ a.btn-icon, button-icon, .card {
 }
 
 button,
-a.btn,
-a.btn-secondary, button-secondary,
-a.btn-outline, button-outline,
-a.btn-destructive, button-destructive,
-a.btn-ghost, button-ghost,
-a.btn-icon, button-icon, .badge,
-a.badge, .badge-secondary,
-a.badge-secondary, .badge-outline,
-a.badge-outline, .badge-destructive,
-a.badge-destructive, .badge-ghost,
-a.badge-ghost, .badge-icon,
-a.badge-icon {
+a.btn, button.secondary, button.outline, button.destructive, button.ghost, button.icon, .badge, .badge.secondary, .badge.outline, .badge.destructive, .badge.ghost, .badge.icon, input,
+textarea,
+select {
   padding: var(--leading) var(--space-d2);
 }
 
@@ -1953,33 +1939,33 @@ section.container-hero p {
 
 
 
-body > footer:last-of-type,
-body > header:first-of-type {
+body > footer.no-body-margin:last-of-type,
+body > header.no-body-margin:first-of-type {
   margin-inline: calc(var(--gap-body) * -1);
   padding-inline: calc(var(--gap-body) * 1);
 }
 @media (max-width: 768px) {
-  body > footer:last-of-type,
-  body > header:first-of-type {
+  body > footer.no-body-margin:last-of-type,
+  body > header.no-body-margin:first-of-type {
     margin-inline: calc(var(--mobile-gap-body) * -1);
   }
 }
 
 
-body > footer:last-of-type {
+body > footer.no-body-margin:last-of-type {
   margin-block-end: calc(var(--gap-body) * -1.5);
 }
 @media (max-width: 768px) {
-  body > footer:last-of-type {
+  body > footer.no-body-margin:last-of-type {
     margin-block-end: calc(var(--mobile-gap-body) * -1.5);
   }
 }
 
-body > header:first-of-type {
+body > header.no-body-margin:first-of-type {
   margin-block-start: calc(var(--gap-body) * -1);
 }
 @media (max-width: 768px) {
-  body > header:first-of-type {
+  body > header.no-body-margin:first-of-type {
     margin-block-end: calc(var(--mobile-gap-body) * -1);
   }
 }
@@ -2288,7 +2274,6 @@ textarea,
 select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
-  padding: var(--leading) var(--space-half) !important;
   border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-surface);
@@ -2695,12 +2680,12 @@ input[type=range]:hover::-webkit-slider-thumb {
 
 
 
-button, button-icon,
-a.btn-icon, button-ghost,
-a.btn-ghost, button-destructive,
-a.btn-destructive, button-outline,
-a.btn-outline, button-secondary,
-a.btn-secondary,
+button, button.icon,
+a.btn.icon, button.ghost,
+a.btn.ghost, button.destructive,
+a.btn.destructive, button.outline,
+a.btn.outline, button.secondary,
+a.btn.secondary,
 a.btn {
   display: inline-flex;
   align-items: center;
@@ -2713,43 +2698,26 @@ a.btn {
   cursor: pointer;
   gap: var(--trim);
   transition: all var(--transition);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
-button svg, button-icon svg,
-a.btn-icon svg, button-ghost svg,
-a.btn-ghost svg, button-destructive svg,
-a.btn-destructive svg, button-outline svg,
-a.btn-outline svg, button-secondary svg,
-a.btn-secondary svg,
+button svg, button.icon svg, button.ghost svg, button.destructive svg, button.outline svg, button.secondary svg,
 a.btn svg {
   margin-inline: calc(var(--leading) * -2);
   max-height: var(--scale-d4);
 }
-button:hover, button-icon:hover,
-a.btn-icon:hover, button-ghost:hover,
-a.btn-ghost:hover, button-destructive:hover,
-a.btn-destructive:hover, button-outline:hover,
-a.btn-outline:hover, button-secondary:hover,
-a.btn-secondary:hover,
+button:hover,
 a.btn:hover {
+  color: var(--color-on-accent);
   background: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
 }
-button.small, button-secondary.small,
-a.small.btn-secondary, button-outline.small,
-a.small.btn-outline, button-destructive.small,
-a.small.btn-destructive, button-ghost.small,
-a.small.btn-ghost, button-icon.small,
-a.small.btn-icon,
+button.small,
 a.btn.small {
-  padding: var(--space-d8) var(--space-d3);
+  padding: var(--space-d6) var(--space-d4);
 }
 
 a.btn:visited,
-a.btn,
-a.btn-secondary,
-a.btn-outline,
-a.btn-destructive,
-a.btn-ghost,
-a.btn-icon {
+a.btn {
   --stroke-width: 1px;
   display: inline-block;
   width: fit-content;
@@ -2760,137 +2728,76 @@ a.btn-icon {
   box-sizing: border-box;
 }
 
-button:active, button-secondary:active,
-a.btn-secondary:active, button-outline:active,
-a.btn-outline:active, button-destructive:active,
-a.btn-destructive:active, button-ghost:active,
-a.btn-ghost:active, button-icon:active,
-a.btn-icon:active,
+button:active,
 a.btn:active {
   background: color-mix(in srgb, var(--color-accent) 50%, var(--color-surface));
 }
 
-button:focus-visible, button-secondary:focus-visible,
-a.btn-secondary:focus-visible, button-outline:focus-visible,
-a.btn-outline:focus-visible, button-destructive:focus-visible,
-a.btn-destructive:focus-visible, button-ghost:focus-visible,
-a.btn-ghost:focus-visible, button-icon:focus-visible,
-a.btn-icon:focus-visible,
+button:focus-visible,
 a.btn:focus-visible {
   outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
   outline-offset: 2px;
   color: var(--color-background);
 }
 
-button.destructive, button-secondary.destructive,
-a.destructive.btn-secondary, button-outline.destructive,
-a.destructive.btn-outline, button-destructive.destructive, button-ghost.destructive,
-a.destructive.btn-ghost, button-icon.destructive,
-a.destructive.btn-icon,
+button.destructive,
+a.destructive.btn,
 a.btn-destructive {
   background-color: var(--color-surface);
   border-color: color-mix(in srgb, var(--color-error) 10%, var(--color-border));
   color: var(--color-error);
 }
-button.destructive:hover, button-secondary.destructive:hover,
-a.destructive.btn-secondary:hover, button-outline.destructive:hover,
-a.destructive.btn-outline:hover, button-destructive.destructive:hover, button-ghost.destructive:hover,
-a.destructive.btn-ghost:hover, button-icon.destructive:hover,
-a.destructive.btn-icon:hover,
+button.destructive:hover,
+a.destructive.btn:hover,
 a.btn-destructive:hover {
   background: var(--color-error);
   color: var(--color-on-accent);
 }
 
-button:disabled, button-secondary:disabled,
-a.btn-secondary:disabled, button-outline:disabled,
-a.btn-outline:disabled, button-destructive:disabled,
-a.btn-destructive:disabled, button-ghost:disabled,
-a.btn-ghost:disabled, button-icon:disabled,
-a.btn-icon:disabled,
+button:disabled,
 a.btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
 
-button.secondary, button-secondary.secondary,
-a.secondary.btn-secondary, button-outline.secondary,
-a.secondary.btn-outline, button-destructive.secondary,
-a.secondary.btn-destructive, button-ghost.secondary,
-a.secondary.btn-ghost, button-icon.secondary,
-a.secondary.btn-icon,
+button.secondary,
 a.btn.secondary {
   background: var(--color-surface);
   color: var(--color-foreground);
 }
-button.secondary:hover, button-secondary.secondary:hover,
-a.secondary.btn-secondary:hover, button-outline.secondary:hover,
-a.secondary.btn-outline:hover, button-destructive.secondary:hover,
-a.secondary.btn-destructive:hover, button-ghost.secondary:hover,
-a.secondary.btn-ghost:hover, button-icon.secondary:hover,
-a.secondary.btn-icon:hover,
+button.secondary:hover,
 a.btn.secondary:hover {
   background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
 
-button.link, button-secondary.link,
-a.link.btn-secondary, button-outline.link,
-a.link.btn-outline, button-destructive.link,
-a.link.btn-destructive, button-ghost.link,
-a.link.btn-ghost, button-icon.link,
-a.link.btn-icon,
+button.link,
 a.btn.link {
   background: var(--color-surface);
   color: var(--color-link);
 }
-button.link:hover, button-secondary.link:hover,
-a.link.btn-secondary:hover, button-outline.link:hover,
-a.link.btn-outline:hover, button-destructive.link:hover,
-a.link.btn-destructive:hover, button-ghost.link:hover,
-a.link.btn-ghost:hover, button-icon.link:hover,
-a.link.btn-icon:hover,
+button.link:hover,
 a.btn.link:hover {
   background: color-mix(in srgb, currentColor 10%, var(--color-surface));
 }
 
-button.outline, button-secondary.outline,
-a.outline.btn-secondary, button-outline.outline,
-a.outline.btn-outline, button-destructive.outline,
-a.outline.btn-destructive, button-ghost.outline,
-a.outline.btn-ghost, button-icon.outline,
-a.outline.btn-icon,
+button.outline,
 a.btn.outline {
   background: transparent;
   color: var(--color-subtle);
 }
-button.outline:hover, button-secondary.outline:hover,
-a.outline.btn-secondary:hover, button-outline.outline:hover,
-a.outline.btn-outline:hover, button-destructive.outline:hover,
-a.outline.btn-destructive:hover, button-ghost.outline:hover,
-a.outline.btn-ghost:hover, button-icon.outline:hover,
-a.outline.btn-icon:hover,
+button.outline:hover,
 a.btn.outline:hover {
   color: var(--color-foreground);
   background-color: var(--color-surface);
 }
 
-button.outline:hover, button-secondary.outline:hover,
-a.outline.btn-secondary:hover, button-outline.outline:hover,
-a.outline.btn-outline:hover, button-destructive.outline:hover,
-a.outline.btn-destructive:hover, button-ghost.outline:hover,
-a.outline.btn-ghost:hover, button-icon.outline:hover,
-a.outline.btn-icon:hover,
+button.outline:hover,
 a.btn.outline:hover {
   background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
 
-button.icon, button-secondary.icon,
-a.icon.btn-secondary, button-outline.icon,
-a.icon.btn-outline, button-destructive.icon,
-a.icon.btn-destructive, button-ghost.icon,
-a.icon.btn-ghost, button-icon.icon,
-a.icon.btn-icon,
+button.icon,
 a.btn.icon {
   display: flex;
   align-items: center;
@@ -2901,24 +2808,14 @@ a.btn.icon {
   height: calc(var(--space) + var(--trim));
 }
 
-button.ghost, button-secondary.ghost,
-a.ghost.btn-secondary, button-outline.ghost,
-a.ghost.btn-outline, button-destructive.ghost,
-a.ghost.btn-destructive, button-ghost.ghost,
-a.ghost.btn-ghost, button-icon.ghost,
-a.ghost.btn-icon,
+button.ghost,
 a.btn.ghost {
   background: none;
   border: none;
   box-shadow: none;
   color: var(--color-muted);
 }
-button.ghost:hover, button-secondary.ghost:hover,
-a.ghost.btn-secondary:hover, button-outline.ghost:hover,
-a.ghost.btn-outline:hover, button-destructive.ghost:hover,
-a.ghost.btn-destructive:hover, button-ghost.ghost:hover,
-a.ghost.btn-ghost:hover, button-icon.ghost:hover,
-a.ghost.btn-icon:hover,
+button.ghost:hover,
 a.btn.ghost:hover {
   color: var(--color-foreground);
   background: color-mix(in srgb, currentColor 5%, var(--color-surface));
@@ -2933,22 +2830,16 @@ a.btn.ghost:hover {
   color: var(--color-accent);
 }
 
-.badge, .badge-icon,
-a.badge-icon, .badge-ghost,
-a.badge-ghost, .badge-destructive,
-a.badge-destructive, .badge-outline,
-a.badge-outline, .badge-secondary,
-a.badge-secondary,
-a.badge {
+.badge, .badge.icon, .badge.ghost, .badge.destructive, .badge.outline, .badge.secondary {
   padding: var(--space-d8) var(--space-d3);
   background-color: var(--color-accent);
   color: var(--color-on-accent);
   border-radius: var(--space-half);
   border: var(--border);
   font-size: var(--scale-d3);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--trim);
+  gap: calc(var(--leading) + var(--trim));
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
   text-decoration: none;
@@ -2958,66 +2849,72 @@ a.badge {
   transition: all var(--transition);
   font-variation-settings: "wdth" 900;
 }
-.badge svg, .badge-icon svg, .badge-ghost svg, .badge-destructive svg, .badge-outline svg, .badge-secondary svg,
-a.badge svg {
+.badge svg, .badge.icon svg, .badge.ghost svg, .badge.destructive svg, .badge.outline svg, .badge.secondary svg {
   max-height: var(--scale-d3);
   margin-inline: calc(var(--trim) * -2);
 }
-.badge ::selection, .badge-icon ::selection, .badge-ghost ::selection, .badge-destructive ::selection, .badge-outline ::selection, .badge-secondary ::selection,
-a.badge ::selection {
+.badge ::selection, .badge.icon ::selection, .badge.ghost ::selection, .badge.destructive ::selection, .badge.outline ::selection, .badge.secondary ::selection {
   background: transparent;
   color: currentColor;
 }
-a.badge:hover, a.badge-secondary:hover, a.badge-outline:hover, a.badge-destructive:hover, a.badge-ghost:hover, a.badge-icon:hover {
+a.badge:hover {
   color: var(--color-on-accent);
   background: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
 }
 
-.badge-secondary,
-a.badge-secondary {
+.badge.secondary,
+a.badge.secondary {
   background-color: var(--color-surface);
   color: var(--color-foreground);
 }
-.badge-secondary svg,
-a.badge-secondary svg {
+.badge.secondary svg,
+a.badge.secondary svg {
   max-height: var(--scale-d3);
   margin-inline: calc(var(--trim) * -2);
 }
 
-a.badge-secondary:hover {
+a.badge.secondary:hover {
   color: var(--color-foreground);
   background: color-mix(in srgb, currentColor 5%, var(--color-surface));
 }
 
-.badge-outline,
-a.badge-outline {
+.badge.outline {
   background-color: transparent;
-  color: var(--color-foreground);
+  color: var(--color-muted);
 }
-.badge-outline svg,
-a.badge-outline svg {
+.badge.outline svg {
   max-height: var(--scale-d3);
   margin-inline: calc(var(--trim) * -2);
 }
-
-a.badge-outline:hover {
+.badge.outline:hover {
   color: var(--color-foreground);
   background: var(--color-surface);
 }
 
-.badge-destructive,
-a.badge-destructive {
+.badge.ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-muted);
+}
+.badge.ghost svg {
+  max-height: var(--scale-d3);
+  margin-inline: calc(var(--trim) * -2);
+}
+.badge.ghost:hover {
+  color: var(--color-foreground);
+  background: var(--color-surface);
+}
+
+.badge.destructive {
   background-color: var(--color-surface);
   border-color: color-mix(in srgb, var(--color-error) 10%, var(--color-border));
   color: var(--color-error);
 }
-.badge-destructive svg,
-a.badge-destructive svg {
+.badge.destructive svg {
   max-height: var(--scale-d3);
   margin-inline: calc(var(--trim) * -2);
 }
-
-a.badge-destructive:hover {
+.badge.destructive:hover {
   background-color: var(--color-error);
   color: var(--color-on-accent);
 }
@@ -6483,12 +6380,12 @@ a.skip-link:active {
 
 .accent {
   --color-msg: var(--color-accent);
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
 }
 
 .success {
   --color-msg: var(--color-success);
-  color: var(--color-success);
+  color: var(--color-success) !important;
 }
 
 .debug,
@@ -6499,12 +6396,12 @@ a.skip-link:active {
 
 .error {
   --color-msg: var(--color-error);
-  color: var(--color-error);
+  color: var(--color-error) !important;
 }
 
 .info {
   --color-msg: var(--color-info);
-  color: var(--color-info);
+  color: var(--color-info) !important;
 }
 
 .red {
@@ -6660,10 +6557,15 @@ a.skip-link:active {
   border-radius: var(--radius) !important;
 }
 
-.flex {
+.flex,
+.flex-col {
   display: flex;
   align-items: baseline;
   gap: var(--space);
+}
+.flex *,
+.flex-col * {
+  margin-top: 0;
 }
 
 .flex-1 {

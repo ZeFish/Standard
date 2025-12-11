@@ -45,7 +45,7 @@ textarea,
 select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
-  padding: var(--leading) var(--space-half) !important;
+  @extend %padding-text;
   border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-surface);

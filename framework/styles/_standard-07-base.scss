@@ -106,8 +106,8 @@ section.container-hero {
  * Allows full-width backgrounds while keeping vertical padding
  */
 
-body > footer:last-of-type,
-body > header:first-of-type {
+body > footer.no-body-margin:last-of-type,
+body > header.no-body-margin:first-of-type {
   margin-inline: calc(var(--gap-body) * -1);
   padding-inline: calc(var(--gap-body) * 1);
 
@@ -121,7 +121,7 @@ body > header:first-of-type {
  * Removes the generous bottom padding applied to body elements
  * Useful when you want footer to sit flush at bottom
  */
-body > footer:last-of-type {
+body > footer.no-body-margin:last-of-type {
   margin-block-end: calc(var(--gap-body) * -1.5);
 
   @media (max-width: #{$small}) {
@@ -129,7 +129,7 @@ body > footer:last-of-type {
   }
 }
 
-body > header:first-of-type {
+body > header.no-body-margin:first-of-type {
   margin-block-start: calc(var(--gap-body) * -1);
 
   @media (max-width: #{$small}) {

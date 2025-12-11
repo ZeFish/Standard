@@ -53,24 +53,12 @@
     font-size: 12px;
   }
 
-  .prose {
-    margin-left: 10%;
-  }
-  h1,
-  h2,
-  h3 {
-    margin-left: -10%;
-  }
-
   hr {
     background: var(--color-foreground);
   }
 
   .callout-content {
     background: none;
-  }
-  p {
-    text-align: left;
   }
   strong {
     color: var(--color-accent);
