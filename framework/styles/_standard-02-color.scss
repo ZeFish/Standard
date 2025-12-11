@@ -157,6 +157,8 @@
   /* ===== SHADOWS AND EFFECTS ===== */
   --color-shadow: color-mix(in srgb, var(--color-dark) 5%, transparent);
   --shadow: 0 1px 2px var(--color-shadow);
+  --shadow-l:
+    0 4px 6px -1px var(--color-darker), 0 2px 4px -2px var(--color-darker);
 
   /* ===== DESIGN TOKENS ===== */
   --border: var(--stroke-width) solid var(--color-border);
