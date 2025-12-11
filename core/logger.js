@@ -141,13 +141,14 @@ function logger(options = {}) {
   // Get verbose setting lazily - reads from global config when actually used
   const getVerbose = () => {
     if (explicitVerbose !== undefined) return explicitVerbose;
-    // Check global config that was set by the integration during astro:config:setup
-    return globalThis.__STANDARD_CONFIG__?.verbose ?? false;
+    return globalThis.__STANDARD_CONFIG__?.verbose ?? explicitVerbose ?? false;
   };
 
   const prefix = `${colors.reset}stdn${colors.yellow.fg}::${colors.reset}gd${colors.reset}`;
   // Close cyan after the scope label to avoid color bleed
-  const scopeText = scopeVar ? `${colors.blue.fg}[${scopeVar}]${colors.reset}` : "";
+  const scopeText = scopeVar
+    ? `${colors.blue.fg}[${scopeVar}]${colors.reset}`
+    : "";
 
   function format(level, ...args) {
     const parts = [prefix];

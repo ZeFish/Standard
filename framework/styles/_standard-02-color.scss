@@ -101,8 +101,6 @@
   /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
-  --color-light: var(--color-light-background);
-  --color-dark: var(--color-light-foreground);
   --color-accent: var(--color-light-accent);
 
   --color-header: var(--color-light-header, var(--color-foreground));
@@ -138,6 +136,8 @@
   --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
   --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
   --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
+  --color-light: var(--color-light-background);
+  --color-dark: var(--color-light-foreground);
 
   --color-background-accent: color-mix(
     in srgb,
