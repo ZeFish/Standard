@@ -101,7 +101,9 @@
     "dev": "npm run watch:css & npm run watch:js & npm run clean:ports && astro dev",
     "11ty": "lsof -ti:8081 | xargs kill -9 2>/dev/null || true && npm run watch:css & npm run watch:js & npm run clean:ports && eleventy --serve --quiet --port=8081",
     "start": "astro dev",
-    "release": "npm run build:css && npm run build:js && npm run commit && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog' && git push && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
+    "release": "npm run build:css && npm run build:js && npm run commit && npm version patch && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog' && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
+    "release:minor": "npm run build:css && npm run build:js && npm run commit && npm version minor && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog' && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
+    "release:major": "npm run build:css && npm run build:js && npm run commit && npm version major && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog' && git push && git push --tags && gh release create v$(node -p \"require('./package.json').version\") --generate-notes",
     "changelog": "auto-changelog -p --template keepachangelog --output CHANGELOG.md",
     "clean:ports": "lsof -ti:8083 | xargs kill -9 2>/dev/null || true",
     "kill-node": "killall node || taskkill /F /IM node.exe",
@@ -166,7 +168,6 @@
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.4.0",
-    "release-it": "^19.0.6",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
   },
