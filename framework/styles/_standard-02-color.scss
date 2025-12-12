@@ -212,6 +212,12 @@
       var(--color-foreground) 5%,
       transparent
     );
+
+    --color-modal-background: color-mix(
+      in srgb,
+      color-mix(in srgb, black 10%, var(--color-background)) 60%,
+      transparent
+    );
   }
 }
 
