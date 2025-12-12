@@ -3,6 +3,44 @@
 /* =========================== */
 /* BUTTONS                     */
 /* =========================== */
+
+.loader {
+  width: var(--space-2);
+  height: var(--space-2);
+  border: var(--trim) solid transparent;
+  border-bottom-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+  background: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  filter: blur(0.3px);
+  animation: rotation 0.25s linear infinite;
+
+  --color-loading-mix: color-mix(in srgb, var(--color-accent) 100%, black);
+  --color-loading: color-mix(
+    in srgb,
+    var(--color-loading-mix) 25%,
+    transparent
+  );
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--color-loading) 100%,
+    transparent
+  );
+  box-shadow:
+    0px 4px 6px -2px var(--color-loading),
+    inset 0px -4px 6px -2px var(--color-loading);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 $types: "secondary", "outline", "destructive", "ghost", "icon";
 
 button,
