@@ -421,14 +421,15 @@ div, span, a, mark, callout-title::before, span, li::before, button, legend, fie
       var(--color-foreground) 45%,
       transparent
     );
-    --color-border: color-mix(
-      in srgb,
-      var(--color-foreground) 10%,
-      transparent
-    );
+    --color-border: color-mix(in srgb, black 15%, transparent);
     --color-surface: color-mix(
       in srgb,
       var(--color-foreground) 5%,
+      transparent
+    );
+    --color-modal-background: color-mix(
+      in srgb,
+      color-mix(in srgb, black 50%, var(--color-background)) 60%,
       transparent
     );
   }
@@ -3140,7 +3141,7 @@ card.inset {
 }
 .callout .callout-content {
   color: var(--color-foreground);
-  background: color-mix(in srgb, var(--color-callout) 2.5%, color-mix(in srgb, var(--color-surface) 25%, var(--color-background)));
+  background: color-mix(in srgb, var(--color-callout) 0.5%, color-mix(in srgb, var(--color-surface) 25%, var(--color-background)));
   line-height: var(--line-height-compact);
   box-shadow: inset var(--shadow);
   border-radius: var(--radius);

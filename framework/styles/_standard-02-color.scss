@@ -201,11 +201,7 @@
       var(--color-foreground) 45%,
       transparent
     );
-    --color-border: color-mix(
-      in srgb,
-      var(--color-foreground) 10%,
-      transparent
-    );
+    --color-border: color-mix(in srgb, black 15%, transparent);
 
     --color-surface: color-mix(
       in srgb,
@@ -215,7 +211,7 @@
 
     --color-modal-background: color-mix(
       in srgb,
-      color-mix(in srgb, black 10%, var(--color-background)) 60%,
+      color-mix(in srgb, black 50%, var(--color-background)) 60%,
       transparent
     );
   }

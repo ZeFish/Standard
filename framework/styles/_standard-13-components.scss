@@ -613,7 +613,7 @@ card.inset {
     color: var(--color-foreground);
     background: color-mix(
       in srgb,
-      var(--color-callout) 2.5%,
+      var(--color-callout) 0.5%,
       color-mix(in srgb, var(--color-surface) 25%, var(--color-background))
     );
     line-height: var(--line-height-compact);
