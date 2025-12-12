@@ -150,6 +150,57 @@
     transparent
   );
 
+  --color-1: color-mix(
+    in srgb,
+    var(--color-foreground) 3%,
+    var(--color-background)
+  );
+  --color-2: color-mix(
+    in srgb,
+    var(--color-foreground) 5%,
+    var(--color-background)
+  );
+  --color-3: color-mix(
+    in srgb,
+    var(--color-foreground) 7%,
+    var(--color-background)
+  );
+  --color-4: color-mix(
+    in srgb,
+    var(--color-foreground) 10%,
+    var(--color-background)
+  );
+  --color-5: color-mix(
+    in srgb,
+    var(--color-foreground) 20%,
+    var(--color-background)
+  );
+  --color-6: color-mix(
+    in srgb,
+    var(--color-background) 3%,
+    var(--color-foreground)
+  );
+  --color-7: color-mix(
+    in srgb,
+    var(--color-background) 5%,
+    var(--color-foreground)
+  );
+  --color-8: color-mix(
+    in srgb,
+    var(--color-background) 7%,
+    var(--color-foreground)
+  );
+  --color-9: color-mix(
+    in srgb,
+    var(--color-background) 10%,
+    var(--color-foreground)
+  );
+  --color-10: color-mix(
+    in srgb,
+    var(--color-background) 20%,
+    var(--color-foreground)
+  );
+
   /* Interactive states */
   --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
   --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
@@ -201,17 +252,18 @@
       var(--color-foreground) 45%,
       transparent
     );
-    --color-border: color-mix(in srgb, black 15%, transparent);
-
-    --color-surface: color-mix(
+    --color-border: color-mix(
       in srgb,
-      var(--color-foreground) 5%,
-      transparent
+      var(--color-foreground) 7%,
+      var(--color-background)
     );
 
+    --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
+
+    --color-surface: color-mix(in srgb, black 3%, transparent);
     --color-modal-background: color-mix(
       in srgb,
-      color-mix(in srgb, black 50%, var(--color-background)) 60%,
+      color-mix(in srgb, black 75%, var(--color-background)) 60%,
       transparent
     );
   }

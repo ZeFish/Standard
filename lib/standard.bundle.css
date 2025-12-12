@@ -10,17 +10,57 @@
     in srgb,
     color-mix(in srgb, var(--color-foreground) 10%, var(--color-background)) 60%,
     transparent
+  );--color-1:color-mix(
+    in srgb,
+    var(--color-foreground) 3%,
+    var(--color-background)
+  );--color-2:color-mix(
+    in srgb,
+    var(--color-foreground) 5%,
+    var(--color-background)
+  );--color-3:color-mix(
+    in srgb,
+    var(--color-foreground) 7%,
+    var(--color-background)
+  );--color-4:color-mix(
+    in srgb,
+    var(--color-foreground) 10%,
+    var(--color-background)
+  );--color-5:color-mix(
+    in srgb,
+    var(--color-foreground) 20%,
+    var(--color-background)
+  );--color-6:color-mix(
+    in srgb,
+    var(--color-background) 3%,
+    var(--color-foreground)
+  );--color-7:color-mix(
+    in srgb,
+    var(--color-background) 5%,
+    var(--color-foreground)
+  );--color-8:color-mix(
+    in srgb,
+    var(--color-background) 7%,
+    var(--color-foreground)
+  );--color-9:color-mix(
+    in srgb,
+    var(--color-background) 10%,
+    var(--color-foreground)
+  );--color-10:color-mix(
+    in srgb,
+    var(--color-background) 20%,
+    var(--color-foreground)
   );--color-hover:color-mix(in srgb, var(--color-accent) 35%, transparent);--color-active:color-mix(in srgb, var(--color-accent) 20%, transparent);--color-shadow:color-mix(in srgb, var(--color-dark) 5%, transparent);--shadow:0 1px 2px var(--color-shadow);--shadow-l:0 4px 6px -1px var(--color-darker),0 2px 4px -2px var(--color-darker);--border:var(--stroke-width) solid var(--color-border);--border-accent:var(--stroke-width) solid color-mix(in srgb, var(--color-accent) 7%, transparent);transition:background-color var(--transition),color var(--transition),border-color var(--transition)}@media (prefers-color-scheme: dark){:root{--color-background:var(--color-dark-background);--color-foreground:var(--color-dark-foreground);--color-accent:var(--color-dark-accent);--color-light:var(--color-dark-foreground);--color-dark:var(--color-dark-background);--color-header:var(--color-dark-header),var(--color-foreground);--color-red:var(--color-dark-red);--color-orange:var(--color-dark-orange);--color-yellow:var(--color-dark-yellow);--color-green:var(--color-dark-green);--color-cyan:var(--color-dark-cyan);--color-blue:var(--color-dark-blue);--color-magenta:var(--color-dark-magenta);--color-link:var(--color-dark-link);--color-muted:color-mix(in srgb, var(--color-foreground) 65%, transparent);--color-subtle:color-mix(
       in srgb,
       var(--color-foreground) 45%,
       transparent
-    );--color-border:color-mix(in srgb, black 15%, transparent);--color-surface:color-mix(
+    );--color-border:color-mix(
       in srgb,
-      var(--color-foreground) 5%,
-      transparent
-    );--color-modal-background:color-mix(
+      var(--color-foreground) 7%,
+      var(--color-background)
+    );--color-secondary:color-mix(in srgb, black 3%, var(--color-background));--color-surface:color-mix(in srgb, black 3%, transparent);--color-modal-background:color-mix(
       in srgb,
-      color-mix(in srgb, black 50%, var(--color-background)) 60%,
+      color-mix(in srgb, black 75%, var(--color-background)) 60%,
       transparent
     )}}@media (prefers-reduced-motion: reduce){:root{transition:none}*{transition:none !important;animation:none !important}}@media (forced-colors: active){:root{--color-background:Canvas;--color-foreground:CanvasText;--color-accent:Highlight;--color-border:CanvasText;--color-muted:GrayText}}html{color:var(--color-foreground);background:var(--color-background);transition:background-color var(--transition),color var(--transition)}:root{--font-sans:"Instrument Sans Variable",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;--font-serif:"Newsreader","Instrument Serif","Garamond Premiere Pro","Source Serif 4",serif;--font-monospace:"IBM Plex Mono",ui-monospace,"SF Mono","Courier New",monospace;--font-text:var(--font-sans);--font-header:"Inter Variable";--font-interface:var(--font-sans);--inter-feature:"calt","cv05","cv11","ss03";--instrument-feature:"figa","ss01","ss02","ss05";--font-feature:"";--font-variation:"wdth" 95;--font-header-feature:"";--font-header-variation:"";--font-monospace-feature:"";--font-monospace-variation:"";--font-weight:450;--font-weight-bold:600;--font-letter-spacing:normal;--font-header-letter-spacing:-0.065em;--font-header-line-height:1;--font-header-weight:700;--font-interface-feature:"dlig","zero";--font-interface-variation:"";--font-list-feature:"dlig","tnum","zero";--font-list-variation:"";--font-weight-h1:var(--font-header-weight);--font-weight-h2:max(
     calc(var(--font-header-weight) * 0.85),
