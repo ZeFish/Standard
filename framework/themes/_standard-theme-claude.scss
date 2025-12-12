@@ -1,13 +1,13 @@
 @use "../styles/standard-00-variables" as *;
 
 [data-theme="claude"] {
-  --color-light-background: #f9f7f2;
-  --color-light-foreground: #1a1a1a;
-  --color-light-accent: #d65d0e;
+  --color-light-background: oklch(0.98 0.01 95.1);
+  --color-light-foreground: oklch(0.34 0.03 95.72);
+  --color-light-accent: oklch(0.62 0.14 39.04);
 
-  --color-dark-foreground: #f9f7f2;
-  --color-dark-background: #1a1a1a;
-  --color-dark-accent: #d65d0e;
+  --color-dark-foreground: oklch(0.81 0.01 93.01);
+  --color-dark-background: oklch(0.27 0 106.64);
+  --color-dark-accent: oklch(0.67 0.13 38.76);
 
   --color-link: var(--color-accent);
 

@@ -41,6 +41,22 @@
   }
 }
 
+kbd {
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--trim) var(--leading);
+  font-family: var(--font-monospace);
+  font-size: var(--scale-d3);
+  color: var(--color-foreground);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--space);
+  height: var(--space);
+  box-shadow: var(--shadow);
+}
+
 $types: "secondary", "outline", "destructive", "ghost", "icon";
 
 button,
