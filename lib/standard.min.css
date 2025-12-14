@@ -477,7 +477,7 @@ div, span, a, mark, callout-title::before, span, li::before, button, legend, fie
       var(--color-background)
     );
     --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
-    --color-surface: color-mix(in srgb, black 3%, transparent);
+    --color-surface: color-mix(in srgb, black 10%, transparent);
     --color-modal-background: color-mix(
       in srgb,
       color-mix(in srgb, black 75%, var(--color-background)) 60%,

@@ -1299,6 +1299,36 @@
 }
 
 
+[data-theme=claude] {
+  --color-light-background: oklch(0.98 0.01 95.1);
+  --color-light-foreground: oklch(0.34 0.03 95.72);
+  --color-light-accent: oklch(0.62 0.14 39.04);
+  --color-dark-foreground: oklch(0.81 0.01 93.01);
+  --color-dark-background: oklch(0.27 0 106.64);
+  --color-dark-accent: oklch(0.67 0.13 38.76);
+  --color-link: var(--color-accent);
+  --font-text: "Instrument Sans";
+  --font-header: Kalice;
+  --font-interface: "IBM Plex Mono", monospace;
+  --font-monospace: "IBM Plex Mono", monospace;
+  --border: 2px solid var(--color-foreground);
+  --border: 1px solid
+    color-mix(in srgb, var(--color-foreground) 15%, var(--color-background));
+  --shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+  --radius: 0;
+  --shadow: 4px 4px 0 color-mix(in srgb, var(--color-dark) 25%, transparent);
+}
+[data-theme=claude] pre {
+  box-shadow: none !important;
+  background: var(--color-dark-background);
+  color: var(--color-dark-foreground);
+}
+[data-theme=claude] h2 {
+  color: var(--color-accent);
+  font-family: var(--font-interface);
+}
+
+
 [data-theme=bauhaus] {
   --color-light-red: #e4002b; 
   --color-light-blue: #0050a4; 

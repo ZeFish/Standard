@@ -243,7 +243,7 @@ export default function standard(options = {}) {
         // Note: Astro will handle calling their hooks automatically
         const integrations = [];
 
-        if (finalConfig.cloudflare?.enabled !== false) {
+        if (finalConfig.cloudflare?.enabled === true) {
           integrations.push(
             cloudflareIntegration({
               ...finalConfig.cloudflare,
@@ -252,7 +252,7 @@ export default function standard(options = {}) {
           );
         }
 
-        if (finalConfig.openrouter?.enabled !== false) {
+        if (finalConfig.openrouter?.enabled === true) {
           integrations.push(
             openrouterIntegration({
               ...finalConfig.openrouter,
