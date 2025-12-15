@@ -638,6 +638,19 @@
   font-style: italic;
   src: url("/assets/fonts/Fraunces-Italic-SOFT-WONK-opsz-wght.woff2");
 }
+[data-theme=frank] {
+  --color-dark-foreground: oklch(0.7721 0.0228 96.47);
+  --color-dark-background: oklch(0.2308 0.0023 67.73);
+  --font-header: InterVariable;
+  --font-header-weight: 900;
+  --font-header-letter-spacing: -0.065em;
+  --font-header-line-height: 0.75;
+  --gap-body: var(--space-2);
+  --optical-ratio: var(--ratio-golden);
+  --font-size: 1em;
+  --line-height: 1.5;
+}
+
 [data-theme=clean] {
   --shadow: none;
   --color-light-background: white;
