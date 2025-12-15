@@ -638,7 +638,7 @@
   font-style: italic;
   src: url("/assets/fonts/Fraunces-Italic-SOFT-WONK-opsz-wght.woff2");
 }
-[data-theme=minimal] {
+[data-theme=clean] {
   --shadow: none;
   --color-light-background: white;
   --color-light-foreground: #444;
@@ -656,33 +656,33 @@
     var(--color-background)
   );
 }
-[data-theme=minimal] h1 {
+[data-theme=clean] h1 {
   margin-block-start: var(--space-7);
   margin-block-end: var(--space-7);
   text-align: center;
   letter-spacing: 0.1em;
 }
-[data-theme=minimal] blockquote,
-[data-theme=minimal] pre {
+[data-theme=clean] blockquote,
+[data-theme=clean] pre {
   background: transparent;
   color: var(--color-foreground);
 }
-[data-theme=minimal] blockquote .copy-button,
-[data-theme=minimal] pre .copy-button {
+[data-theme=clean] blockquote .copy-button,
+[data-theme=clean] pre .copy-button {
   position: absolute;
   top: 0;
   right: 0;
 }
-[data-theme=minimal] pre {
+[data-theme=clean] pre {
   border: 0;
   background: var(--color-surface);
 }
-[data-theme=minimal] pre .copy-button {
+[data-theme=clean] pre .copy-button {
   position: absolute;
   top: var(--space-d2);
   right: var(--space-d2);
 }
-[data-theme=minimal] blockquote {
+[data-theme=clean] blockquote {
   border: 0;
   border-left: 1px solid var(--color-muted);
   color: var(--color-muted);
@@ -1219,55 +1219,6 @@
   font-style: italic;
   src: url("/assets/fonts/MonoLisa-RegularItalic-Variable.woff2");
 }
-[data-theme=marauder] {
-  --font-text: Marauder;
-  --color-light-background: #ebe4de;
-  --color-light-foreground: #191919;
-  --color-dark-background: #191919;
-  --color-dark-foreground: #ebe4de;
-  --color-light-accent: #2c2f50;
-  --font-size: 1.5em;
-  --optical-ratio: 1;
-  --line-height: 1.5;
-  --mobile-font-size: 1.5em;
-  --mobile-line-height: 1.5;
-  
-}
-[data-theme=marauder] .container-hero-marge {
-  background-image: url("/assets/img/sky-sea.webp");
-  background-color: #ebe4de;
-  background-blend-mode: multiply;
-  margin-inline: calc(var(--body-padding) * -1);
-  margin-block-end: calc(var(--space-4) * -1) !important;
-}
-[data-theme=marauder] .container-hero-marge h1 {
-  font-size: 4em;
-  position: relative;
-  top: -30%;
-  color: color-mix(in srgb, #191919 95%, #ebe4de);
-}
-[data-theme=marauder] :is(h2, h3) + p::first-letter {
-  --drop-cap-size: 3;
-  float: inline-start;
-  line-height: 1;
-  margin: calc(var(--trim) * -1) var(--trim) 0 0 !important;
-  font-size: calc(var(--drop-cap-size) * var(--scale) * var(--line-height) + var(--leading) * max(var(--drop-cap-size) - 0, 1));
-  overflow: visible;
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
-  background-image: url("/assets/img/red.webp");
-  background-size: 100px;
-  background-clip: text;
-  -webkit-background-clip: text;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-@media only screen and (max-width: 600px) {
-  [data-theme=marauder] :is(h2, h3) + p::first-letter {
-    --drop-cap-size: 2;
-  }
-}
-
 
 [data-theme=system] {
   --color-light-background: #f9f7f2;
@@ -1326,115 +1277,6 @@
 [data-theme=claude] h2 {
   color: var(--color-accent);
   font-family: var(--font-interface);
-}
-
-
-[data-theme=bauhaus] {
-  --color-light-red: #e4002b; 
-  --color-light-blue: #0050a4; 
-  --color-light-yellow: #f0c300;
-  --color-dark-red: #ff5a36; 
-  --color-dark-blue: #7aa6ff;
-  --color-dark-yellow: #ffd369;
-  --color-accent: var(--color-red);
-  --font-header: "Futura Now Var";
-  --font-text: "Univers", "Helvetica Now Var";
-  --line-height: 1.1;
-  --font-size: 0.9em;
-  --line-width: var(--line-width-s);
-  --gap-nl: var(--space);
-}
-[data-theme=bauhaus] p {
-  text-align: justify;
-  text-align-last: left; 
-  
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  
-  word-spacing: -0.1em;
-  text-box-edge: cap ex;
-}
-[data-theme=bauhaus] p:not(:has(img)) + p {
-  text-indent: var(--space);
-}
-[data-theme=bauhaus] p:has(+ p) {
-  margin-block-end: var(--space-half);
-}
-[data-theme=bauhaus] h1 {
-  font-size: var(--scale-4);
-  letter-spacing: -0.01em; 
-  font-variation-settings: "wght" 650; 
-}
-[data-theme=bauhaus] h2 {
-  font-size: var(--scale-3); 
-  font-variation-settings: "wght" 600;
-  letter-spacing: -0.008em;
-}
-[data-theme=bauhaus] h3 {
-  font-family: var(--font-sans);
-  font-size: var(--scale-2); 
-  font-weight: 600;
-  letter-spacing: -0.003em;
-}
-
-
-
-[data-theme=didone] {
-  --color-light-foreground: #0d0d0d; 
-  --color-light-accent: #a67c00; 
-  --color-light-purple: #6f5a8a;
-  --color-border: color-mix(in srgb, var(--color-foreground) 8%, transparent);
-  --color-dark-foreground: #f0f0f0; 
-  --color-dark-accent: #d8b14d;
-  --font-header: "Futura Now Var", "linotype-didot-headline";
-  --font-text: "linotype-didot";
-  --line-height: 1.55;
-  --line-width: var(--line-width-s);
-}
-[data-theme=didone] p {
-  letter-spacing: 0.006em;
-}
-
-
-
-[data-theme=english-oldstyle] {
-  --color-light-accent: #8a4f39; 
-  --color-blue: #2c3e63; 
-  --color-dark-accent: color-mix(
-      in srgb,
-      var(--color-dark-foreground) 25%,
-      #b08a4b
-  );
-  --font-text: "adobe-caslon-pro";
-  --font-header: "adobe-caslon-pro";
-  --border-color: var(--color-foreground);
-}
-[data-theme=english-oldstyle] .overline {
-  font-variant-caps: small-caps;
-  letter-spacing: 0.04em;
-  font-size: var(--scale-d2);
-  border-top: var(--rule-hairline) solid var(--color-border);
-  padding-block-start: calc(var(--space) / 2);
-  margin-block-end: var(--space);
-}
-[data-theme=english-oldstyle] .sc {
-  font-variant-caps: small-caps;
-  letter-spacing: 0.04em;
-}
-[data-theme=english-oldstyle] abbr,
-[data-theme=english-oldstyle] .acronym {
-  font-variant-caps: all-small-caps;
-  letter-spacing: 0.02em;
-}
-
-
-[data-theme=transitional] {
-  --color-accent: #355c7d; 
-  --color-yellow: #cfb26b; 
-  --font-text: "berthold-baskerville-pro";
-  letter-spacing: -0.002em;
-  --tracking-body: -0.002em;
 }
 
 

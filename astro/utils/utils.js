@@ -2,33 +2,34 @@
  * Content Utilities
  * Ported from src/eleventy/eleventy/filter.js
  */
- 
+
 /**
  * Standard Slugify (Robust)
- * 
+ *
  * Input: "It's --- a   day & night!"
  * Output: "its-a-day-night"
  */
 export function slugify(text) {
-  if (!text) return '';
+  if (!text) return "";
 
   return text
     .toString()
     .toLowerCase()
-    .normalize('NFD')                 // 1. Split accents
-    .replace(/[\u0300-\u036f]/g, '')   // 2. Remove accent marks
-    .replace(/['’‘]/g, '')            // 3. Remove apostrophes (It's -> Its)
-    .replace(/[^a-z0-9]+/g, '-')      // 4. Replace ALL non-alphanumeric chars with hyphen
-    .replace(/^-+|-+$/g, '')          // 5. Trim hyphens from start and end
-    .replace(/-{2,}/g, '-');          // 6. Collapse multiple hyphens into one
+    .normalize("NFD") // 1. Split accents
+    .replace(/[\u0300-\u036f]/g, "") // 2. Remove accent marks
+    .replace(/['’‘]/g, "") // 3. Remove apostrophes (It's -> Its)
+    .replace(/[^a-z0-9]+/g, "-") // 4. Replace ALL non-alphanumeric chars with hyphen
+    .replace(/^-+|-+$/g, "") // 5. Trim hyphens from start and end
+    .replace(/-{2,}/g, "-"); // 6. Collapse multiple hyphens into one
 }
 
 export function generateShortId(length = 6) {
-  const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  let id = '';
+  const alphabet =
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  let id = "";
   const randomValues = new Uint32Array(length);
   crypto.getRandomValues(randomValues);
-  
+
   for (let i = 0; i < length; i++) {
     id += alphabet[randomValues[i] % alphabet.length];
   }
@@ -54,22 +55,6 @@ export function generatePermalink(fileIdOrStem) {
   return `/${slug}/`;
 }
 
-/**
- * Slugify a string for use in URLs
- *
- * @param {string} str - The string to slugify
- * @returns {string} The slugified string
- */
-export function slugify(str) {
-  if (!str) return ''; // Safety check
-
-  return String(str)   // Cast numbers to string
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-") // Aggressive replace
-    .replace(/(^-|-$)+/g, "");   // Trim dashes
-}
 // Reading time estimation
 export function getReadingTime(text) {
   if (!text) return "";
@@ -410,8 +395,6 @@ export function getYear(date) {
   if (isNaN(d.getTime())) return "";
   return String(d.getFullYear());
 }
-
-
 
 /**
  * Deep merge two objects recursively
