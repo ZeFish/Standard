@@ -92,8 +92,10 @@ const year = new Date().getFullYear();
       data-astro-rerun
       src="/assets/standard/standard.bundle.full.js"
       transition:persist></script>
-    <script is:inline src="/assets/standard/standard.lab.js" transition:persist
-    ></script>
+    <!-- Check if lab is enabled in config -->
+    {config.lab ? (
+      <script is:inline src="/assets/standard/standard.lab.js" transition:persist></script>
+    ) : null}
     <link rel="stylesheet" href="https://use.typekit.net/epz8pgr.css" />
   </head>
 
