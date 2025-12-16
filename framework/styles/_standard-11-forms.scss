@@ -51,6 +51,8 @@ select {
   background: var(--color-surface);
   border: var(--border);
   box-shadow: var(--shadow);
+  outline: var(--stroke-width) solid transparent;
+  outline-offset: var(--stroke-width);
   transition:
     background-color var(--transition),
     border-color var(--transition),
@@ -64,7 +66,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-muted); /* Change to your desired color */
+  color: var(--color-subtle); /* Change to your desired color */
 }
 
 input:focus,

@@ -264,7 +264,7 @@ select {
   --duration-superfast: 0.15s;
 }
 
-div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside, input {
+div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, pre, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -2333,6 +2333,8 @@ select {
   background: var(--color-surface);
   border: var(--border);
   box-shadow: var(--shadow);
+  outline: var(--stroke-width) solid transparent;
+  outline-offset: var(--stroke-width);
   transition: background-color var(--transition), border-color var(--transition), outline-color var(--transition);
 }
 
@@ -2343,7 +2345,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-muted); 
+  color: var(--color-subtle); 
 }
 
 input:focus,
