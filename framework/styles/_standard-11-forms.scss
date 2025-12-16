@@ -62,6 +62,11 @@ textarea {
   min-height: var(--space-2);
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted); /* Change to your desired color */
+}
+
 input:focus,
 textarea:focus,
 select:focus {
