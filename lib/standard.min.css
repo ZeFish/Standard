@@ -2808,7 +2808,6 @@ a.btn {
 button svg, button.icon svg, button.ghost svg, button.destructive svg, button.outline svg, button.secondary svg,
 a.btn svg {
   margin-inline: calc(var(--leading) * -2);
-  max-height: var(--scale-d4);
 }
 button:hover,
 a.btn:hover {
