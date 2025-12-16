@@ -302,7 +302,7 @@ export default function standard(options = {}) {
         }
 
         injectScript("page", 'import "@zefish/standard/js";');
-        if (finalConfig.lab !== false)
+        if (finalConfig.lab === true)
           injectScript("page", 'import "@zefish/standard/lab";');
       },
     },
