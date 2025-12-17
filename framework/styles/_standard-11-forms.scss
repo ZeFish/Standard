@@ -46,6 +46,7 @@ select {
   width: 100%;
   font-family: var(--font-interface), system-ui, sans-serif;
   @extend %padding-text;
+
   border-radius: var(--radius);
   color: var(--color-foreground);
   background: var(--color-surface);
