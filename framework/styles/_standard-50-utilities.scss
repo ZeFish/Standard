@@ -810,6 +810,14 @@
     text-align: center !important;
     margin-inline: auto !important;
   }
+
+  @include generate-scale(sm\:mt, margin-top);
+  @include generate-scale(sm\:mr, margin-right);
+  @include generate-scale(sm\:mb, margin-bottom);
+  @include generate-scale(sm\:ml, margin-left);
+  @include generate-scale(sm\:my, margin-block);
+  @include generate-scale(sm\:mx, margin-inline);
+  @include generate-scale(sm\:m, margin);
 }
 
 /* Medium screens (tablet): 769px-1024px */
