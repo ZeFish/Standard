@@ -352,6 +352,7 @@
 
 .center {
   text-align: center !important;
+  text-align-last: center !important;
 }
 
 .right {
@@ -580,10 +581,6 @@
  * Display utilities for showing/hiding content
  */
 
-.hidden {
-  display: none !important;
-}
-
 .block {
   display: block !important;
 }
@@ -598,6 +595,10 @@
 
 .radius {
   border-radius: var(--radius) !important;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .flex,

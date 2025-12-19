@@ -6416,6 +6416,7 @@ a.skip-link:active {
 
 .center {
   text-align: center !important;
+  text-align-last: center !important;
 }
 
 .right {
@@ -6637,10 +6638,6 @@ a.skip-link:active {
 
 
 
-.hidden {
-  display: none !important;
-}
-
 .block {
   display: block !important;
 }
@@ -6655,6 +6652,10 @@ a.skip-link:active {
 
 .radius {
   border-radius: var(--radius) !important;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .flex,

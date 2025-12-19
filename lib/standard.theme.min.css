@@ -253,9 +253,13 @@
 [data-theme=swiss] img {
   border: 0;
 }
-[data-theme=swiss] .prose :is(p, blockquote, pre, details, li, hr, .scroll, .callout, aside) {
-  max-width: 22rem;
+[data-theme=swiss] .prose :is(p, pre, details, li, hr, .scroll, .callout, aside) {
+  max-width: 30rem;
   margin-inline: 0;
+}
+[data-theme=swiss] .prose blockquote p {
+  max-width: none !important;
+  margin-block: var(--space);
 }
 [data-theme=swiss] aside {
   background: none;
