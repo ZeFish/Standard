@@ -625,7 +625,6 @@ h4 {
   font-weight: var(--font-weight);
   font-size: var(--scale);
   line-height: var(--line-height);
-  text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
