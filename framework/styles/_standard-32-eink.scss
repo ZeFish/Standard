@@ -5,10 +5,6 @@
     --color-background: white !important;
     --color-accent: black !important; /* No orange on B&W screens */
     --color-border: black !important;
-    --color-background-secondary:
-
-    /* Remove transparency (it renders as dithered noise) */ --opacity-dim:
-      1;
   }
 
   body::before,
