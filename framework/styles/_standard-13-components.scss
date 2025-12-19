@@ -78,10 +78,6 @@ a.btn {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 
-  svg {
-    margin-inline: calc(var(--leading) * -2);
-  }
-
   &:hover {
     color: var(--color-on-accent);
     background: color-mix(

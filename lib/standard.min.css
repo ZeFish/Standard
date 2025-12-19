@@ -2807,10 +2807,6 @@ a.btn {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
-button svg, button.icon svg, button.ghost svg, button.destructive svg, button.outline svg, button.secondary svg,
-a.btn svg {
-  margin-inline: calc(var(--leading) * -2);
-}
 button:hover,
 a.btn:hover {
   color: var(--color-on-accent);
