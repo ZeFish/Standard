@@ -818,6 +818,14 @@
   @include generate-scale(sm\:my, margin-block);
   @include generate-scale(sm\:mx, margin-inline);
   @include generate-scale(sm\:m, margin);
+
+  @include generate-scale(sm\:pt, padding-top);
+  @include generate-scale(sm\:pr, padding-right);
+  @include generate-scale(sm\:pb, padding-bottom);
+  @include generate-scale(sm\:pl, padding-left);
+  @include generate-scale(sm\:py, padding-block);
+  @include generate-scale(sm\:px, padding-inline);
+  @include generate-scale(sm\:p, padding);
 }
 
 /* Medium screens (tablet): 769px-1024px */

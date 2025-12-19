@@ -1,0 +1,76 @@
+@media screen and (update: slow), (monochrome) {
+  :root {
+    /* Force absolute contrast */
+    --color-foreground: black !important;
+    --color-background: white !important;
+    --color-accent: black !important; /* No orange on B&W screens */
+    --color-border: black !important;
+    --color-background-secondary:
+
+    /* Remove transparency (it renders as dithered noise) */ --opacity-dim:
+      1;
+  }
+
+  body::before,
+  body::after {
+    display: none !important;
+  }
+  body * {
+    text-shadow: none !important;
+    background-blend-mode: normal !important;
+    filter: none !important;
+  }
+
+  body,
+  .markdown-preview-view,
+  .cm-scroller {
+    scroll-behavior: auto !important;
+  }
+
+  /* 2. Kill all motion */
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* 3. Replace Shadows with Borders */
+  /* Shadows look like dirty smudges on e-ink */
+  .card,
+  .button,
+  .image {
+    box-shadow: none !important;
+    border: 2px solid black !important;
+  }
+
+  /* 4. Thicken Typography */
+  /* E-ink anti-aliasing can make thin fonts disappear */
+  body {
+    -webkit-font-smoothing: none; /* Crisper text */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 900 !important; /* Force heavy headers */
+  }
+
+  /* 5. Image Dithering Logic */
+  img {
+    filter: grayscale(100%) contrast(120%);
+  }
+
+  /* Stop caret blinking */
+  .cm-cursor {
+    animation-play-state: paused !important;
+    animation: none !important; /* disables blinking animation */
+    background-color: var(
+      --text-accent
+    ) !important; /* optional: keeps caret visible */
+  }
+}
