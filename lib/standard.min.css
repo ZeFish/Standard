@@ -264,7 +264,7 @@ select {
   --duration-superfast: 0.15s;
 }
 
-div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside {
+kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside {
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -2773,16 +2773,11 @@ kbd {
   background: var(--color-surface);
   border: var(--border);
   border-radius: var(--radius);
-  padding: var(--trim) var(--leading);
+  box-shadow: var(--shadow);
+  padding: var(--leading);
   font-family: var(--font-monospace);
   font-size: var(--scale-d3);
   color: var(--color-foreground);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: var(--space);
-  height: var(--space);
-  box-shadow: var(--shadow);
 }
 
 button, button.icon,
