@@ -1,12 +1,3 @@
-::view-transition {
-  animation-duration: 0s !important;
-}
-
-::view-transition-old(*),
-::view-transition-new(*) {
-  animation: none !important;
-}
-
 *,
 ::after,
 ::before,

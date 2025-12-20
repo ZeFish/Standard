@@ -2,7 +2,7 @@
 /* RESET                       */
 /* =========================== */
 
-/* Disable view transition animations - instant page swaps */
+/* Disable view transition animations - instant page swaps
 ::view-transition {
   animation-duration: 0s !important;
 }
@@ -10,6 +10,7 @@
 ::view-transition-new(*) {
   animation: none !important;
 }
+*/
 
 *,
 ::after,
