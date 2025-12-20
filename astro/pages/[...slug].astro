@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Base from "../layouts/Base.astro";
 
-import config from "virtual:standard/config";
+const config = globalThis.__STANDARD_CONFIG__;
 import { generatePermalink } from "../utils/permalink.js";
 
 // This function generates all the static paths for our .md files

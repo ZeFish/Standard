@@ -1,6 +1,5 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
-import { standardManualCollection } from "./content-config.js";
 
 /**
  * Base schema for content validation

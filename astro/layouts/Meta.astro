@@ -1,8 +1,8 @@
 ---
 import { getExcerpt } from "@zefish/standard/astro/utils";
 
-// Import site configuration from virtual module
-import config from "virtual:standard/config";
+// Access site configuration from global
+const config = globalThis['__STANDARD_CONFIG__'] as any;
 
 const {
     frontmatter,
@@ -17,7 +17,7 @@ const {
     securityHeaders = frontmatter?.securityHeaders,
 } = Astro.props;
 
-const pageTitle = title || site.title;
+
 const fullTitle =
     title && title !== site.title ? `${title} · ${site.title}` : site.title;
 
@@ -136,7 +136,7 @@ const twitterUsername = site.twitter_username || "francisfontaine";
             <meta property="article:published_time" content={datePublished} />
             <meta property="article:author" content={authorName} />
             {tags &&
-                tags.map((tag) => (
+                tags.map((tag: string) => (
                     <meta property="article:tag" content={tag} />
                 ))}
         </>

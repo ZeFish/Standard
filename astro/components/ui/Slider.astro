@@ -1,19 +1,24 @@
 <script>
   (() => {
-    const sliders = document.querySelectorAll('input[type="range"]');
+    const sliders = document.querySelectorAll('input[type="range"]') as NodeListOf<HTMLInputElement>;
     if (!sliders) return;
 
-    const updateSlider = (el) => {
-      const min = parseFloat(el.min || 0);
-      const max = parseFloat(el.max || 100);
-      const value = parseFloat(el.value);
+    const updateSlider = (el: HTMLInputElement) => {
+      const min = Number(el.min) || 0;
+      const max = Number(el.max) || 100;
+      const value = Number(el.value);
       const percent = max === min ? 0 : ((value - min) / (max - min)) * 100;
       el.style.setProperty("--slider-value", `${percent}%`);
     };
 
     sliders.forEach((slider) => {
-      updateSlider(slider);
-      slider.addEventListener("input", (event) => updateSlider(event.target));
+      const input = slider as HTMLInputElement;
+      updateSlider(input);
+      input.addEventListener("input", (event) => {
+        if (event.target instanceof HTMLInputElement) {
+          updateSlider(event.target);
+        }
+      });
     });
   })();
 </script>

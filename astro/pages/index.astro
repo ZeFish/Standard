@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import * as IndexContent from "../../content/index.md";
 import { getCollection } from "astro:content";
-import config from "virtual:standard/config";
+const config = globalThis.__STANDARD_CONFIG__;
 import Shad from "../components/Shad.astro";
 
 // Get all docs from root level (not nested in subdirectories)

@@ -31,7 +31,9 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(entry);
+const rendered = await render(entry);
+// @ts-ignore
+const { Content: ContentComponent, remarkPluginFrontmatter } = rendered;
 
 // Merge schema data with data injected by remark plugins (like backlinks)
 const frontmatter = {
@@ -53,5 +55,5 @@ const frontmatterWithBacklinks = {
     description={frontmatter?.description || ""}
     class="prose"
 >
-    <Content />
+    <ContentComponent />
 </Base>

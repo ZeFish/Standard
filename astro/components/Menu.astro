@@ -3,7 +3,7 @@
  * Menu Component
  * Displays navigation items from site.config.yml with proper active states
  */
-import config from "virtual:standard/config";
+const config = globalThis.__STANDARD_CONFIG__;
 
 const {
     items = config.nav?.header || [],
@@ -24,7 +24,7 @@ function normalizePath(p = "") {
     return s === "" ? "/" : s;
 }
 
-function isActive(itemUrl, currentUrl, exact = false) {
+function isActive(itemUrl: string, currentUrl: string, exact = false) {
     const a = normalizePath(itemUrl);
     const b = normalizePath(currentUrl);
     return exact ? a === b : b.startsWith(a);

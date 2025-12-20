@@ -11,9 +11,9 @@ import { Font } from "astro:assets";
 // Create logger for this layout
 const log = logger({ scope: "Base Layout" });
 
-// Import site configuration from virtual module
-import config from "virtual:standard/config";
+// Access site configuration from global
 import type { StandardFrameworkConfig } from "../types/standard";
+const config = globalThis['__STANDARD_CONFIG__'] as StandardFrameworkConfig;
 
 // ========================================
 // PROPS INTERFACE
@@ -62,6 +62,9 @@ const {
 // ✨ Get backlinks from the page's frontmatter/data
 const backlinks = frontmatter?.backlinks || {};
 const { inbound = [], outbound = [], meta = {} } = backlinks;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _unused = { inbound, outbound, meta };
 
 const year = new Date().getFullYear();
 ---

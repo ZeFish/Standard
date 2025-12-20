@@ -1,19 +1,5 @@
 ---
-import Meta from "../layouts/Meta.astro";
-import Menu from "../components/Menu.astro";
-import Comments from "../components/Comments.astro";
-import { ClientRouter } from "astro:transitions";
-import logger from "../../core/logger.js";
-import { Image } from "astro:assets";
 
-import { Plus, Send } from "@lucide/astro";
-
-// Create logger for this layout
-const log = logger({ scope: "Base Layout" });
-
-// Import site configuration from virtual module
-import config from "virtual:standard/config";
-import type { StandardFrameworkConfig } from "../types/standard";
 ---
 
 <section class="grid sm:grid-1 mt-4 no-rhythm">
@@ -283,12 +269,11 @@ import type { StandardFrameworkConfig } from "../types/standard";
           <p class="smaller muted">m@example.com</p>
         </div>
         <button
-          type="
-                  button"
+          type="button"
           class="icon outline rounded"
           data-tooltip="New message"
         >
-          <Plus size="16" />
+          +
         </button>
       </header>
       <section class="w-full grid-row">
@@ -372,7 +357,7 @@ import type { StandardFrameworkConfig } from "../types/standard";
                 }
               "
         />
-        <button type="button" class="icon" disabled><Send size="16" /></button>
+        <button type="button" class="icon" disabled>Send</button>
       </footer>
     </div>
 

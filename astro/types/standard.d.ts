@@ -90,6 +90,19 @@ export interface StandardFrameworkConfig extends StandardConfig {
     css?: string;
     js?: string;
   };
+  title?: string;
+  description?: string;
+  language?: string;
+  author?: {
+    name?: string;
+    email?: string;
+  };
+  nav?: {
+    header?: any[];
+  };
+  lab?: boolean;
+  site?: SiteConfig;
+  [key: string]: any; // Allow additional properties from config
 }
 
 // Re-export with more descriptive names for easier importing
@@ -158,6 +171,8 @@ declare global {
       enableSpacing: (enabled: boolean) => void;
     };
   }
+
+  var __STANDARD_CONFIG__: any;
 }
 
 // ========================================
@@ -168,7 +183,7 @@ declare global {
  * Virtual module for accessing Standard Framework configuration
  * This module is generated at build time by the Vite plugin
  */
-declare module 'virtual:standard/config' {
+declare module "virtual:standard/config" {
   const config: StandardFrameworkConfig;
   export default config;
 }

@@ -51,7 +51,7 @@ const { class: className } = Astro.props;
 
 <script>
   // 1. We wrap the logic in a function, exactly like your original code
-  const initDropdownMenu = (dropdownMenuComponent) => {
+  const initDropdownMenu = (dropdownMenuComponent: HTMLElement) => {
     // Note: The logic below is EXACTLY what you pasted,
     // just without the window.basecoat wrapper.
 
@@ -66,7 +66,7 @@ const { class: className } = Astro.props;
       return;
     }
 
-    let menuItems = [];
+    let menuItems: HTMLElement[] = [];
     let activeIndex = -1;
 
     const closePopover = (focusOnTrigger = true) => {
@@ -75,11 +75,11 @@ const { class: className } = Astro.props;
       trigger.removeAttribute("aria-activedescendant");
       popover.setAttribute("aria-hidden", "true");
 
-      if (focusOnTrigger) trigger.focus();
+      if (focusOnTrigger) (trigger as HTMLElement).focus();
       setActiveItem(-1);
     };
 
-    const openPopover = (initialSelection = false) => {
+    const openPopover = (initialSelection: boolean | "first" | "last" = false) => {
       // This custom event still works! It allows multiple separate Astro components
       // to talk to each other (e.g., closing one when another opens).
       document.dispatchEvent(
@@ -93,25 +93,25 @@ const { class: className } = Astro.props;
       menuItems = Array.from(
         menu.querySelectorAll('[role^="menuitem"]'),
       ).filter(
-        (item) =>
+        (item: Element) =>
           !item.hasAttribute("disabled") &&
           item.getAttribute("aria-disabled") !== "true",
-      );
+      ).map(item => item as HTMLElement);
 
       if (menuItems.length > 0 && initialSelection) {
-        if (initialSelection === "first") setActiveItem(0);
-        else if (initialSelection === "last")
+        if (typeof initialSelection === "string" && initialSelection === "first") setActiveItem(0);
+        else if (typeof initialSelection === "string" && initialSelection === "last")
           setActiveItem(menuItems.length - 1);
       }
     };
 
-    const setActiveItem = (index) => {
+    const setActiveItem = (index: number) => {
       if (activeIndex > -1 && menuItems[activeIndex]) {
-        menuItems[activeIndex].classList.remove("active");
+        menuItems[activeIndex]!.classList.remove("active");
       }
       activeIndex = index;
       if (activeIndex > -1 && menuItems[activeIndex]) {
-        const activeItem = menuItems[activeIndex];
+        const activeItem = menuItems[activeIndex]!;
         activeItem.classList.add("active");
         trigger.setAttribute("aria-activedescendant", activeItem.id);
       } else {
@@ -184,7 +184,7 @@ const { class: className } = Astro.props;
 
     // Cleanup mouse events and global clicks
     menu.addEventListener("mousemove", (event) => {
-      const menuItem = event.target.closest('[role^="menuitem"]');
+      const menuItem = (event.target as Element)?.closest('[role^="menuitem"]') as HTMLElement | null;
       if (menuItem && menuItems.includes(menuItem)) {
         const index = menuItems.indexOf(menuItem);
         if (index !== activeIndex) setActiveItem(index);
@@ -194,15 +194,15 @@ const { class: className } = Astro.props;
     menu.addEventListener("mouseleave", () => setActiveItem(-1));
 
     menu.addEventListener("click", (event) => {
-      if (event.target.closest('[role^="menuitem"]')) closePopover();
+      if ((event.target as Element)?.closest('[role^="menuitem"]')) closePopover();
     });
 
     document.addEventListener("click", (event) => {
-      if (!dropdownMenuComponent.contains(event.target)) closePopover();
+      if (event.target && !dropdownMenuComponent.contains(event.target as Node)) closePopover();
     });
 
     document.addEventListener("basecoat:popover", (event) => {
-      if (event.detail.source !== dropdownMenuComponent) closePopover(false);
+      if ((event as CustomEvent).detail.source !== dropdownMenuComponent) closePopover(false);
     });
 
     // Mark as initialized to prevent double-binding
@@ -216,16 +216,16 @@ const { class: className } = Astro.props;
   // This runs once when the JavaScript bundle loads on the client.
   document.querySelectorAll(".basecoat-dropdown").forEach((el) => {
     // Check if we already initialized (useful for View Transitions)
-    if (!el.dataset.dropdownMenuInitialized) {
-      initDropdownMenu(el);
+    if (!(el as HTMLElement).dataset.dropdownMenuInitialized) {
+      initDropdownMenu(el as HTMLElement);
     }
   });
 
   // OPTIONAL: If you use Astro View Transitions, you need to re-run this on navigation
   document.addEventListener("astro:page-load", () => {
     document.querySelectorAll(".basecoat-dropdown").forEach((el) => {
-      if (!el.dataset.dropdownMenuInitialized) {
-        initDropdownMenu(el);
+      if (!(el as HTMLElement).dataset.dropdownMenuInitialized) {
+        initDropdownMenu(el as HTMLElement);
       }
     });
   });

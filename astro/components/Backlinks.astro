@@ -1,13 +1,28 @@
 ---
+interface BacklinkItem {
+  url: string;
+  title?: string;
+  data?: {
+    visibility?: string;
+  };
+}
+
+interface Props {
+  backlinks?: BacklinkItem[];
+  heading?: string;
+  ariaLabel?: string;
+}
+
+const props = Astro.props as Props;
 const {
   backlinks = [],
   heading = "Mentionné dans",
   ariaLabel = "Backlinks small",
-} = Astro.props;
+} = props;
 
 // ✨ NEW: Deduplicate backlinks by URL
 const seenUrls = new Set();
-const deduplicatedBacklinks = backlinks.filter((entry) => {
+const deduplicatedBacklinks = backlinks.filter((entry: BacklinkItem) => {
   if (seenUrls.has(entry.url)) {
     return false; // Skip duplicates
   }
@@ -16,7 +31,7 @@ const deduplicatedBacklinks = backlinks.filter((entry) => {
 });
 
 const publicBacklinks = deduplicatedBacklinks.filter(
-  (entry) => entry?.data?.visibility !== "private",
+  (entry: BacklinkItem) => entry?.data?.visibility !== "private",
 );
 ---
 
@@ -28,7 +43,7 @@ const publicBacklinks = deduplicatedBacklinks.filter(
         <p class="muted mb-d4 flow-row">{heading}</p>
         <nav aria-label={ariaLabel}>
           <ul>
-            {publicBacklinks.map((item) => (
+             {publicBacklinks.map((item: BacklinkItem) => (
               <li>
                 <a href={item.url}>{item.title ?? item.url}</a>
               </li>

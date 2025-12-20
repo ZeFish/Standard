@@ -2,11 +2,9 @@
 import Base from "../layouts/Base.astro";
 import * as IndexContent from "../../content/index.md";
 import { getCollection } from "astro:content";
-import config from "virtual:standard/config";
+const config = (globalThis as { [key: string]: any }).__STANDARD_CONFIG__;
 import Shad from "../components/Shad.astro";
-import Dropdown from "../components/Dropdown.astro";
 
-import Accordion from "../components/ui/Accordion.astro";
 import Badge from "../components/ui/Badge.astro";
 import Button from "../components/ui/Button.astro";
 import Breadrcumbs from "../components/ui/Breadcrumbs.astro";

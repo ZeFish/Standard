@@ -85,14 +85,14 @@ const initOptions = {
         <div class="form-actions">
           {showSubmit && <button type="submit" class="button">Post Comment</button>}
           {showReset && <button type="reset" class="button">Clear</button>}
-          {showCancel && <button type="cancel" class="button">Cancel</button>}
+          {showCancel && <button type="button" class="button">Cancel</button>}
         </div>
       </fieldset>
     </form>
   </div>
 </article>
 
-<script define:vars={{ initOptions }} defer>
+<script define:vars={{ initOptions }} is:inline defer>
   document.addEventListener("DOMContentLoaded", async () => {
     // Assuming GitHubComments is loaded globally or imported. 
     // Since the original used a global script, we might need to import it here or assume it's available.

@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { getCollection } from "astro:content";
-import config from "virtual:standard/config";
+const config = globalThis.__STANDARD_CONFIG__;
 
 // Get some random pages to suggest
 const allDocs = await getCollection("content");

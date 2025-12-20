@@ -133,6 +133,7 @@
     "@11ty/eleventy-navigation": "^1.0.5",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "@astrojs/check": "^0.9.6",
     "@astrojs/svelte": "^7.2.2",
     "@fontsource-variable/fraunces": "^5.2.9",
     "@fontsource-variable/instrument-sans": "^5.2.8",
