@@ -142,7 +142,7 @@ a.btn.link {
   background: var(--color-surface);
   color: var(--color-link);
   &:hover {
-    background: color-mix(in srgb, currentColor 10%, var(--color-surface));
+    background: #{mix(currentColor, 10, --color-surface)};
   }
 }
 
@@ -157,7 +157,7 @@ a.btn.outline {
 }
 button.outline:hover,
 a.btn.outline:hover {
-  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
+  background: #{mix(currentColor, 5, --color-surface)};
 }
 button.icon,
 a.btn.icon {
@@ -239,7 +239,7 @@ a.btn.ghost {
 
 a.badge:hover {
   color: var(--color-on-accent);
-  background: color-mix(in srgb, var(--color-accent) 70%, var(--color-surface));
+  background: #{mix(--color-accent, 70, --color-surface)};
 }
 .badge.secondary,
 a.badge.secondary {
@@ -252,7 +252,7 @@ a.badge.secondary {
 }
 a.badge.secondary:hover {
   color: var(--color-foreground);
-  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
+  background: #{mix(currentColor, 5, --color-surface)};
 }
 .badge.outline {
   background-color: transparent;

@@ -45,5 +45,5 @@ caption {
 
 /* Zebra striping */
 .striped tbody tr:nth-child(even) {
-  background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+  background: #{alpha(--color-foreground, 3)};
 }

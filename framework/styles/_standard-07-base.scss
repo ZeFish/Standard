@@ -46,7 +46,7 @@ body {
 
 /* Selection highlight */
 ::selection {
-  background: color-mix(in srgb, var(--color-yellow) 25%, transparent);
+  background: #{alpha(--color-yellow, 25)};
   color: var(--color-foreground);
 }
 
@@ -61,8 +61,8 @@ hr {
 
 /* Mark highlighting */
 mark {
-  background: color-mix(in srgb, var(--color-yellow) 30%, transparent);
-  color: color-mix(in srgb, var(--color-yellow) 30%, var(--color-foreground));
+  background: #{alpha(--color-yellow, 30)};
+  color: #{mix(--color-yellow, 30, --color-foreground)};
   padding: var(--trim);
   padding-top: 0.1em;
 }
