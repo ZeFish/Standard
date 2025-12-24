@@ -278,10 +278,6 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
   
   color-scheme: light dark;
   
-  --tooltip-bg: #1a1a1a;
-  --tooltip-text: #ffffff;
-  --tooltip-ease: cubic-bezier(0.25, 1, 0.5, 1);
-  
   --signal: #d65d0e; 
   
   --dna-l: oklch(from var(--signal) l);
@@ -293,28 +289,21 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
   
   --safe-l: clamp(0.35, var(--dna-l), 0.75);
   
-  
   --pigment-red: oklch(var(--safe-l) var(--safe-c) 25);
-  
   --pigment-yellow: oklch(var(--safe-l) var(--safe-c) 85);
-  
   --pigment-green: oklch(var(--safe-l) var(--safe-c) 145);
-  
   --pigment-cyan: oklch(var(--safe-l) var(--safe-c) 190);
-  
   --pigment-blue: oklch(var(--safe-l) var(--safe-c) 240);
-  
   --pigment-purple: oklch(var(--safe-l) var(--safe-c) 300);
   
-  --color-light-background: white;
+  --color-light-background: #ffffff;
   --color-light-foreground: #262626;
-  
   --color-light-accent: var(--signal);
   
   --color-dark-background: #0f0f0f;
   --color-dark-foreground: #dbdbdb;
-  
   --color-dark-accent: oklch(from var(--signal) calc(l + 0.12) c h);
+  
   
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
@@ -322,7 +311,7 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
   --color-header: var(--color-foreground);
   
   --color-red: var(--pigment-red);
-  --color-orange: oklch(var(--safe-l) var(--safe-c) 55); 
+  --color-orange: oklch(var(--safe-l) var(--safe-c) 55);
   --color-yellow: var(--pigment-yellow);
   --color-green: var(--pigment-green);
   --color-cyan: var(--pigment-cyan);
@@ -337,9 +326,13 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
   --color-link: var(--pigment-blue);
   --color-on-accent: var(--color-background);
   
+  --color-light: var(--color-light-background);
+  --color-dark: var(--color-light-foreground);
+  
   
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
+  
   --color-border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   --color-surface: color-mix(in srgb, var(--color-foreground) 3%, transparent);
   --color-secondary: color-mix(
@@ -347,84 +340,43 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
     var(--color-foreground) 3%,
     var(--color-background)
   );
-  --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
-  --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
-  --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
-  --color-light: var(--color-light-background);
-  --color-dark: var(--color-light-foreground);
+  
   --color-background-accent: color-mix(
     in srgb,
     var(--color-accent) 7%,
     transparent
   );
+  
+  --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
+  
+  --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
+  --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
+  
   --color-modal-background: color-mix(
     in srgb,
     color-mix(in srgb, var(--color-foreground) 10%, var(--color-background)) 60%,
     transparent
   );
   
-  --color-1: color-mix(
-    in srgb,
-    var(--color-foreground) 3%,
-    var(--color-background)
-  );
-  --color-2: color-mix(
-    in srgb,
-    var(--color-foreground) 5%,
-    var(--color-background)
-  );
-  --color-3: color-mix(
-    in srgb,
-    var(--color-foreground) 7%,
-    var(--color-background)
-  );
-  --color-4: color-mix(
-    in srgb,
-    var(--color-foreground) 10%,
-    var(--color-background)
-  );
-  --color-5: color-mix(
-    in srgb,
-    var(--color-foreground) 20%,
-    var(--color-background)
-  );
-  --color-6: color-mix(
-    in srgb,
-    var(--color-background) 3%,
-    var(--color-foreground)
-  );
-  --color-7: color-mix(
-    in srgb,
-    var(--color-background) 5%,
-    var(--color-foreground)
-  );
-  --color-8: color-mix(
-    in srgb,
-    var(--color-background) 7%,
-    var(--color-foreground)
-  );
-  --color-9: color-mix(
-    in srgb,
-    var(--color-background) 10%,
-    var(--color-foreground)
-  );
-  --color-10: color-mix(
-    in srgb,
-    var(--color-background) 20%,
-    var(--color-foreground)
-  );
-  
-  --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  --color-1: color-mix(in srgb, var(--color-foreground) 3%, var(--color-background));
+  --color-2: color-mix(in srgb, var(--color-foreground) 5%, var(--color-background));
+  --color-3: color-mix(in srgb, var(--color-foreground) 7%, var(--color-background));
+  --color-4: color-mix(in srgb, var(--color-foreground) 10%, var(--color-background));
+  --color-5: color-mix(in srgb, var(--color-foreground) 20%, var(--color-background));
+  --color-6: color-mix(in srgb, var(--color-background) 3%, var(--color-foreground));
+  --color-7: color-mix(in srgb, var(--color-background) 5%, var(--color-foreground));
+  --color-8: color-mix(in srgb, var(--color-background) 7%, var(--color-foreground));
+  --color-9: color-mix(in srgb, var(--color-background) 10%, var(--color-foreground));
+  --color-10: color-mix(in srgb, var(--color-background) 20%, var(--color-foreground));
   
   --color-shadow: color-mix(in srgb, var(--color-dark) 5%, transparent);
   --shadow: 0 1px 2px var(--color-shadow);
-  --shadow-l:
-    0 4px 6px -1px var(--color-darker), 0 2px 4px -2px var(--color-darker);
+  --shadow-l: 0 4px 6px -1px var(--color-darker), 0 2px 4px -2px var(--color-darker);
   
   --border: var(--stroke-width) solid var(--color-border);
-  --border-accent: var(--stroke-width) solid
-    color-mix(in srgb, var(--color-accent) 7%, transparent);
+  --border-accent: var(--stroke-width) solid color-mix(in srgb, var(--color-accent) 7%, transparent);
   
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
@@ -433,16 +385,13 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
 @media (prefers-color-scheme: dark) {
   :root {
     
-    
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
-    
     --color-accent: var(--color-dark-accent);
+    --color-header: var(--color-foreground);
     
     --color-light: var(--color-dark-foreground);
     --color-dark: var(--color-dark-background);
-    --color-header: var(--color-foreground);
-    
     
     --pigment-red: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 25);
     --pigment-yellow: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 85);
@@ -460,20 +409,11 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
     --color-magenta: var(--pigment-purple);
     --color-link: var(--pigment-blue);
     
-    
     --color-muted: color-mix(in srgb, var(--color-foreground) 65%, transparent);
-    --color-subtle: color-mix(
-      in srgb,
-      var(--color-foreground) 45%,
-      transparent
-    );
-    --color-border: color-mix(
-      in srgb,
-      var(--color-foreground) 7%,
-      var(--color-background)
-    );
-    --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
+    --color-subtle: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+    --color-border: color-mix(in srgb, var(--color-foreground) 7%, var(--color-background));
     --color-surface: color-mix(in srgb, black 10%, transparent);
+    --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
     --color-modal-background: color-mix(
       in srgb,
       color-mix(in srgb, black 75%, var(--color-background)) 60%,

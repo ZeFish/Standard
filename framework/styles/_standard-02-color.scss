@@ -11,140 +11,175 @@
  * the vibrancy and temperature of your chosen signal while rotating hues to
  * create semantic colors (success, warning, error, info, etc.).
  * 
- * Features:
- * - Single color input generates entire palette
- * - Preserves lightness and chroma (vibrancy) across spectrum
- * - Intelligent dark mode with automatic lightness inversion
- * - Safety constraints for accessibility (WCAG AA compliant)
- * - Maintains color temperature when switching themes
- * - Backward compatible with manual color overrides
- *
+ * ## Core Features
+ * 
+ * - **Single Input**: One signal color generates entire palette
+ * - **Perceptual Uniformity**: OKLCH preserves lightness and chroma across spectrum
+ * - **Smart Dark Mode**: Automatic brightness adjustment while preserving hue
+ * - **Accessibility First**: WCAG AA compliant with built-in safety constraints
+ * - **Temperature Preservation**: Warm colors stay warm, cool colors stay cool
+ * - **Full Compatibility**: Works with manual overrides and legacy systems
+ * 
+ * ## Browser Support
+ * 
+ * OKLCH requires Chrome 111+, Safari 16.4+, Firefox 113+ (March-May 2023)
+ * Older browsers gracefully fall back to default color values.
+ * 
  * @prop {color} --signal Primary brand/accent color (the seed for all others)
  * @prop {color} --color-background Page background color
  * @prop {color} --color-foreground Text foreground color
  * @prop {color} --color-accent Primary accent color (derived from signal)
- * @prop {color} --pigment-red Generated red (errors, deletions)
- * @prop {color} --pigment-yellow Generated yellow (warnings, highlights)
- * @prop {color} --pigment-green Generated green (success, insertions)
- * @prop {color} --pigment-cyan Generated cyan (info, metadata)
- * @prop {color} --pigment-blue Generated blue (links, focus)
- * @prop {color} --pigment-purple Generated purple (magic, AI)
+ * @prop {color} --pigment-red Generated red (errors, deletions) - 25° hue
+ * @prop {color} --pigment-yellow Generated yellow (warnings, highlights) - 85° hue
+ * @prop {color} --pigment-green Generated green (success, insertions) - 145° hue
+ * @prop {color} --pigment-cyan Generated cyan (info, metadata) - 190° hue
+ * @prop {color} --pigment-blue Generated blue (links, focus) - 240° hue
+ * @prop {color} --pigment-purple Generated purple (magic, AI) - 300° hue
  *
- * @example scss - Simple usage: Just set one color
+ * @example scss - Simple: Just set one color
  * :root {
  *   --signal: #d65d0e;
  * }
  *
- * @example scss - Advanced: Override specific colors
+ * @example scss - Advanced: Override specific pigments
  * :root {
  *   --signal: #7a5a2e;
  *   --pigment-red: #a84032;
+ * }
+ * 
+ * @example scss - Legacy: Set colors manually
+ * :root {
+ *   --color-success: #5e9d80;
+ *   --color-error: #b14c42;
  * }
  *
  * @since 0.18.0
  * @see https://developer.chrome.com/blog/css-relative-color-syntax/
  * @see https://webaim.org/articles/contrast/
+ * @see https://oklch.com/
  */
 
-/* Modern Color System - OKLCH-Based Automatic Harmony Generation */
+/* ============================================
+   STANDARD COLOR SYSTEM
+   OKLCH-Based Automatic Harmony Generation
+   ============================================ */
+
 :root {
-  /* Tell browser we support both color schemes */
+  /* Browser color scheme support */
   color-scheme: light dark;
 
-  /* Tooltip variables */
-  --tooltip-bg: #1a1a1a;
-  --tooltip-text: #ffffff;
-  --tooltip-ease: cubic-bezier(0.25, 1, 0.5, 1);
-
-  /* ============================================
-     THE SIGNAL - User's Single Color Choice
-     This is the only color users need to define.
-     Everything else derives from this mathematically.
-     ============================================ */
+  /* ================================================================
+     SECTION 1: THE SIGNAL COLOR (User Input)
+     ================================================================
+     
+     This is the ONLY color users need to define.
+     All other colors generate automatically from this seed.
+     
+     Set to any valid CSS color: hex, rgb, hsl, oklch, etc.
+     ================================================================ */
   
   --signal: #d65d0e; /* Default: Safety Orange */
 
-  /* ============================================
-     THE DNA EXTRACTION
-     Extract lightness (l), chroma (c), and hue (h)
-     from the user's signal color using OKLCH
-     ============================================ */
+  /* ================================================================
+     SECTION 2: DNA EXTRACTION (OKLCH Analysis)
+     ================================================================
+     
+     Extract the three components of the signal color:
+     - Lightness (l): How bright/dark (0-1)
+     - Chroma (c): How vibrant/saturated (0-0.4)
+     - Hue (h): The color angle (0-360°)
+     
+     These form the "DNA" that all generated colors inherit.
+     ================================================================ */
   
   --dna-l: oklch(from var(--signal) l);
   --dna-c: oklch(from var(--signal) c);
   --dna-h: oklch(from var(--signal) h);
 
-  /* ============================================
-     SAFETY CONSTRAINTS
-     Ensure colors are accessible and functional
-     ============================================ */
+  /* ================================================================
+     SECTION 3: SAFETY CONSTRAINTS (Accessibility)
+     ================================================================
+     
+     Apply minimum/maximum bounds to ensure:
+     - Colors aren't too gray (minimum chroma)
+     - Text is readable (clamped lightness)
+     - WCAG AA contrast compliance
+     ================================================================ */
   
-  /* If signal is black/white (chroma=0), ensure minimum vibrancy for alerts */
+  /* Minimum vibrancy - prevents gray colors from black/white signals */
   --safe-c: max(var(--dna-c), 0.12);
   
-  /* Ensure readable text - clamp lightness for derived colors */
+  /* Readable lightness range - prevents too light/dark text */
   --safe-l: clamp(0.35, var(--dna-l), 0.75);
 
-  /* ============================================
-     THE GENERATED SPECTRUM
-     Rotate hue while preserving lightness & chroma
-     Creates harmonious colors from signal DNA
-     ============================================ */
+  /* ================================================================
+     SECTION 4: THE GENERATED SPECTRUM (Hue Rotation)
+     ================================================================
+     
+     Generate six semantic colors by rotating the hue while
+     preserving lightness and chroma from the signal's DNA.
+     
+     Each color sits at a specific hue angle for optimal harmony:
+     - Red (25°): Warm, urgent
+     - Yellow (85°): Bright, attention
+     - Green (145°): Natural, positive
+     - Cyan (190°): Cool, informative
+     - Blue (240°): Trustworthy, primary
+     - Purple (300°): Creative, special
+     
+     All inherit the signal's vibrancy and brightness character.
+     ================================================================ */
   
-  /* Red (~25deg) - Errors, Deletions, Danger */
   --pigment-red: oklch(var(--safe-l) var(--safe-c) 25);
-  
-  /* Yellow (~85deg) - Warnings, Highlights, Caution */
   --pigment-yellow: oklch(var(--safe-l) var(--safe-c) 85);
-  
-  /* Green (~145deg) - Success, Insertions, Positive */
   --pigment-green: oklch(var(--safe-l) var(--safe-c) 145);
-  
-  /* Cyan (~190deg) - Info, Metadata, Neutral */
   --pigment-cyan: oklch(var(--safe-l) var(--safe-c) 190);
-  
-  /* Blue (~240deg) - Links, Focus, Primary Actions */
   --pigment-blue: oklch(var(--safe-l) var(--safe-c) 240);
-  
-  /* Purple (~300deg) - Magic, AI, Special Features */
   --pigment-purple: oklch(var(--safe-l) var(--safe-c) 300);
 
-  /* ============================================
-     LIGHT MODE BASE COLORS
-     Natural, paper-like foundation
-     ============================================ */
+  /* ================================================================
+     SECTION 5: LIGHT MODE FOUNDATION
+     ================================================================
+     
+     Default background and foreground colors for light mode.
+     These can be overridden by themes or user preferences.
+     ================================================================ */
   
-  --color-light-background: white;
+  --color-light-background: #ffffff;
   --color-light-foreground: #262626;
-  
-  /* Use signal as the accent, or override if specified */
   --color-light-accent: var(--signal);
 
-  /* ============================================
-     DARK MODE BASE COLORS
-     Intelligent lightness inversion
-     ============================================ */
+  /* ================================================================
+     SECTION 6: DARK MODE FOUNDATION
+     ================================================================
+     
+     Dark mode colors with intelligent adjustments:
+     - Background: Deep dark (not pure black for reduced eye strain)
+     - Foreground: Soft white (not pure white for better contrast)
+     - Accent: Brightened signal for visibility on dark backgrounds
+     ================================================================ */
   
   --color-dark-background: #0f0f0f;
   --color-dark-foreground: #dbdbdb;
-  
-  /* Brighten signal slightly for dark mode visibility */
   --color-dark-accent: oklch(from var(--signal) calc(l + 0.12) c h);
 
-  /* ============================================
-     SEMANTIC COLOR TOKENS
-     Map generated pigments to semantic names
-     Default to light mode
-     ============================================ */
+  /* ================================================================
+     SECTION 7: ACTIVE COLOR TOKENS (Light Mode Default)
+     ================================================================
+     
+     These are the colors actively used throughout the framework.
+     They default to light mode and switch in the dark mode media query.
+     ================================================================ */
   
+  /* Core UI colors */
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
   --color-accent: var(--color-light-accent);
   --color-header: var(--color-foreground);
 
-  /* Use generated pigments for semantic colors */
+  /* Semantic hue colors mapped to generated pigments */
   --color-red: var(--pigment-red);
-  --color-orange: oklch(var(--safe-l) var(--safe-c) 55); /* Between yellow and red */
+  --color-orange: oklch(var(--safe-l) var(--safe-c) 55);
   --color-yellow: var(--pigment-yellow);
   --color-green: var(--pigment-green);
   --color-cyan: var(--pigment-cyan);
@@ -157,14 +192,27 @@
   --color-error: var(--pigment-red);
   --color-info: var(--pigment-blue);
 
-  /* Links use blue by default */
+  /* Interactive colors */
   --color-link: var(--pigment-blue);
   --color-on-accent: var(--color-background);
 
-  /* ===== COMPUTED SEMANTIC COLORS ===== */
-  /* These use color-mix for semi-transparent variations */
+  /* Light/Dark references for relative color mixing */
+  --color-light: var(--color-light-background);
+  --color-dark: var(--color-light-foreground);
+
+  /* ================================================================
+     SECTION 8: COMPUTED TRANSPARENCY LAYERS
+     ================================================================
+     
+     Semi-transparent variations using color-mix for subtle UI elements.
+     These adjust automatically based on foreground/background colors.
+     ================================================================ */
+  
+  /* Text opacity variations */
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
+  
+  /* Surface and border layers */
   --color-border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   --color-surface: color-mix(in srgb, var(--color-foreground) 3%, transparent);
   --color-secondary: color-mix(
@@ -173,119 +221,103 @@
     var(--color-background)
   );
 
-  --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
-  --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
-  --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
-  --color-light: var(--color-light-background);
-  --color-dark: var(--color-light-foreground);
-
+  /* Accent-based surfaces */
   --color-background-accent: color-mix(
     in srgb,
     var(--color-accent) 7%,
     transparent
   );
+  
+  /* Interactive state overlays */
+  --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  --color-pop: color-mix(in srgb, var(--color-foreground) 22%, transparent);
+  
+  /* Light/dark shading helpers */
+  --color-lighter: color-mix(in srgb, var(--color-light) 15%, transparent);
+  --color-darker: color-mix(in srgb, var(--color-dark) 15%, transparent);
+  
+  /* Modal and overlay backgrounds */
   --color-modal-background: color-mix(
     in srgb,
     color-mix(in srgb, var(--color-foreground) 10%, var(--color-background)) 60%,
     transparent
   );
 
-  /* Tint scale for subtle variations */
-  --color-1: color-mix(
-    in srgb,
-    var(--color-foreground) 3%,
-    var(--color-background)
-  );
-  --color-2: color-mix(
-    in srgb,
-    var(--color-foreground) 5%,
-    var(--color-background)
-  );
-  --color-3: color-mix(
-    in srgb,
-    var(--color-foreground) 7%,
-    var(--color-background)
-  );
-  --color-4: color-mix(
-    in srgb,
-    var(--color-foreground) 10%,
-    var(--color-background)
-  );
-  --color-5: color-mix(
-    in srgb,
-    var(--color-foreground) 20%,
-    var(--color-background)
-  );
-  --color-6: color-mix(
-    in srgb,
-    var(--color-background) 3%,
-    var(--color-foreground)
-  );
-  --color-7: color-mix(
-    in srgb,
-    var(--color-background) 5%,
-    var(--color-foreground)
-  );
-  --color-8: color-mix(
-    in srgb,
-    var(--color-background) 7%,
-    var(--color-foreground)
-  );
-  --color-9: color-mix(
-    in srgb,
-    var(--color-background) 10%,
-    var(--color-foreground)
-  );
-  --color-10: color-mix(
-    in srgb,
-    var(--color-background) 20%,
-    var(--color-foreground)
-  );
+  /* ================================================================
+     SECTION 9: TINT SCALE (10-Step Gradient)
+     ================================================================
+     
+     A numeric scale from 1-10 for fine-grained color control:
+     - 1-5: Foreground mixed into background (subtle lightening)
+     - 6-10: Background mixed into foreground (subtle darkening)
+     
+     Useful for creating layered surfaces and depth hierarchies.
+     ================================================================ */
+  
+  --color-1: color-mix(in srgb, var(--color-foreground) 3%, var(--color-background));
+  --color-2: color-mix(in srgb, var(--color-foreground) 5%, var(--color-background));
+  --color-3: color-mix(in srgb, var(--color-foreground) 7%, var(--color-background));
+  --color-4: color-mix(in srgb, var(--color-foreground) 10%, var(--color-background));
+  --color-5: color-mix(in srgb, var(--color-foreground) 20%, var(--color-background));
+  --color-6: color-mix(in srgb, var(--color-background) 3%, var(--color-foreground));
+  --color-7: color-mix(in srgb, var(--color-background) 5%, var(--color-foreground));
+  --color-8: color-mix(in srgb, var(--color-background) 7%, var(--color-foreground));
+  --color-9: color-mix(in srgb, var(--color-background) 10%, var(--color-foreground));
+  --color-10: color-mix(in srgb, var(--color-background) 20%, var(--color-foreground));
 
-  /* Interactive states */
-  --color-hover: color-mix(in srgb, var(--color-accent) 35%, transparent);
-  --color-active: color-mix(in srgb, var(--color-accent) 20%, transparent);
-
-  /* ===== SHADOWS AND EFFECTS ===== */
+  /* ================================================================
+     SECTION 10: SHADOWS AND VISUAL EFFECTS
+     ================================================================
+     
+     Depth and elevation effects using computed shadow colors.
+     ================================================================ */
+  
   --color-shadow: color-mix(in srgb, var(--color-dark) 5%, transparent);
   --shadow: 0 1px 2px var(--color-shadow);
-  --shadow-l:
-    0 4px 6px -1px var(--color-darker), 0 2px 4px -2px var(--color-darker);
+  --shadow-l: 0 4px 6px -1px var(--color-darker), 0 2px 4px -2px var(--color-darker);
 
-  /* ===== DESIGN TOKENS ===== */
+  /* ================================================================
+     SECTION 11: DESIGN TOKENS (Borders & Transitions)
+     ================================================================ */
+  
   --border: var(--stroke-width) solid var(--color-border);
-  --border-accent: var(--stroke-width) solid
-    color-mix(in srgb, var(--color-accent) 7%, transparent);
+  --border-accent: var(--stroke-width) solid color-mix(in srgb, var(--color-accent) 7%, transparent);
 
-  /* Theme transition for smooth switching */
+  /* Smooth theme transition animation */
   transition:
     background-color var(--transition),
     color var(--transition),
     border-color var(--transition);
 }
 
-/* ============================================
-   AUTOMATIC DARK MODE
-   Intelligent lightness inversion that preserves
-   color temperature and vibrancy
-   ============================================ */
+/* ====================================================================
+   DARK MODE: Automatic Color Inversion
+   ====================================================================
+   
+   When the system or browser requests dark mode, intelligently
+   adjust colors while preserving their essential character:
+   
+   - Flip background/foreground lightness
+   - Brighten pigments for visibility on dark backgrounds
+   - Maintain hue and chroma (temperature and vibrancy)
+   - Adjust transparency layers for better contrast
+   
+   This creates a true dark theme, not just inverted colors.
+   ==================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* ===== FLIP BACKGROUND & FOREGROUND ===== */
-    /* Preserve warmth/coolness while inverting lightness */
+    /* Core UI colors - flip to dark mode variants */
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
-    
-    /* Brighten accent for visibility against dark background */
     --color-accent: var(--color-dark-accent);
+    --color-header: var(--color-foreground);
     
-    /* Update light/dark references */
+    /* Light/dark reference swap */
     --color-light: var(--color-dark-foreground);
     --color-dark: var(--color-dark-background);
-    --color-header: var(--color-foreground);
 
-    /* ===== BRIGHTEN PIGMENTS FOR DARK MODE ===== */
-    /* Generated colors need to glow against dark background */
+    /* Brighten all pigments by +0.15 lightness for visibility */
     --pigment-red: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 25);
     --pigment-yellow: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 85);
     --pigment-green: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 145);
@@ -303,21 +335,12 @@
     --color-magenta: var(--pigment-purple);
     --color-link: var(--pigment-blue);
 
-    /* ===== ADJUSTED COMPUTED COLORS FOR DARK MODE ===== */
-    /* Increase opacity for better visibility on dark backgrounds */
+    /* Adjusted transparency layers for better dark mode contrast */
     --color-muted: color-mix(in srgb, var(--color-foreground) 65%, transparent);
-    --color-subtle: color-mix(
-      in srgb,
-      var(--color-foreground) 45%,
-      transparent
-    );
-    --color-border: color-mix(
-      in srgb,
-      var(--color-foreground) 7%,
-      var(--color-background)
-    );
-    --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
+    --color-subtle: color-mix(in srgb, var(--color-foreground) 45%, transparent);
+    --color-border: color-mix(in srgb, var(--color-foreground) 7%, var(--color-background));
     --color-surface: color-mix(in srgb, black 10%, transparent);
+    --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
     --color-modal-background: color-mix(
       in srgb,
       color-mix(in srgb, black 75%, var(--color-background)) 60%,
@@ -326,7 +349,14 @@
   }
 }
 
-/* Reduced motion support */
+/* ====================================================================
+   ACCESSIBILITY: Motion Preferences
+   ====================================================================
+   
+   Respect user's reduced motion preference by disabling all transitions
+   and animations. Essential for users with vestibular disorders.
+   ==================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     transition: none;
@@ -338,7 +368,14 @@
   }
 }
 
-/* Windows High Contrast mode */
+/* ====================================================================
+   ACCESSIBILITY: High Contrast Mode
+   ====================================================================
+   
+   Windows High Contrast mode uses system color keywords.
+   These override all custom colors for maximum readability.
+   ==================================================================== */
+
 @media (forced-colors: active) {
   :root {
     --color-background: Canvas;
@@ -349,12 +386,18 @@
   }
 }
 
-/* ===== BASE HTML STYLING ===== */
+/* ====================================================================
+   BASE HTML ELEMENT STYLING
+   ====================================================================
+   
+   Apply color system to root HTML element with smooth transitions.
+   ==================================================================== */
+
 html {
   color: var(--color-foreground);
   background: var(--color-background);
 
-  /* Smooth theme transitions */
+  /* Smooth color transitions when switching themes */
   transition:
     background-color var(--transition),
     color var(--transition);
