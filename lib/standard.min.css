@@ -248,7 +248,16 @@ select {
   --z-toast: 1090;
   --z-image-zoom: 9999;
   
+  --duration-instant: 0.1s;
+  --duration-fast: 0.2s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.5s;
   --duration-superfast: 0.15s;
+  
+  --ease-default: ease;
+  --ease-in-out: ease-in-out;
+  --ease-out: ease-out;
+  --ease-in: ease-in;
 }
 
 kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside {
@@ -8310,12 +8319,6 @@ a.skip-link:active {
   body.standard-debug::before {
     display: none !important;
   }
-}
-
-
-:root {
-  --baseline-trim-support: 0;
-  
 }
 
 .standard-lab-panel {

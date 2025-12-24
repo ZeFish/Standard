@@ -126,7 +126,17 @@
   --z-image-zoom: 9999;
 
   /* Animation tokens */
+  --duration-instant: 0.1s;
+  --duration-fast: 0.2s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.5s;
   --duration-superfast: 0.15s;
+
+  /* Easing curves */
+  --ease-default: ease;
+  --ease-in-out: ease-in-out;
+  --ease-out: ease-out;
+  --ease-in: ease-in;
 }
 
 #{$text-elements} {
