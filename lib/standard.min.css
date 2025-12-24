@@ -38,6 +38,21 @@ video {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 button,
 a.btn, button.secondary, button.outline, button.destructive, button.ghost, button.icon, .card {
   border: var(--border);
@@ -45,6 +60,7 @@ a.btn, button.secondary, button.outline, button.destructive, button.ghost, butto
   background: var(--color-background-sexondary);
   border-radius: var(--radius);
 }
+
 
 button,
 a.btn, button.secondary, button.outline, button.destructive, button.ghost, button.icon, .badge, .badge.secondary, .badge.outline, .badge.destructive, .badge.ghost, .badge.icon, input,
@@ -2748,11 +2764,7 @@ input[type=range]:hover::-webkit-slider-thumb {
   filter: blur(0.3px);
   animation: rotation 0.25s linear infinite;
   --color-loading-mix: color-mix(in srgb, var(--color-accent) 100%, black);
-  --color-loading: color-mix(
-    in srgb,
-    var(--color-loading-mix) 25%,
-    transparent
-  );
+  --color-loading: color-mix(in srgb, var(--color-loading-mix) 25%, transparent);
   border-bottom-color: color-mix(in srgb, var(--color-loading) 100%, transparent);
   box-shadow: 0px 4px 6px -2px var(--color-loading), inset 0px -4px 6px -2px var(--color-loading);
 }
@@ -2859,7 +2871,7 @@ a.btn.secondary {
 }
 button.secondary:hover,
 a.btn.secondary:hover {
-  background: color-mix(in srgb, currentColor 5%, var(--color-surface));
+  background: color-mix(in srgb, var(currentColor) 5%, var(--color-surface));
 }
 
 button.link,

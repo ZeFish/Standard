@@ -8,7 +8,7 @@
   width: var(--space-2);
   height: var(--space-2);
   border: var(--trim) solid transparent;
-  border-bottom-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+  border-bottom-color: #{alpha(--color-accent, 85)};
   background: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -17,11 +17,7 @@
   animation: rotation 0.25s linear infinite;
 
   --color-loading-mix: color-mix(in srgb, var(--color-accent) 100%, black);
-  --color-loading: color-mix(
-    in srgb,
-    var(--color-loading-mix) 25%,
-    transparent
-  );
+  --color-loading: #{alpha(--color-loading-mix, 25)};
   border-bottom-color: color-mix(
     in srgb,
     var(--color-loading) 100%,
@@ -75,11 +71,7 @@ a.btn {
 
   &:hover {
     color: var(--color-on-accent);
-    background: color-mix(
-      in srgb,
-      var(--color-accent) 70%,
-      var(--color-surface)
-    );
+    background: #{mix(--color-accent, 70, --color-surface)};
   }
   /* Loop through the list to create .badge-outline, .badge-ghost, etc. */
   @each $type in $types {
@@ -108,12 +100,12 @@ a.btn {
 
 button:active,
 a.btn:active {
-  background: color-mix(in srgb, var(--color-accent) 50%, var(--color-surface));
+  background: #{mix(--color-accent, 50, --color-surface)};
 }
 
 button:focus-visible,
 a.btn:focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-accent) 0%, transparent);
+  outline: 1px solid #{alpha(--color-accent, 0)};
   outline-offset: 2px;
   color: var(--color-background);
 }
@@ -121,7 +113,7 @@ a.btn:focus-visible {
 button.destructive,
 a.btn-destructive {
   background-color: var(--color-surface);
-  border-color: color-mix(in srgb, var(--color-error) 10%, var(--color-border));
+  border-color: #{mix(--color-error, 10, --color-border)};
   color: var(--color-error);
   &:hover {
     background: var(--color-error);
@@ -141,7 +133,7 @@ a.btn.secondary {
   background: var(--color-surface);
   color: var(--color-foreground);
   &:hover {
-    background: color-mix(in srgb, currentColor 5%, var(--color-surface));
+    background: #{mix(currentColor, 5, --color-surface)};
   }
 }
 

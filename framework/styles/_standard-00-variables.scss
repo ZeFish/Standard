@@ -1,34 +1,81 @@
 /**
  * @component SCSS Variables & Mixins
  * @category Foundation
- * @description Responsive breakpoints and rhythm application mixins for consistent
- * vertical rhythm and spacing across all elements. These mixins ensure proper
- * spacing application for rhythm-aware components.
+ * @description Responsive breakpoints, helper mixins, and SCSS variables for DRY code.
+ * This file contains SCSS-time variables (compile-time) for reducing repetition,
+ * while CSS custom properties (runtime) remain in _standard-01-token.scss for user overrides.
  *
- * @prop {variable} $mobile Mobile breakpoint (480px)
+ * Key Distinction:
+ * - SCSS variables ($var): Compile-time, for internal DRY patterns
+ * - CSS variables (--var): Runtime, for user customization
+ *
+ * @prop {variable} $mobile Mobile breakpoint (600px)
  * @prop {variable} $small Small screen breakpoint (768px)
  * @prop {variable} $large Large screen breakpoint (1024px)
  * @prop {variable} $wide Wide screen breakpoint (1440px)
  *
- * @example
- * // Using breakpoint variables
+ * @example scss - Using breakpoints
  * @media (min-width: $small) {
  *   font-size: 1.2rem;
  * }
  *
- * // Using rhythm mixin
- * @include apply-rhythm {
- *   margin-bottom: var(--space);
+ * @example scss - Using color-mix helper
+ * .button {
+ *   background: alpha(--color-accent, 70);
  * }
  *
  * @since 0.1.0
  * @see standard-01-token.scss
  */
 
+@use "sass:string";
+
+/* =========================== */
+/* RESPONSIVE BREAKPOINTS      */
+/* =========================== */
+
 $mobile: 600px;
 $small: 768px;
 $large: 1024px;
 $wide: 1440px;
+
+/* =========================== */
+/* SCSS HELPER FUNCTIONS       */
+/* =========================== */
+
+/**
+ * Create a color-mix with alpha transparency
+ * Reduces repetition of color-mix(in srgb, ...) pattern
+ * @param {string} $color - CSS variable name (without var())
+ * @param {number} $alpha - Opacity percentage (0-100)
+ * @return {string} - color-mix() expression
+ * 
+ * @example
+ *   background: alpha(--color-accent, 25);
+ *   // → color-mix(in srgb, var(--color-accent) 25%, transparent)
+ */
+@function alpha($color, $alpha) {
+  @return string.unquote("color-mix(in srgb, var(#{$color}) #{$alpha}%, transparent)");
+}
+
+/**
+ * Mix two colors together
+ * @param {string} $color1 - First CSS variable name
+ * @param {number} $percent1 - Percentage of first color
+ * @param {string} $color2 - Second CSS variable name
+ * @return {string} - color-mix() expression
+ * 
+ * @example
+ *   background: mix(--color-accent, 70, --color-surface);
+ *   // → color-mix(in srgb, var(--color-accent) 70%, var(--color-surface))
+ */
+@function mix($color1, $percent1, $color2) {
+  @return string.unquote("color-mix(in srgb, var(#{$color1}) #{$percent1}%, var(#{$color2}))");
+}
+
+/* =========================== */
+/* ELEMENT SELECTORS           */
+/* =========================== */
 
 $text-elements: "kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside";
 
@@ -38,6 +85,15 @@ $rhythm-block-small: ".container-small, .callout,  pre, figure, p:has(img)";
 
 $elements-boxed: "blockquote, pre, .alert, aside, .card, .callout, img, iframe, .outset";
 
+/* =========================== */
+/* PLACEHOLDER SELECTORS       */
+/* =========================== */
+
+/**
+ * Surface styling pattern
+ * Consistent border, shadow, background, and radius
+ * Used for cards, modals, panels, etc.
+ */
 %surface {
   border: var(--border);
   box-shadow: var(--shadow);
@@ -45,6 +101,11 @@ $elements-boxed: "blockquote, pre, .alert, aside, .card, .callout, img, iframe, 
   border-radius: var(--radius);
 }
 
+/**
+ * Text padding pattern
+ * Consistent padding for interactive text elements
+ * Used for buttons, inputs, labels
+ */
 %padding-text {
   padding: var(--leading) var(--space-d2);
 }
