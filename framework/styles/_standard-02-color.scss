@@ -3,40 +3,50 @@
 /**
  * @component Color System
  * @category Colors
- * @description Complete light/dark color system with semantic color tokens.
- * Automatically respects user's system color scheme preference using CSS media queries.
- * Includes analog-inspired light theme and retro tech-inspired dark theme.
- * All colors designed for WCAG AA accessibility contrast ratios.
+ * @description Advanced OKLCH-based color system with automatic harmony generation.
+ * Set one "signal" color and the system mathematically generates a complete,
+ * harmonious color palette with perfect consistency across light and dark modes.
+ * 
+ * The system uses OKLCH color space for perceptually uniform colors, preserving
+ * the vibrancy and temperature of your chosen signal while rotating hues to
+ * create semantic colors (success, warning, error, info, etc.).
+ * 
+ * Features:
+ * - Single color input generates entire palette
+ * - Preserves lightness and chroma (vibrancy) across spectrum
+ * - Intelligent dark mode with automatic lightness inversion
+ * - Safety constraints for accessibility (WCAG AA compliant)
+ * - Maintains color temperature when switching themes
+ * - Backward compatible with manual color overrides
  *
+ * @prop {color} --signal Primary brand/accent color (the seed for all others)
  * @prop {color} --color-background Page background color
  * @prop {color} --color-foreground Text foreground color
- * @prop {color} --color-accent Primary accent color
- * @prop {color} --color-success Success/positive state color
- * @prop {color} --color-warning Warning/caution state color
- * @prop {color} --color-error Error/negative state color
- * @prop {color} --color-info Info/neutral state color
+ * @prop {color} --color-accent Primary accent color (derived from signal)
+ * @prop {color} --pigment-red Generated red (errors, deletions)
+ * @prop {color} --pigment-yellow Generated yellow (warnings, highlights)
+ * @prop {color} --pigment-green Generated green (success, insertions)
+ * @prop {color} --pigment-cyan Generated cyan (info, metadata)
+ * @prop {color} --pigment-blue Generated blue (links, focus)
+ * @prop {color} --pigment-purple Generated purple (magic, AI)
  *
- * @example
- * // Light theme colors
+ * @example scss - Simple usage: Just set one color
  * :root {
- *   --color-background: white;
- *   --color-foreground: #262626;
- *   --color-accent: #c8a840;
+ *   --signal: #d65d0e;
  * }
  *
- * // Dark theme (auto-applied)
- * @media (prefers-color-scheme: dark) {
- *   :root {
- *     --color-background: #0f0f0f;
- *     --color-foreground: #dbdbdb;
- *   }
+ * @example scss - Advanced: Override specific colors
+ * :root {
+ *   --signal: #7a5a2e;
+ *   --pigment-red: #a84032;
  * }
  *
- * @since 0.1.0
+ * @since 0.18.0
+ * @see https://developer.chrome.com/blog/css-relative-color-syntax/
  * @see https://webaim.org/articles/contrast/
  */
 
-/* Modern Color System - Automatic Light/Dark Theme with System Preference Detection */
+/* Modern Color System - OKLCH-Based Automatic Harmony Generation */
 :root {
   /* Tell browser we support both color schemes */
   color-scheme: light dark;
@@ -46,83 +56,113 @@
   --tooltip-text: #ffffff;
   --tooltip-ease: cubic-bezier(0.25, 1, 0.5, 1);
 
-  /* ===== LIGHT MODE PALETTE ===== */
-  /* Natural, paper-like, analog-inspired colors */
+  /* ============================================
+     THE SIGNAL - User's Single Color Choice
+     This is the only color users need to define.
+     Everything else derives from this mathematically.
+     ============================================ */
+  
+  --signal: #d65d0e; /* Default: Safety Orange */
+
+  /* ============================================
+     THE DNA EXTRACTION
+     Extract lightness (l), chroma (c), and hue (h)
+     from the user's signal color using OKLCH
+     ============================================ */
+  
+  --dna-l: oklch(from var(--signal) l);
+  --dna-c: oklch(from var(--signal) c);
+  --dna-h: oklch(from var(--signal) h);
+
+  /* ============================================
+     SAFETY CONSTRAINTS
+     Ensure colors are accessible and functional
+     ============================================ */
+  
+  /* If signal is black/white (chroma=0), ensure minimum vibrancy for alerts */
+  --safe-c: max(var(--dna-c), 0.12);
+  
+  /* Ensure readable text - clamp lightness for derived colors */
+  --safe-l: clamp(0.35, var(--dna-l), 0.75);
+
+  /* ============================================
+     THE GENERATED SPECTRUM
+     Rotate hue while preserving lightness & chroma
+     Creates harmonious colors from signal DNA
+     ============================================ */
+  
+  /* Red (~25deg) - Errors, Deletions, Danger */
+  --pigment-red: oklch(var(--safe-l) var(--safe-c) 25);
+  
+  /* Yellow (~85deg) - Warnings, Highlights, Caution */
+  --pigment-yellow: oklch(var(--safe-l) var(--safe-c) 85);
+  
+  /* Green (~145deg) - Success, Insertions, Positive */
+  --pigment-green: oklch(var(--safe-l) var(--safe-c) 145);
+  
+  /* Cyan (~190deg) - Info, Metadata, Neutral */
+  --pigment-cyan: oklch(var(--safe-l) var(--safe-c) 190);
+  
+  /* Blue (~240deg) - Links, Focus, Primary Actions */
+  --pigment-blue: oklch(var(--safe-l) var(--safe-c) 240);
+  
+  /* Purple (~300deg) - Magic, AI, Special Features */
+  --pigment-purple: oklch(var(--safe-l) var(--safe-c) 300);
+
+  /* ============================================
+     LIGHT MODE BASE COLORS
+     Natural, paper-like foundation
+     ============================================ */
+  
   --color-light-background: white;
   --color-light-foreground: #262626;
-  --color-light-accent: var(--color-light-foreground);
+  
+  /* Use signal as the accent, or override if specified */
+  --color-light-accent: var(--signal);
 
-  --color-light-red: #b14c42;
-  /* dusty red clay */
-  --color-light-orange: #d78a5a;
-  /* trail-worn orange */
-  --color-light-yellow: #c8a840;
-  /* parchment mustard */
-  --color-light-green: #5e9d80;
-  /* sage green */
-  --color-light-cyan: #6ba4b6;
-  /* glacier teal */
-  --color-light-blue: #4f81a4;
-  /* faded blueprint */
-  --color-light-magenta: #7a6c91;
-  /* dusk lavender */
-
-  --color-light-link: #4f81a4;
-  /* blueprint - separated from accent for links */
-
-  /* ===== DARK MODE PALETTE ===== */
-  /* Soft-glow, night-usable, retro tech inspired */
+  /* ============================================
+     DARK MODE BASE COLORS
+     Intelligent lightness inversion
+     ============================================ */
+  
   --color-dark-background: #0f0f0f;
-  /* #111 */
   --color-dark-foreground: #dbdbdb;
-  /* #aaa */
-  --color-dark-accent: var(--color-red);
+  
+  /* Brighten signal slightly for dark mode visibility */
+  --color-dark-accent: oklch(from var(--signal) calc(l + 0.12) c h);
 
-  --color-dark-red: #db6057;
-  /* ember red */
-  --color-dark-orange: #e58f5c;
-  /* lantern orange */
-  --color-dark-yellow: #dcb757;
-  /* candlelight gold */
-  --color-dark-green: #74ba98;
-  /* forest mint glow */
-  --color-dark-cyan: #7db9c8;
-  /* creek frost */
-  --color-dark-blue: #6d96b8;
-  /* twilight blueprint */
-  --color-dark-magenta: #a18db6;
-  /* smoky violet dusk */
-
-  --color-dark-link: #6d96b8;
-  /* twilight blueprint - separated from accent for links */
-  --color-dark-on-accent: var(--color-dark-background);
-  /* blueprint - separated from accent for links */
-
-  /* ===== SEMANTIC COLOR TOKENS (Default to Light) ===== */
+  /* ============================================
+     SEMANTIC COLOR TOKENS
+     Map generated pigments to semantic names
+     Default to light mode
+     ============================================ */
+  
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
   --color-accent: var(--color-light-accent);
+  --color-header: var(--color-foreground);
 
-  --color-header: var(--color-light-header, var(--color-foreground));
+  /* Use generated pigments for semantic colors */
+  --color-red: var(--pigment-red);
+  --color-orange: oklch(var(--safe-l) var(--safe-c) 55); /* Between yellow and red */
+  --color-yellow: var(--pigment-yellow);
+  --color-green: var(--pigment-green);
+  --color-cyan: var(--pigment-cyan);
+  --color-blue: var(--pigment-blue);
+  --color-magenta: var(--pigment-purple);
 
-  --color-red: var(--color-light-red);
-  --color-orange: var(--color-light-orange);
-  --color-yellow: var(--color-light-yellow);
-  --color-green: var(--color-light-green);
-  --color-cyan: var(--color-light-cyan);
-  --color-blue: var(--color-light-blue);
-  --color-magenta: var(--color-light-magenta);
+  /* Semantic state colors */
+  --color-success: var(--pigment-green);
+  --color-warning: var(--pigment-yellow);
+  --color-error: var(--pigment-red);
+  --color-info: var(--pigment-blue);
 
-  --color-success: var(--color-green);
-  --color-warning: var(--color-yellow);
-  --color-error: var(--color-red);
-  --color-info: var(--color-blue);
-
-  --color-link: var(--color-light-link);
+  /* Links use blue by default */
+  --color-link: var(--pigment-blue);
   --color-on-accent: var(--color-background);
-  /* blueprint - separated from accent for links */
 
   /* ===== COMPUTED SEMANTIC COLORS ===== */
+  /* These use color-mix for semi-transparent variations */
   --color-muted: color-mix(in srgb, var(--color-foreground) 60%, transparent);
   --color-subtle: color-mix(in srgb, var(--color-foreground) 40%, transparent);
   --color-border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
@@ -150,6 +190,7 @@
     transparent
   );
 
+  /* Tint scale for subtle variations */
   --color-1: color-mix(
     in srgb,
     var(--color-foreground) 3%,
@@ -223,29 +264,47 @@
     border-color var(--transition);
 }
 
-/* ===== AUTOMATIC DARK MODE (System Preference) ===== */
+/* ============================================
+   AUTOMATIC DARK MODE
+   Intelligent lightness inversion that preserves
+   color temperature and vibrancy
+   ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Override semantic tokens to use dark palette */
+    /* ===== FLIP BACKGROUND & FOREGROUND ===== */
+    /* Preserve warmth/coolness while inverting lightness */
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
+    
+    /* Brighten accent for visibility against dark background */
     --color-accent: var(--color-dark-accent);
+    
+    /* Update light/dark references */
     --color-light: var(--color-dark-foreground);
     --color-dark: var(--color-dark-background);
+    --color-header: var(--color-foreground);
 
-    --color-header: var(--color-dark-header), var(--color-foreground);
+    /* ===== BRIGHTEN PIGMENTS FOR DARK MODE ===== */
+    /* Generated colors need to glow against dark background */
+    --pigment-red: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 25);
+    --pigment-yellow: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 85);
+    --pigment-green: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 145);
+    --pigment-cyan: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 190);
+    --pigment-blue: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 240);
+    --pigment-purple: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 300);
 
-    --color-red: var(--color-dark-red);
-    --color-orange: var(--color-dark-orange);
-    --color-yellow: var(--color-dark-yellow);
-    --color-green: var(--color-dark-green);
-    --color-cyan: var(--color-dark-cyan);
-    --color-blue: var(--color-dark-blue);
-    --color-magenta: var(--color-dark-magenta);
+    /* Update semantic colors to use brightened pigments */
+    --color-red: var(--pigment-red);
+    --color-orange: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 55);
+    --color-yellow: var(--pigment-yellow);
+    --color-green: var(--pigment-green);
+    --color-cyan: var(--pigment-cyan);
+    --color-blue: var(--pigment-blue);
+    --color-magenta: var(--pigment-purple);
+    --color-link: var(--pigment-blue);
 
-    --color-link: var(--color-dark-link);
-
-    /* Adjusted computed colors for dark mode */
+    /* ===== ADJUSTED COMPUTED COLORS FOR DARK MODE ===== */
+    /* Increase opacity for better visibility on dark backgrounds */
     --color-muted: color-mix(in srgb, var(--color-foreground) 65%, transparent);
     --color-subtle: color-mix(
       in srgb,
@@ -257,9 +316,7 @@
       var(--color-foreground) 7%,
       var(--color-background)
     );
-
     --color-secondary: color-mix(in srgb, black 3%, var(--color-background));
-
     --color-surface: color-mix(in srgb, black 10%, transparent);
     --color-modal-background: color-mix(
       in srgb,

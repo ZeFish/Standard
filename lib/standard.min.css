@@ -282,68 +282,59 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
   --tooltip-text: #ffffff;
   --tooltip-ease: cubic-bezier(0.25, 1, 0.5, 1);
   
+  --signal: #d65d0e; 
+  
+  --dna-l: oklch(from var(--signal) l);
+  --dna-c: oklch(from var(--signal) c);
+  --dna-h: oklch(from var(--signal) h);
+  
+  
+  --safe-c: max(var(--dna-c), 0.12);
+  
+  --safe-l: clamp(0.35, var(--dna-l), 0.75);
+  
+  
+  --pigment-red: oklch(var(--safe-l) var(--safe-c) 25);
+  
+  --pigment-yellow: oklch(var(--safe-l) var(--safe-c) 85);
+  
+  --pigment-green: oklch(var(--safe-l) var(--safe-c) 145);
+  
+  --pigment-cyan: oklch(var(--safe-l) var(--safe-c) 190);
+  
+  --pigment-blue: oklch(var(--safe-l) var(--safe-c) 240);
+  
+  --pigment-purple: oklch(var(--safe-l) var(--safe-c) 300);
   
   --color-light-background: white;
   --color-light-foreground: #262626;
-  --color-light-accent: var(--color-light-foreground);
-  --color-light-red: #b14c42;
   
-  --color-light-orange: #d78a5a;
-  
-  --color-light-yellow: #c8a840;
-  
-  --color-light-green: #5e9d80;
-  
-  --color-light-cyan: #6ba4b6;
-  
-  --color-light-blue: #4f81a4;
-  
-  --color-light-magenta: #7a6c91;
-  
-  --color-light-link: #4f81a4;
-  
-  
+  --color-light-accent: var(--signal);
   
   --color-dark-background: #0f0f0f;
-  
   --color-dark-foreground: #dbdbdb;
   
-  --color-dark-accent: var(--color-red);
-  --color-dark-red: #db6057;
-  
-  --color-dark-orange: #e58f5c;
-  
-  --color-dark-yellow: #dcb757;
-  
-  --color-dark-green: #74ba98;
-  
-  --color-dark-cyan: #7db9c8;
-  
-  --color-dark-blue: #6d96b8;
-  
-  --color-dark-magenta: #a18db6;
-  
-  --color-dark-link: #6d96b8;
-  
-  --color-dark-on-accent: var(--color-dark-background);
-  
+  --color-dark-accent: oklch(from var(--signal) calc(l + 0.12) c h);
   
   --color-background: var(--color-light-background);
   --color-foreground: var(--color-light-foreground);
   --color-accent: var(--color-light-accent);
-  --color-header: var(--color-light-header, var(--color-foreground));
-  --color-red: var(--color-light-red);
-  --color-orange: var(--color-light-orange);
-  --color-yellow: var(--color-light-yellow);
-  --color-green: var(--color-light-green);
-  --color-cyan: var(--color-light-cyan);
-  --color-blue: var(--color-light-blue);
-  --color-magenta: var(--color-light-magenta);
-  --color-success: var(--color-green);
-  --color-warning: var(--color-yellow);
-  --color-error: var(--color-red);
-  --color-info: var(--color-blue);
-  --color-link: var(--color-light-link);
+  --color-header: var(--color-foreground);
+  
+  --color-red: var(--pigment-red);
+  --color-orange: oklch(var(--safe-l) var(--safe-c) 55); 
+  --color-yellow: var(--pigment-yellow);
+  --color-green: var(--pigment-green);
+  --color-cyan: var(--pigment-cyan);
+  --color-blue: var(--pigment-blue);
+  --color-magenta: var(--pigment-purple);
+  
+  --color-success: var(--pigment-green);
+  --color-warning: var(--pigment-yellow);
+  --color-error: var(--pigment-red);
+  --color-info: var(--pigment-blue);
+  
+  --color-link: var(--pigment-blue);
   --color-on-accent: var(--color-background);
   
   
@@ -371,6 +362,7 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
     color-mix(in srgb, var(--color-foreground) 10%, var(--color-background)) 60%,
     transparent
   );
+  
   --color-1: color-mix(
     in srgb,
     var(--color-foreground) 3%,
@@ -441,20 +433,33 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
 @media (prefers-color-scheme: dark) {
   :root {
     
+    
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
+    
     --color-accent: var(--color-dark-accent);
+    
     --color-light: var(--color-dark-foreground);
     --color-dark: var(--color-dark-background);
-    --color-header: var(--color-dark-header), var(--color-foreground);
-    --color-red: var(--color-dark-red);
-    --color-orange: var(--color-dark-orange);
-    --color-yellow: var(--color-dark-yellow);
-    --color-green: var(--color-dark-green);
-    --color-cyan: var(--color-dark-cyan);
-    --color-blue: var(--color-dark-blue);
-    --color-magenta: var(--color-dark-magenta);
-    --color-link: var(--color-dark-link);
+    --color-header: var(--color-foreground);
+    
+    
+    --pigment-red: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 25);
+    --pigment-yellow: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 85);
+    --pigment-green: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 145);
+    --pigment-cyan: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 190);
+    --pigment-blue: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 240);
+    --pigment-purple: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 300);
+    
+    --color-red: var(--pigment-red);
+    --color-orange: oklch(calc(var(--safe-l) + 0.15) var(--safe-c) 55);
+    --color-yellow: var(--pigment-yellow);
+    --color-green: var(--pigment-green);
+    --color-cyan: var(--pigment-cyan);
+    --color-blue: var(--pigment-blue);
+    --color-magenta: var(--pigment-purple);
+    --color-link: var(--pigment-blue);
+    
     
     --color-muted: color-mix(in srgb, var(--color-foreground) 65%, transparent);
     --color-subtle: color-mix(
