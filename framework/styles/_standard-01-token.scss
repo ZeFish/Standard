@@ -30,57 +30,30 @@
   --optical-ratio: var(--ratio-silver);
   --line-height: var(--optical-ratio);
 
-  /* The actual line-height of html */
-
-  /* Le base line officiel, V0.1.0 */
-  /* Le text cole sur la ligne du haut */
+  /* Baseline grid - official baseline unit (V0.1.0) */
+  /* Text sits on top line, pushed from bottom with leading */
   --baseline: 1rlh;
-
-  /* Si en bas, pousse avec ca */
   --leading: calc((var(--line-height) - 1) * var(--font-size));
 
-  /* Test et essaie supplementaire */
+  /* Additional spacing calculations */
   --nl: calc(var(--leading) * var(--line-height));
   --trim: calc(var(--leading) / 2);
 
   --gap-body: var(--space-3);
   --gap-grid: 0.25lh;
 
-  /* --rhythm-gap: calc(var(--space) + var(--space-half));*/
-
-  /* Grid system tokens */
-
-  /* Design standard system */
+  /* Design system standard tokens */
   --blur: blur(7px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-l: calc(var(--stroke-width) * 2);
-  /*  --rule-hairline */
   --transition: 0.5s ease;
   --radius: var(--leading);
 
-  /*
-.hr { border: 0; border-top: var(--rule-hairline) solid var(--color-border); }
-.label-overline {
-    border-top: var(--rule-hairline) solid var(--color-border);
-    padding-block-start: calc(var(--space) / 2);
-    margin-block-start: calc(var(--space) * 1.5);
-}
-
-
-make h6 running as the first phrase of the paragraph
-
-*/
-
-  /* CONSTANT */
-  /* CONSTANT */
-  /* CONSTANT */
-
-  /* Golden Ratio & Mathematical Precision */
+  /* Mathematical Precision - Golden Ratio & Musical Intervals */
   --ratio-golden: 1.618;
   --ratio-wholestep: 1.618;
   --ratio-silver: 1.414;
   --ratio-halfstep: 1.272;
-  /* sqrt of golden ratio */
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
 
@@ -131,16 +104,15 @@ make h6 running as the first phrase of the paragraph
   --scale-7: calc(var(--font-size) * pow(var(--optical-ratio), 6));
   --scale-8: calc(var(--font-size) * pow(var(--optical-ratio), 7));
 
-  /* Mobile */
+  /* Mobile responsive tokens */
   --mobile-font-size: 1.1rem;
   --mobile-optical-ratio: var(--ratio-silver);
   --mobile-line-height: var(--ratio-silver);
   --mobile-gap-body: var(--space);
   --mobile-gap: 1rlh;
-  /* Space between standard block like paragraph */
   --mobile-gap-block: var(--space-2);
 
-  /* Z-index scale */
+  /* Z-index scale - consistent layering system */
   --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -153,7 +125,7 @@ make h6 running as the first phrase of the paragraph
   --z-toast: 1090;
   --z-image-zoom: 9999;
 
-  /* Callout only animation, to test */
+  /* Animation tokens */
   --duration-superfast: 0.15s;
 }
 
@@ -173,37 +145,3 @@ make h6 running as the first phrase of the paragraph
     --line-height: var(--mobile-line-height) !important;
   }
 }
-
-/*
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    opacity: 0.1;
-    z-index: 99999;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-    background-size: 100px;
-    background-repeat: repeat;
-
-    background-image: url("/assets/img/paper.png");
-}
-
-body.theme-dark::after {
-    opacity: 0.5;
-    mix-blend-mode: multiply;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    opacity: 0.04;
-    z-index: 999;
-    pointer-events: none;
-    background-size: 256px;
-    background-repeat: repeat;
-    mix-blend-mode: multiply;
-    background-image: url("/assets/img/noise.png");
-}
-*/
