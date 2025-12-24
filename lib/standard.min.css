@@ -38,13 +38,18 @@ video {
 }
 
 
+
+
+
+
 button,
 a.btn, button.secondary, button.outline, button.destructive, button.ghost, button.icon, .card {
   border: var(--border);
   box-shadow: var(--shadow);
-  background: var(--color-background-sexondary);
+  background: var(--color-background-secondary);
   border-radius: var(--radius);
 }
+
 
 button,
 a.btn, button.secondary, button.outline, button.destructive, button.ghost, button.icon, .badge, .badge.secondary, .badge.outline, .badge.destructive, .badge.ghost, .badge.icon, input,
@@ -52,6 +57,8 @@ textarea,
 select {
   padding: var(--leading) var(--space-d2);
 }
+
+
 
 
 
@@ -151,9 +158,7 @@ select {
   --line-height: var(--optical-ratio);
   
   
-  
   --baseline: 1rlh;
-  
   --leading: calc((var(--line-height) - 1) * var(--font-size));
   
   --nl: calc(var(--leading) * var(--line-height));
@@ -161,24 +166,16 @@ select {
   --gap-body: var(--space-3);
   --gap-grid: 0.25lh;
   
-  
-  
   --blur: blur(7px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-l: calc(var(--stroke-width) * 2);
-  
   --transition: 0.5s ease;
   --radius: var(--leading);
-  
-  
-  
-  
   
   --ratio-golden: 1.618;
   --ratio-wholestep: 1.618;
   --ratio-silver: 1.414;
   --ratio-halfstep: 1.272;
-  
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
   
@@ -237,7 +234,6 @@ select {
   --mobile-line-height: var(--ratio-silver);
   --mobile-gap-body: var(--space);
   --mobile-gap: 1rlh;
-  
   --mobile-gap-block: var(--space-2);
   
   --z-base: 1;
@@ -252,7 +248,16 @@ select {
   --z-toast: 1090;
   --z-image-zoom: 9999;
   
+  --duration-instant: 0.1s;
+  --duration-fast: 0.2s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.5s;
   --duration-superfast: 0.15s;
+  
+  --ease-default: ease;
+  --ease-in-out: ease-in-out;
+  --ease-out: ease-out;
+  --ease-in: ease-in;
 }
 
 kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside {
@@ -271,7 +276,6 @@ kbd, div, span, a, mark, callout-title::before, span, li::before, button, legend
     --line-height: var(--mobile-line-height) !important;
   }
 }
-
 
 
 :root {
@@ -8315,12 +8319,6 @@ a.skip-link:active {
   body.standard-debug::before {
     display: none !important;
   }
-}
-
-
-:root {
-  --baseline-trim-support: 0;
-  
 }
 
 .standard-lab-panel {

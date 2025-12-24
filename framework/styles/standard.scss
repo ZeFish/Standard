@@ -46,7 +46,8 @@
  * These will eventually be replaced by an external component library.
  * Keep commented for minimal framework footprint.
  */
-// @use "standard-
+// @use "standard-20-extended-components";
+
 @use "standard-30-contrast";
 @use "standard-31-print";
 
@@ -56,28 +57,7 @@
 
 @use "standard-99-debug";
 
-/*
-
-
-[data-theme="default"] {
-  --font-header: InterVariable;
-
-  h1,
-  h2,
-  h3 {
-    letter-spacing: -0.065em;
-    font-weight: 900;
-    line-height: 0.965;
-  }
-}
-*/
-/* Add to standard.css */
-
-:root {
-  --baseline-trim-support: 0;
-  /* Will be 1 when supported */
-}
-
+/* Lab panel - experimental features */
 .standard-lab-panel {
   --gap: 0;
   --base-gap: 0;

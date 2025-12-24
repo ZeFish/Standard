@@ -38,13 +38,51 @@ $rhythm-block-small: ".container-small, .callout,  pre, figure, p:has(img)";
 
 $elements-boxed: "blockquote, pre, .alert, aside, .card, .callout, img, iframe, .outset";
 
+/* =========================== */
+/* COMMON MIXINS & PLACEHOLDERS */
+/* =========================== */
+
+/**
+ * Surface styling - border, shadow, background, radius
+ * Common pattern for cards, buttons, inputs, etc.
+ */
 %surface {
   border: var(--border);
   box-shadow: var(--shadow);
-  background: var(--color-background-sexondary);
+  background: var(--color-background-secondary);
   border-radius: var(--radius);
 }
 
+/**
+ * Text padding - standard padding for text containers
+ * Used in buttons, inputs, labels, etc.
+ */
 %padding-text {
   padding: var(--leading) var(--space-d2);
+}
+
+/**
+ * Mixin: Apply spacing (padding or margin) with standard values
+ * @param {string} $type - Type of spacing (padding or margin)
+ * @param {string} $size - Size token (space, space-d2, space-2, etc.)
+ * @param {string} $direction - Direction (all, block, inline, top, right, bottom, left)
+ */
+@mixin spacing($type: padding, $size: var(--space), $direction: all) {
+  @if $direction == all {
+    #{$type}: $size;
+  } @else if $direction == block {
+    #{$type}-block: $size;
+  } @else if $direction == inline {
+    #{$type}-inline: $size;
+  } @else {
+    #{$type}-#{$direction}: $size;
+  }
+}
+
+/**
+ * Mixin: Standard transition
+ * @param {string} $property - CSS property to transition (default: all)
+ */
+@mixin transition($property: all) {
+  transition: $property var(--transition);
 }
