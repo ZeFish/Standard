@@ -1,0 +1,74 @@
+meta:
+  id: forest
+  label: Forest
+  selector: '[data-theme="forest"]'
+  fonts:
+    - "@stnd/fonts/forrest"
+    - "@stnd/fonts/monaspace-xenon"
+    - "@stnd/fonts/national-park"
+tokens:
+  color-light-background: "#f7f3ee"
+  color-light-foreground: oklch(0.392 0.0488 67.4)
+  color-light-accent: var(--color-yellow)
+  color-light-header: var(--color-light-foreground)
+  color-light-red: oklch(0.5123 0.1555 30.78)
+  color-light-orange: oklch(0.6803 0.1692 45.57)
+  color-light-yellow: oklch(0.6879 0.1635 72.21)
+  color-light-green: oklch(0.5788 0.1848 142.16)
+  color-light-cyan: oklch(0.6578 0.105 196.53)
+  color-light-blue: oklch(0.5859 0.1292 231)
+  color-light-purple: oklch(0.5978 0.1058 303.66)
+  color-light-pink: oklch(0.657 0.169 350.57)
+  color-dark-background: "#231e1a"
+  color-dark-foreground: "#dcc7b2"
+  color-dark-accent: var(--color-yellow)
+  color-dark-header: var(--color-dark-foreground)
+  color-dark-red: "#ac2016"
+  color-dark-orange: "#ce6325"
+  color-dark-yellow: oklch(0.7879 0.1635 72.21)
+  color-dark-green: "#2e9066"
+  color-dark-cyan: "#4dadd5"
+  color-dark-blue: "#256ea2"
+  color-dark-purple: "#8e6ac7"
+  color-dark-pink: "#dd78db"
+  font-weight-h1: "900"
+  font-weight-h2: "850"
+  font-weight-h3: "850"
+  font-weight-h4: "800"
+  font-weight-h5: "700"
+  font-weight-h6: "600"
+  font-text: '"Forrest"'
+  font-header: '"Forrest"'
+  font-monospace: '"Monosten"'
+  font-interface: '"Monosten"'
+  font-interface-weight: "600"
+  color-accent: var(--color-yellow)
+  color-code: var(--color-red)
+  color-bold: var(--color-red)
+  color-italic: var(--color-blue)
+  optical-ratio: var(--ratio-golden)
+  line-height: var(--optical-ratio)
+  font-weight: "400"
+  font-weight-bold: "500"
+  radius: var(--space)
+  stroke-width: 1.5px
+  font-header-letter-spacing: 0em
+  font-header-line-height: 1em
+  font-feature: '""'
+  font-variation: '""'
+  font-ratio: "1.414"
+  font-density: "1.8"
+  bold-weight: "700"
+  font-header-feature: '""'
+  font-header-variation: '""'
+  font-header-style: none
+  font-header-weight: "900"
+  font-mono-feature: '"salt"'
+  font-mono-variation: '""'
+  font-interface-feature: '"salt"'
+  font-interface-variation: '""'
+  h2-size: calc(var(--font-text-size) * pow(var(--font-ratio), 2))
+  h3-size: calc(var(--font-text-size) * pow(var(--font-ratio), 1.5))
+  font-smallest: calc(var(--font-size) * pow(var(--font-ratio), -0.75))
+  font-smaller: calc(var(--font-size) * pow(var(--font-ratio), -0.5))
+  font-small: calc(var(--font-size) * pow(var(--font-ratio), -0.25))

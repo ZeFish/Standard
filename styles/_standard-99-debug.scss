@@ -1,0 +1,478 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Debug System
+ * @category Development
+ * @description Development debugging utilities for visualizing grid layouts,
+ * baseline rhythm, reading zones, and typography processing. Activated by adding
+ * .stnd-debug class to body or parent element. Shows overlays for grid columns,
+ * baseline rhythm, reading layout zones, and other layout metrics. Essential for
+ * design system development and layout debugging. Automatically hidden in print.
+ *
+ * @prop {class} .stnd-debug Enable debug visualization
+ * @prop {overlay} baseline-grid Horizontal baseline grid overlay
+ * @prop {overlay} grid-columns Vertical grid column overlay
+ * @prop {overlay} reading-zones Reading layout zone visualization
+ * @prop {overlay} rhythm-spacing Margin/spacing outline visualization
+ * @prop {indicator} breakpoint-indicator Current responsive breakpoint
+ * @prop {indicator} debug-panel Fixed info panel with metrics
+ *
+ * @example
+ * // Enable debug mode on page
+ * <body class="stnd-debug">
+ *   <!-- All debug overlays visible -->
+ * </body>
+ *
+ * // Debug specific grid
+ * <div class="grid stnd-debug">
+ *   <div class="col-4">Shows grid overlay</div>
+ * </div>
+ *
+ * // Debug reading layout zones
+ * <article class="reading stnd-debug">
+ *   <div class="accent">Zone highlighted</div>
+ * </article>
+ *
+ * @since 0.1.0
+ */
+
+/* =========================== */
+/* STANDARD DEBUG SYSTEM       */
+/* =========================== */
+
+#{$stnd-theme-scope} {
+  --stnd-lab-bg: color-mix(
+    in srgb,
+    var(--color-dark-background) 90%,
+    var(--color-dark-foreground)
+  );
+  --stnd-lab-text: color-mix(
+    in srgb,
+    var(--color-dark-background) 10%,
+    var(--color-dark-foreground)
+  );
+  --stnd-lab-text-size: 12px;
+  --stnd-lab-opacity: 1;
+  --stnd-lab-accent: var(--color-accent);
+  --stnd-lab-border: var(--border);
+  --stnd-lab-shadow: var(--shadow);
+  --stnd-lab-blur: var(--filter-blur);
+  --stnd-lab-font-family: var(--font-monospace);
+}
+
+/* Single class to enable all debug features */
+.debug {
+  display: none;
+}
+
+.stnd-debug .debug {
+  display: inherit;
+}
+
+#{$stnd-theme-scope} {
+  --debug-opacity: 50%;
+  --debug-outline-opacity: 75%;
+  --debug-color: var(--color-cyan);
+}
+
+/* Baseline Grid Overlay */
+.stnd-debug::before {
+  --color-grid: var(--color-cyan);
+  --percent-grid: calc(var(--debug-opacity) / 8);
+  --grid-unit: 1rlh;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--grid-unit) - 1px),
+    color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+      calc(var(--grid-unit) - 1px),
+    color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+      var(--grid-unit)
+  );
+  pointer-events: none;
+  z-index: 10000;
+}
+
+html.stnd-debug .rhythm > * {
+  position: relative;
+}
+html.stnd-debug .rhythm > * + *::after {
+  content: "";
+  position: absolute;
+  border-radius: var(--radius);
+  top: calc(var(--gap) * -0.5);
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: color-mix(in srgb, var(--color-cyan) 5%, transparent);
+  outline: 1px dashed color-mix(in srgb, var(--color-cyan) 25%, transparent);
+
+  font-family: var(--font-monospace);
+  font-size: var(--size-sm);
+  z-index: 1; // Push it behind the content
+  pointer-events: none; // So it doesn't interfere with interactions
+}
+
+.stnd-debug .rhythm > * + *::after {
+  top: calc(var(--gap) * -0.5);
+}
+.stnd-debug .rhythm > * + :is(#{$rhythm-double-tags})::after {
+  top: calc(var(--gap) * -1);
+}
+
+.stnd-debug
+  .rhythm
+  > :is(#{$rhythm-double-tags})
+  + :is(#{$rhythm-double-tags})::after {
+  top: calc(var(--gap) * -0.5);
+}
+
+.stnd-debug .rhythm > :is(#{$rhythm-double-tags}) + *::after {
+  top: calc(var(--gap) * -1);
+}
+
+.stnd-debug .rhythm > * + :is(h1, h2)::after {
+  top: calc(var(--gap) * -3);
+}
+.stnd-debug .rhythm > * + :is(h3, h4, h5, h6)::after {
+  top: calc(var(--gap) * -2);
+}
+.stnd-debug .rhythm > :is(h1, h2, h3, h4) + :is(h2, h3, h4, h5, h6)::after {
+  top: calc(var(--gap) * -1);
+}
+.stnd-debug .rhythm > :is(h1, h2, h3) + *::after {
+  top: calc(var(--gap) * -1);
+}
+
+.stnd-debug .rhythm > :is(h4, h5, h6) + *::after {
+  top: calc(var(--gap) * -0.5);
+}
+/*
+.stnd-debug
+  .rhythm
+  > :is(#{$rhythm-double-tags})
+  + :is(#{$rhythm-double-tags})::after {
+  top: calc(var(--space) * -1);
+  bottom: calc(var(--gap) * -1);
+  background: blue;
+}
+
+.stnd-debug .rhythm > :is(h1, h2, h3, h4, h5, h6)::after {
+  content: "";
+  position: absolute;
+  border-radius: var(--radius);
+  inset: calc(var(--gap) * -1); // Shorthand for top/right/bottom/left: 0
+  background: orange;
+  outline: 1px dashed
+    color-mix(
+      in srgb,
+      var(--color-cyan) calc(var(--debug-opacity) / 1.2),
+      transparent
+    );
+  z-index: -1; // Push it behind the content
+  pointer-events: none; // So it doesn't interfere with interactions
+}
+*/
+
+/* Text*/
+.stnd-debug .rhythm > *::before {
+  content: attr(class);
+  position: absolute;
+  top: 0;
+  left: calc(var(--gap) * -1);
+  transform: translateX(-100%);
+  color: var(--color-cyan);
+  opacity: var(--debug-opacity);
+  font-family: var(--font-monospace);
+  font-size: var(--size-sm);
+}
+.stnd-debug {
+  h1::before {
+    content: "h1" !important;
+  }
+  h2::before {
+    content: "h2" !important;
+  }
+  h3::before {
+    content: "h3" !important;
+  }
+  h4::before {
+    content: "h4" !important;
+  }
+  h5::before {
+    content: "h5" !important;
+  }
+  h6::before {
+    content: "h6" !important;
+  }
+  hr::before {
+    content: "hr" !important;
+  }
+}
+
+/* Reading Layout Debug - show zones */
+.stnd-debug .prose {
+  position: relative;
+}
+
+.stnd-debug .grid-debug-overlay {
+  position: absolute !important;
+  inset: 0;
+  display: grid;
+  grid-template-columns: inherit;
+  pointer-events: none;
+  z-index: 9999;
+  grid-column: hero;
+
+  span:nth-child(1) {
+    grid-column: hero-start / feature-start;
+  }
+  span:nth-child(2) {
+    grid-column: feature-start / editorial-start;
+    border-inline-start: 1px dotted
+      color-mix(
+        in srgb,
+        var(--debug-color) calc(var(--debug-opacity) / 2),
+        transparent
+      );
+  }
+  span:nth-child(3) {
+    grid-column: editorial-start / content-start;
+    border-inline-start: 1px dotted
+      color-mix(
+        in srgb,
+        var(--debug-color) calc(var(--debug-opacity) / 2),
+        transparent
+      );
+  }
+  span:nth-child(4) {
+    grid-column: content;
+    outline: 1px dotted
+      color-mix(
+        in srgb,
+        var(--debug-color) calc(var(--debug-opacity) / 2),
+        transparent
+      );
+  }
+  span:nth-child(5) {
+    grid-column: content-end / editorial-end;
+    border-inline-end: 1px dotted
+      color-mix(
+        in srgb,
+        var(--debug-color) calc(var(--debug-opacity) / 2),
+        transparent
+      );
+  }
+  span:nth-child(6) {
+    grid-column: editorial-end / feature-end;
+    border-inline-end: 1px dotted
+      color-mix(
+        in srgb,
+        var(--debug-color) calc(var(--debug-opacity) / 2),
+        transparent
+      );
+  }
+  span:nth-child(7) {
+    grid-column: feature-end / hero-end;
+  }
+}
+
+/* Fixed 2026-07-14 — --gap-grid (undefined) now uses the real --gap token;
+   --z-tooltip (undefined) now hardcoded to 10000, matching this file's own
+   baseline-grid overlay z-index for consistency. */
+/* Grid item debugging */
+/* Grid Column Overlay (only for .grid inside debug) */
+.stnd-debug .grid,
+.stnd-debug .grid-2,
+.stnd-debug .grid-3,
+.stnd-debug .grid-4,
+.stnd-debug .grid-5,
+.stnd-debug .grid-6,
+.stnd-debug .grid-7,
+.stnd-debug .grid-8,
+.stnd-debug .grid-9,
+.stnd-debug .grid-10,
+.stnd-debug .grid-11,
+.stnd-debug .grid-12 {
+  position: relative;
+}
+.stnd-debug .grid::after,
+.stnd-debug .grid-2::after,
+.stnd-debug .grid-3::after,
+.stnd-debug .grid-4::after,
+.stnd-debug .grid-5::after,
+.stnd-debug .grid-6::after,
+.stnd-debug .grid-7::after,
+.stnd-debug .grid-8::after,
+.stnd-debug .grid-9::after,
+.stnd-debug .grid-10::after,
+.stnd-debug .grid-11::after,
+.stnd-debug .grid-12::after {
+  content: attr(class);
+  position: absolute !important;
+  inset: 0;
+  color: var(--debug-color);
+  font-size: var(--size-xs);
+  font-family: var(--font-monospace);
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  column-gap: var(--gap);
+  pointer-events: none;
+  z-index: 10000;
+  opacity: var(--debug-opacity);
+  background-image: repeating-linear-gradient(
+    to right,
+    color-mix(in srgb, var(--debug-color) 10%, transparent) 0,
+    color-mix(in srgb, var(--debug-color) 10%, transparent)
+      calc(
+        (100% - (var(--gap) * (var(--grid-cols) - 1))) / var(--grid-cols)
+      ),
+    transparent
+      calc(
+        (100% - (var(--gap) * (var(--grid-cols) - 1))) / var(--grid-cols)
+      ),
+    transparent
+      calc(
+        (100% - (var(--gap) * (var(--grid-cols) - 1))) / var(--grid-cols) +
+          var(--gap)
+      )
+  );
+}
+
+.stnd-debug .grid::after {
+  --grid-cols: 12;
+}
+.stnd-debug .grid-2::after {
+  --grid-cols: 2;
+}
+.stnd-debug .grid-3::after {
+  --grid-cols: 3;
+}
+.stnd-debug .grid-4::after {
+  --grid-cols: 4;
+}
+.stnd-debug .grid-5::after {
+  --grid-cols: 5;
+}
+.stnd-debug .grid-6::after {
+  --grid-cols: 6;
+}
+.stnd-debug .grid-7::after {
+  --grid-cols: 7;
+}
+.stnd-debug .grid-8::after {
+  --grid-cols: 8;
+}
+.stnd-debug .grid-9::after {
+  --grid-cols: 9;
+}
+.stnd-debug .grid-10::after {
+  --grid-cols: 10;
+}
+.stnd-debug .grid-11::after {
+  --grid-cols: 11;
+}
+.stnd-debug .grid-12::after {
+  --grid-cols: 12;
+}
+
+.stnd-debug .grid > *,
+.stnd-debug .grid-2 > *,
+.stnd-debug .grid-3 > *,
+.stnd-debug .grid-4 > *,
+.stnd-debug .grid-5 > *,
+.stnd-debug .grid-6 > *,
+.stnd-debug .grid-7 > *,
+.stnd-debug .grid-8 > *,
+.stnd-debug .grid-9 > *,
+.stnd-debug .grid-10 > *,
+.stnd-debug .grid-11 > *,
+.stnd-debug .grid-12 > * {
+  outline: 1px dashed
+    color-mix(
+      in srgb,
+      var(--debug-color) calc(var(--debug-opacity) / 1.2),
+      transparent
+    );
+  outline-offset: -1px;
+  position: relative;
+}
+
+.stnd-debug .grid > *::before,
+.stnd-debug .grid-2 > *::before,
+.stnd-debug .grid-3 > *::before,
+.stnd-debug .grid-4 > *::before,
+.stnd-debug .grid-5 > *::before,
+.stnd-debug .grid-6 > *::before,
+.stnd-debug .grid-7 > *::before,
+.stnd-debug .grid-8 > *::before,
+.stnd-debug .grid-9 > *::before,
+.stnd-debug .grid-10 > *::before,
+.stnd-debug .grid-11 > *::before,
+.stnd-debug .grid-12 > *::before {
+  content: attr(class);
+  position: absolute;
+  top: calc(var(--space) * -1);
+  left: var(--space);
+  color: var(--debug-color);
+  font-size: var(--size-xs);
+  font-family: var(--font-monospace);
+  pointer-events: none;
+  opacity: var(--debug-opacity);
+  z-index: 10000;
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Free column debug */
+.stnd-debug .free-col::after {
+  content: "start: " var(--start) " / span: " var(--span);
+  position: absolute;
+  bottom: var(--space);
+  left: var(--space);
+  color: var(--debug-color);
+  opacity: var(--debug-opacity);
+  font-size: var(--size-xs);
+  font-family: var(--font-monospace);
+  padding: var(--space) var(--space);
+  border-radius: var(--radius);
+  pointer-events: none;
+  opacity: var(--debug-opacity);
+  z-index: 10000;
+  white-space: nowrap;
+}
+
+@media (max-width: #{$small}) {
+  .stnd-debug::after {
+    content: "Debug : " attr(data-standard-version) " : sm (<#{$small})";
+  }
+}
+
+@media (max-width: 600px) {
+  .stnd-debug::after {
+    content: "Debug : " attr(data-standard-version) " : xs (<600px)";
+  }
+}
+
+@media (min-width: #{$large}) {
+  .stnd-debug::after {
+    content: "Debug : " attr(data-standard-version) " : lg (≥#{$large})";
+  }
+}
+
+/* Print debug styles.
+   Note: `.stnd-debug .prose::after` doesn't currently match anything in
+   this file — documentation-only, not fixed here. */
+@media print {
+  .stnd-debug::before,
+  .stnd-debug::after,
+  .stnd-debug .grid::after,
+  .stnd-debug .prose::after {
+    display: none !important;
+  }
+}

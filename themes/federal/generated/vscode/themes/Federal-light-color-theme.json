@@ -1,0 +1,156 @@
+{
+  "name": "Federal Light",
+  "type": "light",
+  "colors": {
+    "foreground": "#2a2222",
+    "input.background": "#000000",
+    "input.foreground": "#2a2222",
+    "input.placeholderForeground": "#060505",
+    "inputOption.activeBorder": "#c6361e80",
+    "badge.foreground": "hsl(45, 25%, 94%)",
+    "badge.background": "#c6361e",
+    "progressBar.background": "#c6361e",
+    "button.background": "#c6361e",
+    "button.foreground": "#2a2222",
+    "button.hoverBackground": "#c6361e90",
+    "dropdown.background": "#000000",
+    "dropdown.foreground": "#2a2222",
+    "dropdown.border": "#020202",
+    "focusBorder": "#c6361e80",
+    "selection.background": "#c6361e40",
+    "editor.background": "hsl(45, 25%, 94%)",
+    "editor.foreground": "#2a2222",
+    "sideBar.background": "hsl(45, 25%, 94%)",
+    "sideBar.border": "#020202",
+    "activityBar.background": "hsl(45, 25%, 94%)",
+    "activityBar.foreground": "#2a2222",
+    "activityBar.inactiveForeground": "#110e0e",
+    "statusBar.background": "hsl(45, 25%, 94%)",
+    "statusBar.foreground": "#2a2222",
+    "titleBar.activeBackground": "hsl(45, 25%, 94%)",
+    "titleBar.activeForeground": "#2a2222",
+    "editorLineNumber.foreground": "#060505",
+    "editorLineNumber.activeForeground": "#110e0e",
+    "editor.lineHighlightBackground": "#020202",
+    "editorIndentGuide.background": "#020202",
+    "editorIndentGuide.activeBackground": "#110e0e",
+    "list.hoverBackground": "#020202",
+    "list.activeSelectionBackground": "#020202",
+    "list.activeSelectionForeground": "#2a2222",
+    "tab.activeBackground": "#020202",
+    "tab.activeForeground": "#2a2222",
+    "tab.inactiveBackground": "hsl(45, 25%, 94%)",
+    "tab.inactiveForeground": "#110e0e",
+    "tab.border": "#020202",
+    "breadcrumb.foreground": "#110e0e",
+    "breadcrumb.focusForeground": "#2a2222",
+    "widget.shadow": "#00000040",
+    "quickInput.background": "#a6a6a6",
+    "terminal.background": "hsl(45, 25%, 94%)",
+    "terminal.foreground": "#2a2222"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#110e0e",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.parameter",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.other.member",
+      "settings": {
+        "foreground": "#2a2222"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "entity.name.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "punctuation.definition.keyword"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#110e0e"
+      }
+    }
+  ]
+}

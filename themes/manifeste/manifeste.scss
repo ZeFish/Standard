@@ -1,0 +1,85 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="manifeste"] {
+  --color-light-background: #f4f1e9;
+  --color-light-foreground: #191911;
+  --color-light-accent: #a14e3d;
+  --color-light-bold: #a14e3d;
+  --color-dark-background: #1b1a18;
+  --color-dark-foreground: oklch(0.825 0.0153 90.24);
+  --color-dark-accent: #9ecaa3;
+  --font-header: "Tiempos Headline", serif;
+  --font-text: "Fern", "Joly", serif;
+  --font-variation: 'TITL' 0.0;
+  --font-interface: "Futura Now Var";
+  --font-monospace: "Sohne Mono";
+  --font-header-weight: 300;
+  --font-header-letter-spacing: 0.01em;
+  --font-header-line-height: 1.2em;
+  --font-ratio: 1.333;
+  --font-density: 1.8;
+  --font-text-size: 1.1em !important;
+  --margin: 3rlh;
+  --font-weight: 500;
+}
+/* TOKENS.YAML ADAPTER END */
+
+// manifeste theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+
+:root[data-theme="manifeste"],
+[data-theme="manifeste"] {
+--color-dark-bold: color-mix(
+    in oklab,
+    #de7260 85%,
+    var(--color-background)
+);
+
+.markdown-reading-view h1,
+.inline-title {
+    text-align: center;
+    padding: 3rlh 0;
+    color: var(--color-foreground);
+}
+
+.markdown-reading-view {
+    .callout {
+        border-color: color-mix(
+            in oklab,
+            var(--callout-color) 20%,
+            var(--background-secondary)
+        );
+        background-color: color-mix(
+            in oklab,
+            var(--callout-color) 2%,
+            var(--background-secondary)
+        );
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-left-width: 0.25rlh;
+    }
+
+    .callout-icon {
+        color: var(--callout-color);
+    }
+
+    .callout-title {
+        color: var(--color-foreground);
+    }
+
+    .callout-content {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+}
+
+.vertical-rhythm .markdown-preview-view ol > li,
+.vertical-rhythm .markdown-preview-view ul > li,
+.vertical-rhythm .markdown-source-view ol > li,
+.vertical-rhythm .markdown-source-view ul > li,
+.vertical-rhythm .mod-cm6 .HyperMD-list-line.cm-line {
+    margin: 0rlh 0rlh 0rlh 0rlh;
+}
+}

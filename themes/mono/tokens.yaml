@@ -1,0 +1,38 @@
+meta:
+  id: mono
+  label: Mono
+  selector: '[data-theme="mono"]'
+  fonts:
+    - "@stnd/fonts/sohne"
+tokens:
+  # Poly-bag white / box-logo black, with a hang-tag orange accent —
+  # a garment spec-sheet rendered entirely in monospace.
+  color-light-foreground: "#0a0a0a"
+  color-light-background: "#f7f5f0"
+  color-light-red: "#af3029"
+  color-light-orange: "#bc5215"
+  color-light-yellow: "#ad8301"
+  color-light-green: "#66800b"
+  color-light-cyan: oklch(45.26% 0.0839 191.25)
+  color-light-blue: "#205ea6"
+  color-light-purple: "#5e409d"
+  color-light-pink: "#a02f6f"
+  color-dark-foreground: "#f7f5f0"
+  color-dark-background: "#0a0a0a"
+  color-light-accent: "#ff3300"
+  color-dark-accent: "#ff5a1f"
+  font-monospace: '"Sohne Mono"'
+  color-bold: var(--color-accent)
+  color-italic: var(--color-foreground)
+  font-text: '"Sohne Mono"'
+  font-header: '"Sohne Mono"'
+  font-interface: '"Sohne Mono"'
+  font-density: "1.5"
+  bold-weight: "700"
+  font-feature: '"zero", "calt", "cv01", "cv07", "cv10", "cv11", "cv14", "cv16",
+    "cv17", "cv18", "ss01"'
+  font-header-feature: '"liga", "calt", "case", "kern", "cv01", "cv02", "cv03",
+    "cv04", "cv06", "cv09", "cv10", "cv11", "cv12", "cv13"'
+  font-header-weight: "700"
+  font-header-line-height: 1em
+  font-header-letter-spacing: 0.08em

@@ -1,0 +1,42 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="venetian"] {
+  --color-light-accent: #7b3f00;
+  --color-blue: #2f4e6e;
+  --color-yellow: #c2a94b;
+  --color-dark-accent: color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b );
+  --font-header: "adobe-jenson-pro";
+  --font-text: "adobe-jenson-pro";
+  --gap-body: var(--space-2);
+  --gap-block: var(--space-2);
+  --monile-gap-body: var(--space-2);
+  --gap-mobile-block: var(--space-2);
+  --line-height: 1.55;
+  --line-width: var(--line-width-sm);
+}
+/* TOKENS.YAML ADAPTER END */
+
+// venetian theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+
+:root[data-theme="venetian"],
+[data-theme="venetian"] {
+/* ─── Design Tokens ──────────────────────────────────────── */
+--color-light-accent: #7b3f00;
+--color-blue: #2f4e6e;
+--color-yellow: #c2a94b;
+--color-dark-accent: color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b );
+--font-header: "adobe-jenson-pro";
+--font-text: "adobe-jenson-pro";
+--gap-body: var(--space-2);
+--gap-block: var(--space-2);
+--monile-gap-body: var(--space-2);
+--gap-mobile-block: var(--space-2);
+--line-height: 1.55;
+--line-width: var(--line-width-sm);
+
+/* ─── Custom rules for Venetian ───────────────────────────── */
+/* burnt umber */ /* lapis-like */
+
+    letter-spacing: 0.004em;
+}

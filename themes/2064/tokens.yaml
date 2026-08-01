@@ -1,0 +1,43 @@
+meta:
+  id: 2064
+  label: "2064"
+  selector: '[data-theme="2064"]'
+  fonts:
+    - "@stnd/fonts/inter"
+    - "@stnd/fonts/cargo-diatype"
+    - "@stnd/fonts/berkeley-mono"
+tokens:
+  color-light-background: "#efefef"
+  color-light-foreground: "#4F4F33"
+  color-light-accent: "#e0b727"
+  color-light-red: "#af2323"
+  color-light-orange: "#c06c2b"
+  color-light-yellow: "#e0b727"
+  color-light-green: "#61a155"
+  color-light-cyan: "#549b88"
+  color-light-blue: "#2e94bb"
+  color-light-magenta: "#7a5ba8"
+  color-dark-background: "#1c1c1a"
+  color-dark-foreground: "#DBCD93"
+  color-dark-accent: "#C7A540"
+  color-dark-red: "#971d1d"
+  color-dark-orange: "#C48745"
+  color-dark-yellow: "#C7A540"
+  color-dark-green: "#919300"
+  color-dark-cyan: "#549b88"
+  color-dark-blue: "#277d9e"
+  color-dark-magenta: "#7a5ba8"
+  font-text: '"Berkeley Mono"'
+  font-header: '"Avant Garde Pro"'
+  font-monospace: '"Berkeley Mono"'
+  optical-ratio: "1.414"
+  line-height: "1.5"
+  line-width: 45rem
+  font-weight: "400"
+  font-weight-bold: "600"
+  radius: 2px
+  stroke-width: 1px
+  font-header-weight: "700"
+  font-interface: '"Berkeley Mono"'
+  font-density: "1.5"
+  font-line-width: 45rem

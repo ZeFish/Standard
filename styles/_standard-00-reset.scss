@@ -1,0 +1,115 @@
+/* =========================== */
+/* RESET                       */
+/* =========================== */
+
+/* Disable view transition animations - instant page swaps
+   Superseded by the fade in/out ::view-transition-old(root) /
+   ::view-transition-new(root) rules in _standard-01-token.scss — kept here
+   commented out as the "instant, no animation" alternative if that fade
+   is ever reverted.
+::view-transition {
+  animation-duration: 0s !important;
+}
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation: none !important;
+}
+*/
+
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
+  border-width: 0;
+  scrollbar-width: thin;
+}
+
+/*
+ * Modern targeted reset (replaces the old `* { margin: 0; padding: 0 }`).
+ * This prevents the framework from destroying the native margins/paddings of complex
+ * embedded editors (like CodeMirror/Obsidian) or third-party web widgets, while still
+ * perfectly resetting the standard web typography and layout elements.
+ */
+:where(
+  html,
+  body,
+  p,
+  ol,
+  ul,
+  li,
+  dl,
+  dt,
+  dd,
+  blockquote,
+  figure,
+  fieldset,
+  legend,
+  textarea,
+  pre,
+  iframe,
+  hr,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  img,
+  span,
+  a
+) {
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+button,
+input,
+select {
+  margin: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+img,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+/* inline-block, not block like img/video above — svgs are used inline
+   within text/buttons/icons far more often than as standalone media. */
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* [hidden] forced off, but hidden="until-found" is deliberately excluded —
+   that's the browser's native find-in-page reveal mechanism (Ctrl/Cmd+F);
+   force-hiding it here would break the browser's ability to un-hide it. */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none !important;
+}
+
+/* Browsers never render <script> content by default — this guards against
+   some other broad selector (a component lib, a CMS export) accidentally
+   setting display on everything and making inline script text visible. */
+script {
+  display: none !important;
+}

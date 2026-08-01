@@ -1,0 +1,129 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="mono"] {
+  --color-light-foreground: #0a0a0a;
+  --color-light-background: #f7f5f0;
+  --color-light-red: #af3029;
+  --color-light-orange: #bc5215;
+  --color-light-yellow: #ad8301;
+  --color-light-green: #66800b;
+  --color-light-cyan: oklch(45.26% 0.0839 191.25);
+  --color-light-blue: #205ea6;
+  --color-light-purple: #5e409d;
+  --color-light-pink: #a02f6f;
+  --color-dark-foreground: #f7f5f0;
+  --color-dark-background: #0a0a0a;
+  --color-light-accent: #ff3300;
+  --color-dark-accent: #ff5a1f;
+  --font-monospace: "Sohne Mono";
+  --color-bold: var(--color-accent);
+  --color-italic: var(--color-foreground);
+  --font-text: "Sohne Mono";
+  --font-header: "Sohne Mono";
+  --font-interface: "Sohne Mono";
+  --font-density: 1.5;
+  --bold-weight: 700;
+  --font-feature: "zero", "calt", "cv01", "cv07", "cv10", "cv11", "cv14", "cv16", "cv17", "cv18", "ss01";
+  --font-header-feature: "liga", "calt", "case", "kern", "cv01", "cv02", "cv03", "cv04", "cv06", "cv09", "cv10", "cv11", "cv12", "cv13";
+  --font-header-weight: 700;
+  --font-header-line-height: 1em;
+  --font-header-letter-spacing: 0.08em;
+}
+/* TOKENS.YAML ADAPTER END */
+
+// mono theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+
+/* ─── Custom rules for Mono — NYC street-fashion spec-sheet ─────────────
+   Every element reads like a garment tag: monospace throughout, tracked-out
+   caps for headers, a hazard-orange accent doing the work a hangtag would. */
+:root[data-theme="mono"],
+[data-theme="mono"] {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-transform: uppercase;
+    font-weight: var(--font-header-weight);
+    letter-spacing: var(--font-header-letter-spacing);
+  }
+
+  /* Barcode rule under the title — thick/thin like a tag scan line */
+  h1 {
+    padding-bottom: var(--space-half);
+    border-bottom: 4px solid var(--color-foreground);
+    box-shadow: 0 6px 0 -3px var(--color-foreground);
+    margin-block-end: var(--space-4);
+  }
+
+  h2::before,
+  h3::before {
+    content: "// ";
+    color: var(--color-accent);
+  }
+
+  strong {
+    color: var(--color-accent);
+    font-weight: var(--bold-weight);
+  }
+
+  /* Off-White-style quotation marks around emphasis */
+  em {
+    font-style: normal;
+    color: var(--color-foreground);
+  }
+  em::before {
+    content: "\201C";
+  }
+  em::after {
+    content: "\201D";
+  }
+
+  a {
+    color: var(--color-foreground);
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  /* Care-label block quote */
+  blockquote {
+    border: 1px dashed var(--color-foreground);
+    padding: var(--space) var(--space-2);
+    position: relative;
+  }
+  blockquote::before {
+    content: "SIZE / NOTE";
+    position: absolute;
+    top: -0.6em;
+    left: var(--space);
+    background: var(--color-background);
+    padding-inline: var(--space-d4);
+    font-size: var(--size-3xs);
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+  }
+
+  table,
+  th,
+  td {
+    font-family: var(--font-monospace);
+    border-color: var(--color-foreground);
+  }
+  th {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+
+  code {
+    background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+  }
+
+  .markdown-reading-view img {
+    filter: none !important;
+    mix-blend-mode: normal !important;
+  }
+}

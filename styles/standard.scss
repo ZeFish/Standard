@@ -1,0 +1,52 @@
+/*!
+ * Standard Design — Fine-Art Typography Framework
+ *
+ * Classical design principles, mathematical precision with the golden ratio,
+ * and micro-typography rules inspired by the masters of print design.
+ * Built to be themable. Zero runtime dependencies.
+ *
+ * Based on research from:
+ * - The Elements of Typographic Style (Robert Bringhurst)
+ * - Ellen Lupton's typography works
+ * - Classical European typography conventions
+ * - Swiss typography principles
+ * - Modern web accessibility standards
+ *
+ * Philosophy: Respect classic typography rules, but readability always wins.
+ *
+ * @version @VERSION_PLACEHOLDER@
+ * @license MIT
+ * @package @stnd/styles
+ */
+
+/* === Foundation === */
+@use "standard-00-reset";
+@use "standard-00-variables" as *;
+@use "standard-01-token";
+@use "standard-02-color";
+@use "standard-03-typography";
+
+/* === Layout === */
+@use "standard-04-grid";
+@use "standard-05-rhythm";
+@use "standard-06-prose";
+
+/* === Elements === */
+@use "standard-07-base";
+@use "standard-08-media";
+@use "standard-09-lists";
+@use "standard-10-tables";
+@use "standard-11-forms";
+@use "standard-12-code";
+
+/* === Components === */
+@use "standard-13-components";
+@use "standard-14-analog";
+
+/* === Modes === */
+@use "standard-30-contrast";
+@use "standard-31-print";
+
+/* === Utilities === */
+@use "standard-50-utilities";
+@use "standard-99-debug";

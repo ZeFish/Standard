@@ -1,0 +1,101 @@
+{
+  "name": "@stnd/core",
+  "version": "0.22.1",
+  "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
+  "author": "Francis Fontaine",
+  "license": "MIT",
+  "homepage": "https://github.com/ZeFish/Standard#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeFish/Standard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZeFish/Standard/issues"
+  },
+  "keywords": [
+    "standard",
+    "astro-integration"
+  ],
+  "main": "standard.js",
+  "type": "module",
+  "svelte": "./Hook.svelte",
+  "exports": {
+    ".": "./standard.js",
+    "./Hook": {
+      "astro": "./Hook.astro",
+      "svelte": "./Hook.svelte",
+      "default": "./Hook.astro"
+    },
+    "./loader": "./src/loader.js",
+    "./virtual": "./src/virtual.js",
+    "./src/dev-toolbar/*": "./src/dev-toolbar/*",
+    "./types/*": "./types/*"
+  },
+  "files": [
+    "standard.js",
+    "types",
+    "src"
+  ],
+  "scripts": {
+    "build": "echo 'No build step required for core integration library'",
+    "dev": "pnpm run clean:ports && astro dev",
+    "start": "astro dev",
+    "kill-node": "killall node || taskkill /F /IM node.exe",
+    "commit": "git add . && git commit",
+    "test": "pnpm run test:lib",
+    "test:lib": "vitest run",
+    "audit:depedencies": "knip && ncu",
+    "clean:depedencies": "knip --fix --include dependencies,devDependencies",
+    "clean:ports": "lsof -ti:8083 | xargs kill -9 2>/dev/null || true"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "9.0.1",
+    "@stnd/client": "^0.5.0",
+    "@stnd/cloudflare": "^0.5.0",
+    "@stnd/fonts": "^0.5.0",
+    "@stnd/icon": "^0.2.0",
+    "@stnd/lab": "^1.0.0",
+    "@stnd/launcher": "^1.0.0",
+    "@stnd/layout": "^0.5.0",
+    "@stnd/log": "^0.5.0",
+    "@stnd/modules": "^0.5.1",
+    "@stnd/press": "^0.7.0",
+    "@stnd/store": "^0.5.0",
+    "@stnd/styles": "^0.5.2",
+    "@stnd/themes": "^0.5.1",
+    "@stnd/ui": "^0.5.0",
+    "@stnd/utils": "^0.5.0",
+    "astro": "7.1.3",
+    "glob": "^13.0.6",
+    "svelte": "5.56.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1",
+    "auto-changelog": "^2.6.0",
+    "happy-dom": "^20.10.6",
+    "knip": "^6.23.0",
+    "prettier": "^3.9.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-svelte": "^4.1.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  },
+  "types": "./types/standard.d.ts"
+}

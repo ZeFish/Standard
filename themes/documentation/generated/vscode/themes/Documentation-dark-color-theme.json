@@ -1,0 +1,156 @@
+{
+  "name": "Documentation Dark",
+  "type": "dark",
+  "colors": {
+    "foreground": "hsl(220, 14%, 70%)",
+    "input.background": "#1f1f1f",
+    "input.foreground": "hsl(220, 14%, 70%)",
+    "input.placeholderForeground": "#000000",
+    "inputOption.activeBorder": "#hsl(220, 92%, 80%)80",
+    "badge.foreground": "hsl(220, 13%, 7.5%)",
+    "badge.background": "hsl(220, 92%, 80%)",
+    "progressBar.background": "hsl(220, 92%, 80%)",
+    "button.background": "hsl(220, 92%, 80%)",
+    "button.foreground": "hsl(220, 14%, 70%)",
+    "button.hoverBackground": "#hsl(220, 92%, 80%)90",
+    "dropdown.background": "#1f1f1f",
+    "dropdown.foreground": "hsl(220, 14%, 70%)",
+    "dropdown.border": "#000000",
+    "focusBorder": "#hsl(220, 92%, 80%)80",
+    "selection.background": "#hsl(220, 92%, 80%)40",
+    "editor.background": "hsl(220, 13%, 7.5%)",
+    "editor.foreground": "hsl(220, 14%, 70%)",
+    "sideBar.background": "hsl(220, 13%, 7.5%)",
+    "sideBar.border": "#000000",
+    "activityBar.background": "hsl(220, 13%, 7.5%)",
+    "activityBar.foreground": "hsl(220, 14%, 70%)",
+    "activityBar.inactiveForeground": "#000000",
+    "statusBar.background": "hsl(220, 13%, 7.5%)",
+    "statusBar.foreground": "hsl(220, 14%, 70%)",
+    "titleBar.activeBackground": "hsl(220, 13%, 7.5%)",
+    "titleBar.activeForeground": "hsl(220, 14%, 70%)",
+    "editorLineNumber.foreground": "#000000",
+    "editorLineNumber.activeForeground": "#000000",
+    "editor.lineHighlightBackground": "#000000",
+    "editorIndentGuide.background": "#000000",
+    "editorIndentGuide.activeBackground": "#000000",
+    "list.hoverBackground": "#000000",
+    "list.activeSelectionBackground": "#000000",
+    "list.activeSelectionForeground": "hsl(220, 14%, 70%)",
+    "tab.activeBackground": "#000000",
+    "tab.activeForeground": "hsl(220, 14%, 70%)",
+    "tab.inactiveBackground": "hsl(220, 13%, 7.5%)",
+    "tab.inactiveForeground": "#000000",
+    "tab.border": "#000000",
+    "breadcrumb.foreground": "#000000",
+    "breadcrumb.focusForeground": "hsl(220, 14%, 70%)",
+    "widget.shadow": "#00000040",
+    "quickInput.background": "#000000",
+    "terminal.background": "hsl(220, 13%, 7.5%)",
+    "terminal.foreground": "hsl(220, 14%, 70%)"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.parameter",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.other.member",
+      "settings": {
+        "foreground": "hsl(220, 14%, 70%)"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "entity.name.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "punctuation.definition.keyword"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#000000"
+      }
+    }
+  ]
+}

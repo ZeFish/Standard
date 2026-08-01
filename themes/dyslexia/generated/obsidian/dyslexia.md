@@ -1,0 +1,92 @@
+---
+aliases: []
+created: 2026-07-24 09:35
+modified: 2026-07-24 09:35
+cssclasses: []
+maturity: sprout
+mode: read
+publish: false
+tags:
+  - design
+theme: dyslexia
+type: theme
+visibility: private
+snippet: false
+---
+
+![[Sample content]]
+
+```css
+[data-stnd-theme="dyslexia"] {
+    /* ─── Custom rules for Dyslexie ───────────────────────────── */
+    /* ─── Design Tokens ──────────────────────────────────────── */
+    --color-light-background: #fdfaf6;
+    --color-light-foreground: #2b2b2b;
+    --color-dark-background: #242526;
+    --color-dark-foreground: #e4e2de;
+    --color-accent: #1f6690;
+    --font-text: "Atkinson Hyperlegible Next", sans-serif;
+    --font-header: "Atkinson Hyperlegible Next", sans-serif;
+    --font-mono: "Atkinson Hyperlegible Mono", monospace;
+    --font-weight-text: 400;
+    --font-header-weight: 700;
+    --font-header-letter-spacing: 0.03em;
+    --line-height: 1.6;
+    --optical-ratio: 1.414;
+    --line-width: var(--line-width-base);
+
+    /* ─── Custom rules for Dyslexie ───────────────────────────── */
+    /* Reduce visual stress: Never pure white or pure black */
+      /* Warm off-white/cream */
+      /* Dark charcoal instead of black */
+      /* Soft dark */
+      /* Soft light */
+      /* Accessible, calm blue */
+
+      /* Dedicated highly-legible fonts */
+
+      /* Typographic tweaks for Dyslexia */
+
+      /* Increased spacing to prevent letters/sentences from crowding */
+      /* Higher leading for better tracking */
+
+      /* Ratios */
+
+      /* Mixins or utilities can use these to force better reading patterns */
+      p,
+      li,
+      blockquote {
+        letter-spacing: 0.02em;
+        word-spacing: 0.05em;
+        text-align: left;
+        /* Never justify text for dyslexia */
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-block-start: var(--space-6);
+        margin-block-end: var(--space-4);
+        letter-spacing: 0.05em;
+      }
+
+      blockquote {
+        border-left: 4px solid var(--color-accent);
+        padding-inline-start: var(--space-3);
+        background: color-mix(in srgb, var(--color-accent) 5%, transparent);
+        padding-block: var(--space-2);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      /* Make links very explicit, not just a subtle color change */
+      a {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+        font-weight: 600;
+      }
+}
+```

@@ -1,0 +1,81 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="gallery"] {
+  --color-dark-foreground: #ccc;
+  --color-dark-background: #101010;
+  --color-light-background: #fafafa;
+  --color-light-foreground: #1c1c1c;
+  --optical-ratio: var(--ratio-golden);
+  --mobile-font-ratio: var(--ratio-golden);
+  --shadow: none;
+  --radius: 0;
+  --font-monospace: monospace;
+  --font-text: "Cargo Diatype";
+  --font-header: "Cargo Diatype";
+  --font-header-letter-spacing: -0.065em;
+  --line-height: 1.2;
+  --gap-body: var(--space);
+}
+/* TOKENS.YAML ADAPTER END */
+
+[data-theme="gallery"] {
+/* ─── Custom rules for Gallery ───────────────────────────── */
+.prose {
+    display: block;
+  }
+
+  body {
+    max-width: 100%;
+  }
+
+  /* The work gets the wall */
+  .prose img {
+    display: block;
+    margin-inline: auto;
+    margin-block: var(--space-8);
+    max-width: min(100%, 72rem);
+  }
+
+  /* The placard: narrow, quiet, beside the work in spirit */
+  .prose :is(p, ul, ol, blockquote) {
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+
+  /* Captions recede like wall labels */
+  figcaption,
+  .prose img + em {
+    display: block;
+    text-align: center;
+    font-size: var(--size-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-block-start: calc(var(--space-8) * -0.6);
+    margin-block-end: var(--space-8);
+  }
+
+  /* Exhibition titles: present, never loud */
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+    font-weight: 500;
+    text-wrap: balance;
+  }
+  h2,
+  h3 {
+    margin-block-start: var(--space-10);
+  }
+
+  /* A horizontal rule is a walk to the next room */
+  hr {
+    border: 0;
+    background: none;
+    height: 0;
+    margin-block: var(--space-12);
+  }
+
+  footer {
+    max-width: 100% !important;
+  }
+}

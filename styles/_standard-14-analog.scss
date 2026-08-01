@@ -1,0 +1,55 @@
+@use "standard-00-variables" as *;
+
+#{$stnd-theme-scope} {
+  /*
+      This data URI is an SVG with a <feTurbulence> filter.
+      baseFrequency controls the "roughness" (higher = finer grain) —
+      5 for --effect-noise (fine), 0.4 for --effect-grain (coarse).
+      AUDIT FLAG (2026-07-14): this comment previously said "baseFrequency=
+      '0.6'" and "opacity='0.05'" — neither matches either data URI below
+      (noise=5, grain=0.4; both rects have opacity=1, the CSS-level
+      --effect-opacity token below is what's actually 0.05/0.15). Corrected
+      to describe the real values.
+   */
+  --effect-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+  --effect-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.4' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+  --effect-blend-mode: multiply;
+  --effect-opacity: 0.15;
+  --effect-ink: 0 0 1.12px oklch(from currentColor l c h / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  #{$stnd-theme-scope}:not([data-color-mode="light"]) {
+    --effect-blend-mode: screen;
+    --effect-opacity: 0.05; /* Needs to be stronger to show on dark */
+  }
+}
+
+#{$stnd-theme-scope}[data-color-mode="dark"] {
+  --effect-blend-mode: screen;
+  --effect-opacity: 0.05;
+}
+
+/* 1. Global Atmosphere (The Desk) */
+html::after,
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* Top layer — same z-index as --z-image-zoom on purpose now, was a
+     hardcoded magic number that happened to match */
+  z-index: var(--z-image-zoom);
+  background-image: var(--effect-grain);
+  opacity: var(--effect-opacity);
+  mix-blend-mode: var(--effect-blend-mode);
+  pointer-events: none;
+  background-size: 200px 200px;
+}
+
+.prose *,
+.ink *,
+.note * {
+  /* filter: contrast(10%);*/
+  /* Blurs the edges slightly, then high contrast makes them crisp but organic */
+  text-shadow: var(--effect-ink);
+}

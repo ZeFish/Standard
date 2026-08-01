@@ -1,0 +1,347 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* FORMS                       */
+/* =========================== */
+
+/* Layout containers */
+
+fieldset {
+  display: grid;
+  gap: 0;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--space) !important;
+  background: color-mix(
+    in oklch,
+    var(--color-surface) 25%,
+    var(--color-background)
+  );
+}
+
+fieldset div,
+fieldset p {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset + button {
+  margin-block-start: var(--space);
+}
+
+fieldset :last-child {
+  margin-block-end: 0;
+}
+
+legend {
+  font-weight: var(--font-weight-bold, bold);
+  margin-inline-start: calc(var(--space-d2) * -1);
+  padding-inline: var(--space-d2);
+}
+
+/* Inputs */
+input,
+textarea {
+  width: 100%;
+  font-family: var(--font-interface), system-ui, sans-serif;
+  @extend %padding-text;
+  font-size: 1em;
+  border-radius: var(--radius-sm);
+  color: var(--color-foreground);
+  background: var(--color-surface);
+  /* shadcn-style raised effect. --border currently resolves to `none` —
+     see the AUDIT FLAG in _standard-02-color.scss. */
+  border: var(--border);
+  box-shadow: var(--shadow-raised);
+  /* Transparent outline at full width reserves the space a real focus
+     outline (set on :focus below) will need — prevents layout shift when
+     the outline color actually appears. */
+  outline: var(--stroke-width) solid transparent;
+  outline-offset: var(--stroke-width);
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: var(--color-surface-high);
+  }
+
+  text-shadow: none !important;
+}
+
+select {
+  width: 100%;
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-weight: var(--font-weight);
+  padding: var(--space-d8) var(--space-d4);
+  font-size: 1em;
+
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  background-color: var(--color-surface);
+  border: var(--border);
+  box-shadow: var(--shadow-raised);
+  outline: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-align: left;
+  text-shadow: none !important;
+  text-box-trim: none;
+
+  appearance: none;
+  /* Match Combobox double-chevron */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(150,150,150,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right var(--space-d8) center;
+  background-size: 1em;
+  padding-right: var(--space); /* Make space for the icon */
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-surface-high);
+    color: var(--color-foreground);
+    border-color: var(--color-subtle);
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: var(--space-2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-subtle);
+  /* Change to your desired color */
+}
+
+input:focus,
+textarea:focus {
+  outline: var(--stroke-width) solid
+    oklch(from var(--color-accent) l c h / 0.25);
+  outline-offset: calc(var(--stroke-width) * 2);
+  background: var(--color-surface-high);
+}
+
+label {
+  margin-block-start: var(--space);
+}
+
+label + :is(input, textarea, select) {
+  margin-block-start: 0;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-d2);
+}
+
+fieldset *:not(legend) + :is(label, select, button, .btn-group) {
+  margin-block-start: var(--space);
+}
+
+fieldset *:not(legend) + .btn-group {
+  margin-block-start: var(--space-2);
+}
+
+input + :is(button, .btn-group) {
+  margin-block-start: var(--space-d2);
+}
+
+fieldset label:has(input[type="checkbox"], input[type="radio"]) {
+  margin-block-start: var(--space);
+}
+
+/* Checkbox/Radio */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: content-box;
+  width: calc(var(--space-d8));
+  height: calc(var(--space-d2));
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  position: relative;
+  margin-inline-end: var(--space-d2);
+
+  /* Subtle inset with border */
+  box-shadow: var(--shadow-raised);
+  outline: 0;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    /* Add subtle glow on hover */
+    background-color: var(--color-surface-high);
+    box-shadow: var(--shadow-raised);
+  }
+
+  &:active {
+    /* Add subtle glow on hover */
+    background-color: var(--color-surface-low);
+    box-shadow: var(--shadow-inset);
+  }
+
+  &:focus-visible {
+    outline: var(--stroke-width) solid var(--color-accent);
+    outline-offset: var(--stroke-width);
+  }
+
+  /* Checked state */
+  &:checked {
+    background-color: var(--color-accent);
+    /* Raised effect when checked, with accent border for clarity */
+    box-shadow: var(--shadow-raised);
+  }
+
+  &:checked:hover {
+    box-shadow: var(--shadow-raised);
+  }
+
+  /* Checkmark using pseudo-element */
+  &:checked::after {
+    content: "";
+    position: absolute;
+    left: 38%;
+    top: 23%;
+    width: 25%;
+    height: 45%;
+    border: var(--stroke-width) solid var(--color-on-accent);
+    border-width: 0 var(--stroke-width-lg) var(--stroke-width-lg) 0;
+    transform: rotate(45deg);
+  }
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+input[type="checkbox"][role="switch"] {
+  --switch-height: calc(var(--space) - var(--space-d3));
+  --switch-width: calc(var(--switch-height) * 2);
+  --switch-padding: 2px;
+
+  appearance: none;
+  box-sizing: border-box; /* Reset content-box from base checkbox rule */
+  position: relative;
+  top: 0; /* Reset top: 50% from base checkbox rule */
+  width: var(--switch-width);
+  height: var(--switch-height);
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  background: var(--color-surface-lowest);
+  box-shadow: var(--shadow-ring), var(--shadow-inset);
+  transition: background 0.2s;
+
+  &:hover {
+    box-shadow: var(--shadow-ring), var(--shadow-inset);
+    &::before {
+      background: var(--color-accent);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* Thumb */
+  &::before {
+    content: "";
+    position: absolute;
+    top: var(--switch-padding);
+    left: var(--switch-padding);
+    width: calc(var(--switch-height) - var(--switch-padding) * 2);
+    height: calc(var(--switch-height) - var(--switch-padding) * 2);
+    border-radius: 50%;
+    background: var(--color-surface-high);
+    box-shadow: var(--shadow-raised);
+    transition: all var(--transition-fast);
+  }
+
+  /* Suppress the checkmark ::after from the base checkbox rule */
+  &:checked::after {
+    content: none;
+  }
+
+  &:checked {
+    background: var(--color-accent);
+    &::before {
+      background: var(--color-surface-high);
+      transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+    }
+  }
+
+  /* Fixed 2026-07-14 — was a typo (--color-on-cce), corrected to
+     --color-on-accent. */
+  &:checked:hover {
+    &::before {
+      background: var(--color-on-accent) !important;
+    }
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  /* Webkit/Blink */
+  appearance: none;
+  cursor: pointer;
+  /* Dimensions */
+  height: var(--space-half);
+  /* Adjust track height */
+  width: 100%;
+  border-radius: 9999px;
+  outline: none;
+  padding: 0;
+  box-shadow: var(--shadow-inset);
+
+  padding: 0;
+  /* Crucial: allows thumb to touch edges */
+  border: var(--border);
+  /* Crucial: removes text-input borders */
+  background-origin: border-box;
+
+  /* Fixed 2026-07-14 — this gradient is real and wired up by
+     Slider.astro's JS (sets --slider-value); the flat color below it was
+     silently overriding it. Removed the override so the fill effect
+     actually renders. */
+  background: linear-gradient(
+    to right,
+    var(--color-background, var(--color-accent)) 0%,
+    var(--color-background, var(--color-accent)) var(--slider-value, 50%),
+    var(--color-red, var(--color-surface)) var(--slider-value, 50%),
+    var(--color-red, var(--color-surface)) 100%
+  );
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: calc(var(--space-half) + 2px);
+  width: calc(var(--space-half) + 2px);
+  border-radius: 50%;
+  border: none;
+  transition: var(--transition-fast);
+
+  background: var(--color-surface-high);
+  /* Raised effect for better grip affordance */
+  box-shadow: var(--shadow-raised);
+
+  /* Vertical alignment logic for Webkit:
+     (Thumb Height / 2) - (Track Height / 2) * -1
+  */
+  margin-top: 0;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  background: var(--color-accent);
+  box-shadow: var(--shadow-raised), var(--shadow-lg);
+  cursor: pointer;
+}

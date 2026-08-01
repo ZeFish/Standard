@@ -1,0 +1,13 @@
+{
+  "name": "@stnd/themes",
+  "version": "0.5.1",
+  "type": "module",
+  "author": "Francis Fontaine",
+  "license": "MIT",
+  "exports": {
+    "./*": "./*/index.module.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

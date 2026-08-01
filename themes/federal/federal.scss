@@ -1,0 +1,84 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="federal"] {
+  --color-light-background: hsl(45, 25%, 94%);
+  --color-light-foreground: oklch(0.26 0.012 15);
+  --color-light-accent: oklch(0.55 0.185 32);
+  --color-light-border: hsl(45, 12%, 76%);
+  --color-light-surface: hsl(45, 22%, 89%);
+  --color-light-surface-low: hsl(45, 22%, 91%);
+  --color-light-subtle: oklch(0.45 0.015 30);
+  --color-light-muted: oklch(0.62 0.012 35);
+  --color-dark-background: hsl(220, 10%, 10%);
+  --color-dark-foreground: oklch(0.88 0.02 65);
+  --color-dark-accent: oklch(0.68 0.17 36);
+  --color-dark-border: hsl(220, 8%, 24%);
+  --color-dark-surface: hsl(220, 10%, 13%);
+  --color-dark-surface-low: hsl(220, 10%, 12%);
+  --color-dark-subtle: oklch(0.65 0.02 50);
+  --color-dark-muted: oklch(0.5 0.015 45);
+  --font-text: "Helvetica Now", system-ui, sans-serif;
+  --font-header: "Helvetica Now", system-ui, sans-serif;
+  --font-monospace: "IBM Plex Mono", monospace;
+  --font-interface: "IBM Plex Mono", monospace;
+  --radius: 0;
+  --shadow: none;
+  --shadow-inset: none;
+  --shadow-raised: none;
+}
+/* TOKENS.YAML ADAPTER END */
+
+// federal theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+[data-theme="federal"] {
+  /* 🌙 Active Mapping (Dark Mode) */
+  &[data-mode="dark"],
+  .dark & {
+    --color-background: var(--color-dark-background);
+    --color-foreground: var(--color-dark-foreground);
+    --color-accent: var(--color-dark-accent);
+    --color-border: var(--color-dark-border);
+    --color-surface: var(--color-dark-surface);
+    --color-surface-low: var(--color-dark-surface-low);
+    --color-subtle: var(--color-dark-subtle);
+    --color-muted: var(--color-dark-muted);
+  }
+
+  /* The theme selector sits on <html> — paint its own background so the
+     sheet extends past the body's measure with no cold gray margins. */
+  background: var(--color-background);
+
+  /* Headings take the ink, not the base prose engine's heading color. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-foreground);
+    text-align:left;
+    padding:0 0;
+  }
+
+  /* ─── The spec voice: Berkeley Mono, small, engineering-flat ─────── */
+  .spec {
+    font-family: var(--font-monospace);
+    font-size: var(--scale-d3);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    margin: 0;
+
+    &.label {
+      color: var(--color-subtle);
+      text-transform: uppercase;
+      font-size: var(--scale-d4);
+      margin-block-end: 0.3em;
+    }
+  }
+
+  /* ─── The federal bar: the one heavy element ──────────────────────── */
+  .bar {
+    height: calc(var(--space-d2) * 1.2);
+    background: var(--color-accent);
+    display:none;
+    margin-block: 0;
+  }
+}

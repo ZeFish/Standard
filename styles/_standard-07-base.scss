@@ -1,0 +1,236 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* BASE (HTML ROOT)            */
+/* =========================== */
+
+html {
+  /* Use the explicit background-color longhand so transitions target
+     the color property directly (avoids shorthand incompatibilities).
+     Keep font-smoothing here for consistent rendering across color modes. */
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-size: var(--size-base);
+  font-weight: var(--font-weight);
+  letter-spacing: var(--font-letter-spacing);
+
+  line-height: var(--line-height);
+
+  text-rendering: optimizeLegibility;
+  /* kerning & ligatures */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-optical-sizing: auto;
+  font-feature-settings: var(--font-feature);
+  font-variation-settings: var(--font-variation);
+
+  text-wrap: pretty;
+  hyphens: none;
+  widows: 2;
+  orphans: 2;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Smoothly transition global surfaces and text color together.
+     Add `will-change` to hint the UA for smoother repainting on theme toggles.
+     Keep motion-reduced users in mind via media query above.
+  */
+  html,
+  body,
+  [data-theme] {
+    transition:
+      background-color var(--transition),
+      color var(--transition),
+      border-color var(--transition);
+    will-change: background-color, color;
+    /* Ensure consistent font smoothing during theme switches */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    transition: color var(--transition-fast);
+  }
+}
+
+body {
+  margin: 0;
+  padding: var(--gap-body);
+  padding-top: var(--gap-header);
+  padding-bottom: var(--gap-footer);
+  max-width: var(--body-max-width);
+  margin-inline: auto;
+
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    padding var(--transition),
+    margin var(--transition);
+
+  [id] {
+    /* Keeps anchor-linked headings from landing under the sticky header. */
+    scroll-margin-top: calc(var(--space-2) + var(--gap-header));
+  }
+}
+
+main {
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    padding var(--transition),
+    margin var(--transition);
+}
+
+/* Selection highlight */
+::selection {
+  background: oklch(from var(--color-yellow) l c h / 0.15);
+  color: var(--color-accent);
+}
+
+/* =========================== */
+/* TEXT LINE WIDTH              */
+/* =========================== */
+/* Comfortable reading length for text elements — works everywhere,
+   not just inside .prose. Images, tables, code blocks are not affected. */
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+div.callout,
+summary {
+  max-width: var(--line-width);
+}
+p:has(img),
+blockquote p {
+  max-width: unset;
+}
+
+/* Horizontal rules */
+hr {
+  height: var(--stroke-width, 1px);
+  background: var(--color-border);
+  border: none;
+  block-size: var(--stroke-width, 1px);
+}
+
+/* Mark highlighting */
+mark {
+  background: oklch(from var(--color-yellow) l c h / 0.3);
+  color: color-mix(in oklch, var(--color-yellow) 30%, var(--color-foreground));
+  padding: var(--trim);
+  padding-top: 0.1em;
+}
+
+/* =========================== */
+/* LAYOUT                      */
+/* =========================== */
+
+section.container-hero {
+  padding-block: var(--space-2);
+  /* --border currently resolves to `none` — see the AUDIT FLAG in
+     _standard-02-color.scss (duplicate --border declaration, "0 solid
+     transparent" then "none" wins). This section's top/bottom border is
+     invisible today as a result — real-world impact of that flag. */
+  border-top: var(--border);
+  border-bottom: var(--border);
+  box-shadow: var(--shadow);
+
+  p {
+    max-width: var(--line-width);
+    margin-inline: auto !important;
+  }
+}
+
+dt {
+  color: var(--color-header);
+  font-weight: var(--font-weight-bold);
+
+  & + dd {
+    margin-block-start: var(--space-half);
+    line-height: var(--line-height-compact);
+  }
+}
+
+/* =========================== */
+/* BODY PADDING NEGATION       */
+/* =========================== */
+
+/**
+ * AUDIT NOTE (2026-07-14): this docblock previously described a
+ * .negate-body-padding / .negate-body-padding-full / .negate-body-padding-bottom
+ * API — those class names don't exist anywhere in this file or the
+ * codebase (grepped), never did as far as git history in this session
+ * shows. The real, implemented class is .no-body-margin, and it's far
+ * narrower than "footers, headers, or other elements" implied: it only
+ * matches <footer>/<header> that are DIRECT children of <body> AND the
+ * first/last element of that type (body > footer.no-body-margin:last-of-type
+ * / body > header.no-body-margin:first-of-type). Neither the old
+ * (fictional) nor the real class name is used anywhere in apps/ today —
+ * corrected the docs to match reality rather than delete the utility.
+ *
+ * Utilities to negate body padding for a direct-child header/footer that
+ * should extend to the viewport edges.
+ *
+ * .no-body-margin — on a <footer> or <header> that is a direct child of
+ *   <body> and the last/first element of its type, respectively. Negates
+ *   horizontal body padding (both variants); the footer variant also
+ *   negates the extra 1.5× bottom padding, the header variant the top.
+ *
+ * Usage:
+ * <footer class="no-body-margin">
+ *   Full-width footer content
+ * </footer>
+ */
+
+/**
+ * Negate horizontal body padding (left/right)
+ * Allows full-width backgrounds while keeping vertical padding
+ */
+
+body > footer.no-body-margin:last-of-type,
+body > header.no-body-margin:first-of-type {
+  margin-inline: calc(var(--gap-body) * -1);
+  padding-inline: calc(var(--gap-body) * 1);
+
+  @media (max-width: #{$small}) {
+    margin-inline: calc(var(--gap-body-mobile) * -1);
+  }
+}
+
+/**
+ * Negate bottom body padding (extra 1.5× multiplier)
+ * Removes the generous bottom padding applied to body elements
+ * Useful when you want footer to sit flush at bottom
+ */
+body > footer.no-body-margin:last-of-type {
+  margin-block-end: calc(var(--gap-body) * -1.5);
+
+  @media (max-width: #{$small}) {
+    margin-block-end: calc(var(--gap-body-mobile) * -1.5);
+  }
+}
+
+/* Fixed 2026-07-14 — was margin-block-end (wrong property, copy-paste
+   typo), now correctly overrides margin-block-start to match the footer's
+   symmetric pattern. */
+body > header.no-body-margin:first-of-type {
+  margin-block-start: calc(var(--gap-body) * -1);
+
+  @media (max-width: #{$small}) {
+    margin-block-start: calc(var(--gap-body-mobile) * -1);
+  }
+}

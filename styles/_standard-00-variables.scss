@@ -1,0 +1,75 @@
+/**
+ * @component SCSS Variables & Mixins
+ * @category Foundation
+ * @description Responsive breakpoints and rhythm application mixins for consistent
+ * vertical rhythm and spacing across all elements. These mixins ensure proper
+ * spacing application for rhythm-aware components.
+ *
+ * @prop {variable} $mobile Mobile breakpoint (600px)
+ * @prop {variable} $small Small screen breakpoint (768px)
+ * @prop {variable} $large Large screen breakpoint (1024px)
+ * @prop {variable} $wide Wide screen breakpoint (1440px)
+ *
+ * @example
+ * // Using breakpoint variables
+ * @media (min-width: $small) {
+ *   font-size: 1.2rem;
+ * }
+ *
+ * // Using rhythm mixin
+ * @include apply-rhythm {
+ *   margin-bottom: var(--space);
+ * }
+ *
+ * @since 0.1.0
+ * @see standard-01-token.scss
+ */
+
+$mobile: 600px;
+$small: 768px;
+$large: 1024px;
+$wide: 1440px;
+
+// Text elements needing text-box-trim (removes leading/trailing font
+// ascender/descender space so line-height math lines up with the baseline
+// grid) — consumed once in _standard-01-token.scss's #{$text-elements} rule.
+$text-elements: "a, kbd, div, span, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside";
+
+// Vertical rhythm system (_standard-05-rhythm.scss): consecutive "simple"
+// elements get 1x --gap margin between them; the moment either neighbor is
+// a "double" (heavier block-level: tables, cards, figures, sections...) the
+// margin becomes --gap * --gap-multiplicator (2x by default) — extra
+// breathing room around visually heavier blocks. $rhythm-tags is the union,
+// used for the heading-follows-anything spacing rules.
+$rhythm-simple-tags: ".alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, li, dl, dt, dd, p, pre, figure, hr, form, fieldset, button, aside, .callout, .card, .box, .btn, .grid";
+$rhythm-double-tags: "table,  blockquote, div:has(.video), section, article, header, footer, hr, #comments, .callout,  pre, figure, p:has(img), section, .box, .card, .small, .editorial, .feature, .hero, .full, .scroll, hr, aside, .stnd-code-block";
+$rhythm-tags: $rhythm-simple-tags + ", div, " + $rhythm-double-tags;
+
+// Reusable style fragments via @extend (not applied directly — SCSS
+// placeholder selectors emit no CSS of their own until extended).
+// %surface: card/panel look — _standard-13-components.scss.
+// %padding-text: form-control text padding — _standard-11-forms.scss,
+// _standard-13-components.scss.
+%surface {
+  border: none;
+  /* Raised effect for all surfaces */
+  box-shadow: var(--shadow-raised);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+}
+
+%padding-text {
+  padding: var(--space-d4) var(--space-d2);
+}
+
+// Single-target on purpose (not ":root, body") — a token declared on both
+// would always win on <body>'s own cascade resolution over anything set at
+// :root/html, silently blocking any :root-only override (which is exactly
+// what a note's frontmatter inlineStyle produces). See _standard-01-token.scss.
+//
+// Used to be two variables ($stnd-scope + $stnd-theme-scope) with different
+// defaults (":root, body" vs ":root"). Consolidated to one (2026-07-14) once
+// $stnd-scope became single-target too — nothing ever set them to different
+// selectors (obsidian.scss configures both identically), so the split was
+// pure redundancy.
+$stnd-theme-scope: ":root" !default;

@@ -1,0 +1,156 @@
+{
+  "name": "Blueprint Light",
+  "type": "light",
+  "colors": {
+    "foreground": "#f0f4f8",
+    "input.background": "#184770",
+    "input.foreground": "#f0f4f8",
+    "input.placeholderForeground": "#3a668d",
+    "inputOption.activeBorder": "#rgba(188, 82, 21, 0.574)80",
+    "badge.foreground": "#1a4d7a",
+    "badge.background": "rgba(188, 82, 21, 0.574)",
+    "progressBar.background": "rgba(188, 82, 21, 0.574)",
+    "button.background": "rgba(188, 82, 21, 0.574)",
+    "button.foreground": "#f0f4f8",
+    "button.hoverBackground": "#rgba(188, 82, 21, 0.574)90",
+    "dropdown.background": "#184770",
+    "dropdown.foreground": "#f0f4f8",
+    "dropdown.border": "#255580",
+    "focusBorder": "#rgba(188, 82, 21, 0.574)80",
+    "selection.background": "#rgba(188, 82, 21, 0.574)40",
+    "editor.background": "#1a4d7a",
+    "editor.foreground": "#f0f4f8",
+    "sideBar.background": "#1a4d7a",
+    "sideBar.border": "#255580",
+    "activityBar.background": "#1a4d7a",
+    "activityBar.foreground": "#f0f4f8",
+    "activityBar.inactiveForeground": "#7090ac",
+    "statusBar.background": "#1a4d7a",
+    "statusBar.foreground": "#f0f4f8",
+    "titleBar.activeBackground": "#1a4d7a",
+    "titleBar.activeForeground": "#f0f4f8",
+    "editorLineNumber.foreground": "#3a668d",
+    "editorLineNumber.activeForeground": "#7090ac",
+    "editor.lineHighlightBackground": "#255580",
+    "editorIndentGuide.background": "#255580",
+    "editorIndentGuide.activeBackground": "#7090ac",
+    "list.hoverBackground": "#255580",
+    "list.activeSelectionBackground": "#255580",
+    "list.activeSelectionForeground": "#f0f4f8",
+    "tab.activeBackground": "#255580",
+    "tab.activeForeground": "#f0f4f8",
+    "tab.inactiveBackground": "#1a4d7a",
+    "tab.inactiveForeground": "#7090ac",
+    "tab.border": "#255580",
+    "breadcrumb.foreground": "#7090ac",
+    "breadcrumb.focusForeground": "#f0f4f8",
+    "widget.shadow": "#00000040",
+    "quickInput.background": "#afc1d0",
+    "terminal.background": "#1a4d7a",
+    "terminal.foreground": "#f0f4f8"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#7090ac",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "rgba(102, 128, 11, 0.576)"
+      }
+    },
+    {
+      "scope": "variable.parameter",
+      "settings": {
+        "foreground": "rgba(188, 82, 21, 0.574)"
+      }
+    },
+    {
+      "scope": "variable.other.member",
+      "settings": {
+        "foreground": "#f0f4f8"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "entity.name.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "rgba(188, 82, 21, 0.574)"
+      }
+    },
+    {
+      "scope": [
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "rgba(188, 82, 21, 0.574)",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "punctuation.definition.keyword"
+      ],
+      "settings": {
+        "foreground": "rgba(188, 82, 21, 0.574)",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "rgba(32, 94, 166, 0.614)",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "rgba(173, 131, 1, 0.794)"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
+      "settings": {
+        "foreground": "rgba(102, 128, 11, 0.576)"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "rgba(32, 94, 166, 0.614)"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "rgba(32, 94, 166, 0.614)"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#7090ac"
+      }
+    }
+  ]
+}

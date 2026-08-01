@@ -1,0 +1,174 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="technical"],
+[data-theme="technical"] {
+  --color-light-foreground: #241b10;
+  --color-light-background: #fffbe9;
+  --color-dark-foreground: #9e7f5b;
+  --color-dark-background: #1d2027;
+  --color-light-border: #aed0ff;
+  --color-dark-border: #333333;
+  --color-light-red: #df453a;
+  --color-light-orange: #e08e1f;
+  --color-light-yellow: #d69a00;
+  --color-light-green: #4ca06b;
+  --color-light-cyan: #2aa198;
+  --color-light-blue: #2882c3;
+  --color-light-purple: #d16d92;
+  --color-light-pink: #ea76cb;
+  --color-dark-red: #d0483e;
+  --color-dark-orange: #da702c;
+  --color-dark-yellow: #d69a00;
+  --color-dark-green: #27a06c;
+  --color-dark-cyan: #81c8be;
+  --color-dark-blue: #8caaee;
+  --color-dark-purple: #8b7ec8;
+  --color-dark-pink: #f4b8e4;
+  --color-light-accent: var(--color-yellow);
+  --color-dark-accent: var(--color-magenta);
+  --color-bold: var(--color-blue);
+  --color-italic: var(--color-green);
+  --color-dark-bold: var(--color-magenta);
+  --optical-ratio: 1.6;
+  --line-height: 1.2;
+  --mobile-line-height: 1.2;
+  --font-text: "Courier Prime";
+  --font-interface: var(--font-text);
+  --font-monospace: "Berkeley Mono", "IBM Plex Mono", "Menlo", "Consolas", monospace;
+  --font-header: "Monosten", "Gorton Perfected", "Futura Now Var";
+  --font-header-feature: "onum", "salt", "calt";
+  --font-header-variation: "wght" 400, "wdth" 100;
+  --font-header-line-height: 0.9em;
+  --font-header-letter-spacing: 0em;
+  --line-height-normal: 1.7em;
+}
+/* TOKENS.YAML ADAPTER END */
+
+// technical theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+
+:root[data-theme="technical"],
+[data-theme="technical"] {
+/* ─── Custom rules for Technical — NASA/EPA spec-sheet ───────────────── */
+background: var(--color-surface);
+
+  body {
+    max-width: calc(var(--line-width) + var(--space-4));
+    margin-inline: auto;
+    background: var(--color-background);
+    box-shadow: var(--shadow-lg);
+    padding-top: 0 !important;
+  }
+
+  main {
+    padding-block: var(--space-10);
+    margin-top: 0 !important;
+    border: 0;
+    padding-inline: 0;
+
+    h1 {
+      text-align: left;
+    }
+
+    h2 {
+      border-bottom: var(--border);
+      padding-block-end: var(--space);
+    }
+  }
+
+  /* Spec-sheet numbering: 1.0, 2.0 … 2.1, 2.2 */
+  .prose {
+    counter-reset: spec;
+  }
+  .prose h2 {
+    counter-increment: spec;
+    counter-reset: subspec;
+  }
+  .prose h2::before {
+    content: counter(spec) ".0\2002";
+    color: var(--color-accent);
+  }
+  .prose h3 {
+    counter-increment: subspec;
+  }
+  .prose h3::before {
+    content: counter(spec) "." counter(subspec) "\2002";
+    color: var(--color-accent);
+  }
+
+  /* Inline code as machined parts */
+  .prose code:not(pre code) {
+    border: 1px solid var(--color-border);
+    padding-inline: 0.3em;
+  }
+
+  /* Data tables: labelled like a parts list */
+  table th {
+    font-size: var(--size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Callouts carry the safety stripe */
+  .callout {
+    border-left: 3px solid var(--color-accent);
+  }
+
+  footer {
+    margin-top: 0 !important;
+    border-top: 0;
+  }
+}
+
+/* ─── Obsidian-specific hooks — carried over from the retired "paper" theme
+   (feeds the vault-sync/Obsidian export pipeline) ───────────────────── */
+:root[data-theme="technical"],
+[data-theme="technical"] {
+  &.theme-dark {
+    --font-text: "JetBrains Mono";
+    --font-monospace: "Voyager Mono";
+    --font-interface: "Futura Now";
+  }
+
+  &.theme-light .markdown-reading-view a {
+    text-decoration: underline !important;
+    --shadow-color: color-mix(in oklab, currentcolor 20%, transparent);
+    --shadow-distance: 0px;
+    --shadow-depth: 0.5px;
+    text-shadow:
+      var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
+      calc(var(--shadow-depth) * -1) 0px var(--shadow-depth) var(--shadow-color),
+      0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
+  }
+
+  .markdown-preview-view,
+  .markdown-source-view {
+    color: color-mix(in oklab, var(--text-normal) 90%, transparent);
+    text-shadow: 0 0 0.5px var(--text-normal);
+
+    --shadow-color: color-mix(in oklab, currentcolor 10%, transparent);
+    --shadow-distance: 0px;
+    --shadow-depth: 0.5px;
+    text-shadow:
+      var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
+      calc(var(--shadow-depth) * -1) 0px var(--shadow-depth) var(--shadow-color),
+      0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
+  }
+
+  .inline-title,
+  .markdown-reading-view :is(h1, h2, h3, h4, h5, h6) {
+    text-align: left;
+    color: color-mix(in oklab, currentcolor 90%, var(--background-primary));
+
+    --shadow-color: color-mix(in oklab, currentcolor 30%, var(--background-primary));
+    --shadow-distance: 0px;
+    --shadow-depth: 0.5px;
+    text-shadow:
+      var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
+      calc(var(--shadow-depth) * -1) 0px var(--shadow-depth) var(--shadow-color),
+      0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
+  }
+}

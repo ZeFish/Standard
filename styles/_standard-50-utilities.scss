@@ -1,0 +1,1112 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Utility Classes
+ * @category Utilities
+ * @description Hybrid utility system supporting both Industrial T-shirt sizes
+ * and Mathematical units (1-12).
+ */
+
+/* ============================================================ */
+/*  MIXIN: Generate Scale                                       */
+/* ============================================================ */
+
+@mixin generate-scale($prefix, $property) {
+  $scales: (
+    "full": 100%,
+    "0": 0,
+    "auto": auto,
+
+    /* Industrial T-shirt Scale */ "3xs": var(--size-3xs),
+    "2xs": var(--size-2xs),
+    "xs": var(--size-xs),
+    "sm": var(--size-sm),
+    "base": var(--size-base),
+    "lg": var(--size-lg),
+    "xl": var(--size-xl),
+    "2xl": var(--size-2xl),
+    "3xl": var(--size-3xl),
+    "4xl": var(--size-4xl),
+    "5xl": var(--size-5xl),
+    "6xl": var(--size-6xl),
+    /* Mathematical Unit Scale (1-12) */ "": var(--space),
+    "2": var(--space-2),
+    "3": var(--space-3),
+    "4": var(--space-4),
+    "5": var(--space-5),
+    "6": var(--space-6),
+    "7": var(--space-7),
+    "8": var(--space-8),
+    "9": var(--space-9),
+    "10": var(--space-10),
+    "11": var(--space-11),
+    "12": var(--space-12),
+    "half": var(--space-d2),
+    /* Naming collision worth knowing: this "trim"/"leading" scale keys
+       (feeding .mt-trim, .p-leading, etc.) use --size-2xs/--size-xs (the
+       type scale) — NOT the real --trim/--leading rhythm tokens
+       (_standard-01-token.scss) that happen to share the same words.
+       A class like .mt-trim does not use --trim. */
+    "trim": var(--size-2xs),
+    "leading": var(--size-xs),
+  );
+
+  // Loop through and generate classes
+  @each $suffix, $value in $scales {
+    @if $suffix == "" {
+      .#{$prefix} {
+        #{$property}: $value !important;
+      }
+    } @else {
+      .#{$prefix}-#{$suffix} {
+        #{$property}: $value !important;
+      }
+    }
+  }
+}
+
+.w-auto {
+  width: auto !important;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+.w-screen {
+  width: 100vw !important;
+}
+
+.w-min {
+  width: min-content !important;
+}
+
+.w-max {
+  width: max-content !important;
+}
+
+.w-fit {
+  width: fit-content !important;
+}
+
+/* Min-width */
+@include generate-scale(min-w, min-width);
+
+.min-w-full {
+  min-width: 100% !important;
+}
+
+.min-w-screen {
+  min-width: 100vw !important;
+}
+
+/* Max-width */
+@include generate-scale(max-w, max-width);
+
+.max-w-none {
+  max-width: none !important;
+}
+
+.max-w-full {
+  max-width: 100% !important;
+}
+
+.max-w-screen {
+  max-width: 100vw !important;
+}
+
+.max-w-mobile {
+  max-width: var(--mobile) !important;
+}
+
+.max-w-small {
+  max-width: var(--small) !important;
+}
+
+.max-w-large {
+  max-width: var(--large) !important;
+}
+
+.max-w-wide {
+  max-width: var(--wide) !important;
+}
+
+.max-w-line {
+  max-width: var(--line-width) !important;
+}
+
+/* ============================================================ */
+/*  HEIGHT                                                      */
+/* ============================================================ */
+
+@include generate-scale(h, height);
+
+.h-auto {
+  height: auto !important;
+}
+
+.h-full {
+  height: 100% !important;
+}
+
+.h-screen {
+  height: 100vh !important;
+}
+
+.h-min {
+  height: min-content !important;
+}
+
+.h-max {
+  height: max-content !important;
+}
+
+.h-fit {
+  height: fit-content !important;
+}
+
+/* Min-height */
+@include generate-scale(min-h, min-height);
+
+.min-h-full {
+  min-height: 100% !important;
+}
+
+.min-h-screen {
+  min-height: 100vh !important;
+}
+
+/* Max-height */
+@include generate-scale(max-h, max-height);
+
+.max-h-none {
+  max-height: none !important;
+}
+
+.max-h-full {
+  max-height: 100% !important;
+}
+
+.max-h-screen {
+  max-height: 100vh !important;
+}
+
+.m-gap-header {
+  margin-top: var(--gap-header);
+}
+
+.p-gap-header {
+  padding-top: var(--gap-header);
+}
+
+.m-gap-footer {
+  margin-bottom: var(--gap-footer);
+}
+
+.p-gap-footer {
+  padding-bottom: var(--gap-footer);
+}
+
+/* ============================================================ */
+/*  DISPLAY                                                     */
+/* ============================================================ */
+
+.block {
+  display: block !important;
+}
+
+.inline {
+  display: inline !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+.grid {
+  display: grid !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============================================================ */
+/*  POSITION                                                    */
+/* ============================================================ */
+
+.relative {
+  position: relative !important;
+}
+
+.absolute {
+  position: absolute !important;
+}
+
+.fixed {
+  position: fixed !important;
+}
+
+.sticky {
+  position: sticky !important;
+}
+
+/* ============================================================ */
+/*  FLEXBOX                                                     */
+/* ============================================================ */
+
+.flex,
+.flex-row,
+.flex-col {
+  display: flex !important;
+  gap: var(--gap);
+
+  & :not(.rhythm) * {
+    margin-top: 0;
+  }
+}
+
+.flex-1 {
+  flex: 1 1 0% !important;
+}
+
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-col {
+  flex-direction: column !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+
+.flex-far {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Align items */
+.items-start {
+  align-items: flex-start !important;
+}
+
+.items-center {
+  align-items: center !important;
+}
+
+.items-end {
+  align-items: flex-end !important;
+}
+
+.items-baseline {
+  align-items: baseline !important;
+}
+
+.items-stretch {
+  align-items: stretch !important;
+}
+
+/* Justify content */
+.justify-start {
+  justify-content: flex-start !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.justify-end {
+  justify-content: flex-end !important;
+}
+
+.justify-between {
+  justify-content: space-between !important;
+}
+
+.justify-around {
+  justify-content: space-around !important;
+}
+
+.justify-evenly {
+  justify-content: space-evenly !important;
+}
+
+/* ============================================================ */
+/*  LAYOUT HELPERS                                              */
+/* ============================================================ */
+
+.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-horizontally,
+.mh-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-vertically {
+  display: flex;
+  align-items: center;
+}
+
+.no-body-margin {
+  margin-inline: calc((var(--gap-body) * -1)) !important;
+}
+
+/* ============================================================ */
+/*  TYPOGRAPHY — Size                                           */
+/* ============================================================ */
+
+.text-3xs {
+  font-size: var(--size-3xs) !important;
+}
+
+.text-2xs {
+  font-size: var(--size-2xs) !important;
+}
+
+.text-xs {
+  font-size: var(--size-xs) !important;
+}
+
+.text-sm {
+  font-size: var(--size-sm) !important;
+}
+
+.text-base {
+  font-size: var(--size-base) !important;
+}
+
+.text-lg {
+  font-size: var(--size-lg) !important;
+}
+
+.text-xl {
+  font-size: var(--size-xl) !important;
+}
+
+.text-2xl {
+  font-size: var(--size-2xl) !important;
+}
+
+.text-3xl {
+  font-size: var(--size-3xl) !important;
+}
+
+.text-4xl {
+  font-size: var(--size-4xl) !important;
+}
+
+.text-5xl {
+  font-size: var(--size-5xl) !important;
+}
+
+.text-6xl {
+  font-size: var(--size-6xl) !important;
+}
+
+/* ============================================================ */
+/*  TYPOGRAPHY — Weight                                         */
+/* ============================================================ */
+
+.font-bold {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.font-normal {
+  font-weight: var(--font-weight) !important;
+}
+
+.font-light {
+  font-weight: 300 !important;
+}
+
+/* ============================================================ */
+/*  TYPOGRAPHY — Line Height                                    */
+/* ============================================================ */
+
+.compact {
+  line-height: var(--line-height-compact) !important;
+}
+
+.relaxed {
+  line-height: var(--line-height-relaxed) !important;
+}
+
+/* ============================================================ */
+/*  TYPOGRAPHY — Alignment                                      */
+/* ============================================================ */
+
+.text-left {
+  text-align: left !important;
+  & > * {
+    margin-inline: 0 auto !important;
+  }
+}
+
+.text-center {
+  text-align: center !important;
+  & > * {
+    margin-inline: auto !important;
+  }
+}
+
+.text-right {
+  text-align: right !important;
+  & > * {
+    margin-inline: auto 0 !important;
+  }
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* ============================================================ */
+/*  TYPOGRAPHY — Transform                                      */
+/* ============================================================ */
+
+.uppercase {
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em;
+}
+
+.lowercase {
+  text-transform: lowercase !important;
+}
+
+.capitalize {
+  text-transform: capitalize !important;
+}
+
+.text-transform-none {
+  text-transform: none !important;
+}
+
+/* ============================================================ */
+/*  TYPOGRAPHY — Wrapping & Overflow                            */
+/* ============================================================ */
+
+.no-wrap {
+  white-space: nowrap !important;
+}
+
+.no-trim {
+  text-box-trim: none !important;
+
+  * {
+    text-box-trim: none !important;
+  }
+}
+
+.ellipsis,
+.ellipsis li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  text-box-trim: inherit;
+  text-box-edge: inherit;
+}
+
+/* ============================================================ */
+/*  READING WIDTH (line-width constraints)                      */
+/* ============================================================ */
+
+.line-xs {
+  max-width: var(--line-width-xs) !important;
+}
+
+/* Fixed 2026-07-14 — was --line-width-s/-l (undefined), corrected to the
+   real --line-width-sm/-lg (all 3 occurrences). */
+.line-s {
+  max-width: var(--line-width-sm) !important;
+}
+
+.line {
+  max-width: var(--line-width) !important;
+}
+
+.line-l {
+  max-width: var(--line-width-lg) !important;
+}
+
+.line-xl {
+  max-width: var(--line-width-xl) !important;
+}
+
+.line-full {
+  max-width: var(--line-width-full) !important;
+}
+
+/* ============================================================ */
+/*  COLORS — Text (semantic)                                    */
+/* ============================================================ */
+
+.text-primary {
+  color: var(--color-foreground) !important;
+}
+
+.text-muted {
+  color: var(--color-muted) !important;
+}
+
+.text-subtle {
+  color: var(--color-subtle) !important;
+}
+
+.text-accent {
+  color: var(--color-accent) !important;
+}
+
+.font-text {
+  font-family: var(--font-text) !important;
+}
+
+.font-monospace {
+  font-family: var(--font-monospace) !important;
+}
+
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+/* ============================================================ */
+/*  COLORS — Status                                             */
+/* ============================================================ */
+
+.success {
+  color: var(--color-success) !important;
+}
+
+.warning {
+  color: var(--color-warning) !important;
+}
+
+.error {
+  color: var(--color-error) !important;
+}
+
+.info {
+  color: var(--color-info) !important;
+}
+
+/* ============================================================ */
+/*  COLORS — Named spectrum (text)                              */
+/* ============================================================ */
+
+.red {
+  color: var(--color-red) !important;
+}
+
+.orange {
+  color: var(--color-orange) !important;
+}
+
+.yellow {
+  color: var(--color-yellow) !important;
+}
+
+.green {
+  color: var(--color-green) !important;
+}
+
+.cyan {
+  color: var(--color-cyan) !important;
+}
+
+.blue {
+  color: var(--color-blue) !important;
+}
+
+/* Fixed 2026-07-14 — was --color-magenta for both (so .purple and .pink
+   rendered identically), now each uses its own real, distinct token. */
+.purple {
+  color: var(--color-purple) !important;
+}
+
+.pink {
+  color: var(--color-pink) !important;
+}
+
+/* ============================================================ */
+/*  BACKGROUNDS — Semantic                                      */
+/* ============================================================ */
+
+.bg-background {
+  background-color: var(--color-background) !important;
+}
+
+.bg-surface {
+  background-color: var(--color-surface) !important;
+}
+
+.bg-accent {
+  background-color: var(--color-accent) !important;
+}
+
+.bg-foreground {
+  background-color: var(--color-foreground) !important;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.bg-glass {
+  backdrop-filter: var(--filter-glass);
+  background-color: var(--color-glass);
+}
+
+.bg-surface-lowest {
+  background-color: var(--color-surface-lowest) !important;
+}
+
+.bg-surface-low {
+  background-color: var(--color-surface-low) !important;
+}
+
+.bg-surface-high {
+  background-color: var(--color-surface-high) !important;
+}
+
+.bg-surface-highest {
+  background-color: var(--color-surface-highest) !important;
+}
+
+/* ============================================================ */
+/*  BACKGROUNDS — Named spectrum                                */
+/* ============================================================ */
+
+.bg-red {
+  background-color: var(--color-red) !important;
+}
+
+.bg-orange {
+  background-color: var(--color-orange) !important;
+}
+
+.bg-yellow {
+  background-color: var(--color-yellow) !important;
+}
+
+.bg-green {
+  background-color: var(--color-green) !important;
+}
+
+.bg-cyan {
+  background-color: var(--color-cyan) !important;
+}
+
+.bg-blue {
+  background-color: var(--color-blue) !important;
+}
+
+/* Fixed 2026-07-14 — was --color-magenta for both (so .purple and .pink
+   rendered identically), now each uses its own real, distinct token. */
+.bg-purple {
+  background-color: var(--color-purple) !important;
+}
+
+.bg-pink {
+  background-color: var(--color-pink) !important;
+}
+
+/* ============================================================ */
+/*  INVERT                                                      */
+/* ============================================================ */
+
+.invert {
+  color: var(--color-background);
+  background: var(--color-foreground);
+
+  * {
+    color: var(--color-background) !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .invert {
+    color: var(--color-foreground) !important;
+    background: color-mix(
+      in srgb,
+      var(--color-foreground) 15%,
+      transparent
+    ) !important;
+  }
+}
+
+/* ============================================================ */
+/*  SHADOWS                                                     */
+/* ============================================================ */
+
+.shadow {
+  box-shadow: var(--shadow) !important;
+}
+
+.shadow-raised {
+  box-shadow: var(--shadow-raised) !important;
+}
+
+.shadow-inset {
+  box-shadow: var(--shadow-inset) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow) !important;
+}
+
+.shadow-ring {
+  box-shadow: var(--shadow-ring) !important;
+}
+
+.shadow-inset-ring {
+  box-shadow: var(--shadow-inset), var(--shadow-ring) !important;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+/* ============================================================ */
+/*  BORDERS                                                     */
+/* ============================================================ */
+
+.border-0 {
+  border: 0 !important;
+}
+
+/* --border currently resolves to `none` — see the AUDIT FLAG in
+   _standard-02-color.scss. Affects .border/.border-accent/.border-t/-b/
+   -l/-r below too. */
+.border {
+  border: var(--border) !important;
+}
+
+.border-accent {
+  border: var(--border-accent) !important;
+}
+
+.border-t {
+  border-top: var(--border) !important;
+}
+
+.border-b {
+  border-bottom: var(--border) !important;
+}
+
+.border-l {
+  border-left: var(--border) !important;
+}
+
+.border-r {
+  border-right: var(--border) !important;
+}
+
+/* ============================================================ */
+/*  BORDER RADIUS                                               */
+/* ============================================================ */
+
+.rounded-sm {
+  border-radius: calc(var(--radius) / 2) !important;
+}
+
+.rounded {
+  border-radius: var(--radius) !important;
+}
+
+.rounded-lg {
+  border-radius: calc(var(--radius) * 1.5) !important;
+}
+
+.rounded-xl {
+  border-radius: calc(var(--radius) * 2) !important;
+}
+
+.rounded-full {
+  border-radius: 9999px !important;
+}
+
+.rounded-50,
+.rounded-50 img {
+  border-radius: 50%;
+}
+
+.no-rounded {
+  border-radius: 0 !important;
+}
+
+/* ============================================================ */
+/*  RHYTHM                                                      */
+/* ============================================================ */
+
+/* Fixed 2026-07-14 — was referencing undefined tokens, now uses the real
+   --gap token (this @supports block essentially never fires in 2026
+   given universal Grid support, but at least it's valid now). */
+@supports not (display: grid) {
+  .rhythm {
+    display: block;
+
+    > * {
+      margin-block-end: var(--gap);
+    }
+
+    > :last-child {
+      margin-block-end: 0;
+    }
+  }
+}
+
+/* ============================================================ */
+/*  MULTI-COLUMN FLOW                                           */
+/* ============================================================ */
+
+.columns,
+.columns-2 {
+  columns: 2;
+  column-gap: var(--space);
+}
+
+.columns-3 {
+  columns: 3;
+  column-gap: var(--space);
+}
+
+.columns-4 {
+  columns: 4;
+  column-gap: var(--space);
+}
+
+.columns-auto {
+  columns: auto;
+  column-width: var(--line-width-sm);
+  column-gap: var(--space);
+}
+
+.columns-gap-compact {
+  column-gap: var(--leading);
+}
+
+.columns-gap-wide {
+  column-gap: var(--space-2);
+}
+
+.columns-keep {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* --border currently resolves to `none` — see the AUDIT FLAG in
+   _standard-02-color.scss. */
+.columns-rule {
+  column-rule: var(--border);
+}
+
+.columns-rule-accent {
+  column-rule: 1px solid var(--color-accent);
+}
+
+@media (max-width: $small) {
+  .columns-2,
+  .columns-3,
+  .columns-4 {
+    columns: 1;
+  }
+}
+
+@media (min-width: calc($small + 1px)) and (max-width: $large) {
+  .columns-3,
+  .columns-4 {
+    columns: 2;
+  }
+}
+
+/* ============================================================ */
+/*  ACCESSIBILITY & RESETS                                      */
+/* ============================================================ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.no-decoration,
+.no-decoration * {
+  text-decoration: none !important;
+}
+
+.no-mouse {
+  pointer-events: none;
+  user-select: none;
+}
+
+.no-bullet {
+  list-style: none;
+  padding-inline-start: 0;
+
+  li::before {
+    display: none;
+  }
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+.keep-words {
+  word-break: keep-all;
+}
+.no-hyphen {
+  hyphens: none;
+}
+
+/* ============================================================ */
+/*  SPACING — Margins                                           */
+/* ============================================================ */
+
+@include generate-scale(m, margin);
+@include generate-scale(my, margin-block);
+@include generate-scale(mx, margin-inline);
+@include generate-scale(mt, margin-top);
+@include generate-scale(mr, margin-right);
+@include generate-scale(mb, margin-bottom);
+@include generate-scale(ml, margin-left);
+
+/* ============================================================ */
+/*  SPACING — Paddings                                          */
+/* ============================================================ */
+
+@include generate-scale(p, padding);
+@include generate-scale(py, padding-block);
+@include generate-scale(px, padding-inline);
+@include generate-scale(pt, padding-top);
+@include generate-scale(pr, padding-right);
+@include generate-scale(pb, padding-bottom);
+@include generate-scale(pl, padding-left);
+
+/* ============================================================ */
+/*  SPACING — Gaps                                              */
+/* ============================================================ */
+
+@include generate-scale(gap, gap);
+@include generate-scale(gap-x, column-gap);
+@include generate-scale(gap-y, row-gap);
+
+/* ============================================================ */
+/*  WIDTH                                                       */
+/* ============================================================ */
+
+@include generate-scale(w, width);
+
+/* ============================================================ */
+/*  RESPONSIVE BREAKPOINTS                                      */
+/* ============================================================ */
+
+/* Small screens (mobile): ≤ $small */
+@media (max-width: $small) {
+  .sm\:hidden {
+    display: none !important;
+  }
+
+  .sm\:only {
+    display: inherit !important;
+  }
+
+  .md\:only {
+    display: none !important;
+  }
+
+  .lg\:only {
+    display: none !important;
+  }
+
+  .sm\:text-center {
+    text-align: center !important;
+    margin-inline: auto !important;
+    & > * {
+      margin-inline: auto !important;
+    }
+  }
+
+  @include generate-scale(sm\:mt, margin-top);
+  @include generate-scale(sm\:mr, margin-right);
+  @include generate-scale(sm\:mb, margin-bottom);
+  @include generate-scale(sm\:ml, margin-left);
+  @include generate-scale(sm\:my, margin-block);
+  @include generate-scale(sm\:mx, margin-inline);
+  @include generate-scale(sm\:m, margin);
+
+  @include generate-scale(sm\:pt, padding-top);
+  @include generate-scale(sm\:pr, padding-right);
+  @include generate-scale(sm\:pb, padding-bottom);
+  @include generate-scale(sm\:pl, padding-left);
+  @include generate-scale(sm\:py, padding-block);
+  @include generate-scale(sm\:px, padding-inline);
+  @include generate-scale(sm\:p, padding);
+}
+
+/* Medium screens (tablet): $small+1 → $large */
+@media (min-width: calc($small + 1px)) and (max-width: $large) {
+  .md\:hidden {
+    display: none !important;
+  }
+
+  .sm\:only {
+    display: none !important;
+  }
+
+  .md\:only {
+    display: inherit !important;
+  }
+
+  .lg\:only {
+    display: none !important;
+  }
+}
+
+/* Large screens (desktop): > $large */
+@media (min-width: calc($large + 1px)) {
+  .lg\:hidden {
+    display: none !important;
+  }
+
+  .sm\:only {
+    display: none !important;
+  }
+
+  .md\:only {
+    display: none !important;
+  }
+
+  .lg\:only {
+    display: inherit !important;
+  }
+}

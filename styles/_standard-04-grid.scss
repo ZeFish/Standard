@@ -1,0 +1,311 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Grid System
+ * @category Layout
+ * @description 12-column Swiss-style responsive grid with flexible gaps and alignment.
+ * Uses CSS Grid with logical properties for RTL support. Supports nested grids,
+ * asymmetric layouts, gap variants (compact/normal/wide), and responsive column changes.
+ * All gaps align to the vertical rhythm system.
+ *
+ * @prop {class} .grid 12-column grid container
+ * @prop {class} .col-1 through .col-12 Column span modifiers (direct children of .grid)
+ * @prop {class} .sm\:col-* Responsive columns at max-width 768px (mobile)
+ * @prop {class} .lg\:col-* Responsive columns at min-width 1024px (desktop)
+ * @prop {class} .start-{n} Start column position (1-12)
+ * @prop {class} .grid.no-gap Removes row-gap
+ * @prop {class} .grid.compact Compact gap (--trim)
+ * @prop {class} .grid.relaxed Wide gap (--space)
+ *
+ * @example
+ * // Basic 12-column grid with equal width columns
+ * <div class="grid">
+ *   <div class="col-3">Item 1</div>
+ *   <div class="col-3">Item 2</div>
+ *   <div class="col-3">Item 3</div>
+ *   <div class="col-3">Item 4</div>
+ * </div>
+ *
+ * // Responsive grid layout
+ * <div class="grid">
+ *   <div class="col-12 sm:col-6 lg:col-3">Card</div>
+ *   <div class="col-12 sm:col-6 lg:col-3">Card</div>
+ * </div>
+ *
+ * // Main content + sidebar layout
+ * <div class="grid">
+ *   <div class="col-8">Main content</div>
+ *   <div class="col-4">Sidebar</div>
+ * </div>
+ *
+ * @since 0.1.0
+ * @see standard-04-rhythm.scss
+ */
+
+/* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps
+   Use this as your single grid across the site (replaces old .h-grid API).
+   Relies on logical properties and Harmony tokens: --base, calc(var(--space) / 4), --base-2, borders, etc.
+*/
+
+/* Fixed 2026-07-14 — was attribute selectors (order-dependent), now an
+   explicit selector list built once via $grid-selectors (order-independent). */
+$grid-selectors: ".grid, .grid-row";
+@for $i from 1 through 12 {
+  $grid-selectors: $grid-selectors + ", .grid-#{$i}";
+}
+
+/* Grid container. */
+#{$grid-selectors} {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+}
+
+#{$grid-selectors} {
+  > * {
+    margin: 0;
+  }
+}
+
+.grid-row {
+  grid-auto-flow: row;
+}
+
+/* =========================== */
+/* TYPOGRAPHIC NUANCES         */
+/* =========================== */
+
+#{$grid-selectors} > * {
+  min-width: 0;
+  /* ← Force items to shrink below content size */
+  margin-block: 0;
+}
+
+@media (max-width: #{$mobile}) {
+  #{$grid-selectors} > * {
+    min-width: 0;
+  }
+}
+
+#{$grid-selectors} {
+  .card {
+    margin: 0;
+  }
+}
+
+/* Gap variants aligned to rhythm — this is the LIVE definition (sets --gap,
+   the property actually consumed by column-gap/row-gap above). */
+:is(.grid, [class^="grid-"]).compact {
+  --gap: var(--trim);
+}
+
+:is(.grid, [class^="grid-"]).relaxed {
+  --gap: var(--space);
+}
+
+/* Spans 1..12 */
+@for $i from 1 through 12 {
+  .grid-#{$i} {
+    display: grid;
+    grid-auto-columns: unset;
+    grid-auto-flow: unset;
+    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: var(--gap);
+  }
+}
+
+/* Spans 1..12 */
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    grid-column: span #{$i};
+    margin-block-end: 0;
+  }
+
+  .start-#{$i} {
+    grid-column-start: #{$i};
+  }
+}
+
+/* Responsive spans/starts: md ≥ #{$small}, lg ≥ #{$large} */
+@media (max-width: #{$small}) {
+  @for $i from 1 through 12 {
+    /* Experimental.. default all grid to be 1 on mobile */
+    .grid-#{$i} {
+      grid-auto-columns: unset;
+      grid-auto-flow: unset;
+      grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+    .sm\:grid-#{$i} {
+      grid-auto-columns: unset;
+      grid-auto-flow: unset;
+      grid-template-columns: repeat(#{$i}, 1fr) !important;
+    }
+
+    .sm\:col-#{$i} {
+      grid-column: span #{$i};
+    }
+
+    .sm\:start-#{$i} {
+      grid-column-start: #{$i};
+    }
+  }
+
+  .sm\:last {
+    order: 999;
+  }
+
+  .sm\:row {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: #{$large}) {
+  @for $i from 1 through 12 {
+    .lg\:grid-#{$i} {
+      display: grid;
+      grid-template-columns: repeat(#{$i}, 1fr);
+      column-gap: var(--gap);
+      row-gap: var(--gap);
+    }
+
+    .lg\:col-#{$i} {
+      grid-column: span #{$i};
+    }
+
+    .lg\:start-#{$i} {
+      grid-column-start: #{$i};
+    }
+  }
+
+  .lg\:row {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Full-span helper (replaces old .h-col-full) */
+.row,
+.col-row,
+.col-full {
+  grid-column: 1 / -1;
+  margin-block-end: 0;
+}
+
+hr.col-row {
+  margin-block: var(--space);
+}
+
+/* Rhythm inside grid items: apply to a cell containing prose */
+.grid .rhythm > * {
+  margin-block-end: var(--space);
+}
+
+/* Free columns: place anywhere with CSS vars or utility shorthands */
+.free-col {
+  /* Defaults; authors override via CSS vars or utilities */
+  --start: auto;
+  /* 1..12 or auto */
+  --span: 3;
+  /* 1..12 */
+
+  grid-column: var(--start) / span var(--span);
+
+  /* If the free column contains prose, opt-in to rhythm */
+  &.rhythm > * {
+    margin-block-end: var(--space);
+  }
+}
+
+/* Utility-class interface to set the CSS vars (ergonomic authoring) */
+@for $i from 1 through 12 {
+  .span-#{$i} {
+    --span: #{$i};
+  }
+
+  .startv-#{$i} {
+    --start: #{$i};
+  }
+
+  /* 'startv' to avoid clash with .start- utilities */
+}
+
+/* Responsive overrides for the var-based API */
+@media (max-width: #{$small}) {
+  @for $i from 1 through 12 {
+    .sm\:span-#{$i} {
+      --span: #{$i};
+    }
+
+    .sm\:startv-#{$i} {
+      --start: #{$i};
+    }
+  }
+}
+
+@media (min-width: #{$large}) {
+  @for $i from 1 through 12 {
+    .lg\:span-#{$i} {
+      --span: #{$i};
+    }
+
+    .lg\:startv-#{$i} {
+      --start: #{$i};
+    }
+  }
+}
+
+/* Mobile fallback: stack free columns full-width */
+@media (max-width: #{$small}) {
+  .free-col {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Optional: sticky marginalia variant for editorial layouts */
+.free-col.sticky {
+  position: sticky;
+  inset-block-start: var(--space);
+  align-self: start;
+  z-index: 1;
+}
+
+/* Row gap utilities for grid system. */
+.grid.no-gap {
+  row-gap: 0;
+}
+
+/* Common layout containers inherit rhythm to cascade deeper */
+.box,
+.grid > .col-1,
+.grid > .col-2,
+.grid > .col-3,
+.grid > .col-4,
+.grid > .col-5,
+.grid > .col-6,
+.grid > .col-7,
+.grid > .col-8,
+.grid > .col-9,
+.grid > .col-10,
+.grid > .col-11,
+.grid > .col-12,
+.grid > .col-full {
+  > * {
+    margin-block: 0;
+    margin-block-end: var(--space);
+  }
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+
+  > :first-child {
+    margin-block-start: 0;
+  }
+}
+
+#{$grid-selectors} .container-hero {
+  margin-inline: 0;
+}

@@ -1,0 +1,183 @@
+/* apps/web/src/press/theme/eink.scss */
+
+/**
+ * @component E-Ink Mode
+ * @category functionality
+ *
+ * @concept
+ * E-ink screens behave like digital paper. They move physically.
+ * Moving particles takes time and energy. Therefore, we strip
+ * all "digital" vanity (animations, shadows, blurs) and prioritize
+ * the "physical" ink (pure black, borders, distinct shapes).
+ *
+ * We rely on the CSS Level 4 `update` media query.
+ * - update: fast   - Normal screens (60hz+)
+ * - update: slow   - E-ink screens (variable refresh)
+ * - update: none   - Printed paper
+ *
+ * This can also be manually triggered via the .standard-eink class
+ * for users who want this aesthetic on regular screens.
+ */
+
+/* Mixin for E-Ink optimizations (DRY) */
+@mixin eink-styles {
+  /* Kill all motion - animations cause ghosting */
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Replace Shadows with Borders */
+  /* Shadows look like dirty smudges on e-ink */
+  .card,
+  .button,
+  button,
+  a.btn,
+  input,
+  textarea,
+  select,
+  pre,
+  blockquote,
+  aside,
+  .callout,
+  img:not([src*=".svg"]) {
+    box-shadow: none !important;
+    border: var(--stroke-width) solid black !important;
+  }
+
+  /* Thicken Typography */
+  /* E-ink anti-aliasing can make thin fonts disappear */
+  body {
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 900 !important;
+    color: black !important;
+  }
+
+  /* Ensure body text is readable */
+  p, li, td, th, dt, dd {
+    color: black !important;
+    font-weight: 400 !important;
+  }
+
+  /* Bold text should be very bold */
+  strong, b {
+    font-weight: 900 !important;
+  }
+
+  /* Image Optimization */
+  /* Convert images to high-contrast grayscale (exclude SVGs) */
+  img:not([src*=".svg"]) {
+    filter: grayscale(100%) contrast(120%) !important;
+  }
+
+  /* Remove Gradients and Complex Backgrounds */
+  /* E-ink displays gradients poorly */
+  * {
+    background-image: none !important;
+  }
+
+  /* Simplify Links */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+    text-decoration-thickness: var(--stroke-width) !important;
+  }
+
+  /* High Contrast for Interactive Elements */
+  button,
+  a.btn,
+  input,
+  textarea,
+  select {
+    background: white !important;
+    color: black !important;
+    border: var(--stroke-width) solid black !important;
+  }
+
+  button:hover,
+  a.btn:hover {
+    background: black !important;
+    color: white !important;
+  }
+
+  /* Code Blocks */
+  code,
+  pre,
+  pre code {
+    background: white !important;
+    color: black !important;
+    border: var(--stroke-width) solid black !important;
+  }
+
+  /* Remove View Transitions */
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Detect Slow Refresh Rates (E-Ink) */
+@media screen and (update: slow),
+       screen and (monochrome),
+       screen and (prefers-contrast: more) {
+  :root {
+    /* Force absolute contrast - pure black and white */
+    --color-background: white !important;
+    --color-foreground: black !important;
+    --color-accent: black !important;
+    --color-link: black !important;
+    --color-header: black !important;
+    
+    /* Legacy color variables (if used) */
+    --color-light-background: white !important;
+    --color-light-foreground: black !important;
+    --color-dark-background: white !important;
+    --color-dark-foreground: black !important;
+    
+    /* Remove transparency (renders as dithered noise on e-ink) */
+    --color-muted: black !important;
+    --color-subtle: black !important;
+    --color-border: black !important;
+    --color-surface: white !important;
+    
+    /* Disable shadows and blur effects */
+    --shadow: none !important;
+    --filter-blur: none !important;
+    
+    /* Simplify borders */
+    --border: var(--stroke-width) solid black !important;
+    --stroke-width: 2px !important;
+    --stroke-width-lg: 3px !important;
+  }
+
+  @include eink-styles;
+}
+
+/* Manual E-Ink Mode Class Override */
+/* When .standard-eink is applied to <html> via JavaScript */
+.standard-eink {
+  /* Force absolute contrast */
+  --color-background: white !important;
+  --color-foreground: black !important;
+  --color-accent: black !important;
+  --color-link: black !important;
+  --color-header: black !important;
+  
+  --color-muted: black !important;
+  --color-subtle: black !important;
+  --color-border: black !important;
+  --color-surface: white !important;
+  
+  --shadow: none !important;
+  --filter-blur: none !important;
+  --border: var(--stroke-width) solid black !important;
+
+  @include eink-styles;
+}

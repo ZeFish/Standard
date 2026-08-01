@@ -1,0 +1,125 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="documentation"] {
+  --color-light-background: hsla(50, 25%, 96%, 1);
+  --color-light-foreground: hsl(220, 13%, 34%);
+  --color-light-accent: hsl(220, 92%, 42%);
+  --color-light-border: hsl(220, 13%, 80%);
+  --color-light-surface: hsla(50, 25%, 94%, 1);
+  --color-light-surface-low: hsla(50, 25%, 92%, 1);
+  --color-light-subtle: hsl(220, 13%, 50%);
+  --color-light-muted: hsl(220, 13%, 70%);
+  --color-light-link: hsl(220, 92%, 42%);
+  --color-dark-background: hsl(220, 13%, 7.5%);
+  --color-dark-foreground: hsl(220, 14%, 70%);
+  --color-dark-accent: hsl(220, 92%, 80%);
+  --color-dark-border: hsl(220, 13%, 20%);
+  --color-dark-surface: hsl(220, 13%, 6.5%);
+  --color-dark-surface-low: hsl(220, 13%, 5%);
+  --color-dark-subtle: hsl(220, 14%, 50%);
+  --color-dark-muted: hsl(220, 13%, 30%);
+  --color-dark-link: hsl(220, 93%, 75%);
+  --color-code: color-mix(in srgb, var(--color-foreground) 70%, var(--color-orange) 30%);
+  --font-text: "iA Writer Quattro", system-ui, sans-serif;
+  --font-interface: "iA Writer Quattro", system-ui, sans-serif;
+  --font-header: "IBM Plex Serif", Georgia, serif;
+  --font-header-weight: 500;
+  --font-monospace: "Berkeley Mono", "IBM Plex Mono", Menlo, monospace;
+  --line-height: 1.6;
+  --line-width: 43rem;
+  --optical-ratio: 1.25;
+}
+/* TOKENS.YAML ADAPTER END */
+
+// documentation theme — token VALUES live in tokens.yaml (single source of truth).
+// Component styling below is translated from fromzed.css (Zed docs), expressed
+// through the mapped semantic vars so light/dark adapt without a manual block.
+
+:root[data-theme="documentation"],
+[data-theme="documentation"] {
+  /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
+  h1 {
+    color: var(--color-accent);
+  }
+
+  h2 {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+
+  /* ── Links — accent with translucent underline ── */
+  a:not(.btn) {
+    color: var(--color-link, var(--color-accent));
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 25%, transparent);
+    text-underline-offset: 3px;
+
+    &:hover {
+      text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+    }
+  }
+
+  /* ── Inline code — blue-tinted chip, warm ink ── */
+  :not(pre) > code {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-code);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    font-size: 0.875em;
+  }
+
+  /* ── Keybinding chips — flat, bordered, no raised effect ── */
+  kbd {
+    background: var(--color-surface);
+    background-image: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 0.1em 0.4em;
+    font-size: 0.8em;
+  }
+
+  /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
+  pre {
+    background: var(--color-surface-high);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-accent) 7%, transparent);
+  }
+
+  /* ── Tables — tinted header, hairline borders, zebra rows ── */
+  table {
+    th {
+      background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    }
+
+    th,
+    td {
+      border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
+    }
+
+    tbody tr:nth-child(even) {
+      background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+    }
+  }
+
+  /* ── Blockquotes — boxed cyan-tinted note, Zed style ── */
+  blockquote {
+    background: color-mix(in srgb, var(--color-cyan) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-cyan) 30%, transparent);
+    border-radius: 6px;
+    padding: var(--space-d2) var(--space);
+  }
+
+  /* ── Rules — the faint blue divider ── */
+  hr {
+    border: 0;
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-accent) 10%, transparent);
+    background: transparent;
+  }
+
+  .doc-card {
+    margin-top: 0px !important;
+  }
+}

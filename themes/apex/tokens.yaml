@@ -1,0 +1,32 @@
+meta:
+  id: apex
+  label: Apex
+  selector: '[data-theme="apex"]'
+  fonts:
+    - "@stnd/fonts/herbus"
+    - "@stnd/fonts/monolisa"
+tokens:
+  color-light-foreground: "#3b3b3b"
+  color-light-background: "#e4e0d6"
+  color-light-accent: var(--color-light-red)
+  color-light-red: "#d14230"
+  color-light-orange: "#d14230"
+  color-light-yellow: "#d14230"
+  color-light-blue: "#d14230"
+  color-light-green: "#d14230"
+  color-dark-foreground: "#e4e0d6"
+  color-dark-background: "#1b1b1b"
+  color-dark-accent: var(--color-dark-red)
+  color-dark-red: "#e4e0d6"
+  color-dark-orange: "#e4e0d6"
+  color-dark-blue: "#e4e0d6"
+  color-dark-green: "#e4e0d6"
+  color-dark-yellow: "#e4e0d6"
+  font-text: '"Herbus", sans-serif'
+  font-header: '"Herbus", sans-serif'
+  font-interface: '"MonoLisa", monospace'
+  font-monospace: '"MonoLisa", monospace'
+  font-header-weight: "400"
+  font-header-letter-spacing: -0.006em
+  font-header-line-height: 1em
+  font-weight-bold: "600"

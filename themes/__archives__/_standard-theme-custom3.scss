@@ -1,0 +1,12 @@
+[data-theme="custom_3"] {
+    --color-light-foreground: black;
+    --color-light-background: white;
+    --color-dark-foreground: white;
+    --color-dark-background: black;
+    --color-accent: grey;
+    
+    --color-surface: var(--color-background);
+    --color-border: grey;
+    --color-muted: color-mix(in srgb, var(--color-foreground) 75%, var(--color-background));
+    --color-subtle: grey
+}

@@ -1,0 +1,19 @@
+/*!
+ * Standard Design — Obsidian Theme Core
+ *
+ * This entry point is specifically for the Obsidian plugin.
+ * It ONLY includes the core CSS variables (tokens, colors) scoped to
+ * body.stnd-theme (not :root — Obsidian's window is shared with other
+ * themes/plugins, so tokens are namespaced rather than declared globally),
+ * without including any of the global element resets (*, html, body)
+ * or layout/typography element selectors that would destroy Obsidian's UI.
+ *
+ * @license MIT
+ * @package @stnd/styles
+ */
+
+@use "standard-00-variables" as * with (
+  $stnd-theme-scope: "body.stnd-theme"
+);
+@use "standard-01-token";
+@use "standard-02-color";

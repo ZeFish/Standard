@@ -1,0 +1,416 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Typography System
+ * @category Typography
+ * @description Fine-art typography system using variable fonts, OpenType features,
+ * and mathematical scaling. Implements classical typography rules with modern web capabilities.
+ * Supports multiple font families, optical sizing, and locale-specific rules.
+ */
+
+#{$stnd-theme-scope} {
+  /* Font stacks */
+  --font-sans:
+    "Inter", "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+  --font-serif:
+    "Source Serif 4", "Newsreader", "Instrument Serif", "Source Serif 4", serif;
+  --font-monospace: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Semantic Font Roles */
+  --font-text: var(--font-sans);
+  --font-header: "Inter";
+  --font-interface: var(--font-sans);
+
+  /* OpenType Feature Sets */
+  --font-inter-feature: "calt", "cv05", "cv11", "ss03";
+  --font-instrument-feature: "figa", "ss01", "ss02", "ss05";
+
+  /* Font Axis Defaults */
+  --font-feature: "";
+  --font-variation: "wdth" 95;
+  --font-header-feature: "";
+  --font-header-variation: "";
+  --font-monospace-feature: "";
+  --font-monospace-variation: "";
+
+  /* Weight Scale */
+  --font-weight: 400;
+  --font-weight-bold: 600;
+  --font-letter-spacing: normal;
+  --font-header-letter-spacing: normal;
+  --font-header-line-height: 1;
+  --font-header-weight: 700;
+
+  /* Interface Tokens */
+  --font-interface-feature: "dlig", "zero";
+  --font-interface-variation: "";
+  --font-list-feature: "dlig", "tnum", "zero";
+  --font-list-variation: "";
+
+  /* Heading Weight Hierarchy */
+  --font-weight-h1: var(--font-header-weight);
+  --font-weight-h2: max(
+    calc(var(--font-header-weight) * 0.85),
+    var(--font-weight)
+  );
+  --font-weight-h3: max(
+    calc(var(--font-header-weight) * 0.85),
+    var(--font-weight)
+  );
+  --font-weight-h4: var(--font-weight);
+  --font-weight-h5: var(--font-weight);
+  --font-weight-h6: var(--font-weight);
+
+  --list-indent: var(--space);
+}
+
+/* =========================== */
+/* CORE ELEMENT STYLING        */
+/* =========================== */
+
+html {
+  font-size: 100%;
+}
+
+b,
+strong,
+.bold {
+  font-weight: var(--font-weight-bold, 600);
+  color: var(--color-bold);
+}
+
+em {
+  color: var(--color-italic);
+}
+
+:is(h1, h2, h3, h4, h5, h6) :is(b, strong, .bold) {
+  font-weight: inherit;
+}
+
+/* Headings Hierarchy */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header), system-ui, sans-serif;
+  color: var(--color-header);
+  text-wrap: balance;
+  font-variant-ligatures: normal;
+  font-feature-settings: var(--font-header-feature);
+  font-variation-settings: var(--font-header-variation);
+  font-style: var(--font-header-style, normal);
+  letter-spacing: var(--font-header-letter-spacing);
+  max-width: 100%;
+}
+
+/* Fixed 2026-07-14 — the mixin's --target-lh now reads
+   --font-header-line-height as an override. The line-height set below
+   for h1/h2/h3 is still always overridden further down by
+   @include grid-line-height(...) (~line 393), which is what actually
+   controls heading line-height now. */
+h1 {
+  font-weight: var(--font-weight-h1);
+  font-size: clamp(var(--size-xl), 5.5vw, var(--size-2xl));
+  line-height: var(--font-header-line-height, 1);
+}
+
+h2 {
+  font-weight: var(--font-weight-h2);
+  font-size: clamp(var(--size-lg), 4vw, var(--size-xl));
+  line-height: var(--font-header-line-height, 1);
+}
+
+h3 {
+  font-weight: var(--font-weight-h3);
+  font-size: clamp(var(--size-base), 3vw, var(--size-lg));
+  line-height: var(--font-header-line-height, 1);
+}
+
+h4 {
+  font-weight: var(--font-weight);
+  font-size: var(--size-base);
+  line-height: var(--line-height);
+}
+
+h5 {
+  font-weight: var(--font-weight);
+  font-size: var(--size-sm);
+  line-height: var(--line-height);
+}
+
+h6 {
+  font-weight: var(--font-weight);
+  font-size: var(--size-xs);
+  line-height: var(--line-height);
+}
+
+/* Typography Patterns */
+.overline {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+  font-size: var(--size-sm);
+  border-top: var(--stroke-width) solid var(--color-border);
+  padding-block-start: var(--space-d2);
+  margin-block-end: var(--space);
+}
+
+/* Interaction */
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  text-decoration-thickness: var(--stroke-width);
+  text-underline-offset: calc(var(--stroke-width) * 2);
+  text-decoration-color: transparent;
+  box-shadow: none;
+  transition:
+    all var(--transition-fast),
+    text-decoration-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+  transition:
+    text-decoration-color var(--transition-fast),
+    color var(--transition);
+}
+
+a[target="_blank"]:not(.internal-link)::after {
+  content: "↗";
+  display: inline-block;
+  font-size: var(--size-xs);
+  color: var(--color-subtle);
+  margin-inline-start: 0.2em;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+a[target="_blank"]:not(.internal-link):hover::after {
+  color: var(--color-link);
+}
+
+[data-env="dev"] span.broken-link {
+  color: var(--color-error);
+  transition: all var(--transition-fast);
+  &::after {
+    content: "⊗";
+    font-size: var(--size-xs);
+    color: var(--color-error);
+    margin-inline-start: 0.2em;
+  }
+}
+
+:is(h1, h2, h3, h4, h5, h6) a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* =========================== */
+/* INTERFACE & CODE            */
+/* =========================== */
+
+.menu,
+.ui,
+.interface,
+.font-interface {
+  font-family: var(--font-interface), system-ui, sans-serif;
+  font-variation-settings: var(--font-interface-variation);
+  font-feature-settings: var(--font-interface-feature);
+  font-weight: var(--font-interface-weight, var(--font-weight));
+  font-size: var(--size-xs);
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-monospace), monospace;
+  font-feature-settings: var(--font-monospace-feature);
+  font-variation-settings: var(--font-monospace-variation);
+}
+
+.stnd-code-block {
+  position: relative;
+  background: var(--color-surface-low);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-inset), var(--shadow-ring);
+  transition: all var(--transition);
+
+  pre {
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: var(--space-d2);
+    overflow-x: auto;
+    position: static;
+  }
+
+  &:hover .copy-button {
+    opacity: 1;
+  }
+}
+
+.copy-button {
+  position: absolute;
+  top: var(--leading);
+  right: var(--leading);
+  opacity: 0;
+
+  &:hover {
+    opacity: 1 !important;
+    color: var(--color-on-accent);
+    background-color: var(--color-accent);
+  }
+
+  &.copied {
+    color: var(--color-success, #22c55e) !important;
+  }
+
+  &.failed {
+    color: var(--color-error, #ef4444) !important;
+  }
+}
+
+pre {
+  line-height: var(--line-height-compact);
+
+  code {
+    opacity: 0.75;
+    transition: opacity var(--transition);
+  }
+
+  &:hover code {
+    opacity: 1;
+  }
+}
+
+blockquote {
+  font-style: italic;
+  color: var(--color-muted);
+  padding: var(--space);
+  border-left: var(--stroke-width-l) solid var(--color-border);
+
+  cite {
+    display: block;
+    margin-top: var(--space);
+    font-size: var(--scale-d2);
+  }
+}
+
+/* Utilities */
+small {
+  font-size: var(--size-sm);
+}
+
+sub,
+sup {
+  font-size: var(--size-xs);
+  line-height: 0;
+}
+
+sub {
+  vertical-align: sub;
+}
+
+sup {
+  vertical-align: super;
+}
+
+/* Duplicate of the `em` rule at line 82 (same --color-italic), this copy
+   additionally sets font-style — harmless overlap, not a conflict. */
+em {
+  color: var(--color-italic);
+  font-style: italic;
+}
+
+/**
+ * @component Design Tokens
+ * @category Foundation
+ * @description Primitive design tokens forming the foundation of the design system.
+ * Includes "Self-Aware" fluid typography that scales based on the Optical Ratio.
+ *
+ * This block redeclares --font-size and --line-height, silently superseding
+ * the flat --font-size: 1rem set in _standard-01-token.scss (same selector,
+ * this file loads later in standard.scss's @use order, so this wins) —
+ * deliberate layering (naive default → fluid enhancement), not a conflict,
+ * but non-obvious without reading both files.
+ */
+
+#{$stnd-theme-scope} {
+  /* ===== 2. THE META-COGNITION (Fluid Slopes) =====
+     Instead of magic numbers, we use the Ratio to determine "Physics".
+
+     Slope: (Ratio - 1).
+     - Golden (0.618) -> steep slope (fast growth).
+     - Silver (0.414) -> moderate slope.
+  */
+  --physics-slope: calc(var(--optical-ratio) - 1);
+
+  /* Growth Factor: How aggressive is the resizing?
+     We multiply the slope by 1vw to create a viewport-relative unit. */
+  --fluid-growth: calc(var(--physics-slope) * 0.5vw);
+
+  /* Tension Factor: How much do we tighten leading as we grow?
+     Higher ratios need more tension to keep large text readable. */
+  --fluid-tension: calc(var(--physics-slope) * 0.3vw);
+
+  /* ===== 3. FLUID TYPOGRAPHY =====
+     Base size starts at 1rem and grows according to the Physics Slope.
+  */
+  --base-size: var(--font-text-size, 1rem);
+
+  --font-size: clamp(
+    var(--base-size),
+    calc(var(--base-size) + var(--fluid-growth)),
+    calc(var(--base-size) * 1.5)
+  );
+
+  /* ===== 4. FLUID LINE HEIGHT =====
+     This is the "Next Level" logic.
+     Start with the Optical Ratio as the base breathing room (in ems).
+     As the screen (and font) grows, SUBTRACT the Tension Factor.
+
+     Why? Large text (Desktop) needs TIGHTER leading than small text (Mobile).
+     A steep ratio (Golden) creates huge text, so it applies MORE tension.
+  */
+  --line-height: clamp(
+    1.15,
+    calc(var(--optical-ratio) - (var(--fluid-tension) / 1vw)),
+    1.65
+  );
+}
+
+@mixin grid-line-height($tightness: 1.1) {
+  /* The "Target" is simply the font-size * tightness, unless a note
+     overrides it via --font-header-line-height in frontmatter */
+  --target-lh: calc(1em * var(--font-header-line-height, #{$tightness}));
+
+  /* The Snap: Force it to be a multiple of --baseline */
+  line-height: round(up, var(--target-lh), var(--baseline)) !important;
+
+  /* Why 'up'?
+     'nearest' might snap down and cause letters to clash.
+     'up' ensures we always have *at least* enough room. */
+}
+
+/* Usage in your Header sizes */
+h1 {
+  /* Giant text needs very tight leading (1.05x), then snap up */
+  @include grid-line-height(1.05);
+}
+
+h2,
+h3 {
+  /* Medium headers breathe a bit more (1.15x), then snap up */
+  @include grid-line-height(1.15);
+}
+
+h4,
+h5,
+h6 {
+  /* Small headers need body-like leading (1.3x), then snap up */
+  @include grid-line-height(1.3);
+}

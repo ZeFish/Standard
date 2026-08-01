@@ -1,0 +1,236 @@
+---
+aliases: []
+created: 2026-07-24 09:35
+modified: 2026-07-24 09:35
+cssclasses: []
+maturity: sprout
+mode: read
+publish: false
+tags:
+  - design
+theme: book
+type: theme
+visibility: private
+snippet: false
+---
+
+![[Sample content]]
+
+```css
+[data-stnd-theme="book"] {
+    /* ─── Custom rules for Book ───────────────────────────── */
+    /* ─── Design Tokens ──────────────────────────────────────── */
+    --color-light-background: #fefdf9;
+    --color-light-foreground: #282726;
+    --color-dark-background: oklch(19.28% 0.0101 70.89);
+    --color-dark-foreground: oklch(80% 0.0227 74.79);
+    --color-light-red: #a12314;
+    --color-light-orange: #c86a3d;
+    --color-light-yellow: #c2a84a;
+    --color-light-green: #5e9d80;
+    --color-light-cyan: #6ba4b6;
+    --color-light-blue: #3b6d90;
+    --color-light-purple: #7a6c91;
+    --color-light-pink: #b97aa0;
+    --color-dark-red: #d95547;
+    --color-dark-orange: #b35f37;
+    --color-dark-yellow: #e0c168;
+    --color-dark-green: #7eb79c;
+    --color-dark-cyan: #84c3d6;
+    --color-dark-blue: #5a86a5;
+    --color-dark-purple: #a58fc0;
+    --color-dark-pink: #e6a3d1;
+    --color-light-accent: var(--color-red);
+    --color-dark-accent: var(--color-red);
+    --color-light-link: var(--color-red);
+    --color-dark-link: var(--color-red);
+    --font-ratio: 1.2;
+    --marge-block: 1.5;
+    --font-density: 1.5;
+    --font-line-width: 35rem;
+    --font-text: "Fern", "Graveur Variable", Bookerly;
+    --font-weight: 450;
+    --font-feature: "liga", "onum", "kern";
+    --font-variation: "";
+    --font-interface: "Fern";
+    --font-monospace: "Monolisa";
+    --font-mono-feature: "onum" off;
+    --font-mono-variation: "";
+    --font-header: "Fern";
+    --font-header-feature: "liga", "onum", "kern";
+    --font-header-variation: "";
+    --font-header-weight: 400;
+    --font-header-line-height: 1;
+    --color-bold: var(--color-red);
+    --bold-weight: 550;
+    --border: 0;
+    --callout-default: var(--color-base-30);
+
+    /* ─── Custom rules for Book ───────────────────────────── */
+    /* Light Mode Accent Colors */ /* like aged brick or red clay */ /* terra cotta */ /* mustard parchment */ /* sage green */ /* antique blue-grey */ /* faded denim */ /* dusk lavender */ /* soft mauve rose */
+
+      /* Dark Mode Accent Colors */ /* warm ember glow */ /* baked clay at dusk */ /* candlelight gold */ /* moonlit sage */ /* cool teal mist */ /* twilight lake */ /* smoky lilac */ /* fading rose light */
+
+      p {
+        text-align: justify;
+        text-align-last: left;
+        /* Don't justify the last line */
+        /* Enable hyphenation */
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        /* Improve word spacing */
+        word-spacing: -0.05em;
+        text-box-edge: cap ex;
+      }
+      /*
+      p:not(:has(img)) + p {
+        text-indent: var(--space);
+      }
+
+      p + p {
+        margin-block-start: var(--space-d2);
+      }
+
+      :is(h2, h3) + p::first-letter {
+        --drop-cap-size: 3.25;
+        float: inline-start;
+        line-height: 1;
+        margin-block-start: 0.05lh;
+        margin-inline-end: 0.05lh;
+        font-size: calc((var(--font-size) * var(--drop-cap-size)) + var(--leading));
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
+        font-family: "Fern";
+        font-weight: 200;
+
+        display: flex;
+        align-self: flex-start;
+      }
+       */
+
+      .prose {
+        margin-left: 10vw;
+        transition: margin-left var(--transition);
+      }
+
+      .prose {
+        display: block;
+      }
+
+      .prose > * {
+        max-width: var(--line-width);
+        margin-inline: 0;
+      }
+
+      .token {
+        color: var(--color-subtle) !important;
+      }
+
+      a:hover {
+        color: var(--color-foreground);
+      }
+
+      blockquote {
+        font-family: "Fern";
+        font-weight: 450;
+        letter-spacing: -0.01em;
+        color: var(--color-muted);
+      }
+
+      blockquote,
+      pre {
+        padding: var(--trim) var(--leading);
+        border: 0;
+        border-left: 1px solid var(--color-subtle);
+        background: transparent;
+        color: var(--color-muted);
+
+        .copy-button {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+
+      hr,
+      hr:not(:first-child) {
+        font-size: var(--size-base);
+        line-height: var(--space);
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      hr::after {
+        content: "\2619 \2015 \2767";
+        text-align: center;
+        display: block;
+        font-family: "Graveur";
+        position: relative;
+        top: var(--space);
+        color: var(--color-border);
+      }
+
+      aside.note {
+        display: inline;
+        position: relative;
+        top: calc(var(--space) * -1);
+        left: calc(var(--space) + var(--line-width));
+        margin-top: calc(var(--space) * -1);
+        margin-bottom: calc(var(--space) * -2);
+        font-size: var(--size-sm);
+        color: var(--color-muted);
+        line-height: var(--line-height-s);
+        max-width: 33%;
+        border-left: var(--border);
+        padding-left: var(--leading);
+        padding-block: var(--leading);
+      }
+
+      .prose > h1:first-child {
+        text-align: left;
+        grid-column: feature;
+        margin-block-end: var(--space-6);
+        font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
+      }
+
+      h1 {
+        text-align: left;
+        letter-spacing: 0.15em;
+        /* /*text-transform: uppercase;* */
+        font-feature-settings: "liga", "onum", "kern", "smcp";
+      }
+
+      @media (max-width: 768px) {
+        p {
+          text-align: left;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .prose {
+          margin-left: 15vw;
+        }
+      }
+
+      @media (max-width: 1000px) {
+        .prose {
+          margin-left: 0;
+          max-width: 100%;
+          display: grid;
+        }
+
+        aside.note {
+          display: block;
+          position: relative;
+          top: 0;
+          left: 0;
+          margin-block: var(--space);
+          border: 0;
+          background: transparent;
+          border-left: 1px solid var(--color-subtle);
+        }
+      }
+}
+```

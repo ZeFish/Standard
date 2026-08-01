@@ -1,0 +1,156 @@
+{
+  "name": "Dyslexie Light",
+  "type": "light",
+  "colors": {
+    "foreground": "#2b2b2b",
+    "input.background": "#e9e6e2",
+    "input.foreground": "#2b2b2b",
+    "input.placeholderForeground": "#dddbd8",
+    "inputOption.activeBorder": "#1f669080",
+    "badge.foreground": "#fdfaf6",
+    "badge.background": "#1f6690",
+    "progressBar.background": "#1f6690",
+    "button.background": "#1f6690",
+    "button.foreground": "#2b2b2b",
+    "button.hoverBackground": "#1f669090",
+    "dropdown.background": "#e9e6e2",
+    "dropdown.foreground": "#2b2b2b",
+    "dropdown.border": "#f3f0ec",
+    "focusBorder": "#1f669080",
+    "selection.background": "#1f669040",
+    "editor.background": "#fdfaf6",
+    "editor.foreground": "#2b2b2b",
+    "sideBar.background": "#fdfaf6",
+    "sideBar.border": "#f3f0ec",
+    "activityBar.background": "#fdfaf6",
+    "activityBar.foreground": "#2b2b2b",
+    "activityBar.inactiveForeground": "#a9a7a5",
+    "statusBar.background": "#fdfaf6",
+    "statusBar.foreground": "#2b2b2b",
+    "titleBar.activeBackground": "#fdfaf6",
+    "titleBar.activeForeground": "#2b2b2b",
+    "editorLineNumber.foreground": "#dddbd8",
+    "editorLineNumber.activeForeground": "#a9a7a5",
+    "editor.lineHighlightBackground": "#f3f0ec",
+    "editorIndentGuide.background": "#f3f0ec",
+    "editorIndentGuide.activeBackground": "#a9a7a5",
+    "list.hoverBackground": "#f3f0ec",
+    "list.activeSelectionBackground": "#f3f0ec",
+    "list.activeSelectionForeground": "#2b2b2b",
+    "tab.activeBackground": "#f3f0ec",
+    "tab.activeForeground": "#2b2b2b",
+    "tab.inactiveBackground": "#fdfaf6",
+    "tab.inactiveForeground": "#a9a7a5",
+    "tab.border": "#f3f0ec",
+    "breadcrumb.foreground": "#a9a7a5",
+    "breadcrumb.focusForeground": "#2b2b2b",
+    "widget.shadow": "#00000040",
+    "quickInput.background": "#fefdfc",
+    "terminal.background": "#fdfaf6",
+    "terminal.foreground": "#2b2b2b"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#a9a7a5",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.parameter",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.other.member",
+      "settings": {
+        "foreground": "#2b2b2b"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "entity.name.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "punctuation.definition.keyword"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#a9a7a5"
+      }
+    }
+  ]
+}

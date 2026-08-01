@@ -1,0 +1,23 @@
+meta:
+  id: venetian
+  label: Venetian
+  selector: '[data-theme="venetian"]'
+  fonts:
+    - "@stnd/fonts/eb-garamond"
+tokens:
+  color-light-background: "#f2e8d5"
+  color-light-foreground: "#2b1d12"
+  color-dark-background: "#1c120a"
+  color-dark-foreground: "#e8d9bd"
+  color-light-accent: "#7b3f00"
+  color-blue: "#2f4e6e"
+  color-yellow: "#c2a94b"
+  color-dark-accent: "color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b )"
+  font-header: '"adobe-jenson-pro"'
+  font-text: '"adobe-jenson-pro"'
+  gap-body: var(--space-2)
+  gap-block: var(--space-2)
+  monile-gap-body: var(--space-2)
+  gap-mobile-block: var(--space-2)
+  line-height: "1.55"
+  line-width: var(--line-width-sm)

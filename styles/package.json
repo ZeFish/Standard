@@ -1,0 +1,46 @@
+{
+  "name": "@stnd/styles",
+  "version": "0.5.2",
+  "type": "module",
+  "author": "Francis Fontaine",
+  "license": "MIT",
+  "main": "./index.js",
+  "style": "./standard.scss",
+  "exports": {
+    ".": "./index.js",
+    "./standard.scss": "./standard.scss",
+    "./reset": "./_standard-00-reset.scss",
+    "./variables": "./_standard-00-variables.scss",
+    "./tokens": "./_standard-01-token.scss",
+    "./color": "./_standard-02-color.scss",
+    "./typography": "./_standard-03-typography.scss",
+    "./grid": "./_standard-04-grid.scss",
+    "./rhythm": "./_standard-05-rhythm.scss",
+    "./prose": "./_standard-06-prose.scss",
+    "./base": "./_standard-07-base.scss",
+    "./media": "./_standard-08-media.scss",
+    "./lists": "./_standard-09-lists.scss",
+    "./tables": "./_standard-10-tables.scss",
+    "./forms": "./_standard-11-forms.scss",
+    "./code": "./_standard-12-code.scss",
+    "./components": "./_standard-13-components.scss",
+    "./analog": "./_standard-14-analog.scss",
+    "./contrast": "./_standard-30-contrast.scss",
+    "./print": "./_standard-31-print.scss",
+    "./eink": "./_standard-32-eink.scss",
+    "./utilities": "./_standard-50-utilities.scss",
+    "./debug": "./_standard-99-debug.scss"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "sass standard.scss dist/standard.css --style compressed && sass obsidian.scss dist/obsidian.css --style compressed"
+  },
+  "dependencies": {
+    "wrangler": "^4.105.0"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

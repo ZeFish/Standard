@@ -1,0 +1,50 @@
+meta:
+  id: kernel
+  label: Kernel
+  selector: '[data-theme="kernel"]'
+  fonts:
+    - "@stnd/fonts/monolisa"
+    - "@stnd/fonts/fraunces"
+tokens:
+  color-light-background: "#f7f3ee"
+  color-light-foreground: "#4a341c"
+  color-light-red: "#df453a"
+  color-light-orange: "#e08e1f"
+  color-light-yellow: "#d69a00"
+  color-light-green: "#4ca06b"
+  color-light-cyan: "#2aa198"
+  color-light-blue: "#2882c3"
+  color-light-purple: "#d16d92"
+  color-light-pink: "#ea76cb"
+  color-dark-background: "#231e1a"
+  color-dark-foreground: "#e6cfb3"
+  color-dark-red: "#d0483e"
+  color-dark-orange: "#da702c"
+  color-dark-yellow: "#d69a00"
+  color-dark-green: "#27a06c"
+  color-dark-cyan: "#81c8be"
+  color-dark-blue: "#8caaee"
+  color-dark-purple: "#8b7ec8"
+  color-dark-pink: "#f4b8e4"
+  color-accent: var(--color-yellow)
+  color-code: var(--color-foreground)
+  color-bold: var(--color-blue)
+  color-italic: var(--color-green)
+  color-dark-accent: var(--color-magenta)
+  color-dark-bold: var(--color-magenta)
+  color-header: var(--color-foreground)
+  radius: var(--leading)
+  font-text: '"MonoLisa"'
+  font-feature: '"onum", "liga", "clig", "calt", "zero"'
+  font-variation: '""'
+  font-header: '"Fraunces"'
+  font-monospace: '"MonoLisa"'
+  font-monospace-feature: '"liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16"'
+  font-interface: '"Monolisa"'
+  font-header-weight: "400"
+  font-header-feature: '""'
+  font-header-variation: '"SOFT" 100, "WONK" 1'
+  font-header-letter-spacing: -0.065em
+  stroke-width: 1.5px
+  line-height: "1.3"
+  line-width: var(--line-width-sm)

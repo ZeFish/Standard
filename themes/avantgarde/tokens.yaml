@@ -1,0 +1,29 @@
+meta:
+  id: avantgarde
+  label: Avant-Garde
+  selector: '[data-theme="avantgarde"]'
+  fonts:
+    - "@stnd/fonts/avant-garde-pro"
+    - "@stnd/fonts/sohne"
+tokens:
+  color-light-foreground: "#393633"
+  color-light-background: "#e7e8e7"
+  color-light-accent: var(--color-light-orange)
+  color-light-orange: "#ff7535"
+  color-light-blue: "#393633"
+  color-light-red: "#393633"
+  color-light-yellow: "#c09f81"
+  color-dark-foreground: "#dcdad6"
+  color-dark-background: "#262421"
+  color-dark-accent: var(--color-dark-orange)
+  color-dark-orange: "#d0a215"
+  color-dark-blue: "#dcdad6"
+  color-dark-red: "#dcdad6"
+  font-text: '"Sohne Mono", monospace'
+  font-header: '"Avant Garde Pro", sans-serif'
+  font-interface: '"Sohne Mono", monospace'
+  font-monospace: '"Sohne Mono", monospace'
+  font-header-weight: "700"
+  font-header-letter-spacing: -0.05em
+  font-header-line-height: 1em
+  font-weight-bold: "600"

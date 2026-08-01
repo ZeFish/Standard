@@ -1,0 +1,171 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="editorial"],
+[data-theme="editorial"] {
+  --color-light-foreground: #292827;
+  --color-light-background: #f7f6f4;
+  --color-light-accent: #1f4f82;
+  --shadow: none;
+  --optical-ratio: 1.414;
+  --color-dark-background: #292827;
+  --color-dark-foreground: #f7f6f4;
+  --color-dark-accent: #8fb4ff;
+  --font-text: "Literata", "Georgia", serif;
+  --font-header: "Tiempos Headline", "Georgia", serif;
+  --font-header-weight: 600;
+  --font-header-letter-spacing: 0em;
+  --font-display: "Tiempos Headline", "Georgia", serif;
+  --font-interface: "Instrument Sans";
+  --font-size: 1.1rem;
+  --line-height: 1.5;
+  --line-width: 27rlh;
+  --gap-body-mobile: var(--space);
+  --mobile-line-height: 1.2;
+  --gap-nl: var(--leading);
+  --color-muted: color-mix( in srgb, var(--color-foreground) 75%, var(--color-background) );
+}
+/* TOKENS.YAML ADAPTER END */
+
+// editorial theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+
+:root[data-theme="editorial"],
+[data-theme="editorial"] {
+/* ─── Design Tokens ──────────────────────────────────────── */
+--color-light-foreground: #292827;
+--color-light-background: #f7f6f4;
+--color-light-accent: #1f4f82;
+--shadow: none;
+--optical-ratio: 1.414;
+--color-dark-background: #292827;
+--color-dark-foreground: #f7f6f4;
+--color-dark-accent: #8fb4ff;
+--font-text: "Literata", "Georgia", serif;
+--font-header: "Tiempos Headline", "Georgia", serif;
+--font-header-weight: 600;
+--font-header-letter-spacing: 0em;
+--font-display: "Tiempos Headline", "Georgia", serif;
+--font-interface: "Instrument Sans";
+--font-size: 1.1rem;
+--line-height: 1.5;
+--line-width: 27rlh;
+--gap-body-mobile: var(--space);
+--mobile-line-height: 1.2;
+--gap-nl: var(--leading);
+--color-muted: color-mix( in srgb, var(--color-foreground) 75%, var(--color-background) );
+
+/* ─── Custom rules for Editorial ───────────────────────────── */
+p {
+    text-align: justify;
+    text-align-last: left; /* don't justify the last line */
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-spacing: -0.1em;
+    text-box-edge: cap ex;
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
+
+  p:not(:has(img)) + p {
+    text-indent: 0;
+  }
+
+  /* The drop cap — the Chronicle's signature. initial-letter where supported,
+     a float fallback elsewhere. Skips ledes that start with an image. */
+  .prose > p:first-of-type:not(:has(img))::first-letter {
+    font-family: var(--font-display);
+    font-weight: 700;
+    float: left;
+    font-size: 3.2em;
+    line-height: 0.85;
+    padding-right: 0.08em;
+    margin-top: 0.04em;
+    color: var(--color-accent);
+  }
+  @supports (initial-letter: 3) {
+    .prose > p:first-of-type:not(:has(img))::first-letter {
+      float: none;
+      font-size: inherit;
+      line-height: inherit;
+      margin-top: 0;
+      initial-letter: 3;
+      padding-right: 0.12em;
+    }
+  }
+
+  header {
+    grid-column: feature;
+    border-bottom: 1px solid var(--color-foreground);
+    padding-block-end: var(--trim);
+
+    * {
+      margin-block-end: var(--leading);
+    }
+  }
+
+  h1 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    text-align: center;
+    letter-spacing: 0em;
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  /* Section heads ruled like a broadsheet */
+  h2,
+  h3 {
+    margin-block-start: var(--space-10);
+  }
+  h2 {
+    border-top: 3px double var(--color-foreground);
+    padding-block-start: var(--leading);
+  }
+
+  h4,
+  h5,
+  h6 {
+    margin-block-start: var(--space-4);
+    margin-block-end: var(--leading);
+  }
+
+  /* Pull quote, magazine style */
+  blockquote {
+    border: 0;
+    padding-inline: var(--space-2);
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--size-xl);
+    line-height: 1.25;
+    font-style: italic;
+  }
+  blockquote p {
+    text-align: center;
+    text-align-last: center;
+  }
+
+  figcaption {
+    font-family: var(--font-interface);
+    font-size: var(--size-xs);
+    color: var(--color-muted);
+  }
+
+  footer * {
+    color: var(--color-subtle) !important;
+  }
+
+  /* Lede paragraph and byline — folded in from the retired newspaper theme */
+  .lede {
+    font-family: var(--font-text);
+    font-size: calc(var(--size-md) * 1.05);
+    color: color-mix(in srgb, var(--color-foreground) 70%, transparent);
+    margin-bottom: var(--space);
+  }
+
+  .byline {
+    font-family: var(--font-interface);
+    font-size: var(--size-sm);
+    color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+  }
+}

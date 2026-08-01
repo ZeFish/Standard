@@ -1,0 +1,11 @@
+[data-theme="custom_2"] {
+    --font-header: "Instrument Serif";
+    --line-height: 1.2;
+    --font-text: var(--font-serif);
+
+    h1 {
+        letter-spacing: 0em;
+        font-weight: 900;
+        line-height: 0.965;
+    }
+}

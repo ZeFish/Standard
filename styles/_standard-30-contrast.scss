@@ -1,0 +1,53 @@
+@use "standard-00-variables" as *;
+
+/* ===== ACCESSIBILITY SUPPORT ===== */
+/* High contrast mode support */
+@media (prefers-contrast: high), (prefers-contrast: more) {
+  #{$stnd-theme-scope} {
+    --color-light-foreground: black !important;
+    --color-light-background: white !important;
+    --color-dark-foreground: white !important;
+    --color-dark-background: black !important;
+    --color-surface: var(--color-background) !important;
+    --color-border: var(--color-foreground) !important;
+    --color-muted: var(--color-foreground) !important;
+    --color-subtle: var(--color-foreground) !important;
+    --shadow: 0 !important;
+  }
+
+  /* Fixed 2026-07-14 — was missing html::after (where the grain overlay
+     actually lives), added it so this rule now actually hides the
+     decorative texture for high-contrast users. */
+  html::after,
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
+/* Reduced motion + e-ink */
+@media (prefers-reduced-motion: reduce), (update: slow), (monochrome) {
+  #{$stnd-theme-scope} {
+    --transition: 0s;
+    --toast-progress-duration: 0.5s;
+    --toast-progress-easing: linear;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Deliberate exception to the blanket transition:none above (wins via
+     higher specificity — .toast-progress beats the universal *). A toast's
+     countdown bar is functional motion (communicates time remaining), not
+     decorative, so it's exempted rather than disabled — just slowed to a
+     flat --toast-progress-duration instead of stopped outright. */
+  .toast-progress {
+    transition: width var(--toast-progress-duration)
+      var(--toast-progress-easing) !important;
+  }
+}

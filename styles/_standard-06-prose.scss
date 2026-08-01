@@ -1,0 +1,295 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Prose Layout System
+ * @category Layout
+ * @description Prose-focused layout system for optimal reading experience with proper
+ * line lengths based on typography research (60-75 characters). Uses CSS Grid with
+ * responsive content columns for sidebars, accents, and featured content.
+ * Inspired by fine-art typography and classical book design principles.
+ *
+ * @prop {class} .prose Main article/content container for readable prose
+ * @prop {class} .small Narrow sidebar width container
+ * @prop {class} .accent Accent container with background color
+ * @prop {class} .feature Featured content with larger spacing
+ * @prop {class} .hero Full-width container
+ * @prop {variable} --line-width-xs Extra small (24rem / 384px)
+ * @prop {variable} --line-width-sm Small (32rem / 512px)
+ * @prop {variable} --line-width-md Medium (42rem / 672px) - default
+ * @prop {variable} --line-width-lg Large (50rem / 800px)
+ * @prop {variable} --line-width-xl Extra large (60rem / 960px)
+ *
+ * @example
+ * // Standard article with proper reading width
+ * <article class="prose">
+ *   <h1>Article Title</h1>
+ *   <p>Content here stays within optimal reading width...</p>
+ * </article>
+ *
+ * // Narrow sidebar content
+ * <div class="prose small">
+ *   <p>Short form content</p>
+ * </div>
+ *
+ * // Featured content with emphasis
+ * <section class="prose feature">
+ *   <blockquote>Important quote with extra space</blockquote>
+ * </section>
+ *
+ * @since 0.1.0
+ * @see https://www.rsub.com/blog/how-long-should-a-line-of-text-be/
+ */
+
+/* Prose Layout Design Tokens - Using logical properties */
+
+/* Prose Layout System - Article content grid and positioning */
+/* Inspired by fine-art typography and book design principles */
+
+:where(.prose) {
+  display: grid;
+  align-content: start;
+
+  /* Left-aligned variant — content hugs the left edge */
+  &.left {
+    margin-inline: 0;
+    grid-template-columns:
+      [hero-start feature-start editorial-start content-start] var(
+        --content-width
+      )
+      [content-end editorial-end feature-end] 1fr [hero-end];
+  }
+
+  grid-template-columns:
+    [hero-start] var(--content-width-hero)
+    [feature-start] var(--content-width-feature) [editorial-start] var(
+      --content-width-editorial
+    )
+    [content-start] var(--content-width) [content-end] var(
+      --content-width-editorial
+    )
+    [editorial-end] var(--content-width-feature) [feature-end] var(
+      --content-width-hero
+    )
+    [hero-end];
+
+  transition: grid-template-columns var(--transition);
+
+  position: relative;
+  max-width: var(--body-max-width);
+  /*z-index: var(--z-base);*/
+  /* Default content positioning */
+
+  > * {
+    grid-column: content;
+    min-width: 0;
+    /* Prevents grid blowout from code blocks and tables */
+    transition:
+      margin-inline var(--transition),
+      padding-inline var(--transition);
+  }
+
+  /* Astro islands render as <astro-island> with display:contents, so their
+     children — not the island — are the grid items and need placement too. */
+  > astro-island > * {
+    grid-column: content;
+    min-width: 0;
+  }
+
+  > .small,
+  > .container-small,
+  > .callout,
+  > blockquote,
+  > pre,
+  > figure,
+  > p:has(img),
+  > .stnd-code-block {
+    grid-column: content;
+    margin-inline: var(--content-width-sm);
+  }
+
+  table,
+  .scroll:has(table),
+  .editorial {
+    grid-column: editorial;
+    margin-inline: 0;
+    max-width: none;
+  }
+
+  .feature {
+    grid-column: feature;
+    margin-inline: 0;
+    max-width: none;
+  }
+
+  .full,
+  .hero {
+    grid-column: hero;
+    max-width: 100vw;
+  }
+
+  .hero {
+    margin-inline: calc(var(--gap-body) * -1);
+    border-radius: 0 !important;
+
+    > * {
+      margin-inline: 0;
+    }
+  }
+
+  /* =========================== */
+  /* TYPOGRAPHIC NUANCES         */
+  /* =========================== */
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-raised);
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+
+  /* Image gallery layout */
+  &:not(.no-grid) {
+    p:has(img),
+    p:has(video) {
+      display: flex;
+      gap: var(--gap-grid-img);
+      border-radius: var(--radius);
+
+      > * {
+        flex: 1 1 auto;
+        min-width: 1%;
+        min-height: 1%;
+        object-fit: cover;
+      }
+
+      img,
+      img:first-child,
+      img:last-child {
+        margin-inline: auto;
+        flex-grow: 0;
+        /* prevents the image from stretching to fill */
+      }
+
+      br {
+        display: none;
+      }
+    }
+
+    .callout p:has(img),
+    .callout p:has(img) br {
+      display: block;
+    }
+
+    /* Adjacent images get reduced spacing  + var(--img-gap)    */
+    p:has(img) + p:has(img) {
+      margin-block-start: var(--gap-grid-img) !important;
+    }
+  }
+  /* Left-aligned variant — content hugs the left edge */
+  &:not(.no-grid).left p:has(img) img,
+  &:not(.no-grid).left p:has(img) img:first-child,
+  &:not(.no-grid).left p:has(img) img:last-child {
+    margin-inline: 0 !important;
+  }
+
+  /* Basic media styling */
+  img,
+  audio,
+  video,
+  iframe {
+    margin: 0;
+    margin-inline: auto;
+    max-inline-size: 100%;
+  }
+
+  p {
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  @media (max-width: #{$mobile}) {
+    .container-small,
+    .callout,
+    blockquote,
+    pre,
+    figure,
+    p:has(img),
+    .stnd-code-block {
+      margin-inline: 0 !important;
+    }
+  }
+
+  @media (max-width: #{$small}) {
+    .card.accent,
+    .card.feature,
+    .card.editorial,
+    .card.full {
+      margin-inline: calc(var(--space) * -1);
+      border-radius: 0;
+    }
+  }
+
+  /* Mermaid diagrams */
+  .mermaid {
+    margin-block-end: var(--space);
+    margin-inline: auto;
+    padding: var(--space);
+  }
+
+  p img {
+    max-inline-size: 100%;
+  }
+
+  a {
+    overflow-wrap: break-word;
+  }
+
+  /* Fixed 2026-07-14 — swapped undefined tokens for their real equivalents
+     (--color-muted, --color-accent, --color-surface-high). */
+  .mycelial-graft {
+    text-decoration: none;
+    border-bottom: 1px dotted var(--color-muted);
+    color: inherit;
+    cursor: help;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--color-accent);
+      border-bottom: 1px solid var(--color-accent);
+      background-color: var(--color-surface-high);
+    }
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

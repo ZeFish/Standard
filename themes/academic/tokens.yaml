@@ -1,0 +1,26 @@
+meta:
+  id: academic
+  label: Academic
+  selector: |-
+    :root[data-theme="academic"],
+    [data-theme="academic"]
+  fonts:
+    - "@stnd/fonts/source-serif-4"
+    - "@stnd/fonts/ibm-plex"
+tokens:
+  color-light-background: "#f7f6f4"
+  color-light-foreground: "#292827"
+  color-accent: "#0f5a7d"
+  font-text: '"Source Serif 4", "Georgia", "Times New Roman", serif'
+  font-header: '"Source Serif 4", "Georgia", "Times New Roman", serif'
+  font-monospace: '"IBM Plex Mono", "Menlo", monospace'
+  sidenote-width: 18rem
+  color-light-accent: "#0f5a7d"
+  color-dark-background: "#211f1d"
+  color-dark-foreground: "#e6e2db"
+  color-dark-accent: "#7fb4cc"
+  optical-ratio: "1.225"
+  font-header-weight: "600"
+  font-feature: '"onum", "pnum"'
+  line-height: "1.55"
+  line-width: 30rlh

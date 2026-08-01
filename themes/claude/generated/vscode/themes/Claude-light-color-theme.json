@@ -1,0 +1,156 @@
+{
+  "name": "Claude Light",
+  "type": "light",
+  "colors": {
+    "foreground": "#3d3826",
+    "input.background": "#e6e4de",
+    "input.foreground": "#3d3826",
+    "input.placeholderForeground": "#dedbd3",
+    "inputOption.activeBorder": "#cb644180",
+    "badge.foreground": "#faf8f1",
+    "badge.background": "#cb6441",
+    "progressBar.background": "#cb6441",
+    "button.background": "#cb6441",
+    "button.foreground": "#3d3826",
+    "button.hoverBackground": "#cb644190",
+    "dropdown.background": "#e6e4de",
+    "dropdown.foreground": "#3d3826",
+    "dropdown.border": "#f1eee7",
+    "focusBorder": "#cb644180",
+    "selection.background": "#cb644140",
+    "editor.background": "#faf8f1",
+    "editor.foreground": "#3d3826",
+    "sideBar.background": "#faf8f1",
+    "sideBar.border": "#f1eee7",
+    "activityBar.background": "#faf8f1",
+    "activityBar.foreground": "#3d3826",
+    "activityBar.inactiveForeground": "#aeaba0",
+    "statusBar.background": "#faf8f1",
+    "statusBar.foreground": "#3d3826",
+    "titleBar.activeBackground": "#faf8f1",
+    "titleBar.activeForeground": "#3d3826",
+    "editorLineNumber.foreground": "#dedbd3",
+    "editorLineNumber.activeForeground": "#aeaba0",
+    "editor.lineHighlightBackground": "#f1eee7",
+    "editorIndentGuide.background": "#f1eee7",
+    "editorIndentGuide.activeBackground": "#aeaba0",
+    "list.hoverBackground": "#f1eee7",
+    "list.activeSelectionBackground": "#f1eee7",
+    "list.activeSelectionForeground": "#3d3826",
+    "tab.activeBackground": "#f1eee7",
+    "tab.activeForeground": "#3d3826",
+    "tab.inactiveBackground": "#faf8f1",
+    "tab.inactiveForeground": "#aeaba0",
+    "tab.border": "#f1eee7",
+    "breadcrumb.foreground": "#aeaba0",
+    "breadcrumb.focusForeground": "#3d3826",
+    "widget.shadow": "#00000040",
+    "quickInput.background": "#fdfdfa",
+    "terminal.background": "#faf8f1",
+    "terminal.foreground": "#3d3826"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#aeaba0",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.parameter",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.other.member",
+      "settings": {
+        "foreground": "#3d3826"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "entity.name.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "punctuation.definition.keyword"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#aeaba0"
+      }
+    }
+  ]
+}

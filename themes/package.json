@@ -1,0 +1,21 @@
+{
+  "name": "@stnd/themes",
+  "version": "0.5.1",
+  "type": "module",
+  "author": "Francis Fontaine",
+  "license": "MIT",
+  "exports": {
+    "./*": "./*/index.module.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node _scripts/build.js && node -e \"if (!process.env.TURBO_HASH) require('child_process').execSync('pnpm --filter standard-garden build', {stdio: 'inherit'})\"",
+    "build:themes": "node _scripts/build.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "wrangler": "^4.105.0"
+  }
+}

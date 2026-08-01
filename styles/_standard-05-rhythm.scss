@@ -1,0 +1,78 @@
+@use "standard-00-variables" as *;
+
+/* ===== BULLETPROOF RHYTHM SYSTEM ===== */
+/* Applied to any container — cascades to children via margin-block-start */
+
+:where(.rhythm) {
+  /* flow-root creates a new Block Formatting Context (BFC).
+     This contains child margins — they won't collapse out of .rhythm.
+     Think of it as "overflow: hidden" but without clipping content. */
+  display: flow-root;
+
+  /* Every selector below is wrapped in :where(), including .rhythm itself
+     — that's zero specificity everywhere, by design (easy for any other
+     rule to override). Which means SOURCE ORDER is the only tiebreaker
+     when more than one of these rules matches the same element (e.g. a
+     paragraph immediately before an h1 matches both the base 1x rule
+     below AND the heading exception further down — the exception wins
+     purely because it's declared later). Do not reorder this block
+     without checking every rule still resolves the way you expect. */
+
+  /* AUDIT FLAG (2026-07-14): this base rule has no `>` — it applies at
+     ANY nesting depth inside .rhythm, not just direct children. Every
+     other rule in this block (the double-tag 2x rule right below, and
+     all EXCEPTIONS) is `>`-scoped to direct children only. So a heading
+     nested two levels deep (inside a .callout, say) gets the base 1x
+     spacing but never the heading-specific 2x/3x exceptions a top-level
+     heading would get. Possibly intentional (exceptions are for
+     top-level document flow only) — flagging since the asymmetry itself
+     isn't declared anywhere, just falls out of one missing `>`. */
+  :where(:is(#{$rhythm-tags})) + :where(:is(#{$rhythm-tags})) {
+    margin-block-start: calc(var(--gap) * 1);
+  }
+
+  > :where(:is(#{$rhythm-double-tags})) + :where(:is(#{$rhythm-simple-tags})),
+  > :where(:is(#{$rhythm-simple-tags})) + :where(:is(#{$rhythm-double-tags})) {
+    margin-block-start: calc(var(--gap) * var(--gap-multiplicator, 2));
+  }
+
+  // EXCEPTIONS
+  //*
+  > :where(:is(#{$rhythm-tags})) ~ :where(:is(h1, h2)) {
+    margin-block-start: calc(
+      var(--gap) * calc(var(--gap-multiplicator, 2) + 3)
+    );
+  }
+
+  > :where(:is(#{$rhythm-tags})) ~ :where(:is(h3, h4, h5, h6)) {
+    margin-block-start: calc(
+      var(--gap) * calc(var(--gap-multiplicator, 2) + 2)
+    );
+  }
+
+  > :where(:is(h1, h2, h3, h4)) + :where(:is(h2, h3, h4, h5, h6)) {
+    margin-block-start: calc(var(--gap) * var(--gap-multiplicator, 2));
+  }
+
+  > :where(:is(h1, h2, h3)) + * {
+    margin-block-start: calc(var(--gap) * var(--gap-multiplicator, 2));
+  }
+
+  > :where(:is(h4, h5, h6)) + * {
+    margin-block-start: calc(var(--gap) * 1);
+  }
+
+  //*/
+
+  /* Flex children use `gap` for spacing, not margin (see cheat sheet:
+     "gap on the parent, not margin on children") — zero out any rhythm
+     margin that would otherwise stack with the flex gap. */
+  .flex > * {
+    margin-block-start: 0;
+  }
+}
+
+/* Individual element overrides */
+.no-rhythm * {
+  margin-block-start: 0;
+}

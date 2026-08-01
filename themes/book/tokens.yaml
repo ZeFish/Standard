@@ -1,0 +1,55 @@
+meta:
+  id: book
+  label: Book
+  selector: '[data-theme="book"]'
+  fonts:
+    - "@stnd/fonts/fern"
+    - "@stnd/fonts/source-serif-4"
+    - "@stnd/fonts/sohne"
+    - "@stnd/fonts/graveur"
+tokens:
+  color-light-background: "#fefdf9"
+  color-light-foreground: "#282726"
+  color-dark-background: oklch(19.28% 0.0101 70.89)
+  color-dark-foreground: oklch(80% 0.0227 74.79)
+  color-light-red: "#a12314"
+  color-light-orange: "#c86a3d"
+  color-light-yellow: "#c2a84a"
+  color-light-green: "#5e9d80"
+  color-light-cyan: "#6ba4b6"
+  color-light-blue: "#3b6d90"
+  color-light-purple: "#7a6c91"
+  color-light-pink: "#b97aa0"
+  color-dark-red: "#d95547"
+  color-dark-orange: "#b35f37"
+  color-dark-yellow: "#e0c168"
+  color-dark-green: "#7eb79c"
+  color-dark-cyan: "#84c3d6"
+  color-dark-blue: "#5a86a5"
+  color-dark-purple: "#a58fc0"
+  color-dark-pink: "#e6a3d1"
+  color-light-accent: var(--color-red)
+  color-dark-accent: var(--color-red)
+  color-light-link: var(--color-red)
+  color-dark-link: var(--color-red)
+  font-ratio: "1.2"
+  marge-block: "1.5"
+  font-density: "1.5"
+  font-line-width: 35rem
+  font-text: '"Fern", "Graveur Variable", Bookerly'
+  font-weight: "450"
+  font-feature: '"liga", "onum", "kern"'
+  font-variation: '""'
+  font-interface: '"Fern"'
+  font-monospace: '"Monolisa"'
+  font-mono-feature: '"onum" off'
+  font-mono-variation: '""'
+  font-header: '"Fern"'
+  font-header-feature: '"liga", "onum", "kern"'
+  font-header-variation: '""'
+  font-header-weight: "400"
+  font-header-line-height: "1"
+  color-bold: var(--color-red)
+  bold-weight: "550"
+  border: "0"
+  callout-default: var(--color-base-30)

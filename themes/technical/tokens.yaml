@@ -1,0 +1,57 @@
+meta:
+  id: technical
+  label: Technical
+  selector: |-
+    :root[data-theme="technical"],
+    [data-theme="technical"]
+  fonts:
+    - "@stnd/fonts/courier-prime"
+    - "@stnd/fonts/futura-now"
+    - "@stnd/fonts/monosten"
+    - "@stnd/fonts/gorton-perfected"
+    - "@stnd/fonts/berkeley-mono"
+tokens:
+  # Parchment/spec-sheet base — carried over from the retired "paper" theme.
+  color-light-foreground: "#241b10"
+  color-light-background: "#fffbe9"
+  color-dark-foreground: "#9e7f5b"
+  color-dark-background: "#1d2027"
+  color-light-border: "#aed0ff"
+  color-dark-border: "#333333"
+  # ANSI/syntax ramp — carried over from the retired "kernel" theme (the one
+  # ramp in the package with real semantic annotation per color).
+  color-light-red: "#df453a" # warning, highlight
+  color-light-orange: "#e08e1f" # attention blocks
+  color-light-yellow: "#d69a00" # vintage punchcard yellow
+  color-light-green: "#4ca06b" # success, approval
+  color-light-cyan: "#2aa198" # teal-y terminal feel
+  color-light-blue: "#2882c3" # link, info
+  color-light-purple: "#d16d92" # utility, label tags
+  color-light-pink: "#ea76cb" # softer
+  color-dark-red: "#d0483e"
+  color-dark-orange: "#da702c"
+  color-dark-yellow: "#d69a00"
+  color-dark-green: "#27a06c"
+  color-dark-cyan: "#81c8be"
+  color-dark-blue: "#8caaee"
+  color-dark-purple: "#8b7ec8"
+  color-dark-pink: "#f4b8e4"
+  color-light-accent: var(--color-yellow)
+  color-dark-accent: var(--color-magenta)
+  color-bold: var(--color-blue)
+  color-italic: var(--color-green)
+  color-dark-bold: var(--color-magenta)
+  # Typography — Courier Prime body, NASA/EPA signage headers, Berkeley Mono
+  # reserved for actual code (more legible than Courier at small sizes).
+  optical-ratio: "1.6"
+  line-height: "1.2"
+  mobile-line-height: "1.2"
+  font-text: '"Courier Prime"'
+  font-interface: var(--font-text)
+  font-monospace: '"Berkeley Mono", "IBM Plex Mono", "Menlo", "Consolas", monospace'
+  font-header: '"Monosten", "Gorton Perfected", "Futura Now Var"'
+  font-header-feature: '"onum", "salt", "calt"'
+  font-header-variation: '"wght" 400, "wdth" 100'
+  font-header-line-height: 0.9em
+  font-header-letter-spacing: 0em
+  line-height-normal: 1.7em

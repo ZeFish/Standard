@@ -1,0 +1,36 @@
+meta:
+  id: documentation
+  label: Documentation
+  selector: '[data-theme="documentation"]'
+  fonts:
+    - "@stnd/fonts/ia-writer"
+    - "@stnd/fonts/ibm-plex"
+    - "@stnd/fonts/berkeley-mono"
+tokens:
+  color-light-background: hsla(50, 25%, 96%, 1)
+  color-light-foreground: hsl(220, 13%, 34%)
+  color-light-accent: hsl(220, 92%, 42%)
+  color-light-border: hsl(220, 13%, 80%)
+  color-light-surface: hsla(50, 25%, 94%, 1)
+  color-light-surface-low: hsla(50, 25%, 92%, 1)
+  color-light-subtle: hsl(220, 13%, 50%)
+  color-light-muted: hsl(220, 13%, 70%)
+  color-light-link: hsl(220, 92%, 42%)
+  color-dark-background: hsl(220, 13%, 7.5%)
+  color-dark-foreground: hsl(220, 14%, 70%)
+  color-dark-accent: hsl(220, 92%, 80%)
+  color-dark-border: hsl(220, 13%, 20%)
+  color-dark-surface: hsl(220, 13%, 6.5%)
+  color-dark-surface-low: hsl(220, 13%, 5%)
+  color-dark-subtle: hsl(220, 14%, 50%)
+  color-dark-muted: hsl(220, 13%, 30%)
+  color-dark-link: hsl(220, 93%, 75%)
+  color-code: color-mix(in srgb, var(--color-foreground) 70%, var(--color-orange) 30%)
+  font-text: '"iA Writer Quattro", system-ui, sans-serif'
+  font-interface: '"iA Writer Quattro", system-ui, sans-serif'
+  font-header: '"IBM Plex Serif", Georgia, serif'
+  font-header-weight: "500"
+  font-monospace: '"Berkeley Mono", "IBM Plex Mono", Menlo, monospace'
+  line-height: "1.6"
+  line-width: 43rem
+  optical-ratio: "1.25"

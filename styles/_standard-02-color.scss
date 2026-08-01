@@ -1,0 +1,703 @@
+@use "standard-00-variables" as *;
+
+/* ==========================================================================
+   STANDARD COLOR SYSTEM — Seed-First Architecture
+
+   Two seeds → two palettes → one semantic layer
+
+   The system works in four stages:
+   1. SEEDS:     Light & dark foreground/background (set in tokens or themes)
+   2. PALETTES:  Generate full light & dark color spectrums via relative color syntax
+   3. SEMANTICS: Map active palette to semantic tokens based on scheme
+   4. COMPUTED:  Derive surfaces, shadows, borders from scheme-aware tokens
+
+   Override strategy (pick your depth):
+   ┌─────────────────────────────────────────────────────────────────────┐
+   │ Minimal:    Set --color-light-foreground → everything else follows │
+   │ Per-scheme: Set --color-light-* and/or --color-dark-* tokens       │
+   │ Full:       Theme via [data-theme] selectors (highest specificity)  │
+   └─────────────────────────────────────────────────────────────────────┘
+
+   Hue wheel (offsets from foreground hue):
+     Red +25°  ·  Orange +55°  ·  Yellow +85°  ·  Green +145°
+     Cyan +190°  ·  Blue +240°  ·  Magenta +300°
+
+   How it works:
+     Each palette color is a single oklch(from <seed> ...) call.
+     Channel keywords l, c, h are resolved INSIDE the function — no
+     intermediate extraction needed. Safety clamps are applied inline:
+       • clamp(0.35, l, 0.65) — lightness for WCAG AA on light bg
+       • max(0.12, c)         — chroma floor prevents gray alerts
+       • calc(h + offset)     — hue rotation from seed
+
+     For achromatic seeds (h = none), CSS Color Level 5 §4.3 says
+     "none" is treated as 0 inside calc(), so the palette maps to
+     standard color positions (red ≈ 25°, blue ≈ 240°, etc.).
+
+   @since 0.2.0
+   @see AGENTS.md § OKLCH Color System
+   ========================================================================== */
+
+#{$stnd-theme-scope} {
+  /* Tell browser we support both color schemes */
+  color-scheme: light dark;
+
+  /* ===================================================================
+     STAGE 1: DARK SEED DERIVATION
+     The ink's soul carries into darkness.
+     Both dark seeds inherit hue from the light foreground — warm brown
+     ink begets a warm dark background and a warm soft foreground.
+     Themes override --color-dark-background / --color-dark-foreground
+     at [data-theme] specificity for a distinct dark mood.
+
+     Light fg #442f1c  →  oklch(0.30, 0.07, H≈60)  warm brown ink
+     Dark bg  derived  →  oklch(0.20, 0.02, H≈60)  same hue, very dark, muted
+     Dark fg  derived  →  oklch(0.85, 0.04, H≈60)  same hue, soft reading brightness
+     =================================================================== */
+
+  /* Dark background: foreground's hue at very low lightness, muted chroma */
+  --color-dark-background: oklch(
+    from var(--color-light-foreground) 0.2
+      /* deep dark — not void-black, just dark enough */ min(c, 0.02)
+      /* muted — a whisper of the ink's chroma */ h
+      /* same hue — warm ink → warm dark */
+  );
+
+  /* Dark foreground: foreground's hue at comfortable reading brightness */
+  --color-dark-foreground: oklch(
+    from var(--color-light-foreground) 0.85
+      /* soft — easy on the eyes, not blinding white */ min(c, 0.04)
+      /* gentle — enough color to feel the warmth */ h
+      /* same hue — the vibe persists */
+  );
+
+  /* ===================================================================
+     STAGE 2: LIGHT PALETTE
+     Full spectrum generated from light foreground seed via inline
+     relative color syntax. Each color is a self-contained transform:
+       oklch(from <seed> <safe-L> <safe-C> calc(h + offset))
+
+     Channel keywords l, c, h resolve inside the function scope.
+     No extraction into intermediate custom properties needed.
+     Safety: clamp(0.65, l, 0.70) for bright vibrant tones, max(0.12, c) for saturation.
+     Achromatic seeds (h = none) → none treated as 0 in calc() per spec.
+     =================================================================== */
+
+  /* Error / Red — foreground hue + 25° */
+  --color-light-red: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 25)
+  );
+  /* Attention / Orange — foreground hue + 55° */
+  --color-light-orange: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 55)
+  );
+  /* Warning / Yellow — foreground hue + 85° */
+  --color-light-yellow: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 85)
+  );
+  /* Success / Green — foreground hue + 145° */
+  --color-light-green: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 145)
+  );
+  /* Info / Cyan — foreground hue + 190° */
+  --color-light-cyan: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 190)
+  );
+  /* Link / Blue — foreground hue + 240° */
+  --color-light-blue: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 240)
+  );
+  /* Magic / Magenta — foreground hue + 300° */
+  --color-light-magenta: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 300)
+  );
+  /* Purple — foreground hue + 270° */
+  --color-light-purple: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 270)
+  );
+  /* Pink — foreground hue + 350° */
+  --color-light-pink: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h + 350)
+  );
+  /* Brown — foreground hue - 15° */
+  --color-light-brown: oklch(
+    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
+      calc(h - 15)
+  );
+
+  /* Link color defaults to blue */
+  --color-light-link: var(--color-light-accent);
+
+  /* Auto-accent strategies */
+  /* 1. Complementary (Opposite side of color wheel, +180°) - High contrast */
+  --color-light-accent-complementary: oklch(
+    from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
+      min(0.2, c * 2) calc(h + 180)
+  );
+
+  /* 2. Analogous (Next to the seed color, +30°) - Harmonious, less jarring */
+  --color-light-accent-analogous: oklch(
+    from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
+      min(0.2, c * 2) calc(h + 30)
+  );
+
+  /* 3. Triadic (Third of the way around, +120°) - Balanced contrast */
+  --color-light-accent-triadic: oklch(
+    from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
+      min(0.2, c * 2) calc(h + 120)
+  );
+
+  /* Default to a slightly shifted analogous/triadic blend instead of pure 180 opposite
+     which can be jarring if the foreground is highly saturated.
+     +120 gives a strong but often more pleasing result than +180. */
+  --color-light-accent-auto: var(--color-light-accent-triadic);
+  --color-light-accent: var(--color-light-accent-auto);
+
+  /* ===================================================================
+     STAGE 2B: DARK PALETTE
+     Full spectrum generated from dark foreground seed.
+     NOT a simple lightening of the light palette — independent vibe.
+     A warm dark-foreground seed gives warm darks. A cool one gives
+     cool darks. Two different seeds, two different moods.
+     Safety: clamp(0.55, l, 0.70) for softer tones on dark surfaces.
+     =================================================================== */
+
+  /* Error / Red — dark foreground hue + 25° */
+  --color-dark-red: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 25)
+  );
+  /* Attention / Orange — dark foreground hue + 55° */
+  --color-dark-orange: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 55)
+  );
+  /* Warning / Yellow — dark foreground hue + 85° */
+  --color-dark-yellow: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 85)
+  );
+  /* Success / Green — dark foreground hue + 145° */
+  --color-dark-green: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 145)
+  );
+  /* Info / Cyan — dark foreground hue + 190° */
+  --color-dark-cyan: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 190)
+  );
+  /* Link / Blue — dark foreground hue + 240° */
+  --color-dark-blue: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 240)
+  );
+  /* Magic / Magenta — dark foreground hue + 300° */
+  --color-dark-magenta: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 300)
+  );
+  /* Purple — dark foreground hue + 270° */
+  --color-dark-purple: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 270)
+  );
+  /* Pink — dark foreground hue + 350° */
+  --color-dark-pink: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h + 350)
+  );
+  /* Brown — dark foreground hue - 15° */
+  --color-dark-brown: oklch(
+    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
+      calc(h - 15)
+  );
+
+  /* Link color defaults to blue */
+  --color-dark-link: var(--color-dark-accent);
+
+  /* Auto-accent strategies for dark mode */
+  --color-dark-accent-complementary: oklch(
+    from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
+      min(0.2, c * 2) calc(h + 180)
+  );
+
+  --color-dark-accent-analogous: oklch(
+    from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
+      min(0.2, c * 2) calc(h + 30)
+  );
+
+  --color-dark-accent-triadic: oklch(
+    from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
+      min(0.2, c * 2) calc(h + 120)
+  );
+
+  --color-dark-accent-auto: var(--color-dark-accent-triadic);
+  --color-dark-accent: var(--color-dark-accent-auto);
+  /* On-accent (text drawn on accent surfaces) */
+  --color-dark-on-accent: var(--color-dark-background);
+
+  /* ===================================================================
+     STAGE 2C: COMPUTED PALETTES
+     Always available for explicit "light-in-dark" or "dark-in-light" UI.
+     =================================================================== */
+
+  /* Light Computed Palette */
+  --color-light-muted: oklch(from var(--color-light-foreground) l c h / 0.6);
+  --color-light-subtle: oklch(from var(--color-light-foreground) l c h / 0.4);
+  --color-light-border: oklch(from var(--color-light-foreground) l c h / 0.1);
+  --color-light-surface: color-mix(
+    in srgb,
+    var(--color-light-foreground) 3%,
+    var(--color-light-background)
+  );
+  --color-light-on-accent: var(--color-light-background);
+
+  /* Dark Computed Palette */
+  --color-dark-muted: oklch(from var(--color-dark-foreground) l c h / 0.65);
+  --color-dark-subtle: oklch(from var(--color-dark-foreground) l c h / 0.45);
+  --color-dark-border: oklch(
+    from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
+      calc(h - 15) / 0.25
+  );
+  --color-dark-surface: color-mix(
+    in srgb,
+    var(--color-dark-foreground) 3%,
+    var(--color-dark-background)
+  );
+
+  /* Light Shadow Palette */
+  --color-light-shadow-base: oklch(
+    from var(--color-light-foreground) calc(l * 0.25) calc(c * 0.5)
+      calc(h - 15) / 0.075
+  );
+  --color-light-highlight: oklch(
+    from var(--color-light-background) min(1, calc(l + 0.05)) c h / 0.6
+  );
+
+  /* Dark Shadow Palette */
+  --color-dark-shadow-base: oklch(
+    from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
+      calc(h - 15) / 0.5
+  );
+  --color-dark-highlight: oklch(
+    from var(--color-dark-foreground) min(1, calc(l + 0.05)) c h / 0.11
+  );
+
+  /* ===================================================================
+     STAGE 3: SEMANTIC TOKENS (Default → Light Palette)
+     These are the tokens components actually consume.
+     Never reference --color-light-* or --color-dark-* in components.
+     Always use --color-red, --color-background, etc.
+     =================================================================== */
+  --color-background: var(--color-light-background);
+  --color-foreground: var(--color-light-foreground);
+  --color-accent: var(--color-light-accent);
+
+  --color-header: var(--color-light-header, var(--color-foreground));
+
+  --color-red: var(--color-light-red);
+  --color-orange: var(--color-light-orange);
+  --color-yellow: var(--color-light-yellow);
+  --color-green: var(--color-light-green);
+  --color-cyan: var(--color-light-cyan);
+  --color-blue: var(--color-light-blue);
+  --color-magenta: var(--color-light-magenta);
+  --color-purple: var(--color-light-purple);
+  --color-pink: var(--color-light-pink);
+  --color-brown: var(--color-light-brown);
+
+  /* Semantic status aliases */
+  --color-success: var(--color-green);
+  --color-warning: var(--color-orange);
+  --color-error: var(--color-red);
+  --color-info: var(--color-blue);
+
+  --color-link: var(--color-light-link);
+  --color-italic: var(--color-light-italic, var(--color-foreground));
+  --color-bold: var(--color-light-bold, var(--color-foreground));
+  --color-on-accent: var(--color-background);
+
+  /* Fixed 2026-07-14 — purple/pink/brown now correctly switch to dark
+     variants in all three dark-mode contexts, plus added missing
+     non-OKLCH fallbacks. */
+
+  /* ===================================================================
+     STAGE 4: COMPUTED SEMANTIC COLORS
+     Derived from the scheme-aware --color-foreground/--color-background.
+     auto-adapt when the scheme switches.
+     =================================================================== */
+  --color-muted: var(--color-light-muted);
+  --color-subtle: var(--color-light-subtle);
+  --color-border: var(--color-light-border);
+  --color-surface: var(--color-light-surface);
+
+  /* Light/dark polarity aliases — always "the lighter" and "the darker" */
+  --color-light: var(--color-light-background);
+  --color-dark: var(--color-light-foreground);
+  --color-darker: oklch(from var(--color-dark) l c h / 0.15);
+
+  --color-glass: oklch(from var(--color-background) l c h / 0.8);
+
+  /* ===================================================================
+     STAGE 5: SHADOWS & SURFACES
+     OKLCH-based for perceptually uniform elevation.
+     All derived from semantic pointers — auto-adapt to dark mode.
+     =================================================================== */
+
+  /* Semantic Shadow Seeds */
+  --color-shadow: var(--color-light-shadow-base);
+  --color-highlight: var(--color-light-highlight);
+
+  /* Shadow building blocks — compose freely */
+  --shadow-ambient: 0 1px 1px var(--color-shadow); /* Felt more than seen */
+
+  /* This one pop a bit */
+  --shadow-lift:
+    0 4px 6px -1px var(--color-shadow), 0 2px 4px -2px var(--color-shadow);
+  /* Organicaly grows */
+  --shadow-glow: 0 4px var(--space) oklch(from var(--color-shadow) l c h / 0.15);
+  --shadow-inset:
+    inset 0 1px 3px var(--color-shadow), inset 0 -1px 0 0 var(--color-highlight);
+  --shadow-ring:
+    inset 0px 1px 1px var(--color-border),
+    inset 1px 0px 1px var(--color-border),
+    inset -1px 0px 1px var(--color-border),
+    inset 0px -1px 1px var(--color-border);
+
+  /* shadcn-style raised effect: inner highlight + border + shadow */
+  --shadow-raised:
+    inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border),
+    var(--shadow-ambient);
+
+  /* Composed presets. Fixed 2026-07-14 — was accidentally doubled, now
+     matches the --shadow-lg/-xl progressive pattern (one layer). */
+  --shadow: var(--shadow-ambient);
+  --shadow-lg: var(--shadow-ambient), var(--shadow-lift);
+  --shadow-xl: var(--shadow-ambient), var(--shadow-lift), var(--shadow-glow);
+
+  /* Surface elevation scale */
+  --color-surface-low: color-mix(
+    in srgb,
+    var(--color-foreground) 3%,
+    var(--color-surface)
+  );
+  --color-surface-lowest: color-mix(
+    in srgb,
+    var(--color-foreground) 3%,
+    var(--color-surface-low)
+  );
+  --color-surface-lower: color-mix(
+    in srgb,
+    var(--color-foreground) 3%,
+    transparent
+  );
+
+  --color-surface-high: color-mix(in srgb, white 50%, var(--color-surface));
+  --color-surface-highest: color-mix(
+    in srgb,
+    white 50%,
+    var(--color-surface-high)
+  );
+  --color-surface-higher: color-mix(in srgb, white 50%, transparent);
+  /* ===================================================================
+     STAGE 6: DESIGN TOKENS (Border Shorthands)
+     =================================================================== */
+  --border-transparent: var(--stroke-width) solid transparent;
+  --border-accent: var(--stroke-width) solid
+    oklch(from var(--color-accent) l c h / 0.07);
+  --border: none;
+}
+
+/* =====================================================================
+   STAGE 7: DARK MODE SWITCH
+   System preference flips semantic tokens to dark palette.
+   Computed semantics (muted, subtle, border, surfaces, shadows)
+   auto-adapt because they reference scheme-aware --color-foreground
+   and --color-background.
+   ===================================================================== */
+@media (prefers-color-scheme: dark) {
+  #{$stnd-theme-scope} {
+    /* Core semantic tokens → dark palette */
+    --color-background: var(--color-dark-background);
+    --color-foreground: var(--color-dark-foreground);
+    --color-accent: var(--color-dark-accent);
+
+    /* Polarity flip: in dark mode, "light" = foreground, "dark" = background */
+    --color-light: var(--color-dark-foreground);
+    --color-dark: var(--color-dark-background);
+
+    --color-header: var(--color-dark-header, var(--color-foreground));
+    --color-on-accent: var(--color-background);
+
+    /* Hue tokens → dark palette */
+    --color-red: var(--color-dark-red);
+    --color-orange: var(--color-dark-orange);
+    --color-yellow: var(--color-dark-yellow);
+    --color-green: var(--color-dark-green);
+    --color-cyan: var(--color-dark-cyan);
+    --color-blue: var(--color-dark-blue);
+    --color-magenta: var(--color-dark-magenta);
+    --color-purple: var(--color-dark-purple);
+    --color-pink: var(--color-dark-pink);
+    --color-brown: var(--color-dark-brown);
+
+    --color-link: var(--color-dark-link);
+    --color-italic: var(--color-dark-italic, var(--color-foreground));
+    --color-bold: var(--color-dark-bold, var(--color-foreground));
+
+    /* Adjusted opacity for dark backgrounds */
+    --color-subtle: var(--color-dark-subtle);
+    --color-muted: var(--color-dark-muted);
+    --color-border: var(--color-dark-border);
+    --color-surface: var(--color-dark-surface);
+
+    --color-shadow: var(--color-dark-shadow-base);
+    --color-highlight: var(--color-dark-highlight);
+
+    --shadow-xl: var(--shadow-glow);
+
+    /* Surface elevation scale */
+
+    --color-surface-low: color-mix(in srgb, black 3%, var(--color-surface));
+    --color-surface-lowest: color-mix(
+      in srgb,
+      black 7%,
+      var(--color-surface-low)
+    );
+    --color-surface-lower: color-mix(in srgb, black 7%, transparent);
+
+    --color-surface-high: color-mix(
+      in srgb,
+      var(--color-dark-foreground) 3%,
+      var(--color-surface)
+    );
+    --color-surface-highest: color-mix(
+      in srgb,
+      var(--color-dark-foreground) 3%,
+      var(--color-surface-high)
+    );
+    --color-surface-higher: color-mix(
+      in srgb,
+      var(--color-dark-foreground) 3%,
+      transparent
+    );
+  }
+}
+
+/* =====================================================================
+   STAGE 7B: THEME UTILITIES (.inverse, .theme-dark, .theme-light)
+   Provides explicit control and local context switching.
+   ===================================================================== */
+
+@mixin theme-light-tokens {
+  --color-background: var(--color-light-background);
+  --color-foreground: var(--color-light-foreground);
+  --color-accent: var(--color-light-accent);
+  --color-muted: var(--color-light-muted);
+  --color-subtle: var(--color-light-subtle);
+  --color-border: var(--color-light-border);
+  --color-surface: var(--color-light-surface);
+  --color-shadow: var(--color-light-shadow-base);
+  --color-highlight: var(--color-light-highlight);
+  --color-light: var(--color-light-background);
+  --color-dark: var(--color-light-foreground);
+  color-scheme: light;
+}
+
+@mixin theme-dark-tokens {
+  --color-background: var(--color-dark-background);
+  --color-foreground: var(--color-dark-foreground);
+  --color-accent: var(--color-dark-accent);
+  --color-muted: var(--color-dark-muted);
+  --color-subtle: var(--color-dark-subtle);
+  --color-border: var(--color-dark-border);
+  --color-surface: var(--color-dark-surface);
+  --color-shadow: var(--color-dark-shadow-base);
+  --color-highlight: var(--color-dark-highlight);
+  --color-light: var(--color-dark-foreground);
+  --color-dark: var(--color-dark-background);
+  color-scheme: dark;
+}
+
+.theme-light {
+  @include theme-light-tokens;
+}
+
+.theme-dark {
+  @include theme-dark-tokens;
+}
+
+/* =====================================================================
+   STAGE 7C: CONTAINER THEMING
+   Re-resolves semantic tokens at element level so any element with
+   [data-theme] gets full color resolution — not just <html>.
+   Enables: themed cards, themed panels, side-by-side theme comparisons,
+   and scoped theme previews without changing the page chrome.
+   ===================================================================== */
+
+[data-theme] {
+  @include theme-light-tokens;
+
+  /* Hue tokens (not in the mixin) */
+  --color-header: var(--color-light-header, var(--color-foreground));
+  --color-red: var(--color-light-red);
+  --color-orange: var(--color-light-orange);
+  --color-yellow: var(--color-light-yellow);
+  --color-green: var(--color-light-green);
+  --color-cyan: var(--color-light-cyan);
+  --color-blue: var(--color-light-blue);
+  --color-magenta: var(--color-light-magenta);
+  --color-purple: var(--color-light-purple);
+  --color-pink: var(--color-light-pink);
+  --color-brown: var(--color-light-brown);
+  --color-link: var(--color-light-link);
+  --color-italic: var(--color-light-italic, var(--color-foreground));
+  --color-bold: var(--color-light-bold, var(--color-foreground));
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme]:not([data-color-mode="light"]) {
+    @include theme-dark-tokens;
+
+    --color-header: var(--color-dark-header, var(--color-foreground));
+    --color-red: var(--color-dark-red);
+    --color-orange: var(--color-dark-orange);
+    --color-yellow: var(--color-dark-yellow);
+    --color-green: var(--color-dark-green);
+    --color-cyan: var(--color-dark-cyan);
+    --color-blue: var(--color-dark-blue);
+    --color-magenta: var(--color-dark-magenta);
+    --color-purple: var(--color-dark-purple);
+    --color-pink: var(--color-dark-pink);
+    --color-brown: var(--color-dark-brown);
+    --color-link: var(--color-dark-link);
+    --color-italic: var(--color-dark-italic, var(--color-foreground));
+    --color-bold: var(--color-dark-bold, var(--color-foreground));
+  }
+}
+
+[data-color-mode="dark"] [data-theme],
+[data-color-mode="dark"][data-theme] {
+  @include theme-dark-tokens;
+
+  --color-header: var(--color-dark-header, var(--color-foreground));
+  --color-red: var(--color-dark-red);
+  --color-orange: var(--color-dark-orange);
+  --color-yellow: var(--color-dark-yellow);
+  --color-green: var(--color-dark-green);
+  --color-cyan: var(--color-dark-cyan);
+  --color-blue: var(--color-dark-blue);
+  --color-magenta: var(--color-dark-magenta);
+  --color-purple: var(--color-dark-purple);
+  --color-pink: var(--color-dark-pink);
+  --color-brown: var(--color-dark-brown);
+  --color-link: var(--color-dark-link);
+  --color-italic: var(--color-dark-italic, var(--color-foreground));
+  --color-bold: var(--color-dark-bold, var(--color-foreground));
+}
+
+[data-color-mode="light"] [data-theme],
+[data-color-mode="light"][data-theme] {
+  @include theme-light-tokens;
+
+  --color-header: var(--color-light-header, var(--color-foreground));
+  --color-red: var(--color-light-red);
+  --color-orange: var(--color-light-orange);
+  --color-yellow: var(--color-light-yellow);
+  --color-green: var(--color-light-green);
+  --color-cyan: var(--color-light-cyan);
+  --color-blue: var(--color-light-blue);
+  --color-magenta: var(--color-light-magenta);
+  --color-link: var(--color-light-link);
+  --color-italic: var(--color-light-italic, var(--color-foreground));
+  --color-bold: var(--color-light-bold, var(--color-foreground));
+}
+
+/* =====================================================================
+   STAGE 8: FALLBACKS — Graceful Degradation
+   Browsers without OKLCH support (Safari <16.4, Chrome <111, FF <113)
+   get concrete color values so the UI remains usable.
+
+   Fixed 2026-07-14 — added missing light/dark purple & pink fallbacks
+   below.
+   ===================================================================== */
+@supports not (color: oklch(50% 0.2 180)) {
+  #{$stnd-theme-scope} {
+    /* Concrete dark seeds */
+    --color-dark-background: #232323;
+    --color-dark-foreground: #d0d0d0;
+
+    /* Light palette fallbacks — standard hue positions */
+    --color-light-red: #c44040;
+    --color-light-orange: #b87020;
+    --color-light-yellow: #9a8520;
+    --color-light-green: #3a8a50;
+    --color-light-cyan: #2a8a8a;
+    --color-light-blue: #3a60b0;
+    --color-light-magenta: #9040a0;
+    --color-light-purple: #8050b0;
+    --color-light-pink: #c05090;
+    --color-light-accent: #2a8a8a;
+
+    /* Dark palette fallbacks */
+    --color-dark-red: #e06060;
+    --color-dark-orange: #d09040;
+    --color-dark-yellow: #c0a840;
+    --color-dark-green: #60b070;
+    --color-dark-cyan: #50b0b0;
+    --color-dark-blue: #6080d0;
+    --color-dark-magenta: #b060c0;
+    --color-dark-purple: #a070d0;
+    --color-dark-pink: #d070a0;
+    --color-dark-accent: #50b0b0;
+
+    /* Computed fallbacks */
+    --color-muted: rgba(0, 0, 0, 0.6);
+    --color-subtle: rgba(0, 0, 0, 0.4);
+    --color-border: rgba(0, 0, 0, 0.1);
+    --color-surface: rgba(0, 0, 0, 0.03);
+    --color-shadow: rgba(0, 0, 0, 0.25);
+    --color-highlight: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* =====================================================================
+   STAGE 9: HIGH CONTRAST — Windows / forced-colors mode
+   ===================================================================== */
+@media (forced-colors: active) {
+  #{$stnd-theme-scope} {
+    --color-background: Canvas;
+    --color-foreground: CanvasText;
+    --color-accent: Highlight;
+    --color-border: CanvasText;
+    --color-muted: GrayText;
+  }
+}
+
+/* The Inverse Logic: Context-aware flipping */
+.inverse {
+  /* Default: if root is light (either by system or choice), inverse is dark */
+  @include theme-dark-tokens;
+
+  /* If system is dark AND root hasn't forced light mode, root is dark, so inverse must be light */
+  @media (prefers-color-scheme: dark) {
+    #{$stnd-theme-scope}:not([data-color-mode="light"]) & {
+      @include theme-light-tokens;
+    }
+  }
+
+  /* If root explicitly forced dark mode, inverse must be light */
+  #{$stnd-theme-scope}[data-color-mode="dark"] & {
+    @include theme-light-tokens;
+  }
+}

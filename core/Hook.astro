@@ -1,0 +1,37 @@
+---
+/**
+ * Hook.astro — The Standard component marketplace portal.
+ *
+ * This component acts as an injection point for components registered via module manifests.
+ * It automatically handles both static SSR rendering and hydrated Svelte rendering.
+ */
+import { extensions } from "virtual:stnd/components";
+import HookSvelte from "./Hook.svelte";
+
+interface Props {
+  zone: string; // The zone ID to inject into (e.g., "backpack", "footer")
+  props?: Record<string, any>;
+  hydrated?: boolean;
+}
+
+const { zone, props = {}, hydrated = false } = Astro.props;
+const entries = extensions[zone] || [];
+---
+
+{
+  hydrated ? (
+    <HookSvelte client:load zone={zone} props={props} />
+  ) : (
+    entries.map((entry: any) => {
+      const Component = entry.component;
+      const finalProps = { ...entry.meta, ...props };
+      return Component ? (
+        <Component
+          {...finalProps}
+          data-module-id={entry.moduleId}
+          data-hook-zone={zone}
+        />
+      ) : null;
+    })
+  )
+}

@@ -1,0 +1,1252 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* BUTTONS                     */
+/* =========================== */
+
+.loader {
+  width: var(--size-lg);
+  height: var(--size-lg);
+  border: var(--space-d3) solid transparent;
+  background: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  filter: blur(0.3px);
+  animation: rotation 0.25s linear infinite;
+
+  --color-loading-mix: color-mix(in oklch, var(--color-accent) 100%, black);
+  --color-loading: oklch(from var(--color-loading-mix) l c h / 0.25);
+  border-bottom-color: var(--color-loading);
+  box-shadow:
+    0px 4px 6px -2px var(--color-loading),
+    inset 0px -4px 6px -2px var(--color-loading);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+kbd {
+  background-color: var(--color-surface);
+  background-image: var(--effect-grain);
+  border: none;
+  border-radius: var(--radius);
+  /* Button-like raised effect */
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-d6) var(--space-d3);
+  font-family: var(--font-monospace);
+  font-size: var(--size-xs);
+  pointer-events: none;
+}
+
+$types: "secondary", "outline", "destructive", "ghost", "icon";
+
+:where(button),
+a.btn {
+  @extend %surface;
+  @extend %padding-text;
+  padding: var(--space-d6) var(--space-d2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-interface);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height);
+  font-size: 1em;
+  user-select: none;
+  background-color: var(--color-surface-high);
+  color: var(--color-foreground);
+  cursor: pointer;
+  gap: var(--space-d3);
+  text-align: center;
+  min-height: 1em;
+
+  /* shadcn-style raised effect */
+  box-shadow: var(--shadow-raised);
+  border: var(--border);
+
+  transition: all var(--transition-fast);
+
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+
+  text-decoration: none !important;
+
+  &:hover {
+    background-color: var(--color-surface-highest);
+    /* Lift shadow slightly on hover */
+    color: var(--color-foreground);
+    box-shadow: var(--shadow-raised), var(--shadow-lg);
+  }
+
+  &:active {
+    background-color: var(--color-surface-low);
+    /* Flatten shadow on press */
+    box-shadow: var(--shadow-inset), var(--shadow-ring);
+  }
+}
+
+:where(button):focus-visible,
+a.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+:where(button).destructive,
+a.btn.destructive {
+  color: color-mix(in srgb, var(--color-error) 75%, transparent);
+
+  &:hover {
+    background-color: var(--color-error);
+    color: var(--color-on-accent);
+  }
+}
+
+:where(button).secondary,
+a.btn.secondary {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+
+  &:hover {
+    color: var(--color-accent);
+    background-color: var(--color-surface-high);
+    box-shadow: var(--shadow-raised), var(--shadow-glow);
+  }
+
+  &:active {
+    background-color: var(--color-surface);
+    /* Flatten shadow on press */
+    box-shadow: var(--shadow-inset), var(--shadow-ring), var(--shadow-glow);
+  }
+}
+
+:where(button).link,
+a.btn.link {
+  background-color: var(--color-surface);
+  color: var(--color-link);
+
+  &:hover {
+    background: color-mix(in srgb, currentColor 10%, var(--color-surface));
+  }
+
+  &:active {
+    background-color: var(--color-surface);
+    /* Flatten shadow on press */
+    box-shadow: var(--shadow-inset), var(--shadow-ring);
+  }
+}
+
+:where(button).outline,
+a.btn.outline {
+  background-color: transparent;
+  backdrop-filter: var(--filter-blur);
+  color: var(--color-subtle);
+
+  &:hover {
+    color: var(--color-foreground);
+    background-color: var(--color-surface-higher);
+  }
+
+  &:active {
+    color: var(--color-foreground);
+    background-color: var(--color-surface-lower);
+    /* Flatten shadow on press */
+    box-shadow: var(--shadow-inset), var(--shadow-ring);
+  }
+}
+
+:where(button).ghost,
+a.btn.ghost {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: var(--color-muted);
+
+  &:hover {
+    color: var(--color-foreground);
+    background-color: var(--color-surface-higher);
+    box-shadow: var(--shadow-raised), var(--shadow-lg);
+  }
+
+  &:active {
+    background-color: var(--color-surface);
+    /* Flatten shadow on press */
+    box-shadow: var(--shadow-inset), var(--shadow-ring);
+  }
+}
+
+:where(button).large,
+a.btn.large {
+  padding: var(--space) var(--space-2);
+  font-size: var(--size-base);
+}
+
+:where(button).small,
+a.btn.small {
+  padding: var(--space-d6) var(--space-d2);
+  font-size: var(--size-xs);
+}
+
+:where(button).smaller,
+a.btn.smaller {
+  padding: var(--space-d6) var(--space-d3);
+  font-size: var(--size-xs);
+}
+
+:where(button).icon,
+a.btn.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--leading);
+  margin: 0;
+  aspect-ratio: 1/1;
+}
+
+:where(button).disabled,
+:where(button):disabled,
+a.btn.disabled,
+a.btn:disabled {
+  opacity: 0.5 !important;
+  color: var(--color-subtle) !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+/*
+:is(:where(button), .btn) svg {
+  height: 100%;
+  width: auto;
+  fill: currentColor;
+}
+*/
+
+.tag {
+  color: var(--color-muted);
+}
+
+.tag:hover {
+  color: var(--color-accent);
+}
+
+.badge {
+  padding: 0 var(--space-d3);
+  background-color: color-mix(in oklch, currentColor 15%, transparent);
+  color: var(--color-accent);
+  border-radius: 999px;
+  border: var(--stroke-width) solid
+    color-mix(in oklch, currentColor 30%, transparent);
+  font-size: var(--size-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-d3);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: var(--font-interface);
+  user-select: none;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-ring);
+  width: fit-content;
+
+  font-variation-settings: "wdth" 900;
+
+  &.small {
+    padding: 0 var(--space-d4) !important;
+    font-size: var(--size-xs);
+  }
+
+  &.smaller {
+    padding: 0 var(--space-d4) !important;
+    font-size: var(--size-2xs);
+  }
+
+  ::selection {
+    background: transparent;
+    color: currentColor;
+  }
+
+  a {
+    text-decoration-color: oklch(from currentColor l c h / 0.5);
+    text-decoration-thickness: 0.112em;
+  }
+}
+
+a.badge:hover,
+.badge a:hover {
+  color: var(--color-on-accent);
+  background: color-mix(
+    in oklch,
+    var(--color-accent) 70%,
+    var(--color-surface)
+  );
+}
+
+.badge.secondary,
+a.badge.secondary {
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
+}
+
+a.badge.secondary:hover,
+.badge.secondary a:hover {
+  color: var(--color-accent);
+  background: color-mix(in oklch, currentColor 5%, var(--color-surface));
+}
+
+.badge.outline {
+  background-color: transparent;
+  color: var(--color-muted);
+
+  &:hover,
+  a:hover {
+    color: var(--color-foreground);
+    background: var(--color-surface);
+  }
+}
+
+.badge.ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-muted);
+
+  &:hover {
+    color: var(--color-foreground);
+    background: var(--color-surface);
+  }
+}
+
+.badge.destructive {
+  background-color: var(--color-surface);
+  border-color: color-mix(
+    in oklch,
+    var(--color-error) 10%,
+    var(--color-border)
+  );
+  color: var(--color-error);
+
+  &:hover,
+  a:hover {
+    background-color: var(--color-error);
+    color: var(--color-on-accent);
+  }
+}
+
+.alert {
+  font-family: var(--font-interface);
+  --color-alert: var(--color-accent);
+  padding: var(--space-d2);
+  color: color-mix(
+    in oklch,
+    var(--color-alert) 25%,
+    var(--color-foreground)
+  ) !important;
+  /* Alpha overlay works consistently on both light and dark backgrounds:
+   light bg → pale tint, dark bg → visible colored tint */
+  background: oklch(from var(--color-alert) l c h / 0.1);
+  border-left: var(--stroke-width) solid
+    oklch(from var(--color-alert) l c h / 0.5);
+  box-shadow: var(--shadow-raised);
+  text-shadow: none !important;
+}
+
+// Callout Color Variants
+.alert.warning {
+  --color-alert: var(--color-warning);
+}
+
+.alert.error {
+  --color-alert: var(--color-error);
+}
+
+.alert.success {
+  --color-alert: var(--color-success);
+}
+
+.alert.info {
+  --color-alert: var(--color-info);
+}
+
+/**
+ * @name Card Component
+ * @group components-layout
+ * @author Francis Fontaine
+ * @since 0.11.0
+ *
+ * In 1991, Edward Tufte published "Envisioning Information" and introduced
+ * the concept of "small multiples"—the idea that human brains excel at
+ * comparing information when it's presented in identical visual containers.
+ * Show someone seven weather forecasts in seven different layouts, and they'll
+ * struggle. Show them seven identical cards with different data, and patterns
+ * emerge instantly. The structure disappears, the content shines.
+ *
+ * But here's the catch: small multiples only work when they're truly identical.
+ * One card with 16px padding, another with 20px, a third with 18px—your brain
+ * registers the inconsistency before it processes the content. This component
+ * solves that problem by providing a single source of truth for card structure.
+ * Every card gets the same padding, the same borders, the same rhythm. Build
+ * one card or build a hundred—they'll feel like family.
+ *
+ * The Swiss designers understood this in the 1950s. Josef Müller-Brockmann's
+ * concert posters used rigid grids not to constrain creativity, but to amplify
+ * it. When the structure is invisible, when it just works, your content can
+ * breathe. That's what `.card` does—it handles the boring consistency so you
+ * can focus on making something beautiful.
+ *
+ * ### Future Improvements
+ *
+ * - Elevation variants (flat, raised, floating) with shadow scales
+ * - Interactive hover states for clickable cards with smooth transitions
+ * - Horizontal card layout variant for image + content side-by-side
+ * - Dark mode shadow adjustments for better depth perception
+ * - Optional card image hero with object-fit controls
+ *
+ * @see {class} .grid - Often used to layout multiple cards in columns
+ * @see {variable} --base - Controls internal spacing rhythm
+ * @see {class} .prose - Can be used inside card-body for rich content
+ *
+ * @link https://en.wikipedia.org/wiki/Edward_Tufte Information Design Pioneer
+ * @link https://www.nngroup.com/articles/cards-component/ NN/g Cards Research
+ *
+ * @example html - Basic card structure
+ *   <article class="card">
+ *     <header class="card-header">
+ *       <h3>Card Title</h3>
+ *     </header>
+ *     <div class="card-body">
+ *       <p>Card content with automatic spacing and rhythm.</p>
+ *     </div>
+ *     <footer class="card-footer">
+ *       <a href="#">Read more →</a>
+ *     </footer>
+ *   </article>
+ *
+ * @example html - Cards in grid layout (3-column responsive)
+ *   <div class="grid">
+ *     <article class="card col-4 col-sm-12">
+ *       <div class="card-body">
+ *         <h3>Feature One</h3>
+ *         <p>Description...</p>
+ *       </div>
+ *     </article>
+ *     <article class="card col-4 col-sm-12">...</article>
+ *     <article class="card col-4 col-sm-12">...</article>
+ *   </div>
+ *
+ * @example html - Clickable card (entire card is a link)
+ *   <a href="/article" class="card card-clickable">
+ *     <div class="card-body">
+ *       <h3>Article Title</h3>
+ *       <p>Preview text that entices you to click...</p>
+ *     </div>
+ *   </a>
+ *
+ * @example scss - Customizing card via CSS variables
+ *   .card.custom {
+ *     --card-border-color: var(--color-accent);
+ *     --card-padding: var(--size-lg);
+ *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ *   }
+ */
+
+/**
+ * @name Clickable Card Variant
+ * @group components-layout
+ * @since 0.11.0
+ *
+ * Sometimes your entire card should be clickable—a blog post preview, a product
+ * listing, a project showcase. This variant ensures proper hover states, focus
+ * indicators, and cursor feedback while maintaining the card's structural integrity.
+ *
+ * The subtle lift on hover (2px translateY) and enhanced shadow create the
+ * illusion of depth—like the card is rising toward you. It's a tactile metaphor
+ * for "this is interactive." The focus-visible outline ensures keyboard users
+ * can see exactly where they are.
+ *
+ * Accessibility note: When using clickable cards, ensure the link text is
+ * descriptive. "Read more" alone isn't enough—screen readers need context.
+ * Use "Read more about [article title]" or aria-label.
+ *
+ * @see {class} .card - Base component
+ * @see {element} a - Applied to anchor tag wrapping card content
+ *
+ * @example html - Accessible clickable card
+ *   <a href="/article/typography-history" class="card card-clickable"
+ *      aria-label="Read full article about Typography History">
+ *     <div class="card-body">
+ *       <h3>Typography History</h3>
+ *       <p>The evolution of type from Gutenberg to now...</p>
+ *     </div>
+ *     <div class="card-footer">
+ *       Read more →
+ *     </div>
+ *   </a>
+ */
+.card {
+  @extend %surface;
+  padding: var(--space);
+  box-shadow: var(--shadow-raised), var(--shadow-lift);
+  background-color: var(--color-surface);
+  transition: all var(--transition);
+  border-radius: var(--radius);
+  /* --border currently resolves to `none` everywhere in this file
+     (card, card header/footer, .comment, .comment-content) — see the
+     AUDIT FLAG in _standard-02-color.scss. */
+  border: var(--border);
+
+  &.hero {
+    border-radius: 0;
+  }
+
+  h3 {
+    font-size: var(--scale-2);
+  }
+
+  h2 {
+    font-size: var(--scale-3);
+  }
+
+  h1 {
+    font-size: var(--scale-4);
+  }
+}
+
+.card > header:first-child {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lift);
+  border-bottom: var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: var(--space);
+  margin: calc(var(--space) * -1);
+  margin-block-end: 0;
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: 0;
+  }
+
+  &.surface {
+    margin-bottom: 0;
+    border-bottom: var(--border);
+
+    box-shadow: var(--shadow);
+    background-color: var(--color-surface);
+  }
+
+  p {
+    margin-top: var(--space-d2);
+    color: var(--color-muted);
+    font-size: var(--size-sm);
+  }
+
+  + * {
+    margin-block-start: var(--space);
+  }
+}
+
+.card > header:has(svg):first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a {
+    margin-top: 0;
+  }
+}
+
+.card > footer:last-child {
+  background: var(--color-surface-low);
+  border-top: var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: var(--space-d2) var(--space);
+  font-size: var(--size-sm);
+  margin: calc(var(--space) * -1);
+  margin-top: var(--space);
+}
+
+.card.clickable {
+  a {
+    text-decoration: none;
+  }
+
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    /* Subtle lift with shadow preset */
+    box-shadow: var(--shadow-lg);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(0);
+    /* Press down on click */
+  }
+}
+
+.inset,
+card.inset {
+  box-shadow: inset var(--shadow) !important;
+}
+
+.callout {
+  /* Raised effect for callout cards */
+  box-shadow: var(--shadow-raised), var(--shadow-ring);
+
+  border-radius: var(--radius-sm);
+  padding: var(--space-d8);
+  padding-top: 0;
+  --color-callout: var(--color-surface);
+  --color-border: oklch(from var(--color-callout) l c h / 0.15);
+  background: color-mix(
+    in srgb,
+    var(--color-callout) 10%,
+    var(--color-surface-high)
+  );
+  font-size: var(--size-sm);
+
+  .callout-title,
+  > summary {
+    position: relative;
+    color: color-mix(
+      in oklch,
+      var(--color-callout) 50%,
+      var(--color-foreground)
+    );
+    display: flex;
+    gap: var(--leading);
+    font-weight: var(--font-weight-bold, bold);
+
+    user-select: none;
+    padding: var(--space-d2);
+    margin: 0 !important;
+
+    .callout-title-inner {
+      margin: 0;
+    }
+  }
+
+  .callout-content:has(> p:empty:only-child) {
+    display: none;
+  }
+
+  .callout-content {
+    color: var(--color-foreground);
+    background: color-mix(
+      in srgb,
+      var(--color-callout) 10%,
+      var(--color-surface-low)
+    );
+    line-height: var(--line-height-compact);
+    box-shadow: var(--shadow-inset), var(--shadow-ring);
+    border-radius: var(--radius-sm);
+    padding: var(--space-d2);
+    margin-top: 0;
+    margin-left: 0;
+    text-align: left;
+
+    p:first-child,
+    p:first-child:empty + p {
+      margin-top: 0 !important;
+    }
+
+    p:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    ul,
+    ol {
+      padding: 0 var(--space-d2);
+      list-style: none;
+    }
+
+    pre {
+      margin: var(--space-d2) 0;
+    }
+
+    > .callout {
+      margin: calc(var(--space) * -1);
+
+      .callout-content {
+        padding: var(--space);
+      }
+
+      .callout-title {
+        padding-left: var(--space);
+        padding-right: var(--space);
+      }
+    }
+  }
+
+  .callout-title-icon {
+    display: none;
+  }
+
+  img {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+// Callout Color Variants
+.callout[data-callout="warning" i] {
+  --color-callout: var(--color-red);
+}
+
+.callout[data-callout="important" i] {
+  --color-callout: var(--color-orange);
+}
+
+// Notion Color Variants
+.callout[data-callout*="gray" i] {
+  --color-callout: var(--color-foreground);
+}
+
+.callout[data-callout*="red" i] {
+  --color-callout: var(--color-red);
+}
+
+.callout[data-callout*="brown" i] {
+  --color-callout: var(--color-brown);
+}
+
+.callout[data-callout*="orange" i] {
+  --color-callout: var(--color-orange);
+}
+
+.callout[data-callout*="yellow" i] {
+  --color-callout: var(--color-yellow);
+}
+
+.callout[data-callout*="green" i] {
+  --color-callout: var(--color-green);
+}
+
+.callout[data-callout*="cyan" i] {
+  --color-callout: var(--color-cyan);
+}
+
+.callout[data-callout*="blue" i] {
+  --color-callout: var(--color-blue);
+}
+
+.callout[data-callout*="magenta" i] {
+  --color-callout: var(--color-magenta);
+}
+
+.callout[data-callout*="purple" i] {
+  --color-callout: var(--color-purple);
+}
+
+.callout[data-callout*="pink" i] {
+  --color-callout: var(--color-pink);
+}
+
+// Details/Summary specific callout styles
+details > summary {
+  list-style: none;
+  /* removes marker in Firefox */
+}
+
+details .callout-title::before {
+  content: "▸";
+  display: inline-block;
+  transform: rotate(0deg);
+  margin-right: 0;
+  text-align: center;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  transform-origin: center;
+  transition: all var(--transition);
+}
+
+details[open] .callout-title::before {
+  transform: rotate(90deg);
+}
+
+details .callout-title-inner {
+  display: inline;
+}
+
+details.callout {
+  interpolate-size: allow-keywords;
+
+  &::details-content {
+    height: 0;
+    overflow: hidden;
+    transition:
+      height var(--transition),
+      content-visibility var(--transition) allow-discrete;
+  }
+
+  &[open]::details-content {
+    height: auto;
+  }
+}
+
+details .callout-fold {
+  margin: 0;
+}
+
+// Caption Callout (after an image)
+p:has(img) + .callout[data-callout="caption" i] {
+  padding: 0;
+  background: none;
+  padding-block-start: var(--gap);
+  border: none;
+  margin: 0 var(--space);
+  box-shadow: none;
+
+  .callout-title {
+    display: none;
+  }
+
+  .callout-content {
+    padding: 0;
+    background: none;
+    color: var(--color-muted);
+    border: none;
+
+    box-shadow: none;
+    text-align: center;
+    text-wrap: balance;
+  }
+}
+
+details .callout-title-inner {
+  display: inline;
+}
+
+details .callout-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height var(--transition),
+    opacity var(--transition);
+}
+
+details[open] .callout-content {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+details .callout-fold {
+  margin: 0;
+}
+
+/**
+ * @name Comments
+ * @group comments
+ * @since 0.11.0
+ */
+
+#comments {
+  * {
+    margin-block-end: 0;
+  }
+
+  font-size: var(--size-sm);
+
+  .comment {
+    border: var(--border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space) var(--space-d2);
+    margin-block-end: var(--space);
+
+    .comment-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-d2);
+
+      .comment-author {
+        font-weight: var(--font-weight-bold);
+      }
+
+      .comment-date,
+      .comment-pending {
+        color: var(--color-subtle);
+        font-size: var(--size-xs);
+      }
+
+      .comment-pending {
+        font-style: italic;
+        color: var(--color-orange);
+      }
+    }
+
+    .comment-content {
+      margin-inline: var(--space-d2);
+      margin-block-start: var(--space-d2);
+      border-left: var(--border);
+      padding: var(--space-d2);
+      color: var(--color-muted);
+      font-size: var(--size-sm);
+      line-height: var(--line-height-compact);
+    }
+  }
+
+  :last-child {
+    margin-block-end: 0;
+  }
+}
+
+/**
+ * @name Alert Action Links
+ * @group components-feedback
+ * @since 0.11.0
+ *
+ * Actions within alerts (links, buttons) should be visually distinct but not
+ * overwhelming. This provides subtle styling that inherits the alert's color.
+ */
+/* Fixed 2026-07-14 — was an undefined token (--alert-border-color),
+   corrected to the real --color-alert, matching the docblock's stated
+   intent that this inherits the alert's color. */
+.alert-action {
+  display: inline-block;
+  margin-inline-start: var(--space-d2);
+  color: var(--color-alert);
+  text-decoration: underline;
+  font-weight: var(--font-weight-bold);
+
+  &:hover {
+    text-decoration-thickness: 0.15em;
+  }
+}
+
+a.skip-link {
+  /* Positioning - absolute to top-left corner */
+  position: absolute;
+  top: var(--space-d3);
+  left: var(--space-d3);
+  z-index: var(--z-modal);
+  /* Above everything else */
+
+  /* Styling - high contrast, unmissable */
+  background: var(--color-accent);
+  color: var(--color-background);
+  padding: var(--space-d3);
+  border-radius: var(--radius);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--size-sm);
+  text-decoration: none;
+  box-shadow: var(--shadow-xl);
+
+  /* Animation */
+
+  /* Hidden by default (accessible hiding) */
+  transform: translateY(-120%);
+  opacity: 0;
+
+  /* Visible on focus (Tab key) */
+  &:focus {
+    transform: translateY(0);
+    opacity: 1;
+    outline: 3px solid var(--color-background);
+    outline-offset: 2px;
+  }
+
+  /* Hover state (if user moves mouse while focused) */
+  &:hover {
+    background: color-mix(
+      in srgb,
+      var(--color-accent) 90%,
+      var(--color-background)
+    );
+    color: var(--color-background);
+  }
+
+  /* Active state (on click) */
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+.skip-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+  padding: var(--space-d3);
+}
+
+/* =========================== */
+/* MENUS / POPOVERS            */
+/* =========================== */
+
+@keyframes std-menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.std-menu-content {
+  padding: var(--space-d4);
+  background: var(--color-surface-high);
+  border: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-raised), var(--shadow-glow);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-dropdown);
+  animation: std-menu-in var(--transition-fast);
+  transform-origin: top left;
+
+  * {
+    text-shadow: none !important;
+  }
+}
+
+.std-menu-label {
+  padding: var(--space-d4);
+  font-family: var(--font-interface);
+  font-size: var(--size-2xs);
+  font-weight: var(--font-weight);
+  color: var(--color-subtle);
+  user-select: none;
+}
+
+.std-menu-separator {
+  all: unset;
+  display: block;
+  height: var(--stroke-width);
+  background: var(--color-border) !important;
+  margin: var(--space-d4) 0;
+  opacity: 1;
+
+  &::after {
+    display: none;
+  }
+}
+
+.std-menu-item {
+  all: unset;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--space-d4);
+  padding: 0 var(--space-d4);
+  border-radius: var(--radius-sm);
+  font-size: var(--size-sm);
+  font-family: var(--font-interface);
+  color: var(--color-foreground);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+  min-height: var(--space);
+  text-decoration: none;
+
+  &:hover:not(.disabled) {
+    background: var(--color-surface-highest);
+    box-shadow: var(--shadow-raised);
+  }
+
+  &:active:not(.disabled) {
+    background: var(--color-surface-low);
+    box-shadow: var(--shadow-inset);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.destructive {
+    color: var(--color-red);
+
+    &:hover {
+      background: var(--color-red);
+      color: var(--color-on-accent);
+    }
+  }
+
+  .item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-muted);
+  }
+
+  &:hover .item-icon {
+    color: var(--color-foreground);
+  }
+
+  .item-label {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .item-shortcut {
+    font-size: var(--size-3xs);
+    color: var(--color-muted);
+    letter-spacing: 0.1em;
+    padding-left: var(--space);
+  }
+}
+
+.scroll {
+  /* Container styling */
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+
+  /* Smooth scrolling with momentum */
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    width: var(--space);
+    opacity: 0;
+    box-shadow: var(--shadow-ring), var(--shadow-glow);
+    transition: box-shadow var(--transition);
+
+    /* Not sure if I like the whole idea but dont want to lose the code so I've hidden it for now  */
+    display: none;
+  }
+
+  &::before {
+    left: calc((var(--space) * -1) + 1px);
+  }
+
+  /* Define the Right Shadow (initially visible) */
+  &::after {
+    right: calc((var(--space) * -1) + 1px);
+  }
+
+  /* When this class is added, the left shadow fades in. */
+  &.show-left-shadow::before {
+    opacity: 1;
+  }
+
+  /* When this class is added, the right shadow fades in. */
+  &.show-right-shadow::after {
+    opacity: 1;
+  }
+
+  & > * {
+    margin-block-end: 0;
+    /* Remove table's own margin */
+    min-width: 100%;
+    /* Ensure table fills wrapper */
+    width: max-content;
+    /* Allow table to grow beyond wrapper */
+  }
+}
+
+.field {
+  /* Field container */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+
+  /* Label styling */
+  label {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--size-sm);
+    color: var(--color-foreground);
+  }
+}
+
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+/* The tooltip bubble */
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.95);
+
+  background: var(--tooltip-background);
+  color: var(--tooltip-text);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: normal;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+
+  /* Hidden state */
+  opacity: 0;
+  visibility: hidden;
+  width: 200px;
+  transition: opacity var(--transition);
+}
+
+/* The arrow */
+[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  border: 5px solid transparent;
+  border-top-color: var(--tooltip-background);
+  margin-bottom: -10px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1000;
+  transition: opacity var(--transition);
+}
+
+/* Hover state */
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-8px) scale(1);
+}
+
+/* Bottom position variant */
+[data-tooltip-pos="bottom"]::after {
+  bottom: auto;
+  top: 100%;
+  transform: translateX(-50%) translateY(-10px) scale(0.95);
+}
+
+[data-tooltip-pos="bottom"]::before {
+  bottom: auto;
+  top: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--tooltip-background);
+  margin-bottom: 0;
+  margin-top: -10px;
+}
+
+[data-tooltip-pos="bottom"]:hover::after,
+[data-tooltip-pos="bottom"]:hover::before {
+  transform: translateX(-50%) translateY(8px) scale(1);
+}

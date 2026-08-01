@@ -1,0 +1,25 @@
+meta:
+  id: calm
+  label: Calme (Anti-Surcharge)
+  selector: '[data-theme="calm"]'
+  fonts:
+    - "@stnd/fonts/oktah"
+    - "@stnd/fonts/quicksand"
+tokens:
+  color-light-background: "#eeebe5"
+  color-light-foreground: "#4a4743"
+  color-dark-background: "#1e1d1b"
+  color-dark-foreground: "#cdcac4"
+  color-accent: "#6f8c7e"
+  color-border: transparent
+  color-subtle: color-mix(in srgb, var(--color-foreground) 4%, transparent)
+  font-text: '"Quicksand", sans-serif'
+  font-header: '"Quicksand", sans-serif'
+  font-weight-text: "400"
+  font-header-weight: "600"
+  font-header-letter-spacing: 0em
+  line-height: "1.6"
+  optical-ratio: "1.333"
+  radius-base: 16px
+  radius-md: 24px
+  radius-lg: 32px

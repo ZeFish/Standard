@@ -1,0 +1,101 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+[data-theme="frank"] {
+  --color-dark-foreground: oklch( 84% 0.0276 80.72 );
+  --color-dark-background: oklch( 9.76% 0.012 90.93 );
+  --font-text: "Cargo Diatype";
+  --font-header: "Inter";
+  --font-header-weight: 900;
+  --font-header-letter-spacing: -0.065em;
+  --font-header-line-height: 1em;
+  --gap-body: var(--space-2);
+  --gap-header: var(--space-6);
+  --optical-ratio: var(--ratio-golden);
+  --font-size: 1rem;
+  --line-height: 1.5;
+  --color-link: var(--color-green);
+  --font-ratio: 1.333;
+  --font-density: 1.4;
+  --marge-block: 1;
+  --font-feature: "liga", "salt", "clig", "kern", "calt", "zero";
+  --font-header-feature: "liga";
+  --font-header-variation: "SOFT" 75, "WONK" 0;
+  --font-interface: "Inter";
+  --font-interface-feature: "tnum";
+  --color-light-foreground: oklch(25.20% 0.0000 0.00);
+  --color-light-background: oklch(100.00% 0.0000 0.00);
+  --color-light-red: oklch(48.37% 0.1896 27.22);
+  --color-light-orange: oklch(70.28% 0.1537 51.89);
+  --color-light-yellow: oklch(76.15% 0.1465 73.14);
+  --color-light-green: oklch(64.49% 0.0991 163.23);
+  --color-light-cyan: oklch(65.79% 0.0866 200.53);
+  --color-light-blue: oklch(48.22% 0.1064 240.38);
+  --color-light-purple: oklch(49.92% 0.1415 320);
+  --color-light-pink: oklch(71.70% 0.1537 360);
+  --color-light-accent: var(--color-blue);
+  --color-light-bold: var(--color-red);
+  --color-light-italic: var(--color-blue);
+}
+/* TOKENS.YAML ADAPTER END */
+
+// frank theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+
+:root[data-theme="frank"],
+[data-theme="frank"] {
+/* Dark */
+--color-dark-foreground: oklch(0.7721 0.0228 96.47);
+--color-dark-background: oklch(0.2308 0.0023 67.73);
+--color-dark-accent: var(--color-yellow);
+
+--color-dark-red: oklch(48.37% 0.1896 27.22);
+--color-dark-orange: oklch(68.30% 0.1638 52.74);
+--color-dark-yellow: oklch(77.36% 0.1572 70.09);
+--color-dark-green: oklch(48.45% 0.0792 169.07);
+--color-dark-cyan: oklch(55.79% 0.0866 200.53);
+--color-dark-blue: oklch(51.36% 0.0974 225.11);
+--color-dark-purple: oklch(52.98% 0.1621 332.34);
+--color-dark-pink: oklch(54.70% 0.1628 360);
+
+--color-dark-accent: var(--color-yellow);
+--color-dark-bold: var(--color-orange);
+--color-dark-italic: var(--color-blue);
+}
+
+
+.markdown-reading-view .callout[data-callout="caption"] {
+    margin: -1rlh 33% 0 0 !important;
+    padding:0;
+    border-radius:0;
+    text-wrap: balance;
+}
+.callout[data-callout="caption"] .callout-content {
+    text-align: left;
+    padding: 0;
+    color: var(--color-foreground);
+    border-radius:0;
+}
+
+.stnd-vertical-rhythm .markdown-preview-view [class^=el-]  hr { display:none !important; }
+
+.markdown-reading-view blockquote,
+		.markdown-reading-view pre,
+		.markdown-reading-view figure,
+		.markdown-reading-view .callout,
+		.markdown-reading-view p:has(img) {
+		  margin-inline: 0 !important;
+		  padding-inline: 0 !important;
+		}
+		
+		.markdown-reading-view h1,
+ .cm-header-1,
+ .HyperMD-header-1,
+.inline-title {
+    text-align: left;
+    padding-block-end: 6rlh;
+    color: var(--color-foreground);
+}
+
+.markdown-reading-view .callout[data-callout="caption"]{
+	    margin-block: -1rlh 8rlh  !important;
+}

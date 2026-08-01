@@ -1,0 +1,32 @@
+meta:
+  id: editorial
+  label: Editorial
+  selector: |-
+    :root[data-theme="editorial"],
+    [data-theme="editorial"]
+  fonts:
+    - "@stnd/fonts/tiempos-headline"
+    - "@stnd/fonts/literata"
+    - "@stnd/fonts/instrument-sans"
+tokens:
+  color-light-foreground: "#292827"
+  color-light-background: "#f7f6f4"
+  color-light-accent: "#1f4f82"
+  shadow: none
+  optical-ratio: "1.414"
+  color-dark-background: "#292827"
+  color-dark-foreground: "#f7f6f4"
+  color-dark-accent: "#8fb4ff"
+  font-text: '"Literata", "Georgia", serif'
+  font-header: '"Tiempos Headline", "Georgia", serif'
+  font-header-weight: "600"
+  font-header-letter-spacing: 0em
+  font-display: '"Tiempos Headline", "Georgia", serif'
+  font-interface: '"Instrument Sans"'
+  font-size: 1.1rem
+  line-height: "1.5"
+  line-width: 27rlh
+  gap-body-mobile: var(--space)
+  mobile-line-height: "1.2"
+  gap-nl: var(--leading)
+  color-muted: color-mix( in srgb, var(--color-foreground) 75%, var(--color-background) )

@@ -1,0 +1,224 @@
+@use "standard-00-variables" as *;
+
+/* =========================== */
+/* MEDIA                       */
+/* =========================== */
+
+/* --border currently resolves to `none` everywhere it's used in this file
+   (3 places) — see the AUDIT FLAG in _standard-02-color.scss (duplicate
+   --border declaration; the "none" copy wins). Media elements here get no
+   visible border as a result. */
+img,
+video,
+audio,
+iframe,
+.video,
+.video-container {
+  max-width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-raised);
+  background: var(--color-surface);
+  max-height: 80vh;
+  border: var(--border);
+}
+
+/* =========================== */
+/* TYPOGRAPHIC NUANCES         */
+/* =========================== */
+.video-container:has(video) {
+  position: relative;
+  /* Unlike the iframe variant in _standard-06-prose.scss, this one holds a
+     native <video> element, which has real intrinsic dimensions — the
+     legacy padding-bottom:56.25% aspect-ratio hack (disabled below) isn't
+     needed the way it is for iframes. */
+  /* padding-bottom: 56.25% — 16:9 aspect ratio, disabled, see above */
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+  background: transparent;
+
+  video {
+    border-radius: var(--radius);
+    border: var(--border);
+    box-shadow: var(--shadow-raised);
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+.stnd-icon {
+  line-height: 0;
+}
+
+.stnd-icon,
+.stnd-icon img,
+.stnd-icon svg {
+  box-shadow: none;
+  background: transparent;
+  border: none;
+  color: currentColor;
+  fill: currentColor;
+}
+
+/* Reset padding for images specifically */
+img {
+  padding: 0;
+}
+
+figure {
+  display: grid;
+  gap: calc(var(--space-d4) * var(--space-2));
+}
+
+figcaption {
+  font-size: var(--size-sm);
+  font-style: italic;
+  text-align: center;
+}
+
+/**
+ * @component Image System
+ * @description Responsive image handling with interactive zoom functionality.
+ * This system is progressively enhanced. Without JavaScript, it provides a
+ * basic zoom-on-click-and-hold. With JavaScript, it provides a full
+ * feature-rich lightbox experience.
+ *
+ * @since 0.1.0
+ */
+
+/* ================================================================ */
+/* PART 1: BASE IMAGE STYLES                                        */
+/* These are the default styles for all images.                     */
+/* ================================================================ */
+
+/*
+ * The `:where` block keeps your original logic of only applying
+ * these base styles inside a `.rhythm` or `<html>` context.
+ */
+:where(html:not(.no-rhythm), .rhythm) {
+  /* Basic image reset */
+  * + img,
+  img,
+  img:first-child,
+  img:last-child {
+    margin: 0;
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  /* Default styles for a zoomable image reset */
+  img:not([data-no-zoom]) {
+    max-width: 100%;
+  }
+
+  /* Your cosmetic classes for adding/removing borders are preserved */
+  img.fx {
+    border-radius: var(--radius);
+    border: var(--border);
+  }
+
+  img.nofx {
+    border-radius: unset;
+    border: unset;
+    box-shadow: unset;
+  }
+}
+
+/* ================================================================ */
+/* PART 2: NO-JAVASCRIPT FALLBACK (using :active)                   */
+/* These rules only apply if the JavaScript has not run.            */
+/* They provide a simple "zoom-on-hold" experience.                 */
+/* ================================================================ */
+
+/* When JS is off, holding click on an image will trigger this zoom effect. */
+html:not(.js-image-zoom-enabled) img:active {
+  cursor: zoom-out;
+  display: block;
+  position: fixed;
+  z-index: var(--z-image-zoom);
+  max-height: calc(100vh);
+  max-width: calc(100vw);
+  object-fit: contain;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+/* Creates a backdrop for the :active zoom. */
+html:not(.js-image-zoom-enabled):has(img:active)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--color-background);
+  z-index: calc(var(--z-image-zoom) - 1);
+}
+
+/* ================================================================ */
+/* PART 3: JAVASCRIPT-ENHANCED STYLES (HTML overlay)                */
+/* These styles are used by the JavaScript class to create the full */
+/* lightbox experience with keyboard navigation, etc.               */
+/* ================================================================ */
+
+/* Lock the page scroll when the JS overlay is active */
+html.image-zoomed-active {
+  overflow: hidden;
+}
+/* The overlay container created by the JS */
+.image-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-image-zoom);
+  background: var(--color-glass);
+  backdrop-filter: var(--filter-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  margin: 0;
+  opacity: 0;
+  cursor: zoom-out !important;
+  transition: all var(--transition);
+}
+
+/* The class added by JS to fade the overlay in */
+.image-zoom-overlay.is-visible {
+  opacity: 1;
+  backdrop-filter: var(--filter-glass);
+}
+
+/* The image element inside the JS overlay */
+.image-zoom-overlay img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  cursor: zoom-out !important;
+  box-shadow: var(--shadow-raised), var(--shadow-glow);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.image-zoom-overlay.is-visible img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Uses #{$small} — same breakpoint variable as everywhere else in the
+   framework. */
+@media (min-width: #{$small}) {
+  /* Global zoomable image cursor */
+  img:not([data-no-zoom]) {
+    cursor: zoom-in !important;
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "name": "Frank Dark",
+  "type": "dark",
+  "colors": {
+    "foreground": "oklch( 84% 0.0276 80.72 )",
+    "input.background": "#1f1f1f",
+    "input.foreground": "oklch( 84% 0.0276 80.72 )",
+    "input.placeholderForeground": "#000000",
+    "inputOption.activeBorder": "#00000080",
+    "badge.foreground": "oklch( 9.76% 0.012 90.93 )",
+    "badge.background": "#000000",
+    "progressBar.background": "#000000",
+    "button.background": "#000000",
+    "button.foreground": "oklch( 84% 0.0276 80.72 )",
+    "button.hoverBackground": "#00000090",
+    "dropdown.background": "#1f1f1f",
+    "dropdown.foreground": "oklch( 84% 0.0276 80.72 )",
+    "dropdown.border": "#000000",
+    "focusBorder": "#00000080",
+    "selection.background": "#00000040",
+    "editor.background": "oklch( 9.76% 0.012 90.93 )",
+    "editor.foreground": "oklch( 84% 0.0276 80.72 )",
+    "sideBar.background": "oklch( 9.76% 0.012 90.93 )",
+    "sideBar.border": "#000000",
+    "activityBar.background": "oklch( 9.76% 0.012 90.93 )",
+    "activityBar.foreground": "oklch( 84% 0.0276 80.72 )",
+    "activityBar.inactiveForeground": "#000000",
+    "statusBar.background": "oklch( 9.76% 0.012 90.93 )",
+    "statusBar.foreground": "oklch( 84% 0.0276 80.72 )",
+    "titleBar.activeBackground": "oklch( 9.76% 0.012 90.93 )",
+    "titleBar.activeForeground": "oklch( 84% 0.0276 80.72 )",
+    "editorLineNumber.foreground": "#000000",
+    "editorLineNumber.activeForeground": "#000000",
+    "editor.lineHighlightBackground": "#000000",
+    "editorIndentGuide.background": "#000000",
+    "editorIndentGuide.activeBackground": "#000000",
+    "list.hoverBackground": "#000000",
+    "list.activeSelectionBackground": "#000000",
+    "list.activeSelectionForeground": "oklch( 84% 0.0276 80.72 )",
+    "tab.activeBackground": "#000000",
+    "tab.activeForeground": "oklch( 84% 0.0276 80.72 )",
+    "tab.inactiveBackground": "oklch( 9.76% 0.012 90.93 )",
+    "tab.inactiveForeground": "#000000",
+    "tab.border": "#000000",
+    "breadcrumb.foreground": "#000000",
+    "breadcrumb.focusForeground": "oklch( 84% 0.0276 80.72 )",
+    "widget.shadow": "#00000040",
+    "quickInput.background": "#000000",
+    "terminal.background": "oklch( 9.76% 0.012 90.93 )",
+    "terminal.foreground": "oklch( 84% 0.0276 80.72 )"
+  },
+  "tokenColors": [
+    {
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.parameter",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "variable.other.member",
+      "settings": {
+        "foreground": "oklch( 84% 0.0276 80.72 )"
+      }
+    },
+    {
+      "scope": [
+        "constant",
+        "entity.name.constant",
+        "variable.other.constant"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "punctuation.definition.keyword"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#000000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#000000"
+      }
+    },
+    {
+      "scope": "punctuation",
+      "settings": {
+        "foreground": "#000000"
+      }
+    }
+  ]
+}

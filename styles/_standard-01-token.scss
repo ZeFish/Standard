@@ -1,0 +1,320 @@
+@use "standard-00-variables" as *;
+
+/**
+ * @component Design Tokens
+ * @category Foundation
+ * @description Primitive design tokens forming the foundation of the design system.
+ * Includes mathematical ratios, modular scales, spacing system, and animation curves.
+ */
+
+#{$stnd-theme-scope} {
+  /* ===== COLOR SEEDS =====
+     The two primary seeds from which everything grows.
+     Set these and the color file (_standard-02-color.scss) does the rest:
+       • Extracts OKLCH DNA from each foreground seed
+       • Generates a full hue palette per scheme
+       • Derives dark seeds automatically (inheriting the light vibe)
+
+     Override --color-dark-background / --color-dark-foreground in a
+     theme to give dark mode its own distinct mood.
+
+     Analog-inspired reference palette (uncomment to pin specific hues):
+     --color-light-red:     #b14c42;    dusty red clay
+     --color-light-orange:  #d78a5a;    trail-worn orange
+     --color-light-yellow:  #c8a840;    parchment mustard
+     --color-light-green:   #5e9d80;    sage green
+     --color-light-cyan:    #6ba4b6;    glacier teal
+     --color-light-blue:    #4f81a4;    faded blueprint
+     --color-light-magenta: #7a6c91;    dusk lavender
+  */
+  --color-light-background: white;
+  --color-light-foreground: #262626;
+  /* Dark seeds are computed in _standard-02-color.scss from the light
+     foreground's OKLCH hue — warm ink begets warm dark mode. */
+
+  /* Tooltip defaults */
+  --tooltip-background: #1a1a1a;
+  --tooltip-text: #ffffff;
+
+  /* Base measurements & ratios. --font-ratio / --font-density are the
+     theme-authoring hooks (set by ~a dozen packages/themes/*.scss files,
+     e.g. --font-ratio: 1.414) — --optical-ratio / --line-height are the
+     resolved, framework-consumed values. A note's frontmatter can also
+     override --optical-ratio directly (it's the registered token name),
+     which bypasses --font-ratio entirely since the more specific
+     declaration wins regardless of this fallback chain. */
+  --font-size: 1rem;
+  --optical-ratio: var(--font-ratio, var(--ratio-silver));
+  --line-height: var(--font-density, var(--optical-ratio));
+
+  /* Baseline: the official rhythm unit */
+  --baseline: 1rlh;
+
+  --trim: calc(var(--leading) / 2);
+  /* Leading: the space between cap-height and next baseline */
+  --leading: calc((var(--line-height) - 1) * var(--font-size));
+  --nl: calc(var(--leading) * var(--line-height));
+
+  /* Gap, space between blocks in rhythm, goes to --space in mobile */
+  --gap: calc(var(--space) * var(--optical-ratio));
+  --gap-body: var(--space-2);
+  --gap-header: var(--space-8);
+  --gap-footer: calc(var(--gap-body) * 1.5);
+  --gap-grid-img: var(--space-d4);
+  --gap-multiplicator: 2;
+
+  --breakpoint-mobile: #{$mobile};
+  --breakpoint-sm: #{$small};
+  --breakpoint-lg: #{$large};
+  --breakpoint-wide: #{$wide};
+
+  --content-width-sm: max(calc(var(--space-2) - var(--space)), var(--space));
+  --content-width-editorial: minmax(0, var(--space-2));
+  --content-width-feature: minmax(0, var(--space-4));
+  --content-width-hero: minmax(0, 1fr);
+
+  /* Design system tokens */
+  --filter-blur: blur(8px);
+  --filter-glass: blur(20px);
+  --stroke-width: max(1px, 0.06rem);
+  --stroke-width-lg: calc(var(--stroke-width) * 2);
+  /* --corner is a documented theme-authoring hook (TOKENS.md) — no theme
+     currently sets it, so --radius always resolves through --leading
+     (proportional to line-height/font-size) today. Not dead, just unused. */
+  --radius: var(--corner, var(--leading));
+  --radius-sm: min(8px, var(--radius));
+
+  /* Golden Ratio & Mathematical Precision */
+  --ratio-golden: 1.618;
+  --ratio-silver: 1.414;
+  --ratio-halfstep: 1.272;
+  --ratio-quarterstep: 1.128;
+  --ratio-eighthstep: 1.062;
+
+  /* Layout width — body-max-width is the whole page shell (header, footer,
+     content); .prose's own box reads it directly, so .hero/.full breakout
+     elements grow into it too. line-width is a single line of readable
+     text — .feature and tables/.editorial break out by a fixed rhythm
+     increment off this (space-2 / space-4 each side), not off
+     body-max-width. */
+  --body-max-width: 900px;
+
+  --line-width-xs: 24rem;
+  --line-width-sm: 32rem;
+  --line-width-md: 42rem;
+  --line-width-lg: 50rem;
+  --line-width-xl: 60rem;
+  --line-width-full: calc(100vw - (var(--space) * 2));
+  /* --font-line-width is the theme-authoring hook (e.g. humanist, book,
+     2064 themes); --measure is a second, editor-specific override read by
+     apps/stnd.gd's Writer component. Same override-ladder shape as
+     --font-ratio above — a note's frontmatter can also set --line-width
+     directly, bypassing both. */
+  --line-width: var(--font-line-width, var(--measure, var(--line-width-md)));
+
+  --content-width: min(var(--line-width), 100%);
+
+  --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
+  --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
+
+  --tracking-tight: -0.01em;
+  --tracking-neutral: 0em;
+  --tracking-open: 0.01em;
+
+  /* Spacing scale (derived from baseline). "d" prefix = divide (space-d4 =
+     space / 4), plain number = multiply (space-4 = space * 4) — same "d"
+     convention repeats below in the type scale. */
+  --space: var(--baseline);
+  --space-half: calc(var(--baseline)/2);
+
+  @for $i from 1 through 12 {
+    --space-d#{$i}: calc(var(--space) / #{$i});
+    --space-#{$i}: calc(var(--space) * #{$i});
+  }
+
+  /* Optical harmony scale. --scale-2 upward is a clean geometric progression
+     (each step = previous * --optical-ratio). Below base (d5..d2) the
+     divisor is deliberately NOT the mirrored geometric inverse (ratio^-1,
+     ratio^-2...) — it's flattened (ratio*1.25, then a 0.5-blended exponent
+     for d2) so small text doesn't shrink as aggressively as a pure
+     geometric scale would, staying legible; each step also floors at 11px
+     regardless of ratio math. */
+  --scale-d5: max(
+    calc(var(--font-size) / (var(--optical-ratio) * var(--optical-ratio))),
+    11px
+  );
+  --scale-d4: max(calc(var(--font-size) / (var(--optical-ratio) * 1.25)), 11px);
+  --scale-d3: max(calc(var(--font-size) / var(--optical-ratio)), 11px);
+  --scale-d2: max(
+    calc(var(--font-size) / (1 + (var(--optical-ratio) - 1) * 0.5)),
+    11px
+  );
+  --scale: var(--font-size);
+  --scale-2: calc(var(--font-size) * var(--optical-ratio));
+  --scale-3: calc(var(--scale-2) * var(--optical-ratio));
+  --scale-4: calc(var(--scale-3) * var(--optical-ratio));
+  --scale-5: calc(var(--scale-4) * var(--optical-ratio));
+  --scale-6: calc(var(--scale-5) * var(--optical-ratio));
+  --scale-7: calc(var(--scale-6) * var(--optical-ratio));
+  --scale-8: calc(var(--scale-7) * var(--optical-ratio));
+
+  /* Industrial Size Scale (T-Shirt Aliases) */
+  --size-3xs: var(--scale-d5);
+  --size-2xs: var(--scale-d4);
+  --size-xs: var(--scale-d3);
+  --size-sm: var(--scale-d2);
+  --size-base: var(--scale);
+  --size-lg: var(--scale-2);
+  --size-xl: var(--scale-3);
+  --size-2xl: var(--scale-4);
+  --size-3xl: var(--scale-5);
+  --size-4xl: var(--scale-6);
+  --size-5xl: var(--scale-7);
+  --size-6xl: var(--scale-8);
+
+  /* Mobile settings */
+  --font-size-mobile: 1.125rem;
+  --gap-body-mobile: var(--space);
+  --gap-mobile: var(--space);
+  --gap-header-mobile: var(--space-4);
+
+  /* Z-index scale */
+  --z-base: 1;
+  --z-dropdown: 1100;
+  --z-modal: 1200;
+  --z-toast: 2000;
+  --z-header: 900;
+  /* Fixed 2026-07-14 — was --z-launher (typo for launcher), renamed. Still
+     unused/unreferenced anywhere, but at least spelled correctly now. */
+  --z-launcher: 1000;
+  --z-image-zoom: 9999;
+
+  /* The *“Snappy”* - for small icons or toggles (Short duration) */
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+
+  /* The *“Standard”* - for general UI transitions (Your 0.5s sweet spot) */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* The *“Soft”* - for large modals or overlays (The *“softest”* feel) */
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* The *“Emphasis”* - has a tiny bit of weight/anticipation */
+  --ease-emphasis: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Special Effects */
+  --ease-aggressive: cubic-bezier(0.7, 0, 0.3, 1);
+
+  --ease-stnd: cubic-bezier(0, 0.3, 0, 1);
+  --ease-stnd-heavy: cubic-bezier(0.5, 0, 0, 1);
+
+  --ease-invisibolt: cubic-bezier(1, 0, 0, 1);
+
+  /* Analog : It starts with a burst of energy (the push) and spends 80% of its time slowly losing that energy. */
+  --ease-friction: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Reference notes only, not live code — mixes prose with invalid CSS
+     (e.g. "Soft Fade Out" as a bare declaration) on purpose, scratch
+     rationale for the eases defined around it, not meant to be uncommented.
+  Animation
+  a {
+    text-decoration-color: rgba(0,0,0,0);
+    transition: text-decoration-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    Soft Fade Out
+  }
+  a:hover {
+    text-decoration-color: rgba(0,0,0,1);
+    transition: text-decoration-color 0.15s ease-out;
+    Snappy Fade In
+  }
+  Intent	Variable Name	Value	Recommended Duration
+  Reaction	--ease-react	cubic-bezier(0.2, 1, 0.4, 1)	0.15s
+  Exit	--ease-out-soft	cubic-bezier(0.4, 0, 1, 1)	0.3s
+  .stnd-button {
+    transition:
+      background-color 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .stnd-button:active {
+    transform: scale(0.98); Tiny physical feedback
+  }
+  */
+
+  --duration-instant: 100ms;
+  --duration-fast: 350ms;
+  --duration-standard: 500ms;
+  --duration-slow: 1000ms;
+
+  --transition-fast: 0.5s var(--ease-friction);
+  --transition: 1s var(--ease-friction);
+  --transition-slow: 2s var(--ease-friction);
+
+  /* Shape Aliases */
+  --ease-shape-snappy: cubic-bezier(0.2, 0, 0, 1);
+  --ease-shape-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-shape-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Interaction (Buttons, Links, Toggles) */
+  --ease-interaction: var(--duration-fast) var(--ease-shape-snappy);
+
+  /* Feedback (Success/Error states, validation) */
+  --ease-feedback: var(--duration-standard) var(--ease-shape-bounce);
+
+  /* Layout (Sidebars, expanding cards, Digital Garden navigation) */
+  --ease-surface: var(--duration-slow) var(--ease-shape-soft);
+
+  /* Enter/Exit (Modals, tooltips) */
+  --ease-enter: var(--duration-fast) ease-out;
+  --ease-exit: var(--duration-standard) ease-in;
+}
+
+#{$text-elements},
+a {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+/* Table cells opt back out of text-box-trim — vertical-align/padding math
+   in table cells doesn't play well with the trimmed ascender/descender
+   box, so cells keep normal line-box sizing instead. */
+td,
+th {
+  text-box-trim: none;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: #{$small}) {
+  #{$stnd-theme-scope} {
+    --gap-body: var(--gap-body-mobile) !important;
+    --gap-header: var(--gap-header-mobile) !important;
+    --gap: var(--gap-mobile) !important;
+    --font-size: var(--font-size-mobile) !important;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 500ms;
+  animation-timing-function: var(--ease-friction);
+}
+
+/* If you want to customize the actual movement */
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
