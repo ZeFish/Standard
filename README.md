@@ -35,7 +35,7 @@ The scale is built on the golden ratio, the vertical rhythm is enforced rather t
 
 ## Status
 
-Pre-release, and honest about it: no backward-compatibility guarantees, no shims, no legacy aliases. Interfaces change when a better shape is found. The packages are published on npm under the [`@stnd`](https://www.npmjs.com/org/stnd) scope and consumed by several production sites, plugins, and native apps.
+Pre-release, and honest about it: no backward-compatibility guarantees, no shims, no legacy aliases. Interfaces change when a better shape is found. The packages run in production behind several sites, plugins, and native apps; the `@stnd` scope on npm is where they land, and not every package there is current yet.
 
 The full ecosystem — apps, plugins, a Tauri/Rust photo tool, and the rest of the `@stnd/*` family — lives in a private monorepo. This mirror is updated automatically on every push to it.
 
