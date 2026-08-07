@@ -79,7 +79,7 @@ struct Palette {
     /// Leica red — the single accent: active state, kept frame, critical action.
     /// Same in both schemes (red reads identically on dark and on paper) —
     /// unless overridden, in which case the override carries to both too.
-    var accent:      Color { accentOverride ?? Color(red: 0, green: 0, blue: 0) }
+    var accent:      Color { accentOverride ?? Color(red: 0.8157, green: 0.5412, blue: 0.2863) }
     var accentFaint: Color { accent.opacity(0.12) }   // selected-row tint — never on the image
 }
 

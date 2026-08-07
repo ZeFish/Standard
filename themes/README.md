@@ -2,7 +2,7 @@
 title: "@stnd/themes"
 aliases: []
 created: 2026-07-04 23:28
-modified: 2026-07-05 19:17
+modified: 2026-08-06T21:38:07.197Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
@@ -17,6 +17,8 @@ tags:
 theme: kernel
 type: package
 visibility: public
+garden-url: https://francisfontaine.com/readme
+garden-short: https://stnd.gd/gBFKAW
 ---
 
 # @[stnd](../README)/themes

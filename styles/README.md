@@ -2,21 +2,23 @@
 title: "@stnd/styles"
 aliases: []
 created: 2026-07-04 23:27
-modified: 2026-07-05 19:16
+modified: 2026-08-06T21:38:09.966Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
 audit_priority: 3
 maturity: tree
 mode: read
-publish: false
+publish: true
 status: active
 tags:
   - package
   - stnd
 theme: kernel
 type: package
-visibility: private
+visibility: public
+garden-url: https://francisfontaine.com/readme
+garden-short: https://stnd.gd/gBFKAW
 ---
 
 # @[stnd](../README)/styles

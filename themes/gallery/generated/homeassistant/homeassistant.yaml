@@ -1,6 +1,6 @@
 Gallery Light:
-  primary-color: "#000000"
-  accent-color: "#000000"
+  primary-color: "#c1443c"
+  accent-color: "#c1443c"
   primary-background-color: "#fafafa"
   primary-text-color: "#1c1c1c"
   secondary-text-color: "#000000"
@@ -12,8 +12,8 @@ Gallery Light:
   info-color: "#000000"
 
 Gallery Dark:
-  primary-color: "#000000"
-  accent-color: "#000000"
+  primary-color: "#c1443c"
+  accent-color: "#c1443c"
   primary-background-color: "#101010"
   primary-text-color: "#ccc"
   secondary-text-color: "#000000"

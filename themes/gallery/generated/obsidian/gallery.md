@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-08-06 19:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,7 +19,9 @@ snippet: false
 ```css
 [data-stnd-theme="gallery"] {
     /* ─── Custom rules for Gallery ───────────────────────────── */
-    display: block;
+    /* ─── Custom rules for Gallery ───────────────────────────── */
+    .prose {
+        display: block;
       }
 
       body {

@@ -1,13 +1,27 @@
 ---
 aliases: []
 created: 2026-03-16 08:07
-modified: 2026-07-03 16:26
+modified: 2026-08-06T03:02:49.789Z
 mode: read
 publish: false
 tags: []
-theme: 
+theme:
 type: note
-visibility: private
+visibility: public
+garden-short: https://stnd.gd/Xg3Sjl
+---
+
+---
+aliases: []
+created: 2026-03-16 08:07
+modified: 2026-07-03 16:26
+mode: read
+publish: true
+tags: []
+theme:
+type: note
+visibility: public
+garden-url: https://francisfontaine.com/tokens
 ---
 
 # Standard Design Tokens
@@ -104,6 +118,7 @@ token — they break out by a fixed rhythm increment off `--line-width`
 
 | Token               | Default                           | Description                                   |
 | ------------------- | --------------------------------- | --------------------------------------------- |
+| `--body-max-width`  | `900px`                           | The whole page shell — header, footer, content, and the ceiling `.hero`/`.full` grow into |
 | `--body-max-width`  | `900px`                           | The whole page shell — header, footer, content, and the ceiling `.hero`/`.full` grow into |
 | `--line-width-xs`   | `24rem`                           | Extra small                                   |
 | `--line-width-sm`   | `32rem`                           | Small                                         |
