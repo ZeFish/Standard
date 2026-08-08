@@ -12,15 +12,29 @@ interface Props {
   zone: string; // The zone ID to inject into (e.g., "backpack", "footer")
   props?: Record<string, any>;
   hydrated?: boolean;
+  // See StndInit.astro for the full contract. An entry with `meta.scope` only
+  // renders when that scope is present in this list; omitted = unrestricted.
+  activeScopes?: string[];
 }
 
-const { zone, props = {}, hydrated = false } = Astro.props;
-const entries = extensions[zone] || [];
+const { zone, props = {}, hydrated = false, activeScopes } = Astro.props;
+
+function isEntryVisible(entry: any): boolean {
+  const requiredScope = entry?.meta?.scope;
+  if (!requiredScope) return true;
+  if (!activeScopes) return true;
+  const required = Array.isArray(requiredScope)
+    ? requiredScope
+    : [requiredScope];
+  return required.every((s: string) => activeScopes.includes(s));
+}
+
+const entries = (extensions[zone] || []).filter(isEntryVisible);
 ---
 
 {
   hydrated ? (
-    <HookSvelte client:load zone={zone} props={props} />
+    <HookSvelte client:load zone={zone} props={props} activeScopes={activeScopes} />
   ) : (
     entries.map((entry: any) => {
       const Component = entry.component;
