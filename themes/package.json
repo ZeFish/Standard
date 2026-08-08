@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
-    "wrangler": "^4.105.0"
+    "wrangler": "^4.120.0"
   }
 }

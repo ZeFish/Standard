@@ -2,7 +2,7 @@
 title: "@stnd/core"
 aliases: []
 created: 2026-06-20 13:56
-modified: 2026-08-06T21:38:48.649Z
+modified: 2026-08-07T21:29:09.798Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
@@ -18,7 +18,7 @@ theme: kernel
 type: package
 visibility: public
 garden-url: https://francisfontaine.com/readme
-garden-short: https://stnd.gd/gBFKAW
+garden-short: https://stnd.gd/G5OsEg
 ---
 
 # @[stnd](../README)/core

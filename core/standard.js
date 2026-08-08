@@ -377,37 +377,6 @@ export default function standard(options = {}) {
             .filter(Boolean),
         ];
 
-        const astro7Workarounds = {
-          name: "stnd-astro-7-workarounds",
-          enforce: "post",
-          configEnvironment(name, config) {
-            if (name === "prerender") {
-              config.build ||= {};
-              config.build.rollupOptions ||= {};
-              config.build.rollupOptions.output = {
-                ...config.build.rollupOptions.output,
-                entryFileNames: "prerender-entry.[hash].mjs",
-                format: "esm"
-              };
-            }
-          },
-          options(rollupOptions) {
-            if (this.environment?.name === "client") {
-              const envConfig = this.environment.config;
-              const rolldownInput = envConfig?.build?.rolldownOptions?.input;
-              const isDefaultInput = !rollupOptions.input ||
-                rollupOptions.input === "index.html" ||
-                (typeof rollupOptions.input === "string" && rollupOptions.input.endsWith("index.html")) ||
-                (Array.isArray(rollupOptions.input) && rollupOptions.input.length === 0);
-
-              if (rolldownInput && isDefaultInput) {
-                rollupOptions.input = rolldownInput;
-              }
-            }
-            return rollupOptions;
-          }
-        };
-
         updateConfig({
           // Speed is a respect (Standard value #2): every Standard app prefetches
           // links in the viewport and speculatively prerenders them. These are
@@ -425,7 +394,7 @@ export default function standard(options = {}) {
           },
           integrations: moduleIntegrations,
           vite: {
-            plugins: [virtualModuleStnd, astro7Workarounds],
+            plugins: [virtualModuleStnd],
             resolve: {
               alias: aliases,
               dedupe: ["svelte"],
