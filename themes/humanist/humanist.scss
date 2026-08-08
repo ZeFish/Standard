@@ -39,12 +39,17 @@
 
 :root[data-theme="humanist"],
 [data-theme="humanist"] {
-}
- .markdown-reading-view h1,
- .cm-header-1,
- .HyperMD-header-1,
-.inline-title {
-    text-align: center;
-    padding: 2rlh 0;
-    color: var(--color-foreground);
+
+
+    .prose {
+    display: block;
+    }
+    .markdown-reading-view h1,
+    .cm-header-1,
+    .HyperMD-header-1,
+    .inline-title {
+        text-align: center;
+        padding: 2rlh 0;
+        color: var(--color-foreground);
+    }
 }
