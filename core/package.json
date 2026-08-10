@@ -26,6 +26,7 @@
       "svelte": "./Hook.svelte",
       "default": "./Hook.astro"
     },
+    "./module-filter": "./module-filter.js",
     "./loader": "./src/loader.js",
     "./virtual": "./src/virtual.js",
     "./src/dev-toolbar/*": "./src/dev-toolbar/*",

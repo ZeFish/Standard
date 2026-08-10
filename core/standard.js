@@ -16,6 +16,7 @@ import {
   generateConfigModule,
   generateModulesModule,
   generateModulesMetadataModule,
+  generateModuleDomainsModule,
   generateStylesModule,
   generateScriptsModule,
   generateComponentsModule,
@@ -344,6 +345,8 @@ export default function standard(options = {}) {
               return generateModulesModule(modules.runtime);
             if (id === "\0virtual-stnd/modules-metadata")
               return generateModulesMetadataModule(modules.runtime);
+            if (id === "\0virtual-stnd/module-domains")
+              return generateModuleDomainsModule(modules.domainFilters);
             if (id === "\0virtual-stnd/components")
               return generateComponentsModule(modules.ui);
             if (id === "\0virtual-stnd/middleware")

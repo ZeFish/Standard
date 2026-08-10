@@ -96,6 +96,21 @@ export function generateModulesModule(runtimeModules) {
   );
 }
 
+/**
+ * Server-only virtual module carrying route patterns for domain-filtered
+ * modules (`filter: { domain }` in a manifest). Deliberately separate from
+ * `generateModulesModule`/`generateModulesMetadataModule`, whose payload is
+ * bundled to the client — route patterns have no reason to ship there.
+ * Consumed by the app's own request middleware to 404 a build-time-injected
+ * route that shouldn't answer on the current domain.
+ *
+ * @param {{id: string, filter: object, routes: Array<{path: string}>}[]} domainFilterModules
+ * @returns {string} module source
+ */
+export function generateModuleDomainsModule(domainFilterModules = []) {
+  return `export const modules = ${JSON.stringify(domainFilterModules)};`;
+}
+
 export function generateModulesMetadataModule(runtimeModules) {
   // Build a sanitized client payload with functions removed (safe for JSON serialization)
   const sanitizedModules = runtimeModules.map((m) => {

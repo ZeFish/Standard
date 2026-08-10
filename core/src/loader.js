@@ -60,6 +60,19 @@ const ModuleManifestSchema = z
     dependencies: z.array(z.string()).optional(),
     config: z.record(z.any()).optional(),
     routes: z.array(RouteSchema).optional(),
+    // Where this module is allowed to exist. `domain` lists the canonical
+    // domain(s) it belongs to; the module's routes and hooks disappear
+    // everywhere else. The framework never resolves a hostname itself — the
+    // app tells the guard which canonical domain the current request is on,
+    // so "standard.garden" still matches while developing on localhost.
+    // Absent = the module exists everywhere (the default for every module
+    // that doesn't opt in).
+    filter: z
+      .object({
+        domain: z.union([z.string(), z.array(z.string())]).optional(),
+      })
+      .passthrough()
+      .optional(),
     hooks: z.record(z.union([HookSchema, z.array(HookSchema)])).optional(),
     styles: z.array(z.string()).optional(),
     scripts: z.array(ScriptSchema).optional(),
@@ -309,6 +322,10 @@ export async function loadModules({
   // 3. Process
   const modules = {
     runtime: [],
+    // Server-only: {id, filter, routes} for modules declaring `filter.domain`.
+    // See the comment at the injectRoute() call site for why this exists
+    // separately from `runtime` (which is the client-bundled payload).
+    domainFilters: [],
     config: [],
     aliases: {},
     ui: {},
@@ -402,6 +419,22 @@ export async function loadModules({
           path.resolve(moduleDir, route.entrypoint),
         ).href;
         injectRoute({ pattern: route.path, entrypoint });
+      });
+    }
+
+    // A module declaring `filter: { domain }` needs its route PATTERNS at
+    // request time, server-side, to turn "hidden in the UI" into "the URL
+    // itself answers 404" (routes are injected once here, at build time, so
+    // hiding a button never stops the URL from working). This is collected
+    // separately from `modules.runtime` because that array is the CLIENT
+    // payload and deliberately strips `routes` (see the destructuring a few
+    // hundred lines down) — bundling every route pattern to the browser for
+    // a check only the server needs would be pure waste.
+    if (def.filter) {
+      modules.domainFilters.push({
+        id: def.id,
+        filter: def.filter,
+        routes: def.routes || [],
       });
     }
 
