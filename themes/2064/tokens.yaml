@@ -1,7 +1,7 @@
 meta:
   id: 2064
   label: "2064"
-  selector: '[data-theme="2064"]'
+  selector: "[data-theme=\"2064\"]"
   fonts:
     - "@stnd/fonts/inter"
     - "@stnd/fonts/cargo-diatype"
@@ -27,9 +27,9 @@ tokens:
   color-dark-cyan: "#549b88"
   color-dark-blue: "#277d9e"
   color-dark-magenta: "#7a5ba8"
-  font-text: '"Berkeley Mono"'
-  font-header: '"Avant Garde Pro"'
-  font-monospace: '"Berkeley Mono"'
+  font-text: "\"Berkeley Mono\""
+  font-header: "\"Avant Garde Pro\""
+  font-monospace: "\"Berkeley Mono\""
   optical-ratio: "1.414"
   line-height: "1.5"
   line-width: 45rem
@@ -38,6 +38,8 @@ tokens:
   radius: 2px
   stroke-width: 1px
   font-header-weight: "700"
-  font-interface: '"Berkeley Mono"'
-  font-density: "1.5"
+  font-interface: "\"Berkeley Mono\""
+  font-density: "1.45"
   font-line-width: 45rem
+  font-size: 1.0625rem
+  font-ratio: "1.25"

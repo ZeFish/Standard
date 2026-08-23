@@ -1,7 +1,7 @@
 meta:
   id: venetian
   label: Venetian
-  selector: '[data-theme="venetian"]'
+  selector: "[data-theme=\"venetian\"]"
   fonts:
     - "@stnd/fonts/eb-garamond"
 tokens:
@@ -13,11 +13,15 @@ tokens:
   color-blue: "#2f4e6e"
   color-yellow: "#c2a94b"
   color-dark-accent: "color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b )"
-  font-header: '"adobe-jenson-pro"'
-  font-text: '"adobe-jenson-pro"'
+  font-header: "\"adobe-jenson-pro\""
+  font-text: "\"adobe-jenson-pro\""
   gap-body: var(--space-2)
   gap-block: var(--space-2)
   monile-gap-body: var(--space-2)
   gap-mobile-block: var(--space-2)
   line-height: "1.55"
   line-width: var(--line-width-sm)
+  font-size: 1.15rem
+  font-ratio: "1.2"
+  font-density: "1.55"
+  font-line-width: 38rem

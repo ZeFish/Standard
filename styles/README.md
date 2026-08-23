@@ -133,7 +133,7 @@ File-by-file pass, adding WHY-comments and checking for cascade/scope bugs. Fixe
 - **`$stnd-scope: ":root, body"` silently blocked frontmatter overrides.**
   A token declared on both `:root` and `body` always resolves to `body`'s   own copy for anything read by a non-inherited property at-or-below   `<body>` (its own `max-width`/`padding`) — inheritance never kicks in   because `body` already has an explicit declaration. Any `:root`-only   override (exactly what a note's frontmatter `inlineStyle` produces) was   silently ineffective for `--body-max-width`, `--line-width`,   `--gap-body`/`--gap-header`/`--gap-footer`. Root cause fixed at the   scope itself (`$stnd-scope` → `:root`-only) rather than patched   per-token. Caught via a live production repro on francisfontaine.com.
 - **`$stnd-scope` vs `$stnd-theme-scope`** — two SCSS variables, always set
-  to the identical selector in every build config (`:root` on web,   `body.stnd-theme` in Obsidian) since the fix above. Pure redundancy —   consolidated to one (`$stnd-theme-scope`, the more widely-used name).
+  to the identical selector in every build config (`:root` on web,   `body.stnd-adapter` in Obsidian) since the fix above. Pure redundancy —   consolidated to one (`$stnd-theme-scope`, the more widely-used name).
 - **`$elements-boxed`** (`_standard-00-variables.scss`) — defined, never
   consumed anywhere. Deleted.
 - **Duplicate `--ease-aggressive`** — identical value declared twice in
@@ -141,7 +141,7 @@ File-by-file pass, adding WHY-comments and checking for cascade/scope bugs. Fixe
 - **`$mobile` docblock drift** — comment claimed `480px`, actual value is
   `600px` (confirmed correct). Comment fixed to match code.
 - **`obsidian.scss` docblock drift** — claimed tokens live "inside :root";
-  actually scoped to `body.stnd-theme` (deliberately, for namespacing in   Obsidian's shared window). Comment corrected.
+  actually scoped to `body.stnd-adapter` (deliberately, for namespacing in   Obsidian's shared window). Comment corrected.
 - **`body`'s own dead `--max-width` fallback** (`_standard-07-base.scss`)
   — `max-width: var(--body-max-width, var(--max-width))`, left over from   *my own* `--max-width` removal earlier this session (missed this one   file at the time). `--body-max-width` always has a value, so the   fallback never fired — harmless, but stale. Now matches `.prose`'s   equivalent rule (`var(--body-max-width)`, no fallback).
 - **Garbled leftover comment** (`_standard-07-base.scss`) — a `[id]`

@@ -11,9 +11,9 @@ tokens:
   color-light-background: "#f7f6f4"
   color-light-foreground: "#292827"
   color-accent: "#0f5a7d"
-  font-text: '"Source Serif 4", "Georgia", "Times New Roman", serif'
-  font-header: '"Source Serif 4", "Georgia", "Times New Roman", serif'
-  font-monospace: '"IBM Plex Mono", "Menlo", monospace'
+  font-text: "\"Source Serif 4\", \"Georgia\", \"Times New Roman\", serif"
+  font-header: "\"Source Serif 4\", \"Georgia\", \"Times New Roman\", serif"
+  font-monospace: "\"IBM Plex Mono\", \"Menlo\", monospace"
   sidenote-width: 18rem
   color-light-accent: "#0f5a7d"
   color-dark-background: "#211f1d"
@@ -21,6 +21,10 @@ tokens:
   color-dark-accent: "#7fb4cc"
   optical-ratio: "1.225"
   font-header-weight: "600"
-  font-feature: '"onum", "pnum"'
+  font-feature: "\"onum\", \"pnum\""
   line-height: "1.55"
   line-width: 30rlh
+  font-size: 1.125rem
+  font-ratio: "1.25"
+  font-density: "1.55"
+  font-line-width: 40rem

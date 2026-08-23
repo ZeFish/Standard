@@ -1,7 +1,7 @@
 meta:
   id: avantgarde
   label: Avant-Garde
-  selector: '[data-theme="avantgarde"]'
+  selector: "[data-theme=\"avantgarde\"]"
   fonts:
     - "@stnd/fonts/avant-garde-pro"
     - "@stnd/fonts/sohne"
@@ -19,11 +19,15 @@ tokens:
   color-dark-orange: "#d0a215"
   color-dark-blue: "#dcdad6"
   color-dark-red: "#dcdad6"
-  font-text: '"Sohne Mono", monospace'
-  font-header: '"Avant Garde Pro", sans-serif'
-  font-interface: '"Sohne Mono", monospace'
-  font-monospace: '"Sohne Mono", monospace'
+  font-text: "\"Sohne Mono\", monospace"
+  font-header: "\"Avant Garde Pro\", sans-serif"
+  font-interface: "\"Sohne Mono\", monospace"
+  font-monospace: "\"Sohne Mono\", monospace"
   font-header-weight: "700"
-  font-header-letter-spacing: -0.05em
+  font-header-letter-spacing: "-0.05em"
   font-header-line-height: 1em
   font-weight-bold: "600"
+  font-size: 1.0625rem
+  font-ratio: "1.25"
+  font-density: "1.45"
+  font-line-width: 44rem

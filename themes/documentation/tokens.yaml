@@ -1,7 +1,7 @@
 meta:
   id: documentation
   label: Documentation
-  selector: '[data-theme="documentation"]'
+  selector: "[data-theme=\"documentation\"]"
   fonts:
     - "@stnd/fonts/ia-writer"
     - "@stnd/fonts/ibm-plex"
@@ -26,11 +26,15 @@ tokens:
   color-dark-muted: hsl(220, 13%, 30%)
   color-dark-link: hsl(220, 93%, 75%)
   color-code: color-mix(in srgb, var(--color-foreground) 70%, var(--color-orange) 30%)
-  font-text: '"iA Writer Quattro", system-ui, sans-serif'
-  font-interface: '"iA Writer Quattro", system-ui, sans-serif'
-  font-header: '"IBM Plex Serif", Georgia, serif'
+  font-text: "\"iA Writer Quattro\", system-ui, sans-serif"
+  font-interface: "\"iA Writer Quattro\", system-ui, sans-serif"
+  font-header: "\"IBM Plex Serif\", Georgia, serif"
   font-header-weight: "500"
-  font-monospace: '"Berkeley Mono", "IBM Plex Mono", Menlo, monospace'
+  font-monospace: "\"Berkeley Mono\", \"IBM Plex Mono\", Menlo, monospace"
   line-height: "1.6"
   line-width: 43rem
   optical-ratio: "1.25"
+  font-size: 1.125rem
+  font-ratio: "1.25"
+  font-density: "1.5"
+  font-line-width: 42rem

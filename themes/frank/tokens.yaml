@@ -1,32 +1,32 @@
 meta:
   id: frank
   label: Frank
-  selector: '[data-theme="frank"]'
+  selector: "[data-theme=\"frank\"]"
   fonts:
     - "@stnd/fonts/inter"
     - "@stnd/fonts/cargo-diatype"
 tokens:
   color-dark-foreground: oklch( 84% 0.0276 80.72 )
   color-dark-background: oklch( 9.76% 0.012 90.93 )
-  font-text: '"Cargo Diatype"'
-  font-header: '"Inter"'
+  font-text: "\"Cargo Diatype\""
+  font-header: "\"Inter\""
   font-header-weight: "900"
-  font-header-letter-spacing: -0.065em
+  font-header-letter-spacing: "-0.065em"
   font-header-line-height: 1em
   gap-body: var(--space-2)
   gap-header: var(--space-6)
   optical-ratio: var(--ratio-golden)
-  font-size: 1rem
+  font-size: 1.0625rem
   line-height: "1.5"
   color-link: var(--color-green)
-  font-ratio: "1.333"
-  font-density: "1.4"
+  font-ratio: "1.25"
+  font-density: "1.45"
   marge-block: "1"
-  font-feature: '"liga", "salt", "clig", "kern", "calt", "zero"'
-  font-header-feature: '"liga"'
-  font-header-variation: '"SOFT" 75, "WONK" 0'
-  font-interface: '"Inter"'
-  font-interface-feature: '"tnum"'
+  font-feature: "\"liga\", \"salt\", \"clig\", \"kern\", \"calt\", \"zero\""
+  font-header-feature: "\"liga\""
+  font-header-variation: "\"SOFT\" 75, \"WONK\" 0"
+  font-interface: "\"Inter\""
+  font-interface-feature: "\"tnum\""
   color-light-foreground: oklch(25.20% 0.0000 0.00)
   color-light-background: oklch(100.00% 0.0000 0.00)
   color-light-red: oklch(48.37% 0.1896 27.22)
@@ -40,3 +40,4 @@ tokens:
   color-light-accent: var(--color-blue)
   color-light-bold: var(--color-red)
   color-light-italic: var(--color-blue)
+  font-line-width: 40rem

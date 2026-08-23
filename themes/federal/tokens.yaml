@@ -1,16 +1,11 @@
 meta:
   id: federal
   label: Federal
-  selector: '[data-theme="federal"]'
+  selector: "[data-theme=\"federal\"]"
   fonts:
     - "@stnd/fonts/helvetica-now"
     - "@stnd/fonts/IBM Plex"
 tokens:
-  # 1970s graphic-standards-manual — NASA/EPA/Vignelli. Warm paper, warm ink,
-  # one federal-red seed. --color-red/yellow/green are NOT set here — the
-  # base engine derives them from --color-*-foreground's hue automatically
-  # (see @stnd/styles STAGE 3), so setting a warm ink is enough to land on
-  # classic red/olive/mustard states.
   color-light-background: hsl(45, 25%, 94%)
   color-light-foreground: oklch(0.26 0.012 15)
   color-light-accent: oklch(0.55 0.185 32)
@@ -27,11 +22,15 @@ tokens:
   color-dark-surface-low: hsl(220, 10%, 12%)
   color-dark-subtle: oklch(0.65 0.02 50)
   color-dark-muted: oklch(0.5 0.015 45)
-  font-text: '"Helvetica Now", system-ui, sans-serif'
-  font-header: '"Helvetica Now", system-ui, sans-serif'
-  font-monospace: '"IBM Plex Mono", monospace'
-  font-interface: '"IBM Plex Mono", monospace'
+  font-text: "\"Helvetica Now\", system-ui, sans-serif"
+  font-header: "\"Helvetica Now\", system-ui, sans-serif"
+  font-monospace: "\"IBM Plex Mono\", monospace"
+  font-interface: "\"IBM Plex Mono\", monospace"
   radius: "0"
   shadow: none
   shadow-inset: none
   shadow-raised: none
+  font-size: 1.0625rem
+  font-ratio: "1.25"
+  font-density: "1.45"
+  font-line-width: 42rem

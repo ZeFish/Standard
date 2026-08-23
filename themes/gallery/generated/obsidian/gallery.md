@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-08-06 19:46
+modified: 2026-08-23 14:48
 cssclasses: []
 maturity: sprout
 mode: read
@@ -59,9 +59,10 @@ snippet: false
       h1,
       h2,
       h3 {
-        text-align: center;
+        text-align: left;
         font-weight: 500;
         text-wrap: balance;
+        margin-inline: var(--space);
       }
       h2,
       h3 {

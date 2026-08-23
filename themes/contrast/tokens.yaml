@@ -1,7 +1,7 @@
 meta:
   id: contrast
   label: Contraste Élevé
-  selector: '[data-theme="contrast"]'
+  selector: "[data-theme=\"contrast\"]"
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"
     - "@stnd/fonts/oktah"
@@ -13,8 +13,8 @@ tokens:
   color-light-accent: "#0050ff"
   color-dark-accent: "#ffff00"
   color-border: var(--color-foreground)
-  font-text: '"Sohne", sans-serif'
-  font-header: '"Inter", sans-serif'
+  font-text: "\"Sohne\", sans-serif"
+  font-header: "\"Inter\", sans-serif"
   font-weight-text: "500"
   font-header-weight: "800"
   font-header-letter-spacing: 0.02em
@@ -22,3 +22,7 @@ tokens:
   optical-ratio: "1.414"
   color-muted: var(--color-foreground)
   color-subtle: var(--color-foreground)
+  font-size: 1.0625rem
+  font-ratio: "1.333"
+  font-density: "1.45"
+  font-line-width: 42rem

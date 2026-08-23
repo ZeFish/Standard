@@ -27,9 +27,10 @@
   --color-dark-bold: var(--color-accent);
   --font-monospace: "MonoLisa";
   --bold-weight: 500;
-  --font-density: 1.6;
-  --font-ratio: 1.414;
-  --font-line-width: 35em;
+  --font-density: 1.5;
+  --font-ratio: 1.333;
+  --font-line-width: 38rem;
+  --font-size: 1.125rem;
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -44,6 +45,7 @@
     .prose {
     display: block;
     }
+
     .markdown-reading-view h1,
     .cm-header-1,
     .HyperMD-header-1,

@@ -1,7 +1,7 @@
 meta:
   id: dyslexia
   label: Dyslexie
-  selector: '[data-theme="dyslexia"]'
+  selector: "[data-theme=\"dyslexia\"]"
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"
     - "@stnd/fonts/atkinson-hyperlegible-mono"
@@ -11,12 +11,16 @@ tokens:
   color-dark-background: "#242526"
   color-dark-foreground: "#e4e2de"
   color-accent: "#1f6690"
-  font-text: '"Atkinson Hyperlegible Next", sans-serif'
-  font-header: '"Atkinson Hyperlegible Next", sans-serif'
-  font-mono: '"Atkinson Hyperlegible Mono", monospace'
+  font-text: "\"Atkinson Hyperlegible Next\", sans-serif"
+  font-header: "\"Atkinson Hyperlegible Next\", sans-serif"
+  font-mono: "\"Atkinson Hyperlegible Mono\", monospace"
   font-weight-text: "400"
   font-header-weight: "700"
   font-header-letter-spacing: 0.03em
   line-height: "1.6"
   optical-ratio: "1.414"
   line-width: var(--line-width-base)
+  font-size: 1.15rem
+  font-ratio: "1.25"
+  font-density: "1.6"
+  font-line-width: 38rem

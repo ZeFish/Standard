@@ -347,39 +347,34 @@ em {
      - Golden (0.618) -> steep slope (fast growth).
      - Silver (0.414) -> moderate slope.
   */
-  --physics-slope: calc(var(--optical-ratio) - 1);
+  --physics-slope: max(calc(var(--optical-ratio) - 1), 0.15);
 
-  /* Growth Factor: How aggressive is the resizing?
-     We multiply the slope by 1vw to create a viewport-relative unit. */
-  --fluid-growth: calc(var(--physics-slope) * 0.5vw);
-
-  /* Tension Factor: How much do we tighten leading as we grow?
-     Higher ratios need more tension to keep large text readable. */
-  --fluid-tension: calc(var(--physics-slope) * 0.3vw);
+  /* Growth Factor: How responsive is the resizing across viewports?
+     Scales smoothly with viewport width while respecting the optical ratio. */
+  --fluid-growth: calc(var(--physics-slope) * 1.2vw);
 
   /* ===== 3. FLUID TYPOGRAPHY =====
-     Base size starts at 1rem and grows according to the Physics Slope.
+     Base size starts from theme --font-size or --font-text-size (defaulting to a generous 1.0625rem / 17px)
+     and grows comfortably across larger displays.
   */
-  --base-size: var(--font-text-size, 1rem);
+  --base-size: var(--font-text-size, var(--font-size, 1.0625rem));
 
   --font-size: clamp(
     var(--base-size),
     calc(var(--base-size) + var(--fluid-growth)),
-    calc(var(--base-size) * 1.5)
+    calc(var(--base-size) * 1.3)
   );
 
   /* ===== 4. FLUID LINE HEIGHT =====
-     This is the "Next Level" logic.
-     Start with the Optical Ratio as the base breathing room (in ems).
-     As the screen (and font) grows, SUBTRACT the Tension Factor.
-
-     Why? Large text (Desktop) needs TIGHTER leading than small text (Mobile).
-     A steep ratio (Golden) creates huge text, so it applies MORE tension.
+     Uses the theme's configured --font-density (falling back to --optical-ratio).
+     Keeps comfortable line spacing in harmony with the theme.
   */
+  --density-base: var(--font-density, var(--optical-ratio));
+
   --line-height: clamp(
-    1.15,
-    calc(var(--optical-ratio) - (var(--fluid-tension) / 1vw)),
-    1.65
+    1.35,
+    var(--density-base),
+    1.75
   );
 }
 

@@ -1,7 +1,7 @@
 meta:
   id: apex
   label: Apex
-  selector: '[data-theme="apex"]'
+  selector: "[data-theme=\"apex\"]"
   fonts:
     - "@stnd/fonts/herbus"
     - "@stnd/fonts/monolisa"
@@ -22,11 +22,15 @@ tokens:
   color-dark-blue: "#e4e0d6"
   color-dark-green: "#e4e0d6"
   color-dark-yellow: "#e4e0d6"
-  font-text: '"Herbus", sans-serif'
-  font-header: '"Herbus", sans-serif'
-  font-interface: '"MonoLisa", monospace'
-  font-monospace: '"MonoLisa", monospace'
+  font-text: "\"Herbus\", sans-serif"
+  font-header: "\"Herbus\", sans-serif"
+  font-interface: "\"MonoLisa\", monospace"
+  font-monospace: "\"MonoLisa\", monospace"
   font-header-weight: "400"
-  font-header-letter-spacing: -0.006em
+  font-header-letter-spacing: "-0.006em"
   font-header-line-height: 1em
   font-weight-bold: "600"
+  font-size: 1.0625rem
+  font-ratio: "1.25"
+  font-density: "1.45"
+  font-line-width: 42rem

@@ -1,7 +1,7 @@
 meta:
   id: occult
   label: Occult
-  selector: '[data-theme="occult"]'
+  selector: "[data-theme=\"occult\"]"
   fonts:
     - "@stnd/fonts/fern"
     - "@stnd/fonts/monaspace-xenon"
@@ -20,6 +20,10 @@ tokens:
   color-dark-accent: "color-mix(in srgb, var(--color-light-accent) 60%, #000 40%)"
   color-bold: var(--color-red)
   color-italic: var(--color-green)
-  font-text: '"Fern"'
-  font-header: '"Fern"'
-  font-monospace: '"Monaspace Xenon"'
+  font-text: "\"Fern\""
+  font-header: "\"Fern\""
+  font-monospace: "\"Monaspace Xenon\""
+  font-size: 1.125rem
+  font-ratio: "1.25"
+  font-density: "1.5"
+  font-line-width: 38rem

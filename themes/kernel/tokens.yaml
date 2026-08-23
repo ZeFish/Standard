@@ -1,7 +1,7 @@
 meta:
   id: kernel
   label: Kernel
-  selector: '[data-theme="kernel"]'
+  selector: "[data-theme=\"kernel\"]"
   fonts:
     - "@stnd/fonts/monolisa"
     - "@stnd/fonts/fraunces"
@@ -34,17 +34,21 @@ tokens:
   color-dark-bold: var(--color-magenta)
   color-header: var(--color-foreground)
   radius: var(--leading)
-  font-text: '"MonoLisa"'
-  font-feature: '"onum", "liga", "clig", "calt", "zero"'
-  font-variation: '""'
-  font-header: '"Fraunces"'
-  font-monospace: '"MonoLisa"'
-  font-monospace-feature: '"liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16"'
-  font-interface: '"Monolisa"'
+  font-text: "\"MonoLisa\""
+  font-feature: "\"onum\", \"liga\", \"clig\", \"calt\", \"zero\""
+  font-variation: "\"\""
+  font-header: "\"Fraunces\""
+  font-monospace: "\"MonoLisa\""
+  font-monospace-feature: "\"liga\", \"zero\", \"calt\", \"ss02\", \"ss03\", \"ss07\", \"ss10\", \"ss15\", \"ss16\""
+  font-interface: "\"Monolisa\""
   font-header-weight: "400"
-  font-header-feature: '""'
-  font-header-variation: '"SOFT" 100, "WONK" 1'
-  font-header-letter-spacing: -0.065em
+  font-header-feature: "\"\""
+  font-header-variation: "\"SOFT\" 100, \"WONK\" 1"
+  font-header-letter-spacing: "-0.065em"
   stroke-width: 1.5px
   line-height: "1.3"
   line-width: var(--line-width-sm)
+  font-size: 1.0625rem
+  font-ratio: "1.25"
+  font-density: "1.45"
+  font-line-width: 44rem

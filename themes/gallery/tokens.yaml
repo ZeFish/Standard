@@ -1,7 +1,7 @@
 meta:
   id: gallery
   label: Gallery
-  selector: '[data-theme="gallery"]'
+  selector: "[data-theme=\"gallery\"]"
   fonts:
     - "@stnd/fonts/cargo-diatype"
 tokens:
@@ -15,8 +15,12 @@ tokens:
   shadow: none
   radius: "0"
   font-monospace: monospace
-  font-text: '"Cargo Diatype"'
-  font-header: '"Cargo Diatype"'
-  font-header-letter-spacing: -0.065em
+  font-text: "\"Cargo Diatype\""
+  font-header: "\"Cargo Diatype\""
+  font-header-letter-spacing: "-0.065em"
   line-height: "1.2"
   gap-body: var(--space)
+  font-size: 1.0625rem
+  font-ratio: "1.333"
+  font-density: "1.5"
+  font-line-width: 42rem

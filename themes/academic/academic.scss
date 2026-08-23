@@ -17,6 +17,10 @@
   --font-feature: "onum", "pnum";
   --line-height: 1.55;
   --line-width: 30rlh;
+  --font-size: 1.125rem;
+  --font-ratio: 1.25;
+  --font-density: 1.55;
+  --font-line-width: 40rem;
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -74,7 +78,7 @@ h1 {
   }
 
   p {
-    text-align: justify;
+    text-align: left;
     text-align-last: left;
     hyphens: auto;
     -webkit-hyphens: auto;

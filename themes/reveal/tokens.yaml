@@ -16,15 +16,16 @@ tokens:
   color-dark-foreground: "#ebebeb"
   color-dark-border: rgba(235, 235, 235, 0.14)
   color-accent: "#d6202c"
-  # Reveal-only extras (a photo-culling app needs these; a note theme doesn't) —
-  # explicit rather than derived, so the app's own hand-tuned "quiet groove" look
-  # survives regeneration exactly instead of an approximate lighten/darken guess.
   color-light-elevated: "#ffffff"
   color-dark-elevated: "#2d2d2d"
   color-light-photoFrame: "#ffffff"
   color-dark-photoFrame: "#171717"
-  font-text: '"Inter", system-ui, sans-serif'
-  font-header: '"DIN Condensed", Impact, "Arial Narrow", sans-serif'
-  font-monospace: '"IBM Plex Mono", "SF Mono", monospace'
-  font-serif: '"Newsreader", Georgia, serif'
+  font-text: "\"Inter\", system-ui, sans-serif"
+  font-header: "\"DIN Condensed\", Impact, \"Arial Narrow\", sans-serif"
+  font-monospace: "\"IBM Plex Mono\", \"SF Mono\", monospace"
+  font-serif: "\"Newsreader\", Georgia, serif"
   line-height: "1.2"
+  font-size: 1.125rem
+  font-ratio: "1.333"
+  font-density: "1.4"
+  font-line-width: 45rem

@@ -1,7 +1,7 @@
 meta:
   id: book
   label: Book
-  selector: '[data-theme="book"]'
+  selector: "[data-theme=\"book\"]"
   fonts:
     - "@stnd/fonts/fern"
     - "@stnd/fonts/source-serif-4"
@@ -32,21 +32,22 @@ tokens:
   color-dark-accent: var(--color-red)
   color-light-link: var(--color-red)
   color-dark-link: var(--color-red)
+  font-size: 1.15rem
   font-ratio: "1.2"
   marge-block: "1.5"
   font-density: "1.5"
-  font-line-width: 35rem
-  font-text: '"Fern", "Graveur Variable", Bookerly'
+  font-line-width: 38rem
+  font-text: "\"Fern\", \"Graveur Variable\", Bookerly"
   font-weight: "450"
-  font-feature: '"liga", "onum", "kern"'
-  font-variation: '""'
-  font-interface: '"Fern"'
-  font-monospace: '"Monolisa"'
-  font-mono-feature: '"onum" off'
-  font-mono-variation: '""'
-  font-header: '"Fern"'
-  font-header-feature: '"liga", "onum", "kern"'
-  font-header-variation: '""'
+  font-feature: "\"liga\", \"onum\", \"kern\""
+  font-variation: "\"\""
+  font-interface: "\"Fern\""
+  font-monospace: "\"Monolisa\""
+  font-mono-feature: "\"onum\" off"
+  font-mono-variation: "\"\""
+  font-header: "\"Fern\""
+  font-header-feature: "\"liga\", \"onum\", \"kern\""
+  font-header-variation: "\"\""
   font-header-weight: "400"
   font-header-line-height: "1"
   color-bold: var(--color-red)

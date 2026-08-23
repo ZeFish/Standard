@@ -15,13 +15,16 @@
   --font-header-letter-spacing: 0em;
   --font-display: "Tiempos Headline", "Georgia", serif;
   --font-interface: "Instrument Sans";
-  --font-size: 1.1rem;
+  --font-size: 1.15rem;
   --line-height: 1.5;
   --line-width: 27rlh;
   --gap-body-mobile: var(--space);
   --mobile-line-height: 1.2;
   --gap-nl: var(--leading);
   --color-muted: color-mix( in srgb, var(--color-foreground) 75%, var(--color-background) );
+  --font-ratio: 1.25;
+  --font-density: 1.55;
+  --font-line-width: 38rem;
 }
 /* TOKENS.YAML ADAPTER END */
 

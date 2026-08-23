@@ -1,7 +1,7 @@
 meta:
   id: international
   label: International
-  selector: '[data-theme="international"]'
+  selector: "[data-theme=\"international\"]"
   fonts:
     - "@stnd/fonts/cargo-diatype"
 tokens:
@@ -23,13 +23,17 @@ tokens:
   color-dark-foreground: "#ccc"
   optical-ratio: var(--ratio-golden)
   mobile-font-ratio: var(--ratio-golden)
-  font-monospace: '"Sohne Mono", monospace'
-  font-text: '"Cargo Diatype"'
+  font-monospace: "\"Sohne Mono\", monospace"
+  font-text: "\"Cargo Diatype\""
   font-header-weight: "900"
-  font-header-letter-spacing: -0.065em
+  font-header-letter-spacing: "-0.065em"
   line-height: "1.2"
   body-padding: var(--space)
   color-surface: var(--color-background)
   font-header: Inter
   font-interface: Inter
   line-width: var(--line-width-xs)
+  font-size: 1.0625rem
+  font-ratio: "1.25"
+  font-density: "1.45"
+  font-line-width: 42rem

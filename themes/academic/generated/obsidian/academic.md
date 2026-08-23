@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-08-23 14:06
 cssclasses: []
 maturity: sprout
 mode: read
@@ -67,7 +67,7 @@ snippet: false
       }
 
       p {
-        text-align: justify;
+        text-align: left;
         text-align-last: left;
         hyphens: auto;
         -webkit-hyphens: auto;

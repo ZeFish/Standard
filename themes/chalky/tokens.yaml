@@ -1,7 +1,7 @@
 meta:
   id: chalky
   label: Chalky
-  selector: '[data-theme="chalky"]'
+  selector: "[data-theme=\"chalky\"]"
   fonts:
     - "@stnd/fonts/jimmy"
     - "@stnd/fonts/brixton"
@@ -21,7 +21,11 @@ tokens:
   color-accent: var(--color-light-orange)
   color-bold: var(--color-red)
   color-italic: var(--color-green)
-  font-text: '"Jimmy Serif Pro"'
-  font-header: '"Fern"'
-  font-monospace: '"Monaspace Xenon"'
+  font-text: "\"Jimmy Serif Pro\""
+  font-header: "\"Fern\""
+  font-monospace: "\"Monaspace Xenon\""
   optical-ratio: "1.414"
+  font-size: 1.125rem
+  font-ratio: "1.25"
+  font-density: "1.5"
+  font-line-width: 38rem
