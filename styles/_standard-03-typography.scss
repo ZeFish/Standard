@@ -62,7 +62,7 @@
   --font-weight-h6: var(--font-weight);
 
   --list-indent: var(--space);
-}
+
 
 /* =========================== */
 /* CORE ELEMENT STYLING        */
@@ -291,7 +291,7 @@ blockquote {
   font-style: italic;
   color: var(--color-muted);
   padding: var(--space);
-  border-left: var(--stroke-width-l) solid var(--color-border);
+  border-left: var(--stroke-width-lg, 2px) solid var(--color-border);
 
   cite {
     display: block;
@@ -408,4 +408,6 @@ h5,
 h6 {
   /* Small headers need body-like leading (1.3x), then snap up */
   @include grid-line-height(1.3);
+}
+
 }

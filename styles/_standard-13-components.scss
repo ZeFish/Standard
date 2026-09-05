@@ -799,7 +799,7 @@ details .callout-fold {
 }
 
 // Caption Callout (after an image)
-p:has(img) + .callout[data-callout="caption" i] {
+.callout[data-callout="caption"] {
   padding: 0;
   background: none;
   padding-block-start: var(--gap);
@@ -815,10 +815,10 @@ p:has(img) + .callout[data-callout="caption" i] {
     padding: 0;
     background: none;
     color: var(--color-muted);
-    border: none;
+    border: none !important;
 
     box-shadow: none;
-    text-align: center;
+    text-align: center !important;
     text-wrap: balance;
   }
 }
