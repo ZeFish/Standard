@@ -2,6 +2,18 @@
    other file in the package. */
 @use "standard-00-variables" as *;
 
+/**
+ * @component E-ink
+ * @category Effects
+ * @description The e-ink / monochrome-display layer (`update: slow` or
+ * `monochrome`): forces absolute black-and-white, removes all motion,
+ * shadows, filters and text-shadows, replaces shadows with hard 2px black
+ * borders, thickens headings to weight 900, and dithers images to
+ * high-contrast grayscale. Zero markup or opt-in classes required.
+ *
+ * @property {variable} --color-accent Forced to black — no orange on black-and-white screens. The single most surprising override in this file: any accent-colored UI goes fully monochrome here, by design.
+ */
+
 @media screen and (update: slow), (monochrome) {
   #{$stnd-theme-scope} {
     /* Force absolute contrast */

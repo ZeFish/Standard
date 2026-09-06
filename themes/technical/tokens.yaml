@@ -47,7 +47,7 @@ tokens:
   font-header: "\"Monosten\", \"Gorton Perfected\", \"Futura Now Var\""
   font-header-feature: "\"onum\", \"salt\", \"calt\""
   font-header-variation: "\"wght\" 400, \"wdth\" 100"
-  font-header-line-height: 0.9em
+  font-header-line-height: "0.9"
   font-header-letter-spacing: 0em
   line-height-normal: 1.7em
   font-size: 1.0625rem

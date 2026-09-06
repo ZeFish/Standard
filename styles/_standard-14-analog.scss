@@ -1,5 +1,21 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Analog
+ * @category Effects
+ * @description The "analog atmosphere" layer: a fixed, full-viewport grain
+ * texture painted over every page with zero markup (`html::after`), plus a
+ * subtle ink-bleed text-shadow for text inside `.prose`/`.ink`/`.note`
+ * containers. Grain intensity and blend mode swap automatically in dark
+ * mode.
+ *
+ * @property {class} .grain Applies the same grain overlay to a specific subtree (via `::after`) instead of the whole page — `html::after` already covers the page globally, so this is for scoping the texture to one element.
+ * @property {variable} --effect-grain Coarse noise texture (`feTurbulence` data URI, baseFrequency 0.4) — the one used by the page-wide overlay.
+ * @property {variable} --effect-noise Fine noise texture (baseFrequency 5) — defined here but not consumed by anything in this package; apply it yourself for a finer grain than the default.
+ * @property {variable} --effect-opacity Overlay opacity — 0.15 in light mode, 0.05 in dark (grain needs to read stronger against a dark background).
+ * @property {variable} --effect-blend-mode Overlay blend mode — `multiply` in light mode, `screen` in dark.
+ */
+
 #{$stnd-theme-scope} {
   /*
       This data URI is an SVG with a <feTurbulence> filter.
@@ -27,7 +43,7 @@
 
 #{$stnd-theme-scope}[data-color-mode="dark"] {
   --effect-blend-mode: screen;
-  --effect-opacity: 0.05;
+  --effect-opacity: 0.025;
 }
 
 /* 1. Global Atmosphere (The Desk) */

@@ -51,6 +51,8 @@ standard({ moduleLoad: ["@stnd/themes/editorial"] });
 
 ## Available Themes
 
+::widget ThemeBar
+
 - **Academic**: Scholarly and traditional.
 - **Editorial**: Clean lines and high contrast.
 - **Humanist**: Warm type and organic feel.

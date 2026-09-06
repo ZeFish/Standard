@@ -1,19 +1,6 @@
 ---
 aliases: []
 created: 2026-03-16 08:07
-modified: 2026-08-06T03:02:49.789Z
-mode: read
-publish: false
-tags: []
-theme:
-type: note
-visibility: public
-garden-short: https://stnd.gd/Xg3Sjl
----
-
----
-aliases: []
-created: 2026-03-16 08:07
 modified: 2026-07-03 16:26
 mode: read
 publish: true

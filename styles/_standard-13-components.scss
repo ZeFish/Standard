@@ -496,9 +496,6 @@ a.badge.secondary:hover,
   background-color: var(--color-surface);
   transition: all var(--transition);
   border-radius: var(--radius);
-  /* --border currently resolves to `none` everywhere in this file
-     (card, card header/footer, .comment, .comment-content) — see the
-     AUDIT FLAG in _standard-02-color.scss. */
   border: var(--border);
 
   &.hero {

@@ -53,7 +53,7 @@ tokens:
   radius: var(--space)
   stroke-width: 1.5px
   font-header-letter-spacing: 0em
-  font-header-line-height: 1em
+  font-header-line-height: "1"
   font-feature: "\"\""
   font-variation: "\"\""
   font-ratio: "1.25"

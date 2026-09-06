@@ -798,9 +798,6 @@
   border: 0 !important;
 }
 
-/* --border currently resolves to `none` — see the AUDIT FLAG in
-   _standard-02-color.scss. Affects .border/.border-accent/.border-t/-b/
-   -l/-r below too. */
 .border {
   border: var(--border) !important;
 }
@@ -918,8 +915,6 @@
   page-break-inside: avoid;
 }
 
-/* --border currently resolves to `none` — see the AUDIT FLAG in
-   _standard-02-color.scss. */
 .columns-rule {
   column-rule: var(--border);
 }

@@ -226,7 +226,7 @@ export default function standard(options = {}) {
             log.warn(
               `Modules define actions but 'src/actions/index.ts' is missing.\n` +
                 `      Actions will trigger 404 errors without this bridge file.\n` +
-                `      See fix: https://stnd.build/manual/5-reference/actions-404`,
+                `      See fix: https://stnd.build/manual/diagnostic/actions-404`,
             );
           }
         }

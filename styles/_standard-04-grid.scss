@@ -8,14 +8,14 @@
  * asymmetric layouts, gap variants (compact/normal/wide), and responsive column changes.
  * All gaps align to the vertical rhythm system.
  *
- * @prop {class} .grid 12-column grid container
- * @prop {class} .col-1 through .col-12 Column span modifiers (direct children of .grid)
- * @prop {class} .sm\:col-* Responsive columns at max-width 768px (mobile)
- * @prop {class} .lg\:col-* Responsive columns at min-width 1024px (desktop)
- * @prop {class} .start-{n} Start column position (1-12)
- * @prop {class} .grid.no-gap Removes row-gap
- * @prop {class} .grid.compact Compact gap (--trim)
- * @prop {class} .grid.relaxed Wide gap (--space)
+ * @property {class} .grid 12-column grid container
+ * @property {class} .col-1 through .col-12 Column span modifiers (direct children of .grid)
+ * @property {class} .sm\:col-* Responsive columns at max-width 768px (mobile)
+ * @property {class} .lg\:col-* Responsive columns at min-width 1024px (desktop)
+ * @property {class} .start-{n} Start column position (1-12)
+ * @property {class} .grid.no-gap Removes row-gap
+ * @property {class} .grid.compact Compact gap (--trim)
+ * @property {class} .grid.relaxed Wide gap (--space)
  *
  * @example
  * // Basic 12-column grid with equal width columns

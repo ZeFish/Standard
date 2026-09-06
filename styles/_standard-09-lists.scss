@@ -1,5 +1,26 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Lists
+ * @category Content
+ * @description Replaces native `<ul>`/`<ol>` markers with custom
+ * absolutely-positioned bullets and tabular-nums counters, and spaces items
+ * apart via `li + li`. Four density/marker classes are opt-in.
+ *
+ * @property {class} .no-bullet Hides markers and removes the inline padding; cascades to nested `<ul>` too. Also defined in `_standard-50-utilities.scss` — same intent, safe to use either.
+ * @property {class} .tight Apply to a `<ul>`/`<ol>` — tightens item spacing to `--space-d3`.
+ * @property {class} .compact Apply to a `<ul>`/`<ol>` — tightens item spacing to `--space-d2`. Combines cleanly with `_standard-50-utilities.scss`'s same-named `.compact` (compact line-height) — different property, same intent, no collision.
+ * @property {class} .relaxed Apply to a `<ul>`/`<ol>` — widens item spacing to `--space-2`. Same relationship to `_standard-50-utilities.scss`'s `.relaxed` as `.compact` above.
+ * @property {class} .task-list-item Applied automatically by `@stnd/press`'s typography-tasks plugin to any `- [ ]` / `- [x]` list item — not something you write by hand. Replaces the bullet with a real (disabled) checkbox.
+ * @property {class} .task-field Applied automatically by the same plugin to `[key:: value]` Dataview-style inline fields found inside task text — rendered as a small tagged badge instead of raw bracket text.
+ *
+ * @example html - What `- [ ] Ship it [priority:: 1]` becomes
+ * <li class="task-list-item">
+ *   <input type="checkbox" disabled> Ship it
+ *   <span class="task-field" data-field="priority">priority: 1</span>
+ * </li>
+ */
+
 /* =========================== */
 /* LISTS                       */
 /* =========================== */
@@ -83,32 +104,55 @@ ol:where(.flex, [style*="display: flex"], [style*="display:flex"]) li {
   }
 }
 
-/* AUDIT FLAG (2026-07-14): .compact and .relaxed are bare, unnamespaced
-   class names also defined in _standard-50-utilities.scss (different
-   rules) and — for .compact/.relaxed specifically — in
-   _standard-04-grid.scss as .grid.compact/.grid.relaxed (qualified, so
-   that one doesn't collide). An element with class="compact" containing
-   <li> children gets BOTH this file's li+li spacing AND whatever
-   _standard-50-utilities.scss's .compact does, unconditionally — no way
-   to opt into one without the other. Flagging the collision rather than
-   renaming; not obvious which file should own the name. (The dead
-   --base-gap sub-issue previously flagged here has been cleaned up: the
-   declarations were removed from this file and from
-   _standard-50-utilities.scss.) */
-.compact {
-  li + li {
-    margin-block-start: var(--space-d2);
+/* FIXED (2026-09-05) — was a bare, unnamespaced .compact/.relaxed that
+   collided with _standard-50-utilities.scss's line-height utilities of the
+   same name: any element with class="compact" containing <li> children got
+   this file's li+li spacing unconditionally, whether or not it was
+   actually a list. Qualified to :is(ul, ol) instead, matching the pattern
+   _standard-04-grid.scss already uses for its own .compact/.relaxed
+   (:is(.grid, [class^="grid-"]).compact) — same class name, each scope's
+   meaning applies only in its own context. A <ul class="compact"> now
+   picks up both this file's tight item spacing AND utilities.scss's
+   compact line-height, which is the combination you'd actually want. */
+:is(ul, ol).compact li + li {
+  margin-block-start: var(--space-d2);
+}
+
+:is(ul, ol).tight li {
+  margin-block-end: var(--space-d3);
+}
+
+:is(ul, ol).relaxed li {
+  margin-block-end: var(--space-2);
+}
+
+/* =========================== */
+/* TASK LISTS                  */
+/* =========================== */
+
+/* Rendered by @stnd/press's typography-tasks plugin from `- [ ]` / `- [x]` —
+   the checkbox replaces the bullet, it doesn't sit alongside it. */
+.task-list-item {
+  &::before {
+    display: none;
+  }
+
+  input[type="checkbox"] {
+    margin-inline-end: var(--space-d3);
+    vertical-align: -0.15em;
+    accent-color: var(--color-accent);
   }
 }
 
-.tight {
-  li {
-    margin-block-end: var(--space-d3);
-  }
-}
-
-.relaxed {
-  li {
-    margin-block-end: var(--space-2);
-  }
+/* Dataview-style `[key:: value]` inline fields, tagged by the same plugin. */
+.task-field {
+  display: inline-block;
+  font-family: var(--font-monospace);
+  font-size: var(--size-3xs);
+  color: var(--color-subtle);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-d4);
+  margin-inline-end: var(--space-d6);
 }

@@ -196,7 +196,7 @@ export async function loadModules({
       const task = tasks[index];
       if (result.status === "rejected") {
         log.fatal(
-          `Failed to load module: ${task.resolvedPath}\nSee: https://stnd.build/manual/5-reference/module-load-failure`,
+          `Failed to load module: ${task.resolvedPath}\nSee: https://stnd.build/manual/diagnostic/module-load-failure`,
           result.reason,
         );
       }
@@ -209,7 +209,7 @@ export async function loadModules({
         if (task.sourceModule) {
           errorMsg += `\n  Required by: "${task.sourceModule}" module`;
         }
-        errorMsg += `\nSee: https://stnd.build/manual/5-reference/core-is-not-a-module`;
+        errorMsg += `\nSee: https://stnd.build/manual/diagnostic/core-is-not-a-module`;
         log.fatal(errorMsg);
       }
 
@@ -223,7 +223,7 @@ export async function loadModules({
         if (task.sourceModule) {
           errorMsg += `  Required by: "${task.sourceModule}" module\n`;
         }
-        errorMsg += `See: https://stnd.build/manual/5-reference/content-validation`;
+        errorMsg += `See: https://stnd.build/manual/diagnostic/content-validation`;
         log.fatal(errorMsg);
       }
 
@@ -238,7 +238,7 @@ export async function loadModules({
               `\n  Path 1: ${existingPath}` +
               `\n  Path 2: ${resolvedPath}` +
               `\n  Every module must have a unique ID.` +
-              `\n  See: https://stnd.build/manual/5-reference/module-duplicate-id`,
+              `\n  See: https://stnd.build/manual/diagnostic/module-duplicate-id`,
           );
         }
       }
@@ -289,7 +289,7 @@ export async function loadModules({
 
       if (!idToPath.has(depId)) {
         log.fatal(
-          `Module "${moduleId}" has unresolved dependency: "${rawDep}"\nSee: https://stnd.build/manual/5-reference/module-dependency-unresolved`,
+          `Module "${moduleId}" has unresolved dependency: "${rawDep}"\nSee: https://stnd.build/manual/diagnostic/module-dependency-unresolved`,
         );
       }
 
@@ -315,7 +315,7 @@ export async function loadModules({
 
   if (sortedIds.length !== allIds.length) {
     log.fatal(
-      "Circular dependency detected in module graph.\nSee: https://stnd.build/manual/5-reference/module-dependency-circular",
+      "Circular dependency detected in module graph.\nSee: https://stnd.build/manual/diagnostic/module-dependency-circular",
     );
   }
 
@@ -553,7 +553,7 @@ export async function loadModules({
                 `\n  Module "${def.id}" registered a ${kind} entry (${entryPath}), but "${hookName}" was already classified as ${previousKind} by an earlier module.` +
                 `\n  A hook name must consistently resolve to one kind: logic hooks are ".js/.ts" entries not prefixed "launcher:" or suffixed ":action"; everything else is a UI/action zone.` +
                 `\n  Rename this hook or make its entry type consistent with the other registrations.` +
-                `\n  See: https://stnd.build/manual/5-reference/hook-kind-mismatch`,
+                `\n  See: https://stnd.build/manual/diagnostic/hook-kind-mismatch`,
             );
           }
           hookKindByName.set(hookName, kind);
@@ -578,7 +578,7 @@ export async function loadModules({
                 `Hook "${hookName}" (module "${def.id}") sets "server: true", but this hook classifies as a UI/action zone contribution, which has no server/client split.` +
                   `\n  "server: true" only has an effect on logic hooks (".js/.ts" entries not prefixed "launcher:" or suffixed ":action").` +
                   `\n  Remove "server: true", or rename this hook off the "launcher:"/":action" pattern if it must stay out of the client bundle.` +
-                  `\n  See: https://stnd.build/manual/5-reference/hook-server-flag-ignored`,
+                  `\n  See: https://stnd.build/manual/diagnostic/hook-server-flag-ignored`,
               );
             }
             if (!modules.ui[hookName]) modules.ui[hookName] = [];

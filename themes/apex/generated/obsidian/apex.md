@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-05 13:10
 cssclasses: []
 maturity: sprout
 mode: read
@@ -68,7 +68,7 @@ snippet: false
     --font-interface: "MonoLisa";
     --font-header-weight:         400;
     --font-header-letter-spacing: -0.006em;
-    --font-header-line-height:    1em;
+    --font-header-line-height:    1;
 
     /* ─── Dark mode font swap ────────────────────────────────── */
     &.theme-dark {

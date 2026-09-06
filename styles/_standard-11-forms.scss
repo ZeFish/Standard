@@ -1,5 +1,30 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Forms
+ * @category Content
+ * @description Zero-class styling for every native form control:
+ * `fieldset`/`legend` layout, text inputs, textarea, a custom-drawn select,
+ * checkbox/radio, an ARIA switch variant, and a range slider — plus the
+ * adjacency rules that space form parts apart from each other and from
+ * whatever follows them.
+ *
+ * @property {variable} --switch-height The one real sizing knob for `input[type=checkbox][role=switch]` — width and thumb size both derive from it.
+ * @property {variable} --switch-width Derived as `calc(var(--switch-height) * 2)`; override independently to change the switch's aspect ratio.
+ * @property {variable} --switch-padding Inset controlling the thumb gap (default `2px`).
+ * @property {variable} --slider-value NOT set here — read by `input[type=range]`'s fill gradient (50% fallback) and written at runtime by the range-slider's own JS. Any consumer building a custom range slider must set this to get the filled-track effect.
+ *
+ * @example html - A switch (role=switch on a checkbox)
+ * <input type="checkbox" role="switch">
+ *
+ * @example html - Fieldset with adjacent button spacing
+ * <fieldset>
+ *   <legend>Notifications</legend>
+ *   <label><input type="checkbox"> Email me</label>
+ * </fieldset>
+ * <button>Save</button>
+ */
+
 /* =========================== */
 /* FORMS                       */
 /* =========================== */
@@ -49,8 +74,7 @@ textarea {
   border-radius: var(--radius-sm);
   color: var(--color-foreground);
   background: var(--color-surface);
-  /* shadcn-style raised effect. --border currently resolves to `none` —
-     see the AUDIT FLAG in _standard-02-color.scss. */
+  /* shadcn-style raised effect. */
   border: var(--border);
   box-shadow: var(--shadow-raised);
   /* Transparent outline at full width reserves the space a real focus

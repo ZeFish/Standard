@@ -5,12 +5,12 @@
  * vertical rhythm and spacing across all elements. These mixins ensure proper
  * spacing application for rhythm-aware components.
  *
- * @prop {variable} $mobile Mobile breakpoint (600px)
- * @prop {variable} $small Small screen breakpoint (768px)
- * @prop {variable} $large Large screen breakpoint (1024px)
- * @prop {variable} $wide Wide screen breakpoint (1440px)
+ * @property {variable} $mobile Mobile breakpoint (600px)
+ * @property {variable} $small Small screen breakpoint (768px)
+ * @property {variable} $large Large screen breakpoint (1024px)
+ * @property {variable} $wide Wide screen breakpoint (1440px)
  *
- * @example
+ * @example scss
  * // Using breakpoint variables
  * @media (min-width: $small) {
  *   font-size: 1.2rem;

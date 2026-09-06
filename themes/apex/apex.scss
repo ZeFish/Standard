@@ -22,7 +22,7 @@
   --font-monospace: "MonoLisa", monospace;
   --font-header-weight: 400;
   --font-header-letter-spacing: -0.006em;
-  --font-header-line-height: 1em;
+  --font-header-line-height: 1;
   --font-weight-bold: 600;
   --font-size: 1.0625rem;
   --font-ratio: 1.25;
@@ -86,7 +86,7 @@
 --font-interface: "MonoLisa";
 --font-header-weight:         400;
 --font-header-letter-spacing: -0.006em;
---font-header-line-height:    1em;
+--font-header-line-height:    1;
 
 /* ─── Dark mode font swap ────────────────────────────────── */
 &.theme-dark {

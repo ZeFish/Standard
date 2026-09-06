@@ -1,5 +1,26 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Tables
+ * @category Content
+ * @description A bare `<table>` gets full styling with no class required:
+ * collapsed borders, uppercase small-caps headers, compact cell padding.
+ * `.striped` and `.numeric` are the only two opt-in classes.
+ *
+ * @property {class} .striped Zebra-stripes even `<tbody>` rows with a 3% foreground tint. Apply to the `<table>`.
+ * @property {class} .numeric Right-aligns and switches on tabular-nums. Works on any element, not just table cells — apply to `<th>`/`<td>`.
+ *
+ * @example html - Bare table, zero classes
+ * <table>
+ *   <thead>
+ *     <tr><th>Name</th><th class="numeric">Count</th></tr>
+ *   </thead>
+ *   <tbody>
+ *     <tr><td>Widgets</td><td class="numeric">42</td></tr>
+ *   </tbody>
+ * </table>
+ */
+
 /* =========================== */
 /* TABLES                      */
 /* =========================== */
@@ -20,12 +41,11 @@ tr {
 th,
 td {
   text-align: left;
-  /* --border currently resolves to `none` — see the AUDIT FLAG in
-     _standard-02-color.scss (duplicate --border declaration). */
   border: var(--border);
   line-height: var(--line-height-compact);
   padding: var(--space-d2);
   font-size: var(--size-sm);
+  vertical-align: top;
   /* Fixed 2026-07-14 — was an invalid unitless min-height, now derives a
      real length from the line-height already set above. */
   min-height: calc(1em * var(--line-height-compact));
@@ -34,9 +54,12 @@ td {
 th {
   font-weight: var(--font-weight-bold, 600);
   transition: background var(--transition);
-  background: var(--color-surface-low);
+  background: var(--color-surface);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  font-size: var(--size-3xs);
+  color: var(--color-muted);
+  vertical-align: middle;
 }
 caption {
   font-weight: var(--font-weight-bold, bold);

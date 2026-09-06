@@ -8,16 +8,16 @@
  * responsive content columns for sidebars, accents, and featured content.
  * Inspired by fine-art typography and classical book design principles.
  *
- * @prop {class} .prose Main article/content container for readable prose
- * @prop {class} .small Narrow sidebar width container
- * @prop {class} .accent Accent container with background color
- * @prop {class} .feature Featured content with larger spacing
- * @prop {class} .hero Full-width container
- * @prop {variable} --line-width-xs Extra small (24rem / 384px)
- * @prop {variable} --line-width-sm Small (32rem / 512px)
- * @prop {variable} --line-width-md Medium (42rem / 672px) - default
- * @prop {variable} --line-width-lg Large (50rem / 800px)
- * @prop {variable} --line-width-xl Extra large (60rem / 960px)
+ * @property {class} .prose Main article/content container for readable prose
+ * @property {class} .small Narrow sidebar width container
+ * @property {class} .accent Accent container with background color
+ * @property {class} .feature Featured content with larger spacing
+ * @property {class} .hero Full-width container
+ * @property {variable} --line-width-xs Extra small (24rem / 384px)
+ * @property {variable} --line-width-sm Small (32rem / 512px)
+ * @property {variable} --line-width-md Medium (42rem / 672px) - default
+ * @property {variable} --line-width-lg Large (50rem / 800px)
+ * @property {variable} --line-width-xl Extra large (60rem / 960px)
  *
  * @example
  * // Standard article with proper reading width

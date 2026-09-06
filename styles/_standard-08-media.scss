@@ -4,10 +4,6 @@
 /* MEDIA                       */
 /* =========================== */
 
-/* --border currently resolves to `none` everywhere it's used in this file
-   (3 places) — see the AUDIT FLAG in _standard-02-color.scss (duplicate
-   --border declaration; the "none" copy wins). Media elements here get no
-   visible border as a result. */
 img,
 video,
 audio,

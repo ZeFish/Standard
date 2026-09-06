@@ -1,5 +1,26 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Rhythm
+ * @category Layout
+ * @description Vertical rhythm for any container: apply `.rhythm` and its
+ * children get consistent `margin-block-start` spacing with no per-element
+ * classes, heavier before headings and around block-level elements
+ * (tables, blockquotes, figures — the tags this cascades to are declared
+ * once in `_standard-00-variables.scss`, not here). `.flex > *` is zeroed
+ * out automatically so rhythm margins never stack with flex `gap`.
+ *
+ * @property {class} .rhythm The container. Sets `display: flow-root` so child margins can't collapse out of it.
+ * @property {class} .no-rhythm Zeroes `margin-block-start` on every descendant — a subtree-wide opt-out, not a single-element one.
+ * @property {variable} --gap-multiplicator The one tunable knob: the multiplier applied to `--gap` for block-level spacing (default `2`), and `+3`/`+2` for the heading exceptions. Defined in `_standard-01-token.scss`.
+ *
+ * @example html - Turn any container into a rhythm block
+ * <article class="rhythm">
+ *   <h2>Heading</h2>
+ *   <p>Spaced automatically — no margin utility classes needed.</p>
+ * </article>
+ */
+
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */
 /* Applied to any container — cascades to children via margin-block-start */
 

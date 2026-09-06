@@ -1,5 +1,38 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Color System
+ * @category Foundation
+ * @description Seed-first OKLCH color engine. Set one thing — your light
+ * foreground color — and a full light/dark palette, ten semantic hues, and
+ * a shadow/elevation scale all derive from it via `oklch(from <seed> ...)`
+ * relative color syntax. Override at three depths: set `--color-light-foreground`
+ * alone (everything else follows); set individual `--color-light-*` /
+ * `--color-dark-*` tokens for per-scheme control; or theme fully via
+ * `[data-theme]` selectors, which re-resolve the whole token set at any
+ * element, not just `:root`. See the block comment below for the full
+ * four-stage architecture and hue-wheel offsets.
+ *
+ * @property {variable} --color-light-foreground The one real seed. Change this alone and dark mode, all ten hues, and every derived surface/border/shadow follow — defined in `_standard-01-token.scss`, consumed here.
+ * @property {variable} --color-light-background The other seed, paired with the foreground above.
+ * @property {variable} --color-background Semantic, scheme-aware — what most consumers actually reach for.
+ * @property {variable} --color-foreground Semantic, scheme-aware.
+ * @property {variable} --color-accent Semantic. Three generation strategies are available (`--color-*-accent-complementary` +180°, `-analogous` +30°, `-triadic` +120°) — `--color-*-accent-auto` currently aliases triadic; that alias is the documented swap point for changing strategy.
+ * @property {variable} --color-border Semantic — the color half of `--border` (`var(--stroke-width) solid var(--color-border)`).
+ * @property {variable} --color-surface Semantic. `--color-surface-low/-lowest/-lower` and `-high/-highest/-higher` extend it into a six-step elevation scale — light mode mixes toward white, dark mode toward `--color-dark-foreground`.
+ * @property {variable} --color-muted Semantic.
+ * @property {variable} --color-subtle Semantic.
+ * @property {variable} --color-red Semantic hue, one of ten (also orange, yellow, green, cyan, blue, magenta, purple, pink, brown) — each independently seeded for light and dark, not a lightened/darkened copy of the other scheme.
+ * @property {variable} --color-success Status alias onto `--color-green` (also `--color-warning`→orange, `--color-error`→red, `--color-info`→blue).
+ * @property {variable} --color-link Semantic, scheme-aware.
+ * @property {variable} --color-light Polarity alias — resolves to "the lighter of the pair," which means it SWAPS meaning between light and dark mode. `--color-dark` is its mirror. A frequent documentation trap: neither name means "the light-mode value."
+ * @property {variable} --shadow Composed preset, built from `--shadow-ambient`/`-lift`/`-glow`/`-inset`/`-ring`/`-raised`. `--shadow-xl` is redefined to just `--shadow-glow` in dark mode.
+ * @property {class} .theme-light Forces the light token set on any subtree (also sets `color-scheme: light`).
+ * @property {class} .theme-dark Forces the dark token set on any subtree (also sets `color-scheme: dark`).
+ * @property {class} .inverse Context-aware flip — resolves to whichever scheme is NOT currently active (system dark, forced dark, or forced light).
+ * @property {class} [data-color-mode] Set to `"light"` or `"dark"` on the root (or an ancestor of `[data-theme]`) to force a scheme and steer `.inverse` — without it the system follows `prefers-color-scheme`.
+ */
+
 /* ==========================================================================
    STANDARD COLOR SYSTEM — Seed-First Architecture
 
@@ -415,7 +448,11 @@
   --border-transparent: var(--stroke-width) solid transparent;
   --border-accent: var(--stroke-width) solid
     oklch(from var(--color-accent) l c h / 0.07);
-  --border: none;
+  /* Regressed to `0 solid transparent` at some point, then a prior audit
+     correctly flagged it as dead code but "fixed" it to `none` instead of
+     restoring the real value. Git history confirms the intended value —
+     unchanged across many commits before the regression — was this. */
+  --border: var(--stroke-width) solid var(--color-border);
 }
 
 /* =====================================================================

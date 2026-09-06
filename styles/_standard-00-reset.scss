@@ -1,3 +1,15 @@
+/**
+ * @component Reset
+ * @category Foundation
+ * @description A deliberately narrow reset — no classes, nothing to apply.
+ * Box-sizing and thin scrollbars go on everything; margin/padding zeroing
+ * is scoped via `:where()` to standard typographic and layout elements
+ * only, so embedded editors (CodeMirror, Obsidian) and third-party widgets
+ * keep their native spacing instead of losing it to a blanket reset. List
+ * markers are removed, media elements become block-level and responsive by
+ * default, and `[hidden]`/`<script>` visibility is enforced defensively.
+ */
+
 /* =========================== */
 /* RESET                       */
 /* =========================== */

@@ -1,5 +1,20 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Print
+ * @category Effects
+ * @description The `@media print` stylesheet: forces black-on-white tokens,
+ * shrinks type and tightens spacing for paper, hides site chrome
+ * (`header`/`footer`/`nav`/`aside`) and the analog grain overlay, strips
+ * decorative shadows, expands external links into visible URL text, and
+ * adds page-break protection plus `@page` margins with a page counter.
+ *
+ * @property {class} .no-print Hides the element and all its descendants only when printing. Everything else on this page needs no class at all.
+ *
+ * @example html - Hide something from the printed page
+ * <button class="no-print">Share</button>
+ */
+
 @media print {
   #{$stnd-theme-scope} {
     --color-foreground: black;

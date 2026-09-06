@@ -1,4 +1,22 @@
 @use "standard-00-variables" as *;
+
+/**
+ * @component Code Highlighting
+ * @category Content
+ * @description A PrismJS color theme, not a code-block layout — despite the
+ * filename, this file styles no bare `pre`/`code` element (that lives in
+ * `_standard-03-typography.scss` and `_standard-13-components.scss`). It
+ * colors `.token.*` classes that PrismJS itself emits, then overrides a
+ * handful per `.language-*` scope. The only thing a consumer actually
+ * writes by hand is `class="language-x"` on a `<pre>`/`<code>` — the
+ * `.token.*` classes are not meant to be applied manually.
+ *
+ * @property {class} .language-yaml Per-language override scope (also .language-markdown, .language-md, .language-bash, .language-sh, .language-shell, .language-nunjucks, .language-njk).
+ *
+ * @example html - The only markup a consumer writes
+ * <pre><code class="language-bash">npm install @stnd/core</code></pre>
+ */
+
 /* Note: General color utilities (.text-muted, .text-subtle, .text-accent, .bg-surface, .border-*) */
 /* moved to _standard-50-utilities.scss for better layer organization (comment said
    "standard-98-utilities.scss" — that file doesn't exist, fixed the reference) */

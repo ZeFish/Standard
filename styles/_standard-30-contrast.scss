@@ -1,5 +1,15 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Accessibility Preferences
+ * @category Effects
+ * @description Responds to OS-level accessibility preferences with zero
+ * markup or opt-in classes: `prefers-contrast: high/more` slams every color
+ * token to pure black/white and hides the decorative grain texture;
+ * `prefers-reduced-motion: reduce` (also `update: slow` / `monochrome`,
+ * covering e-ink displays) kills every transition and animation site-wide.
+ */
+
 /* ===== ACCESSIBILITY SUPPORT ===== */
 /* High contrast mode support */
 @media (prefers-contrast: high), (prefers-contrast: more) {
@@ -29,8 +39,6 @@
 @media (prefers-reduced-motion: reduce), (update: slow), (monochrome) {
   #{$stnd-theme-scope} {
     --transition: 0s;
-    --toast-progress-duration: 0.5s;
-    --toast-progress-easing: linear;
   }
 
   *,
@@ -39,15 +47,5 @@
     transition: none !important;
     animation: none !important;
     scroll-behavior: auto !important;
-  }
-
-  /* Deliberate exception to the blanket transition:none above (wins via
-     higher specificity — .toast-progress beats the universal *). A toast's
-     countdown bar is functional motion (communicates time remaining), not
-     decorative, so it's exempted rather than disabled — just slowed to a
-     flat --toast-progress-duration instead of stopped outright. */
-  .toast-progress {
-    transition: width var(--toast-progress-duration)
-      var(--toast-progress-easing) !important;
   }
 }
