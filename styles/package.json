@@ -37,9 +37,6 @@
   "scripts": {
     "build": "sass standard.scss dist/standard.css --style compressed && sass obsidian.scss dist/obsidian.css --style compressed"
   },
-  "dependencies": {
-    "wrangler": "^4.129.0"
-  },
   "devDependencies": {
     "sass": "^1.70.0"
   }

@@ -1,25 +1,88 @@
 @use "standard-00-variables" as *;
 
 /**
- * @component Code Highlighting
+ * @component Code Layout & Highlighting
  * @category Content
- * @description A PrismJS color theme, not a code-block layout — despite the
- * filename, this file styles no bare `pre`/`code` element (that lives in
- * `_standard-03-typography.scss` and `_standard-13-components.scss`). It
- * colors `.token.*` classes that PrismJS itself emits, then overrides a
- * handful per `.language-*` scope. The only thing a consumer actually
- * writes by hand is `class="language-x"` on a `<pre>`/`<code>` — the
- * `.token.*` classes are not meant to be applied manually.
+ * @description Code block container layout, copy buttons, and PrismJS syntax highlighting theme.
  *
- * @property {class} .language-yaml Per-language override scope (also .language-markdown, .language-md, .language-bash, .language-sh, .language-shell, .language-nunjucks, .language-njk).
+ * @property .stnd-code-block Styled code block container with copy button and inset shadows.
+ * @property .copy-button Floating copy action button inside code blocks.
+ * @property pre Preformatted code block with compact leading and hover transitions.
+ * @property .token.keyword Keywords and control-flow statements (`--color-red`).
+ * @property .token.string Quoted strings and attribute values (`--color-green`).
+ * @property .token.number Numeric literals and boolean values (`--color-cyan`).
+ * @property .token.function Function declarations and method invocations (`--color-yellow`).
+ * @property .token.property Object keys and CSS property names (`--color-orange`).
+ * @property .token.punctuation Brackets, parens, delimiters, and operators (`--color-muted`).
+ * @property .token.comment Code comments rendered in muted italic typography (`--color-subtle`).
+ * @property .language-* Per-language syntax overrides for YAML, Markdown, Shell/Bash, and Nunjucks.
  *
- * @example html - The only markup a consumer writes
- * <pre><code class="language-bash">npm install @stnd/core</code></pre>
+ * @example html - Standard code block with copy button
+ * <div class="stnd-code-block">
+ *   <button class="copy-button">Copy</button>
+ *   <pre><code class="language-bash">npm install @stnd/core</code></pre>
+ * </div>
  */
 
-/* Note: General color utilities (.text-muted, .text-subtle, .text-accent, .bg-surface, .border-*) */
-/* moved to _standard-50-utilities.scss for better layer organization (comment said
-   "standard-98-utilities.scss" — that file doesn't exist, fixed the reference) */
+/* =========================== */
+/* CODE BLOCK CONTAINER        */
+/* =========================== */
+
+.stnd-code-block {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-inset), var(--shadow-ring);
+  transition: all var(--transition);
+
+  pre {
+    padding: var(--space);
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    margin: var(--stroke-width);
+    overflow-x: auto;
+    position: static;
+  }
+
+  &:hover .copy-button {
+    opacity: 1;
+  }
+}
+
+.copy-button {
+  position: absolute;
+  top: var(--leading);
+  right: var(--leading);
+  opacity: 0;
+
+  &:hover {
+    opacity: 1 !important;
+    color: var(--color-on-accent);
+    background-color: var(--color-accent);
+  }
+
+  &.copied {
+    color: var(--color-success, #22c55e) !important;
+  }
+
+  &.failed {
+    color: var(--color-error, #ef4444) !important;
+  }
+}
+
+pre {
+  line-height: var(--line-height-compact);
+
+  code {
+    opacity: 0.85;
+    transition: opacity var(--transition);
+  }
+
+  &:hover code {
+    opacity: 1;
+  }
+}
 
 /* PrismJS syntax highlighting - Language agnostic tokens */
 

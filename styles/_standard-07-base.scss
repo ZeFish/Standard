@@ -8,8 +8,11 @@
  * global reading-measure cap applied to text elements site-wide (not just
  * inside `.prose`), theme-transition rules, and selection/mark highlights.
  *
- * @property {class} .no-body-margin Applied to a `<footer>`/`<header>` that is a direct child of `<body>` and the last/first element of its type, respectively — negates the body's horizontal padding (both variants) and the footer's extra 1.5× bottom padding / the header's top padding, so that one element can extend edge-to-edge. Narrower than the name suggests: it does nothing on any other element or position.
- * @property {class} .container-hero Consumer-applied, but element-qualified — only takes effect on a `<section>`.
+ * @property html Root element establishing background color, foreground text color, font smoothing, and smooth scrolling.
+ * @property body Document container centered at `--body-max-width` with responsive padding and scroll margins.
+ * @property .no-body-margin Full-bleed helper applied to `<header>` or `<footer>` to extend edge-to-edge past body padding.
+ * @property .container-hero Hero section container with vertical padding and hairline borders.
+ * @property ::selection Custom highlight selection using subtle yellow background tint and accent text color.
  *
  * @example html - Full-bleed footer inside a normally-padded body
  * <footer class="no-body-margin">Full-width footer content</footer>
@@ -140,14 +143,6 @@ hr {
   background: var(--color-border);
   border: none;
   block-size: var(--stroke-width, 1px);
-}
-
-/* Mark highlighting */
-mark {
-  background: oklch(from var(--color-yellow) l c h / 0.3);
-  color: color-mix(in oklch, var(--color-yellow) 30%, var(--color-foreground));
-  padding: var(--trim);
-  padding-top: 0.1em;
 }
 
 /* =========================== */

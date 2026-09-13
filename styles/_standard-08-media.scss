@@ -1,15 +1,26 @@
 @use "standard-00-variables" as *;
 
-/* =========================== */
-/* MEDIA                       */
-/* =========================== */
+/**
+ * @component Media & Embeds
+ * @category Content
+ * @description Responsive media containers for images, native video, audio players,
+ * and iframes. Applies theme borders, elevation shadows, and rounded corners by default.
+ *
+ * @property img Responsive image with theme radius and raised surface shadow.
+ * @property video Native video element with border and elevation.
+ * @property .video-container Responsive 16:9 media embed container for videos and iframes.
+ * @property .stnd-icon Icon container unsetting default media borders and shadows to inherit currentColor.
+ * @property figure Grid container for media and associated captions.
+ * @property figcaption Centered italic caption text for figures.
+ * @property img.fx Image explicitly styled with theme border and radius.
+ * @property img.nofx Image stripping borders, shadows, and radii.
+ */
 
 img,
 video,
 audio,
 iframe,
-.video,
-.video-container {
+.video {
   max-width: 100%;
   border-radius: var(--radius);
   box-shadow: var(--shadow-raised);
@@ -19,33 +30,26 @@ iframe,
 }
 
 /* =========================== */
-/* TYPOGRAPHIC NUANCES         */
+/* VIDEO EMBEDS                */
 /* =========================== */
-.video-container:has(video) {
+.video-container {
   position: relative;
-  /* Unlike the iframe variant in _standard-06-prose.scss, this one holds a
-     native <video> element, which has real intrinsic dimensions — the
-     legacy padding-bottom:56.25% aspect-ratio hack (disabled below) isn't
-     needed the way it is for iframes. */
-  /* padding-bottom: 56.25% — 16:9 aspect ratio, disabled, see above */
-  border: none;
-  box-shadow: none;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
-  background: transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-raised);
+  border: var(--border);
+  background: var(--color-surface);
 
+  iframe,
   video {
-    border-radius: var(--radius);
-    border: var(--border);
-    box-shadow: var(--shadow-raised);
-  }
-
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     border: 0;
+    display: block;
+    object-fit: cover;
   }
 }
 
@@ -80,12 +84,17 @@ figcaption {
 }
 
 /**
- * @component Image System
+ * @component Image Zoom & Lightbox
+ * @category Content
  * @description Responsive image handling with interactive zoom functionality.
- * This system is progressively enhanced. Without JavaScript, it provides a
- * basic zoom-on-click-and-hold. With JavaScript, it provides a full
- * feature-rich lightbox experience.
+ * Progressively enhanced: without JavaScript, provides click-and-hold zoom.
+ * With JavaScript, provides a full frosted-glass lightbox experience.
  *
+ * @property html:not(.js-image-zoom-enabled) img:active Fallback CSS-only zoom on click-and-hold.
+ * @property .image-zoom-overlay Fullscreen glassmorphic lightbox overlay created dynamically by JS.
+ * @property .image-zoom-overlay.is-visible Active visible state for the lightbox overlay.
+ * @property html.image-zoomed-active Body scroll lock class applied when lightbox is active.
+ * @property [data-no-zoom] Attribute to prevent zoom interaction on icons or avatars.
  * @since 0.1.0
  */
 

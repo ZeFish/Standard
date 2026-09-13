@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-13 14:29
 cssclasses: []
 maturity: sprout
 mode: read
@@ -136,9 +136,13 @@ snippet: false
         font-weight: 450;
         letter-spacing: -0.01em;
         color: var(--color-muted);
+        border-left: var(--stroke-width-lg) solid var(--color-accent);
+        padding-block: var(--space-2);
+        margin-block: var(--space-3) var(--space-2);
+        margin-inline: var(--space);
+        font-size: var(--size-base);
       }
 
-      blockquote,
       pre {
         padding: var(--trim) var(--leading);
         border: 0;

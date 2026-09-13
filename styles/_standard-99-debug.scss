@@ -9,13 +9,16 @@
  * baseline rhythm, reading layout zones, and other layout metrics. Essential for
  * design system development and layout debugging. Automatically hidden in print.
  *
- * @property {class} .stnd-debug Enable debug visualization
- * @property {overlay} baseline-grid Horizontal baseline grid overlay
- * @property {overlay} grid-columns Vertical grid column overlay
- * @property {overlay} reading-zones Reading layout zone visualization
- * @property {overlay} rhythm-spacing Margin/spacing outline visualization
- * @property {indicator} breakpoint-indicator Current responsive breakpoint
- * @property {indicator} debug-panel Fixed info panel with metrics
+ * @property .stnd-debug Enable debug visualization overlays on the page or container.
+ * @property .debug-baseline-grid Horizontal baseline rhythm grid overlay.
+ * @property .debug-grid-columns Vertical grid column guidelines overlay.
+ * @property .debug-reading-zones Reading layout column boundary highlights.
+ * @property .debug-rhythm-spacing Margin and padding bounding box visualizer.
+ * @property .debug-breakpoint-indicator Viewport responsive breakpoint tag indicator.
+ * @property .debug-panel Fixed status panel reporting active layout metrics.
+ * @property --stnd-lab-bg Debug HUD background color.
+ * @property --stnd-lab-text Debug HUD text color.
+ * @property --stnd-lab-accent Debug HUD accent highlight color.
  *
  * @example
  * // Enable debug mode on page

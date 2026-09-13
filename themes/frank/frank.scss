@@ -86,8 +86,9 @@
 		.markdown-reading-view p:has(img) {
 		  margin-inline: 0 !important;
 		  padding-inline: 0 !important;
+				box-shadow: 0 !important;
 		}
-		
+
 		.markdown-reading-view h1,
  .cm-header-1,
  .HyperMD-header-1,

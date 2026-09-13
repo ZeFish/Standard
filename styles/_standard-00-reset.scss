@@ -7,7 +7,13 @@
  * only, so embedded editors (CodeMirror, Obsidian) and third-party widgets
  * keep their native spacing instead of losing it to a blanket reset. List
  * markers are removed, media elements become block-level and responsive by
- * default, and `[hidden]`/`<script>` visibility is enforced defensively.
+ * @property * Universal box-sizing (`border-box`), zero default border width, and thin scrollbars.
+ * @property :where(...) Targeted margin/padding zeroing on standard typographic and layout elements, protecting embedded editors.
+ * @property ol,ul,menu List-style unsetting for clean typographic lists.
+ * @property img,video Block display, vertical centering, and responsive max-width.
+ * @property svg Inline-block display for inline icons and symbols.
+ * @property [hidden] Defensive display hiding while preserving `hidden="until-found"` for find-in-page.
+ * @property script Enforced `display: none !important` guarding against aggressive global style overrides.
  */
 
 /* =========================== */

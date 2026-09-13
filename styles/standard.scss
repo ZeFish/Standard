@@ -1,10 +1,8 @@
 /*!
  * @component Introduction
- * Standard Design — Fine-Art Typography Framework
- *
- * Classical design principles, mathematical precision with the golden ratio,
- * and micro-typography rules inspired by the masters of print design.
- * Built to be themable. Zero runtime dependencies.
+ * @category Overview
+ * @description Fine-art typography framework combining classical European design principles,
+ * mathematical precision with the golden ratio, and modern relative-color syntax.
  *
  * Based on research from:
  * - The Elements of Typographic Style (Robert Bringhurst)
@@ -14,6 +12,13 @@
  * - Modern web accessibility standards
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
+ *
+ * @property Foundation Layer Reset, variables, design tokens, OKLCH color engine, and typography system.
+ * @property Layout Layer 12-column Swiss grid, vertical rhythm engine, and fluid prose layouts.
+ * @property Elements Layer Base document root, responsive media/lightbox, styled lists, tables, forms, and syntax highlighting.
+ * @property Components Layer Button hierarchy, elevated cards, callouts, alerts, and analog atmospheric grain.
+ * @property Modes Layer High contrast accessibility, print stylesheets, and e-ink display adaptation.
+ * @property Utilities Layer T-shirt and mathematical scale utilities, and layout debugging overlays.
  *
  * @version @VERSION_PLACEHOLDER@
  * @license MIT

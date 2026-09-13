@@ -10,9 +10,10 @@
  * once in `_standard-00-variables.scss`, not here). `.flex > *` is zeroed
  * out automatically so rhythm margins never stack with flex `gap`.
  *
- * @property {class} .rhythm The container. Sets `display: flow-root` so child margins can't collapse out of it.
- * @property {class} .no-rhythm Zeroes `margin-block-start` on every descendant — a subtree-wide opt-out, not a single-element one.
- * @property {variable} --gap-multiplicator The one tunable knob: the multiplier applied to `--gap` for block-level spacing (default `2`), and `+3`/`+2` for the heading exceptions. Defined in `_standard-01-token.scss`.
+ * @property .rhythm The container class. Sets `display: flow-root` so child margins cannot collapse out of it.
+ * @property .no-rhythm Zeroes `margin-block-start` on every descendant — a subtree-wide rhythm opt-out.
+ * @property --gap-multiplicator Rhythm multiplier factor for block-level spacing and heading exceptions.
+ * @property .flex > * Zeroes `margin-block-start` for flex children so margins do not stack with flex gap.
  *
  * @example html - Turn any container into a rhythm block
  * <article class="rhythm">

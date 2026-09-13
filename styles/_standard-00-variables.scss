@@ -5,10 +5,17 @@
  * vertical rhythm and spacing across all elements. These mixins ensure proper
  * spacing application for rhythm-aware components.
  *
- * @property {variable} $mobile Mobile breakpoint (600px)
- * @property {variable} $small Small screen breakpoint (768px)
- * @property {variable} $large Large screen breakpoint (1024px)
- * @property {variable} $wide Wide screen breakpoint (1440px)
+ * @property $mobile Mobile breakpoint boundary (600px).
+ * @property $small Small screen/tablet breakpoint boundary (768px).
+ * @property $large Large desktop screen breakpoint boundary (1024px).
+ * @property $wide Ultra-wide display breakpoint boundary (1440px).
+ * @property $text-elements Selector list of inline and text elements receiving text-box-trim for baseline grid alignment.
+ * @property $rhythm-simple-tags Selector list of standard flow elements spaced by single rhythm gap.
+ * @property $rhythm-double-tags Selector list of heavier block elements spaced by multiplied rhythm margin.
+ * @property $rhythm-tags Union selector list of all rhythm-managed elements.
+ * @property %surface Placeholder selector applying card/surface elevation, radius, and background.
+ * @property %padding-text Placeholder selector applying standard text control padding.
+ * @property $stnd-theme-scope CSS selector scope for theme token assignment (`:root` by default).
  *
  * @example scss
  * // Using breakpoint variables
@@ -16,9 +23,9 @@
  *   font-size: 1.2rem;
  * }
  *
- * // Using rhythm mixin
- * @include apply-rhythm {
- *   margin-bottom: var(--space);
+ * // Extending surface placeholder
+ * .my-panel {
+ *   @extend %surface;
  * }
  *
  * @since 0.1.0

@@ -7,7 +7,11 @@
  * markup or opt-in classes: `prefers-contrast: high/more` slams every color
  * token to pure black/white and hides the decorative grain texture;
  * `prefers-reduced-motion: reduce` (also `update: slow` / `monochrome`,
- * covering e-ink displays) kills every transition and animation site-wide.
+ * @property --color-surface Surface token forced to match background in high-contrast mode.
+ * @property --color-border Border token forced to pure foreground color.
+ * @property --color-muted Muted text token forced to pure foreground color.
+ * @property --shadow Shadow elevation disabled (`0`) to eliminate low-contrast blur.
+ * @property --transition Transition duration forced to `0s` under reduced-motion preferences.
  */
 
 /* ===== ACCESSIBILITY SUPPORT ===== */

@@ -3,8 +3,19 @@
 /**
  * @component Utility Classes
  * @category Utilities
- * @description Hybrid utility system supporting both Industrial T-shirt sizes
- * and Mathematical units (1-12).
+ * @description Hybrid utility system supporting both Industrial T-shirt sizes (3xs..6xl)
+ * and Mathematical rhythm units (1-12, half, trim, leading).
+ *
+ * @property .p-*, .pt-*, .pb-*, .pl-*, .pr-*, .px-*, .py-* Padding scale utilities.
+ * @property .m-*, .mt-*, .mb-*, .ml-*, .mr-*, .mx-*, .my-* Margin scale utilities.
+ * @property .gap-*, .gap-x-*, .gap-y-* Grid and flex gap utilities.
+ * @property .w-*, .h-*, .max-w-*, .min-w-*, .max-h-*, .min-h-* Sizing scale utilities.
+ * @property .text-muted, .text-subtle, .text-accent Foreground text color utilities.
+ * @property .bg-surface, .bg-background Background color utilities.
+ * @property .border, .border-accent, .border-transparent Border stroke utilities.
+ * @property .rounded, .rounded-sm, .rounded-lg, .rounded-full Border radius utilities.
+ * @property .shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl Elevation shadow utilities.
+ * @property .flex, .inline-flex, .grid, .inline-grid, .block, .inline-block, .hidden Layout display utilities.
  */
 
 /* ============================================================ */

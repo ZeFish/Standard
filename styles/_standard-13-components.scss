@@ -1,5 +1,24 @@
 @use "standard-00-variables" as *;
 
+/**
+ * @component Components & Buttons
+ * @category Components
+ * @description Interactive buttons, button groups, loaders, and keycaps.
+ * Buttons extend `%surface` and `%padding-text`, providing tactile hover states,
+ * focus outlines, and active feedback.
+ *
+ * @property button Zero-class interactive button element.
+ * @property a.btn Anchor styled identically to a button.
+ * @property .btn-primary Primary action button filled with accent color.
+ * @property .btn-secondary Secondary button with subtle surface background.
+ * @property .btn-outline Outlined button with hairline border.
+ * @property .btn-destructive Destructive action button using error red.
+ * @property .btn-ghost Ghost button transparent until hover.
+ * @property .btn-icon Square icon action button.
+ * @property .btn-group Segmented inline button group with shared borders.
+ * @property .loader Rotating circular spinner with accent glow.
+ */
+
 /* =========================== */
 /* BUTTONS                     */
 /* =========================== */
@@ -31,19 +50,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-kbd {
-  background-color: var(--color-surface);
-  background-image: var(--effect-grain);
-  border: none;
-  border-radius: var(--radius);
-  /* Button-like raised effect */
-  box-shadow: var(--shadow-raised);
-  padding: var(--space-d6) var(--space-d3);
-  font-family: var(--font-monospace);
-  font-size: var(--size-xs);
-  pointer-events: none;
 }
 
 $types: "secondary", "outline", "destructive", "ghost", "icon";
@@ -339,6 +345,17 @@ a.badge.secondary:hover,
   }
 }
 
+/**
+ * @name Alert Banners
+ * @group components-feedback
+ * @description Contextual feedback notifications with status colors and left accent borders.
+ *
+ * @property .alert Container banner using interface typography and status tinting.
+ * @property .alert.success Success alert themed with green status color.
+ * @property .alert.warning Warning alert themed with orange status color.
+ * @property .alert.error Error alert themed with red status color.
+ * @property .alert.info Informational alert themed with blue status color.
+ */
 .alert {
   font-family: var(--font-interface);
   --color-alert: var(--color-accent);
@@ -407,6 +424,13 @@ a.badge.secondary:hover,
  * - Horizontal card layout variant for image + content side-by-side
  * - Dark mode shadow adjustments for better depth perception
  * - Optional card image hero with object-fit controls
+ *
+ * @property .card Structured container with surface elevation, hairline borders, and rhythm padding.
+ * @property .card-header Header area for card title and metadata.
+ * @property .card-body Main content body with automatic vertical rhythm.
+ * @property .card-footer Bottom action bar for links and buttons.
+ * @property .card.clickable Interactive clickable card variant with hover lift.
+ * @property .card-grid Responsive grid container specifically designed for card multiples.
  *
  * @see {class} .grid - Often used to layout multiple cards in columns
  * @see {variable} --base - Controls internal spacing rhythm
@@ -596,6 +620,16 @@ card.inset {
   box-shadow: inset var(--shadow) !important;
 }
 
+/**
+ * @name Callout Blocks
+ * @group components-layout
+ * @description Obsidian-style callout boxes with icons, titles, and collapsible folding.
+ *
+ * @property .callout Container callout card with raised shadow and ring border.
+ * @property .callout-title Header title for callout.
+ * @property .callout-content Body content within callout.
+ * @property details.callout Collapsible fold callout using native HTML details.
+ */
 .callout {
   /* Raised effect for callout cards */
   box-shadow: var(--shadow-raised), var(--shadow-ring);
@@ -844,8 +878,14 @@ details .callout-fold {
 
 /**
  * @name Comments
- * @group comments
+ * @group components
  * @since 0.11.0
+ * @description Threaded discussion list with author names, timestamps, and quotes.
+ *
+ * @property #comments Root comments container.
+ * @property .comment Single comment card with surface background and elevation.
+ * @property .comment-header Author, date, and status metadata bar.
+ * @property .comment-content Indented comment message body.
  */
 
 #comments {
@@ -907,6 +947,8 @@ details .callout-fold {
  *
  * Actions within alerts (links, buttons) should be visually distinct but not
  * overwhelming. This provides subtle styling that inherits the alert's color.
+ *
+ * @property .alert-action Inline action link within an alert, inheriting `--color-alert`.
  */
 /* Fixed 2026-07-14 — was an undefined token (--alert-border-color),
    corrected to the real --color-alert, matching the docblock's stated

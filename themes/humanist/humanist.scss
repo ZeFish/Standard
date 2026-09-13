@@ -54,4 +54,13 @@
         padding: 2rlh 0;
         color: var(--color-foreground);
     }
+
+    blockquote {
+      border-left: var(--stroke-width-lg) solid var(--color-accent);
+      padding-block: var(--space-2);
+      margin-block: var(--space-2) var(--space);
+      margin-inline: var(--space);
+      font-size: var(--size-lg);
+      font-family: var(--font-header);
+    }
 }

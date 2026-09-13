@@ -6,6 +6,27 @@
  * @description Fine-art typography system using variable fonts, OpenType features,
  * and mathematical scaling. Implements classical typography rules with modern web capabilities.
  * Supports multiple font families, optical sizing, and locale-specific rules.
+ *
+ * @property --font-sans Sans-serif font stack (`"Inter", "Instrument Sans Variable", system-ui, -apple-system, sans-serif`).
+ * @property --font-serif Serif font stack (`"Source Serif 4", "Newsreader", "Instrument Serif", serif`).
+ * @property --font-monospace Monospace font stack (`"IBM Plex Mono", ui-monospace, monospace`).
+ * @property --font-text Semantic body font family (defaults to `--font-sans`).
+ * @property --font-header Semantic heading font family (defaults to `"Inter"`).
+ * @property --font-interface Semantic UI font family (defaults to `--font-sans`).
+ * @property --font-inter-feature OpenType stylistic feature set for Inter font.
+ * @property --font-instrument-feature OpenType stylistic feature set for Instrument Sans.
+ * @property --font-weight Normal text font weight (`400`).
+ * @property --font-weight-bold Bold text font weight (`600`).
+ * @property --font-header-weight Heading font weight anchor (`700`).
+ * @property --font-weight-h1 Level 1 heading weight.
+ * @property --font-weight-h2 Level 2 heading weight.
+ * @property --font-weight-h3 Level 3 heading weight.
+ * @property --font-weight-h4 Level 4 heading weight.
+ * @property --font-weight-h5 Level 5 heading weight.
+ * @property --font-weight-h6 Level 6 heading weight.
+ * @property --font-letter-spacing Body letter spacing default (`normal`).
+ * @property --font-header-letter-spacing Heading letter spacing default (`normal`).
+ * @property --list-indent Default list item indentation (`var(--space)`).
  */
 
 #{$stnd-theme-scope} {
@@ -66,7 +87,7 @@
   --font-weight-h6: var(--font-weight);
 
   --list-indent: var(--space);
-
+}
 
 /* =========================== */
 /* CORE ELEMENT STYLING        */
@@ -150,7 +171,23 @@ h6 {
   line-height: var(--line-height);
 }
 
-/* Typography Patterns */
+/**
+ * @component Typography Elements & Patterns
+ * @category Typography
+ * @description Headings, inline styling, small-caps overlines, keycaps, marks, and blockquotes.
+ *
+ * @property .overline Small-caps letterspaced kicker label with top border rule.
+ * @property .bold Strong bold text weight utility.
+ * @property .menu UI interface font role application.
+ * @property .ui UI interface font role application.
+ * @property .interface UI interface font role application.
+ * @property .font-interface Explicit interface font family utility.
+ * @property .font-mono Monospace font family utility.
+ * @property mark Highlight mark element with optical trim padding and theme tinting.
+ * @property kbd Keyboard keycap with raised shadow and monospace font.
+ * @property a:hover Color and underline accent transition for hyperlinks.
+ * @property a[target="_blank"] External link with automatic arrow indicator (`↗`).
+ */
 .overline {
   font-variant-caps: small-caps;
   letter-spacing: 0.04em;
@@ -235,62 +272,6 @@ pre,
   font-variation-settings: var(--font-monospace-variation);
 }
 
-.stnd-code-block {
-  position: relative;
-  background: var(--color-surface);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-inset), var(--shadow-ring);
-  transition: all var(--transition);
-
-  pre {
-    padding: var(--space);
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    margin: var(--stroke-width);
-    overflow-x: auto;
-    position: static;
-  }
-
-  &:hover .copy-button {
-    opacity: 1;
-  }
-}
-
-.copy-button {
-  position: absolute;
-  top: var(--leading);
-  right: var(--leading);
-  opacity: 0;
-
-  &:hover {
-    opacity: 1 !important;
-    color: var(--color-on-accent);
-    background-color: var(--color-accent);
-  }
-
-  &.copied {
-    color: var(--color-success, #22c55e) !important;
-  }
-
-  &.failed {
-    color: var(--color-error, #ef4444) !important;
-  }
-}
-
-pre {
-  line-height: var(--line-height-compact);
-
-  code {
-    opacity: 0.85;
-    transition: opacity var(--transition);
-  }
-
-  &:hover code {
-    opacity: 1;
-  }
-}
-
 blockquote {
   font-style: italic;
   color: var(--color-muted);
@@ -304,7 +285,7 @@ blockquote {
   }
 }
 
-/* Utilities */
+/* Utilities & Inline Elements */
 small {
   font-size: var(--size-sm);
 }
@@ -330,57 +311,34 @@ em {
   font-style: italic;
 }
 
-/**
- * @component Design Tokens
- * @category Foundation
- * @description Primitive design tokens forming the foundation of the design system.
- * Includes "Self-Aware" fluid typography that scales based on the Optical Ratio.
- *
- * This block redeclares --font-size and --line-height, silently superseding
- * the flat --font-size: 1rem set in _standard-01-token.scss (same selector,
- * this file loads later in standard.scss's @use order, so this wins) —
- * deliberate layering (naive default → fluid enhancement), not a conflict,
- * but non-obvious without reading both files.
- */
-
-#{$stnd-theme-scope} {
-  /* ===== 2. THE META-COGNITION (Fluid Slopes) =====
-     Instead of magic numbers, we use the Ratio to determine "Physics".
-
-     Slope: (Ratio - 1).
-     - Golden (0.618) -> steep slope (fast growth).
-     - Silver (0.414) -> moderate slope.
-  */
-  --physics-slope: max(calc(var(--optical-ratio) - 1), 0.15);
-
-  /* Growth Factor: How responsive is the resizing across viewports?
-     Scales smoothly with viewport width while respecting the optical ratio. */
-  --fluid-growth: calc(var(--physics-slope) * 1.2vw);
-
-  /* ===== 3. FLUID TYPOGRAPHY =====
-     Base size starts from theme --font-size or --font-text-size (defaulting to a generous 1.0625rem / 17px)
-     and grows comfortably across larger displays.
-  */
-  --base-size: var(--font-text-size, var(--font-size, 1.0625rem));
-
-  --font-size: clamp(
-    var(--base-size),
-    calc(var(--base-size) + var(--fluid-growth)),
-    calc(var(--base-size) * 1.3)
-  );
-
-  /* ===== 4. FLUID LINE HEIGHT =====
-     Uses the theme's configured --font-density (falling back to --optical-ratio).
-     Keeps comfortable line spacing in harmony with the theme.
-  */
-  --density-base: var(--font-density, var(--optical-ratio));
-
-  --line-height: clamp(
-    1.35,
-    var(--density-base),
-    1.75
-  );
+/* Mark highlighting */
+mark {
+  background: oklch(from var(--color-yellow) l c h / 0.3);
+  color: color-mix(in oklch, var(--color-yellow) 30%, var(--color-foreground));
+  padding: var(--trim);
+  padding-top: 0.1em;
 }
+
+/* Keycaps */
+kbd {
+  background-color: var(--color-surface);
+  background-image: var(--effect-grain);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-d6) var(--space-d3);
+  font-family: var(--font-monospace);
+  font-size: var(--size-xs);
+  pointer-events: none;
+}
+
+/**
+ * @component Heading Rhythm & Grid Snapping
+ * @category Typography
+ * @description Half-baseline rhythm snapping mixin for heading hierarchy.
+ *
+ * @property @mixin grid-line-height Heading line-height mixin snapping leading to half-baseline rhythm increments.
+ */
 
 @mixin grid-line-height($tightness: 1.1) {
   /* The "Target" is simply the font-size * tightness, unless a note
@@ -400,7 +358,7 @@ em {
      'up' ensures we always have *at least* enough room. */
 }
 
-/* Usage in your Header sizes */
+/* Usage in Header sizes */
 h1 {
   /* Giant text needs very tight leading (1.05x), then snap up */
   @include grid-line-height(1.05);
@@ -417,6 +375,4 @@ h5,
 h6 {
   /* Small headers need body-like leading (1.3x), then snap up */
   @include grid-line-height(1.3);
-}
-
 }

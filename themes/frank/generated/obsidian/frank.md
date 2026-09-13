@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-13 14:37
 cssclasses: []
 maturity: sprout
 mode: read
@@ -61,8 +61,9 @@ snippet: false
     		.markdown-reading-view p:has(img) {
     		  margin-inline: 0 !important;
     		  padding-inline: 0 !important;
+    				box-shadow: 0 !important;
     		}
-    		
+
     		.markdown-reading-view h1,
      .cm-header-1,
      .HyperMD-header-1,

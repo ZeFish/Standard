@@ -9,10 +9,15 @@
  * adjacency rules that space form parts apart from each other and from
  * whatever follows them.
  *
- * @property {variable} --switch-height The one real sizing knob for `input[type=checkbox][role=switch]` — width and thumb size both derive from it.
- * @property {variable} --switch-width Derived as `calc(var(--switch-height) * 2)`; override independently to change the switch's aspect ratio.
- * @property {variable} --switch-padding Inset controlling the thumb gap (default `2px`).
- * @property {variable} --slider-value NOT set here — read by `input[type=range]`'s fill gradient (50% fallback) and written at runtime by the range-slider's own JS. Any consumer building a custom range slider must set this to get the filled-track effect.
+ * @property fieldset Container grouping form controls with hairline border, radius, and subtle surface background tint.
+ * @property legend Bold legend label nested within fieldset.
+ * @property input, textarea Zero-class text controls with interface typography, raised shadow, and accent focus rings.
+ * @property select Custom styled dropdown with double-chevron indicator and rhythm-aligned padding.
+ * @property input[role=switch] Accessible toggle switch with animated sliding thumb.
+ * @property --switch-height Primary height sizing knob for toggle switch controls.
+ * @property --switch-width Width sizing token for toggle switches (`calc(var(--switch-height) * 2)`).
+ * @property --switch-padding Inset padding controlling the toggle switch thumb gap (`2px`).
+ * @property --slider-value Percentage value driving custom filled range slider tracks.
  *
  * @example html - A switch (role=switch on a checkbox)
  * <input type="checkbox" role="switch">

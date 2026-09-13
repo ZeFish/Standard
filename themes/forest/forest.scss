@@ -157,6 +157,8 @@ body.theme-dark .inline-title {
 .el-blockquote blockquote {
   position: relative;
   border-radius: calc(var(--radius-s) * 2);
+  border:none;
+  box-shadow: var(--shadow-inset);
 }
 
 .view-content hr {

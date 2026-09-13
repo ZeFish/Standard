@@ -11,7 +11,10 @@
  * borders, thickens headings to weight 900, and dithers images to
  * high-contrast grayscale. Zero markup or opt-in classes required.
  *
- * @property {variable} --color-accent Forced to black — no orange on black-and-white screens. The single most surprising override in this file: any accent-colored UI goes fully monochrome here, by design.
+ * @property --color-accent Forced to black — no chromatic accents on black-and-white screens.
+ * @property --color-foreground Forced to pure black.
+ * @property --color-background Forced to pure white.
+ * @property --color-border Forced to solid black, replacing fuzzy shadows with sharp contrast.
  */
 
 @media screen and (update: slow), (monochrome) {

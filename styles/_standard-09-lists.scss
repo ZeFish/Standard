@@ -7,12 +7,12 @@
  * absolutely-positioned bullets and tabular-nums counters, and spaces items
  * apart via `li + li`. Four density/marker classes are opt-in.
  *
- * @property {class} .no-bullet Hides markers and removes the inline padding; cascades to nested `<ul>` too. Also defined in `_standard-50-utilities.scss` — same intent, safe to use either.
- * @property {class} .tight Apply to a `<ul>`/`<ol>` — tightens item spacing to `--space-d3`.
- * @property {class} .compact Apply to a `<ul>`/`<ol>` — tightens item spacing to `--space-d2`. Combines cleanly with `_standard-50-utilities.scss`'s same-named `.compact` (compact line-height) — different property, same intent, no collision.
- * @property {class} .relaxed Apply to a `<ul>`/`<ol>` — widens item spacing to `--space-2`. Same relationship to `_standard-50-utilities.scss`'s `.relaxed` as `.compact` above.
- * @property {class} .task-list-item Applied automatically by `@stnd/press`'s typography-tasks plugin to any `- [ ]` / `- [x]` list item — not something you write by hand. Replaces the bullet with a real (disabled) checkbox.
- * @property {class} .task-field Applied automatically by the same plugin to `[key:: value]` Dataview-style inline fields found inside task text — rendered as a small tagged badge instead of raw bracket text.
+ * @property .no-bullet Hides markers and removes inline padding; cascades to nested lists.
+ * @property .tight Tightens list item vertical spacing to `--space-d3`.
+ * @property .compact Tightens list item vertical spacing to `--space-d2`.
+ * @property .relaxed Widens list item vertical spacing to `--space-2`.
+ * @property .task-list-item Applied to task list items (`- [ ]`), displaying interactive or static checkbox.
+ * @property .task-field Inline badge representation for Dataview-style `[key:: value]` metadata.
  *
  * @example html - What `- [ ] Ship it [priority:: 1]` becomes
  * <li class="task-list-item">

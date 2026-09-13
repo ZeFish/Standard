@@ -9,7 +9,11 @@
  * decorative shadows, expands external links into visible URL text, and
  * adds page-break protection plus `@page` margins with a page counter.
  *
- * @property {class} .no-print Hides the element and all its descendants only when printing. Everything else on this page needs no class at all.
+ * @property .no-print Hides the element and all its descendants only when printing.
+ * @property --color-foreground Forced to pure black for high print legibility.
+ * @property --color-background Forced to pure white for paper ink conservation.
+ * @property --font-size Adjusted root font size for printed text (`0.925rem`).
+ * @property --line-height Tightened line height for print reading (`1.4`).
  *
  * @example html - Hide something from the printed page
  * <button class="no-print">Share</button>

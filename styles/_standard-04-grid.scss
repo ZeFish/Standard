@@ -8,14 +8,18 @@
  * asymmetric layouts, gap variants (compact/normal/wide), and responsive column changes.
  * All gaps align to the vertical rhythm system.
  *
- * @property {class} .grid 12-column grid container
- * @property {class} .col-1 through .col-12 Column span modifiers (direct children of .grid)
- * @property {class} .sm\:col-* Responsive columns at max-width 768px (mobile)
- * @property {class} .lg\:col-* Responsive columns at min-width 1024px (desktop)
- * @property {class} .start-{n} Start column position (1-12)
- * @property {class} .grid.no-gap Removes row-gap
- * @property {class} .grid.compact Compact gap (--trim)
- * @property {class} .grid.relaxed Wide gap (--space)
+ * @property .grid 12-column Swiss-style responsive grid container with automatic column flow.
+ * @property .grid-row Grid container with row flow.
+ * @property .grid-{n} Explicit n-column grid container (1 to 12 columns).
+ * @property .col-{n} Column span modifiers (1 to 12 columns, direct children of .grid).
+ * @property .start-{n} Column start position (1 to 12).
+ * @property .grid.no-gap Removes grid row gap.
+ * @property .grid.compact Compact gap variant aligned to `--trim`.
+ * @property .grid.relaxed Relaxed gap variant aligned to `--space`.
+ * @property .sm:col-{n} Responsive column spans at mobile viewport (<=768px).
+ * @property .sm:grid-{n} Responsive column grid count at mobile viewport (<=768px).
+ * @property .lg:col-{n} Responsive column spans at desktop viewport (>=1024px).
+ * @property .lg:grid-{n} Responsive column grid count at desktop viewport (>=1024px).
  *
  * @example
  * // Basic 12-column grid with equal width columns

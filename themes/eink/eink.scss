@@ -121,6 +121,10 @@
   ::view-transition-new(*) {
     animation: none !important;
   }
+
+  .callout .callout-title-icon {
+    display: block !important;
+  }
 }
 
 /* Detect Slow Refresh Rates (E-Ink) */
@@ -134,23 +138,23 @@
     --color-accent: black !important;
     --color-link: black !important;
     --color-header: black !important;
-    
+
     /* Legacy color variables (if used) */
     --color-light-background: white !important;
     --color-light-foreground: black !important;
     --color-dark-background: white !important;
     --color-dark-foreground: black !important;
-    
+
     /* Remove transparency (renders as dithered noise on e-ink) */
     --color-muted: black !important;
     --color-subtle: black !important;
     --color-border: black !important;
     --color-surface: white !important;
-    
+
     /* Disable shadows and blur effects */
     --shadow: none !important;
     --filter-blur: none !important;
-    
+
     /* Simplify borders */
     --border: var(--stroke-width) solid black !important;
     --stroke-width: 2px !important;
@@ -169,15 +173,17 @@
   --color-accent: black !important;
   --color-link: black !important;
   --color-header: black !important;
-  
+
   --color-muted: black !important;
   --color-subtle: black !important;
   --color-border: black !important;
   --color-surface: white !important;
-  
+
   --shadow: none !important;
   --filter-blur: none !important;
   --border: var(--stroke-width) solid black !important;
+
+
 
   @include eink-styles;
 }

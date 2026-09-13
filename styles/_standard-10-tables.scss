@@ -7,8 +7,12 @@
  * collapsed borders, uppercase small-caps headers, compact cell padding.
  * `.striped` and `.numeric` are the only two opt-in classes.
  *
- * @property {class} .striped Zebra-stripes even `<tbody>` rows with a 3% foreground tint. Apply to the `<table>`.
- * @property {class} .numeric Right-aligns and switches on tabular-nums. Works on any element, not just table cells — apply to `<th>`/`<td>`.
+ * @property table Zero-class collapsed table layout with hairline borders and compact padding.
+ * @property th Uppercase small-caps table header with surface background and subtle tracking.
+ * @property caption Bold caption element positioned above table with rhythm padding.
+ * @property .striped Zebra-stripes even `<tbody>` rows with a 3% foreground tint.
+ * @property .numeric Right-aligns content and switches on tabular-nums for numeric columns.
+ * @property .properties Table variant keeping leading identifier/token columns unwrapped.
  *
  * @example html - Bare table, zero classes
  * <table>
@@ -76,4 +80,18 @@ caption {
 /* Zebra striping */
 .striped tbody tr:nth-child(even) {
   background: oklch(from var(--color-foreground) l c h / 0.03);
+}
+
+/* Property & token dictionaries (prevents key column from wrapping) */
+.properties {
+  th:not(:last-child),
+  td:not(:last-child) {
+    white-space: nowrap;
+    width: 1%;
+  }
+
+  th:last-child,
+  td:last-child {
+    width: 100%;
+  }
 }

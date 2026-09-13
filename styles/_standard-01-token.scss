@@ -4,10 +4,20 @@
  * @component Design Tokens
  * @category Foundation
  * @description Primitive design tokens forming the foundation of the design system.
- * Includes mathematical ratios, modular scales, spacing system, and animation curves.
+ * Includes mathematical ratios, modular scales, spacing system, layout widths, z-index hierarchy, animation curves, and seed colors.
  */
 
 #{$stnd-theme-scope} {
+  /**
+   * @name Color Seeds & Tooltips
+   * @description Primary background and foreground seeds from which the OKLCH relative color engine derives full palettes, plus tooltip defaults.
+   *
+   * @property {variable} --color-light-background Light mode root page background seed (`white`).
+   * @property {variable} --color-light-foreground Light mode root text foreground seed (`#262626`). Derives dark mode seeds and the full 10-hue chromatic wheel.
+   * @property {variable} --tooltip-background Default tooltip container background (`var(--color-dark, #1a1a1a)`).
+   * @property {variable} --tooltip-text Default tooltip text color (`var(--color-light, #ffffff)`).
+   */
+
   /* ===== COLOR SEEDS =====
      The two primary seeds from which everything grows.
      Set these and the color file (_standard-02-color.scss) does the rest:
@@ -33,19 +43,45 @@
      foreground's OKLCH hue — warm ink begets warm dark mode. */
 
   /* Tooltip defaults */
-  --tooltip-background: #1a1a1a;
-  --tooltip-text: #ffffff;
+  --tooltip-background: var(--color-dark, #1a1a1a);
+  --tooltip-text: var(--color-light, #ffffff);
+
+  /**
+   * @name Base Measurements & Vertical Rhythm
+   * @description Core measurements governing typography and vertical cadence. Includes fluid viewport scaling and baseline rhythm anchoring.
+   *
+   * @property {variable} --optical-ratio Modular scale ratio. Resolves theme hook `--font-ratio` with fallback to `--ratio-silver`.
+   * @property {variable} --physics-slope Ratio growth physics slope derived from optical ratio (`max(calc(var(--optical-ratio) - 1), 0.15)`).
+   * @property {variable} --fluid-growth Viewport-responsive growth increment (`calc(var(--physics-slope) * 1.2vw)`).
+   * @property {variable} --base-size Root font size base (defaults to `--font-text-size` or `1.0625rem`).
+   * @property {variable} --font-size Clamped fluid font size that scales smoothly between mobile and wide displays.
+   * @property {variable} --density-base Reading density base resolving from `--font-density` or `--optical-ratio`.
+   * @property {variable} --line-height Clamped fluid unitless line height (1.35 to 1.75).
+   * @property {variable} --baseline Official rhythm unit (`1rlh`). Drives vertical spacing across all components.
+   * @property {variable} --trim Half-leading trim applied to typography box edges (`calc(var(--leading) / 2)`).
+   * @property {variable} --leading Space between font cap-height and the next baseline (`calc((var(--line-height) - 1) * var(--font-size))`).
+   * @property {variable} --nl Newline unit representing a full vertical rhythm step (`calc(var(--leading) * var(--line-height))`).
+   */
 
   /* Base measurements & ratios. --font-ratio / --font-density are the
      theme-authoring hooks (set by ~a dozen packages/themes/*.scss files,
      e.g. --font-ratio: 1.414) — --optical-ratio / --line-height are the
-     resolved, framework-consumed values. A note's frontmatter can also
-     override --optical-ratio directly (it's the registered token name),
-     which bypasses --font-ratio entirely since the more specific
-     declaration wins regardless of this fallback chain. */
-  --font-size: 1rem;
+     resolved, framework-consumed values. */
   --optical-ratio: var(--font-ratio, var(--ratio-silver));
-  --line-height: var(--font-density, var(--optical-ratio));
+
+  /* Fluid typography slopes: the optical ratio drives responsiveness */
+  --physics-slope: max(calc(var(--optical-ratio) - 1), 0.15);
+  --fluid-growth: calc(var(--physics-slope) * 1.2vw);
+  --base-size: var(--font-text-size, 1.0625rem);
+  --font-size: clamp(
+    var(--base-size),
+    calc(var(--base-size) + var(--fluid-growth)),
+    calc(var(--base-size) * 1.3)
+  );
+
+  /* Fluid line-height: resolves from theme density or optical ratio */
+  --density-base: var(--font-density, var(--optical-ratio));
+  --line-height: clamp(1.35, var(--density-base), 1.75);
 
   /* Baseline: the official rhythm unit */
   --baseline: 1rlh;
@@ -55,6 +91,17 @@
   --leading: calc((var(--line-height) - 1) * var(--font-size));
   --nl: calc(var(--leading) * var(--line-height));
 
+  /**
+   * @name Rhythm & Gaps
+   * @description Spacing intervals between major layout blocks, page sections, headers, and footers.
+   *
+   * @property {variable} --gap Dynamic gap between rhythm blocks (`calc(var(--space) * var(--optical-ratio))`).
+   * @property {variable} --gap-body Standard gutter for body content containers (`var(--space-2)`).
+   * @property {variable} --gap-header Top margin gutter above page headers (`var(--space-8)`).
+   * @property {variable} --gap-footer Bottom margin gutter above page footers (`calc(var(--gap-body) * 1.5)`).
+   * @property {variable} --gap-grid-img Micro-gap separating adjacent images in rhythm grids (`var(--space-d4)`).
+   * @property {variable} --gap-multiplicator Gutter multiplier factor (`2`).
+   */
   /* Gap, space between blocks in rhythm, goes to --space in mobile */
   --gap: calc(var(--space) * var(--optical-ratio));
   --gap-body: var(--space-2);
@@ -63,16 +110,45 @@
   --gap-grid-img: var(--space-d4);
   --gap-multiplicator: 2;
 
+  /**
+   * @name Breakpoints
+   * @description Viewport boundaries for responsive layout adaptations across mobile, tablet, and desktop displays.
+   *
+   * @property {variable} --breakpoint-mobile Mobile viewport breakpoint boundary (`#{$mobile}`).
+   * @property {variable} --breakpoint-sm Small tablet and compact screen breakpoint boundary (`#{$small}`).
+   * @property {variable} --breakpoint-lg Large desktop screen breakpoint boundary (`#{$large}`).
+   * @property {variable} --breakpoint-wide Ultra-wide display breakpoint boundary (`#{$wide}`).
+   */
   --breakpoint-mobile: #{$mobile};
   --breakpoint-sm: #{$small};
   --breakpoint-lg: #{$large};
   --breakpoint-wide: #{$wide};
 
+  /**
+   * @name Content Breakout Widths
+   * @description Grid breakout track sizes allowing editorial content, features, and media to extend past the reading measure.
+   *
+   * @property {variable} --content-width-sm Small layout breakout track width (`max(calc(var(--space-2) - var(--space)), var(--space))`).
+   * @property {variable} --content-width-editorial Editorial column breakout track width (`minmax(0, var(--space-2))`).
+   * @property {variable} --content-width-feature Feature callout breakout track width (`minmax(0, var(--space-4))`).
+   * @property {variable} --content-width-hero Full-bleed hero breakout track width (`minmax(0, 1fr)`).
+   */
   --content-width-sm: max(calc(var(--space-2) - var(--space)), var(--space));
   --content-width-editorial: minmax(0, var(--space-2));
   --content-width-feature: minmax(0, var(--space-4));
   --content-width-hero: minmax(0, 1fr);
 
+  /**
+   * @name Stroke, Radius & Filters
+   * @description Hairline strokes, corner curvature, and glassmorphic backdrop filters.
+   *
+   * @property {variable} --stroke-width Hairline border stroke width (`max(1px, 0.06rem)`).
+   * @property {variable} --stroke-width-lg Heavy border stroke width (`calc(var(--stroke-width) * 2)`).
+   * @property {variable} --radius Border radius proportional to leading. Resolves theme hook `--corner` or derives proportionally from `--leading`.
+   * @property {variable} --radius-sm Small border radius for badges, inputs, and buttons (`min(8px, var(--radius))`).
+   * @property {variable} --filter-blur Standard blur filter (`blur(8px)`).
+   * @property {variable} --filter-glass Deep glassmorphic blur filter for overlays and floating panels (`blur(20px)`).
+   */
   /* Design system tokens */
   --filter-blur: blur(8px);
   --filter-glass: blur(20px);
@@ -84,6 +160,48 @@
   --radius: var(--corner, var(--leading));
   --radius-sm: min(8px, var(--radius));
 
+  /**
+   * @name Shadows & Elevation
+   * @description Multi-layered elevation scale and presets driven by semantic color seeds.
+   *
+   * @property {variable} --shadow-ambient Subtle ambient contact shadow.
+   * @property {variable} --shadow-lift Medium elevation shadow with directional lift.
+   * @property {variable} --shadow-glow Atmospheric ambient glow shadow.
+   * @property {variable} --shadow-inset Inset bevel shadow.
+   * @property {variable} --shadow-ring Fine border ring inset shadow.
+   * @property {variable} --shadow-raised Layered raised preset with top highlight, hairline border, and ambient shadow.
+   * @property {variable} --shadow Default elevation shadow.
+   * @property {variable} --shadow-lg Large floating dialog/card shadow.
+   * @property {variable} --shadow-xl Maximum elevation hero shadow.
+   */
+  --shadow-ambient: 0 1px 1px var(--color-shadow);
+  --shadow-lift:
+    0 4px 6px -1px var(--color-shadow), 0 2px 4px -2px var(--color-shadow);
+  --shadow-glow: 0 4px var(--space) oklch(from var(--color-shadow) l c h / 0.15);
+  --shadow-inset:
+    inset 0 1px 3px var(--color-shadow), inset 0 -1px 0 0 var(--color-highlight);
+  --shadow-ring:
+    inset 0px 1px 1px var(--color-border),
+    inset 1px 0px 1px var(--color-border),
+    inset -1px 0px 1px var(--color-border),
+    inset 0px -1px 1px var(--color-border);
+  --shadow-raised:
+    inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border),
+    var(--shadow-ambient);
+  --shadow: var(--shadow-ambient);
+  --shadow-lg: var(--shadow-ambient), var(--shadow-lift);
+  --shadow-xl: var(--shadow-ambient), var(--shadow-lift), var(--shadow-glow);
+
+  /**
+   * @name Mathematical Ratios
+   * @description Proportional ratios driving modular scales, typographic scaling, and harmonic layout proportions.
+   *
+   * @property {variable} --ratio-golden Golden ratio (φ ≈ 1.618). Used for golden spiral proportions and dramatic growth slopes.
+   * @property {variable} --ratio-silver Silver ratio (√2 ≈ 1.414). Default modular scale factor for typography and optical steps.
+   * @property {variable} --ratio-halfstep Half-step ratio (1.272). Moderate progression for subtle hierarchy.
+   * @property {variable} --ratio-quarterstep Quarter-step ratio (1.128). Tighter step progression for compact interfaces.
+   * @property {variable} --ratio-eighthstep Eighth-step ratio (1.062). Minimal step increment for dense data displays.
+   */
   /* Golden Ratio & Mathematical Precision */
   --ratio-golden: 1.618;
   --ratio-silver: 1.414;
@@ -91,6 +209,20 @@
   --ratio-quarterstep: 1.128;
   --ratio-eighthstep: 1.062;
 
+  /**
+   * @name Layout & Reading Widths
+   * @description Column constraints for prose reading measure and outer page boundaries.
+   *
+   * @property {variable} --body-max-width Maximum width of the entire page shell (`900px`). Constrains headers, prose, and footers.
+   * @property {variable} --line-width-xs Extra-small reading width (`24rem`). Ideal for cards, sidebars, and captions.
+   * @property {variable} --line-width-sm Small reading width (`32rem`).
+   * @property {variable} --line-width-md Medium reading width (`42rem`). Optimal reading line length (approx. 65-75 characters).
+   * @property {variable} --line-width-lg Large reading width (`50rem`).
+   * @property {variable} --line-width-xl Extra-large reading width (`60rem`).
+   * @property {variable} --line-width-full Full viewport width minus gutters (`calc(100vw - (var(--space) * 2))`).
+   * @property {variable} --line-width Active reading column measure. Resolves `--font-line-width`, `--measure`, or `--line-width-md`.
+   * @property {variable} --content-width Effective content width constrained to container (`min(var(--line-width), 100%)`).
+   */
   /* Layout width — body-max-width is the whole page shell (header, footer,
      content); .prose's own box reads it directly, so .hero/.full breakout
      elements grow into it too. line-width is a single line of readable
@@ -114,6 +246,16 @@
 
   --content-width: min(var(--line-width), 100%);
 
+  /**
+   * @name Line Heights & Letter Spacing
+   * @description Tracking adjustments and proportional line height variants.
+   *
+   * @property {variable} --line-height-compact Compact line height (`calc(1 + (var(--line-height) - 1) / 2)`). Used for titles and tight headings.
+   * @property {variable} --line-height-relaxed Relaxed line height (`calc(1 + (var(--line-height) - 1) * 1.5)`). Used for loose longform prose.
+   * @property {variable} --tracking-tight Tight letter-spacing (`-0.01em`). Applied to large display headings.
+   * @property {variable} --tracking-neutral Normal letter-spacing (`0em`). Default for body text.
+   * @property {variable} --tracking-open Open letter-spacing (`0.01em`). Applied to uppercase labels and small caps.
+   */
   --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
   --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
 
@@ -121,6 +263,37 @@
   --tracking-neutral: 0em;
   --tracking-open: 0.01em;
 
+  /**
+   * @name Spacing Scale
+   * @description Complete vertical rhythm scale derived from `--baseline` (1rlh). Division steps (`--space-d*`) subdivide the baseline; multiplication steps (`--space-*`) expand it.
+   *
+   * @property {variable} --space Base rhythm spacing unit (`var(--baseline)`, 1rlh).
+   * @property {variable} --space-half Half-space rhythm unit (`calc(var(--baseline) / 2)`).
+   * @property {variable} --space-d1 Division step 1 (`calc(var(--space) / 1)`).
+   * @property {variable} --space-d2 Division step 2 (`calc(var(--space) / 2)`). Half-step spacing for compact padding and gaps.
+   * @property {variable} --space-d3 Division step 3 (`calc(var(--space) / 3)`). One-third baseline spacing.
+   * @property {variable} --space-d4 Division step 4 (`calc(var(--space) / 4)`). Quarter baseline spacing for micro-gaps and badge padding.
+   * @property {variable} --space-d5 Division step 5 (`calc(var(--space) / 5)`).
+   * @property {variable} --space-d6 Division step 6 (`calc(var(--space) / 6)`).
+   * @property {variable} --space-d7 Division step 7 (`calc(var(--space) / 7)`).
+   * @property {variable} --space-d8 Division step 8 (`calc(var(--space) / 8)`). Micro-hairline spacing for dense lists and borders.
+   * @property {variable} --space-d9 Division step 9 (`calc(var(--space) / 9)`).
+   * @property {variable} --space-d10 Division step 10 (`calc(var(--space) / 10)`).
+   * @property {variable} --space-d11 Division step 11 (`calc(var(--space) / 11)`).
+   * @property {variable} --space-d12 Division step 12 (`calc(var(--space) / 12)`). Smallest fractional spacing step.
+   * @property {variable} --space-1 Multiplication step 1 (`calc(var(--space) * 1)`). Equals base `--space`.
+   * @property {variable} --space-2 Multiplication step 2 (`calc(var(--space) * 2)`). Standard body gutter and section spacing.
+   * @property {variable} --space-3 Multiplication step 3 (`calc(var(--space) * 3)`). Intermediate container margin.
+   * @property {variable} --space-4 Multiplication step 4 (`calc(var(--space) * 4)`). Feature breakout margin and block rhythm.
+   * @property {variable} --space-5 Multiplication step 5 (`calc(var(--space) * 5)`).
+   * @property {variable} --space-6 Multiplication step 6 (`calc(var(--space) * 6)`). Large section gap.
+   * @property {variable} --space-7 Multiplication step 7 (`calc(var(--space) * 7)`).
+   * @property {variable} --space-8 Multiplication step 8 (`calc(var(--space) * 8)`). Page header gap and macro layout spacing.
+   * @property {variable} --space-9 Multiplication step 9 (`calc(var(--space) * 9)`).
+   * @property {variable} --space-10 Multiplication step 10 (`calc(var(--space) * 10)`).
+   * @property {variable} --space-11 Multiplication step 11 (`calc(var(--space) * 11)`).
+   * @property {variable} --space-12 Multiplication step 12 (`calc(var(--space) * 12)`). Maximum rhythm spacing step.
+   */
   /* Spacing scale (derived from baseline). "d" prefix = divide (space-d4 =
      space / 4), plain number = multiply (space-4 = space * 4) — same "d"
      convention repeats below in the type scale. */
@@ -132,6 +305,35 @@
     --space-#{$i}: calc(var(--space) * #{$i});
   }
 
+  /**
+   * @name Optical Harmony Scale & Sizes
+   * @description Modular geometric scale driven by `--optical-ratio` for typography and sizing. Sub-base steps (d5..d2) use a flattened divisor and floor at 11px to protect legibility.
+   *
+   * @property {variable} --scale-d5 Sub-base optical step -5 (`max(calc(var(--font-size) / (var(--optical-ratio) * var(--optical-ratio))), 11px)`).
+   * @property {variable} --scale-d4 Sub-base optical step -4 (`max(calc(var(--font-size) / (var(--optical-ratio) * 1.25)), 11px)`).
+   * @property {variable} --scale-d3 Sub-base optical step -3 (`max(calc(var(--font-size) / var(--optical-ratio)), 11px)`).
+   * @property {variable} --scale-d2 Sub-base optical step -2 (`max(calc(var(--font-size) / (1 + (var(--optical-ratio) - 1) * 0.5)), 11px)`).
+   * @property {variable} --scale Base optical scale step (`var(--font-size)`).
+   * @property {variable} --scale-2 Super-base optical step 2 (`calc(var(--font-size) * var(--optical-ratio))`).
+   * @property {variable} --scale-3 Super-base optical step 3 (`calc(var(--scale-2) * var(--optical-ratio))`).
+   * @property {variable} --scale-4 Super-base optical step 4 (`calc(var(--scale-3) * var(--optical-ratio))`).
+   * @property {variable} --scale-5 Super-base optical step 5 (`calc(var(--scale-4) * var(--optical-ratio))`).
+   * @property {variable} --scale-6 Super-base optical step 6 (`calc(var(--scale-5) * var(--optical-ratio))`).
+   * @property {variable} --scale-7 Super-base optical step 7 (`calc(var(--scale-6) * var(--optical-ratio))`).
+   * @property {variable} --scale-8 Super-base optical step 8 (`calc(var(--scale-7) * var(--optical-ratio))`).
+   * @property {variable} --size-3xs T-shirt size alias for `--scale-d5`. Used for micro-badges and metadata captions.
+   * @property {variable} --size-2xs T-shirt size alias for `--scale-d4`. Used for tooltips, footnotes, and tags.
+   * @property {variable} --size-xs T-shirt size alias for `--scale-d3`. Used for secondary labels and table metadata.
+   * @property {variable} --size-sm T-shirt size alias for `--scale-d2`. Used for UI controls, inputs, and captions.
+   * @property {variable} --size-base T-shirt size alias for `--scale`. Base body text size (`1rem`).
+   * @property {variable} --size-lg T-shirt size alias for `--scale-2`. Subheadings and lead paragraphs.
+   * @property {variable} --size-xl T-shirt size alias for `--scale-3`. Section headers (`h3`).
+   * @property {variable} --size-2xl T-shirt size alias for `--scale-4`. Major headings (`h2`).
+   * @property {variable} --size-3xl T-shirt size alias for `--scale-5`. Page titles (`h1`).
+   * @property {variable} --size-4xl T-shirt size alias for `--scale-6`. Hero display headings.
+   * @property {variable} --size-5xl T-shirt size alias for `--scale-7`. Large hero numbers and display text.
+   * @property {variable} --size-6xl T-shirt size alias for `--scale-8`. Maximum display typography scale.
+   */
   /* Optical harmony scale. --scale-2 upward is a clean geometric progression
      (each step = previous * --optical-ratio). Below base (d5..d2) the
      divisor is deliberately NOT the mirrored geometric inverse (ratio^-1,
@@ -172,12 +374,33 @@
   --size-5xl: var(--scale-7);
   --size-6xl: var(--scale-8);
 
+  /**
+   * @name Mobile Settings
+   * @description Responsive overrides applied on mobile screen sizes.
+   *
+   * @property {variable} --font-size-mobile Base font size override on mobile viewports (`1.125rem`).
+   * @property {variable} --gap-body-mobile Body gutter override on mobile viewports (`var(--space)`).
+   * @property {variable} --gap-mobile General layout gap override on mobile viewports (`var(--space)`).
+   * @property {variable} --gap-header-mobile Header gutter override on mobile viewports (`var(--space-4)`).
+   */
   /* Mobile settings */
   --font-size-mobile: 1.125rem;
   --gap-body-mobile: var(--space);
   --gap-mobile: var(--space);
   --gap-header-mobile: var(--space-4);
 
+  /**
+   * @name Z-Index Scale
+   * @description Consistent stacking order hierarchy preventing z-index collisions.
+   *
+   * @property {variable} --z-base Base stacking layer above standard document flow (`1`).
+   * @property {variable} --z-header Sticky page header layer (`900`).
+   * @property {variable} --z-launcher Command launcher and quick-search palette (`1000`).
+   * @property {variable} --z-dropdown Dropdowns, popovers, and context menus (`1100`).
+   * @property {variable} --z-modal Modal dialogs and backdrop scrims (`1200`).
+   * @property {variable} --z-toast Toast notifications and system alerts (`2000`).
+   * @property {variable} --z-image-zoom Fullscreen lightbox image zoom overlay (`9999`).
+   */
   /* Z-index scale */
   --z-base: 1;
   --z-dropdown: 1100;
@@ -189,6 +412,35 @@
   --z-launcher: 1000;
   --z-image-zoom: 9999;
 
+  /**
+   * @name Animation, Timing & Curves
+   * @description Cubic bezier easing curves, transition durations, and physics-driven motion presets.
+   *
+   * @property {variable} --ease-snappy Fast response curve for small icons and toggles (`cubic-bezier(0.2, 0, 0, 1)`).
+   * @property {variable} --ease-standard Standard curve for general UI transitions (`cubic-bezier(0.4, 0, 0.2, 1)`).
+   * @property {variable} --ease-soft Gentle curve for large modals, overlays, and drawer panels (`cubic-bezier(0.16, 1, 0.3, 1)`).
+   * @property {variable} --ease-emphasis Weighted curve with anticipation and subtle overshoot (`cubic-bezier(0.34, 1.56, 0.64, 1)`).
+   * @property {variable} --ease-aggressive Rapid acceleration curve for urgent transitions (`cubic-bezier(0.7, 0, 0.3, 1)`).
+   * @property {variable} --ease-stnd Standard signature ease curve (`cubic-bezier(0, 0.3, 0, 1)`).
+   * @property {variable} --ease-stnd-heavy Heavy standard signature ease curve (`cubic-bezier(0.5, 0, 0, 1)`).
+   * @property {variable} --ease-invisibolt Sudden bolt curve (`cubic-bezier(1, 0, 0, 1)`).
+   * @property {variable} --ease-friction Analog physical friction curve with swift attack and long taper (`cubic-bezier(0.22, 1, 0.36, 1)`).
+   * @property {variable} --duration-instant Instant duration for micro-interactions (`100ms`).
+   * @property {variable} --duration-fast Fast duration for button hover, active states, and menus (`350ms`).
+   * @property {variable} --duration-standard Standard duration for UI component state transitions (`500ms`).
+   * @property {variable} --duration-slow Slow duration for large panels, dialogs, and navigation sheets (`1000ms`).
+   * @property {variable} --transition-fast Fast transition shorthand (`0.5s var(--ease-friction)`).
+   * @property {variable} --transition Standard transition shorthand (`1s var(--ease-friction)`).
+   * @property {variable} --transition-slow Slow transition shorthand (`2s var(--ease-friction)`).
+   * @property {variable} --ease-shape-snappy Snappy shape alias curve (`cubic-bezier(0.2, 0, 0, 1)`).
+   * @property {variable} --ease-shape-bounce Bouncy shape alias curve with overshoot (`cubic-bezier(0.34, 1.56, 0.64, 1)`).
+   * @property {variable} --ease-shape-soft Soft shape alias curve (`cubic-bezier(0.16, 1, 0.3, 1)`).
+   * @property {variable} --ease-interaction Preset transition for interactive controls (`var(--duration-fast) var(--ease-shape-snappy)`).
+   * @property {variable} --ease-feedback Preset transition for validation and feedback states (`var(--duration-standard) var(--ease-shape-bounce)`).
+   * @property {variable} --ease-surface Preset transition for large panels and sidebars (`var(--duration-slow) var(--ease-shape-soft)`).
+   * @property {variable} --ease-enter Preset transition for entering elements (`var(--duration-fast) ease-out`).
+   * @property {variable} --ease-exit Preset transition for exiting elements (`var(--duration-standard) ease-in`).
+   */
   /* The *“Snappy”* - for small icons or toggles (Short duration) */
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 
@@ -266,6 +518,17 @@
   /* Enter/Exit (Modals, tooltips) */
   --ease-enter: var(--duration-fast) ease-out;
   --ease-exit: var(--duration-standard) ease-in;
+
+  /**
+   * @name Theme Authoring Hooks
+   * @description Documented custom property hooks intended for themes (`packages/themes/*`) and document frontmatter overrides.
+   *
+   * @property {variable} --font-ratio Theme-authoring hook to override the optical modular scale factor (e.g. `1.414`).
+   * @property {variable} --font-density Theme-authoring hook to override base line height density.
+   * @property {variable} --font-line-width Theme-authoring hook to override default reading column measure.
+   * @property {variable} --measure Editor and writer component hook to override active text measure.
+   * @property {variable} --corner Theme-authoring hook to override base border radius.
+   */
 }
 
 #{$text-elements},

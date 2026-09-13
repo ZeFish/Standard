@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-03-16 08:07
-modified: 2026-07-03 16:26
+modified: 2026-09-13 08:28
 mode: read
 publish: true
 tags: []
@@ -338,8 +338,8 @@ box-shadow: var(--shadow-inset), var(--shadow-ambient);
 
 | Token                  | Default                         | Description        |
 | ---------------------- | ------------------------------- | ------------------ |
-| `--tooltip-background` | `#1a1a1a`                       | Tooltip background |
-| `--tooltip-text`       | `#ffffff`                       | Tooltip text       |
+| `--tooltip-background` | `var(--color-dark, #1a1a1a)`    | Tooltip background |
+| `--tooltip-text`       | `var(--color-light, #ffffff)`   | Tooltip text       |
 | `--tooltip-ease`       | `cubic-bezier(0.25, 1, 0.5, 1)` | Tooltip animation  |
 
 ---

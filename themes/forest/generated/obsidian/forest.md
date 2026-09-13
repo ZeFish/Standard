@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-13 13:45
 cssclasses: []
 maturity: sprout
 mode: read
@@ -100,6 +100,8 @@ snippet: false
     .el-blockquote blockquote {
       position: relative;
       border-radius: calc(var(--radius-s) * 2);
+      border:none;
+      box-shadow: var(--shadow-inset);
     }
 
     .view-content hr {

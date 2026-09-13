@@ -85,6 +85,15 @@ h1 {
     text-wrap: pretty;
   }
 
+  blockquote {
+    border-left: var(--stroke-width-lg) solid var(--color-accent);
+    padding-block: var(--space-2);
+    margin-block: var(--space-3) var(--space-2);
+    margin-inline: var(--space);
+    font-size: var(--size);
+    font-family: var(--font-serif);
+  }
+
   /* The abstract: an opening blockquote reads as the epigraph/abstract */
   .prose > blockquote:first-of-type {
     border: 0;

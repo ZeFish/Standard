@@ -9,11 +9,14 @@
  * containers. Grain intensity and blend mode swap automatically in dark
  * mode.
  *
- * @property {class} .grain Applies the same grain overlay to a specific subtree (via `::after`) instead of the whole page — `html::after` already covers the page globally, so this is for scoping the texture to one element.
- * @property {variable} --effect-grain Coarse noise texture (`feTurbulence` data URI, baseFrequency 0.4) — the one used by the page-wide overlay.
- * @property {variable} --effect-noise Fine noise texture (baseFrequency 5) — defined here but not consumed by anything in this package; apply it yourself for a finer grain than the default.
- * @property {variable} --effect-opacity Overlay opacity — 0.15 in light mode, 0.05 in dark (grain needs to read stronger against a dark background).
- * @property {variable} --effect-blend-mode Overlay blend mode — `multiply` in light mode, `screen` in dark.
+ * @property .grain Applies grain overlay to a specific subtree container.
+ * @property --effect-grain Coarse noise texture SVG filter data URI used by page-wide overlay.
+ * @property --effect-noise Fine noise texture SVG filter data URI for high-density grain.
+ * @property --effect-opacity Overlay opacity (0.15 in light mode, 0.05 in dark mode).
+ * @property --effect-blend-mode Overlay blend mode (`multiply` in light mode, `screen` in dark).
+ * @property --effect-ink Subtle ink-bleed text-shadow applied to typography.
+ * @property .ink Container applying organic ink-bleed text-shadows to descendants.
+ * @property .note Note container applying ink-bleed text-shadows to content.
  */
 
 #{$stnd-theme-scope} {
