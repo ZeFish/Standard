@@ -2,52 +2,52 @@
   "name": "Chalky Dark",
   "type": "dark",
   "colors": {
-    "foreground": "#fffdf6",
-    "input.background": "#423b36",
-    "input.foreground": "#fffdf6",
-    "input.placeholderForeground": "#3d3631",
+    "foreground": "#faf8f1",
+    "input.background": "#545040",
+    "input.foreground": "#faf8f1",
+    "input.placeholderForeground": "#504b3a",
     "inputOption.activeBorder": "#d08a4980",
-    "badge.foreground": "#28201b",
+    "badge.foreground": "#3d3826",
     "badge.background": "#d08a49",
     "progressBar.background": "#d08a49",
     "button.background": "#d08a49",
-    "button.foreground": "#fffdf6",
+    "button.foreground": "#faf8f1",
     "button.hoverBackground": "#d08a4990",
-    "dropdown.background": "#423b36",
-    "dropdown.foreground": "#fffdf6",
-    "dropdown.border": "#39322d",
+    "dropdown.background": "#545040",
+    "dropdown.foreground": "#faf8f1",
+    "dropdown.border": "#4c4736",
     "focusBorder": "#d08a4980",
     "selection.background": "#d08a4940",
-    "editor.background": "#28201b",
-    "editor.foreground": "#fffdf6",
-    "sideBar.background": "#28201b",
-    "sideBar.border": "#39322d",
-    "activityBar.background": "#28201b",
-    "activityBar.foreground": "#fffdf6",
-    "activityBar.inactiveForeground": "#69625d",
-    "statusBar.background": "#28201b",
-    "statusBar.foreground": "#fffdf6",
-    "titleBar.activeBackground": "#28201b",
-    "titleBar.activeForeground": "#fffdf6",
-    "editorLineNumber.foreground": "#3d3631",
-    "editorLineNumber.activeForeground": "#69625d",
-    "editor.lineHighlightBackground": "#241d18",
-    "editorIndentGuide.background": "#39322d",
-    "editorIndentGuide.activeBackground": "#69625d",
-    "list.hoverBackground": "#372f2a",
-    "list.activeSelectionBackground": "#372f2a",
-    "list.activeSelectionForeground": "#fffdf6",
-    "tab.activeBackground": "#372f2a",
-    "tab.activeForeground": "#fffdf6",
-    "tab.inactiveBackground": "#28201b",
-    "tab.inactiveForeground": "#69625d",
-    "tab.border": "#39322d",
-    "breadcrumb.foreground": "#69625d",
-    "breadcrumb.focusForeground": "#fffdf6",
+    "editor.background": "#3d3826",
+    "editor.foreground": "#faf8f1",
+    "sideBar.background": "#3d3826",
+    "sideBar.border": "#4c4736",
+    "activityBar.background": "#3d3826",
+    "activityBar.foreground": "#faf8f1",
+    "activityBar.inactiveForeground": "#767263",
+    "statusBar.background": "#3d3826",
+    "statusBar.foreground": "#faf8f1",
+    "titleBar.activeBackground": "#3d3826",
+    "titleBar.activeForeground": "#faf8f1",
+    "editorLineNumber.foreground": "#504b3a",
+    "editorLineNumber.activeForeground": "#767263",
+    "editor.lineHighlightBackground": "#373222",
+    "editorIndentGuide.background": "#4c4736",
+    "editorIndentGuide.activeBackground": "#767263",
+    "list.hoverBackground": "#4a4534",
+    "list.activeSelectionBackground": "#4a4534",
+    "list.activeSelectionForeground": "#faf8f1",
+    "tab.activeBackground": "#4a4534",
+    "tab.activeForeground": "#faf8f1",
+    "tab.inactiveBackground": "#3d3826",
+    "tab.inactiveForeground": "#767263",
+    "tab.border": "#4c4736",
+    "breadcrumb.foreground": "#767263",
+    "breadcrumb.focusForeground": "#faf8f1",
     "widget.shadow": "#00000040",
-    "quickInput.background": "#372f2a",
-    "terminal.background": "#28201b",
-    "terminal.foreground": "#fffdf6"
+    "quickInput.background": "#4a4534",
+    "terminal.background": "#3d3826",
+    "terminal.foreground": "#faf8f1"
   },
   "tokenColors": [
     {
@@ -56,7 +56,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#69625d",
+        "foreground": "#767263",
         "fontStyle": "italic"
       }
     },
@@ -75,7 +75,7 @@
     {
       "scope": "variable.other.member",
       "settings": {
-        "foreground": "#fffdf6"
+        "foreground": "#faf8f1"
       }
     },
     {
@@ -149,7 +149,7 @@
     {
       "scope": "punctuation",
       "settings": {
-        "foreground": "#69625d"
+        "foreground": "#767263"
       }
     }
   ]
