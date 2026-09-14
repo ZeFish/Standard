@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-05 13:10
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -67,41 +67,25 @@ snippet: false
     --font-header-line-height:    1;
 
     /* ─── Links ─────────────────────────────────────────────── */
-    .markdown-reading-view a {
+    a {
         text-decoration: none !important;
         font-weight: 500;
-    }
 
-    .markdown-reading-view a:hover {
-        text-decoration: none !important;
-    }
-
-    /* ─── Chisel texture ─────────────────────────────────────── */
-    &.theme-dark.chisel-texture .workspace::before {
-        opacity: 1;
-    }
-
-    &.theme-dark.chisel-texture .workspace::after {
-        opacity: 1;
+        &:hover {
+            text-decoration: none !important;
+        }
     }
 
     /* ─── Headers — ghost text with foreground shadow ────────── */
-    .markdown-reading-view :is(h1, h2, h3, h4, h5, h6),
-    .HyperMD-header-1,
-    .HyperMD-header-2,
-    .HyperMD-header-3,
-    .HyperMD-header-4,
-    .HyperMD-header-5,
-    .HyperMD-header-6,
-    .inline-title {
+    :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
         text-shadow: 0px 0px 0.7px
             color-mix(in oklab, var(--color-foreground) 95%, transparent);
         color: transparent;
         text-align: left;
     }
 
-    /* ─── Inline title — orange ghost ───────────────────────── */
-    .inline-title {
+    /* ─── Main header — orange ghost ───────────────────────── */
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         font-feature-settings: "dlig" on;
         font-weight: 600;
         text-transform: uppercase;
@@ -111,17 +95,14 @@ snippet: false
     }
 
     /* ─── Images & lists ────────────────────────────────────── */
-    .markdown-reading-view {
-        img {
-            filter: none !important;
-            mix-blend-mode: normal !important;
-        }
+    img {
+        filter: none !important;
+        mix-blend-mode: normal !important;
+    }
 
-        ul,
-        ol {
-            padding: 0rlh 1rlh;
-            margin: 1rlh 0rlh;
-        }
+    :is(ul, ol) {
+        padding: 0rlh 1rlh;
+        margin: 1rlh 0rlh;
     }
 }
 ```

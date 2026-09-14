@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-08-23 14:48
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -37,7 +37,7 @@ snippet: false
       }
 
       /* The placard: narrow, quiet, beside the work in spirit */
-      .prose :is(p, ul, ol, blockquote) {
+      .prose :is(p, ul, ol, :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote)) {
         max-width: 26rem;
         margin-inline: auto;
       }
@@ -56,21 +56,21 @@ snippet: false
       }
 
       /* Exhibition titles: present, never loud */
-      h1,
-      h2,
-      h3 {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3) {
         text-align: left;
         font-weight: 500;
         text-wrap: balance;
         margin-inline: var(--space);
       }
-      h2,
-      h3 {
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3) {
         margin-block-start: var(--space-10);
       }
 
       /* A horizontal rule is a walk to the next room */
-      hr {
+      :is(hr, .HyperMD-hr) {
         border: 0;
         background: none;
         height: 0;

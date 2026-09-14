@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -61,19 +61,19 @@ snippet: false
       select,
       textarea,
       .module-card,
-      blockquote,
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote),
       pre {
         border: var(--stroke-width) solid var(--color-foreground) !important;
         border-radius: var(--radius-sm);
       }
 
       /* Text elements get stronger treatment */
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3),
+      :is(.markdown-reading-view h4, .HyperMD-header-4),
+      :is(.markdown-reading-view h5, .HyperMD-header-5),
+      :is(.markdown-reading-view h6, .HyperMD-header-6) {
         text-decoration-thickness: calc(var(--stroke-width) * 3);
         text-underline-offset: calc(var(--stroke-width) * 3);
       }

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -37,10 +37,10 @@ snippet: false
       background: var(--color-background);
 
       /* Headings take the ink, not the base prose engine's heading color. */
-      h1,
-      h2,
-      h3,
-      h4 {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3),
+      :is(.markdown-reading-view h4, .HyperMD-header-4) {
         color: var(--color-foreground);
         text-align:left;
         padding:0 0;

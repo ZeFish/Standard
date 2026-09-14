@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -73,12 +73,12 @@ snippet: false
         --color-bold: var(--color-magenta);
       }
 
-      :is(h1, h2, h3, h4, h5, h6) {
+      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
         position: relative;
         border: none;
       }
 
-      :is(h1, h2, h3, h4, h5, h6)::before {
+      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6))::before {
         content: "";
         opacity: var(--blueprint-opacity);
         font-size: var(--size-sm);
@@ -92,27 +92,27 @@ snippet: false
         transform: translateX(-100%);
       }
 
-      h1::before {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title)::before {
         content: "h1";
       }
 
-      h2::before {
+      :is(.markdown-reading-view h2, .HyperMD-header-2)::before {
         content: "h2";
       }
 
-      h3::before {
+      :is(.markdown-reading-view h3, .HyperMD-header-3)::before {
         content: "h3";
       }
 
-      h4::before {
+      :is(.markdown-reading-view h4, .HyperMD-header-4)::before {
         content: "h4";
       }
 
-      h5::before {
+      :is(.markdown-reading-view h5, .HyperMD-header-5)::before {
         content: "h5";
       }
 
-      h6::before {
+      :is(.markdown-reading-view h6, .HyperMD-header-6)::before {
         content: "h6";
       }
 

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-13 13:58
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -38,7 +38,7 @@ snippet: false
     --line-width: 30rlh;
 
     /* ─── Custom rules for Academic ───────────────────────────── */
-    h1 {
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         margin-inline: auto;
         text-align: center;
         text-wrap: balance;
@@ -48,19 +48,19 @@ snippet: false
       .prose {
         counter-reset: sec;
       }
-      .prose h2 {
+      .prose :is(.markdown-reading-view h2, .HyperMD-header-2) {
         counter-increment: sec;
         counter-reset: subsec;
       }
-      .prose h2::before {
+      .prose :is(.markdown-reading-view h2, .HyperMD-header-2)::before {
         content: counter(sec) ".\2002";
         color: var(--color-accent);
         font-variant-numeric: lining-nums;
       }
-      .prose h3 {
+      .prose :is(.markdown-reading-view h3, .HyperMD-header-3) {
         counter-increment: subsec;
       }
-      .prose h3::before {
+      .prose :is(.markdown-reading-view h3, .HyperMD-header-3)::before {
         content: counter(sec) "." counter(subsec) "\2002";
         color: var(--color-accent);
         font-variant-numeric: lining-nums;
@@ -74,7 +74,7 @@ snippet: false
         text-wrap: pretty;
       }
 
-      blockquote {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         border-left: var(--stroke-width-lg) solid var(--color-accent);
         padding-block: var(--space-2);
         margin-block: var(--space-3) var(--space-2);
@@ -83,8 +83,8 @@ snippet: false
         font-family: var(--font-serif);
       }
 
-      /* The abstract: an opening blockquote reads as the epigraph/abstract */
-      .prose > blockquote:first-of-type {
+      /* The abstract: an opening :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) reads as the epigraph/abstract */
+      .prose > :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote):first-of-type {
         border: 0;
         font-style: italic;
         font-size: var(--size-sm);

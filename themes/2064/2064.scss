@@ -45,24 +45,19 @@
 
 :root[data-theme="2064"],
 [data-theme="2064"] {
-}
+  :is(h1, h2) {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 1rlh;
+    margin-bottom: 1rlh;
+    font-family: var(--font-header);
+  }
 
-.markdown-reading-view h1,
-.markdown-reading-view h2,
-.cm-header-1,
-.HyperMD-header-1,
-.inline-title {
-text-transform: uppercase;
-letter-spacing: 0.1em;
-border-bottom: 1px solid var(--color-accent);
-padding-bottom: 1rlh;
-margin-bottom: 1rlh;
-font-family: var(--font-header);
-}
-
-blockquote {
-border-left: 4px solid var(--color-accent);
-background: color-mix(in oklch, var(--background-primary), var(--color-accent) 5%);
-font-family: var(--font-monospace);
-font-size: 0.9em;
+  blockquote {
+    border-left: 4px solid var(--color-accent);
+    background: color-mix(in oklch, var(--color-background), var(--color-accent) 5%);
+    font-family: var(--font-monospace);
+    font-size: 0.9em;
+  }
 }

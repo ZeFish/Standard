@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,27 +19,27 @@ snippet: false
 ```css
 [data-stnd-theme="mono"] {
     /* ─── Custom rules for Mono ───────────────────────────── */
-    h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3),
+      :is(.markdown-reading-view h4, .HyperMD-header-4),
+      :is(.markdown-reading-view h5, .HyperMD-header-5),
+      :is(.markdown-reading-view h6, .HyperMD-header-6) {
         text-transform: uppercase;
         font-weight: var(--font-header-weight);
         letter-spacing: var(--font-header-letter-spacing);
       }
 
       /* Barcode rule under the title — thick/thin like a tag scan line */
-      h1 {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         padding-bottom: var(--space-half);
         border-bottom: 4px solid var(--color-foreground);
         box-shadow: 0 6px 0 -3px var(--color-foreground);
         margin-block-end: var(--space-4);
       }
 
-      h2::before,
-      h3::before {
+      :is(.markdown-reading-view h2, .HyperMD-header-2)::before,
+      :is(.markdown-reading-view h3, .HyperMD-header-3)::before {
         content: "// ";
         color: var(--color-accent);
       }
@@ -69,12 +69,12 @@ snippet: false
       }
 
       /* Care-label block quote */
-      blockquote {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         border: 1px dashed var(--color-foreground);
         padding: var(--space) var(--space-2);
         position: relative;
       }
-      blockquote::before {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote)::before {
         content: "SIZE / NOTE";
         position: absolute;
         top: -0.6em;
@@ -102,7 +102,7 @@ snippet: false
         background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
       }
 
-      .markdown-reading-view img {
+      img {
         filter: none !important;
         mix-blend-mode: normal !important;
       }

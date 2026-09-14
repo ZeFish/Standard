@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -36,11 +36,11 @@ snippet: false
         border: 0;
         padding-inline: 0;
 
-        h1 {
+        :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
           text-align: left;
         }
 
-        h2 {
+        :is(.markdown-reading-view h2, .HyperMD-header-2) {
           border-bottom: var(--border);
           padding-block-end: var(--space);
         }
@@ -50,18 +50,18 @@ snippet: false
       .prose {
         counter-reset: spec;
       }
-      .prose h2 {
+      .prose :is(.markdown-reading-view h2, .HyperMD-header-2) {
         counter-increment: spec;
         counter-reset: subspec;
       }
-      .prose h2::before {
+      .prose :is(.markdown-reading-view h2, .HyperMD-header-2)::before {
         content: counter(spec) ".0\2002";
         color: var(--color-accent);
       }
-      .prose h3 {
+      .prose :is(.markdown-reading-view h3, .HyperMD-header-3) {
         counter-increment: subspec;
       }
-      .prose h3::before {
+      .prose :is(.markdown-reading-view h3, .HyperMD-header-3)::before {
         content: counter(spec) "." counter(subspec) "\2002";
         color: var(--color-accent);
       }
@@ -103,7 +103,8 @@ snippet: false
         --font-interface: "Futura Now";
       }
 
-      &.theme-light .markdown-reading-view a {
+      &.theme-light a,
+      &[data-theme-mode="light"] a {
         text-decoration: underline !important;
         --shadow-color: color-mix(in oklab, currentcolor 20%, transparent);
         --shadow-distance: 0px;
@@ -114,26 +115,11 @@ snippet: false
           0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
       }
 
-      .markdown-preview-view,
-      .markdown-source-view {
-        color: color-mix(in oklab, var(--text-normal) 90%, transparent);
-        text-shadow: 0 0 0.5px var(--text-normal);
-
-        --shadow-color: color-mix(in oklab, currentcolor 10%, transparent);
-        --shadow-distance: 0px;
-        --shadow-depth: 0.5px;
-        text-shadow:
-          var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
-          calc(var(--shadow-depth) * -1) 0px var(--shadow-depth) var(--shadow-color),
-          0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
-      }
-
-      .inline-title,
-      .markdown-reading-view :is(h1, h2, h3, h4, h5, h6) {
+      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
         text-align: left;
-        color: color-mix(in oklab, currentcolor 90%, var(--background-primary));
+        color: color-mix(in oklab, currentcolor 90%, var(--color-background));
 
-        --shadow-color: color-mix(in oklab, currentcolor 30%, var(--background-primary));
+        --shadow-color: color-mix(in oklab, currentcolor 30%, var(--color-background));
         --shadow-distance: 0px;
         --shadow-depth: 0.5px;
         text-shadow:

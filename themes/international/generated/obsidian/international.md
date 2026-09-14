@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -48,24 +48,24 @@ snippet: false
     --line-width: var(--line-width-xs);
 
     /* ─── Custom rules for International ───────────────────────────── */
-    h1 {
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         letter-spacing: -0.065em;
         font-weight: 900;
         line-height: 0.965;
         text-align: left;
         margin-block-end: var(--space-6);
       }
-      h2,
-      h3 {
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3) {
         font-size: var(--size-2xl);
         margin-block-start: var(--space-8);
         margin-block-end: var(--space-4);
         font-weight: 800;
         letter-spacing: -0.065em;
       }
-      h4,
-      h5,
-      h6 {
+      :is(.markdown-reading-view h4, .HyperMD-header-4),
+      :is(.markdown-reading-view h5, .HyperMD-header-5),
+      :is(.markdown-reading-view h6, .HyperMD-header-6) {
         margin-block-end: var(--space);
       }
 
@@ -73,7 +73,7 @@ snippet: false
         font-size: 12px;
       }
 
-      hr {
+      :is(hr, .HyperMD-hr) {
         background: var(--color-foreground);
       }
 
@@ -96,7 +96,7 @@ snippet: false
         font-size: var(--size-sm);
         padding-inline: var(--space);
       }
-      .callout-title {
+      :is(.callout-title, .callout-title-inner) {
         color: var(--color-foreground);
         border: none;
         margin-block-start: var(--leading);
@@ -116,11 +116,11 @@ snippet: false
       img {
         border: 0;
       }
-      .prose :is(p, pre, details, li, hr, .scroll, .callout, aside) {
+      .prose :is(p, pre, details, li, :is(hr, .HyperMD-hr), .scroll, .callout, aside) {
         max-width: 30rem;
         margin-inline: 0;
       }
-      .prose blockquote p {
+      .prose :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) p {
         max-width: none !important;
         margin-block: var(--space);
         color: var(--color-foreground);
@@ -163,7 +163,7 @@ snippet: false
         opacity: 0.2;
       }
 
-      blockquote {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         border: 0;
         padding-block: var(--space);
         padding-inline: 0;

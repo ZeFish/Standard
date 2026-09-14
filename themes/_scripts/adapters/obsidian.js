@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { mapWebSelectorsToObsidian } from '../utils/selector-map.js';
 
 export function build(config, options) {
     const meta = config.rawConfig.meta || {};
@@ -34,6 +35,8 @@ export function build(config, options) {
 
         // Strip any @use statements
         customCss = customCss.replace(/@use\s+['"][^'"]+['"]\s*;?/g, "").trim();
+        // Translate standard web selectors to Obsidian dual selectors
+        customCss = mapWebSelectorsToObsidian(customCss);
     }
 
     // Build the markdown note — structural CSS only, tokens are bundled.

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -92,7 +92,7 @@ snippet: false
         }
       }
 
-      h1 {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         margin-block-start: 0;
         margin-block-end: 0;
         text-align: center;
@@ -102,24 +102,24 @@ snippet: false
       }
 
       /* Section heads ruled like a broadsheet */
-      h2,
-      h3 {
+      :is(.markdown-reading-view h2, .HyperMD-header-2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3) {
         margin-block-start: var(--space-10);
       }
-      h2 {
+      :is(.markdown-reading-view h2, .HyperMD-header-2) {
         border-top: 3px double var(--color-foreground);
         padding-block-start: var(--leading);
       }
 
-      h4,
-      h5,
-      h6 {
+      :is(.markdown-reading-view h4, .HyperMD-header-4),
+      :is(.markdown-reading-view h5, .HyperMD-header-5),
+      :is(.markdown-reading-view h6, .HyperMD-header-6) {
         margin-block-start: var(--space-4);
         margin-block-end: var(--leading);
       }
 
       /* Pull quote, magazine style */
-      blockquote {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         border: 0;
         padding-inline: var(--space-2);
         text-align: center;
@@ -128,7 +128,7 @@ snippet: false
         line-height: 1.25;
         font-style: italic;
       }
-      blockquote p {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) p {
         text-align: center;
         text-align-last: center;
       }

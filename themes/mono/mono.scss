@@ -125,7 +125,7 @@
     background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
   }
 
-  .markdown-reading-view img {
+  img {
     filter: none !important;
     mix-blend-mode: normal !important;
   }

@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const themesBaseDir = path.join(process.cwd()); // We will run this from packages/themes
+const themesBaseDir = path.resolve(__dirname, "..");
 const adaptersDir = path.join(__dirname, "adapters");
 
 // Ensure directories exist

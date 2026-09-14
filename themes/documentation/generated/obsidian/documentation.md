@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,11 +20,11 @@ snippet: false
 [data-stnd-theme="documentation"] {
     /* ─── Custom rules for Documentation ───────────────────────────── */
     /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
-      h1 {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         color: var(--color-accent);
       }
 
-      h2 {
+      :is(.markdown-reading-view h2, .HyperMD-header-2) {
         padding-bottom: 0.3em;
         border-bottom: 1px solid
           color-mix(in srgb, var(--color-accent) 12%, transparent);
@@ -87,7 +87,7 @@ snippet: false
       }
 
       /* ── Blockquotes — boxed cyan-tinted note, Zed style ── */
-      blockquote {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         background: color-mix(in srgb, var(--color-cyan) 8%, transparent);
         border: 1px solid color-mix(in srgb, var(--color-cyan) 30%, transparent);
         border-radius: 6px;
@@ -95,7 +95,7 @@ snippet: false
       }
 
       /* ── Rules — the faint blue divider ── */
-      hr {
+      :is(hr, .HyperMD-hr) {
         border: 0;
         border-top: 1px solid
           color-mix(in srgb, var(--color-accent) 10%, transparent);

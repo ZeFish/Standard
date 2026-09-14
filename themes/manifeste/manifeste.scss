@@ -37,24 +37,22 @@
     var(--color-background)
 );
 
-.markdown-reading-view h1,
-.inline-title {
+h1 {
     text-align: center;
     padding: 3rlh 0;
     color: var(--color-foreground);
 }
 
-.markdown-reading-view {
-    .callout {
+.callout {
         border-color: color-mix(
             in oklab,
             var(--callout-color) 20%,
-            var(--background-secondary)
+            var(--color-surface, var(--color-background))
         );
         background-color: color-mix(
             in oklab,
             var(--callout-color) 2%,
-            var(--background-secondary)
+            var(--color-surface, var(--color-background))
         );
         border-top: 0;
         border-right: 0;
@@ -75,13 +73,8 @@
         background: transparent;
         box-shadow: none;
     }
-}
 
-.vertical-rhythm .markdown-preview-view ol > li,
-.vertical-rhythm .markdown-preview-view ul > li,
-.vertical-rhythm .markdown-source-view ol > li,
-.vertical-rhythm .markdown-source-view ul > li,
-.vertical-rhythm .mod-cm6 .HyperMD-list-line.cm-line {
-    margin: 0rlh 0rlh 0rlh 0rlh;
-}
+    .vertical-rhythm :is(ol, ul) > li {
+        margin: 0;
+    }
 }

@@ -46,7 +46,6 @@
   --font-ratio: 1.25;
   --font-density: 1.45;
   --font-line-width: 44rem;
-  --border:0;
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -108,24 +107,23 @@
 
 --font-interface: "MonoLisa";
 
---code-function: var(--color-pink);
+  --code-function: var(--color-pink);
 
+  &[data-theme-mode="dark"] {
+    --color-accent: var(--color-purple);
+    --color-bold: var(--color-pink);
+  }
 
-}
-body.theme-dark {
-		--color-accent: var(--color-purple);
-		--color-bold: var(--color-pink);
-}
-.inline-title {
-		text-align: left;
-}
+  h1 {
+    text-align: left;
+  }
 
-
-.token.comment {
-		color: color-mix(
-				in oklab,
-				var(--color-base-100) 40%,
-				var(--color-base-00)
-		);
-		font-style: italic;
+  .token.comment {
+    color: color-mix(
+      in oklab,
+      var(--color-base-100) 40%,
+      var(--color-base-00)
+    );
+    font-style: italic;
+  }
 }

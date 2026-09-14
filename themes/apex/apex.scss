@@ -71,9 +71,8 @@
 /* ─── Semantic assignments ──────────────────────────────── */
 --color-accent:       var(--color-red);
 --color-light-accent: var(--color-red);
---color-dark-accent:  var(--color-red);
---color-bold:         var(--text-color);
---color-italic:       var(--text-muted);
+--color-bold:         var(--color-foreground);
+--color-italic:       var(--color-muted, color-mix(in oklab, var(--color-foreground) 70%, transparent));
 
 /* ─── Typography ────────────────────────────────────────── */
 --bold-weight: 600;
@@ -109,19 +108,18 @@
         0px var(--shadow-depth) var(--shadow-depth) var(--shadow-color);
 
 /* ─── Links ─────────────────────────────────────────────── */
-.markdown-reading-view a {
+a {
     text-decoration: underline !important;
 }
 
 /* ─── Headers — sharp emboss shadow ─────────────────────── */
-.inline-title,
-.markdown-reading-view :is(h1, h2, h3, h4, h5, h6) {
-    color: color-mix(in oklab, currentcolor 90%, var(--background-primary));
+:is(h1, h2, h3, h4, h5, h6) {
+    color: color-mix(in oklab, currentcolor 90%, var(--color-background));
 
     --shadow-color: color-mix(
         in oklab,
         currentcolor 100%,
-        var(--background-primary)
+        var(--color-background)
     );
     --shadow-distance: 0px;
     --shadow-depth: 0.75px;
@@ -133,19 +131,18 @@
 }
 
 /* ─── Light mode headers — red tint ─────────────────────── */
-&.theme-light .inline-title,
-&.theme-light .markdown-reading-view :is(h1, h2, h3, h4, h5, h6) {
+&.theme-light :is(h1, h2, h3, h4, h5, h6),
+&[data-theme-mode="light"] :is(h1, h2, h3, h4, h5, h6) {
     color: color-mix(
         in oklab,
         var(--color-red) 90%,
-        var(--background-primary)
+        var(--color-background)
     );
 }
 
 /* ─── Light mode h1 — embossed against background ───────── */
-.markdown-reading-view h1,
-.inline-title {
-    --color: color-mix(in oklab, var(--background-primary) 75%, black);
+h1 {
+    --color: color-mix(in oklab, var(--color-background) 75%, black);
     text-shadow:
         -1px -1px 1px var(--color),
         1px -1px 1px var(--color),
@@ -154,9 +151,9 @@
 }
 
 /* ─── Dark mode h1 — red ghost ──────────────────────────── */
-&.theme-dark .markdown-reading-view h1,
-&.theme-dark .inline-title {
-    --color: color-mix(in oklab, var(--background-primary) 0%, var(--color-red));
+&.theme-dark h1,
+&[data-theme-mode="dark"] h1 {
+    --color: color-mix(in oklab, var(--color-background) 0%, var(--color-red));
     text-shadow:
         -1px -1px 0px var(--color),
         1px -1px 0px var(--color),

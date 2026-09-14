@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:07
 cssclasses: []
 maturity: sprout
 mode: read
@@ -71,25 +71,24 @@ snippet: false
 
     --font-interface: "MonoLisa";
 
-    --code-function: var(--color-pink);
+      --code-function: var(--color-pink);
 
+      &[data-theme-mode="dark"] {
+        --color-accent: var(--color-purple);
+        --color-bold: var(--color-pink);
+      }
 
-    }
-    body.theme-dark {
-    		--color-accent: var(--color-purple);
-    		--color-bold: var(--color-pink);
-    }
-    .inline-title {
-    		text-align: left;
-    }
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+        text-align: left;
+      }
 
-
-    .token.comment {
-    		color: color-mix(
-    				in oklab,
-    				var(--color-base-100) 40%,
-    				var(--color-base-00)
-    		);
-    		font-style: italic;
+      .token.comment {
+        color: color-mix(
+          in oklab,
+          var(--color-base-100) 40%,
+          var(--color-base-00)
+        );
+        font-style: italic;
+      }
 }
 ```

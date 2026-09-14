@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -25,24 +25,22 @@ snippet: false
         var(--color-background)
     );
 
-    .markdown-reading-view h1,
-    .inline-title {
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         text-align: center;
         padding: 3rlh 0;
         color: var(--color-foreground);
     }
 
-    .markdown-reading-view {
-        .callout {
+    .callout {
             border-color: color-mix(
                 in oklab,
                 var(--callout-color) 20%,
-                var(--background-secondary)
+                var(--color-surface, var(--color-background))
             );
             background-color: color-mix(
                 in oklab,
                 var(--callout-color) 2%,
-                var(--background-secondary)
+                var(--color-surface, var(--color-background))
             );
             border-top: 0;
             border-right: 0;
@@ -54,7 +52,7 @@ snippet: false
             color: var(--callout-color);
         }
 
-        .callout-title {
+        :is(.callout-title, .callout-title-inner) {
             color: var(--color-foreground);
         }
 
@@ -63,14 +61,9 @@ snippet: false
             background: transparent;
             box-shadow: none;
         }
-    }
 
-    .vertical-rhythm .markdown-preview-view ol > li,
-    .vertical-rhythm .markdown-preview-view ul > li,
-    .vertical-rhythm .markdown-source-view ol > li,
-    .vertical-rhythm .markdown-source-view ul > li,
-    .vertical-rhythm .mod-cm6 .HyperMD-list-line.cm-line {
-        margin: 0rlh 0rlh 0rlh 0rlh;
-    }
+        .vertical-rhythm :is(ol, ul) > li {
+            margin: 0;
+        }
 }
 ```

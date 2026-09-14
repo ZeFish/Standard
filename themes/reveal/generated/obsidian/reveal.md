@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -53,30 +53,27 @@ snippet: false
     --font-density: 1.2;
 
     /* ─── Custom rules for Reveal ───────────────────────────── */
-    h1, h2, h3, h4, h5, h6,
-    .HyperMD-header-1, .HyperMD-header-2, .HyperMD-header-3,
-    .HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6,
-    .inline-title {
+    :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
         font-family: var(--font-header) !important;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         font-weight: 700;
     }
 
-    h1, .HyperMD-header-1, .inline-title {
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         font-size: var(--size-2xl);
         letter-spacing: 0.12em;
 
         padding-block-end: var(--space-2);
     }
 
-    h2, .HyperMD-header-2 {
+    :is(.markdown-reading-view h2, .HyperMD-header-2) {
         font-size: var(--size-xl);
         border-bottom: var(--border);
         padding-block-end: var(--space);
     }
 
-    h3, .HyperMD-header-3 {
+    :is(.markdown-reading-view h3, .HyperMD-header-3) {
         font-size: var(--size-lg);
     }
 

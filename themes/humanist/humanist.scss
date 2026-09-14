@@ -31,7 +31,6 @@
   --font-ratio: 1.333;
   --font-line-width: 38rem;
   --font-size: 1.125rem;
-  --border:0;
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -47,10 +46,7 @@
     display: block;
     }
 
-    .markdown-reading-view h1,
-    .cm-header-1,
-    .HyperMD-header-1,
-    .inline-title {
+    h1 {
         text-align: center;
         padding: 2rlh 0;
         color: var(--color-foreground);

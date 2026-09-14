@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-13 14:37
+modified: 2026-09-14 21:02
 cssclasses: []
 maturity: sprout
 mode: read
@@ -38,42 +38,35 @@ snippet: false
     --color-dark-italic: var(--color-blue);
     }
 
-
-    .markdown-reading-view .callout[data-callout="caption"] {
+    [data-theme="frank"] {
+      .callout[data-callout="caption"] {
         margin: -1rlh 33% 0 0 !important;
-        padding:0;
-        border-radius:0;
-        text-wrap: balance;
-    }
-    .callout[data-callout="caption"] .callout-content {
-        text-align: left;
         padding: 0;
-        color: var(--color-foreground);
-        border-radius:0;
-    }
+        border-radius: 0;
+        text-wrap: balance;
 
-    .stnd-vertical-rhythm .markdown-preview-view [class^=el-]  hr { display:none !important; }
+        .callout-content {
+          text-align: left;
+          padding: 0;
+          color: var(--color-foreground);
+          border-radius: 0;
+        }
+      }
 
-    .markdown-reading-view blockquote,
-    		.markdown-reading-view pre,
-    		.markdown-reading-view figure,
-    		.markdown-reading-view .callout,
-    		.markdown-reading-view p:has(img) {
-    		  margin-inline: 0 !important;
-    		  padding-inline: 0 !important;
-    				box-shadow: 0 !important;
-    		}
+      .vertical-rhythm :is(hr, .HyperMD-hr) {
+        display: none !important;
+      }
 
-    		.markdown-reading-view h1,
-     .cm-header-1,
-     .HyperMD-header-1,
-    .inline-title {
+      :is(:is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote), pre, figure, .callout, p:has(img)) {
+        margin-inline: 0 !important;
+        padding-inline: 0 !important;
+        box-shadow: 0 !important;
+      }
+
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         text-align: left;
         padding-block-end: 6rlh;
         color: var(--color-foreground);
-    }
-
-    .markdown-reading-view .callout[data-callout="caption"]{
-    	    margin-block: -1rlh 8rlh  !important;
+      }
 }
 ```
