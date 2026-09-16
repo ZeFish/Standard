@@ -1,14 +1,16 @@
 ---
 aliases: []
 created: 2026-03-16 08:07
-modified: 2026-09-13 08:28
+modified: 2026-09-16T15:02:54.904Z
 mode: read
 publish: true
 tags: []
 theme:
 type: note
 visibility: public
-garden-url: https://francisfontaine.com/tokens
+garden-url: https://standard.garden/@francis/tokens
+permalink: tokens
+garden-short: https://stnd.gd/jb29Tu
 ---
 
 # Standard Design Tokens
