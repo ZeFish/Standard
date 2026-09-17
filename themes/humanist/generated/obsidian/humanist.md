@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-16 18:19
 cssclasses: []
 maturity: sprout
 mode: read
@@ -30,7 +30,7 @@ snippet: false
         }
 
         :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
-          border-left: var(--stroke-width-lg) solid var(--color-accent);
+          border-left: 4px solid var(--color-accent);
           padding-block: var(--space-2);
           margin-block: var(--space-2) var(--space);
           margin-inline: var(--space);

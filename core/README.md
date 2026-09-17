@@ -2,7 +2,7 @@
 title: "@stnd/core"
 aliases: []
 created: 2026-06-20 13:56
-modified: 2026-09-16T15:03:40.846Z
+modified: 2026-09-16T17:31:40.687Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
@@ -18,7 +18,7 @@ theme: kernel
 type: package
 visibility: public
 garden-url: https://standard.garden/@francis/readme
-garden-short: https://stnd.gd/Wnlew5
+garden-short: https://stnd.gd/DT0h6O
 permalink: readme
 ---
 

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-16 19:40
 cssclasses: []
 maturity: sprout
 mode: read
@@ -138,7 +138,7 @@ snippet: false
         color: var(--color-muted);
         border-left: var(--stroke-width-lg) solid var(--color-accent);
         padding-block: var(--space-2);
-        margin-block: var(--space-3) var(--space-2);
+        margin-block: var(--space-3) var(--space-2) var(--space-4) var(--space-2);
         margin-inline: var(--space);
         font-size: var(--size-base);
       }

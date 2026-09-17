@@ -2,7 +2,7 @@
 title: "@stnd/themes"
 aliases: []
 created: 2026-07-04 23:28
-modified: 2026-09-16T15:02:51.696Z
+modified: 2026-09-16T18:33:38.739Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
@@ -18,7 +18,7 @@ theme: kernel
 type: package
 visibility: public
 garden-url: https://standard.garden/@francis/readme
-garden-short: https://stnd.gd/Wnlew5
+garden-short: https://stnd.gd/Yl18ps
 permalink: readme
 ---
 
