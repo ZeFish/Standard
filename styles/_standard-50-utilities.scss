@@ -131,15 +131,15 @@
 }
 
 .max-w-small {
-  max-width: var(--small) !important;
+  max-width: var(--line-width-sm) !important;
 }
 
 .max-w-large {
-  max-width: var(--large) !important;
+  max-width: var(--line-width-lg) !important;
 }
 
-.max-w-wide {
-  max-width: var(--wide) !important;
+.max-w-medium {
+  max-width: var(--line-width-md) !important;
 }
 
 .max-w-line {
@@ -432,6 +432,11 @@
 
 .font-bold {
   font-weight: var(--font-weight-bold) !important;
+}
+
+
+.font-header {
+  font-family: var(--font-header) !important;
 }
 
 .font-normal {

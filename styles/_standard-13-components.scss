@@ -23,6 +23,19 @@
 /* BUTTONS                     */
 /* =========================== */
 
+/* Keycaps */
+kbd {
+  background-color: var(--color-surface);
+  border: none;
+  border-radius: 15%;
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-d4) var(--space-d4);
+  font-family: var(--font-monospace);
+  font-size: var(--size-2xs);
+  color: var(--color-foreground);
+  pointer-events: none;
+}
+
 .loader {
   width: var(--size-lg);
   height: var(--size-lg);

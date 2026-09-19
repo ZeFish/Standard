@@ -103,7 +103,7 @@
    * @property {variable} --gap-multiplicator Gutter multiplier factor (`2`).
    */
   /* Gap, space between blocks in rhythm, goes to --space in mobile */
-  --gap: calc(var(--space) * var(--optical-ratio));
+  --gap: calc(var(--space));
   --gap-body: var(--space-2);
   --gap-header: var(--space-8);
   --gap-footer: calc(var(--gap-body) * 1.5);
