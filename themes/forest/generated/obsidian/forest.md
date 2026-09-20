@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:05
+modified: 2026-09-20 15:31
 cssclasses: []
 maturity: sprout
 mode: read
@@ -35,10 +35,8 @@ snippet: false
           -1px -1px 1px var(--color),
           1px -1px 1px var(--color),
           -1px 1px 1px var(--color),
-          1px 1px 1px var(--color) !important;
+          1px 1px 1px var(--color) !important ;
         text-align: center;
-        margin-top: 4rlh;
-        margin-bottom: 4rlh;
         font-feature-settings: "liga", "onum", "kern", "smcp";
       }
 

@@ -1,5 +1,20 @@
 # @stnd/core
 
+## 0.22.7
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @stnd/cloudflare@0.6.0
+  - @stnd/themes@0.6.0
+  - @stnd/ui@0.6.0
+  - @stnd/lab@1.0.4
+  - @stnd/launcher@1.0.4
+  - @stnd/layout@0.5.4
+  - @stnd/modules@0.5.5
+
 ## 0.22.6
 
 ### Patch Changes
