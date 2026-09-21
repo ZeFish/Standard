@@ -1,5 +1,11 @@
 # @stnd/core
 
+## 0.22.11
+
+### Patch Changes
+
+- @stnd/launcher@1.0.7
+
 ## 0.22.10
 
 ### Patch Changes
