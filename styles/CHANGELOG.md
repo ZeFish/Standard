@@ -1,5 +1,11 @@
 # @stnd/styles
 
+## 0.7.2
+
+### Patch Changes
+
+- Auto-bumped @stnd/styles due to modified code.
+
 ## 0.7.1
 
 ### Patch Changes
