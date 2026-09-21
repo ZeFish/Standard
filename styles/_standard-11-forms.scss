@@ -299,7 +299,16 @@ input[type="checkbox"][role="switch"] {
     height: calc(var(--switch-height) - var(--switch-padding) * 2);
     border-radius: 50%;
     background: var(--color-surface-high);
-    box-shadow: var(--shadow-raised);
+    /* Not --shadow-raised here on purpose — its ambient component
+       (--shadow-ambient: 0 1px 1px) is a fixed 1px DOWNWARD drop shadow,
+       tuned to be a subtle depth cue on normal-sized raised elements. On a
+       thumb sized to exactly fill its track (padding 0, see above) that
+       same 1px shows up as a real, asymmetric gap: a crisp bright edge at
+       the top (the inset highlight) against a soft shadow-blurred one at
+       the bottom, which reads as "not touching" the track's bottom edge
+       even though the circle's true box does. Border ring only — no
+       directional shadow to be asymmetric in the first place. */
+    box-shadow: inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border);
     transition: all var(--transition-fast);
   }
 
