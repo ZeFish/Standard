@@ -269,11 +269,19 @@ input[type="checkbox"][role="switch"] {
   border: none;
   cursor: pointer;
   background: var(--color-surface-lowest);
-  box-shadow: var(--shadow-ring), var(--shadow-inset);
+  /* --shadow-inset (not just the thumb's own shadow, fixed two commits ago)
+     is ALSO asymmetric: inset 0 1px 3px (a dark inset shadow pooling near
+     the TOP-inner edge) plus inset 0 -1px 0 0 (a bright highlight line just
+     inside the BOTTOM edge). On a thumb sized to exactly fill this track,
+     that bottom highlight brightens a sliver of the track color right where
+     the thumb's bottom edge sits, reading as the track's own color (accent
+     orange, once checked) peeking out underneath — which is exactly what it
+     is. --shadow-ring alone is symmetric on all four sides. */
+  box-shadow: var(--shadow-ring);
   transition: background 0.2s;
 
   &:hover {
-    box-shadow: var(--shadow-ring), var(--shadow-inset);
+    box-shadow: var(--shadow-ring);
     &::before {
       background: var(--color-accent);
     }
