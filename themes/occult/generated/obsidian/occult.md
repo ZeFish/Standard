@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -59,7 +59,7 @@ snippet: false
       }
 
       /* Pre/code treatment — keep it readable against the parchment */
-      :is(pre, code) {
+      :is(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)), :is(code, .cm-inline-code)) {
         font-family: var(--font-monospace);
         background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
         color: var(--color-foreground);

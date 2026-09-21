@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -66,19 +66,19 @@ snippet: false
         color: var(--color-accent);
       }
 
-      /* Inline code as machined parts */
-      .prose code:not(pre code) {
+      /* Inline :is(code, .cm-inline-code) as machined parts */
+      .prose :is(code, .cm-inline-code):not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) :is(code, .cm-inline-code)) {
         border: 1px solid var(--color-border);
         padding-inline: 0.3em;
       }
 
       /* Data tables: labelled like a parts list */
-      table th {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) th {
         font-size: var(--size-xs);
         text-transform: uppercase;
         letter-spacing: 0.06em;
       }
-      table {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
         font-variant-numeric: tabular-nums;
       }
 

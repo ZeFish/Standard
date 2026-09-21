@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-16 19:40
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -143,7 +143,7 @@ snippet: false
         font-size: var(--size-base);
       }
 
-      pre {
+      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
         padding: var(--trim) var(--leading);
         border: 0;
         border-left: 1px solid var(--color-subtle);

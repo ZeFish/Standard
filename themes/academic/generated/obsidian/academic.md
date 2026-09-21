@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -112,7 +112,7 @@ snippet: false
       }
 
       /* Tables read as data, captions above per journal style */
-      table {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
         font-variant-numeric: lining-nums tabular-nums;
       }
 }

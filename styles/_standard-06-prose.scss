@@ -248,6 +248,7 @@
 
   /* Fixed 2026-07-14 — swapped undefined tokens for their real equivalents
      (--color-muted, --color-accent, --color-surface-high). */
+  .mycelial-link,
   .mycelial-graft {
     text-decoration: none;
     border-bottom: 1px dotted var(--color-muted);

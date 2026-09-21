@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -42,8 +42,8 @@ snippet: false
         }
       }
 
-      /* ── Inline code — blue-tinted chip, warm ink ── */
-      :not(pre) > code {
+      /* ── Inline :is(code, .cm-inline-code) — blue-tinted chip, warm ink ── */
+      :not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre))) > :is(code, .cm-inline-code) {
         background: color-mix(in srgb, var(--color-accent) 10%, transparent);
         color: var(--color-code);
         border-radius: 4px;
@@ -63,7 +63,7 @@ snippet: false
       }
 
       /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
-      pre {
+      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
         background: var(--color-surface-high);
         border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
         border-radius: 8px;
@@ -71,7 +71,7 @@ snippet: false
       }
 
       /* ── Tables — tinted header, hairline borders, zebra rows ── */
-      table {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
         th {
           background: color-mix(in srgb, var(--color-accent) 10%, transparent);
         }

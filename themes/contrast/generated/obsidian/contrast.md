@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -62,7 +62,7 @@ snippet: false
       textarea,
       .module-card,
       :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote),
-      pre {
+      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
         border: var(--stroke-width) solid var(--color-foreground) !important;
         border-radius: var(--radius-sm);
       }

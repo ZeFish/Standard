@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -116,12 +116,12 @@ snippet: false
         content: "h6";
       }
 
-      :is(pre) {
+      :is(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre))) {
         position: relative;
         border: none;
       }
 
-      :is(pre)::before {
+      :is(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)))::before {
         content: "pre";
         opacity: var(--blueprint-opacity);
         font-size: var(--size-sm);

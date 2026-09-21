@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -105,7 +105,7 @@ snippet: false
       .callout-content {
         padding: 0;
       }
-      code,
+      :is(code, .cm-inline-code),
       .token {
         color: var(--color-foreground) !important;
       }
@@ -116,7 +116,7 @@ snippet: false
       img {
         border: 0;
       }
-      .prose :is(p, pre, details, li, :is(hr, .HyperMD-hr), .scroll, .callout, aside) {
+      .prose :is(p, :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)), details, li, :is(hr, .HyperMD-hr), .scroll, .callout, aside) {
         max-width: 30rem;
         margin-inline: 0;
       }
@@ -144,13 +144,13 @@ snippet: false
         display: block;
       }
 
-      pre {
+      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
         padding: 0;
         padding-block: var(--leading);
         margin-block: var(--leading);
         border: 0;
         background-color: var(--color-background);
-        code {
+        :is(code, .cm-inline-code) {
           opacity: 1;
         }
       }
@@ -174,13 +174,13 @@ snippet: false
         font-style: normal;
       }
 
-      table {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
         grid-column: content;
       }
-      table,
-      table th,
-      table td,
-      table td code {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)),
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) th,
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) td,
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) td :is(code, .cm-inline-code) {
         font-size: var(--size-xs);
         font-family: var(--font-monospace);
         word-break: keep-all;

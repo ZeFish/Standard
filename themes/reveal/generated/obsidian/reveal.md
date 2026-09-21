@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -84,19 +84,19 @@ snippet: false
     }
 
     /* Technical tables */
-    table th {
+    :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) th {
         font-family: var(--font-header);
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-size: var(--size-xs);
     }
 
-    table {
+    :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
         font-variant-numeric: tabular-nums;
     }
 
     /* Code tags as camera engravings */
-    code:not(pre code) {
+    :is(code, .cm-inline-code):not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) :is(code, .cm-inline-code)) {
         background: var(--color-surface) !important;
         color: var(--color-foreground) !important;
         border: var(--border) !important;

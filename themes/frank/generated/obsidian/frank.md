@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 15:31
+modified: 2026-09-20 22:04
 cssclasses: []
 maturity: sprout
 mode: read
@@ -57,7 +57,7 @@ snippet: false
         display: none !important;
       }
 
-      :is(:is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote), pre, figure, .callout, p:has(img)) {
+      :is(:is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote), :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)), figure, .callout, p:has(img)) {
         margin-inline: 0 !important;
         padding-inline: 0 !important;
         box-shadow: 0 !important;
