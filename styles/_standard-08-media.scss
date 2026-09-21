@@ -142,29 +142,31 @@ figcaption {
 /* They provide a simple "zoom-on-hold" experience.                 */
 /* ================================================================ */
 
-/* When JS is off, holding click on an image will trigger this zoom effect. */
-html:not(.js-image-zoom-enabled) img:active {
-  cursor: zoom-out;
-  display: block;
-  position: fixed;
-  z-index: var(--z-image-zoom);
-  max-height: calc(100vh);
-  max-width: calc(100vw);
-  object-fit: contain;
-  margin: 0 auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  user-select: none;
-}
+/* When JS is off, holding click on an image will trigger this zoom effect on desktop with fine pointer. */
+@media (min-width: #{$small}) and (pointer: fine) {
+  html:not(.js-image-zoom-enabled) img:active {
+    cursor: zoom-out;
+    display: block;
+    position: fixed;
+    z-index: var(--z-image-zoom);
+    max-height: calc(100vh);
+    max-width: calc(100vw);
+    object-fit: contain;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+  }
 
-/* Creates a backdrop for the :active zoom. */
-html:not(.js-image-zoom-enabled):has(img:active)::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: var(--color-background);
-  z-index: calc(var(--z-image-zoom) - 1);
+  /* Creates a backdrop for the :active zoom. */
+  html:not(.js-image-zoom-enabled):has(img:active)::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--color-background);
+    z-index: calc(var(--z-image-zoom) - 1);
+  }
 }
 
 /* ================================================================ */
@@ -221,7 +223,7 @@ html.image-zoomed-active {
 
 /* Uses #{$small} — same breakpoint variable as everywhere else in the
    framework. */
-@media (min-width: #{$small}) {
+@media (min-width: #{$small}) and (pointer: fine) {
   /* Global zoomable image cursor */
   img:not([data-no-zoom]) {
     cursor: zoom-in !important;
