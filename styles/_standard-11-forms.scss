@@ -249,7 +249,13 @@ input[type="radio"] {
 input[type="checkbox"][role="switch"] {
   --switch-height: calc(var(--space) - var(--space-d3));
   --switch-width: calc(var(--switch-height) * 2);
-  --switch-padding: 2px;
+  /* Was a fixed 2px — correct-looking at the default ~16px-tall switch
+     (an 8px thumb inset by 2px on each side), but any consumer overriding
+     --switch-height alone (a smaller, denser control panel, say) kept that
+     same fixed inset and ended up with a visibly undersized thumb, since
+     the padding never scaled down with it. 1/8 of the height reproduces
+     the original ~2px look at the default size while actually scaling. */
+  --switch-padding: calc(var(--switch-height) / 8);
 
   appearance: none;
   box-sizing: border-box; /* Reset content-box from base checkbox rule */
