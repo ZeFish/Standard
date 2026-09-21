@@ -253,11 +253,11 @@ input[type="checkbox"][role="switch"] {
      (an 8px thumb inset by 2px on each side), but any consumer overriding
      --switch-height alone (a smaller, denser control panel, say) kept that
      same fixed inset and ended up with a visibly undersized thumb, since
-     the padding never scaled down with it. A ratio of the height reproduces
-     roughly that look at the default size while actually scaling — /14
-     (Francis, iterating live: the thumb should fill the track more, not
-     leave a ring of bare track color showing around it). */
-  --switch-padding: calc(var(--switch-height) / 14);
+     the padding never scaled down with it. Went to 0 (Francis, iterating
+     live: the thumb should fill the track, full height, no ring of bare
+     track color around it) — the thumb's own diameter now equals the
+     track's height exactly. */
+  --switch-padding: 0px;
 
   appearance: none;
   box-sizing: border-box; /* Reset content-box from base checkbox rule */
