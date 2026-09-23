@@ -17,6 +17,7 @@
  * @property --window-radius The OS window's own corner radius.
  * @property --window-inset Gap between the window edge and a floating pane.
  * @property --pane-radius Corner of a pane floating inside the window.
+ * @property --titlebar-height Band centred on the OS traffic lights.
  */
 :root {
   /* ---- Type ------------------------------------------------------------
@@ -78,4 +79,11 @@
   --window-radius: 17px;
   --window-inset: 8px;
   --pane-radius: calc(var(--window-radius) - var(--window-inset));
+
+  /* The title-bar band, from the window's top edge. Everything that sits
+     beside the traffic lights (sidebar icons, wordmark, toolbar) centres in
+     this band, so it lines up with them. The lights are placed by macOS,
+     so this is MEASURED, not chosen: their centre sits 20.75pt below the
+     window top (same capture as --window-radius), band = twice that. */
+  --titlebar-height: 41.5px;
 }
