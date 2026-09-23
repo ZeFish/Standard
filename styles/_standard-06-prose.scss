@@ -79,7 +79,10 @@
   transition: grid-template-columns var(--transition);
 
   position: relative;
+  width: 100%;
   max-width: var(--body-max-width);
+  margin-inline: auto;
+  padding-inline: var(--gap-body);
   /*z-index: var(--z-base);*/
   /* Default content positioning */
 
@@ -104,8 +107,8 @@
   > .callout,
   > blockquote,
   > pre,
-  > figure,
-  > p:has(img),
+  > figure:not(.full-bleed):not(.breakout),
+  > p:has(img:not(.full-bleed):not(.breakout):not(.hero):not(.full)),
   > .stnd-code-block {
     grid-column: content;
     margin-inline: var(--content-width-sm);
@@ -125,18 +128,50 @@
     max-width: none;
   }
 
-  .full,
-  .hero {
-    grid-column: hero;
-    max-width: 100vw;
+  .breakout,
+  p:has(> img.breakout),
+  p:has(> video.breakout),
+  figure.breakout {
+    grid-column: 1 / -1;
+    width: min(100%, 72rem);
+    max-width: 72rem;
+    margin-inline: auto !important;
   }
 
-  .hero {
+  .full,
+  .hero,
+  p:has(> img.hero),
+  p:has(> img.full),
+  p:has(> video.hero),
+  p:has(> video.full) {
+    grid-column: 1 / -1;
+    width: calc(100% + var(--gap-body) * 2);
+    max-width: calc(100% + var(--gap-body) * 2);
     margin-inline: calc(var(--gap-body) * -1);
     border-radius: 0 !important;
 
     > * {
       margin-inline: 0;
+    }
+  }
+
+  .full-bleed,
+  p:has(> img.full-bleed),
+  p:has(> video.full-bleed),
+  figure.full-bleed {
+    grid-column: 1 / -1 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-inline: calc(50% - 50vw) !important;
+    border-radius: 0 !important;
+
+    img,
+    video {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-inline: 0 !important;
+      border-radius: 0 !important;
+      display: block;
     }
   }
 

@@ -374,6 +374,19 @@
   margin-inline: calc((var(--gap-body) * -1)) !important;
 }
 
+.full-bleed {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-inline: calc(50% - 50vw) !important;
+  border-radius: 0 !important;
+}
+
+.breakout {
+  width: min(100%, 72rem) !important;
+  max-width: 72rem !important;
+  margin-inline: auto !important;
+}
+
 /* ============================================================ */
 /*  TYPOGRAPHY — Size                                           */
 /* ============================================================ */
