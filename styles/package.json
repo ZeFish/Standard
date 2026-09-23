@@ -9,6 +9,7 @@
   "exports": {
     ".": "./index.js",
     "./standard.scss": "./standard.scss",
+    "./app.scss": "./app.scss",
     "./reset": "./_standard-00-reset.scss",
     "./variables": "./_standard-00-variables.scss",
     "./tokens": "./_standard-01-token.scss",

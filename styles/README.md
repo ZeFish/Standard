@@ -113,6 +113,7 @@ In your main SCSS stylesheet or Astro entry point:
 
 ### Style Files Anatomy
 - `standard.scss`: Framework index.
+- `app.scss`: Opt-in tokens for an application window (fixed type scale, chrome-paced motion, radius, and the window-chrome set `--window-radius` / `--window-inset` / `--pane-radius`). Import after the theme.
 - `_standard-01-token.scss`: Variable dictionary.
 - `_standard-02-color.scss`: Color space equations.
 - `_standard-03-typography.scss`: Typography stacks.

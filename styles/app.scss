@@ -1,0 +1,81 @@
+/**
+ * @component App Tokens
+ * @category Foundation
+ * @description Re-grounds the framework's tokens for an APPLICATION window
+ * instead of a document read in a browser. Opt-in: import it after
+ * standard.scss and after the theme.
+ *
+ * standard.scss is a note framework. It assumes fluid type that grows with
+ * the viewport, a mobile breakpoint that bumps text up on narrow screens, a
+ * reading measure, durations paced for reading. An app window is none of
+ * that: density is fixed, chrome is chrome, and a narrow window is just a
+ * small window.
+ *
+ * Unconditional `:root`, not `[data-theme]`: these are facts about the
+ * window, true whichever theme supplies the colour and font seeds.
+ *
+ * @property --window-radius The OS window's own corner radius.
+ * @property --window-inset Gap between the window edge and a floating pane.
+ * @property --pane-radius Corner of a pane floating inside the window.
+ */
+:root {
+  /* ---- Type ------------------------------------------------------------
+     Fixed UI scale (native macOS text runs ~13px). Wins over the fluid
+     clamp() in _standard-03-typography.scss by specificity. */
+  --font-text-size: 13px;
+  --font-size: var(--font-text-size);
+
+  /* The <768px breakpoint re-sets --font-size / --gap* from these mobile
+     tokens with !important. On the web that is comfort on a phone; in an
+     app it means text GROWS when the window shrinks. Point the mobile
+     tokens at the desktop values so the breakpoint becomes a no-op.
+     (Gap formulas are duplicated rather than var(--gap)-referenced —
+     referencing the token they feed would create a custom-property cycle.) */
+  --font-size-mobile: var(--font-text-size);
+  --gap-mobile: calc(var(--space) * var(--optical-ratio));
+  --gap-body-mobile: var(--space-2);
+  --gap-header-mobile: var(--space-8);
+
+  /* Tighter modular scale than the silver default — in an app, headings
+     are labels and section chrome, not display type. */
+  --font-ratio: 1.333;
+
+  /* ---- Motion ----------------------------------------------------------
+     The framework's durations (350 / 500 / 1000ms) are paced for a page
+     settling under your eyes. Chrome has to feel immediate under the
+     cursor. Same names, so components stay themeable from one place. */
+  --duration-instant: 120ms;
+  --duration-fast: 150ms;
+  --duration-standard: 180ms;
+  --duration-slow: 300ms;
+
+  /* ---- Radius ----------------------------------------------------------
+     The framework derives --radius from --leading, a TYPOGRAPHIC rhythm
+     value (~2.6px at 13px / 1.2), not a chrome corner. --corner is the
+     framework's own escape hatch for exactly this.
+     --radius-sm is set explicitly: the framework's min(8px, --radius)
+     would collapse onto --radius and stop being a distinct step.
+     --radius-lg has no framework equivalent; declared here so it is real. */
+  --corner: 6px; /* feeds --radius */
+  --radius-sm: 4px;
+  --radius-lg: 12px;
+
+  /* ---- Window chrome ---------------------------------------------------
+     A pane floating inside the window (a sidebar, an inspector) sits
+     --window-inset from the edge, and its corner is CONCENTRIC with the
+     window's: same centre, so radius = window radius − inset. That is the
+     rule macOS follows for its own inset sidebars; a pane radius picked
+     on its own never lines up with the window corner around it.
+
+     --window-radius is the one number that has to match the OS, and Apple
+     does not publish it: the HIG gives the concentric RULE (WWDC25, "Build
+     an AppKit app with the new design"), and native code gets it for free
+     (SwiftUI ConcentricRectangle / containerShape), but a web view has to
+     be told. MEASURED 2026-09-23 on Darwin 27 (the macOS after Tahoe), from Reveal's own window
+     (screencapture -o, circle fit on the corner's alpha edge): 17pt. That
+     is the titlebar-only radius. A window with an NSToolbar gets a larger
+     one; an app that has one should override this token, not the panes. */
+  --window-radius: 17px;
+  --window-inset: 8px;
+  --pane-radius: calc(var(--window-radius) - var(--window-inset));
+}
