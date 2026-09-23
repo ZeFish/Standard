@@ -1,5 +1,18 @@
 # @stnd/core
 
+## 0.22.22
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/launcher@1.1.0
+
+## 0.22.21
+
+### Patch Changes
+
+- @stnd/launcher@1.0.16
+
 ## 0.22.20
 
 ### Patch Changes
