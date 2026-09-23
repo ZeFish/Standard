@@ -387,6 +387,47 @@
   margin-inline: auto !important;
 }
 
+.stnd-screen-break {
+  border: none;
+  height: 1px;
+  background: var(--color-border-subtle, rgba(125, 125, 125, 0.2));
+  margin-block: var(--gap-section, 6rem);
+  margin-inline: auto;
+  width: min(100%, 18rem);
+  scroll-margin-top: calc(var(--gap-header, 3.5rem) + 1.5rem);
+
+  &.screen-full {
+    width: 100%;
+    min-height: 80vh;
+    background: transparent;
+    margin-block: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: "✦";
+      color: var(--color-muted, #888);
+      opacity: 0.5;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.stnd-screen-section {
+  width: 100%;
+  margin-block: var(--gap-section, 4rem);
+  scroll-margin-top: calc(var(--gap-header, 3.5rem) + 1.5rem);
+
+  &.screen-full {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-block: 0;
+  }
+}
+
 /* ============================================================ */
 /*  TYPOGRAPHY — Size                                           */
 /* ============================================================ */
