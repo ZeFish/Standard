@@ -1,5 +1,18 @@
 # @stnd/core
 
+## 0.22.20
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @stnd/client@0.7.0
+  - @stnd/press@0.10.0
+  - @stnd/styles@0.9.0
+  - @stnd/launcher@1.0.15
+  - @stnd/modules@0.6.8
+
 ## 0.22.19
 
 ### Patch Changes
