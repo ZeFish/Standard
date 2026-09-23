@@ -188,9 +188,12 @@
   --shadow-raised:
     inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border),
     var(--shadow-ambient);
-  --shadow: var(--shadow-ambient);
+
   --shadow-lg: var(--shadow-ambient), var(--shadow-lift);
   --shadow-xl: var(--shadow-ambient), var(--shadow-lift), var(--shadow-glow);
+
+  --shadow: var(--shadow-raised);
+  --shadow-hover: var(--shadow-raised), var(--shadow-lg);
 
   /**
    * @name Mathematical Ratios

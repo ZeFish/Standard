@@ -23,7 +23,7 @@ iframe,
 .video {
   max-width: 100%;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--shadow);
   background: var(--color-surface);
   max-height: 80vh;
   border: var(--border);
@@ -39,7 +39,7 @@ iframe,
   max-width: 100%;
   overflow: hidden;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--shadow);
   border: var(--border);
   background: var(--color-surface);
 

@@ -80,8 +80,8 @@ textarea {
   color: var(--color-foreground);
   background: var(--color-surface);
   /* shadcn-style raised effect. */
-  border: var(--border);
-  box-shadow: var(--shadow-raised);
+  border: none;
+  box-shadow: var(--shadow);
   /* Transparent outline at full width reserves the space a real focus
      outline (set on :focus below) will need — prevents layout shift when
      the outline color actually appears. */
@@ -106,8 +106,8 @@ select {
   border-radius: var(--radius-sm);
   color: var(--color-muted);
   background-color: var(--color-surface);
-  border: var(--border);
-  box-shadow: var(--shadow-raised);
+  border: none;
+  box-shadow: var(--shadow);
   outline: none;
   transition: all var(--transition-fast);
   cursor: pointer;
@@ -188,7 +188,7 @@ input[type="radio"] {
   box-sizing: content-box;
   width: calc(var(--space-d8));
   height: calc(var(--space-d2));
-  border: var(--border);
+  border: none;
   border-radius: var(--radius);
   background-color: var(--color-surface);
   cursor: pointer;
@@ -196,14 +196,14 @@ input[type="radio"] {
   margin-inline-end: var(--space-d2);
 
   /* Subtle inset with border */
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--shadow);
   outline: 0;
   transition: all var(--transition-fast);
 
   &:hover {
     /* Add subtle glow on hover */
     background-color: var(--color-surface-high);
-    box-shadow: var(--shadow-raised);
+    box-shadow: var(--shadow);
   }
 
   &:active {
@@ -221,11 +221,11 @@ input[type="radio"] {
   &:checked {
     background-color: var(--color-accent);
     /* Raised effect when checked, with accent border for clarity */
-    box-shadow: var(--shadow-raised);
+    box-shadow: var(--shadow);
   }
 
   &:checked:hover {
-    box-shadow: var(--shadow-raised);
+    box-shadow: var(--shadow);
   }
 
   /* Checkmark using pseudo-element */
@@ -386,7 +386,7 @@ input[type="range"]::-webkit-slider-thumb {
 
   background: var(--color-surface-high);
   /* Raised effect for better grip affordance */
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--shadow);
 
   /* Vertical alignment logic for Webkit:
      (Thumb Height / 2) - (Track Height / 2) * -1
@@ -396,6 +396,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]:hover::-webkit-slider-thumb {
   background: var(--color-accent);
-  box-shadow: var(--shadow-raised), var(--shadow-lg);
+  box-shadow: var(--shadow-hover);
   cursor: pointer;
 }

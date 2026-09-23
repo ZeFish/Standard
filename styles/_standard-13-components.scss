@@ -28,7 +28,7 @@ kbd {
   background-color: var(--color-surface);
   border: none;
   border-radius: 15%;
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--shadow);
   padding: var(--space-d4) var(--space-d4);
   font-family: var(--font-monospace);
   font-size: var(--size-2xs);
@@ -88,8 +88,8 @@ a.btn {
   min-height: 1em;
 
   /* shadcn-style raised effect */
-  box-shadow: var(--shadow-raised);
-  border: var(--border);
+  box-shadow: var(--shadow);
+  border: none;
 
   transition: all var(--transition-fast);
 
@@ -102,7 +102,7 @@ a.btn {
     background-color: var(--color-surface-highest);
     /* Lift shadow slightly on hover */
     color: var(--color-foreground);
-    box-shadow: var(--shadow-raised), var(--shadow-lg);
+    box-shadow: var(--shadow-hover);
   }
 
   &:active {
@@ -166,7 +166,7 @@ a.btn.link {
 a.btn.outline {
   background-color: transparent;
   backdrop-filter: var(--filter-blur);
-  color: var(--color-subtle);
+  color: var(--color-foreground);
 
   &:hover {
     color: var(--color-foreground);
@@ -191,7 +191,7 @@ a.btn.ghost {
   &:hover {
     color: var(--color-foreground);
     background-color: var(--color-surface-higher);
-    box-shadow: var(--shadow-raised), var(--shadow-lg);
+    box-shadow: var(--shadow-hover);
   }
 
   &:active {
@@ -261,6 +261,7 @@ a.btn:disabled {
   border-radius: 999px;
   border: var(--stroke-width) solid
     color-mix(in oklch, currentColor 30%, transparent);
+  border: none;
   font-size: var(--size-xs);
   display: inline-flex;
   align-items: center;
@@ -383,7 +384,7 @@ a.badge.secondary:hover,
   background: oklch(from var(--color-alert) l c h / 0.1);
   border-left: var(--stroke-width) solid
     oklch(from var(--color-alert) l c h / 0.5);
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--shadow);
   text-shadow: none !important;
 }
 
@@ -533,7 +534,7 @@ a.badge.secondary:hover,
   background-color: var(--color-surface);
   transition: all var(--transition);
   border-radius: var(--radius);
-  border: var(--border);
+  border: none;
 
   &.hero {
     border-radius: 0;
@@ -909,7 +910,7 @@ details .callout-fold {
   font-size: var(--size-sm);
 
   .comment {
-    border: var(--border);
+    border: none;
     box-shadow: var(--shadow);
     border-radius: var(--radius);
     background: var(--color-surface);
@@ -1111,7 +1112,7 @@ a.skip-link {
 
   &:hover:not(.disabled) {
     background: var(--color-surface-highest);
-    box-shadow: var(--shadow-raised);
+    box-shadow: var(--shadow);
   }
 
   &:active:not(.disabled) {
