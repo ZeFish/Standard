@@ -139,7 +139,9 @@ token — they break out by a fixed rhythm increment off `--line-width`
 | ------------------- | ------------------------------- | ---------------------------------------- |
 | `--stroke-width`    | `max(1px, 0.06rem)`             | Hairline stroke                          |
 | `--stroke-width-lg` | `calc(stroke-width * 2)`        | Heavy stroke                             |
+| `--radius-sm`       | `min(8px, var(--radius))`       | Small radius for badges/buttons          |
 | `--radius`          | `var(--corner, var(--leading))` | Border radius (themeable via `--corner`) |
+| `--radius-lg`       | `calc(var(--radius) * 1.5)`     | Large radius for cards and dialogs       |
 | `--filter-blur`     | `blur(8px)`                     | Standard blur filter                     |
 
 ## Gaps

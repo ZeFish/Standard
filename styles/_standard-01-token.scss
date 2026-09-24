@@ -159,6 +159,7 @@
      (proportional to line-height/font-size) today. Not dead, just unused. */
   --radius: var(--corner, var(--leading));
   --radius-sm: min(8px, var(--radius));
+  --radius-lg: calc(var(--radius) * 1.5);
 
   /**
    * @name Shadows & Elevation
