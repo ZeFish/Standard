@@ -51,16 +51,16 @@
   &.left {
     margin-inline: 0;
     grid-template-columns:
-      [full-start wide-start content-start] min(100%, var(--prose-width))
-      [content-end wide-end] 1fr [full-end];
+      [full-start hero-start wide-start content-start] min(100%, var(--prose-width))
+      [content-end wide-end] 1fr [hero-end full-end];
   }
 
   grid-template-columns:
-    [full-start] var(--prose-track-full, minmax(0, 1fr))
+    [full-start hero-start] var(--prose-track-full, minmax(0, 1fr))
     [wide-start] var(--prose-breakout, minmax(0, var(--space)))
     [content-start] min(100%, var(--prose-width)) [content-end]
     var(--prose-breakout, minmax(0, var(--space))) [wide-end]
-    var(--prose-track-full, minmax(0, 1fr)) [full-end];
+    var(--prose-track-full, minmax(0, 1fr)) [hero-end full-end];
 
   transition: grid-template-columns var(--transition);
 
@@ -114,7 +114,9 @@
 
   /* Full: spans to page shell (--page-max-width) */
   .full,
+  .hero,
   .container-full,
+  .container-hero,
   p:has(> img.full),
   p:has(> video.full) {
     grid-column: full;
