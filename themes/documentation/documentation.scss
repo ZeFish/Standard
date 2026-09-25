@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="documentation"],
 [data-theme="documentation"] {
   --color-light-background: hsla(50, 25%, 96%, 1);
   --color-light-foreground: hsl(220, 13%, 34%);
@@ -40,6 +41,8 @@
 
 :root[data-theme="documentation"],
 [data-theme="documentation"] {
+
+    --color-light-shadow-base: red;
   /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
   h1 {
     color: var(--color-accent);
@@ -85,10 +88,10 @@
 
   /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
   pre {
-    background: var(--color-surface-light-1);
-    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-accent) 7%, transparent);
+    background: var(--color-surface-dark-1);
+    border: 0px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+
+    box-shadow: var(--shadow-ring), var(--shadow-glow);
   }
 
   /* ── Tables — tinted header, hairline borders, zebra rows ── */

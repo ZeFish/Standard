@@ -1,7 +1,9 @@
 meta:
   id: documentation
   label: Documentation
-  selector: "[data-theme=\"documentation\"]"
+  selector: |-
+    :root[data-theme="documentation"],
+    [data-theme="documentation"]
   fonts:
     - "@stnd/fonts/ia-writer"
     - "@stnd/fonts/ibm-plex"

@@ -57,7 +57,7 @@ standard({ moduleLoad: ["@stnd/themes/editorial"] });
 - **Academic**: Scholarly and traditional.
 - **Editorial**: Clean lines and high contrast.
 - **Humanist**: Warm type and organic feel.
-- **Technical**: Code clarity and precision.
+- **Documentation**: Code clarity and precision.
 - **Gallery**: Minimalist with generous white space.
 - **E-Ink**: Optimized for e-readers and high-contrast displays.
 - **Federal**: 1970s standards manual identity (Helvetica, federal red seed).

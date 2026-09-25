@@ -57,9 +57,9 @@
 
   grid-template-columns:
     [full-start] var(--prose-track-full, minmax(0, 1fr))
-    [wide-start] var(--prose-breakout, minmax(0, var(--space-4)))
+    [wide-start] var(--prose-breakout, minmax(0, var(--space)))
     [content-start] min(100%, var(--prose-width)) [content-end]
-    var(--prose-breakout, minmax(0, var(--space-4))) [wide-end]
+    var(--prose-breakout, minmax(0, var(--space))) [wide-end]
     var(--prose-track-full, minmax(0, 1fr)) [full-end];
 
   transition: grid-template-columns var(--transition);

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 02:06
+modified: 2026-09-25 11:59
 cssclasses: []
 maturity: sprout
 mode: read
@@ -64,10 +64,10 @@ snippet: false
 
       /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
       :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
-        background: var(--color-surface-light-1);
-        border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-        border-radius: 8px;
-        box-shadow: 0 2px 8px color-mix(in srgb, var(--color-accent) 7%, transparent);
+        background: var(--color-surface-dark-1);
+        border: 0px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+
+        box-shadow: var(--shadow-ring), var(--shadow-glow);
       }
 
       /* ── Tables — tinted header, hairline borders, zebra rows ── */
