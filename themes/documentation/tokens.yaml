@@ -32,7 +32,7 @@ tokens:
   font-header-weight: "500"
   font-monospace: "\"Berkeley Mono\", \"IBM Plex Mono\", Menlo, monospace"
   line-height: "1.6"
-  line-width: 43rem
+  prose-width: 43rem
   optical-ratio: "1.25"
   font-size: 1.125rem
   font-ratio: "1.25"

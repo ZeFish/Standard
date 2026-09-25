@@ -173,7 +173,10 @@ The system uses CSS variables (`--stnd-*` or root variables `:root`) for consist
 | `--space` | `var(--baseline)` | Base spacing. |
 | `--space-[1-12]` | `var(--space) * n` | Modular spacing scale. |
 | `--scale-[2-8]` | `modular scale` | Exponential typographic scale. |
-| `--line-width` | `~42rem` | Optimal reading width (measure). |
+| `--page-max-width` | `1400px` | Page container maximum width constraint. |
+| `--page-padding` | `clamp(1rem, 3vw, 2.5rem)` | Fluid horizontal page gutters. |
+| `--prose-width` | `~42rem` | Optimal reading width (measure). |
+| `--rhythm-block-scale` | `2` | Multiplier for non-text block elements. |
 | `--radius` | `--leading` | Border radius consistent with rhythm. |
 
 ### 🎨 Colors (`packages/styles/_standard-02-color.scss`)

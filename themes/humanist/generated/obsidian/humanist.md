@@ -33,7 +33,7 @@ snippet: false
           padding-block: var(--space-2);
           margin-block: var(--space-2) var(--space);
           margin-inline: var(--space);
-          font-size: var(--size-lg);
+          font-size: var(--scale-2);
           font-family: var(--font-header);
         }
 }

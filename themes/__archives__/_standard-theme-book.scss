@@ -183,7 +183,7 @@
 
   hr,
   hr:not(:first-child) {
-    font-size: var(--size-base);
+    font-size: var(--scale);
     line-height: var(--space);
     padding: 0;
     border: 0;
@@ -206,7 +206,7 @@
     left: calc(var(--space) + var(--line-width));
     margin-top: calc(var(--space) * -1);
     margin-bottom: calc(var(--space) * -2);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     color: var(--color-muted);
     line-height: var(--line-height-s);
     max-width: 33%;

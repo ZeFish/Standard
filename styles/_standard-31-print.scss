@@ -28,15 +28,9 @@
     --optical-ratio: 1.125 !important;
     --line-height: 1.4 !important;
 
-    /* Fixed 2026-07-14 — was setting the wrong, unread token
-       (--body-padding); now overrides the three real padding tokens
-       (--gap-body/--gap-header/--gap-footer) print mode was clearly
-       trying to reduce. */
-    --gap-body: var(--space-2);
-    --gap-header: var(--space-2);
-    --gap-footer: var(--space-2);
-    --line-width: var(--line-width-full);
-    --gap: 0;
+    --page-padding: var(--space-2);
+    --prose-width: 100%;
+    --space: 0;
     --shadow: 0;
   }
 

@@ -97,7 +97,7 @@
   :is(h1, h2, h3, h4, h5, h6)::before {
     content: "";
     opacity: var(--blueprint-opacity);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     color: var(--color-foreground);
     font-style: italic;
     font-weight: 400;
@@ -140,7 +140,7 @@
   :is(pre)::before {
     content: "pre";
     opacity: var(--blueprint-opacity);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     color: var(--color-foreground);
     font-style: italic;
     font-weight: 400;
@@ -159,7 +159,7 @@
   :is(p)::before {
     content: "p";
     opacity: var(--blueprint-opacity);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     color: var(--color-foreground);
     font-style: italic;
     font-weight: 400;

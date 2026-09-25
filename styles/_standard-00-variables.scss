@@ -45,11 +45,11 @@ $text-elements: "a, kbd, div, span, mark, callout-title::before, span, li::befor
 // Vertical rhythm system (_standard-05-rhythm.scss): consecutive "simple"
 // elements get 1x --gap margin between them; the moment either neighbor is
 // a "double" (heavier block-level: tables, cards, figures, sections...) the
-// margin becomes --gap * --gap-multiplicator (2x by default) — extra
+// margin becomes --space * --rhythm-block-scale (2x by default) — extra
 // breathing room around visually heavier blocks. $rhythm-tags is the union,
 // used for the heading-follows-anything spacing rules.
 $rhythm-simple-tags: ".alert, #comments, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, li, dl, dt, dd, p, pre, figure, hr, form, fieldset, button, aside, .callout, .card, .box, .btn, .grid";
-$rhythm-double-tags: "table,  blockquote, div:has(.video), section, article, header, footer, hr, #comments, .callout,  pre, figure, p:has(img), section, .box, .card, .small, .editorial, .feature, .hero, .full, .scroll, hr, aside, .stnd-code-block";
+$rhythm-double-tags: "table,  blockquote, div:has(.video), section, article, header, footer, hr, #comments, .callout,  pre, figure, p:has(img), section, .box, .card, .narrow, .wide, .full, .scroll, hr, aside, .stnd-code-block";
 $rhythm-tags: $rhythm-simple-tags + ", div, " + $rhythm-double-tags;
 
 // Reusable style fragments via @extend (not applied directly — SCSS
@@ -66,7 +66,7 @@ $rhythm-tags: $rhythm-simple-tags + ", div, " + $rhythm-double-tags;
 }
 
 %padding-text {
-  padding: var(--space-d4) var(--space-d2);
+  padding: var(--trim) var(--leading);
 }
 
 // Single-target on purpose (not ":root, body") — a token declared on both

@@ -12,7 +12,7 @@
  *
  * @property .rhythm The container class. Sets `display: flow-root` so child margins cannot collapse out of it.
  * @property .no-rhythm Zeroes `margin-block-start` on every descendant — a subtree-wide rhythm opt-out.
- * @property --gap-multiplicator Rhythm multiplier factor for block-level spacing and heading exceptions.
+ * @property --rhythm-block-scale Rhythm multiplier factor for block-level spacing and heading exceptions.
  * @property .flex > * Zeroes `margin-block-start` for flex children so margins do not stack with flex gap.
  *
  * @example html - Turn any container into a rhythm block
@@ -50,38 +50,38 @@
      top-level document flow only) — flagging since the asymmetry itself
      isn't declared anywhere, just falls out of one missing `>`. */
   :where(:is(#{$rhythm-tags})) + :where(:is(#{$rhythm-tags})) {
-    margin-block-start: calc(var(--gap) * 1);
+    margin-block-start: var(--space);
   }
 
   > :where(:is(#{$rhythm-double-tags})) + :where(:is(#{$rhythm-simple-tags})),
   > :where(:is(#{$rhythm-simple-tags})) + :where(:is(#{$rhythm-double-tags})) {
-    margin-block-start: calc(var(--gap) * var(--gap-multiplicator, 2));
+    margin-block-start: calc(var(--space) * var(--rhythm-block-scale, 2));
   }
 
   // EXCEPTIONS
   //*
   > :where(:is(#{$rhythm-tags})) ~ :where(:is(h1, h2)) {
     margin-block-start: calc(
-      var(--gap) * calc(var(--gap-multiplicator, 2) + 2)
+      var(--space) * calc(var(--rhythm-block-scale, 2) + 2)
     );
   }
 
   > :where(:is(#{$rhythm-tags})) ~ :where(:is(h3, h4, h5, h6)) {
     margin-block-start: calc(
-      var(--gap) * calc(var(--gap-multiplicator, 2) + 1)
+      var(--space) * calc(var(--rhythm-block-scale, 2) + 1)
     );
   }
 
   > :where(:is(h1, h2, h3, h4)) + :where(:is(h2, h3, h4, h5, h6)) {
-    margin-block-start: calc(var(--gap) * var(--gap-multiplicator, 2));
+    margin-block-start: calc(var(--space) * var(--rhythm-block-scale, 2));
   }
 
   > :where(:is(h1, h2, h3)) + * {
-    margin-block-start: calc(var(--gap) * var(--gap-multiplicator, 2));
+    margin-block-start: calc(var(--space) * var(--rhythm-block-scale, 2));
   }
 
   > :where(:is(h4, h5, h6)) + * {
-    margin-block-start: calc(var(--gap) * 1);
+    margin-block-start: var(--space);
   }
 
   //*/

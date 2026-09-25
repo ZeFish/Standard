@@ -92,23 +92,20 @@
   --nl: calc(var(--leading) * var(--line-height));
 
   /**
-   * @name Rhythm & Gaps
-   * @description Spacing intervals between major layout blocks, page sections, headers, and footers.
+   * @name Rhythm & Page Padding
+   * @description Spacing intervals between major layout blocks, page sections, and screen edges.
    *
-   * @property {variable} --gap Dynamic gap between rhythm blocks (`calc(var(--space) * var(--optical-ratio))`).
-   * @property {variable} --gap-body Standard gutter for body content containers (`var(--space-2)`).
-   * @property {variable} --gap-header Top margin gutter above page headers (`var(--space-8)`).
-   * @property {variable} --gap-footer Bottom margin gutter above page footers (`calc(var(--gap-body) * 1.5)`).
-   * @property {variable} --gap-grid-img Micro-gap separating adjacent images in rhythm grids (`var(--space-d4)`).
-   * @property {variable} --gap-multiplicator Gutter multiplier factor (`2`).
+   * @property {variable} --gap Dynamic gap between rhythm blocks (`calc(var(--space))`).
+   * @property {variable} --gap-compact Compact micro-gap for inline groups, metadata, breadcrumbs (`var(--trim)`).
+   * @property {variable} --page-padding Fluid outer margin/padding preventing content from touching device bezels (`clamp(1rem, 3vw, 2.5rem)`).
+   * @property {variable} --gap-grid-img Micro-gap separating adjacent images in rhythm grids (`var(--space-half)`).
+   * @property {variable} --rhythm-block-scale Ratio multiplier factor for non-text blocks (`2`).
    */
-  /* Gap, space between blocks in rhythm, goes to --space in mobile */
   --gap: calc(var(--space));
-  --gap-body: var(--space-2);
-  --gap-header: var(--space-8);
-  --gap-footer: calc(var(--gap-body) * 1.5);
-  --gap-grid-img: var(--space-d4);
-  --gap-multiplicator: 2;
+  --gap-compact: var(--trim);
+  --page-padding: clamp(1rem, 3vw, 2.5rem);
+  --gap-grid-img: var(--space-half);
+  --rhythm-block-scale: 2;
 
   /**
    * @name Breakpoints
@@ -125,18 +122,16 @@
   --breakpoint-wide: #{$wide};
 
   /**
-   * @name Content Breakout Widths
-   * @description Grid breakout track sizes allowing editorial content, features, and media to extend past the reading measure.
+   * @name Prose Breakout Tracks & Insets
+   * @description Grid breakout track sizes allowing wide content and full-width elements to extend past the reading measure, plus narrow element insets.
    *
-   * @property {variable} --content-width-sm Small layout breakout track width (`max(calc(var(--space-2) - var(--space)), var(--space))`).
-   * @property {variable} --content-width-editorial Editorial column breakout track width (`minmax(0, var(--space-2))`).
-   * @property {variable} --content-width-feature Feature callout breakout track width (`minmax(0, var(--space-4))`).
-   * @property {variable} --content-width-hero Full-bleed hero breakout track width (`minmax(0, 1fr)`).
+   * @property {variable} --prose-inset Narrow layout inset margin (`max(calc(var(--space-2) - var(--space)), var(--space))`).
+   * @property {variable} --prose-breakout Wide column breakout track width (`minmax(0, var(--space-4))`).
+   * @property {variable} --prose-track-full Full-width page breakout track (`minmax(0, 1fr)`).
    */
-  --content-width-sm: max(calc(var(--space-2) - var(--space)), var(--space));
-  --content-width-editorial: minmax(0, var(--space-2));
-  --content-width-feature: minmax(0, var(--space-4));
-  --content-width-hero: minmax(0, 1fr);
+  --prose-inset: max(calc(var(--space-2) - var(--space)), var(--space));
+  --prose-breakout: minmax(0, var(--space-4));
+  --prose-track-full: minmax(0, 1fr);
 
   /**
    * @name Stroke, Radius & Filters
@@ -144,22 +139,17 @@
    *
    * @property {variable} --stroke-width Hairline border stroke width (`max(1px, 0.06rem)`).
    * @property {variable} --stroke-width-lg Heavy border stroke width (`calc(var(--stroke-width) * 2)`).
-   * @property {variable} --radius Border radius proportional to leading. Resolves theme hook `--corner` or derives proportionally from `--leading`.
-   * @property {variable} --radius-sm Small border radius for badges, inputs, and buttons (`min(8px, var(--radius))`).
+   * @property {variable} --radius Macro border radius for cards, dialogs, and large containers (`var(--leading)`).
+   * @property {variable} --radius-sm Micro border radius for tags, badges, buttons, and inputs (`var(--trim)`).
    * @property {variable} --filter-blur Standard blur filter (`blur(8px)`).
    * @property {variable} --filter-glass Deep glassmorphic blur filter for overlays and floating panels (`blur(20px)`).
    */
-  /* Design system tokens */
   --filter-blur: blur(8px);
   --filter-glass: blur(20px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-lg: calc(var(--stroke-width) * 2);
-  /* --corner is a documented theme-authoring hook (TOKENS.md) — no theme
-     currently sets it, so --radius always resolves through --leading
-     (proportional to line-height/font-size) today. Not dead, just unused. */
-  --radius: var(--corner, var(--leading));
-  --radius-sm: min(8px, var(--radius));
-  --radius-lg: calc(var(--radius) * 1.5);
+  --radius: var(--leading);
+  --radius-sm: var(--trim);
 
   /**
    * @name Shadows & Elevation
@@ -217,38 +207,11 @@
    * @name Layout & Reading Widths
    * @description Column constraints for prose reading measure and outer page boundaries.
    *
-   * @property {variable} --body-max-width Maximum width of the entire page shell (`900px`). Constrains headers, prose, and footers.
-   * @property {variable} --line-width-xs Extra-small reading width (`24rem`). Ideal for cards, sidebars, and captions.
-   * @property {variable} --line-width-sm Small reading width (`32rem`).
-   * @property {variable} --line-width-md Medium reading width (`42rem`). Optimal reading line length (approx. 65-75 characters).
-   * @property {variable} --line-width-lg Large reading width (`50rem`).
-   * @property {variable} --line-width-xl Extra-large reading width (`60rem`).
-   * @property {variable} --line-width-full Full viewport width minus gutters (`calc(100vw - (var(--space) * 2))`).
-   * @property {variable} --line-width Active reading column measure. Resolves `--font-line-width`, `--measure`, or `--line-width-md`.
-   * @property {variable} --content-width Effective content width constrained to container (`min(var(--line-width), 100%)`).
+   * @property {variable} --page-max-width Maximum width of the entire page shell (`1400px`).
+   * @property {variable} --prose-width Optimal reading line length (approx. 65 characters / `42rem`).
    */
-  /* Layout width — body-max-width is the whole page shell (header, footer,
-     content); .prose's own box reads it directly, so .hero/.full breakout
-     elements grow into it too. line-width is a single line of readable
-     text — .feature and tables/.editorial break out by a fixed rhythm
-     increment off this (space-2 / space-4 each side), not off
-     body-max-width. */
-  --body-max-width: 900px;
-
-  --line-width-xs: 24rem;
-  --line-width-sm: 32rem;
-  --line-width-md: 42rem;
-  --line-width-lg: 50rem;
-  --line-width-xl: 60rem;
-  --line-width-full: calc(100vw - (var(--space) * 2));
-  /* --font-line-width is the theme-authoring hook (e.g. humanist, book,
-     2064 themes); --measure is a second, editor-specific override read by
-     apps/stnd.gd's Writer component. Same override-ladder shape as
-     --font-ratio above — a note's frontmatter can also set --line-width
-     directly, bypassing both. */
-  --line-width: var(--font-line-width, var(--measure, var(--line-width-md)));
-
-  --content-width: min(var(--line-width), 100%);
+  --page-max-width: 1400px;
+  --prose-width: 42rem;
 
   /**
    * @name Line Heights & Letter Spacing
@@ -325,18 +288,6 @@
    * @property {variable} --scale-6 Super-base optical step 6 (`calc(var(--scale-5) * var(--optical-ratio))`).
    * @property {variable} --scale-7 Super-base optical step 7 (`calc(var(--scale-6) * var(--optical-ratio))`).
    * @property {variable} --scale-8 Super-base optical step 8 (`calc(var(--scale-7) * var(--optical-ratio))`).
-   * @property {variable} --size-3xs T-shirt size alias for `--scale-d5`. Used for micro-badges and metadata captions.
-   * @property {variable} --size-2xs T-shirt size alias for `--scale-d4`. Used for tooltips, footnotes, and tags.
-   * @property {variable} --size-xs T-shirt size alias for `--scale-d3`. Used for secondary labels and table metadata.
-   * @property {variable} --size-sm T-shirt size alias for `--scale-d2`. Used for UI controls, inputs, and captions.
-   * @property {variable} --size-base T-shirt size alias for `--scale`. Base body text size (`1rem`).
-   * @property {variable} --size-lg T-shirt size alias for `--scale-2`. Subheadings and lead paragraphs.
-   * @property {variable} --size-xl T-shirt size alias for `--scale-3`. Section headers (`h3`).
-   * @property {variable} --size-2xl T-shirt size alias for `--scale-4`. Major headings (`h2`).
-   * @property {variable} --size-3xl T-shirt size alias for `--scale-5`. Page titles (`h1`).
-   * @property {variable} --size-4xl T-shirt size alias for `--scale-6`. Hero display headings.
-   * @property {variable} --size-5xl T-shirt size alias for `--scale-7`. Large hero numbers and display text.
-   * @property {variable} --size-6xl T-shirt size alias for `--scale-8`. Maximum display typography scale.
    */
   /* Optical harmony scale. --scale-2 upward is a clean geometric progression
      (each step = previous * --optical-ratio). Below base (d5..d2) the
@@ -364,34 +315,13 @@
   --scale-7: calc(var(--scale-6) * var(--optical-ratio));
   --scale-8: calc(var(--scale-7) * var(--optical-ratio));
 
-  /* Industrial Size Scale (T-Shirt Aliases) */
-  --size-3xs: var(--scale-d5);
-  --size-2xs: var(--scale-d4);
-  --size-xs: var(--scale-d3);
-  --size-sm: var(--scale-d2);
-  --size-base: var(--scale);
-  --size-lg: var(--scale-2);
-  --size-xl: var(--scale-3);
-  --size-2xl: var(--scale-4);
-  --size-3xl: var(--scale-5);
-  --size-4xl: var(--scale-6);
-  --size-5xl: var(--scale-7);
-  --size-6xl: var(--scale-8);
-
   /**
    * @name Mobile Settings
    * @description Responsive overrides applied on mobile screen sizes.
    *
    * @property {variable} --font-size-mobile Base font size override on mobile viewports (`1.125rem`).
-   * @property {variable} --gap-body-mobile Body gutter override on mobile viewports (`var(--space)`).
-   * @property {variable} --gap-mobile General layout gap override on mobile viewports (`var(--space)`).
-   * @property {variable} --gap-header-mobile Header gutter override on mobile viewports (`var(--space-4)`).
    */
-  /* Mobile settings */
   --font-size-mobile: 1.125rem;
-  --gap-body-mobile: var(--space);
-  --gap-mobile: var(--space);
-  --gap-header-mobile: var(--space-4);
 
   /**
    * @name Z-Index Scale
@@ -538,23 +468,22 @@
 #{$text-elements},
 a {
   text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
+  text-box-edge: cap text;
 }
 
-/* Table cells opt back out of text-box-trim — vertical-align/padding math
-   in table cells doesn't play well with the trimmed ascender/descender
-   box, so cells keep normal line-box sizing instead. */
+/* Table cells and site footers opt back out of text-box-trim — vertical-align/padding
+   math and compact interface metadata don't play well with trimmed line boxes,
+   so they keep normal line-box sizing instead. */
 td,
-th {
+th,
+footer,
+.stnd-footer {
   text-box-trim: none;
 }
 
 /* Responsive adjustments */
 @media only screen and (max-width: #{$small}) {
   #{$stnd-theme-scope} {
-    --gap-body: var(--gap-body-mobile) !important;
-    --gap-header: var(--gap-header-mobile) !important;
-    --gap: var(--gap-mobile) !important;
     --font-size: var(--font-size-mobile) !important;
   }
 }

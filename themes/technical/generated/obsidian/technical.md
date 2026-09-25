@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-09-25 01:45
 cssclasses: []
 maturity: sprout
 mode: read
@@ -23,7 +23,7 @@ snippet: false
     background: var(--color-surface);
 
       body {
-        max-width: calc(var(--line-width) + var(--space-4));
+        max-width: calc(var(--prose-width) + var(--space-4));
         margin-inline: auto;
         background: var(--color-background);
         box-shadow: var(--shadow-lg);
@@ -74,7 +74,7 @@ snippet: false
 
       /* Data tables: labelled like a parts list */
       :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) th {
-        font-size: var(--size-xs);
+        font-size: var(--scale-d3);
         text-transform: uppercase;
         letter-spacing: 0.06em;
       }

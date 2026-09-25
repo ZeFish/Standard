@@ -183,8 +183,8 @@ All 17 files verified via a running dev server (both `stnd.gd` and `stnd.build`)
 - **`.rhythm`'s base 1x-spacing rule has no `>` combinator; every other rule in the same block does** (`_standard-05-rhythm.scss`) — applies at any nesting depth instead of direct children only. Left alone: adding `>` risks a real regression on nested content (e.g. a paragraph inside a `.callout` inside `.rhythm`) that's impossible to fully rule out without a visual pass over every place `.rhythm` is used.
 - **`.compact`/`.relaxed` are unnamespaced and collide across `_standard-09-lists.scss` and `_standard-50-utilities.scss`** — resolving this properly means renaming part of the framework's public class API, which is an architectural decision, not a mechanical fix.
 
-**Documented, not a bug:**
-- The `generate-scale` mixin's `"trim"`/`"leading"` scale keys (feeding `.mt-trim`, `.p-leading`, etc.) use `--size-2xs`/`--size-xs` — not the real `--trim`/`--leading` rhythm tokens that happen to share the same words. `.mt-trim` does not use `--trim`. A naming collision worth knowing about, not something to change.
+**Resolved:**
+- The `generate-scale` mixin's `"trim"` and `"leading"` scale keys (feeding `.mt-trim`, `.mb-leading`, etc.) now directly connect to the real vertical rhythm tokens `var(--trim)` and `var(--leading)`, aligning spacing utilities with typographic rhythm. Invalid combinations like `padding: auto` and `gap: auto` are filtered out.
 
 **Where the mechanism is real but the hook is currently unused:**
 - `--corner` (theme override for `--radius`) — documented, no theme sets

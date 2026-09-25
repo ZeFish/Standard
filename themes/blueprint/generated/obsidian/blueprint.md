@@ -81,7 +81,7 @@ snippet: false
       :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6))::before {
         content: "";
         opacity: var(--blueprint-opacity);
-        font-size: var(--size-sm);
+        font-size: var(--scale-d2);
         color: var(--color-foreground);
         font-style: italic;
         font-weight: 400;
@@ -124,7 +124,7 @@ snippet: false
       :is(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)))::before {
         content: "pre";
         opacity: var(--blueprint-opacity);
-        font-size: var(--size-sm);
+        font-size: var(--scale-d2);
         color: var(--color-foreground);
         font-style: italic;
         font-weight: 400;
@@ -143,7 +143,7 @@ snippet: false
       :is(p)::before {
         content: "p";
         opacity: var(--blueprint-opacity);
-        font-size: var(--size-sm);
+        font-size: var(--scale-d2);
         color: var(--color-foreground);
         font-style: italic;
         font-weight: 400;

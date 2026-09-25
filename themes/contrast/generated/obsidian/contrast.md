@@ -64,7 +64,7 @@ snippet: false
       :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote),
       :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
         border: var(--stroke-width) solid var(--color-foreground) !important;
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius);
       }
 
       /* Text elements get stronger treatment */

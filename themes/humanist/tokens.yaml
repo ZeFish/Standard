@@ -28,7 +28,7 @@ tokens:
   font-header-letter-spacing: 0em
   font-weight-bold: "600"
   stroke-width: 0
-  gap-body: var(--space-3)
+  page-padding: var(--space-3)
   color-light-italic: var(--color-blue)
   color-light-bold: var(--color-accent)
   color-dark-italic: var(--color-blue)

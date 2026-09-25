@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-09-25 02:06
 cssclasses: []
 maturity: sprout
 mode: read
@@ -21,7 +21,7 @@ snippet: false
     /* ─── Custom rules for Reveal ───────────────────────────── */
     :root[data-theme="reveal"],
       [data-theme="reveal"] {
-        --color-photo-frame: var(--color-surface-high);
+        --color-photo-frame: var(--color-surface-light-2);
       }
     }
 
@@ -61,26 +61,26 @@ snippet: false
     }
 
     :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
-        font-size: var(--size-2xl);
+        font-size: var(--scale-4);
         letter-spacing: 0.12em;
 
         padding-block-end: var(--space-2);
     }
 
     :is(.markdown-reading-view h2, .HyperMD-header-2) {
-        font-size: var(--size-xl);
+        font-size: var(--scale-3);
         border-bottom: var(--border);
         padding-block-end: var(--space);
     }
 
     :is(.markdown-reading-view h3, .HyperMD-header-3) {
-        font-size: var(--size-lg);
+        font-size: var(--scale-2);
     }
 
     /* Leica safety styling */
     .callout {
         border-left: 3px solid var(--color-accent) !important;
-        background: var(--color-surface-low) !important;
+        background: var(--color-surface-dark-1) !important;
     }
 
     /* Technical tables */
@@ -88,7 +88,7 @@ snippet: false
         font-family: var(--font-header);
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        font-size: var(--size-xs);
+        font-size: var(--scale-d3);
     }
 
     :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
@@ -102,7 +102,7 @@ snippet: false
         border: var(--border) !important;
         padding-inline: 0.3em !important;
         border-radius: var(--radius) !important;
-        font-size: var(--size-xs) !important;
+        font-size: var(--scale-d3) !important;
     }
 }
 ```

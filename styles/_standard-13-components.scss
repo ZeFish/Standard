@@ -25,20 +25,20 @@
 
 /* Keycaps */
 kbd {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-light-1);
   border: none;
   border-radius: 15%;
   box-shadow: var(--shadow);
   padding: var(--space-d4) var(--space-d4);
   font-family: var(--font-monospace);
-  font-size: var(--size-2xs);
+  font-size: var(--scale-d4);
   color: var(--color-foreground);
   pointer-events: none;
 }
 
 .loader {
-  width: var(--size-lg);
-  height: var(--size-lg);
+  width: var(--scale-2);
+  height: var(--scale-2);
   border: var(--space-d3) solid transparent;
   background: transparent;
   border-radius: 50%;
@@ -71,19 +71,19 @@ $types: "secondary", "outline", "destructive", "ghost", "icon";
 a.btn {
   @extend %surface;
   @extend %padding-text;
-  padding: var(--space-d6) var(--space-d2);
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-interface);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height);
+  line-height: 1;
   font-size: 1em;
   user-select: none;
-  background-color: var(--color-surface-high);
+  background-color: var(--color-surface-light-1);
   color: var(--color-foreground);
   cursor: pointer;
-  gap: var(--space-d3);
+  gap: var(--gap-compact);
   text-align: center;
   min-height: 1em;
 
@@ -94,19 +94,19 @@ a.btn {
   transition: all var(--transition-fast);
 
   text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
+  text-box-edge: cap text;
 
   text-decoration: none !important;
 
   &:hover {
-    background-color: var(--color-surface-highest);
+    background-color: var(--color-surface-light-2);
     /* Lift shadow slightly on hover */
     color: var(--color-foreground);
     box-shadow: var(--shadow-hover);
   }
 
   &:active {
-    background-color: var(--color-surface-low);
+    background-color: var(--color-surface-dark-1);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -135,12 +135,12 @@ a.btn.secondary {
 
   &:hover {
     color: var(--color-accent);
-    background-color: var(--color-surface-high);
+    background-color: var(--color-surface-light-2);
     box-shadow: var(--shadow-raised), var(--shadow-glow);
   }
 
   &:active {
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-dark-1);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring), var(--shadow-glow);
   }
@@ -148,15 +148,15 @@ a.btn.secondary {
 
 :where(button).link,
 a.btn.link {
-  background-color: var(--color-surface);
+  background-color: transparent;
   color: var(--color-link);
 
   &:hover {
-    background: color-mix(in srgb, currentColor 10%, var(--color-surface));
+    background: color-mix(in srgb, currentColor 10%, transparent);
   }
 
   &:active {
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-dark-1);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -170,12 +170,12 @@ a.btn.outline {
 
   &:hover {
     color: var(--color-foreground);
-    background-color: var(--color-surface-higher);
+    background-color: var(--color-surface-light-1);
   }
 
   &:active {
     color: var(--color-foreground);
-    background-color: var(--color-surface-lower);
+    background-color: var(--color-surface-dark-1);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -190,12 +190,12 @@ a.btn.ghost {
 
   &:hover {
     color: var(--color-foreground);
-    background-color: var(--color-surface-higher);
+    background-color: var(--color-surface-light-1);
     box-shadow: var(--shadow-hover);
   }
 
   &:active {
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-dark-1);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -203,20 +203,23 @@ a.btn.ghost {
 
 :where(button).large,
 a.btn.large {
-  padding: var(--space) var(--space-2);
-  font-size: var(--size-base);
+  padding: var(--leading) var(--space-2);
+  border-radius: var(--radius);
+  font-size: var(--scale);
 }
 
 :where(button).small,
 a.btn.small {
-  padding: var(--space-d6) var(--space-d2);
-  font-size: var(--size-xs);
+  padding: calc(var(--trim) / 2) var(--trim);
+  border-radius: var(--radius-sm);
+  font-size: var(--scale-d3);
 }
 
 :where(button).smaller,
 a.btn.smaller {
-  padding: var(--space-d6) var(--space-d3);
-  font-size: var(--size-xs);
+  padding: calc(var(--trim) / 2) var(--trim);
+  border-radius: var(--radius-sm);
+  font-size: var(--scale-d4);
 }
 
 :where(button).icon,
@@ -255,37 +258,38 @@ a.btn:disabled {
 }
 
 .badge {
-  padding: 0 var(--space-d3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: var(--space-d5) var(--space-d3);
+  font-size: var(--scale-d3);
+  font-family: var(--font-interface);
+  font-weight: 500;
+  font-variation-settings: "wdth" 900;
+  gap: var(--space-d4);
+  width: fit-content;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-box-trim: none;
+
   background-color: color-mix(in oklch, currentColor 15%, transparent);
   color: var(--color-accent);
   border-radius: 999px;
-  border: var(--stroke-width) solid
-    color-mix(in oklch, currentColor 30%, transparent);
   border: none;
-  font-size: var(--size-xs);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-d3);
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
+  box-shadow: var(--shadow-ring);
   text-decoration: none;
-  font-weight: 500;
-  font-family: var(--font-interface);
   user-select: none;
   transition: all var(--transition-fast);
-  box-shadow: var(--shadow-ring);
-  width: fit-content;
-
-  font-variation-settings: "wdth" 900;
 
   &.small {
-    padding: 0 var(--space-d4) !important;
-    font-size: var(--size-xs);
+    padding: calc(var(--space-d5) / 2) var(--space-d4) !important;
+    font-size: var(--scale-d3);
   }
 
   &.smaller {
-    padding: 0 var(--space-d4) !important;
-    font-size: var(--size-2xs);
+    padding: calc(var(--space-d5) / 2) var(--space-d4) !important;
+    font-size: var(--scale-d4);
   }
 
   ::selection {
@@ -305,20 +309,20 @@ a.badge:hover,
   background: color-mix(
     in oklch,
     var(--color-accent) 70%,
-    var(--color-surface)
+    var(--color-surface-light-1)
   );
 }
 
 .badge.secondary,
 a.badge.secondary {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-light-1);
   color: var(--color-foreground);
 }
 
 a.badge.secondary:hover,
 .badge.secondary a:hover {
   color: var(--color-accent);
-  background: color-mix(in oklch, currentColor 5%, var(--color-surface));
+  background: color-mix(in oklch, currentColor 5%, var(--color-surface-light-1));
 }
 
 .badge.outline {
@@ -328,7 +332,7 @@ a.badge.secondary:hover,
   &:hover,
   a:hover {
     color: var(--color-foreground);
-    background: var(--color-surface);
+    background: var(--color-surface-light-1);
   }
 }
 
@@ -339,12 +343,12 @@ a.badge.secondary:hover,
 
   &:hover {
     color: var(--color-foreground);
-    background: var(--color-surface);
+    background: var(--color-surface-light-1);
   }
 }
 
 .badge.destructive {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-light-1);
   border-color: color-mix(
     in oklch,
     var(--color-error) 10%,
@@ -489,7 +493,7 @@ a.badge.secondary:hover,
  * @example scss - Customizing card via CSS variables
  *   .card.custom {
  *     --card-border-color: var(--color-accent);
- *     --card-padding: var(--size-lg);
+ *     --card-padding: var(--scale-2);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
  */
@@ -531,7 +535,7 @@ a.badge.secondary:hover,
   @extend %surface;
   padding: var(--space);
   box-shadow: var(--shadow-raised), var(--shadow-lift);
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-light-1);
   transition: all var(--transition);
   border-radius: var(--radius);
   border: none;
@@ -554,7 +558,7 @@ a.badge.secondary:hover,
 }
 
 .card > header:first-child {
-  background: var(--color-surface);
+  background: var(--color-surface-light-1);
   box-shadow: var(--shadow-lift);
   border-bottom: var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
@@ -571,13 +575,13 @@ a.badge.secondary:hover,
     border-bottom: var(--border);
 
     box-shadow: var(--shadow);
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-light-1);
   }
 
   p {
     margin-top: var(--space-d2);
     color: var(--color-muted);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
   }
 
   + * {
@@ -595,11 +599,11 @@ a.badge.secondary:hover,
 }
 
 .card > footer:last-child {
-  background: var(--color-surface-low);
+  background: var(--color-surface-dark-1);
   border-top: var(--border);
   border-radius: 0 0 var(--radius) var(--radius);
   padding: var(--space-d2) var(--space);
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
   margin: calc(var(--space) * -1);
   margin-top: var(--space);
 }
@@ -648,17 +652,17 @@ card.inset {
   /* Raised effect for callout cards */
   box-shadow: var(--shadow-raised), var(--shadow-ring);
 
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   padding: var(--space-d8);
   padding-top: 0;
-  --color-callout: var(--color-surface);
+  --color-callout: var(--color-surface-light-1);
   --color-border: oklch(from var(--color-callout) l c h / 0.15);
   background: color-mix(
     in srgb,
     var(--color-callout) 10%,
-    var(--color-surface-high)
+    var(--color-surface-light-1)
   );
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
 
   .callout-title,
   > summary {
@@ -690,11 +694,11 @@ card.inset {
     background: color-mix(
       in srgb,
       var(--color-callout) 10%,
-      var(--color-surface-low)
+      var(--color-surface-dark-1)
     );
     line-height: var(--line-height-compact);
     box-shadow: var(--shadow-inset), var(--shadow-ring);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     padding: var(--space-d2);
     margin-top: 0;
     margin-left: 0;
@@ -907,7 +911,7 @@ details .callout-fold {
     margin-block-end: 0;
   }
 
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
 
   .comment {
     border: none;
@@ -929,7 +933,7 @@ details .callout-fold {
       .comment-date,
       .comment-pending {
         color: var(--color-subtle);
-        font-size: var(--size-xs);
+        font-size: var(--scale-d3);
       }
 
       .comment-pending {
@@ -944,7 +948,7 @@ details .callout-fold {
       border-left: var(--border);
       padding: var(--space-d2);
       color: var(--color-muted);
-      font-size: var(--size-sm);
+      font-size: var(--scale-d2);
       line-height: var(--line-height-compact);
     }
   }
@@ -993,7 +997,7 @@ a.skip-link {
   padding: var(--space-d3);
   border-radius: var(--radius);
   font-weight: var(--font-weight-bold);
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
   text-decoration: none;
   box-shadow: var(--shadow-xl);
 
@@ -1057,7 +1061,7 @@ a.skip-link {
   padding: var(--space-d4);
   background: var(--color-surface-high);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-raised), var(--shadow-glow);
   display: flex;
   flex-direction: column;
@@ -1073,7 +1077,7 @@ a.skip-link {
 .std-menu-label {
   padding: var(--space-d4);
   font-family: var(--font-interface);
-  font-size: var(--size-2xs);
+  font-size: var(--scale-d4);
   font-weight: var(--font-weight);
   color: var(--color-subtle);
   user-select: none;
@@ -1100,8 +1104,8 @@ a.skip-link {
   align-items: center;
   gap: var(--space-d4);
   padding: 0 var(--space-d4);
-  border-radius: var(--radius-sm);
-  font-size: var(--size-sm);
+  border-radius: var(--radius);
+  font-size: var(--scale-d2);
   font-family: var(--font-interface);
   color: var(--color-foreground);
   cursor: pointer;
@@ -1151,7 +1155,7 @@ a.skip-link {
   }
 
   .item-shortcut {
-    font-size: var(--size-3xs);
+    font-size: var(--scale-d5);
     color: var(--color-muted);
     letter-spacing: 0.1em;
     padding-left: var(--space);
@@ -1222,7 +1226,7 @@ a.skip-link {
   /* Label styling */
   label {
     font-weight: var(--font-weight-bold);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     color: var(--color-foreground);
   }
 }

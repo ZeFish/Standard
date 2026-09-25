@@ -80,7 +80,7 @@ ol > li::before {
   color: var(--color-subtle);
   font-variant-numeric: tabular-nums;
   width: 1rlh;
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
 }
 
 /* Fixed 2026-07-14 — was checking for .display-flex (not a real class
@@ -148,9 +148,9 @@ ol:where(.flex, [style*="display: flex"], [style*="display:flex"]) li {
 .task-field {
   display: inline-block;
   font-family: var(--font-monospace);
-  font-size: var(--size-3xs);
+  font-size: var(--scale-d5);
   color: var(--color-subtle);
-  background: var(--color-surface);
+  background: var(--color-surface-dark-1);
   border: var(--border);
   border-radius: var(--radius-sm);
   padding: 0 var(--space-d4);

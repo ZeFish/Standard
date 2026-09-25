@@ -28,18 +28,19 @@
     "0": 0,
     "auto": auto,
 
-    /* Industrial T-shirt Scale */ "3xs": var(--size-3xs),
-    "2xs": var(--size-2xs),
-    "xs": var(--size-xs),
-    "sm": var(--size-sm),
-    "base": var(--size-base),
-    "lg": var(--size-lg),
-    "xl": var(--size-xl),
-    "2xl": var(--size-2xl),
-    "3xl": var(--size-3xl),
-    "4xl": var(--size-4xl),
-    "5xl": var(--size-5xl),
-    "6xl": var(--size-6xl),
+    /* Optical Scale */
+    "3xs": var(--scale-d5),
+    "2xs": var(--scale-d4),
+    "xs": var(--scale-d3),
+    "sm": var(--scale-d2),
+    "base": var(--scale),
+    "lg": var(--scale-2),
+    "xl": var(--scale-3),
+    "2xl": var(--scale-4),
+    "3xl": var(--scale-5),
+    "4xl": var(--scale-6),
+    "5xl": var(--scale-7),
+    "6xl": var(--scale-8),
     /* Mathematical Unit Scale (1-12) */ "": var(--space),
     "2": var(--space-2),
     "3": var(--space-3),
@@ -53,36 +54,35 @@
     "11": var(--space-11),
     "12": var(--space-12),
     "half": var(--space-d2),
-    /* Naming collision worth knowing: this "trim"/"leading" scale keys
-       (feeding .mt-trim, .p-leading, etc.) use --size-2xs/--size-xs (the
-       type scale) — NOT the real --trim/--leading rhythm tokens
-       (_standard-01-token.scss) that happen to share the same words.
-       A class like .mt-trim does not use --trim. */
-    "trim": var(--size-2xs),
-    "leading": var(--size-xs),
+    /* Vertical Rhythm Tokens */
+    "trim": var(--trim),
+    "leading": var(--leading),
   );
 
   // Loop through and generate classes
   @each $suffix, $value in $scales {
-    @if $suffix == "" {
-      .#{$prefix} {
-        #{$property}: $value !important;
-      }
-    } @else {
-      .#{$prefix}-#{$suffix} {
-        #{$property}: $value !important;
+    $invalid-auto: $value == auto and ($property == padding or $property == padding-top or $property == padding-bottom or $property == padding-left or $property == padding-right or $property == padding-inline or $property == padding-block or $property == gap or $property == column-gap or $property == row-gap);
+    $invalid-gap-full: $value == 100% and ($property == gap or $property == column-gap or $property == row-gap);
+
+    @if not $invalid-auto and not $invalid-gap-full {
+      @if $suffix == "" {
+        .#{$prefix} {
+          #{$property}: $value !important;
+        }
+      } @else {
+        .#{$prefix}-#{$suffix} {
+          #{$property}: $value !important;
+        }
       }
     }
   }
 }
 
-.w-auto {
-  width: auto !important;
-}
+/* ============================================================ */
+/*  WIDTH                                                       */
+/* ============================================================ */
 
-.w-full {
-  width: 100% !important;
-}
+@include generate-scale(w, width);
 
 .w-screen {
   width: 100vw !important;
@@ -103,10 +103,6 @@
 /* Min-width */
 @include generate-scale(min-w, min-width);
 
-.min-w-full {
-  min-width: 100% !important;
-}
-
 .min-w-screen {
   min-width: 100vw !important;
 }
@@ -118,10 +114,6 @@
   max-width: none !important;
 }
 
-.max-w-full {
-  max-width: 100% !important;
-}
-
 .max-w-screen {
   max-width: 100vw !important;
 }
@@ -130,20 +122,21 @@
   max-width: var(--mobile) !important;
 }
 
-.max-w-small {
-  max-width: var(--line-width-sm) !important;
+.max-w-prose {
+  max-width: var(--prose-width) !important;
 }
 
-.max-w-large {
-  max-width: var(--line-width-lg) !important;
+.narrow {
+  margin-inline: var(--prose-inset) !important;
 }
 
-.max-w-medium {
-  max-width: var(--line-width-md) !important;
+.max-w-wide,
+.wide:not(.prose *) {
+  max-width: calc(var(--prose-width) + (var(--space-4) * 2)) !important;
 }
 
-.max-w-line {
-  max-width: var(--line-width) !important;
+.max-w-page {
+  max-width: var(--page-max-width) !important;
 }
 
 /* ============================================================ */
@@ -151,14 +144,6 @@
 /* ============================================================ */
 
 @include generate-scale(h, height);
-
-.h-auto {
-  height: auto !important;
-}
-
-.h-full {
-  height: 100% !important;
-}
 
 .h-screen {
   height: 100vh !important;
@@ -179,10 +164,6 @@
 /* Min-height */
 @include generate-scale(min-h, min-height);
 
-.min-h-full {
-  min-height: 100% !important;
-}
-
 .min-h-screen {
   min-height: 100vh !important;
 }
@@ -194,28 +175,8 @@
   max-height: none !important;
 }
 
-.max-h-full {
-  max-height: 100% !important;
-}
-
 .max-h-screen {
   max-height: 100vh !important;
-}
-
-.m-gap-header {
-  margin-top: var(--gap-header);
-}
-
-.p-gap-header {
-  padding-top: var(--gap-header);
-}
-
-.m-gap-footer {
-  margin-bottom: var(--gap-footer);
-}
-
-.p-gap-footer {
-  padding-bottom: var(--gap-footer);
 }
 
 /* ============================================================ */
@@ -272,7 +233,7 @@
   display: flex !important;
   gap: var(--gap);
 
-  & :not(.rhythm) * {
+  &:not(.rhythm) > * {
     margin-top: 0;
   }
 }
@@ -371,7 +332,7 @@
 }
 
 .no-body-margin {
-  margin-inline: calc((var(--gap-body) * -1)) !important;
+  margin-inline: calc((var(--page-padding) * -1)) !important;
 }
 
 .full-bleed {
@@ -382,8 +343,8 @@
 }
 
 .breakout {
-  width: min(100%, 72rem) !important;
-  max-width: 72rem !important;
+  width: min(100%, var(--page-max-width)) !important;
+  max-width: var(--page-max-width) !important;
   margin-inline: auto !important;
 }
 
@@ -394,7 +355,7 @@
   margin-block: var(--gap-section, 6rem);
   margin-inline: auto;
   width: min(100%, 18rem);
-  scroll-margin-top: calc(var(--gap-header, 3.5rem) + 1.5rem);
+  scroll-margin-top: var(--space-6);
 
   &.screen-full {
     width: 100%;
@@ -417,7 +378,7 @@
 .stnd-screen-section {
   width: 100%;
   margin-block: var(--gap-section, 4rem);
-  scroll-margin-top: calc(var(--gap-header, 3.5rem) + 1.5rem);
+  scroll-margin-top: var(--space-6);
 
   &.screen-full {
     min-height: 85vh;
@@ -432,52 +393,64 @@
 /*  TYPOGRAPHY — Size                                           */
 /* ============================================================ */
 
-.text-3xs {
-  font-size: var(--size-3xs) !important;
+.text-3xs,
+.text-scale-d5 {
+  font-size: var(--scale-d5) !important;
 }
 
-.text-2xs {
-  font-size: var(--size-2xs) !important;
+.text-2xs,
+.text-scale-d4 {
+  font-size: var(--scale-d4) !important;
 }
 
-.text-xs {
-  font-size: var(--size-xs) !important;
+.text-xs,
+.text-scale-d3 {
+  font-size: var(--scale-d3) !important;
 }
 
-.text-sm {
-  font-size: var(--size-sm) !important;
+.text-sm,
+.text-scale-d2 {
+  font-size: var(--scale-d2) !important;
 }
 
-.text-base {
-  font-size: var(--size-base) !important;
+.text-base,
+.text-scale {
+  font-size: var(--scale) !important;
 }
 
-.text-lg {
-  font-size: var(--size-lg) !important;
+.text-lg,
+.text-scale-2 {
+  font-size: var(--scale-2) !important;
 }
 
-.text-xl {
-  font-size: var(--size-xl) !important;
+.text-xl,
+.text-scale-3 {
+  font-size: var(--scale-3) !important;
 }
 
-.text-2xl {
-  font-size: var(--size-2xl) !important;
+.text-2xl,
+.text-scale-4 {
+  font-size: var(--scale-4) !important;
 }
 
-.text-3xl {
-  font-size: var(--size-3xl) !important;
+.text-3xl,
+.text-scale-5 {
+  font-size: var(--scale-5) !important;
 }
 
-.text-4xl {
-  font-size: var(--size-4xl) !important;
+.text-4xl,
+.text-scale-6 {
+  font-size: var(--scale-6) !important;
 }
 
-.text-5xl {
-  font-size: var(--size-5xl) !important;
+.text-5xl,
+.text-scale-7 {
+  font-size: var(--scale-7) !important;
 }
 
-.text-6xl {
-  font-size: var(--size-6xl) !important;
+.text-6xl,
+.text-scale-8 {
+  font-size: var(--scale-8) !important;
 }
 
 /* ============================================================ */
@@ -571,12 +544,21 @@
   white-space: nowrap !important;
 }
 
-.no-trim {
+.no-trim,
+.trim-none {
   text-box-trim: none !important;
 
   * {
     text-box-trim: none !important;
   }
+}
+
+.trim-baseline {
+  text-box-edge: cap alphabetic !important;
+}
+
+.trim-cap {
+  text-box-edge: cap text !important;
 }
 
 .ellipsis,
@@ -589,35 +571,6 @@
   text-box-edge: inherit;
 }
 
-/* ============================================================ */
-/*  READING WIDTH (line-width constraints)                      */
-/* ============================================================ */
-
-.line-xs {
-  max-width: var(--line-width-xs) !important;
-}
-
-/* Fixed 2026-07-14 — was --line-width-s/-l (undefined), corrected to the
-   real --line-width-sm/-lg (all 3 occurrences). */
-.line-s {
-  max-width: var(--line-width-sm) !important;
-}
-
-.line {
-  max-width: var(--line-width) !important;
-}
-
-.line-l {
-  max-width: var(--line-width-lg) !important;
-}
-
-.line-xl {
-  max-width: var(--line-width-xl) !important;
-}
-
-.line-full {
-  max-width: var(--line-width-full) !important;
-}
 
 /* ============================================================ */
 /*  COLORS — Text (semantic)                                    */
@@ -742,20 +695,28 @@
   background-color: var(--color-glass);
 }
 
-.bg-surface-lowest {
-  background-color: var(--color-surface-lowest) !important;
+.bg-surface-light-1 {
+  background-color: var(--color-surface-light-1) !important;
 }
 
-.bg-surface-low {
-  background-color: var(--color-surface-low) !important;
+.bg-surface-light-2 {
+  background-color: var(--color-surface-light-2) !important;
 }
 
-.bg-surface-high {
-  background-color: var(--color-surface-high) !important;
+.bg-surface-light-3 {
+  background-color: var(--color-surface-light-3) !important;
 }
 
-.bg-surface-highest {
-  background-color: var(--color-surface-highest) !important;
+.bg-surface-dark-1 {
+  background-color: var(--color-surface-dark-1) !important;
+}
+
+.bg-surface-dark-2 {
+  background-color: var(--color-surface-dark-2) !important;
+}
+
+.bg-surface-dark-3 {
+  background-color: var(--color-surface-dark-3) !important;
 }
 
 /* ============================================================ */
@@ -803,10 +764,6 @@
 .invert {
   color: var(--color-background);
   background: var(--color-foreground);
-
-  * {
-    color: var(--color-background) !important;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -897,7 +854,7 @@
 /* ============================================================ */
 
 .rounded-sm {
-  border-radius: calc(var(--radius) / 2) !important;
+  border-radius: var(--radius-sm) !important;
 }
 
 .rounded {
@@ -968,7 +925,7 @@
 
 .columns-auto {
   columns: auto;
-  column-width: var(--line-width-sm);
+  column-width: calc(var(--prose-width) / 2);
   column-gap: var(--space);
 }
 
@@ -1085,11 +1042,10 @@
 @include generate-scale(gap-x, column-gap);
 @include generate-scale(gap-y, row-gap);
 
-/* ============================================================ */
-/*  WIDTH                                                       */
-/* ============================================================ */
+.gap-compact {
+  gap: var(--gap-compact) !important;
+}
 
-@include generate-scale(w, width);
 
 /* ============================================================ */
 /*  RESPONSIVE BREAKPOINTS                                      */

@@ -57,7 +57,7 @@
 background: var(--color-surface);
 
   body {
-    max-width: calc(var(--line-width) + var(--space-4));
+    max-width: calc(var(--prose-width) + var(--space-4));
     margin-inline: auto;
     background: var(--color-background);
     box-shadow: var(--shadow-lg);
@@ -108,7 +108,7 @@ background: var(--color-surface);
 
   /* Data tables: labelled like a parts list */
   table th {
-    font-size: var(--size-xs);
+    font-size: var(--scale-d3);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }

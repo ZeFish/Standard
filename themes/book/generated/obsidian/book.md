@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-09-25 01:45
 cssclasses: []
 maturity: sprout
 mode: read
@@ -119,7 +119,7 @@ snippet: false
       }
 
       .prose > * {
-        max-width: var(--line-width);
+        max-width: var(--prose-width);
         margin-inline: 0;
       }
 
@@ -140,7 +140,7 @@ snippet: false
         padding-block: var(--space-2);
         margin-block: var(--space-3) var(--space-2) var(--space-4) var(--space-2);
         margin-inline: var(--space);
-        font-size: var(--size-base);
+        font-size: var(--scale);
       }
 
       :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
@@ -159,7 +159,7 @@ snippet: false
 
       :is(hr, .HyperMD-hr),
       :is(hr, .HyperMD-hr):not(:first-child) {
-        font-size: var(--size-base);
+        font-size: var(--scale);
         line-height: var(--space);
         padding: 0;
         border: 0;
@@ -180,10 +180,10 @@ snippet: false
         display: inline;
         position: relative;
         top: calc(var(--space) * -1);
-        left: calc(var(--space) + var(--line-width));
+        left: calc(var(--space) + var(--prose-width));
         margin-top: calc(var(--space) * -1);
         margin-bottom: calc(var(--space) * -2);
-        font-size: var(--size-sm);
+        font-size: var(--scale-d2);
         color: var(--color-muted);
         line-height: var(--line-height-s);
         max-width: 33%;

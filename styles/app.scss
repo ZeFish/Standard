@@ -33,9 +33,6 @@
      (Gap formulas are duplicated rather than var(--gap)-referenced —
      referencing the token they feed would create a custom-property cycle.) */
   --font-size-mobile: var(--font-text-size);
-  --gap-mobile: calc(var(--space) * var(--optical-ratio));
-  --gap-body-mobile: var(--space-2);
-  --gap-header-mobile: var(--space-8);
 
   /* Tighter modular scale than the silver default — in an app, headings
      are labels and section chrome, not display type. */
@@ -54,8 +51,7 @@
      The framework derives --radius from --leading, a TYPOGRAPHIC rhythm
      value (~2.6px at 13px / 1.2), not a chrome corner. --corner is the
      framework's own escape hatch for exactly this.
-     --radius-sm is set explicitly: the framework's min(8px, --radius)
-     would collapse onto --radius and stop being a distinct step.
+     --radius-sm is set explicitly for chrome controls.
      --radius-lg has no framework equivalent; declared here so it is real. */
   --corner: 6px; /* feeds --radius */
   --radius-sm: 4px;

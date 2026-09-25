@@ -329,7 +329,7 @@
   --color-light-border: oklch(from var(--color-light-foreground) l c h / 0.1);
   --color-light-surface: color-mix(
     in srgb,
-    var(--color-light-foreground) 3%,
+    white 4%,
     var(--color-light-background)
   );
   --color-light-on-accent: var(--color-light-background);
@@ -343,7 +343,7 @@
   );
   --color-dark-surface: color-mix(
     in srgb,
-    var(--color-dark-foreground) 3%,
+    white 4%,
     var(--color-dark-background)
   );
 
@@ -456,59 +456,46 @@
    *
    * @property --color-shadow Active base shadow color.
    * @property --color-highlight Active specular highlight color.
-   * @property --color-surface-lowest Deepest recessed surface step.
-   * @property --color-surface-lower Sub-surface step mixed with transparency.
-   * @property --color-surface-low Low elevation surface step.
-   * @property --color-surface Base surface color.
-   * @property --color-surface-high Elevated surface step.
-   * @property --color-surface-highest Highest surface elevation step.
+   * @property --color-surface Base surface color (defaults to surface-light-1).
+   * @property --color-surface-light-1 Subtle elevated surface step (cards, containers).
+   * @property --color-surface-light-2 Elevated surface step (popovers, menus, dialogs).
+   * @property --color-surface-light-3 High elevated surface step (active highlights, modals).
+   * @property --color-surface-dark-1 Recessed surface step (inputs, wells, code blocks).
+   * @property --color-surface-dark-2 Deep recessed surface step (switch tracks, sunken wells).
+   * @property --color-surface-dark-3 Deepest recessed surface step.
    */
 
   /* Semantic Shadow Seeds */
   --color-shadow: var(--color-light-shadow-base);
   --color-highlight: var(--color-light-highlight);
 
-  /* Surface elevation scale */
-  --color-surface-low: color-mix(
-    in srgb,
-    var(--color-foreground) 3%,
-    var(--color-surface)
-  );
-  --color-surface-lowest: color-mix(
-    in srgb,
-    var(--color-foreground) 3%,
-    var(--color-surface-low)
-  );
-  --color-surface-lower: color-mix(
-    in srgb,
-    var(--color-foreground) 3%,
-    transparent
-  );
+  /* Directional surface scale (lighter & darker than background) */
+  --color-surface-light-1: color-mix(in srgb, white 4%, var(--color-background));
+  --color-surface-light-2: color-mix(in srgb, white 9%, var(--color-background));
+  --color-surface-light-3: color-mix(in srgb, white 16%, var(--color-background));
 
-  --color-surface-high: color-mix(in srgb, white 50%, var(--color-surface));
-  --color-surface-highest: color-mix(
-    in srgb,
-    white 50%,
-    var(--color-surface-high)
-  );
-  --color-surface-higher: color-mix(in srgb, white 50%, transparent);
+  --color-surface-dark-1: color-mix(in srgb, black 4%, var(--color-background));
+  --color-surface-dark-2: color-mix(in srgb, black 9%, var(--color-background));
+  --color-surface-dark-3: color-mix(in srgb, black 16%, var(--color-background));
+
+  /* Canonical base surface */
+  --color-surface: var(--color-surface-light-1);
+
   /**
    * @component Border Shorthands
    * @category Foundation
    * @description Pre-composed border shorthand tokens for clean layout boundaries.
    *
    * @property --border Standard border shorthand (`var(--stroke-width) solid var(--color-border)`).
+   * @property --border-hover Hover border shorthand (`var(--stroke-width) solid var(--color-foreground)`).
    * @property --border-accent Tinted accent border shorthand (`var(--stroke-width) solid oklch(...)`).
    * @property --border-transparent Transparent layout placeholder border.
    */
   --border-transparent: var(--stroke-width) solid transparent;
   --border-accent: var(--stroke-width) solid
     oklch(from var(--color-accent) l c h / 0.07);
-  /* Regressed to `0 solid transparent` at some point, then a prior audit
-     correctly flagged it as dead code but "fixed" it to `none` instead of
-     restoring the real value. Git history confirms the intended value —
-     unchanged across many commits before the regression — was this. */
   --border: var(--stroke-width) solid var(--color-border);
+  --border-hover: var(--stroke-width) solid var(--color-foreground);
 }
 
 /* =====================================================================
@@ -550,40 +537,23 @@
 
     /* Adjusted opacity for dark backgrounds */
     --color-subtle: var(--color-dark-subtle);
-    --color-muted: var(--color-dark-muted);
     --color-border: var(--color-dark-border);
-    --color-surface: var(--color-dark-surface);
 
     --color-shadow: var(--color-dark-shadow-base);
     --color-highlight: var(--color-dark-highlight);
 
     --shadow-xl: var(--shadow-glow);
 
-    /* Surface elevation scale */
+    /* Directional surface scale in dark mode */
+    --color-surface-light-1: color-mix(in srgb, white 4%, var(--color-background));
+    --color-surface-light-2: color-mix(in srgb, white 9%, var(--color-background));
+    --color-surface-light-3: color-mix(in srgb, white 16%, var(--color-background));
 
-    --color-surface-low: color-mix(in srgb, black 3%, var(--color-surface));
-    --color-surface-lowest: color-mix(
-      in srgb,
-      black 7%,
-      var(--color-surface-low)
-    );
-    --color-surface-lower: color-mix(in srgb, black 7%, transparent);
+    --color-surface-dark-1: color-mix(in srgb, black 4%, var(--color-background));
+    --color-surface-dark-2: color-mix(in srgb, black 9%, var(--color-background));
+    --color-surface-dark-3: color-mix(in srgb, black 16%, var(--color-background));
 
-    --color-surface-high: color-mix(
-      in srgb,
-      var(--color-dark-foreground) 3%,
-      var(--color-surface)
-    );
-    --color-surface-highest: color-mix(
-      in srgb,
-      var(--color-dark-foreground) 3%,
-      var(--color-surface-high)
-    );
-    --color-surface-higher: color-mix(
-      in srgb,
-      var(--color-dark-foreground) 3%,
-      transparent
-    );
+    --color-surface: var(--color-surface-light-1);
   }
 }
 
@@ -608,7 +578,7 @@
   --color-muted: var(--color-light-muted);
   --color-subtle: var(--color-light-subtle);
   --color-border: var(--color-light-border);
-  --color-surface: var(--color-light-surface);
+  --color-surface: var(--color-surface-light-1);
   --color-shadow: var(--color-light-shadow-base);
   --color-highlight: var(--color-light-highlight);
   --color-light: var(--color-light-background);
@@ -623,7 +593,7 @@
   --color-muted: var(--color-dark-muted);
   --color-subtle: var(--color-dark-subtle);
   --color-border: var(--color-dark-border);
-  --color-surface: var(--color-dark-surface);
+  --color-surface: var(--color-surface-light-1);
   --color-shadow: var(--color-dark-shadow-base);
   --color-highlight: var(--color-dark-highlight);
   --color-light: var(--color-dark-foreground);

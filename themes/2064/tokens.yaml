@@ -32,7 +32,7 @@ tokens:
   font-monospace: "\"Berkeley Mono\""
   optical-ratio: "1.414"
   line-height: "1.5"
-  line-width: 45rem
+  prose-width: 45rem
   font-weight: "400"
   font-weight-bold: "600"
   radius: 2px

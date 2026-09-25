@@ -155,7 +155,7 @@
   }
 
   .prose > * {
-    max-width: var(--line-width);
+    max-width: var(--prose-width);
     margin-inline: 0;
   }
 
@@ -176,7 +176,7 @@
     padding-block: var(--space-2);
     margin-block: var(--space-3) var(--space-2) var(--space-4) var(--space-2);
     margin-inline: var(--space);
-    font-size: var(--size-base);
+    font-size: var(--scale);
   }
 
   pre {
@@ -195,7 +195,7 @@
 
   hr,
   hr:not(:first-child) {
-    font-size: var(--size-base);
+    font-size: var(--scale);
     line-height: var(--space);
     padding: 0;
     border: 0;
@@ -216,10 +216,10 @@
     display: inline;
     position: relative;
     top: calc(var(--space) * -1);
-    left: calc(var(--space) + var(--line-width));
+    left: calc(var(--space) + var(--prose-width));
     margin-top: calc(var(--space) * -1);
     margin-bottom: calc(var(--space) * -2);
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     color: var(--color-muted);
     line-height: var(--line-height-s);
     max-width: 33%;

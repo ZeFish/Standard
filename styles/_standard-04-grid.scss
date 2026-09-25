@@ -102,7 +102,7 @@ $grid-selectors: ".grid, .grid-row";
 /* Gap variants aligned to rhythm — this is the LIVE definition (sets --gap,
    the property actually consumed by column-gap/row-gap above). */
 :is(.grid, [class^="grid-"]).compact {
-  --gap: var(--trim);
+  --gap: var(--gap-compact);
 }
 
 :is(.grid, [class^="grid-"]).relaxed {

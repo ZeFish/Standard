@@ -137,37 +137,37 @@ h6 {
    controls heading line-height now. */
 h1 {
   font-weight: var(--font-weight-h1);
-  font-size: clamp(var(--size-xl), 5.5vw, var(--size-2xl));
+  font-size: clamp(var(--scale-3), 5.5vw, var(--scale-4));
   line-height: var(--font-header-line-height, 1);
 }
 
 h2 {
   font-weight: var(--font-weight-h2);
-  font-size: clamp(var(--size-lg), 4vw, var(--size-xl));
+  font-size: clamp(var(--scale-2), 4vw, var(--scale-3));
   line-height: var(--font-header-line-height, 1);
 }
 
 h3 {
   font-weight: var(--font-weight-h3);
-  font-size: clamp(var(--size-base), 3vw, var(--size-lg));
+  font-size: clamp(var(--scale), 3vw, var(--scale-2));
   line-height: var(--font-header-line-height, 1);
 }
 
 h4 {
   font-weight: var(--font-weight);
-  font-size: var(--size-base);
+  font-size: var(--scale);
   line-height: var(--line-height);
 }
 
 h5 {
   font-weight: var(--font-weight);
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
   line-height: var(--line-height);
 }
 
 h6 {
   font-weight: var(--font-weight);
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   line-height: var(--line-height);
 }
 
@@ -191,7 +191,7 @@ h6 {
 .overline {
   font-variant-caps: small-caps;
   letter-spacing: 0.04em;
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
   border-top: var(--stroke-width) solid var(--color-border);
   padding-block-start: var(--space-d2);
   margin-block-end: var(--space);
@@ -202,7 +202,7 @@ a {
   color: var(--color-link);
   text-decoration: none;
   text-decoration-thickness: var(--stroke-width);
-  text-underline-offset: calc(var(--stroke-width) * 2);
+  text-underline-offset: var(--trim);
   text-decoration-color: transparent;
   box-shadow: none;
   transition:
@@ -221,7 +221,7 @@ a:hover {
 a[target="_blank"]:not(.internal-link)::after {
   content: "↗";
   display: inline-block;
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   color: var(--color-subtle);
   margin-inline-start: 0.2em;
   transition: all var(--transition-fast);
@@ -236,7 +236,7 @@ a[target="_blank"]:not(.internal-link):hover::after {
   transition: all var(--transition-fast);
   &::after {
     content: "⊗";
-    font-size: var(--size-xs);
+    font-size: var(--scale-d3);
     color: var(--color-error);
     margin-inline-start: 0.2em;
   }
@@ -261,7 +261,7 @@ a[target="_blank"]:not(.internal-link):hover::after {
   font-variation-settings: var(--font-interface-variation);
   font-feature-settings: var(--font-interface-feature);
   font-weight: var(--font-interface-weight, var(--font-weight));
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
 }
 
 code,
@@ -287,12 +287,12 @@ blockquote {
 
 /* Utilities & Inline Elements */
 small {
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
 }
 
 sub,
 sup {
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   line-height: 0;
 }
 
@@ -321,14 +321,14 @@ mark {
 
 /* Keycaps */
 kbd {
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-light-2);
   background-image: var(--effect-grain);
   border: none;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
-  padding: var(--space-d6) var(--space-d3);
+  padding: calc(var(--trim) / 2) var(--trim);
   font-family: var(--font-monospace);
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   pointer-events: none;
 }
 

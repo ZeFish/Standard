@@ -19,7 +19,7 @@ tokens:
   font-header: "\"Cargo Diatype\""
   font-header-letter-spacing: "-0.065em"
   line-height: "1.2"
-  gap-body: var(--space)
+  page-padding: var(--space)
   font-size: 1.0625rem
   font-ratio: "1.333"
   font-density: "1.5"

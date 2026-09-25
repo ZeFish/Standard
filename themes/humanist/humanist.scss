@@ -20,7 +20,7 @@
   --font-header-letter-spacing: 0em;
   --font-weight-bold: 600;
   --stroke-width: 0;
-  --gap-body: var(--space-3);
+  --page-padding: var(--space-3);
   --color-light-italic: var(--color-blue);
   --color-light-bold: var(--color-accent);
   --color-dark-italic: var(--color-blue);
@@ -56,7 +56,7 @@
       padding-block: var(--space-2);
       margin-block: var(--space-2) var(--space);
       margin-inline: var(--space);
-      font-size: var(--size-lg);
+      font-size: var(--scale-2);
       font-family: var(--font-header);
     }
 }

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-25 01:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -33,7 +33,7 @@ snippet: false
     --font-header-letter-spacing: 0.03em;
     --line-height: 1.6;
     --optical-ratio: 1.414;
-    --line-width: var(--line-width-base);
+    --prose-width: 38rem;
 
     /* ─── Custom rules for Dyslexie ───────────────────────────── */
     /* Reduce visual stress: Never pure white or pure black */
@@ -78,7 +78,7 @@ snippet: false
         padding-inline-start: var(--space-3);
         background: color-mix(in srgb, var(--color-accent) 5%, transparent);
         padding-block: var(--space-2);
-        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        border-radius: 0 var(--radius) var(--radius) 0;
       }
 
       /* Make links very explicit, not just a subtle color change */

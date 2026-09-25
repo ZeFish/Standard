@@ -47,7 +47,7 @@ snippet: false
       .prose img + em {
         display: block;
         text-align: center;
-        font-size: var(--size-xs);
+        font-size: var(--scale-d3);
         letter-spacing: 0.08em;
         text-transform: uppercase;
         opacity: 0.55;

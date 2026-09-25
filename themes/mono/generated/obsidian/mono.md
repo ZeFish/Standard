@@ -81,7 +81,7 @@ snippet: false
         left: var(--space);
         background: var(--color-background);
         padding-inline: var(--space-d4);
-        font-size: var(--size-3xs);
+        font-size: var(--scale-d5);
         letter-spacing: 0.15em;
         color: var(--color-accent);
       }

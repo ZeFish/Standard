@@ -10,18 +10,12 @@
  *
  * @property .prose Main article/content grid container for readable prose with named tracks.
  * @property .prose.left Left-aligned prose variant hugging the left edge.
- * @property .small Narrow sidebar breakout column track.
- * @property .editorial Editorial column breakout track (`minmax(0, var(--space-2))`).
- * @property .feature Feature callout breakout track (`minmax(0, var(--space-4))`).
- * @property .hero Full-bleed viewport width hero track (`minmax(0, 1fr)`).
- * @property .full Full viewport width breakout track.
- * @property --line-width Active reading column measure.
- * @property --line-width-xs Extra small reading measure (24rem / 384px).
- * @property --line-width-sm Small reading measure (32rem / 512px).
- * @property --line-width-md Medium reading measure (42rem / 672px) - default.
- * @property --line-width-lg Large reading measure (50rem / 800px).
- * @property --line-width-xl Extra large reading measure (60rem / 960px).
- * @property --body-max-width Overall page max-width constraint (900px).
+ * @property .narrow Inset element narrower than prose reading column (`var(--prose-inset)`).
+ * @property .wide Breakout column extending past prose reading column (`var(--prose-breakout)`).
+ * @property .full Full container width breakout track spanning to `--page-max-width`.
+ * @property .full-bleed Full viewport width breakout track (`100vw`).
+ * @property --prose-width Active reading column measure.
+ * @property --page-max-width Overall page max-width constraint (1400px).
  *
  * @example
  * // Standard article with proper reading width
@@ -57,35 +51,26 @@
   &.left {
     margin-inline: 0;
     grid-template-columns:
-      [hero-start feature-start editorial-start content-start] var(
-        --content-width
-      )
-      [content-end editorial-end feature-end] 1fr [hero-end];
+      [full-start wide-start content-start] min(100%, var(--prose-width))
+      [content-end wide-end] 1fr [full-end];
   }
 
   grid-template-columns:
-    [hero-start] var(--content-width-hero)
-    [feature-start] var(--content-width-feature) [editorial-start] var(
-      --content-width-editorial
-    )
-    [content-start] var(--content-width) [content-end] var(
-      --content-width-editorial
-    )
-    [editorial-end] var(--content-width-feature) [feature-end] var(
-      --content-width-hero
-    )
-    [hero-end];
+    [full-start] var(--prose-track-full, minmax(0, 1fr))
+    [wide-start] var(--prose-breakout, minmax(0, var(--space-4)))
+    [content-start] min(100%, var(--prose-width)) [content-end]
+    var(--prose-breakout, minmax(0, var(--space-4))) [wide-end]
+    var(--prose-track-full, minmax(0, 1fr)) [full-end];
 
   transition: grid-template-columns var(--transition);
 
   position: relative;
   width: 100%;
-  max-width: var(--body-max-width);
+  max-width: var(--page-max-width);
   margin-inline: auto;
-  padding-inline: var(--gap-body);
-  /*z-index: var(--z-base);*/
-  /* Default content positioning */
+  padding-inline: var(--page-padding);
 
+  /* Default content positioning */
   > * {
     grid-column: content;
     min-width: 0;
@@ -102,52 +87,40 @@
     min-width: 0;
   }
 
-  > .small,
-  > .container-small,
+  /* Narrow: inset elements (callouts, blockquotes, code blocks, or .narrow) */
+  > .narrow,
+  > .container-narrow,
   > .callout,
   > blockquote,
   > pre,
-  > figure:not(.full-bleed):not(.breakout),
-  > p:has(img:not(.full-bleed):not(.breakout):not(.hero):not(.full)),
+  > figure:not(.full-bleed):not(.wide):not(.full),
+  > p:has(img:not(.full-bleed):not(.wide):not(.full)),
   > .stnd-code-block {
     grid-column: content;
-    margin-inline: var(--content-width-sm);
+    margin-inline: var(--prose-inset);
   }
 
+  /* Wide: breakout elements (tables, or .wide / .container-wide) */
   table,
   .scroll:has(table),
-  .editorial {
-    grid-column: editorial;
+  .wide,
+  .container-wide,
+  p:has(> img.wide),
+  p:has(> video.wide) {
+    grid-column: wide;
     margin-inline: 0;
     max-width: none;
   }
 
-  .feature {
-    grid-column: feature;
-    margin-inline: 0;
-    max-width: none;
-  }
-
-  .breakout,
-  p:has(> img.breakout),
-  p:has(> video.breakout),
-  figure.breakout {
-    grid-column: 1 / -1;
-    width: min(100%, 72rem);
-    max-width: 72rem;
-    margin-inline: auto !important;
-  }
-
+  /* Full: spans to page shell (--page-max-width) */
   .full,
-  .hero,
-  p:has(> img.hero),
+  .container-full,
   p:has(> img.full),
-  p:has(> video.hero),
   p:has(> video.full) {
-    grid-column: 1 / -1;
-    width: calc(100% + var(--gap-body) * 2);
-    max-width: calc(100% + var(--gap-body) * 2);
-    margin-inline: calc(var(--gap-body) * -1);
+    grid-column: full;
+    width: calc(100% + var(--page-padding) * 2);
+    max-width: calc(100% + var(--page-padding) * 2);
+    margin-inline: calc(var(--page-padding) * -1);
     border-radius: 0 !important;
 
     > * {
@@ -185,7 +158,7 @@
     margin-inline: auto;
     width: min(100%, 18rem);
     position: relative;
-    scroll-margin-top: calc(var(--gap-header, 3.5rem) + 1.5rem);
+    scroll-margin-top: var(--space-6);
 
     &.screen-full {
       width: 100%;
@@ -209,7 +182,7 @@
     grid-column: 1 / -1;
     width: 100%;
     margin-block: var(--gap-section, 4rem);
-    scroll-margin-top: calc(var(--gap-header, 3.5rem) + 1.5rem);
+    scroll-margin-top: var(--space-6);
 
     &.screen-full {
       min-height: 85vh;
@@ -290,7 +263,8 @@
   }
 
   @media (max-width: #{$mobile}) {
-    .container-small,
+    .narrow,
+    .container-narrow,
     .callout,
     blockquote,
     pre,
@@ -303,8 +277,7 @@
 
   @media (max-width: #{$small}) {
     .card.accent,
-    .card.feature,
-    .card.editorial,
+    .card.wide,
     .card.full {
       margin-inline: calc(var(--space) * -1);
       border-radius: 0;
@@ -327,7 +300,7 @@
   }
 
   /* Fixed 2026-07-14 — swapped undefined tokens for their real equivalents
-     (--color-muted, --color-accent, --color-surface-high). */
+     (--color-muted, --color-accent, --color-surface-light-2). */
   .mycelial-link,
   .mycelial-graft {
     text-decoration: none;
@@ -339,7 +312,7 @@
     &:hover {
       color: var(--color-accent);
       border-bottom: 1px solid var(--color-accent);
-      background-color: var(--color-surface-high);
+      background-color: var(--color-surface-light-2);
     }
   }
 }

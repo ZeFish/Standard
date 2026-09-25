@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-25 02:06
 cssclasses: []
 maturity: sprout
 mode: read
@@ -27,7 +27,6 @@ snippet: false
         --color-accent: var(--color-dark-accent);
         --color-border: var(--color-dark-border);
         --color-surface: var(--color-dark-surface);
-        --color-surface-low: var(--color-dark-surface-low);
         --color-subtle: var(--color-dark-subtle);
         --color-muted: var(--color-dark-muted);
       }

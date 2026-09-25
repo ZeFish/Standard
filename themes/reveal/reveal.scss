@@ -27,7 +27,7 @@
 @media (prefers-color-scheme: dark) {
   :root[data-theme="reveal"],
   [data-theme="reveal"] {
-    --color-photo-frame: var(--color-surface-high);
+    --color-photo-frame: var(--color-surface-light-2);
   }
 }
 
@@ -67,26 +67,26 @@
 }
 
 h1 {
-    font-size: var(--size-2xl);
+    font-size: var(--scale-4);
     letter-spacing: 0.12em;
 
     padding-block-end: var(--space-2);
 }
 
 h2 {
-    font-size: var(--size-xl);
+    font-size: var(--scale-3);
     border-bottom: var(--border);
     padding-block-end: var(--space);
 }
 
 h3 {
-    font-size: var(--size-lg);
+    font-size: var(--scale-2);
 }
 
 /* Leica safety styling */
 .callout {
     border-left: 3px solid var(--color-accent) !important;
-    background: var(--color-surface-low) !important;
+    background: var(--color-surface-dark-1) !important;
 }
 
 /* Technical tables */
@@ -94,7 +94,7 @@ table th {
     font-family: var(--font-header);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-size: var(--size-xs);
+    font-size: var(--scale-d3);
 }
 
 table {
@@ -108,6 +108,6 @@ code:not(pre code) {
     border: var(--border) !important;
     padding-inline: 0.3em !important;
     border-radius: var(--radius) !important;
-    font-size: var(--size-xs) !important;
+    font-size: var(--scale-d3) !important;
 }
 }

@@ -42,7 +42,7 @@
   }
   h2,
   h3 {
-    font-size: var(--size-2xl);
+    font-size: var(--scale-4);
     margin-block-start: var(--space-8);
     margin-block-end: var(--space-4);
   }
@@ -75,7 +75,7 @@
   .callout {
     background: none;
     border: 0;
-    font-size: var(--size-sm);
+    font-size: var(--scale-d2);
     padding-inline: var(--space);
   }
   .callout-title {
@@ -154,7 +154,7 @@
   table th,
   table td,
   table td code {
-    font-size: var(--size-xs);
+    font-size: var(--scale-d3);
     font-family: var(--font-monospace);
     word-break: keep-all;
   }

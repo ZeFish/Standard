@@ -114,7 +114,7 @@ html.stnd-debug .rhythm > * + *::after {
   outline: 1px dashed color-mix(in srgb, var(--color-cyan) 25%, transparent);
 
   font-family: var(--font-monospace);
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
   z-index: 1; // Push it behind the content
   pointer-events: none; // So it doesn't interfere with interactions
 }
@@ -190,7 +190,7 @@ html.stnd-debug .rhythm > * + *::after {
   color: var(--color-cyan);
   opacity: var(--debug-opacity);
   font-family: var(--font-monospace);
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
 }
 .stnd-debug {
   h1::before {
@@ -318,7 +318,7 @@ html.stnd-debug .rhythm > * + *::after {
   position: absolute !important;
   inset: 0;
   color: var(--debug-color);
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   display: grid;
   grid-template-columns: repeat(var(--grid-cols), 1fr);
@@ -421,7 +421,7 @@ html.stnd-debug .rhythm > * + *::after {
   top: calc(var(--space) * -1);
   left: var(--space);
   color: var(--debug-color);
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   pointer-events: none;
   opacity: var(--debug-opacity);
@@ -440,7 +440,7 @@ html.stnd-debug .rhythm > * + *::after {
   left: var(--space);
   color: var(--debug-color);
   opacity: var(--debug-opacity);
-  font-size: var(--size-xs);
+  font-size: var(--scale-d3);
   font-family: var(--font-monospace);
   padding: var(--space) var(--space);
   border-radius: var(--radius);

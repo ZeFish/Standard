@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-09-25 01:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -35,7 +35,7 @@ snippet: false
     --font-header-weight: 600;
     --font-feature: "onum", "pnum";
     --line-height: 1.55;
-    --line-width: 30rlh;
+    --prose-width: 30rlh;
 
     /* ─── Custom rules for Academic ───────────────────────────── */
     :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
@@ -79,7 +79,7 @@ snippet: false
         padding-block: var(--space-2);
         margin-block: var(--space-3) var(--space-2);
         margin-inline: var(--space);
-        font-size: var(--size);
+        font-size: var(--scale);
         font-family: var(--font-serif);
       }
 
@@ -87,13 +87,13 @@ snippet: false
       .prose > :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote):first-of-type {
         border: 0;
         font-style: italic;
-        font-size: var(--size-sm);
+        font-size: var(--scale-d2);
         padding-inline: var(--space-4);
       }
 
       /* Sidenote voice for asides */
       aside {
-        font-size: var(--size-sm);
+        font-size: var(--scale-d2);
         line-height: 1.4;
         border-left: 2px solid var(--color-accent);
         background: none;
@@ -106,7 +106,7 @@ snippet: false
       }
 
       figcaption {
-        font-size: var(--size-xs);
+        font-size: var(--scale-d3);
         text-align: center;
         font-style: italic;
       }

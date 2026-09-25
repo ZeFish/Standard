@@ -80,42 +80,17 @@ Powered by `pow(var(--optical-ratio), N)`.
 | `--scale-7`  | 6        |                        |
 | `--scale-8`  | 7        | Largest                |
 
-## T-Shirt Size Aliases
-
-| Token         | Maps to      |
-| ------------- | ------------ |
-| `--size-3xs`  | `--scale-d5` |
-| `--size-2xs`  | `--scale-d4` |
-| `--size-xs`   | `--scale-d3` |
-| `--size-sm`   | `--scale-d2` |
-| `--size-base` | `--scale`    |
-| `--size-lg`   | `--scale-2`  |
-| `--size-xl`   | `--scale-3`  |
-| `--size-2xl`  | `--scale-4`  |
-| `--size-3xl`  | `--scale-5`  |
-| `--size-4xl`  | `--scale-6`  |
-| `--size-5xl`  | `--scale-7`  |
-| `--size-6xl`  | `--scale-8`  |
-
 ## Layout Widths
 
-Two independent scopes. `.prose`'s own box reads `--body-max-width`
-directly, so `.hero`/`.full` breakout elements grow all the way to the page
-shell. `.feature` and tables/`.editorial` don't reference either width
-token — they break out by a fixed rhythm increment off `--line-width`
-(`--space-2` / `--space-4` each side).
+The page layout uses a two-tier containment model: `--page-max-width` defines the outer
+viewport boundary for the page shell, header, and footer, while `--prose-width` defines the
+optimal reading measure for readable text elements (60–75 characters). Breakout tracks
+extend outwards from `--prose-width` in rhythm steps towards `--page-max-width`.
 
-| Token               | Default                           | Description                                   |
-| ------------------- | --------------------------------- | --------------------------------------------- |
-| `--body-max-width`  | `900px`                           | The whole page shell — header, footer, content, and the ceiling `.hero`/`.full` grow into |
-| `--body-max-width`  | `900px`                           | The whole page shell — header, footer, content, and the ceiling `.hero`/`.full` grow into |
-| `--line-width-xs`   | `24rem`                           | Extra small                                   |
-| `--line-width-sm`   | `32rem`                           | Small                                         |
-| `--line-width-md`   | `42rem`                           | Medium (default reading width)                |
-| `--line-width-lg`   | `50rem`                           | Large                                         |
-| `--line-width-xl`   | `60rem`                           | Extra large                                   |
-| `--line-width-full` | `calc(100vw - space*2)`           | Full viewport minus gutters                   |
-| `--line-width`      | `var(--measure, --line-width-md)` | Active line width (themeable via `--measure`) |
+| Token              | Default   | Description                                                           |
+| ------------------ | --------- | --------------------------------------------------------------------- |
+| `--page-max-width` | `1400px`  | The whole page shell — header, footer, content, and breakout ceiling  |
+| `--prose-width`    | `42rem`   | Active readable column measure (60–75 characters)                     |
 
 ## Line Heights
 
@@ -133,25 +108,31 @@ token — they break out by a fixed rhythm increment off `--line-width`
 | `--tracking-neutral` | `0em`     | Neutral tracking |
 | `--tracking-open`    | `0.01em`  | Open tracking    |
 
-## Stroke & Radius
+## Stroke, Radius & Interactive States
 
 | Token               | Default                         | Description                              |
 | ------------------- | ------------------------------- | ---------------------------------------- |
 | `--stroke-width`    | `max(1px, 0.06rem)`             | Hairline stroke                          |
-| `--stroke-width-lg` | `calc(stroke-width * 2)`        | Heavy stroke                             |
-| `--radius-sm`       | `min(8px, var(--radius))`       | Small radius for badges/buttons          |
-| `--radius`          | `var(--corner, var(--leading))` | Border radius (themeable via `--corner`) |
-| `--radius-lg`       | `calc(var(--radius) * 1.5)`     | Large radius for cards and dialogs       |
+| `--stroke-width-lg` | `calc(var(--stroke-width) * 2)` | Heavy stroke                             |
+| `--radius`          | `var(--leading)`                | Macro border radius (cards, panels)      |
+| `--radius-sm`       | `var(--trim)`                   | Micro border radius (buttons, tags, inputs)|
+| `--border`          | `var(--stroke-width) solid var(--color-border)` | Active border state      |
+| `--border-hover`    | `var(--stroke-width) solid var(--color-foreground)` | Hover border state   |
+| `--shadow`          | Layered elevation               | Resting shadow                           |
+| `--shadow-hover`    | Layered elevation + glow        | Active hover shadow                      |
 | `--filter-blur`     | `blur(8px)`                     | Standard blur filter                     |
 
-## Gaps
+## Layout Padding & Vertical Rhythm
 
-| Token               | Default                               | Description           |
-| ------------------- | ------------------------------------- | --------------------- |
-| `--gap-body`        | `clamp(space, 0.5vi+0.5rlh, space-3)` | Body gutter           |
-| `--gap-grid`        | `0.25lh`                              | Grid gutter           |
-| `--gap-body-mobile` | `var(--space)`                        | Body gutter on mobile |
-| `--gap-mobile`      | `1rlh`                                | General gap on mobile |
+| Token                  | Default                       | Description                                                     |
+| ---------------------- | ----------------------------- | --------------------------------------------------------------- |
+| `--page-padding`       | `clamp(1rem, 3vw, 2.5rem)`    | Fluid horizontal page gutter (desktop and mobile)               |
+| `--rhythm-block-scale` | `2`                           | Vertical rhythm multiplier for non-text block elements          |
+| `--space`              | `1rlh`                        | Fundamental vertical rhythm unit                                |
+| `--space-half`         | `calc(var(--space) / 2)`      | Half-step vertical rhythm unit                                  |
+| `--gap`                | `calc(var(--space))`          | Rhythm layout gap                                               |
+| `--gap-compact`        | `var(--trim)`                 | Compact micro-gap for inline groups and chips                   |
+| `--gap-grid`           | `0.25lh`                      | Grid gutter                                                     |
 
 ## Z-Index
 
@@ -277,25 +258,24 @@ Active tokens that resolve to light or dark palette.
 | `--color-muted`        | `foreground 60%`            | Muted text               |
 | `--color-subtle`       | `foreground 40%`            | Subtle text / decoration |
 | `--color-border`       | `foreground 10%`            | Default border           |
-| `--color-surface-low`  | `foreground 3%` opaque      | Slight surface tint      |
-| `--color-surface`      | `foreground 3%` opaque      | Secondary background     |
-| `--color-surface-high` | `foreground 5%` transparent | Hover state              |
-| `--color-darker`       | `dark 15%` transparent      | Shadow helper            |
-| `--color-light`        | light background            | Pole light               |
-| `--color-dark`         | light foreground            | Pole dark                |
-| `--color-shadow`       | `dark 5%` transparent       | Shadow color base        |
+| `--color-surface`        | `var(--color-surface-light-1)` | Active base surface      |
+| `--color-surface-light-1`| `color-mix(in srgb, white 4%, bg)`  | Light step 1 (subtle lift)|
+| `--color-surface-light-2`| `color-mix(in srgb, white 9%, bg)`  | Light step 2 (cards)     |
+| `--color-surface-light-3`| `color-mix(in srgb, white 16%, bg)` | Light step 3 (popovers)  |
+| `--color-surface-dark-1` | `color-mix(in srgb, black 4%, bg)`  | Dark step 1 (subtle wells)|
+| `--color-surface-dark-2` | `color-mix(in srgb, black 9%, bg)`  | Dark step 2 (wells/inputs)|
+| `--color-surface-dark-3` | `color-mix(in srgb, black 16%, bg)` | Dark step 3 (deep wells) |
+| `--color-darker`         | `dark 15%` transparent              | Shadow helper            |
+| `--color-light`          | light background                    | Pole light               |
+| `--color-dark`           | light foreground                    | Pole dark                |
+| `--color-shadow`         | `dark 5%` transparent               | Shadow color base        |
 
-## Surface Elevation
+## Directional Surfaces
 
-Progressive foreground tinting for depth. Pairs with shadow presets.
-
-| Token                     | Tint            | Shadow        | Use case                |
-| ------------------------- | --------------- | ------------- | ----------------------- |
-| `--color-surface-lowest`  | 14% (background) | none          | Page background         |
-| `--color-surface-low`     | 7%              | `--shadow`    | Cards, inputs           |
-| `--color-surface`         | 3%              | `--shadow-lg` | Raised panels, popovers |
-| `--color-surface-high`    | 7%              | `--shadow-xl` | Overlays, drawers       |
-| `--color-surface-highest` | 14%             | `--shadow-xl` | Modals, toasts          |
+Standard uses directional surface tokens relative to canvas background:
+- **Light steps (`--color-surface-light-1..3`)**: Blend subtle amounts of white into the background canvas, lifting elements up into elevation regardless of light/dark mode.
+- **Dark steps (`--color-surface-dark-1..3`)**: Blend subtle amounts of black into the background canvas, sinking elements into wells/recessed areas.
+- **Default surface (`--color-surface`)**: Resolves to `--color-surface-light-1` by default, customizable per theme.
 
 ## Shadows (Layered System)
 
@@ -408,13 +388,12 @@ box-shadow: var(--shadow-inset), var(--shadow-ambient);
 
 ## Layout — Prose Grid
 
-| Token                       | Default                       | Description              |
-| --------------------------- | ----------------------------- | ------------------------ |
-| `--content-width`           | `min(--line-width, 100%)`     | Content column width     |
-| `--content-width-sm`        | `max(space-2 - space, space)` | Sidebar margin inset     |
-| `--content-width-editorial` | `minmax(0, --space-2)`        | Editorial column         |
-| `--content-width-feature`   | `minmax(0, --space-4)`        | Feature column           |
-| `--content-width-hero`      | `minmax(0, 1fr)`              | Hero (full bleed) column |
+| Token                  | Default                                      | Description                 |
+| ---------------------- | -------------------------------------------- | --------------------------- |
+| `--prose-width`        | `42rem`                                      | Optimal reading line length |
+| `--prose-inset`        | `max(calc(var(--space-2) - var(--space)), var(--space))` | Narrow elements margin inset |
+| `--prose-breakout`     | `minmax(0, var(--space-4))`                  | Wide breakout column track  |
+| `--prose-track-full`   | `minmax(0, 1fr)`                             | Full page breakout track    |
 
 ## Analog (Noise Overlay)
 

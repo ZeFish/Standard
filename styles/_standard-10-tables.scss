@@ -48,7 +48,7 @@ td {
   border: var(--border);
   line-height: var(--line-height-compact);
   padding: var(--space-d2);
-  font-size: var(--size-sm);
+  font-size: var(--scale-d2);
   vertical-align: top;
   /* Fixed 2026-07-14 — was an invalid unitless min-height, now derives a
      real length from the line-height already set above. */
@@ -61,7 +61,7 @@ th {
   background: var(--color-surface);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: var(--size-3xs);
+  font-size: var(--scale-d5);
   color: var(--color-muted);
   vertical-align: middle;
 }

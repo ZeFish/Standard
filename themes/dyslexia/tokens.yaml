@@ -19,7 +19,7 @@ tokens:
   font-header-letter-spacing: 0.03em
   line-height: "1.6"
   optical-ratio: "1.414"
-  line-width: var(--line-width-base)
+  prose-width: 38rem
   font-size: 1.15rem
   font-ratio: "1.25"
   font-density: "1.6"
