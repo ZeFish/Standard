@@ -476,7 +476,6 @@ footer,
 @media only screen and (max-width: #{$small}) {
   #{$stnd-theme-scope} {
     --font-size: var(--font-size-mobile) !important;
-    --page-padding: 0 !important;
   }
 }
 
