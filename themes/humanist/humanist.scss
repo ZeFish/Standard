@@ -27,36 +27,9 @@
   --color-dark-bold: var(--color-accent);
   --font-monospace: "MonoLisa";
   --bold-weight: 500;
-  --font-density: 1.5;
+  --font-density: 1.6;
   --font-ratio: 1.333;
   --font-line-width: 38rem;
-  --font-size: 1.125rem;
+  --font-size: 1.2rem;
 }
 /* TOKENS.YAML ADAPTER END */
-
-// humanist theme — token VALUES live in tokens.yaml (single source of truth).
-// This file keeps only web-only structural CSS.
-
-
-:root[data-theme="humanist"],
-[data-theme="humanist"] {
-
-
-    .prose {
-    display: block;
-    }
-
-    h1 {
-        text-align: center;
-        color: var(--color-foreground);
-    }
-
-    blockquote {
-      border-left: 4px solid var(--color-accent);
-      padding-block: var(--space-2);
-      margin-block: var(--space-2) var(--space);
-      margin-inline: var(--space);
-      font-size: var(--scale-2);
-      font-family: var(--font-header);
-    }
-}

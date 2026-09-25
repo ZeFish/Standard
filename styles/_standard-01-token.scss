@@ -276,10 +276,10 @@
    * @name Optical Harmony Scale & Sizes
    * @description Modular geometric scale driven by `--optical-ratio` for typography and sizing. Sub-base steps (d5..d2) use a flattened divisor and floor at 11px to protect legibility.
    *
-   * @property {variable} --scale-d5 Sub-base optical step -5 (`max(calc(var(--font-size) / (var(--optical-ratio) * var(--optical-ratio))), 11px)`).
-   * @property {variable} --scale-d4 Sub-base optical step -4 (`max(calc(var(--font-size) / (var(--optical-ratio) * 1.25)), 11px)`).
-   * @property {variable} --scale-d3 Sub-base optical step -3 (`max(calc(var(--font-size) / var(--optical-ratio)), 11px)`).
-   * @property {variable} --scale-d2 Sub-base optical step -2 (`max(calc(var(--font-size) / (1 + (var(--optical-ratio) - 1) * 0.5)), 11px)`).
+   * @property {variable} --scale-d5 Sub-base optical step -5 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -2)), 9px)`).
+   * @property {variable} --scale-d4 Sub-base optical step -4 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -1.5)), 9px)`).
+   * @property {variable} --scale-d3 Sub-base optical step -3 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -1)), 9px)`).
+   * @property {variable} --scale-d2 Sub-base optical step -2 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -0.5)), 9px)`).
    * @property {variable} --scale Base optical scale step (`var(--font-size)`).
    * @property {variable} --scale-2 Super-base optical step 2 (`calc(var(--font-size) * var(--optical-ratio))`).
    * @property {variable} --scale-3 Super-base optical step 3 (`calc(var(--scale-2) * var(--optical-ratio))`).
@@ -291,21 +291,12 @@
    */
   /* Optical harmony scale. --scale-2 upward is a clean geometric progression
      (each step = previous * --optical-ratio). Below base (d5..d2) the
-     divisor is deliberately NOT the mirrored geometric inverse (ratio^-1,
-     ratio^-2...) — it's flattened (ratio*1.25, then a 0.5-blended exponent
-     for d2) so small text doesn't shrink as aggressively as a pure
-     geometric scale would, staying legible; each step also floors at 11px
-     regardless of ratio math. */
-  --scale-d5: max(
-    calc(var(--font-size) / (var(--optical-ratio) * var(--optical-ratio))),
-    11px
-  );
-  --scale-d4: max(calc(var(--font-size) / (var(--optical-ratio) * 1.25)), 11px);
-  --scale-d3: max(calc(var(--font-size) / var(--optical-ratio)), 11px);
-  --scale-d2: max(
-    calc(var(--font-size) / (1 + (var(--optical-ratio) - 1) * 0.5)),
-    11px
-  );
+     scale steps down by fractional power increments (ratio^-0.5, ratio^-1,
+     ratio^-1.5, ratio^-2) floored at 9px so micro text stays legible and distinct. */
+  --scale-d5: max(calc(var(--font-size) * pow(var(--optical-ratio), -2)), 9px);
+  --scale-d4: max(calc(var(--font-size) * pow(var(--optical-ratio), -1.5)), 9px);
+  --scale-d3: max(calc(var(--font-size) * pow(var(--optical-ratio), -1)), 9px);
+  --scale-d2: max(calc(var(--font-size) * pow(var(--optical-ratio), -0.5)), 9px);
   --scale: var(--font-size);
   --scale-2: calc(var(--font-size) * var(--optical-ratio));
   --scale-3: calc(var(--scale-2) * var(--optical-ratio));

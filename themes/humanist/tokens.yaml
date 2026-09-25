@@ -35,7 +35,7 @@ tokens:
   color-dark-bold: var(--color-accent)
   font-monospace: "\"MonoLisa\""
   bold-weight: "500"
-  font-density: "1.5"
+  font-density: "1.6"
   font-ratio: "1.333"
   font-line-width: 38rem
-  font-size: 1.125rem
+  font-size: 1.2rem
