@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 11:59
+modified: 2026-09-25 12:03
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,7 +19,8 @@ snippet: false
 ```css
 [data-stnd-theme="documentation"] {
     /* ─── Custom rules for Documentation ───────────────────────────── */
-    /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
+    --color-light-shadow-base: red;
+      /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
       :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         color: var(--color-accent);
       }
