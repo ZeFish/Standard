@@ -42,7 +42,11 @@
 :root[data-theme="documentation"],
 [data-theme="documentation"] {
 
-    --color-light-shadow-base: red;
+    --color-light-shadow-base: color-mix(in srgb, var(--color-accent) 1%, transparent);
+    --color-border:color-mix(in srgb, var(--color-accent) 15%, transparent);
+    --shadow-glow: 0 4px var(--leading) oklch(from var(--color-shadow) l c h / 0.05);
+    --rhythm-block-scale: 3;
+
   /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
   h1 {
     color: var(--color-accent);
@@ -52,6 +56,11 @@
     padding-bottom: 0.3em;
     border-bottom: 1px solid
       color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+
+  .prose > .stnd-code-block {
+    grid-column: wide;
+    margin-inline: 0;
   }
 
   /* ── Links — accent with translucent underline ── */
@@ -88,8 +97,7 @@
 
   /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
   pre {
-    background: var(--color-surface-dark-1);
-    border: 0px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+
 
     box-shadow: var(--shadow-ring), var(--shadow-glow);
   }

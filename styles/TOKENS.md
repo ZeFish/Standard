@@ -392,7 +392,7 @@ box-shadow: var(--shadow-inset), var(--shadow-ambient);
 | ---------------------- | -------------------------------------------- | --------------------------- |
 | `--prose-width`        | `42rem`                                      | Optimal reading line length |
 | `--prose-inset`        | `max(calc(var(--space-2) - var(--space)), var(--space))` | Narrow elements margin inset |
-| `--prose-breakout`     | `minmax(0, var(--space-4))`                  | Wide breakout column track  |
+| `--prose-breakout`     | `minmax(0, var(--space))`                    | Wide breakout column track  |
 | `--prose-track-full`   | `minmax(0, 1fr)`                             | Full page breakout track    |
 
 ## Analog (Noise Overlay)

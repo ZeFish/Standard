@@ -126,11 +126,11 @@
    * @description Grid breakout track sizes allowing wide content and full-width elements to extend past the reading measure, plus narrow element insets.
    *
    * @property {variable} --prose-inset Narrow layout inset margin (`max(calc(var(--space-2) - var(--space)), var(--space))`).
-   * @property {variable} --prose-breakout Wide column breakout track width (`minmax(0, var(--space-4))`).
+   * @property {variable} --prose-breakout Wide column breakout track width (`minmax(0, var(--space))`).
    * @property {variable} --prose-track-full Full-width page breakout track (`minmax(0, 1fr)`).
    */
   --prose-inset: max(calc(var(--space-2) - var(--space)), var(--space));
-  --prose-breakout: minmax(0, var(--space-4));
+  --prose-breakout: minmax(0, var(--space));
   --prose-track-full: minmax(0, 1fr);
 
   /**

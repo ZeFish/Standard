@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 12:03
+modified: 2026-09-25 12:32
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,7 +19,11 @@ snippet: false
 ```css
 [data-stnd-theme="documentation"] {
     /* ─── Custom rules for Documentation ───────────────────────────── */
-    --color-light-shadow-base: red;
+    --color-light-shadow-base: color-mix(in srgb, var(--color-accent) 1%, transparent);
+        --color-border:color-mix(in srgb, var(--color-accent) 15%, transparent);
+        --shadow-glow: 0 4px var(--leading) oklch(from var(--color-shadow) l c h / 0.05);
+        --rhythm-block-scale: 3;
+
       /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
       :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         color: var(--color-accent);
@@ -29,6 +33,11 @@ snippet: false
         padding-bottom: 0.3em;
         border-bottom: 1px solid
           color-mix(in srgb, var(--color-accent) 12%, transparent);
+      }
+
+      .prose > .stnd-code-block {
+        grid-column: wide;
+        margin-inline: 0;
       }
 
       /* ── Links — accent with translucent underline ── */
@@ -65,8 +74,7 @@ snippet: false
 
       /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
       :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
-        background: var(--color-surface-dark-1);
-        border: 0px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+
 
         box-shadow: var(--shadow-ring), var(--shadow-glow);
       }

@@ -43,6 +43,7 @@
     margin: var(--stroke-width);
     overflow-x: auto;
     position: static;
+    border-radius: var(--radius);
   }
 
   &:hover .copy-button {
