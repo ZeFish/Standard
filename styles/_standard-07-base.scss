@@ -109,6 +109,7 @@ body {
 }
 
 main {
+  margin-block-start: var(--padding-page);
   transition:
     background-color var(--transition),
     color var(--transition),
