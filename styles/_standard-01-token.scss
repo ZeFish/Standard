@@ -293,18 +293,18 @@
      (each step = previous * --optical-ratio). Below base (d5..d2) the
      scale steps down by fractional power increments (ratio^-0.5, ratio^-1,
      ratio^-1.5, ratio^-2) floored at 9px so micro text stays legible and distinct. */
-  --scale-d5: max(calc(var(--font-size) * pow(var(--optical-ratio), -2)), 9px);
-  --scale-d4: max(calc(var(--font-size) * pow(var(--optical-ratio), -1.5)), 9px);
-  --scale-d3: max(calc(var(--font-size) * pow(var(--optical-ratio), -1)), 9px);
-  --scale-d2: max(calc(var(--font-size) * pow(var(--optical-ratio), -0.5)), 9px);
+  --scale-d5: max(calc(var(--font-size) * pow(var(--optical-ratio), -4)), 9px);
+  --scale-d4: max(calc(var(--font-size) * pow(var(--optical-ratio), -3)), 9px);
+  --scale-d3: max(calc(var(--font-size) * pow(var(--optical-ratio), -2)), 9px);
+  --scale-d2: max(calc(var(--font-size) * pow(var(--optical-ratio), -1)), 9px);
   --scale: var(--font-size);
-  --scale-2: calc(var(--font-size) * var(--optical-ratio));
-  --scale-3: calc(var(--scale-2) * var(--optical-ratio));
-  --scale-4: calc(var(--scale-3) * var(--optical-ratio));
-  --scale-5: calc(var(--scale-4) * var(--optical-ratio));
-  --scale-6: calc(var(--scale-5) * var(--optical-ratio));
-  --scale-7: calc(var(--scale-6) * var(--optical-ratio));
-  --scale-8: calc(var(--scale-7) * var(--optical-ratio));
+  --scale-2: min(calc(var(--font-size) * pow(var(--optical-ratio), 1)), 96px);
+  --scale-3: min(calc(var(--font-size) * pow(var(--optical-ratio), 2)), 96px);
+  --scale-4: min(calc(var(--font-size) * pow(var(--optical-ratio), 3)), 96px);
+  --scale-5: min(calc(var(--font-size) * pow(var(--optical-ratio), 4)), 96px);
+  --scale-6: min(calc(var(--font-size) * pow(var(--optical-ratio), 5)), 96px);
+  --scale-7: min(calc(var(--font-size) * pow(var(--optical-ratio), 6)), 96px);
+  --scale-8: min(calc(var(--font-size) * pow(var(--optical-ratio), 7)), 96px);
 
   /**
    * @name Mobile Settings
