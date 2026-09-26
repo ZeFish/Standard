@@ -121,7 +121,6 @@ select {
   background-repeat: no-repeat;
   background-position: right var(--space-d8) center;
   background-size: 1em;
-  padding-right: var(--space); /* Make space for the icon */
 
   &:hover,
   &:focus {
