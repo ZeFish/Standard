@@ -1,5 +1,11 @@
 # @stnd/themes
 
+## 0.8.6
+
+### Patch Changes
+
+- Auto-bumped @stnd/themes due to modified code.
+
 ## 0.8.5
 
 ### Patch Changes

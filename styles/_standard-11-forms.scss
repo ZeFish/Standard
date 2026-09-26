@@ -103,6 +103,8 @@ select {
   @extend %padding-text;
   font-size: 1em;
 
+
+
   border-radius: var(--radius-sm);
   color: var(--color-muted);
   background-color: var(--color-surface-dark-1);
@@ -113,7 +115,9 @@ select {
   cursor: pointer;
   text-align: left;
   text-shadow: none !important;
-  text-box-trim: none;
+  text-box-trim: trim;
+
+  padding: 0 var(--trim);
 
   appearance: none;
   /* Match Combobox double-chevron */
