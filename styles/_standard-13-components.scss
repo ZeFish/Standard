@@ -210,14 +210,12 @@ a.btn.large {
 
 :where(button).small,
 a.btn.small {
-  padding: calc(var(--trim) / 2) var(--trim);
   border-radius: var(--radius-sm);
   font-size: var(--scale-d3);
 }
 
 :where(button).smaller,
 a.btn.smaller {
-  padding: calc(var(--trim) / 2) var(--trim);
   border-radius: var(--radius-sm);
   font-size: var(--scale-d4);
 }
