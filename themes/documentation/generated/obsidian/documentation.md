@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 12:32
+modified: 2026-09-27 17:39
 cssclasses: []
 maturity: sprout
 mode: read
@@ -38,6 +38,7 @@ snippet: false
       .prose > .stnd-code-block {
         grid-column: wide;
         margin-inline: 0;
+        box-shadow: var(--shadow);
       }
 
       /* ── Links — accent with translucent underline ── */
@@ -72,12 +73,7 @@ snippet: false
         font-size: 0.8em;
       }
 
-      /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
-      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
 
-
-        box-shadow: var(--shadow-ring), var(--shadow-glow);
-      }
 
       /* ── Tables — tinted header, hairline borders, zebra rows ── */
       :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {

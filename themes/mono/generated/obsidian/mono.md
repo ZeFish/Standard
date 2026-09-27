@@ -26,7 +26,7 @@ snippet: false
       :is(.markdown-reading-view h5, .HyperMD-header-5),
       :is(.markdown-reading-view h6, .HyperMD-header-6) {
         text-transform: uppercase;
-        font-weight: var(--font-header-weight);
+        font-weight: var(--font-weight-header);
         letter-spacing: var(--font-header-letter-spacing);
       }
 

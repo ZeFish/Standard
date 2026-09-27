@@ -8,7 +8,7 @@
   --optical-ratio: var(--ratio-golden);
   --mobile-font-ratio: var(--ratio-golden);
   --shadow: none;
-  --radius: 0;
+  --shadow-inset: none;;
   --font-monospace: monospace;
   --font-text: "Cargo Diatype";
   --font-header: "Cargo Diatype";
@@ -17,14 +17,12 @@
   --page-padding: var(--space);
   --font-size: 1.0625rem;
   --font-ratio: 1.333;
-  --font-density: 1.5;
-  --font-line-width: 42rem;
 }
 /* TOKENS.YAML ADAPTER END */
 
 [data-theme="gallery"] {
 /* ─── Custom rules for Gallery ───────────────────────────── */
-.prose {
+    .prose {
     display: block;
   }
 
@@ -32,31 +30,41 @@
     max-width: 100%;
   }
 
-  /* The work gets the wall */
-  .prose img {
-    display: block;
-    margin-inline: auto;
-    margin-block: var(--space-8);
-    max-width: min(100%, 72rem);
+  --img-padding: var(--space);
+
+
+    .stnd-toc {
+        display:none !important;
+    }
+
+  .prose p:has(img) {
+    grid-column: full;
+    margin-inline: 0 !important;
+    margin-block: var(--img-padding);
   }
 
   /* The placard: narrow, quiet, beside the work in spirit */
-  .prose :is(p, ul, ol, blockquote) {
-    max-width: 26rem;
-    margin-inline: auto;
+  .prose :not(p:has(img)) {
+    max-width: var(--prose-width);
   }
 
   /* Captions recede like wall labels */
-  figcaption,
-  .prose img + em {
+  .callout[data-callout="caption"] {
     display: block;
     text-align: center;
     font-size: var(--scale-d3);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    opacity: 0.55;
-    margin-block-start: calc(var(--space-8) * -0.6);
-    margin-block-end: var(--space-8);
+
+    margin-block-start: calc(var(--img-padding) * -1);
+    margin-block-end: var(--img-padding);
+    margin-inline:auto;
+  }
+
+  blockquote {
+      margin: var(--space-6) auto;
+      font-size: var(--scale-2);
+      padding:var(--space-2);
   }
 
   /* Exhibition titles: present, never loud */
@@ -66,11 +74,13 @@
     text-align: left;
     font-weight: 500;
     text-wrap: balance;
-    margin-inline: var(--space);
   }
   h2,
   h3 {
     margin-block-start: var(--space-10);
+  }
+  :is(h2, h3) + p {
+      margin-top:var(--space);
   }
 
   /* A horizontal rule is a walk to the next room */

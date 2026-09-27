@@ -35,7 +35,7 @@
   --font-monospace: "MonoLisa";
   --font-monospace-feature: "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
   --font-interface: "Monolisa";
-  --font-header-weight: 400;
+  --font-weight-header: 400;
   --font-header-feature: "";
   --font-header-variation: "SOFT" 100, "WONK" 1;
   --font-header-letter-spacing: -0.065em;
@@ -96,7 +96,7 @@
 --font-variation: "";
 
 --font-header: "Fraunces";
---font-header-weight: 400;
+--font-weight-header: 400;
   --font-header-feature: "";
   --font-header-variation: "SOFT" 100, "WONK" 1;
   --font-header-letter-spacing: -0.065em;

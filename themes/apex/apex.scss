@@ -20,7 +20,7 @@
   --font-header: "Herbus", sans-serif;
   --font-interface: "MonoLisa", monospace;
   --font-monospace: "MonoLisa", monospace;
-  --font-header-weight: 400;
+  --font-weight-header: 400;
   --font-header-letter-spacing: -0.006em;
   --font-header-line-height: 1;
   --font-weight-bold: 600;
@@ -83,7 +83,7 @@
 --font-header:    "Herbus Apex";
 --font-monospace: "MonoLisa";
 --font-interface: "MonoLisa";
---font-header-weight:         400;
+--font-weight-header:         400;
 --font-header-letter-spacing: -0.006em;
 --font-header-line-height:    1;
 
@@ -95,7 +95,7 @@
 }
 
 /* ─── Body text — subtle emboss shadow ──────────────────── */
- 
+
     color: color-mix(in oklab, var(--color-foreground) 90%, transparent);
 
     --shadow-color: color-mix(in oklab, currentcolor 10%, transparent);

@@ -350,8 +350,8 @@ box-shadow: var(--shadow-inset), var(--shadow-ambient);
 | ---------------------- | --------------------------- | -------------- |
 | `--font-weight`        | `400`                       | Body weight    |
 | `--font-weight-bold`   | `600`                       | Bold weight    |
-| `--font-header-weight` | `700`                       | Heading weight |
-| `--font-weight-h1`     | `var(--font-header-weight)` | H1 weight      |
+| `--font-weight-header` | `700`                       | Heading weight |
+| `--font-weight-h1`     | `var(--font-weight-header)` | H1 weight      |
 | `--font-weight-h2`     | `max(header*0.85, body)`    | H2 weight      |
 | `--font-weight-h3`     | `max(header*0.85, body)`    | H3 weight      |
 | `--font-weight-h4`     | `var(--font-weight)`        | H4 weight      |
@@ -392,8 +392,8 @@ box-shadow: var(--shadow-inset), var(--shadow-ambient);
 | ---------------------- | -------------------------------------------- | --------------------------- |
 | `--prose-width`        | `42rem`                                      | Optimal reading line length |
 | `--prose-inset`        | `max(calc(var(--space-2) - var(--space)), var(--space))` | Narrow elements margin inset |
-| `--prose-breakout`     | `minmax(0, var(--space))`                    | Wide breakout column track  |
-| `--prose-track-full`   | `minmax(0, 1fr)`                             | Full page breakout track    |
+| `--prose-wide`     | `minmax(0, var(--space))`                    | Wide breakout column track  |
+| `--prose-full`   | `minmax(0, 1fr)`                             | Full page breakout track    |
 
 ## Analog (Noise Overlay)
 

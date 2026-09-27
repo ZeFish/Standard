@@ -126,12 +126,12 @@
    * @description Grid breakout track sizes allowing wide content and full-width elements to extend past the reading measure, plus narrow element insets.
    *
    * @property {variable} --prose-inset Narrow layout inset margin (`max(calc(var(--space-2) - var(--space)), var(--space))`).
-   * @property {variable} --prose-breakout Wide column breakout track width (`minmax(0, var(--space))`).
-   * @property {variable} --prose-track-full Full-width page breakout track (`minmax(0, 1fr)`).
+   * @property {variable} --prose-wide Wide column breakout track width (`minmax(0, var(--space))`).
+   * @property {variable} --prose-full Full-width page breakout track (`minmax(0, 1fr)`).
    */
   --prose-inset: max(calc(var(--space-2) - var(--space)), var(--space));
-  --prose-breakout: minmax(0, var(--space));
-  --prose-track-full: minmax(0, 1fr);
+  --prose-wide: minmax(0, var(--space));
+  --prose-full: minmax(0, 1fr);
 
   /**
    * @name Stroke, Radius & Filters
@@ -148,8 +148,8 @@
   --filter-glass: blur(20px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-lg: calc(var(--stroke-width) * 2);
-  --radius: var(--leading);
-  --radius-sm: var(--trim);
+  --radius: var(--trim);
+  --radius-sm: 4px;
 
   /**
    * @name Shadows & Elevation

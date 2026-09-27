@@ -74,7 +74,7 @@ snippet: false
         line-height: var(--font-header-line-height, 1em);
         text-wrap: balance;
         font-style: var(--font-header-style, normal);
-        font-weight: var(--font-header-weight);
+        font-weight: var(--font-weight-header);
       }
 
       :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {

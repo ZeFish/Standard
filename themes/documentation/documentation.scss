@@ -23,7 +23,7 @@
   --font-text: "iA Writer Quattro", system-ui, sans-serif;
   --font-interface: "iA Writer Quattro", system-ui, sans-serif;
   --font-header: "IBM Plex Serif", Georgia, serif;
-  --font-header-weight: 500;
+  --font-weight-header: 500;
   --font-monospace: "Berkeley Mono", "IBM Plex Mono", Menlo, monospace;
   --line-height: 1.6;
   --prose-width: 43rem;
@@ -32,6 +32,7 @@
   --font-ratio: 1.25;
   --font-density: 1.5;
   --font-line-width: 42rem;
+  --radius: var(--trim);
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -47,6 +48,18 @@
     --shadow-glow: 0 4px var(--leading) oklch(from var(--color-shadow) l c h / 0.05);
     --rhythm-block-scale: 3;
 
+    &.theme-dark,
+    &[data-color-mode="dark"] {
+        .stnd-code-block {
+            background: var(--color-surface-light-1);
+        }
+    }
+    @media (prefers-color-scheme: dark) {
+        .stnd-code-block {
+            background: var(--color-surface-light-1);
+        }
+    }
+
   /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
   h1 {
     color: var(--color-accent);
@@ -61,6 +74,7 @@
   .prose > .stnd-code-block {
     grid-column: wide;
     margin-inline: 0;
+    box-shadow: var(--shadow);
   }
 
   /* ── Links — accent with translucent underline ── */
@@ -95,12 +109,7 @@
     font-size: 0.8em;
   }
 
-  /* ── Code blocks — elevated panel, accent-tinted border + soft shadow ── */
-  pre {
 
-
-    box-shadow: var(--shadow-ring), var(--shadow-glow);
-  }
 
   /* ── Tables — tinted header, hairline borders, zebra rows ── */
   table {
@@ -122,8 +131,9 @@
   blockquote {
     background: color-mix(in srgb, var(--color-cyan) 8%, transparent);
     border: 1px solid color-mix(in srgb, var(--color-cyan) 30%, transparent);
-    border-radius: 6px;
-    padding: var(--space-d2) var(--space);
+    border-radius: var(--radius);
+    padding: var(--space);
+    color: var(--color-foreground);
   }
 
   /* ── Rules — the faint blue divider ── */
@@ -137,4 +147,5 @@
   .doc-card {
     margin-top: 0px !important;
   }
+
 }

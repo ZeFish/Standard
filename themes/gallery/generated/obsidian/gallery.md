@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-09-27 17:12
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,7 +20,7 @@ snippet: false
 [data-stnd-theme="gallery"] {
     /* ─── Custom rules for Gallery ───────────────────────────── */
     /* ─── Custom rules for Gallery ───────────────────────────── */
-    .prose {
+        .prose {
         display: block;
       }
 
@@ -28,31 +28,38 @@ snippet: false
         max-width: 100%;
       }
 
-      /* The work gets the wall */
-      .prose img {
-        display: block;
-        margin-inline: auto;
-        margin-block: var(--space-8);
-        max-width: min(100%, 72rem);
+      --img-padding: var(--space);
+
+
+      .prose p:has(img) {
+        grid-column: full;
+        margin-inline: 0;
+        margin-block: var(--img-padding);
+        padding:0;
       }
 
       /* The placard: narrow, quiet, beside the work in spirit */
-      .prose :is(p, ul, ol, :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote)) {
-        max-width: 26rem;
-        margin-inline: auto;
+      .prose :not(p:has(img)) {
+        max-width: var(--prose-width);
       }
 
       /* Captions recede like wall labels */
-      figcaption,
-      .prose img + em {
+      .callout[data-callout="caption"] {
         display: block;
         text-align: center;
         font-size: var(--scale-d3);
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        opacity: 0.55;
-        margin-block-start: calc(var(--space-8) * -0.6);
-        margin-block-end: var(--space-8);
+
+        margin-block-start: calc(var(--img-padding) * -1);
+        margin-block-end: var(--img-padding);
+        margin-inline:auto;
+      }
+
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
+          margin: var(--space-6) auto;
+          font-size: var(--scale-2);
+          padding:var(--space-2);
       }
 
       /* Exhibition titles: present, never loud */
@@ -62,11 +69,13 @@ snippet: false
         text-align: left;
         font-weight: 500;
         text-wrap: balance;
-        margin-inline: var(--space);
       }
       :is(.markdown-reading-view h2, .HyperMD-header-2),
       :is(.markdown-reading-view h3, .HyperMD-header-3) {
         margin-block-start: var(--space-10);
+      }
+      :is(:is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3)) + p {
+          margin-top:0;
       }
 
       /* A horizontal rule is a walk to the next room */

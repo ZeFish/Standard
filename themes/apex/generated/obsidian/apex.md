@@ -65,7 +65,7 @@ snippet: false
     --font-header:    "Herbus Apex";
     --font-monospace: "MonoLisa";
     --font-interface: "MonoLisa";
-    --font-header-weight:         400;
+    --font-weight-header:         400;
     --font-header-letter-spacing: -0.006em;
     --font-header-line-height:    1;
 

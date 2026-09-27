@@ -32,7 +32,7 @@ snippet: false
     --color-dark-foreground: #e6e2db;
     --color-dark-accent: #7fb4cc;
     --optical-ratio: 1.225;
-    --font-header-weight: 600;
+    --font-weight-header: 600;
     --font-feature: "onum", "pnum";
     --line-height: 1.55;
     --prose-width: 30rlh;

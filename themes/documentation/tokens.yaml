@@ -31,7 +31,7 @@ tokens:
   font-text: "\"iA Writer Quattro\", system-ui, sans-serif"
   font-interface: "\"iA Writer Quattro\", system-ui, sans-serif"
   font-header: "\"IBM Plex Serif\", Georgia, serif"
-  font-header-weight: "500"
+  font-weight-header: "500"
   font-monospace: "\"Berkeley Mono\", \"IBM Plex Mono\", Menlo, monospace"
   line-height: "1.6"
   prose-width: 43rem
@@ -40,3 +40,4 @@ tokens:
   font-ratio: "1.25"
   font-density: "1.5"
   font-line-width: 42rem
+  radius: var(--trim)

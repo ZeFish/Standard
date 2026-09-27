@@ -648,11 +648,10 @@ card.inset {
  */
 .callout {
   /* Raised effect for callout cards */
-  box-shadow: var(--shadow-raised), var(--shadow-ring);
+  box-shadow: var(--shadow);
 
   border-radius: var(--radius);
-  padding: var(--space-d8);
-  padding-top: 0;
+  padding: calc(var(--trim)/2);
   --color-callout: var(--color-surface-light-1);
   --color-border: oklch(from var(--color-callout) l c h / 0.15);
   background: color-mix(
@@ -675,7 +674,7 @@ card.inset {
     font-weight: var(--font-weight-bold, bold);
 
     user-select: none;
-    padding: var(--space-d2);
+    padding: var(--leading);
     margin: 0 !important;
 
     .callout-title-inner {

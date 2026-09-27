@@ -30,7 +30,7 @@ snippet: false
     --font-text: "Quicksand", sans-serif;
     --font-header: "Quicksand", sans-serif;
     --font-weight-text: 400;
-    --font-header-weight: 600;
+    --font-weight-header: 600;
     --font-header-letter-spacing: 0em;
     --line-height: 1.6;
     --optical-ratio: 1.333;

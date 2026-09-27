@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-09-25 01:44
-modified: 2026-09-25 01:44
+modified: 2026-09-27 17:23
 cssclasses: []
 maturity: sprout
 mode: read
@@ -17,4 +17,11 @@ snippet: false
 ![[Sample content]]
 
 ```css
+[data-stnd-theme="editorial"] {
+    /* ─── Custom rules for Editorial ───────────────────────────── */
+    :is(.callout-title, .callout-title-inner),
+        > summary {
+        padding: 0 var(--space-d2);
+        }
+}
 ```

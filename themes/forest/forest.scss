@@ -55,7 +55,7 @@
   --font-header-feature: "";
   --font-header-variation: "";
   --font-header-style: none;
-  --font-header-weight: 900;
+  --font-weight-header: 900;
   --font-mono-feature: "salt";
   --font-mono-variation: "";
   --font-interface-feature: "salt";
@@ -131,7 +131,7 @@
     line-height: var(--font-header-line-height, 1em);
     text-wrap: balance;
     font-style: var(--font-header-style, normal);
-    font-weight: var(--font-header-weight);
+    font-weight: var(--font-weight-header);
   }
 
   blockquote {

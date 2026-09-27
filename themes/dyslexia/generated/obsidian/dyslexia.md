@@ -29,7 +29,7 @@ snippet: false
     --font-header: "Atkinson Hyperlegible Next", sans-serif;
     --font-mono: "Atkinson Hyperlegible Mono", monospace;
     --font-weight-text: 400;
-    --font-header-weight: 700;
+    --font-weight-header: 700;
     --font-header-letter-spacing: 0.03em;
     --line-height: 1.6;
     --optical-ratio: 1.414;

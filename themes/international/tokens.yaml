@@ -17,8 +17,7 @@ tokens:
   color-accent: var(--color-red)
   color-link: var(--color-red)
   shadow: none
-  radius: "0"
-  color-border: none
+  shadow-inset: none
   color-muted: var(--color-foreground)
   color-dark-foreground: "#ccc"
   optical-ratio: var(--ratio-golden)

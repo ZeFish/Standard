@@ -30,7 +30,7 @@ snippet: false
     --font-text: "Sohne", sans-serif;
     --font-header: "Inter", sans-serif;
     --font-weight-text: 500;
-    --font-header-weight: 800;
+    --font-weight-header: 800;
     --font-header-letter-spacing: 0.02em;
     --line-height: 1.5;
     --optical-ratio: 1.414;

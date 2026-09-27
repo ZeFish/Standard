@@ -60,7 +60,7 @@ snippet: false
     --font-variation: "";
 
     --font-header: "Fraunces";
-    --font-header-weight: 400;
+    --font-weight-header: 400;
       --font-header-feature: "";
       --font-header-variation: "SOFT" 100, "WONK" 1;
       --font-header-letter-spacing: -0.065em;

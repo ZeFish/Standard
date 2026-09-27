@@ -11,7 +11,7 @@
  * @property .prose Main article/content grid container for readable prose with named tracks.
  * @property .prose.left Left-aligned prose variant hugging the left edge.
  * @property .narrow Inset element narrower than prose reading column (`var(--prose-inset)`).
- * @property .wide Breakout column extending past prose reading column (`var(--prose-breakout)`).
+ * @property .wide Breakout column extending past prose reading column (`var(--prose-wide)`).
  * @property .full Full container width breakout track spanning to `--page-max-width`.
  * @property .full-bleed Full viewport width breakout track (`100vw`).
  * @property --prose-width Active reading column measure.
@@ -56,11 +56,11 @@
   }
 
   grid-template-columns:
-    [full-start hero-start] var(--prose-track-full, minmax(0, 1fr))
-    [wide-start] var(--prose-breakout, minmax(0, var(--space)))
+    [full-start hero-start] var(--prose-full, minmax(0, 1fr))
+    [wide-start] var(--prose-wide, minmax(0, var(--space)))
     [content-start] min(100%, var(--prose-width)) [content-end]
-    var(--prose-breakout, minmax(0, var(--space))) [wide-end]
-    var(--prose-track-full, minmax(0, 1fr)) [hero-end full-end];
+    var(--prose-wide, minmax(0, var(--space))) [wide-end]
+    var(--prose-full, minmax(0, 1fr)) [hero-end full-end];
 
   transition: grid-template-columns var(--transition);
 

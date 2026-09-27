@@ -62,7 +62,7 @@ snippet: false
     --font-header:    "Avant Garde Pro";
     --font-monospace: "Sohne Mono";
     --font-interface: "Sohne Mono";
-    --font-header-weight:         700;
+    --font-weight-header:         700;
     --font-header-letter-spacing: -0.05em;
     --font-header-line-height:    1;
 

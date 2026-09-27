@@ -17,7 +17,7 @@
  * @property --font-instrument-feature OpenType stylistic feature set for Instrument Sans.
  * @property --font-weight Normal text font weight (`400`).
  * @property --font-weight-bold Bold text font weight (`600`).
- * @property --font-header-weight Heading font weight anchor (`700`).
+ * @property --font-weight-header Heading font weight anchor (`700`).
  * @property --font-weight-h1 Level 1 heading weight.
  * @property --font-weight-h2 Level 2 heading weight.
  * @property --font-weight-h3 Level 3 heading weight.
@@ -64,7 +64,7 @@
      default. A theme or note can still override by setting this explicitly —
      but defining it here to a literal value would shadow every level's
      tightness with the same number, which is the bug this avoids. */
-  --font-header-weight: 700;
+  --font-weight-header: 700;
 
   /* Interface Tokens */
   --font-interface-feature: "dlig", "zero";
@@ -73,13 +73,13 @@
   --font-list-variation: "";
 
   /* Heading Weight Hierarchy */
-  --font-weight-h1: var(--font-header-weight);
+  --font-weight-h1: var(--font-weight-header);
   --font-weight-h2: max(
-    calc(var(--font-header-weight) * 0.85),
+    calc(var(--font-weight-header) * 0.85),
     var(--font-weight)
   );
   --font-weight-h3: max(
-    calc(var(--font-header-weight) * 0.85),
+    calc(var(--font-weight-header) * 0.85),
     var(--font-weight)
   );
   --font-weight-h4: var(--font-weight);

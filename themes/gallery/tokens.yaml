@@ -13,7 +13,7 @@ tokens:
   optical-ratio: var(--ratio-golden)
   mobile-font-ratio: var(--ratio-golden)
   shadow: none
-  radius: "0"
+  shadow-inset: none;
   font-monospace: monospace
   font-text: "\"Cargo Diatype\""
   font-header: "\"Cargo Diatype\""
@@ -22,5 +22,3 @@ tokens:
   page-padding: var(--space)
   font-size: 1.0625rem
   font-ratio: "1.333"
-  font-density: "1.5"
-  font-line-width: 42rem
