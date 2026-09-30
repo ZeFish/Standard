@@ -148,7 +148,10 @@
   --filter-glass: blur(20px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-lg: calc(var(--stroke-width) * 2);
-  --radius: var(--trim);
+  /* `--corner` is the documented hook (see Theme Authoring Hooks) — an app or
+     theme sets it and this follows. It was documented and never read, so
+     `--corner: 6px` in app.scss left --radius at --trim (~1.3px). */
+  --radius: var(--corner, var(--trim));
   --radius-sm: 4px;
 
   /**

@@ -18,6 +18,18 @@
  * @property --window-inset Gap between the window edge and a floating pane.
  * @property --pane-radius Corner of a pane floating inside the window.
  * @property --titlebar-height Band centred on the OS traffic lights.
+ *
+ * Everything an application window needs that a document does not — this
+ * sheet is where it lives, so nothing has to be hunted for or rebuilt in an app:
+ *
+ * @property .pane A surface floating inside the window: inset, concentric corner, raised.
+ * @property .list, .item A column of rows. `.item` hovers, and reads aria-current / aria-selected as "this one".
+ * @property .hud A floating translucent chip or panel over the content (a toast, a status readout).
+ * @property .divider A hairline between groups.
+ * @property .window-controls, .window-close, .window-minimize, .window-zoom The traffic lights.
+ * @property .is-dragging, .is-drop-target The two states of a drag and drop.
+ * @property [data-reveal-host], [data-reveal] A control that only shows while its host is hovered or focused.
+ * @property .muted, .fine Secondary text and small print.
  */
 :root {
   /* ---- Type ------------------------------------------------------------
@@ -82,4 +94,228 @@
      so this is MEASURED, not chosen: their centre sits 20.75pt below the
      window top (same capture as --window-radius), band = twice that. */
   --titlebar-height: 41.5px;
+}
+
+/* ---- Images -------------------------------------------------------------
+   standard.scss zooms an image on press (a lightbox fallback that needs no
+   script) — right for a document, wrong for an app, where an image is a
+   workflow item you select and drag. Switch that behaviour off here so an
+   app never has to fight it with !important of its own. */
+img,
+img:not([data-no-zoom]) {
+  cursor: inherit !important;
+}
+
+html img:active,
+html:not(.js-image-zoom-enabled) img:active {
+  position: static !important;
+  z-index: auto !important;
+  transform: none !important;
+  max-height: none !important;
+  max-width: none !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  cursor: inherit !important;
+}
+
+html:has(img:active)::before,
+html:not(.js-image-zoom-enabled):has(img:active)::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* ---- Panes --------------------------------------------------------------
+   A sidebar, an inspector, a tray: a surface that floats inside the window,
+   --window-inset from its edge, corner concentric with the window's. Every
+   one of them used to spell these five lines out for itself. Layout (width,
+   flex, padding) stays with the pane; this is only what makes it a pane. */
+.pane {
+  margin: var(--window-inset);
+  background: var(--color-surface-light-1);
+  border-radius: var(--pane-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* ---- States ---------------------------------------------------------------
+   The "current" state of anything is said with ARIA, never a class of the
+   app's own: aria-current (this row, this page), aria-selected (this tab,
+   this option), aria-pressed (this toggle), aria-expanded, aria-disabled.
+   The kit below styles those, so the look can never disagree with what a
+   screen reader is told. Drag and drop has no ARIA of its own; it has two
+   classes. */
+.is-dragging {
+  opacity: 0.4;
+}
+
+/* A region switched off by the state of something else (a row of AI options
+   while AI is off). Native controls inside keep their own disabled styling. */
+[aria-disabled="true"]:not(.item, button, a, input, select, textarea) {
+  opacity: 0.5;
+}
+
+.is-drop-target {
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  box-shadow: inset 0 0 0 var(--stroke-width) var(--color-accent);
+}
+
+/* Shown only while the host is hovered or holds focus — the quiet controls
+   of a row or a photo (remove, grip, reorder) that would clutter it at rest. */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-soft);
+}
+
+[data-reveal-host]:is(:hover, :focus-within) [data-reveal],
+[data-reveal]:is(:hover, :focus-visible) {
+  opacity: 1;
+}
+
+/* ---- Lists ----------------------------------------------------------------
+   A column of rows: folders, notes, settings, a queue. */
+.list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.list.divided > :not(:last-child) {
+  border-bottom: var(--border);
+}
+
+/* A card whose content is rows: no padding of its own, rows run edge to edge. */
+.card.flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-d2);
+  min-width: 0;
+  padding: var(--space-d5) var(--space-d2);
+  border-radius: var(--radius-sm);
+  /* Works on a div or a button alike: a row is not a raised control. */
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition:
+    background var(--duration-instant) var(--ease-soft),
+    color var(--duration-instant) var(--ease-soft);
+
+  &:hover {
+    background: var(--color-surface);
+    color: var(--color-foreground);
+  }
+
+  &:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
+    background: var(--color-surface-dark-1);
+    color: var(--color-foreground);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &:is(:disabled, [aria-disabled="true"]) {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+/* ---- HUD ------------------------------------------------------------------
+   A translucent chip over the content: a toast, an export readout, a
+   legend. Not a pane — it carries no chrome of the window, it just floats. */
+.hud {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-d2);
+  padding: var(--space-d4) var(--space-d2);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-surface-light-1) 88%, transparent);
+  backdrop-filter: var(--filter-blur);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-foreground);
+  font-size: var(--scale-d2);
+  white-space: nowrap;
+
+  &.panel {
+    display: flex;
+    border-radius: var(--radius-lg);
+    white-space: normal;
+  }
+}
+
+.divider {
+  flex-shrink: 0;
+  height: var(--stroke-width);
+  margin: 0;
+  border: none;
+  background: var(--color-border);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.fine {
+  font-size: var(--scale-d2);
+  color: var(--color-muted);
+}
+
+/* ---- Window controls ------------------------------------------------------
+   The traffic lights, drawn by the page because the native ones are hidden
+   (an overlay title bar). At rest they are three quiet dots; over the group
+   they take the system colours and their glyphs. The three colours are
+   macOS's own, not the theme's. */
+.window-controls {
+  display: flex;
+  gap: var(--space-d2);
+
+  > button {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: default;
+    background: var(--color-foreground);
+    opacity: 0.35;
+    transition:
+      opacity var(--duration-instant) var(--ease-soft),
+      background-color var(--duration-instant) var(--ease-soft);
+  }
+
+  &:has(> button:hover) > button {
+    opacity: 1;
+
+    &::after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgb(0 0 0 / 55%);
+      font-family: sans-serif;
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 1;
+    }
+  }
+
+  &:has(> button:hover) > .window-close {
+    background: #ff5f57;
+    &::after { content: "×"; }
+  }
+  &:has(> button:hover) > .window-minimize {
+    background: #febc2e;
+    &::after { content: "−"; }
+  }
+  &:has(> button:hover) > .window-zoom {
+    background: #28c840;
+    &::after { content: "+"; }
+  }
 }

@@ -14,9 +14,9 @@
  * @property input, textarea Zero-class text controls with interface typography, raised shadow, and accent focus rings.
  * @property select Custom styled dropdown with double-chevron indicator and rhythm-aligned padding.
  * @property input[role=switch] Accessible toggle switch with animated sliding thumb.
- * @property --switch-height Primary height sizing knob for toggle switch controls.
+ * @property --switch-height Primary height sizing knob for toggle switch controls. Set it anywhere — on the switch, a class, or a container — and width and thumb follow.
  * @property --switch-width Width sizing token for toggle switches (`calc(var(--switch-height) * 2)`).
- * @property --switch-padding Inset padding controlling the toggle switch thumb gap (`2px`).
+ * @property --switch-padding Inset padding controlling the toggle switch thumb gap (`0px`).
  * @property --slider-value Percentage value driving custom filled range slider tracks.
  *
  * @example html - A switch (role=switch on a checkbox)
@@ -117,7 +117,10 @@ select {
   text-shadow: none !important;
   text-box-trim: trim;
 
-  padding: 0 var(--trim);
+  /* Room on the right for the chevron drawn below: without it a long value
+     ran under the arrow. */
+  padding: 0 calc(1em + var(--space-d4)) 0 var(--trim);
+  text-overflow: ellipsis;
 
   appearance: none;
   /* Match Combobox double-chevron */
@@ -131,6 +134,28 @@ select {
     background-color: var(--color-surface);
     color: var(--color-foreground);
     border-color: var(--color-subtle);
+  }
+}
+
+/* A colour input is a swatch, not a text field: fill the control with the
+   colour instead of inheriting the text-input padding around a tiny chip. */
+input[type="color"] {
+  height: var(--space-2);
+  padding: var(--space-d8);
+  cursor: pointer;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: calc(var(--radius-sm) - var(--stroke-width));
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
   }
 }
 
@@ -250,24 +275,33 @@ input[type="radio"] {
 }
 
 input[type="checkbox"][role="switch"] {
-  --switch-height: calc(var(--space) - var(--space-d3));
-  --switch-width: calc(var(--switch-height) * 2);
+  /* The public knobs (--switch-height, --switch-width, --switch-padding) are
+     only READ here, never declared on the element. Declaring them on the
+     input itself made them impossible to set from outside: a value on a
+     container is shadowed by the element's own declaration, and a value on
+     the input loses to this rule's specificity — it only ever worked for an
+     inline style, or for a consumer that happened to out-rank this selector
+     by source order. The resolved values live in private --_switch-* props,
+     computed from whatever the cascade supplies, so a knob set anywhere
+     (ancestor, class, inline) takes effect and the others follow it. */
+  --_switch-height: var(--switch-height, calc(var(--space) - var(--space-d3)));
+  --_switch-width: var(--switch-width, calc(var(--_switch-height) * 2));
   /* Was a fixed 2px — correct-looking at the default ~16px-tall switch
      (an 8px thumb inset by 2px on each side), but any consumer overriding
-     --switch-height alone (a smaller, denser control panel, say) kept that
-     same fixed inset and ended up with a visibly undersized thumb, since
-     the padding never scaled down with it. Went to 0 (Francis, iterating
-     live: the thumb should fill the track, full height, no ring of bare
-     track color around it) — the thumb's own diameter now equals the
-     track's height exactly. */
-  --switch-padding: 0px;
+     the height alone (a smaller, denser control panel, say) kept that same
+     fixed inset and ended up with a visibly undersized thumb, since the
+     padding never scaled down with it. Went to 0 (Francis, iterating live:
+     the thumb should fill the track, full height, no ring of bare track
+     color around it) — the thumb's own diameter now equals the track's
+     height exactly. */
+  --_switch-padding: var(--switch-padding, 0px);
 
   appearance: none;
   box-sizing: border-box; /* Reset content-box from base checkbox rule */
   position: relative;
   top: 0; /* Reset top: 50% from base checkbox rule */
-  width: var(--switch-width);
-  height: var(--switch-height);
+  width: var(--_switch-width);
+  height: var(--_switch-height);
   border-radius: 9999px;
   border: none;
   cursor: pointer;
@@ -304,10 +338,10 @@ input[type="checkbox"][role="switch"] {
   &::before {
     content: "";
     position: absolute;
-    top: var(--switch-padding);
-    left: var(--switch-padding);
-    width: calc(var(--switch-height) - var(--switch-padding) * 2);
-    height: calc(var(--switch-height) - var(--switch-padding) * 2);
+    top: var(--_switch-padding);
+    left: var(--_switch-padding);
+    width: calc(var(--_switch-height) - var(--_switch-padding) * 2);
+    height: calc(var(--_switch-height) - var(--_switch-padding) * 2);
     border-radius: 50%;
     background: var(--color-surface-light-2);
     /* Not --shadow-raised here on purpose — its ambient component
@@ -332,7 +366,7 @@ input[type="checkbox"][role="switch"] {
     background: var(--color-accent);
     &::before {
       background: var(--color-surface-light-2);
-      transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+      transform: translateX(calc(var(--_switch-width) - var(--_switch-height)));
     }
   }
 
@@ -342,6 +376,37 @@ input[type="checkbox"][role="switch"] {
     &::before {
       background: var(--color-on-accent) !important;
     }
+  }
+}
+
+/* Progress: a filled track, the way a range is, for work that has a known
+   length. Indeterminate (no value) shows the empty track. */
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--space-d4);
+  border: none;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: var(--color-surface-dark-2);
+  color: var(--color-accent);
+
+  &::-webkit-progress-bar {
+    background: var(--color-surface-dark-2);
+    border-radius: inherit;
+  }
+
+  &::-webkit-progress-value {
+    background: var(--color-accent);
+    border-radius: inherit;
+    transition: width var(--duration-standard) var(--ease-soft);
+  }
+
+  &::-moz-progress-bar {
+    background: var(--color-accent);
+    border-radius: inherit;
   }
 }
 
@@ -371,10 +436,10 @@ input[type="range"] {
      actually renders. */
   background: linear-gradient(
     to right,
-    var(--color-background, var(--color-accent)) 0%,
-    var(--color-background, var(--color-accent)) var(--slider-value, 50%),
-    var(--color-red, var(--color-surface)) var(--slider-value, 50%),
-    var(--color-red, var(--color-surface)) 100%
+    var(--color-accent) 0%,
+    var(--color-accent) var(--slider-value, 50%),
+    var(--color-surface-dark-2) var(--slider-value, 50%),
+    var(--color-surface-dark-2) 100%
   );
 }
 

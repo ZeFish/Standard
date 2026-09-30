@@ -241,6 +241,53 @@ a.btn:disabled {
   cursor: not-allowed !important;
   pointer-events: none !important;
 }
+/* A toggle button that is currently ON (aria-pressed): the accent, the same
+   cue whichever variant it wears. Zero-class so any variant or consumer rule
+   still wins over it. */
+:where(button):is([aria-pressed="true"], [aria-current]:not([aria-current="false"])) {
+  color: var(--color-accent);
+}
+
+/* Segmented button group — the either/or control (Frames | Editorial, a row
+   of tabs). Documented in the header and referenced by the form spacing rules
+   for a long time, but never actually defined. The pressed one is marked the
+   way assistive tech reads it — aria-pressed / aria-selected / aria-checked /
+   aria-current — so the look can never disagree with the state. */
+.btn-group {
+  display: inline-flex;
+  gap: 1px;
+  padding: 1px;
+  border-radius: var(--radius);
+  background: var(--color-surface-dark-1);
+  box-shadow: var(--shadow-inset);
+
+  > :where(button, a.btn) {
+    flex: 1 1 0;
+    min-width: 0;
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--color-muted);
+    border-radius: calc(var(--radius) - 1px);
+
+    &:hover {
+      background-color: var(--color-surface);
+      color: var(--color-foreground);
+      box-shadow: none;
+    }
+
+    &:is(
+        [aria-pressed="true"],
+        [aria-selected="true"],
+        [aria-checked="true"],
+        [aria-current]:not([aria-current="false"])
+      ) {
+      background-color: var(--color-surface-light-2);
+      color: var(--color-foreground);
+      box-shadow: var(--shadow);
+    }
+  }
+}
+
 /*
 :is(:where(button), .btn) svg {
   height: 100%;
@@ -1056,7 +1103,7 @@ a.skip-link {
 
 .std-menu-content {
   padding: var(--space-d4);
-  background: var(--color-surface-high);
+  background: var(--color-surface-light-1);
   border: none;
   border-radius: var(--radius);
   box-shadow: var(--shadow-raised), var(--shadow-glow);
@@ -1112,12 +1159,12 @@ a.skip-link {
   text-decoration: none;
 
   &:hover:not(.disabled) {
-    background: var(--color-surface-highest);
+    background: var(--color-surface-light-2);
     box-shadow: var(--shadow);
   }
 
   &:active:not(.disabled) {
-    background: var(--color-surface-low);
+    background: var(--color-surface-dark-1);
     box-shadow: var(--shadow-inset);
   }
 
