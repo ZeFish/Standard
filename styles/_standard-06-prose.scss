@@ -326,3 +326,15 @@
     transform: translateY(0);
   }
 }
+
+/* Live example — the rendered half of a documentation example (the source is
+   the code block above it). Bordered so it reads as a demo stage, not more
+   page prose. Used by ```example fences (@stnd/press) and the manual's CSS
+   reference. */
+.stnd-doc-live {
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--space);
+  margin-block: var(--space);
+  background: var(--color-surface);
+}
