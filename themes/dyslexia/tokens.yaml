@@ -1,6 +1,6 @@
 meta:
   id: dyslexia
-  label: Dyslexie
+  label: Dyslexia
   selector: "[data-theme=\"dyslexia\"]"
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"

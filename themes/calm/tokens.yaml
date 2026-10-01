@@ -1,6 +1,6 @@
 meta:
   id: calm
-  label: Calme (Anti-Surcharge)
+  label: Calm (Anti-Overload)
   selector: "[data-theme=\"calm\"]"
   fonts:
     - "@stnd/fonts/oktah"

@@ -1,6 +1,6 @@
 meta:
   id: contrast
-  label: Contraste Élevé
+  label: High Contrast
   selector: "[data-theme=\"contrast\"]"
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"

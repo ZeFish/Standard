@@ -1,6 +1,6 @@
 meta:
   id: manifeste
-  label: Manifeste
+  label: Manifesto
   selector: "[data-theme=\"manifeste\"]"
   fonts:
     - "@stnd/fonts/tiempos-headline"
