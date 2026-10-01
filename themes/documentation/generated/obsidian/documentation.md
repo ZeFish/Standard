@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-27 17:39
+modified: 2026-10-01 13:40
 cssclasses: []
 maturity: sprout
 mode: read
@@ -23,6 +23,18 @@ snippet: false
         --color-border:color-mix(in srgb, var(--color-accent) 15%, transparent);
         --shadow-glow: 0 4px var(--leading) oklch(from var(--color-shadow) l c h / 0.05);
         --rhythm-block-scale: 3;
+
+        &.theme-dark,
+        &[data-color-mode="dark"] {
+            .stnd-code-block {
+                background: var(--color-surface-light-1);
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            .stnd-code-block {
+                background: var(--color-surface-light-1);
+            }
+        }
 
       /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
       :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
@@ -95,8 +107,9 @@ snippet: false
       :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         background: color-mix(in srgb, var(--color-cyan) 8%, transparent);
         border: 1px solid color-mix(in srgb, var(--color-cyan) 30%, transparent);
-        border-radius: 6px;
-        padding: var(--space-d2) var(--space);
+        border-radius: var(--radius);
+        padding: var(--space);
+        color: var(--color-foreground);
       }
 
       /* ── Rules — the faint blue divider ── */

@@ -105,15 +105,6 @@ import Hook from "@stnd/core/Hook.astro";
 
 Importable via `@stnd/server/[filename]` or `@stnd/utils/[filename]`.
 
-### Authentication (`@stnd/server/auth.js`)
-
-| Function | Signature | Description |
-| :--- | :--- | :--- |
-| `signJWT` | `signJWT(payload, secret)` | Signs a JWT token via the Web Crypto API. |
-| `verifyJWT` | `verifyJWT(token, secret)` | Verifies and decodes a JWT. |
-| `getSession` | `getSession(request, secret)` | Extracts the session from cookies. |
-| `createSession` | `createSession(payload, secret)` | Generates the `Set-Cookie` header. |
-
 ### Browser & Client (`@stnd/client`)
 
 | Function | Signature | Description |

@@ -89,7 +89,6 @@
 
   /* Narrow: inset elements (callouts, blockquotes, code blocks, or .narrow) */
   > .narrow,
-  > .container-narrow,
   > .callout,
   > blockquote,
   > pre,
@@ -100,11 +99,10 @@
     margin-inline: var(--prose-inset);
   }
 
-  /* Wide: breakout elements (tables, or .wide / .container-wide) */
+  /* Wide: breakout elements (tables, or .wide) */
   table,
   .scroll:has(table),
   .wide,
-  .container-wide,
   p:has(> img.wide),
   p:has(> video.wide) {
     grid-column: wide;
@@ -115,8 +113,6 @@
   /* Full: spans to page shell (--page-max-width) */
   .full,
   .hero,
-  .container-full,
-  .container-hero,
   p:has(> img.full),
   p:has(> video.full) {
     grid-column: full;
@@ -266,7 +262,6 @@
 
   @media (max-width: #{$mobile}) {
     .narrow,
-    .container-narrow,
     .callout,
     blockquote,
     pre,
