@@ -549,9 +549,9 @@
     --color-surface-light-2: color-mix(in srgb, white 9%, var(--color-background));
     --color-surface-light-3: color-mix(in srgb, white 16%, var(--color-background));
 
-    --color-surface-dark-1: color-mix(in srgb, black 4%, var(--color-background));
-    --color-surface-dark-2: color-mix(in srgb, black 9%, var(--color-background));
-    --color-surface-dark-3: color-mix(in srgb, black 16%, var(--color-background));
+    --color-surface-dark-1: color-mix(in srgb, black 15%, var(--color-background));
+    --color-surface-dark-2: color-mix(in srgb, black 20%, var(--color-background));
+    --color-surface-dark-3: color-mix(in srgb, black 25%, var(--color-background));
 
     --color-surface: var(--color-surface-light-1);
   }

@@ -1,5 +1,22 @@
 # @stnd/core
 
+## 0.23.0
+
+### Minor Changes
+
+- Auto-bumped @stnd/core due to modified code.
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @stnd/press@0.11.0
+  - @stnd/styles@0.12.0
+  - @stnd/themes@0.9.0
+  - @stnd/modules@0.6.36
+  - @stnd/launcher@1.3.23
+
 ## 0.22.54
 
 ### Patch Changes
