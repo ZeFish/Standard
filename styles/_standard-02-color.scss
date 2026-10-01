@@ -349,11 +349,11 @@
 
   /* Light Shadow Palette */
   --color-light-shadow-base: oklch(
-    from var(--color-light-foreground) calc(l * 0.25) calc(c * 0.5)
+    from var(--color-light-foreground) calc(l * 0.50) calc(c * 0.5)
       calc(h - 15) / 0.075
   );
   --color-light-highlight: oklch(
-    from var(--color-light-background) min(1, calc(l + 0.05)) c h / 0.6
+    from var(--color-light-background) min(1, calc(l + 0.25)) c h / 0.6
   );
 
   /* Dark Shadow Palette */
@@ -470,9 +470,9 @@
   --color-highlight: var(--color-light-highlight);
 
   /* Directional surface scale (lighter & darker than background) */
-  --color-surface-light-1: color-mix(in srgb, white 50%, var(--color-background));
-  --color-surface-light-2: color-mix(in srgb, white 75%, var(--color-background));
-  --color-surface-light-3: color-mix(in srgb, white 95%, var(--color-background));
+  --color-surface-light-1: color-mix(in srgb, white 40%, var(--color-background));
+  --color-surface-light-2: color-mix(in srgb, white 60%, var(--color-background));
+  --color-surface-light-3: color-mix(in srgb, white 80%, var(--color-background));
 
   --color-surface-dark-1: color-mix(in srgb, black 4%, var(--color-background));
   --color-surface-dark-2: color-mix(in srgb, black 9%, var(--color-background));
