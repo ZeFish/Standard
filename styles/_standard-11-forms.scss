@@ -426,7 +426,7 @@ input[type="range"] {
 
   padding: 0;
   /* Crucial: allows thumb to touch edges */
-  border: var(--border);
+  border: none;
   /* Crucial: removes text-input borders */
   background-origin: border-box;
 

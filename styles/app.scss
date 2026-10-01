@@ -35,8 +35,10 @@
   /* ---- Type ------------------------------------------------------------
      Fixed UI scale (native macOS text runs ~13px). Wins over the fluid
      clamp() in _standard-03-typography.scss by specificity. */
+  --font-text: var(--font-interface);
   --font-text-size: 13px;
   --font-size: var(--font-text-size);
+  --scale: var(--font-text-size);
 
   /* The <768px breakpoint re-sets --font-size / --gap* from these mobile
      tokens with !important. On the web that is comfort on a phone; in an
@@ -132,6 +134,7 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
    flex, padding) stays with the pane; this is only what makes it a pane. */
 .pane {
   margin: var(--window-inset);
+  padding: var(--window-inset);
   background: var(--color-surface-light-1);
   border-radius: var(--pane-radius);
   box-shadow: var(--shadow);
