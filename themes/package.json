@@ -16,7 +16,9 @@
     "dev": "node _scripts/watch.js"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
     "wrangler": "^4.129.0"
   }
 }
