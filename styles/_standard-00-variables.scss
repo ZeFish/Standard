@@ -40,7 +40,7 @@ $wide: 1440px;
 // Text elements needing text-box-trim (removes leading/trailing font
 // ascender/descender space so line-height math lines up with the baseline
 // grid) — consumed once in _standard-01-token.scss's #{$text-elements} rule.
-$text-elements: "a, kbd, div, span, mark, callout-title::before, span, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p:not(:has(img)), figcaption, dt, dd, label, td, th, .callout, code, .lined, aside";
+$text-elements: "a, kbd, div, span, mark, .callout-title::before, li::before, button, legend, fieldset, label, li, h1, h2, h3, h4, h5, h6, p, figcaption, dt, dd, td, th, .callout, code, .lined, aside";
 
 // Vertical rhythm system (_standard-05-rhythm.scss): consecutive "simple"
 // elements get 1x --gap margin between them; the moment either neighbor is

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-10-02 20:58
 cssclasses: []
 maturity: sprout
 mode: read
@@ -18,7 +18,7 @@ snippet: false
 
 ```css
 [data-stnd-theme="contrast"] {
-    /* ─── Custom rules for Contraste Élevé ───────────────────────────── */
+    /* ─── Custom rules for High Contrast ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
     --color-light-background: #ffffff;
     --color-light-foreground: #000000;

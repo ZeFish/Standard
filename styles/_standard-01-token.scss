@@ -459,26 +459,28 @@
    */
 }
 
-#{$text-elements},
-a {
-  text-box-trim: trim-both;
-  text-box-edge: cap text;
-}
+@supports (text-box-trim: trim-both) {
+  #{$text-elements},
+  a {
+    text-box-trim: trim-both;
+    text-box-edge: cap text;
+  }
 
-/* Table cells and site footers opt back out of text-box-trim — vertical-align/padding
-   math and compact interface metadata don't play well with trimmed line boxes,
-   so they keep normal line-box sizing instead. */
-td,
-th,
-footer,
-.stnd-footer {
-  text-box-trim: none;
+  /* Table cells and site footers opt back out of text-box-trim — vertical-align/padding
+     math and compact interface metadata don't play well with trimmed line boxes,
+     so they keep normal line-box sizing instead. */
+  td,
+  th,
+  footer,
+  .stnd-footer {
+    text-box-trim: none;
+  }
 }
 
 /* Responsive adjustments */
 @media only screen and (max-width: #{$small}) {
   #{$stnd-theme-scope} {
-    --font-size: var(--font-size-mobile) !important;
+    --font-size: var(--font-size-mobile);
   }
 }
 

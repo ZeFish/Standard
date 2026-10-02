@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 01:46
+modified: 2026-10-02 20:58
 cssclasses: []
 maturity: sprout
 mode: read
@@ -18,7 +18,7 @@ snippet: false
 
 ```css
 [data-stnd-theme="dyslexia"] {
-    /* ─── Custom rules for Dyslexie ───────────────────────────── */
+    /* ─── Custom rules for Dyslexia ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
     --color-light-background: #fdfaf6;
     --color-light-foreground: #2b2b2b;

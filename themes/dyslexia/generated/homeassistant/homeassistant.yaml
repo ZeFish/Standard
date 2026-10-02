@@ -1,4 +1,4 @@
-Dyslexie Light:
+Dyslexia Light:
   primary-color: "#1f6690"
   accent-color: "#1f6690"
   primary-background-color: "#fdfaf6"
@@ -11,7 +11,7 @@ Dyslexie Light:
   success-color: "#000000"
   info-color: "#000000"
 
-Dyslexie Dark:
+Dyslexia Dark:
   primary-color: "#1f6690"
   accent-color: "#1f6690"
   primary-background-color: "#242526"

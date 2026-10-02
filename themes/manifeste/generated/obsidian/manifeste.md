@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-10-02 20:58
 cssclasses: []
 maturity: sprout
 mode: read
@@ -18,7 +18,7 @@ snippet: false
 
 ```css
 [data-stnd-theme="manifeste"] {
-    /* ─── Custom rules for Manifeste ───────────────────────────── */
+    /* ─── Custom rules for Manifesto ───────────────────────────── */
     --color-dark-bold: color-mix(
         in oklab,
         #de7260 85%,

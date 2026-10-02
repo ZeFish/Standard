@@ -1,4 +1,4 @@
-Calme (Anti-Surcharge) Light:
+Calm (Anti-Overload) Light:
   primary-color: "#6f8c7e"
   accent-color: "#6f8c7e"
   primary-background-color: "#eeebe5"
@@ -11,7 +11,7 @@ Calme (Anti-Surcharge) Light:
   success-color: "#000000"
   info-color: "#000000"
 
-Calme (Anti-Surcharge) Dark:
+Calm (Anti-Overload) Dark:
   primary-color: "#6f8c7e"
   accent-color: "#6f8c7e"
   primary-background-color: "#1e1d1b"

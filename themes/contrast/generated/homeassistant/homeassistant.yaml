@@ -1,4 +1,4 @@
-Contraste Élevé Light:
+High Contrast Light:
   primary-color: "#0050ff"
   accent-color: "#0050ff"
   primary-background-color: "#ffffff"
@@ -11,7 +11,7 @@ Contraste Élevé Light:
   success-color: "#000000"
   info-color: "#000000"
 
-Contraste Élevé Dark:
+High Contrast Dark:
   primary-color: "#ffff00"
   accent-color: "#ffff00"
   primary-background-color: "#000000"

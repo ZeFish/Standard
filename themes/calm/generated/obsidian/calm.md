@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-07-24 09:35
+modified: 2026-10-02 20:58
 cssclasses: []
 maturity: sprout
 mode: read
@@ -18,7 +18,7 @@ snippet: false
 
 ```css
 [data-stnd-theme="calm"] {
-    /* ─── Custom rules for Calme (Anti-Surcharge) ───────────────────────────── */
+    /* ─── Custom rules for Calm (Anti-Overload) ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
     --color-light-background: #eeebe5;
     --color-light-foreground: #4a4743;
