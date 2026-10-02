@@ -1,5 +1,11 @@
 # @stnd/themes
 
+## 0.9.2
+
+### Patch Changes
+
+- c6305f2: `wrangler` is now a dev dependency. Nothing in these packages imports it, but it was declared as a runtime dependency everywhere, so installing any `@stnd/*` package pulled in wrangler, workerd and miniflare (about 240 MB). The Obsidian plugin's dependency tree drops from 63 packages to 19.
+
 ## 0.9.1
 
 ### Patch Changes

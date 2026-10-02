@@ -1,5 +1,25 @@
 # @stnd/core
 
+## 0.23.6
+
+### Patch Changes
+
+- Updated dependencies [c6305f2]
+  - @stnd/cloudflare@0.6.4
+  - @stnd/fonts@0.5.2
+  - @stnd/icon@0.4.1
+  - @stnd/lab@1.0.18
+  - @stnd/launcher@1.4.2
+  - @stnd/layout@0.7.1
+  - @stnd/log@0.5.2
+  - @stnd/modules@0.6.40
+  - @stnd/press@0.11.3
+  - @stnd/store@0.5.2
+  - @stnd/themes@0.9.2
+  - @stnd/ui@0.8.3
+  - @stnd/utils@0.7.1
+  - @stnd/client@0.7.3
+
 ## 0.23.5
 
 ### Patch Changes
