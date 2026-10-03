@@ -274,9 +274,18 @@ html:not(.js-image-zoom-enabled):has(img:active)::before {
    (an overlay title bar). At rest they are three quiet dots; over the group
    they take the system colours and their glyphs. The three colours are
    macOS's own, not the theme's. */
+.window-controls-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: var(--space) var(--space) calc(var(--space-d4) * 6) var(--space);
+  z-index: 100;
+  display: inline-flex;
+}
+
 .window-controls {
   display: flex;
-  gap: var(--space-d2);
+  gap: 8px;
 
   > button {
     all: unset;

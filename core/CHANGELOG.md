@@ -1,5 +1,13 @@
 # @stnd/core
 
+## 0.23.7
+
+### Patch Changes
+
+- Updated dependencies [aa160d7]
+  - @stnd/layout@0.7.2
+  - @stnd/modules@0.6.41
+
 ## 0.23.6
 
 ### Patch Changes
