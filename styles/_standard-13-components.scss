@@ -517,7 +517,7 @@ a.badge.secondary:hover,
  *       <p>Card content with automatic spacing and rhythm.</p>
  *     </div>
  *     <footer class="flex-right">
- *       <a href="#">Read more →</a>
+ *       <a href="#" class="btn ghost">Read more →</a>
  *       <a href="#" class="btn">Continue</a>
  *     </footer>
  *   </article>
@@ -623,6 +623,22 @@ a.badge.secondary:hover,
   }
 }
 
+// The body of a card is a plain div and keeps its own vertical rhythm: one space
+// between its children, none before the first. Only for a card built from parts
+// (a header or a footer around the body): a card used as a bare list of rows
+// keeps whatever spacing its rows set.
+.card:is(:has(> header), :has(> footer)) > div {
+  display: flow-root;
+
+  > * + * {
+    margin-block-start: var(--space);
+  }
+
+  > :first-child {
+    margin-block-start: 0;
+  }
+}
+
 .card > header:first-child {
   background: var(--color-surface-light-2);
   box-shadow: var(--shadow-lift);
@@ -664,7 +680,7 @@ a.badge.secondary:hover,
   }
 }
 
-.card > header:has(svg):first-child {
+.card > header:has(> svg):first-child {
   display: flex;
   // Baseline, not center: headings are trimmed to cap height and may wrap onto
   // two lines. Centering put the icon on the middle of the whole block, below
@@ -684,6 +700,8 @@ a.badge.secondary:hover,
   font-size: var(--scale-d2);
   margin: calc(var(--space) * -1);
   margin-top: var(--space);
+
+  > * {margin-top:0px;}
 }
 
 .card.clickable {
