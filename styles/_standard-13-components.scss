@@ -504,35 +504,35 @@ a.badge.secondary:hover,
  *
  * @example html - Basic card structure
  *   <article class="card">
- *     <header class="card-header">
+ *     <header>
  *       <h3>Card Title</h3>
  *     </header>
- *     <div class="card-body">
+ *     <div>
  *       <p>Card content with automatic spacing and rhythm.</p>
  *     </div>
- *     <footer class="card-footer">
+ *     <footer>
  *       <a href="#">Read more →</a>
  *     </footer>
  *   </article>
  *
  * @example html - Cards in grid layout (3-column responsive)
- *   <div class="grid">
- *     <article class="card col-4 col-sm-12">
- *       <div class="card-body">
+ *   <div class="grid sm:grid-1">
+ *     <article class="card">
+ *       <div>
  *         <h3>Feature One</h3>
  *         <p>Description...</p>
  *       </div>
  *     </article>
- *     <article class="card col-4 col-sm-12">...</article>
- *     <article class="card col-4 col-sm-12">...</article>
+ *     <article class="card">...</article>
+ *     <article class="card">...</article>
  *   </div>
  *
  * @example html - Clickable card (entire card is a link)
  *   <a href="/article" class="card card-clickable">
- *     <div class="card-body">
- *       <h3>Article Title</h3>
+ *     <header>
+ *       <h3>Article Title</h3></header>
  *       <p>Preview text that entices you to click...</p>
- *     </div>
+
  *   </a>
  *
  * @example scss - Customizing card via CSS variables
@@ -603,7 +603,7 @@ a.badge.secondary:hover,
 }
 
 .card > header:first-child {
-  background: var(--color-surface-light-1);
+  background: var(--color-surface-light-2);
   box-shadow: var(--shadow-lift);
   border-bottom: var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
@@ -636,7 +636,10 @@ a.badge.secondary:hover,
 
 .card > header:has(svg):first-child {
   display: flex;
-  align-items: center;
+  // Baseline, not center: headings are trimmed to cap height and may wrap onto
+  // two lines. Centering put the icon on the middle of the whole block, below
+  // the letters; sitting on the first line's baseline keeps it level with them.
+  align-items: first baseline;
   justify-content: space-between;
   a {
     margin-top: 0;
