@@ -537,7 +537,7 @@ a.badge.secondary:hover,
  * @example html - Icon in the title (sized to the heading's cap height, on its baseline)
  *   <article class="card">
  *     <header>
- *       <h3 class="flex-far"><span>Connect</span><svg width="1cap" height="1cap">…</svg></h3>
+ *       <h3><span>Connect</span><svg width="1cap" height="1cap">…</svg></h3>
  *     </header>
  *     <div>
  *       <p>Why this matters.</p>
@@ -636,6 +636,15 @@ a.badge.secondary:hover,
     margin-block: 0;
   }
 
+  // A heading that ends with an icon: the icon goes to the end of the line and
+  // sits on the first baseline. Size it in cap units (width="1cap") to match the title.
+  :is(h1, h2, h3, h4, h5, h6):has(> svg, > [role="img"], > .stnd-icon) {
+    display: flex;
+    justify-content: space-between;
+    align-items: first baseline;
+    gap: var(--space-d2);
+  }
+
   &.surface {
     margin-bottom: 0;
     border-bottom: var(--border);
@@ -668,10 +677,10 @@ a.badge.secondary:hover,
 }
 
 .card > footer:last-child {
-  background: var(--color-surface-dark-1);
+  background: var(--color-background);
   border-top: var(--border);
   border-radius: 0 0 var(--radius) var(--radius);
-  padding: var(--space-d2) var(--space);
+  padding: var(--leading);
   font-size: var(--scale-d2);
   margin: calc(var(--space) * -1);
   margin-top: var(--space);
