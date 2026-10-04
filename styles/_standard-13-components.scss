@@ -525,10 +525,10 @@ a.badge.secondary:hover,
  * @example html - Cards in grid layout (3-column responsive)
  *   <div class="grid sm:grid-1">
  *     <article class="card">
- *       <div>
+ *       <header>
  *         <h3>Feature One</h3>
- *         <p>Description...</p>
- *       </div>
+ *       </header>
+ *       <p>Description...</p>
  *     </article>
  *     <article class="card">...</article>
  *     <article class="card">...</article>
@@ -537,7 +537,7 @@ a.badge.secondary:hover,
  * @example html - Icon in the title (sized to the heading's cap height, on its baseline)
  *   <article class="card">
  *     <header>
- *       <h3 class="flex-between"><span>Connect</span><svg width="1cap" height="1cap">…</svg></h3>
+ *       <h3 class="flex-far"><span>Connect</span><svg width="1cap" height="1cap">…</svg></h3>
  *     </header>
  *     <div>
  *       <p>Why this matters.</p>
