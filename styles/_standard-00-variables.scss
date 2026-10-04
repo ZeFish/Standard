@@ -62,6 +62,7 @@ $rhythm-tags: $rhythm-simple-tags + ", div, " + $rhythm-double-tags;
   /* Raised effect for all surfaces */
   box-shadow: var(--shadow);
   background: var(--color-surface);
+  color: var(--color-foreground);
   border-radius: var(--radius);
 }
 

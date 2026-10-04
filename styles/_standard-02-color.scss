@@ -649,10 +649,12 @@
 
 .theme-light {
   @include theme-light-tokens;
+  color: var(--color-foreground);
 }
 
 .theme-dark {
   @include theme-dark-tokens;
+  color: var(--color-foreground);
 }
 
 /* =====================================================================
@@ -816,16 +818,19 @@
 .inverse {
   /* Default: if root is light (either by system or choice), inverse is dark */
   @include theme-dark-tokens;
+  color: var(--color-foreground);
 
   /* If system is dark AND root hasn't forced light mode, root is dark, so inverse must be light */
   @media (prefers-color-scheme: dark) {
     #{$stnd-theme-scope}:not([data-color-mode="light"]) & {
       @include theme-light-tokens;
+      color: var(--color-foreground);
     }
   }
 
   /* If root explicitly forced dark mode, inverse must be light */
   #{$stnd-theme-scope}[data-color-mode="dark"] & {
     @include theme-light-tokens;
+    color: var(--color-foreground);
   }
 }
