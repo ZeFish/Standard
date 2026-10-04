@@ -100,8 +100,9 @@
   }
 
   /* Ensure text over accent background is readable (like buttons) */
-  .action-button.primary,
-  button.primary {
+  .action-button,
+  button:not(.ghost, .outline, .link, .icon, .accent, .destructive),
+  a.btn:not(.ghost, .outline, .link, .icon, .accent, .destructive) {
     background: var(--color-accent);
     color: var(--color-background);
     border: calc(var(--stroke-width) * 4) solid var(--color-background) !important;

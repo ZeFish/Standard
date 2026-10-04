@@ -7,14 +7,13 @@
  * Buttons extend `%surface` and `%padding-text`, providing tactile hover states,
  * focus outlines, and active feedback.
  *
- * @property button Zero-class interactive button element.
+ * @property button Zero-class interactive button element. It is the primary action: no class is needed to say so, there is no `.primary`.
  * @property a.btn Anchor styled identically to a button.
- * @property .btn-primary Primary action button filled with accent color.
- * @property .btn-secondary Secondary button with subtle surface background.
- * @property .btn-outline Outlined button with hairline border.
- * @property .btn-destructive Destructive action button using error red.
- * @property .btn-ghost Ghost button transparent until hover.
- * @property .btn-icon Square icon action button.
+ * @property .accent Variant (`button.accent`, `a.btn.accent`, `.badge.accent`) tinted with the accent color. Formerly `.secondary`.
+ * @property .outline Outlined button with hairline border.
+ * @property .destructive Destructive action button using error red.
+ * @property .ghost Ghost button transparent until hover.
+ * @property .icon Square icon action button.
  * @property .btn-group Segmented inline button group with shared borders.
  * @property .loader Rotating circular spinner with accent glow.
  */
@@ -65,7 +64,7 @@ kbd {
   }
 }
 
-$types: "secondary", "outline", "destructive", "ghost", "icon";
+$types: "accent", "outline", "destructive", "ghost", "icon";
 
 :where(button),
 a.btn {
@@ -128,8 +127,8 @@ a.btn.destructive {
   }
 }
 
-:where(button).secondary,
-a.btn.secondary {
+:where(button).accent,
+a.btn.accent {
     color: color-mix(in oklch, var(--color-accent) 90%, var(--color-foreground));
     background-color: var(--color-surface-dark-1);
 
@@ -358,14 +357,14 @@ a.badge:hover,
   );
 }
 
-.badge.secondary,
-a.badge.secondary {
+.badge.accent,
+a.badge.accent {
   background-color: var(--color-surface-light-1);
   color: var(--color-foreground);
 }
 
-a.badge.secondary:hover,
-.badge.secondary a:hover {
+a.badge.accent:hover,
+.badge.accent a:hover {
   color: var(--color-accent);
   background: color-mix(in oklch, currentColor 5%, var(--color-surface-light-1));
 }
