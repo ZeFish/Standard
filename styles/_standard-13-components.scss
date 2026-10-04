@@ -489,12 +489,12 @@ a.badge.secondary:hover,
  * - Optional card image hero with object-fit controls
  *
  * A card is read by its elements, not by extra classes: an `article.card` holds a
- * `header` (the title, optionally with an icon inside the heading), a plain `div`
+ * `header` (the title, optionally followed by an icon outside the heading), a plain `div`
  * (the body, with automatic vertical rhythm) and a `footer` (the actions, aligned
  * with `.flex-right` or `.flex-left`). Each part is optional.
  *
  * @property .card Structured container with surface elevation, hairline borders, and rhythm padding.
- * @property .card > header Title area; holds the heading (and an icon, set in `cap` units inside the heading so it follows the title).
+ * @property .card > header Title area; holds the heading and, outside it, an optional icon set in `cap` units (it goes to the far end, on the title's baseline).
  * @property .card > div Main content body with automatic vertical rhythm.
  * @property .card > footer Bottom action bar for links and buttons; add `.flex-right` or `.flex-left` to align them.
  * @property .card.clickable Interactive clickable card variant with hover lift.
@@ -537,7 +537,8 @@ a.badge.secondary:hover,
  * @example html - Icon in the title (sized to the heading's cap height, on its baseline)
  *   <article class="card">
  *     <header>
- *       <h3><span>Connect</span><svg width="1cap" height="1cap">…</svg></h3>
+ *       <h3>Connect</h3>
+ *       <svg width="1cap" height="1cap">…</svg>
  *     </header>
  *     <div>
  *       <p>Why this matters.</p>
@@ -652,15 +653,6 @@ a.badge.secondary:hover,
     margin-block: 0;
   }
 
-  // A heading that ends with an icon: the icon goes to the end of the line and
-  // sits on the first baseline. Size it in cap units (width="1cap") to match the title.
-  :is(h1, h2, h3, h4, h5, h6):has(> svg, > [role="img"], > .stnd-icon) {
-    display: flex;
-    justify-content: space-between;
-    align-items: first baseline;
-    gap: var(--space-d2);
-  }
-
   &.surface {
     margin-bottom: 0;
     border-bottom: var(--border);
@@ -680,13 +672,29 @@ a.badge.secondary:hover,
   }
 }
 
-.card > header:has(> svg):first-child {
+// An icon placed after the title (a direct child of the header, outside the
+// heading) goes to the far end of the line, on the first baseline. Size it with
+// width="1cap" height="1cap": the header gives it the type size of its heading
+// (h3 by default), so it matches the title's capitals.
+.card > header:is(:has(> svg), :has(> .stnd-icon), :has(> [role="img"])):first-child {
   display: flex;
-  // Baseline, not center: headings are trimmed to cap height and may wrap onto
-  // two lines. Centering put the icon on the middle of the whole block, below
-  // the letters; sitting on the first line's baseline keeps it level with them.
   align-items: first baseline;
   justify-content: space-between;
+  gap: var(--space-d2);
+
+  > :is(svg, .stnd-icon, [role="img"]) {
+    flex-shrink: 0;
+    font-size: var(--scale-2);
+  }
+
+  &:has(> h2) > :is(svg, .stnd-icon, [role="img"]) {
+    font-size: var(--scale-3);
+  }
+
+  &:has(> h1) > :is(svg, .stnd-icon, [role="img"]) {
+    font-size: var(--scale-4);
+  }
+
   a {
     margin-top: 0;
   }
