@@ -1,6 +1,6 @@
 {
   "name": "@stnd/core",
-  "version": "0.23.22",
+  "version": "0.23.23",
   "description": "A fine-art typography framework implementing classical design principles, mathematical precision with the golden ratio, and micro-typography rules inspired by the masters of print design.",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -75,7 +75,7 @@
     "@stnd/layout": "^0.7.7",
     "@stnd/log": "^0.5.2",
     "@stnd/modules": "^0.9.1",
-    "@stnd/press": "^0.11.5",
+    "@stnd/press": "^0.12.0",
     "@stnd/store": "^0.5.2",
     "@stnd/styles": "^0.14.1",
     "@stnd/themes": "^0.10.0",

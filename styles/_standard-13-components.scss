@@ -601,7 +601,7 @@ a.badge.accent:hover,
   @extend %surface;
   padding: var(--space);
   box-shadow: var(--shadow-raised), var(--shadow-lift);
-  background-color: var(--color-surface-light-1);
+  background-color: var(--color-surface);
   transition: all var(--transition);
   border-radius: var(--radius);
   border: none;

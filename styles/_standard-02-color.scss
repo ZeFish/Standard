@@ -311,12 +311,10 @@
    * @property --color-light-muted Light muted text color (~60% opacity).
    * @property --color-light-subtle Light subtle text color (~40% opacity).
    * @property --color-light-border Light border color (~10% opacity).
-   * @property --color-light-surface Light surface background (3% foreground mixed with background).
    * @property --color-light-on-accent Text color drawn on light accent backgrounds.
    * @property --color-dark-muted Dark muted text color (~65% opacity).
    * @property --color-dark-subtle Dark subtle text color (~45% opacity).
    * @property --color-dark-border Dark border color.
-   * @property --color-dark-surface Dark surface background.
    * @property --color-light-shadow-base Base shadow seed for light mode.
    * @property --color-light-highlight Base specular highlight for light mode.
    * @property --color-dark-shadow-base Base shadow seed for dark mode.
@@ -327,11 +325,6 @@
   --color-light-muted: oklch(from var(--color-light-foreground) l c h / 0.6);
   --color-light-subtle: oklch(from var(--color-light-foreground) l c h / 0.4);
   --color-light-border: oklch(from var(--color-light-foreground) l c h / 0.1);
-  --color-light-surface: color-mix(
-    in srgb,
-    white 4%,
-    var(--color-light-background)
-  );
   --color-light-on-accent: var(--color-light-background);
 
   /* Dark Computed Palette */
@@ -340,11 +333,6 @@
   --color-dark-border: oklch(
     from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
       calc(h - 15) / 0.25
-  );
-  --color-dark-surface: color-mix(
-    in srgb,
-    white 4%,
-    var(--color-dark-background)
   );
 
   /* Light Shadow Palette */
@@ -440,7 +428,6 @@
   --color-muted: var(--color-light-muted);
   --color-subtle: var(--color-light-subtle);
   --color-border: var(--color-light-border);
-  --color-surface: var(--color-light-surface);
 
   /* Light/dark polarity aliases — always "the lighter" and "the darker" */
   --color-light: var(--color-light-background);
@@ -470,13 +457,25 @@
   --color-highlight: var(--color-light-highlight);
 
   /* Directional surface scale (lighter & darker than background) */
-  --color-surface-light-1: color-mix(in srgb, white 40%, var(--color-background));
-  --color-surface-light-2: color-mix(in srgb, white 60%, var(--color-background));
-  --color-surface-light-3: color-mix(in srgb, white 80%, var(--color-background));
+  --color-surface-light-1: oklch(
+    from var(--color-background) min(1, calc(l + 0.03)) c h
+  );
+  --color-surface-light-2: oklch(
+    from var(--color-background) min(1, calc(l + 0.06)) c h
+  );
+  --color-surface-light-3: oklch(
+    from var(--color-background) min(1, calc(l + 0.09)) c h
+  );
 
-  --color-surface-dark-1: color-mix(in srgb, black 4%, var(--color-background));
-  --color-surface-dark-2: color-mix(in srgb, black 9%, var(--color-background));
-  --color-surface-dark-3: color-mix(in srgb, black 16%, var(--color-background));
+  --color-surface-dark-1: oklch(
+    from var(--color-background) max(0, calc(l - 0.03)) c h
+  );
+  --color-surface-dark-2: oklch(
+    from var(--color-background) max(0, calc(l - 0.06)) c h
+  );
+  --color-surface-dark-3: oklch(
+    from var(--color-background) max(0, calc(l - 0.09)) c h
+  );
 
   /* Canonical base surface */
   --color-surface: var(--color-surface-light-1);
@@ -543,17 +542,6 @@
     --color-highlight: var(--color-dark-highlight);
 
     --shadow-xl: var(--shadow-glow);
-
-    /* Directional surface scale in dark mode */
-    --color-surface-light-1: color-mix(in srgb, white 4%, var(--color-background));
-    --color-surface-light-2: color-mix(in srgb, white 9%, var(--color-background));
-    --color-surface-light-3: color-mix(in srgb, white 16%, var(--color-background));
-
-    --color-surface-dark-1: color-mix(in srgb, black 15%, var(--color-background));
-    --color-surface-dark-2: color-mix(in srgb, black 20%, var(--color-background));
-    --color-surface-dark-3: color-mix(in srgb, black 25%, var(--color-background));
-
-    --color-surface: var(--color-surface-light-1);
   }
 }
 
@@ -737,7 +725,13 @@
     --color-muted: rgba(0, 0, 0, 0.6);
     --color-subtle: rgba(0, 0, 0, 0.4);
     --color-border: rgba(0, 0, 0, 0.1);
-    --color-surface: rgba(0, 0, 0, 0.03);
+    --color-surface-light-1: rgba(255, 255, 255, 0.4);
+    --color-surface-light-2: rgba(255, 255, 255, 0.6);
+    --color-surface-light-3: rgba(255, 255, 255, 0.8);
+    --color-surface-dark-1: rgba(0, 0, 0, 0.04);
+    --color-surface-dark-2: rgba(0, 0, 0, 0.08);
+    --color-surface-dark-3: rgba(0, 0, 0, 0.14);
+    --color-surface: var(--color-surface-light-1);
     --color-shadow: rgba(0, 0, 0, 0.25);
     --color-highlight: rgba(255, 255, 255, 0.6);
   }

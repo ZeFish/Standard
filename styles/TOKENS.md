@@ -259,12 +259,12 @@ Active tokens that resolve to light or dark palette.
 | `--color-subtle`       | `foreground 40%`            | Subtle text / decoration |
 | `--color-border`       | `foreground 10%`            | Default border           |
 | `--color-surface`        | `var(--color-surface-light-1)` | Active base surface      |
-| `--color-surface-light-1`| `color-mix(in srgb, white 4%, bg)`  | Light step 1 (subtle lift)|
-| `--color-surface-light-2`| `color-mix(in srgb, white 9%, bg)`  | Light step 2 (cards)     |
-| `--color-surface-light-3`| `color-mix(in srgb, white 16%, bg)` | Light step 3 (popovers)  |
-| `--color-surface-dark-1` | `color-mix(in srgb, black 4%, bg)`  | Dark step 1 (subtle wells)|
-| `--color-surface-dark-2` | `color-mix(in srgb, black 9%, bg)`  | Dark step 2 (wells/inputs)|
-| `--color-surface-dark-3` | `color-mix(in srgb, black 16%, bg)` | Dark step 3 (deep wells) |
+| `--color-surface-light-1`| `oklch(from bg min(1, calc(l + 0.03)) c h)` | Light step 1 (subtle lift / cards)|
+| `--color-surface-light-2`| `oklch(from bg min(1, calc(l + 0.06)) c h)` | Light step 2 (headers / menus)|
+| `--color-surface-light-3`| `oklch(from bg min(1, calc(l + 0.09)) c h)` | Light step 3 (modals / popovers)|
+| `--color-surface-dark-1` | `oklch(from bg max(0, calc(l - 0.03)) c h)` | Dark step 1 (subtle wells / code blocks)|
+| `--color-surface-dark-2` | `oklch(from bg max(0, calc(l - 0.06)) c h)` | Dark step 2 (wells / tracks / inputs)|
+| `--color-surface-dark-3` | `oklch(from bg max(0, calc(l - 0.09)) c h)` | Dark step 3 (deep wells)|
 | `--color-darker`         | `dark 15%` transparent              | Shadow helper            |
 | `--color-light`          | light background                    | Pole light               |
 | `--color-dark`           | light foreground                    | Pole dark                |
@@ -272,9 +272,9 @@ Active tokens that resolve to light or dark palette.
 
 ## Directional Surfaces
 
-Standard uses directional surface tokens relative to canvas background:
-- **Light steps (`--color-surface-light-1..3`)**: Blend subtle amounts of white into the background canvas, lifting elements up into elevation regardless of light/dark mode.
-- **Dark steps (`--color-surface-dark-1..3`)**: Blend subtle amounts of black into the background canvas, sinking elements into wells/recessed areas.
+Standard uses directional surface tokens relative to canvas background via perceptual OKLCH relative color syntax:
+- **Light steps (`--color-surface-light-1..3`)**: Uniformly increase perceptual lightness (+0.03, +0.06, +0.09) from canvas background, lifting elements into elevation across both light and dark mode.
+- **Dark steps (`--color-surface-dark-1..3`)**: Uniformly decrease perceptual lightness (-0.03, -0.06, -0.09) from canvas background, sinking elements into recessed areas across both light and dark mode.
 - **Default surface (`--color-surface`)**: Resolves to `--color-surface-light-1` by default, customizable per theme.
 
 ## Shadows (Layered System)

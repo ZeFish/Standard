@@ -1,5 +1,12 @@
 # @stnd/core
 
+## 0.23.23
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/press@0.12.0
+
 ## 0.23.22
 
 ### Patch Changes
