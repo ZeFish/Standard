@@ -2,7 +2,7 @@
 title: "@stnd/styles"
 aliases: []
 created: 2026-07-04 23:27
-modified: 2026-09-16T18:33:44.496Z
+modified: 2026-10-04T15:00:00.000Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
@@ -97,6 +97,35 @@ Specialized styling rules load automatically depending on document attributes:
 - **Prose Mode** (`.prose`): Restricts reading width to an optimal measure ($\approx 65\text{ch}$) to prevent eye strain.
 - **Dark Mode**: Evaluated via system settings (`prefers-color-scheme`) or overridden with the `.theme-dark` class.
 - **E-Ink Mode** (`.standard-eink`): Strips out all transforms, blurs, and animations, switching colors to pure high-contrast black and white to prevent ghosting on e-readers.
+
+## 6. Buttons & Cards
+
+Both are read by their **elements**, not by extra classes.
+
+**Buttons.** A `button` (or `a.btn`) is the primary action by default: no class says so, and there is no `.primary`. Variants are added to it: `.accent` (tinted with the accent color), `.outline`, `.ghost`, `.link`, `.destructive`, `.icon`, and the sizes `.small` / `.smaller` / `.large`. `.badge.accent` follows the same name. Buttons live in a card's `footer` (or in a button group), never loose in a card's body.
+
+> [!warning] Renamed in October 2026
+> `.secondary` became **`.accent`** (buttons and badges), and `.primary` was dropped. Migrating a site: replace `class="secondary"` with `class="accent"` on buttons and badges, and delete `primary` from button class lists. Nothing else changes.
+
+**Cards.** An `article.card` is made of parts, each optional:
+
+```html
+<article class="card">
+  <header>
+    <h3>Title</h3>
+    <svg width="1cap" height="1cap">…</svg> <!-- optional icon, outside the heading -->
+  </header>
+  <div>
+    <p>The body keeps its own vertical rhythm.</p>
+  </div>
+  <footer class="flex-right">
+    <a href="#">Read more</a>
+    <a href="#" class="btn">Continue</a>
+  </footer>
+</article>
+```
+
+The header holds the heading and, outside it, an optional icon (it goes to the far end, on the title's first baseline, at the heading's type size; size it with `width="1cap" height="1cap"`). Explanatory text belongs in the body, not the header. The footer holds the actions, aligned with `.flex-right` or `.flex-left`.
 
 ---
 
