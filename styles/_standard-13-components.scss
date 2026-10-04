@@ -408,6 +408,66 @@ a.badge.accent:hover,
 }
 
 /**
+ * @name Color Swatches
+ * @group components-forms
+ * @description Compact interactive color swatch pills and chips for palettes, themes, and pickers.
+ *
+ * @property .swatch Compact color chip button or preview container.
+ * @property .swatch.circle, .swatch.round Circular variant.
+ * @property .swatch.small Micro swatch sized at mathematical unit `--space`.
+ * @property .swatch.large Macro swatch sized at mathematical unit `--space-3`.
+ */
+.swatch,
+:where(button, a.btn).swatch {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--space-2);
+  height: var(--space-2);
+  min-width: var(--space-2);
+  min-height: var(--space-2);
+  padding: 0;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+
+  &.round,
+  &.circle {
+    border-radius: 50%;
+  }
+
+  &.small {
+    width: var(--space);
+    height: var(--space);
+    min-width: var(--space);
+    min-height: var(--space);
+  }
+
+  &.large {
+    width: var(--space-3);
+    height: var(--space-3);
+    min-width: var(--space-3);
+    min-height: var(--space-3);
+  }
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  &:focus-visible {
+    outline: var(--stroke-width) solid var(--color-accent);
+    outline-offset: var(--stroke-width);
+  }
+}
+
+/**
  * @name Alert Banners
  * @group components-feedback
  * @description Contextual feedback notifications with status colors and left accent borders.

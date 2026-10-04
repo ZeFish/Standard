@@ -140,9 +140,13 @@ select {
 /* A colour input is a swatch, not a text field: fill the control with the
    colour instead of inheriting the text-input padding around a tiny chip. */
 input[type="color"] {
+  display: inline-block;
+  width: var(--space-2);
+  min-width: var(--space-2);
   height: var(--space-2);
   padding: var(--space-d8);
   cursor: pointer;
+  flex-shrink: 0;
 
   &::-webkit-color-swatch-wrapper {
     padding: 0;
