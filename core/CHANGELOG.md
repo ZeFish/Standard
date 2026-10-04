@@ -1,5 +1,91 @@
 # @stnd/core
 
+## 0.23.15
+
+### Patch Changes
+
+- @stnd/modules@0.8.1
+
+## 0.23.14
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/modules@0.8.0
+
+## 0.23.13
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/modules@0.7.0
+
+## 0.23.12
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/icon@0.7.0
+  - @stnd/launcher@1.4.7
+  - @stnd/modules@0.6.46
+  - @stnd/ui@0.8.8
+  - @stnd/lab@1.0.23
+  - @stnd/layout@0.7.7
+
+## 0.23.11
+
+### Patch Changes
+
+- Updated dependencies [bb60065]
+  - @stnd/utils@0.7.3
+  - @stnd/client@0.7.5
+  - @stnd/cloudflare@0.6.6
+  - @stnd/layout@0.7.6
+  - @stnd/modules@0.6.45
+  - @stnd/press@0.11.5
+  - @stnd/ui@0.8.7
+  - @stnd/launcher@1.4.6
+  - @stnd/lab@1.0.22
+
+## 0.23.10
+
+### Patch Changes
+
+- Updated dependencies [869f91f]
+  - @stnd/utils@0.7.2
+  - @stnd/press@0.11.4
+  - @stnd/client@0.7.4
+  - @stnd/cloudflare@0.6.5
+  - @stnd/layout@0.7.5
+  - @stnd/modules@0.6.44
+  - @stnd/ui@0.8.6
+  - @stnd/launcher@1.4.5
+  - @stnd/lab@1.0.21
+
+## 0.23.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/icon@0.6.0
+  - @stnd/launcher@1.4.4
+  - @stnd/modules@0.6.43
+  - @stnd/ui@0.8.5
+  - @stnd/lab@1.0.20
+  - @stnd/layout@0.7.4
+
+## 0.23.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/icon@0.5.0
+  - @stnd/launcher@1.4.3
+  - @stnd/modules@0.6.42
+  - @stnd/ui@0.8.4
+  - @stnd/lab@1.0.19
+  - @stnd/layout@0.7.3
+
 ## 0.23.7
 
 ### Patch Changes
