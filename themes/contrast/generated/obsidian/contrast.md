@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-02 20:58
+modified: 2026-10-04 15:07
 cssclasses: []
 maturity: sprout
 mode: read
@@ -90,8 +90,9 @@ snippet: false
       }
 
       /* Ensure text over accent background is readable (like buttons) */
-      .action-button.primary,
-      button.primary {
+      .action-button,
+      button:not(.ghost, .outline, .link, .icon, .accent, .destructive),
+      a.btn:not(.ghost, .outline, .link, .icon, .accent, .destructive) {
         background: var(--color-accent);
         color: var(--color-background);
         border: calc(var(--stroke-width) * 4) solid var(--color-background) !important;

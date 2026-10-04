@@ -505,11 +505,12 @@
    and --color-background.
    ===================================================================== */
 @media (prefers-color-scheme: dark) {
-  #{$stnd-theme-scope} {
+  #{$stnd-theme-scope}:not([data-color-mode="light"]):not([data-theme-mode="light"]) {
     /* Core semantic tokens → dark palette */
     --color-background: var(--color-dark-background);
     --color-foreground: var(--color-dark-foreground);
     --color-accent: var(--color-dark-accent);
+    --color-muted: var(--color-dark-muted);
 
     /* Polarity flip: in dark mode, "light" = foreground, "dark" = background */
     --color-light: var(--color-dark-foreground);
@@ -542,6 +543,27 @@
     --color-highlight: var(--color-dark-highlight);
 
     --shadow-xl: var(--shadow-glow);
+
+    /* Recompute directional surfaces for dark background */
+    --color-surface-light-1: oklch(
+      from var(--color-background) min(1, calc(l + 0.03)) c h
+    );
+    --color-surface-light-2: oklch(
+      from var(--color-background) min(1, calc(l + 0.06)) c h
+    );
+    --color-surface-light-3: oklch(
+      from var(--color-background) min(1, calc(l + 0.09)) c h
+    );
+    --color-surface-dark-1: oklch(
+      from var(--color-background) max(0, calc(l - 0.03)) c h
+    );
+    --color-surface-dark-2: oklch(
+      from var(--color-background) max(0, calc(l - 0.06)) c h
+    );
+    --color-surface-dark-3: oklch(
+      from var(--color-background) max(0, calc(l - 0.09)) c h
+    );
+    --color-surface: var(--color-surface-light-1);
   }
 }
 
@@ -566,6 +588,24 @@
   --color-muted: var(--color-light-muted);
   --color-subtle: var(--color-light-subtle);
   --color-border: var(--color-light-border);
+  --color-surface-light-1: oklch(
+    from var(--color-background) min(1, calc(l + 0.03)) c h
+  );
+  --color-surface-light-2: oklch(
+    from var(--color-background) min(1, calc(l + 0.06)) c h
+  );
+  --color-surface-light-3: oklch(
+    from var(--color-background) min(1, calc(l + 0.09)) c h
+  );
+  --color-surface-dark-1: oklch(
+    from var(--color-background) max(0, calc(l - 0.03)) c h
+  );
+  --color-surface-dark-2: oklch(
+    from var(--color-background) max(0, calc(l - 0.06)) c h
+  );
+  --color-surface-dark-3: oklch(
+    from var(--color-background) max(0, calc(l - 0.09)) c h
+  );
   --color-surface: var(--color-surface-light-1);
   --color-shadow: var(--color-light-shadow-base);
   --color-highlight: var(--color-light-highlight);
@@ -581,6 +621,24 @@
   --color-muted: var(--color-dark-muted);
   --color-subtle: var(--color-dark-subtle);
   --color-border: var(--color-dark-border);
+  --color-surface-light-1: oklch(
+    from var(--color-background) min(1, calc(l + 0.03)) c h
+  );
+  --color-surface-light-2: oklch(
+    from var(--color-background) min(1, calc(l + 0.06)) c h
+  );
+  --color-surface-light-3: oklch(
+    from var(--color-background) min(1, calc(l + 0.09)) c h
+  );
+  --color-surface-dark-1: oklch(
+    from var(--color-background) max(0, calc(l - 0.03)) c h
+  );
+  --color-surface-dark-2: oklch(
+    from var(--color-background) max(0, calc(l - 0.06)) c h
+  );
+  --color-surface-dark-3: oklch(
+    from var(--color-background) max(0, calc(l - 0.09)) c h
+  );
   --color-surface: var(--color-surface-light-1);
   --color-shadow: var(--color-dark-shadow-base);
   --color-highlight: var(--color-dark-highlight);
@@ -626,7 +684,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  [data-theme]:not([data-color-mode="light"]) {
+  [data-theme]:not([data-color-mode="light"]):not([data-theme-mode="light"]) {
     @include theme-dark-tokens;
 
     --color-header: var(--color-dark-header, var(--color-foreground));
@@ -646,8 +704,10 @@
   }
 }
 
+#{$stnd-theme-scope}[data-color-mode="dark"],
 [data-color-mode="dark"] [data-theme],
-[data-color-mode="dark"][data-theme] {
+[data-color-mode="dark"][data-theme],
+[data-color-mode="dark"] {
   @include theme-dark-tokens;
 
   --color-header: var(--color-dark-header, var(--color-foreground));
@@ -666,8 +726,10 @@
   --color-bold: var(--color-dark-bold, var(--color-foreground));
 }
 
+#{$stnd-theme-scope}[data-color-mode="light"],
 [data-color-mode="light"] [data-theme],
-[data-color-mode="light"][data-theme] {
+[data-color-mode="light"][data-theme],
+[data-color-mode="light"] {
   @include theme-light-tokens;
 
   --color-header: var(--color-light-header, var(--color-foreground));
