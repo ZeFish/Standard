@@ -488,16 +488,22 @@ a.badge.secondary:hover,
  * - Dark mode shadow adjustments for better depth perception
  * - Optional card image hero with object-fit controls
  *
+ * A card is read by its elements, not by extra classes: an `article.card` holds a
+ * `header` (the title, optionally with an icon inside the heading), a plain `div`
+ * (the body, with automatic vertical rhythm) and a `footer` (the actions, aligned
+ * with `.flex-right` or `.flex-left`). Each part is optional.
+ *
  * @property .card Structured container with surface elevation, hairline borders, and rhythm padding.
- * @property .card-header Header area for card title and metadata.
- * @property .card-body Main content body with automatic vertical rhythm.
- * @property .card-footer Bottom action bar for links and buttons.
+ * @property .card > header Title area; holds the heading (and an icon, set in `cap` units inside the heading so it follows the title).
+ * @property .card > div Main content body with automatic vertical rhythm.
+ * @property .card > footer Bottom action bar for links and buttons; add `.flex-right` or `.flex-left` to align them.
  * @property .card.clickable Interactive clickable card variant with hover lift.
  * @property .card-grid Responsive grid container specifically designed for card multiples.
  *
  * @see {class} .grid - Often used to layout multiple cards in columns
  * @see {variable} --base - Controls internal spacing rhythm
- * @see {class} .prose - Can be used inside card-body for rich content
+ * @see {class} .prose - Can be used inside the card body for rich content
+ * @see {class} .flex-right - Aligns the actions of a card footer
  *
  * @link https://en.wikipedia.org/wiki/Edward_Tufte Information Design Pioneer
  * @link https://www.nngroup.com/articles/cards-component/ NN/g Cards Research
@@ -510,8 +516,9 @@ a.badge.secondary:hover,
  *     <div>
  *       <p>Card content with automatic spacing and rhythm.</p>
  *     </div>
- *     <footer>
+ *     <footer class="flex-right">
  *       <a href="#">Read more →</a>
+ *       <a href="#" class="btn">Continue</a>
  *     </footer>
  *   </article>
  *
@@ -527,12 +534,24 @@ a.badge.secondary:hover,
  *     <article class="card">...</article>
  *   </div>
  *
- * @example html - Clickable card (entire card is a link)
- *   <a href="/article" class="card card-clickable">
+ * @example html - Icon in the title (sized to the heading's cap height, on its baseline)
+ *   <article class="card">
  *     <header>
- *       <h3>Article Title</h3></header>
+ *       <h3 class="flex-between"><span>Connect</span><svg width="1cap" height="1cap">…</svg></h3>
+ *     </header>
+ *     <div>
+ *       <p>Why this matters.</p>
+ *     </div>
+ *   </article>
+ *
+ * @example html - Clickable card (entire card is a link)
+ *   <a href="/article" class="card clickable">
+ *     <header>
+ *       <h3>Article Title</h3>
+ *     </header>
+ *     <div>
  *       <p>Preview text that entices you to click...</p>
-
+ *     </div>
  *   </a>
  *
  * @example scss - Customizing card via CSS variables
@@ -565,15 +584,17 @@ a.badge.secondary:hover,
  * @see {element} a - Applied to anchor tag wrapping card content
  *
  * @example html - Accessible clickable card
- *   <a href="/article/typography-history" class="card card-clickable"
+ *   <a href="/article/typography-history" class="card clickable"
  *      aria-label="Read full article about Typography History">
- *     <div class="card-body">
+ *     <header>
  *       <h3>Typography History</h3>
+ *     </header>
+ *     <div>
  *       <p>The evolution of type from Gutenberg to now...</p>
  *     </div>
- *     <div class="card-footer">
+ *     <footer>
  *       Read more →
- *     </div>
+ *     </footer>
  *   </a>
  */
 .card {
@@ -607,7 +628,7 @@ a.badge.secondary:hover,
   box-shadow: var(--shadow-lift);
   border-bottom: var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
-  padding: var(--space);
+  padding: var(--space) var(--space) var(--space-d2) var(--space);
   margin: calc(var(--space) * -1);
   margin-block-end: 0;
 
