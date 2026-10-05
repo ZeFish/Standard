@@ -269,7 +269,7 @@ a.btn:disabled {
     border-radius: calc(var(--radius) - 1px);
 
     &:hover {
-      background-color: var(--color-surface);
+      background-color: var(--color-surface-dark-2);
       color: var(--color-foreground);
       box-shadow: none;
     }
@@ -280,7 +280,7 @@ a.btn:disabled {
         [aria-checked="true"],
         [aria-current]:not([aria-current="false"])
       ) {
-      background-color: var(--color-surface-light-2);
+      background-color: var(--color-surface-light-1);
       color: var(--color-foreground);
       box-shadow: var(--shadow);
     }

@@ -144,7 +144,7 @@ figcaption {
 
 /* When JS is off, holding click on an image will trigger this zoom effect on desktop with fine pointer. */
 @media (min-width: #{$small}) and (pointer: fine) {
-  html:not(.js-image-zoom-enabled) img:active {
+  html:not(.js-image-zoom-enabled) :where(.prose, article, .rhythm) img:not([data-no-zoom]):active {
     cursor: zoom-out;
     display: block;
     position: fixed;
@@ -160,7 +160,7 @@ figcaption {
   }
 
   /* Creates a backdrop for the :active zoom. */
-  html:not(.js-image-zoom-enabled):has(img:active)::before {
+  html:not(.js-image-zoom-enabled):has(:where(.prose, article, .rhythm) img:not([data-no-zoom]):active)::before {
     content: "";
     position: fixed;
     inset: 0;

@@ -153,6 +153,21 @@
      `--corner: 6px` in app.scss left --radius at --trim (~1.3px). */
   --radius: var(--corner, var(--trim));
   --radius-sm: 4px;
+  --radius-lg: 12px;
+
+  /**
+   * @name Window Chrome & Application Tokens
+   * @description Application window geometry, concentric pane radii, and titlebar metrics.
+   *
+   * @property {variable} --window-radius The OS window's corner radius (`17px` on macOS).
+   * @property {variable} --window-inset Gap between the window edge and a floating pane (`8px`).
+   * @property {variable} --pane-radius Concentric inner radius for floating panes (`calc(var(--window-radius) - var(--window-inset))`).
+   * @property {variable} --titlebar-height Title-bar band height centered on window traffic lights (`41.5px`).
+   */
+  --window-radius: 17px;
+  --window-inset: 8px;
+  --pane-radius: calc(var(--window-radius) - var(--window-inset));
+  --titlebar-height: 41.5px;
 
   /**
    * @name Shadows & Elevation

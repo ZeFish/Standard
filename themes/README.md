@@ -61,6 +61,7 @@ standard({ moduleLoad: ["@stnd/themes/editorial"] });
 - **Gallery**: Minimalist with generous white space.
 - **E-Ink**: Optimized for e-readers and high-contrast displays.
 - **Federal**: 1970s standards manual identity (Helvetica, federal red seed).
+- **macOS**: Native macOS system temperament with San Francisco typography and native window aesthetics.
 - **And many more**: Blueprint, Forest, Frank, Occult, etc.
 
 ## Usage

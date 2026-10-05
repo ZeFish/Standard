@@ -1,10 +1,12 @@
 {
   "name": "@stnd/themes",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "type": "module",
   "author": "Francis Fontaine",
   "license": "MIT",
   "exports": {
+    ".": "./macos/index.module.js",
+    "./*/*.scss": "./*/*.scss",
     "./*": "./*/index.module.js"
   },
   "publishConfig": {
