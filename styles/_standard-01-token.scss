@@ -139,6 +139,7 @@
    *
    * @property {variable} --stroke-width Hairline border stroke width (`max(1px, 0.06rem)`).
    * @property {variable} --stroke-width-lg Heavy border stroke width (`calc(var(--stroke-width) * 2)`).
+   * @property {variable} --opacity-disabled How much of a control is left when it cannot act (`0.4`). Every disabled control, `fieldset:disabled` zone and `[inert]` zone reads it, so they all dim alike.
    * @property {variable} --radius Macro border radius for cards, dialogs, and large containers (`var(--leading)`).
    * @property {variable} --radius-sm Micro border radius for tags, badges, buttons, and inputs (`var(--trim)`).
    * @property {variable} --filter-blur Standard blur filter (`blur(8px)`).
@@ -148,6 +149,7 @@
   --filter-glass: blur(20px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-lg: calc(var(--stroke-width) * 2);
+  --opacity-disabled: 0.4;
   /* `--corner` is the documented hook (see Theme Authoring Hooks) — an app or
      theme sets it and this follows. It was documented and never read, so
      `--corner: 6px` in app.scss left --radius at --trim (~1.3px). */

@@ -141,6 +141,7 @@ of the ladder without being recomputed.
 | Hovered / selected row | `hover` / `selected` |
 | Placeholder, helper text | `subtle` |
 | Disabled label | `disabled` |
+| A control, or a whole zone, that cannot act | the platform state, never a class of yours: `disabled`, `<fieldset disabled>`, `inert` (dimmed to `--opacity-disabled` by the framework) |
 | Focus ring | `accent` |
 | Primary button | `accent` fill, `on-accent` text |
 

@@ -157,10 +157,6 @@ input[type="color"] {
     border-radius: calc(var(--radius-sm) - var(--stroke-width));
   }
 
-  &:disabled {
-    opacity: 0.4;
-    cursor: default;
-  }
 }
 
 textarea {
@@ -332,11 +328,6 @@ input[type="checkbox"][role="switch"] {
     outline-offset: 2px;
   }
 
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
   /* Thumb */
   &::before {
     content: "";
@@ -461,9 +452,45 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
-input[type="range"]:hover::-webkit-slider-thumb,
-input[type="range"]:hover::-moz-range-thumb {
+input[type="range"]:not(:disabled):hover::-webkit-slider-thumb,
+input[type="range"]:not(:disabled):hover::-moz-range-thumb {
   background: var(--color-accent);
   box-shadow: var(--shadow-hover);
   cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------------
+   Disabled — the one look of something that cannot act.
+
+   A control dims to `--opacity-disabled` and shows `not-allowed`; it never changes colour, so
+   it keeps its theme's hue and only loses weight (Apple dims the same way). The rule is
+   zero-class on purpose: a component or theme can still say more.
+
+   Three ways in, one look out:
+     * the control itself: `:disabled`, or `aria-disabled="true"` where it is not a form control
+       (a link, a custom switch);
+     * a whole zone: `<fieldset disabled>` — the browser already disables every control in it;
+       here the labels and text dim with them, once;
+     * a zone that is not a fieldset: `[inert]` — nothing in it can be focused or clicked.
+   ------------------------------------------------------------------------- */
+:where(button, input, select, textarea, optgroup):disabled,
+:where([aria-disabled="true"]) {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+:where(fieldset):disabled,
+:where([inert]) {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* A control inside a disabled zone is already dimmed with its zone: not twice. */
+:is(fieldset:disabled, [inert]) :is(button, input, select, textarea, optgroup, [aria-disabled="true"]) {
+  opacity: 1;
+}
+
+/* A link cannot be disabled, so the attribute has to stop the click too. */
+:where(a)[aria-disabled="true"] {
+  pointer-events: none;
 }

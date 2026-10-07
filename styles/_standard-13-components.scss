@@ -235,10 +235,16 @@ a.btn.icon {
 :where(button):disabled,
 a.btn.disabled,
 a.btn:disabled {
-  opacity: 0.5 !important;
-  color: var(--color-subtle) !important;
-  cursor: not-allowed !important;
-  pointer-events: none !important;
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+/* No hover, no press, no click on a button that cannot act (and a link has no `disabled`:
+   the class stands in for it). */
+:where(button).disabled,
+:where(button):disabled,
+a.btn.disabled,
+a.btn:disabled {
+  pointer-events: none;
 }
 /* A toggle button that is currently ON (aria-pressed): the accent, the same
    cue whichever variant it wears. Zero-class so any variant or consumer rule
@@ -1287,7 +1293,7 @@ a.skip-link {
   }
 
   &.disabled {
-    opacity: 0.5;
+    opacity: var(--opacity-disabled);
     cursor: not-allowed;
   }
 

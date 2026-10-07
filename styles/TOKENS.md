@@ -117,6 +117,8 @@ extend outwards from `--prose-width` in rhythm steps towards `--page-max-width`.
 | `--radius`          | `var(--leading)`                | Macro border radius (cards, panels)      |
 | `--radius-sm`       | `var(--trim)`                   | Micro border radius (buttons, tags, inputs)|
 | `--border`          | `var(--stroke-width) solid var(--color-border)` | Active border state      |
+| `--opacity-disabled`| `0.4`                           | What is left of a control that cannot act: `:disabled`, `[aria-disabled]`, a `fieldset:disabled` or `[inert]` zone, all dimmed alike |
+| `--shadow-border`   | `inset 0 0 0 var(--stroke-width) var(--color-border)` | A border drawn as a shadow: no layout space (`-top` `-bottom` `-left` `-right` for one side) |
 | `--shadow`          | Layered elevation               | Resting shadow                           |
 | `--shadow-hover`    | Layered elevation + glow        | Active hover shadow                      |
 | `--filter-blur`     | `blur(8px)`                     | Standard blur filter                     |
