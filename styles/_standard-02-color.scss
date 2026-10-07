@@ -328,6 +328,8 @@
    * @property --color-success Status color for success states (`--color-green`).
    * @property --color-warning Status color for warnings (`--color-orange`).
    * @property --color-error Status color for errors (`--color-red`).
+   * @property --color-danger Semantic error alias (`--color-error`).
+   * @property --color-destructive Semantic error alias (`--color-error`).
    * @property --color-info Status color for informative notices (`--color-blue`).
    * @property --color-link Active scheme link color.
    * @property --color-on-accent Text color for elements over accent backgrounds.
@@ -356,6 +358,8 @@
   --color-success: var(--color-green);
   --color-warning: var(--color-orange);
   --color-error: var(--color-red);
+  --color-danger: var(--color-error);
+  --color-destructive: var(--color-error);
   --color-info: var(--color-blue);
 
   --color-link: light-dark(var(--color-light-link), var(--color-dark-link));
@@ -381,7 +385,6 @@
    * @property --color-surface Elevated surface and card background.
    * @property --color-light Polarity alias resolving to lighter color of active scheme.
    * @property --color-dark Polarity alias resolving to darker color of active scheme.
-   * @property --color-darker Dark overlay tint.
    * @property --color-glass Frosted glassmorphism background color (~80% alpha).
    */
   --color-muted: light-dark(
@@ -406,7 +409,6 @@
   /* Light/dark polarity aliases — always "the lighter" and "the darker" */
   --color-light: light-dark(var(--color-light-background), var(--color-dark-foreground));
   --color-dark: light-dark(var(--color-light-foreground), var(--color-dark-background));
-  --color-darker: oklch(from var(--color-dark) l c h / 0.15);
 
   --color-glass: oklch(from var(--color-background) l c h / 0.8);
 
@@ -551,7 +553,6 @@
    * @description Pre-composed border shorthand tokens for clean layout boundaries.
    *
    * @property --border Standard border shorthand (`var(--stroke-width) solid var(--color-border)`).
-   * @property --border-hover Hover border shorthand (`var(--stroke-width) solid var(--color-foreground)`).
    * @property --border-accent Tinted accent border shorthand (`var(--stroke-width) solid oklch(...)`).
    * @property --border-transparent Transparent layout placeholder border.
    */
@@ -559,7 +560,6 @@
   --border-accent: var(--stroke-width) solid
     oklch(from var(--color-accent) l c h / 0.07);
   --border: var(--stroke-width) solid var(--color-border);
-  --border-hover: var(--stroke-width) solid var(--color-foreground);
 }
 
 /* =====================================================================
@@ -570,7 +570,6 @@
    these rules pin it on an element and, by inheritance, its subtree.
    ===================================================================== */
 [data-color-mode="light"],
-[data-theme-mode="light"],
 .theme-light {
   color-scheme: light;
 }
@@ -700,7 +699,7 @@
 
   /* System is dark and the root has not forced light: root is dark, so inverse is light */
   @media (prefers-color-scheme: dark) {
-    #{$stnd-theme-scope}:not([data-color-mode="light"]):not([data-theme-mode="light"]) & {
+    #{$stnd-theme-scope}:not([data-color-mode="light"]) & {
       color-scheme: light;
     }
   }

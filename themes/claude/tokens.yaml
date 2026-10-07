@@ -17,7 +17,6 @@ tokens:
   font-serif: "\"Ibarra Real Nova\", Georgia, \"Times New Roman\", serif"
   font-monospace: "\"MonoLisa\", ui-monospace, SFMono-Regular, Menlo, Monaco, \"Roboto Mono\", monospace"
   optical-ratio: "1.414"
-  claude-opacity: 18%
   color-light-border: color-mix(in srgb, var(--color-foreground) 6%, transparent)
   font-size: 1.0625rem
   font-ratio: "1.25"

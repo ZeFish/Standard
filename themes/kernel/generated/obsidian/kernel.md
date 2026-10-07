@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 14:00
+modified: 2026-10-07 16:05
 cssclasses: []
 maturity: sprout
 mode: read
@@ -54,6 +54,7 @@ snippet: false
 
       --code-function: var(--color-pink);
 
+      &[data-color-mode="dark"],
       &[data-theme-mode="dark"] {
         --color-accent: var(--color-purple);
         --color-bold: var(--color-pink);

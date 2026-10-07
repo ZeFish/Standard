@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 14:00
+modified: 2026-10-07 16:05
 cssclasses: []
 maturity: sprout
 mode: read
@@ -75,7 +75,6 @@ snippet: false
         color: color-mix(in oklab, var(--color-foreground) 90%, transparent);
 
         --shadow-color: color-mix(in oklab, currentcolor 10%, transparent);
-        --shadow-distance: 0px;
         --shadow-depth: 0.5px;
         text-shadow:
             var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
@@ -97,7 +96,6 @@ snippet: false
             currentcolor 100%,
             var(--color-background)
         );
-        --shadow-distance: 0px;
         --shadow-depth: 0.75px;
         text-shadow:
             var(--shadow-depth) 0px var(--shadow-depth) var(--shadow-color),
@@ -108,6 +106,7 @@ snippet: false
 
     /* ─── Light mode headers — red tint ─────────────────────── */
     &.theme-light :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)),
+    &[data-color-mode="light"] :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)),
     &[data-theme-mode="light"] :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
         color: color-mix(
             in oklab,
@@ -128,6 +127,7 @@ snippet: false
 
     /* ─── Dark mode :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) — red ghost ──────────────────────────── */
     &.theme-dark :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
+    &[data-color-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
     &[data-theme-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         --color: color-mix(in oklab, var(--color-background) 0%, var(--color-red));
         text-shadow:

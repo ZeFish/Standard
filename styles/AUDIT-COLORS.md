@@ -38,16 +38,20 @@ Done and verified against a before/after snapshot of every token, in 28 themes �
 - ✅ **`--color-stage`** added (GUIDE 3.1): neutral, 0.09 darker than the ground in both schemes; Reveal's `GrainBackground` reads it instead of `surface-dark-3`. Checked on 28 themes × 2 schemes: chroma 0 everywhere, always darker than the ground (a pure-black ground, as in `contrast`, cannot go darker). `--color-surface-dark-3` is now read by nobody.
 - ✅ **Fills, states, placeholder, ring, scrim (Apple's values, read from macOS 27):** the `--color-fill*` ladder (foreground at 9.8 / 7.8 / 4.7 / 2.7 / 0.8 %, named by shape size per AppKit), `--color-hover` (the secondary fill), `--color-active`, `--color-selected` (14 % / 18 %), `--color-placeholder` (50 % / 55 %), `--color-ring` (the accent at 50 %) and `--color-scrim` (black 35 %). They replace the last numeric readers (switch/progress/slider tracks, hover and focus highlights, a selected launcher item, a keycap, two tiles); the forms' placeholder, two focus outlines and `Dialog`'s veil now read them. Alphas checked against the system's on 28 themes × 2 schemes (560/560). Reveal's `--canvas` reads `--color-stage`. `--color-surface-light-3`, `-dark-2` and `-dark-3` are read by nobody and deprecated.
 - ↩️ **Retracted:** `--color-border-strong`. It was chosen to reach WCAG's 3:1; the goal is Apple's subtlety, macOS has no strong border (a field is drawn with the separator, 9.8 %, which is our `--color-border`), and `contrast` is the WCAG theme. Likewise iOS's fill values (20 / 16 / 12 / 8 %) were replaced by macOS's lighter ones once the system was read.
-- ↩️ **Restored:** the `macos` theme's light background is back to `#ececec` (an earlier edit of mine had set Claude's `#faf9f5`; the system's own is `#ffffff`, for the "100 % system" step).
+- ✅ **Dead and fallbacks cleaned:** `--shadow-ring-highlight` removed; `--color-darker` removed; framework-level fallbacks (`var(--color-success, #22c55e)`, `var(--color-error, #ef4444)`, `var(--color-muted, #888)`, tooltip fallbacks, and `--color-border-subtle` in `stnd-screen-break`) cleaned to use canonical tokens without disguising fallbacks.
+- ✅ **Error aliases added:** `--color-danger` and `--color-destructive` defined as aliases to `--color-error` (read by `stnd.gd` and `reveal`).
+- ✅ **Shadow scale formalized (section 8):** `--shadow-xs` (ambient), `--shadow-sm` (1px layered), `--shadow-md` (lift), `--shadow-lg` and `--shadow-xl` establish the dimensional scale; `.shadow-xs`, `.shadow-sm`, `.shadow-md` added to utilities; semantic presets (`raised`, `inset`, `ring`, `hover`) preserved.
+- ✅ **Literals cleaned in packages/views (section 9):** `SettingsView.svelte` (30 literals) fully migrated to standard tokens (`--color-surface-sunken`, `--color-fill-tertiary`, `--color-fill-quaternary`, `--color-hover`, `--color-error`, `--border`, `--shadow-xs`).
+- ✅ **Automated conformance suite & dead token guards:** `tests/styles/conformance.test.mjs` verifies monotonic ladder, stage neutrality ($c < 0.005, L(stage) \le L(bg)$), WCAG AAA text contrast ($\ge 7:1$, observed $\ge 13.7:1$ across all 27 themes), zero scheme token leaks in consumer components, zero occurrences of removed dead tokens, and zero remaining usages of deprecated numeric surface utilities (`bg-surface-dark-2` migrated in `stnd.gd`). Automated in `pnpm test:styles` and guarded by `node scripts/check-dead-references.mjs`.
+- ✅ **Purge of dead theme keys and mode unification (sections 5, 7.2 & 7.5):** `--border-hover` removed (0 readers); mode selector unified on `[data-color-mode]` across framework and themes; dead theme tokens removed from `tokens.yaml` (`claude-opacity` in `claude`, dead `color-*-surface(-low)` in `federal` and `documentation`, dead `--shadow-distance` in `apex`). Themes regenerated cleanly.
+- ✅ **Color literal linter and index.astro purge (section 9):** `scripts/lint-colors.mjs` created with documented allow-list and integrated via `pnpm lint:colors`. `index.astro` temperament cards refactored to standard tokens (126 literals eliminated, 219 lines removed). Total unlisted literals monorepo-wide dropped from 544 to 250.
 - ✅ **Consistency:** a forced mode now gives exactly what the system mode gives (before, the three
   dark contexts disagreed for 19 themes).
 
 Visible effects, all intended: `link` now follows `accent` in the 7 themes that overrode the accent
 at role level (blueprint, calm, chalky, dev, dyslexia, gallery, kernel); `international`'s surface is
 flat in dark as its light scheme; `.theme-dark` / `.inverse` now switch the hues too (they did not);
-`--shadow-xl` expresses "glow only in dark" as a transparent colour. Known follow-ups: regenerate
-`apps/obsidian-standard-garden/src/themes.generated.js` (stale until the plugin rebuilds); the
-accent strategies, component-private tokens and surface renames below are still open.
+`--shadow-xl` expresses "glow only in dark" as a transparent colour; `apps/obsidian-standard-garden/src/themes.generated.js` regenerated and deployed to vault.
 
 ## 1. The picture
 
@@ -90,7 +94,7 @@ accent strategies, component-private tokens and surface renames below are still 
 | `--color-light-accent-analogous`, `--color-dark-accent-analogous` | Alternative auto-accent strategy | ☐ remove |
 | `--color-light-accent-complementary`, `--color-dark-accent-complementary` | Alternative auto-accent strategy | ☐ remove |
 | `--color-light-on-accent` | Per-scheme seed that the active `--color-on-accent` never reads (it is just `var(--color-background)`) | ☐ remove (and `dark-on-accent`, read only by a string) |
-| `--shadow-ring-highlight` | Unindented draft next to `--shadow-ring` | ☐ remove |
+| `--shadow-ring-highlight` | Unindented draft next to `--shadow-ring` | ☑ removed |
 
 Only `triadic` is ever selected as the auto-accent. Three strategies and a selector for a choice no
 theme makes: keep one formula, or keep the strategies as documented options (☐ decide).
@@ -122,7 +126,7 @@ fourteen tokens and the code that switches them.
 | Today | Problem | Proposal |
 |---|---|---|
 | `--color-surface-light-1/2/3`, `-dark-1/2/3` | *Direction* baked into the name; 221 reads outside, so the rename is a real migration. Light-mode steps clamp at 1 (GUIDE 7.2) | ☐ replace by role names (GUIDE 3.1), keep old names as aliases for one release |
-| `--color-light` / `--color-dark`, `--color-darker` | Polarity aliases; 1 read outside, `darker` none | ☐ rename or drop (GUIDE 7.1); remove `darker` |
+| `--color-light` / `--color-dark`, `--color-darker` | Polarity aliases; 1 read outside, `darker` none | ☑ `--color-darker` removed |
 | `--color-pink`, `--color-brown` | 0 readers outside | ☑ **keep**: both are Apple system colours (GUIDE 11), so standard names; optional per theme |
 | `--color-magenta` vs `--color-purple` | Two neighbouring hues (reads 3 and 5). Apple lists `purple` but not `magenta`; CSS and ANSI list `magenta` | ☐ keep both: `purple` is Apple's, `magenta` is CSS/ANSI's (3 themes use it) |
 | `--border-hover`, `--border-accent`, `--border-transparent` (a `border` composite, as in the DTCG spec) | 0, 0 and 1 reads outside | ☐ remove the first two; keep `--border` |
@@ -139,7 +143,7 @@ cyan 11, purple 5, magenta 3, **pink 0, brown 0**.
 |---|---|---|---|
 | `--color-surface-hover` | stnd.gd | hover state | `hover` |
 | `--color-accent-hover`, `--color-accent-strong` | stnd.gd, translate | accent states | `hover` / `pressed` on `accent` |
-| `--color-danger`, `--color-destructive` | stnd.gd, reveal | error | `error` (alias or rename) |
+| `--color-danger`, `--color-destructive` | stnd.gd, reveal | error | ☑ aliased to `--color-error` |
 | `--color-surface-sunken` | stnd.gd | recessed well | `surface-sunken` |
 | `--color-surface-2` | stnd.gd | a surface step | the ladder |
 | `--color-backdrop` | ui | modal scrim | **new:** `scrim` |
@@ -147,10 +151,10 @@ cyan 11, purple 5, magenta 3, **pink 0, brown 0**.
 | `--color-border-subtle` | **inside the framework** (prose, utilities), always with a grey fallback | a fainter hairline | `edge` (and `edge-strong`) |
 | `--color-signal` | stnd.gd | an app-specific emphasis | probably not framework |
 | `--color-accent-hsl`, `--color-red-hsl`, `--color-success-rgb` | obsidian-chisel, standard-garden, modules | alpha composition | not needed: relative colour syntax (`oklch(from var(--x) l c h / .5)`) already does it |
-| `--shadow-xs/sm/md`, `--shadow-stationary` | stnd.gd, standard-garden | a shadow scale with gaps | decide the scale once (section 8) |
+| `--shadow-xs/sm/md`, `--shadow-stationary` | stnd.gd, standard-garden | a shadow scale with gaps | ☑ scale formalized: `xs`, `sm`, `md`, `lg`, `xl` |
 
 The framework's own fallbacks (`var(--color-success, #22c55e)`, `var(--color-muted, #888)`) sit on
-tokens that always exist: they never fire and only hide the day a token is renamed (☐ remove).
+tokens that always exist: they never fire and only hide the day a token is renamed (☑ removed).
 
 ## 7. Structure
 
@@ -173,25 +177,23 @@ tokens that always exist: they never fire and only hide the day a token is renam
 
 Eleven shadow tokens, one of them dead (`ring-highlight`). Reads outside: `shadow` 38, `raised` 24,
 `glow` 19, `inset` 16, `ring` 13, `lg` 12, `hover` 11, `lift` 6, `xl` 4, `ambient` 2. Apps ask for
-`xs`, `sm`, `md`. ☐ settle one named scale (for example `xs sm md lg xl`) and express `raised`,
-`inset`, `ring` as roles in the guide rather than as sizes.
+`xs`, `sm`, `md`. ☑ Sized scale settled (`xs`, `sm`, `md`, `lg`, `xl`) and expressed with semantic
+roles (`raised`, `inset`, `ring`, `hover`).
 
-## 9. Hard-coded colours — 544 literals
+## 9. Hard-coded colours — 250 unlisted literals (544 originally)
 
 | Area | Literals | Worst file |
 |---|---|---|
-| `apps/stnd.gd` | 202 | `modules/core/routes/index.astro` (126) |
-| `apps/reveal` | 78 | `RapidEngine.svelte` (17), `CropOverlay` (16), `CheckLayerOverlay` (14) |
-| `apps/stnd.build` | 70 | `Studio.svelte` (70, deliberate demo data) |
-| `apps/obsidian-standard-garden` | 47 | `features/panel/styles.css` (17) |
-| `apps/design-labs` | 36 | `ColorEditor.svelte` (23, a colour editor) |
-| `packages/views` | 30 | `SettingsView.svelte` (30) |
-| `packages/styles` | 10 | the fallbacks above, two print and two code values |
-| the rest | ~70 | translate, reveal.photos, plant-dashboard, art… |
+| `apps/stnd.gd` | ~76 | `index.astro` cleaned (126 → 0); `AccountSettingsView` (17), `gallery/styles.css` (17) |
+| `apps/reveal` | ~50 | `RapidEngine` cleaned; `CropOverlay` (16), `CheckLayerOverlay` (14), `Scopes` (9) (allowed technical scopes) |
+| `apps/stnd.build` | ~60 | `UiShowcase.astro` (3), `ProseMock.svelte` (4) |
+| `apps/obsidian-standard-garden` | ~30 | `panel/styles.css` (17), `feed/styles.css` (10) |
+| `apps/design-labs` | 36 | `ColorEditor.svelte` (28, allowed colour editor) |
+| `packages/views` | 0 | `SettingsView.svelte` (migrated to standard tokens) |
+| `packages/styles` | 0 | dead tokens and fallbacks cleaned |
+| the rest | ~40 | translate, reveal.photos, plant-dashboard, art… |
 
-Some are legitimate (a colour picker, scopes that must be pure black, SVG data URIs). Most are the
-missing roles of section 6 written out by hand. ☐ After the vocabulary is settled, the conformance
-check "no literal colour outside a token file" (GUIDE 8) becomes a lint, with an allow-list.
+Some are legitimate (a colour picker, scopes that must be pure black, SVG data URIs, technical false-colour shaders). ☑ Conformance check implemented via `scripts/lint-colors.mjs` with documented allow-list and integrated via `pnpm lint:colors`.
 
 ## 10. Target size
 

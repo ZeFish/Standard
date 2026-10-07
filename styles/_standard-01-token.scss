@@ -14,8 +14,8 @@
    *
    * @property {variable} --color-light-background Light mode root page background seed (`white`).
    * @property {variable} --color-light-foreground Light mode root text foreground seed (`#262626`). Derives dark mode seeds and the full 10-hue chromatic wheel.
-   * @property {variable} --tooltip-background Default tooltip container background (`var(--color-dark, #1a1a1a)`).
-   * @property {variable} --tooltip-text Default tooltip text color (`var(--color-light, #ffffff)`).
+   * @property {variable} --tooltip-background Default tooltip container background (`var(--color-dark)`).
+   * @property {variable} --tooltip-text Default tooltip text color (`var(--color-light)`).
    */
 
   /* ===== COLOR SEEDS =====
@@ -43,8 +43,8 @@
      foreground's OKLCH hue — warm ink begets warm dark mode. */
 
   /* Tooltip defaults */
-  --tooltip-background: var(--color-dark, #1a1a1a);
-  --tooltip-text: var(--color-light, #ffffff);
+  --tooltip-background: var(--color-dark);
+  --tooltip-text: var(--color-light);
 
   /**
    * @name Base Measurements & Vertical Rhythm
@@ -182,6 +182,9 @@
    * @property {variable} --shadow-ring Fine border ring inset shadow.
    * @property {variable} --shadow-raised Layered raised preset with top highlight, hairline border, and ambient shadow.
    * @property {variable} --shadow Default elevation shadow.
+   * @property {variable} --shadow-xs Extra-small subtle contact shadow.
+   * @property {variable} --shadow-sm Small card/well shadow.
+   * @property {variable} --shadow-md Medium elevation shadow.
    * @property {variable} --shadow-lg Large floating dialog/card shadow.
    * @property {variable} --shadow-xl Maximum elevation hero shadow.
    */
@@ -196,15 +199,14 @@
     inset 1px 0px 1px var(--color-border),
     inset -1px 0px 1px var(--color-border),
     inset 0px -1px 1px var(--color-border);
---shadow-ring-highlight:
-    inset 0px 1px 1px var(--color-highlight),
-    inset 1px 0px 1px var(--color-highlight),
-    inset -1px 0px 1px var(--color-highlight),
-    inset 0px -1px 1px var(--color-highlight);
   --shadow-raised:
     inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border),
     var(--shadow-ambient);
 
+  /* Size scale (xs, sm, md, lg, xl) */
+  --shadow-xs: var(--shadow-ambient);
+  --shadow-sm: 0 1px 2px 0 var(--color-shadow), 0 1px 1px -1px var(--color-shadow);
+  --shadow-md: var(--shadow-lift);
   --shadow-lg: var(--shadow-ambient), var(--shadow-lift);
   /* xl stacks the same layers as `lg` plus the glow; in dark schemes the
      contact and lift layers are transparent (stacked dark shadows turn to mud),

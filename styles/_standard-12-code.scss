@@ -64,11 +64,11 @@
   }
 
   &.copied {
-    color: var(--color-success, #22c55e) !important;
+    color: var(--color-success) !important;
   }
 
   &.failed {
-    color: var(--color-error, #ef4444) !important;
+    color: var(--color-error) !important;
   }
 }
 

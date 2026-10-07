@@ -365,7 +365,7 @@
 .stnd-screen-break {
   border: none;
   height: 1px;
-  background: var(--color-border-subtle, rgba(125, 125, 125, 0.2));
+  background: var(--color-border);
   margin-block: var(--gap-section, 6rem);
   margin-inline: auto;
   width: min(100%, 18rem);
@@ -382,7 +382,7 @@
 
     &::after {
       content: "✦";
-      color: var(--color-muted, #888);
+      color: var(--color-muted);
       opacity: 0.5;
       font-size: 1.25rem;
     }
@@ -812,6 +812,18 @@
 
 .shadow-inset {
   box-shadow: var(--shadow-inset) !important;
+}
+
+.shadow-xs {
+  box-shadow: var(--shadow-xs) !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md) !important;
 }
 
 .shadow-lg {

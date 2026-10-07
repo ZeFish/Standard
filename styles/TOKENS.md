@@ -117,7 +117,6 @@ extend outwards from `--prose-width` in rhythm steps towards `--page-max-width`.
 | `--radius`          | `var(--leading)`                | Macro border radius (cards, panels)      |
 | `--radius-sm`       | `var(--trim)`                   | Micro border radius (buttons, tags, inputs)|
 | `--border`          | `var(--stroke-width) solid var(--color-border)` | Active border state      |
-| `--border-hover`    | `var(--stroke-width) solid var(--color-foreground)` | Hover border state   |
 | `--shadow`          | Layered elevation               | Resting shadow                           |
 | `--shadow-hover`    | Layered elevation + glow        | Active hover shadow                      |
 | `--filter-blur`     | `blur(8px)`                     | Standard blur filter                     |
@@ -247,8 +246,10 @@ container (`[data-theme]`) re-declares them, so it sees its own seeds. Requires 
 | `--color-blue`       | Blue hue                             |
 | `--color-magenta`    | Magenta hue                          |
 | `--color-success`    | = `--color-green`                    |
-| `--color-warning`    | = `--color-yellow`                   |
+| `--color-warning`    | = `--color-orange`                   |
 | `--color-error`      | = `--color-red`                      |
+| `--color-danger`     | = `--color-error`                    |
+| `--color-destructive`| = `--color-error`                    |
 | `--color-info`       | = `--color-blue`                     |
 | `--color-link`       | Link color                           |
 | `--color-italic`     | Italic text color                    |
@@ -297,7 +298,6 @@ directly has one value for both schemes.
 | `--color-surface-light-3`, `--color-surface-dark-2` | numeric steps | **Deprecated**: nothing reads them; the roles above replace their uses |
 | `--color-surface-dark-3` | `oklch(from bg max(0, calc(l - 0.09)) c h)` | Numeric step -3; superseded by `--color-stage`, nothing reads it |
 | `--color-surface-light-1`, `-light-2`, `-dark-1` | aliases | Legacy names of `raised`, `overlay`, `sunken`; kept until nothing reads them |
-| `--color-darker`         | `dark 15%` transparent              | Shadow helper            |
 | `--color-light`          | light background                    | Pole light               |
 | `--color-dark`           | light foreground                    | Pole dark                |
 | `--color-shadow`         | `dark 5%` transparent               | Shadow color base        |
@@ -324,13 +324,22 @@ Composable shadow primitives. Combine freely with comma-separated values.
 | `--shadow-inset`   | Pressed/recessed effect      |
 | `--shadow-ring`    | Border-like inset ring       |
 
-### Composed Presets
+### Dimensional Scale
 
 | Token         | Composition           | Description                     |
 | ------------- | --------------------- | ------------------------------- |
-| `--shadow`    | ambient               | Default subtle shadow           |
-| `--shadow-lg` | ambient + lift        | Medium elevation                |
+| `--shadow-xs` | ambient               | Extra-small contact shadow      |
+| `--shadow-sm` | 1px layered           | Small card/well shadow          |
+| `--shadow-md` | lift                  | Medium elevation shadow         |
+| `--shadow-lg` | ambient + lift        | Large dialog/card shadow        |
 | `--shadow-xl` | ambient + lift + glow | High elevation with accent glow |
+
+### Semantic Presets & Roles
+
+| Token            | Composition           | Description                           |
+| ---------------- | --------------------- | ------------------------------------- |
+| `--shadow`       | raised (default)      | Default surface card shadow           |
+| `--shadow-hover` | raised + lg           | Hover state elevation                 |
 
 ### Usage
 
@@ -355,8 +364,8 @@ box-shadow: var(--shadow-inset), var(--shadow-ambient);
 
 | Token                  | Default                         | Description        |
 | ---------------------- | ------------------------------- | ------------------ |
-| `--tooltip-background` | `var(--color-dark, #1a1a1a)`    | Tooltip background |
-| `--tooltip-text`       | `var(--color-light, #ffffff)`   | Tooltip text       |
+| `--tooltip-background` | `var(--color-dark)`             | Tooltip background |
+| `--tooltip-text`       | `var(--color-light)`            | Tooltip text       |
 | `--tooltip-ease`       | `cubic-bezier(0.25, 1, 0.5, 1)` | Tooltip animation  |
 
 ---

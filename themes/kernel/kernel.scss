@@ -90,6 +90,7 @@
 
   --code-function: var(--color-pink);
 
+  &[data-color-mode="dark"],
   &[data-theme-mode="dark"] {
     --color-accent: var(--color-purple);
     --color-bold: var(--color-pink);
