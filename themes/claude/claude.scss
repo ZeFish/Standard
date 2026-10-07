@@ -1,11 +1,12 @@
 /* TOKENS.YAML ADAPTER BEGIN */
 [data-theme="claude"] {
-  --color-light-background: oklch(0.98 0.01 95.1);
-  --color-light-foreground: oklch(0.34 0.03 95.72);
+  --color-light-background: oklch(0.982 0.006 85);
+  --color-light-foreground: oklch(0.25 0.015 60);
   --color-light-accent: oklch(0.62 0.14 39.04);
-  --color-dark-foreground: oklch(0.81 0.01 93.01);
-  --color-dark-background: oklch(0.27 0 106.64);
-  --color-dark-accent: oklch(0.67 0.13 38.76);
+  --color-dark-foreground: oklch(0.90 0.005 60);
+  --color-dark-background: oklch(0.252 0.002 60);
+  --color-dark-accent: oklch(0.65 0.13 38.76);
+  --color-dark-stage: oklch(0.178 0 0);
   --color-code: var(--color-foreground);
   --color-light-bold: var(--color-light-accent);
   --color-light-italic: color-mix( in srgb, var(--color-accent) 65%, var(--color-foreground) );

@@ -2,52 +2,52 @@
   "name": "Claude Dark",
   "type": "dark",
   "colors": {
-    "foreground": "#c3c1ba",
-    "input.background": "#404040",
-    "input.foreground": "#c3c1ba",
-    "input.placeholderForeground": "#363635",
-    "inputOption.activeBorder": "#d8775780",
-    "badge.foreground": "#262626",
-    "badge.background": "#d87757",
-    "progressBar.background": "#d87757",
-    "button.background": "#d87757",
-    "button.foreground": "#c3c1ba",
-    "button.hoverBackground": "#d8775790",
-    "dropdown.background": "#404040",
-    "dropdown.foreground": "#c3c1ba",
-    "dropdown.border": "#333232",
-    "focusBorder": "#d8775780",
-    "selection.background": "#d8775740",
-    "editor.background": "#262626",
-    "editor.foreground": "#c3c1ba",
-    "sideBar.background": "#262626",
-    "sideBar.border": "#333232",
-    "activityBar.background": "#262626",
-    "activityBar.foreground": "#c3c1ba",
-    "activityBar.inactiveForeground": "#555552",
-    "statusBar.background": "#262626",
-    "statusBar.foreground": "#c3c1ba",
-    "titleBar.activeBackground": "#262626",
-    "titleBar.activeForeground": "#c3c1ba",
-    "editorLineNumber.foreground": "#363635",
-    "editorLineNumber.activeForeground": "#555552",
-    "editor.lineHighlightBackground": "#222222",
-    "editorIndentGuide.background": "#333232",
-    "editorIndentGuide.activeBackground": "#555552",
-    "list.hoverBackground": "#313130",
-    "list.activeSelectionBackground": "#313130",
-    "list.activeSelectionForeground": "#c3c1ba",
-    "tab.activeBackground": "#313130",
-    "tab.activeForeground": "#c3c1ba",
-    "tab.inactiveBackground": "#262626",
-    "tab.inactiveForeground": "#555552",
-    "tab.border": "#333232",
-    "breadcrumb.foreground": "#555552",
-    "breadcrumb.focusForeground": "#c3c1ba",
+    "foreground": "#e1dddb",
+    "input.background": "#3d3d3c",
+    "input.foreground": "#e1dddb",
+    "input.placeholderForeground": "#363534",
+    "inputOption.activeBorder": "#d1705180",
+    "badge.foreground": "#232221",
+    "badge.background": "#d17051",
+    "progressBar.background": "#d17051",
+    "button.background": "#d17051",
+    "button.foreground": "#e1dddb",
+    "button.hoverBackground": "#d1705190",
+    "dropdown.background": "#3d3d3c",
+    "dropdown.foreground": "#e1dddb",
+    "dropdown.border": "#323130",
+    "focusBorder": "#d1705180",
+    "selection.background": "#d1705140",
+    "editor.background": "#232221",
+    "editor.foreground": "#e1dddb",
+    "sideBar.background": "#232221",
+    "sideBar.border": "#323130",
+    "activityBar.background": "#232221",
+    "activityBar.foreground": "#e1dddb",
+    "activityBar.inactiveForeground": "#5c5a59",
+    "statusBar.background": "#232221",
+    "statusBar.foreground": "#e1dddb",
+    "titleBar.activeBackground": "#232221",
+    "titleBar.activeForeground": "#e1dddb",
+    "editorLineNumber.foreground": "#363534",
+    "editorLineNumber.activeForeground": "#5c5a59",
+    "editor.lineHighlightBackground": "#201f1e",
+    "editorIndentGuide.background": "#323130",
+    "editorIndentGuide.activeBackground": "#5c5a59",
+    "list.hoverBackground": "#302f2e",
+    "list.activeSelectionBackground": "#302f2e",
+    "list.activeSelectionForeground": "#e1dddb",
+    "tab.activeBackground": "#302f2e",
+    "tab.activeForeground": "#e1dddb",
+    "tab.inactiveBackground": "#232221",
+    "tab.inactiveForeground": "#5c5a59",
+    "tab.border": "#323130",
+    "breadcrumb.foreground": "#5c5a59",
+    "breadcrumb.focusForeground": "#e1dddb",
     "widget.shadow": "#00000040",
-    "quickInput.background": "#313130",
-    "terminal.background": "#262626",
-    "terminal.foreground": "#c3c1ba"
+    "quickInput.background": "#302f2e",
+    "terminal.background": "#232221",
+    "terminal.foreground": "#e1dddb"
   },
   "tokenColors": [
     {
@@ -56,7 +56,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#555552",
+        "foreground": "#5c5a59",
         "fontStyle": "italic"
       }
     },
@@ -75,7 +75,7 @@
     {
       "scope": "variable.other.member",
       "settings": {
-        "foreground": "#c3c1ba"
+        "foreground": "#e1dddb"
       }
     },
     {
@@ -149,7 +149,7 @@
     {
       "scope": "punctuation",
       "settings": {
-        "foreground": "#555552"
+        "foreground": "#5c5a59"
       }
     }
   ]

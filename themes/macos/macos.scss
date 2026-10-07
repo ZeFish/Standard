@@ -39,6 +39,8 @@
 }
 /* TOKENS.YAML ADAPTER END */
 
+@import "./macos-dynamic";
+
 // macOS system theme & application foundation
 :root[data-theme="macos"],
 [data-theme="macos"] {

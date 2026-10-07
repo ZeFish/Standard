@@ -43,8 +43,11 @@ Done and verified against a before/after snapshot of every token, in 28 themes �
 - ✅ **Shadow scale formalized (section 8):** `--shadow-xs` (ambient), `--shadow-sm` (1px layered), `--shadow-md` (lift), `--shadow-lg` and `--shadow-xl` establish the dimensional scale; `.shadow-xs`, `.shadow-sm`, `.shadow-md` added to utilities; semantic presets (`raised`, `inset`, `ring`, `hover`) preserved.
 - ✅ **Literals cleaned in packages/views (section 9):** `SettingsView.svelte` (30 literals) fully migrated to standard tokens (`--color-surface-sunken`, `--color-fill-tertiary`, `--color-fill-quaternary`, `--color-hover`, `--color-error`, `--border`, `--shadow-xs`).
 - ✅ **Automated conformance suite & dead token guards:** `tests/styles/conformance.test.mjs` verifies monotonic ladder, stage neutrality ($c < 0.005, L(stage) \le L(bg)$), WCAG AAA text contrast ($\ge 7:1$, observed $\ge 13.7:1$ across all 27 themes), zero scheme token leaks in consumer components, zero occurrences of removed dead tokens, and zero remaining usages of deprecated numeric surface utilities (`bg-surface-dark-2` migrated in `stnd.gd`). Automated in `pnpm test:styles` and guarded by `node scripts/check-dead-references.mjs`.
-- ✅ **Purge of dead theme keys and mode unification (sections 5, 7.2 & 7.5):** `--border-hover` removed (0 readers); mode selector unified on `[data-color-mode]` across framework and themes; dead theme tokens removed from `tokens.yaml` (`claude-opacity` in `claude`, dead `color-*-surface(-low)` in `federal` and `documentation`, dead `--shadow-distance` in `apex`). Themes regenerated cleanly.
+- ✅ **Dead theme keys purged:** `--border-hover` removed (0 readers); dead theme tokens removed from `tokens.yaml`. (The same commit claimed the mode selector was unified on `[data-color-mode]` "across framework and themes": it was not, five `data-theme-mode` selectors remained in `kernel`, `apex` and `forest`. Finished 2026-10-07, see *Audit* below, and guarded by a test.)
 - ✅ **Color literal linter and index.astro purge (section 9):** `scripts/lint-colors.mjs` created with documented allow-list and integrated via `pnpm lint:colors`. `index.astro` temperament cards refactored to standard tokens (126 literals eliminated, 219 lines removed). Total unlisted literals monorepo-wide dropped from 544 to 250.
+- ✅ **Secondary views cleaned (section 9):** `AccountSettingsView` (17 literals), `translate` (19 literals), `plant-dashboard` (14 literals), `LoginView` (3), `ModeratorView` (5), `MyNotesView` (3), `ConnectApp` (1), `UserAvatar` (6), `password-gate` (1), `pro.astro` (1), `CheckoutView` (1), `Dialog` (1), `ArtButton` (1), `Avatar` (2), `404.astro` (1), `maintenance` (2) fully migrated to canonical tokens (`--color-surface-sunken`, `--color-fill*`, `--color-success`, `--color-warning`, `--color-error`, `--color-scrim`, `--color-shadow`). Total unlisted literals dropped from 250 to 142 across 30 files.
+- ✅ **Recalibration of `claude` theme (GUIDE.md §10.4):** dark ground calibrated to real desktop app content ground ($L = 0.252$, `#222222`), recessed sidebar / sunken stage to $L = 0.178$ (`#111111`), dark foreground to $L = 0.90$ (`#ececec`), and light ground to warm parchment ($L = 0.982$, `#faf9f5`), with terracotta accent preserved. All adapters (VSCode, Zed, Obsidian, Reveal, HomeAssistant) regenerated.
+- ✅ **macOS theme resolved by the system (reworked 2026-10-07):** `packages/themes/macos/macos-dynamic.scss` binds the roles WebKit can express to `-apple-system-*` keywords. The first version never applied: WKWebView on macOS 27 rejects `-apple-system-window-background`, `-apple-system-under-page-background` and `-apple-system-cyan`, so its `@supports` guard was false and the theme rendered its palette, while this file said "completed". Now: only keywords the engine accepts (control-background for the ground, the three labels and the placeholder, separator, control-accent, the unemphasized selection, eight hues); the surface ladder, `stage`, link and cyan stay with the palette. Checked in a real WKWebView against AppKit's own values (7 bound roles, light and dark) and for consistency across forced modes, nested containers, `.theme-*` and `.inverse`; guarded by `tests/styles/webkit.test.mjs`.
 - ✅ **Consistency:** a forced mode now gives exactly what the system mode gives (before, the three
   dark contexts disagreed for 19 themes).
 
@@ -52,6 +55,60 @@ Visible effects, all intended: `link` now follows `accent` in the 7 themes that 
 at role level (blueprint, calm, chalky, dev, dyslexia, gallery, kernel); `international`'s surface is
 flat in dark as its light scheme; `.theme-dark` / `.inverse` now switch the hues too (they did not);
 `--shadow-xl` expresses "glow only in dark" as a transparent colour; `apps/obsidian-standard-garden/src/themes.generated.js` regenerated and deployed to vault.
+
+
+- ✅ **Elevation in light, decided: the shadow carries it (GUIDE 5).** Measured first: of 28 light themes, 17 have `raised` = `overlay` (both white), 6 a partial step, 5 a full ladder; 24 have a ground above 0.94. Elevation is now documented as a pair (surface + shadow), `--shadow-overlay` pairs with `--color-surface-overlay`, the Studio has an *Elevation* mockup, and `tests/styles/elevation.test.mjs` requires neighbouring levels to differ in colour or in shadow (all 28 themes pass; `calm` is flat by design and named). Checked the test fails when a theme loses its shadows.
+- ✅ **Guards wired into `pnpm check`** (which the pre-push hook and the CI both run): `test:styles` (conformance, consistency, shadows, elevation, WebKit on macOS) and a colour-literal **ratchet** (`lint-colors --ratchet`, baseline `scripts/lint-colors.baseline.json`, 172 literals: a file may not gain one). In CI a missing Chrome fails the test instead of skipping it.
+
+### Reveal, combed (2026-10-07)
+
+198 source files in `apps/reveal/modules` and `src`. Clean on reads: no colour token read that is not
+defined, one colour token declared locally (the develop zones' accent), 11 `!important` (the import
+HUD's transparent window, and one export animation). Found and fixed:
+
+- **16 hover backgrounds were a surface** (`var(--color-surface)`: sidebar rows, section headers, the
+  "+" buttons, accordion headers, two rules in `app.scss`) or a hand-written 8 %. With the macOS theme
+  now really resolved by the system, the light ground is white and so is `--color-surface`, so those
+  hovers vanished in light. All read `--color-hover` (macOS's secondary fill, 7.8 %: over the white
+  ground it is `#ebebeb`; over the dark ground `#303030`, where the raised surface it replaces was only
+  about three points lighter).
+- **A regression of mine:** the focus outline reads `--color-ring`, which is computed on `:root`, so the
+  develop zones' local accent no longer reached it. The zones re-declare the ring (GUIDE 2.1).
+- **Hand-written translucent fills** (3, 4, 5, 8 % of the foreground) now read the fill ladder, and the
+  three hairline borders the border role; 3 fallbacks for tokens that exist were dropped.
+- The ratchet went from 172 to 166 literals and the baseline was lowered.
+- **The check layer had three palettes** (the canvas painter, the toolbar dots, the legend and photo
+  marks). The painter's are the real ones, so `CHECK_COLORS` in `developAnalysis.js` is now the only
+  place they are written; the dots, the legend (false-colour bands included) and the photo marks read
+  it, and a test paints a pixel per band and compares.
+- **Border → shadow.** `--shadow-border` and its four sides (`-top`, `-bottom`, `-left`, `-right`) draw
+  the stroke as an inset shadow, so it takes no layout space and a hover or focus colour change moves
+  nothing. 39 of Reveal's 51 `border` declarations migrated (dividers, cards, fields, tabs, focus
+  rings); the invisible `transparent` borders that only reserved space were deleted. Kept as borders,
+  on purpose: the crop overlay's corner brackets and frame, the loupe ring, the spinner arcs, the
+  dashed empty state. The Scopes frame is a `::after` ring, because its canvas would cover an inset
+  shadow. Not looked at in a running window: the web preview has no panels, so check the Tauri app.
+- The ratchet went from 166 to 155 literals.
+
+Left as findings: the check layer's legend colours exist in three places and disagree (the toolbar's
+clipping dots are `#ff3b30` and `#007aff`, the photo marks and the legend use `#ef4444`); photo
+overlays (drop shadows over thumbnails, the loupe) are black or white by nature; the import HUD is a
+dark panel on purpose; 51 `border` declarations in 28 files are the map for the border-to-shadow work.
+
+### Audit of the second session's commits (2026-10-07)
+
+Ten commits after `8f6a4920a`, reviewed against a before/after snapshot of every token (28 themes × 11
+contexts, 38 192 comparisons) and, for the macOS theme, a real WKWebView. Most of the work holds: no
+existing token moved except in `claude` (recalibrated) and `kernel` (a regression, below); the shadow
+scale only adds; the migrations use roles. Findings, all fixed:
+
+- **The macOS dynamic theme was dead code** (see above). Fixed, and `tests/styles/webkit.test.mjs` fails on the old version.
+- **`kernel` regressed:** `&[data-color-mode="dark"]` was added to a hand-written block of role-level overrides, so a forced dark mode differed from the system dark mode again (`bold`, `accent`, `ring`, `border-accent`). The block only ever applied under the dead `data-theme-mode` attribute; removed. `tests/styles/consistency.test.mjs` fails on the old version.
+- **`data-theme-mode`** was still used by `kernel`, `apex` and `forest` (dead aliases). Removed; `conformance.test.mjs` now fails on any occurrence.
+- **Orphan tokens:** `--color-selected-accent` (not an industry name) and `--color-border-subtle` were defined only inside the dead block. Gone with it.
+- **The suite tested the model, not the CSS:** it recomputes from the yaml, so it passed with both defects. Added the two tests above and `tests/styles/snapshot.mjs`, which captures every resolved token so a refactor's diff shows exactly what moved.
+- **Left for a decision:** the `claude` recalibration (the dark values look measured; the light ones have no source on record), the unverified visual equivalence of the literal-to-token migrations, `apex` and `forest`'s dark `h1` rules, which apply under `.theme-dark` or a forced mode but not under the system dark scheme.
+- **A correction to my own first reading:** `apps/obsidian-standard-garden/build.js` deploys into the Obsidian vault by design (set `VAULT_PLUGINS` to a path that does not exist to skip it), so the vault write was that script's normal behaviour, not an extra step.
 
 ## 1. The picture
 

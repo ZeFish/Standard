@@ -2,52 +2,52 @@
   "name": "Claude Light",
   "type": "light",
   "colors": {
-    "foreground": "#3d3826",
-    "input.background": "#e6e4de",
-    "input.foreground": "#3d3826",
-    "input.placeholderForeground": "#dedbd3",
+    "foreground": "#27201a",
+    "input.background": "#e7e5e1",
+    "input.foreground": "#27201a",
+    "input.placeholderForeground": "#dbd8d4",
     "inputOption.activeBorder": "#cb644180",
-    "badge.foreground": "#faf8f1",
+    "badge.foreground": "#fbf9f5",
     "badge.background": "#cb6441",
     "progressBar.background": "#cb6441",
     "button.background": "#cb6441",
-    "button.foreground": "#3d3826",
+    "button.foreground": "#27201a",
     "button.hoverBackground": "#cb644190",
-    "dropdown.background": "#e6e4de",
-    "dropdown.foreground": "#3d3826",
-    "dropdown.border": "#f1eee7",
+    "dropdown.background": "#e7e5e1",
+    "dropdown.foreground": "#27201a",
+    "dropdown.border": "#f0eeea",
     "focusBorder": "#cb644180",
     "selection.background": "#cb644140",
-    "editor.background": "#faf8f1",
-    "editor.foreground": "#3d3826",
-    "sideBar.background": "#faf8f1",
-    "sideBar.border": "#f1eee7",
-    "activityBar.background": "#faf8f1",
-    "activityBar.foreground": "#3d3826",
-    "activityBar.inactiveForeground": "#aeaba0",
-    "statusBar.background": "#faf8f1",
-    "statusBar.foreground": "#3d3826",
-    "titleBar.activeBackground": "#faf8f1",
-    "titleBar.activeForeground": "#3d3826",
-    "editorLineNumber.foreground": "#dedbd3",
-    "editorLineNumber.activeForeground": "#aeaba0",
-    "editor.lineHighlightBackground": "#f1eee7",
-    "editorIndentGuide.background": "#f1eee7",
-    "editorIndentGuide.activeBackground": "#aeaba0",
-    "list.hoverBackground": "#f1eee7",
-    "list.activeSelectionBackground": "#f1eee7",
-    "list.activeSelectionForeground": "#3d3826",
-    "tab.activeBackground": "#f1eee7",
-    "tab.activeForeground": "#3d3826",
-    "tab.inactiveBackground": "#faf8f1",
-    "tab.inactiveForeground": "#aeaba0",
-    "tab.border": "#f1eee7",
-    "breadcrumb.foreground": "#aeaba0",
-    "breadcrumb.focusForeground": "#3d3826",
+    "editor.background": "#fbf9f5",
+    "editor.foreground": "#27201a",
+    "sideBar.background": "#fbf9f5",
+    "sideBar.border": "#f0eeea",
+    "activityBar.background": "#fbf9f5",
+    "activityBar.foreground": "#27201a",
+    "activityBar.inactiveForeground": "#a6a29d",
+    "statusBar.background": "#fbf9f5",
+    "statusBar.foreground": "#27201a",
+    "titleBar.activeBackground": "#fbf9f5",
+    "titleBar.activeForeground": "#27201a",
+    "editorLineNumber.foreground": "#dbd8d4",
+    "editorLineNumber.activeForeground": "#a6a29d",
+    "editor.lineHighlightBackground": "#f0eeea",
+    "editorIndentGuide.background": "#f0eeea",
+    "editorIndentGuide.activeBackground": "#a6a29d",
+    "list.hoverBackground": "#f0eeea",
+    "list.activeSelectionBackground": "#f0eeea",
+    "list.activeSelectionForeground": "#27201a",
+    "tab.activeBackground": "#f0eeea",
+    "tab.activeForeground": "#27201a",
+    "tab.inactiveBackground": "#fbf9f5",
+    "tab.inactiveForeground": "#a6a29d",
+    "tab.border": "#f0eeea",
+    "breadcrumb.foreground": "#a6a29d",
+    "breadcrumb.focusForeground": "#27201a",
     "widget.shadow": "#00000040",
-    "quickInput.background": "#fdfdfa",
-    "terminal.background": "#faf8f1",
-    "terminal.foreground": "#3d3826"
+    "quickInput.background": "#fefdfc",
+    "terminal.background": "#fbf9f5",
+    "terminal.foreground": "#27201a"
   },
   "tokenColors": [
     {
@@ -56,7 +56,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#aeaba0",
+        "foreground": "#a6a29d",
         "fontStyle": "italic"
       }
     },
@@ -75,7 +75,7 @@
     {
       "scope": "variable.other.member",
       "settings": {
-        "foreground": "#3d3826"
+        "foreground": "#27201a"
       }
     },
     {
@@ -149,7 +149,7 @@
     {
       "scope": "punctuation",
       "settings": {
-        "foreground": "#aeaba0"
+        "foreground": "#a6a29d"
       }
     }
   ]

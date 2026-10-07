@@ -76,8 +76,7 @@
 :root[data-theme="forest"],
 [data-theme="forest"] {
   &.theme-dark,
-  &[data-color-mode="dark"],
-  &[data-theme-mode="dark"] {
+  &[data-color-mode="dark"] {
     --color-base-05: #2a241d;
     --color-base-00: #231e1a;
   }
@@ -98,8 +97,7 @@
   }
 
   &.theme-dark h1,
-  &[data-color-mode="dark"] h1,
-  &[data-theme-mode="dark"] h1 {
+  &[data-color-mode="dark"] h1 {
     --color: color-mix(
       in oklab,
       var(--color-background) 50%,

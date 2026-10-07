@@ -302,6 +302,19 @@ directly has one value for both schemes.
 | `--color-dark`           | light foreground                    | Pole dark                |
 | `--color-shadow`         | `dark 5%` transparent               | Shadow color base        |
 
+## Elevation: a surface and its shadow
+
+| Level | Surface | Shadow |
+| --- | --- | --- |
+| Sunken | `--color-surface-sunken` | `--shadow-inset` |
+| Ground | `--color-background` | none |
+| Raised | `--color-surface-raised` | `--shadow-raised` |
+| Overlay | `--color-surface-overlay` | `--shadow-overlay` (alias of `--shadow-lg`) |
+
+A colour stops at white, so in a light scheme `raised` and `overlay` are often the same colour and
+the shadow tells them apart. Dark schemes also lighten each level. Neighbouring levels must differ in
+colour or in shadow (`tests/styles/elevation.test.mjs`).
+
 ## Surface levels
 Named after Atlassian's elevation ladder (sunken, default, raised, overlay). Each level is the
 background shifted in OKLCH lightness, so it follows any theme and both schemes.

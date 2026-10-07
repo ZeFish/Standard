@@ -124,8 +124,7 @@ a {
 
 /* ─── Light mode headers — red tint ─────────────────────── */
 &.theme-light :is(h1, h2, h3, h4, h5, h6),
-&[data-color-mode="light"] :is(h1, h2, h3, h4, h5, h6),
-&[data-theme-mode="light"] :is(h1, h2, h3, h4, h5, h6) {
+&[data-color-mode="light"] :is(h1, h2, h3, h4, h5, h6) {
     color: color-mix(
         in oklab,
         var(--color-red) 90%,
@@ -145,8 +144,7 @@ h1 {
 
 /* ─── Dark mode h1 — red ghost ──────────────────────────── */
 &.theme-dark h1,
-&[data-color-mode="dark"] h1,
-&[data-theme-mode="dark"] h1 {
+&[data-color-mode="dark"] h1 {
     --color: color-mix(in oklab, var(--color-background) 0%, var(--color-red));
     text-shadow:
         -1px -1px 0px var(--color),

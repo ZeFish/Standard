@@ -168,7 +168,7 @@
   --window-radius: 17px;
   --window-inset: 8px;
   --pane-radius: calc(var(--window-radius) - var(--window-inset));
-  --pane-edge: inset 0 0 0 var(--stroke-width) var(--color-highlight);
+  --pane-edge: inset 0 0 0 1px var(--color-highlight);
   --titlebar-height: 41.5px;
 
   /**
@@ -180,12 +180,15 @@
    * @property {variable} --shadow-glow Atmospheric ambient glow shadow.
    * @property {variable} --shadow-inset Inset bevel shadow.
    * @property {variable} --shadow-ring Fine border ring inset shadow.
+   * @property {variable} --shadow-border A one-stroke border drawn as an inset shadow: it looks like `border: var(--border)` but takes no layout space, so nothing shifts when it appears, disappears or changes colour. Paints under the element's content (use `::after` over a canvas or image).
+   * @property {variable} --shadow-border-top Same, one side only (a divider): `-top`, `-bottom`, `-left`, `-right`.
    * @property {variable} --shadow-raised Layered raised preset with top highlight, hairline border, and ambient shadow.
    * @property {variable} --shadow Default elevation shadow.
    * @property {variable} --shadow-xs Extra-small subtle contact shadow.
    * @property {variable} --shadow-sm Small card/well shadow.
    * @property {variable} --shadow-md Medium elevation shadow.
    * @property {variable} --shadow-lg Large floating dialog/card shadow.
+   * @property {variable} --shadow-overlay The shadow that pairs with `--color-surface-overlay` (alias of `--shadow-lg`). `--shadow-raised` pairs with `--color-surface-raised`, `--shadow-inset` with `--color-surface-sunken`.
    * @property {variable} --shadow-xl Maximum elevation hero shadow.
    */
   --shadow-ambient: 0 1px 1px var(--color-shadow);
@@ -199,6 +202,13 @@
     inset 1px 0px 1px var(--color-border),
     inset -1px 0px 1px var(--color-border),
     inset 0px -1px 1px var(--color-border);
+  --shadow-border: inset 0 0 0 var(--stroke-width) var(--color-border);
+  --shadow-border-top: inset 0 var(--stroke-width) 0 0 var(--color-border);
+  --shadow-border-bottom: inset 0 calc(var(--stroke-width) * -1) 0 0
+    var(--color-border);
+  --shadow-border-left: inset var(--stroke-width) 0 0 0 var(--color-border);
+  --shadow-border-right: inset calc(var(--stroke-width) * -1) 0 0 0
+    var(--color-border);
   --shadow-raised:
     inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border),
     var(--shadow-ambient);
@@ -208,6 +218,11 @@
   --shadow-sm: 0 1px 2px 0 var(--color-shadow), 0 1px 1px -1px var(--color-shadow);
   --shadow-md: var(--shadow-lift);
   --shadow-lg: var(--shadow-ambient), var(--shadow-lift);
+  /* Elevation is a pair: a surface and its shadow. In a light scheme the surface
+     colours stop at white (a ground at 0.97 leaves 0.03 above it), so `raised` and
+     `overlay` can be the same colour and the shadow is what tells them apart, as in
+     Atlassian's elevation tokens and on macOS, which never lightens a surface. */
+  --shadow-overlay: var(--shadow-lg);
   /* xl stacks the same layers as `lg` plus the glow; in dark schemes the
      contact and lift layers are transparent (stacked dark shadows turn to mud),
      which `light-dark()` expresses as a colour, not a second declaration. */

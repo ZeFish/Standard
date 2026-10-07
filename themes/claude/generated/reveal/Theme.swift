@@ -48,13 +48,13 @@ struct Palette {
          accent accentOverride: Color? = nil) {
         self.accentOverride = accentOverride
         if scheme == .dark {
-            bg = bgOverride ?? Color(red: 0.149, green: 0.149, blue: 0.149)
-            fg = fgOverride ?? Color(red: 0.7647, green: 0.7569, blue: 0.7294)
-            elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 0.2, green: 0.2, blue: 0.2)      // bg + ~6% — the floating chrome
-            photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 0.1412, green: 0.1412, blue: 0.1412)     // a notch *darker* than bg — a quiet groove
+            bg = bgOverride ?? Color(red: 0.1373, green: 0.1333, blue: 0.1294)
+            fg = fgOverride ?? Color(red: 0.8824, green: 0.8667, blue: 0.8588)
+            elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 0.1882, green: 0.1843, blue: 0.1804)      // bg + ~6% — the floating chrome
+            photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 0.1294, green: 0.1255, blue: 0.1216)     // a notch *darker* than bg — a quiet groove
         } else {
-            bg = bgOverride ?? Color(red: 0.9804, green: 0.9725, blue: 0.9451)
-            fg = fgOverride ?? Color(red: 0.2392, green: 0.2196, blue: 0.149)
+            bg = bgOverride ?? Color(red: 0.9843, green: 0.9765, blue: 0.9608)
+            fg = fgOverride ?? Color(red: 0.1529, green: 0.1255, blue: 0.102)
             elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 1, green: 1, blue: 1)              // clean white cards over the grey well
             photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 1, green: 1, blue: 1)
         }

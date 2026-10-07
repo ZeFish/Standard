@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 16:05
+modified: 2026-10-07 17:31
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,8 +20,7 @@ snippet: false
 [data-stnd-theme="forest"] {
     /* ─── Custom rules for Forest ───────────────────────────── */
     &.theme-dark,
-      &[data-color-mode="dark"],
-      &[data-theme-mode="dark"] {
+      &[data-color-mode="dark"] {
         --color-base-05: #2a241d;
         --color-base-00: #231e1a;
       }
@@ -42,8 +41,7 @@ snippet: false
       }
 
       &.theme-dark :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
-      &[data-color-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
-      &[data-theme-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+      &[data-color-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         --color: color-mix(
           in oklab,
           var(--color-background) 50%,

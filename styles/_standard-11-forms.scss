@@ -414,29 +414,20 @@ progress {
 }
 
 input[type="range"] {
+  --_range-track-h: var(--space-half);
+  --_range-thumb-size: calc(var(--space-half) + 2px);
   -webkit-appearance: none;
-  /* Webkit/Blink */
   appearance: none;
   cursor: pointer;
-  /* Dimensions */
-  height: var(--space-half);
-  /* Adjust track height */
+  height: var(--_range-track-h);
   width: 100%;
   border-radius: 9999px;
   outline: none;
   padding: 0;
-  box-shadow: var(--shadow-inset);
-
-  padding: 0;
-  /* Crucial: allows thumb to touch edges */
   border: none;
-  /* Crucial: removes text-input borders */
+  box-shadow: var(--shadow-inset);
   background-origin: border-box;
 
-  /* Fixed 2026-07-14 — this gradient is real and wired up by
-     Slider.astro's JS (sets --slider-value); the flat color below it was
-     silently overriding it. Removed the override so the fill effect
-     actually renders. */
   background: linear-gradient(
     to right,
     var(--color-accent) 0%,
@@ -449,29 +440,29 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  height: calc(var(--space-half) + 2px);
-  width: calc(var(--space-half) + 2px);
+  width: var(--_range-thumb-size);
+  height: var(--_range-thumb-size);
   border-radius: 50%;
   border: none;
   transition: var(--transition-fast);
-
   background: var(--color-surface-overlay);
-  /* Raised effect for better grip affordance */
   box-shadow: var(--shadow);
-
-  /* Vertical alignment logic for Webkit:
-     (Thumb Height / 2) - (Track Height / 2) * -1
-  */
-  margin-top: 0;
+  margin-top: calc((var(--_range-track-h) - var(--_range-thumb-size)) / 2);
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  width: var(--space-d2);
-  height: var(--space-d2);
-  margin-top: calc((var(--space-d4) - var(--space-d2)) / 2);
+input[type="range"]::-moz-range-thumb {
+  width: var(--_range-thumb-size);
+  height: var(--_range-thumb-size);
+  border-radius: 50%;
+  border: none;
+  transition: var(--transition-fast);
+  background: var(--color-surface-overlay);
+  box-shadow: var(--shadow);
+  cursor: pointer;
 }
 
-input[type="range"]:hover::-webkit-slider-thumb {
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:hover::-moz-range-thumb {
   background: var(--color-accent);
   box-shadow: var(--shadow-hover);
   cursor: pointer;

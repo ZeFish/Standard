@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 16:05
+modified: 2026-10-07 17:31
 cssclasses: []
 maturity: sprout
 mode: read
@@ -53,12 +53,6 @@ snippet: false
     --font-interface: "MonoLisa";
 
       --code-function: var(--color-pink);
-
-      &[data-color-mode="dark"],
-      &[data-theme-mode="dark"] {
-        --color-accent: var(--color-purple);
-        --color-bold: var(--color-pink);
-      }
 
       :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         text-align: left;

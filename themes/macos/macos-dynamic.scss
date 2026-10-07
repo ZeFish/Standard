@@ -1,0 +1,54 @@
+// macOS, resolved by the system itself.
+//
+// WebKit (Safari, and the WKWebView Reveal runs in) exposes the system's live
+// colours as `-apple-system-*` keywords. Each one is the value AppKit returns
+// for the matching NSColor, and follows the element's `color-scheme`, so it
+// agrees with [data-color-mode], .theme-dark and .inverse like every other role.
+// When the user changes their accent colour or switches appearance, it follows.
+//
+// Only keywords WebKit accepts are used. The test in tests/styles/webkit.test.mjs
+// loads this theme in a real WKWebView and fails if one is rejected or if the
+// guard below stops matching (which would silently turn this file into dead code).
+//
+// Not available as keywords on macOS 27, so they stay with the palette:
+//   window-background    control-background has the same value (255 light, 30 dark)
+//   under-page-background  --color-stage stays a neutral 0.09 darker than the ground
+//   link                 the link follows the accent
+//   cyan, mint, teal, indigo   the palette's
+//
+// The surface ladder (sunken, raised, overlay) is derived from the ground, as in
+// every theme: macOS raises things with fills and materials, which the web
+// cannot read, and mapping the three levels onto one colour would flatten them.
+
+@supports (color: -apple-system-control-background) {
+  :root[data-theme="macos"],
+  [data-theme="macos"] {
+    /* Ground. AppKit's window, control and text backgrounds are one value. */
+    --color-background: -apple-system-control-background;
+
+    /* Text, by the weights macOS draws it at (84.7 / 49.8 / 25.9 % in light). */
+    --color-foreground: -apple-system-label;
+    --color-muted: -apple-system-secondary-label;
+    --color-subtle: -apple-system-tertiary-label;
+    --color-placeholder: -apple-system-placeholder-text;
+
+    /* The separator is the border: black or white at 9.8 %. */
+    --color-border: -apple-system-separator;
+
+    /* The user's accent colour, the focus ring on it, and the unemphasized selection. */
+    --color-accent: -apple-system-control-accent;
+    --color-link: var(--color-accent);
+    --color-ring: color-mix(in srgb, -apple-system-control-accent 50%, transparent);
+    --color-selected: -apple-system-unemphasized-selected-content-background;
+
+    /* The hues the system exposes. */
+    --color-red: -apple-system-red;
+    --color-orange: -apple-system-orange;
+    --color-yellow: -apple-system-yellow;
+    --color-green: -apple-system-green;
+    --color-blue: -apple-system-blue;
+    --color-purple: -apple-system-purple;
+    --color-pink: -apple-system-pink;
+    --color-brown: -apple-system-brown;
+  }
+}

@@ -45,6 +45,18 @@ tags: [standard, design-tokens, guide]
 Today the seed and palette layers share the `--color-light-*` / `--color-dark-*` names with the
 role layer's polarity aliases (see 7.1). The guide treats that as the main thing to fix.
 
+### 2.1 Overriding a role on a subtree
+
+A custom property that refers to another one is resolved **where it is declared**, not where it is
+used. `--color-ring` is `oklch(from var(--color-accent) …)` declared on `:root`, so a subtree that
+sets its own `--color-accent` still inherits the root's ring. The same goes for every role derived
+from another: the ring, the link, `--border-accent`. A `[data-theme]` container works because the
+framework re-declares the roles on it; a local override has to do the same for what it needs.
+Reveal's three develop zones (blue shadows, green midtones, red highlights) set their own accent and
+re-declare the ring (`apps/reveal/modules/develop/DevelopPanel.svelte`). Read the accent itself
+(`var(--color-accent)`) where a local accent must show; read a derived role only where the root's
+value is the right one.
+
 ## 3. Role catalogue (proposed)
 
 Current name → proposed name where they differ. **Bold = new role.**
@@ -134,18 +146,31 @@ of the ladder without being recomputed.
 
 ## 5. Elevation in light and dark
 
-- **Dark schemes:** raised surfaces are *lighter* than the ground (Material 3, Apple). Works with
-  a lightness step today.
-- **Light schemes:** raised surfaces are *white-er*, but the ground is already near white
-  (`#faf9f5` has an OKLCH lightness of 0.982), so there is almost no room above it. The
-  options:
-  - **A. Tint the ground.** Light grounds sit at ≤ 0.96 so raised can reach 1.0 (Apple's grouped
-    background is grey with white cells).
-  - **B. Separate by border and shadow, not lightness.** Keep the ground, give `surface` a `border`
-    and `surface-overlay` a shadow.
-  - **C. Both:** A for apps, B for documents.
+**Decided (2026-10-07): the shadow carries the elevation.** Elevation is a pair, a surface and its
+shadow:
 
-  *Decision pending (see 9).*
+| Level | Surface | Shadow |
+|---|---|---|
+| Sunken | `--color-surface-sunken` | `--shadow-inset` |
+| Ground | `--color-background` | none |
+| Raised | `--color-surface-raised` | `--shadow-raised` |
+| Overlay | `--color-surface-overlay` | `--shadow-overlay` (alias of `--shadow-lg`) |
+
+- **Dark schemes:** a higher level is also *lighter* (Material 3, Atlassian), because shadows are hard
+  to see on dark. The lightness step does the work and the shadow reinforces it.
+- **Light schemes:** a colour cannot go lighter than white. Light grounds sit at 0.97 and above in
+  24 of the 28 themes, so `raised` and `overlay` are often the same white (17 themes), or one small step
+  apart (6); only 5 have a full ladder. That is fine: Atlassian pairs its raised and overlay surfaces
+  with shadows, and macOS never lightens a surface at all. The rule is therefore **not** "each level
+  has its own colour" but "no two neighbouring levels look the same":
+  ground, raised and overlay must differ in colour **or** in shadow.
+  `tests/styles/elevation.test.mjs` enforces it on every theme and scheme; `calm`, flat by design,
+  is the one named exception, so a theme that loses its shadows by accident still fails.
+- **What we did not do, and why:** tinting the ground so raised can reach white (Carbon's alternating
+  layers, iOS grouped lists) means redesigning 24 grounds, so it stays a choice for a given theme;
+  stretching the ladder proportionally gives steps of about 0.014, below what the eye separates.
+- The Studio's *Elevation* mockup shows the four levels of the current theme and says, for each,
+  whether it shares its colour with the level below (so that the shadow carries it).
 
 ## 6. Case study — Reveal
 
@@ -186,7 +211,7 @@ Proposed: schemes keep the `light-` / `dark-` prefix but only in the seed and pa
 polarity becomes `--color-pole-high` / `--color-pole-low` (or similar); direction disappears into
 the role names of 3.1.
 
-### 7.2 Surface hierarchy collapses in light schemes
+### 7.2 Surface hierarchy collapses in light schemes (resolved by design: section 5)
 
 `surface-light-N = min(1, L + 0.03·N)`. With a ground at L = 0.982 all three steps clamp to 1, so
 a card, a menu and a dialog are the same colour in every light theme.
@@ -221,13 +246,13 @@ Run against every theme, in both schemes:
 
 1. **Names — resolved by the industry (section 11):** named levels, the Atlassian ladder
    `sunken` / default / `raised` / `overlay`. A numeric ladder (Radix) only for raw neutrals.
-2. **Light elevation:** A, B or C from section 5?
+2. **Light elevation — resolved (2026-10-07):** the shadow carries it (section 5).
 3. **`border` vs `edge` — resolved:** `border`. No standard system uses `edge` (section 11).
 4. **Polarity names:** `pole-high/low`, `on-ground/…`, or drop them (are they used)?
 5. **DTCG:** should `tokens.yaml` become (or export to) the W3C Design Tokens JSON format so
    Figma and other tools can consume it?
 6. **Scope of `stage`:** neutral in both schemes, or tinted by the theme?
-7. **System colours at runtime:** could the macOS theme *resolve* the system's colours instead of
+7. **System colours at runtime — resolved (2026-10-07):** see section 10.4; WebKit accepts most of them and they equal AppKit's. (Original question:) could the macOS theme *resolve* the system's colours instead of
    copying hex values? Apple warns that documented values "may fluctuate from release to release".
    WebKit exposes `-apple-system-*` colour keywords (control background, separator, label, …) —
    not documented by Apple; to verify inside Reveal's webview before relying on it. If it works,
@@ -297,15 +322,10 @@ Source: the HIG *Color* page (revision of 16 December 2025), as exported to PDF 
 - **Liquid Glass has no colour of its own**; it takes the colour of what is behind it. `--color-glass`
   should therefore stay a tint-free translucent seed, not a theme colour.
 
-### 10.4 Direction (decided, not yet scheduled)
+### 10.4 Direction & Implementation
 
-- **The `macos` theme becomes 100 % system:** no palette of its own, only the mapping of 10.2 onto
-  the platform's colours (question 7 decides how: runtime keywords or a generated mapping).
-- **The `claude` theme is redone from the Claude app's own colours**, measured from the app (see the
-  calibration table in section 6), replacing today's hand-picked seeds. The interesting part will
-  be the difference between the two themes: same roles, one resolved by the OS, one by a palette.
-  The current `claude` dark ground is a neutral `oklch(0.27 0 106)`; the app's real ladder starts
-  lower (sidebar L 0.178) and has the `sunken` / `stage` rungs the theme cannot express yet.
+- **The `macos` theme is resolved by the system where WebKit allows (reworked 2026-10-07).** WKWebView accepts `-apple-system-control-background`, the labels, `separator`, `control-accent`, the unemphasized selection and eight hues, and each equals what AppKit returns (section 10.5); it rejects `window-background`, `under-page-background` and `cyan`, and has no keyword for the link. The system colours follow `color-scheme` per element, so forced modes and nested containers stay consistent. The roles with no keyword (the surface ladder, `stage`, link, cyan) stay with the palette. Verified by `tests/styles/webkit.test.mjs`; an earlier version that used the three rejected keywords silently did nothing.
+- **The `claude` theme recalibrated from real app measurements (completed 2026-10-07):** dark ground calibrated to the real desktop app content ground (L 0.252, `#222222`), sunken sidebar / stage to L 0.178 (`#111111`), dark foreground to L 0.90 (`#ececec`), and light ground to warm parchment (L 0.982, `#faf9f5`), with terracotta accent preserved. Expresses the full measured ladder from section 6. The light values have no measurement on record (no light capture was saved); treat them as provisional until one is.
 
 ### 10.5 macOS ground truth (read from the system)
 
