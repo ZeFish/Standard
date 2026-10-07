@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-04 15:07
+modified: 2026-10-07 13:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,13 +20,6 @@ snippet: false
 [data-stnd-theme="contrast"] {
     /* ─── Custom rules for High Contrast ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
-    --color-light-background: #ffffff;
-    --color-light-foreground: #000000;
-    --color-dark-background: #000000;
-    --color-dark-foreground: #ffffff;
-    --color-light-accent: #0050ff;
-    --color-dark-accent: #ffff00;
-    --color-border: var(--color-foreground);
     --font-text: "Sohne", sans-serif;
     --font-header: "Inter", sans-serif;
     --font-weight-text: 500;
@@ -34,8 +27,6 @@ snippet: false
     --font-header-letter-spacing: 0.02em;
     --line-height: 1.5;
     --optical-ratio: 1.414;
-    --color-muted: var(--color-foreground);
-    --color-subtle: var(--color-foreground);
 
     /* ─── Custom rules for Contraste Élevé ───────────────────────────── */
     /* High contrast strictly limits grayscales and relies on #000 and #fff */

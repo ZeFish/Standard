@@ -18,8 +18,8 @@ tokens:
   color-dark-background: "#0f0f0f"
   color-dark-foreground: "#efeae3"
   color-dark-accent: "color-mix(in srgb, var(--color-light-accent) 60%, #000 40%)"
-  color-bold: var(--color-red)
-  color-italic: var(--color-green)
+  color-light-bold: var(--color-red)
+  color-light-italic: var(--color-green)
   font-text: "\"Fern\""
   font-header: "\"Fern\""
   font-monospace: "\"Monaspace Xenon\""

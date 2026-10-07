@@ -114,14 +114,14 @@
         "support.function"
       ],
       "settings": {
-        "foreground": "#2f4e6e",
+        "foreground": "#000000",
         "fontStyle": "italic"
       }
     },
     {
       "scope": "string",
       "settings": {
-        "foreground": "#c2a94b"
+        "foreground": "#000000"
       }
     },
     {
@@ -137,13 +137,13 @@
     {
       "scope": "entity.name.tag",
       "settings": {
-        "foreground": "#2f4e6e"
+        "foreground": "#000000"
       }
     },
     {
       "scope": "entity.other.attribute-name",
       "settings": {
-        "foreground": "#2f4e6e"
+        "foreground": "#000000"
       }
     },
     {

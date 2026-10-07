@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 02:06
+modified: 2026-10-07 14:14
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,30 +19,10 @@ snippet: false
 ```css
 [data-stnd-theme="reveal"] {
     /* ─── Custom rules for Reveal ───────────────────────────── */
-    :root[data-theme="reveal"],
-      [data-theme="reveal"] {
-        --color-photo-frame: var(--color-surface-light-2);
-      }
-    }
-
-    // reveal theme — token VALUES live in tokens.yaml (single source of truth).
-    // This file keeps only web-only structural CSS.
-
-
-    :root[data-theme="reveal"],
-    [data-theme="reveal"] {
     /* ─── Foreground & Background ────────────────────────────── */
-    --color-light-background: #fdfdfc;
-    --color-light-foreground: #212121;
-    --color-light-border: rgba(33, 33, 33, 0.14);
-    --color-dark-background: #1f1f1e;
-    --color-dark-foreground: #ebebeb;
-    --color-dark-border: rgba(235, 235, 235, 0.14);
 
     /* ─── Accent ────────────────────────────────────────────── */
-    --color-light-accent: #d6202c;
     --color-dark-accent: #d6202c;
-    --color-accent: #d6202c;
 
     /* ─── Typography ────────────────────────────────────────── */
     --font-text: "Inter", system-ui, sans-serif;
@@ -80,7 +60,7 @@ snippet: false
     /* Leica safety styling */
     .callout {
         border-left: 3px solid var(--color-accent) !important;
-        background: var(--color-surface-dark-1) !important;
+        background: var(--color-surface-sunken) !important;
     }
 
     /* Technical tables */

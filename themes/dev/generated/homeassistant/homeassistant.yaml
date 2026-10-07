@@ -12,8 +12,8 @@ Dev Light:
   info-color: "#000000"
 
 Dev Dark:
-  primary-color: "#c7a540"
-  accent-color: "#c7a540"
+  primary-color: "#000000"
+  accent-color: "#000000"
   primary-background-color: "#1c1c1b"
   primary-text-color: "#dbcd93"
   secondary-text-color: "#277d9e"

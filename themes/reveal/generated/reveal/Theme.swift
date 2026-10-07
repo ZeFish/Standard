@@ -50,8 +50,8 @@ struct Palette {
         if scheme == .dark {
             bg = bgOverride ?? Color(red: 0.1216, green: 0.1216, blue: 0.1176)
             fg = fgOverride ?? Color(red: 0.9216, green: 0.9216, blue: 0.9216)
-            elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 0.1765, green: 0.1765, blue: 0.1765)      // bg + ~6% — the floating chrome
-            photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 0.0902, green: 0.0902, blue: 0.0902)     // a notch *darker* than bg — a quiet groove
+            elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 0.1725, green: 0.1725, blue: 0.1725)      // bg + ~6% — the floating chrome
+            photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 0.1137, green: 0.1137, blue: 0.1137)     // a notch *darker* than bg — a quiet groove
         } else {
             bg = bgOverride ?? Color(red: 0.9922, green: 0.9922, blue: 0.9882)
             fg = fgOverride ?? Color(red: 0.1294, green: 0.1294, blue: 0.1294)

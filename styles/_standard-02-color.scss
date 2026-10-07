@@ -45,8 +45,9 @@
    The system works in four stages:
    1. SEEDS:     Light & dark foreground/background (set in tokens or themes)
    2. PALETTES:  Generate full light & dark color spectrums via relative color syntax
-   3. SEMANTICS: Map active palette to semantic tokens based on scheme
-   4. COMPUTED:  Derive surfaces, shadows, borders from scheme-aware tokens
+   3. ROLES:     Each semantic token is one light-dark(light seed, dark seed) pair
+   4. COMPUTED:  Surfaces, shadows, borders are formulas on the active roles;
+                 `color-scheme` (system, or pinned on an element) picks the scheme
 
    Override strategy (pick your depth):
    ┌─────────────────────────────────────────────────────────────────────┐
@@ -120,8 +121,6 @@
    * @property --color-light-purple Purple (+270° hue offset).
    * @property --color-light-pink Pink (+350° hue offset).
    * @property --color-light-brown Brown (+60° hue offset).
-   * @property --color-light-accent-complementary Complementary accent (+180°).
-   * @property --color-light-accent-analogous Analogous accent (+30°).
    * @property --color-light-accent-triadic Triadic accent (+120°).
    * @property --color-light-accent-auto Default accent strategy (triadic).
    * @property --color-light-accent Active light mode accent color.
@@ -181,28 +180,14 @@
   /* Link color defaults to blue */
   --color-light-link: var(--color-light-accent);
 
-  /* Auto-accent strategies */
-  /* 1. Complementary (Opposite side of color wheel, +180°) - High contrast */
-  --color-light-accent-complementary: oklch(
-    from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
-      min(0.2, c * 2) calc(h + 180)
-  );
-
-  /* 2. Analogous (Next to the seed color, +30°) - Harmonious, less jarring */
-  --color-light-accent-analogous: oklch(
-    from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
-      min(0.2, c * 2) calc(h + 30)
-  );
-
-  /* 3. Triadic (Third of the way around, +120°) - Balanced contrast */
+  /* Auto-accent strategy: triadic (Third of the way around, +120°) - Balanced contrast */
   --color-light-accent-triadic: oklch(
     from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
       min(0.2, c * 2) calc(h + 120)
   );
 
-  /* Default to a slightly shifted analogous/triadic blend instead of pure 180 opposite
-     which can be jarring if the foreground is highly saturated.
-     +120 gives a strong but often more pleasing result than +180. */
+  /* +120° gives a strong but pleasing accent; a pure +180° opposite can be
+     jarring when the foreground is highly saturated. */
   --color-light-accent-auto: var(--color-light-accent-triadic);
   --color-light-accent: var(--color-light-accent-auto);
 
@@ -221,8 +206,6 @@
    * @property --color-dark-purple Dark mode purple (+270° hue offset).
    * @property --color-dark-pink Dark mode pink (+350° hue offset).
    * @property --color-dark-brown Dark mode brown (+60° hue offset).
-   * @property --color-dark-accent-complementary Dark complementary accent (+180°).
-   * @property --color-dark-accent-analogous Dark analogous accent (+30°).
    * @property --color-dark-accent-triadic Dark triadic accent (+120°).
    * @property --color-dark-accent-auto Default dark accent strategy.
    * @property --color-dark-accent Active dark mode accent color.
@@ -282,17 +265,7 @@
   /* Link color defaults to blue */
   --color-dark-link: var(--color-dark-accent);
 
-  /* Auto-accent strategies for dark mode */
-  --color-dark-accent-complementary: oklch(
-    from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
-      min(0.2, c * 2) calc(h + 180)
-  );
-
-  --color-dark-accent-analogous: oklch(
-    from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
-      min(0.2, c * 2) calc(h + 30)
-  );
-
+  /* Auto-accent strategy: triadic (+120°) */
   --color-dark-accent-triadic: oklch(
     from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
       min(0.2, c * 2) calc(h + 120)
@@ -300,59 +273,39 @@
 
   --color-dark-accent-auto: var(--color-dark-accent-triadic);
   --color-dark-accent: var(--color-dark-accent-auto);
-  /* On-accent (text drawn on accent surfaces) */
-  --color-dark-on-accent: var(--color-dark-background);
 
   /**
-   * @component Computed Palettes
+   * @component Per-scheme Overrides (optional hooks)
    * @category Foundation
-   * @description Computed scheme-specific tints for muted text, subtle UI elements, borders, and shadows.
+   * @description The roles `muted`, `subtle`, `border`, `shadow` and `highlight` are computed once,
+   * from the active seeds (see Semantic Tokens). A theme that wants its own value for one scheme sets
+   * the matching hook; nothing is declared here, and an unset hook falls back to the formula.
    *
-   * @property --color-light-muted Light muted text color (~60% opacity).
-   * @property --color-light-subtle Light subtle text color (~40% opacity).
-   * @property --color-light-border Light border color (~10% opacity).
-   * @property --color-light-on-accent Text color drawn on light accent backgrounds.
-   * @property --color-dark-muted Dark muted text color (~65% opacity).
-   * @property --color-dark-subtle Dark subtle text color (~45% opacity).
-   * @property --color-dark-border Dark border color.
-   * @property --color-light-shadow-base Base shadow seed for light mode.
-   * @property --color-light-highlight Base specular highlight for light mode.
-   * @property --color-dark-shadow-base Base shadow seed for dark mode.
-   * @property --color-dark-highlight Base specular highlight for dark mode.
+   * @property --color-light-muted Optional light override for `--color-muted` (formula: foreground at 60% alpha).
+   * @property --color-dark-muted Optional dark override for `--color-muted` (foreground at 65% alpha).
+   * @property --color-light-subtle Optional light override for `--color-subtle` (foreground at 40% alpha).
+   * @property --color-dark-subtle Optional dark override for `--color-subtle` (foreground at 45% alpha).
+   * @property --color-light-border Optional light override for `--color-border` (foreground at 10% alpha).
+   * @property --color-dark-border Optional dark override for `--color-border` (darkened background at 25% alpha).
+   * @property --color-light-shadow-base Optional light override for `--color-shadow`.
+   * @property --color-dark-shadow-base Optional dark override for `--color-shadow`.
+   * @property --color-light-highlight Optional light override for `--color-highlight`.
+   * @property --color-dark-highlight Optional dark override for `--color-highlight`.
    */
+}
 
-  /* Light Computed Palette */
-  --color-light-muted: oklch(from var(--color-light-foreground) l c h / 0.6);
-  --color-light-subtle: oklch(from var(--color-light-foreground) l c h / 0.4);
-  --color-light-border: oklch(from var(--color-light-foreground) l c h / 0.1);
-  --color-light-on-accent: var(--color-light-background);
-
-  /* Dark Computed Palette */
-  --color-dark-muted: oklch(from var(--color-dark-foreground) l c h / 0.65);
-  --color-dark-subtle: oklch(from var(--color-dark-foreground) l c h / 0.45);
-  --color-dark-border: oklch(
-    from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
-      calc(h - 15) / 0.25
-  );
-
-  /* Light Shadow Palette */
-  --color-light-shadow-base: oklch(
-    from var(--color-light-foreground) calc(l * 0.50) calc(c * 0.5)
-      calc(h - 15) / 0.075
-  );
-  --color-light-highlight: oklch(
-    from var(--color-light-background) min(1, calc(l + 0.25)) c h / 0.6
-  );
-
-  /* Dark Shadow Palette */
-  --color-dark-shadow-base: oklch(
-    from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
-      calc(h - 15) / 0.5
-  );
-  --color-dark-highlight: oklch(
-    from var(--color-dark-foreground) min(1, calc(l + 0.05)) c h / 0.11
-  );
-
+/* =====================================================================
+   STAGE 6: ROLES — one declaration per role
+   Every role is a `light-dark(<light seed>, <dark seed>)` pair, so
+   choosing a scheme is only choosing `color-scheme` (see Stage 7); no
+   second copy of the list exists. The rule also targets `[data-theme]`
+   because a custom property is substituted where it is declared: a
+   themed container has to re-declare the roles to see its own seeds.
+   Requires `light-dark()` (Chrome 123, Safari 17.5, Firefox 120); older
+   browsers get the light scheme only (Stage 8).
+   ===================================================================== */
+#{$stnd-theme-scope},
+[data-theme] {
   /**
    * @component Semantic Tokens
    * @category Foundation
@@ -379,22 +332,25 @@
    * @property --color-link Active scheme link color.
    * @property --color-on-accent Text color for elements over accent backgrounds.
    */
-  --color-background: var(--color-light-background);
-  --color-foreground: var(--color-light-foreground);
-  --color-accent: var(--color-light-accent);
+  --color-background: light-dark(var(--color-light-background), var(--color-dark-background));
+  --color-foreground: light-dark(var(--color-light-foreground), var(--color-dark-foreground));
+  --color-accent: light-dark(var(--color-light-accent), var(--color-dark-accent));
 
-  --color-header: var(--color-light-header, var(--color-foreground));
+  --color-header: light-dark(
+    var(--color-light-header, var(--color-foreground)),
+    var(--color-dark-header, var(--color-foreground))
+  );
 
-  --color-red: var(--color-light-red);
-  --color-orange: var(--color-light-orange);
-  --color-yellow: var(--color-light-yellow);
-  --color-green: var(--color-light-green);
-  --color-cyan: var(--color-light-cyan);
-  --color-blue: var(--color-light-blue);
-  --color-magenta: var(--color-light-magenta);
-  --color-purple: var(--color-light-purple);
-  --color-pink: var(--color-light-pink);
-  --color-brown: var(--color-light-brown);
+  --color-red: light-dark(var(--color-light-red), var(--color-dark-red));
+  --color-orange: light-dark(var(--color-light-orange), var(--color-dark-orange));
+  --color-yellow: light-dark(var(--color-light-yellow), var(--color-dark-yellow));
+  --color-green: light-dark(var(--color-light-green), var(--color-dark-green));
+  --color-cyan: light-dark(var(--color-light-cyan), var(--color-dark-cyan));
+  --color-blue: light-dark(var(--color-light-blue), var(--color-dark-blue));
+  --color-magenta: light-dark(var(--color-light-magenta), var(--color-dark-magenta));
+  --color-purple: light-dark(var(--color-light-purple), var(--color-dark-purple));
+  --color-pink: light-dark(var(--color-light-pink), var(--color-dark-pink));
+  --color-brown: light-dark(var(--color-light-brown), var(--color-dark-brown));
 
   /* Semantic status aliases */
   --color-success: var(--color-green);
@@ -402,14 +358,17 @@
   --color-error: var(--color-red);
   --color-info: var(--color-blue);
 
-  --color-link: var(--color-light-link);
-  --color-italic: var(--color-light-italic, var(--color-foreground));
-  --color-bold: var(--color-light-bold, var(--color-foreground));
+  --color-link: light-dark(var(--color-light-link), var(--color-dark-link));
+  --color-italic: light-dark(
+    var(--color-light-italic, var(--color-foreground)),
+    var(--color-dark-italic, var(--color-foreground))
+  );
+  --color-bold: light-dark(
+    var(--color-light-bold, var(--color-foreground)),
+    var(--color-dark-bold, var(--color-foreground))
+  );
   --color-on-accent: var(--color-background);
 
-  /* Fixed 2026-07-14 — purple/pink/brown now correctly switch to dark
-     variants in all three dark-mode contexts, plus added missing
-     non-OKLCH fallbacks. */
 
   /**
    * @component Computed Semantics
@@ -425,13 +384,28 @@
    * @property --color-darker Dark overlay tint.
    * @property --color-glass Frosted glassmorphism background color (~80% alpha).
    */
-  --color-muted: var(--color-light-muted);
-  --color-subtle: var(--color-light-subtle);
-  --color-border: var(--color-light-border);
+  --color-muted: light-dark(
+    var(--color-light-muted, oklch(from var(--color-light-foreground) l c h / 0.6)),
+    var(--color-dark-muted, oklch(from var(--color-dark-foreground) l c h / 0.65))
+  );
+  --color-subtle: light-dark(
+    var(--color-light-subtle, oklch(from var(--color-light-foreground) l c h / 0.4)),
+    var(--color-dark-subtle, oklch(from var(--color-dark-foreground) l c h / 0.45))
+  );
+  --color-border: light-dark(
+    var(--color-light-border, oklch(from var(--color-light-foreground) l c h / 0.1)),
+    var(
+      --color-dark-border,
+      oklch(
+        from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
+          calc(h - 15) / 0.25
+      )
+    )
+  );
 
   /* Light/dark polarity aliases — always "the lighter" and "the darker" */
-  --color-light: var(--color-light-background);
-  --color-dark: var(--color-light-foreground);
+  --color-light: light-dark(var(--color-light-background), var(--color-dark-foreground));
+  --color-dark: light-dark(var(--color-light-foreground), var(--color-dark-background));
   --color-darker: oklch(from var(--color-dark) l c h / 0.15);
 
   --color-glass: oklch(from var(--color-background) l c h / 0.8);
@@ -443,32 +417,121 @@
    *
    * @property --color-shadow Active base shadow color.
    * @property --color-highlight Active specular highlight color.
-   * @property --color-surface Base surface color (defaults to surface-light-1).
-   * @property --color-surface-light-1 Subtle elevated surface step (cards, containers).
-   * @property --color-surface-light-2 Elevated surface step (popovers, menus, dialogs).
-   * @property --color-surface-light-3 High elevated surface step (active highlights, modals).
-   * @property --color-surface-dark-1 Recessed surface step (inputs, wells, code blocks).
-   * @property --color-surface-dark-2 Deep recessed surface step (switch tracks, sunken wells).
-   * @property --color-surface-dark-3 Deepest recessed surface step.
+   * @property --color-surface-sunken Recessed surface, 0.03 darker than the background (inputs, wells, code blocks).
+   * @property --color-surface-raised Raised surface, 0.03 lighter than the background (cards, panes, panels).
+   * @property --color-surface Short alias of `--color-surface-raised`.
+   * @property --color-surface-overlay Floating surface, 0.06 lighter than the background (menus, popovers, dialogs).
+   * @property --color-fill Fill for thin shapes (the track of a slider): Apple's `systemFill`, the foreground at 9.8 %.
+   * @property --color-fill-secondary Small shapes (the backing of a progress bar): 7.8 %.
+   * @property --color-fill-tertiary Medium shapes (the backing of a switch): 4.7 %.
+   * @property --color-fill-quaternary Large areas (a group box): 2.7 %.
+   * @property --color-fill-quinary Large areas needing subtle emphasis (the content of a form): 0.8 %.
+   * @property --color-hover Pointer over an item. Apple defines no hover colour; this is its secondary fill.
+   * @property --color-active Item being pressed (`:active`): the primary fill.
+   * @property --color-selected Selected item: Apple's `unemphasizedSelectedContentBackgroundColor` as a foreground alpha, 14 % light / 18 % dark.
+   * @property --color-placeholder Placeholder text: Apple's `placeholderTextColor`, the foreground at 50 % light / 55 % dark.
+   * @property --color-ring Keyboard focus ring: Apple's `keyboardFocusIndicatorColor`, the accent at 50 %.
+   * @property --color-scrim Veil behind a modal surface: Apple's dimming layer, black at 35 %.
+   * @property --color-stage Backdrop behind media (photos, video, a canvas): neutral, 0.09 darker than the background, in both schemes. A theme may set `--color-light-stage` / `--color-dark-stage`.
+   * @property --color-surface-light-3 Numeric step, +0.09 (kept; no named level yet).
+   * @property --color-surface-dark-2 Numeric step, -0.06 (switch tracks, deep wells).
+   * @property --color-surface-dark-3 Numeric step, -0.09 (deepest insets).
+   * @property --color-surface-light-1 Legacy alias of `--color-surface-raised`.
+   * @property --color-surface-light-2 Legacy alias of `--color-surface-overlay`.
+   * @property --color-surface-dark-1 Legacy alias of `--color-surface-sunken`.
    */
 
   /* Semantic Shadow Seeds */
-  --color-shadow: var(--color-light-shadow-base);
-  --color-highlight: var(--color-light-highlight);
+  --color-shadow: light-dark(
+    var(
+      --color-light-shadow-base,
+      oklch(
+        from var(--color-light-foreground) calc(l * 0.5) calc(c * 0.5)
+          calc(h - 15) / 0.075
+      )
+    ),
+    var(
+      --color-dark-shadow-base,
+      oklch(
+        from var(--color-dark-background) calc(l * 0.25) calc(c * 0.5)
+          calc(h - 15) / 0.5
+      )
+    )
+  );
+  --color-highlight: light-dark(
+    var(
+      --color-light-highlight,
+      oklch(from var(--color-light-background) min(1, calc(l + 0.25)) c h / 0.6)
+    ),
+    var(
+      --color-dark-highlight,
+      oklch(from var(--color-dark-foreground) min(1, calc(l + 0.05)) c h / 0.11)
+    )
+  );
 
-  /* Directional surface scale (lighter & darker than background) */
-  --color-surface-light-1: oklch(
+  /* Named levels, relative to the ground (names after Atlassian's elevation
+     ladder: sunken, default, raised, overlay). See GUIDE.md section 11. */
+  --color-surface-sunken: oklch(
+    from var(--color-background) max(0, calc(l - 0.03)) c h
+  );
+  --color-surface-raised: oklch(
     from var(--color-background) min(1, calc(l + 0.03)) c h
   );
-  --color-surface-light-2: oklch(
+  --color-surface-overlay: oklch(
     from var(--color-background) min(1, calc(l + 0.06)) c h
   );
-  --color-surface-light-3: oklch(
-    from var(--color-background) min(1, calc(l + 0.09)) c h
+  --color-surface: var(--color-surface-raised);
+
+  /* The stage: what a picture sits on. Neutral (no chroma, so it casts no colour
+     on the photos) and darker than the ground in both schemes. Not an
+     elevation level: nothing is above or below it. */
+  --_stage: oklch(from var(--color-background) max(0, calc(l - 0.09)) 0 h);
+  --color-stage: light-dark(
+    var(--color-light-stage, var(--_stage)),
+    var(--color-dark-stage, var(--_stage))
   );
 
-  --color-surface-dark-1: oklch(
-    from var(--color-background) max(0, calc(l - 0.03)) c h
+  /* Fills: the macOS ladder (NSColor.systemFill and the four after it), read
+     from the system itself (see packages/themes/macos/system-colors.json). The
+     foreground at 9.8 / 7.8 / 4.7 / 2.7 / 0.8 %, the same in light and dark, so
+     one declaration each. Named by the size of the shape they fill, as AppKit
+     documents: thin (slider track), small (progress backing), medium (switch
+     backing), large (group box), large and subtle (form content). */
+  --color-fill: oklch(from var(--color-foreground) l c h / 0.098);
+  --color-fill-secondary: oklch(from var(--color-foreground) l c h / 0.078);
+  --color-fill-tertiary: oklch(from var(--color-foreground) l c h / 0.047);
+  --color-fill-quaternary: oklch(from var(--color-foreground) l c h / 0.027);
+  --color-fill-quinary: oklch(from var(--color-foreground) l c h / 0.008);
+
+  /* Interaction states, translucent so they work on every surface. macOS has
+     no hover colour (system controls draw their own): hover and press borrow
+     its fills, whose names are about shape, not state. Selected is Apple's
+     unemphasized selection (220 on white, 70 on 30) as a foreground alpha. */
+  --color-hover: var(--color-fill-secondary);
+  --color-active: var(--color-fill);
+  --color-selected: light-dark(
+    oklch(from var(--color-light-foreground) l c h / 0.14),
+    oklch(from var(--color-dark-foreground) l c h / 0.18)
+  );
+
+  /* Placeholder: macOS draws it at the secondary-label weight, 49.8 % in light
+     and 54.9 % in dark. */
+  --color-placeholder: light-dark(
+    oklch(from var(--color-light-foreground) l c h / 0.5),
+    oklch(from var(--color-dark-foreground) l c h / 0.55)
+  );
+
+  /* Focus ring: shadcn/ui's word, Apple's value. keyboardFocusIndicatorColor is
+     the accent at 49.8 %. */
+  --color-ring: oklch(from var(--color-accent) l c h / 0.5);
+
+  /* Scrim: the dimming layer Apple's Materials page puts behind clear Liquid
+     Glass over bright content, 35 % black. Plain rgb() so it works everywhere. */
+  --color-scrim: rgb(0 0 0 / 0.35);
+
+  /* Numeric steps without a named level yet. */
+  --color-surface-light-3: oklch(
+    from var(--color-background) min(1, calc(l + 0.09)) c h
   );
   --color-surface-dark-2: oklch(
     from var(--color-background) max(0, calc(l - 0.06)) c h
@@ -477,8 +540,10 @@
     from var(--color-background) max(0, calc(l - 0.09)) c h
   );
 
-  /* Canonical base surface */
-  --color-surface: var(--color-surface-light-1);
+  /* Legacy aliases, kept until nothing reads them. */
+  --color-surface-light-1: var(--color-surface-raised);
+  --color-surface-light-2: var(--color-surface-overlay);
+  --color-surface-dark-1: var(--color-surface-sunken);
 
   /**
    * @component Border Shorthands
@@ -498,257 +563,69 @@
 }
 
 /* =====================================================================
-   STAGE 7: DARK MODE SWITCH
-   System preference flips semantic tokens to dark palette.
-   Computed semantics (muted, subtle, border, surfaces, shadows)
-   auto-adapt because they reference scheme-aware --color-foreground
-   and --color-background.
+   STAGE 7: SCHEME CONTROL
+   The roles above resolve against `color-scheme`, so everything a scheme
+   switch used to restate — dark palette, containers, forced modes — is
+   one property. `color-scheme: light dark` (Stage 1) follows the system;
+   these rules pin it on an element and, by inheritance, its subtree.
    ===================================================================== */
-@media (prefers-color-scheme: dark) {
-  #{$stnd-theme-scope}:not([data-color-mode="light"]):not([data-theme-mode="light"]) {
-    /* Core semantic tokens → dark palette */
-    --color-background: var(--color-dark-background);
-    --color-foreground: var(--color-dark-foreground);
-    --color-accent: var(--color-dark-accent);
-    --color-muted: var(--color-dark-muted);
-
-    /* Polarity flip: in dark mode, "light" = foreground, "dark" = background */
-    --color-light: var(--color-dark-foreground);
-    --color-dark: var(--color-dark-background);
-
-    --color-header: var(--color-dark-header, var(--color-foreground));
-    --color-on-accent: var(--color-background);
-
-    /* Hue tokens → dark palette */
-    --color-red: var(--color-dark-red);
-    --color-orange: var(--color-dark-orange);
-    --color-yellow: var(--color-dark-yellow);
-    --color-green: var(--color-dark-green);
-    --color-cyan: var(--color-dark-cyan);
-    --color-blue: var(--color-dark-blue);
-    --color-magenta: var(--color-dark-magenta);
-    --color-purple: var(--color-dark-purple);
-    --color-pink: var(--color-dark-pink);
-    --color-brown: var(--color-dark-brown);
-
-    --color-link: var(--color-dark-link);
-    --color-italic: var(--color-dark-italic, var(--color-foreground));
-    --color-bold: var(--color-dark-bold, var(--color-foreground));
-
-    /* Adjusted opacity for dark backgrounds */
-    --color-subtle: var(--color-dark-subtle);
-    --color-border: var(--color-dark-border);
-
-    --color-shadow: var(--color-dark-shadow-base);
-    --color-highlight: var(--color-dark-highlight);
-
-    --shadow-xl: var(--shadow-glow);
-
-    /* Recompute directional surfaces for dark background */
-    --color-surface-light-1: oklch(
-      from var(--color-background) min(1, calc(l + 0.03)) c h
-    );
-    --color-surface-light-2: oklch(
-      from var(--color-background) min(1, calc(l + 0.06)) c h
-    );
-    --color-surface-light-3: oklch(
-      from var(--color-background) min(1, calc(l + 0.09)) c h
-    );
-    --color-surface-dark-1: oklch(
-      from var(--color-background) max(0, calc(l - 0.03)) c h
-    );
-    --color-surface-dark-2: oklch(
-      from var(--color-background) max(0, calc(l - 0.06)) c h
-    );
-    --color-surface-dark-3: oklch(
-      from var(--color-background) max(0, calc(l - 0.09)) c h
-    );
-    --color-surface: var(--color-surface-light-1);
-  }
-}
-
-/**
- * @component Theme Classes & Mixins
- * @category Foundation
- * @description Utilities and classes for forcing color modes and contextual inversion on subtrees.
- *
- * @property .theme-light Forces light color scheme and tokens on the applied container.
- * @property .theme-dark Forces dark color scheme and tokens on the applied container.
- * @property .inverse Contextually inverts color scheme relative to current background mode.
- * @property [data-theme] Scoped theme attribute allowing local theme switching on cards or panels.
- * @property [data-color-mode] Attribute setting explicit `"light"` or `"dark"` mode.
- * @property @mixin theme-light-tokens Mixin stamping active light palette tokens into a selector.
- * @property @mixin theme-dark-tokens Mixin stamping active dark palette tokens into a selector.
- */
-
-@mixin theme-light-tokens {
-  --color-background: var(--color-light-background);
-  --color-foreground: var(--color-light-foreground);
-  --color-accent: var(--color-light-accent);
-  --color-muted: var(--color-light-muted);
-  --color-subtle: var(--color-light-subtle);
-  --color-border: var(--color-light-border);
-  --color-surface-light-1: oklch(
-    from var(--color-background) min(1, calc(l + 0.03)) c h
-  );
-  --color-surface-light-2: oklch(
-    from var(--color-background) min(1, calc(l + 0.06)) c h
-  );
-  --color-surface-light-3: oklch(
-    from var(--color-background) min(1, calc(l + 0.09)) c h
-  );
-  --color-surface-dark-1: oklch(
-    from var(--color-background) max(0, calc(l - 0.03)) c h
-  );
-  --color-surface-dark-2: oklch(
-    from var(--color-background) max(0, calc(l - 0.06)) c h
-  );
-  --color-surface-dark-3: oklch(
-    from var(--color-background) max(0, calc(l - 0.09)) c h
-  );
-  --color-surface: var(--color-surface-light-1);
-  --color-shadow: var(--color-light-shadow-base);
-  --color-highlight: var(--color-light-highlight);
-  --color-light: var(--color-light-background);
-  --color-dark: var(--color-light-foreground);
+[data-color-mode="light"],
+[data-theme-mode="light"],
+.theme-light {
   color-scheme: light;
 }
 
-@mixin theme-dark-tokens {
-  --color-background: var(--color-dark-background);
-  --color-foreground: var(--color-dark-foreground);
-  --color-accent: var(--color-dark-accent);
-  --color-muted: var(--color-dark-muted);
-  --color-subtle: var(--color-dark-subtle);
-  --color-border: var(--color-dark-border);
-  --color-surface-light-1: oklch(
-    from var(--color-background) min(1, calc(l + 0.03)) c h
-  );
-  --color-surface-light-2: oklch(
-    from var(--color-background) min(1, calc(l + 0.06)) c h
-  );
-  --color-surface-light-3: oklch(
-    from var(--color-background) min(1, calc(l + 0.09)) c h
-  );
-  --color-surface-dark-1: oklch(
-    from var(--color-background) max(0, calc(l - 0.03)) c h
-  );
-  --color-surface-dark-2: oklch(
-    from var(--color-background) max(0, calc(l - 0.06)) c h
-  );
-  --color-surface-dark-3: oklch(
-    from var(--color-background) max(0, calc(l - 0.09)) c h
-  );
-  --color-surface: var(--color-surface-light-1);
-  --color-shadow: var(--color-dark-shadow-base);
-  --color-highlight: var(--color-dark-highlight);
-  --color-light: var(--color-dark-foreground);
-  --color-dark: var(--color-dark-background);
+[data-color-mode="dark"],
+.theme-dark {
   color-scheme: dark;
 }
 
-.theme-light {
-  @include theme-light-tokens;
-  color: var(--color-foreground);
-}
-
+.theme-light,
 .theme-dark {
-  @include theme-dark-tokens;
   color: var(--color-foreground);
-}
-
-/* =====================================================================
-   STAGE 7C: CONTAINER THEMING
-   Re-resolves semantic tokens at element level so any element with
-   [data-theme] gets full color resolution — not just <html>.
-   Enables: themed cards, themed panels, side-by-side theme comparisons,
-   and scoped theme previews without changing the page chrome.
-   ===================================================================== */
-
-[data-theme] {
-  @include theme-light-tokens;
-
-  /* Hue tokens (not in the mixin) */
-  --color-header: var(--color-light-header, var(--color-foreground));
-  --color-red: var(--color-light-red);
-  --color-orange: var(--color-light-orange);
-  --color-yellow: var(--color-light-yellow);
-  --color-green: var(--color-light-green);
-  --color-cyan: var(--color-light-cyan);
-  --color-blue: var(--color-light-blue);
-  --color-magenta: var(--color-light-magenta);
-  --color-purple: var(--color-light-purple);
-  --color-pink: var(--color-light-pink);
-  --color-brown: var(--color-light-brown);
-  --color-link: var(--color-light-link);
-  --color-italic: var(--color-light-italic, var(--color-foreground));
-  --color-bold: var(--color-light-bold, var(--color-foreground));
-}
-
-@media (prefers-color-scheme: dark) {
-  [data-theme]:not([data-color-mode="light"]):not([data-theme-mode="light"]) {
-    @include theme-dark-tokens;
-
-    --color-header: var(--color-dark-header, var(--color-foreground));
-    --color-red: var(--color-dark-red);
-    --color-orange: var(--color-dark-orange);
-    --color-yellow: var(--color-dark-yellow);
-    --color-green: var(--color-dark-green);
-    --color-cyan: var(--color-dark-cyan);
-    --color-blue: var(--color-dark-blue);
-    --color-magenta: var(--color-dark-magenta);
-    --color-purple: var(--color-dark-purple);
-    --color-pink: var(--color-dark-pink);
-    --color-brown: var(--color-dark-brown);
-    --color-link: var(--color-dark-link);
-    --color-italic: var(--color-dark-italic, var(--color-foreground));
-    --color-bold: var(--color-dark-bold, var(--color-foreground));
-  }
-}
-
-#{$stnd-theme-scope}[data-color-mode="dark"],
-[data-color-mode="dark"] [data-theme],
-[data-color-mode="dark"][data-theme],
-[data-color-mode="dark"] {
-  @include theme-dark-tokens;
-
-  --color-header: var(--color-dark-header, var(--color-foreground));
-  --color-red: var(--color-dark-red);
-  --color-orange: var(--color-dark-orange);
-  --color-yellow: var(--color-dark-yellow);
-  --color-green: var(--color-dark-green);
-  --color-cyan: var(--color-dark-cyan);
-  --color-blue: var(--color-dark-blue);
-  --color-magenta: var(--color-dark-magenta);
-  --color-purple: var(--color-dark-purple);
-  --color-pink: var(--color-dark-pink);
-  --color-brown: var(--color-dark-brown);
-  --color-link: var(--color-dark-link);
-  --color-italic: var(--color-dark-italic, var(--color-foreground));
-  --color-bold: var(--color-dark-bold, var(--color-foreground));
-}
-
-#{$stnd-theme-scope}[data-color-mode="light"],
-[data-color-mode="light"] [data-theme],
-[data-color-mode="light"][data-theme],
-[data-color-mode="light"] {
-  @include theme-light-tokens;
-
-  --color-header: var(--color-light-header, var(--color-foreground));
-  --color-red: var(--color-light-red);
-  --color-orange: var(--color-light-orange);
-  --color-yellow: var(--color-light-yellow);
-  --color-green: var(--color-light-green);
-  --color-cyan: var(--color-light-cyan);
-  --color-blue: var(--color-light-blue);
-  --color-magenta: var(--color-light-magenta);
-  --color-link: var(--color-light-link);
-  --color-italic: var(--color-light-italic, var(--color-foreground));
-  --color-bold: var(--color-light-bold, var(--color-foreground));
 }
 
 /* =====================================================================
    STAGE 8: FALLBACKS — Graceful Degradation
+   Without `light-dark()` the roles above are invalid, so these browsers
+   get the light scheme: every role maps straight to its light seed.
+   ===================================================================== */
+@supports not (color: light-dark(white, black)) {
+  #{$stnd-theme-scope},
+  [data-theme] {
+    --color-background: var(--color-light-background);
+    --color-foreground: var(--color-light-foreground);
+    --color-accent: var(--color-light-accent);
+    --color-header: var(--color-light-header, var(--color-foreground));
+    --color-red: var(--color-light-red);
+    --color-orange: var(--color-light-orange);
+    --color-yellow: var(--color-light-yellow);
+    --color-green: var(--color-light-green);
+    --color-cyan: var(--color-light-cyan);
+    --color-blue: var(--color-light-blue);
+    --color-magenta: var(--color-light-magenta);
+    --color-purple: var(--color-light-purple);
+    --color-pink: var(--color-light-pink);
+    --color-brown: var(--color-light-brown);
+    --color-link: var(--color-light-link);
+    --color-italic: var(--color-light-italic, var(--color-foreground));
+    --color-bold: var(--color-light-bold, var(--color-foreground));
+    --color-muted: var(--color-light-muted, rgba(0, 0, 0, 0.6));
+    --color-subtle: var(--color-light-subtle, rgba(0, 0, 0, 0.4));
+    --color-border: var(--color-light-border, rgba(0, 0, 0, 0.1));
+    --color-shadow: var(--color-light-shadow-base, rgba(0, 0, 0, 0.25));
+    --color-highlight: var(--color-light-highlight, rgba(255, 255, 255, 0.6));
+    --color-light: var(--color-light-background);
+    --color-dark: var(--color-light-foreground);
+    --color-stage: var(--color-light-stage, var(--_stage));
+    --color-selected: rgba(0, 0, 0, 0.14);
+    --color-placeholder: rgba(0, 0, 0, 0.5);
+    --shadow-xl-tone: var(--color-shadow);
+  }
+}
+
+/* =====================================================================
+   Browsers without OKLCH — concrete values so the UI stays usable.
    Browsers without OKLCH support (Safari <16.4, Chrome <111, FF <113)
    get concrete color values so the UI remains usable.
 
@@ -789,13 +666,14 @@
     --color-muted: rgba(0, 0, 0, 0.6);
     --color-subtle: rgba(0, 0, 0, 0.4);
     --color-border: rgba(0, 0, 0, 0.1);
-    --color-surface-light-1: rgba(255, 255, 255, 0.4);
-    --color-surface-light-2: rgba(255, 255, 255, 0.6);
+    --color-surface-raised: rgba(255, 255, 255, 0.4);
+    --color-surface-overlay: rgba(255, 255, 255, 0.6);
     --color-surface-light-3: rgba(255, 255, 255, 0.8);
-    --color-surface-dark-1: rgba(0, 0, 0, 0.04);
+    --color-surface-sunken: rgba(0, 0, 0, 0.04);
+    --color-stage: rgba(0, 0, 0, 0.14);
     --color-surface-dark-2: rgba(0, 0, 0, 0.08);
     --color-surface-dark-3: rgba(0, 0, 0, 0.14);
-    --color-surface: var(--color-surface-light-1);
+    --color-surface: var(--color-surface-raised);
     --color-shadow: rgba(0, 0, 0, 0.25);
     --color-highlight: rgba(255, 255, 255, 0.6);
   }
@@ -814,23 +692,21 @@
   }
 }
 
-/* The Inverse Logic: Context-aware flipping */
+/* The Inverse Logic: the scheme opposite to the current one.
+   Default: if the root is light (by system or by choice), inverse is dark. */
 .inverse {
-  /* Default: if root is light (either by system or choice), inverse is dark */
-  @include theme-dark-tokens;
+  color-scheme: dark;
   color: var(--color-foreground);
 
-  /* If system is dark AND root hasn't forced light mode, root is dark, so inverse must be light */
+  /* System is dark and the root has not forced light: root is dark, so inverse is light */
   @media (prefers-color-scheme: dark) {
-    #{$stnd-theme-scope}:not([data-color-mode="light"]) & {
-      @include theme-light-tokens;
-      color: var(--color-foreground);
+    #{$stnd-theme-scope}:not([data-color-mode="light"]):not([data-theme-mode="light"]) & {
+      color-scheme: light;
     }
   }
 
-  /* If root explicitly forced dark mode, inverse must be light */
+  /* Root explicitly forced dark: inverse is light */
   #{$stnd-theme-scope}[data-color-mode="dark"] & {
-    @include theme-light-tokens;
-    color: var(--color-foreground);
+    color-scheme: light;
   }
 }

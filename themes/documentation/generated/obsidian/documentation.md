@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-01 13:40
+modified: 2026-10-07 14:14
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,19 +20,19 @@ snippet: false
 [data-stnd-theme="documentation"] {
     /* ─── Custom rules for Documentation ───────────────────────────── */
     --color-light-shadow-base: color-mix(in srgb, var(--color-accent) 1%, transparent);
-        --color-border:color-mix(in srgb, var(--color-accent) 15%, transparent);
+        --color-light-border: color-mix(in srgb, var(--color-accent) 15%, transparent);
         --shadow-glow: 0 4px var(--leading) oklch(from var(--color-shadow) l c h / 0.05);
         --rhythm-block-scale: 3;
 
         &.theme-dark,
         &[data-color-mode="dark"] {
             .stnd-code-block {
-                background: var(--color-surface-light-1);
+                background: var(--color-surface-raised);
             }
         }
         @media (prefers-color-scheme: dark) {
             .stnd-code-block {
-                background: var(--color-surface-light-1);
+                background: var(--color-surface-raised);
             }
         }
 
@@ -76,7 +76,7 @@ snippet: false
 
       /* ── Keybinding chips — flat, bordered, no raised effect ── */
       kbd {
-        background: var(--color-surface-light-2);
+        background: var(--color-surface-overlay);
         background-image: none;
         border: 1px solid var(--color-border);
         border-radius: 4px;

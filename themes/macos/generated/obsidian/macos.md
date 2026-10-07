@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-04 21:56
-modified: 2026-10-07 12:51
+modified: 2026-10-07 14:30
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,12 +19,7 @@ snippet: false
 ```css
 [data-stnd-theme="macos"] {
     /* ─── Custom rules for macOS ───────────────────────────── */
-    @media (prefers-color-scheme: dark) {
-        --color-accent: #0a84ff;
-        --color-photo-frame: #181818;
-      }
-
-      /* Motion */
+    /* Motion */
       --duration-instant: 120ms;
       --duration-fast: 150ms;
       --duration-standard: 180ms;
@@ -66,7 +61,7 @@ snippet: false
     .pane {
       margin: var(--window-inset);
       padding: var(--window-inset);
-      background: var(--color-surface-light-1);
+      background: var(--color-surface-raised);
       border-radius: var(--pane-radius);
       box-shadow: var(--shadow), var(--pane-edge);
       overflow: hidden;
@@ -128,12 +123,12 @@ snippet: false
         color var(--duration-instant) var(--ease-soft);
 
       &:hover {
-        background: var(--color-surface-dark-2);
+        background: var(--color-hover);
         color: var(--color-foreground);
       }
 
       &:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
-        background: var(--color-surface-dark-1);
+        background: var(--color-surface-sunken);
         color: var(--color-foreground);
         font-weight: var(--font-weight-bold);
       }
@@ -151,7 +146,7 @@ snippet: false
       gap: var(--space-d2);
       padding: var(--space-d4) var(--space-d2);
       border-radius: 999px;
-      background: color-mix(in srgb, var(--color-surface-light-1) 88%, transparent);
+      background: color-mix(in srgb, var(--color-surface-raised) 88%, transparent);
       backdrop-filter: blur(20px) var(--filter-blur);
       -webkit-backdrop-filter: blur(20px);
       box-shadow: var(--shadow-raised);

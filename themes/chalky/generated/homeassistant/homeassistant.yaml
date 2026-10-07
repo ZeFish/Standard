@@ -12,8 +12,8 @@ Chalky Light:
   info-color: "#5b7fb5"
 
 Chalky Dark:
-  primary-color: "#d08a49"
-  accent-color: "#d08a49"
+  primary-color: "#000000"
+  accent-color: "#000000"
   primary-background-color: "#3d3826"
   primary-text-color: "#faf8f1"
   secondary-text-color: "#000000"

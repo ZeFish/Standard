@@ -18,6 +18,37 @@ tags: [standard, design-tokens, audit]
 > own variables (`--background-*`, `--color-base-*`) are Obsidian's API and out of scope.
 > Each decision below has a ☐ to tick, change or veto.
 
+## Progress (2026-10-07)
+
+Done and verified against a before/after snapshot of every token, in 28 themes × 11 contexts
+(system light/dark, forced modes, nested `[data-theme]`, `.theme-*`, `.inverse`):
+
+- ✅ **Scheme switch collapsed** (section 7.1): six copies → one `light-dark()` declaration per role,
+  scheme chosen by `color-scheme`. `_standard-02-color.scss` 836 → 670 lines; `standard.css` −4 %;
+  the Obsidian build −17 %.
+- ✅ **Computed palettes at the role layer** (section 3): `muted`, `subtle`, `border`, `shadow`,
+  `highlight` are formulas on the active seeds. The 16 per-scheme twins are no longer declared; the
+  same names remain as **optional overrides** (`var(--color-dark-border, <formula>)`).
+- ✅ **Dead removed:** `light/dark-on-accent`, `--color-photo-frame`, `elevated` and `photoFrame` seeds.
+- ✅ **Themes minimised:** 134 colour declarations that duplicated the generated block removed from
+  15 theme `.scss`; 36 role-level overrides moved to light seeds (so dark is unchanged).
+- ✅ **Accent strategies:** `analogous` and `complementary` removed (never read); `triadic` is the only derivation. `dark-on-accent` removed with them.
+- ✅ **Component-private tokens:** `--color-callout`, `--color-alert`, `--color-loading(-mix)` and `--color-grid` are now `--_callout`, `--_alert`, `--_loading(-mix)`, `--_grid` (the `--_` private convention; `--callout-color` is taken by Obsidian). stnd.gd's two Loaders, blueprint and Obsidian's callouts follow. Compiled CSS is identical for all 28 themes.
+- ✅ **Surface names (step 3):** `--color-surface-sunken`, `-raised`, `-overlay` (Atlassian's ladder, see GUIDE 11) are the canonical names; `--color-surface` stays as the short alias of `raised`. 159 readers in 49 files migrated (Reveal included) and the utilities gained `.bg-surface-sunken/-raised/-overlay`. The old `-light-1`, `-light-2`, `-dark-1` remain as aliases, now read by nothing in the repo. The numeric steps `-light-3`, `-dark-2`, `-dark-3` (15 readers) are not elevation levels at all: they are hover/active/selected states (13), control tracks (6, Apple's `fill`) and Reveal's photo backdrop (`stage`). They go once those roles exist (GUIDE 11). Verified: every pre-existing token identical on 39,732 comparisons; the new names equal the old ones in all 1,232 alias checks (the only gap is `international`, which overrides `--color-surface` on purpose).
+- ✅ **`--color-stage`** added (GUIDE 3.1): neutral, 0.09 darker than the ground in both schemes; Reveal's `GrainBackground` reads it instead of `surface-dark-3`. Checked on 28 themes × 2 schemes: chroma 0 everywhere, always darker than the ground (a pure-black ground, as in `contrast`, cannot go darker). `--color-surface-dark-3` is now read by nobody.
+- ✅ **Fills, states, placeholder, ring, scrim (Apple's values, read from macOS 27):** the `--color-fill*` ladder (foreground at 9.8 / 7.8 / 4.7 / 2.7 / 0.8 %, named by shape size per AppKit), `--color-hover` (the secondary fill), `--color-active`, `--color-selected` (14 % / 18 %), `--color-placeholder` (50 % / 55 %), `--color-ring` (the accent at 50 %) and `--color-scrim` (black 35 %). They replace the last numeric readers (switch/progress/slider tracks, hover and focus highlights, a selected launcher item, a keycap, two tiles); the forms' placeholder, two focus outlines and `Dialog`'s veil now read them. Alphas checked against the system's on 28 themes × 2 schemes (560/560). Reveal's `--canvas` reads `--color-stage`. `--color-surface-light-3`, `-dark-2` and `-dark-3` are read by nobody and deprecated.
+- ↩️ **Retracted:** `--color-border-strong`. It was chosen to reach WCAG's 3:1; the goal is Apple's subtlety, macOS has no strong border (a field is drawn with the separator, 9.8 %, which is our `--color-border`), and `contrast` is the WCAG theme. Likewise iOS's fill values (20 / 16 / 12 / 8 %) were replaced by macOS's lighter ones once the system was read.
+- ↩️ **Restored:** the `macos` theme's light background is back to `#ececec` (an earlier edit of mine had set Claude's `#faf9f5`; the system's own is `#ffffff`, for the "100 % system" step).
+- ✅ **Consistency:** a forced mode now gives exactly what the system mode gives (before, the three
+  dark contexts disagreed for 19 themes).
+
+Visible effects, all intended: `link` now follows `accent` in the 7 themes that overrode the accent
+at role level (blueprint, calm, chalky, dev, dyslexia, gallery, kernel); `international`'s surface is
+flat in dark as its light scheme; `.theme-dark` / `.inverse` now switch the hues too (they did not);
+`--shadow-xl` expresses "glow only in dark" as a transparent colour. Known follow-ups: regenerate
+`apps/obsidian-standard-garden/src/themes.generated.js` (stale until the plugin rebuilds); the
+accent strategies, component-private tokens and surface renames below are still open.
+
 ## 1. The picture
 
 | | |
@@ -92,9 +123,9 @@ fourteen tokens and the code that switches them.
 |---|---|---|
 | `--color-surface-light-1/2/3`, `-dark-1/2/3` | *Direction* baked into the name; 221 reads outside, so the rename is a real migration. Light-mode steps clamp at 1 (GUIDE 7.2) | ☐ replace by role names (GUIDE 3.1), keep old names as aliases for one release |
 | `--color-light` / `--color-dark`, `--color-darker` | Polarity aliases; 1 read outside, `darker` none | ☐ rename or drop (GUIDE 7.1); remove `darker` |
-| `--color-pink`, `--color-brown` | 0 readers outside | ☐ remove from the core, theme-optional |
-| `--color-magenta` vs `--color-purple` | Two neighbouring hues (reads 3 and 5) | ☐ keep one, or keep both with distinct jobs |
-| `--border-hover`, `--border-accent`, `--border-transparent` | 0, 0 and 1 reads outside | ☐ remove the first two; keep `--border` |
+| `--color-pink`, `--color-brown` | 0 readers outside | ☑ **keep**: both are Apple system colours (GUIDE 11), so standard names; optional per theme |
+| `--color-magenta` vs `--color-purple` | Two neighbouring hues (reads 3 and 5). Apple lists `purple` but not `magenta`; CSS and ANSI list `magenta` | ☐ keep both: `purple` is Apple's, `magenta` is CSS/ANSI's (3 themes use it) |
+| `--border-hover`, `--border-accent`, `--border-transparent` (a `border` composite, as in the DTCG spec) | 0, 0 and 1 reads outside | ☐ remove the first two; keep `--border` |
 | `--color-photo-frame` (+ seeds `photoFrame`, `elevated` in `macos` and `reveal`) | Defined in two themes, **read by nobody**; Reveal improvises `--canvas` instead | ☐ fold into `stage` (GUIDE 3.1) and delete |
 | `--color-light/dark-surface`, `-surface-low` (documentation, federal) | One theme reads `dark-surface`; the rest unread | ☐ fold into the surface ladder |
 | `--color-loading*` etc. | see section 4 | |

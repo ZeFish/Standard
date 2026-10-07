@@ -24,7 +24,7 @@
 
 /* Keycaps */
 kbd {
-  background-color: var(--color-surface-light-1);
+  background-color: var(--color-surface-raised);
   border: none;
   border-radius: 15%;
   box-shadow: var(--shadow);
@@ -46,12 +46,12 @@ kbd {
   filter: blur(0.3px);
   animation: rotation 0.25s linear infinite;
 
-  --color-loading-mix: color-mix(in oklch, var(--color-accent) 100%, black);
-  --color-loading: oklch(from var(--color-loading-mix) l c h / 0.25);
-  border-bottom-color: var(--color-loading);
+  --_loading-mix: color-mix(in oklch, var(--color-accent) 100%, black);
+  --_loading: oklch(from var(--_loading-mix) l c h / 0.25);
+  border-bottom-color: var(--_loading);
   box-shadow:
-    0px 4px 6px -2px var(--color-loading),
-    inset 0px -4px 6px -2px var(--color-loading);
+    0px 4px 6px -2px var(--_loading),
+    inset 0px -4px 6px -2px var(--_loading);
 }
 
 @keyframes rotation {
@@ -79,7 +79,7 @@ a.btn {
   line-height: 1;
   font-size: 1em;
   user-select: none;
-  background-color: var(--color-surface-light-1);
+  background-color: var(--color-surface-raised);
   color: var(--color-foreground);
   cursor: pointer;
   gap: var(--gap-compact);
@@ -98,14 +98,14 @@ a.btn {
   text-decoration: none !important;
 
   &:hover {
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
     /* Lift shadow slightly on hover */
     color: var(--color-foreground);
     box-shadow: var(--shadow-hover);
   }
 
   &:active {
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -130,10 +130,10 @@ a.btn.destructive {
 :where(button).accent,
 a.btn.accent {
     color: color-mix(in oklch, var(--color-accent) 90%, var(--color-foreground));
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
 
   &:hover {
-    background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface-dark-1));
+    background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface-sunken));
     color: var(--color-foreground);
     box-shadow: var(--shadow-raised), var(--shadow-glow);
 
@@ -157,7 +157,7 @@ a.btn.link {
   }
 
   &:active {
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -171,12 +171,12 @@ a.btn.outline {
 
   &:hover {
     color: var(--color-foreground);
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
   }
 
   &:active {
     color: var(--color-foreground);
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -191,12 +191,12 @@ a.btn.ghost {
 
   &:hover {
     color: var(--color-foreground);
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
     box-shadow: var(--shadow-hover);
   }
 
   &:active {
-    background-color: var(--color-surface-dark-1);
+    background-color: var(--color-surface-sunken);
     /* Flatten shadow on press */
     box-shadow: var(--shadow-inset), var(--shadow-ring);
   }
@@ -257,7 +257,7 @@ a.btn:disabled {
   gap: 1px;
   padding: 1px;
   border-radius: var(--radius);
-  background: var(--color-surface-dark-1);
+  background: var(--color-surface-sunken);
   box-shadow: var(--shadow-inset);
 
   > :where(button, a.btn) {
@@ -269,7 +269,7 @@ a.btn:disabled {
     border-radius: calc(var(--radius) - 1px);
 
     &:hover {
-      background-color: var(--color-surface-dark-2);
+      background-color: var(--color-hover);
       color: var(--color-foreground);
       box-shadow: none;
     }
@@ -280,7 +280,7 @@ a.btn:disabled {
         [aria-checked="true"],
         [aria-current]:not([aria-current="false"])
       ) {
-      background-color: var(--color-surface-light-1);
+      background-color: var(--color-surface-raised);
       color: var(--color-foreground);
       box-shadow: var(--shadow);
     }
@@ -353,20 +353,20 @@ a.badge:hover,
   background: color-mix(
     in oklch,
     var(--color-accent) 70%,
-    var(--color-surface-light-1)
+    var(--color-surface-raised)
   );
 }
 
 .badge.accent,
 a.badge.accent {
-  background-color: var(--color-surface-light-1);
+  background-color: var(--color-surface-raised);
   color: var(--color-foreground);
 }
 
 a.badge.accent:hover,
 .badge.accent a:hover {
   color: var(--color-accent);
-  background: color-mix(in oklch, currentColor 5%, var(--color-surface-light-1));
+  background: color-mix(in oklch, currentColor 5%, var(--color-surface-raised));
 }
 
 .badge.outline {
@@ -376,7 +376,7 @@ a.badge.accent:hover,
   &:hover,
   a:hover {
     color: var(--color-foreground);
-    background: var(--color-surface-dark-1);
+    background: var(--color-surface-sunken);
   }
 }
 
@@ -387,12 +387,12 @@ a.badge.accent:hover,
 
   &:hover {
     color: var(--color-foreground);
-    background: var(--color-surface-light-1);
+    background: var(--color-surface-raised);
   }
 }
 
 .badge.destructive {
-  background-color: var(--color-surface-light-1);
+  background-color: var(--color-surface-raised);
   border-color: color-mix(
     in oklch,
     var(--color-error) 10%,
@@ -480,37 +480,37 @@ a.badge.accent:hover,
  */
 .alert {
   font-family: var(--font-interface);
-  --color-alert: var(--color-accent);
+  --_alert: var(--color-accent);
   padding: var(--space-d2);
   color: color-mix(
     in oklch,
-    var(--color-alert) 25%,
+    var(--_alert) 25%,
     var(--color-foreground)
   ) !important;
   /* Alpha overlay works consistently on both light and dark backgrounds:
    light bg → pale tint, dark bg → visible colored tint */
-  background: oklch(from var(--color-alert) l c h / 0.1);
+  background: oklch(from var(--_alert) l c h / 0.1);
   border-left: var(--stroke-width) solid
-    oklch(from var(--color-alert) l c h / 0.5);
+    oklch(from var(--_alert) l c h / 0.5);
   box-shadow: var(--shadow);
   text-shadow: none !important;
 }
 
 // Callout Color Variants
 .alert.warning {
-  --color-alert: var(--color-warning);
+  --_alert: var(--color-warning);
 }
 
 .alert.error {
-  --color-alert: var(--color-error);
+  --_alert: var(--color-error);
 }
 
 .alert.success {
-  --color-alert: var(--color-success);
+  --_alert: var(--color-success);
 }
 
 .alert.info {
-  --color-alert: var(--color-info);
+  --_alert: var(--color-info);
 }
 
 /**
@@ -700,7 +700,7 @@ a.badge.accent:hover,
 }
 
 .card > header:first-child {
-  background: var(--color-surface-light-2);
+  background: var(--color-surface-overlay);
   box-shadow: var(--shadow-lift);
   border-bottom: var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
@@ -717,7 +717,7 @@ a.badge.accent:hover,
     border-bottom: var(--border);
 
     box-shadow: var(--shadow);
-    background-color: var(--color-surface-light-1);
+    background-color: var(--color-surface-raised);
   }
 
   p {
@@ -817,12 +817,12 @@ card.inset {
 
   border-radius: var(--radius);
   padding: calc(var(--trim)/2);
-  --color-callout: var(--color-surface-light-1);
-  --color-border: oklch(from var(--color-callout) l c h / 0.15);
+  --_callout: var(--color-surface-raised);
+  --color-border: oklch(from var(--_callout) l c h / 0.15);
   background: color-mix(
     in srgb,
-    var(--color-callout) 10%,
-    var(--color-surface-light-1)
+    var(--_callout) 10%,
+    var(--color-surface-raised)
   );
   font-size: var(--scale-d2);
 
@@ -831,7 +831,7 @@ card.inset {
     position: relative;
     color: color-mix(
       in oklch,
-      var(--color-callout) 50%,
+      var(--_callout) 50%,
       var(--color-foreground)
     );
     display: flex;
@@ -855,8 +855,8 @@ card.inset {
     color: var(--color-foreground);
     background: color-mix(
       in srgb,
-      var(--color-callout) 10%,
-      var(--color-surface-dark-1)
+      var(--_callout) 10%,
+      var(--color-surface-sunken)
     );
     line-height: var(--line-height-compact);
     box-shadow: var(--shadow-inset), var(--shadow-ring);
@@ -911,56 +911,56 @@ card.inset {
 
 // Callout Color Variants
 .callout[data-callout="warning" i] {
-  --color-callout: var(--color-red);
+  --_callout: var(--color-red);
 }
 
 .callout[data-callout="important" i] {
-  --color-callout: var(--color-orange);
+  --_callout: var(--color-orange);
 }
 
 // Notion Color Variants
 .callout[data-callout*="gray" i] {
-  --color-callout: var(--color-foreground);
+  --_callout: var(--color-foreground);
 }
 
 .callout[data-callout*="red" i] {
-  --color-callout: var(--color-red);
+  --_callout: var(--color-red);
 }
 
 .callout[data-callout*="brown" i] {
-  --color-callout: var(--color-brown);
+  --_callout: var(--color-brown);
 }
 
 .callout[data-callout*="orange" i] {
-  --color-callout: var(--color-orange);
+  --_callout: var(--color-orange);
 }
 
 .callout[data-callout*="yellow" i] {
-  --color-callout: var(--color-yellow);
+  --_callout: var(--color-yellow);
 }
 
 .callout[data-callout*="green" i] {
-  --color-callout: var(--color-green);
+  --_callout: var(--color-green);
 }
 
 .callout[data-callout*="cyan" i] {
-  --color-callout: var(--color-cyan);
+  --_callout: var(--color-cyan);
 }
 
 .callout[data-callout*="blue" i] {
-  --color-callout: var(--color-blue);
+  --_callout: var(--color-blue);
 }
 
 .callout[data-callout*="magenta" i] {
-  --color-callout: var(--color-magenta);
+  --_callout: var(--color-magenta);
 }
 
 .callout[data-callout*="purple" i] {
-  --color-callout: var(--color-purple);
+  --_callout: var(--color-purple);
 }
 
 .callout[data-callout*="pink" i] {
-  --color-callout: var(--color-pink);
+  --_callout: var(--color-pink);
 }
 
 // Details/Summary specific callout styles
@@ -1128,15 +1128,15 @@ details .callout-fold {
  * Actions within alerts (links, buttons) should be visually distinct but not
  * overwhelming. This provides subtle styling that inherits the alert's color.
  *
- * @property .alert-action Inline action link within an alert, inheriting `--color-alert`.
+ * @property .alert-action Inline action link within an alert, inheriting `--_alert`.
  */
 /* Fixed 2026-07-14 — was an undefined token (--alert-border-color),
-   corrected to the real --color-alert, matching the docblock's stated
+   corrected to the real --_alert, matching the docblock's stated
    intent that this inherits the alert's color. */
 .alert-action {
   display: inline-block;
   margin-inline-start: var(--space-d2);
-  color: var(--color-alert);
+  color: var(--_alert);
   text-decoration: underline;
   font-weight: var(--font-weight-bold);
 
@@ -1221,7 +1221,7 @@ a.skip-link {
 
 .std-menu-content {
   padding: var(--space-d4);
-  background: var(--color-surface-light-1);
+  background: var(--color-surface-raised);
   border: none;
   border-radius: var(--radius);
   box-shadow: var(--shadow-raised), var(--shadow-glow);
@@ -1277,12 +1277,12 @@ a.skip-link {
   text-decoration: none;
 
   &:hover:not(.disabled) {
-    background: var(--color-surface-light-2);
+    background: var(--color-surface-overlay);
     box-shadow: var(--shadow);
   }
 
   &:active:not(.disabled) {
-    background: var(--color-surface-dark-1);
+    background: var(--color-surface-sunken);
     box-shadow: var(--shadow-inset);
   }
 

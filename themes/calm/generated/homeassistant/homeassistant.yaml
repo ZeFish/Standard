@@ -12,8 +12,8 @@ Calm (Anti-Overload) Light:
   info-color: "#000000"
 
 Calm (Anti-Overload) Dark:
-  primary-color: "#6f8c7e"
-  accent-color: "#6f8c7e"
+  primary-color: "#000000"
+  accent-color: "#000000"
   primary-background-color: "#1e1d1b"
   primary-text-color: "#cdcac4"
   secondary-text-color: "#000000"

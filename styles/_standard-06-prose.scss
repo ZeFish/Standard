@@ -297,7 +297,7 @@
   }
 
   /* Fixed 2026-07-14 — swapped undefined tokens for their real equivalents
-     (--color-muted, --color-accent, --color-surface-light-2). */
+     (--color-muted, --color-accent, --color-surface-overlay). */
   .mycelial-link,
   .mycelial-graft {
     text-decoration: none;
@@ -309,7 +309,7 @@
     &:hover {
       color: var(--color-accent);
       border-bottom: 1px solid var(--color-accent);
-      background-color: var(--color-surface-light-2);
+      background-color: var(--color-surface-overlay);
     }
   }
 }

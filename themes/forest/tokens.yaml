@@ -42,10 +42,9 @@ tokens:
   font-monospace: "\"Monosten\""
   font-interface: "\"Monosten\""
   font-interface-weight: "600"
-  color-accent: var(--color-yellow)
   color-code: var(--color-orange)
-  color-bold: var(--color-orange)
-  color-italic: var(--color-blue)
+  color-light-bold: var(--color-orange)
+  color-light-italic: var(--color-blue)
   optical-ratio: var(--ratio-golden)
   line-height: var(--optical-ratio)
   font-weight: "400"

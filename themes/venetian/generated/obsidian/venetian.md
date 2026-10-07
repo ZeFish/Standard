@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 01:46
+modified: 2026-10-07 13:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,10 +20,6 @@ snippet: false
 [data-stnd-theme="venetian"] {
     /* ─── Custom rules for Venetian ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
-    --color-light-accent: #7b3f00;
-    --color-blue: #2f4e6e;
-    --color-yellow: #c2a94b;
-    --color-dark-accent: color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b );
     --font-header: "adobe-jenson-pro";
     --font-text: "adobe-jenson-pro";
     --page-padding: var(--space-2);

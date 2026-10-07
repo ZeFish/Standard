@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-10-07 14:00
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,24 +20,6 @@ snippet: false
 [data-stnd-theme="blueprint"] {
     /* ─── Custom rules for Blueprint ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
-    --color-light-background: #1a4d7a;
-    --color-light-foreground: #f0f4f8;
-    --color-dark-foreground: var(--color-light-foreground);
-    --color-dark-background: var(--color-light-background);
-    --color-light-red: rgba(255, 28, 0, 0.493);
-    --color-light-orange: rgba(188, 82, 21, 0.574);
-    --color-light-yellow: rgba(173, 131, 1, 0.794);
-    --color-light-green: rgba(102, 128, 11, 0.576);
-    --color-light-cyan: rgba(36, 131, 123, 0.641);
-    --color-light-blue: rgba(32, 94, 166, 0.614);
-    --color-light-purple: #5e409d;
-    --color-light-pink: #a02f6f;
-    --color-accent: var(--color-orange);
-    --color-code: var(--color-foreground);
-    --color-bold: var(--color-red);
-    --color-italic: var(--color-green);
-    --color-dark-accent: var(--color-magenta);
-    --color-dark-bold: var(--color-magenta);
     --font-monospace: "MonoLisa";
     --font-monospace-feature: "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
     --optical-ratio: 1.425;
@@ -207,7 +189,7 @@ snippet: false
       }
 
       body::before {
-        --color-grid: var(--color-foreground);
+        --_grid: var(--color-foreground);
         --percent-grid: 5%;
         --grid-unit: var(--space);
         --dot-size: 1px;
@@ -218,7 +200,7 @@ snippet: false
         opacity: 1;
         background-image: radial-gradient(
           circle,
-          color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+          color-mix(in srgb, var(--_grid) var(--percent-grid), transparent)
             var(--dot-size),
           transparent var(--dot-size)
         );

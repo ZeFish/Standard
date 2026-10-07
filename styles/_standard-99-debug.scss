@@ -80,7 +80,7 @@
 
 /* Baseline Grid Overlay */
 .stnd-debug::before {
-  --color-grid: var(--color-cyan);
+  --_grid: var(--color-cyan);
   --percent-grid: calc(var(--debug-opacity) / 8);
   --grid-unit: 1rlh;
   content: "";
@@ -90,9 +90,9 @@
     to bottom,
     transparent 0,
     transparent calc(var(--grid-unit) - 1px),
-    color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+    color-mix(in srgb, var(--_grid) var(--percent-grid), transparent)
       calc(var(--grid-unit) - 1px),
-    color-mix(in srgb, var(--color-grid) var(--percent-grid), transparent)
+    color-mix(in srgb, var(--_grid) var(--percent-grid), transparent)
       var(--grid-unit)
   );
   pointer-events: none;

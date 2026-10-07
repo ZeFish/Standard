@@ -18,9 +18,9 @@ tokens:
   color-light-blue: "#5b7fb5"
   color-light-purple: "#9b6fb3"
   color-light-pink: "#d99db2"
-  color-accent: var(--color-light-orange)
-  color-bold: var(--color-red)
-  color-italic: var(--color-green)
+  color-light-accent: var(--color-light-orange)
+  color-light-bold: var(--color-red)
+  color-light-italic: var(--color-green)
   font-text: "\"Jimmy Serif Pro\""
   font-header: "\"Fern\""
   font-monospace: "\"Monaspace Xenon\""

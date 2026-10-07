@@ -10,9 +10,9 @@ tokens:
   color-light-foreground: "#4a4743"
   color-dark-background: "#1e1d1b"
   color-dark-foreground: "#cdcac4"
-  color-accent: "#6f8c7e"
-  color-border: transparent
-  color-subtle: color-mix(in srgb, var(--color-foreground) 4%, transparent)
+  color-light-accent: "#6f8c7e"
+  color-light-border: transparent
+  color-light-subtle: color-mix(in srgb, var(--color-foreground) 4%, transparent)
   font-text: "\"Quicksand\", sans-serif"
   font-header: "\"Quicksand\", sans-serif"
   font-weight-text: "400"

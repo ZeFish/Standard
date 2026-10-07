@@ -26,13 +26,13 @@ tokens:
   color-dark-blue: "#8caaee"
   color-dark-purple: "#8b7ec8"
   color-dark-pink: "#f4b8e4"
-  color-accent: var(--color-yellow)
+  color-light-accent: var(--color-yellow)
   color-code: var(--color-foreground)
-  color-bold: var(--color-blue)
-  color-italic: var(--color-green)
+  color-light-bold: var(--color-blue)
+  color-light-italic: var(--color-green)
   color-dark-accent: var(--color-magenta)
   color-dark-bold: var(--color-magenta)
-  color-header: var(--color-foreground)
+  color-light-header: var(--color-foreground)
   radius: var(--leading)
   font-text: "\"MonoLisa\""
   font-feature: "\"onum\", \"liga\", \"clig\", \"calt\", \"zero\""

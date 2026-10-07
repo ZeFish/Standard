@@ -49,6 +49,6 @@ tokens:
   font-header-variation: "\"\""
   font-header-weight: "400"
   font-header-line-height: "1"
-  color-bold: var(--color-red)
+  color-light-bold: var(--color-red)
   bold-weight: "550"
   callout-default: var(--color-base-30)

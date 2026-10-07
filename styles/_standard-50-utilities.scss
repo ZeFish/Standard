@@ -709,24 +709,31 @@
   background-color: var(--color-glass);
 }
 
+.bg-surface-raised,
 .bg-surface-light-1 {
-  background-color: var(--color-surface-light-1) !important;
+  background-color: var(--color-surface-raised) !important;
 }
 
+.bg-surface-overlay,
 .bg-surface-light-2 {
-  background-color: var(--color-surface-light-2) !important;
+  background-color: var(--color-surface-overlay) !important;
 }
 
 .bg-surface-light-3 {
   background-color: var(--color-surface-light-3) !important;
 }
 
+.bg-surface-sunken,
 .bg-surface-dark-1 {
-  background-color: var(--color-surface-dark-1) !important;
+  background-color: var(--color-surface-sunken) !important;
 }
 
 .bg-surface-dark-2 {
   background-color: var(--color-surface-dark-2) !important;
+}
+
+.bg-stage {
+  background-color: var(--color-stage) !important;
 }
 
 .bg-surface-dark-3 {

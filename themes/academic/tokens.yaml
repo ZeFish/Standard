@@ -10,7 +10,6 @@ meta:
 tokens:
   color-light-background: "#f7f6f4"
   color-light-foreground: "#292827"
-  color-accent: "#0f5a7d"
   font-text: "\"Source Serif 4\", \"Georgia\", \"Times New Roman\", serif"
   font-header: "\"Source Serif 4\", \"Georgia\", \"Times New Roman\", serif"
   font-monospace: "\"IBM Plex Mono\", \"Menlo\", monospace"

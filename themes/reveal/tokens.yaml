@@ -15,11 +15,7 @@ tokens:
   color-dark-background: "#1f1f1e"
   color-dark-foreground: "#ebebeb"
   color-dark-border: rgba(235, 235, 235, 0.14)
-  color-accent: "#d6202c"
-  color-light-elevated: "#ffffff"
-  color-dark-elevated: "#2d2d2d"
-  color-light-photoFrame: "#ffffff"
-  color-dark-photoFrame: "#171717"
+  color-light-accent: "#d6202c"
   font-text: "\"Inter\", system-ui, sans-serif"
   font-header: "\"DIN Condensed\", Impact, \"Arial Narrow\", sans-serif"
   font-monospace: "\"IBM Plex Mono\", \"SF Mono\", monospace"

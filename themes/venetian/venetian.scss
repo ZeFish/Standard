@@ -5,8 +5,8 @@
   --color-dark-background: #1c120a;
   --color-dark-foreground: #e8d9bd;
   --color-light-accent: #7b3f00;
-  --color-blue: #2f4e6e;
-  --color-yellow: #c2a94b;
+  --color-light-blue: #2f4e6e;
+  --color-light-yellow: #c2a94b;
   --color-dark-accent: color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b );
   --font-header: "adobe-jenson-pro";
   --font-text: "adobe-jenson-pro";
@@ -29,10 +29,6 @@
 :root[data-theme="venetian"],
 [data-theme="venetian"] {
 /* ─── Design Tokens ──────────────────────────────────────── */
---color-light-accent: #7b3f00;
---color-blue: #2f4e6e;
---color-yellow: #c2a94b;
---color-dark-accent: color-mix( in srgb, var(--color-dark-foreground) 25%, #b08a4b );
 --font-header: "adobe-jenson-pro";
 --font-text: "adobe-jenson-pro";
 --page-padding: var(--space-2);

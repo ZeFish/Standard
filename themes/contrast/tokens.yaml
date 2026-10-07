@@ -12,7 +12,7 @@ tokens:
   color-dark-foreground: "#ffffff"
   color-light-accent: "#0050ff"
   color-dark-accent: "#ffff00"
-  color-border: var(--color-foreground)
+  color-light-border: var(--color-foreground)
   font-text: "\"Sohne\", sans-serif"
   font-header: "\"Inter\", sans-serif"
   font-weight-text: "500"
@@ -20,8 +20,8 @@ tokens:
   font-header-letter-spacing: 0.02em
   line-height: "1.5"
   optical-ratio: "1.414"
-  color-muted: var(--color-foreground)
-  color-subtle: var(--color-foreground)
+  color-light-muted: var(--color-foreground)
+  color-light-subtle: var(--color-foreground)
   font-size: 1.0625rem
   font-ratio: "1.333"
   font-density: "1.45"

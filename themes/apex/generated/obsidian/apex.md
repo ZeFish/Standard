@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-01 13:40
+modified: 2026-10-07 14:00
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,10 +20,6 @@ snippet: false
 [data-stnd-theme="apex"] {
     /* ─── Custom rules for Apex ───────────────────────────── */
     /* ─── Foreground & Background ────────────────────────────── */
-    --color-light-foreground: #3b3b3b;
-    --color-light-background: #e4e0d6;
-    --color-dark-foreground:  #e4e0d6;
-    --color-dark-background:  #1b1b1b;
 
     /* ─── Light Palette — Volcanic Tonal ─────────────────────── */
     /*
@@ -51,10 +47,8 @@ snippet: false
     --color-dark-pink:   oklch(64% 0.118 12);    /* ember rose                  */
 
     /* ─── Semantic assignments ──────────────────────────────── */
-    --color-accent:       var(--color-red);
     --color-light-accent: var(--color-red);
-    --color-bold:         var(--color-foreground);
-    --color-italic:       var(--color-muted, color-mix(in oklab, var(--color-foreground) 70%, transparent));
+    --color-light-italic:       var(--color-muted, color-mix(in oklab, var(--color-foreground) 70%, transparent));
 
     /* ─── Typography ────────────────────────────────────────── */
     --bold-weight: 600;

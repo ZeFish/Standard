@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-20 22:04
+modified: 2026-10-07 13:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,20 +20,6 @@ snippet: false
 [data-stnd-theme="occult"] {
     /* ─── Custom rules for Occult ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
-    --color-light-background: #f8f5f1;
-    --color-light-foreground: #1c1c1b;
-    --color-light-accent: #be9c63;
-    --color-light-red: #8a3324;
-    --color-light-orange: #c1742d;
-    --color-light-green: #4a7a49;
-    --color-light-cyan: #3b8d8a;
-    --color-light-blue: #2f5f87;
-    --color-light-purple: #6b4b8a;
-    --color-dark-background: #0f0f0f;
-    --color-dark-foreground: #efeae3;
-    --color-dark-accent: color-mix(in srgb, var(--color-light-accent) 60%, #000 40%);
-    --color-bold: var(--color-red);
-    --color-italic: var(--color-green);
     --font-text: "Fern";
     --font-header: "Fern";
     --font-monospace: "Monaspace Xenon";

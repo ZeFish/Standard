@@ -12,8 +12,8 @@ Gallery Light:
   info-color: "#000000"
 
 Gallery Dark:
-  primary-color: "#c1443c"
-  accent-color: "#c1443c"
+  primary-color: "#000000"
+  accent-color: "#000000"
   primary-background-color: "#101010"
   primary-text-color: "#ccc"
   secondary-text-color: "#000000"

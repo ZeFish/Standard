@@ -150,7 +150,7 @@ ol:where(.flex, [style*="display: flex"], [style*="display:flex"]) li {
   font-family: var(--font-monospace);
   font-size: var(--scale-d5);
   color: var(--color-subtle);
-  background: var(--color-surface-dark-1);
+  background: var(--color-surface-sunken);
   border: var(--border);
   border-radius: var(--radius-sm);
   padding: 0 var(--trim);

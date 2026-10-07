@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-02 20:58
+modified: 2026-10-07 13:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,13 +20,6 @@ snippet: false
 [data-stnd-theme="calm"] {
     /* ─── Custom rules for Calm (Anti-Overload) ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
-    --color-light-background: #eeebe5;
-    --color-light-foreground: #4a4743;
-    --color-dark-background: #1e1d1b;
-    --color-dark-foreground: #cdcac4;
-    --color-accent: #6f8c7e;
-    --color-border: transparent;
-    --color-subtle: color-mix(in srgb, var(--color-foreground) 4%, transparent);
     --font-text: "Quicksand", sans-serif;
     --font-header: "Quicksand", sans-serif;
     --font-weight-text: 400;

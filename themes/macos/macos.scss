@@ -1,12 +1,10 @@
 /* TOKENS.YAML ADAPTER BEGIN */
 :root[data-theme="macos"],
 [data-theme="macos"] {
-  --color-light-background: #faf9f5;
+  --color-light-background: #ececec;
   --color-light-foreground: #1d1d1f;
   --color-light-border: rgba(0, 0, 0, 0.12);
   --color-light-accent: #007aff;
-  --color-light-elevated: #ffffff;
-  --color-light-photoFrame: #ffffff;
   --color-light-red: #ff3b30;
   --color-light-orange: #ff9500;
   --color-light-yellow: #ffcc00;
@@ -19,8 +17,6 @@
   --color-dark-foreground: #f5f5f7;
   --color-dark-border: rgba(255, 255, 255, 0.12);
   --color-dark-accent: #0a84ff;
-  --color-dark-elevated: #2d2d2d;
-  --color-dark-photoFrame: #141414;
   --color-dark-red: #ff453a;
   --color-dark-orange: #ff9f0a;
   --color-dark-yellow: #ffd60a;
@@ -29,7 +25,6 @@
   --color-dark-blue: #0a84ff;
   --color-dark-purple: #bf5af2;
   --color-dark-pink: #ff375f;
-  --color-accent: #007aff;
   --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui, sans-serif;
   --font-header: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", system-ui, sans-serif;
   --font-monospace: "SF Mono", ui-monospace, Menlo, Monaco, monospace;
@@ -47,11 +42,6 @@
 // macOS system theme & application foundation
 :root[data-theme="macos"],
 [data-theme="macos"] {
-  @media (prefers-color-scheme: dark) {
-    --color-accent: #0a84ff;
-    --color-photo-frame: #181818;
-  }
-
   /* Motion */
   --duration-instant: 120ms;
   --duration-fast: 150ms;
@@ -94,7 +84,7 @@ html:not(:has(.panel-wrapper))::after {
 .pane {
   margin: var(--window-inset);
   padding: var(--window-inset);
-  background: var(--color-surface-light-1);
+  background: var(--color-surface-raised);
   border-radius: var(--pane-radius);
   box-shadow: var(--shadow), var(--pane-edge);
   overflow: hidden;
@@ -156,12 +146,12 @@ html:not(:has(.panel-wrapper))::after {
     color var(--duration-instant) var(--ease-soft);
 
   &:hover {
-    background: var(--color-surface-dark-2);
+    background: var(--color-hover);
     color: var(--color-foreground);
   }
 
   &:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
-    background: var(--color-surface-dark-1);
+    background: var(--color-surface-sunken);
     color: var(--color-foreground);
     font-weight: var(--font-weight-bold);
   }
@@ -179,7 +169,7 @@ html:not(:has(.panel-wrapper))::after {
   gap: var(--space-d2);
   padding: var(--space-d4) var(--space-d2);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--color-surface-light-1) 88%, transparent);
+  background: color-mix(in srgb, var(--color-surface-raised) 88%, transparent);
   backdrop-filter: blur(20px) var(--filter-blur);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow-raised);

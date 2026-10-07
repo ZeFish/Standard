@@ -20,8 +20,8 @@ tokens:
   color-light-accent: "#ff3300"
   color-dark-accent: "#ff5a1f"
   font-monospace: "\"Sohne Mono\""
-  color-bold: var(--color-accent)
-  color-italic: var(--color-foreground)
+  color-light-bold: var(--color-accent)
+  color-light-italic: var(--color-foreground)
   font-text: "\"Sohne Mono\""
   font-header: "\"Sohne Mono\""
   font-interface: "\"Sohne Mono\""

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 01:46
+modified: 2026-10-07 13:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,17 +20,10 @@ snippet: false
 [data-stnd-theme="academic"] {
     /* ─── Custom rules for Academic ───────────────────────────── */
     /* ─── Design Tokens ──────────────────────────────────────── */
-    --color-light-background: #f7f6f4;
-    --color-light-foreground: #292827;
-    --color-accent: #0f5a7d;
     --font-text: "Source Serif 4", "Georgia", "Times New Roman", serif;
     --font-header: "Source Serif 4", "Georgia", "Times New Roman", serif;
     --font-monospace: "IBM Plex Mono", "Menlo", monospace;
     --sidenote-width: 18rem;
-    --color-light-accent: #0f5a7d;
-    --color-dark-background: #211f1d;
-    --color-dark-foreground: #e6e2db;
-    --color-dark-accent: #7fb4cc;
     --optical-ratio: 1.225;
     --font-weight-header: 600;
     --font-feature: "onum", "pnum";

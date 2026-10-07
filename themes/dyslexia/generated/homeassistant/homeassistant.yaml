@@ -12,8 +12,8 @@ Dyslexia Light:
   info-color: "#000000"
 
 Dyslexia Dark:
-  primary-color: "#1f6690"
-  accent-color: "#1f6690"
+  primary-color: "#000000"
+  accent-color: "#000000"
   primary-background-color: "#242526"
   primary-text-color: "#e4e2de"
   secondary-text-color: "#000000"

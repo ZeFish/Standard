@@ -17,10 +17,10 @@ tokens:
   color-light-blue: rgba(32, 94, 166, 0.614)
   color-light-purple: "#5e409d"
   color-light-pink: "#a02f6f"
-  color-accent: var(--color-orange)
+  color-light-accent: var(--color-orange)
   color-code: var(--color-foreground)
-  color-bold: var(--color-red)
-  color-italic: var(--color-green)
+  color-light-bold: var(--color-red)
+  color-light-italic: var(--color-green)
   color-dark-accent: var(--color-magenta)
   color-dark-bold: var(--color-magenta)
   font-monospace: "\"MonoLisa\""

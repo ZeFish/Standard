@@ -9,16 +9,16 @@ tokens:
   color-dark-background: "#111111"
   color-light-red: "#e03030"
   color-dark-red: "#db6057"
-  color-green: var(--color-red)
-  color-blue: "#2b5aa0"
-  color-yellow: var(--color-red)
-  color-magenta: var(--color-red)
-  color-orange: var(--color-red)
-  color-accent: var(--color-red)
-  color-link: var(--color-red)
+  color-light-green: var(--color-red)
+  color-light-blue: "#2b5aa0"
+  color-light-yellow: var(--color-red)
+  color-light-magenta: var(--color-red)
+  color-light-orange: var(--color-red)
+  color-light-accent: var(--color-red)
+  color-light-link: var(--color-red)
   shadow: none
   shadow-inset: none
-  color-muted: var(--color-foreground)
+  color-light-muted: var(--color-foreground)
   color-dark-foreground: "#ccc"
   optical-ratio: var(--ratio-golden)
   mobile-font-ratio: var(--ratio-golden)

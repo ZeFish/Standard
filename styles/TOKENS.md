@@ -213,21 +213,25 @@ Themes can override individual values.
 | `--color-dark-blue`       | auto                           | Lightened blue    |
 | `--color-dark-magenta`    | auto                           | Lightened magenta |
 | `--color-dark-link`       | auto                           | Lightened link    |
-| `--color-dark-on-accent`  | `var(--color-dark-background)` | Text on accent    |
 
-## Colors — Auto-Accent Strategies
+## Colors — Auto-Accent
 
-Standard provides three automatic strategies to generate an accent color from your foreground text hue. By default, the system uses the `triadic` strategy for a balanced contrast. You can explicitly override `--color-[light/dark]-accent` in your theme using any of these strategies:
+When a theme does not set an accent, Standard derives one from the foreground hue: a third of the
+way around the colour wheel (triadic, +120°), a balanced contrast that stays natural. Set
+`--color-light-accent` and `--color-dark-accent` to use your own.
 
 | Token | Description |
 | --- | --- |
-| `--color-[light/dark]-accent-complementary` | Opposite side of the color wheel (+180°). Provides maximum, aggressive contrast. |
-| `--color-[light/dark]-accent-triadic` | A third of the way around (+120°). Balanced, strong but natural contrast (Default). |
-| `--color-[light/dark]-accent-analogous` | Next to the seed color (+30°). Harmonious, subtle, camaïeu effect. |
+| `--color-[light/dark]-accent-triadic` | The derived accent (+120° from the foreground hue). |
 
 ## Colors — Semantic
 
-Active tokens that resolve to light or dark palette.
+Active tokens that resolve to the light or dark palette. Each is declared **once**, as
+`light-dark(<light seed>, <dark seed>)`, so which palette applies is decided by the element's
+`color-scheme`: the system preference by default, or pinned with `[data-color-mode="light|dark"]`,
+`.theme-light`, `.theme-dark`, or `.inverse` (the opposite of the surrounding scheme). A themed
+container (`[data-theme]`) re-declares them, so it sees its own seeds. Requires `light-dark()`
+(Chrome 123, Safari 17.5, Firefox 120); older browsers get the light scheme.
 
 | Token                | Description                          |
 | -------------------- | ------------------------------------ |
@@ -253,29 +257,58 @@ Active tokens that resolve to light or dark palette.
 
 ## Colors — Computed
 
+Computed once from the active seeds, at the role layer: there is no separate light and dark copy
+of the formula. A theme that wants its own value for one scheme sets the matching **optional
+override** (`--color-light-muted`, `--color-dark-border`, …); an unset override falls back to the
+formula.
+
+| Override (optional)                                   | Role it replaces        |
+| ----------------------------------------------------- | ----------------------- |
+| `--color-light-muted`, `--color-dark-muted`           | `--color-muted`         |
+| `--color-light-subtle`, `--color-dark-subtle`         | `--color-subtle`        |
+| `--color-light-border`, `--color-dark-border`         | `--color-border`        |
+| `--color-light-shadow-base`, `--color-dark-shadow-base` | `--color-shadow`      |
+| `--color-light-highlight`, `--color-dark-highlight`   | `--color-highlight`     |
+
+A theme sets **seeds** (`--color-light-*`, `--color-dark-*`), never a role directly: a role set
+directly has one value for both schemes.
+
 | Token                  | Value                       | Description              |
 | ---------------------- | --------------------------- | ------------------------ |
 | `--color-muted`        | `foreground 60%`            | Muted text               |
 | `--color-subtle`       | `foreground 40%`            | Subtle text / decoration |
 | `--color-border`       | `foreground 10%`            | Default border           |
-| `--color-surface`        | `var(--color-surface-light-1)` | Active base surface      |
-| `--color-surface-light-1`| `oklch(from bg min(1, calc(l + 0.03)) c h)` | Light step 1 (subtle lift / cards)|
-| `--color-surface-light-2`| `oklch(from bg min(1, calc(l + 0.06)) c h)` | Light step 2 (headers / menus)|
-| `--color-surface-light-3`| `oklch(from bg min(1, calc(l + 0.09)) c h)` | Light step 3 (modals / popovers)|
-| `--color-surface-dark-1` | `oklch(from bg max(0, calc(l - 0.03)) c h)` | Dark step 1 (subtle wells / code blocks)|
-| `--color-surface-dark-2` | `oklch(from bg max(0, calc(l - 0.06)) c h)` | Dark step 2 (wells / tracks / inputs)|
-| `--color-surface-dark-3` | `oklch(from bg max(0, calc(l - 0.09)) c h)` | Dark step 3 (deep wells)|
+| `--color-surface-sunken` | `oklch(from bg max(0, calc(l - 0.03)) c h)` | Recessed: wells, code blocks, input fields |
+| `--color-surface-raised` | `oklch(from bg min(1, calc(l + 0.03)) c h)` | Raised: cards, panes, panels |
+| `--color-surface`        | `var(--color-surface-raised)` | Short alias of `raised`; a theme may override it |
+| `--color-surface-overlay`| `oklch(from bg min(1, calc(l + 0.06)) c h)` | Floating: menus, popovers, dialogs |
+| `--color-stage`          | `oklch(from bg max(0, calc(l - 0.09)) 0 h)` | Backdrop behind media (photos, video): neutral, darker than the ground in both schemes. Not an elevation level. Themes may set `--color-light-stage` / `--color-dark-stage`. |
+| `--color-fill`           | foreground at 9.8 % | Thin shapes: a slider track (macOS `systemFill`) |
+| `--color-fill-secondary` | foreground at 7.8 % | Small shapes: a progress bar's backing |
+| `--color-fill-tertiary`  | foreground at 4.7 % | Medium shapes: a switch's backing |
+| `--color-fill-quaternary`| foreground at 2.7 % | Large areas: a group box |
+| `--color-fill-quinary`   | foreground at 0.8 % | Large areas needing subtle emphasis: form content |
+| `--color-hover`          | `var(--color-fill-secondary)` | Pointer over an item (macOS has no hover colour; it borrows a fill) |
+| `--color-active`         | `var(--color-fill)` | Pressed (`:active`) |
+| `--color-selected`       | foreground at 14 % (light) / 18 % (dark) | Selected item (macOS `unemphasizedSelectedContentBackgroundColor`) |
+| `--color-placeholder`    | foreground at 50 % (light) / 55 % (dark) | Placeholder text (macOS `placeholderTextColor`) |
+| `--color-ring`           | accent at 50 % | Keyboard focus ring (macOS `keyboardFocusIndicatorColor`) |
+| `--color-scrim`          | `rgb(0 0 0 / 0.35)` | Veil behind a modal surface (Apple's dimming layer) |
+| `--color-surface-light-3`, `--color-surface-dark-2` | numeric steps | **Deprecated**: nothing reads them; the roles above replace their uses |
+| `--color-surface-dark-3` | `oklch(from bg max(0, calc(l - 0.09)) c h)` | Numeric step -3; superseded by `--color-stage`, nothing reads it |
+| `--color-surface-light-1`, `-light-2`, `-dark-1` | aliases | Legacy names of `raised`, `overlay`, `sunken`; kept until nothing reads them |
 | `--color-darker`         | `dark 15%` transparent              | Shadow helper            |
 | `--color-light`          | light background                    | Pole light               |
 | `--color-dark`           | light foreground                    | Pole dark                |
 | `--color-shadow`         | `dark 5%` transparent               | Shadow color base        |
 
-## Directional Surfaces
-
-Standard uses directional surface tokens relative to canvas background via perceptual OKLCH relative color syntax:
-- **Light steps (`--color-surface-light-1..3`)**: Uniformly increase perceptual lightness (+0.03, +0.06, +0.09) from canvas background, lifting elements into elevation across both light and dark mode.
-- **Dark steps (`--color-surface-dark-1..3`)**: Uniformly decrease perceptual lightness (-0.03, -0.06, -0.09) from canvas background, sinking elements into recessed areas across both light and dark mode.
-- **Default surface (`--color-surface`)**: Resolves to `--color-surface-light-1` by default, customizable per theme.
+## Surface levels
+Named after Atlassian's elevation ladder (sunken, default, raised, overlay). Each level is the
+background shifted in OKLCH lightness, so it follows any theme and both schemes.
+- **Sunken** (`--color-surface-sunken`, -0.03): recessed areas, away from the viewer.
+- **Raised** (`--color-surface-raised`, +0.03): anything that sits on the ground. `--color-surface` is its short alias.
+- **Overlay** (`--color-surface-overlay`, +0.06): anything that floats over a surface.
+- The old numeric steps (`-light-3`, `-dark-2`, `-dark-3`) were never elevation levels. They served hover and selection states, control tracks and Reveal's photo backdrop; `--color-hover` / `--color-selected`, the `--color-fill*` family and `--color-stage` replace them.
 
 ## Shadows (Layered System)
 

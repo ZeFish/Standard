@@ -10,7 +10,7 @@ tokens:
   color-light-foreground: "#2b2b2b"
   color-dark-background: "#242526"
   color-dark-foreground: "#e4e2de"
-  color-accent: "#1f6690"
+  color-light-accent: "#1f6690"
   font-text: "\"Atkinson Hyperlegible Next\", sans-serif"
   font-header: "\"Atkinson Hyperlegible Next\", sans-serif"
   font-mono: "\"Atkinson Hyperlegible Mono\", monospace"

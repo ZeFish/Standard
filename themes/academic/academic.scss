@@ -3,7 +3,6 @@
 [data-theme="academic"] {
   --color-light-background: #f7f6f4;
   --color-light-foreground: #292827;
-  --color-accent: #0f5a7d;
   --font-text: "Source Serif 4", "Georgia", "Times New Roman", serif;
   --font-header: "Source Serif 4", "Georgia", "Times New Roman", serif;
   --font-monospace: "IBM Plex Mono", "Menlo", monospace;
@@ -31,17 +30,10 @@
 :root[data-theme="academic"],
 [data-theme="academic"] {
 /* ─── Design Tokens ──────────────────────────────────────── */
---color-light-background: #f7f6f4;
---color-light-foreground: #292827;
---color-accent: #0f5a7d;
 --font-text: "Source Serif 4", "Georgia", "Times New Roman", serif;
 --font-header: "Source Serif 4", "Georgia", "Times New Roman", serif;
 --font-monospace: "IBM Plex Mono", "Menlo", monospace;
 --sidenote-width: 18rem;
---color-light-accent: #0f5a7d;
---color-dark-background: #211f1d;
---color-dark-foreground: #e6e2db;
---color-dark-accent: #7fb4cc;
 --optical-ratio: 1.225;
 --font-weight-header: 600;
 --font-feature: "onum", "pnum";

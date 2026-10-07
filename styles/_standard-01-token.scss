@@ -206,7 +206,13 @@
     var(--shadow-ambient);
 
   --shadow-lg: var(--shadow-ambient), var(--shadow-lift);
-  --shadow-xl: var(--shadow-ambient), var(--shadow-lift), var(--shadow-glow);
+  /* xl stacks the same layers as `lg` plus the glow; in dark schemes the
+     contact and lift layers are transparent (stacked dark shadows turn to mud),
+     which `light-dark()` expresses as a colour, not a second declaration. */
+  --shadow-xl-tone: light-dark(var(--color-shadow), transparent);
+  --shadow-xl:
+    0 1px 1px var(--shadow-xl-tone), 0 4px 6px -1px var(--shadow-xl-tone),
+    0 2px 4px -2px var(--shadow-xl-tone), var(--shadow-glow);
 
   --shadow: var(--shadow-raised);
   --shadow-hover: var(--shadow-raised), var(--shadow-lg);

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-14 21:02
+modified: 2026-10-07 13:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -20,10 +20,6 @@ snippet: false
 [data-stnd-theme="avantgarde"] {
     /* ─── Custom rules for Avant-Garde ───────────────────────────── */
     /* ─── Foreground & Background ────────────────────────────── */
-    --color-light-foreground: #393633;
-    --color-light-background: #e7e8e7;
-    --color-dark-foreground:  #dcdad6;
-    --color-dark-background:  #262421;
 
     /* ─── Light Palette — Bauhaus Editorial ─────────────────── */
     /*
