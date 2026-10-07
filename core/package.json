@@ -81,9 +81,9 @@
     "@stnd/themes": "^0.11.0",
     "@stnd/ui": "^0.8.8",
     "@stnd/utils": "^0.7.3",
-    "astro": "7.3.1",
+    "astro": "7.3.6",
     "glob": "^13.0.6",
-    "svelte": "5.57.0",
+    "svelte": "5.57.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {
