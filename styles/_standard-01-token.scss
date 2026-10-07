@@ -162,11 +162,13 @@
    * @property {variable} --window-radius The OS window's corner radius (`17px` on macOS).
    * @property {variable} --window-inset Gap between the window edge and a floating pane (`8px`).
    * @property {variable} --pane-radius Concentric inner radius for floating panes (`calc(var(--window-radius) - var(--window-inset))`).
+   * @property {variable} --pane-edge Hairline that outlines a pane and the window itself — an inset ring in `--color-highlight`, so it follows light/dark with the theme and never takes up layout space.
    * @property {variable} --titlebar-height Title-bar band height centered on window traffic lights (`41.5px`).
    */
   --window-radius: 17px;
   --window-inset: 8px;
   --pane-radius: calc(var(--window-radius) - var(--window-inset));
+  --pane-edge: inset 0 0 0 var(--stroke-width) var(--color-highlight);
   --titlebar-height: 41.5px;
 
   /**

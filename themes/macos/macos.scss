@@ -1,7 +1,7 @@
 /* TOKENS.YAML ADAPTER BEGIN */
 :root[data-theme="macos"],
 [data-theme="macos"] {
-  --color-light-background: #ececec;
+  --color-light-background: #faf9f5;
   --color-light-foreground: #1d1d1f;
   --color-light-border: rgba(0, 0, 0, 0.12);
   --color-light-accent: #007aff;
@@ -77,13 +77,26 @@
   }
 }
 
+/* The window's own edge: a hairline just inside the native frame, following its
+   corner radius. Drawn above everything and never catches a click. Every window carries it
+   except the transparent import HUD (`.panel-wrapper`), which is rounded on its own. */
+html:not(:has(.panel-wrapper))::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  border-radius: var(--window-radius);
+  box-shadow: var(--pane-edge);
+  pointer-events: none;
+}
+
 /* Application primitives (merged from app.scss) */
 .pane {
   margin: var(--window-inset);
   padding: var(--window-inset);
   background: var(--color-surface-light-1);
   border-radius: var(--pane-radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), var(--pane-edge);
   overflow: hidden;
 }
 

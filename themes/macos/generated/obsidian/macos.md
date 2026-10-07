@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-04 21:56
-modified: 2026-10-04 22:02
+modified: 2026-10-07 12:51
 cssclasses: []
 maturity: sprout
 mode: read
@@ -49,13 +49,26 @@ snippet: false
       }
     }
 
+    /* The window's own edge: a hairline just inside the native frame, following its
+       corner radius. Drawn above everything and never catches a click. Every window carries it
+       except the transparent import HUD (`.panel-wrapper`), which is rounded on its own. */
+    html:not(:has(.panel-wrapper))::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 2147483000;
+      border-radius: var(--window-radius);
+      box-shadow: var(--pane-edge);
+      pointer-events: none;
+    }
+
     /* Application primitives (merged from app.scss) */
     .pane {
       margin: var(--window-inset);
       padding: var(--window-inset);
       background: var(--color-surface-light-1);
       border-radius: var(--pane-radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow), var(--pane-edge);
       overflow: hidden;
     }
 

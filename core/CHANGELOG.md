@@ -1,5 +1,41 @@
 # @stnd/core
 
+## 0.24.0
+
+### Minor Changes
+
+- Auto-bumped @stnd/core due to modified code.
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @stnd/cloudflare@0.7.0
+  - @stnd/fonts@0.6.0
+  - @stnd/icon@0.8.0
+  - @stnd/lab@1.1.0
+  - @stnd/launcher@1.5.0
+  - @stnd/layout@0.8.0
+  - @stnd/log@0.6.0
+  - @stnd/modules@0.10.0
+  - @stnd/press@0.13.0
+  - @stnd/store@0.6.0
+  - @stnd/themes@0.12.0
+  - @stnd/ui@0.9.0
+  - @stnd/utils@0.8.0
+  - @stnd/client@0.7.6
+
 ## 0.23.28
 
 ### Patch Changes

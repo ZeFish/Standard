@@ -6,7 +6,7 @@ meta:
     [data-theme="macos"]
   fonts: []
 tokens:
-  color-light-background: "#ececec"
+  color-light-background: "#faf9f5"
   color-light-foreground: "#1d1d1f"
   color-light-border: "rgba(0, 0, 0, 0.12)"
   color-light-accent: "#007aff"
