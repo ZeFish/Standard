@@ -63,13 +63,13 @@
     {
       "scope": "variable",
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#30d158"
       }
     },
     {
       "scope": "variable.parameter",
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#ff9f0a"
       }
     },
     {
@@ -85,7 +85,7 @@
         "variable.other.constant"
       ],
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#ff9f0a"
       }
     },
     {
@@ -94,7 +94,7 @@
         "storage.modifier"
       ],
       "settings": {
-        "foreground": "#000000",
+        "foreground": "#ff9f0a",
         "fontStyle": "italic"
       }
     },
@@ -104,7 +104,7 @@
         "punctuation.definition.keyword"
       ],
       "settings": {
-        "foreground": "#000000",
+        "foreground": "#ff9f0a",
         "fontStyle": "italic"
       }
     },
@@ -114,14 +114,14 @@
         "support.function"
       ],
       "settings": {
-        "foreground": "#000000",
+        "foreground": "#0a84ff",
         "fontStyle": "italic"
       }
     },
     {
       "scope": "string",
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#ffd60a"
       }
     },
     {
@@ -131,19 +131,19 @@
         "support.class"
       ],
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#30d158"
       }
     },
     {
       "scope": "entity.name.tag",
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#0a84ff"
       }
     },
     {
       "scope": "entity.other.attribute-name",
       "settings": {
-        "foreground": "#000000"
+        "foreground": "#0a84ff"
       }
     },
     {
