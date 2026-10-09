@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 /* TOKENS.YAML ADAPTER BEGIN */
 :root[data-theme="macos"],
 [data-theme="macos"] {
@@ -39,7 +41,10 @@
 }
 /* TOKENS.YAML ADAPTER END */
 
-@import "./macos-dynamic";
+// load-css, not @import: it puts the rules exactly here (after the adapter block, so the
+// system colours win over its fallback values) without the @import deprecation. `@use` would
+// emit them first.
+@include meta.load-css("./macos-dynamic");
 
 // macOS system theme & application foundation
 :root[data-theme="macos"],

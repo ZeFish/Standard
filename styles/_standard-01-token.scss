@@ -212,7 +212,7 @@
   --shadow-border-right: inset calc(var(--stroke-width) * -1) 0 0 0
     var(--color-border);
   --shadow-raised:
-    inset 0 1px 0 0 var(--color-highlight), 0 0 0 1px var(--color-border),
+    inset 0 1px 0 0 var(--color-highlight),
     var(--shadow-ambient);
 
   /* Size scale (xs, sm, md, lg, xl) */

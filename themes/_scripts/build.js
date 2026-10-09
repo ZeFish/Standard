@@ -98,8 +98,10 @@ async function processTheme(themeDir, configFile) {
   let scssContent = "";
   if (fs.existsSync(scssPath)) {
     scssContent = fs.readFileSync(scssPath, "utf8");
-    // Strip any @use statements
-    scssContent = scssContent.replace(/@use\s+['"][^'"]+['"]\s*;?/g, "").trim();
+    // Strip any @use statements of the theme's own (the build re-adds what it needs), but keep
+    // the built-in `sass:` modules: a theme that loads a partial in place with
+    // `meta.load-css` needs `@use "sass:meta"` to still be there after this runs.
+    scssContent = scssContent.replace(/@use\s+['"](?!sass:)[^'"]+['"]\s*;?/g, "").trim();
 
     const beginComment = "/* TOKENS.YAML ADAPTER BEGIN */";
     const endComment = "/* TOKENS.YAML ADAPTER END */";

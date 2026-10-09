@@ -487,7 +487,7 @@
   /* The stage: what a picture sits on. Neutral (no chroma, so it casts no colour
      on the photos) and darker than the ground in both schemes. Not an
      elevation level: nothing is above or below it. */
-  --_stage: oklch(from var(--color-background) max(0, calc(l - 0.09)) 0 h);
+  --_stage: oklch(from var(--color-background) max(0, calc(l - 0.03)) 0 h);
   --color-stage: light-dark(
     var(--color-light-stage, var(--_stage)),
     var(--color-dark-stage, var(--_stage))
