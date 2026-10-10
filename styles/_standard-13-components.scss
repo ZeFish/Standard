@@ -867,7 +867,7 @@ card.inset {
     line-height: var(--line-height-compact);
     box-shadow: var(--shadow-inset), var(--shadow-ring);
     border-radius: var(--radius);
-    padding: var(--space-d2);
+    padding: var(--space-d4) var(--space-d2);
     margin-top: 0;
     margin-left: 0;
     text-align: left;
