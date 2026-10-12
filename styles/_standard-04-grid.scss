@@ -136,17 +136,20 @@ $grid-selectors: ".grid, .grid-row";
 /* Responsive spans/starts: md ≥ #{$small}, lg ≥ #{$large} */
 @media (max-width: #{$small}) {
   @for $i from 1 through 12 {
-    /* Experimental.. default all grid to be 1 on mobile */
+    /* Experimental.. default all grid to be 1 on mobile.
+       The column is minmax(0, 1fr), like the base .grid-N rule: a bare 1fr is minmax(auto, 1fr),
+       which grows to the widest thing inside a card (a table, a row of badges) and pushes it
+       past the edge of the screen. */
     .grid-#{$i} {
       grid-auto-columns: unset;
       grid-auto-flow: unset;
-      grid-template-columns: repeat(1, 1fr) !important;
+      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
     }
 
     .sm\:grid-#{$i} {
       grid-auto-columns: unset;
       grid-auto-flow: unset;
-      grid-template-columns: repeat(#{$i}, 1fr) !important;
+      grid-template-columns: repeat(#{$i}, minmax(0, 1fr)) !important;
     }
 
     .sm\:col-#{$i} {
@@ -171,7 +174,7 @@ $grid-selectors: ".grid, .grid-row";
   @for $i from 1 through 12 {
     .lg\:grid-#{$i} {
       display: grid;
-      grid-template-columns: repeat(#{$i}, 1fr);
+      grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
       column-gap: var(--gap);
       row-gap: var(--gap);
     }
