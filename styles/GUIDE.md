@@ -132,7 +132,7 @@ of the ladder without being recomputed.
 | App window, page | `background` |
 | Sidebar that belongs to the app | `background`, separated by `border` |
 | Sidebar that should read as recessed (Claude's look) | `surface-sunken` |
-| Floating pane (inspector, side panel) | `surface` + `--pane-edge` |
+| Floating pane (inspector, side panel, app sidebar) | `.pane`: `surface` + `--shadow` + `--pane-edge`, inset by `--window-inset`, radius `--pane-radius`; its rows are `.item` (`hover`, `selected`), its hairlines `.divider` (`_standard-15-application.scss`) |
 | Card, grouped list | `surface` |
 | Menu, popover, dialog | `surface-overlay` |
 | Text field, code block, well | `surface-sunken`, `border` |

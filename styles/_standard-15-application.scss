@@ -1,0 +1,99 @@
+/**
+ * @component Application primitives
+ * @category Components
+ * @description The few shapes an application window is made of, as opposed to a
+ * document: a floating pane, a list of rows, a row, a hairline between groups.
+ * They were born in the macOS theme (Reveal's sidebar) and lived there, so an app
+ * on any other theme got them by accident, through the global theme bundle. They
+ * belong to the framework: every value below is an existing token (GUIDE.md §4,
+ * "Sidebar that floats" = `.pane`).
+ *
+ * @example html
+ * <nav class="pane">
+ *   <ul class="list">
+ *     <li><a class="item" href="/stations" aria-current="page">Stations</a></li>
+ *     <li><a class="item" href="/carte">Carte</a></li>
+ *   </ul>
+ *   <hr class="divider" />
+ * </nav>
+ */
+
+/* A pane floats `--window-inset` from the edges of its window, with the radius
+   that is concentric with the window's own (`--pane-radius`). Surface and shadow
+   are a pair (GUIDE.md §5); `--pane-edge` is the hairline that carries it in a
+   light scheme, where `raised` can be the same white as the ground. */
+.pane {
+  margin: var(--window-inset);
+  padding: var(--window-inset);
+  background: var(--color-surface-raised);
+  border-radius: var(--pane-radius);
+  box-shadow: var(--shadow), var(--pane-edge);
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.list.divided > :not(:last-child) {
+  border-bottom: var(--border);
+}
+
+/* A row: a link, a button or a label with an icon. Hover and selection are
+   translucent fills (`--color-hover`, `--color-selected`), so a row reads the
+   same on every rung of the surface ladder. `aria-current` is the selection of
+   a navigation; `aria-selected` that of a list. */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-d2);
+  min-width: 0;
+  padding: var(--space-d5) var(--space-d2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  text-decoration: none;
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition:
+    background var(--duration-instant) var(--ease-soft),
+    color var(--duration-instant) var(--ease-soft);
+
+  &:hover {
+    background: var(--color-hover);
+    color: var(--color-foreground);
+  }
+
+  &:active {
+    background: var(--color-active);
+  }
+
+  &:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
+    background: var(--color-selected);
+    color: var(--color-foreground);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &:focus-visible {
+    outline: var(--stroke-width-lg) solid var(--color-ring);
+    outline-offset: calc(var(--stroke-width-lg) * -1);
+  }
+
+  &:is(:disabled, [aria-disabled="true"]) {
+    opacity: var(--opacity-disabled);
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.divider {
+  flex-shrink: 0;
+  height: var(--stroke-width);
+  margin: 0;
+  border: none;
+  background: var(--color-border);
+}

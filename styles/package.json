@@ -1,6 +1,6 @@
 {
   "name": "@stnd/styles",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "type": "module",
   "author": "Francis Fontaine",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "./code": "./_standard-12-code.scss",
     "./components": "./_standard-13-components.scss",
     "./analog": "./_standard-14-analog.scss",
+    "./application": "./_standard-15-application.scss",
     "./contrast": "./_standard-30-contrast.scss",
     "./print": "./_standard-31-print.scss",
     "./eink": "./_standard-32-eink.scss",
