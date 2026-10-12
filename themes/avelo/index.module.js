@@ -5,5 +5,9 @@ export default {
     "The àVélo operations palette: Vélosolutions red as the accent in light, àVélo green as the accent in dark.",
   meta: { type: "theme", themeId: "avelo", label: "àVélo" },
   styles: ["./avelo.scss"],
-  dependencies: [],
+  dependencies: [
+    "@stnd/fonts/calsans",
+    "@stnd/fonts/cargo-diatype",
+    "@stnd/fonts/monolisa",
+  ],
 };
