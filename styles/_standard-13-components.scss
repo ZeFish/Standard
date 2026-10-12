@@ -701,7 +701,7 @@ a.badge.accent:hover,
   display: flow-root;
 
   > * + * {
-    margin-block-start: var(--space);
+    // margin-block-start: var(--space);
   }
 
   > :first-child {
