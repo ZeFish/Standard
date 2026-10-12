@@ -32,3 +32,4 @@ tokens:
   color-dark-blue: "#5b9cf0"
   color-dark-purple: "#a98be0"
   color-dark-pink: "#e873a8"
+  radius: var(--space-d4)
