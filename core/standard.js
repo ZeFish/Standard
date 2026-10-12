@@ -388,12 +388,14 @@ export default function standard(options = {}) {
           // `hooks` off an integration. `clientPrerender` is an Astro experimental
           // flag, valid in the pinned Astro 7.x; it degrades gracefully in
           // browsers without the Speculation Rules API.
-          prefetch: {
+          // An app may change both: `standard({ prefetch, clientPrerender })`. A page
+          // that is heavy to render or to download should not be preloaded eagerly.
+          prefetch: finalConfig.prefetch ?? {
             prefetchAll: true,
             defaultStrategy: "viewport",
           },
           experimental: {
-            clientPrerender: true,
+            clientPrerender: finalConfig.clientPrerender ?? true,
           },
           integrations: moduleIntegrations,
           vite: {
