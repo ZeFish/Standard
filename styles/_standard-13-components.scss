@@ -260,6 +260,10 @@ a.btn:disabled {
    aria-current — so the look can never disagree with the state. */
 .btn-group {
   display: inline-flex;
+  /* When the labels do not fit one row, the group wraps instead of letting the
+     buttons shrink below their text and overlap (seven filters on a phone). */
+  flex-wrap: wrap;
+  max-width: 100%;
   gap: 1px;
   padding: 1px;
   border-radius: var(--radius);
@@ -268,7 +272,7 @@ a.btn:disabled {
 
   > :where(button, a.btn) {
     flex: 1 1 0;
-    min-width: 0;
+    min-width: max-content;
     background-color: transparent;
     box-shadow: none;
     color: var(--color-muted);
