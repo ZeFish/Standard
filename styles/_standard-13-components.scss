@@ -86,6 +86,8 @@ a.btn {
   text-align: center;
   min-height: 1em;
 
+  padding: var(--leading) var(--space-d2);
+
   /* shadcn-style raised effect */
   box-shadow: var(--shadow);
   border: none;
@@ -213,6 +215,7 @@ a.btn.large {
 a.btn.small {
   border-radius: var(--radius-sm);
   font-size: var(--scale-d3);
+  padding: var(--trim) var(--leading);
 }
 
 :where(button).smaller,
@@ -731,7 +734,7 @@ a.badge.accent:hover,
   }
 
   p {
-    margin-top: var(--space-d2);
+    margin-top: var(--space-d4);
     color: var(--color-muted);
     font-size: var(--scale-d2);
   }
