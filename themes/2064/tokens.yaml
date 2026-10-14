@@ -33,8 +33,6 @@ tokens:
   optical-ratio: "1.414"
   line-height: "1.5"
   prose-width: 45rem
-  font-weight: "400"
-  font-weight-bold: "600"
   radius: 2px
   stroke-width: 1px
   font-header-weight: "700"

@@ -17,7 +17,11 @@
  * @property --font-instrument-feature OpenType stylistic feature set for Instrument Sans.
  * @property --font-weight Normal text font weight (`400`).
  * @property --font-weight-bold Bold text font weight (`600`).
- * @property --font-weight-header Heading font weight anchor (`700`).
+ * @property --font-weight-medium A step above regular: `500`. Interface labels, table figures.
+ * @property --font-weight-semibold `600`: the usual emphasis weight (the default of `--font-weight-bold`, which a theme may change; this one never moves).
+ * @property --font-weight-strong `700`: strong emphasis, figures that carry a card, small titles.
+ * @property --font-weight-heavy `800`: the heaviest weight in use, for a few large numerals.
+ * @property --font-weight-header Heading font weight anchor: `700`, or the `--font-header-weight` hook when a theme sets it.
  * @property --font-weight-h1 Level 1 heading weight.
  * @property --font-weight-h2 Level 2 heading weight.
  * @property --font-weight-h3 Level 3 heading weight.
@@ -27,6 +31,32 @@
  * @property --font-letter-spacing Body letter spacing default (`normal`).
  * @property --font-header-letter-spacing Heading letter spacing default (`normal`).
  * @property --list-indent Default list item indentation (`var(--space)`).
+ * @property --font-feature Default OpenType feature settings for body text.
+ * @property --font-variation Default variable-font axes for body text.
+ * @property --font-header-feature OpenType feature settings for headings.
+ * @property --font-header-variation Variable-font axes for headings.
+ * @property --font-monospace-feature OpenType feature settings for monospace text.
+ * @property --font-monospace-variation Variable-font axes for monospace text.
+ * @property --font-interface-feature OpenType feature settings for interface text.
+ * @property --font-interface-variation Variable-font axes for interface text.
+ * @property --font-list-feature OpenType feature settings for lists (tabular numbers, slashed zero…).
+ * @property --font-list-variation Variable-font axes for lists.
+ * @property --target-lh Line height used to snap headings to the baseline grid (see `grid-line-height`).
+ *
+ * @example html - Headings, the type scale and the weights
+ * <h1>Heading 1</h1>
+ * <h2>Heading 2</h2>
+ * <h3>Heading 3</h3>
+ * <h4>Heading 4</h4>
+ * <h5>Heading 5</h5>
+ * <h6>Heading 6</h6>
+ * <p>Body text in <code>--font-text</code>, set on the baseline grid so every line lands on the rhythm.</p>
+ *
+ * @example html - The three font roles
+ * <p style="font-family: var(--font-sans)">Sans: the default, <code>--font-sans</code>.</p>
+ * <p style="font-family: var(--font-serif)">Serif: for long reading, <code>--font-serif</code>.</p>
+ * <p style="font-family: var(--font-monospace)">Monospace: for code and data, <code>--font-monospace</code>.</p>
+ * <p style="font-family: var(--font-interface)">Interface: for controls and labels, <code>--font-interface</code>.</p>
  */
 
 #{$stnd-theme-scope} {
@@ -57,6 +87,12 @@
   /* Weight Scale */
   --font-weight: 400;
   --font-weight-bold: 600;
+  /* The weights by name (Tailwind, Radix, Primer). `--font-weight-bold` is a role a theme sets;
+     these are the plain steps and do not move with the theme. */
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-strong: 700;
+  --font-weight-heavy: 800;
   --font-letter-spacing: normal;
   --font-header-letter-spacing: normal;
   /* Intentionally unset: leaving this undefined lets grid-line-height()'s
@@ -64,7 +100,7 @@
      default. A theme or note can still override by setting this explicitly —
      but defining it here to a literal value would shadow every level's
      tightness with the same number, which is the bug this avoids. */
-  --font-weight-header: 700;
+  --font-weight-header: var(--font-header-weight, 700);
 
   /* Interface Tokens */
   --font-interface-feature: "dlig", "zero";
@@ -187,6 +223,29 @@ h6 {
  * @property kbd Keyboard keycap with raised shadow and monospace font.
  * @property a:hover Color and underline accent transition for hyperlinks.
  * @property a[target="_blank"] External link with automatic arrow indicator (`↗`).
+ * @property a.internal-link A `target="_blank"` link that is on the same site: it opts out of the external arrow.
+ *
+ * @example html - Inline text elements
+ * <p>
+ *   Some <strong>strong</strong>, <em>emphasised</em> and <mark>marked</mark> text,
+ *   <code>inline code</code>, a <kbd>⌘</kbd> <kbd>K</kbd> shortcut, <small>small print</small>,
+ *   H<sub>2</sub>O and x<sup>2</sup>, an <abbr title="Cascading Style Sheets">CSS</abbr> abbreviation,
+ *   and <del>deleted</del> or <ins>inserted</ins> text.
+ * </p>
+ *
+ * @example html - Links, internal and external
+ * <p>
+ *   An <a href="#">internal link</a> and an
+ *   <a href="https://stnd.build" target="_blank" rel="noopener">external link</a>
+ *   that gets its arrow automatically.
+ * </p>
+ *
+ * @example html - Overline, weight and font utilities
+ * <p class="overline">An overline kicker</p>
+ * <p class="bold">Bold weight on a whole line</p>
+ * <p class="font-mono">Monospace on a whole line</p>
+ * <p class="font-interface">Interface font on a whole line</p>
+ * <p class="ui">The ui, menu and interface classes apply the interface role to a block.</p>
  */
 .overline {
   font-variant-caps: small-caps;

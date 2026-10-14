@@ -20,6 +20,23 @@
  *   <h2>Heading</h2>
  *   <p>Spaced automatically — no margin utility classes needed.</p>
  * </article>
+ *
+ * @example html - Opting a subtree out of the rhythm
+ * <div class="rhythm">
+ *   <p>A paragraph in the rhythm.</p>
+ *   <div class="no-rhythm">
+ *     <p>No spacing before this one.</p>
+ *     <p>Nor this one: the whole subtree is tight.</p>
+ *   </div>
+ *   <p>Back in the rhythm.</p>
+ * </div>
+ *
+ * @example html - Flex children do not stack their rhythm margins with the gap
+ * <div class="rhythm">
+ *   <div class="flex" style="gap: var(--space)">
+ *     <p>One</p><p>Two</p><p>Three</p>
+ *   </div>
+ * </div>
  */
 
 /* ===== BULLETPROOF RHYTHM SYSTEM ===== */

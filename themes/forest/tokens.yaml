@@ -47,25 +47,19 @@ tokens:
   color-light-italic: var(--color-blue)
   optical-ratio: var(--ratio-golden)
   line-height: var(--optical-ratio)
-  font-weight: "400"
   font-weight-bold: "500"
   radius: var(--space)
   stroke-width: 1.5px
   font-header-letter-spacing: 0em
   font-header-line-height: "1"
-  font-feature: "\"\""
   font-variation: "\"\""
   font-ratio: "1.25"
   font-density: "1.55"
   bold-weight: "700"
-  font-header-feature: "\"\""
-  font-header-variation: "\"\""
   font-header-style: none
   font-header-weight: "900"
-  font-mono-feature: "\"salt\""
-  font-mono-variation: "\"\""
+  font-monospace-feature: "\"salt\""
   font-interface-feature: "\"salt\""
-  font-interface-variation: "\"\""
   h2-size: calc(var(--font-text-size) * pow(var(--font-ratio), 2))
   h3-size: calc(var(--font-text-size) * pow(var(--font-ratio), 1.5))
   font-smallest: calc(var(--font-size) * pow(var(--font-ratio), -0.75))

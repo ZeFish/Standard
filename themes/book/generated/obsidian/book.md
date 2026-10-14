@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-01 13:40
+modified: 2026-10-14 14:00
 cssclasses: []
 maturity: sprout
 mode: read
@@ -141,7 +141,7 @@ snippet: false
         margin-bottom: calc(var(--space) * -2);
         font-size: var(--scale-d2);
         color: var(--color-muted);
-        line-height: var(--line-height-s);
+        line-height: var(--line-height-compact);
         max-width: 33%;
         border-left: var(--border);
         padding-left: var(--leading);

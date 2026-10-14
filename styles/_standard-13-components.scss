@@ -16,6 +16,61 @@
  * @property .icon Square icon action button.
  * @property .btn-group Segmented inline button group with shared borders.
  * @property .loader Rotating circular spinner with accent glow.
+ * @property .link Button that reads as an inline link, tinted with `--color-link`.
+ * @property .large, .small, .smaller Size steps for `button` and `a.btn`.
+ * @property .disabled, :disabled Dimmed and inert, for `button` and `a.btn`.
+ * @property kbd Keycap: a small raised key, for shortcuts.
+ * @property .tag Muted label that turns accent on hover.
+ * @property .badge Compact pill label. Variants: `.accent`, `.outline`, `.ghost`, `.destructive`; works on `a` too.
+ *
+ * @example html - The button vocabulary: the default is the primary action
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2); align-items: center">
+ *   <button>Save</button>
+ *   <button class="accent">Accent</button>
+ *   <button class="outline">Outline</button>
+ *   <button class="ghost">Ghost</button>
+ *   <button class="link">Link</button>
+ *   <button class="destructive">Delete</button>
+ * </div>
+ *
+ * @example html - Sizes, icon and disabled
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2); align-items: center">
+ *   <button class="large">Large</button>
+ *   <button>Default</button>
+ *   <button class="small">Small</button>
+ *   <button class="smaller">Smaller</button>
+ *   <button disabled>Disabled</button>
+ *   <button class="icon" aria-label="Add">+</button>
+ * </div>
+ *
+ * @example html - An anchor styled as a button
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2); align-items: center">
+ *   <a class="btn" href="#">Primary link</a>
+ *   <a class="btn accent" href="#">Accent link</a>
+ *   <a class="btn outline" href="#">Outline link</a>
+ * </div>
+ *
+ * @example html - A segmented group: the pressed one is read from aria-pressed
+ * <div class="btn-group" role="group" aria-label="View">
+ *   <button aria-pressed="true">Day</button>
+ *   <button aria-pressed="false">Week</button>
+ *   <button aria-pressed="false">Month</button>
+ * </div>
+ *
+ * @example html - Loader and keycaps
+ * <span class="loader" role="status" aria-label="Loading"></span>
+ * Press <kbd>⌘</kbd> <kbd>K</kbd> to open the launcher.
+ *
+ * @example html - Tags and badges
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2); align-items: center">
+ *   <a class="tag" href="#">#garden</a>
+ *   <span class="badge">Default</span>
+ *   <span class="badge accent">Accent</span>
+ *   <span class="badge outline">Outline</span>
+ *   <span class="badge ghost">Ghost</span>
+ *   <span class="badge destructive">Destructive</span>
+ *   <a class="badge" href="#">A link badge</a>
+ * </div>
  */
 
 /* =========================== */
@@ -421,6 +476,82 @@ a.badge.accent:hover,
 }
 
 /**
+ * @name Dot
+ * @group components-feedback
+ * @description A small round marker: a status beside a label, a legend key, an unread flag. It sits on the baseline of the text and rises by half the x-height (less half its own size), so it is centred on the lowercase letters as a typographer sets a bullet. That is what keeps it level with the text whatever the font is, and whether or not `text-box-trim` shrinks the line box, which centring on the box does not. In a flex row, set `align-items: baseline` on the row so the dot and the text share a baseline; a dot alone in a row that centres its items needs nothing, since at its default size it is as tall as the x-height.
+ *
+ * @property .dot The marker, in `--color-muted` until it is given a status.
+ * @property .dot.success, .dot.warning, .dot.error, .dot.info, .dot.accent The status colour (see Colour roles); the dot is a status, so it follows the status roles, not a hue.
+ * @property .dot.pulse A halo that grows and fades in the dot's own colour, for something that needs attention. It stands still for anyone who asked for less motion.
+ * @property --dot-size Hook: the diameter of the dots under it (default `--space-d3`).
+ *
+ * @example html - A dot at the start of a label
+ * <p><span class="dot success"></span> Available</p>
+ * <p><span class="dot warning"></span> Almost full</p>
+ * <p><span class="dot error"></span> Out of service</p>
+ * <p><span class="dot info"></span> In transit</p>
+ * <p><span class="dot"></span> Unknown</p>
+ *
+ * @example html - A dot that asks for attention
+ * <p><span class="dot error pulse"></span> Battery under 20 %</p>
+ *
+ * @example html - In a row of its own: the row aligns on the baseline
+ * <div class="flex" style="align-items: baseline; gap: var(--space-d3); justify-content: space-between">
+ *   <span><span class="dot error"></span> Full (no free dock)</span>
+ *   <strong>3</strong>
+ * </div>
+ */
+.dot {
+  --_dot-size: var(--dot-size, var(--space-d3));
+  display: inline-block;
+  flex: none;
+  width: var(--_dot-size);
+  height: var(--_dot-size);
+  border-radius: var(--radius-full);
+  background: var(--_dot, var(--color-muted));
+  vertical-align: baseline;
+  margin-block-end: calc(0.5ex - var(--_dot-size) / 2);
+
+  &.success {
+    --_dot: var(--color-success);
+  }
+
+  &.warning {
+    --_dot: var(--color-warning);
+  }
+
+  &.error {
+    --_dot: var(--color-error);
+  }
+
+  &.info {
+    --_dot: var(--color-info);
+  }
+
+  &.accent {
+    --_dot: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &.pulse {
+      animation: dot-pulse calc(var(--duration-slow) * 1.5) infinite;
+    }
+  }
+}
+
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--_dot, var(--color-muted)) 70%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 var(--space-d4) transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/**
  * @name Color Swatches
  * @group components-forms
  * @description Compact interactive color swatch pills and chips for palettes, themes, and pickers.
@@ -429,6 +560,15 @@ a.badge.accent:hover,
  * @property .swatch.circle, .swatch.round Circular variant.
  * @property .swatch.small Micro swatch sized at mathematical unit `--space`.
  * @property .swatch.large Macro swatch sized at mathematical unit `--space-3`.
+ *
+ * @example html - Sizes and shapes
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2); align-items: center">
+ *   <button class="swatch small" style="background: var(--color-red)" aria-label="Red"></button>
+ *   <button class="swatch" style="background: var(--color-green)" aria-label="Green"></button>
+ *   <button class="swatch large" style="background: var(--color-blue)" aria-label="Blue"></button>
+ *   <button class="swatch circle" style="background: var(--color-orange)" aria-label="Orange"></button>
+ *   <button class="swatch circle large" style="background: var(--color-purple)" aria-label="Purple"></button>
+ * </div>
  */
 .swatch,
 :where(button, a.btn).swatch {
@@ -490,6 +630,19 @@ a.badge.accent:hover,
  * @property .alert.warning Warning alert themed with orange status color.
  * @property .alert.error Error alert themed with red status color.
  * @property .alert.info Informational alert themed with blue status color.
+ *
+ * @example html - The four statuses, and the neutral one
+ * <div class="alert">A neutral note, in the accent.</div>
+ * <div class="alert success">Saved. Your changes are live.</div>
+ * <div class="alert info">Indexing 1 204 photos in the background.</div>
+ * <div class="alert warning">The volume is almost full.</div>
+ * <div class="alert error">Could not reach the server.</div>
+ *
+ * @example html - An action inside an alert inherits its colour
+ * <div class="alert warning">
+ *   Your plan ends in 3 days.
+ *   <a class="alert-action" href="#">Renew</a>
+ * </div>
  */
 .alert {
   font-family: var(--font-interface);
@@ -571,6 +724,8 @@ a.badge.accent:hover,
  * @property .card > footer Bottom action bar for links and buttons; add `.flex-right` or `.flex-left` to align them.
  * @property .card.clickable Interactive clickable card variant with hover lift.
  * @property .card-grid Responsive grid container specifically designed for card multiples.
+ * @property .inset Inset variant: the shadow is drawn inside, so the card looks pressed in.
+ * @property .card > header.surface Header variant that sits on a raised surface with a bottom border.
  *
  * @see {class} .grid - Often used to layout multiple cards in columns
  * @see {variable} --base - Controls internal spacing rhythm
@@ -633,6 +788,12 @@ a.badge.accent:hover,
  *     --card-padding: var(--scale-2);
  *     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  *   }
+ *
+ * @example html - An inset card: pressed into the page instead of raised
+ * <article class="card inset">
+ *   <header><h3>Inset</h3></header>
+ *   <div>The shadow is drawn inside, so the card reads as a well.</div>
+ * </article>
  */
 
 /**
@@ -809,9 +970,12 @@ a.badge.accent:hover,
   }
 }
 
+/* `inset var(--shadow)` never worked: `--shadow` is a list of layers, and `inset`
+   can only prefix one. The inset preset is its own token. (`card.inset` was a
+   selector for an element named `card`; it means `.card.inset`.) */
 .inset,
-card.inset {
-  box-shadow: inset var(--shadow) !important;
+.card.inset {
+  box-shadow: var(--shadow-inset) !important;
 }
 
 /**
@@ -823,6 +987,28 @@ card.inset {
  * @property .callout-title Header title for callout.
  * @property .callout-content Body content within callout.
  * @property details.callout Collapsible fold callout using native HTML details.
+ * @property .callout-fold Content wrapper of a collapsible callout; its margin is reset so the fold sits flush.
+ * @property .callout-title-icon The icon before a callout title; hidden on caption callouts.
+ *
+ * @example html - The note callout and a few named types
+ * <div class="callout" data-callout="note">
+ *   <div class="callout-title"><span class="callout-title-inner">Note</span></div>
+ *   <div class="callout-content"><p>A callout sits on a raised surface with a tinted edge.</p></div>
+ * </div>
+ * <div class="callout" data-callout="warning">
+ *   <div class="callout-title"><span class="callout-title-inner">Warning</span></div>
+ *   <div class="callout-content"><p>The same callout in the warning hue.</p></div>
+ * </div>
+ * <div class="callout" data-callout="tip">
+ *   <div class="callout-title"><span class="callout-title-inner">Tip</span></div>
+ *   <div class="callout-content"><p>Any colour name in <code>data-callout</code> tints it: red, orange, green, blue, purple…</p></div>
+ * </div>
+ *
+ * @example html - A collapsible callout uses native details
+ * <details class="callout" data-callout="info" open>
+ *   <summary class="callout-title"><span class="callout-title-inner">Folds on click</span></summary>
+ *   <div class="callout-content"><p>No script: the browser handles the fold.</p></div>
+ * </details>
  */
 .callout {
   /* Raised effect for callout cards */
@@ -1079,6 +1265,18 @@ details .callout-fold {
  * @property .comment Single comment card with surface background and elevation.
  * @property .comment-header Author, date, and status metadata bar.
  * @property .comment-content Indented comment message body.
+ *
+ * @example html - A thread
+ * <section id="comments">
+ *   <div class="comment">
+ *     <div class="comment-header"><span class="comment-author">Ada</span><span class="comment-date">2 hours ago</span></div>
+ *     <div class="comment-content">The rhythm of this page reads beautifully.</div>
+ *   </div>
+ *   <div class="comment">
+ *     <div class="comment-header"><span class="comment-author">Linus</span><span class="comment-pending">awaiting moderation</span></div>
+ *     <div class="comment-content">Agreed. One question about the grid.</div>
+ *   </div>
+ * </section>
  */
 
 #comments {
@@ -1158,6 +1356,20 @@ details .callout-fold {
   }
 }
 
+/**
+ * @name Skip Links
+ * @group components
+ * @description Shortcuts for keyboard users, hidden until they take focus: press Tab on a page and the first thing reached is a link to the main content. `.skip-links` stacks several of them in the top-left corner.
+ *
+ * @property a.skip-link A link that slides into view on focus (Tab) and jumps past the navigation.
+ * @property .skip-links Container stacking several skip links in the corner.
+ *
+ * @example html - Click into the box, then press Tab
+ * <div class="skip-links" style="position: static">
+ *   <a class="skip-link" href="#main">Skip to content</a>
+ *   <a class="skip-link" href="#nav">Skip to navigation</a>
+ * </div>
+ */
 a.skip-link {
   /* Positioning - absolute to top-left corner */
   position: absolute;
@@ -1232,6 +1444,27 @@ a.skip-link {
   }
 }
 
+/**
+ * @name Menu Surfaces
+ * @group components
+ * @description The surface of a menu or popover: a raised panel holding labelled groups of items. The `Dropdown` and `ContextMenu` components in `@stnd/ui` render with these classes, so a menu built by hand looks the same.
+ *
+ * @property .std-menu-content The raised panel, animated in.
+ * @property .std-menu-label A small group label.
+ * @property .std-menu-separator A hairline between groups.
+ * @property .std-menu-item A row: hover raises it, `:active` presses it; `.disabled` dims it, `.destructive` turns it red.
+ * @property .item-icon, .item-label, .item-shortcut The parts of a row: leading icon, text, trailing shortcut.
+ *
+ * @example html - A menu
+ * <div class="std-menu-content" style="display: inline-flex; min-width: 14rem; animation: none">
+ *   <div class="std-menu-label">File</div>
+ *   <button class="std-menu-item"><span class="item-label">New note</span><span class="item-shortcut">⌘N</span></button>
+ *   <button class="std-menu-item"><span class="item-label">Open…</span><span class="item-shortcut">⌘O</span></button>
+ *   <hr class="std-menu-separator">
+ *   <button class="std-menu-item disabled"><span class="item-label">Export</span></button>
+ *   <button class="std-menu-item destructive"><span class="item-label">Delete</span></button>
+ * </div>
+ */
 .std-menu-content {
   padding: var(--space-d4);
   background: var(--color-surface-raised);
@@ -1337,6 +1570,22 @@ a.skip-link {
   }
 }
 
+/**
+ * @name Scroll Container
+ * @group components
+ * @description A box that scrolls on its own axis, for content wider than the page (a table, a long code line). Inside prose a `.scroll` that holds a table takes the wide track.
+ *
+ * @property .scroll Scrolling container, full width.
+ * @property .scroll.show-left-shadow, .scroll.show-right-shadow Edge shadows hinting at hidden content; currently switched off in the stylesheet.
+ *
+ * @example html - A wide table that scrolls inside its own box
+ * <div class="scroll" style="max-width: 14rem">
+ *   <table>
+ *     <thead><tr><th>Quarter</th><th>North</th><th>South</th><th>East</th><th>West</th><th>Total</th></tr></thead>
+ *     <tbody><tr><td>Q1</td><td>120</td><td>98</td><td>143</td><td>87</td><td>448</td></tr></tbody>
+ *   </table>
+ * </div>
+ */
 .scroll {
   /* Container styling */
   position: relative;
@@ -1392,6 +1641,19 @@ a.skip-link {
   }
 }
 
+/**
+ * @name Field
+ * @group components
+ * @description A label stacked over its control, with the rhythm gap between them. The label takes the bold interface style.
+ *
+ * @property .field Vertical stack of a `label` and one form control.
+ *
+ * @example html - A labelled control
+ * <div class="field">
+ *   <label for="ex-field">Display name</label>
+ *   <input id="ex-field" type="text" placeholder="Ada">
+ * </div>
+ */
 .field {
   /* Field container */
   display: flex;
@@ -1406,6 +1668,20 @@ a.skip-link {
   }
 }
 
+/**
+ * @name Tooltips
+ * @group components
+ * @description A CSS-only tooltip: put the text in `data-tooltip` and it appears above the element on hover. No script, no markup. It is a hint, not a place for anything a keyboard or touch user needs.
+ *
+ * @property [data-tooltip] The tooltip text; shown above the element on hover.
+ * @property [data-tooltip-pos="bottom"] Places the tooltip below the element instead.
+ *
+ * @example html - Above (the default) and below
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-2); padding-block: var(--space-2)">
+ *   <button data-tooltip="Saves the draft">Save</button>
+ *   <button class="outline" data-tooltip="Opens the preview" data-tooltip-pos="bottom">Preview</button>
+ * </div>
+ */
 [data-tooltip] {
   position: relative;
   cursor: help;

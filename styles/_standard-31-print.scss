@@ -12,8 +12,14 @@
  * @property .no-print Hides the element and all its descendants only when printing.
  * @property --color-foreground Forced to pure black for high print legibility.
  * @property --color-background Forced to pure white for paper ink conservation.
- * @property --font-size Adjusted root font size for printed text (`0.925rem`).
- * @property --line-height Tightened line height for print reading (`1.4`).
+ * @property --font-size Adjusted root font size for printed text.
+ * @property --line-height Tightened line height for print reading.
+ * @property --color-surface Forced to white, like the background.
+ * @property --optical-ratio Flattened to a small ratio so the type scale does not balloon on paper.
+ * @property --page-padding Narrow page margin for print.
+ * @property --prose-width Full width: the reading column fills the page.
+ * @property --space Zeroed: the rhythm spacing is removed on paper.
+ * @property --shadow Removed: no decorative shadows on paper.
  *
  * @example html - Hide something from the printed page
  * <button class="no-print">Share</button>

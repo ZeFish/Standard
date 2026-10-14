@@ -42,11 +42,9 @@ tokens:
   font-variation: "\"\""
   font-interface: "\"Fern\""
   font-monospace: "\"Monolisa\""
-  font-mono-feature: "\"onum\" off"
-  font-mono-variation: "\"\""
+  font-monospace-feature: "\"onum\" off"
   font-header: "\"Fern\""
   font-header-feature: "\"liga\", \"onum\", \"kern\""
-  font-header-variation: "\"\""
   font-header-weight: "400"
   font-header-line-height: "1"
   color-light-bold: var(--color-red)

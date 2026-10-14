@@ -17,6 +17,13 @@
  * @property --effect-ink Subtle ink-bleed text-shadow applied to typography.
  * @property .ink Container applying organic ink-bleed text-shadows to descendants.
  * @property .note Note container applying ink-bleed text-shadows to content.
+ *
+ * @example html - Grain over a subtree, and ink bleed on type
+ * <div class="grain" style="padding: var(--space); border-radius: var(--radius); background: var(--color-surface-raised)">
+ *   A surface with <code>.grain</code>: the texture sits over this container only.
+ * </div>
+ * <p class="ink">Text with <code>.ink</code>: a hair of bleed, as on paper.</p>
+ * <div class="note">A <code>.note</code> container applies the same ink to its content.</div>
  */
 
 #{$stnd-theme-scope} {

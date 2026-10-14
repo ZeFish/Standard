@@ -24,6 +24,8 @@
  * @property --color-muted Active muted text color (~60% opacity).
  * @property --color-subtle Active subtle UI text color (~40% opacity).
  * @property --color-link Semantic link color token.
+ * @property --color-italic Colour of italic text.
+ * @property --color-bold Colour of bold text.
  * @property --color-success Semantic success status color (`--color-green`).
  * @property --color-warning Semantic warning status color (`--color-orange`).
  * @property --color-error Semantic error status color (`--color-red`).
@@ -35,6 +37,13 @@
  * @property .theme-dark Forces dark token set and color scheme on any subtree.
  * @property .inverse Flips scheme to whichever mode is not currently active.
  * @property [data-color-mode] Attribute forcing `"light"` or `"dark"` scheme mode.
+ *
+ * @example html - Pinning a scheme on a subtree
+ * <div class="grid-3">
+ *   <div class="theme-light" style="padding: var(--space); border-radius: var(--radius); background: var(--color-background); color: var(--color-foreground)">.theme-light</div>
+ *   <div class="theme-dark" style="padding: var(--space); border-radius: var(--radius); background: var(--color-background); color: var(--color-foreground)">.theme-dark</div>
+ *   <div class="inverse" style="padding: var(--space); border-radius: var(--radius); background: var(--color-background); color: var(--color-foreground)">.inverse: the opposite of here</div>
+ * </div>
  */
 
 /* ==========================================================================
@@ -84,6 +93,7 @@
    * @component Dark Seed Derivation
    * @category Foundation
    * @description Both dark seeds inherit hue from the light foreground seed.
+   * When a theme does not set an accent, one is derived from the foreground hue, a third of the way around the colour wheel (triadic, +120°); set `--color-light-accent` and `--color-dark-accent` to use your own. The dark palette is derived from the light one and a theme may override any value.
    * Warm ink begets a warm dark background and a warm soft reading foreground.
    *
    * @property --color-dark-background Dark background matching foreground hue at ~20% lightness and muted chroma.
@@ -310,6 +320,8 @@
    * @component Semantic Tokens
    * @category Foundation
    * @description Semantic color tokens consumed across all components and styles.
+   * Each role is declared once, as `light-dark(<light seed>, <dark seed>)`, so which palette applies is decided by the element's `color-scheme`: the system preference by default, or pinned with `[data-color-mode="light|dark"]`, `.theme-light`, `.theme-dark` or `.inverse`. A themed container (`[data-theme]`) re-declares the roles, so it sees its own seeds. Requires `light-dark()` (Chrome 123, Safari 17.5, Firefox 120); older browsers get the light scheme.
+   * The status colours (`--color-success`, `--color-warning`, `--color-error`, `--color-info`) alias hues. Each has a background and a border tint, the status colour at a fixed opacity, for an alert, a badge or a highlighted row: the full colour stays the text and the icon. The tints are named with the CSS property, like `--color-border-strong`, because `muted` already means a text level.
    *
    * @property --color-background Active scheme root background.
    * @property --color-foreground Active scheme text foreground.
@@ -331,6 +343,14 @@
    * @property --color-danger Semantic error alias (`--color-error`).
    * @property --color-destructive Semantic error alias (`--color-error`).
    * @property --color-info Status color for informative notices (`--color-blue`).
+   * @property --color-chart-1 Series 1 of a chart or a map legend: blue, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-2 Series 2 of a chart or a map legend: orange, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-3 Series 3 of a chart or a map legend: green, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-4 Series 4 of a chart or a map legend: purple, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-5 Series 5 of a chart or a map legend: cyan, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-6 Series 6 of a chart or a map legend: yellow, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-7 Series 7 of a chart or a map legend: pink, unless the theme says otherwise. Data, not a status.
+   * @property --color-chart-8 Series 8 of a chart or a map legend: red, unless the theme says otherwise. Data, not a status.
    * @property --color-link Active scheme link color.
    * @property --color-on-accent Text color for elements over accent backgrounds.
    */
@@ -362,6 +382,17 @@
   --color-destructive: var(--color-error);
   --color-info: var(--color-blue);
 
+  /* Data series, in the order a chart takes them. Aliases of the hues, so a theme can reorder
+     or replace them; shadcn/ui's `chart-1` to `chart-5`, extended to eight. */
+  --color-chart-1: var(--color-blue);
+  --color-chart-2: var(--color-orange);
+  --color-chart-3: var(--color-green);
+  --color-chart-4: var(--color-purple);
+  --color-chart-5: var(--color-cyan);
+  --color-chart-6: var(--color-yellow);
+  --color-chart-7: var(--color-pink);
+  --color-chart-8: var(--color-red);
+
   --color-link: light-dark(var(--color-light-link), var(--color-dark-link));
   --color-italic: light-dark(
     var(--color-light-italic, var(--color-foreground)),
@@ -378,6 +409,7 @@
    * @component Computed Semantics
    * @category Foundation
    * @description Scheme-aware computed colors derived from active foreground and background seeds.
+   * Roles computed from the seeds at the role layer: there is no separate light and dark copy of the formula. A theme that wants its own value for one scheme sets the matching optional override (`--color-light-muted`, `--color-dark-border`, …); an unset override falls back to the formula. A theme sets seeds (`--color-light-*`, `--color-dark-*`), never a role directly: a role set directly has one value for both schemes.
    *
    * @property --color-muted Secondary text color (~60% alpha).
    * @property --color-subtle Tertiary text and decorative icon color (~40% alpha).
@@ -416,6 +448,7 @@
    * @component Surfaces & Elevation Colors
    * @category Foundation
    * @description Semantic elevation color seeds and surface hierarchy using perceptual OKLCH color spaces.
+   * Named after Atlassian's elevation ladder (sunken, default, raised, overlay). Each level is the background shifted in OKLCH lightness, so it follows any theme and both schemes. Sunken is recessed, away from the viewer (wells, fields); raised is anything that sits on the ground (`--color-surface` is its short alias); overlay floats over a surface. A colour stops at white, so in a light scheme raised and overlay are often the same colour and the shadow tells them apart; dark schemes also lighten each level. Neighbouring levels must differ in colour or in shadow (`tests/styles/elevation.test.mjs`).
    *
    * @property --color-shadow Active base shadow color.
    * @property --color-highlight Active specular highlight color.
@@ -433,6 +466,14 @@
    * @property --color-selected Selected item: Apple's `unemphasizedSelectedContentBackgroundColor` as a foreground alpha, 14 % light / 18 % dark.
    * @property --color-placeholder Placeholder text: Apple's `placeholderTextColor`, the foreground at 50 % light / 55 % dark.
    * @property --color-ring Keyboard focus ring: Apple's `keyboardFocusIndicatorColor`, the accent at 50 %.
+   * @property --color-success-background Fill of a success alert, badge or highlighted row: the status colour at a low opacity.
+   * @property --color-success-border Edge of a success alert or badge: the status colour at a higher opacity.
+   * @property --color-warning-background Fill of a warning alert, badge or highlighted row: the status colour at a low opacity.
+   * @property --color-warning-border Edge of a warning alert or badge: the status colour at a higher opacity.
+   * @property --color-error-background Fill of a error alert, badge or highlighted row: the status colour at a low opacity.
+   * @property --color-error-border Edge of a error alert or badge: the status colour at a higher opacity.
+   * @property --color-info-background Fill of a informational alert, badge or highlighted row: the status colour at a low opacity.
+   * @property --color-info-border Edge of a informational alert or badge: the status colour at a higher opacity.
    * @property --color-scrim Veil behind a modal surface: Apple's dimming layer, black at 35 %.
    * @property --color-stage Backdrop behind media (photos, video, a canvas): neutral, 0.09 darker than the background, in both schemes. A theme may set `--color-light-stage` / `--color-dark-stage`.
    * @property --color-surface-light-3 Numeric step, +0.09 (kept; no named level yet).
@@ -472,7 +513,7 @@
   );
 
   /* Named levels, relative to the ground (names after Atlassian's elevation
-     ladder: sunken, default, raised, overlay). See GUIDE.md section 11. */
+     ladder: sunken, default, raised, overlay). See the styles README, roles §11. */
   --color-surface-sunken: oklch(
     from var(--color-background) max(0, calc(l - 0.03)) c h
   );
@@ -527,6 +568,21 @@
      the accent at 49.8 %. */
   --color-ring: oklch(from var(--color-accent) l c h / 0.5);
 
+  /* Status tints: the fill and the edge of an alert, a badge or a highlighted
+     row. Atlassian's `color.background.danger` / `color.border.danger` and
+     Primer's `bgColor-danger-muted` / `borderColor-danger-muted`, named with
+     the CSS property (as `--color-border-strong` is) because `muted` already
+     means a text level here. The status colour at 12 % and 30 %, so they sit
+     on any surface in both schemes; the full colour stays the text and icon. */
+  --color-success-background: oklch(from var(--color-success) l c h / 0.12);
+  --color-success-border: oklch(from var(--color-success) l c h / 0.3);
+  --color-warning-background: oklch(from var(--color-warning) l c h / 0.12);
+  --color-warning-border: oklch(from var(--color-warning) l c h / 0.3);
+  --color-error-background: oklch(from var(--color-error) l c h / 0.12);
+  --color-error-border: oklch(from var(--color-error) l c h / 0.3);
+  --color-info-background: oklch(from var(--color-info) l c h / 0.12);
+  --color-info-border: oklch(from var(--color-info) l c h / 0.3);
+
   /* Scrim: the dimming layer Apple's Materials page puts behind clear Liquid
      Glass over bright content, 35 % black. Plain rgb() so it works everywhere. */
   --color-scrim: rgb(0 0 0 / 0.35);
@@ -553,7 +609,7 @@
    * @description Pre-composed border shorthand tokens for clean layout boundaries.
    *
    * @property --border Standard border shorthand (`var(--stroke-width) solid var(--color-border)`).
-   * @property --border-accent Tinted accent border shorthand (`var(--stroke-width) solid oklch(...)`).
+   * @property --border-accent Tinted accent border shorthand.
    * @property --border-transparent Transparent layout placeholder border.
    */
   --border-transparent: var(--stroke-width) solid transparent;

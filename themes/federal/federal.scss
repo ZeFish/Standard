@@ -31,17 +31,9 @@
 // This file keeps only web-only structural CSS.
 
 [data-theme="federal"] {
-  /* 🌙 Active Mapping (Dark Mode) */
-  &[data-mode="dark"],
-  .dark & {
-    --color-background: var(--color-dark-background);
-    --color-foreground: var(--color-dark-foreground);
-    --color-accent: var(--color-dark-accent);
-    --color-border: var(--color-dark-border);
-    --color-surface: var(--color-dark-surface);
-    --color-subtle: var(--color-dark-subtle);
-    --color-muted: var(--color-dark-muted);
-  }
+  /* The dark scheme needs no mapping here: every role is one `light-dark()` declaration in
+     @stnd/styles and reads the seeds in tokens.yaml. (A hand-written dark block used to map the
+     roles to `--color-dark-*` names, one of which, `--color-dark-surface`, does not exist.) */
 
   /* The theme selector sits on <html> — paint its own background so the
      sheet extends past the body's measure with no cold gray margins. */

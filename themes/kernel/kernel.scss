@@ -36,7 +36,6 @@
   --font-monospace-feature: "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15", "ss16";
   --font-interface: "Monolisa";
   --font-header-weight: 400;
-  --font-header-feature: "";
   --font-header-variation: "SOFT" 100, "WONK" 1;
   --font-header-letter-spacing: -0.065em;
   --stroke-width: 1.5px;
@@ -97,8 +96,8 @@
   .token.comment {
     color: color-mix(
       in oklab,
-      var(--color-base-100) 40%,
-      var(--color-base-00)
+      var(--color-foreground) 40%,
+      var(--color-background)
     );
     font-style: italic;
   }

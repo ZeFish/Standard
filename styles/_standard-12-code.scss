@@ -16,12 +16,40 @@
  * @property .token.punctuation Brackets, parens, delimiters, and operators (`--color-muted`).
  * @property .token.comment Code comments rendered in muted italic typography (`--color-subtle`).
  * @property .language-* Per-language syntax overrides for YAML, Markdown, Shell/Bash, and Nunjucks.
+ * @property .copy-button.copied Success state of the copy button: the text turns `--color-success`.
+ * @property .copy-button.failed Failure state of the copy button: the text turns `--color-error`.
  *
  * @example html - Standard code block with copy button
  * <div class="stnd-code-block">
  *   <button class="copy-button">Copy</button>
  *   <pre><code class="language-bash">npm install @stnd/core</code></pre>
  * </div>
+ *
+ * @example html - Inline code and a plain preformatted block
+ * <p>Inline <code>code</code> sits in the text, and <code>pre</code> holds a block:</p>
+ * <pre><code>const rhythm = "1rlh";
+ * console.log(rhythm);</code></pre>
+ *
+ * @example html - Syntax tokens, one per colour role
+ * <pre><code><span class="token comment">// a comment</span>
+ * <span class="token keyword">const</span> <span class="token function">greet</span> <span class="token punctuation">=</span> <span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">=&gt;</span> <span class="token string">"Hello, "</span> <span class="token punctuation">+</span> name<span class="token punctuation">;</span>
+ * <span class="token property">retries</span><span class="token punctuation">:</span> <span class="token number">3</span></code></pre>
+ *
+ * @example html - The copy button states
+ * <div class="stnd-code-block">
+ *   <pre><code>pnpm add @stnd/styles</code></pre>
+ *   <button class="copy-button" type="button">Copy</button>
+ * </div>
+ * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2)">
+ *   <button class="copy-button copied" type="button" style="position: static">Copied</button>
+ *   <button class="copy-button failed" type="button" style="position: static">Failed</button>
+ * </div>
+ *
+ * @example html - A language override (YAML here)
+ * <pre class="language-yaml"><code>title: A note
+ * tags:
+ *   - garden
+ * publish: true</code></pre>
  */
 
 /* =========================== */

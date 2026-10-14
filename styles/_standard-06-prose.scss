@@ -16,6 +16,13 @@
  * @property .full-bleed Full viewport width breakout track (`100vw`).
  * @property --prose-width Active reading column measure.
  * @property --page-max-width Overall page max-width constraint (1400px).
+ * @property .hero Alias of `.full`: a hero block on the full-width track.
+ * @property .stnd-screen-break A short centred rule that separates sections; add `.screen-full` for a full-screen pause.
+ * @property .stnd-screen-section A section spanning every column; add `.screen-full` for a full-screen one.
+ * @property .no-grid Turns the prose grid off on that container (and the image-gallery layout with it).
+ * @property .scroll A scrolling box; one holding a table takes the wide track.
+ * @property .mermaid Container for a rendered Mermaid diagram.
+ * @property .mycelial-link, .mycelial-graft Dotted-underline links to another note, with a help cursor and accent hover.
  *
  * @example
  * // Standard article with proper reading width
@@ -36,6 +43,36 @@
  *
  * @since 0.1.0
  * @see https://www.rsub.com/blog/how-long-should-a-line-of-text-be/
+ *
+ * @example html - Tracks: narrow, the reading column, wide and full
+ * <div class="prose">
+ *   <p>A paragraph on the reading column, set to <code>--prose-width</code>.</p>
+ *   <div class="narrow bg-background border rounded-sm p-half">narrow: inset from the reading column</div>
+ *   <div class="wide bg-background border rounded-sm p-half">wide: breaks out of the reading column</div>
+ *   <div class="full bg-background border rounded-sm p-half">full: spans to <code>--page-max-width</code></div>
+ * </div>
+ *
+ * @example html - Left-aligned prose hugs the left edge
+ * <div class="prose left">
+ *   <p>The reading column starts at the left edge of the container instead of being centred.</p>
+ * </div>
+ *
+ * @example html - A section break, and a hero image on the full track
+ * <div class="prose">
+ *   <p>Text before the break.</p>
+ *   <hr class="stnd-screen-break">
+ *   <p>Text after it: the break is a short rule with generous space around it.</p>
+ *   <div class="hero bg-background border rounded-sm p-half">hero: spans to the page shell, like .full</div>
+ * </div>
+ *
+ * @example Full-bleed spans the whole viewport (shown as code: it would overflow this page)
+ * <img class="full-bleed" src="photo.jpg" alt="">
+ *
+ * @example html - Links to another note, and prose with the grid turned off
+ * <p>The long version lives in <a class="mycelial-link" href="#">another note</a>, linked with a dotted underline.</p>
+ * <div class="prose no-grid">
+ *   <p>A <code>.no-grid</code> container is plain flow: no tracks, so <code>.wide</code> and <code>.full</code> do nothing here.</p>
+ * </div>
  */
 
 /* Prose Layout Design Tokens - Using logical properties */

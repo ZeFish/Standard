@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-02 20:58
+modified: 2026-10-14 14:00
 cssclasses: []
 maturity: sprout
 mode: read
@@ -34,12 +34,12 @@ snippet: false
     .callout {
             border-color: color-mix(
                 in oklab,
-                var(--callout-color) 20%,
+                var(--_callout) 20%,
                 var(--color-surface, var(--color-background))
             );
             background-color: color-mix(
                 in oklab,
-                var(--callout-color) 2%,
+                var(--_callout) 2%,
                 var(--color-surface, var(--color-background))
             );
             border-top: 0;
@@ -49,7 +49,7 @@ snippet: false
         }
 
         .callout-icon {
-            color: var(--callout-color);
+            color: var(--_callout);
         }
 
         :is(.callout-title, .callout-title-inner) {

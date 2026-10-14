@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-04 21:56
-modified: 2026-10-07 14:30
+modified: 2026-10-14 13:03
 cssclasses: []
 maturity: sprout
 mode: read
@@ -57,15 +57,9 @@ snippet: false
       pointer-events: none;
     }
 
-    /* Application primitives (merged from app.scss) */
-    .pane {
-      margin: var(--window-inset);
-      padding: var(--window-inset);
-      background: var(--color-surface-raised);
-      border-radius: var(--pane-radius);
-      box-shadow: var(--shadow), var(--pane-edge);
-      overflow: hidden;
-    }
+    /* Application primitives that are specific to the macOS window (the shape of
+       `.pane`, `.list`, `.item` and `.divider` lives in the framework:
+       packages/styles/_standard-15-application.scss). */
 
     .is-dragging {
       opacity: 0.4;
@@ -90,54 +84,9 @@ snippet: false
       opacity: 1;
     }
 
-    .list {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .list.divided > :not(:last-child) {
-      border-bottom: var(--border);
-    }
-
     .card.flush {
       padding: 0;
       overflow: hidden;
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: var(--space-d2);
-      min-width: 0;
-      padding: var(--space-d5) var(--space-d2);
-      border-radius: var(--radius-sm);
-      background: transparent;
-      box-shadow: none;
-      text-align: left;
-      color: var(--color-foreground);
-      cursor: pointer;
-      transition:
-        background var(--duration-instant) var(--ease-soft),
-        color var(--duration-instant) var(--ease-soft);
-
-      &:hover {
-        background: var(--color-hover);
-        color: var(--color-foreground);
-      }
-
-      &:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
-        background: var(--color-surface-sunken);
-        color: var(--color-foreground);
-        font-weight: var(--font-weight-bold);
-      }
-
-      &:is(:disabled, [aria-disabled="true"]) {
-        opacity: 0.5;
-        cursor: default;
-        pointer-events: none;
-      }
     }
 
     .hud {
@@ -159,14 +108,6 @@ snippet: false
         border-radius: var(--radius-lg);
         white-space: normal;
       }
-    }
-
-    .divider {
-      flex-shrink: 0;
-      height: var(--stroke-width);
-      margin: 0;
-      border: none;
-      background: var(--color-border);
     }
 
     .muted {

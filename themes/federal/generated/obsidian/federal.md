@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 02:06
+modified: 2026-10-14 14:00
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,17 +19,9 @@ snippet: false
 ```css
 [data-stnd-theme="federal"] {
     /* ─── Custom rules for Federal ───────────────────────────── */
-    /* 🌙 Active Mapping (Dark Mode) */
-      &[data-mode="dark"],
-      .dark & {
-        --color-background: var(--color-dark-background);
-        --color-foreground: var(--color-dark-foreground);
-        --color-accent: var(--color-dark-accent);
-        --color-border: var(--color-dark-border);
-        --color-surface: var(--color-dark-surface);
-        --color-subtle: var(--color-dark-subtle);
-        --color-muted: var(--color-dark-muted);
-      }
+    /* The dark scheme needs no mapping here: every role is one `light-dark()` declaration in
+         @stnd/styles and reads the seeds in tokens.yaml. (A hand-written dark block used to map the
+         roles to `--color-dark-*` names, one of which, `--color-dark-surface`, does not exist.) */
 
       /* The theme selector sits on <html> — paint its own background so the
          sheet extends past the body's measure with no cold gray margins. */

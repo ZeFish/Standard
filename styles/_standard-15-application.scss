@@ -5,7 +5,7 @@
  * document: a floating pane, a list of rows, a row, a hairline between groups.
  * They were born in the macOS theme (Reveal's sidebar) and lived there, so an app
  * on any other theme got them by accident, through the global theme bundle. They
- * belong to the framework: every value below is an existing token (GUIDE.md §4,
+ * belong to the framework: every value below is an existing token (styles README, roles §4,
  * "Sidebar that floats" = `.pane`).
  *
  * @example html
@@ -20,7 +20,7 @@
 
 /* A pane floats `--window-inset` from the edges of its window, with the radius
    that is concentric with the window's own (`--pane-radius`). Surface and shadow
-   are a pair (GUIDE.md §5); `--pane-edge` is the hairline that carries it in a
+   are a pair (styles README, roles §5); `--pane-edge` is the hairline that carries it in a
    light scheme, where `raised` can be the same white as the ground. */
 .pane {
   margin: var(--window-inset);
@@ -74,7 +74,7 @@
 
   &:is([aria-current]:not([aria-current="false"]), [aria-selected="true"]) {
     background: var(--color-selected);
-    color: var(--color-foreground);
+    color: var(--color-accent);
     font-weight: var(--font-weight-bold);
   }
 

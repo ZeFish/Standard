@@ -20,6 +20,14 @@
  * @property .sm:grid-{n} Responsive column grid count at mobile viewport (<=768px).
  * @property .lg:col-{n} Responsive column spans at desktop viewport (>=1024px).
  * @property .lg:grid-{n} Responsive column grid count at desktop viewport (>=1024px).
+ * @property .row, .col-row, .col-full Spans every column of the grid (an `hr.col-row` also gets a divider margin).
+ * @property .free-col Column placed with the `--start` and `--span` variables instead of fixed classes.
+ * @property .span-{n}, .startv-{n} Set `--span` and `--start` (1 to 12) on a `.free-col`; `startv` avoids a clash with the `.start-{n}` utilities. `sm:` and `lg:` prefixes apply at a breakpoint.
+ * @property .free-col.sticky Free column that sticks while the rest scrolls (marginalia for editorial layouts).
+ * @property .box Layout container whose children keep the vertical rhythm, like the grid cells do.
+ * @property --start Column start of a `.free-col` (1 to 12, or `auto`).
+ * @property --span Column span of a `.free-col` (1 to 12).
+ * @property --gap Gap between grid items, read by the grid's `column-gap` and `row-gap`; `.compact` and `.relaxed` set it.
  *
  * @example
  * // Basic 12-column grid with equal width columns
@@ -44,6 +52,63 @@
  *
  * @since 0.1.0
  * @see standard-04-rhythm.scss
+ *
+ * @example html - Twelve columns: spans add up to 12
+ * <div class="grid">
+ *   <div class="col-8 bg-background border rounded-sm p-half">col-8</div>
+ *   <div class="col-4 bg-background border rounded-sm p-half">col-4</div>
+ *   <div class="col-3 bg-background border rounded-sm p-half">col-3</div>
+ *   <div class="col-3 bg-background border rounded-sm p-half">col-3</div>
+ *   <div class="col-6 bg-background border rounded-sm p-half">col-6</div>
+ * </div>
+ *
+ * @example html - An explicit grid of n equal columns
+ * <div class="grid-3">
+ *   <div class="bg-background border rounded-sm p-half">One</div>
+ *   <div class="bg-background border rounded-sm p-half">Two</div>
+ *   <div class="bg-background border rounded-sm p-half">Three</div>
+ *   <div class="bg-background border rounded-sm p-half">Four</div>
+ *   <div class="bg-background border rounded-sm p-half">Five</div>
+ *   <div class="bg-background border rounded-sm p-half">Six</div>
+ * </div>
+ *
+ * @example html - Start position
+ * <div class="grid">
+ *   <div class="col-4 start-3 bg-background border rounded-sm p-half">col-4 start-3</div>
+ *   <div class="col-3 start-9 bg-background border rounded-sm p-half">col-3 start-9</div>
+ * </div>
+ *
+ * @example html - Gap variants
+ * <div class="grid-4 no-gap"><div class="bg-background border rounded-sm p-half">no-gap</div><div class="bg-background border rounded-sm p-half">no-gap</div><div class="bg-background border rounded-sm p-half">no-gap</div><div class="bg-background border rounded-sm p-half">no-gap</div></div>
+ * <br>
+ * <div class="grid-4 compact"><div class="bg-background border rounded-sm p-half">compact</div><div class="bg-background border rounded-sm p-half">compact</div><div class="bg-background border rounded-sm p-half">compact</div><div class="bg-background border rounded-sm p-half">compact</div></div>
+ * <br>
+ * <div class="grid-4 relaxed"><div class="bg-background border rounded-sm p-half">relaxed</div><div class="bg-background border rounded-sm p-half">relaxed</div><div class="bg-background border rounded-sm p-half">relaxed</div><div class="bg-background border rounded-sm p-half">relaxed</div></div>
+ *
+ * @example html - Responsive: one column on a phone, two on a tablet, four on a desktop
+ * <div class="grid">
+ *   <div class="col-12 sm:col-12 lg:col-3 bg-background border rounded-sm p-half">Card</div>
+ *   <div class="col-12 sm:col-12 lg:col-3 bg-background border rounded-sm p-half">Card</div>
+ *   <div class="col-12 sm:col-12 lg:col-3 bg-background border rounded-sm p-half">Card</div>
+ *   <div class="col-12 sm:col-12 lg:col-3 bg-background border rounded-sm p-half">Card</div>
+ * </div>
+ *
+ * @example html - A row that spans every column, and a divider
+ * <div class="grid">
+ *   <div class="col-6 bg-background border rounded-sm p-half">half</div>
+ *   <div class="col-6 bg-background border rounded-sm p-half">half</div>
+ *   <div class="col-full bg-background border rounded-sm p-half">col-full: all twelve</div>
+ *   <hr class="col-row">
+ *   <div class="col-4 bg-background border rounded-sm p-half">a third</div>
+ *   <div class="col-8 bg-background border rounded-sm p-half">two thirds</div>
+ * </div>
+ *
+ * @example html - Free columns: span and start from variables
+ * <div class="grid">
+ *   <div class="free-col span-4 bg-background border rounded-sm p-half">span-4</div>
+ *   <div class="free-col span-3 startv-9 bg-background border rounded-sm p-half">span-3 startv-9</div>
+ *   <div class="free-col span-12 bg-background border rounded-sm p-half">span-12</div>
+ * </div>
  */
 
 /* Harmony Grid (unified) — 12-col Swiss-style grid with rhythm-native gaps

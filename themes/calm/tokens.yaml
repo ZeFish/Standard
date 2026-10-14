@@ -15,7 +15,6 @@ tokens:
   color-light-subtle: color-mix(in srgb, var(--color-foreground) 4%, transparent)
   font-text: "\"Quicksand\", sans-serif"
   font-header: "\"Quicksand\", sans-serif"
-  font-weight-text: "400"
   font-header-weight: "600"
   font-header-letter-spacing: 0em
   line-height: "1.6"

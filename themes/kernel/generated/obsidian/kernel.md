@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 17:31
+modified: 2026-10-14 14:00
 cssclasses: []
 maturity: sprout
 mode: read
@@ -61,8 +61,8 @@ snippet: false
       .token.comment {
         color: color-mix(
           in oklab,
-          var(--color-base-100) 40%,
-          var(--color-base-00)
+          var(--color-foreground) 40%,
+          var(--color-background)
         );
         font-style: italic;
       }

@@ -19,6 +19,35 @@
  *   <input type="checkbox" disabled> Ship it
  *   <span class="task-field" data-field="priority">priority: 1</span>
  * </li>
+ *
+ * @example html - Unordered, ordered and nested
+ * <ul>
+ *   <li>First</li>
+ *   <li>Second
+ *     <ul><li>Nested one</li><li>Nested two</li></ul>
+ *   </li>
+ *   <li>Third</li>
+ * </ul>
+ * <ol>
+ *   <li>Step one</li>
+ *   <li>Step two</li>
+ *   <li>Step three</li>
+ * </ol>
+ *
+ * @example html - Spacing variants
+ * <div class="grid-3">
+ *   <ul class="tight"><li>tight</li><li>tight</li><li>tight</li></ul>
+ *   <ul class="compact"><li>compact</li><li>compact</li><li>compact</li></ul>
+ *   <ul class="relaxed"><li>relaxed</li><li>relaxed</li><li>relaxed</li></ul>
+ * </div>
+ *
+ * @example html - Without bullets
+ * <ul class="no-bullet">
+ *   <li>No marker</li>
+ *   <li>No indent
+ *     <ul><li>Nested lists follow</li></ul>
+ *   </li>
+ * </ul>
  */
 
 /* =========================== */

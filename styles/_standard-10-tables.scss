@@ -13,6 +13,8 @@
  * @property .striped Zebra-stripes even `<tbody>` rows with a 3% foreground tint.
  * @property .numeric Right-aligns content and switches on tabular-nums for numeric columns.
  * @property .properties Table variant keeping leading identifier/token columns unwrapped.
+ * @property th[aria-sort] Sortable column header: its inner `button.sort` inherits the header look and shows a ▲/▼ arrow for the active direction (driven by `aria-sort`, used by `@stnd/ui` DataTable).
+ * @property tr[data-selected] Selected table row, filled with `--color-selected`.
  *
  * @example html - Bare table, zero classes
  * <table>
@@ -21,6 +23,53 @@
  *   </thead>
  *   <tbody>
  *     <tr><td>Widgets</td><td class="numeric">42</td></tr>
+ *   </tbody>
+ * </table>
+ *
+ * @example html - A caption and zebra stripes
+ * <table class="striped">
+ *   <caption>Quarterly sales</caption>
+ *   <thead><tr><th>Quarter</th><th>Region</th><th>Notes</th></tr></thead>
+ *   <tbody>
+ *     <tr><td>Q1</td><td>North</td><td>Steady</td></tr>
+ *     <tr><td>Q2</td><td>North</td><td>Up</td></tr>
+ *     <tr><td>Q3</td><td>South</td><td>Flat</td></tr>
+ *     <tr><td>Q4</td><td>South</td><td>Up</td></tr>
+ *   </tbody>
+ * </table>
+ *
+ * @example html - Numeric columns align right with tabular figures
+ * <table>
+ *   <thead><tr><th>Item</th><th class="numeric">Price</th><th class="numeric">Qty</th></tr></thead>
+ *   <tbody>
+ *     <tr><td>Notebook</td><td class="numeric">12.50</td><td class="numeric">3</td></tr>
+ *     <tr><td>Pen</td><td class="numeric">1.20</td><td class="numeric">120</td></tr>
+ *     <tr><td>Stapler</td><td class="numeric">9.99</td><td class="numeric">12</td></tr>
+ *   </tbody>
+ * </table>
+ *
+ * @example html - Properties: the leading identifier column stays on one line
+ * <table class="properties">
+ *   <thead><tr><th>Token</th><th>Value</th><th>Description</th></tr></thead>
+ *   <tbody>
+ *     <tr><td><code>--space</code></td><td><code>1rlh</code></td><td>One line of the baseline grid.</td></tr>
+ *     <tr><td><code>--radius</code></td><td><code>var(--trim)</code></td><td>The standard corner.</td></tr>
+ *   </tbody>
+ * </table>
+ *
+ * @example html - Sortable headers and a selected row
+ * <table>
+ *   <thead>
+ *     <tr>
+ *       <th aria-sort="ascending"><button class="sort" type="button">Name</button></th>
+ *       <th aria-sort="none"><button class="sort" type="button">Size</button></th>
+ *       <th aria-sort="none"><button class="sort" type="button">Modified</button></th>
+ *     </tr>
+ *   </thead>
+ *   <tbody>
+ *     <tr><td>Alpha</td><td>12 KB</td><td>Today</td></tr>
+ *     <tr data-selected><td>Beta</td><td>3 KB</td><td>Yesterday</td></tr>
+ *     <tr><td>Gamma</td><td>48 KB</td><td>Last week</td></tr>
  *   </tbody>
  * </table>
  */
@@ -94,4 +143,70 @@ caption {
   td:last-child {
     width: 100%;
   }
+}
+
+/* Sortable headers — state lives in `aria-sort`, so the CSS needs no class
+   toggling. The button is reset to look like the plain header text. */
+th[aria-sort] .sort {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+
+  &::after {
+    content: "";
+    inline-size: 0.6em;
+    text-align: center;
+    opacity: 0.35;
+  }
+
+  &:hover {
+    color: var(--color-foreground);
+  }
+
+  &:focus-visible {
+    outline: var(--stroke-width) solid var(--color-ring);
+    outline-offset: var(--stroke-width);
+  }
+}
+
+th.numeric .sort {
+  flex-direction: row-reverse;
+}
+
+th[aria-sort="none"] .sort:hover::after {
+  content: "▲";
+}
+
+th[aria-sort="ascending"] .sort,
+th[aria-sort="descending"] .sort {
+  color: var(--color-foreground);
+
+  &::after {
+    opacity: 1;
+  }
+}
+
+th[aria-sort="ascending"] .sort::after {
+  content: "▲";
+}
+
+th[aria-sort="descending"] .sort::after {
+  content: "▼";
+}
+
+/* Selected row */
+tr[data-selected] {
+  background: var(--color-selected);
+}
+
+tr[tabindex]:focus-visible {
+  outline: var(--stroke-width) solid var(--color-ring);
+  outline-offset: calc(-1 * var(--stroke-width));
 }

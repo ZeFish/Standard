@@ -97,7 +97,7 @@
    *
    * @property {variable} --gap Dynamic gap between rhythm blocks (`calc(var(--space))`).
    * @property {variable} --gap-compact Compact micro-gap for inline groups, metadata, breadcrumbs (`var(--trim)`).
-   * @property {variable} --page-padding Fluid outer margin/padding preventing content from touching device bezels (`clamp(1rem, 3vw, 2.5rem)`).
+   * @property {variable} --page-padding Fluid outer margin/padding preventing content from touching device bezels.
    * @property {variable} --gap-grid-img Micro-gap separating adjacent images in rhythm grids (`var(--space-half)`).
    * @property {variable} --rhythm-block-scale Ratio multiplier factor for non-text blocks (`2`).
    */
@@ -140,22 +140,31 @@
    * @property {variable} --stroke-width Hairline border stroke width (`max(1px, 0.06rem)`).
    * @property {variable} --stroke-width-lg Heavy border stroke width (`calc(var(--stroke-width) * 2)`).
    * @property {variable} --opacity-disabled How much of a control is left when it cannot act (`0.4`). Every disabled control, `fieldset:disabled` zone and `[inert]` zone reads it, so they all dim alike.
-   * @property {variable} --radius Macro border radius for cards, dialogs, and large containers (`var(--leading)`).
-   * @property {variable} --radius-sm Micro border radius for tags, badges, buttons, and inputs (`var(--trim)`).
+   * @property {variable} --opacity-subdued A little less than full: secondary content, an inactive neighbour.
+   * @property {variable} --opacity-faint Half: placeholders, decoration and quiet states (a control that cannot act is `--opacity-disabled`).
+   * @property {variable} --radius Macro border radius for cards, dialogs, and large containers.
+   * @property {variable} --radius-sm Micro border radius for tags, badges, buttons, and inputs.
+   * @property {variable} --radius-lg Large border radius, for modals and hero panels.
+   * @property {variable} --radius-full Fully rounded corners: pills, badges, avatars and progress tracks.
    * @property {variable} --filter-blur Standard blur filter (`blur(8px)`).
    * @property {variable} --filter-glass Deep glassmorphic blur filter for overlays and floating panels (`blur(20px)`).
+   * @property {variable} --filter-blur-sm A light blur, for a hint of depth behind a small floating element.
    */
   --filter-blur: blur(8px);
   --filter-glass: blur(20px);
+  --filter-blur-sm: blur(4px);
   --stroke-width: max(1px, 0.06rem);
   --stroke-width-lg: calc(var(--stroke-width) * 2);
   --opacity-disabled: 0.4;
+  --opacity-subdued: 0.85;
+  --opacity-faint: 0.5;
   /* `--corner` is the documented hook (see Theme Authoring Hooks) — an app or
      theme sets it and this follows. It was documented and never read, so
      `--corner: 6px` in app.scss left --radius at --trim (~1.3px). */
   --radius: var(--corner, var(--trim));
   --radius-sm: 4px;
   --radius-lg: 12px;
+  --radius-full: 9999px;
 
   /**
    * @name Window Chrome & Application Tokens
@@ -176,16 +185,23 @@
   /**
    * @name Shadows & Elevation
    * @description Multi-layered elevation scale and presets driven by semantic color seeds.
+   * Composable shadow primitives: combine them freely with comma-separated values, for example `box-shadow: var(--shadow-ring), var(--shadow-lift)`.
    *
    * @property {variable} --shadow-ambient Subtle ambient contact shadow.
    * @property {variable} --shadow-lift Medium elevation shadow with directional lift.
    * @property {variable} --shadow-glow Atmospheric ambient glow shadow.
    * @property {variable} --shadow-inset Inset bevel shadow.
    * @property {variable} --shadow-ring Fine border ring inset shadow.
+   * @property {variable} --shadow-focus The keyboard focus ring as a shadow: `--color-ring` around the element, two strokes wide. For a control that cannot take an outline.
    * @property {variable} --shadow-border A one-stroke border drawn as an inset shadow: it looks like `border: var(--border)` but takes no layout space, so nothing shifts when it appears, disappears or changes colour. Paints under the element's content (use `::after` over a canvas or image).
    * @property {variable} --shadow-border-top Same, one side only (a divider): `-top`, `-bottom`, `-left`, `-right`.
+   * @property {variable} --shadow-border-bottom Same as `--shadow-border`, bottom side only.
+   * @property {variable} --shadow-border-left Same as `--shadow-border`, left side only.
+   * @property {variable} --shadow-border-right Same as `--shadow-border`, right side only.
    * @property {variable} --shadow-raised Layered raised preset with top highlight, hairline border, and ambient shadow.
    * @property {variable} --shadow Default elevation shadow.
+   * @property {variable} --shadow-hover Raised shadow plus a large lift, for an element under the pointer.
+   * @property {variable} --shadow-xl-tone Colour of the `--shadow-xl` layers: the shadow colour in a light scheme, transparent in a dark one, where the surface steps carry the elevation.
    * @property {variable} --shadow-xs Extra-small subtle contact shadow.
    * @property {variable} --shadow-sm Small card/well shadow.
    * @property {variable} --shadow-md Medium elevation shadow.
@@ -204,6 +220,7 @@
     inset 1px 0px 1px var(--color-border),
     inset -1px 0px 1px var(--color-border),
     inset 0px -1px 1px var(--color-border);
+  --shadow-focus: 0 0 0 var(--stroke-width-lg) var(--color-ring);
   --shadow-border: inset 0 0 0 var(--stroke-width) var(--color-border);
   --shadow-border-top: inset 0 var(--stroke-width) 0 0 var(--color-border);
   --shadow-border-bottom: inset 0 calc(var(--stroke-width) * -1) 0 0
@@ -256,29 +273,70 @@
   /**
    * @name Layout & Reading Widths
    * @description Column constraints for prose reading measure and outer page boundaries.
+   * A two-tier containment model: `--page-max-width` is the outer boundary of the page shell, header and footer, while `--prose-width` is the optimal reading measure (60 to 75 characters). Breakout tracks extend outwards from `--prose-width` in rhythm steps towards `--page-max-width`.
    *
    * @property {variable} --page-max-width Maximum width of the entire page shell (`1400px`).
    * @property {variable} --prose-width Optimal reading line length (approx. 65 characters / `42rem`).
    */
   --page-max-width: 1400px;
-  --prose-width: 42rem;
+  /* `--font-line-width` is the theme-authoring hook (tokens.yaml, note frontmatter, the Obsidian
+     editor width); 42rem when nothing sets it. A theme may also set `--prose-width` directly. */
+  --prose-width: var(--font-line-width, 42rem);
+
+  /**
+   * @name Control Sizes & Containers
+   * @description How big a control is, and how wide a container may be. Control heights are the Primer scale (28, 32, 40) plus the minimum touch target (44, the size Apple asks for). Container widths are Tailwind's named scale, in rem: a popover, a drawer, a dialog or a form column takes one instead of a number.
+   *
+   * @property {variable} --control-height-sm A small control: 28px.
+   * @property {variable} --control-height-md The standard control: 32px.
+   * @property {variable} --control-height-lg A large control: 40px.
+   * @property {variable} --hit-target The smallest touch target: 44px. An icon button that is drawn smaller is still this big to a finger.
+   * @property {variable} --container-xs Extra-small container: 20rem.
+   * @property {variable} --container-sm Small container: 24rem.
+   * @property {variable} --container-md Medium container: 28rem.
+   * @property {variable} --container-lg Large container: 32rem.
+   * @property {variable} --container-xl Extra-large container: 36rem.
+   * @property {variable} --container-2xl 42rem, the reading measure.
+   * @property {variable} --container-3xl 48rem.
+   * @property {variable} --container-4xl 56rem.
+   * @property {variable} --container-5xl 64rem.
+   */
+  --control-height-sm: 28px;
+  --control-height-md: 32px;
+  --control-height-lg: 40px;
+  --hit-target: 44px;
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+  --container-xl: 36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-4xl: 56rem;
+  --container-5xl: 64rem;
 
   /**
    * @name Line Heights & Letter Spacing
    * @description Tracking adjustments and proportional line height variants.
    *
+   * @property {variable} --line-height-none A line height of 1, for numerals, icons and labels set on one line (Tailwind's `leading-none`).
    * @property {variable} --line-height-compact Compact line height (`calc(1 + (var(--line-height) - 1) / 2)`). Used for titles and tight headings.
    * @property {variable} --line-height-relaxed Relaxed line height (`calc(1 + (var(--line-height) - 1) * 1.5)`). Used for loose longform prose.
    * @property {variable} --tracking-tight Tight letter-spacing (`-0.01em`). Applied to large display headings.
    * @property {variable} --tracking-neutral Normal letter-spacing (`0em`). Default for body text.
    * @property {variable} --tracking-open Open letter-spacing (`0.01em`). Applied to uppercase labels and small caps.
+   * @property {variable} --tracking-wide Wide letter-spacing, for small uppercase labels and captions (Tailwind's `tracking-wide`).
+   * @property {variable} --tracking-wider Wider letter-spacing, for the smallest uppercase labels (Tailwind's `tracking-wider`).
    */
+  --line-height-none: 1;
   --line-height-compact: calc(1 + (var(--line-height) - 1) / 2);
   --line-height-relaxed: calc(1 + (var(--line-height) - 1) * 1.5);
 
   --tracking-tight: -0.01em;
   --tracking-neutral: 0em;
   --tracking-open: 0.01em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
 
   /**
    * @name Spacing Scale
@@ -326,18 +384,18 @@
    * @name Optical Harmony Scale & Sizes
    * @description Modular geometric scale driven by `--optical-ratio` for typography and sizing. Sub-base steps (d5..d2) use a flattened divisor and floor at 11px to protect legibility.
    *
-   * @property {variable} --scale-d5 Sub-base optical step -5 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -2)), 9px)`).
-   * @property {variable} --scale-d4 Sub-base optical step -4 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -1.5)), 9px)`).
-   * @property {variable} --scale-d3 Sub-base optical step -3 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -1)), 9px)`).
-   * @property {variable} --scale-d2 Sub-base optical step -2 (`max(calc(var(--font-size) * pow(var(--optical-ratio), -0.5)), 9px)`).
+   * @property {variable} --scale-d5 Sub-base optical step -5.
+   * @property {variable} --scale-d4 Sub-base optical step -4.
+   * @property {variable} --scale-d3 Sub-base optical step -3.
+   * @property {variable} --scale-d2 Sub-base optical step -2.
    * @property {variable} --scale Base optical scale step (`var(--font-size)`).
-   * @property {variable} --scale-2 Super-base optical step 2 (`calc(var(--font-size) * var(--optical-ratio))`).
-   * @property {variable} --scale-3 Super-base optical step 3 (`calc(var(--scale-2) * var(--optical-ratio))`).
-   * @property {variable} --scale-4 Super-base optical step 4 (`calc(var(--scale-3) * var(--optical-ratio))`).
-   * @property {variable} --scale-5 Super-base optical step 5 (`calc(var(--scale-4) * var(--optical-ratio))`).
-   * @property {variable} --scale-6 Super-base optical step 6 (`calc(var(--scale-5) * var(--optical-ratio))`).
-   * @property {variable} --scale-7 Super-base optical step 7 (`calc(var(--scale-6) * var(--optical-ratio))`).
-   * @property {variable} --scale-8 Super-base optical step 8 (`calc(var(--scale-7) * var(--optical-ratio))`).
+   * @property {variable} --scale-2 Super-base optical step 2.
+   * @property {variable} --scale-3 Super-base optical step 3.
+   * @property {variable} --scale-4 Super-base optical step 4.
+   * @property {variable} --scale-5 Super-base optical step 5.
+   * @property {variable} --scale-6 Super-base optical step 6.
+   * @property {variable} --scale-7 Super-base optical step 7.
+   * @property {variable} --scale-8 Super-base optical step 8.
    */
   /* Optical harmony scale. --scale-2 upward is a clean geometric progression
      (each step = previous * --optical-ratio). Below base (d5..d2) the
@@ -500,8 +558,8 @@
    *
    * @property {variable} --font-ratio Theme-authoring hook to override the optical modular scale factor (e.g. `1.414`).
    * @property {variable} --font-density Theme-authoring hook to override base line height density.
-   * @property {variable} --font-line-width Theme-authoring hook to override default reading column measure.
-   * @property {variable} --measure Editor and writer component hook to override active text measure.
+   * @property {variable} --font-line-width Theme-authoring hook to override the default reading column measure: `--prose-width` reads it. The Obsidian plugin uses the same value as its editor width.
+   * @property {variable} --font-header-weight Theme-authoring hook to override the heading weight anchor: `--font-weight-header` reads it.
    * @property {variable} --corner Theme-authoring hook to override base border radius.
    */
 }

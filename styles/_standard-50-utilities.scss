@@ -16,6 +16,52 @@
  * @property .rounded, .rounded-sm, .rounded-lg, .rounded-full Border radius utilities.
  * @property .shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl Elevation shadow utilities.
  * @property .flex, .inline-flex, .grid, .inline-grid, .block, .inline-block, .hidden Layout display utilities.
+ *
+ * @example html - Padding and margin
+ * <div class="bg-background border rounded p-2">p-2: padding on every side</div>
+ * <div class="bg-background border rounded px-4 py-2 mt-2">px-4 py-2 and mt-2</div>
+ * <div class="bg-background border rounded p-half mt-2">p-half: half a baseline</div>
+ *
+ * @example html - Gap and layout
+ * <div class="flex flex-wrap gap-2">
+ *   <div class="bg-background border rounded p-2">flex</div>
+ *   <div class="bg-background border rounded p-2">with</div>
+ *   <div class="bg-background border rounded p-2">gap-2</div>
+ * </div>
+ * <div class="grid-3 gap-half mt-2">
+ *   <div class="bg-background border rounded p-2">grid</div>
+ *   <div class="bg-background border rounded p-2">gap-half</div>
+ *   <div class="bg-background border rounded p-2">3 columns</div>
+ * </div>
+ *
+ * @example html - Colour, border and radius
+ * <div class="flex flex-wrap gap-2 no-rhythm">
+ *   <span class="text-muted">text-muted</span>
+ *   <span class="text-subtle">text-subtle</span>
+ *   <span class="text-accent">text-accent</span>
+ *   <span class="border p-2">border</span>
+ *   <span class="border-accent p-2">border-accent</span>
+ *   <span class="bg-background border p-2 rounded-sm">rounded-sm</span>
+ *   <span class="bg-background border p-2 rounded">rounded</span>
+ *   <span class="bg-background border p-2 rounded-lg">rounded-lg</span>
+ *   <span class="bg-background border p-2 rounded-full">rounded-full</span>
+ * </div>
+ *
+ * @example html - Elevation
+ * <div class="flex flex-wrap gap-3 no-rhythm" style="padding: var(--space)">
+ *   <div class="bg-background border rounded p-2 shadow-sm">shadow-sm</div>
+ *   <div class="bg-background border rounded p-2 shadow-md">shadow-md</div>
+ *   <div class="bg-background border rounded p-2 shadow-lg">shadow-lg</div>
+ *   <div class="bg-background border rounded p-2 shadow-xl">shadow-xl</div>
+ * </div>
+ *
+ * @example html - Type size and alignment
+ * <p class="text-xs">text-xs</p>
+ * <p class="text-base">text-base</p>
+ * <p class="text-xl">text-xl</p>
+ * <p class="text-3xl">text-3xl</p>
+ * <p class="text-center">text-center</p>
+ * <p class="text-right">text-right</p>
  */
 
 /* ============================================================ */

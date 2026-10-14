@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 17:31
+modified: 2026-10-14 13:49
 cssclasses: []
 maturity: sprout
 mode: read
@@ -36,8 +36,12 @@ snippet: false
           1px -1px 1px var(--color),
           -1px 1px 1px var(--color),
           1px 1px 1px var(--color) !important ;
-        text-align: center;
+
         font-feature-settings: "liga", "onum", "kern", "smcp";
+      }
+
+      .prose :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+          text-align: center;
       }
 
       &.theme-dark :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
@@ -79,7 +83,7 @@ snippet: false
 
       :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
         position: relative;
-        border-radius: calc(var(--radius-s) * 2);
+        border-radius: calc(var(--radius-sm) * 2);
         border: none;
         box-shadow: var(--shadow-inset);
 
@@ -98,7 +102,8 @@ snippet: false
       }
 
       :is(hr, .HyperMD-hr) {
-        font-size: calc(var(--h1-size) * 1);
+        /* The size of an :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) (the embellishment glyph is set as large as a title). */
+        font-size: clamp(var(--scale-3), 5.5vw, var(--scale-4));
         line-height: 0.75em;
         padding: 0;
         border: 0;

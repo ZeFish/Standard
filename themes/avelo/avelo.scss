@@ -31,3 +31,17 @@
   --font-monospace: "MonoLisa";
 }
 /* TOKENS.YAML ADAPTER END */
+
+:root[data-theme="avelo"],
+[data-theme="avelo"] {
+
+    --font-monospace: "Monolisa";
+    --font-monospace-feature: "zero" on;
+    .value, .stat-number, .figure-value {
+        font-feature-settings: "zero" on;
+    }
+
+  .drawer-title {
+    --color-header: var(--color-muted);
+  }
+}

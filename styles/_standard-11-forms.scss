@@ -17,7 +17,7 @@
  * @property --switch-height Primary height sizing knob for toggle switch controls. Set it anywhere — on the switch, a class, or a container — and width and thumb follow.
  * @property --switch-width Width sizing token for toggle switches (`calc(var(--switch-height) * 2)`).
  * @property --switch-padding Inset padding controlling the toggle switch thumb gap (`0px`).
- * @property --slider-value Percentage value driving custom filled range slider tracks.
+ * @property --slider-value Percentage value driving custom filled range slider tracks. Kept in step with the thumb for every `input[type=range]` by `StndInit` (`@stnd/layout`); set it in the element's own `style` for a non-linear slider, or mark it `data-slider-fill="manual"`.
  *
  * @example html - A switch (role=switch on a checkbox)
  * <input type="checkbox" role="switch">
@@ -28,6 +28,51 @@
  *   <label><input type="checkbox"> Email me</label>
  * </fieldset>
  * <button>Save</button>
+ *
+ * @example html - Text controls, zero classes
+ * <form>
+ *   <div class="field">
+ *     <label for="ex-name">Name</label>
+ *     <input id="ex-name" type="text" placeholder="Ada Lovelace">
+ *   </div>
+ *   <div class="field">
+ *     <label for="ex-mail">Email</label>
+ *     <input id="ex-mail" type="email" placeholder="ada@example.com">
+ *   </div>
+ *   <div class="field">
+ *     <label for="ex-plan">Plan</label>
+ *     <select id="ex-plan"><option>Free</option><option>Gardener</option><option>Studio</option></select>
+ *   </div>
+ *   <div class="field">
+ *     <label for="ex-bio">Bio</label>
+ *     <textarea id="ex-bio" rows="3" placeholder="A few words about you…"></textarea>
+ *   </div>
+ * </form>
+ *
+ * @example html - Checkbox, radio and switch
+ * <label><input type="checkbox" checked> Checkbox</label><br>
+ * <label><input type="radio" name="ex-r" checked> Radio</label><br>
+ * <label><input type="checkbox" role="switch" checked> Switch on</label><br>
+ * <label><input type="checkbox" role="switch"> Switch off</label>
+ *
+ * @example html - A switch resized from one token
+ * <label style="--switch-height: 2rem"><input type="checkbox" role="switch" checked> A larger switch</label>
+ *
+ * @example html - Range, progress and meter
+ * <div class="field"><label for="ex-range">Reading size</label><input id="ex-range" type="range" min="0" max="100" value="60"></div>
+ * <div class="field"><label for="ex-progress">Export</label><progress id="ex-progress" max="100" value="45"></progress></div>
+ * <div class="field"><label for="ex-meter">Storage</label><meter id="ex-meter" min="0" max="100" low="40" high="80" optimum="20" value="64"></meter></div>
+ *
+ * @example html - A fieldset with a legend, and the disabled state
+ * <fieldset>
+ *   <legend>Preferences</legend>
+ *   <label><input type="checkbox" role="switch" checked> Email me when a note is published</label>
+ * </fieldset>
+ * <fieldset disabled>
+ *   <legend>Disabled</legend>
+ *   <input type="text" placeholder="Cannot be edited">
+ *   <button>Cannot be pressed</button>
+ * </fieldset>
  */
 
 /* =========================== */
