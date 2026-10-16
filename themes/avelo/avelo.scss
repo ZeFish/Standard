@@ -26,16 +26,17 @@
   --color-dark-pink: #e873a8;
   --radius: var(--space-d4);
   --font-header: "Cal Sans";
+  --font-weight-header: 600;
   --font-text: "Cargo Diatype";
-  --font-interface: "Cargo Diatype";
+  --font-interface: "Inter";
   --font-monospace: "MonoLisa";
 }
 /* TOKENS.YAML ADAPTER END */
 
 :root[data-theme="avelo"],
 [data-theme="avelo"] {
+    --font-header-variation: 'GEOM' 100.0;
 
-    --font-monospace: "Monolisa";
     --font-monospace-feature: "zero" on;
     .value, .stat-number, .figure-value {
         font-feature-settings: "zero" on;
@@ -43,5 +44,9 @@
 
   .drawer-title {
     --color-header: var(--color-muted);
+  }
+
+  table {
+      font-family: var(--font-interface);
   }
 }
