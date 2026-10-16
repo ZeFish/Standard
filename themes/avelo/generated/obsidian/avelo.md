@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-11 23:09
-modified: 2026-10-14 13:03
+modified: 2026-10-16 02:53
 cssclasses: []
 maturity: sprout
 mode: read
@@ -25,12 +25,8 @@ snippet: false
             font-feature-settings: "zero" on;
         }
 
-      &.theme-dark,
-      &[data-color-mode="dark"] {
-          --color-header: var(--color-muted);
-          .drawer-title {
-              --color-header: var(--color-muted);
-          }
+      .drawer-title {
+        --color-header: var(--color-muted);
       }
 }
 ```

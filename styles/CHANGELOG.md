@@ -1,5 +1,12 @@
 # @stnd/styles
 
+## 0.24.0
+
+### Minor Changes
+
+- aeeccac: Add `DataTable` (`@stnd/ui`): a table with sortable column headers (ascending, descending, original order), plus the `sort.js` helpers behind it. `@stnd/styles` styles `th[aria-sort]` headers and `tr[data-selected]` rows.
+- 5599b9d: Add status tints, `--color-{success,warning,error,info}-background` (12 %) and `-border` (30 %), and `--radius-full`. Documented in `TOKENS.md` and `GUIDE.md`.
+
 ## 0.23.0
 
 ### Minor Changes
