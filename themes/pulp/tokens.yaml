@@ -48,8 +48,7 @@ tokens:
   font-header-letter-spacing: "-0.015em"
   font-header-line-height: "1.05"
   line-height: "1.55"
-  radius: "0"
-  radius-base: "0"
+  radius: var(--space)
   radius-md: 2px
   radius-lg: 4px
   font-ratio: "1.25"
