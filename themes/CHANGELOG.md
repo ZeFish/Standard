@@ -1,5 +1,11 @@
 # @stnd/themes
 
+## 0.24.0
+
+### Minor Changes
+
+- Auto-bumped @stnd/themes due to modified code.
+
 ## 0.23.0
 
 ### Minor Changes

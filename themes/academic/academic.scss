@@ -29,7 +29,7 @@
 :root[data-theme="academic"],
 [data-theme="academic"] {
   /* ─── Custom rules for Academic ───────────────────────────── */
-h1 {
+.prose h1 {
     margin-inline: auto;
     text-align: center;
     text-wrap: balance;
