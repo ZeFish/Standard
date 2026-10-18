@@ -23,7 +23,6 @@ tokens:
   font-feature: "\"onum\", \"pnum\""
   line-height: "1.55"
   prose-width: 30rlh
-  font-text-size: 1.125rem
   font-ratio: "1.25"
   font-density: "1.68"
   font-line-width: 40rem

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 13:46
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,15 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="venetian"] {
     /* ─── Custom rules for Venetian ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-header: "adobe-jenson-pro";
-    --font-text: "adobe-jenson-pro";
-    --page-padding: var(--space-2);
-    --gap-block: var(--space-2);
-    --gap-mobile-block: var(--space-2);
-    --line-height: 1.55;
-    --prose-width: 38rem;
-
     /* ─── Custom rules for Venetian ───────────────────────────── */
     /* burnt umber */ /* lapis-like */
 

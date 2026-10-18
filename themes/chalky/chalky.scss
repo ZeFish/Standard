@@ -19,8 +19,6 @@
   --font-text: "Jimmy Serif Pro";
   --font-header: "Fern";
   --font-monospace: "Monaspace Xenon";
-  --optical-ratio: 1.414;
-  --font-text-size: 1.125rem;
   --font-ratio: 1.25;
   --font-density: 1.5;
   --font-line-width: 38rem;
@@ -33,14 +31,6 @@
 
 :root[data-theme="chalky"],
 [data-theme="chalky"] {
-/* ─── Design Tokens ──────────────────────────────────────── */
---color-light-background: #fffdf6;
---color-light-foreground: #28201b;
---font-text: "Jimmy Serif Pro";
---font-header: "Fern";
---font-monospace: "Monaspace Xenon";
---optical-ratio: 1.414;
-
 /* ─── Custom rules for Chalky ───────────────────────────── */
 /* soft chalk paper */
   /* deep charcoal writing */

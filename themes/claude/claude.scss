@@ -13,12 +13,9 @@
   --color-light-italic: color-mix( in srgb, var(--color-accent) 65%, var(--color-foreground) );
   --font-serif: "Ibarra Real Nova", Georgia, "Times New Roman", serif;
   --font-monospace: "MonoLisa", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-  --optical-ratio: 1.414;
   --color-light-border: color-mix(in srgb, var(--color-foreground) 6%, transparent);
-  --font-text-size: 1.0625rem;
   --font-ratio: 1.25;
   --font-density: 1.5;
-  --font-line-width: 42rem;
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -28,12 +25,6 @@
 
 :root[data-theme="claude"],
 [data-theme="claude"] {
-/* ─── Design Tokens ──────────────────────────────────────── */
---font-serif: "Ibarra Real Nova", Georgia, "Times New Roman", serif;
---font-monospace: "MonoLisa", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
---optical-ratio: 1.414;
---claude-opacity: 18%;
-
 /* ─── Custom rules for Claude ───────────────────────────── */
 /* Light theme foundations (OKLCH tuned) */
 

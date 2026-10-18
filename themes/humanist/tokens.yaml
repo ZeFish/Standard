@@ -23,7 +23,6 @@ tokens:
   font-interface: "\"Kalice\""
   font-header-weight: "400"
   font-header-line-height: "1.1"
-  font-header-letter-spacing: 0em
   stroke-width: 0
   color-light-italic: var(--color-blue)
   color-light-bold: var(--color-accent)
@@ -34,4 +33,3 @@ tokens:
   font-density: "1.6"
   font-ratio: "1.333"
   font-line-width: 38rem
-  font-text-size: 1.2rem

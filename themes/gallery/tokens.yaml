@@ -22,5 +22,4 @@ tokens:
   font-header-letter-spacing: "-0.065em"
   line-height: "1.2"
   page-padding: var(--space)
-  font-text-size: 1.0625rem
   font-ratio: "1.333"

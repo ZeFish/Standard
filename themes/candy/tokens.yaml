@@ -44,16 +44,14 @@ tokens:
   font-header: "\"Wonder\", \"Quicksand\", sans-serif"
   font-monospace: "\"Maple Mono\", monospace"
   font-interface: "\"Maple Mono\", monospace"
-  font-header-weight: "700"
   font-header-letter-spacing: "-0.01em"
   font-header-line-height: "1.15"
   line-height: "1.6"
   optical-ratio: "1.333"
-  radius: "16px"
-  radius-base: "12px"
-  radius-md: "20px"
-  radius-lg: "32px"
-  font-text-size: 1.0625rem
+  radius: 16px
+  radius-base: 12px
+  radius-md: 20px
+  radius-lg: 32px
   font-ratio: "1.25"
   font-density: "1.5"
   font-line-width: 40rem

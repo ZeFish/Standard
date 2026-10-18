@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 13:46
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,18 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="calm"] {
     /* ─── Custom rules for Calm (Anti-Overload) ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-text: "Quicksand", sans-serif;
-    --font-header: "Quicksand", sans-serif;
-    --font-weight-text: 400;
-    --font-weight-header: 600;
-    --font-header-letter-spacing: 0em;
-    --line-height: 1.6;
-    --optical-ratio: 1.333;
-    --radius-base: 16px;
-    --radius-md: 24px;
-    --radius-lg: 32px;
-
     /* ─── Custom rules for Calme (Anti-Surcharge) ───────────────────────────── */
     /* Soft, earthy, desaturated pastel tokens to reduce visual fatigue */
       /* Soft taupe/sand */

@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 13:46
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,12 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="claude"] {
     /* ─── Custom rules for Claude ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-serif: "Ibarra Real Nova", Georgia, "Times New Roman", serif;
-    --font-monospace: "MonoLisa", ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-    --optical-ratio: 1.414;
-    --claude-opacity: 18%;
-
     /* ─── Custom rules for Claude ───────────────────────────── */
     /* Light theme foundations (OKLCH tuned) */
 

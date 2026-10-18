@@ -16,7 +16,6 @@
   --font-feature: "onum", "pnum";
   --line-height: 1.55;
   --prose-width: 30rlh;
-  --font-text-size: 1.125rem;
   --font-ratio: 1.25;
   --font-density: 1.68;
   --font-line-width: 40rem;
@@ -29,18 +28,7 @@
 
 :root[data-theme="academic"],
 [data-theme="academic"] {
-/* ─── Design Tokens ──────────────────────────────────────── */
---font-text: "Source Serif 4", "Georgia", "Times New Roman", serif;
---font-header: "Source Serif 4", "Georgia", "Times New Roman", serif;
---font-monospace: "IBM Plex Mono", "Menlo", monospace;
---sidenote-width: 18rem;
---optical-ratio: 1.225;
---font-weight-header: 600;
---font-feature: "onum", "pnum";
---line-height: 1.55;
---prose-width: 30rlh;
-
-/* ─── Custom rules for Academic ───────────────────────────── */
+  /* ─── Custom rules for Academic ───────────────────────────── */
 h1 {
     margin-inline: auto;
     text-align: center;

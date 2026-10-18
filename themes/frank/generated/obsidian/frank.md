@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 00:54
+modified: 2026-10-18 12:46
 cssclasses: []
 maturity: sprout
 mode: read
@@ -65,6 +65,13 @@ snippet: false
       :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         text-align: left;
         color: var(--color-foreground);
+      }
+
+      :is(.markdown-reading-view h2, .HyperMD-header-2) a {
+          color: var(--color-foreground);
+      }
+      :is(.markdown-reading-view h2, .HyperMD-header-2) a:hover {
+          color: var(--color-link);
       }
 }
 ```

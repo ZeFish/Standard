@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 13:46
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,17 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="dyslexia"] {
     /* ─── Custom rules for Dyslexia ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-text: "Atkinson Hyperlegible Next", sans-serif;
-    --font-header: "Atkinson Hyperlegible Next", sans-serif;
-    --font-mono: "Atkinson Hyperlegible Mono", monospace;
-    --font-weight-text: 400;
-    --font-weight-header: 700;
-    --font-header-letter-spacing: 0.03em;
-    --line-height: 1.6;
-    --optical-ratio: 1.414;
-    --prose-width: 38rem;
-
     /* ─── Custom rules for Dyslexie ───────────────────────────── */
     /* Reduce visual stress: Never pure white or pure black */
       /* Warm off-white/cream */

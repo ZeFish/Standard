@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 13:46
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,17 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="academic"] {
     /* ─── Custom rules for Academic ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-text: "Source Serif 4", "Georgia", "Times New Roman", serif;
-    --font-header: "Source Serif 4", "Georgia", "Times New Roman", serif;
-    --font-monospace: "IBM Plex Mono", "Menlo", monospace;
-    --sidenote-width: 18rem;
-    --optical-ratio: 1.225;
-    --font-weight-header: 600;
-    --font-feature: "onum", "pnum";
-    --line-height: 1.55;
-    --prose-width: 30rlh;
-
     /* ─── Custom rules for Academic ───────────────────────────── */
     :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
         margin-inline: auto;

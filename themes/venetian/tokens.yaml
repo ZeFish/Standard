@@ -21,8 +21,6 @@ tokens:
   gap-block: var(--space-2)
   gap-mobile-block: var(--space-2)
   line-height: "1.55"
-  prose-width: 38rem
-  font-text-size: 1.15rem
   font-ratio: "1.2"
   font-density: "1.55"
   font-line-width: 38rem

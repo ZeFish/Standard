@@ -26,13 +26,11 @@
   --color-light-link: var(--color-red);
   --color-dark-link: var(--color-red);
   --font-ratio: 1.2;
-  --font-text-size: 1.15rem;
   --font-density: 2;
   --prose-width: 38rem;
   --font-text: "Fern", "Graveur Variable", Bookerly;
   --font-weight: 450;
   --font-feature: "liga", "onum", "kern";
-  --font-variation: "";
   --font-interface: "Fern";
   --font-monospace: "Monolisa";
   --font-monospace-feature: "onum" off;
@@ -52,10 +50,6 @@
 
 :root[data-theme="book"],
 [data-theme="book"] {
-/* ─── Design Tokens ──────────────────────────────────────── */
-
-
-
 /* ─── Custom rules for Book ───────────────────────────── */
 /* Light Mode Accent Colors */ /* like aged brick or red clay */ /* terra cotta */ /* mustard parchment */ /* sage green */ /* antique blue-grey */ /* faded denim */ /* dusk lavender */ /* soft mauve rose */
 

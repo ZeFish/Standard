@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 13:46
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,11 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="occult"] {
     /* ─── Custom rules for Occult ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-text: "Fern";
-    --font-header: "Fern";
-    --font-monospace: "Monaspace Xenon";
-
     /* ─── Custom rules for Occult ───────────────────────────── */
     /* === Core palette (light) === */
       /* warm paper */

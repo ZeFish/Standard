@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-14 14:00
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,10 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="book"] {
     /* ─── Custom rules for Book ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-
-
-
     /* ─── Custom rules for Book ───────────────────────────── */
     /* Light Mode Accent Colors */ /* like aged brick or red clay */ /* terra cotta */ /* mustard parchment */ /* sage green */ /* antique blue-grey */ /* faded denim */ /* dusk lavender */ /* soft mauve rose */
 

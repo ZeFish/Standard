@@ -32,14 +32,10 @@ tokens:
   font-text: "\"Berkeley Mono\""
   font-header: "\"Avant Garde Pro\""
   font-monospace: "\"Berkeley Mono\""
-  optical-ratio: "1.414"
   line-height: "1.5"
-  prose-width: 45rem
   radius: 2px
   stroke-width: 1px
-  font-header-weight: "700"
   font-interface: "\"Berkeley Mono\""
   font-density: "1.45"
   font-line-width: 45rem
-  font-text-size: 1.0625rem
   font-ratio: "1.25"

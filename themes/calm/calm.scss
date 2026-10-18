@@ -11,13 +11,11 @@
   --font-text: "Quicksand", sans-serif;
   --font-header: "Quicksand", sans-serif;
   --font-header-weight: 600;
-  --font-header-letter-spacing: 0em;
   --line-height: 1.6;
   --optical-ratio: 1.333;
   --radius-base: 16px;
   --radius-md: 24px;
   --radius-lg: 32px;
-  --font-text-size: 1.0625rem;
   --font-ratio: 1.25;
   --font-density: 1.5;
   --font-line-width: 40rem;
@@ -30,18 +28,6 @@
 
 :root[data-theme="calm"],
 [data-theme="calm"] {
-/* ─── Design Tokens ──────────────────────────────────────── */
---font-text: "Quicksand", sans-serif;
---font-header: "Quicksand", sans-serif;
---font-weight-text: 400;
---font-weight-header: 600;
---font-header-letter-spacing: 0em;
---line-height: 1.6;
---optical-ratio: 1.333;
---radius-base: 16px;
---radius-md: 24px;
---radius-lg: 32px;
-
 /* ─── Custom rules for Calme (Anti-Surcharge) ───────────────────────────── */
 /* Soft, earthy, desaturated pastel tokens to reduce visual fatigue */
   /* Soft taupe/sand */

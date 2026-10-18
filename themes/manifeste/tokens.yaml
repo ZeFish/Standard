@@ -27,7 +27,6 @@ tokens:
   font-header-line-height: "1.2"
   font-ratio: "1.333"
   font-density: "1.6"
-  font-text-size: 1.1em !important
   margin: 3rlh
   font-weight: "500"
   font-line-width: 38rem

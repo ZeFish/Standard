@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 14:00
+modified: 2026-10-18 12:50
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,12 +19,6 @@ snippet: false
 ```css
 [data-stnd-theme="blueprint"] {
     /* ─── Custom rules for Blueprint ───────────────────────────── */
-    /* ─── Design Tokens ──────────────────────────────────────── */
-    --font-monospace: "MonoLisa";
-    --font-monospace-feature: "liga", "zero", "calt", "ss02", "ss03", "ss07", "ss10", "ss15";
-    --optical-ratio: 1.425;
-    --blueprint-opacity: 20%;
-
     /* ─── Custom rules for Blueprint ───────────────────────────── */
     /* Accent system */
       /* warning, highlight */
