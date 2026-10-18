@@ -5,11 +5,24 @@
   --color-dark-background: #111111;
   --color-light-red: #e03030;
   --color-dark-red: #db6057;
-  --color-light-green: var(--color-red);
+  --color-light-orange: #c4570a;
+  --color-light-yellow: #946c00;
+  --color-light-green: #1f7a46;
+  --color-light-cyan: #16808f;
   --color-light-blue: #2b5aa0;
-  --color-light-yellow: var(--color-red);
-  --color-light-magenta: var(--color-red);
-  --color-light-orange: var(--color-red);
+  --color-light-purple: #6a4c9c;
+  --color-light-magenta: #b0267a;
+  --color-light-pink: #c23a74;
+  --color-light-brown: #8a5a3c;
+  --color-dark-orange: #e8893a;
+  --color-dark-yellow: #e3b341;
+  --color-dark-green: #5fb878;
+  --color-dark-cyan: #4fb3c4;
+  --color-dark-blue: #6b9bd6;
+  --color-dark-purple: #a58bd6;
+  --color-dark-magenta: #d86bb0;
+  --color-dark-pink: #e88aaa;
+  --color-dark-brown: #b88a68;
   --color-light-accent: var(--color-red);
   --color-light-link: var(--color-red);
   --shadow: none;
@@ -22,13 +35,14 @@
   --font-text: "Cargo Diatype";
   --font-header-weight: 900;
   --font-header-letter-spacing: -0.065em;
-  --line-height: 1.2;
   --page-padding: var(--space);
   --color-surface: var(--color-background);
   --font-interface: Inter;
   --prose-width: 38rem;
   --font-ratio: 1.25;
   --font-density: 1.45;
+  --shadow-raised: 0;
+  --shadow-lift: inset 0 calc(var(--stroke-width) * -1) 0 0 var(--color-border);
 }
 /* TOKENS.YAML ADAPTER END */
 
@@ -36,5 +50,9 @@
     .callout-title,
     > summary {
     padding: 0 var(--space-d2);
+    }
+
+    h1 {
+        line-height: 1;
     }
 }

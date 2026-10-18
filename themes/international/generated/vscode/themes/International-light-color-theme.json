@@ -63,13 +63,13 @@
     {
       "scope": "variable",
       "settings": {
-        "foreground": "#e03030"
+        "foreground": "#1f7a46"
       }
     },
     {
       "scope": "variable.parameter",
       "settings": {
-        "foreground": "#e03030"
+        "foreground": "#c4570a"
       }
     },
     {
@@ -85,7 +85,7 @@
         "variable.other.constant"
       ],
       "settings": {
-        "foreground": "#e03030"
+        "foreground": "#c4570a"
       }
     },
     {
@@ -94,7 +94,7 @@
         "storage.modifier"
       ],
       "settings": {
-        "foreground": "#e03030",
+        "foreground": "#c4570a",
         "fontStyle": "italic"
       }
     },
@@ -104,7 +104,7 @@
         "punctuation.definition.keyword"
       ],
       "settings": {
-        "foreground": "#e03030",
+        "foreground": "#c4570a",
         "fontStyle": "italic"
       }
     },
@@ -121,7 +121,7 @@
     {
       "scope": "string",
       "settings": {
-        "foreground": "#e03030"
+        "foreground": "#946c00"
       }
     },
     {
@@ -131,7 +131,7 @@
         "support.class"
       ],
       "settings": {
-        "foreground": "#e03030"
+        "foreground": "#1f7a46"
       }
     },
     {

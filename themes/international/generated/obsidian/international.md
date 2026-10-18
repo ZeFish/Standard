@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-01 13:40
+modified: 2026-10-18 17:58
 cssclasses: []
 maturity: sprout
 mode: read
@@ -22,6 +22,10 @@ snippet: false
     :is(.callout-title, .callout-title-inner),
         > summary {
         padding: 0 var(--space-d2);
+        }
+
+        :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+            line-height: 1;
         }
 }
 ```
