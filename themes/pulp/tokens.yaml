@@ -47,7 +47,6 @@ tokens:
   font-interface: "\"Courier Prime\", monospace"
   font-header-letter-spacing: "-0.015em"
   font-header-line-height: "1.05"
-  line-height: "1.55"
   radius: var(--space)
   radius-md: 2px
   radius-lg: 4px

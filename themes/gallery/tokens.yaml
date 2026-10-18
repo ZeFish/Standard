@@ -20,6 +20,5 @@ tokens:
   font-text: "\"Cargo Diatype\""
   font-header: "\"Cargo Diatype\""
   font-header-letter-spacing: "-0.065em"
-  line-height: "1.2"
   page-padding: var(--space)
   font-ratio: "1.333"

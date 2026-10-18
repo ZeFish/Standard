@@ -24,7 +24,6 @@ tokens:
   font-monospace: "\"Sohne Mono\""
   font-header-weight: "300"
   font-header-letter-spacing: 0.01em
-  font-header-line-height: "1.2"
   font-ratio: "1.333"
   font-density: "1.6"
   margin: 3rlh

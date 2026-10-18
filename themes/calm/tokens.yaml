@@ -18,7 +18,6 @@ tokens:
   font-text: "\"Quicksand\", sans-serif"
   font-header: "\"Quicksand\", sans-serif"
   font-header-weight: "600"
-  line-height: "1.6"
   optical-ratio: "1.333"
   radius-base: 16px
   radius-md: 24px

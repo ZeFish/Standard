@@ -17,7 +17,6 @@ tokens:
   font-header: "\"Atkinson Hyperlegible Next\", sans-serif"
   font-mono: "\"Atkinson Hyperlegible Mono\", monospace"
   font-header-letter-spacing: 0.03em
-  line-height: "1.6"
   font-ratio: "1.25"
   font-density: "1.6"
   font-line-width: 38rem
