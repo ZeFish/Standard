@@ -89,4 +89,11 @@
     text-align: left;
     color: var(--color-foreground);
   }
+
+  h2 a {
+      color: var(--color-foreground);
+  }
+  h2 a:hover {
+      color: var(--color-link);
+  }
 }
