@@ -75,21 +75,11 @@
     font-weight: 700;
   }
 
-  /* Sharp paper cuts: dime-store novel aesthetic */
-  button,
-  .button,
-  input,
-  select,
-  textarea,
-  article.card,
-  .card {
-    border-radius: var(--radius-base, 0);
-  }
+
 
   .badge,
   .tag,
   .pill {
-    border-radius: var(--radius-md, 2px);
     font-family: var(--font-monospace);
     text-transform: uppercase;
     font-size: var(--scale-d4, 0.75rem);
