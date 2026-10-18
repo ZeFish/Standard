@@ -52,9 +52,9 @@
    *
    * @property {variable} --optical-ratio Modular scale ratio. Resolves theme hook `--font-ratio` with fallback to `--ratio-silver`.
    * @property {variable} --physics-slope Ratio growth physics slope derived from optical ratio (`max(calc(var(--optical-ratio) - 1), 0.15)`).
-   * @property {variable} --fluid-growth Viewport-responsive growth increment (`calc(var(--physics-slope) * 1.2vw)`).
-   * @property {variable} --base-size Root font size base (defaults to `--font-text-size` or `1.0625rem`).
-   * @property {variable} --font-size Clamped fluid font size that scales smoothly between mobile and wide displays.
+   * @property {variable} --fluid-growth Viewport-responsive growth increment beyond wide screens (`0px`).
+   * @property {variable} --base-size Root font size base (defaults to `--font-text-size` or `1rem`) (`var(--font-text-size, 1rem)`).
+   * @property {variable} --font-size Base font size, scaling fluidly on displays wider than wide breakpoint (`var(--base-size)`).
    * @property {variable} --density-base Reading density base resolving from `--font-density` or `--optical-ratio`.
    * @property {variable} --line-height Clamped fluid unitless line height (1.35 to 1.75).
    * @property {variable} --baseline Official rhythm unit (`1rlh`). Drives vertical spacing across all components.
@@ -71,13 +71,9 @@
 
   /* Fluid typography slopes: the optical ratio drives responsiveness */
   --physics-slope: max(calc(var(--optical-ratio) - 1), 0.15);
-  --fluid-growth: calc(var(--physics-slope) * 1.2vw);
+  --fluid-growth: 0px;
   --base-size: var(--font-text-size, 1rem);
-  --font-size: clamp(
-    var(--base-size),
-    calc(var(--base-size) + var(--fluid-growth)),
-    calc(var(--base-size) * 1.3)
-  );
+  --font-size: var(--base-size);
 
   /* Fluid line-height: resolves from theme density or optical ratio */
   --density-base: var(--font-density, var(--optical-ratio));
@@ -587,6 +583,17 @@
 @media only screen and (max-width: #{$small}) {
   #{$stnd-theme-scope} {
     --font-size: var(--font-size-mobile);
+  }
+}
+
+@media only screen and (min-width: #{$wide}) {
+  #{$stnd-theme-scope} {
+    --fluid-growth: calc(var(--physics-slope) * (100vw - #{$wide}) * 0.02);
+    --font-size: clamp(
+      var(--base-size),
+      calc(var(--base-size) + var(--fluid-growth)),
+      calc(var(--base-size) * 1.3)
+    );
   }
 }
 
