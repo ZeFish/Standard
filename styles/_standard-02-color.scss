@@ -130,7 +130,7 @@
    * @property --color-light-magenta Magic / Magenta (+300° hue offset).
    * @property --color-light-purple Purple (+270° hue offset).
    * @property --color-light-pink Pink (+350° hue offset).
-   * @property --color-light-brown Brown (+60° hue offset).
+   * @property --color-light-brown Brown (the light orange, darker and muted).
    * @property --color-light-accent-triadic Triadic accent (+120°).
    * @property --color-light-accent-auto Default accent strategy (triadic).
    * @property --color-light-accent Active light mode accent color.
@@ -181,10 +181,10 @@
     from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
       calc(h + 350)
   );
-  /* Brown — foreground hue - 15° */
+  /* Brown — the theme's orange, darker and muted: a brown is a dark, dull orange.
+     (Derived from the foreground hue it came out a pale red.) */
   --color-light-brown: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h - 15)
+    from var(--color-light-orange) calc(l - 0.2) calc(c * 0.55) h
   );
 
   /* Link color defaults to blue */
@@ -215,7 +215,7 @@
    * @property --color-dark-magenta Dark mode magenta (+300° hue offset).
    * @property --color-dark-purple Dark mode purple (+270° hue offset).
    * @property --color-dark-pink Dark mode pink (+350° hue offset).
-   * @property --color-dark-brown Dark mode brown (+60° hue offset).
+   * @property --color-dark-brown Dark mode brown (the dark orange, muted).
    * @property --color-dark-accent-triadic Dark triadic accent (+120°).
    * @property --color-dark-accent-auto Default dark accent strategy.
    * @property --color-dark-accent Active dark mode accent color.
@@ -266,10 +266,9 @@
     from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
       calc(h + 350)
   );
-  /* Brown — dark foreground hue - 15° */
+  /* Brown — the theme's dark orange, muted. */
   --color-dark-brown: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h - 15)
+    from var(--color-dark-orange) calc(l - 0.04) calc(c * 0.55) h
   );
 
   /* Link color defaults to blue */
