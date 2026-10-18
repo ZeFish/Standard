@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="dyslexia"],
 [data-theme="dyslexia"] {
   --color-light-background: #fdfaf6;
   --color-light-foreground: #2b2b2b;
@@ -13,7 +14,7 @@
   --line-height: 1.6;
   --optical-ratio: 1.414;
   --prose-width: 38rem;
-  --font-size: 1.15rem;
+  --font-text-size: 1.15rem;
   --font-ratio: 1.25;
   --font-density: 1.6;
   --font-line-width: 38rem;

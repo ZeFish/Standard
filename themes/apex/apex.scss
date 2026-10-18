@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="apex"],
 [data-theme="apex"] {
   --color-light-foreground: #3b3b3b;
   --color-light-background: #e4e0d6;
@@ -23,7 +24,7 @@
   --font-header-weight: 400;
   --font-header-letter-spacing: -0.006em;
   --font-header-line-height: 1;
-  --font-size: 1.0625rem;
+  --font-text-size: 1.0625rem;
   --font-ratio: 1.25;
   --font-density: 1.45;
   --font-line-width: 42rem;

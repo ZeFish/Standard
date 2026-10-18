@@ -2,7 +2,7 @@
 title: "@stnd/themes"
 aliases: []
 created: 2026-07-04 23:28
-modified: 2026-09-16T18:33:38.739Z
+modified: 2026-10-18T04:30:00.000Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12
@@ -62,7 +62,7 @@ standard({ moduleLoad: ["@stnd/themes/editorial"] });
 - **E-Ink**: Optimized for e-readers and high-contrast displays.
 - **Federal**: 1970s standards manual identity (Helvetica, federal red seed).
 - **macOS**: Native macOS system temperament with San Francisco typography and native window aesthetics.
-- **And many more**: Blueprint, Forest, Frank, Occult, etc.
+- **And many more**: Pulp, Candy, Blueprint, Forest, Frank, Occult, etc.
 
 ## Usage
 

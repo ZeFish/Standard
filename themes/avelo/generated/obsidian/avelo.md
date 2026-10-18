@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-11 23:09
-modified: 2026-10-16 02:53
+modified: 2026-10-18 04:25
 cssclasses: []
 maturity: sprout
 mode: read
@@ -19,7 +19,8 @@ snippet: false
 ```css
 [data-stnd-theme="avelo"] {
     /* ─── Custom rules for àVélo ───────────────────────────── */
-    --font-monospace: "Monolisa";
+    --font-header-variation: 'GEOM' 100.0;
+
         --font-monospace-feature: "zero" on;
         .value, .stat-number, .figure-value {
             font-feature-settings: "zero" on;
@@ -27,6 +28,10 @@ snippet: false
 
       .drawer-title {
         --color-header: var(--color-muted);
+      }
+
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
+          font-family: var(--font-interface);
       }
 }
 ```

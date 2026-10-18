@@ -1,7 +1,9 @@
 meta:
   id: 2064
   label: "2064"
-  selector: "[data-theme=\"2064\"]"
+  selector: |-
+    :root[data-theme="2064"],
+    [data-theme="2064"]
   fonts:
     - "@stnd/fonts/inter"
     - "@stnd/fonts/cargo-diatype"
@@ -39,5 +41,5 @@ tokens:
   font-interface: "\"Berkeley Mono\""
   font-density: "1.45"
   font-line-width: 45rem
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   font-ratio: "1.25"

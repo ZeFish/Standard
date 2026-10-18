@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="federal"],
 [data-theme="federal"] {
   --color-light-background: hsl(45, 25%, 94%);
   --color-light-foreground: oklch(0.26 0.012 15);
@@ -20,7 +21,7 @@
   --shadow: none;
   --shadow-inset: none;
   --shadow-raised: none;
-  --font-size: 1.0625rem;
+  --font-text-size: 1.0625rem;
   --font-ratio: 1.25;
   --font-density: 1.45;
   --font-line-width: 42rem;

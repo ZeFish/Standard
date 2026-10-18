@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="avelo"],
 [data-theme="avelo"] {
   --color-light-background: oklch(0.94 0.004 165);
   --color-light-foreground: #1d1f1e;
@@ -26,9 +27,8 @@
   --color-dark-pink: #e873a8;
   --radius: var(--space-d4);
   --font-header: "Cal Sans";
-  --font-weight-header: 600;
   --font-text: "Cargo Diatype";
-  --font-interface: "Inter";
+  --font-interface: "Cargo Diatype";
   --font-monospace: "MonoLisa";
 }
 /* TOKENS.YAML ADAPTER END */

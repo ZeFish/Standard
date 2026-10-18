@@ -1,7 +1,9 @@
 meta:
   id: contrast
   label: High Contrast
-  selector: "[data-theme=\"contrast\"]"
+  selector: |-
+    :root[data-theme="contrast"],
+    [data-theme="contrast"]
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"
     - "@stnd/fonts/oktah"
@@ -22,7 +24,7 @@ tokens:
   optical-ratio: "1.414"
   color-light-muted: var(--color-foreground)
   color-light-subtle: var(--color-foreground)
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   font-ratio: "1.333"
   font-density: "1.45"
   font-line-width: 42rem

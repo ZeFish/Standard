@@ -72,7 +72,7 @@
   /* Fluid typography slopes: the optical ratio drives responsiveness */
   --physics-slope: max(calc(var(--optical-ratio) - 1), 0.15);
   --fluid-growth: calc(var(--physics-slope) * 1.2vw);
-  --base-size: var(--font-text-size, 1.0625rem);
+  --base-size: var(--font-text-size, 1rem);
   --font-size: clamp(
     var(--base-size),
     calc(var(--base-size) + var(--fluid-growth)),
@@ -558,6 +558,7 @@
    *
    * @property {variable} --font-ratio Theme-authoring hook to override the optical modular scale factor (e.g. `1.414`).
    * @property {variable} --font-density Theme-authoring hook to override base line height density.
+   * @property {variable} --font-text-size Theme-authoring hook to override base text size (drives `--base-size`).
    * @property {variable} --font-line-width Theme-authoring hook to override the default reading column measure: `--prose-width` reads it. The Obsidian plugin uses the same value as its editor width.
    * @property {variable} --font-header-weight Theme-authoring hook to override the heading weight anchor: `--font-weight-header` reads it.
    * @property {variable} --corner Theme-authoring hook to override base border radius.

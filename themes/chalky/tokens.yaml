@@ -1,7 +1,9 @@
 meta:
   id: chalky
   label: Chalky
-  selector: "[data-theme=\"chalky\"]"
+  selector: |-
+    :root[data-theme="chalky"],
+    [data-theme="chalky"]
   fonts:
     - "@stnd/fonts/jimmy"
     - "@stnd/fonts/brixton"
@@ -25,7 +27,7 @@ tokens:
   font-header: "\"Fern\""
   font-monospace: "\"Monaspace Xenon\""
   optical-ratio: "1.414"
-  font-size: 1.125rem
+  font-text-size: 1.125rem
   font-ratio: "1.25"
   font-density: "1.5"
   font-line-width: 38rem

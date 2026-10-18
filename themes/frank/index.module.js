@@ -5,5 +5,5 @@ export default {
   meta: { type: "theme", themeId: "frank", label: "Frank" },
   styles: ["./frank.scss"],
 
-  dependencies: ["@stnd/fonts/inter"]
+  dependencies: ["@stnd/fonts/inter", "@stnd/fonts/cargo-diatype"]
 };

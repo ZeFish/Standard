@@ -1,7 +1,9 @@
 meta:
   id: dyslexia
   label: Dyslexia
-  selector: "[data-theme=\"dyslexia\"]"
+  selector: |-
+    :root[data-theme="dyslexia"],
+    [data-theme="dyslexia"]
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"
     - "@stnd/fonts/atkinson-hyperlegible-mono"
@@ -19,7 +21,7 @@ tokens:
   line-height: "1.6"
   optical-ratio: "1.414"
   prose-width: 38rem
-  font-size: 1.15rem
+  font-text-size: 1.15rem
   font-ratio: "1.25"
   font-density: "1.6"
   font-line-width: 38rem

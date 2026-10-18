@@ -1,0 +1,59 @@
+meta:
+  id: candy
+  label: Candy
+  selector: |-
+    :root[data-theme="candy"],
+    [data-theme="candy"]
+  fonts:
+    - "@stnd/fonts/quicksand"
+    - "@stnd/fonts/wonder"
+    - "@stnd/fonts/maple"
+tokens:
+  color-light-background: oklch(0.985 0.012 355)
+  color-light-foreground: oklch(0.28 0.045 350)
+  color-light-accent: oklch(0.65 0.22 355)
+  color-light-border: oklch(0.90 0.025 355)
+  color-light-subtle: oklch(0.95 0.018 355)
+  color-light-muted: oklch(0.58 0.035 350)
+  color-light-pink: oklch(0.72 0.18 355)
+  color-light-red: oklch(0.62 0.21 22)
+  color-light-orange: oklch(0.72 0.16 55)
+  color-light-yellow: oklch(0.82 0.14 95)
+  color-light-green: oklch(0.75 0.14 150)
+  color-light-cyan: oklch(0.75 0.12 210)
+  color-light-blue: oklch(0.68 0.14 245)
+  color-light-purple: oklch(0.68 0.16 315)
+  color-dark-background: oklch(0.18 0.03 345)
+  color-dark-foreground: oklch(0.92 0.02 355)
+  color-dark-accent: oklch(0.75 0.23 355)
+  color-dark-border: oklch(0.32 0.04 345)
+  color-dark-subtle: oklch(0.24 0.035 345)
+  color-dark-muted: oklch(0.65 0.025 350)
+  color-dark-pink: oklch(0.78 0.20 355)
+  color-dark-red: oklch(0.70 0.22 25)
+  color-dark-orange: oklch(0.78 0.18 60)
+  color-dark-yellow: oklch(0.85 0.16 95)
+  color-dark-green: oklch(0.80 0.16 150)
+  color-dark-cyan: oklch(0.80 0.13 210)
+  color-dark-blue: oklch(0.75 0.15 245)
+  color-dark-purple: oklch(0.76 0.18 315)
+  color-light-bold: var(--color-pink)
+  color-light-italic: var(--color-purple)
+  color-code: var(--color-accent)
+  font-text: "\"Quicksand\", system-ui, sans-serif"
+  font-header: "\"Wonder\", \"Quicksand\", sans-serif"
+  font-monospace: "\"Maple Mono\", monospace"
+  font-interface: "\"Maple Mono\", monospace"
+  font-header-weight: "700"
+  font-header-letter-spacing: "-0.01em"
+  font-header-line-height: "1.15"
+  line-height: "1.6"
+  optical-ratio: "1.333"
+  radius: "16px"
+  radius-base: "12px"
+  radius-md: "20px"
+  radius-lg: "32px"
+  font-text-size: 1.0625rem
+  font-ratio: "1.25"
+  font-density: "1.5"
+  font-line-width: 40rem

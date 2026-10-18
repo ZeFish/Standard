@@ -1,7 +1,9 @@
 meta:
   id: avelo
   label: àVélo
-  selector: "[data-theme=\"avelo\"]"
+  selector: |-
+    :root[data-theme="avelo"],
+    [data-theme="avelo"]
 tokens:
   # Brand: Vélosolutions red (#d00008) is the accent in light, àVélo green
   # (#30d3ae) the accent in dark. Both read from the logos' own pixels.

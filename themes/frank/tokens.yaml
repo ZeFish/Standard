@@ -1,7 +1,9 @@
 meta:
   id: frank
   label: Frank
-  selector: "[data-theme=\"frank\"]"
+  selector: |-
+    :root[data-theme="frank"],
+    [data-theme="frank"]
   fonts:
     - "@stnd/fonts/inter"
     - "@stnd/fonts/cargo-diatype"
@@ -14,7 +16,7 @@ tokens:
   font-header-line-height: "1"
   page-padding: var(--space-2)
   optical-ratio: var(--ratio-golden)
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   line-height: "1.5"
   font-ratio: "1.25"
   font-density: "1.45"

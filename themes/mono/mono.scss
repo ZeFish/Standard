@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="mono"],
 [data-theme="mono"] {
   --color-light-foreground: #0a0a0a;
   --color-light-background: #f7f5f0;
@@ -27,7 +28,7 @@
   --font-header-weight: 700;
   --font-header-line-height: 1;
   --font-header-letter-spacing: 0.08em;
-  --font-size: 1.0625rem;
+  --font-text-size: 1.0625rem;
   --font-ratio: 1.2;
   --font-line-width: 44rem;
 }
@@ -42,72 +43,12 @@
    caps for headers, a hazard-orange accent doing the work a hangtag would. */
 :root[data-theme="mono"],
 [data-theme="mono"] {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    text-transform: uppercase;
-    font-weight: var(--font-weight-header);
-    letter-spacing: var(--font-header-letter-spacing);
-  }
 
-  /* Barcode rule under the title — thick/thin like a tag scan line */
-  h1 {
-    padding-bottom: var(--space-half);
-    border-bottom: 4px solid var(--color-foreground);
-    box-shadow: 0 6px 0 -3px var(--color-foreground);
-    margin-block-end: var(--space-4);
-  }
 
-  h2::before,
-  h3::before {
-    content: "// ";
-    color: var(--color-accent);
-  }
 
-  strong {
-    color: var(--color-accent);
-    font-weight: var(--bold-weight);
-  }
 
-  /* Off-White-style quotation marks around emphasis */
-  em {
-    font-style: normal;
-    color: var(--color-foreground);
-  }
-  em::before {
-    content: "\201C";
-  }
-  em::after {
-    content: "\201D";
-  }
 
-  a {
-    color: var(--color-foreground);
-    text-decoration-color: var(--color-accent);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
-  }
 
-  /* Care-label block quote */
-  blockquote {
-    border: 1px dashed var(--color-foreground);
-    padding: var(--space) var(--space-2);
-    position: relative;
-  }
-  blockquote::before {
-    content: "SIZE / NOTE";
-    position: absolute;
-    top: -0.6em;
-    left: var(--space);
-    background: var(--color-background);
-    padding-inline: var(--space-d4);
-    font-size: var(--scale-d5);
-    letter-spacing: 0.15em;
-    color: var(--color-accent);
-  }
 
   table,
   th,

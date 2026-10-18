@@ -35,7 +35,7 @@ tokens:
   font-monospace: "\"SF Mono\", ui-monospace, Menlo, Monaco, monospace"
   font-interface: "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"SF Pro\", system-ui, sans-serif"
   font-serif: "\"New York\", -apple-system-ui-serif, Georgia, serif"
-  font-size: "13px"
+  font-text-size: "13px"
   line-height: "1.25"
   font-ratio: "1.333"
   font-density: "1.25"

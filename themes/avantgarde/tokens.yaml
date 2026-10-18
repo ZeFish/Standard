@@ -1,7 +1,9 @@
 meta:
   id: avantgarde
   label: Avant-Garde
-  selector: "[data-theme=\"avantgarde\"]"
+  selector: |-
+    :root[data-theme="avantgarde"],
+    [data-theme="avantgarde"]
   fonts:
     - "@stnd/fonts/avant-garde-pro"
     - "@stnd/fonts/sohne"
@@ -26,7 +28,7 @@ tokens:
   font-header-weight: "700"
   font-header-letter-spacing: "-0.05em"
   font-header-line-height: "1"
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   font-ratio: "1.25"
   font-density: "1.45"
   font-line-width: 44rem

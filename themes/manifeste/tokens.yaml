@@ -1,7 +1,9 @@
 meta:
   id: manifeste
   label: Manifesto
-  selector: "[data-theme=\"manifeste\"]"
+  selector: |-
+    :root[data-theme="manifeste"],
+    [data-theme="manifeste"]
   fonts:
     - "@stnd/fonts/tiempos-headline"
     - "@stnd/fonts/joly"
@@ -28,5 +30,4 @@ tokens:
   font-text-size: 1.1em !important
   margin: 3rlh
   font-weight: "500"
-  font-size: 1.15rem
   font-line-width: 38rem

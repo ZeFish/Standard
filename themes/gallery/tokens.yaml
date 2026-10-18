@@ -1,7 +1,9 @@
 meta:
   id: gallery
   label: Gallery
-  selector: "[data-theme=\"gallery\"]"
+  selector: |-
+    :root[data-theme="gallery"],
+    [data-theme="gallery"]
   fonts:
     - "@stnd/fonts/cargo-diatype"
 tokens:
@@ -20,5 +22,5 @@ tokens:
   font-header-letter-spacing: "-0.065em"
   line-height: "1.2"
   page-padding: var(--space)
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   font-ratio: "1.333"

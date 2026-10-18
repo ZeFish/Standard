@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="calm"],
 [data-theme="calm"] {
   --color-light-background: #eeebe5;
   --color-light-foreground: #4a4743;
@@ -16,7 +17,7 @@
   --radius-base: 16px;
   --radius-md: 24px;
   --radius-lg: 32px;
-  --font-size: 1.0625rem;
+  --font-text-size: 1.0625rem;
   --font-ratio: 1.25;
   --font-density: 1.5;
   --font-line-width: 40rem;

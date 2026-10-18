@@ -1,0 +1,108 @@
+/* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="pulp"],
+[data-theme="pulp"] {
+  --color-light-background: oklch(0.94 0.032 85);
+  --color-light-foreground: oklch(0.20 0.02 55);
+  --color-light-accent: oklch(0.80 0.185 85);
+  --color-light-border: oklch(0.82 0.04 80);
+  --color-light-subtle: oklch(0.91 0.035 85);
+  --color-light-muted: oklch(0.48 0.025 60);
+  --color-light-yellow: oklch(0.80 0.185 85);
+  --color-light-red: oklch(0.55 0.22 28);
+  --color-light-orange: oklch(0.68 0.19 48);
+  --color-light-green: oklch(0.58 0.13 145);
+  --color-light-cyan: oklch(0.65 0.11 205);
+  --color-light-blue: oklch(0.50 0.13 250);
+  --color-light-purple: oklch(0.52 0.15 315);
+  --color-light-pink: oklch(0.62 0.18 15);
+  --color-dark-background: oklch(0.16 0.015 50);
+  --color-dark-foreground: oklch(0.88 0.03 85);
+  --color-dark-accent: oklch(0.84 0.19 85);
+  --color-dark-border: oklch(0.28 0.02 50);
+  --color-dark-subtle: oklch(0.22 0.018 50);
+  --color-dark-muted: oklch(0.60 0.025 70);
+  --color-dark-yellow: oklch(0.84 0.19 85);
+  --color-dark-red: oklch(0.65 0.24 28);
+  --color-dark-orange: oklch(0.74 0.20 50);
+  --color-dark-green: oklch(0.75 0.16 145);
+  --color-dark-cyan: oklch(0.75 0.13 205);
+  --color-dark-blue: oklch(0.68 0.16 250);
+  --color-dark-purple: oklch(0.70 0.19 315);
+  --color-dark-pink: oklch(0.72 0.20 15);
+  --color-light-bold: var(--color-red);
+  --color-light-italic: var(--color-orange);
+  --color-code: var(--color-red);
+  --font-text: "Century Expanded", "Newsreader", Georgia, serif;
+  --font-header: "Herbus Apex", "Herbus", serif;
+  --font-monospace: "Courier Prime", monospace;
+  --font-interface: "Courier Prime", monospace;
+  --font-header-weight: 700;
+  --font-header-letter-spacing: -0.015em;
+  --font-header-line-height: 1.05;
+  --line-height: 1.55;
+  --optical-ratio: 1.414;
+  --radius: 0;
+  --radius-base: 0;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --font-text-size: 1.0625rem;
+  --font-ratio: 1.25;
+  --font-density: 1.45;
+  --font-line-width: 39rem;
+}
+/* TOKENS.YAML ADAPTER END */
+
+// pulp theme — token VALUES live in tokens.yaml (single source of truth).
+// This file keeps only web-only structural CSS.
+
+:root[data-theme="pulp"],
+[data-theme="pulp"] {
+  background: var(--color-background);
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+    color: var(--color-foreground);
+    letter-spacing: var(--font-header-letter-spacing, -0.015em);
+    line-height: var(--font-header-line-height, 1.05);
+  }
+
+  h1 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: var(--space-d4, 0.25rem);
+    margin-bottom: var(--space, 1rem);
+  }
+
+  h2 {
+    font-weight: 700;
+  }
+
+  /* Sharp paper cuts: dime-store novel aesthetic */
+  button,
+  .button,
+  input,
+  select,
+  textarea,
+  article.card,
+  .card {
+    border-radius: var(--radius-base, 0);
+  }
+
+  .badge,
+  .tag,
+  .pill {
+    border-radius: var(--radius-md, 2px);
+    font-family: var(--font-monospace);
+    text-transform: uppercase;
+    font-size: var(--scale-d4, 0.75rem);
+    letter-spacing: 0.05em;
+  }
+
+  /* Pulp yellow highlighter selection */
+  ::selection {
+    background: var(--color-accent);
+    color: #1d140d;
+  }
+}

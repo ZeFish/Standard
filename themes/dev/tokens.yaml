@@ -1,7 +1,9 @@
 meta:
   id: dev
   label: Dev
-  selector: "[data-theme=\"dev\"]"
+  selector: |-
+    :root[data-theme="dev"],
+    [data-theme="dev"]
   fonts:
     - "@stnd/fonts/inter"
     - "@stnd/fonts/berkeley-mono"
@@ -25,7 +27,7 @@ tokens:
   font-monospace: "\"Berkeley Mono\", \"MonoLisa\", ui-monospace, SFMono-Regular, Menlo, Monaco, \"Roboto Mono\", monospace"
   border: 2px solid red
   color-light-shadow-base: green
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   font-ratio: "1.25"
   font-density: "1.45"
   font-line-width: 44rem

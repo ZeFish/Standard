@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="frank"],
 [data-theme="frank"] {
   --color-dark-foreground: oklch( 84% 0.0276 80.72 );
   --color-dark-background: oklch( 9.76% 0.012 90.93 );
@@ -8,7 +9,7 @@
   --font-header-line-height: 1;
   --page-padding: var(--space-2);
   --optical-ratio: var(--ratio-golden);
-  --font-size: 1.0625rem;
+  --font-text-size: 1.0625rem;
   --line-height: 1.5;
   --font-ratio: 1.25;
   --font-density: 1.45;

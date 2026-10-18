@@ -1,7 +1,9 @@
 meta:
   id: blueprint
   label: Blueprint
-  selector: "[data-theme=\"blueprint\"]"
+  selector: |-
+    :root[data-theme="blueprint"],
+    [data-theme="blueprint"]
   fonts:
     - "@stnd/fonts/monolisa"
 tokens:
@@ -27,7 +29,7 @@ tokens:
   font-monospace-feature: "\"liga\", \"zero\", \"calt\", \"ss02\", \"ss03\", \"ss07\", \"ss10\", \"ss15\""
   optical-ratio: "1.425"
   blueprint-opacity: 20%
-  font-size: 1.0625rem
+  font-text-size: 1.0625rem
   font-ratio: "1.25"
   font-density: "1.45"
   font-line-width: 44rem

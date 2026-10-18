@@ -1,7 +1,9 @@
 meta:
   id: book
   label: Book
-  selector: "[data-theme=\"book\"]"
+  selector: |-
+    :root[data-theme="book"],
+    [data-theme="book"]
   fonts:
     - "@stnd/fonts/fern"
     - "@stnd/fonts/source-serif-4"
@@ -33,7 +35,7 @@ tokens:
   color-light-link: var(--color-red)
   color-dark-link: var(--color-red)
   font-ratio: 1.2
-  font-size: 1.15rem
+  font-text-size: 1.15rem
   font-density: 2
   prose-width: 38rem
   font-text: "\"Fern\", \"Graveur Variable\", Bookerly"

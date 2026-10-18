@@ -1,7 +1,9 @@
 meta:
   id: venetian
   label: Venetian
-  selector: "[data-theme=\"venetian\"]"
+  selector: |-
+    :root[data-theme="venetian"],
+    [data-theme="venetian"]
   fonts:
     - "@stnd/fonts/eb-garamond"
 tokens:
@@ -20,7 +22,7 @@ tokens:
   gap-mobile-block: var(--space-2)
   line-height: "1.55"
   prose-width: 38rem
-  font-size: 1.15rem
+  font-text-size: 1.15rem
   font-ratio: "1.2"
   font-density: "1.55"
   font-line-width: 38rem

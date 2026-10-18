@@ -1,4 +1,5 @@
 /* TOKENS.YAML ADAPTER BEGIN */
+:root[data-theme="gallery"],
 [data-theme="gallery"] {
   --color-dark-foreground: #ccc;
   --color-dark-background: #101010;
@@ -15,7 +16,7 @@
   --font-header-letter-spacing: -0.065em;
   --line-height: 1.2;
   --page-padding: var(--space);
-  --font-size: 1.0625rem;
+  --font-text-size: 1.0625rem;
   --font-ratio: 1.333;
 }
 /* TOKENS.YAML ADAPTER END */
