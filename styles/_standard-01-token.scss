@@ -581,9 +581,13 @@
 
 /* Responsive adjustments */
 @media only screen and (max-width: #{$small}) {
-  #{$stnd-theme-scope} {
+  #{$stnd-theme-scope},
+  :root[data-theme],
+  [data-theme] {
     --font-size: var(--font-size-mobile);
-    --page-padding: var(--space);
+    --page-padding: var(--space) !important;
+    --prose-wide: 0px !important;
+    --prose-inset: 0px !important;
   }
 }
 

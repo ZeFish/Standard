@@ -2,7 +2,7 @@
 title: "@stnd/styles"
 aliases: []
 created: 2026-07-04 23:27
-modified: 2026-10-04T15:00:00.000Z
+modified: 2026-10-19T14:06:00.000Z
 last_audited: 2026-07-14
 audit_interval_days: 90
 next_audit: 2026-10-12

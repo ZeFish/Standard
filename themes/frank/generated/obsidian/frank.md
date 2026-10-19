@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-18 22:55
+modified: 2026-10-19 18:07
 cssclasses: []
 maturity: sprout
 mode: read
@@ -39,6 +39,13 @@ snippet: false
     }
 
     [data-theme="frank"] {
+      .prose {
+        margin-inline: 0;
+        grid-template-columns:
+          [full-start hero-start wide-start content-start] min(100%, var(--prose-width))
+          [content-end wide-end] 1fr [hero-end full-end];
+      }
+
       .callout[data-callout="caption"] {
         margin: -1rlh 33% 0 0 !important;
         padding: 0;

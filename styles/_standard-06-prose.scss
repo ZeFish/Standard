@@ -297,7 +297,9 @@
     text-wrap: balance;
   }
 
-  @media (max-width: #{$mobile}) {
+  @media (max-width: #{$small}) {
+    --prose-wide: 0px;
+
     .narrow,
     .callout,
     blockquote,
@@ -307,9 +309,7 @@
     .stnd-code-block {
       margin-inline: 0 !important;
     }
-  }
 
-  @media (max-width: #{$small}) {
     .card.accent,
     .card.wide,
     .card.full {
