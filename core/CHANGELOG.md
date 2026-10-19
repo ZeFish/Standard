@@ -1,5 +1,14 @@
 # @stnd/core
 
+## 0.24.31
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/styles@0.26.2
+  - @stnd/modules@0.13.4
+  - @stnd/launcher@1.9.5
+
 ## 0.24.30
 
 ### Patch Changes

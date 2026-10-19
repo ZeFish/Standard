@@ -24,8 +24,13 @@ tokens:
   font-header-variation: "\"SOFT\" 75, \"WONK\" 0, \"wght\" 900"
   font-interface: "\"Inter\""
   font-interface-feature: "\"tnum\""
-  color-light-foreground: oklch(25.20% 0.0000 0.00)
-  color-light-background: oklch(100.00% 0.0000 0.00)
+  #color-light-foreground: oklch(25.20% 0.0000 0.00)
+  #color-light-background: oklch(100.00% 0.0000 0.00)
+  # color-light-accent: var(--color-brown)
+  color-light-background: "#FFFCF0"
+  color-light-foreground: "#4D3A0B"
+  color-light-accent: "#AD8301"
+
   color-light-red: oklch(48.37% 0.1896 27.22)
   color-light-orange: oklch(70.28% 0.1537 51.89)
   color-light-yellow: oklch(76.15% 0.1465 73.14)
@@ -34,7 +39,7 @@ tokens:
   color-light-blue: oklch(48.22% 0.1064 240.38)
   color-light-purple: oklch(49.92% 0.1415 320)
   color-light-pink: oklch(71.70% 0.1537 360)
-  color-light-accent: var(--color-blue)
-  color-light-bold: var(--color-red)
-  color-light-italic: var(--color-blue)
+
+  color-light-bold: var(--color-foreground)
+  color-light-italic: var(--color-foreground)
   font-line-width: 40rem

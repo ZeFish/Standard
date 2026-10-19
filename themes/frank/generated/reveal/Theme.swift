@@ -53,8 +53,8 @@ struct Palette {
             elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 0.0588, green: 0.0588, blue: 0.0588)      // bg + ~6% — the floating chrome
             photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 0, green: 0, blue: 0)     // a notch *darker* than bg — a quiet groove
         } else {
-            bg = bgOverride ?? Color(red: 0, green: 0, blue: 0)
-            fg = fgOverride ?? Color(red: 0, green: 0, blue: 0)
+            bg = bgOverride ?? Color(red: 1, green: 0.9882, blue: 0.9412)
+            fg = fgOverride ?? Color(red: 0.302, green: 0.2275, blue: 0.0431)
             elevated = bgOverride.map { Self.adjustBrightness($0, by: 0.06) } ?? Color(red: 1, green: 1, blue: 1)              // clean white cards over the grey well
             photoFrame = bgOverride.map { Self.adjustBrightness($0, by: -0.05) } ?? Color(red: 1, green: 1, blue: 1)
         }
@@ -79,7 +79,7 @@ struct Palette {
     /// Leica red — the single accent: active state, kept frame, critical action.
     /// Same in both schemes (red reads identically on dark and on paper) —
     /// unless overridden, in which case the override carries to both too.
-    var accent:      Color { accentOverride ?? Color(red: 0, green: 0, blue: 0) }
+    var accent:      Color { accentOverride ?? Color(red: 0.6784, green: 0.5137, blue: 0.0039) }
     var accentFaint: Color { accent.opacity(0.12) }   // selected-row tint — never on the image
 }
 
