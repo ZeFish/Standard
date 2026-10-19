@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-18 12:46
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -53,24 +53,24 @@ snippet: false
         }
       }
 
-      .vertical-rhythm :is(hr, .HyperMD-hr) {
+      .vertical-rhythm :is(hr, .HyperMD-hr, .reveal hr, .slides hr) {
         display: none !important;
       }
 
-      :is(:is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote), :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)), figure, .callout, p:has(img)) {
+      :is(:is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote), :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre), .reveal pre, .slides pre), figure, .callout, p:has(img)) {
         margin-inline: 0 !important;
         box-shadow: 0 !important;
       }
 
-      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) {
         text-align: left;
         color: var(--color-foreground);
       }
 
-      :is(.markdown-reading-view h2, .HyperMD-header-2) a {
+      :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2) a {
           color: var(--color-foreground);
       }
-      :is(.markdown-reading-view h2, .HyperMD-header-2) a:hover {
+      :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2) a:hover {
           color: var(--color-link);
       }
 }

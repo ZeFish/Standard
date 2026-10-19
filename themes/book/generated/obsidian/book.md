@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-18 12:50
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -45,7 +45,7 @@ snippet: false
         margin-block-start: var(--space-d2);
       }
 
-      :is(:is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3)) + p::first-letter {
+      :is(:is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3)) + p::first-letter {
         --drop-cap-size: 3.25;
         float: inline-start;
         line-height: 1;
@@ -84,7 +84,7 @@ snippet: false
         color: var(--color-foreground);
       }
 
-      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote) {
         font-family: "Fern";
         font-weight: 450;
         letter-spacing: -0.01em;
@@ -95,7 +95,7 @@ snippet: false
         font-size: var(--scale);
       }
 
-      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
+      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre), .reveal pre, .slides pre) {
         padding: var(--trim) var(--leading);
         border: 0;
         border-left: 1px solid var(--color-subtle);
@@ -109,8 +109,8 @@ snippet: false
         }
       }
 
-      :is(hr, .HyperMD-hr),
-      :is(hr, .HyperMD-hr):not(:first-child) {
+      :is(hr, .HyperMD-hr, .reveal hr, .slides hr),
+      :is(hr, .HyperMD-hr, .reveal hr, .slides hr):not(:first-child) {
         font-size: var(--scale);
         line-height: var(--space);
         padding: 0;
@@ -118,7 +118,7 @@ snippet: false
         background: transparent;
       }
 
-      :is(hr, .HyperMD-hr)::after {
+      :is(hr, .HyperMD-hr, .reveal hr, .slides hr)::after {
         content: "\2619 \2015 \2767";
         text-align: center;
         display: block;
@@ -144,14 +144,14 @@ snippet: false
         padding-block: var(--leading);
       }
 
-      .prose > :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title):first-child {
+      .prose > :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1):first-child {
         text-align: left;
         grid-column: feature;
         margin-block-end: var(--space-6);
         font-size: calc(var(--font-size) * pow(var(--optical-ratio), 3));
       }
 
-      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) {
         text-align: left;
         letter-spacing: 0.15em;
         /* /*text-transform: uppercase;* */

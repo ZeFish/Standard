@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-18 12:50
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -43,19 +43,19 @@ snippet: false
       select,
       textarea,
       .module-card,
-      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote),
-      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote),
+      :is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre), .reveal pre, .slides pre) {
         border: var(--stroke-width) solid var(--color-foreground) !important;
         border-radius: var(--radius);
       }
 
       /* Text elements get stronger treatment */
-      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
-      :is(.markdown-reading-view h2, .HyperMD-header-2),
-      :is(.markdown-reading-view h3, .HyperMD-header-3),
-      :is(.markdown-reading-view h4, .HyperMD-header-4),
-      :is(.markdown-reading-view h5, .HyperMD-header-5),
-      :is(.markdown-reading-view h6, .HyperMD-header-6) {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1),
+      :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3),
+      :is(.markdown-reading-view h4, .HyperMD-header-4, .reveal h4, .slides h4),
+      :is(.markdown-reading-view h5, .HyperMD-header-5, .reveal h5, .slides h5),
+      :is(.markdown-reading-view h6, .HyperMD-header-6, .reveal h6, .slides h6) {
         text-decoration-thickness: calc(var(--stroke-width) * 3);
         text-underline-offset: calc(var(--stroke-width) * 3);
       }

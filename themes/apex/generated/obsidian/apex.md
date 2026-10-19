@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 17:31
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -88,7 +88,7 @@ snippet: false
     }
 
     /* ─── Headers — sharp emboss shadow ─────────────────────── */
-    :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
+    :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1), :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3), :is(.markdown-reading-view h4, .HyperMD-header-4, .reveal h4, .slides h4), :is(.markdown-reading-view h5, .HyperMD-header-5, .reveal h5, .slides h5), :is(.markdown-reading-view h6, .HyperMD-header-6, .reveal h6, .slides h6)) {
         color: color-mix(in oklab, currentcolor 90%, var(--color-background));
 
         --shadow-color: color-mix(
@@ -105,8 +105,8 @@ snippet: false
     }
 
     /* ─── Light mode headers — red tint ─────────────────────── */
-    &.theme-light :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)),
-    &[data-color-mode="light"] :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
+    &.theme-light :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1), :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3), :is(.markdown-reading-view h4, .HyperMD-header-4, .reveal h4, .slides h4), :is(.markdown-reading-view h5, .HyperMD-header-5, .reveal h5, .slides h5), :is(.markdown-reading-view h6, .HyperMD-header-6, .reveal h6, .slides h6)),
+    &[data-color-mode="light"] :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1), :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3), :is(.markdown-reading-view h4, .HyperMD-header-4, .reveal h4, .slides h4), :is(.markdown-reading-view h5, .HyperMD-header-5, .reveal h5, .slides h5), :is(.markdown-reading-view h6, .HyperMD-header-6, .reveal h6, .slides h6)) {
         color: color-mix(
             in oklab,
             var(--color-red) 90%,
@@ -114,8 +114,8 @@ snippet: false
         );
     }
 
-    /* ─── Light mode :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) — embossed against background ───────── */
-    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+    /* ─── Light mode :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) — embossed against background ───────── */
+    :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) {
         --color: color-mix(in oklab, var(--color-background) 75%, black);
         text-shadow:
             -1px -1px 1px var(--color),
@@ -124,9 +124,9 @@ snippet: false
             1px 1px 1px var(--color) !important;
     }
 
-    /* ─── Dark mode :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) — red ghost ──────────────────────────── */
-    &.theme-dark :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
-    &[data-color-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+    /* ─── Dark mode :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) — red ghost ──────────────────────────── */
+    &.theme-dark :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1),
+    &[data-color-mode="dark"] :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) {
         --color: color-mix(in oklab, var(--color-background) 0%, var(--color-red));
         text-shadow:
             -1px -1px 0px var(--color),

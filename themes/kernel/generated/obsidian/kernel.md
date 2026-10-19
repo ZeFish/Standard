@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-14 14:00
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -54,7 +54,7 @@ snippet: false
 
       --code-function: var(--color-pink);
 
-      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) {
         text-align: left;
       }
 

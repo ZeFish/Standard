@@ -1,15 +1,23 @@
 {
-  "name": "@stnd/themes",
-  "version": "0.22.2",
-  "type": "module",
-  "author": "Francis Fontaine",
-  "license": "MIT",
-  "exports": {
-    ".": "./macos/index.module.js",
-    "./*/*.scss": "./*/*.scss",
-    "./*": "./*/index.module.js"
+  "name": "utopie",
+  "version": "0.1.0",
+  "private": true,
+  "overrides": {
+    "cookie": "^0.7.0",
+    "@notionhq/client": "^5.9.0"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "pnpm": {
+    "overrides": {
+      "astro": "7.3.6",
+      "vite": "^8.3.1",
+      "svelte": "5.57.2",
+      "@cloudflare/vite-plugin": "^1.63.0"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd"
+    ],
+    "patchedDependencies": {}
+  },
+  "packageManager": "pnpm@10.28.2"
 }

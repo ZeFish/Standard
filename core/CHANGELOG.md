@@ -1,5 +1,12 @@
 # @stnd/core
 
+## 0.24.29
+
+### Patch Changes
+
+- Updated dependencies
+  - @stnd/themes@0.26.0
+
 ## 0.24.28
 
 ### Patch Changes

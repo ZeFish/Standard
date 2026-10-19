@@ -319,10 +319,92 @@
   }
 
   /* Mermaid diagrams */
-  .mermaid {
-    margin-block-end: var(--space);
+  .mermaid,
+  .mermaid-diagram,
+  .block-language-mermaid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    margin-block: var(--space);
     margin-inline: auto;
-    padding: var(--space);
+    padding: var(--space-d2);
+    overflow-x: auto;
+    background: transparent;
+
+    svg {
+      max-inline-size: 100%;
+      block-size: auto;
+      font-family: var(--font-text);
+
+      /* Clusters / Subgraphs */
+      .cluster rect {
+        fill: color-mix(in oklch, var(--color-foreground) 3%, var(--color-background));
+        stroke: color-mix(in oklch, var(--color-foreground) 15%, transparent);
+        stroke-width: var(--stroke-width);
+        rx: var(--radius-lg);
+      }
+
+      .cluster text,
+      .cluster-label span,
+      .cluster-label p {
+        font-family: var(--font-header);
+        font-weight: 600;
+        fill: var(--color-foreground);
+        color: var(--color-foreground);
+      }
+
+      /* Nodes */
+      .node rect,
+      .node circle,
+      .node ellipse,
+      .node polygon,
+      .node path,
+      .node .label-container {
+        fill: var(--color-surface);
+        stroke: color-mix(in oklch, var(--color-foreground) 22%, transparent);
+        stroke-width: var(--stroke-width);
+        rx: var(--radius);
+      }
+
+      .node .label,
+      .node text,
+      .node span,
+      .node p,
+      .node div {
+        font-family: var(--font-text);
+        color: var(--color-foreground);
+        fill: var(--color-foreground);
+      }
+
+      /* Edges & Connectors */
+      .edgePath .path,
+      .flowchart-link {
+        stroke: color-mix(in oklch, var(--color-foreground) 35%, transparent);
+        stroke-width: calc(var(--stroke-width) * 1.5);
+      }
+
+      marker path,
+      marker polygon,
+      .arrowMarkerPath {
+        fill: color-mix(in oklch, var(--color-foreground) 35%, transparent);
+        stroke: color-mix(in oklch, var(--color-foreground) 35%, transparent);
+      }
+
+      /* Edge Labels */
+      .edgeLabel,
+      .edgeLabel span,
+      .edgeLabel p {
+        background-color: var(--color-background);
+        color: var(--color-muted);
+        fill: var(--color-muted);
+        font-family: var(--font-monospace);
+        font-size: var(--scale-d2);
+        padding: var(--space-d4) var(--space-d2);
+        border-radius: var(--radius-sm);
+      }
+    }
   }
 
   p img {

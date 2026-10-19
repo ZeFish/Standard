@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-04 21:56
-modified: 2026-10-14 13:03
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -29,13 +29,13 @@ snippet: false
       font-family: var(--font-text);
       -webkit-font-smoothing: antialiased;
 
-      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
+      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1), :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3), :is(.markdown-reading-view h4, .HyperMD-header-4, .reveal h4, .slides h4), :is(.markdown-reading-view h5, .HyperMD-header-5, .reveal h5, .slides h5), :is(.markdown-reading-view h6, .HyperMD-header-6, .reveal h6, .slides h6)) {
         font-family: var(--font-header);
         font-weight: 600;
         letter-spacing: -0.015em;
       }
 
-      :is(code, .cm-inline-code):not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre)) :is(code, .cm-inline-code)) {
+      :is(code, .cm-inline-code):not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre), .reveal pre, .slides pre) :is(code, .cm-inline-code)) {
         font-family: var(--font-monospace);
         font-size: 0.9em;
         padding: 0.15em 0.35em;

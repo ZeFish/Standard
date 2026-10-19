@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-10-11 23:09
-modified: 2026-10-18 04:25
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -30,7 +30,7 @@ snippet: false
         --color-header: var(--color-muted);
       }
 
-      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table), .reveal table, .slides table) {
           font-family: var(--font-interface);
       }
 }

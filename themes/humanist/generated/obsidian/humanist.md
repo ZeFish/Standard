@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-09-25 11:36
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -17,4 +17,11 @@ snippet: false
 ![[Sample content]]
 
 ```css
+[data-stnd-theme="humanist"] {
+    /* ─── Custom rules for Humanist ───────────────────────────── */
+    :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote) {
+            font-family: var(--font-header);
+            font-size: var(--scale-2);
+        }
+}
 ```

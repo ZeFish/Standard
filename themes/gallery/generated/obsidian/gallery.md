@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-01 13:40
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -59,30 +59,30 @@ snippet: false
         margin-inline:auto;
       }
 
-      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote) {
           margin: var(--space-6) auto;
           font-size: var(--scale-2);
           padding:var(--space-2);
       }
 
       /* Exhibition titles: present, never loud */
-      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title),
-      :is(.markdown-reading-view h2, .HyperMD-header-2),
-      :is(.markdown-reading-view h3, .HyperMD-header-3) {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1),
+      :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3) {
         text-align: left;
         font-weight: 500;
         text-wrap: balance;
       }
-      :is(.markdown-reading-view h2, .HyperMD-header-2),
-      :is(.markdown-reading-view h3, .HyperMD-header-3) {
+      :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2),
+      :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3) {
         margin-block-start: var(--space-10);
       }
-      :is(:is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3)) + p {
+      :is(:is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3)) + p {
           margin-top:var(--space);
       }
 
       /* A horizontal rule is a walk to the next room */
-      :is(hr, .HyperMD-hr) {
+      :is(hr, .HyperMD-hr, .reveal hr, .slides hr) {
         border: 0;
         background: none;
         height: 0;

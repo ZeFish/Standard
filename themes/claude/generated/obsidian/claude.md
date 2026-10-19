@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-18 12:50
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -35,7 +35,7 @@ snippet: false
         --color-bold: var(--color-dark-accent);
       }
 
-      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title), :is(.markdown-reading-view h2, .HyperMD-header-2), :is(.markdown-reading-view h3, .HyperMD-header-3), :is(.markdown-reading-view h4, .HyperMD-header-4), :is(.markdown-reading-view h5, .HyperMD-header-5), :is(.markdown-reading-view h6, .HyperMD-header-6)) {
+      :is(:is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1), :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2), :is(.markdown-reading-view h3, .HyperMD-header-3, .reveal h3, .slides h3), :is(.markdown-reading-view h4, .HyperMD-header-4, .reveal h4, .slides h4), :is(.markdown-reading-view h5, .HyperMD-header-5, .reveal h5, .slides h5), :is(.markdown-reading-view h6, .HyperMD-header-6, .reveal h6, .slides h6)) {
         border: none;
       }
 

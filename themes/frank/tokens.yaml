@@ -21,7 +21,7 @@ tokens:
   marge-block: "1"
   font-feature: "\"liga\", \"salt\", \"clig\", \"kern\", \"calt\", \"zero\""
   font-header-feature: "\"liga\""
-  font-header-variation: "\"SOFT\" 75, \"WONK\" 0"
+  font-header-variation: "\"SOFT\" 75, \"WONK\" 0, \"wght\" 900"
   font-interface: "\"Inter\""
   font-interface-feature: "\"tnum\""
   color-light-foreground: oklch(25.20% 0.0000 0.00)

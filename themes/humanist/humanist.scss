@@ -12,7 +12,7 @@
   --font-feature: "ss01", "ss02";
   --font-serif: Kalice;
   --font-header: Kalice, Newsreader;
-  --font-interface: "Inter";
+  --font-interface: "Kalice";
   --font-header-weight: 400;
   --font-header-line-height: 1.1;
   --stroke-width: 0;
@@ -27,6 +27,7 @@
   --font-line-width: 38rem;
 }
 /* TOKENS.YAML ADAPTER END */
+
 :root[data-theme="humanist"],
 [data-theme="humanist"] {
     blockquote {

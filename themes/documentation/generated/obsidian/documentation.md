@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-07 14:14
+modified: 2026-10-18 22:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -37,11 +37,11 @@ snippet: false
         }
 
       /* ── Headings — IBM Plex Serif, blue page title, ruled sections ── */
-      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title) {
+      :is(.markdown-reading-view h1, .HyperMD-header-1, .inline-title, .reveal h1, .slides h1) {
         color: var(--color-accent);
       }
 
-      :is(.markdown-reading-view h2, .HyperMD-header-2) {
+      :is(.markdown-reading-view h2, .HyperMD-header-2, .reveal h2, .slides h2) {
         padding-bottom: 0.3em;
         border-bottom: 1px solid
           color-mix(in srgb, var(--color-accent) 12%, transparent);
@@ -66,7 +66,7 @@ snippet: false
       }
 
       /* ── Inline :is(code, .cm-inline-code) — blue-tinted chip, warm ink ── */
-      :not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre))) > :is(code, .cm-inline-code) {
+      :not(:is(.markdown-reading-view pre, .markdown-rendered pre, .markdown-preview-view pre, .cm-embed-block:has(pre), .reveal pre, .slides pre)) > :is(code, .cm-inline-code) {
         background: color-mix(in srgb, var(--color-accent) 10%, transparent);
         color: var(--color-code);
         border-radius: 4px;
@@ -88,7 +88,7 @@ snippet: false
 
 
       /* ── Tables — tinted header, hairline borders, zebra rows ── */
-      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table)) {
+      :is(.markdown-reading-view table, .markdown-rendered table, .cm-embed-block:has(table), .reveal table, .slides table) {
         th {
           background: color-mix(in srgb, var(--color-accent) 10%, transparent);
         }
@@ -104,7 +104,7 @@ snippet: false
       }
 
       /* ── Blockquotes — boxed cyan-tinted note, Zed style ── */
-      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote) {
+      :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote) {
         background: color-mix(in srgb, var(--color-cyan) 8%, transparent);
         border: 1px solid color-mix(in srgb, var(--color-cyan) 30%, transparent);
         border-radius: var(--radius);
@@ -113,7 +113,7 @@ snippet: false
       }
 
       /* ── Rules — the faint blue divider ── */
-      :is(hr, .HyperMD-hr) {
+      :is(hr, .HyperMD-hr, .reveal hr, .slides hr) {
         border: 0;
         border-top: 1px solid
           color-mix(in srgb, var(--color-accent) 10%, transparent);
