@@ -19,7 +19,6 @@
  * @property .link Button that reads as an inline link, tinted with `--color-link`.
  * @property .large, .small, .smaller Size steps for `button` and `a.btn`.
  * @property .disabled, :disabled Dimmed and inert, for `button` and `a.btn`.
- * @property kbd Keycap: a small raised key, for shortcuts.
  * @property .tag Muted label that turns accent on hover.
  * @property .badge Compact pill label. Variants: `.accent`, `.outline`, `.ghost`, `.destructive`; works on `a` too.
  *
@@ -57,9 +56,8 @@
  *   <button aria-pressed="false">Month</button>
  * </div>
  *
- * @example html - Loader and keycaps
+ * @example html - Loader
  * <span class="loader" role="status" aria-label="Loading"></span>
- * Press <kbd>⌘</kbd> <kbd>K</kbd> to open the launcher.
  *
  * @example html - Tags and badges
  * <div class="flex flex-wrap no-rhythm" style="gap: var(--space-d2); align-items: center">
@@ -76,19 +74,6 @@
 /* =========================== */
 /* BUTTONS                     */
 /* =========================== */
-
-/* Keycaps */
-kbd {
-  background-color: var(--color-surface-raised);
-  border: none;
-  border-radius: 15%;
-  box-shadow: var(--shadow);
-  padding: var(--trim);
-  font-family: var(--font-monospace);
-  font-size: var(--scale-d2);
-  color: var(--color-foreground);
-  pointer-events: none;
-}
 
 .loader {
   width: var(--scale-2);

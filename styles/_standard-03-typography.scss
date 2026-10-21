@@ -380,14 +380,19 @@ mark {
 
 /* Keycaps */
 kbd {
-  background-color: var(--color-surface-overlay);
-  background-image: var(--effect-grain);
-  border: none;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow);
-  padding: calc(var(--trim) / 2) var(--trim);
+  display: inline-block;
+  min-width: 1.5em;
+  text-align: center;
+  padding: calc(var(--trim) / 2) var(--space-d3);
   font-family: var(--font-monospace);
   font-size: var(--scale-d3);
+  line-height: var(--line-height-compact, 1.2);
+  color: var(--color-foreground);
+  background-color: var(--color-surface-overlay);
+  background-image: var(--effect-grain);
+  border: var(--stroke-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-raised);
   pointer-events: none;
 }
 
