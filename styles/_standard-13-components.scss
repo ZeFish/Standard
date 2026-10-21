@@ -1708,7 +1708,9 @@ a.skip-link {
   /* Hidden state */
   opacity: 0;
   visibility: hidden;
-  width: 200px;
+  width: max-content;
+  max-width: 200px;
+  text-align: center;
   transition: opacity var(--transition);
 }
 

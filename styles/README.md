@@ -220,7 +220,7 @@ All three are translucent overlays on whatever surface they sit on, so they work
 | `--color-on-accent` | Text drawn on an accent fill. |
 | `--color-link` | Links (defaults to blue). |
 | `--color-success` `--color-warning` `--color-error` `--color-info` | Status. Each should get an `on-` partner when used as a fill. |
-| `--color-success-background` `-border` (and the same for `warning`, `error`, `info`) | The tinted fill and edge of an alert, badge or highlighted row: the status colour at 12 % and 30 %. Text and icon stay the full status colour. Named with the CSS property, as Atlassian (`color.background.danger`) does, because `muted` here is a text level and Primer's `bgColor-danger-muted` would collide with it. Added from `apps/ÀVélo-stat`, which had fifteen hand-written `rgba(...)` for this. |
+| `--color-success-background` `-border` (and the same for `warning`, `error`, `info`) | The tinted fill and edge of an alert, badge or highlighted row: the status colour at 12 % and 30 %. Text and icon stay the full status colour. Named with the CSS property, as Atlassian (`color.background.danger`) does, because `muted` here is a text level and Primer's `bgColor-danger-muted` would collide with it. Added from `apps/avelo-stat`, which had fifteen hand-written `rgba(...)` for this. |
 | `--color-red` … `--color-brown` | The hue palette. Not roles: use them through the status or accent roles when meaning exists. |
 
 ### 4. "I am building…" — which token?
