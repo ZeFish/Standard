@@ -1,4 +1,4 @@
-Kernel Light:
+Maker Light:
   primary-color: "#d69a00"
   accent-color: "#d69a00"
   primary-background-color: "#f7f3ee"
@@ -11,7 +11,7 @@ Kernel Light:
   success-color: "#4ca06b"
   info-color: "#2882c3"
 
-Kernel Dark:
+Maker Dark:
   primary-color: "#000000"
   accent-color: "#000000"
   primary-background-color: "#231e1a"

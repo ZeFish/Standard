@@ -1,6 +1,6 @@
 /* TOKENS.YAML ADAPTER BEGIN */
-:root[data-theme="kernel"],
-[data-theme="kernel"] {
+:root[data-theme="maker"],
+[data-theme="maker"] {
   --color-light-background: #f7f3ee;
   --color-light-foreground: #4a341c;
   --color-light-red: #df453a;
@@ -45,12 +45,12 @@
 }
 /* TOKENS.YAML ADAPTER END */
 
-// kernel theme — token VALUES live in tokens.yaml (single source of truth).
+// maker theme — token VALUES live in tokens.yaml (single source of truth).
 // This file keeps only web-only structural CSS.
 
 
-:root[data-theme="kernel"],
-[data-theme="kernel"] {
+:root[data-theme="maker"],
+[data-theme="maker"] {
 /* Accent system */
 
 

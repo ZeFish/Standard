@@ -1,9 +1,9 @@
 meta:
-  id: kernel
-  label: Kernel
+  id: maker
+  label: Maker
   selector: |-
-    :root[data-theme="kernel"],
-    [data-theme="kernel"]
+    :root[data-theme="maker"],
+    [data-theme="maker"]
   fonts:
     - "@stnd/fonts/monolisa"
     - "@stnd/fonts/fraunces"

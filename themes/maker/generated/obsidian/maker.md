@@ -1,14 +1,14 @@
 ---
 aliases: []
-created: 2026-07-24 09:35
-modified: 2026-10-18 22:55
+created: 2026-10-23 12:17
+modified: 2026-10-23 12:17
 cssclasses: []
 maturity: sprout
 mode: read
 publish: false
 tags:
   - design
-theme: kernel
+theme: maker
 type: theme
 visibility: private
 snippet: false
@@ -17,8 +17,8 @@ snippet: false
 ![[Sample content]]
 
 ```css
-[data-stnd-theme="kernel"] {
-    /* ─── Custom rules for Kernel ───────────────────────────── */
+[data-stnd-theme="maker"] {
+    /* ─── Custom rules for Maker ───────────────────────────── */
     /* Accent system */
 
 

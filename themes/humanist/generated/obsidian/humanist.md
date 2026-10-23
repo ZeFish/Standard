@@ -1,7 +1,7 @@
 ---
 aliases: []
 created: 2026-07-24 09:35
-modified: 2026-10-18 22:55
+modified: 2026-10-23 02:55
 cssclasses: []
 maturity: sprout
 mode: read
@@ -22,6 +22,8 @@ snippet: false
     :is(.markdown-reading-view blockquote, .markdown-rendered blockquote, .HyperMD-quote, .reveal blockquote, .slides blockquote) {
             font-family: var(--font-header);
             font-size: var(--scale-2);
+            font-style: italic;
+            border:0;
         }
 }
 ```

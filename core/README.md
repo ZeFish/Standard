@@ -14,7 +14,7 @@ status: active
 tags:
   - package
   - stnd
-theme: kernel
+theme: maker
 type: package
 visibility: public
 garden-url: https://standard.garden/@francis/readme
