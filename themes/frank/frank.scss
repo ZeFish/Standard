@@ -70,6 +70,8 @@
 
   }
 
+
+
   .callout[data-callout="caption"] {
     margin: -1rlh 33% 0 0 !important;
     padding: 0;
@@ -105,10 +107,14 @@
       color: var(--color-link);
   }
 
-  &.theme-light,
-  &[data-color-mode="light"] {
+  .prose img {
+          mix-blend-mode: multiply;
+  }
+
+  &.theme-dark,
+  &[data-color-mode="dark"] {
       .prose img {
-              mix-blend-mode: multiply;
+              mix-blend-mode: normal;
       }
   }
 }
