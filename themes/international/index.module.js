@@ -5,8 +5,7 @@ export default {
   meta: { type: "theme", themeId: "international", label: "International" },
   styles: ["./international.scss"],
   dependencies: [
-    "@stnd/fonts/cargo-diatype",
-    "@stnd/fonts/sohne",
-    "@stnd/fonts/inter"
+    "@stnd/fonts/inter",
+    "@stnd/fonts/ibm-plex"
   ],
 };

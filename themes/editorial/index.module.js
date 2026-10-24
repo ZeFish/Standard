@@ -6,7 +6,7 @@ export default {
   styles: ["./editorial.scss"],
 
   dependencies: [
-    "@stnd/fonts/tiempos-headline",
+    "@stnd/fonts/fraunces",
     "@stnd/fonts/literata",
     "@stnd/fonts/instrument-sans",
   ]

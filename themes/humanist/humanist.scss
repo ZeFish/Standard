@@ -7,12 +7,12 @@
   --color-dark-foreground: oklch(0.81 0.01 93.01);
   --color-dark-background: oklch(0.27 0 106.64);
   --color-dark-accent: oklch(0.67 0.13 38.76);
-  --font-sans: "National Park";
-  --font-text: "National Park";
+  --font-sans: "National Park", sans-serif;
+  --font-text: "National Park", sans-serif;
   --font-feature: "ss01", "ss02";
-  --font-serif: Kalice;
-  --font-header: Kalice, Newsreader;
-  --font-interface: "Kalice";
+  --font-serif: "Instrument Serif", "Newsreader", Georgia, serif;
+  --font-header: "Instrument Serif", "Newsreader", Georgia, serif;
+  --font-interface: "National Park", sans-serif;
   --font-header-weight: 400;
   --font-header-line-height: 1.1;
   --stroke-width: 0;
@@ -20,7 +20,7 @@
   --color-light-bold: var(--color-accent);
   --color-dark-italic: var(--color-blue);
   --color-dark-bold: var(--color-accent);
-  --font-monospace: "MonoLisa";
+  --font-monospace: "JetBrains Mono", monospace;
   --bold-weight: 500;
   --font-density: 1.6;
   --font-ratio: 1.333;

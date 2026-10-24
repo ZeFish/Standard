@@ -5,8 +5,8 @@ meta:
     :root[data-theme="calm"],
     [data-theme="calm"]
   fonts:
-    - "@stnd/fonts/oktah"
     - "@stnd/fonts/quicksand"
+    - "@stnd/fonts/lexend"
 tokens:
   color-light-background: "#eeebe5"
   color-light-foreground: "#4a4743"

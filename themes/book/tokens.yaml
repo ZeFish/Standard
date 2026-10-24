@@ -5,10 +5,9 @@ meta:
     :root[data-theme="book"],
     [data-theme="book"]
   fonts:
-    - "@stnd/fonts/fern"
     - "@stnd/fonts/source-serif-4"
-    - "@stnd/fonts/sohne"
-    - "@stnd/fonts/graveur"
+    - "@stnd/fonts/newsreader"
+    - "@stnd/fonts/ibm-plex"
 tokens:
   color-light-background: "#fefdf9"
   color-light-foreground: "#282726"
@@ -37,13 +36,13 @@ tokens:
   font-ratio: 1.2
   font-density: 2
   prose-width: 38rem
-  font-text: "\"Fern\", \"Graveur Variable\", Bookerly"
+  font-text: "\"Source Serif 4\", \"Newsreader\", Georgia, serif"
   font-weight: "450"
   font-feature: "\"liga\", \"onum\", \"kern\""
-  font-interface: "\"Fern\""
-  font-monospace: "\"Monolisa\""
+  font-interface: "\"Source Serif 4\", serif"
+  font-monospace: "\"IBM Plex Mono\", monospace"
   font-monospace-feature: "\"onum\" off"
-  font-header: "\"Fern\""
+  font-header: "\"Newsreader\", \"Source Serif 4\", Georgia, serif"
   font-header-feature: "\"liga\", \"onum\", \"kern\""
   font-header-weight: "400"
   color-light-bold: var(--color-red)

@@ -6,7 +6,7 @@ meta:
     [data-theme="contrast"]
   fonts:
     - "@stnd/fonts/atkinson-hyperlegible-next"
-    - "@stnd/fonts/oktah"
+    - "@stnd/fonts/inter"
 tokens:
   color-light-background: "#ffffff"
   color-light-foreground: "#000000"
@@ -15,7 +15,7 @@ tokens:
   color-light-accent: "#0050ff"
   color-dark-accent: "#ffff00"
   color-light-border: var(--color-foreground)
-  font-text: "\"Sohne\", sans-serif"
+  font-text: "\"Atkinson Hyperlegible Next\", \"Inter\", sans-serif"
   font-header: "\"Inter\", sans-serif"
   font-weight: "500"
   font-header-weight: "800"

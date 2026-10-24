@@ -6,9 +6,9 @@ export default {
   styles: ["./humanist.scss"],
 
   dependencies: [
-    "@stnd/fonts/inter",
-    "@stnd/fonts/instrument-sans",
-    "@stnd/fonts/kalice",
-    "@stnd/fonts/newsreader"
+    "@stnd/fonts/national-park",
+    "@stnd/fonts/instrument-serif",
+    "@stnd/fonts/newsreader",
+    "@stnd/fonts/jetbrains-mono"
   ],
 };

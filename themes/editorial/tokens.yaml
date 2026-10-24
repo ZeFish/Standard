@@ -5,7 +5,7 @@ meta:
     :root[data-theme="editorial"],
     [data-theme="editorial"]
   fonts:
-    - "@stnd/fonts/tiempos-headline"
+    - "@stnd/fonts/fraunces"
     - "@stnd/fonts/literata"
     - "@stnd/fonts/instrument-sans"
 tokens:
@@ -17,9 +17,9 @@ tokens:
   color-dark-foreground: "#f7f6f4"
   color-dark-accent: "#8fb4ff"
   font-text: "\"Literata\", \"Georgia\", serif"
-  font-header: "\"Tiempos Headline\", \"Georgia\", serif"
+  font-header: "\"Fraunces\", \"Georgia\", serif"
   font-weight-header: "400"
-  font-display: "\"Tiempos Headline\", \"Georgia\", serif"
+  font-display: "\"Fraunces\", \"Georgia\", serif"
   font-interface: "\"Instrument Sans\""
   radius: var(--radius-sm)
   mobile-line-height: "1.2"

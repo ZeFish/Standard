@@ -129,19 +129,33 @@ export async function loadModules({
   log.success("Initializing module engine...");
 
   const modulePatterns = buildModulePatterns(finalConfig);
-  const require = createRequire(import.meta.url);
+  const coreRequire = createRequire(import.meta.url);
+  let appRequire = coreRequire;
+  try {
+    appRequire = createRequire(path.join(appRoot, "package.json"));
+  } catch {
+    // Fallback to coreRequire when appRoot has no package.json
+  }
 
   const discoveredFiles = discoverModuleFiles(appRoot, modulePatterns);
 
-  const resolveModulePath = (idOrPath) => {
+  const resolveModulePath = (idOrPath, fromFile = null) => {
     if (path.isAbsolute(idOrPath)) return idOrPath;
 
     const tryResolve = (id) => {
-      try {
-        return require.resolve(id);
-      } catch {
-        return null;
+      for (const req of [
+        appRequire,
+        fromFile ? createRequire(fromFile) : null,
+        coreRequire,
+      ]) {
+        if (!req) continue;
+        try {
+          return req.resolve(id);
+        } catch {
+          // try next resolver
+        }
       }
+      return null;
     };
 
     const isBare =
@@ -175,8 +189,8 @@ export async function loadModules({
   while (loadQueue.length > 0) {
     const batch = loadQueue.splice(0, loadQueue.length);
     const tasks = batch
-      .map(({ rawId, origin, sourceModule }) => {
-        const resolvedPath = resolveModulePath(rawId);
+      .map(({ rawId, origin, sourceModule, sourceFile }) => {
+        const resolvedPath = resolveModulePath(rawId, sourceFile);
         if (!resolvedPath || processedPaths.has(resolvedPath)) return null;
         processedPaths.add(resolvedPath);
         return { rawId, origin, sourceModule, resolvedPath };
@@ -254,6 +268,7 @@ export async function loadModules({
               rawId: depId,
               origin: "dependency",
               sourceModule: def.id,
+              sourceFile: resolvedPath,
             });
           }
         }
@@ -281,7 +296,7 @@ export async function loadModules({
     for (const rawDep of def.dependencies) {
       let depId = rawDep;
       if (!idToPath.has(depId)) {
-        const resolvedDepPath = resolveModulePath(rawDep);
+        const resolvedDepPath = resolveModulePath(rawDep, pathStr);
         if (resolvedDepPath && moduleMap.has(resolvedDepPath)) {
           depId = moduleMap.get(resolvedDepPath).def.id;
         }

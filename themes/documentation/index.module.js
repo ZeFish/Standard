@@ -7,6 +7,5 @@ export default {
   dependencies: [
     "@stnd/fonts/ia-writer",
     "@stnd/fonts/ibm-plex",
-    "@stnd/fonts/berkeley-mono",
   ],
 };

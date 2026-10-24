@@ -1,11 +1,12 @@
 export default {
   id: "theme-mono",
   name: "Stnd :: Theme :: Mono",
-  description: "Monospace street-fashion — a garment-tag spec sheet rendered entirely in Sohne Mono.",
+  description: "Monospace spec-sheet aesthetic rendered entirely in IBM Plex Mono.",
   meta: { type: "theme", themeId: "mono", label: "Mono" },
   styles: ["./mono.scss"],
 
   dependencies: [
-    "@stnd/fonts/sohne"
+    "@stnd/fonts/ibm-plex",
+    "@stnd/fonts/jetbrains-mono"
   ],
 };

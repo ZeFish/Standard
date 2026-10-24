@@ -1,7 +1,5 @@
 /*!
- * Standard Framework - Fine-Art Typography Management
- *
- * The Standard Theme Implication Yes this is a test!
+ * Standard Framework — Core Themes Bundle
  *
  * Philosophy: Respect classic typography rules, but readability always wins.
  *
@@ -9,22 +7,15 @@
  * @license MIT
  */
 
-/* @use "../design/standard-00-variables" as *; */
-@use "standard-theme-paper";
-@use "standard-theme-swiss";
-@use "standard-theme-forest";
-@use "standard-theme-maker";
-@use "standard-theme-frank";
-@use "standard-theme-book";
-@use "standard-theme-blueprint";
-@use "standard-theme-claude";
-@use "standard-theme-newspaper";
-@use "standard-theme-venetian";
+@use "international/international" as *;
+@use "book/book" as *;
+@use "editorial/editorial" as *;
+@use "humanist/humanist" as *;
+@use "academic/academic" as *;
 @use "documentation/documentation" as *;
-
-@use "standard-theme-chalky";
-@use "standard-theme-occult";
-
-@use "standard-theme-custom1";
-@use "standard-theme-custom2";
-@use "standard-theme-custom3";
+@use "mono/mono" as *;
+@use "macos/macos" as *;
+@use "eink/eink" as *;
+@use "contrast/contrast" as *;
+@use "dyslexia/dyslexia" as *;
+@use "calm/calm" as *;
