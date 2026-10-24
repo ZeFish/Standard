@@ -37,7 +37,7 @@ A theme is a personality you can put on a site: colors, fonts, mood. Each one li
 standard({ moduleLoad: ["@stnd/themes/editorial"] });
 ```
 
-**Make a new theme:** copy an existing theme folder, edit `tokens.yaml`, run `node packages/themes/tools/build-tokens.mjs <theme-name>`. See “Creating a Theme” below for the full 5-file recipe.
+**Make a new theme:** copy an existing theme folder, edit `tokens.yaml`, run `node packages/themes/_scripts/build.js <theme-name>`. See “Creating a Theme” below for the 3-file recipe.
 
 ## Overview
 
@@ -221,9 +221,9 @@ To make the theme available in the loader and workspace, you **must** add it to 
   ]
 ```
 
-## Source of truth & the sync tools (Resolved)
+## Source of truth & the sync tools
 
-**`<theme>/tokens.yaml` is the ONE source of token values.** `tools/build-tokens.mjs` regenerates each `_tokens.generated.scss` from it. Both consumers are downstream: the **web** uses `@stnd/themes` directly, and the **Obsidian plugin** bundles `themes.generated.js` (built from these same `_tokens.generated.scss` by `apps/stnd-obsidian/build.js`). Edit `tokens.yaml`, never a `.generated.scss`.
+**`<theme>/tokens.yaml` is the ONE source of token values.** `packages/themes/_scripts/build.js` splices generated CSS variables into `<theme>.scss` and exports multi-target artifacts. Both web and Obsidian consumers sit downstream: the **web** uses `@stnd/themes` directly, and the **Obsidian plugin** bundles `themes.generated.js` (built from these same stylesheets by `apps/stnd-obsidian/build.js`). Edit `tokens.yaml`, never a generated block.
 
 ### Bidirectional Synchronization Tools
 
@@ -251,9 +251,9 @@ This tool:
 - Merges the updated design tokens back into the package’s `tokens.yaml`.
 - Un-indents and updates the package’s `<theme>.scss` with the custom layout rules.
 
-### The `scripts/` pipeline — multi-target theme codegen
+### The `_scripts/build.js` pipeline — multi-target theme codegen
 
-Separate from `tools/build-tokens.mjs` above (web/SCSS/Obsidian only): `scripts/build.js` turns every theme’s `tokens.yaml` into **non-web** target formats too, via a small adapter-per-target system. Same rule as everywhere else in this package — **`tokens.yaml` is the one source of truth; every file under a theme’s `generated/` folder is overwritten on the next run, never hand-edited.**
+`packages/themes/_scripts/build.js` turns every theme’s `tokens.yaml` into both web SCSS and **non-web** target formats via a modular adapter-per-target system. Same rule as everywhere else in this package — **`tokens.yaml` is the one source of truth; every file under a theme’s `generated/` folder is overwritten on the next run, never hand-edited.**
 
 ```bash
 node packages/themes/_scripts/build.js            # every theme, every adapter
