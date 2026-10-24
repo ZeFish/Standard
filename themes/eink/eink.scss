@@ -165,7 +165,9 @@
 }
 
 /* Manual E-Ink Mode Class Override */
-/* When .standard-eink is applied to <html> via JavaScript */
+/* When .standard-eink or [data-theme="eink"] is applied to <html> via JavaScript */
+:root[data-theme="eink"],
+[data-theme="eink"],
 .standard-eink {
   /* Force absolute contrast */
   --color-background: white !important;
