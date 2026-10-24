@@ -97,7 +97,7 @@ To add a new theme to the Standard Ecosystem, create a new directory under `pack
 
 ### 1. Structure of a Theme Folder
 
-Every real, working theme has these **3 files** (verified against every shipped theme — none currently ship `register.js`/`actions.js` despite older drafts of this doc implying they're required; treat those two as an unbuilt extension point, not a checklist item):
+Every working theme ships with **3 core files** (`register.js` and `actions.js` are optional extension points not required by standard themes):
 
 ```text
 packages/themes/<theme-name>/
@@ -131,13 +131,15 @@ tokens:
   line-height: "1.2"
 ```
 
-After creating/updating this file, run the real build script (from `packages/themes/`, not `tools/build-tokens.mjs` — that path doesn't exist):
+After creating or updating `tokens.yaml`, run the theme compiler from `packages/themes/`:
 
 ```bash
 node _scripts/build.js <theme-name>
 ```
 
-This does two things: it splices a generated `--token: value;` block straight into `<theme-name>.scss` (between `/* TOKENS.YAML ADAPTER BEGIN/END */` markers — there is no separate `_tokens.generated.scss` file, no `@use` needed), and it writes cross-tool exports to `<theme-name>/generated/` (Obsidian note, VS Code theme, Zed theme, Reveal Swift, Home Assistant YAML).
+Running this script performs two operations automatically:
+1. **In-place SCSS splice**: Injects the generated `--token: value;` declarations directly into `<theme-name>.scss` between the `/* TOKENS.YAML ADAPTER BEGIN/END */` markers (no separate `_tokens.generated.scss` file or `@use` statement required).
+2. **Multi-target export**: Writes cross-platform theme artifacts into `<theme-name>/generated/` (Obsidian note, VS Code theme, Zed theme, Reveal Swift, and Home Assistant YAML).
 
 #### `<theme-name>.scss`
 Start the file with just the empty marker pair — the build script fills it in. Everything *after* the `END` marker is yours: layout overrides, theme-specific aesthetics, component-level rules scoped to the theme's own selector.
@@ -270,7 +272,11 @@ For each theme, this writes into `<theme>/generated/<adapter-name>/`:
 
 Adding a target = adding one file to `scripts/adapters/<name>.js` exporting a `build(config, options)` function — `build.js` discovers and runs every adapter against every theme automatically, no registration step.
 
-**Reveal actually consumes its generated output** — `apps/reveal/Sources/Reveal/ Theme.swift` is a **symlink** to `packages/themes/reveal/generated/reveal/Theme.swift`, so `swift build` compiles straight through it. Tune Reveal’s palette by editing `packages/themes/reveal/tokens.yaml` and re-running the command above; never edit the Swift file directly (a hand edit is a symlink target, so it’d edit the generated file in place and get overwritten by the next regenerate anyway). `color-accent` (and any other colour) can be a single scheme-agnostic value — Reveal’s Leica-red accent is deliberately the same in both light and dark — or split as `color-light-*`/`color-dark-*`; the build falls back to the unprefixed key when the scheme-specific one is missing. Reveal-only tokens (`color-{light,dark}-elevated`, `color-{light,dark}-photoFrame` — a photo-culling app needs a couple of extras a note theme doesn’t) are read straight from `tokens.yaml` when present, and only approximated (lighten/darken off the background) for themes that don’t define them.
+#### Native App Integration (`apps/reveal`)
+
+- **Symlinked Swift output**: `apps/reveal/Sources/Reveal/Theme.swift` is a symlink to `packages/themes/reveal/generated/reveal/Theme.swift`, so `swift build` compiles straight through the generated output. Tune Reveal's palette in `packages/themes/reveal/tokens.yaml` and re-run `node packages/themes/_scripts/build.js reveal` — never edit `Theme.swift` by hand.
+- **Scheme-agnostic token fallback**: Tokens like `color-accent` can be defined as a single scheme-agnostic value (e.g. Reveal's Leica-red accent in both light and dark modes) or split into `color-light-*` / `color-dark-*`. The compiler falls back to the unprefixed key whenever a scheme-specific key is omitted.
+- **App-specific surface tokens**: Reveal-specific tokens (`color-{light,dark}-elevated`, `color-{light,dark}-photoFrame`) are read directly from `tokens.yaml` when present, and automatically approximated from the background for themes that omit them.
 
 After running either tool, simply rebuild the Obsidian plugin to package the latest themes:
 

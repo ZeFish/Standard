@@ -65,7 +65,7 @@ The concept relies on a strict separation between the **Core** (static, tested) 
 
 Modules are auto-discovered and orchestrate both logic and interface via a **Unified Hooks** system.
 
-### Anatomy of a module (`index.module.js`):
+### Anatomy of a Module (`index.module.js`)
 
 ```javascript
 export default {
@@ -87,16 +87,35 @@ export default {
 };
 ```
 
-### Virtual Modules & Rendering:
+### Virtual Modules & Rendering
 
-- `virtual:stnd/hooks`: To execute **logic hooks** — `.js`/`.ts` entries not prefixed `launcher:` and not suffixed `:action` (those two patterns always classify as UI/action zone contributions instead — see `virtual:stnd/components` below — mismatched classification of the same hook name across registrations is a build-time fatal error). Two calling conventions over the same `hooks:` registrations: `runHook(name, ...args)` fans a call out to every registered handler and collects their results into an array (e.g. `astro:build:done`, `stnd:rss:register`); `runPipeline(name, initialValue, ...args)` threads one value through every registered handler in sequence, each required to explicitly return the (possibly transformed) value — for "let each interested module inspect and optionally override the same thing" (e.g. `apps/stnd.gd`'s `note:render`, where password-gate overrides how a locked note renders without the route naming it). Both isolate handler failures — a throwing handler is logged and skipped, not left to abort the rest. Handlers registered with `server: true` are excluded from the client build of this virtual module — required for any handler touching server-only data (DB calls, secrets), since client-bundled consumers like `packages/launcher/launcher.ts` import from the same module; setting `server: true` on a `launcher:`/`:action`-classified entry is a fatal error rather than a silent no-op, since that pool has no SSR/client split.
-- `virtual:stnd/components`: Used by the `<Hook />` component for UI rendering, and read directly (`extensions[zone]`) by client code that needs callable functions, not just components — e.g. `launcher:action`/`graft:action` entries.
+The module loader compiles `hooks:` registrations into two dedicated virtual modules based on entry classification:
 
-**UI Consumption:**
+| Virtual Module | Entry Classification | Primary Consumers |
+| :--- | :--- | :--- |
+| `virtual:stnd/hooks` | **Logic hooks** — `.js` / `.ts` entries (excluding `launcher:*` and `*:action`) | `runHook()` and `runPipeline()` |
+| `virtual:stnd/components` | **UI & action zones** — `.astro` / `.svelte` / `.md` components, plus all `launcher:*` and `*:action` entries | `<Hook zone="..." />` and `extensions[zone]` |
+
+#### Calling Conventions (`virtual:stnd/hooks`)
+
+- **Fan-out (`runHook(name, ...args)`)**: Calls every registered handler for `name` and collects their return values into an array (e.g. `astro:build:done`, `stnd:rss:register`).
+- **Sequential Pipeline (`runPipeline(name, initialValue, ...args)`)**: Threads a single value through every registered handler in sequence. Each handler must explicitly return the (optionally transformed) value — ideal when modules inspect and override a shared descriptor (e.g. `note:render` in `apps/stnd.gd`).
+
+#### Isolation & Bundling Guarantees
+
+- **Failure Isolation**: Both `runHook` and `runPipeline` isolate handler exceptions — a throwing handler is logged and skipped so it cannot abort sibling handlers.
+- **Server-Only Filtering (`server: true`)**: Handlers marked with `server: true` are stripped from the client bundle of `virtual:stnd/hooks`. Use this for any handler touching databases or secrets when client modules (like `@stnd/launcher`) also import from `virtual:stnd/hooks`.
+- **Build-Time Classification Guards**:
+  - Registering the same hook name as both a logic hook and a UI/action zone across modules throws a build-time fatal error ([`hook-kind-mismatch`](https://stnd.build/manual/diagnostic/hook-kind-mismatch)).
+  - Setting `server: true` on a `launcher:*` or `*:action` entry throws a build-time fatal error ([`hook-server-flag-ignored`](https://stnd.build/manual/diagnostic/hook-server-flag-ignored)), since `virtual:stnd/components` has no SSR/client split.
+
+#### UI Consumption
 
 ```astro
+---
 import Hook from "@stnd/core/Hook.astro";
-<Hook id="header:top" />
+---
+<Hook zone="header:top" />
 ```
 
 ---
@@ -140,7 +159,7 @@ Importable via `@stnd/server/[filename]` or `@stnd/utils/[filename]`.
 | `getReadingTime` | `getReadingTime(text)` | Estimated reading time. |
 | `validateEmail` | `validateEmail(email)` | Simplified email validation. |
 
-### Other Helpers:
+### Other Helpers
 
 - `@stnd/server/cors.js`: `getCorsHeaders`, `handleCorsPreflight`.
 - `@stnd/server/errors.js`: Standardized error classes (`StandardError`, `AuthError`, etc.).
