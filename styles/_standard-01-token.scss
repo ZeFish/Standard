@@ -12,8 +12,8 @@
    * @name Color Seeds & Tooltips
    * @description Primary background and foreground seeds from which the OKLCH relative color engine derives full palettes, plus tooltip defaults.
    *
-   * @property {variable} --color-light-background Light mode root page background seed (`white`).
-   * @property {variable} --color-light-foreground Light mode root text foreground seed (`#262626`). Derives dark mode seeds and the full 10-hue chromatic wheel.
+   * @property {variable} --color-light-background Light mode root page background seed (`#faf8f2`). Warm archival stock — felt rather than perceived, never clinical pure white.
+   * @property {variable} --color-light-foreground Light mode root text foreground seed (`#221f1c`). Warm carbon printer's ink — never pure black. Derives dark mode seeds and the full 10-hue chromatic wheel.
    * @property {variable} --tooltip-background Default tooltip container background (`var(--color-dark)`).
    * @property {variable} --tooltip-text Default tooltip text color (`var(--color-light)`).
    */
@@ -28,17 +28,11 @@
      Override --color-dark-background / --color-dark-foreground in a
      theme to give dark mode its own distinct mood.
 
-     Analog-inspired reference palette (uncomment to pin specific hues):
-     --color-light-red:     #b14c42;    dusty red clay
-     --color-light-orange:  #d78a5a;    trail-worn orange
-     --color-light-yellow:  #c8a840;    parchment mustard
-     --color-light-green:   #5e9d80;    sage green
-     --color-light-cyan:    #6ba4b6;    glacier teal
-     --color-light-blue:    #4f81a4;    faded blueprint
-     --color-light-magenta: #7a6c91;    dusk lavender
+     Default: 1970s Swiss Standards Manual archival paper (#faf8f2) and
+     warm carbon printer's ink (#221f1c) — felt rather than perceived.
   */
-  --color-light-background: white;
-  --color-light-foreground: #262626;
+  --color-light-background: #faf8f2;
+  --color-light-foreground: #221f1c;
   /* Dark seeds are computed in _standard-02-color.scss from the light
      foreground's OKLCH hue — warm ink begets warm dark mode. */
 

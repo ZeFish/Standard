@@ -13,7 +13,7 @@
  * element, not just `:root`.
  *
  * @property --color-light-foreground The primary light foreground seed. Change this alone and dark mode, all ten chromatic hues, and derived surfaces/borders/shadows follow.
- * @property --color-light-background The root light background seed (default `white`).
+ * @property --color-light-background The root light background seed (`#faf8f2`).
  * @property --color-dark-foreground Derived dark reading foreground (default ~85% lightness matching foreground hue).
  * @property --color-dark-background Derived dark background (default ~20% lightness matching foreground hue).
  * @property --color-background Active scheme background token.
@@ -136,50 +136,50 @@
    * @property --color-light-accent Active light mode accent color.
    */
 
-  /* Error / Red — foreground hue + 25° */
+  /* Error / Red — Polaroid / EPA vermilion (+25° anchored, subtly warmed by ink hue) */
   --color-light-red: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 25)
+    from var(--color-light-foreground) clamp(0.55, l, 0.65) max(0.16, c)
+      calc((h * 0.08) + 25)
   );
-  /* Attention / Orange — foreground hue + 55° */
+  /* Attention / Orange — Polaroid warm amber (+55° anchored) */
   --color-light-orange: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 55)
+    from var(--color-light-foreground) clamp(0.64, l, 0.7) max(0.15, c)
+      calc((h * 0.08) + 55)
   );
-  /* Warning / Yellow — foreground hue + 85° */
+  /* Warning / Yellow — 1970s ochre mustard (+85° anchored) */
   --color-light-yellow: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 85)
+    from var(--color-light-foreground) clamp(0.7, l, 0.76) max(0.14, c)
+      calc((h * 0.08) + 82)
   );
-  /* Success / Green — foreground hue + 145° */
+  /* Success / Green — archival EPA forest green (+150° anchored) */
   --color-light-green: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 145)
+    from var(--color-light-foreground) clamp(0.56, l, 0.64) max(0.11, c)
+      calc((h * 0.08) + 152)
   );
-  /* Info / Cyan — foreground hue + 190° */
+  /* Info / Cyan — vintage Kodachrome / VHS cyan (+195° anchored) */
   --color-light-cyan: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 190)
+    from var(--color-light-foreground) clamp(0.58, l, 0.66) max(0.09, c)
+      calc((h * 0.08) + 195)
   );
-  /* Link / Blue — foreground hue + 240° */
+  /* Link / Blue — Swiss international cerulean (+245° anchored) */
   --color-light-blue: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 240)
+    from var(--color-light-foreground) clamp(0.5, l, 0.6) max(0.12, c)
+      calc((h * 0.08) + 245)
   );
-  /* Magic / Magenta — foreground hue + 300° */
+  /* Magic / Magenta — analog magenta (+325° anchored) */
   --color-light-magenta: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 300)
+    from var(--color-light-foreground) clamp(0.55, l, 0.65) max(0.14, c)
+      calc((h * 0.08) + 325)
   );
-  /* Purple — foreground hue + 270° */
+  /* Purple — analog tape violet (+290° anchored) */
   --color-light-purple: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 270)
+    from var(--color-light-foreground) clamp(0.52, l, 0.62) max(0.13, c)
+      calc((h * 0.08) + 290)
   );
-  /* Pink — foreground hue + 350° */
+  /* Pink — warm rose (+350° anchored) */
   --color-light-pink: oklch(
-    from var(--color-light-foreground) clamp(0.65, l, 0.7) max(0.12, c)
-      calc(h + 350)
+    from var(--color-light-foreground) clamp(0.62, l, 0.7) max(0.14, c)
+      calc((h * 0.08) + 350)
   );
   /* Brown — the theme's orange, darker and muted: a brown is a dark, dull orange.
      (Derived from the foreground hue it came out a pale red.) */
@@ -187,17 +187,16 @@
     from var(--color-light-orange) calc(l - 0.2) calc(c * 0.55) h
   );
 
-  /* Link color defaults to blue */
+  /* Link color defaults to accent */
   --color-light-link: var(--color-light-accent);
 
-  /* Auto-accent strategy: triadic (Third of the way around, +120°) - Balanced contrast */
+  /* Auto-accent strategy: Swiss standards manual signal vermilion by default,
+     shifting triadically when a theme supplies a strongly chromatic foreground. */
   --color-light-accent-triadic: oklch(
-    from var(--color-light-foreground) calc(l + (0.65 - l) * min(1, c * 10))
-      min(0.2, c * 2) calc(h + 120)
+    from var(--color-light-foreground) 0.54
+      max(0.17, min(0.2, c * 2)) calc((h * 0.08) + 28)
   );
 
-  /* +120° gives a strong but pleasing accent; a pure +180° opposite can be
-     jarring when the foreground is highly saturated. */
   --color-light-accent-auto: var(--color-light-accent-triadic);
   --color-light-accent: var(--color-light-accent-auto);
 
@@ -223,61 +222,61 @@
 
   /* Error / Red — dark foreground hue + 25° */
   --color-dark-red: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 25)
+    from var(--color-dark-foreground) clamp(0.62, l, 0.7) max(0.16, c)
+      calc((h * 0.08) + 25)
   );
   /* Attention / Orange — dark foreground hue + 55° */
   --color-dark-orange: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 55)
+    from var(--color-dark-foreground) clamp(0.68, l, 0.74) max(0.15, c)
+      calc((h * 0.08) + 55)
   );
   /* Warning / Yellow — dark foreground hue + 85° */
   --color-dark-yellow: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 85)
+    from var(--color-dark-foreground) clamp(0.75, l, 0.8) max(0.14, c)
+      calc((h * 0.08) + 82)
   );
   /* Success / Green — dark foreground hue + 145° */
   --color-dark-green: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 145)
+    from var(--color-dark-foreground) clamp(0.64, l, 0.72) max(0.11, c)
+      calc((h * 0.08) + 152)
   );
   /* Info / Cyan — dark foreground hue + 190° */
   --color-dark-cyan: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 190)
+    from var(--color-dark-foreground) clamp(0.66, l, 0.74) max(0.09, c)
+      calc((h * 0.08) + 195)
   );
   /* Link / Blue — dark foreground hue + 240° */
   --color-dark-blue: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 240)
+    from var(--color-dark-foreground) clamp(0.62, l, 0.7) max(0.12, c)
+      calc((h * 0.08) + 245)
   );
   /* Magic / Magenta — dark foreground hue + 300° */
   --color-dark-magenta: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 300)
+    from var(--color-dark-foreground) clamp(0.64, l, 0.72) max(0.14, c)
+      calc((h * 0.08) + 325)
   );
   /* Purple — dark foreground hue + 270° */
   --color-dark-purple: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 270)
+    from var(--color-dark-foreground) clamp(0.64, l, 0.72) max(0.13, c)
+      calc((h * 0.08) + 290)
   );
   /* Pink — dark foreground hue + 350° */
   --color-dark-pink: oklch(
-    from var(--color-dark-foreground) clamp(0.55, l, 0.7) max(0.12, c)
-      calc(h + 350)
+    from var(--color-dark-foreground) clamp(0.68, l, 0.76) max(0.14, c)
+      calc((h * 0.08) + 350)
   );
   /* Brown — the theme's dark orange, muted. */
   --color-dark-brown: oklch(
     from var(--color-dark-orange) calc(l - 0.04) calc(c * 0.55) h
   );
 
-  /* Link color defaults to blue */
+  /* Link color defaults to accent */
   --color-dark-link: var(--color-dark-accent);
 
-  /* Auto-accent strategy: triadic (+120°) */
+  /* Auto-accent strategy: warm signal vermilion-amber in dark mode */
   --color-dark-accent-triadic: oklch(
-    from var(--color-dark-foreground) calc(l + (0.7 - l) * min(1, c * 10))
-      min(0.2, c * 2) calc(h + 120)
+    from var(--color-dark-foreground) 0.68
+      max(0.16, min(0.2, c * 2)) calc((h * 0.08) + 34)
   );
 
   --color-dark-accent-auto: var(--color-dark-accent-triadic);
