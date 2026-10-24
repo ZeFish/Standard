@@ -61,7 +61,7 @@ The concept relies on a strict separation between the **Core** (static, tested) 
 
 ---
 
-## 🔌 Module System (Spores)
+## Module System (Spores)
 
 Modules are auto-discovered and orchestrate both logic and interface via a **Unified Hooks** system.
 
@@ -101,7 +101,7 @@ import Hook from "@stnd/core/Hook.astro";
 
 ---
 
-## 🛠 Helpers Reference (Core & Server)
+## Helpers Reference (Core & Server)
 
 Importable via `@stnd/server/[filename]` or `@stnd/utils/[filename]`.
 
@@ -150,11 +150,11 @@ Importable via `@stnd/server/[filename]` or `@stnd/utils/[filename]`.
 
 ---
 
-## 🎨 Design Tokens (CSS Variables)
+## Design Tokens (CSS Variables)
 
 The system uses CSS variables (`--stnd-*` or root variables `:root`) for consistency.
 
-### 📐 Geometry & Rhythm (`packages/styles/_standard-01-token.scss`)
+### Geometry & Rhythm (`packages/styles/_standard-01-token.scss`)
 
 | Variable | Default Value | Description |
 | :--- | :--- | :--- |
@@ -170,7 +170,7 @@ The system uses CSS variables (`--stnd-*` or root variables `:root`) for consist
 | `--rhythm-block-scale` | `2` | Multiplier for non-text block elements. |
 | `--radius` | `--leading` | Border radius consistent with rhythm. |
 
-### 🎨 Colors (`packages/styles/_standard-02-color.scss`)
+### Colors (`packages/styles/_standard-02-color.scss`)
 
 OKLCH-based system generating harmony from `--color-accent`.
 
@@ -184,7 +184,7 @@ OKLCH-based system generating harmony from `--color-accent`.
 | `--color-[green\|red\|yellow\|blue]` | Pigment colors derived from accent. |
 | `--color-success\|error\|warning` | Semantic states. |
 
-### 🛠 SCSS Breakpoints
+### SCSS Breakpoints
 
 - `$mobile`: 600px
 - `$small`: 768px
@@ -193,7 +193,7 @@ OKLCH-based system generating harmony from `--color-accent`.
 
 ---
 
-## 💡 Notes for AI
+## Notes for AI
 
 - **Module Integration**: Standardized on *“Module”* terminology (formerly Folios/Spores).
 - **Actions**: Core actions are now fully decanted into their respective modules and aggregated via `virtual:stnd/actions`.
@@ -223,11 +223,10 @@ Part of the [Road to Public Release](../README.md#-road-to-public-release) (Phas
 - [ ] **`adeSsrDeps` → `@stnd/cloudflare`** (not core) — decided during Phase 2: [priority:: 3] [token_scale:: 3] [created:: 2026-07-14] [area:: framework]
       the SSR/workerd optimizeDeps fix belongs with the Cloudflare package, split       from the app-specific deps that stay in the app.
 
-## 🔗 Liens & Normes
+## Links & Standards
 
-Ce paquet implémente les principes directeurs de l’écosystème Standard. Pour plus de détails sur le fonctionnement global, consultez les documents suivants :
-- **Architecture Système** : [4.1 Architecture](../../apps/stnd.build/modules/manual/content/4-system/4.1-architecture.md)
-- **Principes de Code** : [4.2 Code Standards](../../apps/stnd.build/modules/manual/content/4-system/4.2-code-standards.md)
-- **Normes de Documentation** : [4.9 Normes README](../../apps/stnd.build/modules/manual/content/4-system/4.9-readme-standard.md)
-- **Le Standard** : [packages/README.md](../README.md)
-- **Entrée Monorepo** : [README.md](../../README.md)
+This package implements the core architectural principles of the Standard ecosystem. For further details on how the framework operates globally, see:
+- **System Architecture**: [Framework Guide & Invariants](../../apps/stnd.build/modules/manual/content/system/framework-guide.md)
+- **Engineering Philosophy**: [Engineering Philosophy](../../apps/stnd.build/modules/manual/content/philosophy/engineering-philosophy.md)
+- **Package Ecosystem**: [packages/README.md](../README.md)
+- **Monorepo Root**: [README.md](../../README.md)

@@ -588,11 +588,10 @@ Batches (see `packages/styles/*.scss`, foundation → layout → elements → co
 
 ---
 
-## 🔗 Liens & Normes
+## Links & Standards
 
-Ce paquet de styles implémente la charte visuelle et les tokens de l’écosystème Standard. Pour plus de détails sur les spécifications graphiques et de code, consultez :
-- **Architecture Système** : [4.1 Architecture](../../apps/stnd.build/modules/manual/content/4-system/4.1-architecture.md)
-- **Principes de Code** : [4.2 Code Standards](../../apps/stnd.build/modules/manual/content/4-system/4.2-code-standards.md)
-- **Normes de Documentation** : [4.9 Normes README](../../apps/stnd.build/modules/manual/content/4-system/4.9-readme-standard.md)
-- **Le Standard** : [packages/README.md](../README.md)
-- **Charte Graphique** : [3.1 Color System](../../apps/stnd.build/modules/manual/content/3-graphics/3.1-color-system.md) et [3.2 Typography](../../apps/stnd.build/modules/manual/content/3-graphics/3.2-typography-and-typefaces.md)
+This stylesheet package implements the visual system and design tokens of the Standard ecosystem. For further details on visual and engineering specifications, see:
+- **System Architecture**: [Framework Guide & Invariants](../../apps/stnd.build/modules/manual/content/system/framework-guide.md)
+- **Engineering Philosophy**: [Engineering Philosophy](../../apps/stnd.build/modules/manual/content/philosophy/engineering-philosophy.md)
+- **Package Ecosystem**: [packages/README.md](../README.md)
+- **Visual System**: [Color System](../../apps/stnd.build/modules/manual/content/standard/color.md) and [Typography](../../apps/stnd.build/modules/manual/content/standard/typography.md)

@@ -223,7 +223,7 @@ To make the theme available in the loader and workspace, you **must** add it to 
 
 **`<theme>/tokens.yaml` is the ONE source of token values.** `tools/build-tokens.mjs` regenerates each `_tokens.generated.scss` from it. Both consumers are downstream: the **web** uses `@stnd/themes` directly, and the **Obsidian plugin** bundles `themes.generated.js` (built from these same `_tokens.generated.scss` by `apps/stnd-obsidian/build.js`). Edit `tokens.yaml`, never a `.generated.scss`.
 
-### 🔄 Bidirectional Synchronization Tools
+### Bidirectional Synchronization Tools
 
 The historical design drift between Francis’s hand-maintained vault notes at `Kernel/Themes/*` and the package’s canonical codebase has been resolved. Two powerful automation scripts have been added under `packages/themes/tools/` to enable seamless bidirectional syncing:
 
