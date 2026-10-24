@@ -65,6 +65,9 @@
     grid-template-columns:
       [full-start hero-start wide-start content-start] min(100%, var(--prose-width))
       [content-end wide-end] 1fr [hero-end full-end];
+
+
+
   }
 
   .callout[data-callout="caption"] {
@@ -100,5 +103,12 @@
   }
   h2 a:hover {
       color: var(--color-link);
+  }
+
+  &.theme-light,
+  &[data-color-mode="light"] {
+      .prose img {
+              mix-blend-mode: multiply;
+      }
   }
 }
